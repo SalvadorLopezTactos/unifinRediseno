@@ -125,11 +125,42 @@ class Note extends SugarBean
             $this->file_mime_type = get_file_mime_type($filePath, 'application/octet-stream');
             $this->file_ext = pathinfo($this->filename, PATHINFO_EXTENSION);
             $this->file_size = filesize($filePath);
-            $this->attachment_flag = true;
+            if (!$this->isUpdate()) {
+                // new attachment-only note
+                $this->attachment_flag = true;
+                $check_notify = false;
+            }
+        }
+
+        if (!$this->attachment_flag && $this->load_relationship('attachments')) {
+            $attachments = $this->attachments->getBeans();
+
+            foreach ($attachments as $attachment) {
+                $attachment->setAttachmentTeams($this);
+            }
         }
 
         $this->setContactId();
         return parent::save($check_notify);
+    }
+
+    /**
+     * Set teams and assigned user to be the same as parent's for an attachment note
+     *
+     * @param SugarBean $parentBean
+     * @param bool $save
+     */
+    public function setAttachmentTeams(SugarBean $parentBean, bool $save = true)
+    {
+        if ($this->team_set_id !== $parentBean->team_set_id || $this->assigned_user_id !== $parentBean->assigned_user_id) {
+            $this->team_id = $parentBean->team_id ?? null;
+            $this->team_set_id = $parentBean->team_set_id ?? null;
+            $this->acl_team_set_id = $parentBean->acl_team_set_id ?? null;
+            $this->assigned_user_id = $parentBean->assigned_user_id ?? null;
+            if ($save) {
+                $this->save();
+            }
+        }
     }
 
     function safeAttachmentName()
@@ -177,9 +208,10 @@ class Note extends SugarBean
      * Removes the file from the filesystem and clears the file metadata from the record.
      *
      * @param string $isduplicate
+     * @param boolean $save
      * @return bool
      */
-    function deleteAttachment($isduplicate = "false")
+    public function deleteAttachment($isduplicate = "false", $save = true)
     {
         if (!$this->ACLAccess('edit')) {
             return false;
@@ -205,7 +237,9 @@ class Note extends SugarBean
         $this->email_type = '';
         $this->email_id = '';
         $this->upload_id = '';
-        $this->save();
+        if ($save) {
+            $this->save();
+        }
         return true;
     }
 
@@ -370,5 +404,22 @@ class Note extends SugarBean
             ];
         }
         return [];
+    }
+
+    /**
+     * Checks if its the right parent relationship
+     * @inheritdoc
+     * @param string $typeField The parent field type
+     * @param SugarRelationship $rel The parent relationship
+     * @return bool
+     */
+    protected function checkParentRelationship(string $typeField, SugarRelationship $rel): bool
+    {
+        $relColumns = $rel->getRelationshipRoleColumns();
+        // check if attachment_flag matches
+        $attachmentFlagMatch = !isset($relColumns['attachment_flag']) ||
+            (($relColumns['attachment_flag'] === 1 && !empty($this->attachment_flag)) ||
+                ($relColumns['attachment_flag'] === 0 && empty($this->attachment_flag)));
+        return isset($relColumns[$typeField]) && $attachmentFlagMatch;
     }
 }

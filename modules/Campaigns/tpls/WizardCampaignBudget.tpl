@@ -60,11 +60,10 @@
     /*
      * this is the custom validation script that will validate the fields on step2 of wizard
      */
-	{literal}
     function validate_step2(){
         //add fields to validation and call generic validation script
         var requiredTxt = SUGAR.language.get('app_strings', 'ERR_MISSING_REQUIRED_FIELDS');
-        if(validate['wizform']!='undefined'){delete validate['wizform']};
+        if(validate['wizform']!='undefined'){ delete validate['wizform'] };
         addToValidate('wizform', 'budget', 'float', false,  document.getElementById('budget').title);
         addToValidate('wizform', 'actual_cost', 'float', false,  document.getElementById('actual_cost').title);
         addToValidate('wizform', 'expected_revenue', 'float', false,  document.getElementById('expected_revenue').title);
@@ -105,5 +104,4 @@
 		budget.value = formatNumber(budget.value, num_grp_sep, dec_sep);
 		actual_cost.value = formatNumber(actual_cost.value, num_grp_sep, dec_sep);
 	}    
-	{/literal}
-	</script>	
+	</script>

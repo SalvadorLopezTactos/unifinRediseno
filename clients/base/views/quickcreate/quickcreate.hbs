@@ -11,13 +11,21 @@
  */
 --}}
 <ul class="nav megamenu" >
-    <li class="dropdown" id="createList">
-        <div class="btn-group">
-            <button data-toggle="dropdown" role="button" type="button" class="btn btn-invisible btn-link dropdown-toggle" rel="tooltip" data-placement="left" title="{{str "LBL_QUICK_CREATE_TITLE"}}" track="click:quickCreate" aria-label="{{str 'LBL_QUICK_CREATE_MENU'}}"><i class="fa fa-plus fa-md"></i></button>
-            <div class="dropdown-menu scroll pull-right" role="menu">
-                <ul>
+    <li class="dropdown border-l border-default" id="createList">
+        <div class="btn-group p-2">
+            <button data-toggle="dropdown" role="button" type="button"
+                class="btn btn-invisible btn-link dropdown-toggle" rel="tooltip" data-placement="left"
+                title="{{str "LBL_QUICK_CREATE_TITLE"}}" track="click:quickCreate"
+                aria-label="{{str 'LBL_QUICK_CREATE_MENU'}}" aria-haspopup="true" aria-expanded="false"
+            >
+                <i class="sicon sicon-plus"></i>
+            </button>
+            <div class="dropdown-menu rounded-t-none scroll pull-right">
+                <ul role="menu">
                     {{#each createMenuItems}}
-                        <li>{{field ../this model=model template=../this.action}}</li>
+                        <li class="megamenu-dropdown-item-container">
+                            {{field ../this model=model template=../this.action}}
+                        </li>
                     {{/each}}
                 </ul>
             </div>

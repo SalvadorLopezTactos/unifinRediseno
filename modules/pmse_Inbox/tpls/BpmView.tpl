@@ -288,10 +288,10 @@ YAHOO.util.Event.onContentReady(
 //window.setTimeout(, 100);
 
 // bug 55468 -- IE is too aggressive with onUnload event
-{{literal}}
-if (SUGAR.browser.msie){{/literal}} {ldelim}
-{{literal}}$(document).ready(function() {{/literal}} {ldelim}
-   {{literal}} $(".collapseLink,.expandLink").click(function (e) {{/literal}} {ldelim} e.preventDefault(); {rdelim});
+
+if (SUGAR.browser.msie) {ldelim}
+$(document).ready(function()  {ldelim}
+    $(".collapseLink,.expandLink").click(function (e)  {ldelim} e.preventDefault(); {rdelim});
   {rdelim});
 {rdelim}
 </script>

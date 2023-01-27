@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class GraphList extends BaseItem
 {
@@ -30,7 +28,7 @@ class GraphList extends BaseItem
     * Gets the displayName
     * The displayable title of the list.
     *
-    * @return string The displayName
+    * @return string|null The displayName
     */
     public function getDisplayName()
     {
@@ -47,7 +45,7 @@ class GraphList extends BaseItem
     *
     * @param string $val The displayName
     *
-    * @return List
+    * @return GraphList
     */
     public function setDisplayName($val)
     {
@@ -59,12 +57,12 @@ class GraphList extends BaseItem
     * Gets the list
     * Provides additional details about the list.
     *
-    * @return ListInfo The list
+    * @return ListInfo|null The list
     */
     public function getList()
     {
         if (array_key_exists("list", $this->_propDict)) {
-            if (is_a($this->_propDict["list"], "Microsoft\Graph\Model\ListInfo")) {
+            if (is_a($this->_propDict["list"], "\Microsoft\Graph\Model\ListInfo") || is_null($this->_propDict["list"])) {
                 return $this->_propDict["list"];
             } else {
                 $this->_propDict["list"] = new ListInfo($this->_propDict["list"]);
@@ -80,7 +78,7 @@ class GraphList extends BaseItem
     *
     * @param ListInfo $val The list
     *
-    * @return List
+    * @return GraphList
     */
     public function setList($val)
     {
@@ -92,12 +90,12 @@ class GraphList extends BaseItem
     * Gets the sharepointIds
     * Returns identifiers useful for SharePoint REST compatibility. Read-only.
     *
-    * @return SharepointIds The sharepointIds
+    * @return SharepointIds|null The sharepointIds
     */
     public function getSharepointIds()
     {
         if (array_key_exists("sharepointIds", $this->_propDict)) {
-            if (is_a($this->_propDict["sharepointIds"], "Microsoft\Graph\Model\SharepointIds")) {
+            if (is_a($this->_propDict["sharepointIds"], "\Microsoft\Graph\Model\SharepointIds") || is_null($this->_propDict["sharepointIds"])) {
                 return $this->_propDict["sharepointIds"];
             } else {
                 $this->_propDict["sharepointIds"] = new SharepointIds($this->_propDict["sharepointIds"]);
@@ -113,7 +111,7 @@ class GraphList extends BaseItem
     *
     * @param SharepointIds $val The sharepointIds
     *
-    * @return List
+    * @return GraphList
     */
     public function setSharepointIds($val)
     {
@@ -125,12 +123,12 @@ class GraphList extends BaseItem
     * Gets the system
     * If present, indicates that this is a system-managed list. Read-only.
     *
-    * @return SystemFacet The system
+    * @return SystemFacet|null The system
     */
     public function getSystem()
     {
         if (array_key_exists("system", $this->_propDict)) {
-            if (is_a($this->_propDict["system"], "Microsoft\Graph\Model\SystemFacet")) {
+            if (is_a($this->_propDict["system"], "\Microsoft\Graph\Model\SystemFacet") || is_null($this->_propDict["system"])) {
                 return $this->_propDict["system"];
             } else {
                 $this->_propDict["system"] = new SystemFacet($this->_propDict["system"]);
@@ -146,7 +144,7 @@ class GraphList extends BaseItem
     *
     * @param SystemFacet $val The system
     *
-    * @return List
+    * @return GraphList
     */
     public function setSystem($val)
     {
@@ -159,7 +157,7 @@ class GraphList extends BaseItem
      * Gets the columns
     * The collection of field definitions for this list.
      *
-     * @return array The columns
+     * @return array|null The columns
      */
     public function getColumns()
     {
@@ -176,11 +174,11 @@ class GraphList extends BaseItem
     *
     * @param ColumnDefinition $val The columns
     *
-    * @return List
+    * @return GraphList
     */
     public function setColumns($val)
     {
-		$this->_propDict["columns"] = $val;
+        $this->_propDict["columns"] = $val;
         return $this;
     }
     
@@ -189,7 +187,7 @@ class GraphList extends BaseItem
      * Gets the contentTypes
     * The collection of content types present in this list.
      *
-     * @return array The contentTypes
+     * @return array|null The contentTypes
      */
     public function getContentTypes()
     {
@@ -206,11 +204,11 @@ class GraphList extends BaseItem
     *
     * @param ContentType $val The contentTypes
     *
-    * @return List
+    * @return GraphList
     */
     public function setContentTypes($val)
     {
-		$this->_propDict["contentTypes"] = $val;
+        $this->_propDict["contentTypes"] = $val;
         return $this;
     }
     
@@ -218,12 +216,12 @@ class GraphList extends BaseItem
     * Gets the drive
     * Only present on document libraries. Allows access to the list as a [drive][] resource with [driveItems][driveItem].
     *
-    * @return Drive The drive
+    * @return Drive|null The drive
     */
     public function getDrive()
     {
         if (array_key_exists("drive", $this->_propDict)) {
-            if (is_a($this->_propDict["drive"], "Microsoft\Graph\Model\Drive")) {
+            if (is_a($this->_propDict["drive"], "\Microsoft\Graph\Model\Drive") || is_null($this->_propDict["drive"])) {
                 return $this->_propDict["drive"];
             } else {
                 $this->_propDict["drive"] = new Drive($this->_propDict["drive"]);
@@ -239,7 +237,7 @@ class GraphList extends BaseItem
     *
     * @param Drive $val The drive
     *
-    * @return List
+    * @return GraphList
     */
     public function setDrive($val)
     {
@@ -252,7 +250,7 @@ class GraphList extends BaseItem
      * Gets the items
     * All items contained in the list.
      *
-     * @return array The items
+     * @return array|null The items
      */
     public function getItems()
     {
@@ -269,11 +267,41 @@ class GraphList extends BaseItem
     *
     * @param ListItem $val The items
     *
-    * @return List
+    * @return GraphList
     */
     public function setItems($val)
     {
-		$this->_propDict["items"] = $val;
+        $this->_propDict["items"] = $val;
+        return $this;
+    }
+    
+
+     /** 
+     * Gets the subscriptions
+    * The set of subscriptions on the list.
+     *
+     * @return array|null The subscriptions
+     */
+    public function getSubscriptions()
+    {
+        if (array_key_exists("subscriptions", $this->_propDict)) {
+           return $this->_propDict["subscriptions"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the subscriptions
+    * The set of subscriptions on the list.
+    *
+    * @param Subscription $val The subscriptions
+    *
+    * @return GraphList
+    */
+    public function setSubscriptions($val)
+    {
+        $this->_propDict["subscriptions"] = $val;
         return $this;
     }
     

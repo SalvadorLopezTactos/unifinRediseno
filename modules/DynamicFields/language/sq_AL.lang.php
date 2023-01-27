@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Emri i fushës tashmë ekziston',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Emri i fajlit duhet të përmbajë vetëm karakteret vijuese: a-zA-Z',
     'ERR_NO_MODULE_INCLUDED' => 'Asnjë modul i përfshirë nuk mund të ruhet',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Emri me lëshim poshtë ekziston tashmë',
     'LBL_BTN_ADD' => 'shto',
     'LBL_BTN_EDIT' => 'Ndrysho',
     'LBL_GENERATE_URL' => 'Gjenero URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Shto kolonë {0} në',
     'LBL_DONE' => 'E bërë',
     'LBL_EXE_NON_SIM_MODE' => 'Ekzekuto modul jo-simulativ',
+    'LBL_CALCULATION_VISIBLE' => 'Bëji të dukshme për llogaritjet',
 );
-
-
-?>

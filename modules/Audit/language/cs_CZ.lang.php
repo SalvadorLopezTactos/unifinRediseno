@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Položky auditované v tomto modulu:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'V tomto modulu nejsou žádné kontrolované položky',
     'LBL_CHANGE_LOG' => 'Protokol auditu',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Když jsou kontrolovaná pole měny uložena v měně, která není výchozí měnou systému, budou v protokolu změn zobrazeny staré a nové hodnoty v převedené, systémem definované výchozí měně.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Když jsou kontrolovaná pole měny uložena v měně, která není výchozí měnou systému, budou v protokolu změn zobrazeny staré a nové hodnoty v převedené, systémem definované výchozí měně.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Aktualizovat do',
+    'LBL_BLANK' => '-prázdný-',
 );

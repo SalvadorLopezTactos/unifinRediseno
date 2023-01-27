@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Możesz na przykład użyć tej opcji do znalezienia wcześniej dodanego zgłoszenia.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'W przypadku nowego zgłoszenia wsparcia do dodania kliknij tutaj, aby dodać nowe zgłoszenie.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Kliknięcie tutaj przeniesie Cię z powrotem do tego widoku.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcje w zgłoszeniu',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu zgłoszenia',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notatki',
 

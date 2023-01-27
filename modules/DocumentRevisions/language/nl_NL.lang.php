@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'Nieuw document',
 	'LNK_DOCUMENT_LIST'=> 'Documentenlijst',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'Revisies gerelateerd document',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'U heeft de {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a> succesvol aangemaakt.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'Revisienummer',
 	'LBL_FILENAME' => 'Bestandsnaam',
 	'LBL_MIME' => 'Mime type',

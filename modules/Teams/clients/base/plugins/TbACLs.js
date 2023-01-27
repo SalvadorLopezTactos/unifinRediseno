@@ -71,10 +71,10 @@
 
                 if (state) {
                     this.$(btnSelector).addClass('active');
-                    this.$(btnIconSelector).removeClass('fa-lock').addClass('fa-unlock-alt');
+                    this.$(btnIconSelector).removeClass('sicon-lock').addClass('sicon-unlock');
                 } else {
                     this.$(btnSelector).removeClass('active');
-                    this.$(btnIconSelector).removeClass('fa-unlock-alt').addClass('fa-lock');
+                    this.$(btnIconSelector).removeClass('sicon-unlock').addClass('sicon-lock');
                 }
             },
 
@@ -84,7 +84,8 @@
              * @return {boolean}
              */
             isEnabledForModule: function(module) {
-                if (!_.isUndefined(app.config.teamBasedAcl.enabled) &&
+                if (!_.isUndefined(app.config.teamBasedAcl) &&
+                        !_.isUndefined(app.config.teamBasedAcl.enabled) &&
                         !_.isUndefined(app.config.teamBasedAcl.enabledModules)) {
                     return app.config.teamBasedAcl.enabled &&
                         (_.indexOf(app.config.teamBasedAcl.enabledModules, module) !== -1);

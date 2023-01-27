@@ -105,7 +105,7 @@
     initialize: function(options) {
         this._super('initialize', [options]);
 
-        this.currentModule = this.context.get('module');
+        this.currentModule = this._currentModule();
         this.module = 'Purchases';
         this.moduleName = {'module_name': app.lang.getModuleName(this.module, {'plural': true})};
         this.baseModule = 'Accounts';
@@ -116,9 +116,15 @@
         if (canAccessPurchases && canAccessPlis) {
             this.purchasesModule = true;
             this.hidePagination = false;
-            this.purchasesFields = app.metadata.getModule('Purchases', 'fields');
-            this.pliFields = app.metadata.getModule('PurchasedLineItems', 'fields');
 
+            this.purchasesFields = app.utils.deepCopy(app.metadata.getModule('Purchases', 'fields'));
+            this.purchasesFields.name.link = true;
+            this.purchasesFields.name.disableFocusDrawerRecordSwitching = true;
+
+            this.pliFields = app.utils.deepCopy(app.metadata.getModule('PurchasedLineItems', 'fields'));
+            this.pliFields.name.type = 'dates-name';
+            this.pliFields.name.link = true;
+            this.pliFields.name.disableFocusDrawerRecordSwitching = true;
             this.pliFields.total_amount.showTransactionalAmount = true;
             this.pliFields.total_amount.convertToBase = true;
 
@@ -181,9 +187,9 @@
         var language = app.lang.getLanguage();
         var module = 'purchasehistorydashlet';
         var route = app.controller.context.get('layout');
-        var products = app.user.get('products') ?
-            app.user.get('products').join(',') :
-            '';
+
+        let products = app.user.getProductCodes();
+        products = products ? products.join(',') : '';
 
         var params = {
             edition: serverInfo.flavor,
@@ -409,11 +415,11 @@
      * @private
      */
     _togglePliVisibility: function(purchase) {
-        if (!purchase.chevronIcon || purchase.chevronIcon === 'fa-chevron-down') {
-            purchase.chevronIcon = 'fa-chevron-up';
+        if (!purchase.chevronIcon || purchase.chevronIcon === 'sicon-chevron-down') {
+            purchase.chevronIcon = 'sicon-chevron-up';
             purchase.showPliList = true;
         } else {
-            purchase.chevronIcon = 'fa-chevron-down';
+            purchase.chevronIcon = 'sicon-chevron-down';
             purchase.showPliList = false;
         }
     },

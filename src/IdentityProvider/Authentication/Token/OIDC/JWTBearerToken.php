@@ -82,6 +82,9 @@ class JWTBearerToken extends AbstractToken
             'iss' => $this->getAttribute('iss'),
             'tid' => $this->tenant,
         ];
+        if ($this->hasAttribute('sudoer')) {
+            $claims['sudoer'] = $this->getAttribute('sudoer');
+        }
         return JWSFactory::createJWSToCompactJSON(
             $claims,
             $jwkPrivateKey,

@@ -36,8 +36,10 @@ final class Directive
               (?<!.)\*(?!.)
            )
            (?<httpScheme>https?://)
+           (?<websocketScheme>wss?://)
            (?<url>                                          # host
               (?&httpScheme)?
+              (?&websocketScheme)?
               (?:(?&ipv4)|(?&ipv6))
               (?&port)?                                     # optional port number
            )
@@ -114,6 +116,7 @@ regex;
             'base-uri',
             'form-action',
             'frame-src',
+            'child-src',
             'connect-src',
             'font-src',
             'frame-ancestors',

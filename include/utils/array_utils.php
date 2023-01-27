@@ -33,7 +33,7 @@ function var_export_helper($tempArray) {
 
 function override_value_to_string($array_name, $value_name, $value){
 	$string = "\${$array_name}[". var_export($value_name, true). "] = ";
-	$string .= var_export_helper($value,true);
+    $string .= var_export_helper($value);
 	return $string . ";";
 }
 
@@ -61,12 +61,12 @@ function override_value_to_string_recursive($key_names, $array_name, $value)
 }
 
 function override_recursive_helper($key_names, $array_name, $value){
-	if( empty( $key_names ) )
-		return "=".var_export_helper($value,true).";";
-	else{
-		$key = array_shift($key_names);
-		return "[".var_export($key,true)."]". override_recursive_helper($key_names, $array_name,$value);
-	}
+    if (empty($key_names)) {
+        return "=" . var_export_helper($value) . ";";
+    } else {
+        $key = array_shift($key_names);
+        return "[" . var_export($key, true) . "]" . override_recursive_helper($key_names, $array_name, $value);
+    }
 }
 
 /**
@@ -167,6 +167,26 @@ function object_to_array_recursive($obj)
 	}
 	return $ret;
 }
+
+/**
+ * Same as object_to_array_recursive, but also processing objects inside arrays
+ * @param $obj
+ * @return mixed
+ */
+function object_to_array_deep($obj)
+{
+    if (!(is_array($obj) || is_object($obj))) {
+        return $obj;
+    }
+
+    $input = is_object($obj) ? get_object_vars($obj) : $obj;
+    $ret = [];
+    foreach ($input as $key => $value) {
+        $ret[$key] = object_to_array_deep($value);
+    }
+    return $ret;
+}
+
 /**
 	 * This function returns an array of all the key=>value pairs in $array1
 	 * that are wither not present, or different in $array2.

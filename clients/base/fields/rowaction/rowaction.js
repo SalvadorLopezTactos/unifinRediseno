@@ -25,6 +25,11 @@
         options.def.events = _.extend({}, options.def.events, {
             'click .rowaction': 'rowActionSelect'
         });
+
+        if (options.def.event === 'list:preview:fire') {
+            options.def.css_class += ' border-none bg-none';
+        }
+
         this._super('initialize', [options]);
     },
 

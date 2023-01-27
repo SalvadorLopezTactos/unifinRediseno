@@ -1,8 +1,8 @@
 @sweetspotWidth: 500px;
 @sweetspotHalfWidth: 50px;
 @sweetspotHeight: 60px;
-@sweetspotGrey: #dbdbdb;
-@sweetspotDarkText: #e5e5e5;
+@sweetspotGrey: @gray40;
+@sweetspotDarkText: @gray30;
 
 .noselect {
   -webkit-touch-callout: none;
@@ -20,7 +20,7 @@
   position: fixed;
   width: @sweetspotWidth;
   min-height: @sweetspotHeight;
-  background-color: @grayLighter;
+  background-color: @gray20;
   top: 14%;
   z-index: 100000;
   left: ~'-moz-calc(50% - 250px)';
@@ -32,11 +32,11 @@
 
   &[data-theme=light] {
     border-radius: 2px;
-    border: 1px solid @grayLighter;
-    box-shadow: 2px 5px 15px fade(@black, 50%);
+    border: @borderWidget;
+    box-shadow: @shadowWidget;
 
     input[type=text] {
-      color: @grayDarkish;
+      color: @gray80;
       background-color: @transparent;
     }
 
@@ -49,8 +49,8 @@
         margin: 0 10px;
         padding: 2px 0 0;
         background-color: @transparent;
-        color: @gray;
-        border-bottom: 1px solid @grayDarkish;
+        color: @gray80;
+        border-bottom: 1px solid @gray80;
       }
 
       li[data-sweetaction] {
@@ -69,9 +69,9 @@
 
   &[data-theme=dark] {
     border-radius: 2px;
-    border: 1px solid @grayDark;
+    border: 1px solid @gray90;
     box-shadow: 2px 5px 15px fade(@black, 50%);
-    background-color: @grayDarkish;
+    background-color: @gray80;
 
     input[type=text] {
       color: @sweetspotDarkText;
@@ -79,11 +79,7 @@
     }
 
     ul {
-      background-color: @grayDark;
-    }
-
-    img {
-      opacity: 1;
+      background-color: @gray90;
     }
 
     i {
@@ -101,7 +97,7 @@
         padding: 2px 0 0;
         background-color: transparent;
         color: @sweetspotDarkText;
-        border-bottom: 1px solid @grayLight;
+        border-bottom: 1px solid @gray70;
       }
 
       li[data-sweetaction] {
@@ -113,7 +109,7 @@
           > div.result-text {
             div.result-keyword.label {
               background-color: fade(@white, 80%);
-              color: @grayDark;
+              color: @gray90;
               border: none;
             }
           }
@@ -149,7 +145,7 @@
     margin: 0;
     position: absolute;
     width: calc(~"100% - 75px");
-    color: @grayDark;
+    color: @gray90;
     background-color: @sweetspotGrey;
     font-size: 34px;
     box-shadow: none;
@@ -164,14 +160,13 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    opacity: 0.6;
   }
 
   i {
     margin: 3px 3px 0 0;
 
     &:hover {
-      color: @grayDark;
+      color: @sicon-hover-color;
       cursor: pointer;
     }
   }
@@ -211,7 +206,7 @@
         }
 
         a {
-          color: @grayDark;
+          color: @gray90;
           position: relative;
           top: 0;
           right: 0;
@@ -255,7 +250,7 @@
 
           .fa-mail-forward {
             display: block;
-            color: fade(@black, 70%);
+            color: @gray70;
           }
 
           .result-icon {

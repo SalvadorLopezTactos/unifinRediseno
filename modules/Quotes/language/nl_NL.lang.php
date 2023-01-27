@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Offerteconfiguratie',
 
     'LBL_RENEWAL' => 'Verlenging',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interactie offerte',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn offerte',
 );

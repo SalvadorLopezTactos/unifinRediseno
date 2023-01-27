@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Lietotāji',
     'LBL_EMAILS_PRODUCTS_REL' => 'Piedāvājuma produkti',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Ieņēmumu posteņi',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Eskalācijas',
     'LBL_EMAILS_MESSAGES_REL' => 'Ziņojumi',
     'LBL_EMAILS_PURCHASES_REL' => 'Pirkumi',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Iegādātie produkti',
@@ -473,4 +474,5 @@ Jūs variet izmantot iepriekš definētas veidnes izmantojot pogu "Veidnes" vai 
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Sūtīt e-pastu',
     'LBL_MAILBOX' => 'Ienākošais klients',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Konfigurējiet izejošā e-pasta kontu, izmantojot <a href="#OutboundEmail">E-pasta iestatījumi</a>, lai varētu sūtīt e-pastus.',
 );

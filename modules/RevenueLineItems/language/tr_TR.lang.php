@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Yenileme Gelir Kalemi Kimliği',
     'LBL_PARENT_RLIS' => 'Ana Gelir Kalemleri',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Ana Gelir Kalemleri',
+    'LBL_FORECASTED_LIKELY' => 'Tahmini Muhtemel',
     'LBL_EXPERT_ID' => 'Ürün Uzmanı',
     'LBL_FORECAST' => 'Tahmine dahil et',
     'LBL_SUBTOTAL' => 'Alt toplam',

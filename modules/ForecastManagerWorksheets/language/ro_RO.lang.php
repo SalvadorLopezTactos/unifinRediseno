@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Rata de baza',
 
     'LBL_QUOTA' => 'Obiectiv',
-    'LBL_QUOTA_ADJUSTED' => 'Obiectiv (ajustat)',
+    'LBL_QUOTA_ADJUSTED' => 'Cotă ajustată',
 
     'LBL_FORECAST' => 'Previziune',
     'LBL_COMMIT_STAGE' => 'Asumare stadiu',

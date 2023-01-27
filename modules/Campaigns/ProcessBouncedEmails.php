@@ -103,7 +103,7 @@ function getExistingCampaignLogEntry($identifier)
             $query,
             [$identifier]
         )
-        ->fetch();
+        ->fetchAssociative();
 }
 
 /**
@@ -176,7 +176,7 @@ function campaign_process_bounced_emails(&$email, &$email_header)
                             "SELECT * FROM campaign_log WHERE target_tracker_key = ? 
                             AND (activity_type = 'invalid email' OR activity_type = 'send error')",
                             [$row['target_tracker_key']]
-                        )->fetchColumn();
+                        )->fetchOne();
 
                     if (false === $campaignLog) {
 						$return_id = createBouncedCampaignLogEntry($row, $email, $email_description);	

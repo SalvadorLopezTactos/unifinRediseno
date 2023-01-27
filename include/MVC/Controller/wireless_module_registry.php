@@ -29,4 +29,6 @@ $wireless_module_registry = array(
     'Contracts' => [],
     'ContractTypes' => [],
     'KBContents' => [],
+    'EmailTemplates' => [],
+    'UserSignatures' => [],
 );

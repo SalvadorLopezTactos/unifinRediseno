@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'預設時間格式',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'顯示伺服器回應時間',
+    'FREEZE_FIRST_COLUMN' => '允許欄位固定',
+    'FREEZE_FIRST_COLUMN_HELP' => '啟用此設置允許用戶凍結各種列表視圖中的第一列， ' .
+        '包括模塊列表視圖、子面板、Dashlet 和控制台。',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => '記錄慢速查詢',
     'LOCK_HOMEPAGE_HELP'=>'此設定用來阻止 <BR> 1) 在首頁模組中新增新的首頁和 Dashlet，<BR>2) 透過拖放自訂 Dashlet 在首頁的位置。',
     'CURRENT_LOGO'=>'當前標誌：',
+    'CURRENT_LOGO_DARK' => '當前暗模式標誌：',
     'CURRENT_LOGO_HELP'=>'該標誌顯示於 Sugar 應用程式頁尾的左角。',
+    'CURRENT_LOGO_DARK_HELP' => "根據用戶的外觀首選項，當 Sugar 應用程序處於暗模式時，此標誌會顯示在頁腳的左下角。",
     'NEW_LOGO'=>'選取標誌：',
     'NEW_LOGO_HELP' => '圖像檔案格式可以為 .png 或 .jpg。最大高度為 24px，最大寬度為180px。任何超出此範圍的圖像都將自動調整至最大尺寸。',
+    'NEW_LOGO_DARK' => '選擇暗模式標誌：',
     'NEW_LOGO_HELP_NO_SPACE' => '圖像檔案格式可以為 .png 或 .jpg。最大高度為 24px，最大寬度為450px。任何超出此範圍的圖像都將自動調整至最大尺寸。圖像檔案名不能包含空格字元。',
     'NEW_QUOTE_LOGO'=>'上載新報價標誌',
     'NEW_QUOTE_LOGO_HELP'=>'符合要求的圖像檔案格式為 .jpg。<BR>建議大小為 867x74 px。',
@@ -412,8 +418,7 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => '繼續',
     'LBL_WIZARD_FINISH_TAB' => '完成',
     'LBL_WIZARD_FINISH_TITLE' => '已完成基本系統配置。',
-    'LBL_WIZARD_FINISH' => '按一下<b>繼續</b>以配置使用者設定。<br/><br />
-如需配置其他系統設定，按一下<a href="index.php?module=Administration&action=index" target="_blank">此處</a>。',
+    'LBL_WIZARD_FINISH' => '點擊<b>繼續</b>配置你的用戶設置。 <br/><br />配置額外的系統配置，請點擊 <a href="#Administration" target="_blank">這裡</a>。',
     'LBL_WIZARD_SYSTEM_TITLE' => '品牌化',
     'LBL_WIZARD_SYSTEM_DESC' => '提供組織名稱和標誌，以讓 Sugar 品牌化。',
     'LBL_WIZARD_LOCALE_DESC' => '根據您所在的地理位置，指定如何顯示 Sugar 中的資料。您提供的設定將作為預設設定。使用者可完成自己的喜好設定。',
@@ -424,7 +429,8 @@ BSOFR
 	'LBL_LOADING' => '載入中...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => '刪除' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => '歡迎' /*for 508 compliance fix*/,
-	'LBL_LOGO' => '標誌' /*for 508 compliance fix*/,
+    'LBL_LOGO' => '標誌' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => '暗模式標誌',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* 報表模組僅適用於 SugarCRM 和 Sugar Mobile 原生用戶端。',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* 報表模組不適用於基於瀏覽器的行動裝置檢視。',
 
@@ -463,5 +469,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

@@ -13,7 +13,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
     <td colspan="100">
-        <h2>{$MOD.LBL_FTS_SETTINGS}</h2>
+        <h2>{$MOD.LBL_FTS_SETTINGS|escape:'html':'UTF-8'}</h2>
     </td>
 </tr>
 <tr>
@@ -38,9 +38,9 @@
 	<table border="0" cellspacing="1" cellpadding="1">
 		<tr>
 			<td>
-			<input title="{$APP.LBL_SAVE_BUTTON_LABEL}" accessKey="{$APP.LBL_SAVE_BUTTON_TITLE}" class="button primary" onclick="SUGAR.saveGlobalSearchSettings();" type="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">
-                <input title="{$MOD.LBL_SAVE_SCHED_BUTTON}" class="button primary schedFullSystemIndex" onclick="SUGAR.FTS.schedFullSystemIndex();" style="{if !$showSchedButton}display:none;{/if}text-decoration: none;" id='schedFullSystemIndexBtn' type="button" name="button" value="{$MOD.LBL_SAVE_SCHED_BUTTON}">
-            <input title="{$APP.LBL_CANCEL_BUTTON_LABEL}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="document.GlobalSearchSettings.action.value='';" type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+			<input title="{$APP.LBL_SAVE_BUTTON_LABEL|escape:'html':'UTF-8'}" accessKey="{$APP.LBL_SAVE_BUTTON_TITLE|escape:'html':'UTF-8'}" class="button primary" onclick="SUGAR.saveGlobalSearchSettings();" type="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL|escape:'html':'UTF-8'}">
+            <input title="{$MOD.LBL_SAVE_SCHED_BUTTON|escape:'html':'UTF-8'}" class="button primary schedFullSystemIndex" onclick="SUGAR.FTS.schedFullSystemIndex();" style="{if !$showSchedButton}display:none;{/if}text-decoration: none;" id='schedFullSystemIndexBtn' type="button" name="button" value="{$MOD.LBL_SAVE_SCHED_BUTTON|escape:'html':'UTF-8'}">
+            <input title="{$APP.LBL_CANCEL_BUTTON_LABEL|escape:'html':'UTF-8'}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY|escape:'html':'UTF-8'}" class="button" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL|escape:'html':'UTF-8'}">
 			</td>
 		</tr>
 	</table>
@@ -64,21 +64,21 @@
         <br><br>
         <table width="50%" border="0" cellspacing="1" cellpadding="0" class="edit view">
             <tbody>
-                <tr><th align="left" scope="row" colspan="4"><h4>{$MOD.LBL_FTS_SETTINGS_TITLE}</h4></th></tr>
+                <tr><th align="left" scope="row" colspan="4"><h4>{$MOD.LBL_FTS_SETTINGS_TITLE|escape:'html':'UTF-8'}</h4></th></tr>
 
                 <tr>
-                    <td width="25%" scope="row" valign="middle">{$MOD.LBL_FTS_TYPE}:&nbsp;{sugar_help text=$MOD.LBL_FTS_TYPE_HELP}</td>
+                    <td width="25%" scope="row" valign="middle">{$MOD.LBL_FTS_TYPE|escape:'html':'UTF-8'}:&nbsp;{sugar_help text=$MOD.LBL_FTS_TYPE_HELP}</td>
                     <td width="25%" align="left" valign="middle"><select name="fts_type" id="fts_type">{$fts_type}</select></td>
                     <td width="60%">&nbsp;</td>
                 </tr>
                 <tr class="shouldToggle">
-                    <td width="25%" scope="row" valign="middle">{$MOD.LBL_FTS_HOST}:&nbsp;{sugar_help text=$MOD.LBL_FTS_HOST_HELP}</td>
-                    <td width="25%" align="left" valign="middle"><input type="text" name="fts_host" id="fts_host" value="{$fts_host}" ></td>
-                    <td width="60%" valign="bottom">&nbsp;<a href="javascript:void(0);" onclick="SUGAR.FTS.testSettings();" style="text-decoration: none;">{$MOD.LBL_FTS_TEST}</a></td>
+                    <td width="25%" scope="row" valign="middle">{$MOD.LBL_FTS_HOST|escape:'html':'UTF-8'}:&nbsp;{sugar_help text=$MOD.LBL_FTS_HOST_HELP}</td>
+                    <td width="25%" align="left" valign="middle"><input type="text" name="fts_host" id="fts_host" value="{$fts_host|escape:'html':'UTF-8'}" ></td>
+                    <td width="60%" valign="bottom">&nbsp;<a href="javascript:void(0);" onclick="SUGAR.FTS.testSettings();" style="text-decoration: none;">{$MOD.LBL_FTS_TEST|escape:'html':'UTF-8'}</a></td>
                 </tr>
                 <tr class="shouldToggle">
-                    <td width="25%" scope="row" valign="middle">{$MOD.LBL_FTS_PORT}:&nbsp;{sugar_help text=$MOD.LBL_FTS_PORT_HELP}</td>
-                    <td width="25%" align="left" valign="middle"><input type="text" name="fts_port" id="fts_port" maxlength="5" size="5" value="{$fts_port}"></td>
+                    <td width="25%" scope="row" valign="middle">{$MOD.LBL_FTS_PORT|escape:'html':'UTF-8'}:&nbsp;{sugar_help text=$MOD.LBL_FTS_PORT_HELP}</td>
+                    <td width="25%" align="left" valign="middle"><input type="text" name="fts_port" id="fts_port" maxlength="5" size="5" value="{$fts_port|escape:'html':'UTF-8'}"></td>
                     <td width="60%"></td>
                 </tr>
                 <tr class="shouldToggle">
@@ -90,9 +90,9 @@
 	<table border="0" cellspacing="1" cellpadding="1">
 		<tr>
 			<td>
-				<input title="{$APP.LBL_SAVE_BUTTON_LABEL}" class="button primary" onclick="SUGAR.saveGlobalSearchSettings();" type="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">
-                <input title="{$MOD.LBL_SAVE_SCHED_BUTTON}" class="button primary schedFullSystemIndex" onclick="SUGAR.FTS.schedFullSystemIndex();" style="{if !$showSchedButton}display:none;{/if}text-decoration: none;" id='schedFullSystemIndex' type="button" name="button" value="{$MOD.LBL_SAVE_SCHED_BUTTON}">
-                <input title="{$APP.LBL_CANCEL_BUTTON_LABEL}" class="button" onclick="document.GlobalSearchSettings.action.value='';" type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+				<input title="{$APP.LBL_SAVE_BUTTON_LABEL|escape:'html':'UTF-8'}" class="button primary" onclick="SUGAR.saveGlobalSearchSettings();" type="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL|escape:'html':'UTF-8'}">
+                <input title="{$MOD.LBL_SAVE_SCHED_BUTTON|escape:'html':'UTF-8'}" class="button primary schedFullSystemIndex" onclick="SUGAR.FTS.schedFullSystemIndex();" style="{if !$showSchedButton}display:none;{/if}text-decoration: none;" id='schedFullSystemIndex' type="button" name="button" value="{$MOD.LBL_SAVE_SCHED_BUTTON|escape:'html':'UTF-8'}">
+                <input title="{$APP.LBL_CANCEL_BUTTON_LABEL|escape:'html':'UTF-8'}" class="button" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL|escape:'html':'UTF-8'}">
 			</td>
 		</tr>
 	</table>
@@ -103,7 +103,7 @@
 <div id='selectFTSModules' class="yui-hidden">
     <div style="background-color: white; padding: 20px; overflow:scroll; height:400px;">
         <div id='selectFTSModulesTable' ></div>
-        <div style="padding-top: 10px"><input type="checkbox" name="clearDataOnIndex" id="clearDataOnIndex" >&nbsp;{$MOD.LBL_DELETE_FTS_DATA}</div>
+        <div style="padding-top: 10px"><input type="checkbox" name="clearDataOnIndex" id="clearDataOnIndex" >&nbsp;{$MOD.LBL_DELETE_FTS_DATA|escape:'html':'UTF-8'}</div>
     </div>
 </div>
 <script type="text/javascript">
@@ -119,30 +119,29 @@
 	var lblEnabled = '{sugar_translate label="LBL_ACTIVE_MODULES"}';
 	var lblDisabled = '{sugar_translate label="LBL_DISABLED_MODULES"}';
 
-	{literal}
 	SUGAR.globalSearchEnabledTable = new YAHOO.SUGAR.DragDropTable(
 		"enabled_div",
-		[{key:"label",  label: lblEnabled, width: 200, sortable: false},
-		 {key:"module", label: lblEnabled, hidden:true}],
+		[{ key:"label",  label: lblEnabled, width: 200, sortable: false },
+		 { key:"module", label: lblEnabled, hidden:true }],
 		new YAHOO.util.LocalDataSource(enabled_modules, {
-			responseSchema: {fields : [{key : "module"}, {key : "label"}]}
+			responseSchema: { fields : [{ key : "module" }, { key : "label" }]}
 		}),
-		{height: "300px"}
+		{ height: "300px" }
 	);
 	SUGAR.globalSearchDisabledTable = new YAHOO.SUGAR.DragDropTable(
 		"disabled_div",
-		[{key:"label",  label: lblDisabled, width: 200, sortable: false},
-		 {key:"module", label: lblDisabled, hidden:true}],
+		[{ key:"label",  label: lblDisabled, width: 200, sortable: false },
+		 { key:"module", label: lblDisabled, hidden:true }],
 		new YAHOO.util.LocalDataSource(disabled_modules, {
-			responseSchema: {fields : [{key : "module"}, {key : "label"}]}
+			responseSchema: { fields : [{ key : "module"}, { key : "label"}]}
 		}),
-		{height: "300px"}
+		{ height: "300px"}
 	);
 
 	SUGAR.globalSearchEnabledTable.disableEmptyRows = true;
 	SUGAR.globalSearchDisabledTable.disableEmptyRows = true;
-	SUGAR.globalSearchEnabledTable.addRow({module: "", label: ""});
-	SUGAR.globalSearchDisabledTable.addRow({module: "", label: ""});
+	SUGAR.globalSearchEnabledTable.addRow({ module: "", label: "" });
+	SUGAR.globalSearchDisabledTable.addRow({ module: "", label: "" });
 	SUGAR.globalSearchEnabledTable.render();
 	SUGAR.globalSearchDisabledTable.render();
 
@@ -174,13 +173,13 @@
     SUGAR.getTranslatedEnabledModules = function()
     {
         var enabledTable = SUGAR.globalSearchEnabledTable;
-        var modules = [{module:'', label: SUGAR.language.get('Administration', 'LBL_ALL')}];
+        var modules = [{ module:'', label: SUGAR.language.get('Administration', 'LBL_ALL')} ];
         for(var i=0; i < enabledTable.getRecordSet().getLength(); i++)
         {
             var data = enabledTable.getRecord(i).getData();
             if (data.module && data.module != '')
             {
-                var tmp = {'module' : data.module, 'label' : data.label};
+                var tmp = { 'module': data.module, 'label' : data.label};
                 modules.push(tmp);
             }
         }
@@ -217,7 +216,7 @@
 		Connect.asyncRequest(
             Connect.method,
             Connect.url,
-            {success: SUGAR.saveCallBack},
+            { success: SUGAR.saveCallBack },
 			SUGAR.util.paramsToUrl(urlParams) + "to_pdf=1"
         );
 
@@ -231,17 +230,15 @@
         if (response === "true") {
             var app = parent.SUGAR.App;
             app.sync();
-            window.location.assign('index.php?module=Administration&action=index');
+            parent.SUGAR.App.router.navigate("#Administration", {ldelim}trigger: true{rdelim});
 	   } else {
-            YAHOO.SUGAR.MessageBox.show({msg: response});
+            YAHOO.SUGAR.MessageBox.show({ msg: response });
 	   }
 	}
 })();
-{/literal}
 </script>
 <script type="text/javascript">
     var justRequestedAScheduledIndex = '{$justRequestedAScheduledIndex}';
-    {literal}
     $(document).ready(function()
     {
         if(justRequestedAScheduledIndex)
@@ -320,9 +317,9 @@
             SUGAR.FTS.selectFTSModulesDialog.render();
             SUGAR.FTS.selectFTSModulesDialog.show();
 
-            var enabledModules = {'modules': modules};
+            var enabledModules = { 'modules': modules};
 
-            var myColumnDefs = [{key:"label",label:SUGAR.language.get('Administration','LBL_AVAILABLE_FTS_MODULES'), sortable:false, width:200}];
+            var myColumnDefs = [{ key:"label",label:SUGAR.language.get('Administration','LBL_AVAILABLE_FTS_MODULES'), sortable:false, width:200 }];
 
             this.myDataSource = new YAHOO.util.DataSource(enabledModules);
             this.myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
@@ -396,8 +393,7 @@
 
         }
     };
-    {/literal}
     addForm('GlobalSearchSettings');
-    addToValidateMoreThan('GlobalSearchSettings', 'fts_port', 'int', true, '{$MOD.LBL_FTS_PORT}', 1);
-    addToValidate('GlobalSearchSettings', 'fts_host', 'varchar', 'true', '{$MOD.LBL_FTS_URL}');
+    addToValidateMoreThan('GlobalSearchSettings', 'fts_port', 'int', true, '{$MOD.LBL_FTS_PORT|escape:javascript}', 1);
+    addToValidate('GlobalSearchSettings', 'fts_host', 'varchar', 'true', '{$MOD.LBL_FTS_URL|escape:javascript}');
 </script>

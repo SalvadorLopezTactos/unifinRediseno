@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'Prognoser',
     'ForecastWorksheets' => 'Arbeidsplan for Prognoser',
     'ForecastManagerWorksheets' => 'Arbeidsflate for prognoser',
-    'MergeRecords'=>'Fusjonér registre',
       'VisualPipeline'=>'Visuell pipeline',
       'ConsoleConfiguration' => 'Konsollkonfigurasjon',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'Roller',
     'Notifications'=>'Varsler',
     'Sync'=>'Synkronisér',
+    'HintAccountsets' => 'HintKontosett',
+    'HintNotificationTargets' => 'HintVarselMål',
+    'HintNewsNotifications' => 'HintNyheterVarsler',
+    'HintEnrichFieldConfigs' => 'HintUtvidFeltKonfigurasjoner',
     'ReportMaker' => 'Virksomhetsrapporter',
     'DataSets' => 'Dataformater',
     'CustomQueries' => 'Tilpassede forespørsler',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'Kjøpte varelinjer',
     'MobileDevices' => 'Mobileenheter',
     'PushNotifications' => 'Push-varslinger',
+    'Escalations' => 'Opptrappinger',
+    'DocumentTemplates' => 'Dokumentmaler',
+    'DocumentMerges' => 'Dokumentsammenflettinger',
     'WorkFlow' => 'Workflow-definisjoner:',
     'EAPM' => 'Eksterne konto',
     'Worksheet' => 'Regneark',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'Ferier',
     'ChangeTimers' => 'Endre timere',
     'Messages' => 'Meldinger',
+    'Audit' => 'Revidere',
+    'RevenueLineItems' => 'Omsetningsposter',
+    'DocuSignEnvelopes' => 'DocuSign omslag',
+    'Geocode' => 'Geokoding',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Oppgaver',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'BC',
         'PurchasedLineItems' => 'PL',
+        'DocumentTemplates' => 'DT',
+        'DocumentMerges' => 'DM',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Forcast-arbeidsplan',
     'ForecastManagerWorksheets' => 'Arbeidsflate for prognoser',
     'Quotas' => 'Budsjett',
-    'MergeRecords'=>'Flett post',
     'Teams' => 'Gruppe',
     'TeamNotices' => 'Gruppemelding',
     'Activities' => 'Aktivitet',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'Kjøp',
     'PurchasedLineItems' => 'Kjøpt varelinje',
     'PushNotifications' => 'Push-varsling',
+    'Escalations' => 'Opptrapping',
+    'DocumentTemplates' => 'Dokumentmal',
+    'DocumentMerges' => 'Dokumentsammenfletting',
     'WorkFlow' => 'Arbeidsflyt',
     'EAPM' => 'Ekstern konto',
     'Worksheet' => 'Regneark',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'Ferie',
     'ChangeTimers' => 'Endre timer',
     'Messages' => 'Melding',
+    'Audit' => 'Revidere',
+    'DocuSignEnvelopes' => 'DocuSignOmslag',
+    'HintAccountsets' => 'HintKontosett',
+    'HintNotificationTargets' => 'HintVarselMål',
+    'HintNewsNotifications' => 'HintNyheterVarsler',
+    'HintEnrichFieldConfigs' => 'HintUtvidFeltKonfigurasjoner',
+    'Geocode' => 'Geokoding',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'Gass og vann',
     'Other' => 'Andre',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF og CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'Pågår',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'KB-dokumenter',
       'PurchasedLineItems' => 'Kjøpt varelinje',
       'Purchases' => 'Kjøp',
+      'Escalations' => 'Opptrapping',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Konto',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'Notat',
     'PurchasedLineItems' => 'Kjøpt varelinje',
     'Purchases' => 'Kjøp',
+    'Escalations' => 'Opptrapping',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'Bestilt',
       'Ship' => 'Sendt',
   ),
+    'active_status_dom' => [
+        'Active' => 'Aktiv',
+        'Inactive' => 'Inaktiv',
+        'Retired' => 'Avviklet',
+    ],
+    'appearance_options' => [
+        'system_default' => 'Bruk systeminnstilling',
+        'light' => 'Lys',
+        'dark' => 'Mørk',
+    ],
 
 
   'pricing_formula_default_key' => 'Fast',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'TV',
         'NewsLetter' => 'Nyhetsbrev',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GET',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,13 +2049,15 @@ $app_list_strings = array (
         'print'       => 'Skriv ut',
         'pieWedgeName'      => 'seksjoner',
     ),
-    'd3_chart_types' => array (
-        'pie chart' => 'Kakediagramm',
-        'bar chart' => 'Vertikal StopleDiagramm',
-        'group by chart' => 'Vertikal StolpeDiagramm Gruppe',
-        'horizontal bar chart' => 'Horisontalt stolpediagramm',
-        'horizontal group by chart' => 'Horisontalt stolpediagramm Gruppe',
-        'line chart' => 'Linjediagramm',
+    'chart_types' => array (
+        'pie chart' => 'Kakediagram',
+        'donut chart' => 'Smultringdiagram',
+        'treemap chart' => 'Trekartdiagram',
+        'bar chart' => 'Vertikalt stolpediagram',
+        'group by chart' => 'Vertikalt gruppert stolpediagram',
+        'horizontal bar chart' => 'Horisontalt stolpediagram',
+        'horizontal group by chart' => 'Horisontalt gruppert stolpediagram',
+        'line chart' => 'Linjediagram',
         'funnel chart' => 'Traktdiagram',
     ),
     'd3_value_placement' => array (
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'Pris (høyest total)',
             'total_revenue:asc' => 'Pris (lavest total)',
         ],
+        'calendar_type_list' => [
+          'main' => 'Kalendersenter',
+        ],
+        'calendar_views_options' => [
+          'day' => 'Dag',
+          'week' => 'Uke',
+          'workWeek' => 'Arbeidsuke',
+          'expandedMonth' => 'Måned',
+          'agenda' => 'Agenda',
+          'timeline' => 'Tidslinje',
+          'monthSchedule' => 'Planlegger',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'Opprettet',
+          'completed' => 'Fullført',
+          'declined' => 'Avslått',
+          'delivered' => 'Levert',
+          'sent' => 'Sendt',
+          'signed' => 'Signert',
+          'voided' => 'Ugyldiggjort',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'Vanlig',
+            'color' => 'Farge',
+            'image' => 'Bilde',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'Ny',
+            'In Progress' => 'Pågår',
+            'Closed' => 'Lukket',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'Inaktivitet',
+            'Lack of Progress' => 'Manglende fremdrift',
+            'Customer-Imposed Deadline' => 'Kundepålagt tidsfrist',
+            'Account at Risk' => 'Konto i fare',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'Kundeetterspurt',
+            'Internally Requested' => 'Internt etterspurt',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'Sak',
+            'Bugs' => 'Feil',
+            'Accounts' => 'Konto',
+            'Opportunities' => 'Mulighet',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'Positiv',
+            'Negative' => 'Negativ',
+            'Neutral' => 'Nøytral',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'Usannsynlig',
+            '02_less_likely' => 'Mindre sannsynlig',
+            '03_neutral' => 'Nøytral',
+            '04_more_likely' => 'Mer sannsynlig',
+            '05_very_likely' => 'Sannsynlig',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'Samsvarer ikke med kunder',
+            '02_no_match' => '',
+            '01_matches_customers' => 'Samsvarer med kunder',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Følg link',
   'LBL_TOGGLE_VISIBILITY' => 'Bytte mellom visning', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivitetstrøm',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar og 3-D kuben er registrerte varemerker for SugarCRM Inc. '.
         'Alle andre selskaps- og produktnavn som brukes eller vises i dette produktet kan være varemerker for de '.
         'SugarCRM ®, Sugar Enterprise™ og Sugar™ er varemerker av SugarCRM Inc.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'Tilføy' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Bedriftslogo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalender' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'En nedtrekksverdi du valgte endret din Record View-layout. ' .
+        'Felt skjult i denne nye layouten har fjernet verdiene sine. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'navigasjon i hovedmodul',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'Lukk',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} merket som {{status}}.',
 
+    'LBL_FOCUS' => 'Fokus',
+
     'LBL_QUERY_VALID'=>'Gyldig',
     'LBL_QUERY_ERROR'=>'Feil!',
     'LBL_QUERY_CHILD'=>'Gyldig underspørsmål',
@@ -3068,6 +3185,10 @@ $app_strings = array (
     'LBL_CASES'=>'Saker',
     'LBL_MESSAGE'=>'Melding',
     'LBL_MESSAGES'=>'Meldinger',
+    'LBL_ESCALATIONS' => 'Opptrappinger',
+    'LBL_ESCALATION' => 'Opptrapping',
+    'LBL_DOCUSIGN_ENVELOPES' => 'DocuSign omslag',
+    'LBL_DOCUSIGN_ENVELOPE' => 'DocuSign omslag',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Endre passord',
     'LBL_CHANGE_BUTTON_LABEL' => 'Endre',
@@ -3093,6 +3214,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'Åpne elementer:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Skriv e-post',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'E-post',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Skriv e-post [Alt+L]',
     'LBL_SEARCH_DROPDOWN_YES'=>'Ja',
     'LBL_SEARCH_DROPDOWN_NO'=>'Nei',
@@ -3118,6 +3240,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Dokumenter',
     'LBL_DATE_ENTERED' => 'Opprettet dato:',
     'LBL_DATE_MODIFIED' => 'Sist endret:',
+    'LBL_ACTIVITY_MODIFIED' => 'Endret',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Rediger Oversikt-fane',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'Rediger Modul-faner',
     'LBL_EDIT_BUTTON' => 'Rediger',
@@ -3140,6 +3263,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Velg felt',
     'LBL_FILTER_SELECT_OPERATOR' => 'Velg operatør',
     'LBL_FILTER_CREATE_NEW' => 'Opprett',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'Konstruer filter (ikke lagret)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(Ikke lagret)',
     'LBL_FILTER_CREATE_FILTER' => 'Opprett nytt filter',
     'LBL_FILTER_CLOSE_FILTER' => 'Lukk filter',
     'LBL_FILTER_EDIT_FILTER' => 'Rediger filter',
@@ -3202,6 +3327,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => 'Mer {{name}} …',
     'LBL_TODAYS_ACTIVITIES' => 'Dagens aktiviteter',
     'LBL_LEADS'=>'Emner',
+    'LBL_LEAD'=>'Lead',
+    'LBL_QUOTES_BILL_TO' => 'Sitater (regne til)',
     'LBL_LESS' => 'mindre',
     'LBL_CAMPAIGN' => 'Kampanje:',
     'LBL_CAMPAIGNS' => 'Kampanje',
@@ -3229,19 +3356,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'Velg minst 2 poster før du fortsetter.',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'Velg mindre enn 10 poster før du fortsetter',
     'LBL_LISTVIEW_ALL' => 'Alle',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'Frys spalte 1',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'Alle duplikater',
     'LBL_LISTVIEW_NONE' => 'Ingen',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'Denne siden',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Alle poster',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Valgte poster',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Valg: ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Fjern valgte',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Fjern alle valg.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'Velg alle poster',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'Det er mer enn {{num}} poster i resultatsettet. Du har valgt den første {{num}} poster.',
     'TPL_LISTVIEW_SELECTED' => 'You have selected {{num}} records in the result set.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'Du har valgt 1 oppføring i resultatsettet.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'Du har valgt alle {{num}} postene i resultatsettet.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'Du har valgt alle {{num}} poster i denne visningen. {{link}} i resultatsettet.',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Oppdaterer {{num}} av {{total}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Oppdaterer {{num}} av {{total}}',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(ca {{time}} {{unit}} gjenstår)',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Masseoppdatering mislyktes. Starte nytt forsøk ({{num}} av {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Masseoppdatering ufullstendig.{{num}} post(er) forblir uendret.',
@@ -3274,10 +3403,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Velg og rediger',
     'LBL_LISTVIEW_ACTIONS' => 'Handlinger',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'Velger alle oppføringer på denne siden',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'Velger bort alle oppføringer på denne siden',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} av {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '{{num}} av laster...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Klikk for total',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'av',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'Få antall sider',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'Ukjent',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Person',
@@ -3285,10 +3421,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Code Monkey Extraordinaire',
     'LBL_LOGIN_TO_ACCESS' => 'Logg inn for å få tilgang til dette området',
     'LBL_LOGOUT' => 'Logg ut',
+    'LBL_FINISH_IMPERSONATING' => 'Fullfør imitasjon',
+    'LBL_RESET_MFA' => 'Tilbakestill flerfaktorautentisering',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, du etterligner for øyeblikket {{user}}.',
     'LBL_PROFILE' => 'Profil',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'E-postfusjonering',
     'LBL_MASS_UPDATE' => 'Masseoppdatering',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'Velg alle innlegg for masseoppdatering',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'Inkluder innlegg i masseoppdatering',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Legg til felt',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Fjern felt',
     'LBL_GENERATE_QUOTE' => 'Opprett tilbud',
@@ -3343,6 +3484,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'Mer informasjon',
     'LBL_PANEL_BODY' => 'Oversikt',
     'LBL_PARENT_TYPE' => 'Overordnet type',
+    'LBL_RELATED_TYPE' => 'Relatert type',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'Fase',
     'LBL_PICTURE_FILE' => 'Bilde',
@@ -3416,7 +3558,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'Relatert',
     'LBL_RELATED_INFORMATION' => 'Relatert informasjon',
-    'LBL_RELATED_RECORDS' => 'Beslektede poster',
+    'LBL_RELATED_RECORDS' => 'Relatert {{module}}',
     'LBL_REPORTS_TO' => 'rapporterer til',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'Felt som må fylles ut',
@@ -3535,7 +3677,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Alle rettigheter reservert. <br /> SugarCRM, Sugar og 3-D kuben er registrerte varemerker for SugarCRM Inc. '.
         'Alle andre selskaps- og produktnavn som brukes eller vises i dette produktet kan være varemerker for de '.
         'respektive selskapene som de er tilknyttet til.',
@@ -3607,6 +3749,7 @@ SugarCRM',
     'LBL_UNDELETE' => 'Opphev fjerning',
     'LBL_UNSYNC' => 'Opphev synkronisering',
     'LBL_UPDATE' => 'Oppdater',
+    'LBL_UPDATES' => 'Oppdateringer',
     'LBL_USER_LIST' => 'Brukerliste',
     'LBL_USER_MENU' => 'Bruker meny',
     'LBL_USERS_SYNC'=>'Brukersynkronisering',
@@ -3673,6 +3816,8 @@ SugarCRM',
     'NTC_DELETE_SUCCESS' => 'Du slettet {0}.',
     'NTC_UNLINK_CONFIRMATION' => 'Er du sikker på at du vil koble fra denne posten?',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'Er du sikker på at du vil koble fra {0}?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'Er du sikker på at du vil fjerne {0}? Dette vil også fjerne dem fra sakens primære kontaktfelt.',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => '{0} kan ikke fjernes fordi de er den primære kontakten i denne saken. Oppdater feltet Primær kontakt før du fjerner dette innlegget.',
     'NTC_UNLINK_SUCCESS' => 'Du frakoblet {0}.',
     'NTC_LOGIN_MESSAGE' => 'Skriv brukernavn og passord:',
     'NTC_NO_ITEMS_DISPLAY' => 'ingen',
@@ -3704,6 +3849,9 @@ SugarCRM',
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Oppdatering av nettleseren vil automatisk lukke alle SugarLive-anrops- eller chatøkter du har åpen, og alle ulagrede endringer vil gå tapt. Ønsker du å fortsette?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Du har ulagrede endringer. Er du sikker på at du vil forlate siden og forkaste endringene?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'Er du sikker på at du vil tilbakestille <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank"> flerfaktorautentisering </a>?
+Hvis du utfører denne handlingen, logger du deg ut umiddelbart, og du må autentisere ved hjelp av autentiseringsappen neste gang du logger på.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'Bekreft og logg ut',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'En eller flere små streker har ulagrede endringer. Er du sikker på at du vil lukke skuffen?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Du flytter til rapportmodulen. Endringene til dashlet vil ikke bli lagret. Fortsett?',
     'ERROR_NO_RECORD' => 'En feil oppsto ved henting av fil. Denne oppføringen kan ha blitt slettet eller så har du ikke tilgang til å vise filen.',
@@ -3799,6 +3947,11 @@ SugarCRM',
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Du har for øyeblikket ingen <item1>-poster lagret. <item2> en nå.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Du kan opprette <item1> fra en <item2>. <item3> <item2>-liste.",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'Positiv',
+    'LBL_SENTIMENT_NEUTRAL' => 'Nøytral',
+    'LBL_SENTIMENT_NEGATIVE' => 'Negativ',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Klikk her",
     // contextMenu strings
@@ -3808,11 +3961,16 @@ SugarCRM',
     'LBL_CREATE_NOTE' => 'Opprett notat',
     'LBL_CREATE_OPPORTUNITY' => 'Opprett mulighet',
     'LBL_SCHEDULE_CALL' => 'Opprett oppringning',
+    'LBL_SCHEDULE_CALL2' => 'Telefonsamtale',
     'LBL_SCHEDULE_MEETING' => 'Opprett møte',
+    'LBL_SCHEDULE_MEETING2' => 'Møte',
     'LBL_CREATE_MESSAGE' => 'Opprett melding',
+    'LBL_CREATE_MESSAGE2' => 'Beskjed',
     'LBL_CREATE_TASK' => 'Opprett oppgave',
+    'LBL_CREATE_TASK2' => 'Oppgave',
     'LBL_REMOVE_FROM_FAVORITES' => 'Fjern fra Mine favoritter',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'Melding',
     'LBL_DOWNLOAD_ALL' => 'Last ned alle',
     'LBL_DOWNLOAD_ONE' => 'Last ned',
     'LBL_ATTACHMENTS' => 'Vedlegg',
@@ -3852,13 +4010,14 @@ SugarCRM',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Vis rader',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Relatert til nåværende post',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Koblet felt',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'Frys første spalte',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Er du sikker på at du vil gjerne Dashlet?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Er du sikker på at du vil fjerne rekken?',
     'LBL_MAXIMUM_OF' => 'Maksimalt av',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'kolonner kan vises.',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'Hjem',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Mitt Dashboard',
     'LBL_COLLAPSE_ALL' => 'Forminsk alle',
@@ -3875,12 +4034,15 @@ SugarCRM',
     'LBL_DASHLET_CONFIGURE' => 'Konfigurer',
     'LBL_DASHLET_TOGGLE' => 'Åpne/Lukke',
     'LBL_SIDEPANE_TOGGLE' => 'Åpne/lukke siderute',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'Gjenopprett vanlige dashlets',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'Ingen dashbord konfigurert',
+    'LBL_CREATE_DASHBOARD_LINK' => 'Opprett dashbord',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'Hjelp',
     'LBL_HELPLET_TOGGLE' => 'Åpne/Lukke',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'Moduler',
     'LBL_FACET_MODIFIED_BY_ME' => 'Modifisert av meg',
     'LBL_FACET_CREATED_BY_ME' => 'Opprettet av meg',
@@ -3897,6 +4059,7 @@ SugarCRM',
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Registervisning',
+    'LBL_RELATED_RECORDS' => 'Tilknyttet {{module}}',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Viser et register og valgfrie relaterte registre i faner.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Grunnregistertype',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Denne {{moduleSingular}}',
@@ -3946,7 +4109,7 @@ SugarCRM',
 
     'LBL_DASHLET_NO_RECORDS' => 'Ingen poster ble funnet på dette tidspunkt.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Sakssammendrag',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'Interaksjoner',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'Tidslinje',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Notater & vedlegg',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notater & vedlegg tilhører denne posten',
     'LBL_DASHLET_PIPLINE_NAME' => 'Pipeline',
@@ -4217,6 +4380,8 @@ SugarCRM',
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Last opp fra datamaskinen',
     'LBL_SEARCH_EXTERNAL_API' => 'Fil på ekstern kilde',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'Last opp til ekstern kilde',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'Link fra ekstern kilde',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'Sikkerhet',
     'LBL_SHARE_PRIVATE' => 'Privat',
     'LBL_SHARE_COMPANY' => 'Firma',
@@ -4325,6 +4490,9 @@ SugarCRM',
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Tastatur-snarveier',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>Form Functionality - Alt+</strong><br/> I = ed<b>I</b>t (detailview)<br/> U = d<b>U</b>plicate (detailview)<br/> D = <b>D</b>elete (detailview)<br/> A = s<b>A</b>ve (editview)<br/> L = cance<b>L</b> (editview) <br/><br/></p><p><strong>Search and Navigation  - Alt+</strong><br/> 7 = first input on Edit form<br/> 8 = Advanced Search link<br/> 9 = First Search Form input<br/> 0 = Unified search input<br></p>' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'Trapp opp',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'Del',
     'TPL_RECORD_SHARE_SUBJECT' => 'Delt {{module}} {{name}} fra {{appId}}',
@@ -4397,7 +4565,7 @@ SugarCRM',
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'Alle endringer vil bli forkastet når du bytter til en ny primærpost. Er du sikker på at du vil bytte?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'Slå sammen relaterte poster',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Slått sammen: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Slått sammen: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'Fletting av relaterte {{objectName}} feilet. Starte nytt forsøk ({{num}} av {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4451,14 +4619,14 @@ SugarCRM',
     'LBL_LANGUAGE' => 'Språk',
     'LBL_LOADING_LANGUAGE' => 'Laster språkpakke',
     'LBL_UPLOADING' => 'Laster opp',
+    'LBL_UPLOADING_DOTS' => 'Laster opp ...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Er du sikker på at du vil slette dette bilde?',
     'LBL_FILE_DELETE_CONFIRM' => "Er du sikker på at du vil slette denne filen? Dette kan ikke gjøres om.",
     'LBL_FILE_DELETED' => 'Filen ble slettet',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'Tema for Portal',
-    'LBL_COFIGURE_PORTAL_THEME' => 'Konfigurer tema for portal',
-    'LBL_THEME_PREVIEW' => 'Forhåndsvisning av tema',
+    'LBL_THEME_PREVIEW' => 'Forhåndsvisning av portaltema',
     'LBL_LOADING_PREVIEW' => 'Laster forhåndsvisning',
     'LBL_RESET' => 'Tilbakestill',
     'LBL_COLORS' => 'Farger',
@@ -4609,10 +4777,18 @@ SugarCRM',
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Møter',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Oppgaver',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Samtaler',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Kontoer',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontaker',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'E-poster',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'Skift',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produkter',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Skiftunntak',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenter',
+    'LBL_ESCALATIONS' => 'Opptrappinger',
+    'LBL_ESCALATED' => 'Trappet opp',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'Opptrappinger',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'Andre relaterte opptrappinger',
+    'LBL_ESCALATIONS' => 'Opptrappinger',
     'LNK_SETTINGS' => 'Innstillinger',
     'LBL_MOBILE_SUPPORT' => 'Support',
     'LBL_MOBILE_SHOW_MORE' => 'Vis mer...',
@@ -4820,6 +4996,55 @@ SugarCRM',
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'Klarte ikke å få server tid',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'Kunne ikke aktivere offline-modus. Kunne ikke nå serveren.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'Utseende',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'Bruk systeminnstilling',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'Lys',
+    'LBL_MOBILE_APP_THEME_DARK' => 'Mørk',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'Nytt filnavn',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'Rediger filnavn',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'Opprettet av meg',
+    'LBL_OPERATOR_CONTAINS' => 'er noe av',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'er ikke noe av',
+    'LBL_OPERATOR_EMPTY' => 'er tom',
+    'LBL_OPERATOR_NOT_EMPTY' => 'er ikke tom',
+    'LBL_OPERATOR_MATCHES' => 'stemmer nøyaktig overens',
+    'LBL_OPERATOR_STARTS_WITH' => 'begynner med',
+    'LBL_OPERATOR_EQUALS' => 'er lik',
+    'LBL_OPERATOR_NOT_EQUALS' => 'er ikke lik',
+    'LBL_OPERATOR_GREATER_THAN' => 'er mer enn',
+    'LBL_OPERATOR_LESS_THAN' => 'er mindre enn',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'er større enn eller lik',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'er mindre enn eller lik',
+    'LBL_OPERATOR_BETWEEN' => 'er mellom',
+    'LBL_OPERATOR_BEFORE' => 'før',
+    'LBL_OPERATOR_AFTER' => 'etter',
+    'LBL_OPERATOR_YESTERDAY' => 'i går',
+    'LBL_OPERATOR_TODAY' => 'i dag',
+    'LBL_OPERATOR_TOMORROW' => 'i morgen',
+    'LBL_OPERATOR_LAST_7_DAYS' => 'siste 7 dager',
+    'LBL_OPERATOR_NEXT_7_DAYS' => 'neste 7 dager',
+    'LBL_OPERATOR_LAST_30_DAYS' => 'siste 30 dager',
+    'LBL_OPERATOR_NEXT_30_DAYS' => 'neste 30 dager',
+    'LBL_OPERATOR_LAST_MONTH' => 'forrige måned',
+    'LBL_OPERATOR_THIS_MONTH' => 'denne måneden',
+    'LBL_OPERATOR_NEXT_MONTH' => 'neste måned',
+    'LBL_OPERATOR_LAST_YEAR' => 'i fjor',
+    'LBL_OPERATOR_THIS_YEAR' => 'i år',
+    'LBL_OPERATOR_NEXT_YEAR' => 'neste år',
+    'LBL_OPERATOR_IS' => 'er',
+    'LBL_OPERATOR_IS_NOT' => 'er ikke',
+    'LBL_ERROR_FILTER_EMPTY' => 'Legg til filterkriterier.',
+    'LBL_ADD_FILTER' => 'Legg til filterkriterier',
+    'LBL_FILTER_NAME' => 'Filternavn',
+    'LBL_FILTER_FIELD' => 'Felt',
+    'LBL_FILTER_OPERATOR' => 'Operatør',
+    'LBL_FILTER_VALUE' => 'Verdi',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Lagre til Desktop-appen',
+    'LBL_FILTER_LOCAL' => 'Lokalt filter',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'Velkommen til {{{brandName}}}.<br/><br/> Tillat oss å fremheve noen nye funksjoner...',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'Hovedmeny navigasjon.',
@@ -4865,6 +5090,7 @@ SugarCRM',
     'LBL_COMMENT_ADD' => 'Legg til kommentar',
     'LBL_REQUIRED' => 'Obligatorisk',
     'LBL_MORE_BUTTON' => 'Mer',
+    'LBL_NO_OPTIONS' => 'Ingen tilgjengelige alternativer',
     'LBL_TRY_AGAIN' => 'Prøv igjen',
     'LBL_NEW_RECORDS' => 'Nylig opprettet',
     'LBL_ASSIGNED_TO_ME' => 'Min {{{module}}}',
@@ -5090,11 +5316,15 @@ SugarCRM',
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Er du sikker på at du vil lukke chatten?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'Opprett notat eller vedlegg',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'Legg til et notat',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Påloggingen var ikke vellykket. Prøv igjen.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Gal påloggingsinformasjon',
-    'LBL_PORTAL_INVALID_GRANT' => 'Din påloggingskapsel har utløpt eller er ugyldig. Vennligst logg inn på nytt.',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Påloggingskapselen har utløpt',
+    'LBL_PORTAL_INVALID_GRANT' => 'Økten din er utløpt. Logg på igjen.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Økt utløpt',
     'LBL_PORTAL_AUTH_FAILED' => 'Klient-autentisering feilet.',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'Ugyldig klient',
     'LBL_PORTAL_INVALID_REQUEST' => 'Forespørselen er ugyldig eller feil. Vennligst ta kontakt med teknisk support.',
@@ -5128,6 +5358,8 @@ SugarCRM',
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'Gjenopprett standard instrumentpanel',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'Fornyelser-konsoll',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Oversikt',
@@ -5147,6 +5379,7 @@ SugarCRM',
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Meldingssammendrag',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Anropssammendrag',
     'LBL_OMNICHANNEL_LINK_TO' => 'Koble {{fromModule}} til {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'Link til {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'Koblet',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Nettleseren din støtter ikke chat. Bruk Google Chrome eller Mozilla Firefox.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Ta kontakt med Sugar-administratoren din for assistanse.',
@@ -5154,6 +5387,8 @@ SugarCRM',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Fullfør konfigurering av SugarLive før du foretar en utgående samtale.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Fullfør konfigurering av SugarLive-oppsettet før SugarLive åpnes.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Sett deg selv til "Frakoblet" i SugarLive før du konfigurerer SugarLive-oppsettet.',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'Kompakt visning',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'Full visning',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'Gjennopprett fane til standard',
@@ -5565,9 +5800,12 @@ SugarCRM',
     'LBL_BEST' => 'Beste',
     'LBL_WORST' => 'Verst',
     'LBL_LIKELY' => 'Sannsynlig',
-    'LBL_BEST_ADJUSTED' => 'Best (Korrigert)',
-    'LBL_WORST_ADJUSTED' => 'Verst (Korrigert)',
-    'LBL_LIKELY_ADJUSTED' => 'Sannsynlig (Korrigert)',
+    'LBL_BEST_FORECAST' => 'Forpliktelse (best)',
+    'LBL_WORST_FORECAST' => 'Forpliktelse (verst)',
+    'LBL_LIKELY_FORECAST' => 'Forpliktelse (sannsynlig)',
+    'LBL_BEST_ADJUSTED' => 'Justert forpliktelse (best)',
+    'LBL_WORST_ADJUSTED' => 'Justert forpliktelse (verst)',
+    'LBL_LIKELY_ADJUSTED' => 'Justert forpliktelse (sannsynlig)',
     'LBL_AMOUNT_USDOLLAR' => 'Omregnet beløp',
     'LBL_OVERDUE' => 'Forfalt',
 
@@ -5588,6 +5826,8 @@ SugarCRM',
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'For mer informasjon, se {{{more_info_url}}} {{plural_module_name}} dokumentasjon. {{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'Ingen data tilgjengelig',
+    'LBL_NEED_HELP' => 'Trenger du hjelp med noe nytt?',
+    'LBL_NEW_CASE' => 'Ny sak',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'Hjelp dashlet gir spesifikk informasjon knyttet til modulen du ser på i øyeblikket sammen med en link til den tilsvarende dokumentasjon (f.eks Emner-dokumentasjon) i programguiden for mer informasjon.',
@@ -5723,9 +5963,19 @@ SugarCRM',
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'Ingen svar',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Arbeidsplanen er utilgjengelig',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'Tilgjengelige visninger',
+    'LBL_CALENDAR_DASHLET_NAME' => 'Kalenderplanlegger',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'Standard visning',
+    'LBL_CALENDAR_MY_CALENDARS' => 'Mine kalendre',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'Bruker- og teamkalendre',
+    'LBL_CALENDAR' => 'Kalender',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'En feil oppsto ved henting av arbeidsplanen.',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'Lagre og send invitasjoner',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'Godta status',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Prosesser',
@@ -5842,15 +6092,21 @@ SugarCRM',
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopier bekreftelseskobling',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Interaksjoner',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} interaksjoner',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje',
+    'LBL_NO_ACTIVITY' => 'Ingen aktivitet',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} Tidslinje',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'Mer',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'Mindre',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Tidslinjen viser Telefonsamtaler, E-post, ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Vis mer ...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Vis mindre ...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Ingen data tilgjengelig',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'Modulen er ikke lisensiert.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktive abonnement',
@@ -5899,8 +6155,10 @@ SugarCRM',
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuff',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'Lukk fokusskuffe',
     'LBL_EXTERNAL_GUESTS' => 'Eksterne gjester',
     'LBL_MY_FAVORITE_TASKS' => 'Mine favorittoppgaver',
+
     'LBL_MY_TASKS' => 'Mine oppgaver',
 
     // Sugar Integrate
@@ -5917,7 +6175,367 @@ SugarCRM',
     'LBL_TIME_AWARE_TYPE' => 'Type',
     'LBL_TIME_AWARE_BEAN_ID' => 'Bean-ID',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'Vis etikett',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'Åpne innleggvisning',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'Legg til',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'Hjelp ikke tilgjengelig',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'Funksjoner',
+    'LBL_ACTIONBUTTON_FIELDS' => 'Felt',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'Velg felt...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Rollup',
+    'LBL_ACTIONBUTTON_RELATED' => 'Relatert',
+    'LBL_ACTIONBUTTON_SAVE' => 'Lagre',
+    'LBL_ACTIONBUTTON_CANCEL' => 'Avbryt',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'Relatert modul',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'Relaterte felt',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'Rollup modul',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'Rollup felt',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'Rollup funksjon',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'Min',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'Maks',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'Gjennomsnitt',
+    'LBL_ACTIONBUTTON_SUM' => 'Sum',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'Tildel innlegg',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'Skriv e-post',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'Opprett innlegg',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Dokumentfletting',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'Åpne URL',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'Begynn rapport',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'Oppdater innlegg',
+    'LBL_ACTIONBUTTON_ACTION' => 'Handling',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'Tildel til',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'Send e-post til',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'Bruk PMSE',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'Mal',
+    'LBL_ACTIONBUTTON_MODULE' => 'Modul',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'Skjerminnstillinger',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'Type',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'Nedtrekksmeny',
+    'LBL_ACTIONBUTTON_BUTTON' => 'Knapp',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'Knappgruppe',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'Vis etikett på oppføring',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'Vis i overskrift',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'Skjul på Rediger',
+    'LBL_ACTIONBUTTON_SIZE' => 'Størrelse',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'Vanlig',
+    'LBL_ACTIONBUTTON_SMALL' => 'Liten',
+    'LBL_ACTIONBUTTON_LARGE' => 'Stor',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'Regnet ut',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'Konverter til PDF',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Dokumentfletting',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'Forhåndsvisning',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'Egenskaper',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'Etikett',
+    'LBL_ACTIONBUTTON_DESC' => 'Tooltip',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'Vis etikett',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'Vis ikon',
+    'LBL_ACTIONBUTTON_SCHEME' => 'Fargevalg',
+    'LBL_ACTIONBUTTON_ICON' => 'Ikon',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'Avhengig',
+    'LBL_ACTIONBUTTON_DESIGN' => 'Oppsettkonfigurasjon',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'Stopp ved feil',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'Automatisk lagring',
+    'LBL_ACTIONBUTTON_CONFIG' => 'Konfigurasjon',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'Vennligst konfigurer Action-knappen før du lagrer.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'Konfigurer knapper',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'Opprett automatisk',
+    'LBL_ACTIONBUTTON_LINK' => 'Link',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'Kopier parent-verdier',
+    'LBL_ACTIONBUTTON_PRESET' => 'Forhåndsinnstill',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'Forhåndsinnstill fra parent',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'Velg...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'Fra parent-felt ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'Er du sikker på at du vil slette denne knappen?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'Er du sikker på at du vil slette denne handlingen?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'Ugyldige handlingsknappdata',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'Velg en modul før du lagrer.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'Velg en link før du lagrer. Hvis ingen link er tilgjengelig, fjerner du merket for koblingsalternativet.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'Velg et innlegg før du lagrer.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'Velg en mal før du lagrer.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'Primær',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'Sekundær',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HighViz',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'Havblå',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'Pink',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'Militær',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'Blågrønn',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'Stillehavet',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'Grønn',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'Gul',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'Oransje',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'Rød',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'Korall',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'Lilla',
+    'LBL_ACTIONBUTTON_FORMULA' => 'Formel',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'Handlinger',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'Det oppsto feil ved validering av knappdata.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'Knappene må ha minst en etikett eller et ikon.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'Vennligst skriv inn en gyldig knappetikett.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'Oppføringen kunne ikke opprettes på grunn av manglende nødvendige verdier. Kontakt administratoren din.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'Du må ha minst to aktive knapper for denne knappetypen.',
+    'LBL_ACTIONBUTTON_RECORD' => 'Oppføringsvisninger',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'Handlingsmenyer',
+    'LBL_ACTIONBUTTON_ORDER' => 'Ordre',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'Listevisning',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'Oppføringsvisning',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'Registrer visningsdashlet',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'Underpaneler',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'Oppgavesekvensutførelsesmotoren kunne ikke utføre følgende handlinger: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'Legg til en handling',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'Fjern denne handlingen',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'Dokumentfletting',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'Dokumentfletting til PDF',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'Firmastørrelse',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'Bransje',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'Bransjeetiketter',
+    'LBL_HINT_COMPANY_LOCATION' => 'Firmasete',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'Firmabeskrivelse',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'År grunnlagt',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Firma Facebook',
+    'LBL_HINT_COMPANY_TWITTER' => 'Firma Twitter',
+    'LBL_HINT_COMPANY_PIC' => 'Firma logo',
+    'LBL_HINT_CONTACT_PIC' => 'Kontaktbilde',
+    'LBL_HINT_COMPANY_WEBSITE' => 'Firmanettsted',
+    'LBL_HINT_PHOTO' => 'Fotolenke',
+    'LBL_HINT_JOB_2' => 'Tidligere jobber',
+    'LBL_HINT_EDUCATION' => 'Utdanning',
+    'LBL_HINT_EDUCATION_2' => 'Ytterligere utdanning',
+    'LBL_HINT_TWITTER' => 'Twitter lenke',
+    'LBL_HINT_FACEBOOK' => 'Facebook lenke',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'NAICS-kode',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'Bransjekode',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'FY ende',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'Årlig omsetning',
+    'LBL_HINT_PHONE_1' => 'Telefon 1',
+    'LBL_HINT_PHONE_2' => 'Telefon 2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'Forbind tabell',
+    'LBL_HINT_FULL_NAME' => 'Fullt navn',
+    'LBL_HINT_JOB_TITLE' => 'Jobbtittel',
+    'LBL_HINT_OFFICE_PHONE' => 'Telefonnummer til kontor',
+    'LBL_HINT_MOBILE_PHONE' => 'Mobil',
+    'LBL_HINT_OTHER_PHONE' => 'Andre telefonnumre',
+    'LBL_HINT_WEBSITE' => 'Nettsted',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'Ønsker du å overskrive alle eksisterende data for denne oppføringen med nye data funnet i hint?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'Ønsker du å overskrive eksisterende {{fieldName}} for denne oppføringen med nye {{fieldName}} funnet i hint?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'Alle kontorelaterte data vil bli fjernet. Er du sikker på at du vil fortsette?',
+    'LBL_HINT_COMPANY_LOGO' => 'Logo',
+    'LBL_HINT_CONTACTS_AVATAR' => 'Foto',
+    'LBL_HINT_ACCOUNTSETS' => 'Hint Kontosett Etiketter',
+
+    'LBL_HINT_LOADING' => 'Laster ...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'Deinstallerer hint, vennligst vent',
+    'LBL_HINT_VALUE_ERASED' => ' Verdi slettet ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'Denne informasjonen ble slettet via forespørsel om personvern',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'Velg et av alternativene for deinstallering nedenfor:',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Deinstaller kun hintpakken',
+    'LBL_HINT_UNINSTALL_FULL' => 'Deinstaller hint fullstendig',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'Dette alternativet vil fjerne Hint MLP og deaktivere alle aktive abonnementer på hintinnsikt.
+    Ny installering av hint vil automatisk aktivere abonnementene igjen.',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'Dette alternativet vil foreta en fullstendig deinstallasjon av hint, inkludert fjerning av MLP og sletting all informasjon om konfigurasjon og abonnementer.',
+    'LBL_HINT_UNINSTALL' => 'Avinstaller',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Avinstaller hint',
+    'LBL_HINT_CANCEL' => 'Avbryt',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'ADVARSEL: Velg dette alternativet kun dersom du ikke ønsker å bruke Hint igjen i fremtiden.
+    Foreta en fullstendig sikkerhetskopiering av din Sugar-database og sett Sugar i vedlikeholdsmodus før du foretar deinstallasjon. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'Se ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Hint administrasjonsveiledning ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'for informasjon om deinstallasjonsprosessen.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Er du sikker på at du kun vil avinstallere Hint-pakken?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Er du sikker på at du vil avinstallere Hint-pakken fullstendig?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(MERK: DU KAN IKKE OMGJØRE DENNE HANDLINGEN)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Hint felt',
+    'LBL_HINT_NO_RESULTS_MSG' => 'Ingen resultater funnet.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'Grunnleggende hint-panellayout',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'Kontoer',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'Kontakter',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'Emner',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'Utvidet hint-panellayout',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'Omarbeid feltene ved å dra og slippe disse i avsnittene i hint-panellayouten ovenfor.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'For detaljerte instruksjoner og en liste over standard felt, se ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' for å gjenopprette standardinnstillingene for ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'modulen.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'Er du sikker på at du vil gjenopprette standardverdiene for {{module}} modulen?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'Klikk her',
+    'LBL_HINT_CONFIG_NAME' => 'Hint administrasjonsveiledning.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'Felt',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'Utvidede felt',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'Dette avsnittet angir alle Hint-felt og Sugar-felt som utfylles av Hint. Hint-felt er merket med en asterisk (*) og kan bare vises i Hint-panelet dersom de er utfylt.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'Feltnavn',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'Utfyll felt',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Vis i Hint',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Vis i Hint-panel',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'Ytterligere Sugar-felt',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'Dette avsnittet angir alle Sugar-felt som ikke er utfylt med Hint.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'Advarsel',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'Advarsel: Du er i ferd med å synkronisere med Hintinnsikt-tjenesten. Enhver ventende e-postoversikt vil gå tapt, og eksisterende nyheter fjernes fra Insights dashlet. Enhver type av varsler gjenopptas etter fullført synkronisering.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'Foreslåtte selskaper tilknyttet din {{_moduleSingular}} er oppført nedenfor. Angi firmainformasjon for visning.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'Ingen konto er valgt',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'Flere e-poster funnet, velg e-poster for import: ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'Hint fantet intet samsvar i systemet basert på oppførte data.',
+    'LBL_HINT_HELP_MESSAGE2' => 'De beste resultatene i hint kan man finne med en persons navn og e-postadresse.',
+    'LBL_HINT_HELP_MESSAGE3' => 'De beste resultatene i hint kan man finne med firmaets nettside-URL.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "Angi ditt {{_moduleSingular}} firmanavn eller nettsted, og hint vil søke etter ytterligere informasjon.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "Angi din {{currentModule}} e-postadresse og hint vil søke etter ytterligere informasjon.",
+
+    'LBL_HINT_HISTORY_NONE' => 'Ingen tilgjengelige data for historisk visning',
+    'LBL_HINT_HISTORY_TITLE' => 'Aktivitetslogg',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'Datautfyllelse',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'Lisensen til din SugarCRM Hint-tjeneste er utløpt. Ta kontakt med din SugarCRM-administrator for å fornye lisensen din.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'Ønsker du å se hva SugarCRM Hint kan gjøre for deg og ditt selskap? Ta kontakt med SugarCRM-administratoren for å legge til Hint.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'Kontoinformasjonen ble ikke funnet',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'Utfylte data funnet - klikk for å lagre alle utfylte data til din oppføring.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'Klikk for å lagre utfylte data til din oppføring.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'Tilknyttede kontakter',
+    'LBL_HINT_CONTACTS_NONE' => 'Ingen tilknyttede kontakter',
+
+    'LBL_HINT_NEWS' => 'Nyheter',
+    'LBL_HINT_GENERAL' => 'Generelt',
+    'LBL_HINT_ALL_NEWS' => 'Alle nyheter',
+    'LBL_HINT_FILTER_NEWS' => 'Filtrere nyheter',
+    'LBL_HINT_FINANCIAL_NEWS' => 'Økonomi',
+    'LBL_HINT_PERSONNEL_NEWS' => 'Personell',
+    'LBL_HINT_PRESS_RELEASES' => 'Pressemeldinger',
+    'LBL_HINT_OTHER_NEWS' => 'Annet',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'Søk i nyhetsartikler',
+    'LBL_HINT_NEWS_ALERT' => 'Hintinnsikt',
+    'LBL_HINT_NEWS_NONE' => 'Ingen tilgjengelige nyheter',
+    'LBL_NEW_NOTIFICATIONS' => 'Nye varsler',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'Du må en Hint-lisens for å se hintinnsikt dashlet.
+    Be din administrator om å få en Hint-lisens.',
+
+    'LBL_HINT_FOR' => 'For',
+    'LBL_HINT_WITH' => 'med',
+    'LBL_HINT_SHOW_ME' => 'Vis meg: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'Varsle meg innen: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Hintinnsikt preferansesenter',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'Nøkkel for preferansealternativer',
+    'LBL_HINT_PREFERENCES' => 'Preferanser',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'Slett deaktiverte, minst en preferanseerklæring påkrevd',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'Legg til deaktivert, du har nådd maksimumsantallet for preferanseerklæringer',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Inkluder i hintinnsikt dashlet',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'Sprettoppvindu som skrivebordvarsel',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'Varsler må være aktivert på alle nettlesere og på alle stasjonære PCer for å motta varsler forskriftsmessig.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Enkelte nettlesere, som Internet Explorer, støtter ikke varsler. Varsler kan ikke aktiveres ved bruk av en nettleser som ikke støtter varsler.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'Send umiddelbar e-postmelding for hvert varsel',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'Send en daglig e-postoversikt',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'Send en ukentlig e-postoversikt',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'Preferanser kunne ikke lagres. Sjekk systemforbindelsen din og prøv igjen.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'Enkelte påkrevde felt mangler en verdi. Sjekk preferansene dine og påse at alle påkrevde felt er utfylt.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'Du er i ferd med å aktivere nettleservarsler for hintinnsikt. Klikk på Bekreft for å fortsette. Nettleseren din vil be deg om tillatelse til å motta varslingshendelser.',
+    'LBL_HINT_PUSH_ERROR' => 'Programvareutvidelsen for pushvarsler er registrert for {{options.type}} uten avhengighet. Programvareutvidelsen vil ikke fungere som tiltenkt, så påse at du tilbyr en bane til arbeidsfilen og en metode for lagring av abonnementet på serveren.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'Slå PÅ hintvarsler for alle brukere',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'Slå AV hintvarsler for alle brukere',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'ADVARSEL: Kunne ikke deaktivere varsler under deinstallasjon av Sugar Hint. For å deaktivere varsler må du installere Hint 5.4.0 eller høyere, og utføre en fullstendig deinstallasjon med Hint Uninstaller som er å finne i administrasjonsavsnittet hos Sugar.',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'Kartkonfigurasjon',
+    'LBL_MAP_MAP' => 'Kart',
+    'LBL_MAP_MAPS' => 'Kart',
+    'LBL_MAP_GEOCODING_RECORD' => 'Geokoding',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'Vellykket geokoding av oppføring.',
+    'LBL_MAP_LATITUDE' => 'Breddegrad',
+    'LBL_MAP_LONGITUDE' => 'Lengdegrad',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'Søk etter adresse...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'Aktuell oppføring har allerede geokoding. Er du sikker på at du vil overskrive geokoding for denne oppføringen?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'Manuell geokoding',
+    'LBL_MAP_POINT_COORDINATES' => 'Kartpunktkoordinater',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'Beregner optimal rute...',
+    'LBL_MAP_DIRECTIONS' => 'Retningslinjer',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'Retningslinjer med start fra aktuell bruker',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'Retningslinjer med start fra denne oppføringen',
+    'LBL_MAPS_RADIUS_INPUT' => 'Radius (0-250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'innenfor en radius fra postnummer',
+    'LBL_MAPS_DISTANCE' => 'Avstand',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'Postnummer',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'Ugyldig konfigurasjon: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => '<strong>{{module}}</strong> feltkartlegginger er ugyldig.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'Karttype',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'Zoomnivå',
+    'LBL_MAPS_DASHLET' => 'Kart',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'Viser oppføring(er) med geokoding på kart.',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'Kart er ikke tilgjengelig for denne modulen. Aktiver dette i administratorkonsollen.',
+    'LBL_MAP_MODULES' => 'Modul',
+    'LBL_MAP_FILTER_BY' => 'Filtrer etter',
+    'LBL_MAP_UNIT_TYPE' => 'Enhetstype',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'Mil',
+    'LBL_MAP_UNIT_TYPE_KM' => 'Kilometer',
+    'LBL_MAP_ADDRESS' => 'Adresse',
+    'LBL_MAP_NO_STARTING_POINT' => 'Startpunkt har ingen geokoding.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'Startpunktoppføring er uten geokoding.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'Enkelte utvalgte oppføringer er uten geokoding og vises ikke på kartet.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'Oppføring(er) er uten geokoding.',
+    'LBL_MAPS_MODULE_FIELDS' => 'Modul felt',
+    'LBL_MAPS_SELECT_FIELD' => 'Velg felt',
+    'LBL_MAPS_RELATE_RECORD' => 'Tilknyttet oppføring',
+    'LBL_MAPS_MAPPING_TYPE' => 'Kartleggingstype',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'Ingen oppføringer med geokoding',
+    'LBL_MAPS_ADDRESS' => 'Adresse',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'Tildelt bruker',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'Gatesidevisning er ikke tilgjengelig for gitt punkt',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> oppføringer er ikke gyldige for kartlegging. Fjern modulen fra listen.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'Lukk',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'Utvid',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'Lagre som PDF',
+    'LBL_MAPS_EMAIL_LINK' => 'E-postlenke',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'Du må ha minst en oppføring med geokoding.',
+    'LBL_MAPS_GENERATING' => 'Genererer kart...',
+    'LBL_MAPS_POINTS' => 'Kartpunkter',
+    'LBL_MAPS_POINT' => 'Punkt',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'Reiseinformasjon',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'Samlet avstand',
+    'LBL_MAPS_TOTAL_DURATION' => 'Samlet varighet',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'Samlet varighet uten trafikk',
+    'LBL_MAPS_ITINERARY' => 'Veibeskrivelse',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'Kjørestrekning',
+    'LBL_MAPS_TRAVEL_DURATION' => 'Reisevarighet',
+    'LBL_MAPS_TRAVEL_STEPS' => 'Trinn',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'Advarsler',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Bing Maps støtter maksimum 10 posisjonspunkter på et delt kart. Gjennomgå ditt utvalg.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'Kartlisens påkrevd',
+
+    'LBL_INVALID_FORMULA' => 'Ugyldig formel',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'Funksjonens returtype samsvarer ikke',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'Prognose',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'Optimal kundeprofil',
+
+    // User last state
+    'LBL_LAST_STATE' => 'Siste tilstand',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'Send til DocuSign',
+
+    // Base sales stages
+    'LBL_OPEN' => 'Åpen',
+    'LBL_CLOSED_WON' => 'Lukket Vunnet',
+    'LBL_CLOSED_LOST' => 'Lukket Mistet',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6754,8 +7372,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Google Kontakter',
@@ -7095,6 +7713,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Vedlagt fil';
     'YER' => 'Rial',
     'ZWD' => 'Zimbabwe dollar',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'Veldig høy',
+        '4' => 'Høy',
+        '3' => 'Nøytral',
+        '2' => 'Lav',
+        '1' => 'Veldig lav',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'Ingen',
         'future' => 'Gjeldende verdi',
@@ -7104,3 +7730,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Vedlagt fil';
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'Enkelttreff',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'Behandler',
+        'error' => 'Feil',
+        'success' => 'Suksess',
+        'canceled' => 'Avbrutt',
+        'document_load' => 'Laste mal',
+        'tags_extract' => 'Hente ut etiketter',
+        'tags_validate' => 'Validere etiketter',
+        'data_retrieving' => 'Hente data',
+        'serialize_document' => 'Sette dokumentet sammen igjen',
+        'send_document' => 'Sende dokumentet til deg',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'Flett sammen',
+        'convert' => 'PDF-sammenfletting',
+        'multimerge' => 'Multisammenfletting',
+        'multimerge_convert' => 'Multisammenflettings-PDF',
+        'labelsgenerate' => 'Generer etiketter',
+        'labelsgenerate_convert' => 'Generer etikett-PDF',
+        'excel' => 'Excel-sammenfletting',
+        'excel_convert' => 'Konverter Excel-sammenfletting',
+        'presentation' => 'PowerPoint-sammenfletting',
+        'presentation_convert' => 'PowerPoint Merge PDF',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'Mine kontoer',
+      'favorites' => 'Favorittkontoer',
+      'tags' => 'Taggede kontoer',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'Alle nyheter',
+      'General' => 'Generelt',
+      'Finance' => 'Økonomi',
+      'People' => 'Personell',
+      'Press Releases' => 'Pressemeldinger',
+      'Other' => 'Annet',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'Eiere';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Skydisk';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'Skydisk dashlet for integrering';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'Kopier lenke';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'Last ned';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Opprett Sugar-dokument';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Synkroniser med Google disk';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'Synkroniser alle med Google disk';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'Kunne ikke laste ned denne filen';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'Sky dashlet foreligger ikke';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Sugar-dokument opprettet';
+
+    $app_string['LBL_MY_FILES'] = 'Mine filer';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Delt med meg';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'Skyleverandør';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google Disk',
+      'onedrive' => 'Microsoft Onedrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Delt med meg';
+    $app_strings['LBL_MY_FILES'] = 'Mine filer';
+    $app_strings['LBL_UPLOAD_FILE'] = 'Last opp fil';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'Mappe ikke funnet';
+    $app_strings['LBL_CREATE_FOLDER'] = 'Opprett mappe';
+    $app_strings['LBL_LOAD_MORE'] = 'Last mer...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'Forbindelse med Google ikke funnet...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'Forbindelse med Microsoft ikke funnet...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-tom-',
+      'Exact' => 'Eksakt',
+      'Null_address_components' => 'En eller flere tomme adressekomponenter',
+      'Invalid_address' => 'Ugyldig adresse, server returnerte feil',
+      'Invalid_server_response_not_XML' => 'Ugyldig serverrespons, ikke XML',
+      'Invalid_address_no_location' => 'Ugyldig adresse, server returnerte ingen lokalisering',
+      'Ambiguous_address' => 'Uklar adresse, flere samsvar',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'Vei',
+      'a' => 'Luft',
+      'be' => 'Fugleperspektiv',
+      'rd' => 'Mørk vei',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

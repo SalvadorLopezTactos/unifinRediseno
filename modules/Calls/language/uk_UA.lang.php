@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Contact Id',
     'LBL_DESCRIPTION_INFORMATION' => 'Опис інформації',
     'LBL_DESCRIPTION' => 'Опис:',
+    'LBL_INTERNAL_NOTES' => 'Внутрішні примітки:',
     'LBL_STATUS' => 'Статус:',
     'LBL_DIRECTION' => 'Напрямок:',
     'LBL_DATE' => 'Дата початку',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Тривалість повинна бути більше, ніж 0',
     'LBL_CALL_INFORMATION' => 'Огляд',
     'LBL_REMOVE' => 'вид.',
-    'LBL_ACCEPT_STATUS' => 'Прийняти статус',
     'LBL_ACCEPT_LINK' => 'Прийняти посилання',
     //For export labels
     'LBL_PARENT_ID' => 'ID батьківського запису',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Дзвінок:',
     'LBL_CALL_RECORDING_URL' => 'URL-адреса для запису',
     'LBL_CALL_RECORDING' => 'Запис',
+
+    'LBL_LEAD_ID' => 'Ідентифікатор попереднього контакту',
+    'LBL_LEAD_NAME' => 'Попередній контакт',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Ви успішно створили {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> for {{formatDate date_start}}.',

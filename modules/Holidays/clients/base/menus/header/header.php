@@ -16,7 +16,7 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'label' =>'LNK_NEW_HOLIDAY',
         'acl_action'=>'create',
         'acl_module'=>$module_name,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
     ),
     array(
         'route'=>'#'.$module_name,

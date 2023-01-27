@@ -341,7 +341,7 @@ class SqlsrvManager extends MssqlManager
             ->executeQuery($query, array($tablename));
 
         $columns = array();
-        while (($row = $stmt->fetch())) {
+        while (($row = $stmt->fetchAssociative())) {
             $column_name = strtolower($row['COLUMN_NAME']);
             $columns[$column_name]['name']=$column_name;
             $columns[$column_name]['type']=strtolower($row['TYPE_NAME']);

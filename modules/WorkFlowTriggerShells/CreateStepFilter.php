@@ -19,7 +19,7 @@ global $mod_strings;
 global $urlPrefix;
 global $currentModule;
 
-$log = LoggerManager::getLogger('workflow_alerts');
+$log = LoggerManager::getLogger();
 
 
 if(!empty($_REQUEST['workflow_id'])) {

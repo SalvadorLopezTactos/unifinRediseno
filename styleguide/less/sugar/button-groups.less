@@ -113,7 +113,7 @@
 
   // Keep the hover's background when dropdown is open
   .btn.dropdown-toggle {
-    background-color: @btnBackgroundHighlight;
+    background-color: @btnSecondaryBackground;
   }
 
   .btn-primary.dropdown-toggle {
@@ -235,13 +235,12 @@
     outline: 0;
 
     .btn.btn-primary.dropdown-toggle {
-      background-color: darken(@btnPrimaryBackgroundHighlight, 10%);
+      background-color: @darkBlue;
     }
     // Reposition menu on open and round all corners
     .dropdown-menu {
       display: block;
       margin-top: 0;
-      border-radius: @baseBorderRadius;
     }
   }
 }
@@ -252,12 +251,6 @@
 // Remove top embossing
 .btn-group > .btn + .dropdown-toggle {
   box-shadow: none;
-  padding: 4px 7px;
-}
-
-// Space out series of button groups
-.btn-group + .btn-group {
-  margin-left: 8px;
 }
 
 // Optional: Group multiple button groups together for a toolbar
@@ -276,9 +269,11 @@
     margin-left: 8px;
   }
 
-  .dashlet-toolbar .label {
-    font-size: @baseFontSize;
-    font-weight: normal;
+  .dashlet-toolbar {
+    .label {
+      font-size: @baseFontSize;
+      font-weight: normal;
+    }
   }
 }
 
@@ -287,6 +282,24 @@
 }
 
 /* NEW SKIN START */
+
+.filter-actions {
+  .btn-group {
+    .btn {
+      padding: 7px;
+    }
+  }
+}
+
+.btn-group {
+  &.refresh,
+  &.actions {
+    .btn {
+      line-height: 12px;
+      padding: 7px;
+    }
+  }
+}
 
 .btn-group {
   /* selector changes */
@@ -297,26 +310,10 @@
     }
   }
 
-  .dropdown-toggle:active,
   &.open {
-    .btn.dropdown-toggle,
-    .btn.btn-invisible:not(.disabled):hover {
-      /* override */
-      background: @white;
-
-      /* override */
-      color: initial;
-
-      > .fa {
-        /* override */
-        color: initial;
-      }
+    .btn.btn-invisible:not(.disabled):not(.module-name):not(.dropdown-toggle):hover {
+      .bg-btn-active-background();
     }
-  }
-
-  > .btn + .dropdown-toggle {
-    /* override */
-    width: 10px;
   }
 }
 

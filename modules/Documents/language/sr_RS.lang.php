@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Stavke prihoda',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Kupovine',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Kupljene stavke',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa dokumenata',
+    'LBL_MY_DOCUMENTS' => 'Moji dokumenti',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Pošalji u DocuSign',
 );

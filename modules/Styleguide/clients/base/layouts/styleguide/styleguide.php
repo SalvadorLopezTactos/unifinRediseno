@@ -42,7 +42,7 @@ $viewdefs['Styleguide']['base']['layout']['styleguide'] = array(
         "chapters" => array (
             "home" => array (
                 "title" => "Styleguide",
-                "description" => "A guide to styling the Sugar7 User Interface",
+                "description" => "A guide to styling the SugarCRM User Interface",
                 "index" => false,
             ),
             "docs" => array (
@@ -71,7 +71,7 @@ $viewdefs['Styleguide']['base']['layout']['styleguide'] = array(
                         "description" => "Basic form elements and layouts for a consistent editing experience.",
                         "index" => true,
                         "pages" => array (
-                            "fields" => array("title"=>"Sugar7 fields", "url"=>"#Styleguide/fields/index", "description"=>"Basic fields that support detail, record, and edit modes with error addons."),
+                            "fields" => array("title"=>"SugarCRM fields", "url"=>"#Styleguide/fields/index", "description"=>"Basic fields that support detail, record, and edit modes with error addons."),
                             "buttons" => array("title"=>"Buttons", "description"=>"Standard css only button styles."),
                             //TODO: remove this page or update
                             //"editable" => array("title"=>"Editable", "description"=>"Inline form edit inputs."),
@@ -130,7 +130,7 @@ $viewdefs['Styleguide']['base']['layout']['styleguide'] = array(
                     ),
                     "charts" => array (
                         "title" => "Sucrose Charts",
-                        "description" => "Standard and custom charts in Sugar7 are developed using D3 and the Sucrose Charts library. For configuration details see the <a href='http://sucrose.io'>sucrose.io</a> website.",
+                        "description" => "Standard and custom charts in SugarCRM are developed using D3 and the Sucrose Charts library. For configuration details see the <a href='http://sucrose.io'>sucrose.io</a> website.",
                         "index" => true,
                         "pages" => array (
                             "types" => array("title"=>"Chart Types", "description"=>"Currently supported Sucrose chart types."),
@@ -140,12 +140,12 @@ $viewdefs['Styleguide']['base']['layout']['styleguide'] = array(
                 ),
             ),
             "fields" => array (
-                "title" => "Example Sugar7 Fields",
+                "title" => "Example SugarCRM Fields",
                 "description" => "Basic fields that support detail, record, and edit modes with error addons.",
                 "index" => false,
             ),
             "views" => array (
-                "title" => "Example Sugar7 Views",
+                "title" => "Example SugarCRM Views",
                 "description" => "Basic views are the building blocks of a layout.",
                 "index" => true,
                 "sections" => array (

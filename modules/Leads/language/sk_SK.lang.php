@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Odporučil',
     'LBL_LIST_STATUS' => 'Stav',
     'LBL_LIST_TITLE' => 'Titul',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Predpoveď trhového záujmu',
+    'LBL_MARKET_SCORE' => 'Trhové skóre',
     'LBL_MOBILE_PHONE' => 'Mobil:',
     'LBL_MODULE_NAME' => 'Záujemcovia',
     'LBL_MODULE_NAME_SINGULAR' => 'Záujemca',
@@ -330,4 +332,9 @@ Po potvrdení všetkých povinných a požadovaných modulov kliknite na tlačid
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Predpoveď konverzie záujemcu',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Zobraziť podrobnosti predpovede pre konkrétneho záujemcu',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Povoliť riadkové položky výnosov',
+    'LBL_REQUIRE_RLIS' => 'Pri vytváraní novej príležitosti vyžadovať riadkové položky výnosov',
+    'LBL_COPY_DATA_RLIS' => 'Pri vytváraní novej príležitosti skopírovať údaje záujemcu do riadkových položiek výnosov',
 );

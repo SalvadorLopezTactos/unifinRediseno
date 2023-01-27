@@ -14,7 +14,12 @@ use Sugarcrm\Sugarcrm\modules\Reports\Exporters\ReportExporter;
 
 require_once('include/export_utils.php');
 
-function template_handle_export(&$reporter)
+/**
+ * @param Report $reporter Report object
+ * @param bool $stream Streaming back to the client
+ * @return string|void Return file name to caller if not streaming
+ */
+function template_handle_export(Report &$reporter, bool $stream = true)
 {
     ini_set('zlib.output_compression', 'Off');
     $reporter->plain_text_output = true;
@@ -34,16 +39,22 @@ function template_handle_export(&$reporter)
         true
     );
 
-    ob_clean();
-    header("Pragma: cache");
-    header("Content-type: text/plain; charset=".$locale->getExportCharset());
-    header("Content-Disposition: attachment; filename={$_REQUEST['module']}.csv");
-    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-    header("Last-Modified: " . TimeDate::httpTime());
-    header("Cache-Control: post-check=0, pre-check=0", false);
-    header("Content-Length: ".mb_strlen($transContent, '8bit'));
+    if ($stream) {
+        ob_clean();
+        header("Pragma: cache");
+        header("Content-type: text/plain; charset=" . $locale->getExportCharset());
+        header("Content-Disposition: attachment; filename=Reports.csv");
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Last-Modified: " . TimeDate::httpTime());
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Content-Length: " . mb_strlen($transContent, '8bit'));
+    }
     if (!empty($sugar_config['export_excel_compatible'])) {
-        print $transContent;
+        if ($stream) {
+            print $transContent;
+        } else {
+            return writeToCSVFile($transContent, $reporter->name);
+        }
     } else {
         $user_agent = (isset($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
         if ($locale->getExportCharset() == 'UTF-8' &&
@@ -52,6 +63,31 @@ function template_handle_export(&$reporter)
         } else {
             $BOM = ''; // Mac Excel does not support utf-8
         }
-        print $BOM . $transContent;
+        if ($stream) {
+            print $BOM . $transContent;
+        } else {
+            return writeToCSVFile($BOM . $transContent, $reporter->name);
+        }
     }
+}
+
+/**
+ * Writes content to cache file
+ *
+ * @param String $content
+ * @param String $reportName
+ * @return string
+ */
+function writeToCSVFile(string $content, string $reportName)
+{
+    // This mimics what pdf does
+    create_cache_directory('csv');
+    $filenamestamp = '_' . date(translate('LBL_PDF_TIMESTAMP', 'Reports'), time());
+    $cr = array(' ', "\r", "\n", "/");
+    $filename = str_replace($cr, '_', $reportName . $filenamestamp . '.csv');
+    $cachefile = sugar_cached('csv/') . basename($filename);
+    $fp = sugar_fopen($cachefile, 'w');
+    fwrite($fp, $content);
+    fclose($fp);
+    return $cachefile;
 }

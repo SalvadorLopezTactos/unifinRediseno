@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'Prognozės',
     'ForecastWorksheets' => 'Prognozių darbalapiai',
     'ForecastManagerWorksheets' => 'Prognozių tvarkytuvo darbalapiai',
-    'MergeRecords'=>'Sulieti įrašus',
       'VisualPipeline'=>'Vaizdinės pardavimo galimybės',
       'ConsoleConfiguration' => 'Konsolės konfigūracija',
       'SugarLive' => '„SugarLive“',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'Vaidmenys',
     'Notifications'=>'Pranešimai',
     'Sync'=>'Sinchronizavimas',
+    'HintAccountsets' => 'Užiominų paskyros rinkiniai',
+    'HintNotificationTargets' => 'Užuominų pranešimų tikslai',
+    'HintNewsNotifications' => 'Užuominos naujienų pranešimai',
+    'HintEnrichFieldConfigs' => 'Užuominos papildytų laukų konfigūracijos',
     'ReportMaker' => 'Išplėstinės ataskaitos',
     'DataSets' => 'Duomenų formatai',
     'CustomQueries' => 'Nestandartinės užklausos',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'Pirkimo eilutės prekės',
     'MobileDevices' => 'Mobilieji prietaisai',
     'PushNotifications' => '„Push“ pranešimai',
+    'Escalations' => 'Išplėtimai',
+    'DocumentTemplates' => 'Dokumentų šablonai',
+    'DocumentMerges' => 'Dokumentų suliejimas',
     'WorkFlow' => 'Darbo eigos apibrėžimai',
     'EAPM' => 'Išorinės paskyros',
     'Worksheet' => 'Darbalapis',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'Nedarbo dienos',
     'ChangeTimers' => 'Keisti laikmačius',
     'Messages' => 'Žinutės',
+    'Audit' => 'Auditas',
+    'RevenueLineItems' => 'Pajamų eilutės prekės',
+    'DocuSignEnvelopes' => '„DocuSign“ vokai',
+    'Geocode' => 'Geokodas',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Užd.',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'VC',
         'PurchasedLineItems' => 'PE',
+        'DocumentTemplates' => 'DT',
+        'DocumentMerges' => 'DM',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Prognozės darbalapis',
     'ForecastManagerWorksheets' => 'Prognozių tvarkytuvo darbalapis',
     'Quotas' => 'Kvota',
-    'MergeRecords'=>'Sulieti įrašus',
     'Teams' => 'Komanda',
     'TeamNotices' => 'Komandos pranešimas',
     'Activities' => 'Veikla',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'Pirkimas',
     'PurchasedLineItems' => 'Pirkimo eilutės prekė',
     'PushNotifications' => '„Push“ pranešimai',
+    'Escalations' => 'Išplėtimas',
+    'DocumentTemplates' => 'Dokumento šablonas',
+    'DocumentMerges' => 'Dokumentų suliejimas',
     'WorkFlow' => 'Darbo eiga',
     'EAPM' => 'Išorinė paskyra',
     'Worksheet' => 'Darbalapis',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'Atostogos',
     'ChangeTimers' => 'Keisti laikmatį',
     'Messages' => 'Žinutė',
+    'Audit' => 'Auditas',
+    'DocuSignEnvelopes' => '„DocuSign" vokas',
+    'HintAccountsets' => 'Užiominų paskyros rinkiniai',
+    'HintNotificationTargets' => 'Užuominų pranešimų tikslai',
+    'HintNewsNotifications' => 'Užuominos naujienų pranešimai',
+    'HintEnrichFieldConfigs' => 'Užuominos papildytų laukų konfigūracijos',
+    'Geocode' => 'Geokodas',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'Komunalinės paslaugos',
     'Other' => 'Kita',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF ir CVS',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'Vykdoma',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'Žinių bazė',
       'PurchasedLineItems' => 'Pirkimo eilutės prekė',
       'Purchases' => 'Pirkimas',
+      'Escalations' => 'Išplėtimas',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Paskyra',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'Pastaba',
     'PurchasedLineItems' => 'Pirkimo eilutės prekė',
     'Purchases' => 'Pirkimas',
+    'Escalations' => 'Išplėtimas',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'Užsakyta',
       'Ship' => 'Išsiųsta',
   ),
+    'active_status_dom' => [
+        'Active' => 'Aktyvus',
+        'Inactive' => 'Neaktyvus',
+        'Retired' => 'Atsistatydinęs',
+    ],
+    'appearance_options' => [
+        'system_default' => 'Naudoti sistemos nustatymus',
+        'light' => 'Šviesus',
+        'dark' => 'Tamsus',
+    ],
 
 
   'pricing_formula_default_key' => 'Fiksuotoji',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'Televizija',
         'NewsLetter' => 'Naujienlaiškis',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GAUTI',
+      'POST' => 'SKELBTI',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,14 +2049,16 @@ $app_list_strings = array (
         'print'       => 'Spausdinti',
         'pieWedgeName'      => 'sekcijos',
     ),
-    'd3_chart_types' => array (
+    'chart_types' => array (
         'pie chart' => 'Skritulinė diagrama',
+        'donut chart' => 'Riestainio diagrama',
+        'treemap chart' => 'Medžio schemos diagrama',
         'bar chart' => 'Vertikali juostinė diagrama',
-        'group by chart' => 'Vertikali juostinė grupės diagrama',
+        'group by chart' => 'Vertikali juostinė sugrupuota diagrama',
         'horizontal bar chart' => 'Horizontali juostinė diagrama',
-        'horizontal group by chart' => 'Horizontali juostinė grupės diagrama',
+        'horizontal group by chart' => 'Horizontali juostinė sugrupuota diagrama',
         'line chart' => 'Linijinė diagrama',
-        'funnel chart' => 'Piltuvėlio tipo diagrama',
+        'funnel chart' => 'Piltuvo diagrama',
     ),
     'd3_value_placement' => array (
         '0'            => 'Nėra',
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'Kaina (didžiausia suma)',
             'total_revenue:asc' => 'Kaina (mažiausia suma)',
         ],
+        'calendar_type_list' => [
+          'main' => 'Kalendoriaus centras',
+        ],
+        'calendar_views_options' => [
+          'day' => 'Diena',
+          'week' => 'Savaitė',
+          'workWeek' => 'Darbo savaitė',
+          'expandedMonth' => 'Mėnuo',
+          'agenda' => 'Darbotvarkė',
+          'timeline' => 'Laiko juosta',
+          'monthSchedule' => 'Planuoklė',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'Sukurtas',
+          'completed' => 'Užbaigta',
+          'declined' => 'Atmesta',
+          'delivered' => 'Pristatyta',
+          'sent' => 'Išsiųsta',
+          'signed' => 'Pasirašyta',
+          'voided' => 'Panaikinta',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'Numatytasis',
+            'color' => 'Spalva',
+            'image' => 'Paveikslėlis',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'Naujas',
+            'In Progress' => 'Vykdoma',
+            'Closed' => 'Uždaryta',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'Neveiklumas',
+            'Lack of Progress' => 'Progreso nebuvimas',
+            'Customer-Imposed Deadline' => 'Kliento nustatytas terminas',
+            'Account at Risk' => 'Sąskaitai kyla rizika',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'Kliento prašomas',
+            'Internally Requested' => 'Viduje prašoma',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'Atvejis',
+            'Bugs' => 'Virusas',
+            'Accounts' => 'Sąskaita',
+            'Opportunities' => 'Galimybė',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'Teigiamas',
+            'Negative' => 'Neigiamas',
+            'Neutral' => 'Neutralus',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'Netikėtina',
+            '02_less_likely' => 'Mažai tikėtina',
+            '03_neutral' => 'Neapsisprendęs',
+            '04_more_likely' => 'Labiau tiikėtina',
+            '05_very_likely' => 'Labai tikėtina',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'Neatitinka klientų',
+            '02_no_match' => '',
+            '01_matches_customers' => 'Atitinka klientus',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Sekti saitą',
   'LBL_TOGGLE_VISIBILITY' => 'Perjungti matomumą', // Record view header panel element
   'LBL_ACTIVITIES' => 'Veiklos srautas',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => '„SugarCRM, Sugar“ ir 3-D kubas yra registruotieji „SugarCRM Inc.“ prekės ženklai. '.
         'Visi kiti šiame produkte naudojami arba pateikti įmonių ir produktų pavadinimai yra '.
         '„SugarCRM ®“, „Sugar Enterprise™“ ir „Sugar™“ yra „SugarCRM Inc.“ prekių ženklai',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'Pridėti' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Įmonės logotipas' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalendorius' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'Pasirinkta išskleidžiamoji vertė pakeitė įrašo rodinio išdėstymą. ' .
+        'Šiame naujame išdėstyme paslėptų laukų vertės išvalytos. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'pagrindinio modulio naršymas',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'Uždaryti',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} marked as {{status}}.',
 
+    'LBL_FOCUS' => '„Focus“',
+
     'LBL_QUERY_VALID'=>'Teisingas',
     'LBL_QUERY_ERROR'=>'Klaida!',
     'LBL_QUERY_CHILD'=>'Teisinga užklausa',
@@ -3068,8 +3185,12 @@ $app_strings = array (
     'LBL_CASES'=>'Aptarnavimai',
     'LBL_MESSAGE'=>'Žinutė',
     'LBL_MESSAGES'=>'Žinutės',
+    'LBL_ESCALATIONS' => 'Išplėtimai',
+    'LBL_ESCALATION' => 'Išplėtimas',
+    'LBL_DOCUSIGN_ENVELOPES' => '„DocuSign“ vokai',
+    'LBL_DOCUSIGN_ENVELOPE' => '„DocuSign“ vokas',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
-    'LBL_CHANGE_PASSWORD' => 'Slaptažodžio keitimas',
+    'LBL_CHANGE_PASSWORD' => 'Keisti slaptažodį',
     'LBL_CHANGE_BUTTON_LABEL' => 'Pakeisti',
     'LBL_CHANGE_BUTTON_TITLE' => 'Pakeisti [Alt+G]',
     'LBL_CHARSET' => 'UTF-8',
@@ -3093,6 +3214,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'Atidaryti elementus:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Rašyti laišką',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'El. pašto adresas',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Rašyti laišką [Alt+L]',
     'LBL_SEARCH_DROPDOWN_YES'=>'Taip',
     'LBL_SEARCH_DROPDOWN_NO'=>'Ne',
@@ -3118,6 +3240,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Dokumentai',
     'LBL_DATE_ENTERED' => 'Sukūrimo data:',
     'LBL_DATE_MODIFIED' => 'Redagavimo data:',
+    'LBL_ACTIVITY_MODIFIED' => 'Pakeistas',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Redaguoti apžvalgos skirtuką',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'Redaguoti modulių skirtukus',
     'LBL_EDIT_BUTTON' => 'Redaguoti',
@@ -3140,6 +3263,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Select field...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Select operator...',
     'LBL_FILTER_CREATE_NEW' => 'Sukurti',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'Sukūrimo filtras (neišsaugotas)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(Neišsaugota)',
     'LBL_FILTER_CREATE_FILTER' => 'Sukurti naują filtrą',
     'LBL_FILTER_CLOSE_FILTER' => 'Uždaryti filtrą',
     'LBL_FILTER_EDIT_FILTER' => 'Redaguoti filtrą',
@@ -3202,6 +3327,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => 'More {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Šiandienos priminimai',
     'LBL_LEADS'=>'Potencialūs kontaktai',
+    'LBL_LEAD'=>'Galimas klientas',
+    'LBL_QUOTES_BILL_TO' => 'Komerciniai pasiūlymai (adresas sąskaitoms)',
     'LBL_LESS' => 'mažiau',
     'LBL_CAMPAIGN' => 'Kampanija:',
     'LBL_CAMPAIGNS' => 'Kampanijos',
@@ -3229,19 +3356,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'Prašome pasirinkti mažiausiai 2 įrašus, kad galėtumėte tęsti.',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'Prašome pasirinkti mažiau nei 10 įrašų.',
     'LBL_LISTVIEW_ALL' => 'Visi',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'Įšaldykite 1 pirmą',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'All duplicates',
     'LBL_LISTVIEW_NONE' => 'Atžymėti visus',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'Pasirinkti šį puslapį',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Visi įrašai',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Pasirinkti įrašai',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Pasirinkta:',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Clear selections.',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Išvalyti visus pasirinkimus.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'Select all records',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'There are more than {{num}} records in the result set. You have selected the first {{num}} records.',
     'TPL_LISTVIEW_SELECTED' => 'You have selected {{num}} records in the result set.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'Rezultatų rinkinyje pasirinkote 1 įrašą.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'You have selected all {{num}} records in the result set.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'You have selected all {{num}} records in this view. {{link}} in the result set.',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Updating {{num}} of {{total}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Atnaujinama {{num}} iš {{total}}',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(about {{time}} {{unit}} left)',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Mass Update failed. Initiating new attempt ({{num}} of {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Mass Update incomplete. {{num}} record(s) remain unchanged.',
@@ -3249,7 +3378,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} įrašo (-ų) nepaisyta dėl ribotų teisių ar klaidų.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} record(s) were updated successfully.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} Mass Update',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Deleting {{num}} of {{total}}.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Ištrinama {{num}} iš {{total}}',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(about {{time}} {{unit}} left)',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => 'Mass Delete failed. Initiating new attempt ({{num}} of {{total}}).',
     'TPL_MASSDELETE_WARNING_CLOSE' => 'Mass Delete incomplete. {{num}} record(s) remain.',
@@ -3274,10 +3403,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Pasirinkti',
     'LBL_LISTVIEW_ACTIONS' => 'Veiksmai',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'Pasirinkite visus šio puslapio įrašus',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'Panaikinkite visų šio puslapio įrašų pasirinkimą',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} of {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '{{num}} įkėlimo...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Click for total',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'iš',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'Gaukite puslapių skaičių',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'Jonas',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Jonaitis',
@@ -3285,10 +3421,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Kodas beždžionė neįprasta',
     'LBL_LOGIN_TO_ACCESS' => 'Prašome prisijungti, jei norite prieiti prie šios vietos.',
     'LBL_LOGOUT' => 'Atsijungti',
+    'LBL_FINISH_IMPERSONATING' => 'Nebeapsimesti kitu asmeniu',
+    'LBL_RESET_MFA' => 'Atkurti kelių veiksnių autentifikavimą',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, jūs šiuo metu vaidinate {{user}}.',
     'LBL_PROFILE' => 'Profilis',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'Laiškų apjungimas',
     'LBL_MASS_UPDATE' => 'Masinis atnaujinimas',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'Pasirinkite visus įrašus norėdami atlikti masinį atnaujinimą',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'Įtraukite įrašą į masinį atnaujinimą',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Pridėti lauką',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Išmesti lauką',
     'LBL_GENERATE_QUOTE' => 'Generate Quote',
@@ -3343,6 +3484,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'Daugiau informacijos',
     'LBL_PANEL_BODY' => 'Užduoties informacija',
     'LBL_PARENT_TYPE' => 'Pirminis tipas',
+    'LBL_RELATED_TYPE' => 'Susijęs tipas',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'Intervalas',
     'LBL_PICTURE_FILE' => 'Nuotrauka',
@@ -3416,7 +3558,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'Susiję',
     'LBL_RELATED_INFORMATION' => 'Susijusi informacija',
-    'LBL_RELATED_RECORDS' => 'Susiję įrašai',
+    'LBL_RELATED_RECORDS' => 'Susijęs {{module}}',
     'LBL_REPORTS_TO' => 'Raportuoti kam',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'Privalomas laukas',
@@ -3535,7 +3677,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Visos teisės saugomos.<br />„SugarCRM, Sugar“ ir 3-D kubas yra registruotieji „SugarCRM Inc.“ prekės ženklai. '.
         'Visi kiti šiame produkte naudojami arba pateikti įmonių ir produktų pavadinimai yra '.
         'atitinkamų įmonių, su kuriomis jie susiję, prekės ženklai.',
@@ -3604,6 +3746,7 @@ Sincerely, SugarCRM',
     'LBL_UNDELETE' => 'Atstatyti',
     'LBL_UNSYNC' => 'Atstatyti sinchronizaciją',
     'LBL_UPDATE' => 'Atnaujinti',
+    'LBL_UPDATES' => 'Naujiniai',
     'LBL_USER_LIST' => 'Vartotojų sąrašas',
     'LBL_USER_MENU' => 'User Menu',
     'LBL_USERS_SYNC'=>'Vartotojų sinchronizacija',
@@ -3670,6 +3813,8 @@ Sincerely, SugarCRM',
     'NTC_DELETE_SUCCESS' => 'You deleted the {0}.',
     'NTC_UNLINK_CONFIRMATION' => 'Are you sure you want to unlink this record?',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'Are you sure you want to unlink the {0}?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'Ar tikrai norite atsieti {0}? Jie taip pat bus pašalinti iš bylos lauko „Pagrindinis kontaktas“.',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => '{0} negalima atsieti, nes jie yra pagrindiniai šios bylos kontaktai. Prieš atsiedami šį įrašą, atnaujinkite lauką „Pagrindinis kontaktas“.',
     'NTC_UNLINK_SUCCESS' => 'You unlinked the {0}.',
     'NTC_LOGIN_MESSAGE' => 'Prašome įvesti vartotojo vardą ir slaptažodį.',
     'NTC_NO_ITEMS_DISPLAY' => 'joks',
@@ -3701,6 +3846,9 @@ Sincerely, SugarCRM',
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Atnaujinus naršyklę, visos jūsų atidarytos „SugarLive“ skambučių ar pokalbių sesijos bus automatiškai uždarytos ir visi neišsaugoti pakeitimai bus prarasti. Ar norite tęsti?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Neįrašėte pakeitimų. Ar tikrai norite išeiti iš puslapio ir atsisakyti pakeitimų?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'Ar tikrai norite atkurti <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">kelių veiksnių autentifikavimą</a>? 
+Atlikę šį veiksmą jūs iš karto atsijungsite ir kitą kartą prisijungdami turėsite iš naujo atlikti autentifikavimą naudodami autentifikavimo programą.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'Patvirtinti ir atsijungti',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Viename arba daugiau skydelių yra neįrašytų pakeitimų. Ar tikrai norite uždaryti stalčių?',
     'LBL_NAVIGATE_TO_REPORTS' => 'You are moving to the Reports module. Your changes to dashlet will not be saved. Continue?',
     'ERROR_NO_RECORD' => 'Klaida gaunant įrašą. Šis įrašas gali būti ištrintas arba neturite teisių jį matyti.',
@@ -3796,6 +3944,11 @@ Sincerely, SugarCRM',
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "You currently have no <item1> records saved. <item2> one now.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "You can create <item1> from a <item2>. <item3> <item2> list.",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'Teigiamas',
+    'LBL_SENTIMENT_NEUTRAL' => 'Neutralus',
+    'LBL_SENTIMENT_NEGATIVE' => 'Neigiamas',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Spauskite čia",
     // contextMenu strings
@@ -3805,11 +3958,16 @@ Sincerely, SugarCRM',
     'LBL_CREATE_NOTE' => 'Sukurti užrašą',
     'LBL_CREATE_OPPORTUNITY' => 'Sukurti pardavimą',
     'LBL_SCHEDULE_CALL' => 'Suplanuoti skambutį',
+    'LBL_SCHEDULE_CALL2' => 'Skambinti',
     'LBL_SCHEDULE_MEETING' => 'Suplanuoti susitikimą',
+    'LBL_SCHEDULE_MEETING2' => 'Susitikimas',
     'LBL_CREATE_MESSAGE' => 'Sukurti žinutę',
+    'LBL_CREATE_MESSAGE2' => 'Žinutė',
     'LBL_CREATE_TASK' => 'Sukurti užduotį',
+    'LBL_CREATE_TASK2' => 'Užduotis',
     'LBL_REMOVE_FROM_FAVORITES' => 'Išmesti iš Mano mėgstamiausių',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'Pastaba',
     'LBL_DOWNLOAD_ALL' => 'Atsisiųsti viską',
     'LBL_DOWNLOAD_ONE' => 'Atsisiųsti',
     'LBL_ATTACHMENTS' => 'Priedai',
@@ -3849,13 +4007,14 @@ Sincerely, SugarCRM',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Rodyti eilutes',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Relate to current record',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Linked field',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'Įšaldykite pirmą stulpelį',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Ar tikrai norite išimti panelį?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Are you sure you want to remove the row?',
     'LBL_MAXIMUM_OF' => 'Maximum of ',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => ' columns can be displayed.',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'Ataskaitų sritis',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'My Dashboard',
     'LBL_COLLAPSE_ALL' => 'Viską sutraukti',
@@ -3872,12 +4031,15 @@ Sincerely, SugarCRM',
     'LBL_DASHLET_CONFIGURE' => 'Configure',
     'LBL_DASHLET_TOGGLE' => 'Open/Close',
     'LBL_SIDEPANE_TOGGLE' => 'Atidaryti / uždaryti šoninę sritį',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'Atkurti numatytąjį skydelį',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'Nėra sukonfigūruotos ataskaitų srities',
+    'LBL_CREATE_DASHBOARD_LINK' => 'Sukurti ataskaitų sritį',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'Žinynas',
     'LBL_HELPLET_TOGGLE' => 'Atidaryti / uždaryti',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'Moduliai',
     'LBL_FACET_MODIFIED_BY_ME' => 'Modified by Me',
     'LBL_FACET_CREATED_BY_ME' => 'Created by Me',
@@ -3894,6 +4056,7 @@ Sincerely, SugarCRM',
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Įrašo rodinys',
+    'LBL_RELATED_RECORDS' => 'Susijęs {{module}}',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Rodomas įrašas ir pasirinktinai susiję įrašai skirtukuose.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Pagrindinis įrašo tipas',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Šis {{moduleSingular}}',
@@ -3943,7 +4106,7 @@ Sincerely, SugarCRM',
 
     'LBL_DASHLET_NO_RECORDS' => 'No records were found at this time.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Case Summary',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'Interactions',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'Laiko juosta',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Prisegtukai',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notes & Attachments belongs to the record',
     'LBL_DASHLET_PIPLINE_NAME' => 'Pipeline',
@@ -4214,6 +4377,8 @@ Sincerely, SugarCRM',
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Įkelti iš Jūsų kompiuterio',
     'LBL_SEARCH_EXTERNAL_API' => 'Failas arba išorinis šaltinis',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'Įkelti į išorinį šaltinį',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'Susieti iš išorinio šaltinio',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'Saugumas',
     'LBL_SHARE_PRIVATE' => 'Asmeninis',
     'LBL_SHARE_COMPANY' => 'Įmonė',
@@ -4322,6 +4487,9 @@ Sincerely, SugarCRM',
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Trumpos nuorodos',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => 'Form Functionality - Alt+<br />I = edIt (detailview)<br />U = dUplicate (detailview)<br />D = Delete (detailview)<br />A = sAve (editview)<br />L = canceL (editview) <br /><br />Search and Navigation - Alt+<br />7 = first input on Edit form<br />8 = Advanced Search link<br />9 = First Search Form input<br />0 = Unified search input' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'Išplėsti',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'Share',
     'TPL_RECORD_SHARE_SUBJECT' => 'Shared {{module}} {{name}} from {{appId}}',
@@ -4394,7 +4562,7 @@ Sincerely, SugarCRM',
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'All changes will be discarded when you switch to a new primary record. Are you sure you want to switch?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'Merge Related Records',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Merged: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Sujungtas: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'Merge Related {{objectName}} failed. Initiating new attempt ({{num}} of {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4448,14 +4616,14 @@ Sincerely, SugarCRM',
     'LBL_LANGUAGE' => 'Kalba',
     'LBL_LOADING_LANGUAGE' => 'Kraunamas kalbos paketas',
     'LBL_UPLOADING' => 'Įkeliamas',
+    'LBL_UPLOADING_DOTS' => 'Įkeliamas...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Are you sure you want to delete this image?',
     'LBL_FILE_DELETE_CONFIRM' => "Are you sure you want to delete this file? This cannot be undone.",
     'LBL_FILE_DELETED' => 'File was successfully deleted',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'Portal Theme',
-    'LBL_COFIGURE_PORTAL_THEME' => 'Configure Portal Theme',
-    'LBL_THEME_PREVIEW' => 'Theme Preview',
+    'LBL_THEME_PREVIEW' => 'Portalo temos peržiūra',
     'LBL_LOADING_PREVIEW' => 'Loading Preview',
     'LBL_RESET' => 'Atstatyti',
     'LBL_COLORS' => 'Spalvos',
@@ -4606,10 +4774,18 @@ Sincerely, SugarCRM',
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Susitikimai',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Užduotys',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Skambučiai',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Sąskaitos',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontaktai',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Laiškai',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'Pamainos',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Quoted Line Items',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Pamainos išimtys',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentai',
+    'LBL_ESCALATIONS' => 'Išplėtimai',
+    'LBL_ESCALATED' => 'Išplečiamas',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'Išplėtimai',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'Kiti susiję išplėtimai',
+    'LBL_ESCALATIONS' => 'Išplėtimai',
     'LNK_SETTINGS' => 'Nustatymai',
     'LBL_MOBILE_SUPPORT' => 'Palaikymas',
     'LBL_MOBILE_SHOW_MORE' => 'Rodyti daugiau...',
@@ -4817,6 +4993,55 @@ Sincerely, SugarCRM',
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'Failed to get server time',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'Failed to enable offline mode. Unable to reach the server.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'Išvaizda',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'Naudoti sistemos nustatymus',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'Šviesus',
+    'LBL_MOBILE_APP_THEME_DARK' => 'Tamsus',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'Naujas failo pavadinimas',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'Pervadinti failą',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'Sukūriau aš',
+    'LBL_OPERATOR_CONTAINS' => 'yra vienas iš',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'nėra vienas iš',
+    'LBL_OPERATOR_EMPTY' => 'yra tuščias',
+    'LBL_OPERATOR_NOT_EMPTY' => 'nėra tuščias',
+    'LBL_OPERATOR_MATCHES' => 'tiksliai sutampa',
+    'LBL_OPERATOR_STARTS_WITH' => 'prasideda',
+    'LBL_OPERATOR_EQUALS' => 'lygus',
+    'LBL_OPERATOR_NOT_EQUALS' => 'nelygus',
+    'LBL_OPERATOR_GREATER_THAN' => 'didesnis nei',
+    'LBL_OPERATOR_LESS_THAN' => 'mažesnis nei',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'didesnis nei arba lygus',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'mažesnis nei arba lygus',
+    'LBL_OPERATOR_BETWEEN' => 'yra tarp',
+    'LBL_OPERATOR_BEFORE' => 'prieš',
+    'LBL_OPERATOR_AFTER' => 'po',
+    'LBL_OPERATOR_YESTERDAY' => 'vakar',
+    'LBL_OPERATOR_TODAY' => 'šiandien',
+    'LBL_OPERATOR_TOMORROW' => 'rytoj',
+    'LBL_OPERATOR_LAST_7_DAYS' => 'paskutines 7 dienas',
+    'LBL_OPERATOR_NEXT_7_DAYS' => 'kitas 7 dienas',
+    'LBL_OPERATOR_LAST_30_DAYS' => 'paskutines 30 dienų',
+    'LBL_OPERATOR_NEXT_30_DAYS' => 'kitas 30 dienų',
+    'LBL_OPERATOR_LAST_MONTH' => 'praėjusį mėnesį',
+    'LBL_OPERATOR_THIS_MONTH' => 'šį mėnesį',
+    'LBL_OPERATOR_NEXT_MONTH' => 'kitą mėnesį',
+    'LBL_OPERATOR_LAST_YEAR' => 'praėjusiais metais',
+    'LBL_OPERATOR_THIS_YEAR' => 'šiais metais',
+    'LBL_OPERATOR_NEXT_YEAR' => 'kitais metais',
+    'LBL_OPERATOR_IS' => 'yra',
+    'LBL_OPERATOR_IS_NOT' => 'nėra',
+    'LBL_ERROR_FILTER_EMPTY' => 'Pridėkite filtro kriterijus.',
+    'LBL_ADD_FILTER' => 'Pridėti kriterijų',
+    'LBL_FILTER_NAME' => 'Failo pavadinimas',
+    'LBL_FILTER_FIELD' => 'Laukas',
+    'LBL_FILTER_OPERATOR' => 'Operatorius',
+    'LBL_FILTER_VALUE' => 'Vertė',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Išsaugoti darbalaukio programoje',
+    'LBL_FILTER_LOCAL' => 'Vietinis filtras',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'Sveiki atvykę į SugarCRM Mobile.<br /><br />Leiskite Jus supažindinti su naujausiu funkcionalumu',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'Pagridinė meniu navigacija.',
@@ -4862,6 +5087,7 @@ Sincerely, SugarCRM',
     'LBL_COMMENT_ADD' => 'Įterpti komentarą',
     'LBL_REQUIRED' => 'Būtinas',
     'LBL_MORE_BUTTON' => 'Daugiau',
+    'LBL_NO_OPTIONS' => 'Nėra parinkčių',
     'LBL_TRY_AGAIN' => 'Bandyti dar kartą',
     'LBL_NEW_RECORDS' => 'Neseniai sukurtas',
     'LBL_ASSIGNED_TO_ME' => 'Mano {{{module}}}',
@@ -5087,11 +5313,15 @@ Sincerely, SugarCRM',
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Ar tikrai norite uždaryti pokalbį?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'Sukurti užrašą ir pridėti priedą',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'Pridėti užrašą',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Prisijungti nepavyko. Bandykite dar kartą.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Neteisingi prisijungimai',
-    'LBL_PORTAL_INVALID_GRANT' => 'Jūsų žetonas nebegalioja arba neteisingas. Prašome prisijungti vėl.',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Žetonas nebegalioja',
+    'LBL_PORTAL_INVALID_GRANT' => 'Jūsų sesija pasibaigė. Prisijunkite iš naujo.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Sesija baigėsi',
     'LBL_PORTAL_AUTH_FAILED' => 'Kliento autentifikavimas nesėkmingas.',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'Neteisingas klientas',
     'LBL_PORTAL_INVALID_REQUEST' => 'Užklausa yra neteisinga arba sugadinta. Prašome susisiekti su techniniu aptarnavimu.',
@@ -5125,6 +5355,8 @@ Sincerely, SugarCRM',
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'Atkurti numatytąjį skydelį',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'Atnaujinimo konsolė',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Apžvalga',
@@ -5144,6 +5376,7 @@ Sincerely, SugarCRM',
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Pranešimų santrauka',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Skambučių santrauka',
     'LBL_OMNICHANNEL_LINK_TO' => 'Susiekite nuo {{fromModule}} iki {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'Susieti su {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'Susieti',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Jūsų naršyklė nepalaiko pokalbių. Naudokite „Google Chrome“ arba „Mozilla Firefox“.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Norėdami gauti pagalbos, susisiekite su „Sugar“ administratoriumi.',
@@ -5151,6 +5384,8 @@ Sincerely, SugarCRM',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Prieš skambindami, užbaikite „SugarLive“ konfigūravimą.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Baikite konfigūruoti „SugarLive“ išdėstymą prieš atidarydami „SugarLive“.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Prieš sukonfigūruodami „SugarLive“ išdėstymą, „SugarLive“ nustatykite „Offline“.',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'Kompaktiškas rodinys',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'Visas rodinys',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'Atkurti kortelę į numatytąją',
@@ -5563,9 +5798,12 @@ Sincerely, SugarCRM',
     'LBL_BEST' => 'Geriausias',
     'LBL_WORST' => 'Blogiausias',
     'LBL_LIKELY' => 'Suma',
-    'LBL_BEST_ADJUSTED' => 'Best (Adjusted)',
-    'LBL_WORST_ADJUSTED' => 'Worst (Adjusted)',
-    'LBL_LIKELY_ADJUSTED' => 'Likely (Adjusted)',
+    'LBL_BEST_FORECAST' => 'Įsipareigojimas (geriausias)',
+    'LBL_WORST_FORECAST' => 'Įsipareigojimas (blogiausias)',
+    'LBL_LIKELY_FORECAST' => 'Įsipareigojimas (tikėtina)',
+    'LBL_BEST_ADJUSTED' => 'Koreguotas įsipareigojimas (geriausias)',
+    'LBL_WORST_ADJUSTED' => 'Koreguotas įsipareigojimas (blogiausias)',
+    'LBL_LIKELY_ADJUSTED' => 'Koreguotas įsipareigojimas (tikėtina)',
     'LBL_AMOUNT_USDOLLAR' => 'Viso suma',
     'LBL_OVERDUE' => 'Overdue',
 
@@ -5586,6 +5824,8 @@ Sincerely, SugarCRM',
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'For more information, refer to the {{{more_info_url}}} {{plural_module_name}} documentation.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'No Data Available',
+    'LBL_NEED_HELP' => 'Reikia pagalbos dėl kažkokio naujo dalyko?',
+    'LBL_NEW_CASE' => 'Naujas atvejis',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'The help dashlet provides specific information pertaining to the module you are currently viewing along with a link to the corresponding documentation (e.g. Leads documentation) in the Application guide for more information.',
@@ -5733,9 +5973,19 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'No Reply',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Schedule Unavailable',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'Galimi rodiniai',
+    'LBL_CALENDAR_DASHLET_NAME' => 'Kalendoriaus planuoklė',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'Numatytasis rodinys',
+    'LBL_CALENDAR_MY_CALENDARS' => 'Mano kalendoriai',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'Vartotojų ir komandų kalendoriai',
+    'LBL_CALENDAR' => 'Kalendorius',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'Error occurred while retrieving schedule.',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'Įrašyti ir siųsti kvietimus',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'Patvirtinti statusą',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Procesai',
@@ -5852,15 +6102,21 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopijos patvirtinimo nuoroda',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Sąveika',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} sąveika',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Laiko juosta',
+    'LBL_NO_ACTIVITY' => 'Veiklos nėra',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} laiko juosta',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'Daugiau',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'Mažiau',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Laiko juostoje rodomi skambučiai, el. laiškai, ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Rodyti daugiau...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Rodyti mažiau...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Nėra duomenų',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'Modulis neturi licencijos.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktyvios prenumeratos',
@@ -5909,8 +6165,10 @@ To create a new record using the values you have entered, click "Ignore Duplicat
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => '„Focus“ stalčius',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'Uždaryti „Focus“ stalčių',
     'LBL_EXTERNAL_GUESTS' => 'Svečiai iš išorės',
     'LBL_MY_FAVORITE_TASKS' => 'Mano mėgstamiausios užduotys',
+
     'LBL_MY_TASKS' => 'Mano užduotys',
 
     // Sugar Integrate
@@ -5927,7 +6185,367 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_TIME_AWARE_TYPE' => 'Tipas',
     'LBL_TIME_AWARE_BEAN_ID' => 'Aibės ID',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'Rodyti etiketę',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'Atidaryti įrašo rodinį',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'Pridėti',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'Pagalba negalima',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'Funkcijos',
+    'LBL_ACTIONBUTTON_FIELDS' => 'Laukai',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'Pasirinkti lauką...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Komanda',
+    'LBL_ACTIONBUTTON_RELATED' => 'Susiję',
+    'LBL_ACTIONBUTTON_SAVE' => 'Išsaugoti',
+    'LBL_ACTIONBUTTON_CANCEL' => 'Atšaukti',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'Susijęs modulis',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'Susiję laukai',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'Komandos modulis',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'Komandos laukai',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'Komandos funkcija',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'Min.',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'Maks.',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'Vidurkis',
+    'LBL_ACTIONBUTTON_SUM' => 'Suma',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'Priskirti įrašą',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'Kurti el. laišką',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'Kurti įrašą',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Dokumentų sujungimas',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'Atverti Url',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'Generuoti ataskaitą',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'Atnaujinti įrašą',
+    'LBL_ACTIONBUTTON_ACTION' => 'Veiksmas',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'Priskirti',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'Siųsti el. laišką',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'Naudoti PMSE',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'Šablonas',
+    'LBL_ACTIONBUTTON_MODULE' => 'Modulis',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'Rodyti nustatymus',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'Tipas',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'Išskleidžiamasis sąrašas',
+    'LBL_ACTIONBUTTON_BUTTON' => 'Mygtukas',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'Mygtukų grupė',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'Rodyti etiketę ant užrašo',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'Rodyti antraštėje',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'Slėpti redaguojant',
+    'LBL_ACTIONBUTTON_SIZE' => 'Dydis',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'Numatytasis',
+    'LBL_ACTIONBUTTON_SMALL' => 'Mažas',
+    'LBL_ACTIONBUTTON_LARGE' => 'Didelis',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'Apskaičiuota',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'Konvertuoti į PDF',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Dokumentų sujungimas',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'Peržiūra',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'Savybės',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'Etiketė',
+    'LBL_ACTIONBUTTON_DESC' => 'Patarimas',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'Rodyti etiketę',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'Rodyti piktogramą',
+    'LBL_ACTIONBUTTON_SCHEME' => 'Spalvų schema',
+    'LBL_ACTIONBUTTON_ICON' => 'Piktograma',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'Priklausomas',
+    'LBL_ACTIONBUTTON_DESIGN' => 'Išdėstymo konfigūracija',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'Sustoti užfiksavus klaidą',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'Automatinis išsaugojimas',
+    'LBL_ACTIONBUTTON_CONFIG' => 'Konfigūracija',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'Prieš išsaugodami sukonfigūruokite veiksmo mygtuką.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'Konfigūruoti mygtukus',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'Automatinis kūrimas',
+    'LBL_ACTIONBUTTON_LINK' => 'Nuoroda',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'Kopijuoti pagrindines vertes',
+    'LBL_ACTIONBUTTON_PRESET' => 'Išankstinis',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'Išankstinis iš pagrindinio',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'Pasirinkite...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'Iš pagrindinio lauko ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'Ar jūs tikrai norite ištrinti šį mygtuką?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'Ar jūs tikrai norite ištrinti šį veiksmą?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'Neteisingas mygtuko duomenų veiksmas',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'Prieš išsaugodami, pasirinkite modulį.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'Prieš išsaugodami pasirinkite nuorodą. Jei nuorodos nėra, panaikinkite nuorodos parinkties žymėjimą.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'Prieš išsaugodami, pasirinkite įrašą.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'Prieš išsaugodami, pasirinkite šabloną.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'Pirminis',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'Antrinis',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'Aukš. vizual.',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'Vandenynas',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'Rožinė',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'Armija',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'Žalsvai mėlyna',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'Vandenynas',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'Žalia',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'Geltona',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'Oranžinė',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'Raudona',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'Koralinė',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'Violetinė',
+    'LBL_ACTIONBUTTON_FORMULA' => 'Formulė',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'Veiksmai',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'Klaidą patvirtinančio mygtuko duomenys.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'Ant mygtukų turi būti bent etiketė ar piktogramų rinkinys.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'Įveskite teisingą mygtuko etiketę.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'Nepavyko sukurti įrašo dėl trūkstamų verčių. Susisiekite su administratoriumi.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'Turite turėti bent du aktyvius šio tipo mygtukus.',
+    'LBL_ACTIONBUTTON_RECORD' => 'Įrašo peržiūra',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'Veiksmų sąrašas',
+    'LBL_ACTIONBUTTON_ORDER' => 'Seka',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'Sąrašo rodinys',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'Įrašo rodinys',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'Įrašų rodymo skydelis',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'Subpaneliai',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'Užduočių sekos vykdymo variklis neatliko šių veiksmų: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'Pridėkite veiksmą',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'Pašalinkite šį veiksmą',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'Dokumentų sujungimas',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'Dokumentų sujungimas į PDF',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'Įmonės dydis',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'Pramonės šaka',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'Pramonės šakos žymos',
+    'LBL_HINT_COMPANY_LOCATION' => 'Įmonės vieta',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'Įmonės aprašymas',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'Įkūrimo metai',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Įmonės feisbukas',
+    'LBL_HINT_COMPANY_TWITTER' => 'Įmonės twiteris',
+    'LBL_HINT_COMPANY_PIC' => 'Įmonės logotipas',
+    'LBL_HINT_CONTACT_PIC' => 'Kontaktinis telefonas',
+    'LBL_HINT_COMPANY_WEBSITE' => 'Įmonės svetainė',
+    'LBL_HINT_PHOTO' => 'Nuotraukos nuoroda',
+    'LBL_HINT_JOB_2' => 'Ankstesni darbai',
+    'LBL_HINT_EDUCATION' => 'Išsilavinimas',
+    'LBL_HINT_EDUCATION_2' => 'Papildomas išsilavinimas',
+    'LBL_HINT_TWITTER' => 'Tviterio nuoroda',
+    'LBL_HINT_FACEBOOK' => '„Facebook“ nuoroda',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'NAICS kodas',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'SIC kodas',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'FY pabaiga',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'Metinės pajamos',
+    'LBL_HINT_PHONE_1' => '1 telefonas',
+    'LBL_HINT_PHONE_2' => '2 telefonas',
+    'LBL_HINT_PANEL' => 'Užuomina',
+    'LBL_HINT_JOIN_TABLE' => 'Prijungti lentelę',
+    'LBL_HINT_FULL_NAME' => 'Pilnas vardas',
+    'LBL_HINT_JOB_TITLE' => 'Pareigos',
+    'LBL_HINT_OFFICE_PHONE' => 'Įstaigos telefonas',
+    'LBL_HINT_MOBILE_PHONE' => 'Mobilus',
+    'LBL_HINT_OTHER_PHONE' => 'Kitas telefonas',
+    'LBL_HINT_WEBSITE' => 'Tinklapis',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'Ar norėtumėte visus esamus šio įrašo duomenis perrašyti naujais duomenimis, nurodytais užuominoje?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'Ar norėtumėte perrašyti esamą {{fieldName}} įrašą nauju {{fieldName}}, esančiu užuominoje?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'Visi su paskyra susiję duomenys bus pašalinti, ar tikrai norite tęsti?',
+    'LBL_HINT_COMPANY_LOGO' => 'Logotipas',
+    'LBL_HINT_CONTACTS_AVATAR' => 'Nuotrauka',
+    'LBL_HINT_ACCOUNTSETS' => 'Užuominų paskyrų rinkinio žymos',
+
+    'LBL_HINT_LOADING' => 'Kraunama ...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'Pašalinama užuomina, palaukite',
+    'LBL_HINT_VALUE_ERASED' => ' Ištrinta vertė ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'Ši informacija buvo ištrinta naudojant duomenų privatumo užklausą',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'Toliau pasirinkite vieną iš pašalinimo parinkčių:',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Pašalinkite tik „Hint“ paketą',
+    'LBL_HINT_UNINSTALL_FULL' => 'Visiškai pašalinkite „Hint“',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'Pasirinkus šią parinktį bus pašalinta „Hint MLP“ ir išjungtos visos aktyvios „Hint Insights“ prenumeratos.
+    Iš naujo įdiegus „Hint“, prenumeratos bus automatiškai vėl aktyvuotos.',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'Pasirinkus šią parinktį bus atliktas visiškas „Hint“ pašalinimas, įskaitant MLP pašalinimą ir visos konfigūracijos bei prenumeratos informacijos ištrynimą.',
+    'LBL_HINT_UNINSTALL' => 'Pašalinti',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Pašalinti „Hint“',
+    'LBL_HINT_CANCEL' => 'Atšaukti',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'ĮSPĖJIMAS: šią parinktį pasirinkite tik tuo atveju, jei neketinate ateityje daugiau naudoti užuominų. 
+    Prieš atlikdami pašalinimo veiksmą, atlikite pilną „Sugar“ duomenų bazės atsarginę kopiją ir įjunkite „Sugar“ techninės priežiūros režimą. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'Žr.',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Užuominos administravimo vadovas ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'jei noritegauti daugiau informacijos apie pašalinimo procesą.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Ar tikrai norite pašalinti tik „Hint“ paketą?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Ar tikrai norite visiškai pašalinti „Hint“?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(PASTABA: ŠIO VEIKSMO ATŠAUKTI NEGALIMA)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Užuominų laukai',
+    'LBL_HINT_NO_RESULTS_MSG' => 'Nėra jokių rezultatų.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'Pagrindinis užuominų skydelio išdėstymas',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'Paskyros',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'Kontaktai',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'Vadovai',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'Išplėstinis užuominų skydelio išdėstymas',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'Pakeiskite laukų išdėstymą vilkdami ir paleisdami pirmiau nurodytuose patarimų skydelio išdėstymo skyriuose.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'Norėdami gauti išsamesnes instrukcijas ir numatytųjų laukų sąrašą, žiūrėkite ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' norėdami atkurti numatytuosius nustatymus ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'modulis.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'Ar tikrai norite atkurti numatytuosius modulio {{module}} nustatymus?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'Spustelėkite čia',
+    'LBL_HINT_CONFIG_NAME' => 'Užuominos administravimo vadovas.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'Laukai',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'Papildyti laukai',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'Šiame skyriuje išvardyti visi „Hint“ laukai ir „Sugar“ laukai, kurie yra papildyti „Hint“. Užuominų laukai pažymėti žvaigždute (*) ir gali būti rodomi Užuominų skydelyje tik tada, jei jie yra papildyti.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'Lauko pavadinimas',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'Papildytas laukas',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Rodyti užuominoje',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Rodyti užuominų skydelyje',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'Papildomi „Sugar" laukai',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'Šiame skyriuje išvardyti visi „Sugar“ laukai, kurie nėra papildyti „Hint“ funkcija.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'Perspėjimas',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'Atsargiai: jūs ruošiatės sinchronizuoti su „Hint Insights“ paslauga. Visos laukiančios el. pašto suvestinės istorijos bus prarastos, o esamos naujienos bus ištrintos iš „Insights“ skydelio. Baigus sinchronizavimą, visų tipų pranešimai bus atnaujinti.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'Siūlomos įmonės, susijusios su jūsų {{_moduleSingular}} išvardytos toliau. Pasirinkite įmonės duomenis, kurie bus rodomi.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'Paskyra nepasirinkta',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'Rasti keli el. laiškai, pasirinkite el. laiškus, kuriuos norite importuoti: ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'Pagal įvestus duomenis užuomina sistemoje nerado atitikmens.',
+    'LBL_HINT_HELP_MESSAGE2' => 'Geriausius užuominų rezultatus galima rasti nurodant asmens vardą ir el. pašto adresą.',
+    'LBL_HINT_HELP_MESSAGE3' => 'Geriausius užuominos rezultatus galima rasti naudojant įmonės interneto svetainės url adresą.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "Įveskite savo {{_moduleSingular}} įmonės pavadinimą arba svetainę ir užuomina ieškos papildomų duomenų.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "Įveskite savo {{currentModule}} el. pašto adresą ir užuomina ieškos papildomų duomenų.",
+
+    'LBL_HINT_HISTORY_NONE' => 'Duomenų apie istorinį vaizdą nėra',
+    'LBL_HINT_HISTORY_TITLE' => 'Veiklos istorija',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'Duomenų papildymas',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'Jūsų „SugarCRM Hint“ paslaugos licencijos galiojimas baigėsi. Susisiekite su savo „SugarCRM“ administratoriumi, kad atnaujintumėte licenciją.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'Norite sužinoti, ką „SugarCRM Hint“ gali padaryti jums ir jūsų įmonei? Susisiekite su savo „SugarCRM“ administratoriumi ir pridėkite „Hint“.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'Paskyros informacija nerasta',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'Rasti papildyti duomenys - spustelėkite, jei norite įrašyti visus papildytus duomenis į savo įrašą.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'Spustelėkite, jei norite įrašyti papildytus duomenis į savo įrašą.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'Susiję kontaktai',
+    'LBL_HINT_CONTACTS_NONE' => 'Nėra susijusių kontaktų',
+
+    'LBL_HINT_NEWS' => 'Naujienos',
+    'LBL_HINT_GENERAL' => 'Bendras',
+    'LBL_HINT_ALL_NEWS' => 'Visos naujienos',
+    'LBL_HINT_FILTER_NEWS' => 'Filtruoti naujienas',
+    'LBL_HINT_FINANCIAL_NEWS' => 'Finansinis',
+    'LBL_HINT_PERSONNEL_NEWS' => 'Asmeninis',
+    'LBL_HINT_PRESS_RELEASES' => 'Pranešimai spaudai',
+    'LBL_HINT_OTHER_NEWS' => 'Kiti',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'Ieškoti naujienų straipsnių',
+    'LBL_HINT_NEWS_ALERT' => '„Hint Insights“',
+    'LBL_HINT_NEWS_NONE' => 'Jokių naujienų nėra',
+    'LBL_NEW_NOTIFICATIONS' => 'Nauji pranešimai',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'Turite turėti užuominos licenciją, kad galėtumėte peržiūrėti „Hint Insights“ informacijos rinkinį.
+     Paklauskite administratoriaus, kaip gauti užuominos licenciją.',
+
+    'LBL_HINT_FOR' => 'Dėl',
+    'LBL_HINT_WITH' => 'su',
+    'LBL_HINT_SHOW_ME' => 'Parodykite man: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'Praneškite man: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => '„Hint Insights“ nuostatų centras',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'Nuostatų parinkčių raktas',
+    'LBL_HINT_PREFERENCES' => 'Nuostatos',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'Ištrynimas išjungtas, reikalingas mažiausiai vienas nuostatos teiginys',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'Pridėti išjungta, pasiekėte didžiausią nuostatų teiginių skaičių',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Įtraukti į „Hint Insights“ informacinį rinkinį',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'Iššokantis langas kaip darbalaukio pranešimas',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'Norint nuolat gauti pranešimus, pranešimai turi būti įjungti visose naršyklėse ir visuose staliniuose kompiuteriuose.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Kai kurios naršyklės, pavyzdžiui, „Internet Explorer“, nepalaiko pranešimų. Naudojant naršyklę, kuri nepalaiko pranešimų, pranešimų įjungti negalima.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'Siųskite momentinį įspėjimą el. paštu apie kiekvieną pranešimą',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'Kasdien siųskite santrauką el. paštu',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'Siųskite savaitinę santrauką el. paštu',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'Nepavyko išsaugoti nuostatų. Patikrinkite sistemos ryšį ir bandykite dar kartą.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'Kai kuriuose privalomuose laukuose trūksta reikšmės. Patikrinkite savo nuostatas ir įsitikinkite, kad visi privalomi laukai yra užpildyti.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'Ruošiatės įgalinti „Hint Insights“ naršyklės pranešimus. Spustelėkite „Patvirtinti“, kad tęstumėte. Tada jūsų naršyklė paprašys jūsų leidimo gauti pranešimų įvykius.',
+    'LBL_HINT_PUSH_ERROR' => '„Push Notifications“ įskiepis užregistruotas {{{options.type}} be priklausomybių. Įskiepis neveiks taip, kaip numatyta, todėl įsitikinkite, kad nurodėte kelią iki darbinio failo ir prenumeratos išsaugojimo serveryje metodą.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'ĮJUNKITE užuominų pranešimus visiems vartotojams',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'IŠJUNKITE užuominų pranešimus visiems vartotojams',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'ĮSPĖJIMAS: nepavyko išjungti pranešimų šalinant „Sugar Hint“. Norėdami išjungti pranešimus, įdiekite „Hint 5.4.0“ arba naujesnę versiją ir atlikite visišką pašalinimą naudodami „Hint“ pašalinimo programą, kurią rasite „Sugar“ administravimo skyriuje.',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'Žemėlapių konfigūracija',
+    'LBL_MAP_MAP' => 'Žemėlapis',
+    'LBL_MAP_MAPS' => 'Žemėlapiai',
+    'LBL_MAP_GEOCODING_RECORD' => 'Geokodas',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'Įrašas sėkmingai geokoduotas.',
+    'LBL_MAP_LATITUDE' => 'Platuma',
+    'LBL_MAP_LONGITUDE' => 'Ilguma',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'Ieškoti pagal adresą...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'Dabartinis įrašas jau geografiškai užkoduotas. Ar tikrai norite perrašyti šio įrašo geokodavimą?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'Geokodavimas rankiniu būdu',
+    'LBL_MAP_POINT_COORDINATES' => 'Žemėlapio taško koordinatės',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'Optimalaus maršruto apskaičiavimas...',
+    'LBL_MAP_DIRECTIONS' => 'Kryptys',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'Kryptys pradedant nuo dabartinio vartotojo',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'Kryptys nuo šio įrašo',
+    'LBL_MAPS_RADIUS_INPUT' => 'Spindulys (0-250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'spinduliu nuo pašto kodo',
+    'LBL_MAPS_DISTANCE' => 'Atstumas',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'Pašto kodas',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'Neteisinga konfigūracija: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => 'Netinkami <strong>{{module}}</strong> laukų atvaizdai.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'Žemėlapio tipas',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'Priartinimo lygis',
+    'LBL_MAPS_DASHLET' => 'Žemėlapiai',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'Žemėlapyje rodomas (-i) geokoduotas (-i) įrašas (-ai).',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'Žemėlapiai šiame modulyje nepateikiami. Įjunkite jį administratoriaus konsolėje.',
+    'LBL_MAP_MODULES' => 'Modulis',
+    'LBL_MAP_FILTER_BY' => 'Filtruoti pagal',
+    'LBL_MAP_UNIT_TYPE' => 'Vieneto tipas',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'Mylios',
+    'LBL_MAP_UNIT_TYPE_KM' => 'Kilometrai',
+    'LBL_MAP_ADDRESS' => 'Adresas',
+    'LBL_MAP_NO_STARTING_POINT' => 'Pradinis taškas nėra geokoduotas.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'Pradinio taško įrašas nėra geokoduotas.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'Kai kurie iš pasirinktų įrašų nėra geokoduoti ir nebus rodomi žemėlapyje.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'Įrašas (-ai) nėra geokoduotas (-i).',
+    'LBL_MAPS_MODULE_FIELDS' => 'Modulio laukai',
+    'LBL_MAPS_SELECT_FIELD' => 'Pasirinkti lauką',
+    'LBL_MAPS_RELATE_RECORD' => 'Susiję įrašai',
+    'LBL_MAPS_MAPPING_TYPE' => 'Žemėlapio tipas',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'Nėra geokoduotų įrašų',
+    'LBL_MAPS_ADDRESS' => 'Adresas',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'Priskirtas vartotojas',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'Šiame taške gatvės vaizdas iš šono negalimas',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> įrašai netinkami atvaizdavimui. Pašalinkite modulį iš sąrašo.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'Uždaryti',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'Išplėsti',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'Saugoti kaip PDF',
+    'LBL_MAPS_EMAIL_LINK' => 'El. pašto nuoroda',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'Turite turėti bent vieną geokoduotą įrašą.',
+    'LBL_MAPS_GENERATING' => 'Generuojamas žemėlapis...',
+    'LBL_MAPS_POINTS' => 'Žemėlapio taškai',
+    'LBL_MAPS_POINT' => 'Taškas',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'Kelionės duomenys',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'Visas atstumas',
+    'LBL_MAPS_TOTAL_DURATION' => 'Visa trukmė',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'Bendra trukmė be eismo',
+    'LBL_MAPS_ITINERARY' => 'Maršrutas',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'Kelionės atstumas',
+    'LBL_MAPS_TRAVEL_DURATION' => 'Kelionės trukmė',
+    'LBL_MAPS_TRAVEL_STEPS' => 'Žingsniai',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'Perspėjimai',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => '„Bing Maps“ palaiko ne daugiau kaip 10 taškų bendrajame žemėlapyje. Peržiūrėkite savo pasirinkimą.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'Reikalinga žemėlapių licencija',
+
+    'LBL_INVALID_FORMULA' => 'Neteisinga formulė',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'Funkcijos grįžties tipas neatitinka',
+
+    'LBL_PREDICT_TOOLTIP' => 'Prognozuoti cukrų',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'Numatymas',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'Idealaus kliento profilis',
+
+    // User last state
+    'LBL_LAST_STATE' => 'Paskutinė sūsena',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'Siųsti į „DocuSign“',
+
+    // Base sales stages
+    'LBL_OPEN' => 'Atidaryti',
+    'LBL_CLOSED_WON' => 'Uždarytas laimėtas',
+    'LBL_CLOSED_LOST' => 'Uždarytas pralaimėtas',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6764,8 +7382,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => '„Google“ dokumentai',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => '„Microsoft“',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => '„Google“ kontaktai',
@@ -7105,6 +7723,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Įdėtasis failas';
     'YER' => 'Irano rialai',
     'ZWD' => 'Zimbabvės doleriai',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'Labai aukštai',
+        '4' => 'Aukštai',
+        '3' => 'Neapsisprendęs',
+        '2' => 'Žemai',
+        '1' => 'Labai žemai',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'Nėra',
         'future' => 'Dabartinė reikšmė',
@@ -7114,3 +7740,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Įdėtasis failas';
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'Vienas apsilankymas',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'Apdorojama',
+        'error' => 'Klaida',
+        'success' => 'Sėkmė',
+        'canceled' => 'Atšaukta',
+        'document_load' => 'Įkėlimo šablonas',
+        'tags_extract' => 'Išgaunamos žymos',
+        'tags_validate' => 'Patvirtinamos žymos',
+        'data_retrieving' => 'Gaunami duomenys',
+        'serialize_document' => 'Dokumentai sudedami atgal',
+        'send_document' => 'Dokumentai siunčiami jums',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'Suliejimas',
+        'convert' => 'PDF suliejimas',
+        'multimerge' => 'Daugialypis suliejimas',
+        'multimerge_convert' => 'Daugialypis suliejimas PDF',
+        'labelsgenerate' => 'Sukurti etikeltes',
+        'labelsgenerate_convert' => 'Sukurti etiketes PDF',
+        'excel' => 'Excel suliejimas',
+        'excel_convert' => 'Excel suliejimo konvertavimas',
+        'presentation' => 'PowerPoint suliejimas',
+        'presentation_convert' => 'PowerPoint suliejimas PDF',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'Mano paskyros',
+      'favorites' => 'Mėgstamos ataskaitos',
+      'tags' => 'Paskyros su žyma',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'Visos naujienos',
+      'General' => 'Bendras',
+      'Finance' => 'Finansinis',
+      'People' => 'Asmeninis',
+      'Press Releases' => 'Pranešimai spaudai',
+      'Other' => 'Kiti',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'Savininkai';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Debesų diskas';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'Debesų disko integracijos prietaisų skydelis';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'Kopijavimo nuoroda';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'Atsisiųsti';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Sukurti „Sugar“ dokumentą';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Sinchronizuoti su „Google“ disku';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'Sinchronizuoti visus su „Google“ disku';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'Nepavyko atsisiųsti šio failo';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'Debesų prietaisų skydelis nepateiktas';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Sukurtas „Sugar“ dokumentas';
+
+    $app_string['LBL_MY_FILES'] = 'Mano failai';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Pasidalino su manimi';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'Debesų tiekėjas';
+
+    $app_list_strings['drive_types'] = [
+      'google' => '„Google“ diskas',
+      'onedrive' => '„Microsoft Onedrive"',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Pasidalino su manimi';
+    $app_strings['LBL_MY_FILES'] = 'Mano failai';
+    $app_strings['LBL_UPLOAD_FILE'] = 'Įkelti failą';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'Katalogas nerastas';
+    $app_strings['LBL_CREATE_FOLDER'] = 'Sukurti katalogą';
+    $app_strings['LBL_LOAD_MORE'] = 'Įkelti daugiau...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'Ryšys su „Google“ nerastas...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'Ryšys su „Microsoft“ nerastas...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-tuščia-',
+      'Exact' => 'Tikslus',
+      'Null_address_components' => 'Vienas ar keli adreso komponentai tušti',
+      'Invalid_address' => 'Netinkamas adresas, serveris rodo „False“',
+      'Invalid_server_response_not_XML' => 'Netinkamas serverio atsakymas, ne XML',
+      'Invalid_address_no_location' => 'Netinkamas adresas, serveris nepateikė vietos',
+      'Ambiguous_address' => 'Dviprasmiškas adresas, keli atitikmenys',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'Kelias',
+      'a' => 'Antena',
+      'be' => 'Iš oro',
+      'rd' => 'Kelias tamsus',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

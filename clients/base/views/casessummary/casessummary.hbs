@@ -12,9 +12,21 @@
 --}}
 <div class="tabbable tabs-full {{tabClass}}" data-content="chart">
     <ul id="tab" class="nav nav-tabs">
-        <li class="active"><a class="ellipsis_inline" data-original-title="{{str "LBL_DASHLET_CASESSUMMARY_SUMMARY"}}" data-casessummary-status="Summary" href="#tab-chart" data-toggle="tab">{{str "LBL_DASHLET_CASESSUMMARY_SUMMARY"}}<br><span class="label label-important count sc-fill00">{{total}}</span></a></li>
+        <li class="active">
+            <a class="ellipsis_inline" data-original-title="{{str "LBL_DASHLET_CASESSUMMARY_SUMMARY"}}" data-casessummary-status="Summary" href="#tab-chart" data-toggle="tab">
+                <span class="tab-title">{{str "LBL_DASHLET_CASESSUMMARY_SUMMARY"}}</span>
+                <br>
+                <span class="label label-important count sc-fill00">{{total}}</span>
+            </a>
+        </li>
         {{#each tabData}}
-            <li><a class="ellipsis_inline" data-original-title="{{statusLabel}}" data-casessummary-status="{{status}}" href="#tab-{{index}}" data-toggle="tab">{{statusLabel}}<br><span class="label count {{cssClass}}">{{models.length}}</span></a></li>
+            <li>
+                <a class="ellipsis_inline" data-original-title="{{statusLabel}}" data-casessummary-status="{{status}}" href="#tab-{{index}}" data-toggle="tab">
+                    <span class="tab-title font-semibold">{{statusLabel}}</span>
+                    <br>
+                    <span class="label count {{cssClass}}">{{models.length}}</span>
+                </a>
+            </li>
         {{/each}}
     </ul>
     <div id="myTabContent" class="tab-content">

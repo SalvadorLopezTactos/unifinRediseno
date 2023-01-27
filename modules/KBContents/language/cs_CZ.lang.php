@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Zobrazit šablony',
     'LNK_LIST_KBCATEGORIES' => 'Zobrazit kategorie',
     'LBL_TEMPLATES' => 'Šablony',
+    'LBL_TEMPLATE' => 'Šablona',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Šablona přepíše veškerý obsah.' .
         ' Opravdu chcete použít tuto šablonu?',
     'LNK_IMPORT_KBCONTENTS' => 'Importovat články',

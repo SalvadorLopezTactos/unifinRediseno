@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Tidsplaner med fokus på behandlingstid',
 'LBL_OOTB_DATA_ARCHIVER' => 'Kør aktive dataarkiver/sletninger',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geokoder for poster',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Geokoderresolver',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
 'LBL_LIST_LIST_ORDER' => 'Planlæggere:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Til Setup crontab',
 'LBL_CRON_LINUX_DESC' => 'Føj denne linje til crontab:',
 'LBL_CRON_WINDOWS_DESC' => 'Opret en batchfil med følgende kommandoer:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'side_url' .'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Joblog',
 'LBL_EXECUTE_TIME'			=> 'Udfør tid',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Fjern midlertidige filer',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Genopbyg unormale team-sikkerhedsdata',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Opdatér produktdefinition',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Geokoderkort',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Geokoderresolver',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Kør hver nat kampagner med masse-e-mails',
 'LBL_ASYNCMASSUPDATE' => 'Udfør Asynchronous masse opdateringer',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Oprydning i gamle rekord lister',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Activity Stream Purger',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Tidsplaner med fokus på behandlingstid',
+'LBL_SUGARJOBDATAARCHIVER' => 'Kør aktive dataarkiver/sletninger',
 'LBL_PMSEENGINECRON' => 'SugarBPM-planlægger',
 );
 

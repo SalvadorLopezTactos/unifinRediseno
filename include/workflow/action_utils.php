@@ -62,7 +62,7 @@ function addWorkflowIdToActionArray(array $array)
     $stmt = DBManagerFactory::getInstance()
             ->getConnection()
             ->executeQuery($sql, [':action_id' => $array['action_id']]);
-    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $data = $stmt->fetchAllAssociative();
 
     // Get the id from the result
     $id = isset($data[0]['id']) ? $data[0]['id'] : '';

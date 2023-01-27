@@ -96,6 +96,14 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
             'modules' => ['Purchases', 'PurchasedLineItems'],
             'forceVisible' => true,
         ],
+        // 11.2.0 new Escalations Module
+        [
+            'name' => 'Escalations Module',
+            'fromVersion' => ['11.2.0', '<'],
+            'toFlavor' => ['ent'],
+            'modules' => ['Escalations'],
+            'forceVisible' => true,
+        ],
     ];
 
     public function run()

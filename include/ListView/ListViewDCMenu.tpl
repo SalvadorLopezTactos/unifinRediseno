@@ -11,7 +11,6 @@
  */
 *}
 <script type="text/javascript">
-{literal}
 function submitListViewDCMenu(submitElem) {
 var callback = {
 success: function(o) {
@@ -30,7 +29,6 @@ window.history.go(0);
 YAHOO.util.Connect.asyncRequest('POST', 'index.php', callback, "module=Meetings&action=listbytype&button=Search&name_basic="+document.getElementById('dcSearch').value);
 
 }
-{/literal}
 </script>
 <form id="dcSearchForm">
 {sugar_csrf_form_token}

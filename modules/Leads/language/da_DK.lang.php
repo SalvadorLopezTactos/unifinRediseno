@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Henvist af',
     'LBL_LIST_STATUS' => 'Status',
     'LBL_LIST_TITLE' => 'Titel',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Forudsigelse af markedsinteresse',
+    'LBL_MARKET_SCORE' => 'Markedsscore',
     'LBL_MOBILE_PHONE' => 'Mobiltelefon:',
     'LBL_MODULE_NAME' => 'Kundeemner',
     'LBL_MODULE_NAME_SINGULAR' => 'Tilbud produkter',
@@ -330,4 +332,9 @@ Efter bekræftelse af hvert enkelt påkrævet og ønsket modul, skal du klikke p
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Kundeemne konverteringsprognose',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Se prognosedetaljer for et specifikt kundeemne',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Aktivér Indtægtspost',
+    'LBL_REQUIRE_RLIS' => 'Kræv Indtægtspost, når der oprettes en ny mulighed',
+    'LBL_COPY_DATA_RLIS' => 'Kopiér Leders data til Indtægtspost, når der oprettes en ny mulighed',
 );

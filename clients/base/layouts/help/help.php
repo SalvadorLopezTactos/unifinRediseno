@@ -21,6 +21,15 @@ $viewdefs['base']['layout']['help'] = array(
                 'type' => 'base',
                 'css_class' => 'helplet-list-container',
                 'components' => array(
+                    [
+                        'view' => [
+                            'name' => 'about-version',
+                            'css_class' => 'mt-3',
+                        ],
+                        'context' => [
+                            'module' => 'Home',
+                        ],
+                    ],
                     array(
                         'view' => 'helplet',
                     ),

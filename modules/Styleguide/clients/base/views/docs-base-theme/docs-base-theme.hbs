@@ -11,9 +11,11 @@
  */
 --}}
 <section id="edit-documentation">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <h2>Themeable Colors</h2>
   <div class="row-fluid">
@@ -121,4 +123,3 @@
     </div>
 
 </section>
-

@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'Suodatin',
     'LBL_CONSOLE_FILTER_RULES' => 'Suodattimen säännöt',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'Kiinnitä ensimmäinen sarake',
+
     'LBL_CONSOLE_COLUMNS' => 'Sarakkeet',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'Monikenttäinen sarake',
     'LBL_CONSOLE_PRIMARY_SORT' => 'Ensisijainen järjestys',

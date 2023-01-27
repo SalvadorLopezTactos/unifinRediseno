@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Вече съществува поле с такова име',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Името на полето трябва да съдържа само следните символи: а-яА-Я_',
     'ERR_NO_MODULE_INCLUDED' => 'Не може да бъде направен запис поради липса на вкл&#39;чени модули',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Вече съществува име на падащо меню',
     'LBL_BTN_ADD' => 'Добави',
     'LBL_BTN_EDIT' => 'Редактирай',
     'LBL_GENERATE_URL' => 'URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Добавяне на колона {0} в',
     'LBL_DONE' => 'Край',
     'LBL_EXE_NON_SIM_MODE' => 'Изпълнение не в режим на симулация',
+    'LBL_CALCULATION_VISIBLE' => 'Направете видими за изчисления',
 );
-
-
-?>

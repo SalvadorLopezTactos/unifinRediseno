@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Rrjedha e punës'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Lloji',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Shënim:</strong> Funksioni "Rrjedha e punës" dhe "Administrimi i rrjedhës së punës" të "Sugar" është në modalitet mirëmbajtjeje. Klientët e versionit "Sugar Enterprise" duhet të fillojnë të përdorin funksionin e ofruar nga SugarBPM<sup class="trademark">TM</sup>.',
 );
 

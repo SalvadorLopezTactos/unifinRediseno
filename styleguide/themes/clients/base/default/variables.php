@@ -1,5 +1,7 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,25 +24,33 @@ $lessdefs = array(
         /**
          * Primary Color:
          * 3 pixel line on the navbar
-         * -------------------------
-         * was @primary
+         * - Matches Sugar's @gray30 (default)
+         * - Uses Sugar's @gray80 in dark mode
          */
-        'BorderColor' => '#d3dbe1',
+        'BorderColor' => '#e5eaed',
 
         /**
          * Secondary Color:
-         * color of the navbar
-         * -------------------------
-         * was @secondary
+         * Color used for navbar background
+         * - Matches Sugar's @white (default)
+         * - Uses Sugar's @black in dark mode
          */
-        'NavigationBar' => '#fff',
+        'NavigationBar' => '#ffffff',
 
         /**
          * Primary Button Color:
          * color of the primary button
-         * -------------------------
-         * was @primaryBtn
+         * - Matches Sugar's @blue (default)
+         * - Uses the same color in dark mode
          */
         'PrimaryButton' => '#0679c8',
+
+        /**
+         * Link Color:
+         * color of link text
+         * - Matches Sugar's @blue (default)
+         * - Uses @darkModeBlue in dark mode
+         */
+        'LinkColor' => '#0679c8',
     ),
 );

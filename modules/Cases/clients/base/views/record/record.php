@@ -48,6 +48,13 @@ $viewdefs['Cases']['base']['view']['record'] = array(
                     'primary' => true,
                     'acl_action' => 'edit',
                 ),
+                [
+                    'type' => 'escalate-action',
+                    'event' => 'button:escalate_button:click',
+                    'name' => 'escalate_button',
+                    'label' => 'LBL_ESCALATE_BUTTON_LABEL',
+                    'acl_action' => 'create',
+                ],
                 array(
                     'type' => 'shareaction',
                     'name' => 'share',
@@ -154,6 +161,13 @@ $viewdefs['Cases']['base']['view']['record'] = array(
                     'readonly' => true,
                     'dismiss_label' => true,
                 ),
+                [
+                    'name' => 'is_escalated',
+                    'type' => 'badge',
+                    'badge_label' => 'LBL_ESCALATED',
+                    'warning_level' => 'important',
+                    'dismiss_label' => true,
+                ],
             ),
         ),
         array(
@@ -187,6 +201,30 @@ $viewdefs['Cases']['base']['view']['record'] = array(
                     'label' => 'LBL_COMMENTLOG',
                     'span' => 12,
                 ),
+                [
+                    'name' => 'attachment_list',
+                    'label' => 'LBL_ATTACHMENTS',
+                    'type' => 'multi-attachments',
+                    'link' => 'attachments',
+                    'module' => 'Notes',
+                    'modulefield' => 'filename',
+                    'bLabel' => 'LBL_ADD_ATTACHMENT',
+                    'span' => 12,
+                    'max_num' => -1,
+                    'related_fields' => [
+                        'filename',
+                        'file_mime_type',
+                    ],
+                    'fields' => [
+                        'name',
+                        'filename',
+                        'file_size',
+                        'file_source',
+                        'file_mime_type',
+                        'file_ext',
+                        'upload_id',
+                    ],
+                ],
                 array(
                     'name' => 'tag',
                     'span' => 12,

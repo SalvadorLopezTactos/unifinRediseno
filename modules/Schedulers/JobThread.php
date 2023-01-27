@@ -15,10 +15,9 @@ if(!empty($_REQUEST['job_id'])) {
 	
 	$job_id = $_REQUEST['job_id'];
 
-	if(empty($GLOBALS['log'])) { // setup logging
-		
-		$GLOBALS['log'] = LoggerManager::getLogger('SugarCRM'); 	
-	}
+    if (empty($GLOBALS['log'])) { // setup logging
+        $GLOBALS['log'] = LoggerManager::getLogger();
+    }
 	ob_implicit_flush();
 	ignore_user_abort(true);// keep processing if browser is closed
 	set_time_limit(0);// no time out

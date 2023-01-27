@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => '이 모듈의 필드를 검사했습니다.',
     'LBL_NO_AUDITED_FIELDS_TEXT' => '이 모듈에서 검사된 필드가 없습니다.',
     'LBL_CHANGE_LOG' => '검사 로그',
-    'LBL_CURRENCY_CONVERSION_TEXT' => '감사 완료된 통화 필드가 비시스템 기본 통화로 저장되면, 변경 로그는 변환된 시스템 정의 기본 통화로 된 이전 값과 새 값을 표시합니다.변경 로그에에서 저장 됩니다.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => '감사 완료된 통화 필드가 비시스템 기본 통화로 저장되면, 변경 로그는 변환된 시스템 정의 기본 통화로 된 이전 값과 새 값을 표시합니다.변경 로그에에서 저장 됩니다.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => '업데이트',
+    'LBL_BLANK' => '-빈칸-',
 );

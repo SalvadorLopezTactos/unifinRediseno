@@ -37,14 +37,14 @@ class SugarUpgradeFixNoteFilenames extends UpgradeScript
      */
     protected function shouldRun()
     {
-        return version_compare($this->from_version, '11.0.1', '<');
+        return version_compare($this->from_version, '11.1.0', '<');
     }
 
     /**
      * Removes newline characters from the name and filename columns of all
      * Notes that contain them
      *
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Doctrine\DBAL\Exception
      */
     protected function executeQuery()
     {

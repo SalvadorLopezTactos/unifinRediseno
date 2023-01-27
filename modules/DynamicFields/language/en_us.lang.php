@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Field Name already exists',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Field name should contain only the following characters: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'No Module Included Could Not Save',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Dropdown name already exists',
     'LBL_BTN_ADD' => 'Add',
     'LBL_BTN_EDIT' => 'Edit',
     'LBL_GENERATE_URL' => 'Generate URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Adding Column {0} to',
     'LBL_DONE' => 'Done',
     'LBL_EXE_NON_SIM_MODE' => 'Execute non-simulation mode',
+    'LBL_CALCULATION_VISIBLE' => 'Make visible for calculations',
 );
-
-
-?>

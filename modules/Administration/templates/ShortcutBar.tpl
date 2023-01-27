@@ -17,7 +17,7 @@
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr><td colspan='100'><h2>{$title}</h2></td></tr>
-    <tr><td><i class="info">{$msg}</i></td></tr>
+    <tr><td><i class="info">{$msg|escape:'html':'UTF-8'}</i></td></tr>
     <tr><td colspan='100'>
         {if empty($msg)}
             <form name="ConfigureShortcutBar" method="POST" action="index.php">
@@ -25,8 +25,8 @@
                 <input type="hidden" name="module" value="Administration">
                 <input type="hidden" name="action" value="ConfigureShortcutBar">
                 <input type="hidden" id="enabled_modules" name="enabled_modules" value="">
-                <input type="hidden" name="return_module" value="{$RETURN_MODULE}">
-                <input type="hidden" name="return_action" value="{$RETURN_ACTION}">
+                <input type="hidden" name="return_module" value="{$RETURN_MODULE|escape:'html':'UTF-8'}">
+                <input type="hidden" name="return_action" value="{$RETURN_ACTION|escape:'html':'UTF-8'}">
                 <br>
                 <p>{$MOD.LBL_CONFIGURE_SHORTCUT_BAR_HELP}</p>
                 <br>
@@ -34,7 +34,7 @@
                     <tr>
                         <td>
                             <input title="{$APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{$APP.LBL_SAVE_BUTTON_KEY}" class="button primary" onclick="SUGAR.saveShortcutBar();" type="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}" >
-                            <input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="parent.SUGAR.App.router.navigate(parent.SUGAR.App.router.buildRoute('{$RETURN_MODULE}'), {literal}{trigger: true}{/literal}); return false;" type="button" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+                            <input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="parent.SUGAR.App.router.navigate(parent.SUGAR.App.router.buildRoute('{$RETURN_MODULE|escape:javascript}'), { trigger: true }); return false;" type="button" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
                         </td>
                     </tr>
                 </table>
@@ -50,7 +50,7 @@
                     <tr>
                         <td>
                             <input title="{$APP.LBL_SAVE_BUTTON_TITLE}" class="button primary" onclick="SUGAR.saveShortcutBar();" type="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}" >
-                            <input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="parent.SUGAR.App.router.navigate(parent.SUGAR.App.router.buildRoute('{$RETURN_MODULE}'), {literal}{trigger: true}{/literal}); return false;" type="button" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+                            <input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="parent.SUGAR.App.router.navigate(parent.SUGAR.App.router.buildRoute('{$RETURN_MODULE|escape:javascript}'), { trigger: true }); return false;" type="button" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
                         </td>
                     </tr>
                 </table>
@@ -66,45 +66,45 @@
                 var disabled_modules = {$disabled_modules};
                 var lblEnabled = '{sugar_translate label="LBL_ACTIVE_MODULES"}';
                 var lblDisabled = '{sugar_translate label="LBL_DISABLED_MODULES"}';
-                {literal}
+
                 SUGAR.prodEnabledTable = new YAHOO.SUGAR.DragDropTable(
                         "enabled_div",
                         [
-                            {key: "label", label: lblEnabled, width: 200, sortable: false},
-                            {key: "module", label: lblEnabled, hidden: true}
+                            { key: "label", label: lblEnabled, width: 200, sortable: false },
+                            { key: "module", label: lblEnabled, hidden: true }
                         ],
                         new YAHOO.util.LocalDataSource(enabled_modules, {
                             responseSchema: {
                                 resultsList: "modules",
                                 fields: [
-                                    {key: "module"},
-                                    {key: "label"}
+                                    { key: "module"},
+                                    { key: "label"}
                                 ]
                             }
                         }),
-                        {height: "300px"}
+                        { height: "300px"}
                 );
                 SUGAR.prodDisabledTable = new YAHOO.SUGAR.DragDropTable(
                         "disabled_div",
                         [
-                            {key: "label", label: lblDisabled, width: 200, sortable: false},
-                            {key: "module", label: lblDisabled, hidden: true}
+                            { key: "label", label: lblDisabled, width: 200, sortable: false },
+                            { key: "module", label: lblDisabled, hidden: true }
                         ],
                         new YAHOO.util.LocalDataSource(disabled_modules, {
                             responseSchema: {
                                 resultsList: "modules",
                                 fields: [
-                                    {key: "module"},
-                                    {key: "label"}
+                                    { key: "module" },
+                                    { key: "label" }
                                 ]
                             }
                         }),
-                        {height: "300px"}
+                        { height: "300px" }
                 );
                 SUGAR.prodEnabledTable.disableEmptyRows = true;
                 SUGAR.prodDisabledTable.disableEmptyRows = true;
-                SUGAR.prodEnabledTable.addRow({module: "", label: ""});
-                SUGAR.prodDisabledTable.addRow({module: "", label: ""});
+                SUGAR.prodEnabledTable.addRow({ module: "", label: "" });
+                SUGAR.prodDisabledTable.addRow({ module: "", label: "" });
                 SUGAR.prodEnabledTable.render();
                 SUGAR.prodDisabledTable.render();
 
@@ -118,11 +118,11 @@
                     }
 
                     ajaxStatus.showStatus(SUGAR.language.get('Administration', 'LBL_SAVING'));
-                    //YAHOO.SUGAR.MessageBox.show({title:"saving",msg:"Saving",close:false})
+                    //YAHOO.SUGAR.MessageBox.show({ title:"saving",msg:"Saving",close:false })
                     Connect.asyncRequest(
                             Connect.method,
                             Connect.url,
-                            {success: SUGAR.saveCallBack},
+                            { success: SUGAR.saveCallBack },
                             'to_pdf=1&module=Administration&action=ConfigureShortcutBar&enabled_modules=' + YAHOO.lang.JSON.stringify(modules) + '&csrf_token=' + SUGAR.csrf.form_token
                     );
 
@@ -135,11 +135,10 @@
                         parent.window.location.reload();
                     }
                     else {
-                        YAHOO.SUGAR.MessageBox.show({msg: response});
+                        YAHOO.SUGAR.MessageBox.show({ msg: response });
                     }
                 }
             })();
-            {/literal}
         </script>
         {/if}
     </td></tr>

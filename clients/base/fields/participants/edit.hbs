@@ -42,9 +42,9 @@
                         <span class="ellipsis_inline" title="{{name}}">{{name}}</span>
                     {{/if}}
                     {{#unless email}}
-                    <span class="flag error">
-                        <i class="fa fa-times"></i><i class="fa fa-envelope"></i>
-                    </span>
+                        <span class="flag error">
+                            <i class="sicon sicon-close"></i><i class="sicon sicon-email"></i>
+                        </span>
                     {{/unless}}
                 </div>
                 <div class="status">
@@ -124,11 +124,11 @@
         <div class="cell buttons">
             <div class="btn-toolbar pull-right">
                 <button type="button" class="btn{{#unless deletable}} disabled{{/unless}}" data-action="removeRow" data-id="{{id}}">
-                    <i class="fa fa-minus"></i>
+                    <i class="sicon sicon-minus"></i>
                 </button>
                 {{#if last}}
                 <button type="button" class="btn" data-action="addRow">
-                    <i class="fa fa-plus"></i>
+                    <i class="sicon sicon-plus"></i>
                 </button>
                 {{/if}}
             </div>
@@ -148,7 +148,7 @@
         <div class="cell buttons">
             <div class="btn-toolbar pull-right">
                 <button type="button" class="btn" data-action="removeRow">
-                    <i class="fa fa-minus"></i>
+                    <i class="sicon sicon-minus"></i>
                 </button>
             </div>
         </div>

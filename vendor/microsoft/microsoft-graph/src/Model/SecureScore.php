@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class SecureScore extends Entity
 {
@@ -30,7 +28,7 @@ class SecureScore extends Entity
     * Gets the activeUserCount
     * Active user count of the given tenant.
     *
-    * @return int The activeUserCount
+    * @return int|null The activeUserCount
     */
     public function getActiveUserCount()
     {
@@ -60,7 +58,7 @@ class SecureScore extends Entity
      * Gets the averageComparativeScores
     * Average score by different scopes (for example, average by industry, average by seating) and control category (Identity, Data, Device, Apps, Infrastructure) within the scope.
      *
-     * @return array The averageComparativeScores
+     * @return array|null The averageComparativeScores
      */
     public function getAverageComparativeScores()
     {
@@ -81,7 +79,7 @@ class SecureScore extends Entity
     */
     public function setAverageComparativeScores($val)
     {
-		$this->_propDict["averageComparativeScores"] = $val;
+        $this->_propDict["averageComparativeScores"] = $val;
         return $this;
     }
     
@@ -89,7 +87,7 @@ class SecureScore extends Entity
     * Gets the azureTenantId
     * GUID string for tenant ID.
     *
-    * @return string The azureTenantId
+    * @return string|null The azureTenantId
     */
     public function getAzureTenantId()
     {
@@ -119,7 +117,7 @@ class SecureScore extends Entity
      * Gets the controlScores
     * Contains tenant scores for a set of controls.
      *
-     * @return array The controlScores
+     * @return array|null The controlScores
      */
     public function getControlScores()
     {
@@ -140,7 +138,7 @@ class SecureScore extends Entity
     */
     public function setControlScores($val)
     {
-		$this->_propDict["controlScores"] = $val;
+        $this->_propDict["controlScores"] = $val;
         return $this;
     }
     
@@ -148,12 +146,12 @@ class SecureScore extends Entity
     * Gets the createdDateTime
     * The date when the entity is created.
     *
-    * @return \DateTime The createdDateTime
+    * @return \DateTime|null The createdDateTime
     */
     public function getCreatedDateTime()
     {
         if (array_key_exists("createdDateTime", $this->_propDict)) {
-            if (is_a($this->_propDict["createdDateTime"], "\DateTime")) {
+            if (is_a($this->_propDict["createdDateTime"], "\DateTime") || is_null($this->_propDict["createdDateTime"])) {
                 return $this->_propDict["createdDateTime"];
             } else {
                 $this->_propDict["createdDateTime"] = new \DateTime($this->_propDict["createdDateTime"]);
@@ -181,7 +179,7 @@ class SecureScore extends Entity
     * Gets the currentScore
     * Tenant current attained score on specified date.
     *
-    * @return float The currentScore
+    * @return float|null The currentScore
     */
     public function getCurrentScore()
     {
@@ -202,7 +200,7 @@ class SecureScore extends Entity
     */
     public function setCurrentScore($val)
     {
-        $this->_propDict["currentScore"] = $val;
+        $this->_propDict["currentScore"] = floatval($val);
         return $this;
     }
     
@@ -210,7 +208,7 @@ class SecureScore extends Entity
     * Gets the enabledServices
     * Microsoft-provided services for the tenant (for example, Exchange online, Skype, Sharepoint).
     *
-    * @return string The enabledServices
+    * @return string|null The enabledServices
     */
     public function getEnabledServices()
     {
@@ -239,7 +237,7 @@ class SecureScore extends Entity
     * Gets the licensedUserCount
     * Licensed user count of the given tenant.
     *
-    * @return int The licensedUserCount
+    * @return int|null The licensedUserCount
     */
     public function getLicensedUserCount()
     {
@@ -268,7 +266,7 @@ class SecureScore extends Entity
     * Gets the maxScore
     * Tenant maximum possible score on specified date.
     *
-    * @return float The maxScore
+    * @return float|null The maxScore
     */
     public function getMaxScore()
     {
@@ -289,7 +287,7 @@ class SecureScore extends Entity
     */
     public function setMaxScore($val)
     {
-        $this->_propDict["maxScore"] = $val;
+        $this->_propDict["maxScore"] = floatval($val);
         return $this;
     }
     
@@ -297,12 +295,12 @@ class SecureScore extends Entity
     * Gets the vendorInformation
     * Complex type containing details about the security product/service vendor, provider, and subprovider (for example, vendor=Microsoft; provider=SecureScore). Required.
     *
-    * @return SecurityVendorInformation The vendorInformation
+    * @return SecurityVendorInformation|null The vendorInformation
     */
     public function getVendorInformation()
     {
         if (array_key_exists("vendorInformation", $this->_propDict)) {
-            if (is_a($this->_propDict["vendorInformation"], "Microsoft\Graph\Model\SecurityVendorInformation")) {
+            if (is_a($this->_propDict["vendorInformation"], "\Microsoft\Graph\Model\SecurityVendorInformation") || is_null($this->_propDict["vendorInformation"])) {
                 return $this->_propDict["vendorInformation"];
             } else {
                 $this->_propDict["vendorInformation"] = new SecurityVendorInformation($this->_propDict["vendorInformation"]);

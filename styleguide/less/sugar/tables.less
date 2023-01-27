@@ -28,7 +28,7 @@ table {
     line-height: @baseLineHeight;
     text-align: left;
     vertical-align: top;
-    border-top: @tableBorder;
+    border-top: @borderWidget;
   }
 
   th {
@@ -49,12 +49,7 @@ table {
   }
   // Account for multiple tbody instances
   tbody + tbody {
-    border-top: 2px solid @tableBorderColor;
-  }
-
-  // Nesting
-  .table {
-    background-color: @bodyBackground;
+    border-top: 2px solid @borderColor;
   }
 }
 
@@ -72,14 +67,14 @@ table {
 // ----------------
 
 .table-bordered {
-  border: @tableBorder;
+  border: @borderWidget;
   border-collapse: separate; // Done so we can round those corners!
   border-left: 0;
   border-radius: @baseBorderRadius;
 
   th,
   td {
-    border-left: @tableBorder;
+    border-left: @borderWidget;
   }
   // Prevent a double border
   caption + thead tr:first-child th,
@@ -141,19 +136,6 @@ table {
   }
 }
 
-// ZEBRA-STRIPING
-// --------------
-
-// Default zebra-stripe styles (alternating gray and transparent backgrounds)
-.table-striped {
-  tbody {
-    > tr:nth-child(odd) > td,
-    > tr:nth-child(odd) > th {
-      background-color: @tableBackgroundAccent;
-    }
-  }
-}
-
 // HOVER EFFECT
 // ------------
 // Placed here since it has to come after the potential zebra striping
@@ -161,7 +143,7 @@ table {
   tbody {
     tr:hover td,
     tr:hover th {
-      background-color: @tableBackgroundHover;
+      background-color: @tableRowHover;
     }
   }
 }

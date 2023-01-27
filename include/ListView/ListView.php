@@ -363,7 +363,7 @@ function process_dynamic_listview($source_module, $sugarbean,$subpanel_def)
             $processed_ids[$aItem->id] = 1;
 
             //ADD OFFSET TO ARRAY
-            $fields['OFFSET'] = ($offset + $count + 1);
+            $fields['OFFSET'] = is_numeric($offset) ? ($offset + $count + 1) : $offset;
 
             if ($this->shouldProcess) {
                 if ($aItem->ACLAccess('EditView')) {
@@ -1005,8 +1005,7 @@ function getUserVariable($localVarName, $varName) {
     */
     function processSugarBean($xtemplateSection, $html_varName, $seed) {
         global $list_view_row_count;
-
-        $current_offset = $this->getOffset($html_varName);
+        $current_offset = intval($this->getOffset($html_varName));
         $response = array();
 
         //ADDING VCR CONTROL
@@ -1056,7 +1055,7 @@ function getUserVariable($localVarName, $varName) {
 		}
 		$this->setSessionVariable("detailview", "record", $sugarbean->id);
 
-		$current_offset = $this->getOffset($html_var);
+        $current_offset = intval($this->getOffset($html_var));
 		$module = isset($_REQUEST['module']) ? $_REQUEST['module'] : '';
 		$response = array();
 
@@ -1501,11 +1500,9 @@ function getUserVariable($localVarName, $varName) {
                     $this->base_URL .= "?";
                 } else
                 {
-                    if ($fullRequestString == substr($this->baseURL, '-' . strlen($fullRequestString)))
-                    {
+                    if ($fullRequestString === substr($this->baseURL, -strlen($fullRequestString))) {
                         $this->base_URL = preg_replace("/&" . $key . "\=.*/", "", $this->base_URL);
-                    } else
-                    {
+                    } else {
                         $this->base_URL = preg_replace("/&" . $key . "\=.*?&/", "&", $this->base_URL);
                     }
                     $this->base_URL .= "&";

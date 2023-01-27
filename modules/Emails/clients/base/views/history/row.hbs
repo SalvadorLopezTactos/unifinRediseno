@@ -18,9 +18,9 @@
                 <img src="{{fieldValue this 'picture_url'}}" alt="{{fieldValue this 'assigned_user_name'}}">
             </a>
         {{else}}
-            <span class="fa fa-stack pull-left">
-                <i class="fa fa-user fa-stack-base"></i>
-                <i class="fa fa-question-circle fa-light"></i>
+            <span class="pull-left">
+                <i class="sicon sicon-user"></i>
+                <i class="sicon sicon-help"></i>
             </span>
         {{/if}}
         <a href="#{{buildRoute model=this action='detail'}}">

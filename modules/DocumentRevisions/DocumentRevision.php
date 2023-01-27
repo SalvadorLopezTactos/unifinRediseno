@@ -98,6 +98,13 @@ class DocumentRevision extends SugarBean {
         $filePath = "upload://{$this->id}";
         $this->file_size = file_exists($filePath) ? filesize($filePath) : 0;
 
+        // For Document Revisions that have a file uploaded to the Sugar file
+        // system and are set as external API document types, upload them to the
+        // external API
+        if (!empty($this->doc_type) && $this->doc_type !== 'Sugar' && file_exists($filePath)) {
+            $this->syncWithExternalApi();
+        }
+
 		$saveRet = parent::save($check_notify);
 
 		//update documents table. (not through save, because it causes a loop)
@@ -113,6 +120,28 @@ class DocumentRevision extends SugarBean {
 
         return $saveRet;
 	}
+
+    /**
+     * Syncs a file uploaded to Sugar's filesystem to the external API indicated
+     * by the doc_type of the DocumentRevision.
+     *
+     * The effect of this is that the file will be uploaded to the external API,
+     * and this DocumentRevision will store a link to the URL of the external
+     * resource, rather than a link to the file on the filesystem. If successful,
+     * the original file will be deleted from the filesystem.
+     */
+    protected function syncWithExternalApi()
+    {
+        $upload_file = new UploadFile('filename_file');
+        $upload_file->upload_doc(
+            $this,
+            $this->id,
+            $this->doc_type,
+            $this->filename,
+            $this->file_mime_type
+        );
+    }
+
 	function get_summary_text()
 	{
 		return "$this->filename";
@@ -148,7 +177,7 @@ class DocumentRevision extends SugarBean {
                   AND document_revisions.id = documents.document_revision_id';
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array($this->document_id));
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
 		if ($row != null) {
 			$this->document_name = $row['document_name'];
             $this->name = $this->document_name;

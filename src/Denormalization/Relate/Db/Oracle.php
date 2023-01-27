@@ -21,7 +21,7 @@ final class Oracle extends Db
         int $limit
     ): int {
         $offsetEnd = $offset + $limit + 1;
-        $tmpTableName = self::TMP_TABLE_NAME;
+        $tmpTableName = $this->getTmpTableName();
 
         $sql = "
             UPDATE $targetTableName
@@ -45,9 +45,9 @@ final class Oracle extends Db
 
     private function gatherTemporaryTableStats(): void
     {
-        $tmpTableName = self::TMP_TABLE_NAME;
-        $tmpPrimaryIndexName = self::TMP_PRIMARY_INDEX_NAME;
-        $tmpTargetIdIndexName = self::TMP_TARGET_ID_INDEX_NAME;
+        $tmpTableName = $this->getTmpTableName();
+        $tmpPrimaryIndexName = $this->getPrimaryIndexName();
+        $tmpTargetIdIndexName = $this->getTargetIdIndexName();
 
         $sql = "BEGIN
             DBMS_STATS.GATHER_TABLE_STATS(

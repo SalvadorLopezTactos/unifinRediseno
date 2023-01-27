@@ -16,38 +16,38 @@
 
 .panel_name {
 	font-weight: bold;
-	color: #000000;
-	float:left; 
+	color: var(--text-color);
+	float:left;
 	margin:5px;
 }
 #toolbox { float:left; width: 175px; padding:5px; margin:0;    border: 1px dotted black;}
-#panels { 
-	float:right; 
+#panels {
+	float:right;
 	padding:5px 10px 5px 5px;
 	margin-left:20px;
 	border: 1px dotted black;
 }
-.le_panel { 
-    background: #eee;
+.le_panel {
+    background: var(--content-background);
 }
-.le_row { 
-    background: #ddd; 
+.le_row {
+    background: var(--secondary-content-background);
 }
 
-#layoutEditor .le_panel { 
+#layoutEditor .le_panel {
 	margin: 2px 2px 10px 2px;
 	padding: 5px 15px 15px 15px;
 }
-#layoutEditor .le_row { 
-	margin: 2px 3px; 
-	height: 24px; clear: both; 
+#layoutEditor .le_row {
+	margin: 2px 3px;
+	height: 24px; clear: both;
 	padding: 5px 15px;
 }
 
-body > .le_panel .le_edit, #toolbox .le_panel .le_edit {  
-	display:none; 
+body > .le_panel .le_edit, #toolbox .le_panel .le_edit {
+	display:none;
 }
-#toolbox .le_panel, #toolbox .le_row, .le_field { width:150px; float: left; border: 1px solid grey; background: #eee; padding: 2px; margin: 2px 3px; overflow:hidden; }
+#toolbox .le_panel, #toolbox .le_row, .le_field { width:150px; float: left; border: 1px solid var(--border-color); background: var(--primary-content-background); padding: 2px; margin: 2px 3px; overflow:hidden; }
 
 #delete { width: 52px; padding-top:5px; padding-bottom:10px;}
 
@@ -70,7 +70,7 @@ body > .le_panel .le_edit, #toolbox .le_panel .le_edit {
 .portal-module-list-container {
 	width: 235px;
 	display: inline-block;
-	border: 1px solid rgb(128,128,128);
+	border: 1px solid var(--border-color);
 	margin: 2px;
 	vertical-align: top;
 }
@@ -84,7 +84,8 @@ body > .le_panel .le_edit, #toolbox .le_panel .le_edit {
 .portal-module-list-container ul li {
 	list-style: none;
 	border-style: none;
-	background-color: white;
+        background-color: var(--primary-content-background);
+        color: var(--text-color);
 	padding: 4px;
 	margin: 1px;
 }
@@ -92,13 +93,14 @@ body > .le_panel .le_edit, #toolbox .le_panel .le_edit {
 .portal-module-list-header {
 	text-align: center;
 	padding: 2px;
-	background-color: rgb(238, 238, 238);
-	border-bottom: 1px solid rgb(203,203,203);
+	background-color: var(--headerpane-background);
+	border-bottom: 1px solid var(--border-color);
 }
 
 .portal-module-list-scrolldiv {
 	height: 150px;
-	overflow: scroll;
+        overflow: scroll;
+        background-color: var(--content-background);
 }
 
 .portal-module-list-container .ui-sortable-helper {

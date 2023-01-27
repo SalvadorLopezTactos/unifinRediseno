@@ -113,7 +113,7 @@ class RelatedValueApi extends SugarApi
                             break;
                         }
 
-                        $beans = $focus->$link->getBeans(array("enforce_teams" => true));
+                        $beans = $focus->$link->getBeansForSugarLogic();
                         //No related beans means no value
                         if (empty($beans)) {
                             break;
@@ -148,7 +148,7 @@ class RelatedValueApi extends SugarApi
                 case "rollupMax":
                     //If we are going to calculate one rollup, calculate all the rollups since there is so little cost
                     if ($focus->load_relationship($link)) {
-                        $relBeans = $focus->$link->getBeans(array("enforce_teams" => true));
+                        $relBeans = $focus->$link->getBeansForSugarLogic();
                         $sum = 0;
                         $count = 0;
                         $min = false;
@@ -218,7 +218,7 @@ class RelatedValueApi extends SugarApi
 
                     if ($focus->load_relationship($link)) {
                         $condition_values = Parser::evaluate($rfDef['condition_expr'])->evaluate();
-                        $relBeans = $focus->$link->getBeans(array("enforce_teams" => true));
+                        $relBeans = $focus->$link->getBeansForSugarLogic();
 
                         foreach ($relBeans as $bean) {
                             if (in_array($bean->{$rfDef['condition_field']}, $condition_values)) {
@@ -247,7 +247,7 @@ class RelatedValueApi extends SugarApi
                             $condition_values = array($rfDef['condition_expr']);
                         }
                         $toRate = isset($focus->base_rate) ? $focus->base_rate : null;
-                        $relBeans = $focus->$link->getBeans(array("enforce_teams" => true));
+                        $relBeans = $focus->$link->getBeansForSugarLogic();
                         $sum = '0';
                         $isCurrency = null;
                         foreach ($relBeans as $bean) {
@@ -255,7 +255,7 @@ class RelatedValueApi extends SugarApi
                                 //ensure the user can access the fields we are using.
                                 ACLField::hasAccess($rField, $bean->module_dir, $GLOBALS['current_user']->id, true)
                             ) {
-                                if (in_array($bean->{$rfDef['condition_field']}, $condition_values)) {
+                                if (is_array($condition_values) && in_array($bean->{$rfDef['condition_field']}, $condition_values)) {
                                     if (is_null($isCurrency)) {
                                         $isCurrency = $this->isFieldCurrency($bean, $rField);
                                     }
@@ -301,7 +301,7 @@ class RelatedValueApi extends SugarApi
                         $td = TimeDate::getInstance();
                         $isTimestamp = true;
                         $resDate = 0;
-                        $relBeans = $focus->$link->getBeans(array("enforce_teams" => true));
+                        $relBeans = $focus->$link->getBeansForSugarLogic();
                         $valueMap = array();
                         foreach ($relBeans as $bean) {
                             // If this is a rollupConditionalMinDate, make sure the bean conditions hold

@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'プロセスレコードダッシュボード',
 
     'LBL_CAS_ID' => 'プロセス番号',
+    'LBL_CAS_STATUS' => 'プロセスステータス',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "不明（ユーザーID：&#39;％s&#39;による）",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "タスクは以下となりました",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "タスクは以下でした",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "がプロセス #%s にアサインされました。%s %s レコード、%s アクション %s によって",
     'LBL_PMSE_HISTORY_LOG_ON'  => "日付",
     'LBL_PMSE_HISTORY_LOG_AND'  => "および",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'レコードをリンクまたはリンク解除',
 
     'LBL_PMSE_LABEL_APPROVE' => '承認',
     'LBL_PMSE_LABEL_REJECT' => '却下',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'プロセス進行中',
     'LBL_STATUS_CANCELLED' => 'プロセスキャンセル',
     'LBL_STATUS_ERROR' => 'プロセスエラー',
+    'LBL_STATUS_COMPLETED_ENUM' => '完了',
+    'LBL_STATUS_TERMINATED_ENUM' => '終了',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => '進行中',
+    'LBL_STATUS_CANCELLED_ENUM' => 'キャンセル済み',
+    'LBL_STATUS_ERROR_ENUM' => 'エラー',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'プロセス管理',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => '無人のプロセス',

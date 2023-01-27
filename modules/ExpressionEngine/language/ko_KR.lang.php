@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => '표현 엔진',
-  'LBL_MODULE_NAME_SINGULAR' => '표현 엔진',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => '이전' /*for 508 compliance fix*/,
-	'LBL_NEXT' => '다음' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => '확장' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => '표현 엔진',
+    'LBL_MODULE_NAME_SINGULAR' => '표현 엔진',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => '이전' /*for 508 compliance fix*/,
+    'LBL_NEXT' => '다음' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => '확장' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => '알 수 없는 필드',
+];

@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Usuaris',
     'LBL_EMAILS_PRODUCTS_REL' => 'Elements de línia pressupostats',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Elements de línia d&#39;ingressos',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Escalades',
     'LBL_EMAILS_MESSAGES_REL' => 'Missatges',
     'LBL_EMAILS_PURCHASES_REL' => 'Compres',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Elements de línia comprats',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Enviar correu',
     'LBL_MAILBOX' => 'Compte d&#39;entrada',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Configureu un compte de correu electrònic sortint mitjançant la <a href="#OutboundEmail">Configuració de correu electrònic</a> per enviar correus electrònics.',
 );

@@ -61,6 +61,11 @@ $stub = <<<'STUB'
 <?php
 Phar::mapPhar();
 set_include_path('phar://' . __FILE__ . PATH_SEPARATOR . get_include_path());
+$basePath = 'phar://' . __FILE__ . '/';
+require $basePath . 'vendor/autoload.php';
+require $basePath . 'scanner/convert.php';
+require $basePath . 'converter/Lexer.php';
+require $basePath . 'converter/Service.php';
 require_once "ShadowUpgrader.php"; $upgrader = new ShadowUpgrader(); $upgrader->start(); __HALT_COMPILER();
 STUB;
 $phar->setStub($stub);

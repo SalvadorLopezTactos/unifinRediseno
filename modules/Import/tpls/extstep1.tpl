@@ -17,18 +17,18 @@
 <form enctype="multipart/form-data" real_id="extstep1" id="extstep1" name="extstep1" method="POST" action="index.php">
 {sugar_csrf_form_token}
 <input type="hidden" name="module" value="Import">
-<input type="hidden" name="import_type" value="{$TYPE}">
-<input type="hidden" name="external_source" value="{$smarty.request.external_source}">
+<input type="hidden" name="import_type" value="{$TYPE|escape:'html':'UTF-8'}">
+<input type="hidden" name="external_source" value="{$smarty.request.external_source|escape:'html':'UTF-8'}">
 <input type="hidden" name="action" value="ExtStep1">
-<input type="hidden" name="records_per_import" value="{$RECORDTHRESHOLD}">
-<input type="hidden" name="import_module" value="{$IMPORT_MODULE}">
-<input type="hidden" name="current_step" value="{$CURRENT_STEP}">
-<input type="hidden" name="columncount" value ="{$COLUMNCOUNT}">
-<input type="hidden" name="enabled_dup_fields" value ="{$ENABLED_DUP_FIELDS}">
+<input type="hidden" name="records_per_import" value="{$RECORDTHRESHOLD|escape:'html':'UTF-8'}">
+<input type="hidden" name="import_module" value="{$IMPORT_MODULE|escape:'html':'UTF-8'}">
+<input type="hidden" name="current_step" value="{$CURRENT_STEP|escape:'html':'UTF-8'}">
+<input type="hidden" name="columncount" value ="{$COLUMNCOUNT|escape:'html':'UTF-8'}">
+<input type="hidden" name="enabled_dup_fields" value ="{$ENABLED_DUP_FIELDS|escape:'html':'UTF-8'}">
 <input type="hidden" name="offset" value="0">
 <input type="hidden" name="to_pdf" value="1">
 <input type="hidden" name="has_header" value="off">
-<input type="hidden" name="from_admin_wizard" value="{$smarty.request.from_admin_wizard}">
+<input type="hidden" name="from_admin_wizard" value="{$smarty.request.from_admin_wizard|escape:'html':'UTF-8'}">
 
 <p>
     {$MOD.LBL_EXTERNAL_MAP_HELP}
@@ -41,18 +41,18 @@
 {if $MOD.LBL_EXTERNAL_MAP_NOTE != ''}
     <p>
         <input title="{$MOD.LBL_SHOW_ADVANCED_OPTIONS}"  id="toggleNotes" class="button" type="button"
-                       name="button" value="  {$MOD.LBL_SHOW_NOTES}  ">
+                       name="button" value="  {$MOD.LBL_SHOW_NOTES|escape:'html':'UTF-8'}  ">
         <div id="importNotes" style="display: none;">
             <ul>
-                <li>{$MOD.LBL_EXTERNAL_MAP_NOTE}</li>
-                <li>{$MOD.LBL_EXTERNAL_MAP_NOTE_SUB}</li>
+                <li>{$MOD.LBL_EXTERNAL_MAP_NOTE|escape:'html':'UTF-8'}</li>
+                <li>{$MOD.LBL_EXTERNAL_MAP_NOTE_SUB|escape:'html':'UTF-8'}</li>
             </ul>
         </div>
     </p>
 {/if}    
     
 <div align="right">
-    <span class="required" align="right">{$APP.LBL_REQUIRED_SYMBOL}</span> {$APP.NTC_REQUIRED}
+    <span class="required" align="right">{$APP.LBL_REQUIRED_SYMBOL|escape:'html':'UTF-8'}</span> {$APP.NTC_REQUIRED|escape:'html':'UTF-8'}
 </div>
 
 <table border="0" cellpadding="0" width="100%" id="importTable" class="detail view">
@@ -60,15 +60,15 @@
 {if $smarty.foreach.rows.first}
 <tr>
     <td style="text-align: left;" scope="col">
-        <b>{$MOD.LBL_EXTERNAL_FIELD}</b>&nbsp;
+        <b>{$MOD.LBL_EXTERNAL_FIELD|escape:'html':'UTF-8'}</b>&nbsp;
         {sugar_help text=$MOD.LBL_EXTERNAL_FIELD_TOOLTIP}
     </td>
     <td style="text-align: left;" scope="col">
-        <b>{$MOD.LBL_DATABASE_FIELD}</b>&nbsp;
+        <b>{$MOD.LBL_DATABASE_FIELD|escape:'html':'UTF-8'}</b>&nbsp;
         {sugar_help text=$MOD.LBL_DATABASE_FIELD_HELP}
     </td>
     <td style="text-align: left;" scope="col" id="default_column_header" width="10%">
-        <span id="hide_default_link" class="expand">&nbsp;<b id="">{$MOD.LBL_DEFAULT_VALUE}</b>&nbsp;
+        <span id="hide_default_link" class="expand">&nbsp;<b id="">{$MOD.LBL_DEFAULT_VALUE|escape:'html':'UTF-8'}</b>&nbsp;
         {sugar_help text=$MOD.LBL_EXTERNAL_DEFAULT_TOOPLTIP}</span>
         <span id="default_column_header_span">&nbsp;</span>
     </td>
@@ -81,22 +81,22 @@
         {/if}
     </td>
 
-    <td valign="top" align="left" id="row_{$smarty.foreach.rows.index}_col_0">
-        <select class='fixedwidth' name="colnum_{$smarty.foreach.rows.index}" id="colnum_{$smarty.foreach.rows.index}" >
+    <td valign="top" align="left" id="row_{$smarty.foreach.rows.index|escape:'html':'UTF-8'}_col_0">
+        <select class='fixedwidth' name="colnum_{$smarty.foreach.rows.index|escape:'html':'UTF-8'}" id="colnum_{$smarty.foreach.rows.index|escape:'html':'UTF-8'}" >
             <option value="-1">{$MOD.LBL_DONT_MAP}</option>
-            {$item.field_choices}
+            {$item.field_choices|escape:'html':'UTF-8'}
         </select>
-        <input type="hidden" name="extkey_{$smarty.foreach.rows.index}" value="{$item.ext_key}">
+        <input type="hidden" name="extkey_{$smarty.foreach.rows.index|escape:'html':'UTF-8'}" value="{$item.ext_key|escape:'html':'UTF-8'}">
     </td>
-    <td id="defaultvaluepicker_{$smarty.foreach.rows.index}" nowrap="nowrap">
-        {$item.default_field}
+    <td id="defaultvaluepicker_{$smarty.foreach.rows.index|escape:'html':'UTF-8'}" nowrap="nowrap">
+        {$item.default_field|escape:'html':'UTF-8'}
     </td>
 </tr>
 {/foreach}
     <tr>
     <td align="left" colspan="4" style="display: none;">
-        <input title="{$MOD.LBL_ADD_ROW}"  id="addrow" class="button" type="button"
-            name="button" value="  {$MOD.LBL_ADD_ROW}  ">
+        <input title="{$MOD.LBL_ADD_ROW|escape:'html':'UTF-8'}"  id="addrow" class="button" type="button"
+            name="button" value="  {$MOD.LBL_ADD_ROW|escape:'html':'UTF-8'}  ">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </td>
 </tr>
@@ -104,13 +104,13 @@
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
 <tr>
     <td align="left">
-        <input title="{$MOD.LBL_BACK}"  id="goback" class="button" type="submit" name="button" value="  {$MOD.LBL_BACK}  ">&nbsp;
-        <input title="{$MOD.LBL_IMPORT_NOW}"  id="importnow" class="button" type="button" name="button" value="  {$MOD.LBL_IMPORT_NOW}  ">
+        <input title="{$MOD.LBL_BACK|escape:'html':'UTF-8'}"  id="goback" class="button" type="submit" name="button" value="  {$MOD.LBL_BACK|escape:'html':'UTF-8'}  ">&nbsp;
+        <input title="{$MOD.LBL_IMPORT_NOW|escape:'html':'UTF-8'}"  id="importnow" class="button" type="button" name="button" value="  {$MOD.LBL_IMPORT_NOW|escape:'html':'UTF-8'}  ">
     </td>
 </tr>
 </table>
 </form>
-{literal}
+
 <script type="text/javascript">
 /**
  * Singleton to handle processing the import
@@ -130,7 +130,7 @@ ProcessESImport = new function()
     /*
      * maximum number of records per file
      */
-    this.recordsPerImport   = {/literal}{$RECORDTHRESHOLD}{literal};
+    this.recordsPerImport   = {$RECORDTHRESHOLD|escape:javascript};
 
     /*
      * submits the form
@@ -167,14 +167,14 @@ ProcessESImport = new function()
                     ProcessESImport.totalRecordCount = resp['totalRecordCount'];
                     var locationStr = "index.php?module=Import&action=Last"
                         + "&current_step=" + document.getElementById("extstep1").current_step.value
-                        + "&type={/literal}{$TYPE}{literal}"
-                        + "&import_module={/literal}{$IMPORT_MODULE}{literal}"
+                        + "&type={$TYPE|escape:url}"
+                        + "&import_module={$IMPORT_MODULE|escape:url}"
                         + "&has_header=" +  document.getElementById("extstep1").has_header.value ;
 
                     //Determine if we are not or not.
                     if ( resp['done'] || (ProcessESImport.recordsPerImport * (ProcessESImport.offsetStart + 1) >= ProcessESImport.totalRecordCount) )
                     {
-                        YAHOO.SUGAR.MessageBox.updateProgress(1,'{/literal}{$MOD.LBL_IMPORT_COMPLETED}{literal}');
+                        YAHOO.SUGAR.MessageBox.updateProgress(1,'{$MOD.LBL_IMPORT_COMPLETED|escape:javascript}');
                         SUGAR.util.hrefURL(locationStr);
                     }
                     else
@@ -195,11 +195,11 @@ ProcessESImport = new function()
         }
 
         if(this.totalRecordCount == 0 )
-            displayMessg = "{/literal}{$MOD.LBL_IMPORT_RECORDS}{literal} ";
+            displayMessg = "{$MOD.LBL_IMPORT_RECORDS|escape:javascript} ";
         else
-            displayMessg = "{/literal}{$MOD.LBL_IMPORT_RECORDS}{literal} " + ((this.offsetStart * this.recordsPerImport) + 1)
-                            + " {/literal}{$MOD.LBL_IMPORT_RECORDS_TO}{literal} " + Math.min(((this.offsetStart+1) * this.recordsPerImport),this.totalRecordCount)
-                            + " {/literal}{$MOD.LBL_IMPORT_RECORDS_OF}{literal} " + this.totalRecordCount;
+            displayMessg = "{$MOD.LBL_IMPORT_RECORDS|escape:javascript} " + ((this.offsetStart * this.recordsPerImport) + 1)
+                            + " {$MOD.LBL_IMPORT_RECORDS_TO|escape:javascript} " + Math.min(((this.offsetStart+1) * this.recordsPerImport),this.totalRecordCount)
+                            + " {$MOD.LBL_IMPORT_RECORDS_OF|escape:javascript} " + this.totalRecordCount;
 
         YAHOO.SUGAR.MessageBox.updateProgress( move,displayMessg);
     }
@@ -209,7 +209,7 @@ ProcessESImport = new function()
         YAHOO.SUGAR.MessageBox.minWidth = 500;
         YAHOO.SUGAR.MessageBox.show({
             type:  "alert",
-            title: '{/literal}{$MOD.LBL_IMPORT_ERROR}{literal}',
+            title: '{$MOD.LBL_IMPORT_ERROR|escape:javascript}',
             msg:   errorMessage,
             fn: function() { }
         });
@@ -219,10 +219,10 @@ ProcessESImport = new function()
      */
     this.begin = function()
     {
-        datestarted = '{/literal}{$MOD.LBL_IMPORT_STARTED}{literal} ' +
-                YAHOO.util.Date.format('{/literal}{$datetimeformat}{literal}');
+        datestarted = '{$MOD.LBL_IMPORT_STARTED|escape:javascript} ' +
+                YAHOO.util.Date.format('{$datetimeformat}');
         YAHOO.SUGAR.MessageBox.show({
-            title: '{/literal}{$STEP4_TITLE}{literal}',
+            title: '{$STEP4_TITLE|escape:javascript}',
             msg: datestarted,
             width: 500,
             type: "progress",
@@ -258,4 +258,3 @@ document.getElementById('importnow').onclick = function(){
 }
 
 </script>
-{/literal}

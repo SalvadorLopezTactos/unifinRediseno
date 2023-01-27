@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Revenue Line Items',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Pirkimai',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Pirkimo eilutės prekės',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Dokumentų įrašų ataskaitų sritis',
+    'LBL_MY_DOCUMENTS' => 'Mano dokumentai',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Siųsti į „DocuSign“',
 );

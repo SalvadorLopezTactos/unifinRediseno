@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => '連絡先 Id',
     'LBL_DESCRIPTION_INFORMATION' => '詳細情報',
     'LBL_DESCRIPTION' => '詳細:',
+    'LBL_INTERNAL_NOTES' => '内部メモ：',
     'LBL_STATUS' => 'ステータス:',
     'LBL_DIRECTION' => '受信/送信',
     'LBL_DATE' => '開始日:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => '時間は0以上である必要があります。',
     'LBL_CALL_INFORMATION' => '電話の概要',
     'LBL_REMOVE' => '削除',
-    'LBL_ACCEPT_STATUS' => '出欠確認',
     'LBL_ACCEPT_LINK' => '承認リンク',
     //For export labels
     'LBL_PARENT_ID' => '親ID',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => '電話:',
     'LBL_CALL_RECORDING_URL' => 'レコーディング URL',
     'LBL_CALL_RECORDING' => 'レコーディング',
+
+    'LBL_LEAD_ID' => 'リードID',
+    'LBL_LEAD_NAME' => 'リード',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'スケジュールしました{{moduleSingularLower}} {{name}} for {{formatDate date_start}}.',

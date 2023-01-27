@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => '续订营收单项 ID',
     'LBL_PARENT_RLIS' => '父级营收单项',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => '父级营收单项',
+    'LBL_FORECASTED_LIKELY' => '预测可能性',
     'LBL_EXPERT_ID' => '产品专家',
     'LBL_FORECAST' => '预测包括',
     'LBL_SUBTOTAL' => '小计',

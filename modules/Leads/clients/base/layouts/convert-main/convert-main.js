@@ -74,12 +74,19 @@
             convertModuleList = [];
 
         _.each(modulesMetadata, function(moduleMeta) {
-            var moduleSingular = this.getModuleSingular(moduleMeta.module);
-            convertModuleList.push({
+            let moduleSingular = this.getModuleSingular(moduleMeta.module);
+            let moduleDetails = {
                 id: moduleMeta.module,
                 text: moduleSingular,
                 required: moduleMeta.required
+            };
+
+            moduleDetails = Object.assign(moduleDetails, {
+                enableRlis: moduleMeta.enableRlis,
+                requireRlis: moduleMeta.requireRlis,
             });
+
+            convertModuleList.push(moduleDetails);
         }, this);
 
         this.context.set('convertModuleList', convertModuleList);
@@ -268,19 +275,24 @@
      * When save button is clicked, call the Lead Convert API
      */
     handleSave: function() {
-        var convertModel, myURL;
-
-        //disable the save button to prevent double click
+        // Disable the save button to prevent double click
         this.context.trigger('lead:convert-save:toggle', false);
 
         app.alert.show('processing_convert', {level: 'process', title: app.lang.get('LBL_SAVING')});
 
-        convertModel = new Backbone.Model(_.extend(
+        // Before building the convert model, make sure that if any of the module panels have create subpanels,
+        // their subpanel models are added to the save correctly
+        _.each(this.convertPanels, function(panel, module) {
+            if (panel.createView) {
+                panel.createView.addSubpanelCreateModels();
+            }
+        }, this);
+
+        // Build the convert model that will be sent into the convert API
+        let convertModel = new Backbone.Model(_.extend(
             {'modules' : this.parseEditableFields(this.associatedModels)},
             this.getTransferActivitiesAttributes()
         ));
-
-        myURL = app.api.buildURL('Leads', 'convert', {id: this.context.get('leadsModel').id});
 
         // Set field_duplicateBeanId for fields implementing FieldDuplicate
         _.each(this.convertPanels, function(view, module) {
@@ -289,6 +301,8 @@
             }
         }, this);
 
+        // Call the convert API with the convert model
+        let myURL = app.api.buildURL('Leads', 'convert', {id: this.context.get('leadsModel').id});
         app.api.call('create', myURL, convertModel, {
             success: _.bind(this.convertSuccess, this),
             error: _.bind(this.convertError, this)
@@ -364,8 +378,10 @@
             if (this.fromPipeline) {
                 app.drawer.close(level === 'success');
             } else {
-                app.drawer.close();
-                app.router.record('Leads', leadsModel.id);
+                app.drawer.close(level === 'success');
+                if (this.context.get('doRedirect') !== false) {
+                    app.router.record('Leads', leadsModel.id);
+                }
             }
         }
     },

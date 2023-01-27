@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Referido por',
     'LBL_LIST_STATUS' => 'Estado',
     'LBL_LIST_TITLE' => 'Cargo',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Predicción del interés del mercado',
+    'LBL_MARKET_SCORE' => 'Puntaje del mercado',
     'LBL_MOBILE_PHONE' => 'Móvil:',
     'LBL_MODULE_NAME' => 'Clientes potenciales',
     'LBL_MODULE_NAME_SINGULAR' => 'Cliente Potencial',
@@ -330,4 +332,9 @@ Tras confirmar cada módulo necesario y deseado, haga clic en el botón Guardar 
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Predicción de Conversión de Clientes Potenciales',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Ver detalles de predicción para un cliente potencial específico',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Crear una Partida Individual de Ingresos',
+    'LBL_REQUIRE_RLIS' => 'Requerir Partidas Individuales de Ingresos al crear una nueva Oportunidad',
+    'LBL_COPY_DATA_RLIS' => 'Copiar datos de Cliente Potencial en las Partidas Individuales de Ingresos al crear una nueva Oportunidad',
 );

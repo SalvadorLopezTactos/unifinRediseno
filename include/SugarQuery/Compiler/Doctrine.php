@@ -74,7 +74,7 @@ class SugarQuery_Compiler_Doctrine
                 }
             }
 
-            $sql .= $this->compileSubQuery($builder, $union['query']);
+            $sql .= '(' . $this->compileSubQuery($builder, $union['query']) . ')';
         }
 
         $hasLimit = $query->limit !== null || $query->offset !== null;
@@ -172,7 +172,7 @@ class SugarQuery_Compiler_Doctrine
             $columns[] = 'COUNT(0) AS record_count';
         }
 
-        $builder->select($columns);
+        $builder->select(...$columns);
     }
 
     /**
@@ -365,9 +365,10 @@ class SugarQuery_Compiler_Doctrine
         }
 
         if ($where) {
-            $builder->where(
-                $this->compileExpression($builder, $where)
-            );
+            $whereExpression = $this->compileExpression($builder, $where);
+            if ($whereExpression) {
+                $builder->where($whereExpression);
+            }
         }
     }
 
@@ -553,7 +554,7 @@ class SugarQuery_Compiler_Doctrine
             return current($expressions);
         }
 
-        $method = strtolower($expression->operator()) . 'X';
+        $method = strtolower($expression->operator());
         return call_user_func_array(array($builder->expr(), $method), $expressions);
     }
 
@@ -654,13 +655,26 @@ class SugarQuery_Compiler_Doctrine
      */
     protected function compileIn(QueryBuilder $builder, $field, $operator, $set, array $fieldDef)
     {
-        $sql = $field . ' ' . $operator . ' (' . $this->compileSet($builder, $set, $fieldDef) . ')';
-
         $isNegative = strpos($operator, 'NOT') !== false;
+        $isOracle = $this->db instanceof OracleManager;
+        if ($set instanceof \Traversable) {
+            $set = iterator_to_array($set);
+        }
+        if ($isOracle && is_array($set) && count($set) > OracleManager::MAX_EXPRESSION_LIST_SIZE) {
+            // split 1000+ long list of values to workaround Oracle limitations, see ORA-01795
+            $chunks = array_chunk($set, OracleManager::MAX_EXPRESSION_LIST_SIZE);
+            $sqlParts = [];
+            foreach ($chunks as $chunk) {
+                $sqlParts[] = $field . ' ' . $operator . ' (' . $this->compileSet($builder, $chunk, $fieldDef) . ')';
+            }
+            $concatOperator = $isNegative ? ' AND ' : ' OR ';
+            $sql = implode($concatOperator, $sqlParts);
+        } else {
+            $sql = $field . ' ' . $operator . ' (' . $this->compileSet($builder, $set, $fieldDef) . ')';
+        }
         if ($isNegative) {
             $sql = $this->isNullOr($field, $sql);
         }
-
         return $sql;
     }
 

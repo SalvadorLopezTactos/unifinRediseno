@@ -15,9 +15,6 @@
 <script type="text/javascript">
 <!--
 /* initialize the popup request from the parent */
-{literal}
-
-{/literal}
 -->
 </script>
 <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view">

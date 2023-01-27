@@ -302,6 +302,10 @@
     _render: function () {
         this._super("_render");
 
+        if($('[data-fieldname="accounts_tct_pld"] > span').length >0){
+            $('[data-fieldname="accounts_tct_pld"] > span').show();
+        }
+
         var selfPLD = this;
         this.$("div.record-label[data-name='accounts_tct_pld']").attr('style', 'display:none;');
         this.$('div[data-name=tct_nuevo_pld_c]').parent().attr('style', 'display:none;'); //Oculta campo tct_nuevo_pld_c

@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'תיאור',
     'LBL_OW_TYPE'=>'סוג',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'תחזית הצוות עבור <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'דוח ישיר',
     'LBL_FDR_OPPORTUNITIES'=>'בזדמנויות בתחזית:',
     'LBL_FDR_WEIGH'=>'סכום משוקלל של התחזיות:',
     'LBL_FDR_COMMIT'=>'סכום מחויב',
     'LBL_FDR_DATE_COMMIT'=>'תאריך התחייבות',
+    'LBL_FDR_FORECAST_HEADER' => 'תחזית המוכר עבור <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'תחזיות:גיליון עבודה',
     'LBL_DV_MY_FORECASTS' => 'התחזיות שלי',
-    'LBL_DV_MY_TEAM' => "התחזיות של הצוות שלי" ,
+    'LBL_DV_MY_TEAM' => "התחזיות של הצוות שלי",
     'LBL_DV_TIMEPERIODS' => 'משכי זמן:',
     'LBL_DV_FORECAST_PERIOD' => 'משך זמן לתחזית',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'הזדמנויות לתחזית',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'שער בסיס',
 
     'LBL_QUOTA' => 'הצעת מחיר',
-    'LBL_QUOTA_ADJUSTED' => 'הצעת מחיר (מותאמת)',
+    'LBL_QUOTA_ADJUSTED' => 'מיכסה מותאמת',
 
     'LBL_FORECAST_FOR'=>'גיליון עבודה תחזית עבור:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(כלפי מעלה)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'מכסה מול מחויבים מול מעשי',
 
     'LBL_FORECAST' => 'תחזית',
+    'LBL_COMMITMENT' => 'התחייבות',
+    'LBL_TEAM_COMMITMENT' => 'התחייבות צוות',
+    'LBL_FORECASTED' => 'נראה בתחזיות',
+    'LBL_ADJUSTED_TOTAL' => 'סכום כולל מותאם',
     'LBL_COMMIT_STAGE' => 'שלב חיוב',
     'LBL_SALES_STAGE' => 'שלב',
     'LBL_AMOUNT' => 'סכום',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, and {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'בסבירות גבוהה {{{direction}}} {{{from}}} ל- {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'עדיף {{{direction}}} {{{from}}} ל- {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'הכי גרוע {{{direction}}} {{{from}}} ל- {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'סביר להניח שנשאר אותו הדבר',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'הכי טוב להשאיר כך',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'הכי גרוע להשאיר כך',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'התחייבות (סביר) {{{direction}}} {{{from}}} ל-{{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'התחייבות (הכי טוב) {{{direction}}} {{{from}}} ל-{{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'התחייבות (הכי גרוע) {{{direction}}} {{{from}}} ל-{{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'התחייבות (סביר) נשארה אותו דבר',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'התחייבות (הכי טוב) נשארה אותו דבר',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'התחייבות (הכי גרוע) נשארה אותו דבר',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'חודש זה ב {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'סך הכל מוצג',
     'LBL_TOTAL' => 'סך הכל',
     'LBL_OVERALL_TOTAL' => 'סך הכל כללי',
-    'LBL_EDITABLE_INVALID' => 'ערך שגוי עבור {0}',
+    'LBL_EDITABLE_INVALID' => 'ערך שגוי עבור {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'על הערך להיות בין {0} ל {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'יש שינויים שלא שמרת בגליון העבודה',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'רק נתונים שנשמרו או שחויבו ייוצאו. לא ניתן לבטל. אשר ייצור נתונים שנשמרו',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'כלול',
     'LBL_CHART_NOT_INCLUDED' => 'לא כלול',
     'LBL_CHART_ADJUSTED' => '(התאם)',
-    'LBL_SAVE_DRAFT' => 'שמור טויוטה',
+    'LBL_SAVE_DRAFT' => 'שמירה',
     'LBL_CHANGES_BY' => 'שינויים על ידי  {0}',
     'LBL_FORECAST_SETTINGS' => 'הגדרות',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'תאריך תחילת שנת כספים',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'הגדר את תקופת הזמן שתבוא לשימוש במודול תחזיות.<br><br>אנא שים לב כי לא ניתן לשנות את ההגדרות של תקופת זמן לאחר ההגדרה הראשונית.<br><br>התחל בבחירת תאריך ההתחלה של שנת הכספים שלך. לאחר מכן, בחר את סוג תקופת הזמן עבור התחזית. טווח התאריכים עבור תקופות הזמן יחושב אוטומטית לפי הבחירות שלך. תקופת זמן המשנה היא הבסיס לגיליון התחזית.<br><br>תקופות הזמן העתידיות והקודמות שניתן לצפות בהן יקבעו את מספר תקופות-המשנה הגלויות במודול תחזיות. המשתמשים יכולים להציג ולערוך מספרי תחזיות בתקופות-המשנה הגלויות.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'הגדר כיצד לסווג את {{forecastByModule}}. <br><br>קח בחשבון שלא ניתן לשנות את הגדרות הטווח לאחר ההתחייבות הראשונה. עבור מופעים משודרגים, הגדרת הטווח נעולה עם נתוני התחזית הקיימים.<br><br>באפשרותך לבחור שתי קטגוריות או יותר על סמך טווחי ההסתברות או ליצור קטגוריות שאינן מבוססות על הסתברות. <br><br>לצד הקטגוריות שהתאמת אישית, יש תיבות סימון; השתמש בהן כדי לקבוע אילו טווחים ייכללו בסכום התחזית שעליו התחייבת ושדווח למנהלים. <br><br>המשתמשים יוכלו לשנות את הסטטוס &#39;כלול/אל תכלול&#39; ואת הקטגוריה של {{forecastByModule}} באופן ידני מגיליון העבודה שלהם.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'הגדר כיצד לסווג את {{forecastByModule}}. <br><br>קח בחשבון שלא ניתן לשנות את הגדרות הטווח לאחר ההתחייבות הראשונה. עבור מופעים משודרגים, הגדרת הטווח נעולה על נתוני התחזית הקיימים.<br><br>באפשרותך לבחור שתי קטגוריות או יותר על סמך טווחי ההסתברות או ליצור קטגוריות שאינן מבוססות על הסתברות. <br><br>לצד הקטגוריות שהתאמת אישית, יש תיבות סימון; השתמש בהן כדי לקבוע אילו טווחים ייכללו בסכום התחזית שעליו התחייבת ושדווח למנהלים. <br><br>המשתמשים יוכלו לשנות את הסטטוס &#39;כלול/אל תכלול&#39; ואת הקטגוריה של {{forecastByModule}} באופן ידני מגיליון העבודה שלהם.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'בחר את העמודות שתרצה שהמשתמש ימלא עבור התחזיות שלו לכל {{forecastByModuleSingular}}. אנא שים לב שהסכום הצפוי קשור לסכום שמופיע ב{{forecastByModule}}; מסיבה זו, לא ניתן להסתיר עמודה זו.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'בחר אילו עמודות תרצה להציג במודול התחזיות. רשימת השדות תשלב את גיליון העבודה ותאפשר למשתמש לבחור כיצד להגדיר את התצוגה שלו.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'אני מציין מקום עבור תחזית על ידי תוכן how-to',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'יש עודף של',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'אין נתונים',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'הצעת מחיר לפגישה',
+    'LBL_OPEN_LIKELY' => 'פתח את &#39;סביר&#39;',
+    'LBL_OPEN_BEST' => 'פתח את &#39;הכי טוב&#39;',
+    'LBL_OPEN_WORST' => 'פתח את &#39;הכי גרוע&#39;',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'הקצה הצעת מחיר',
     'LBL_ASSIGNING_QUOTA' => 'מקצה הצעת מחיר',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "התחזית של הצוות שלי",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'יש נתונים שלא נשמרו. אתה בטוח שאתה רוצה למיין ולאבד נתונים?',
+
+    'LBL_SAVE_TOOLTIP' => 'שמירת שינויים שבוצעו בשורות גליון העבודה',
+    'LBL_COMMIT_TOOLTIP_REP' => 'שמירת שינויים שבוצעו ברשומות ושליחת התחזית למנהל',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'שלח את התחזית למנהל והקצה מיכסה',
+
+    'LBL_SAVE_LABEL_REP' => 'שמירה ',
+    'LBL_SAVE_LABEL_MGR' => 'שמירת ערכים מותאמים',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'המודול {{plural_module_name}} כולל רישומי {{forecastby_singular_module}} לבניית {{forecastworksheets_module}} ומנבא מכירות. משתמשים יכולים לעבוד על מכירות {{quotas_module}} ברמת המשתמש, הצוות וברמת ארגון המכירות. לפני שמשתמשים יוכלו לגשת אל המודול {{plural_module_name}}, מנהל מערכת חייב לבחור את תקופות הזמן, הטווחים והתרחישים הרצויים של הארגון,

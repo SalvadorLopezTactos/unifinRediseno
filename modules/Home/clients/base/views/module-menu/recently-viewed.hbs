@@ -11,12 +11,21 @@
  */
 --}}
 {{#each collection.models}}
-    <li><a class="ellipsis_inline" tabindex="-1"
-           href="#{{buildRoute model=this}}"
-           data-route="#{{buildRoute model=this}}"
-           title="{{fieldValue this 'name'}}"><i
-            class="fa fa-clock-o active"></i>{{!FIXME this should be improved by SC-2622}}{{#if attributes.name}}{{fieldValue this 'name'}}{{else}}{{getModuleName attributes._module}}{{/if}}
-    </a></li>
+    <li class="megamenu-dropdown-item-container">
+        <a class="ellipsis_inline megamenu-dropdown-item" tabindex="-1" href="#{{buildRoute model=this}}"
+           data-route="#{{buildRoute model=this}}" title="{{fieldValue this 'name'}}"
+         >
+            <i class="sicon sicon-clock active"></i>
+            {{!FIXME this should be improved by SC-2622}}
+            <span class="text-overflow">
+                {{#if attributes.name}}
+                    {{fieldValue this 'name'}}
+                {{else}}
+                    {{getModuleName attributes._module}}
+                {{/if}}
+            </span>
+        </a>
+    </li>
 {{/each}}
 {{#if showRecentToggle}}
     <li><a href="javascript:void(0);" class="btn-link btn-invisible toggle-recents" data-toggle="recently-viewed" tabindex="-1">

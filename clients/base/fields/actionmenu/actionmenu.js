@@ -122,6 +122,8 @@
         }
         var isChecked = $checkbox.is(':checked');
         this.toggleAll(isChecked);
+
+        this.toggleCheckAllCheckboxTooltip($checkbox, isChecked);
     },
 
     /**
@@ -176,6 +178,7 @@
         this.massCollection.on('all:checked', function() {
             if (this.collection.length !== 0) {
                 this.$(this.fieldTag).prop('checked', true);
+                this.toggleCheckAllCheckboxTooltip($(this.fieldTag), true);
             }
         }, this);
 
@@ -183,6 +186,7 @@
         // each row are NOT all checked.
         this.massCollection.on('not:all:checked', function() {
             this.$(this.fieldTag).prop('checked', false);
+            this.toggleCheckAllCheckboxTooltip($(this.fieldTag), false);
         }, this);
 
         this.massCollection.on('add', this._onMassCollectionAddAll, this);
@@ -338,6 +342,29 @@
             return;
         }
         return this._super('_getChildFieldsMeta');
+    },
+
+    /**
+     * Update the tooltip on the check all checkbox depending on it's checked state
+     *
+     * @param $checkbox
+     * @param isChecked
+     */
+    toggleCheckAllCheckboxTooltip: function($checkbox, isChecked) {
+        if (this.def.is_list_pagination) {
+            let $parent = $checkbox.parent();
+
+            let attrName = $parent.attr('title') ? 'title' :
+                $parent.attr('data-original-title') ? 'data-original-title' :
+                    '';
+
+            if (attrName) {
+                $parent.attr(
+                    attrName,
+                    app.lang.get(isChecked ? 'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' : 'LBL_LISTVIEW_SELECT_ALL_ON_PAGE')
+                );
+            }
+        }
     },
 
     /**

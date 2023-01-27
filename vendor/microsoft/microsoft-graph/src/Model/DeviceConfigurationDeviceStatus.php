@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,18 +18,50 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class DeviceConfigurationDeviceStatus extends Entity
 {
     /**
+    * Gets the complianceGracePeriodExpirationDateTime
+    * The DateTime when device compliance grace period expires
+    *
+    * @return \DateTime|null The complianceGracePeriodExpirationDateTime
+    */
+    public function getComplianceGracePeriodExpirationDateTime()
+    {
+        if (array_key_exists("complianceGracePeriodExpirationDateTime", $this->_propDict)) {
+            if (is_a($this->_propDict["complianceGracePeriodExpirationDateTime"], "\DateTime") || is_null($this->_propDict["complianceGracePeriodExpirationDateTime"])) {
+                return $this->_propDict["complianceGracePeriodExpirationDateTime"];
+            } else {
+                $this->_propDict["complianceGracePeriodExpirationDateTime"] = new \DateTime($this->_propDict["complianceGracePeriodExpirationDateTime"]);
+                return $this->_propDict["complianceGracePeriodExpirationDateTime"];
+            }
+        }
+        return null;
+    }
+    
+    /**
+    * Sets the complianceGracePeriodExpirationDateTime
+    * The DateTime when device compliance grace period expires
+    *
+    * @param \DateTime $val The complianceGracePeriodExpirationDateTime
+    *
+    * @return DeviceConfigurationDeviceStatus
+    */
+    public function setComplianceGracePeriodExpirationDateTime($val)
+    {
+        $this->_propDict["complianceGracePeriodExpirationDateTime"] = $val;
+        return $this;
+    }
+    
+    /**
     * Gets the deviceDisplayName
     * Device name of the DevicePolicyStatus.
     *
-    * @return string The deviceDisplayName
+    * @return string|null The deviceDisplayName
     */
     public function getDeviceDisplayName()
     {
@@ -56,39 +87,10 @@ class DeviceConfigurationDeviceStatus extends Entity
     }
     
     /**
-    * Gets the userName
-    * The User Name that is being reported
-    *
-    * @return string The userName
-    */
-    public function getUserName()
-    {
-        if (array_key_exists("userName", $this->_propDict)) {
-            return $this->_propDict["userName"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the userName
-    * The User Name that is being reported
-    *
-    * @param string $val The userName
-    *
-    * @return DeviceConfigurationDeviceStatus
-    */
-    public function setUserName($val)
-    {
-        $this->_propDict["userName"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the deviceModel
     * The device model that is being reported
     *
-    * @return string The deviceModel
+    * @return string|null The deviceModel
     */
     public function getDeviceModel()
     {
@@ -114,81 +116,15 @@ class DeviceConfigurationDeviceStatus extends Entity
     }
     
     /**
-    * Gets the complianceGracePeriodExpirationDateTime
-    * The DateTime when device compliance grace period expires
-    *
-    * @return \DateTime The complianceGracePeriodExpirationDateTime
-    */
-    public function getComplianceGracePeriodExpirationDateTime()
-    {
-        if (array_key_exists("complianceGracePeriodExpirationDateTime", $this->_propDict)) {
-            if (is_a($this->_propDict["complianceGracePeriodExpirationDateTime"], "\DateTime")) {
-                return $this->_propDict["complianceGracePeriodExpirationDateTime"];
-            } else {
-                $this->_propDict["complianceGracePeriodExpirationDateTime"] = new \DateTime($this->_propDict["complianceGracePeriodExpirationDateTime"]);
-                return $this->_propDict["complianceGracePeriodExpirationDateTime"];
-            }
-        }
-        return null;
-    }
-    
-    /**
-    * Sets the complianceGracePeriodExpirationDateTime
-    * The DateTime when device compliance grace period expires
-    *
-    * @param \DateTime $val The complianceGracePeriodExpirationDateTime
-    *
-    * @return DeviceConfigurationDeviceStatus
-    */
-    public function setComplianceGracePeriodExpirationDateTime($val)
-    {
-        $this->_propDict["complianceGracePeriodExpirationDateTime"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the status
-    * Compliance status of the policy report. Possible values are: unknown, notApplicable, compliant, remediated, nonCompliant, error, conflict, notAssigned.
-    *
-    * @return ComplianceStatus The status
-    */
-    public function getStatus()
-    {
-        if (array_key_exists("status", $this->_propDict)) {
-            if (is_a($this->_propDict["status"], "Microsoft\Graph\Model\ComplianceStatus")) {
-                return $this->_propDict["status"];
-            } else {
-                $this->_propDict["status"] = new ComplianceStatus($this->_propDict["status"]);
-                return $this->_propDict["status"];
-            }
-        }
-        return null;
-    }
-    
-    /**
-    * Sets the status
-    * Compliance status of the policy report. Possible values are: unknown, notApplicable, compliant, remediated, nonCompliant, error, conflict, notAssigned.
-    *
-    * @param ComplianceStatus $val The status
-    *
-    * @return DeviceConfigurationDeviceStatus
-    */
-    public function setStatus($val)
-    {
-        $this->_propDict["status"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the lastReportedDateTime
     * Last modified date time of the policy report.
     *
-    * @return \DateTime The lastReportedDateTime
+    * @return \DateTime|null The lastReportedDateTime
     */
     public function getLastReportedDateTime()
     {
         if (array_key_exists("lastReportedDateTime", $this->_propDict)) {
-            if (is_a($this->_propDict["lastReportedDateTime"], "\DateTime")) {
+            if (is_a($this->_propDict["lastReportedDateTime"], "\DateTime") || is_null($this->_propDict["lastReportedDateTime"])) {
                 return $this->_propDict["lastReportedDateTime"];
             } else {
                 $this->_propDict["lastReportedDateTime"] = new \DateTime($this->_propDict["lastReportedDateTime"]);
@@ -213,10 +149,72 @@ class DeviceConfigurationDeviceStatus extends Entity
     }
     
     /**
+    * Gets the status
+    * Compliance status of the policy report. Possible values are: unknown, notApplicable, compliant, remediated, nonCompliant, error, conflict, notAssigned.
+    *
+    * @return ComplianceStatus|null The status
+    */
+    public function getStatus()
+    {
+        if (array_key_exists("status", $this->_propDict)) {
+            if (is_a($this->_propDict["status"], "\Microsoft\Graph\Model\ComplianceStatus") || is_null($this->_propDict["status"])) {
+                return $this->_propDict["status"];
+            } else {
+                $this->_propDict["status"] = new ComplianceStatus($this->_propDict["status"]);
+                return $this->_propDict["status"];
+            }
+        }
+        return null;
+    }
+    
+    /**
+    * Sets the status
+    * Compliance status of the policy report. Possible values are: unknown, notApplicable, compliant, remediated, nonCompliant, error, conflict, notAssigned.
+    *
+    * @param ComplianceStatus $val The status
+    *
+    * @return DeviceConfigurationDeviceStatus
+    */
+    public function setStatus($val)
+    {
+        $this->_propDict["status"] = $val;
+        return $this;
+    }
+    
+    /**
+    * Gets the userName
+    * The User Name that is being reported
+    *
+    * @return string|null The userName
+    */
+    public function getUserName()
+    {
+        if (array_key_exists("userName", $this->_propDict)) {
+            return $this->_propDict["userName"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the userName
+    * The User Name that is being reported
+    *
+    * @param string $val The userName
+    *
+    * @return DeviceConfigurationDeviceStatus
+    */
+    public function setUserName($val)
+    {
+        $this->_propDict["userName"] = $val;
+        return $this;
+    }
+    
+    /**
     * Gets the userPrincipalName
     * UserPrincipalName.
     *
-    * @return string The userPrincipalName
+    * @return string|null The userPrincipalName
     */
     public function getUserPrincipalName()
     {

@@ -17,7 +17,7 @@ $viewdefs['Home']['base']['layout']['record'] = array(
             'layout' => array(
                 'type' => 'base',
                 'name' => 'main-pane',
-                'css_class' => 'main-pane home-dashboard row-fluid',
+                'css_class' => 'main-pane home-dashboard row-fluid bg-secondary-content-background',
                 'components' => array(
                     array(
                         'layout' => array(

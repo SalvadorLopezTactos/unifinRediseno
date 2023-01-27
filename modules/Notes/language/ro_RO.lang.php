@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Adresa Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Atasare email',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Atașament e-mail pentru',
+    'LBL_NOTE_ATTACHMENT' => 'Atașări de note',
+    'LBL_KB_ATTACHMENT' => 'Atașări KBDocument',
+    'LBL_CASE_ATTACHMENT' => 'Atașări de caz',
     'LBL_FILE_MIME_TYPE' => 'Tipul de mima',
     'LBL_FILE_EXTENSION' => 'Extensie fișier',
     'LBL_FILE_SOURCE' => 'Sursă fișier',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Sursă notă',
     'LBL_SOURCE_EXTERNAL' => 'Extern',
     'LBL_SOURCE_INTERNAL' => 'Intern',
+    'LBL_PORTAL' => 'Portal',
 
     // Help Text
     // List View Help Text

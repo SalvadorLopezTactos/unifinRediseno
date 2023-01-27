@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Öppna meddelanderapporter',
     'LNK_IMPORT_MESSAGES' => 'Importera meddelanden',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'Möjlig kund ID',
+    'LBL_LEAD_NAME' => 'Möjlig kund',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Chatt på kundsidan',
+    'LBL_ACTIVITY_CUSTOMER' => 'Kund',
+    'LBL_ACTIVITY_FINISHED' => 'avslutad',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'pågår',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för meddelanden',
 ];

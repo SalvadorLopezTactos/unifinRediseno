@@ -206,7 +206,7 @@ class Project extends SugarBean {
     protected function markTasksDeleted($id)
     {
         if ($this->id != $id) {
-            $bean = BeanFactory::newBean($this->module_name, $id);
+            $bean = BeanFactory::getBean($this->module_name, $id);
             $bean->id = $id;
         } else {
             $bean = $this;

@@ -10,6 +10,7 @@
  */
 ({
     plugins: ['Prettify'],
+    className: 'container-fluid',
 
     initialize: function(options) {
         this._super('initialize', [options]);
@@ -34,9 +35,9 @@
         // override view function that relies on the dashlet layout
         this.example.toggleMinify = function(evt) {
             var $el = this.$('.dashlet-toggle > i'),
-                collapsed = $el.is('.fa-chevron-up');
-            this.$(".dashlet-toggle > i").toggleClass("fa-chevron-down", collapsed);
-            this.$(".dashlet-toggle > i").toggleClass("fa-chevron-up", !collapsed);
+                collapsed = $el.is('.sicon-chevron-up');
+            this.$('.dashlet-toggle > i').toggleClass('sicon-chevron-down', collapsed);
+            this.$('.dashlet-toggle > i').toggleClass('sicon-chevron-up', !collapsed);
         };
 
         this.$('#example_view').append(this.example.el);

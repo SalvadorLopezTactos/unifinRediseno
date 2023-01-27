@@ -262,7 +262,7 @@ class Administration extends SugarBean {
         // declare a cache for all settings
         $settings_cache = sugar_cache_retrieve('admin_settings_cache');
 
-        if($clean) {
+        if ($clean) {
             $settings_cache = array();
         }
 
@@ -285,7 +285,7 @@ class Administration extends SugarBean {
         }
 
         $stmt = $query->execute();
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $key = $row['category'] . '_' . $row['name'];
             // There can be settings that have the same `category`, the same
             // `name` but a different platform. We are going to prevent the
@@ -333,13 +333,22 @@ class Administration extends SugarBean {
         // outbound email settings
         $oe = new OutboundEmail();
         $oe = $oe->getSystemMailerSettings();
+        $proxyVisible = Container::getInstance()->get(SugarConfig::class)->get('proxy_visible', true);
 
         foreach($_POST as $key => $val) {
             $prefix = $this->get_config_prefix($key);
             if(in_array($prefix[0], $this->config_categories)) {
+                if ($prefix[0] === 'proxy' && !$proxyVisible) {
+                    continue;
+                }
                 if (($key === 'proxy_username' || $key === 'proxy_password')
                     && (empty($_POST['proxy_on']) || empty($_POST['proxy_auth']))) {
                     $val = '';
+                }
+                if ($prefix[0] === 'proxy' && $prefix[1] === 'on') {
+                    if (empty($_POST['proxy_host']) || empty($_POST['proxy_port'])) {
+                        $val = '';
+                    }
                 }
                 if(is_array($val)){
                     $val=implode(",",$val);
@@ -394,7 +403,7 @@ class Administration extends SugarBean {
             ->from($this->table_name)
             ->where($this->getConfigWhere($builder, $category, $key, $platform))
             ->setMaxResults(1);
-        $result = $query->execute()->fetchColumn();
+        $result = $query->execute()->fetchOne();
         if (is_array($value)) {
             $value = json_encode($value);
         }
@@ -456,20 +465,20 @@ class Administration extends SugarBean {
      */
     protected function getConfigWhere(QueryBuilder $builder, $category, $name, $platform)
     {
-        $where = $builder->expr()->andX(
+        $where = $builder->expr()->and(
             $builder->expr()->eq('category', $builder->createPositionalParameter($category)),
             $builder->expr()->eq('name', $builder->createPositionalParameter($name))
         );
 
         $wherePlatform = $builder->expr()->eq('platform', $builder->createPositionalParameter($platform));
         if (empty($platform)) {
-            $wherePlatform = $builder->expr()->orX(
+            $wherePlatform = $builder->expr()->or(
                 $wherePlatform,
                 $builder->expr()->isNull('platform')
             );
         }
 
-        return $where->add($wherePlatform);
+        return $where->with($wherePlatform);
     }
 
     /**
@@ -509,11 +518,10 @@ class Administration extends SugarBean {
         }
 
         $conn = $this->db->getConnection();
-        $stmt = $conn->prepare($sql);
-        $stmt->execute(array($module, $platform));
+        $result = $conn->executeQuery($sql, array($module, $platform));
 
         $moduleConfig = array();
-        while ($row = $stmt->fetch()) {
+        while ($row = $result->fetchAssociative()) {
             $moduleConfig[$row['name']] = $this->decodeConfigVar($row['value']);
         }
 
@@ -543,7 +551,7 @@ class Administration extends SugarBean {
         $stmt = $query->execute();
 
         $return = array();
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $row['value'] = $this->decodeConfigVar($row['value']);
             $return[] = $row;
         }

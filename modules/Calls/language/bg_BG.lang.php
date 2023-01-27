@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Идентификатор на Контакта',
     'LBL_DESCRIPTION_INFORMATION' => 'Допълнителна информация',
     'LBL_DESCRIPTION' => 'Описание:',
+    'LBL_INTERNAL_NOTES' => 'Вътрешни бележки:',
     'LBL_STATUS' => 'Статус:',
     'LBL_DIRECTION' => 'Направление:',
     'LBL_DATE' => 'Начална дата:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Продължителността на разговора трябва да надхвърля 0',
     'LBL_CALL_INFORMATION' => 'Обаждане',
     'LBL_REMOVE' => 'изтрий',
-    'LBL_ACCEPT_STATUS' => 'Статус на приемане',
     'LBL_ACCEPT_LINK' => 'Връзка към приемане',
     //For export labels
     'LBL_PARENT_ID' => 'Идентификатор на родителския запис',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Среща:',
     'LBL_CALL_RECORDING_URL' => 'Записване на URL',
     'LBL_CALL_RECORDING' => 'Записване',
+
+    'LBL_LEAD_ID' => 'Идентификатор на потенциален клиент',
+    'LBL_LEAD_NAME' => 'Потенциален клиент',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Вие насрочихте {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> за {{formatDate date_start}}.',

@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Потребители',
     'LBL_EMAILS_PRODUCTS_REL' => 'Оферирани продукти',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Приходни позиции',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Пренасочвания на по-високо ниво',
     'LBL_EMAILS_MESSAGES_REL' => 'Съобщения',
     'LBL_EMAILS_PURCHASES_REL' => 'Покупки',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Закупени позиции',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Изпрати електронно писмо',
     'LBL_MAILBOX' => 'Входящ профил',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Моля, конфигурирайте акаунт за изходяща електронна поща чрез <a href="#OutboundEmail">Настройки на електронна поща</a>, за да изпращате съобщения по електронна поща.',
 );

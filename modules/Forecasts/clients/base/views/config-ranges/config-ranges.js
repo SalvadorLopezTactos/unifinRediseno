@@ -869,82 +869,107 @@
      */
     connectSliders: function(ranges, sliders) {
         var rangeSliders = sliders[ranges];
-
-        if(ranges == 'show_binary') {
-            rangeSliders.include.sliderChangeDelegate = function(value) {
-                // lock the upper handle to 100, as per UI/UX requirements to show a dual slider
-                rangeSliders.include.$(rangeSliders.include.fieldTag).noUiSlider('move', {handle: 'upper', to: rangeSliders.include.def.maxRange});
-                // set the excluded range based on the lower value of the include range
-                this.view.setExcludeValueForLastSlider(value, ranges, rangeSliders.include);
-            };
-        } else if(ranges == 'show_buckets') {
-            rangeSliders.include.sliderChangeDelegate = function(value) {
-                // lock the upper handle to 100, as per UI/UX requirements to show a dual slider
-                rangeSliders.include.$(rangeSliders.include.fieldTag).noUiSlider('move', {handle: 'upper', to: rangeSliders.include.def.maxRange});
-
-                rangeSliders.upside.$(rangeSliders.upside.fieldTag).noUiSlider('move', {handle: 'upper', to: value.min - 1});
-                if(value.min <= rangeSliders.upside.$(rangeSliders.upside.fieldTag).noUiSlider('value')[0] + 1) {
-                    rangeSliders.upside.$(rangeSliders.upside.fieldTag).noUiSlider('move', {handle: 'lower', to: value.min - 2});
-                }
-            };
-            rangeSliders.upside.sliderChangeDelegate = function(value) {
-                rangeSliders.include.$(rangeSliders.include.fieldTag).noUiSlider('move', {handle: 'lower', to: value.max + 1});
-                // set the excluded range based on the lower value of the upside range
-                this.view.setExcludeValueForLastSlider(value, ranges, rangeSliders.upside);
-            };
-        } else if(ranges == 'show_custom_buckets') {
-            var i, max,
-                customSliders = _.sortBy(_.filter(
+        var probabilitySliders = [rangeSliders.include];
+        var customSliders = _.sortBy(_.filter(
                     rangeSliders,
                     function(item) {
                         return item.customType == 'custom';
                     }
                 ), function(item) {
-                        return parseInt(item.customIndex, 10);
-                    }
-                ),
-                probabilitySliders = _.union(rangeSliders.include, rangeSliders.upside, customSliders, rangeSliders.exclude);
-
-            if(probabilitySliders.length) {
-                for(i = 0, max = probabilitySliders.length; i < max; i++) {
-                    probabilitySliders[i].connectedSlider = (probabilitySliders[i + 1]) ? probabilitySliders[i + 1] : null;
-                    probabilitySliders[i].connectedToSlider = (probabilitySliders[i - 1]) ? probabilitySliders[i - 1] : null;
-                    probabilitySliders[i].sliderChangeDelegate = function(value, populateEvent) {
-                        // lock the upper handle to 100, as per UI/UX requirements to show a dual slider
-                        if(this.name == 'include') {
-                            this.$(this.fieldTag).noUiSlider('move', {handle: 'upper', to: this.def.maxRange});
-                        } else if(this.name == 'exclude') {
-                            this.$(this.fieldTag).noUiSlider('move', {handle: 'lower', to: this.def.minRange});
-                        }
-
-                        if(this.connectedSlider) {
-                            this.connectedSlider.$(this.connectedSlider.fieldTag).noUiSlider('move', {handle: 'upper', to: value.min - 1});
-                            if(value.min <= this.connectedSlider.$(this.connectedSlider.fieldTag).noUiSlider('value')[0] + 1) {
-                                this.connectedSlider.$(this.connectedSlider.fieldTag).noUiSlider('move', {handle: 'lower', to: value.min - 2});
-                            }
-                            if(_.isUndefined(populateEvent) || populateEvent == 'down') {
-                                this.connectedSlider.sliderChangeDelegate.call(this.connectedSlider, {
-                                    min: this.connectedSlider.$(this.connectedSlider.fieldTag).noUiSlider('value')[0],
-                                    max: this.connectedSlider.$(this.connectedSlider.fieldTag).noUiSlider('value')[1]
-                                }, 'down');
-                            }
-                        }
-                        if(this.connectedToSlider) {
-                            this.connectedToSlider.$(this.connectedToSlider.fieldTag).noUiSlider('move', {handle: 'lower', to: value.max + 1});
-                            if(value.max >= this.connectedToSlider.$(this.connectedToSlider.fieldTag).noUiSlider('value')[1] - 1) {
-                                this.connectedToSlider.$(this.connectedToSlider.fieldTag).noUiSlider('move', {handle: 'upper', to: value.max + 2});
-                            }
-                            if(_.isUndefined(populateEvent) || populateEvent == 'up') {
-                                this.connectedToSlider.sliderChangeDelegate.call(this.connectedToSlider, {
-                                    min: this.connectedToSlider.$(this.connectedToSlider.fieldTag).noUiSlider('value')[0],
-                                    max: this.connectedToSlider.$(this.connectedToSlider.fieldTag).noUiSlider('value')[1]
-                                }, 'up');
-                            }
-                        }
-                    };
+                    return parseInt(item.customIndex, 10);
                 }
+            );
+
+        if (rangeSliders.upside) {
+            probabilitySliders.push(rangeSliders.upside);
+        }
+
+        probabilitySliders = _.union(
+            probabilitySliders,
+            customSliders
+        );
+        if (rangeSliders.exclude) {
+            probabilitySliders.push(rangeSliders.exclude);
+        }
+
+        if (probabilitySliders.length) {
+            for (var i = 0; i < probabilitySliders.length; i++) {
+                if (probabilitySliders[i].def) {
+                    var offset = 0;
+                    if (ranges == 'show_custom_buckets') {
+                        offset = 1;
+                    }
+                    probabilitySliders[i].def.minRange = probabilitySliders.length - i - offset;
+                    probabilitySliders[i].def.maxRange = 100 - i;
+                }
+
+                probabilitySliders[i].connectedSlider =
+                    (probabilitySliders[i + 1]) ? probabilitySliders[i + 1] : null;
+                probabilitySliders[i].connectedToSlider =
+                    (probabilitySliders[i - 1]) ? probabilitySliders[i - 1] : null;
+
+                probabilitySliders[i].sliderChangeDelegate = function(value, populateEvent) {
+                    // lock the upper handle to 100, as per UI/UX requirements to show a dual slider
+                    if (this.name == 'include') {
+                        this.$(this.fieldTag).noUiSlider('move', {handle: 'upper', to: this.def.maxRange});
+                    } else if (this.name == 'exclude') {
+                        this.$(this.fieldTag).noUiSlider('move', {handle: 'lower', to: this.def.minRange});
+                    }
+                    //Bounds the range of handles to prevent users from moving
+                    //impossible values.
+                    if (value.min < this.def.minRange) {
+                        this.$(this.fieldTag).noUiSlider('move', {handle: 'lower', to: this.def.minRange});
+                    }
+                    if (value.max < this.def.minRange) {
+                        this.$(this.fieldTag).noUiSlider('move', {handle: 'upper', to: this.def.minRange});
+                    }
+                    if (value.min > this.def.maxRange) {
+                        this.$(this.fieldTag).noUiSlider('move', {handle: 'lower', to: this.def.maxRange});
+                    }
+                    if (value.max > this.def.maxRange) {
+                        this.$(this.fieldTag).noUiSlider('move', {handle: 'upper', to: this.def.maxRange});
+                    }
+                    value.min = this.$(this.fieldTag).noUiSlider('value')[0];
+                    value.max = this.$(this.fieldTag).noUiSlider('value')[1];
+
+                    if (this.connectedSlider) {
+                        var connectedSliderEl = this.connectedSlider.$(this.connectedSlider.fieldTag);
+                        connectedSliderEl.noUiSlider('move', {handle: 'upper', to: value.min - 1});
+                        if (value.min <= connectedSliderEl.noUiSlider('value')[0] + 1) {
+                            connectedSliderEl.noUiSlider('move', {handle: 'lower', to: value.min - 1});
+                            connectedSliderEl.noUiSlider('move', {handle: 'upper', to: value.min - 1});
+                        }
+                        if (_.isUndefined(populateEvent) || populateEvent == 'down') {
+                            this.connectedSlider.sliderChangeDelegate.call(this.connectedSlider, {
+                                min: connectedSliderEl.noUiSlider('value')[0],
+                                max: connectedSliderEl.noUiSlider('value')[1]
+                            }, 'down');
+                        }
+                    }
+                    if (this.connectedToSlider) {
+                        var connectedToSliderEl = this.connectedToSlider.$(this.connectedToSlider.fieldTag);
+                        connectedToSliderEl.noUiSlider('move', {handle: 'lower', to: value.max + 1});
+                        if (value.max >= connectedToSliderEl.noUiSlider('value')[1] - 1) {
+
+                            connectedToSliderEl.noUiSlider('move', {handle: 'upper', to: value.max + 1});
+                            connectedToSliderEl.noUiSlider('move', {handle: 'lower', to: value.max + 1});
+                        }
+                        if (_.isUndefined(populateEvent) || populateEvent == 'up') {
+                            this.connectedToSlider.sliderChangeDelegate.call(this.connectedToSlider, {
+                                min: connectedToSliderEl.noUiSlider('value')[0],
+                                max: connectedToSliderEl.noUiSlider('value')[1]
+                            }, 'up');
+                        }
+                    }
+                    if (ranges == 'show_binary' && this.name == 'include') {
+                        this.view.setExcludeValueForLastSlider(value, ranges, rangeSliders.include);
+                    } else if (ranges == 'show_buckets' && this.name == 'upside') {
+                        this.view.setExcludeValueForLastSlider(value, ranges, rangeSliders.upside);
+                    }
+                };
             }
         }
+
     },
 
     /**
@@ -963,7 +988,7 @@
             setting = _.clone(this.model.get(settingName));
 
         excludeRange.max = value.min - 1;
-        excludeRange.min = slider.def.minRange;
+        excludeRange.min = slider.def.minRange - 1;
         setting.exclude = excludeRange;
         this.model.set(settingName, setting);
     }

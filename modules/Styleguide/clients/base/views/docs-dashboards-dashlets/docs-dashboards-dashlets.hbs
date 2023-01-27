@@ -11,9 +11,11 @@
  */
 --}}
 <section id="dashboards">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <div class="row-fluid">
     <div class="span12">
@@ -23,7 +25,7 @@
 
   <div class="row-fluid">
     <div class="span6">
-        <p>Dashlets are defined as Sugar7 views generally with an <code>.hbs</code> template file, a <code>.php</code> configuration file, and a <code>.js</code> controller.</p>
+        <p>Dashlets are defined as SugarCRM views generally with an <code>.hbs</code> template file, a <code>.php</code> configuration file, and a <code>.js</code> controller.</p>
         <p>The outer dashlet chrome and general functionality is provided by the dashlet plugin and is included in the controller with <code>plugins: ['Dashlet']</code>. All basic features of the dashlet can be modified using the configuration file as shown below.</p>
         <p>The CSS classes specific to dashlet views are: <code>.dashlet</code>, <code>.dashlet-header</code>, <code>.dashlet-title</code>, <code>.dashlet-toolbar</code>, <code>.dashlet-options</code>, <code>.dashlet-content</code>, and the core Bootstrap class <code>.thumbnail</code>. The related LESS files are <code>styleguide/less/sugar/dashlets.less</code> and <code>styleguide/less/sugar/charts.less</code></p>
         <p>Please see the <a href="#Styleguide/docs/dashboards-home">Styleguide Dashboards</a> page for detailed information about dashboards.</p>
@@ -87,10 +89,10 @@
 &lt;div class="btn-toolbar pull-right"&gt;
 &lt;span class="actions btn-group dashlet-toolbar"&gt;
     &lt;a class="btn btn-invisible dropdown-toggle"&gt;
-        &lt;span class="fa fa-plus"&gt;
+        &lt;span class="sicon sicon-plus"&gt;
 &lt;div class="btn-group"&gt;
     &lt;a data-toggle="dropdown" class="btn btn-invisible dropdown-toggle"&gt;
-        &lt;i class="fa fa-cog"&gt;
+        &lt;i class="sicon sicon-settings"&gt;
 </pre>
 <pre class="prettyprint linenums">
 'custom_toolbar' => array(
@@ -98,7 +100,7 @@
     array(
         'type' => 'actiondropdown',
         'no_default_action' => true,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
         'buttons' => array(
         ),
     )
@@ -138,9 +140,9 @@
 <pre class="prettyprint linenums">
 &lt;div class="btn-group pull-right dashlet-group" data-toggle="buttons-radio"&gt;
 &lt;button class="btn active" value="user" data-action="visibility-switcher"&gt;
-    &lt;i class="fa fa-user"&gt;
+    &lt;i class="sicon sicon-user"&gt;
 &lt;button class="btn" value="group" data-action="visibility-switcher"&gt;
-    &lt;i class="fa fa-users"&gt;
+    &lt;i class="sicon sicon-user-group"&gt;
 </pre>
     </div>
   </div>
@@ -160,12 +162,12 @@
           <tr>
             <td>Chart</td>
             <td><p>The case summmary dashlet is comprised of the default header and tabs for viewing 'Summary' or 'New' cases; the content is visualized as a chart.</p></td>
-            <td><button class="btn btn-secondary dashlet-example" data-dashlet="dashlet-chart"><i class="fa fa-eye"></i></button></td>
+            <td><button class="btn btn-secondary dashlet-example" data-dashlet="dashlet-chart"><i class="sicon sicon-preview"></i></button></td>
           </tr>
           <tr>
             <td>Summary</td>
             <td>The forecast dashlet brings together several key bits of data and uses separators and labels for visualization.</td>
-            <td><button class="btn btn-secondary dashlet-example" data-dashlet="forecastdetails"><i class="fa fa-eye"></i></button></td>
+            <td><button class="btn btn-secondary dashlet-example" data-dashlet="forecastdetails"><i class="sicon sicon-preview"></i></button></td>
           </tr>
           <tr>
             <td>Tabbed</td>
@@ -178,17 +180,17 @@
             &lt;a data-toggle="tab" data-action="tab-switcher"&gt;
 </pre>
             </td>
-            <td><button class="btn btn-secondary dashlet-example" data-dashlet="dashlet-tabbed"><i class="fa fa-eye"></i></button></td>
+            <td><button class="btn btn-secondary dashlet-example" data-dashlet="dashlet-tabbed"><i class="sicon sicon-preview"></i></button></td>
           </tr>
           <tr>
             <td>Article</td>
             <td>For a list of records that contain a additional elements like avatars and record details, the article dashlet pattern should be used.</td>
-            <td><button class="btn btn-secondary dashlet-example" data-dashlet="top-activity-user" data-module="Home"><i class="fa fa-eye"></i></button></td>
+            <td><button class="btn btn-secondary dashlet-example" data-dashlet="top-activity-user" data-module="Home"><i class="sicon sicon-preview"></i></button></td>
           </tr>
           <tr>
             <td>Item</td>
             <td>In dashlets which contain a list of items it is often useful to include item-specific actions. to maintain consistency it is best to use a dropdown containing all possible actions although currently some dashlets use individual buttons.</td>
-            <td><button class="btn btn-secondary dashlet-example" data-dashlet="dashlet-tabbed"><i class="fa fa-eye"></i></button></td>
+            <td><button class="btn btn-secondary dashlet-example" data-dashlet="dashlet-tabbed"><i class="sicon sicon-preview"></i></button></td>
           </tr>
         </tbody>
       </table>
@@ -210,7 +212,7 @@
           <tr>
             <td>Separators</td>
             <td>Use sparingly in dashlets to separate data types or provide specific desired look</td>
-            <td><button class="btn btn-secondary dashlet-example" data-dashlet="active-tasks"><i class="fa fa-eye"></i></button></td>
+            <td><button class="btn btn-secondary dashlet-example" data-dashlet="active-tasks"><i class="sicon sicon-preview"></i></button></td>
           </tr>
           <tr>
             <td>Avatar</td>
@@ -222,7 +224,7 @@
 &lt;span class="label label-important"&gt;Label&lt;/span&gt;
 </pre>
             </td>
-            <td><button class="btn btn-secondary dashlet-example" data-dashlet="top-activity-user" data-module="Home"><i class="fa fa-eye"></i></button></td>
+            <td><button class="btn btn-secondary dashlet-example" data-dashlet="top-activity-user" data-module="Home"><i class="sicon sicon-preview"></i></button></td>
           </tr>
           <tr>
             <td>Labels</td>
@@ -237,7 +239,7 @@
 &lt;span class="label"&gt;
 </pre>
             </td>
-            <td><button class="btn btn-secondary dashlet-example" data-dashlet="dashlet-tabbed"><i class="fa fa-eye"></i></button></td>
+            <td><button class="btn btn-secondary dashlet-example" data-dashlet="dashlet-tabbed"><i class="sicon sicon-preview"></i></button></td>
           </tr>
       {{! <tr>
             <td>Date/Time Stamps</td>

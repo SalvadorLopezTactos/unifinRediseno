@@ -11,6 +11,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\PackageManager\VersionComparator;
+
 require_once dirname(__FILE__) . '/ScannerMeta.php';
 
 /**
@@ -58,7 +60,7 @@ class HealthCheckScanner
      *
      * @var string Log filename
      */
-    protected $logfile = "healthcheck.log";
+    protected $logfile;
 
     /**
      *
@@ -180,6 +182,18 @@ class HealthCheckScanner
         'modules/Opportunities/SugarFeeds/OppFeed.php',
     );
 
+    protected $ignoredTplPatterns = [
+        '~/LinkedinParserSettings\.tpl$~i',
+        '~/PipelineByObjectivesConfigure\.tpl$~i',
+        '~/zendeskTickets/.*\.tpl$~i',
+        '~/zendesk-dashlet/.*\.tpl$~i',
+        '~/Forecasts/Chart\.tpl$~i',
+        '~/modules/Relationships/editFields\.tpl$~i',
+        '~/swagger/settings/settings\.tpl$~i',
+        '~Address/ro_RO\.EditView\.tpl$~i',
+        '~Address/sk_SK\.EditView\.tpl$~i',
+    ];
+
     /**
      * If Scanner founds some number of files and is going to report them, it's better to report them in bunches.
      * This field defines an appropriate bunch size.
@@ -207,7 +221,6 @@ class HealthCheckScanner
         'XTemplate',
         'Zend',
         'include/lessphp',
-        'include/nusoap',
         'include/oauth2-php',
         'include/tcpdf',
         'include/ytree',
@@ -280,6 +293,13 @@ class HealthCheckScanner
         // Deprecated in 7.10
         '/\.(initButtons)/' => 'useOfInitButtons',
     );
+
+    protected $deprecatedHBSPatterns = [];
+
+    // Deprecated patterns that could be in PHP, JS, or HBS files
+    protected $deprecatedGenericPatterns = [
+        '/(([\'"\s\.]|\b)fa-\w*?[\'"\s\.])/' => 'deprecatedFontAwesomeIcons',
+    ];
 
     //Removed in 7.8
     protected $removedSidecarFiles = array(
@@ -459,7 +479,9 @@ class HealthCheckScanner
     public function __construct()
     {
         $this->meta = HealthCheckScannerMeta::getInstance();
-        $this->logfile = "healthcheck-" . time() . ".log";
+        if (!class_exists('LoggerManager')) {
+            $this->logfile = "healthcheck-" . time() . ".log";
+        }
     }
 
     public function getIgnoredFiles(): array
@@ -487,19 +509,29 @@ class HealthCheckScanner
      * @param string $tag Log level
      * @return string formatted log message
      */
-    protected function log($msg, $tag = 'INFO')
+    protected function log(string $msg, string $tag = 'INFO')
     {
-        $fmsg = sprintf("[%s] %s %s\n", date('c'), $tag, $msg);
+        if (null === $this->logfile && empty($this->fp)) {
+            $fmsg = sprintf("[Scanner] [%s] %s", $tag, $msg);
+            $tagsToLevelMap = [
+                'STATUS' => 'fatal',
+                'ERROR' => 'error',
+                'BUCKET' => 'warn',
+                'INFO' => 'info',
+            ];
+            $level = $tagsToLevelMap[$tag] ?? 'info';
+            LoggerManager::getLogger()->$level($fmsg);
+        } else {
+            $fmsg = sprintf("[%s] %s %s\n", date('c'), $tag, $msg);
 
-        if (empty($this->fp)) {
-            $this->fp = @fopen($this->logfile, 'a+');
+            if (empty($this->fp)) {
+                $this->fp = @fopen($this->logfile, 'a+');
+            }
+            if (empty($this->fp)) {
+                throw new RuntimeException("Cannot open logfile: $this->logfile");
+            }
+            fwrite($this->fp, $fmsg);
         }
-        if (empty($this->fp)) {
-            throw new RuntimeException("Cannot open logfile: $this->logfile");
-        }
-
-        fwrite($this->fp, $fmsg);
-
         return $fmsg;
     }
 
@@ -750,68 +782,164 @@ class HealthCheckScanner
         $this->log("Instance version: $sugar_version");
         $this->log("Instance flavor: $sugar_flavor");
 
-        if ($this->upgrader) {
-            $manifest = $this->getPackageManifest();
+        try {
+            if ($this->upgrader) {
+                $manifest = $this->getPackageManifest();
 
-            if (version_compare($upgraderVersionInfo[0], HealthCheckScannerMeta::ALLOWED_UPGRADER_VERSION, '<')) {
-                $this->updateStatus('unsupportedUpgrader');
-                $this->log(
-                    'Unsupported Upgrader version. Please install the appropriate SugarUpgradeWizardPrereq package'
-                );
-                return $this->logMeta;
+                if (version_compare($upgraderVersionInfo[0], HealthCheckScannerMeta::ALLOWED_UPGRADER_VERSION, '<')) {
+                    $this->updateStatus('unsupportedUpgrader');
+                    $this->log(
+                        'Unsupported Upgrader version. Please install the appropriate SugarUpgradeWizardPrereq package'
+                    );
+                    return $this->logMeta;
+                }
+
+                $manifestFlavor = !empty($manifest['flavor']) ? $manifest['flavor'] : '';
+                $manifestVersion = $manifest['version'];
+                if ((!version_compare($sugar_version, $manifestVersion) && !strcasecmp($sugar_flavor, $manifestFlavor)) ||
+                    version_compare($sugar_version, $manifestVersion, '>')
+                ) {
+                    $this->updateStatus("alreadyUpgraded");
+                    $this->log("Instance already upgraded to " . $manifestVersion);
+                    return $this->logMeta;
+                }
             }
 
-            $manifestFlavor = !empty($manifest['flavor']) ? $manifest['flavor'] : '';
-            $manifestVersion = $manifest['version'];
-            if ((!version_compare($sugar_version, $manifestVersion) && !strcasecmp($sugar_flavor, $manifestFlavor)) ||
-                version_compare($sugar_version, $manifestVersion, '>')
-            ) {
-                $this->updateStatus("alreadyUpgraded");
-                $this->log("Instance already upgraded to " . $manifestVersion);
-                return $this->logMeta;
+            if ($GLOBALS['sugar_config']['site_url']) {
+                $this->ping(array("instance" => $GLOBALS['sugar_config']['site_url'], "version" => $sugar_version));
             }
-        }
 
-        if ($GLOBALS['sugar_config']['site_url']) {
-            $this->ping(array("instance" => $GLOBALS['sugar_config']['site_url'], "version" => $sugar_version));
-        }
+            $this->checkDbDriver();
 
-        $this->checkDbDriver();
+            $this->listUpgrades();
+            $this->checkPackages();
+            $this->scanCustomDir();
 
-        $this->listUpgrades();
-        $this->checkPackages();
-        $this->scanCustomDir();
-
-        foreach ($this->getModuleList() as $module) {
-            $this->log("Checking module $module");
-            $this->scanModule($module);
-        }
-
-        //Now that we have catalogued all the bad files in custom, log them by category.
-        $this->updateCustomDirScanStatus();
-
-        // Check global hooks
-        $this->log("Checking global hooks");
-        $hook_files = array();
-        $this->extractHooks("custom/modules/logic_hooks.php", $hook_files, true);
-        $this->extractHooks("custom/application/Ext/LogicHooks/logichooks.ext.php", $hook_files, true);
-        foreach ($hook_files as $hookname => $hooks) {
-            foreach ($hooks as $hook_data) {
-                $this->log("Checking global hook $hookname:{$hook_data[1]}");
-                $this->checkFileForOutput($hook_data[2], $hook_data[3]);
+            foreach ($this->getModuleList() as $module) {
+                $this->log("Checking module $module");
+                $this->scanModule($module);
             }
-        }
 
-        // Check the Elastic Search Customization
-        $this->checkCustomElastic();
+            //Now that we have catalogued all the bad files in custom, log them by category.
+            $this->updateCustomDirScanStatus();
 
-        // TODO: custom dashlets
-        if ($GLOBALS['sugar_config']['site_url']) {
-            $this->ping(array("instance" => $GLOBALS['sugar_config']['site_url'], "verdict" => $this->status));
+            // Check global hooks
+            $this->log("Checking global hooks");
+            $hook_files = array();
+            $this->extractHooks("custom/modules/logic_hooks.php", $hook_files, true);
+            $this->extractHooks("custom/application/Ext/LogicHooks/logichooks.ext.php", $hook_files, true);
+            foreach ($hook_files as $hookname => $hooks) {
+                foreach ($hooks as $hook_data) {
+                    $this->log("Checking global hook $hookname:{$hook_data[1]}");
+                    $this->checkFileForOutput($hook_data[2], $hook_data[3]);
+                }
+            }
+
+            // Check the Elastic Search Customization
+            $this->checkCustomElastic();
+
+            if (version_compare($sugar_version, '11.2.0.0', '<')) {
+                $this->checkSmartyTemplatesSyntax();
+            }
+
+            // TODO: custom dashlets
+            if ($GLOBALS['sugar_config']['site_url']) {
+                $this->ping(array("instance" => $GLOBALS['sugar_config']['site_url'], "verdict" => $this->status));
+            }
+        } catch (\Error $error) {
+            $this->reportPhpError(E_ERROR, $error->getMessage(), $error->getFile(), $error->getLine());
         }
 
         $this->finishScan();
         return $this->logMeta;
+    }
+
+    protected function checkSmartyTemplatesSyntax()
+    {
+        if (!in_array('phar', stream_get_wrappers())) {
+            stream_wrapper_restore('phar');
+        }
+        if (file_exists(dirname(__DIR__) . '/smarty.phar')) {
+            require_once dirname(__DIR__) . '/smarty.phar';
+        }
+        if (!class_exists('Smarty3')) {
+            return;
+        }
+        $sql = "SELECT * FROM pdfmanager WHERE deleted='0'";
+        $converter = new \SmartyConverter();
+        $converter::muteExpectedErrors();
+        $templates = DBManagerFactory::getConnection()->executeQuery($sql)->fetchAll(\PDO::FETCH_ASSOC);
+        $dbErrors = [];
+        foreach ($templates as $template) {
+            $dbErrors = $converter->scanDatabaseTpl($template);
+            if (!count($dbErrors)) {
+                $this->updateStatus('smartyCustomPdf', $template['name']);
+            } else {
+                $this->updateStatus('smartyOutdatedCustomPdf', $template['name'], implode(', ', $dbErrors));
+                $this->log('Errors: ' . implode(', ', $dbErrors), 'ERROR');
+            }
+        }
+        if (!is_dir('./custom') && !is_dir('./modules')) {
+            $converter::unmuteExpectedErrors();
+            return;
+        }
+
+        $iterator = new AppendIterator();
+        if (is_dir('./custom')) {
+            $customRecursiveIterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator('./custom'));
+            $customRegexIterator = new RegexIterator($customRecursiveIterator, '/^.+\.tpl$/i', RecursiveRegexIterator::GET_MATCH);
+            $iterator->append($customRegexIterator);
+        }
+        if (is_dir('./modules')) {
+            $modulesRecursiveIterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator('./modules'));
+            $modulesRegexIterator = new RegexIterator($modulesRecursiveIterator, '/^.+\.tpl$/i', RecursiveRegexIterator::GET_MATCH);
+            $iterator->append($modulesRegexIterator);
+        }
+        $errors = [];
+        foreach ($iterator as $match) {
+            $curFile = $match[0];
+            if (defined('SUGAR_SHADOW_TEMPLATEPATH')) {
+                $realName = realpath(str_replace(SHADOW_INSTANCE_DIR . '/', '', $curFile));
+                if (0 === strpos($realName, SUGAR_SHADOW_TEMPLATEPATH)) {
+                    continue;
+                }
+            } elseif (isset($this->md5_files[str_replace('\\', '/', $curFile)])) {// Stock file
+                continue;
+            }
+            if ($this->isIgnoredTplPattern($curFile)) {
+                $this->updateStatus('smartyUnsupportedSyntax', $curFile);
+                continue;
+            }
+            $errors = $converter->scanFilesystemTpl($curFile);
+            if (!count($errors)) {
+                $this->updateStatus('smartyCustomization', $curFile);
+            } else {
+                $this->updateStatus('smartyOutdatedCustomization', $curFile);
+                $this->log('Errors: ' . implode(', ', $errors), 'ERROR');
+            }
+        }
+        $cacheDir = sugar_cached('smarty3/');
+        if (file_exists($cacheDir)) {
+            rmdir_recursive($cacheDir);
+        }
+        if (count($errors)) {
+            rmdir_recursive('./_smarty3_');
+        }
+        $converter::unmuteExpectedErrors();
+    }
+
+    /**
+     * @param string $filename
+     * @return bool
+     */
+    private function isIgnoredTplPattern(string $filename): bool
+    {
+        foreach ($this->ignoredTplPatterns as $pattern) {
+            if (preg_match($pattern, $filename)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function initPackageScan()
@@ -2042,7 +2170,7 @@ ENDP;
                     }
                     if (empty($req['version'])) {
                         $incompatible = true;
-                    } elseif ($req['version'] == '*' || version_compare($pack['version'], $req['version'], '<')) {
+                    } elseif ($req['version'] == '*' || $this->versionLessThan($pack['version'], $req['version'])) {
                         $incompatible = true;
                     }
                     if (!empty($req['author'])) {
@@ -2164,6 +2292,7 @@ ENDP;
     {
         $this->checkCreateActions();
         $this->checkSidecarJSFiles();
+        $this->checkSidecarTemplateFiles();
         $this->log("Checking custom directory for no longer valid code");
         $files = $this->getPhpFiles("custom/");
         foreach ($files as $name => $file) {
@@ -2276,13 +2405,23 @@ ENDP;
     }
 
     /**
+     * Gets all relevant deprecated code patterns
+     * @param $typeSpecificPatterns
+     * @return array
+     */
+    protected function getDeprecatedPatterns($typeSpecificPatterns)
+    {
+        return array_merge($typeSpecificPatterns, $this->deprecatedGenericPatterns);
+    }
+
+    /**
      * Checks that we don't use classes deprecated/removed in sugar API
      * @param string $file
      * @param string $fileContents
      */
     public function scanFileForDeprecatedCode($file, $fileContents)
     {
-        foreach ($this->deprecatedPHPCodePatterns as $pattern => $reportId) {
+        foreach ($this->getDeprecatedPatterns($this->deprecatedPHPCodePatterns) as $pattern => $reportId) {
             if (preg_match($pattern, $fileContents)) {
                 $this->filesWithDeprecatedCode[$reportId][] = $file;
             }
@@ -2367,6 +2506,7 @@ ENDP;
         );
         $this->checkCreateActions($options);
         $this->checkSidecarJSFiles($options);
+        $this->checkSidecarTemplateFiles($options);
 
         /*
          * Module specific checks
@@ -2501,42 +2641,13 @@ ENDP;
         }
     }
 
+    /**
+     * Check sidecar javascript files for deprecated code and removed files
+     * @param array $options
+     */
     protected function checkSidecarJSFiles($options = array())
     {
-        $files = array();
-        $sidecarJSPath = 'clients' . DIRECTORY_SEPARATOR .
-            '*' . DIRECTORY_SEPARATOR .
-            '{layouts,views,fields}' . DIRECTORY_SEPARATOR .
-            '*' . DIRECTORY_SEPARATOR .
-            '*.js';
-
-        if (!empty($options['module'])) {
-            $this->log("Checking for deprecated/removed Sidecar JS in custom/modules/{$options['module']}");
-            $files = glob(
-                'custom' . DIRECTORY_SEPARATOR .
-                'modules' . DIRECTORY_SEPARATOR .
-                $options['module'] . DIRECTORY_SEPARATOR .
-                $sidecarJSPath,
-                GLOB_BRACE
-            );
-
-            if (!empty($options['isNewModule'])) {
-                $this->log("Checking for deprecated/removed Sidecar JS in modules/{$options['module']}");
-                $files = array_merge($files, glob(
-                    'modules' . DIRECTORY_SEPARATOR .
-                    $options['module'] . DIRECTORY_SEPARATOR .
-                    $sidecarJSPath,
-                    GLOB_BRACE
-                ));
-            }
-        } else {
-            $this->log("Checking for deprecated/removed Sidecar JS in custom/clients");
-            $files = glob(
-                'custom' . DIRECTORY_SEPARATOR .
-                $sidecarJSPath,
-                GLOB_BRACE
-            );
-        }
+        $files = $this->getSidecarFiles('js', $options);
 
         if (!empty($files)) {
             foreach ($files as $file) {
@@ -2553,13 +2664,84 @@ ENDP;
     }
 
     /**
+     * Check sidecar template files for deprecated code
+     * @param array $options
+     */
+    protected function checkSidecarTemplateFiles($options = [])
+    {
+        $files = $this->getSidecarFiles('hbs', $options);
+
+        if (!empty($files)) {
+            foreach ($files as $file) {
+                $this->scanFileForDeprecatedHBSCode($file, file_get_contents($file));
+            }
+        }
+    }
+
+    /**
+     * Gets the string to match sidecar files of the given extension
+     * @param $ext string extension to search for (ex: 'js', 'hbs')
+     * @return string
+     */
+    protected function getSidecarPathForExtension($ext)
+    {
+        return 'clients' . DIRECTORY_SEPARATOR .
+            '*' . DIRECTORY_SEPARATOR .
+            '{layouts,views,fields}' . DIRECTORY_SEPARATOR .
+            '*' . DIRECTORY_SEPARATOR .
+            '*.' . $ext;
+    }
+
+    /**
+     * Gets sidecar files of the given extension
+     * @param $ext
+     * @param $options
+     * @return array
+     */
+    protected function getSidecarFiles($ext, $options)
+    {
+        $path = $this->getSidecarPathForExtension($ext);
+        $extLabel = sugarStrToUpper($ext);
+
+        if (!empty($options['module'])) {
+            $this->log("Checking for deprecated/removed Sidecar {$extLabel} in custom/modules/{$options['module']}");
+            $files = glob(
+                'custom' . DIRECTORY_SEPARATOR .
+                'modules' . DIRECTORY_SEPARATOR .
+                $options['module'] . DIRECTORY_SEPARATOR .
+                $path,
+                GLOB_BRACE
+            );
+
+            if (!empty($options['isNewModule'])) {
+                $this->log("Checking for deprecated/removed Sidecar {$extLabel} in modules/{$options['module']}");
+                $files = array_merge($files, glob(
+                    'modules' . DIRECTORY_SEPARATOR .
+                    $options['module'] . DIRECTORY_SEPARATOR .
+                    $path,
+                    GLOB_BRACE
+                ));
+            }
+        } else {
+            $this->log("Checking for deprecated/removed Sidecar {$extLabel} in custom/clients");
+            $files = glob(
+                'custom' . DIRECTORY_SEPARATOR .
+                $path,
+                GLOB_BRACE
+            );
+        }
+
+        return $files;
+    }
+
+    /**
      * Checks that we don't use classes deprecated/removed in sugar API
      * @param string $file
      * @param string $fileContents
      */
     public function scanFileForDeprecatedJSCode($file, $fileContents)
     {
-        foreach ($this->deprecatedJsAPIPatterns as $pattern => $reportId) {
+        foreach ($this->getDeprecatedPatterns($this->deprecatedJsAPIPatterns) as $pattern => $reportId) {
             $matches = array();
             if ($val = preg_match($pattern, $fileContents, $matches)) {
                 $this->log("Found $matches[1] in $file");
@@ -2570,6 +2752,22 @@ ENDP;
             if (preg_match('/\s+extendsFrom:\s*[\'"]' . $className . '[\'"]/', $fileContents)) {
                 $this->log("Found $className in $file");
                 $this->filesWithDeprecatedCode["extendsFromRemovedSidecarClass"][] = $file;
+            }
+        }
+    }
+
+    /**
+     * Checks HBS template files for deprecated code
+     * @param string $file
+     * @param string $fileContents
+     */
+    public function scanFileForDeprecatedHBSCode($file, $fileContents)
+    {
+        foreach ($this->getDeprecatedPatterns($this->deprecatedHBSPatterns) as $pattern => $reportId) {
+            $matches = array();
+            if ($val = preg_match($pattern, $fileContents, $matches)) {
+                $this->log("Found $matches[1] in $file");
+                $this->filesWithDeprecatedCode[$reportId][] = $file;
             }
         }
     }
@@ -3631,48 +3829,15 @@ ENDP;
      * @param string $errstr
      * @param string $errfile
      * @param string $errline
-     * @param array $errcontext
      */
-    public function scriptErrorHandler($errno, $errstr, $errfile, $errline, $errcontext)
+    public function scriptErrorHandler($errno, $errstr, $errfile, $errline)
     {
         // error was suppressed with the @-operator
         if (error_reporting() === 0) {
             return false;
         }
+        return $this->reportPhpError($errno, $errstr, $errfile, $errline);
 
-        // ignore redis initialization error when running healthcheck on 8.1
-        if (basename($errfile) === 'Redis.php') {
-            return false;
-        }
-
-        // ignore entryPoint session error when running healthcheck on php7.3+
-        if (basename($errfile) === 'entryPoint.php'
-            && !empty($errstr)
-            && strpos($errstr, 'session_set_save_handler') !== false
-        ) {
-            return false;
-        }
-
-        switch ($errno) {
-            case 1:     $e_type = 'E_ERROR'; break;
-            case 2:     $e_type = 'E_WARNING'; break;
-            case 4:     $e_type = 'E_PARSE'; break;
-            case 8:     $e_type = 'E_NOTICE'; break;
-            case 16:    $e_type = 'E_CORE_ERROR'; break;
-            case 32:    $e_type = 'E_CORE_WARNING'; break;
-            case 64:    $e_type = 'E_COMPILE_ERROR'; break;
-            case 128:   $e_type = 'E_COMPILE_WARNING'; break;
-            case 256:   $e_type = 'E_USER_ERROR'; break;
-            case 512:   $e_type = 'E_USER_WARNING'; break;
-            case 1024:  $e_type = 'E_USER_NOTICE'; break;
-            case 2048:  $e_type = 'E_STRICT'; break;
-            case 4096:  $e_type = 'E_RECOVERABLE_ERROR'; break;
-            case 8192:  $e_type = 'E_DEPRECATED'; break;
-            case 16384: $e_type = 'E_USER_DEPRECATED'; break;
-            case 30719: $e_type = 'E_ALL'; break;
-            default:    $e_type = 'E_UNKNOWN'; break;
-        }
-        $this->updateStatus("phpError", $e_type, $errstr, $errfile, $errline);
     }
 
     public $names = array(
@@ -3909,7 +4074,7 @@ ENDP;
      * @param array $status Status array to store errors
      * @param string $module Module name
      */
-    protected function checkFields($key, $fields, $fieldDefs, $custom = '', $module)
+    protected function checkFields(string $key, array $fields, array $fieldDefs, string $custom, string $module): void
     {
         foreach ($fields as $subField) {
             if (empty($fieldDefs[$subField])) {
@@ -4050,6 +4215,13 @@ ENDP;
 
                         break;
                     case 'link':
+                        if (isset($value['link_file'], $value['link_class']) && file_exists($value['link_file']) && !class_exists($value['link_class'])) {
+                            require_once $value['link_file'];
+                            if (class_exists($value['link_class'])) {
+                                $this->updateStatus("badVardefsClassAutoloading", $key, $module);
+                            }
+                            break;
+                        }
                         $seed->load_relationship($key);
                         if (empty($seed->$key)) {
                             $this->updateStatus("badVardefsLink", $key, $module);
@@ -4127,7 +4299,13 @@ ENDP;
     protected function ping($data)
     {
         $url = $this->ping_url . "?" . http_build_query($data);
-        @file_get_contents($url);
+        $curlHandler = curl_init($url);
+        if ($curlHandler !== false) {
+            curl_setopt($curlHandler, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curlHandler, CURLOPT_FOLLOWLOCATION, true);
+            curl_exec($curlHandler);
+            curl_close($curlHandler);
+        }
     }
 
     /**
@@ -4192,7 +4370,6 @@ ENDP;
         'Releases',
         'ReportMaker',
         'Reports',
-        'Roles',
         'SavedSearch',
         'Schedulers',
         'SchedulersJobs',
@@ -4375,7 +4552,100 @@ ENDP;
         return $this->md5_files['./' . $path] === md5($contents);
     }
 
+    /**
+     * @param $version1
+     * @param $version2
+     * @return bool|int
+     */
+    private function versionLessThan($version1, $version2)
+    {
+        $version1 = ltrim($version1, 'v');
+        $version2 = ltrim($version2, 'v');
+        return version_compare($version1, $version2, '<');
+    }
 
+    /**
+     * @param int $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param string $errline
+     * @return false|void
+     */
+    private function reportPhpError(int $errno, string $errstr, string $errfile, string $errline)
+    {
+        // ignore redis initialization error when running healthcheck on 8.1
+        if (basename($errfile) === 'Redis.php') {
+            return false;
+        }
+
+        // ignore entryPoint session error when running healthcheck on php7.3+
+        if (basename($errfile) === 'entryPoint.php'
+            && !empty($errstr)
+            && strpos($errstr, 'session_set_save_handler') !== false
+        ) {
+            return false;
+        }
+
+        // ignore errors in smarty cache
+        if (false !== strpos($errfile, sugar_cached('smarty3/'))) {
+            return false;
+        }
+
+        switch ($errno) {
+            case 1:
+                $e_type = 'E_ERROR';
+                break;
+            case 2:
+                $e_type = 'E_WARNING';
+                break;
+            case 4:
+                $e_type = 'E_PARSE';
+                break;
+            case 8:
+                $e_type = 'E_NOTICE';
+                break;
+            case 16:
+                $e_type = 'E_CORE_ERROR';
+                break;
+            case 32:
+                $e_type = 'E_CORE_WARNING';
+                break;
+            case 64:
+                $e_type = 'E_COMPILE_ERROR';
+                break;
+            case 128:
+                $e_type = 'E_COMPILE_WARNING';
+                break;
+            case 256:
+                $e_type = 'E_USER_ERROR';
+                break;
+            case 512:
+                $e_type = 'E_USER_WARNING';
+                break;
+            case 1024:
+                $e_type = 'E_USER_NOTICE';
+                break;
+            case 2048:
+                $e_type = 'E_STRICT';
+                break;
+            case 4096:
+                $e_type = 'E_RECOVERABLE_ERROR';
+                break;
+            case 8192:
+                $e_type = 'E_DEPRECATED';
+                break;
+            case 16384:
+                $e_type = 'E_USER_DEPRECATED';
+                break;
+            case 30719:
+                $e_type = 'E_ALL';
+                break;
+            default:
+                $e_type = 'E_UNKNOWN';
+                break;
+        }
+        $this->updateStatus("phpError", $e_type, $errstr, $errfile, $errline);
+    }
 }
 
 /**

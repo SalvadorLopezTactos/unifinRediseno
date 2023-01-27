@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'ID pozycji przychodów odnowienia',
     'LBL_PARENT_RLIS' => 'Nadrzędne pozycje szansy',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Nadrzędne pozycje przychodów',
+    'LBL_FORECASTED_LIKELY' => 'Prognozy prawdopodobne',
     'LBL_EXPERT_ID' => 'Ekspert produktowy',
     'LBL_FORECAST' => 'Uwzględnij w prognozie',
     'LBL_SUBTOTAL' => 'Suma częściowa',

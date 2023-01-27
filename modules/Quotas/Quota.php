@@ -486,7 +486,7 @@ AND quotas.quota_type = 'Rollup'
 SQL;
         return $this->db->getConnection()
             ->executeQuery($query, [$current_user->id, $timeperiod_id])
-            ->fetchColumn();
+            ->fetchOne();
     }
 
 
@@ -506,7 +506,7 @@ WHERE id = ?
 SQL;
         return $this->db->getConnection()
             ->executeQuery($query, [$currency_id])
-            ->fetchColumn();
+            ->fetchOne();
     }
 
 
@@ -526,7 +526,7 @@ WHERE id = ?
 SQL;
         return $this->db->getConnection()
             ->executeQuery($query, [$currency_id])
-            ->fetchColumn();
+            ->fetchOne();
     }
 
 

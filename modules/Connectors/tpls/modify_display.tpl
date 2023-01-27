@@ -15,7 +15,6 @@
 <link rel="stylesheet" type="text/css" href="{sugar_getjspath file='modules/Connectors/tpls/tabs.css'}"/>
 
 
-{literal}
 
 <script language="javascript">
 
@@ -26,29 +25,25 @@ var SourceTabs = {
     init : function() {
          _tabView = new YAHOO.widget.TabView();
 
-    	{/literal}
     		 {counter assign=source_count start=0 print=0}
 	        {foreach name=connectors from=$SOURCES key=name item=source}
 	            {counter assign=source_count}
-		{literal}
 		       	tab = new YAHOO.widget.Tab({
-			        label: '{/literal}{$source.name}{literal} ',
-			        dataSrc: {/literal}'index.php?module=Connectors&action=DisplayProperties&source_id={$source.id}'{literal},
+			        label: '{$source.name} ',
+			        dataSrc: 'index.php?module=Connectors&action=DisplayProperties&source_id={$source.id}',
 			        cacheData: true,
-			        {/literal}
 			        {if $source_count == 1}
 			        active: true
 			        {else}
 			        active: false
 			        {/if}
-			        {literal}
 			    });
 			    _tabView.addTab(tab);
 			    tab.addListener('contentChange', SourceTabs.tabContentChanged);
-			    _sourceArray[{/literal}{$source_count}{literal}-1] = '{/literal}{$source.id}{literal}';
-		{/literal}
+			    _sourceArray[{$source_count}-1] = '{$source.id}';
+
 	       {/foreach}
-		  {literal}
+
   		_tabView.appendTo('container');
   		//_tabView.addListener('contentChange', SourceTabs.tabContentChanged);
  		_tabView.addListener('beforeActiveTabChange', SourceTabs.tabIndexChanged);
@@ -76,7 +71,7 @@ var SourceTabs = {
 }
 YAHOO.util.Event.onDOMReady(SourceTabs.init);
 </script>
-{/literal}
+
 <form name="ModifyDisplay" method="POST">
 {sugar_csrf_form_token}
 <input type="hidden" name="modify" value="true">
@@ -115,14 +110,12 @@ YAHOO.util.Event.onDOMReady(SourceTabs.init);
 </form>
 
 <script type="text/javascript">
-{literal}
 YAHOO.util.Event.onDOMReady(SourceTabs.fitContainer);
-{/literal}
 </script>
 
 
 <script type="text/javascript">
-{literal}
+
 function calculateValues() {
     tabview = SourceTabs.getTabView();
     display_vals = ''
@@ -160,5 +153,5 @@ function calculateValues() {
 }
 
 YAHOO.util.Event.onDOMReady(SourceTabs.fitContainer);
-{/literal}
+
 </script>

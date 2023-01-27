@@ -109,6 +109,10 @@
             this.nuevaDireccion.listIndicador = this.def.listIndicador;
             this.cont_render = 0;
         }
+
+        if($('[data-fieldname="lead_direcciones"] > span').length >0){
+            $('[data-fieldname="lead_direcciones"] > span').show();
+        }
     },
 
     getInfoAboutCP: function (evt) {

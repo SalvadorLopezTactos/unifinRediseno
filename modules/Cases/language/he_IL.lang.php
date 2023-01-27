@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'לדוגמא, אתה יכול להשתמש בזה למציאת נושא שדווח בעבר',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'אם יש פניית שירות חדשה שברצונך לפתוח, הקלק כאן',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'הקלקה כאן תחזיר אותך לתצוגה זו בכל עת',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'אינטראקציות לגבי פניות שירות',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של האירוע',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'הערות',
 

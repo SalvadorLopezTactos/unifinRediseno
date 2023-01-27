@@ -44,6 +44,27 @@ class PMSELogicHook
     }
 
     /**
+     * Function for relationship hook trigger
+     * @param SugarBean $bean
+     * @param string $event
+     * @param array $arguments
+     * @return bool
+     */
+    public function after_relationship($bean, $event, $arguments)
+    {
+        if (!$this->isSugarInstalled()) {
+            return true;
+        }
+
+        if (!PMSEEngineUtils::hasActiveProcesses($bean)) {
+            return true;
+        }
+        //Define PA Hook Handler
+        $handler = ProcessManager\Factory::getPMSEObject('PMSEHookHandler');
+        return $handler->runStartEventAfterRelationship($bean, $event, $arguments);
+    }
+
+    /**
      * Checks to see if Sugar is installed. Returns false when Sugar is in the process
      * of installation
      * @return boolean

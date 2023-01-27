@@ -32,7 +32,6 @@
 <script type="text/javascript" language="Javascript">
 SUGAR.ajaxLoad = true;
 var html_editor = '{$HTML_EDITOR|escape:javascript}';
-{literal}
 var setupMCE = function() {
     ModuleBuilder.tabPanel.get("activeTab").on("remove", function() {
 		tinyMCE.execCommand('mceRemoveControl', false, 'htmlarea');
@@ -61,7 +60,6 @@ document.popup_form.presave = function(){
     }
     document.getElementById('ext4').style.display = '';
 };
-{/literal}
 {if $hideLevel < 5}
 	setTimeout("setupMCE();", 500);
 {/if}

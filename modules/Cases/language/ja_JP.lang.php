@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => '例えば、以前に提出された問題を見つけるためにこれを使う事ができます。',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => '提出したい新しいサポートケースがあるのであれば、ここをクリックすることにより新しいケースを提出できます。',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'ここをクリックすることによりいつでもこのビューに戻ることができます。',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ケース対話',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '案件のタイムライン',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'メモ',
 

@@ -14,11 +14,15 @@
  * @extends View.Layout
  */
 ({
+    cache: null,
+
     /**
      * Listen to events to resize the header to fit the browser width
      * @param options
      */
     initialize: function(options) {
+        this.cache = app[app.config.authStore || 'cache'];
+
         app.view.Layout.prototype.initialize.call(this, options);
         this.on('header:update:route', this.resize, this);
         app.events.on('app:view:change', this.resize, this);
@@ -30,6 +34,11 @@
         $(window)
             .off('resize.header')
             .on('resize.header', resize);
+
+        if (this.cache.has('ImpersonationFor')) {
+            app.$rootEl.addClass('banner-shifted');
+            $('#nprogress').addClass('banner-shifted');
+        }
     },
 
     /**

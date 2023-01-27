@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Alle dashbord for modulen {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Alle dashbord for modulen {{module}} visning {{view}}',
     'LBL_COPY_OF' => 'Kopi av {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Fokusskuff-instrumentpaneler kan ikke slettes.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Opprett dashbord',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Er du sikker på at du vil gjenopprette dette instrumentpanelet til standardlayout?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Er du sikker på at du vil gjenopprette dashbordet til sitt standardoppsett?',
+    'LBL_FILTER_UTILS_SELECT' => 'Tildelt',
 );

@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Preporučen od',
     'LBL_LIST_STATUS' => 'Status',
     'LBL_LIST_TITLE' => 'Titula',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Predviđanje u pogledu interesa na tržištu',
+    'LBL_MARKET_SCORE' => 'Tržišna ocena',
     'LBL_MOBILE_PHONE' => 'Mob. telefon:',
     'LBL_MODULE_NAME' => 'Potencijalni klijenti',
     'LBL_MODULE_NAME_SINGULAR' => 'Potencijalni klijent',
@@ -330,4 +332,9 @@ After confirming each required and desired module, click the Save and Convert bu
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Prognoza konverzije potencijalnih klijenata',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Prikaži pojedinosti o prognozi za određenog potencijalnog klijenta',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Omogući stavke prihoda',
+    'LBL_REQUIRE_RLIS' => 'Zahtevaj stavke prihoda pri izradi nove prilike',
+    'LBL_COPY_DATA_RLIS' => 'Kopiraj podatke potencijalnog klijenta u stavke prihoda pri izradi nove prilike',
 );

@@ -23,6 +23,16 @@ class DataArchiverApi extends ModuleApi
     private $archiver;
 
     /**
+     * Array that contains required filter fields for specific modules
+     * @var string[][]
+     */
+    protected $moduleRequirements = [
+        'pmse_Inbox' => [
+            'cas_status',
+        ],
+    ];
+
+    /**
      * Rest Api Registration Method
      *
      * @return array
@@ -67,6 +77,8 @@ class DataArchiverApi extends ModuleApi
 
         $criteria['filter'] = json_decode($bean->filter_def, true);
         $criteria['module'] = $module;
+
+        $this->verifyModuleRequirements($module, $criteria['filter']);
 
         $where = $this->applyCriteria($criteria);
         $this->archiver = new DbArchiver($module);
@@ -121,5 +133,29 @@ class DataArchiverApi extends ModuleApi
         // Use extended filterApi to access special method unique to DataArchiver
         $filterApi = new \DataArchiverFilterApi();
         return $filterApi->convertFiltersToWhere($criteria['filter'], $criteria['module']);
+    }
+
+    /**
+     * Verifies module specific requirements defined
+     * @param $module
+     * @param $filter
+     * @throws SugarApiExceptionInvalidParameter
+     */
+    private function verifyModuleRequirements($module, $filter)
+    {
+        // Throw an error if an archival process is attempted on a module that has requirements that are unsatisfied as a filter
+        // Throws at first instance of error
+        if (isset($this->moduleRequirements[$module])) {
+            $filterKeys = [];
+            foreach ($filter as $f) {
+                $filterKeys[] = array_keys($f)[0];
+            }
+            
+            foreach ($this->moduleRequirements[$module] as $req) {
+                if (!array_key_exists($req, array_flip($filterKeys))) {
+                    throw new SugarApiExceptionInvalidParameter($req, null, null, 0, 'ModuleReqError');
+                }
+            }
+        }
     }
 }

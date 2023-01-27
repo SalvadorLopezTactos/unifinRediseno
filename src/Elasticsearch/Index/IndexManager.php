@@ -182,10 +182,21 @@ class IndexManager
      * Verify if the system is ready to create/change indices.
      * @return boolean
      */
-    protected function readyForIndexChanges()
+    protected function readyForIndexChanges() : bool
     {
-        // force connectivity check
-        if (!$this->container->client->isAvailable(true)) {
+        $count = 0;
+        $available = false;
+        while ($count < 5) {
+            // force connectivity check
+            if ($this->container->client->isAvailable(true)) {
+                $available = true;
+                break;
+            }
+            $count++;
+            sleep(1);
+        }
+        if (!$available) {
+            $this->container->logger->critical('IndexManager: ES server is not available.');
             return false;
         }
         return $this->container->queueManager->pauseQueue();

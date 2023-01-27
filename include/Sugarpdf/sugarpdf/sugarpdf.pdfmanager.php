@@ -22,13 +22,6 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
     {
         parent::preDisplay();
 
-        // settings for disable smarty php tags
-        $this->ss->security_settings['PHP_TAGS'] = false;
-        $this->ss->security = true;
-        if (defined('SUGAR_SHADOW_PATH')) {
-            $this->ss->secure_dir[] = SUGAR_SHADOW_PATH;
-        }
-
         // header/footer settings
         $this->setPrintHeader(false);
         $this->setPrintFooter(true); // always print page number at least
@@ -49,6 +42,14 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                 $this->SetTitle($pdfTemplate->title);
                 $this->SetSubject($pdfTemplate->subject);
                 $this->SetKeywords($pdfTemplate->keywords);
+
+                /**
+                 * Serve converted Smarty template instead of the original one
+                 * @todo Remove in future release
+                 */
+                if (file_exists('./_smarty3_/' . $pdfTemplate->id)) {
+                    $pdfTemplate->body_html = file_get_contents('./_smarty3_/' . $pdfTemplate->id);
+                }
                 $this->templateLocation = $this->buildTemplateFile($pdfTemplate, $previewMode);
 
                 $headerLogo = '';
@@ -56,9 +57,9 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                     // Create a temporary copy of the header logo
                     // and append the original filename, so TCPDF can figure the extension
                     $uniqueNumber = rand(1, 500) / rand(1, 50);
-                    $headerLogo = 'upload/' . $uniqueNumber . '-' .
-                        $pdfTemplate->id . $pdfTemplate->header_logo;
-                    copy('upload/' . $pdfTemplate->id, $headerLogo);
+                    $headerLogo = 'upload://' . $uniqueNumber . '-' . $pdfTemplate->id . '.'
+                        . pathinfo($pdfTemplate->header_logo, PATHINFO_EXTENSION);
+                    copy('upload://' . $pdfTemplate->id, $headerLogo);
                 }
 
                 if (!empty($pdfTemplate->header_logo) ||
@@ -189,8 +190,8 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         parent::display();
 
         $headerdata = $this->getHeaderData();
-        // Remove the temporary logo copy (starts with "upload/") if exists
-        if (!empty($headerdata['logo']) && file_exists($headerdata['logo']) && strpos($headerdata['logo'], "upload/") === 0) {
+        // Remove the temporary logo copy (starts with "upload://") if exists
+        if (!empty($headerdata['logo']) && file_exists($headerdata['logo']) && strpos($headerdata['logo'], "upload://") === 0) {
             unlink($headerdata['logo']);
         }
     }
@@ -359,9 +360,10 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
 	    $source = 'upload://'.$file_name;
         $destination = "upload://{$note->id}";
 
-        if (!copy($source, $destination)){
+        if (!@copy($source, $destination)) {
             $msg = str_replace('$destination', $destination, translate('LBL_RENAME_ERROR', "Quotes"));
-            die($msg);
+            $GLOBALS["log"]->fatal($msg);
+            die('ERROR: can\'t copy pdf file to destination. You should try making the directory writable by the webserver');
         }
 
         @unlink($source);
@@ -532,9 +534,9 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
             $this->write1DBarcode($barcode, 'C128B', $this->GetX(), $cur_y + $line_width, $barcode_width, (($this->getFooterMargin() / 3) - $line_width), 0.3, '', '');
         }
         if (empty($this->pagegroups)) {
-            $pagenumtxt = $this->l['w_page'].' '.$this->getAliasNumPage().' / '.$this->getAliasNbPages();
+            $pagenumtxt = ($this->l['w_page'] ?? '') . ' ' . $this->getAliasNumPage() . ' / ' . $this->getAliasNbPages();
         } else {
-            $pagenumtxt = $this->l['w_page'].' '.$this->getPageNumGroupAlias().' / '.$this->getPageGroupAlias();
+            $pagenumtxt = ($this->l['w_page'] ?? '') . ' ' . $this->getPageNumGroupAlias() . ' / ' . $this->getPageGroupAlias();
         }
         $this->SetY($cur_y);
 

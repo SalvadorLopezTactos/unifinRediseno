@@ -120,7 +120,7 @@ class ForecastsDefaults
             // whether or not to show the likely column in the forecasts worksheets
             'show_worksheet_likely' => 1,
             // whether or not to show the best column in the forecasts worksheets
-            'show_worksheet_best' => 1,
+            'show_worksheet_best' => 0,
             // whether or not to show the worst column in the forecasts worksheets
             'show_worksheet_worst' => 0,
             // whether or not to show the likely total in the forecasts projected view
@@ -172,7 +172,6 @@ class ForecastsDefaults
                     'sales_stage',
                     'probability',
                     'likely_case',
-                    'best_case',
                 );
                 break;
         }

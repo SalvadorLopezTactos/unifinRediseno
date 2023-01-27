@@ -11,9 +11,11 @@
  */
 --}}
 <section id="list-basic">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <p>Documentation is available in the <a href="#Styleguide/docs/dashboards-dashlets">Dashlets documentation page</a> for the components that are commonly combined in a dashlet.</p>
 
@@ -27,12 +29,12 @@
   &lt;div class="btn-toolbar pull-right"&gt;
     &lt;span class="dashlet-toolbar"&gt;
       &lt;a data-dashletaction="toggleMinify" rel="tooltip" data-placement="bottom" title="Open/Close" class="dashlet-toggle btn btn-invisible minify"&gt;
-        &lt;i class="fa fa-chevron-up"&gt;&lt;/i&gt;
+        &lt;i class="sicon sicon-chevron-up"&gt;&lt;/i&gt;
       &lt;/a&gt;
     &lt;/span&gt;
     &lt;div class="btn-group"&gt;
         &lt;a data-toggle="dropdown" rel="tooltip" title="Configure" class="dropdown-toggle btn btn-invisible"&gt;
-          &lt;i data-action="loading" class="fa fa-cog"&gt;&lt;/i&gt;
+          &lt;i data-action="loading" class="sicon sicon-settings"&gt;&lt;/i&gt;
         &lt;/a&gt;
         &lt;ul class="dropdown-menu left"&gt;
           ...default config options...

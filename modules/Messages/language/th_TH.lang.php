@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'ดูข้อความรายงาน',
     'LNK_IMPORT_MESSAGES' => 'นำเข้าข้อความ',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'ID ผู้สนใจ',
+    'LBL_LEAD_NAME' => 'ผู้สนใจ',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'การสนทนาฝั่งลูกค้า',
+    'LBL_ACTIVITY_CUSTOMER' => 'ลูกค้า',
+    'LBL_ACTIVITY_FINISHED' => 'สิ้นสุดแล้ว',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'อยู่ระหว่างดำเนินการ',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'ข้อความระบบลิ้นชัก',
 ];

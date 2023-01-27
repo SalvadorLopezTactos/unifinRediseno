@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('modules/Reports/templates/templates_group_chooser.php');
 require_once('modules/Reports/templates/templates_reports_functions_js.php');
 require_once('modules/Reports/templates/templates_list_view.php');
 require_once('modules/Reports/templates/templates_reports_request_js.php');
@@ -594,7 +593,8 @@ function hasReportFilterModified($reportId, $filtersContent) {
 
 } // fn
 
-function saveReportFilters($reportId, $filtersContent) {
+function saveReportFilters($reportId, $filtersContent, $saveAll = false)
+{
 	$reportCache = new ReportCache();
 	$reportCache->retrieve($reportId);
 	if (empty($reportCache->id)) {
@@ -602,7 +602,7 @@ function saveReportFilters($reportId, $filtersContent) {
 		$reportCache->new_with_id = true;
 	}
 	$reportCache->contents = $filtersContent;
-	$reportCache->save();
+    $reportCache->save($saveAll);
 	return $reportCache;
 } // fn
 
@@ -652,198 +652,6 @@ function getReportDetailViewString(&$reporter,&$args) {
 	$detailViewString = $detailViewString . "</tr></table>";
 	return $detailViewString;
 }
-
-function template_reports_report(&$reporter,&$args) {
-
-	global $current_user;
-	global $current_language;
-	global $mod_strings, $app_strings;
-	global $sugar_config, $sugar_version;
-
-	$sort_by = '';
-	$sort_dir = '';
-	$summary_sort_by = '';
-	$summary_sort_dir = '';
-	$report_type = '';
-
-
-	$smarty = new Sugar_Smarty();
-
-	if (isset($reporter->report_def['order_by'][0]['name']) && isset($reporter->report_def['order_by'][0]['table_key'])) {
-		$sort_by = $reporter->report_def['order_by'][0]['table_key'].":".$reporter->report_def['order_by'][0]['name'];
-	} // if
-	if (isset($reporter->report_def['order_by'][0]['sort_dir'])) {
-		$sort_dir = $reporter->report_def['order_by'][0]['sort_dir'];
-	} // if
-
-	if ( ! empty($reporter->report_def['summary_order_by'][0]['group_function']) && $reporter->report_def['summary_order_by'][0]['group_function'] == 'count') {
-
-            $summary_sort_by = $reporter->report_def['summary_order_by'][0]['table_key'].":".'count';
-	} else if ( isset($reporter->report_def['summary_order_by'][0]['name'])) {
-		$summary_sort_by = $reporter->report_def['summary_order_by'][0]['table_key'].":".$reporter->report_def['summary_order_by'][0]['name'];
-
-		if ( ! empty($reporter->report_def['summary_order_by'][0]['group_function'])) {
-			$summary_sort_by .=":". $reporter->report_def['summary_order_by'][0]['group_function'];
-		} else if ( ! empty($reporter->report_def['summary_order_by'][0]['column__function'])) {
-	    	$summary_sort_by .=":". $reporter->report_def['summary_order_by'][0]['column_function'];
-	    } // else if
-	} // else if
-
-	if ( isset($reporter->report_def['summary_order_by'][0]['sort_dir'])) {
-		$summary_sort_dir = $reporter->report_def['summary_order_by'][0]['sort_dir'];
-	} // if
-	if ( isset($reporter->report_def['report_type'])) {
-		$report_type = $reporter->report_def['report_type'];
-	} // if
-
-	$issetSaveResults = false;
-	$isSaveResults = false;
-	$request = InputValidation::getService();
-	$saveReportAs = $request->getValidInputRequest('save_report_as');
-	if (isset($args['save_result'])) {
-		$issetSaveResults = true;
-		$smarty->assign('save_report_as_str', $saveReportAs);
-		if($args['save_result']) {
-			$isSaveResults = true;
-		} // if
-	} // if
-
-	$smarty->assign('mod_strings', $mod_strings);
-	$smarty->assign('app_strings', $app_strings);
-	$smarty->assign('current_language', $current_language);
-	$smarty->assign('sugar_config', $sugar_config);
-	$smarty->assign('sugar_version', $sugar_version);
-	$smarty->assign('issetSaveResults', $issetSaveResults);
-	$smarty->assign('isSaveResults', $isSaveResults);
-	$smarty->assign('report_type', $report_type);
-
-    $form_header = get_form_header(
-        $mod_strings['LBL_TITLE'] . ": "
-        . htmlspecialchars($args['reporter']->saved_report->name, ENT_QUOTES, 'UTF-8'),
-        "",
-        false
-    );
-	$smarty->assign('form_header', $form_header);
-	$smarty->assign('report_offset', $reporter->report_offset);
-	$smarty->assign('sort_by', $sort_by);
-	$smarty->assign('sort_dir', $sort_dir);
-	$smarty->assign('summary_sort_by', $summary_sort_by);
-	$smarty->assign('summary_sort_dir', $summary_sort_dir);
-
-	$saveAs = $request->getValidInputRequest('save_as');
-	$record = $request->getValidInputRequest('record','Assert\Guid');
-
-	if ($saveAs !== null &&  $saveAs == 'true') {
-	    $report_id = '';
-	} else if (isset($reporter->saved_report->id) ) {
-	    $report_id = $reporter->saved_report->id;
-	} elseif (!empty($record)) {
-	    $report_id = $record;
-	} else {
-	    $report_id = '';
-	} // else
-
-	$smarty->assign('report_id', $report_id);
-	$smarty->assign('to_pdf', isset($_REQUEST['to_pdf']) ? $_REQUEST['to_pdf'] : "");
-	$smarty->assign('to_csv', isset($_REQUEST['to_csv']) ? $_REQUEST['to_csv'] : "");
-
-	if(!empty($args['reporter']->saved_report)) {
-	    $context = array("bean" => $args['reporter']->saved_report);
-	} else {
-	    $context = array();
-	}
-	$report_edit_access = SugarACL::checkAccess('Reports', 'edit', $context);
-	$smarty->assign('report_edit_access', $report_edit_access);
-	$report_delete_access = SugarACL::checkAccess('Reports', 'delete', $context);
-	$smarty->assign('report_delete_access', $report_delete_access);
-	$report_export_access = SugarACL::checkAccess('Reports', 'export', $context);
-	$smarty->assign('report_export_access', $report_export_access);
-	$smarty->assign('form_submit', empty($_REQUEST['form_submit']) ? false : $_REQUEST['form_submit']);
-
-	$global_json = getJSONobj();
-	global $ACLAllowedModules;
-	$ACLAllowedModules = getACLAllowedModules();
-	$smarty->assign('ACLAllowedModules', $global_json->encode(array_keys($ACLAllowedModules)));
-
-
-	$tabs = array();
-
-	array_push($tabs,array('title'=>$mod_strings['LBL_1_REPORT_ON'],'link'=>'module_join_tab','key'=>'module_join_tab'));
-	array_push($tabs,array('title'=>$mod_strings['LBL_2_FILTER'],'link'=>'filters_tab','key'=>'filters_tab'));
-	if ( $args['reporter']->report_type == 'tabular') {
-	  array_push($tabs,array('title'=>$mod_strings['LBL_3_GROUP'],'hidden'=>true,'link'=>'group_by_tab','key'=>'group_by_tab'));
-	  array_push($tabs,array('title'=>$mod_strings['LBL_3_CHOOSE'],'link'=>'columns_tab','key'=>'columns_tab'));
-	  array_push($tabs,array('title'=>$mod_strings['LBL_5_CHART_OPTIONS'],'hidden'=>true,'link'=>'chart_options_tab','key'=>'chart_options_tab'));
-	} else {
-	  array_push($tabs,array('title'=>$mod_strings['LBL_3_GROUP'],'link'=>'group_by_tab','key'=>'group_by_tab'));
-	  array_push($tabs,array('title'=>$mod_strings['LBL_4_CHOOSE'],'link'=>'columns_tab','key'=>'columns_tab'));
-	  array_push($tabs,array('title'=>$mod_strings['LBL_5_CHART_OPTIONS'],'link'=>'chart_options_tab','key'=>'chart_options_tab'));
-	}
-
-	$current_key = 'module_join_tab';
-	$tab_panel= new SugarWidgetTabs($tabs,$current_key,'showReportTab');
-	$smarty->assign('tab_panel_display', $tab_panel->display());
-
-	template_reports_tables($smarty, $args);
-
-	if( $reporter->report_type=='summary') {
-		$summary_display = '';
-	 	if ( $reporter->show_columns) {
-	 		$column_display = '';
-	 	} else {
-	  		$column_display = 'none';
-	 	} // else
-	} else {
-		 $summary_display = 'none';
-		 $column_display = '';
-	} // else
-
-	$summary_join_selector = '&nbsp;<div style="padding-bottom:2px">'.$mod_strings['LBL_MODULE'].': <select onChange="viewJoinChanged(this);" id="view_join_summary" name="view_join_summary"></select></div>';
-
-	$chooser_args_summary = array('id'=>'summary_table','title'=>$mod_strings['LBL_CHOOSE_SUMMARIES'].':','left_name'=>'display_summary','right_name'=>'hidden_summary','left_label'=>$mod_strings['LBL_DISPLAY_SUMMARIES'],'right_label'=>$summary_join_selector,'display'=>$summary_display,'onmoveleft'=>'reload_columns(\'join\')','onmoveright'=>'reload_columns(\'join\')');
-
-	$join_selector = '&nbsp;<div style="padding-bottom:2px">'.$mod_strings['LBL_MODULE'].': <select onChange="viewJoinChanged(this);" id="view_join" name="view_join"></select></div>';
-
-	$chooser_args = array('id'=>'columns_table','title'=>$mod_strings['LBL_CHOOSE_COLUMNS'].':','left_name'=>'display_columns','right_name'=>'hidden_columns','left_label'=>$mod_strings['LBL_DISPLAY_COLUMNS'],'right_label'=>$join_selector,'display'=>$column_display,'topleftcontent'=>$join_selector,'onmoveleft'=>'reload_columns(\'join\')','onmoveright'=>'reload_columns(\'join\')');
-
-	$smarty->assign('template_grups_choosers1', template_groups_chooser($chooser_args_summary));
-
-	if ($summary_display == 'none') {
-		$smarty->assign('summary_display_style', "display:none");
-	} // if
-	if ($reporter->show_columns) {
-		$smarty->assign('show_columns_reports', true);
-	} // if
-	$smarty->assign('column_display', $column_display);
-
-	$smarty->assign('template_grups_choosers2', template_groups_chooser($chooser_args));
-	template_reports_filters($smarty, $args);
-	$smarty->assign('reporter_report_type', $args['reporter']->report_type);
-	template_reports_group_by($smarty, $args);
-	template_reports_chart_options($smarty, $args);
-	$smarty->assign('md5_current_user_id', md5($current_user->id));
-	$smarty->assign('args_image_path', $args['IMAGE_PATH']);
-	template_reports_request_vars_js($smarty, $reporter,$args);
-	$smarty->assign('cache_path', sugar_cached(''));
-
-    // Set fiscal start date
-    $admin = BeanFactory::newBean('Administration');
-    $config = $admin->getConfigForModule('Forecasts', 'base');
-    if (!empty($config['is_setup']) && !empty($config['timeperiod_start_date'])) {
-        $smarty->assign("fiscalStartDate", $config['timeperiod_start_date']);
-    }
-
-    $smarty->assign('ENTROPY', mt_rand());
-	echo $smarty->fetch("modules/Reports/templates/_template_reports_report.tpl");
-
-ob_start();
-?>
-<script language="javascript">
-if(typeof YAHOO != 'undefined') YAHOO.util.Event.addListener(window, 'load', load_page);
-</script>
-<?php
-reportResults($reporter, $args);
-} // fn
 
 function reportResults(&$reporter, &$args) {
 	ob_start();
@@ -995,6 +803,8 @@ function template_reports_chart_options(&$smarty, &$args) {
 		'pieF'=>$mod_strings['LBL_PIE'],
 		'funnelF'=>$mod_strings['LBL_FUNNEL'],
 		'lineF'=>$mod_strings['LBL_LINE'],
+        'donutF' => $mod_strings['LBL_DONUT'],
+        'treemapF' => $mod_strings['LBL_TREEMAP'],
 	);
 	$chart_description = htmlentities($reporter->chart_description, ENT_QUOTES, 'UTF-8');
 	$smarty->assign('mod_strings', $mod_strings);

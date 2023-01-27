@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Sjablonen weergeven',
     'LNK_LIST_KBCATEGORIES' => 'Categorieën weergeven',
     'LBL_TEMPLATES' => 'Sjablonen',
+    'LBL_TEMPLATE' => 'Sjabloon',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Het sjabloon zal alle inhoud overschrijven.' .
         ' Weet u het zeker dat u dit sjabloon wilt gebruiken?',
     'LNK_IMPORT_KBCONTENTS' => 'Artikelen importeren',

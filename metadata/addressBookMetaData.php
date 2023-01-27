@@ -113,13 +113,6 @@ $dictionary['AddressBookMailingListItems'] = array ('table' => 'address_book_lis
 		),
 	),
 	'indices' => array (
-		array(
-			'name' => 'abli_list_id_idx',
-			'type' =>'index',
-			'fields' => array(
-				'list_id',
-			)
-		),
                 array(
                     'name' => 'idx_abli_pk',
                     'type' =>'primary',

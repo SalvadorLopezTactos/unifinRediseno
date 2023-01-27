@@ -70,7 +70,7 @@ class MetaDataCache implements LoggerAwareInterface
         return $this->db
             ->getConnection()
             ->executeQuery('SELECT type FROM ' . static::$cacheTable)
-            ->fetchAll(\PDO::FETCH_COLUMN);
+            ->fetchFirstColumn();
     }
 
     public function reset()
@@ -176,7 +176,7 @@ class MetaDataCache implements LoggerAwareInterface
      * return last modified db row by type
      * @param $type
      * @return array|null
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     protected function getLastModifiedByType($type)
     {
@@ -189,10 +189,10 @@ class MetaDataCache implements LoggerAwareInterface
             sprintf('SELECT id, data FROM %s WHERE type = ? ORDER BY date_modified DESC', static::$cacheTable),
             array($type)
         );
-        $result = $stmt->fetch();
+        $result = $stmt->fetchAssociative();
         if ($result) {
             //If we have more than one entry for the same key, we need to remove the duplicate entries.
-            while ($row = $stmt->fetch()) {
+            while ($row = $stmt->fetchAssociative()) {
                 $conn->delete(static::$cacheTable, array('id' => $row['id']));
             }
         }

@@ -235,7 +235,8 @@
                     } else {
                         alert = this._buildAlertForReset();
                     }
-                } else if (this.massCollection.entire) {
+                } else if (this.massCollection.entire ||
+                    (this.massCollection.length > 0 && this.independentMassCollection)) {
                     alert = this._buildAlertForReset();
                 }
                 if (alert) {
@@ -244,7 +245,6 @@
                     this.layout.trigger('list:alert:hide');
                 }
             },
-
 
 
             /**
@@ -259,6 +259,9 @@
              */
             _buildAlertForReset: function(offset) {
                 var self = this;
+                if (_.isUndefined(this._selectedOffsetTpl)) {
+                    return null;
+                }
                 var alert = $('<span></span>').append(this._selectedOffsetTpl({
                     offset: offset,
                     num: this.massCollection.length,

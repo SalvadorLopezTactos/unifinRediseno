@@ -45,7 +45,7 @@ $viewdefs['base']['view']['active-tasks'] = array(
             array(
                 'type' => 'actiondropdown',
                 'no_default_action' => true,
-                'icon' => 'fa-plus',
+                'icon' => 'sicon-plus',
                 'buttons' => array(
                     array(
                         'type' => 'dashletaction',
@@ -125,7 +125,7 @@ $viewdefs['base']['view']['active-tasks'] = array(
             'row_actions' => array(
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-times-circle',
+                    'icon' => 'sicon-remove',
                     'css_class' => 'btn btn-mini',
                     'event' => 'active-tasks:close-task:fire',
                     'target' => 'view',
@@ -134,7 +134,7 @@ $viewdefs['base']['view']['active-tasks'] = array(
                 ),
                 array(
                     'type' => 'unlink-action',
-                    'icon' => 'fa-chain-broken',
+                    'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
                     'event' => 'tabbed-dashlet:unlink-record:fire',
                     'target' => 'view',
@@ -167,7 +167,7 @@ $viewdefs['base']['view']['active-tasks'] = array(
             'row_actions' => array(
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-times-circle',
+                    'icon' => 'sicon-remove',
                     'css_class' => 'btn btn-mini',
                     'event' => 'active-tasks:close-task:fire',
                     'target' => 'view',
@@ -176,7 +176,7 @@ $viewdefs['base']['view']['active-tasks'] = array(
                 ),
                 array(
                     'type' => 'unlink-action',
-                    'icon' => 'fa-chain-broken',
+                    'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
                     'event' => 'tabbed-dashlet:unlink-record:fire',
                     'target' => 'view',
@@ -203,7 +203,7 @@ $viewdefs['base']['view']['active-tasks'] = array(
             'row_actions' => array(
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-times-circle',
+                    'icon' => 'sicon-remove',
                     'css_class' => 'btn btn-mini',
                     'event' => 'active-tasks:close-task:fire',
                     'target' => 'view',
@@ -212,7 +212,7 @@ $viewdefs['base']['view']['active-tasks'] = array(
                 ),
                 array(
                     'type' => 'unlink-action',
-                    'icon' => 'fa-chain-broken',
+                    'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
                     'event' => 'tabbed-dashlet:unlink-record:fire',
                     'target' => 'view',

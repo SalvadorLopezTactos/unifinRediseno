@@ -379,7 +379,7 @@ class MailApi extends ModuleApi
                 $retrieveOptions = ['erased_fields' => true, 'encode' => false, 'use_cache' => false];
             }
             foreach ($records as $idx => $record) {
-                $bean = BeanFactory::retrieveBean($record['_module'], $record['id'], $retrieveOptions);
+                $bean = $this->getBeanFromServiceRecord($record, $retrieveOptions);
                 if (!isset($apiHelpers[$record['_module']])) {
                     $apiHelpers[$record['_module']] = ApiHelper::getHelper($api, $bean);
                 }
@@ -394,6 +394,33 @@ class MailApi extends ModuleApi
             "next_offset" => $nextOffset,
             "records" => $records,
         );
+    }
+
+    /**
+     * Gets a bean from a record provided by the EmailRecipientsService find()
+     * method. Gets the bean using list view permissions.
+     *
+     * @param array $record
+     * @param array $retrieveOptions
+     *
+     * @returns SugarBean
+     */
+    protected function getBeanFromServiceRecord(array $record, array $retrieveOptions = array()): SugarBean
+    {
+        $seed = BeanFactory::newBean($record['_module']);
+        if (!$seed->ACLAccess('list')) {
+            throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $record['_module']);
+        }
+        $q = new SugarQuery(DBManagerFactory::getInstance('listviews'));
+        $q->from($seed, $retrieveOptions);
+        $q->where()->equals('id', $record['id']);
+        $beans = $seed->fetchFromQuery($q);
+
+        $bean = array_shift($beans);
+        if (is_null($bean)) {
+            throw new SugarApiExceptionError('Record not found in fetch: ' . $record['_module'] . ':' . $record['id']);
+        }
+        return $bean;
     }
 
     /**

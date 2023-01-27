@@ -103,6 +103,8 @@ $renamedefs = array(
             array('name' => 'LBL_GUEST_SCHEDULED_CALLS', 'type' => 'plural', 'source' => 'Calls'),
             array('name' => 'LBL_CALLS_FOCUS_DRAWER_DASHBOARD', 'type' => 'plural', 'source' => 'Calls'),
             ['name' => 'LBL_CALLS_RECORD_DASHBOARD', 'type' => 'plural', 'source' => 'Calls',],
+            ['name' => 'LBL_LEAD_ID', 'type' => 'singular', 'source' => 'Leads'],
+            ['name' => 'LBL_LEAD_NAME', 'type' => 'singular', 'source' => 'Leads'],
         ),
         'Campaigns' => array(
             array('name' => 'LBL_ACCOUNTS', 'type' => 'plural', 'source' => 'Accounts'),
@@ -220,6 +222,9 @@ $renamedefs = array(
             array('name' => 'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD', 'type' => 'plural', 'source' => 'DataPrivacy'),
             ['name' => 'LBL_DATA_PRIVACY_RECORD_DASHBOARD', 'type' => 'plural', 'source' => 'DataPrivacy',],
         ),
+        'DocumentRevisions' => [
+            ['name' => 'LBL_REVISIONS_FOR_DOC', 'type' => 'singular', 'source' => 'Documents'],
+        ],
         'Documents' => array(
             array('name' => 'LBL_MODULE_TITLE', 'type' => 'plural', 'source' => 'Documents'),
             array('name' => 'LBL_DOC_REV_HEADER', 'type' => 'singular', 'source' => 'Documents'),
@@ -250,6 +255,8 @@ $renamedefs = array(
             array('name' => 'LBL_DOC_ID', 'type' => 'singular', 'source' => 'Documents'),
             array('name' => 'LBL_DOC_URL', 'type' => 'singular', 'source' => 'Documents'),
             array('name' => 'LBL_BUGS_SUBPANEL_TITLE', 'type' => 'plural', 'source' => 'Bugs'),
+            ['name' => 'LBL_DOCUMENTS_RECORD_DASHBOARD', 'type' => 'plural', 'source' => 'Documents'],
+            ['name' => 'LBL_MY_DOCUMENTS', 'type' => 'plural', 'source' => 'Documents'],
         ),
         'Emails' => array(
             array('name' => 'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD', 'type' => 'plural', 'source' => 'Emails'),
@@ -268,6 +275,7 @@ $renamedefs = array(
             ['name' => 'LBL_EMAILS_PRODUCTS_REL', 'type' => 'plural', 'source' => 'Products'],
             ['name' => 'LBL_EMAILS_REVENUELINEITEMS_REL', 'type' => 'plural', 'source' => 'RevenueLineItems'],
             ['name' => 'LBL_EMAILS_QUOTES_REL', 'type' => 'plural', 'source' => 'Quotes'],
+            ['name' => 'LBL_EMAILS_ESCALATIONS_REL', 'type' => 'plural', 'source' => 'Escalations'],
             ['name' => 'LBL_EMAILS_MESSAGES_REL', 'type' => 'plural', 'source' => 'Messages'],
             ['name' => 'LBL_EMAILS_PURCHASES_REL', 'type' => 'plural', 'source' => 'Purchases'],
             ['name' => 'LBL_EMAILS_PURCHASEDLINEITEMS_REL', 'type' => 'plural', 'source' => 'PurchasedLineItems'],
@@ -280,6 +288,9 @@ $renamedefs = array(
             array('name' => 'LBL_MODULE_NAME', 'type' => 'singular', 'source' => 'EmailParticipants'),
             array('name' => 'LBL_MODULE_NAME_SINGULAR', 'type' => 'singular', 'source' => 'EmailParticipants'),
         ),
+        'Escalations' => [
+            ['name' => 'LBL_ESCALATIONS_FOCUS_DRAWER_DASHBOARD', 'type' => 'plural', 'source' => 'Escalations'],
+        ],
         'Forecasts' => array(
             array('name' => 'LNK_NEW_OPPORTUNITY', 'type' => 'singular', 'source' => 'Opportunities'),
             array('name' => 'LBL_MODULE_TITLE', 'type' => 'plural', 'source' => 'Forecasts'),
@@ -569,6 +580,12 @@ $renamedefs = array(
             ['name' => 'LBL_LEADS_RECORD_DASHBOARD', 'type' => 'plural', 'source' => 'Leads',],
             array('name' => 'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME', 'type' => 'plural', 'source' => 'Leads'),
             array('name' => 'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC', 'type' => 'singular', 'source' => 'Leads'),
+            ['name' => 'LBL_ENABLE_RLIS', 'type' => 'plural', 'source' => 'RevenueLineItems'],
+            ['name' => 'LBL_REQUIRE_RLIS', 'type' => 'plural', 'source' => 'RevenueLineItems'],
+            ['name' => 'LBL_REQUIRE_RLIS', 'type' => 'singular', 'source' => 'Opportunities'],
+            ['name' => 'LBL_COPY_DATA_RLIS', 'type' => 'singular', 'source' => 'Leads'],
+            ['name' => 'LBL_COPY_DATA_RLIS', 'type' => 'plural', 'source' => 'RevenueLineItems'],
+            ['name' => 'LBL_COPY_DATA_RLIS', 'type' => 'singular', 'source' => 'Opportunities'],
         ),
         'Manufacturers' => array(
             array('name' => 'LNK_NEW_PRODUCT', 'type' => 'singular', 'source' => 'ProductTemplates'),
@@ -612,6 +629,12 @@ $renamedefs = array(
             ['name' => 'LBL_LEAD_GUESTS', 'type' => 'singular', 'source' => 'Leads',],
             ['name' => 'LBL_CONTACT_GUESTS', 'type' => 'singular', 'source' => 'Contacts',],
         ),
+        'Messages' => [
+            ['name' => 'LBL_CONTACT_ID', 'type' => 'singular', 'source' => 'Contacts'],
+            ['name' => 'LBL_CONTACT_NAME', 'type' => 'singular', 'source' => 'Contacts'],
+            ['name' => 'LBL_LEAD_ID', 'type' => 'singular', 'source' => 'Leads'],
+            ['name' => 'LBL_LEAD_NAME', 'type' => 'singular', 'source' => 'Leads'],
+        ],
         'ModuleBuilder' => array(
             array('name' => 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_NEW', 'type' => 'plural', 'source' => 'Opportunities'),
             array('name' => 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_NEW', 'type' => 'singular', 'source' => 'RevenueLineItems'),
@@ -685,6 +708,7 @@ $renamedefs = array(
             array('name' => 'LBL_PRODUCTS_SUBPANEL_TITLE', 'type' => 'plural', 'source' => 'Products'),
             array('name' => 'LBL_TOTAL_RLIS', 'type' => 'plural', 'source' => 'RevenueLineItems'),
             array('name' => 'LBL_CLOSED_RLIS', 'type' => 'plural', 'source' => 'RevenueLineItems'),
+            ['name' => 'LBL_CLOSED_WON_RLIS', 'type' => 'plural', 'source' => 'RevenueLineItems'],
             array('name' => 'NOTICE_NO_DELETE_CLOSED_RLIS', 'type' => 'plural', 'source' => 'Opportunities'),
             array('name' => 'NOTICE_NO_DELETE_CLOSED_RLIS', 'type' => 'plural', 'source' => 'RevenueLineItems'),
             array('name' => 'LBL_RLI', 'type' => 'plural', 'source' => 'RevenueLineItems'),
@@ -719,6 +743,10 @@ $renamedefs = array(
             array('name' => 'LBL_RENEWAL_PARENT', 'type' => 'singular', 'source' => 'Opportunities'),
             array('name' => 'LBL_RENEWAL_OPPORTUNITY', 'type' => 'singular', 'source' => 'Opportunities'),
             array('name' => 'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD', 'type' => 'plural', 'source' => 'Opportunities'),
+            ['name' => 'LBL_CASCADE_RLI_EDIT', 'type' => 'plural', 'source' => 'RevenueLineItems'],
+            ['name' => 'LBL_CASCADE_RLI_CREATE', 'type' => 'plural', 'source' => 'RevenueLineItems'],
+            ['name' => 'LBL_CASCADE_SERVICE_WARNING', 'type' => 'plural', 'source' => 'RevenueLineItems'],
+            ['name' => 'LBL_CASCADE_DURATION_WARNING', 'type' => 'plural', 'source' => 'RevenueLineItems'],
             array('name' => 'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME', 'type' => 'singular', 'source' => 'Opportunities'),
             array('name' => 'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC', 'type' => 'singular', 'source' => 'Opportunities'),
         ),
@@ -1021,6 +1049,7 @@ $renamedefs = array(
             array('name' => 'LNK_NEW_TASK', 'type' => 'singular', 'source' => 'Tasks'),
             array('name' => 'LBL_ACCOUNTS', 'type' => 'plural', 'source' => 'Accounts'),
             array('name' => 'LBL_OPPORTUNITIES', 'type' => 'plural', 'source' => 'Opportunities'),
+            ['name' => 'LBL_REVENUELINEITEMS', 'type' => 'plural', 'source' => 'RevenueLineItems'],
             array('name' => 'LBL_CONTACTS', 'type' => 'plural', 'source' => 'Contacts'),
             array('name' => 'LBL_LEADS', 'type' => 'plural', 'source' => 'Leads'),
             array('name' => 'LBL_ACCOUNT', 'type' => 'singular', 'source' => 'Accounts'),
@@ -1167,6 +1196,7 @@ $renamedefs = array(
             array('name' => 'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT', 'type' => 'singular', 'source' => 'Opportunities'),
             array('name' => 'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT', 'type' => 'singular', 'source' => 'ProductTemplates'),
             array('name' => 'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT', 'type' => 'plural', 'source' => 'Currencies'),
+            array('name' => 'LBL_FAVORITE_REPORTS', 'type' => 'plural', 'source' => 'Reports'),
         ),
     ),
     'global' => array(
@@ -1292,6 +1322,7 @@ $renamedefs = array(
 
         // Leads
         array('name' => 'LBL_HELP_PREVIEW', 'type' => 'plural', 'source' => 'Leads'),
+        ['name' => 'LBL_LEAD', 'type' => 'singular', 'source' => 'Leads'],
 
         // Meetings
         array('name' => 'LBL_MEETINGS', 'type' => 'plural', 'source' => 'Meetings'),
@@ -1344,6 +1375,7 @@ $renamedefs = array(
         array('name' => 'LBL_GENERATE_QUOTE', 'type' => 'singular', 'source' => 'Quotes'),
         array('name' => 'LBL_QUOTES_SHIP_TO', 'type' => 'plural', 'source' => 'Quotes'),
         array('name' => 'LBL_QUOTES', 'type' => 'plural', 'source' => 'Quotes'),
+        ['name' => 'LBL_QUOTES_BILL_TO', 'type' => 'plural', 'source' => 'Quotes'],
 
         // Revenue Line Item(s)
         array('name' => 'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME', 'type' => 'plural', 'source' => 'RevenueLineItems'),

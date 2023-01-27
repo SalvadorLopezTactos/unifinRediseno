@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Идентификатор дохода по продуктам в продлеваемой сделке',
     'LBL_PARENT_RLIS' => 'Исходные позиции статьи доходов',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Исходные позиции статьи доходов',
+    'LBL_FORECASTED_LIKELY' => 'Наиболее вероятные прогнозы',
     'LBL_EXPERT_ID' => 'Эксперт по продукту',
     'LBL_FORECAST' => 'Внести в прогноз',
     'LBL_SUBTOTAL' => 'Промежуточная сумма',

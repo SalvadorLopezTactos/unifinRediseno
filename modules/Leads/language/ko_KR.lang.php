@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => '추천인',
     'LBL_LIST_STATUS' => '상태',
     'LBL_LIST_TITLE' => '직급',
+    'LBL_MARKET_INTEREST_PREDICTION' => '시장 관심도 예측',
+    'LBL_MARKET_SCORE' => '시장 점수',
     'LBL_MOBILE_PHONE' => '휴대폰번호',
     'LBL_MODULE_NAME' => '관심고객',
     'LBL_MODULE_NAME_SINGULAR' => '관심고객',
@@ -318,4 +320,9 @@ $mod_strings = array (
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => '리드 전환 예측',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => '특정 관심고객에 대한 예측 정보 보기',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => '매출 라인 품목 활성화',
+    'LBL_REQUIRE_RLIS' => '신규 영업기회 생성 시 매출 라인 품목 필요',
+    'LBL_COPY_DATA_RLIS' => '신규 영업기회 생성 시 리드의 데이터를 매출 라인 품목으로 복사',
 );

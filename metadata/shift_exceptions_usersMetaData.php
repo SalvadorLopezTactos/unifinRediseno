@@ -45,13 +45,6 @@ $dictionary['shift_exceptions_users'] = [
             ],
         ],
         [
-            'name' => 'idx_shift_exception_id',
-            'type' => 'index',
-            'fields' => [
-                'shift_exception_id',
-            ],
-        ],
-        [
             'name' => 'shift_exceptions_idx_user_id',
             'type' => 'alternate_key',
             'fields' => [

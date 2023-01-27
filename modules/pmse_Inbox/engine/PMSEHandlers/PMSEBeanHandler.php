@@ -281,7 +281,8 @@ class PMSEBeanHandler
                     }
                 }
 
-                if ($data['rel_module'] === pmse_Emails_Templates_sugar::CURRENT_ACTIVITY_LINK) {
+                if (isset($data['rel_module']) &&
+                    $data['rel_module'] === pmse_Emails_Templates_sugar::CURRENT_ACTIVITY_LINK) {
                     $replace[$data['original']] = $this->getCurrentActivityLink($bean);
                 } elseif ($data['value_type'] === 'href_link') {
                     $replace[$data['original']] = bpminbox_get_href($newBean, $fieldName, $value);

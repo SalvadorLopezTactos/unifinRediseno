@@ -1,8 +1,6 @@
 /* UTILITIES
   ----------------*/
 
-/* twitter-bootstrap import START */
-
 // Quick floats
 .pull-right {
   float: right;
@@ -13,6 +11,7 @@
 }
 
 // Toggling content
+.hidden,
 .hide {
   display: none;
 }
@@ -31,9 +30,8 @@
   position: fixed;
 }
 
-/* twitter-bootstrap import END */
-
 // Quick floats
+// DEPRECATED in favour of text-{alignment}
 .tcenter {
   text-align: center !important;
 }
@@ -47,7 +45,7 @@
 }
 
 .tbold {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .temph {
@@ -63,10 +61,587 @@
   min-width: 0 !important;
 }
 
-.padded {
-  padding: 20px;
+/*
+ * An ode to functional CSS. We aim to transform this file to make lives easier with reuse and composition.
+*/
+
+/**
+ * Mixin for iterating over normal utility classes.
+ * This will generate utilities with static options, such as flex.
+ * For example, it will generate `flex` which is display: flex and `block` which is display: block.
+ *
+ * @props - The CSS property(s) we want to generate a utility class for. Ex. width, height, display.
+ * @abbreviation - The abbreviation we want the utility class to have. Ex h for height.
+ * @n - The list of values to be used to populate utility classes.
+ */
+
+.generate-utility-class(@props, @abbreviation, @n) {
+  .-(@i: length(@n)) when (@i > 0) {
+    @class-name: extract(@n, @i);
+    .@{abbreviation}-@{class-name} when (iskeyword(@abbreviation)) {
+      .-(@j: length(@props)) when (@j > 0) {
+        @current-prop: extract(@props, @j);
+
+        @{current-prop}: @class-name;
+        .-(@j - 1);
+      }
+      .-;
+    }
+
+    .@{class-name} when (iskeyword(@abbreviation) = false) {
+      .-(@j: length(@props)) when (@j > 0) {
+        @current-prop: extract(@props, @j);
+
+        @{current-prop}: @class-name;
+        .-(@j - 1);
+      }
+      .-;
+    }
+    .-(@i - 1);
+  }
+  .-;
 }
 
-.width-auto {
-  width: auto;
+/**
+ * Mixin for generating numerical utility classes that have a rem-based value.
+ * This will generate classes that use REM values based on a 16px root element font size. The conversion is as follows:
+ * (pixel value / 16) * 4 will give the correct size to be used with the associated class.
+ * For example, if we need padding: 6px; (6 / 16) * 4 = 1.5. Thus, use p-1.5.
+ *
+ * @props - The CSS property(s) we want to generate a utility class for. Ex. width, height, display.
+ * @abbreviation - The abbreviation we want the utility class to have. Ex h for height, pl for padding-left.
+ * @n - The list of escaped strings to be used for the class names.
+ * @p - The list of values to be used to populate utility class values.
+ * @hasNegativeValues - A boolean, 0 or 1, for whether or not we want negative values, such as -m-1.5 for margin: -6px.
+ */
+
+.generate-rem-utility-class(@props, @abbreviation, @n, @p, @hasNegativeValues) {
+  .-(@i: length(@n)) when (@i > 0) {
+    @class-name: extract(@n, @i);
+    @current-value: extract(@p, @i);
+
+    .@{abbreviation}-@{class-name} {
+      .-(@j: length(@props)) when (@j > 0) {
+        @current-prop: extract(@props, @j);
+
+        @{current-prop}: (@current-value / 4) * 1rem;
+        .-(@j - 1);
+      }
+      .-;
+    }
+
+    .-@{abbreviation}-@{class-name} when (iskeyword(@hasNegativeValues) = true) {
+      .-(@k: length(@props)) when (@k > 0) {
+        @current-prop-neg: extract(@props, @k);
+
+        @{current-prop-neg}: (@current-value / 4) * -1rem;
+        .-(@k - 1);
+      }
+      .-;
+    }
+    .-(@i - 1);
+  }
+  .-;
+}
+
+/**
+ * Mixing for generating %-based utilities. Mainly used for width utilities.
+ * For example, this will generate classes like w-1/2 and w-3/5 which generates: width: 50% and width: 60%.
+ *
+ * @props - The CSS property(s) we want to generate a utility class for. Ex. width, height, display.
+ * @abbreviation - The abbreviation we want the utility class to have. Ex h for height, pl for padding-left.
+ * @n - The list of escaped strings to be used for the class names.
+ * @p - The list of values to be used to populate utility class values.
+ */
+
+.generate-percent-utility-class(@props, @abbreviation, @n, @p) {
+  .-(@i: length(@n)) when (@i > 0) {
+    @class-name: extract(@n, @i);
+    @class-value: extract(@p, @i);
+
+    .@{abbreviation}-@{class-name} {
+      .-(@j: length(@props)) when (@j > 0) {
+        @current-prop: extract(@props, @j);
+
+        @{current-prop}: percentage(@class-value);
+        .-(@j - 1);
+      }
+      .-;
+    }
+    .-(@i - 1);
+  }
+  .-;
+}
+
+/**
+ * Mixin for generating utility classes based on our colour palette. The
+ * For example, it is used by the `bg-{color}` utility. A class that adds background-color: var(--content-background)
+ * will look like: bg-content-background.
+ *
+ * @props - The CSS property(s) we want to generate a utility class for. Ex. background-color, color.
+ * @abbreviation - The abbreviation we want the utility class to have. Ex bg for background-color.
+ * @n - The list of variables that can be referenced for colors.
+ */
+
+.generate-color-utility-class(@prop, @abbreviation, @n) {
+  .-(@i: length(@n)) when (@i > 0) {
+    @class-name: extract(@n, @i);
+
+    .@{abbreviation}-@{class-name} {
+      @color-variable: ~"--@{class-name}";
+
+      @{prop}: var(@color-variable);
+    }
+    .-(@i - 1);
+  }
+  .-;
+}
+
+/**
+ * Generate display: _ utility class variations
+ * The classes available are: @displayOptions
+ */
+
+@displayOptions: block, inline-block, flex, table, table-row, table-cell, inline-flex;
+.generate-utility-class(display; 0; @displayOptions);
+
+/**
+ * Generate position: _ utility class variations
+ * The classes available are: @positionOptions
+ */
+
+@positionOptions: static, fixed, absolute, relative;
+.generate-utility-class(position; 0; @positionOptions);
+
+.sticky {
+  position: sticky;
+  position: -webkit-sticky;
+}
+
+/**
+ * Generate overflow: _ utility class variation
+ * The classes available are: overflow-{@overflowOptions}
+ *                            overflow-x-{@overflowOptions}
+ *                            overflow-y-{@overflowOptions}
+ */
+@overflowOptions: auto, hidden, clip, visible, scroll;
+.generate-utility-class(overflow; overflow; @overflowOptions);
+.generate-utility-class(overflow-x; overflow-x; @overflowOptions);
+.generate-utility-class(overflow-y; overflow-y; @overflowOptions);
+
+/**
+ * Generate flex-direction: _ utility class variations
+ * The classes available are: flex-{@flexDirectionOptions}
+ */
+
+@flexDirectionOptions: row, row-reverse, column, column-reverse;
+.generate-utility-class(flex-direction; flex; @flexDirectionOptions);
+
+/**
+ * Flex grow utility classes
+ */
+
+.flex-grow-0 { flex-grow: 0; }
+.flex-grow { flex-grow: 1; }
+
+/**
+ * Flex justify utility classes
+ */
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.justify-evenly { justify-content: space-evenly; }
+
+/**
+ * Generate text-align: _ utility class variations
+ * The classes available are: text-align-{alignment}
+ */
+
+@textAlignOptions: left, center, right, justify, initial;
+.generate-utility-class(text-align; text; @textAlignOptions);
+
+/**
+ * Generate color: _ utility class variations
+ * The classes available are: text-{color}
+ */
+.text-default { color: @textColor; }
+.text-label { color: @labelColor; }
+
+/**
+ * font-weight: _ utility class variations
+ */
+.font-normal { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+/**
+ * Generate align-items: _ utility class variations
+ * The classes available are: @alignOptions
+ */
+
+/**
+ * Generate vertical-align: _ utility class variations
+ * The classes available are: align-{alignment}
+ */
+
+@verticalAlignOptions: baseline, text-top, text-bottom, middle, top, bottom;
+.generate-utility-class(vertical-align; align; @verticalAlignOptions);
+
+@alignOptions: center, baseline, stretch;
+.generate-utility-class(align-items, items, @alignOptions);
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+
+// Array of values used to populate a subset of width, height and spacing utility classes
+@sizingOptionDecimals: ~"0", ~"0\.5", ~"0\.75", ~"1", ~"1\.5", ~"2", ~"2\.5", ~"3", ~"3\.5", ~"4", ~"5", ~"6", ~"7", ~"7\.5", ~"8", ~"9", ~"10", ~"11", ~"12", ~"15", ~"22\.5", ~"47\.5", ~"50", ~"92", ~"150";
+@sizingOptionValues: 0, 0.5, 0.75, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 7.5, 8, 9, 10, 11, 12, 15, 22.5, 47.5, 50, 92, 150;
+@layoutOptionFractions: ~"1\/2", ~"1\/3", ~"2\/3", ~"1\/4", ~"2\/4", ~"3\/4", ~"1\/5", ~"2\/5", ~"3\/5", ~"4\/5", ~"1\/6", ~"2\/6", ~"3\/6", ~"4\/6", ~"5\/6", ~"1\/12", ~"2\/12", ~"3\/12", ~"4\/12", ~"5\/12", ~"6\/12", ~"7\/12", ~"8\/12", ~"9\/12", ~"10\/12", ~"11\/12";
+@layoutOptionValues: 1/2, 1/3, 2/3, 1/4, 2/4, 3/4, 1/5, 2/5, 3/5, 4/5, 1/6, 2/6, 3/6, 4/6, 5/6, 1/12, 2/12, 3/12, 4/12, 5/12, 6/12, 7/12, 8/12, 9/12, 10/12, 11/12;
+
+/**
+ * Generate width: n utility class variations
+ * The classes available are: w-{size}, w-auto, w-full
+ */
+
+.generate-rem-utility-class(width; w; @sizingOptionDecimals; @sizingOptionValues; 0);
+.generate-percent-utility-class(width; w; @layoutOptionFractions; @layoutOptionValues);
+.generate-utility-class(width; w; auto);
+.w-full { width: 100%; }
+.w-min { width: min-content; }
+.w-max { width: max-content; }
+.w-screen { width: 100vw; }
+
+/**
+ * Generate max-width: n utility class variations
+ * The classes available are: max-w-{size}, max-w-full, max-w-screen
+ */
+
+.generate-rem-utility-class(max-width; max-w; @sizingOptionDecimals; @sizingOptionValues; 0);
+.max-w-full { max-width: 100%; }
+.max-w-screen { max-width: 100vw; }
+
+/**
+ * Generate min-width: n utility class variations
+ * The classes available are: min-w-{size}
+ */
+
+.generate-rem-utility-class(min-width; min-w; @sizingOptionDecimals; @sizingOptionValues; 0);
+
+/**
+ * Generate height: n utility class variations
+ * The classes available are: h-{size}, h-full, h-screen, h-auto
+ */
+
+.generate-rem-utility-class(height; h; @sizingOptionDecimals; @sizingOptionValues; 0);
+.generate-percent-utility-class(height; h; @layoutOptionFractions; @layoutOptionValues);
+.generate-utility-class(height; h; auto);
+.h-full { height: 100%; }
+.h-screen { height: 100vh; }
+
+/**
+ * Generate max-height: n utility class variations
+ * The classes available are: max-h-{size}, max-h-full, max-h-screen
+ */
+
+.generate-rem-utility-class(max-height; max-h; @sizingOptionDecimals; @sizingOptionValues; 0);
+.max-h-full { max-height: 100%; }
+.max-h-screen { max-height: 100vh; }
+
+/**
+ * Generate margin: n utility class variations
+ * The classes available are: m{t|b|l|r|x|y}-{size} available
+ */
+
+.generate-rem-utility-class(margin; m; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(margin-top; mt; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(margin-bottom; mb; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(margin-left; ml; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(margin-right; mr; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(margin-left, margin-right; mx; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(margin-top, margin-bottom; my; @sizingOptionDecimals; @sizingOptionValues; true);
+
+/**
+ * Generate box-shadow: _ utility class variations
+ * The classes available are: shadow-[@boxShadowOptions]
+ */
+@boxShadowOptions: none, shadow-color;
+.generate-utility-class(box-shadow, shadow, @boxShadowOptions);
+
+/**
+ * Generate margin: auto utility class variations
+ * The classes available are: m{t|b|l|r|x|y}-auto classes
+ */
+
+.generate-utility-class(margin; m; auto);
+.generate-utility-class(margin-top; mt; auto);
+.generate-utility-class(margin-bottom; mb; auto);
+.generate-utility-class(margin-left; ml; auto);
+.generate-utility-class(margin-right; mr; auto);
+.generate-utility-class(margin-left, margin-right; mx; auto);
+.generate-utility-class(margin-top, margin-bottom; my; auto);
+
+/**
+ * Generate padding: n utility class variations
+ * The classes available are: p{t|b|l|r|x|y}-{size} available
+ */
+
+.generate-rem-utility-class(padding; p; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(padding-top; pt; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(padding-bottom; pb; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(padding-left; pl; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(padding-right; pr; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(padding-left, padding-right; px; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(padding-top, padding-bottom; py; @sizingOptionDecimals; @sizingOptionValues; true);
+
+/**
+ * Generate padding: auto utility class variations
+ * The classes available are: p{t|b|l|r|x|y}-auto classes
+ */
+
+.generate-utility-class(padding; p; auto);
+.generate-utility-class(padding-top; pt; auto);
+.generate-utility-class(padding-bottom; pb; auto);
+.generate-utility-class(padding-left; pl; auto);
+.generate-utility-class(padding-right; pr; auto);
+.generate-utility-class(padding-left, padding-right; px; auto);
+.generate-utility-class(padding-top, padding-bottom; py; auto);
+
+/**
+ * Border color utility class variations.
+ * The classes available are: border-{color}
+ */
+.border-default { border-color: @borderColor; }
+.border-light { border-color: @borderColorLight; }
+.border-separator { border-color: @separatorColor; }
+.border-active-tab { border-color: @activeTabBorderColor; }
+
+/**
+ * Border width utility class variations.
+ * The classes available are: border-{side}-{size}
+ */
+
+.border-0 { border-width: 0; }
+.border { border-width: 1px; }
+.border-4 { border-width: 4px; }
+.border-t-0 { border-top-width: 0; }
+.border-t { border-top-width: 1px; }
+.border-t-4 { border-top-width: 4px; }
+.border-l-0 { border-left-width: 0; }
+.border-l { border-left-width: 1px; }
+.border-l-4 { border-left-width: 4px; }
+.border-b-0 { border-bottom-width: 0; }
+.border-b { border-bottom-width: 1px; }
+.border-b-4 { border-bottom-width: 4px; }
+.border-r-0 { border-right-width: 0; }
+.border-r { border-right-width: 1px; }
+.border-r-4 { border-right-width: 4px; }
+
+/**
+ * Utility for controlling the opacity of an element.
+ * The classes available are: opacity-{factor}
+ */
+
+.opacity-0 { opacity: 0; }
+.opacity-5 { opacity: 0.05; }
+.opacity-10 { opacity: 0.1; }
+.opacity-20 { opacity: 0.2; }
+.opacity-25 { opacity: 0.25; }
+.opacity-30 { opacity: 0.3; }
+.opacity-40 { opacity: 0.4; }
+.opacity-50 { opacity: 0.5; }
+.opacity-60 { opacity: 0.6; }
+.opacity-70 { opacity: 0.7; }
+.opacity-75 { opacity: 0.75; }
+.opacity-80 { opacity: 0.8; }
+.opacity-90 { opacity: 0.9; }
+.opacity-95 { opacity: 0.95; }
+.opacity-100 { opacity: 1; }
+
+/**
+ * Border radius utility class variations.
+ */
+
+.rounded-none { border-radius: 0; }
+.rounded-sm { border-radius: 0.125rem; }
+.rounded { border-radius: 0.25rem; }
+.rounded-md { border-radius: 0.425rem; }
+.rounded-lg { border-radius: 0.6rem; }
+.rounded-xl { border-radius: 0.75rem; }
+.rounded-2xl { border-radius: 1rem; }
+.rounded-3xl { border-radius: 1.5rem; }
+.rounded-full { border-radius: 9999px; }
+
+.rounded-t-none {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.rounded-b-md {
+  border-bottom-left-radius: 0.425rem;
+  border-bottom-right-radius: 0.425rem;
+}
+
+/**
+ * Border widget utility class variations
+ */
+
+.border-dropdown-widget { border: var(--dropdown-border-widget); }
+
+/**
+ * Font size utility class variations.
+ * Default is text-xs which works out to 12px. 0.75rem * 16px = 12.
+ */
+
+.text-2xs {
+  font-size: 0.625rem;
+  line-height: 0.75rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+@bg-color-options: none, alert-background, btn-background, btn-active-background, btn-secondary-background, content-background, config-pill-background, pill-background, content-loading-background, dashlet-background, dropdown-background, dropdown-link-background-hover, footer-background, headerpane-background, headerpane-side-toggle-background, input-background, input-disabled-background, label-background, navbar-background, primary-content-background, progress-bar-background, secondary-content-background, select2-background, subpanel-background, tab-background-hover-color;
+
+/**
+ * Background color utility class variations.
+ * The classes available are: bg-{@bg-color-options}. Example: bg-content-background, bg-btn-active-background
+ */
+
+.generate-color-utility-class(background-color; bg; @bg-color-options);
+.bg-transparent { background-color: transparent; }
+.bg-impersonation-banner { background-color: @darkPurple; }
+.hover\:bg-dashlet-background-hover:hover { background-color: @dashletBackgroundHover; }
+.hover\:bg-content-container-background-hover:hover { background-color: @contentContainerBackgroundHover; }
+
+/**
+ * Box shadow utility class variations.
+ * The available classes are below.
+ */
+
+.shadow {
+  --sugar-box-shadow: @boxShadow;
+
+  box-shadow: var(--sugar-box-shadow);
+}
+
+.shadow-lg {
+  --sugar-box-shadow: @boxShadowLg;
+
+  box-shadow: var(--sugar-box-shadow);
+}
+
+.shadow-xl {
+  --sugar-box-shadow: @boxShadowXl;
+
+  box-shadow: var(--sugar-box-shadow);
+}
+
+.shadow-none {
+  --sugar-box-shadow: @boxShadowNone;
+
+  box-shadow: var(--sugar-box-shadow);
+}
+
+.hover\:shadow-lg:hover {
+  --sugar-box-shadow: @boxShadowLgHover;
+
+  box-shadow: var(--sugar-box-shadow);
+}
+
+.transition-shadow {
+  transition-property: box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/**
+ * Border style utility class variations.
+ * The classes available are: border-{@borderStyleOptions}
+ */
+
+@borderStyleOptions: solid, dashed, dotted, double, none;
+.generate-utility-class(border-style; border; @borderStyleOptions);
+
+/**
+ * Text transform
+ */
+@textTransformOptions: uppercase, lowercase, capitalize;
+.generate-utility-class(text-transform; 0; @textTransformOptions);
+.normal-case { text-transform: none; }
+
+// A small mixin to be used for selected tab elements, such as megamenu and dashboard navs.
+.active-tab {
+  .border-b-4();
+  .border-active-tab();
+
+  a > .count:not(.label-important),
+  a > .module-name,
+  a > .tab-title,
+  .btn {
+    color: @activeTabBorderColor;
+
+    .sicon:not(.sicon-bell-lg-line) {
+      color: @activeTabBorderColor;
+    }
+  }
+
+  &:hover {
+    .bg-tab-background-hover-color();
+  }
+}
+
+// Freeze first column in list view
+.stick-first {
+  .sticky();
+
+  left: @firstColumnLeft;
+  z-index: 10;
+}
+
+.stick-first.no-left-column {
+  left: 0;
+}
+
+// Shadow when scrolling
+.stick-first::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  border-right: @borderWidget;
+}
+
+.stick-first.no-border::after {
+  display: none;
 }

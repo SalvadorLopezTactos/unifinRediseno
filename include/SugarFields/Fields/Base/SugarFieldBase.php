@@ -230,7 +230,8 @@ class SugarFieldBase {
         }
     }
 
-    function getWirelessSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex = -1, $view){
+    public function getWirelessSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, $view)
+    {
     	$this->setup($parentFieldArray, $vardef, $displayParams, $tabindex, false);
         return $this->fetch($this->findTemplate($view));
     }
@@ -240,7 +241,8 @@ class SugarFieldBase {
         return $formattedField;
     }
 
-    function getSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex = -1, $view){
+    public function getSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, $view)
+    {
     	$this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
 
         $formName = isset($displayParams['formName']) ? $displayParams['formName'] : '';
@@ -292,6 +294,13 @@ class SugarFieldBase {
         return $this->getWirelessSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, 'WirelessDetailView');
     }
 
+    /**
+     * @param string $parentFieldArray name of the variable in the parent template for the bean's data
+     * @param array $vardef vardef field defintion
+     * @param $displayParams
+     * @param $tabindex
+     * @return string
+     */
     function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
     	if(!empty($vardef['function']['returns']) && $vardef['function']['returns'] == 'html'){
     		$type = $this->type;
@@ -643,12 +652,20 @@ class SugarFieldBase {
      * @param string $field - The name of the field to save (the vardef name, not the form element name)
      * @param array $properties - Any properties for this field
      */
-    public function apiSave(SugarBean $bean, array $params, $field, $properties) {
+    public function apiSave(SugarBean $bean, array $params, $field, $properties)
+    {
         if (isset($params[$field])) {
+            $unformatted = $this->apiUnformatField($params[$field], $properties);
             if (isset($properties['len']) && isset($properties['type']) && $this->isTrimmable($properties['type'])) {
-                $bean->$field = trim($this->apiUnformatField($params[$field], $properties));
+                if (is_string($unformatted) || is_numeric($unformatted)) {
+                    $bean->$field = trim($unformatted);
+                } else {
+                    \Sugarcrm\Sugarcrm\Logger\Factory::getLogger('default')->warning(
+                        'Attempt to trim non-string field value, field ' . $field . ' of type ' . $properties['type']
+                    );
+                }
             } else {
-                $bean->$field = $this->apiUnformatField($params[$field], $properties);
+                $bean->$field = $unformatted;
             }
         }
     }

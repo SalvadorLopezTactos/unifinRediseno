@@ -870,6 +870,10 @@
   background-position: -514px -180px;
 }
 
+.adam-shape-50-activity-scripttask-document_merge {
+  background-position: -572px -175px;
+}
+
 .adam-shape-75-activity-scripttask-none {
   background-position: -475px -204px;
 }
@@ -892,6 +896,10 @@
 
 .adam-shape-75-activity-scripttask-business_rule {
   background-position: -514px -145px;
+}
+
+.adam-shape-75-activity-scripttask-document_merge {
+  background-position: -573px -146px;
 }
 
 .adam-shape-100-activity-scripttask-none {
@@ -918,6 +926,10 @@
   background-position: -514px -105px;
 }
 
+.adam-shape-100-activity-scripttask-document_merge {
+  background-position: -572px -107px;
+}
+
 .adam-shape-125-activity-scripttask-none {
   background-position: -300px -465px;
 }
@@ -942,6 +954,10 @@
   background-position: -514px -55px;
 }
 
+.adam-shape-125-activity-scripttask-document_merge {
+  background-position: -572px -57px;
+}
+
 .adam-shape-150-activity-scripttask-none {
   background-position: -240px -465px;
 }
@@ -964,6 +980,10 @@
 
 .adam-shape-150-activity-scripttask-business_rule {
   background-position: -514px -0px;
+}
+
+.adam-shape-150-activity-scripttask-document_merge {
+  background-position: -572px -1px;
 }
 
 [class^="adam-menu-icon-"],
@@ -1231,7 +1251,12 @@
   vertical-align: middle;
 }
 #adam_toolbar span.navbtn:not(.mod):hover {
-  background-color: #FFFFFF;
+  background-color: var(--btn-background-active);
+  border-color: var(--border-color-focus);
+}
+
+#adam_toolbar span.navbtn:not(.mod).fa:hover {
+  color: var(--sicon-hover-color);
 }
 #adam_toolbar span.navbtn .button {
   background-color: #F5F5F5;
@@ -1274,7 +1299,7 @@
 
 #ProjectTitle {
   font-family: Arial,Verdana,Helvetica,sans-serif;
-  color: #000000;
+  color: var(--text-color);
   font-weight: bold;
   font-size: 12pt;
   float: right;
@@ -1290,6 +1315,7 @@
   -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  color: #2b2d2e;
 }
 
 .friendly-select {
@@ -1298,7 +1324,7 @@
   text-align: center;
   vertical-align: middle;
   height: 30px;
-  background-color: #F5F5F5;
+  background-color: var(--input-background);
   font-size: 12px;
   margin: 0px;
 }
@@ -1314,7 +1340,7 @@ div.line {
   transform-origin: left top;
   height: 1px;
   /* Line width of 3 */
-  background: #000000;
+  background: var(--text-color);
   /* Black fill */
   background-clip: content-box;
   cursor: pointer;

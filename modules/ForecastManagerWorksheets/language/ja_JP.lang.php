@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => '基本レート',
 
     'LBL_QUOTA' => 'ノルマ',
-    'LBL_QUOTA_ADJUSTED' => 'ノルマ（調整済）',
+    'LBL_QUOTA_ADJUSTED' => 'アサイン済みノルマ',
 
     'LBL_FORECAST' => '売上予測',
     'LBL_COMMIT_STAGE' => 'コミットステージ',

@@ -234,7 +234,7 @@ class ForecastOpportunities extends SugarBean {
 
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array($opportunity_id));
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
 
         if ($row) {
             return $row['name'];

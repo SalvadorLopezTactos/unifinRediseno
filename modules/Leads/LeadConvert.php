@@ -209,6 +209,7 @@ class LeadConvert
                     $this->lead,
                     $this->contact
                 );
+                $this->moveMarketBeans($this->lead, $this->contact);
                 Activity::restoreToPreviousState();
             }
         }
@@ -435,6 +436,53 @@ class LeadConvert
     }
 
     /**
+     * Move lead's related Market beans to the new contact
+     * @param $lead
+     * @param $contact
+     */
+    public function moveMarketBeans($lead, $contact)
+    {
+        global $beanList;
+        if (empty($lead) || empty($contact)) {
+            return;
+        }
+
+        $marketActivities = [
+            'sf_Dialogs' => [
+                'Contacts' => 'sf_dialogs_contacts',
+                'Leads' => 'sf_dialogs_leads',
+            ],
+            'sf_EventManagement' => [
+                'Contacts' => 'sf_eventmanagement_contacts',
+                'Leads' => 'sf_eventmanagement_leads',
+            ],
+            'sf_webActivity' => [
+                'Contacts' => 'sf_webactivity_contacts',
+                'Leads' => 'sf_webactivity_leads',
+            ],
+        ];
+
+        foreach ($marketActivities as $marketActivityName => $marketActivity) {
+            if (empty($beanList[$marketActivityName])) {
+                continue;
+            }
+
+            $leadsLink = $marketActivity['Leads'];
+            $contactsLink = $marketActivity['Contacts'];
+            if (!$lead->load_relationship($leadsLink) || !$contact->load_relationship($contactsLink)) {
+                continue;
+            }
+
+            $relatedBeans = $lead->$leadsLink->getBeans();
+            foreach ($relatedBeans as $relatedBean) {
+                $lead->$leadsLink->delete($lead->id, $relatedBean);
+            }
+
+            $contact->$contactsLink->add($relatedBeans);
+        }
+    }
+
+    /**
      * Gets the list of activities related to the lead
      * @param Lead $lead Lead to get activities from
      * @return Array of Activity SugarBeans.
@@ -442,11 +490,21 @@ class LeadConvert
     protected function getActivitiesFromLead($lead)
     {
         global $beanList, $db;
-        $activitiesList = array("Calls", "Tasks", "Meetings", "Emails", "Notes");
+        $activitiesList = [
+            'Calls',
+            'Tasks',
+            'Meetings',
+            'Emails',
+            'Notes',
+            'Messages',
+        ];
         $activities = array();
 
         if (!empty($lead)) {
             foreach ($activitiesList as $module) {
+                if (empty($beanList[$module])) {
+                    continue;
+                }
                 $beanName = $beanList[$module];
                 $activity = new $beanName();
                 $query = "SELECT id FROM {$activity->table_name} WHERE parent_id = '{$lead->id}' AND parent_type = 'Leads'";

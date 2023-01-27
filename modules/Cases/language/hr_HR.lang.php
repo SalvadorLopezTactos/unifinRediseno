@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Tako, primjerice, možete pronaći problem koji je prethodno prijavljen.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Ako imate novi slučaj podrške koji biste željeli prijaviti, možete kliknuti ovdje da biste prijavili novi slučaj.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Možete se u bilo kojem trenutku vratiti na ovaj prikaz tako da kliknete ovdje.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcije sa slučajem',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija slučaja',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Bilješke',
 

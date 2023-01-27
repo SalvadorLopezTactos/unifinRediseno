@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Arbetsark',
     'LBL_PURCHASED_LINE_ITEMS' => 'Köpta poster',
 
+    'LBL_FORECASTED_LIKELY' => 'Prognostiserad som sannolik',
     'LBL_RENEWAL' => 'Förnyelse',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Förnyelsemöjligheter',
     'LBL_RENEWAL_PARENT' => 'Huvudaffärsmöjlighet',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# av totala intäktsposter',
     'LBL_CLOSED_RLIS' => '# av stängda intäktsposter',
+    'LBL_CLOSED_WON_RLIS' => '# av intäktsposter med märkningen Stängd Vunnen',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# av öppna intäktsposter med Service Flex-varaktighet',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Du kan inte ta bort affärsmöjligheter som innehåller stängda Intäktsposter',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'En eller flera av de valda posterna innehåller stängda intäktsposter och kan inte tas bort.',
     'LBL_INCLUDED_RLIS' => 'Antal inkomstposter',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Uppdatering öppen',
+    'LBL_CASCADE_RLI_EDIT' => 'Uppdatera öppna intäktsposter',
+    'LBL_CASCADE_RLI_CREATE' => 'Ange på alla intäktsposter',
     'LBL_SERVICE_START_DATE_INVALID' => 'Startdatum för tjänsten kan inte ställas in efter slutdatum för tjänsten för några öppna resultatradartiklar.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Offerter',
@@ -207,24 +211,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Efter att förändringen påbörjas kommer Inkomstposter att skapas för varje {{module_name}} i bakgrunden. När de är klara och tillgängliga kommer du att få ett meddelande till mailadressen på din profil. Obs. att din instans måste vara inställd på att skicka email via Admin -> Emailinställningar för att meddelanden ska kunna skickas.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulen {{plural_module_name}} gör det möjligt för dig att spåra enskilda försäljningar från start till mål. Varje post {{module_name}} representerar en möjlig försäljning och inkluderar relevanta försäljningsdata såväl som att relatera till andra viktiga poster som {{quotes_module}}, {{contacts_module}}, osv. En {{module_name}} kommer typiskt att pågå genom flera försäljningssteg tills den märks som antingen "Stängd vunnen" eller "Stängd förlorad". {{plural_module_name}} kan tas ännu längre genom användning av Sugars modul {{forecasts_singular_module}} så att man ska kunna förstå och förutspå försäljningstrender såväl som att fokusera arbete mot att uppnå försäljningskvoter.',
+    'LBL_HELP_RECORDS' => 'Modulen {{plural_module_name}} gör det möjligt för dig att spåra individuella försäljningar från början till slut. Varje {{module_name}}-post representerar en framtida försäljning, innehåller relevant försäljningsdata och är kopplad till andra viktiga poster som {{quotes_module}}, {{contacts_module}}, osv. En {{module_name}} kommer normalt att gå igenom flera försäljningssteg innan den markeras som ”Stängd vunnen” eller ”Stängd förlorad”. {{plural_module_name}} kan även användas tillsammans med Sugars {{forecasts_singular_module}}modul för att förstå och förutse försäljningstrender samt för att arbeta mot säljmål.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulen {{plural_module_name}} gör det möjligt för dig att spåra individuella försäljningar från början till slut. Varje {{module_name}}-post representerar en potentiell försäljning och inkluderar relevant försäljningsinformation samt relaterar till andra viktiga poster som {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_RECORD' => 'Modulen {{plural_module_name}} gör det möjligt för dig att spåra individuella försäljningar från början till slut. Varje {{module_name}}-post representerar en potentiell försäljning, innehåller relevant försäljningsinformation och är kopplad till andra viktiga poster som {{quotes_module}}, {{contacts_module}} osv.
 
 - Redigera postens fält genom att klicka på ett enskilt fält eller knappen Redigera.
 - Visa eller ändra länkar till andra poster i underpanelerna genom att växla nedre vänstra rutan till "Datavy".
-- Gör och visa användarkommentarer och registrera ändringshistorik i {{activitystream_singular_module}} genom att växla nedre vänstra rutan till "Aktivitetsström".
+- Gör och visa användarkommentarer och registrera ändringshistorik i {{activitystream_singular_module}} genom att växla nedre vänstra rutan till "Aktivitetsflöde".
 - Följ eller gör denna post till favorit med ikonerna till höger om postnamnet.
 - Ytterligare åtgärder är tillgängliga i rullgardinsmenyn Åtgärder till höger om knappen Redigera.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulen {{plural_module_name}} gör det möjligt dig att spåra individuella försäljningar från början till slut. Varje {{module_name}}-post representerar en potentiell försäljning och inkluderar relevant försäljningsinformation samt relaterar till andra viktiga poster som {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_CREATE' => 'Modulen {{plural_module_name}} gör det möjligt dig att spåra individuella försäljningar och poster från början till slut. Varje {{module_name}}-post representerar en potentiell försäljning, innehåller relevant försäljningsinformation och är kopplad till andra viktiga poster som {{quotes_module}}, {{contacts_module}} osv.
 
 För att skapa en {{module_name}}:
 1. Ange värden för fälten efter önskemål.
  - Fält markerade "Obligatoriska" måste fyllas i innan du sparar.
- - Klicka på "Visa mer" för att exponera ytterligare fält vid behov.
+ - Klicka på "Visa mer" för att visa ytterligare fält vid behov.
 2. Klicka på "Spara" för att slutföra den nya posten och återgå till föregående sida.',
 
 // END ENT/ULT
@@ -239,7 +243,10 @@ För att skapa en {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Mitt Teams Affärsmöjligheter",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Kunde inte ändra {{fieldName}} eftersom denna {{moduleSingular}} inte har några öppna linjeartiklar.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Möjlighetsinteraktioner',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Möjlighet tidslinje',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' kan inte ställas in för någon av dessa intäktsposter eftersom de inte är tjänster. Vill du fortsätta att skapa?',
+    'LBL_CASCADE_DURATION_WARNING' => ' kan inte ställas in för någon av dessa intäktsposter eftersom deras varaktighet är låst. Vill du fortsätta att skapa?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Affärsmöjlighet nära förutsägelse',

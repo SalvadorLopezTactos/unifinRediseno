@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'กำหนดการรายงานนี้',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนกำหนดการรายงาน',
+    'LBL_FILE_TYPE' => 'ประเภทไฟล์',
 );

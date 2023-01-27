@@ -227,9 +227,9 @@ function create_default_reports($is_upgrade = false, $reportlist = array())
                     6: Default UUID
              */
             if ($report[3] == 'tabular') {
-                $result = $saved_report->save_report(-1, 1, $report[1], $report[0], $report[3], $report[2], 1, '1', 'none', null, $report[5], isset($report[6]) ? $report[6] : null);
+                $result = $saved_report->save_report(null, 1, $report[1], $report[0], $report[3], $report[2], 1, '1', 'none', null, $report[5], isset($report[6]) ? $report[6] : null);
             } else {
-                $result = $saved_report->save_report(-1, 1, $report[1], $report[0], $report[3], $report[2], 1, '1', $report[4], null, $report[5], isset($report[6]) ? $report[6] : null);
+                $result = $saved_report->save_report(null, 1, $report[1], $report[0], $report[3], $report[2], 1, '1', $report[4], null, $report[5], isset($report[6]) ? $report[6] : null);
             }
 
             $saved_report->load_relationship("tag_link");

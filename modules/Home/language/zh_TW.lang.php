@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => '已新增 Sugar Dashlet',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Dashlet 將重新排欄，您確定要更改欄的版面配置嗎？',
   'LBL_REMOVE_DASHLET_CONFIRM' => '您確定要移除 Sugar Dashlet 嗎？',
-  'LBL_NO_DASHBOARD_CONFIGURED' => '未設定儀表板',
   'LBL_NO_DASHLETS_CONFIGURED' => '未設定 Dashlet',
-  'LBL_CREATE_DASHBOARD_LINK' => '建立儀表板',
 
   'LBL_DASHLET_WEBPAGE_NAME' => '網頁',
   'LBL_DASHLET_WEBPAGE_DESC' => '網頁',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => '原始程式碼',
   'LBL_SOURCE_SUGAR' => 'Sugar－SugarCRM Inc 推出的世界上最受歡迎的銷售人員自動化應用程式。',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate－BarnabÃ¡s Debreceni 建立的 PHP 範本引擎',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP－NuSphere Corporation 和 Dietrich Ayala 推出的允許開發者建立和使用 Web 服務一組 PHP 類',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar－Mihai Bazon 開發的用於輸入日期的行事曆',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF－Wayne Munro 推出的用於建立 PDF 文件的程式庫。',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - PHP 中的 WebDAV 伺服器執行方式。',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => '説明顯示您正在檢視的模組的具體資訊，提供在模組中執行某些操作所需的詳細步驟，並告訴您如何獲得更全面的資訊和支援。',
 
     'LBL_FACETS_DASHBOARD_TITLE' => '篩選器',
+
+    'LBL_ABOUT_VERSION' => '您正在使用具有以下許可證的版本{{version}}：',
 );

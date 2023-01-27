@@ -198,7 +198,8 @@ class TemplateEnum extends TemplateText{
      */
     function delete($df){
         //If a dropdown uses the field that is being delted as a parent dropdown, we need to remove that dependency
-        $seed = BeanFactory::newBean($df->getModuleName());
+        $moduleName = $df->getModuleName();
+        $seed = BeanFactory::newBean($moduleName);
         if ($seed)
         {
             $fields = $seed->field_defs;
@@ -222,6 +223,22 @@ class TemplateEnum extends TemplateText{
                 }
             }
         }
+
+        // Remove any dropdown-based views based on this field
+        $dropdownLayoutPaths = 'custom/modules/' . $moduleName . '/clients/*/views/*/dropdowns/';
+
+        if (!check_file_name($dropdownLayoutPaths)) {
+            $GLOBALS['log']->fatal("Path traversal attack vector detected: '$dropdownLayoutPaths'.");
+            throw new \Exception('Path traversal attack vector detected');
+        }
+
+        $dropdownFolders = glob($dropdownLayoutPaths);
+        foreach ($dropdownFolders as $dropdownFolder) {
+            if (is_dir($dropdownFolder) && is_dir($dropdownFolder . $field)) {
+                rmdir_recursive($dropdownFolder);
+            }
+        }
+
         parent::delete($df);
     }
 }

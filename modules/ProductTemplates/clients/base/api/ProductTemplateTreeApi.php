@@ -147,7 +147,7 @@ class ProductTemplateTreeApi extends SugarApi
     {
         $productFreeCategoriesIds = [];
         $stmt = $query->compile()->execute();
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             if ($row['p_id'] !== null) {
                 return true;
             }
@@ -175,6 +175,7 @@ class ProductTemplateTreeApi extends SugarApi
         $subQuery->from($bean, ['alias' => 'product_template']);
         $subQuery->select->selectReset();
         $subQuery->select(['product_template.id', 'product_template.category_id']);
+        $subQuery->where()->equals('product_template.active_status', 'Active');
 
         $query->joinTable($subQuery, ['alias' => 'product_template', 'joinType' => 'LEFT'])
             ->on()
@@ -234,18 +235,32 @@ class ProductTemplateTreeApi extends SugarApi
     protected function getTreeDataWithArray(array $input = [])
     {
         $q = new SugarQuery();
+
+        // Create a separate query for each input, and union them
+        // all together using $q
         foreach ($input as $table => $value) {
             $bean = BeanFactory::newBean($table);
             if (!is_null($bean)) {
+                $db = DBManagerFactory::getInstance();
                 if ($table === 'ProductCategories') {
-                    $type = 'category';
+                    $type = $db->quoted('category');
+                    $listOrder = 'list_order';
+                    $listOrderNullsLast = '(CASE WHEN list_order IS NULL THEN 1 ELSE 0 END)';
                 } elseif ($table === 'ProductTemplates') {
-                    $type = 'product';
+                    $type = $db->quoted('product');
+                    $listOrder = 0;
+                    $listOrderNullsLast = 0;
                 }
                 $query = new SugarQuery();
                 $query->from($bean);
                 $query->select(['id', 'name']);
-                $query->select()->fieldRaw("'{$type}'", 'type');
+                $query->select()->fieldRaw($type, 'type');
+                $query->select()->fieldRaw($listOrderNullsLast, 'list_order_nulls_last');
+                $query->select()->fieldRaw($listOrder, 'list_order');
+                if ($table === 'ProductTemplates') {
+                    $query->where()->equals('active_status', 'Active');
+                }
+                // Set up the filter for the query
                 if (is_array($value)) {
                     foreach ($value as $key => $colValue) {
                         if (is_null($colValue)) {
@@ -257,10 +272,17 @@ class ProductTemplateTreeApi extends SugarApi
                 } else {
                     $query->where()->contains('name', $value);
                 }
+
                  $q->union($query);
             }
         }
+
+        // Set the correct order of the results. Types should be grouped
+        // together first, then by the list order within those types. Ties
+        // should be broken by alphabetical order
         $q->orderBy('type', 'ASC');
+        $q->orderBy('list_order_nulls_last', 'ASC');
+        $q->orderBy('list_order', 'ASC');
         $q->orderBy('name', 'ASC');
 
         return $q->execute();
@@ -352,11 +374,8 @@ class ProductTemplateTreeApi extends SugarApi
             "order by type, name";
 
         $conn = $this->getDBConnection();
-        $stmt = $conn->prepare($q);
-
-        $stmt->execute($params);
-
-        return $stmt->fetchAll();
+        $result = $conn->executeQuery($q, $params);
+        return $result->fetchAllAssociative();
     }
 
     /**

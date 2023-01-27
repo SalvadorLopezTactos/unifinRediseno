@@ -11,12 +11,17 @@
  */
 --}}
 {{#if meta.short}}
-    <a class="module-list-link" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" tabindex="-1"><span class="label label-module label-module-mini label-{{module}}" title="{{getModuleName module plural=true}}">{{moduleIconLabel module}}</span>{{getModuleName module plural=true}}</a>
+    <a class="module-list-link pr-1" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" tabindex="-1"><span class="label label-module label-module-mini label-{{module}}" title="{{getModuleName module plural=true}}">{{moduleIconLabel module}}</span>{{getModuleName module plural=true}}</a>
 {{else}}
     <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:me:{{module}}" aria-label="{{getModuleName module plural=true}}">{{getModuleName module plural=true}}</a>
     {{#if actions}}
-    <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle" track="click:{{name}}-dropdown" aria-label="{{getModuleName module plural=true}} - {{str 'LBL_LINK_MORE' module}}"><i class="fa fa-caret-down"></i></button>
-    <div class="dropdown-menu scroll">
+        <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown"
+                class="btn btn-invisible dropdown-toggle" track="click:{{name}}-dropdown"
+                aria-label="{{getModuleName module plural=true}} - {{str 'LBL_LINK_MORE' module}}"
+        >
+            <i class="sicon sicon-chevron-down"></i>
+        </button>
+    <div class="dropdown-menu rounded-t-none scroll">
         <ul role="menu">
             {{#each actions}}
                 {{#if type}}
@@ -26,8 +31,10 @@
                         {{field ../../../this template="detail"}}
                     {{/eq}}
                 {{else}}
-                    <li><a class="ellipsis_inline" tabindex="-1"
+                    <li class="megamenu-dropdown-item-container" role="menuitem">
+                        <a class="ellipsis_inline megamenu-dropdown-item" tabindex="-1"
                            data-navbar-menu-item="{{label}}"
+                           rel="tooltip"
                         {{#if event}}
                            href="javascript:void(0);"
                            data-event="{{event}}"
@@ -39,7 +46,15 @@
                            data-openwindow="true"
                            {{/if}}
                            track="click:{{route}}"
-                        {{/if}}>{{#if icon}}<i class="fa {{icon}}"></i>{{/if}}{{str label ../../module}}</a>
+                        {{/if}}
+                        >
+                            {{#if icon}}
+                                <i class="{{buildIcon icon}}"></i>
+                            {{/if}}
+                            <span class="text-overflow">
+                                {{str label ../../module}}
+                            </span>
+                        </a>
                     </li>
                 {{/if}}
             {{/each}}

@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Výrazové prostriedky',
-  'LBL_MODULE_NAME_SINGULAR' => 'Výrazové prostriedky',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Predošlý' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Nadchádzajúci' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Rozšíriť' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Výrazové prostriedky',
+    'LBL_MODULE_NAME_SINGULAR' => 'Výrazové prostriedky',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Predošlý' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Nadchádzajúci' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Rozšíriť' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Neznáme pole',
+];

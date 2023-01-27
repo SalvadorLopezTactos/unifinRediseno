@@ -26,6 +26,8 @@ class SugarACLPortal extends SugarACLStatic
         'EmailAddresses',
         'Tags',
         'SugarFavorites',
+        'Audit',
+        'Teams',
     ];
 
     /**
@@ -43,7 +45,8 @@ class SugarACLPortal extends SugarACLStatic
         // Cache portal owner on bean so that we aren't loading Contacts for each ACL check
         // Performance Bug58133
         if (!isset($bean->portal_owner)) {
-            switch ($bean->module_name) {
+            $moduleName = $bean->getModuleName();
+            switch ($moduleName) {
                 case 'Contacts':
                     $bean->portal_owner = $bean->id === PortalFactory::getInstance('Session')->getContactId();
                     break;

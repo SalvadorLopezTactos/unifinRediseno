@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class Entity implements \JsonSerializable
 {
@@ -30,7 +28,7 @@ class Entity implements \JsonSerializable
     * The array of properties available
     * to the model
     *
-    * @var array(string => string)
+    * @var array $_propDict
     */
     protected $_propDict;
     
@@ -41,7 +39,10 @@ class Entity implements \JsonSerializable
     */
     function __construct($propDict = array())
     {
-		$this->_propDict = $propDict;
+        if (!is_array($propDict)) {
+           $propDict = array();
+        }
+        $this->_propDict = $propDict;
     }
 
     /**
@@ -58,7 +59,7 @@ class Entity implements \JsonSerializable
     * Gets the id
     * Read-only.
     *
-    * @return string The id
+    * @return string|null The id
     */
     public function getId()
     {
@@ -96,7 +97,7 @@ class Entity implements \JsonSerializable
     /**
     * Sets the ODataType
     *
-    * @param string The ODataType
+    * @param string $val The ODataType
     *
     * @return Entity
     */
@@ -108,7 +109,7 @@ class Entity implements \JsonSerializable
     
     /**
     * Serializes the object by property array
-	* Manually serialize DateTime into RFC3339 format
+    * Manually serialize DateTime into RFC3339 format
     *
     * @return array The list of properties
     */

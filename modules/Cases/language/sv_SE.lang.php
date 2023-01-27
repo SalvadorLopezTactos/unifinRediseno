@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Till exempel kan du använda detta för att hitta en fråga som tidigare har lämnats in.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Om du har en ny support case du vill skicka in kan du klicka här för att skicka in ett nytt case.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Genom att klicka här kommer du tillbaka till den här vyn när som helst.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ärendeinteraktioner',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ärende tidslinje',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Anteckningar',
 

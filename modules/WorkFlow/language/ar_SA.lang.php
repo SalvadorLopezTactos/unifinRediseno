@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'سير العمل'),
   'LBL_EMAILTEMPLATES_TYPE' => 'النوع',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>ملاحظة:</strong> وظيفة Sugar Workflow وWorkflow Management في وضع الصيانة. ينبغي على عملاء إصدار Sugar Enterprise البدء في استخدام الوظائف المتاحة بواسطة SugarBPM<sup class="trademark">TM</sup>.',
 );
 

@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'מחק' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'מופעל על ידי SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'תפקיד',
+    'LBL_BASE_LAYOUT' => 'תצורת בסיס',
+    'LBL_FIELD_NAME' => 'שם שדה',
+    'LBL_FIELD_VALUE' => 'ערך',
+    'LBL_LAYOUT_DETERMINED_BY' => 'התצורה נקבעת לפי:',
+    'layoutDeterminedBy' => [
+        'std' => 'תצורה סטנדרטית',
+        'role' => 'תפקיד',
+        'dropdown' => 'שדה נפתח',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'כל התצורות המותאמות אישית יוסרו. בטוח שברצונך לשנות את הגדרות התצורה הנוכחית?',
 'help'=>array(
     'package'=>array(
             'create'=>'Provide a <b>Name</b> for the package.  The name you enter must be alphanumeric and contain no spaces. (Example: HR_Management)<br/><br/> You can provide <b>Author</b> and <b>Description</b> information for package. <br/><br/>Click <b>Save</b> to create the package.',
@@ -448,8 +458,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'עורך נראות',
 'LBL_ROLLUP' => 'Rollup',
 'LBL_RELATED_FIELD' => 'שדה קשור',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'כתובת ה-URL של התמונה עבור סמל הלוגו המותאם אישית. הממדים המומלצים עבור סמלי לוגו הם 22x22 פיקסלים. תמונות רחבות יותר או גבוהות יותר שיועלו יותאמו לממדים מרביים אלה.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'כתובת ה-URL של התמונה עבור הלוגו המותאם אישית. הרוחב המומלץ עבור לוגו הוא 200 פיקסלים. תמונות רחבות יותר או גבוהות יותר שיועלו יותאמו לממדים מרביים אלה. לוגו זה יוצג במסך הכניסה. אם לא תועלה תמונה, ייעשה שימוש בסמל הלוגו.',
 'LBL_PORTAL_ROLE_DESC' => 'אל תמחק תפקיד זה. תפקיד שער שירות-עצמי של הלקוח הוא תפקיד שיצרה המערכת במהלך תהליך ההפעלה של שער Sugar. השתמש בבקרי גישה בתוך תפקיד זה כדי להפעיל ו/או להשבית באגים, מקרים או מודולים של בסיס ידע בשער Sugar. אל תשנה בקרי גישה אחרים של תפקיד זה כדי להימנע מהתנהגות מערכת בלתי ידועה ובלתי צפויה. במקרה של מחיקה מקרית של תפקיד זה, צור אותו מחדש על ידי השבתה והפעלה מחדש של שער Sugar.',
 
 //RELATIONSHIPS
@@ -572,6 +580,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'הוסף מערכת יחסים',
 'LBL_BTN_RENAME_MODULE' => 'שנה שם מודול',
 'LBL_BTN_INSERT'=>'הכנס',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'שחזור תצורת הבסיס',
 //TABS
 
 //ERRORS
@@ -582,6 +591,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'An error has occured',
 'ERROR_REQUIRED_FIELDS' => 'Are you sure you wish to continue? The following required fields are missing from the layout:',
 'ERROR_ARE_YOU_SURE' => 'האם אתה בטוח שברצונך להמשיך?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'לא ניתן ליצור את השדה. הגעת למגבלה המוגדרת עבור גודל שורות בטבלה זו במסד הנתונים. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">למידע נוסף</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'לשדות הבאים יש ערכים מחושבים שלא יחושבו שוב בזמן אמת בתצוגת עריכה סלולרית של SugarCRM:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'לשדות הבאים יש ערכים מחושבים שלא יחושבו שוב בזמן אמת בתצוגת עריכה של שער SugarCRM:',
@@ -591,16 +601,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'אם ברצונך לאפשר אותם בפורטל אנא אפשר אותם  <br /><a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">כאן</a>.',
     'LBL_PORTAL_CONFIGURE' => 'הגדר פורטל',
     'LBL_PORTAL_ENABLE_PORTAL' => 'הפעל פורטל',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'הפעל חיפוש לפני פתיחת אירוע',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'אפשר שימוש בהערות במודול של מאגר הידע',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'אפשר למשתמשי הפורטל לסגור פניית שירות',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'אפשר למשתמשים חדשים להירשם',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'הרשאות משתמשים',
     'LBL_PORTAL_THEME' => 'פורטל נושא',
     'LBL_PORTAL_ENABLE' => 'אפשר',
     'LBL_PORTAL_SITE_URL' => 'אתר הפורטל לך זמין ב',
     'LBL_PORTAL_APP_NAME' => 'שם אפליקציה',
-    'LBL_PORTAL_LOGOMARK_URL' => 'כתובת ה-URL של סמל הלוגו',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'תצוגה מקדימה של סמל הלוגו',
-    'LBL_PORTAL_LOGO_URL' => 'לוגו URL',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'תצוגה מקדימה של לוגו',
     'LBL_PORTAL_CONTACT_PHONE' => 'טלפון',
     'LBL_PORTAL_CONTACT_EMAIL' => 'דוא"ל',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'יש להזין כתובת דוא"ל חוקית',
@@ -616,6 +624,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'גרור ושחרר את השמות של מודולי הפורטל כדי להגדיר הצגה או הסתרה שלהם בסרגל הניווט העליון של הפורטל. כדי לשלוט בגישה של משתמשי הפורטל למודולים, השתמש ב<a href="?module=ACLRoles&action=index">ניהול תפקידים.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'מודולים מוצגים',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'מודולים מוסתרים',
+    'LBL_CONFIG_VISIBILITY' => 'ניראות',
+    'LBL_CASE_VISIBILITY_HELP' => 'הגדר באיזה פורטל משתמשים יכולים לראות אירוע.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'הגדר אילו משתמשים בפורטל יכולים לראות הודעות דוא"ל הקשורות לאירוע. אנשי קשר משתתפים הם אלה שמוצגים בשדות &#39;אל&#39;, &#39;מאת&#39;, &#39;עותק&#39; ו&#39;עותק מוסתר&#39;.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'הגדר אילו משתמשים בפורטל יכולים לראות הודעות הקשורות לאירוע. אנשי קשר משתתפים הם אלה שמוצגים בשדה &#39;אורחים&#39;.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'כל אנשי הקשר שיש להם נגיעה לחשבון',
+        'related_contacts' => 'רק איש הקשר הראשי ואנשי קשר שיש להם נגיעה לאירוע זה',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'רק אנשי קשר משתתפים',
+        'all' => 'כל אנשי הקשר שיכולים לראות את האירוע',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'רק אנשי קשר משתתפים',
+        'all' => 'כל אנשי הקשר שיכולים לראות את האירוע',
+    ],
+
 
 'LBL_PORTAL'=>'שער',
 'LBL_PORTAL_LAYOUTS'=>'תצורות שער',
@@ -789,10 +814,10 @@ $mod_strings = array(
     . "אבל לא יפעלו לפי הנוסחה באפליקציות המקוריות, כמו Sugar Mobile ל-iPhone. <br/>"
     . "הם לא יפעלו לפי הנוסחה בפורטל לשירות עצמי של Sugar.",
 'LBL_POPHELP_READONLY'=>"צור נוסחה כדי לקבוע אם שדה זה מוגדר לקריאה בלבד בתצורות.<br/>"
-        . "שדות לקריאה בלבד יפעלו לפי הנוסחה בתצוגת נייד מבוססת-דפדפן, <br/>"
+        . "שדות המוגדרים לקריאה בלבד יפעלו לפי הנוסחה בתצוגה מבוססת-דפדפן בנייד, <br/>"
         . "אבל לא יפעלו לפי הנוסחה באפליקציות המקוריות, כמו Sugar Mobile ל-iPhone. <br/>"
         . "הם לא יפעלו לפי הנוסחה בפורטל לשירות עצמי של Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'בחר כדי להשתמש בשדה זה במהלך חיפוש רשומות באמצעות חיפוש גלובלי במודול זה.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'בחר להשתמש בשדה זה בעת חיפוש רשומות באמצעות חיפוש גלובלי במודול זה.',
 //Revert Module labels
 'LBL_RESET' => 'איפוס',
 'LBL_RESET_MODULE' => 'אפס מודול',
@@ -828,6 +853,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Datetime',
                 'decimal'=>'עשרונים',
                 'autoincrement' => 'תוספת אוטומטית',
+                'actionbutton' => 'ActionButton',
 ),
 'labelTypes' => array(
     "" => "תוויות נפוצות",
@@ -846,4 +872,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (ביחס {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'העתק מפריסת דף',
 'LBL_RELATIONSHIP_TYPE' => 'קשר גומלין',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'שפת השוואה',
+'LBL_LABEL_NOT_TRANSLATED' => 'This label may not be translated',
 );

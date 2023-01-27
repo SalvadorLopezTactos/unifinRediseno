@@ -26,7 +26,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => '{{module}} 模块的全部仪表板',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => '{{module}} 模块 {{view}} 视图的全部仪表板',
     'LBL_COPY_OF' => '{{{name}}} 的副本',
-    'LBL_DELETE_FOCUS_DRAWER' => '无法删除焦点抽屉仪表板。',
     'LBL_CREATE_DASHBOARD_BUTTON' => '创建仪表板',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "是否确定要将仪表板恢复为默认布局？",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => '是否确定要将仪表板面板恢复为其默认布局？',
+    'LBL_FILTER_UTILS_SELECT' => '已分配',
 );

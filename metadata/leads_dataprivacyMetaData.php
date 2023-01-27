@@ -45,13 +45,6 @@ $dictionary['leads_dataprivacy'] = array(
             ),
         ),
         array(
-            'name' => 'idx_lead_dataprivacy_lead',
-            'type' => 'index',
-            'fields' => array(
-                'lead_id',
-            ),
-        ),
-        array(
             'name' => 'idx_lead_dataprivacy_dataprivacy',
             'type' => 'index',
             'fields' => array(

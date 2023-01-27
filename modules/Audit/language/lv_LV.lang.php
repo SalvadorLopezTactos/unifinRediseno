@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Auditētie lauki šai modulī:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Šai modulī nav auditētu lauku',
     'LBL_CHANGE_LOG' => 'Audita žurnāls',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Kad pārbaudītie valūtas lauki tiek saglabāti valūtā, kas nav sistēmas noklusējuma valūta, izmaiņu žurnālā tiek attēlota vecā un jaunā vērtība konvertētajā, sistēmas noklusējuma valūtā.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Kad pārbaudītie valūtas lauki tiek saglabāti valūtā, kas nav sistēmas noklusējuma valūta, izmaiņu žurnālā tiek attēlota vecā un jaunā vērtība konvertētajā, sistēmas noklusējuma valūtā.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Atjaunināt uz',
+    'LBL_BLANK' => '-tukšs-',
 );

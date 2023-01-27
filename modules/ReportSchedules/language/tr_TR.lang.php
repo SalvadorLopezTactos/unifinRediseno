@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Bu Rapor Planı',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Rapor Planları Kayıt Panosu',
+    'LBL_FILE_TYPE' => 'Dosya Türü/Türleri',
 );

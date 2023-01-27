@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => '{{module}} modul összes műszerfala',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => '{{module}} modul {{view}} nézetének összes műszerfala',
     'LBL_COPY_OF' => '{{{name}}} másolata',
-    'LBL_DELETE_FOCUS_DRAWER' => 'A figyelemfelhívásokkal kapcsolatos irányítópultok nem törölhetőek.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Műszerfal létrehozása',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Biztos benne, hogy szeretné visszaállítani ennek a vezérlőpultnak az alapértelmezett elrendezését?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Biztos benne, hogy szeretné visszaállítani a vezérlőpult alapértelmezett elrendezését?',
+    'LBL_FILTER_UTILS_SELECT' => 'Hozzárendelve',
 );

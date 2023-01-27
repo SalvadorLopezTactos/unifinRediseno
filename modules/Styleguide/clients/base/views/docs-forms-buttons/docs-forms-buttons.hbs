@@ -13,9 +13,11 @@
 <!-- Buttons
 ================================================== -->
 <section id="buttons">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <h2>One class, multiple tags</h2>
   <p>Use the <code>.btn</code> class on an <code>&lt;a&gt;</code>, <code>&lt;button&gt;</code>, or <code>&lt;input&gt;</code> element.</p>
@@ -175,12 +177,12 @@
   <p>Sometimes you want the same size, position and spacing options of a button without the background styling. This can be accomplished with the <code>.btn-invisible</code> class. This is often used for stand alone icons like the favorite star.</p>
 
   <p class="bs-docs-example">
-    <a class="btn"><i class="fa fa-favorite"></i></a>
-    <a class="btn btn-invisible"><i class="fa fa-favorite"></i></a>
+    <a class="btn"><i class="sicon sicon-star-outline"></i></a>
+    <a class="btn btn-invisible"><i class="sicon sicon-star-outline"></i></a>
   </p>
 <pre class="prettyprint linenums">
-    &lt;a class="btn"&gt;&lt;i class="fa fa-favorite"&gt;&lt;/i&gt;&lt;/a&gt;
-    &lt;a class="btn btn-invisible"&gt;&lt;i class="fa fa-favorite"&gt;&lt;/i&gt;&lt;/a&gt;
+    &lt;a class="btn"&gt;&lt;i class="sicon sicon-star-outline"&gt;&lt;/i&gt;&lt;/a&gt;
+    &lt;a class="btn btn-invisible"&gt;&lt;i class="sicon sicon-star-outline"&gt;&lt;/i&gt;&lt;/a&gt;
 </pre>
 
   <h2>Link style button</h2>
@@ -217,23 +219,23 @@
       <tr>
         <td>Normal</td>
         <td><code>.btn</code></td>
-        <td><a class="btn">Button</a><a class="btn"><i class="fa fa-ambulance"></i></a></td>
-        <td><a class="btn disabled">Button</a><a class="btn disabled"><i class="fa fa-ambulance"></i></a></td>
-        <td><a class="btn active">Button</a><a class="btn active"><i class="fa fa-ambulance"></i></a></td>
+        <td><a class="btn">Button</a><a class="btn"><i class="sicon sicon-mask"></i></a></td>
+        <td><a class="btn disabled">Button</a><a class="btn disabled"><i class="sicon sicon-mask"></i></a></td>
+        <td><a class="btn active">Button</a><a class="btn active"><i class="sicon sicon-mask"></i></a></td>
       </tr>
       <tr>
         <td>Invisible</td>
         <td><code>.btn .btn-invisible</code></td>
-        <td><a class="btn btn-invisible">Button</a><a class="btn btn-invisible"><i class="fa fa-ambulance"></i></a></td>
-        <td><a class="btn btn-invisible disabled">Button</a><a class="btn btn-invisible disabled"><i class="fa fa-ambulance"></i></a></td>
-        <td><a class="btn btn-invisible active">Button</a><a class="btn btn-invisible active"><i class="fa fa-ambulance"></i></a></td>
+        <td><a class="btn btn-invisible">Button</a><a class="btn btn-invisible"><i class="sicon sicon-mask"></i></a></td>
+        <td><a class="btn btn-invisible disabled">Button</a><a class="btn btn-invisible disabled"><i class="sicon sicon-mask"></i></a></td>
+        <td><a class="btn btn-invisible active">Button</a><a class="btn btn-invisible active"><i class="sicon sicon-mask"></i></a></td>
       </tr>
       <tr>
         <td>Link</td>
         <td><code>.btn .btn-invisible .btn-link</code></td>
-        <td><a class="btn btn-invisible btn-link">Button</a><a class="btn btn-invisible btn-link"><i class="fa fa-ambulance"></i></a></td>
-        <td><a class="btn btn-invisible btn-link disabled">Button</a><a class="btn btn-invisible btn-link disabled"><i class="fa fa-ambulance"></i></a></td>
-        <td><a class="btn btn-invisible btn-link active">Button</a><a class="btn btn-invisible btn-link active"><i class="fa fa-ambulance"></i></a></td>
+        <td><a class="btn btn-invisible btn-link">Button</a><a class="btn btn-invisible btn-link"><i class="sicon sicon-mask"></i></a></td>
+        <td><a class="btn btn-invisible btn-link disabled">Button</a><a class="btn btn-invisible btn-link disabled"><i class="sicon sicon-mask"></i></a></td>
+        <td><a class="btn btn-invisible btn-link active">Button</a><a class="btn btn-invisible btn-link active"><i class="sicon sicon-mask"></i></a></td>
       </tr>
     </tbody>
   </table>
@@ -323,7 +325,7 @@
       <p>Use any button to trigger a dropdown menu by placing it within a <code>.btn-group</code> and providing the proper menu markup.</p>
       <div class="btn-toolbar" style="margin-top: 18px;">
         <div class="btn-group">
-          <a class="btn dropdown-toggle" data-toggle="dropdown">Action <i class="fa fa-caret-down"></i></a>
+          <a class="btn dropdown-toggle" data-toggle="dropdown">Action <i class="sicon sicon-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
@@ -333,7 +335,7 @@
           </ul>
         </div><!-- /btn-group -->
         <div class="btn-group">
-          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action <i class="fa fa-caret-down"></i></a>
+          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action <i class="sicon sicon-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
@@ -343,7 +345,7 @@
           </ul>
         </div><!-- /btn-group -->
         <div class="btn-group">
-          <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Danger <i class="fa fa-caret-down"></i></a>
+          <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Danger <i class="sicon sicon-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
@@ -355,7 +357,7 @@
       </div>
       <div class="btn-toolbar">
         <div class="btn-group">
-          <a class="btn btn-success dropdown-toggle" data-toggle="dropdown">Success <i class="fa fa-caret-down"></i></a>
+          <a class="btn btn-success dropdown-toggle" data-toggle="dropdown">Success <i class="sicon sicon-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
@@ -365,7 +367,7 @@
           </ul>
         </div><!-- /btn-group -->
         <div class="btn-group">
-          <a class="btn btn-info dropdown-toggle" data-toggle="dropdown">Info <i class="fa fa-caret-down"></i></a>
+          <a class="btn btn-info dropdown-toggle" data-toggle="dropdown">Info <i class="sicon sicon-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
@@ -383,7 +385,7 @@
 &lt;div class="btn-group"&gt;
   &lt;a class="btn dropdown-toggle" data-toggle="dropdown"&gt;
     Action
-    &lt;i class="fa fa-caret-down"&gt;&lt;/i&gt;
+    &lt;i class="sicon sicon-chevron-down"&gt;&lt;/i&gt;
   &lt;/a&gt;
   &lt;ul class="dropdown-menu"&gt;
     &lt;!-- dropdown menu links --&gt;
@@ -400,7 +402,7 @@
       <div class="btn-toolbar" style="margin-top: 18px;">
         <div class="btn-group">
           <a class="btn">Action</a>
-          <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></a>
+          <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="sicon sicon-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
@@ -411,7 +413,7 @@
         </div><!-- /btn-group -->
         <div class="btn-group">
           <a class="btn btn-primary">Action</a>
-          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></a>
+          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="sicon sicon-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
@@ -422,7 +424,7 @@
         </div><!-- /btn-group -->
         <div class="btn-group">
           <a class="btn btn-danger">Danger</a>
-          <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></a>
+          <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="sicon sicon-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
@@ -435,7 +437,7 @@
       <div class="btn-toolbar">
         <div class="btn-group">
           <a class="btn btn-success">Success</a>
-          <a class="btn btn-success dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></a>
+          <a class="btn btn-success dropdown-toggle" data-toggle="dropdown"><i class="sicon sicon-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
@@ -446,7 +448,7 @@
         </div><!-- /btn-group -->
         <div class="btn-group">
           <a class="btn btn-info">Info</a>
-          <a class="btn btn-info dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></a>
+          <a class="btn btn-info dropdown-toggle" data-toggle="dropdown"><i class="sicon sicon-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
@@ -464,7 +466,7 @@
 &lt;div class="btn-group"&gt;
   &lt;a class="btn"&gt;Action&lt;/a&gt;
   &lt;a class="btn dropdown-toggle" data-toggle="dropdown"&gt;
-    &lt;i class="fa fa-caret-down"&gt;&lt;/i&gt;
+    &lt;i class="sicon sicon-chevron-down"&gt;&lt;/i&gt;
   &lt;/a&gt;
   &lt;ul class="dropdown-menu"&gt;
     &lt;!-- dropdown menu links --&gt;

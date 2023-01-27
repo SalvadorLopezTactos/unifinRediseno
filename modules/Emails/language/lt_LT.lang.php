@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Vartotojai',
     'LBL_EMAILS_PRODUCTS_REL' => 'Įvykdyto pasiūlymo eilutės prekės',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Pajamų eilutės prekės',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Išplėtimai',
     'LBL_EMAILS_MESSAGES_REL' => 'Žinutės',
     'LBL_EMAILS_PURCHASES_REL' => 'Pirkimai',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Pirkimo eilutės prekės',
@@ -473,4 +474,5 @@ You may apply a predefined template using the Template button or include one of 
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Siųsti el. laišką',
     'LBL_MAILBOX' => 'Įeinančio pašto klientas',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Sukonfigūruokite siunčiamo el. pašto paskyrą naudodami <a href="#OutboundEmail">el. pašto nustatymus</a>, kad galėtumėte siųsti el. laiškus.',
 );

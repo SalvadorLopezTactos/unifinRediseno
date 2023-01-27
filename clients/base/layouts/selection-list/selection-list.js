@@ -14,7 +14,7 @@
  * @extends View.Layout
  */
 ({
-    plugins: ['ShortcutSession'],
+    plugins: ['ShortcutSession', 'ConfigDrivenList'],
 
     shortcuts: [
         'Headerpane:Cancel',

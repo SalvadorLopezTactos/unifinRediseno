@@ -65,6 +65,11 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
      */
     public function start($lock = false)
     {
+        ini_set('session.use_only_cookies', '0');
+        ini_set('session.use_cookies', '0');
+        ini_set('session.use_trans_sid', '0');
+        ini_set('session.cache_limiter', '');
+
         session_start();
         $this->populateFromArray($_SESSION);
         //keep session values

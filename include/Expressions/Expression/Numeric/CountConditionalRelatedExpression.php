@@ -61,7 +61,7 @@ class CountConditionalRelatedExpression extends NumericExpression
         if (App === undefined) {
             return SUGAR.expressions.Expression.FALSE;
         }
-        
+
         var params = this.params,
             view = this.context.view,
             target = this.context.target,

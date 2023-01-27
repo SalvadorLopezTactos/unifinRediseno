@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Nome Campo già esistente',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Il nome del campo deve contenere soltanto i seguenti caratteri: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Nessun Modulo Incluso Impossibile Salvare',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Nome Casella a discesa già esistente',
     'LBL_BTN_ADD' => 'Aggiungi',
     'LBL_BTN_EDIT' => 'Modifica',
     'LBL_GENERATE_URL' => 'Crea URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Aggiunta Colonna {0} a',
     'LBL_DONE' => 'Fatto',
     'LBL_EXE_NON_SIM_MODE' => 'Eseguire modalità non-simulazione',
+    'LBL_CALCULATION_VISIBLE' => 'Rendi visibile per i calcoli',
 );
-
-
-?>

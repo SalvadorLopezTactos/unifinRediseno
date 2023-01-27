@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Tabuľka',
     'LBL_PURCHASED_LINE_ITEMS' => 'Zakúpené riadkové položky',
 
+    'LBL_FORECASTED_LIKELY' => 'Prognózované ako pravdepodobné',
     'LBL_RENEWAL' => 'Obnovenie',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Príležitosti obnovenia',
     'LBL_RENEWAL_PARENT' => 'Nadradená príležitosť',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# z celkových položiek krivky výnosu',
     'LBL_CLOSED_RLIS' => '# z uzavretých položiek krivky výnosu',
+    'LBL_CLOSED_WON_RLIS' => '# z uzavretých získaných riadkových položiek výnosov',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# riadkových položiek pre výnosy počas flexibilného trvania otvorenej služby',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Nemôžete vymazať príležitosti, ktoré obsahujú uzavreté položky krivky výnosu',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Jeden alebo viac z vybratých záznamov obsahuje uzavreté položky krivky výnosu a nemôže byť odstránený.',
     'LBL_INCLUDED_RLIS' => '# zo zahrnutých položiek krivky výnosu',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Aktualizácia otvorená',
+    'LBL_CASCADE_RLI_EDIT' => 'Aktualizovať otvorené riadkové položky výnosov',
+    'LBL_CASCADE_RLI_CREATE' => 'Nastaviť naprieč riadkovými položkami výnosov',
     'LBL_SERVICE_START_DATE_INVALID' => 'Dátum začatia služby nie je možné nastaviť po dátume ukončenia služby žiadnych otvorených doplnkových položiek krivky výnosu.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Ponuky',
@@ -210,7 +214,7 @@ $mod_strings = array(
     'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje od začiatku do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad {{quotes_module}}, {{contacts_module}} a pod. {{module_name}} štandardne prejde niekoľkými fázami predaja a na záver sa označí buď stavom „Uzatvorené získané“, alebo „Uzatvorené nezískané“. Modul {{plural_module_name}} možno využiť ešte viac použitím modulu {{forecasts_singular_module}} aplikácie Sugar, vďaka čomu možno porozumieť trendom predaja a predpovedať ich, ako aj zamerať sa na prácu s cieľom dosiahnuť kvóty predaja.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje a položky patriace k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad záznamy {{quotes_module}}, {{contacts_module}} a pod.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje a riadkové položky patriace k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad záznamy {{quotes_module}}, {{contacts_module}} a pod.
 
 – Polia tohto záznamu upravíte kliknutím na jednotlivé polia alebo stlačením tlačidla Upraviť.
 – Prepojenia na ďalšie záznamy v podpaneloch možno zobraziť alebo upraviť prepnutím ľavého spodného panelu na „Zobrazenie údajov“.
@@ -219,7 +223,7 @@ $mod_strings = array(
 – Ďalšie akcie sú k dispozícii v rozbaľovacej ponuke Akcie napravo od tlačidla Upraviť.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje a položky patriace k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad záznamy {{quotes_module}}, {{contacts_module}} a pod. 
+    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje a riadkové položky patriace k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad záznamy {{quotes_module}}, {{contacts_module}} a pod.
 
 Ak chcete vytvoriť modul {{module_name}}:
 1. Zadajte požadované hodnoty do polí.
@@ -239,7 +243,10 @@ Ak chcete vytvoriť modul {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Príležitosti môjho tímu",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Nie je možné zmeniť {{fieldName}}, pretože tento {{moduleSingular}} nemá žiadne otvorené riadkové položky.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcie s príležitosťou',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os príležitosti',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' nie je možné nastaviť naprieč žiadnou z týchto riadkových položiek výnosov, pretože nejde o služby. Chcete pokračovať vo vytváraní?',
+    'LBL_CASCADE_DURATION_WARNING' => ' nie je možné nastaviť naprieč žiadnou z týchto riadkových položiek výnosov, pretože ich trvanie je uzamknuté. Chcete pokračovať vo vytváraní?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Predpoveď uzatvorenia príležitosti',

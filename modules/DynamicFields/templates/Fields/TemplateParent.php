@@ -41,37 +41,57 @@ class TemplateParent extends TemplateEnum{
         $this->name = 'parent_name';
         $this->default_value = '';
         parent::save($df); // always save because we may have updates
-        
-        //save parent_type
+
+        foreach ($this->createFields() as $field) {
+            $field->save($df);
+        }
+    }
+
+    /**
+     * @param DynamicField $dynamicField
+     * @return array
+     */
+    public function getContainedDefs(DynamicField $dynamicField): array
+    {
+        return array_map(function (TemplateField $tf): array {
+            return $tf->get_field_def();
+        }, $this->createFields());
+    }
+
+    /**
+     * @return TemplateField[]
+     */
+    private function createFields(): array
+    {
         $parent_type = new TemplateParentType();
         $parent_type->name = 'parent_type';
         $parent_type->vname = 'LBL_PARENT_TYPE';
         $parent_type->label = $parent_type->vname;
         $parent_type->len = 255;
         $parent_type->importable = $this->importable;
-        $parent_type->save($df);
-            
-        //save parent_name
+
         $parent_id = new TemplateId();
         $parent_id->name = 'parent_id';
         $parent_id->vname = 'LBL_PARENT_ID';
         $parent_id->label = $parent_id->vname;
         $parent_id->len = 36;
         $parent_id->importable = $this->importable;
-        $parent_id->save($df);
+
+        return [$parent_type, $parent_id];
     }
-    
-    function get_db_add_alter_table($table){
+
+    public function get_db_add_alter_table($table)
+    {
         return '';
     }
+
     /**
      * mysql requires the datatype caluse in the alter statment.it will be no-op anyway.
-     */ 
-    function get_db_modify_alter_table($table){
+     */
+    public function get_db_modify_alter_table($table)
+    {
         return '';
     }
-    
-    
 }
 
 

@@ -49,9 +49,19 @@ $viewdefs['Notes']['portal']['view']['record'] = array(
                     'modulefield' => 'filename',
                     'bLabel' => 'LBL_ADD_ATTACHMENT',
                     'span' => 12,
+                    'max_num' => -1,
                     'related_fields' => [
                         'filename',
                         'file_mime_type',
+                    ],
+                    'fields' => [
+                        'name',
+                        'filename',
+                        'file_size',
+                        'file_source',
+                        'file_mime_type',
+                        'file_ext',
+                        'upload_id',
                     ],
                 ],
                 array(

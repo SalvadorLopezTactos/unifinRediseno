@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Базовая процентная ставка',
 
     'LBL_QUOTA' => 'Квота',
-    'LBL_QUOTA_ADJUSTED' => 'Квота (Скорректированная)',
+    'LBL_QUOTA_ADJUSTED' => 'Скорректированный объем продаж',
 
     'LBL_FORECAST' => 'Прогноз',
     'LBL_COMMIT_STAGE' => 'Стадия совершения продажи',

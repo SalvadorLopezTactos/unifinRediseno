@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => '이름 지원',
   'LBL_SUPPORT_TERM' => '팀 지원',
   'LBL_TAX_CLASS' => '세금 종류',
+  'LBL_ACTIVE_STATUS' => '상태',
   'LBL_TYPE_NAME'=>'이름 입력',
   'LBL_TYPE' => '유형',
   'LBL_PRODUCT_TYPE' => '제품 유형',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => '제품 카탈로그 목록 대시보드',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => '제품 카탈로그 기록 대시 보드',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '제품 카탈로그 포커스 서랍',
+    'LBL_FILTER_ACTIVE_STATUS' => '활성화 상태',
 );

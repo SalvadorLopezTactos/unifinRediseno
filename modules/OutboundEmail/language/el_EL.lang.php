@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Απάντηση σε ταυτότητες διευθύνσεων Email',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Απάντηση-σε διεύθυνση Email',
     'LBL_PRIMARY_TEAM' => 'Κύρια ομάδα',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Προτιμώμενος λογαριασμός αποστολής',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης ρυθμίσεων ηλεκτρονικού ταχυδρομείου',
 );

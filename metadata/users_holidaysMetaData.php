@@ -46,13 +46,6 @@ $dictionary['users_holidays'] = array(
             ),
         ),
         array(
-            'name' => 'idx_user_holi_user',
-            'type' => 'index',
-            'fields' => array(
-                'user_id',
-            ),
-        ),
-        array(
             'name' => 'idx_user_holi_holi',
             'type' => 'index',
             'fields' => array(

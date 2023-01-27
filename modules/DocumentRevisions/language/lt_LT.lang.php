@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'Sukurti dokumentą',
 	'LNK_DOCUMENT_LIST'=> 'Dokumentai',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'Susijusio dokumento peržiūros',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'Jūs sėkmingai sukūrėte {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a>.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'Versijos numeris',
 	'LBL_FILENAME' => 'Failo pavadinimas',
 	'LBL_MIME' => 'Mime tipas',

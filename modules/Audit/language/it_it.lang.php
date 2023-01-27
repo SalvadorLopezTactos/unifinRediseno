@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Campi verificati in questo modulo:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Non ci sono campi verificati in questo modulo',
     'LBL_CHANGE_LOG' => 'Registro di controllo',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Quando i campi valuta revisionati vengono salvati in una valuta non predefinita di sistema, il log delle modifiche mostrerà i valori vecchi e quelli nuovi nella valuta predefinita convertita e definita dal sistema.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Quando i campi valuta revisionati vengono salvati in una valuta non predefinita di sistema, il log delle modifiche mostrerà i valori vecchi e quelli nuovi nella valuta predefinita convertita e definita dal sistema.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Aggiorna a',
+    'LBL_BLANK' => '-vuoto-',
 );

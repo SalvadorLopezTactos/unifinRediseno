@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Adresse Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Pièces jointes',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Pièce jointe d&#39;e-mail pour',
+    'LBL_NOTE_ATTACHMENT' => 'Notes en pièces jointes',
+    'LBL_KB_ATTACHMENT' => 'Documents base de connaissances en pièces jointes',
+    'LBL_CASE_ATTACHMENT' => 'Tickets en pièces jointes',
     'LBL_FILE_MIME_TYPE' => 'Type Mime',
     'LBL_FILE_EXTENSION' => 'Extension de fichier',
     'LBL_FILE_SOURCE' => 'Source de fichier',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Source de la note',
     'LBL_SOURCE_EXTERNAL' => 'Externe',
     'LBL_SOURCE_INTERNAL' => 'Interne',
+    'LBL_PORTAL' => 'Portail',
 
     // Help Text
     // List View Help Text

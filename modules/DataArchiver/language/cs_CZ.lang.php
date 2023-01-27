@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Archivovat',
     'LBL_PROCESS_TYPE_DELETE' => 'Trvalé odstranění',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Archivovat spuštění',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Varování',
+    'LBL_ARCHIVER_WARNING' => 'Tuto akci se doporučuje provádět během nízké míry využívání nebo mimo '
+        . 'pracovní dobu, protože může ovlivnit výkon systému. Opravdu chcete tuto akci provést nyní?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Archivátor pro modul {{moduleName}} musí mít jako filtr nastaveno {{fieldName}}',
 );

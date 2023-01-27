@@ -88,7 +88,8 @@ class FileValidator extends ConstraintValidator
         // normalize using realpath, implies a fileExists check
         $normalized = realpath($value);
 
-        if ($normalized === false) {
+        // check for file existence explicitly because shadow version of realpath returns path instead of false for missing file
+        if ($normalized === false || !file_exists($normalized)) {
             $this->context->buildViolation($constraint->message)
                 ->setInvalidValue($value)
                 ->setCode(File::ERROR_FILE_NOT_FOUND)

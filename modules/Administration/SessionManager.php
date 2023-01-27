@@ -118,7 +118,7 @@ class SessionManager extends SugarBean {
     function getNumActiveSessions(){
         return $this->db->getConnection()->executeQuery(
             sprintf('SELECT count(*) FROM %s', $this->table_name)
-        )->fetchColumn();
+        )->fetchOne();
     }
 
     /*

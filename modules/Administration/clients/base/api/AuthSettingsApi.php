@@ -106,6 +106,14 @@ class AuthSettingsApi extends SugarApi
             $settings['saml'] = $this->getSAMLConfig();
         }
 
+        $oauth2 = $this->getAuthConfig()->get('oauth2', []);
+        if (!empty($oauth2[OAuth2::CONFIG_ACCESS_LIFETIME]) && !empty($oauth2[OAuth2::CONFIG_REFRESH_LIFETIME])) {
+            $settings['token_lifetime'] = [
+                OAuth2::CONFIG_ACCESS_LIFETIME => intval($oauth2[OAuth2::CONFIG_ACCESS_LIFETIME]),
+                OAuth2::CONFIG_REFRESH_LIFETIME => intval($oauth2[OAuth2::CONFIG_REFRESH_LIFETIME]),
+            ];
+        }
+
         return $settings;
     }
 

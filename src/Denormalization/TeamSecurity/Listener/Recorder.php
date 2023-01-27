@@ -13,7 +13,7 @@
 namespace Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Psr\Log\LoggerInterface;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
 use Sugarcrm\Sugarcrm\Util\Uuid;
@@ -114,7 +114,7 @@ SQL
             $this->table
         );
 
-        $this->conn->executeUpdate($query, [
+        $this->conn->executeStatement($query, [
             Uuid::uuid1(),
             $method,
             json_encode($arguments),
@@ -142,7 +142,7 @@ SQL
 
         $stmt = $this->conn->executeQuery($query);
 
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             try {
                 $listener->{$row['action']}(...json_decode($row['params']));
             } catch (\Exception $e) {
@@ -175,7 +175,7 @@ SQL
             $this->table
         );
 
-        $this->conn->executeUpdate($query, [$id]);
+        $this->conn->executeStatement($query, [$id]);
     }
 
     /**

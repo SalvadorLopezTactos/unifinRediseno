@@ -5,13 +5,17 @@
 // Chart colors defined in colors.less
 
 .sc-background {
-  fill: @white;
+  fill: @primaryContentBackground;
+}
+
+.sc-base {
+  stroke: @borderColor;
 }
 
 .sc-chart-background {
   fill: transparent;
   stroke-width: 0.5px;
-  stroke: @grayLight;
+  stroke: @borderColor;
 }
 
 .sc-chart {
@@ -60,7 +64,7 @@ svg.sc-chart,
 
   .sc-labels text {
     font-weight: bold;
-    fill: @gray;
+    fill: @labelColor;
   }
 
   .sc-label-value text,
@@ -73,7 +77,7 @@ svg.sc-chart,
   }
 
   .calc-text-strings {
-    fill: @black;
+    fill: @textColor;
     stroke: @transparent;
     pointer-events: none;
   }

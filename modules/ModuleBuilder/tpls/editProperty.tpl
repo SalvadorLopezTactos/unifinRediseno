@@ -24,12 +24,9 @@
 <input type='hidden' name='view_package' value='{$view_package}'>
 {/if}
 
-{literal}
 <script>
     function saveAction() {
-{/literal}
         var widthUnit = '{$widthUnit}';
-{literal}
         for(var i=0, l=document.editProperty.elements.length; i<l; i++) {
             var field = document.editProperty.elements[i];
             if (field.className.indexOf('save') != -1 )
@@ -53,17 +50,14 @@
 
 	function switchLanguage( language )
 	{
-{/literal}
         var request = 'module=ModuleBuilder&action=editProperty&view_module={$editModule}&selected_lang=' + language ;
         {foreach from=$properties key='key' item='property'}
                 request += '&id_{$key}={$property.id}&name_{$key}={$property.name}&title_{$key}={$property.title}&label_{$key}={$property.label}' ;
         {/foreach}
-{literal}
         ModuleBuilder.getContent( request ) ;
     }
 
 </script>
-{/literal}
 
 <table style="width:100%">
 
@@ -84,17 +78,17 @@
 						<option value="custom">custom</option>
 					</select>
 					<input id="widthValue_{$id}{$property.id}" onchange="handleWidthChange(this.value)" value="{$property.value}" style="display:none">
-                    {literal}
+                    
                     <script>
                     var propertyValue, widthValue, saveWidthProperty, selectWidthClass;
-                    {/literal}
+                    
 
                     propertyValue = '{$property.value}';
                     saveWidthProperty = document.getElementById('editProperty_{$id}{$property.id}');
                     widthValue = document.getElementById('widthValue_{$id}{$property.id}');
                     selectWidthClass = document.getElementById('selectWidthClass_{$id}{$property.id}');
 
-                    {literal}
+                    
                     if (propertyValue != '') {
                         if (isNaN(propertyValue)) {
                             selectWidthClass.value = propertyValue;
@@ -123,7 +117,7 @@
                         saveWidthProperty.value = w;
                     }
                     </script>
-                    {/literal}
+                    
 				{else}
                     <input onchange='document.getElementById("editProperty_{$id}{$property.id}").value = this.value' value='{$property.value}'>
                 {/if}

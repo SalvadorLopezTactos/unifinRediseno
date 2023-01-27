@@ -15,7 +15,6 @@
 <script type="text/javascript">
 	{$ASSOCIATED_JAVASCRIPT_DATA}
 
-{literal}
 function clearAll() {
    for(i=0; i < document.popup_query_form.length; i++) {
        if(/select/i.test(document.popup_query_form.elements[i].type)) {
@@ -25,7 +24,6 @@ function clearAll() {
        }
    }
 }
-{/literal}
 </script>
 {{if isset($formData)}}
 {$SEARCH_FORM_HEADER}

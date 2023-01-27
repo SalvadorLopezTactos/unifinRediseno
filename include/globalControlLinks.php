@@ -38,7 +38,7 @@ if (
 
         ) $global_control_links['admin'] = array(
 
-'linkinfo' => array($app_strings['LBL_ADMIN'] => 'index.php?module=Administration&action=index'),
+'linkinfo' => array($app_strings['LBL_ADMIN'] => '#Administration'),
 'submenu' => ''
 );
 /* no longer goes in the menubar - now implemented in the bottom bar.

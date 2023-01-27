@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Archiwizuj',
     'LBL_PROCESS_TYPE_DELETE' => 'Trwałe usunięcie',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Przebiegi archiwizacji',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Ostrzeżenie',
+    'LBL_ARCHIVER_WARNING' => 'Zaleca się wykonanie tej czynności w trakcie niskiego obciążenia systemu lub poza godzinami pracy, '
+        . 'ponieważ może to wpływać na wydajność systemu. Czy na pewno chcesz wykonać tę czynność teraz?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Archiwizator modułu {{moduleName}} musi mieć pole {{fieldName}} ustawione jako filtr',
 );

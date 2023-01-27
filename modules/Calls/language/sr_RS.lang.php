@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'ID kontakta',
     'LBL_DESCRIPTION_INFORMATION' => 'Opisne informacije',
     'LBL_DESCRIPTION' => 'Opis:',
+    'LBL_INTERNAL_NOTES' => 'Interne beleške:',
     'LBL_STATUS' => 'Status:',
     'LBL_DIRECTION' => 'Smer:',
     'LBL_DATE' => 'Datum početka:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Vreme trajanja mora biti veće od 0',
     'LBL_CALL_INFORMATION' => 'Pregled poziva',
     'LBL_REMOVE' => 'Ukloni',
-    'LBL_ACCEPT_STATUS' => 'Prihvati status',
     'LBL_ACCEPT_LINK' => 'Prihvati link',
     //For export labels
     'LBL_PARENT_ID' => 'Matični ID broj:',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Poziv:',
     'LBL_CALL_RECORDING_URL' => 'URL snimka',
     'LBL_CALL_RECORDING' => 'Snimanje',
+
+    'LBL_LEAD_ID' => 'ID potencijalnog klijenta',
+    'LBL_LEAD_NAME' => 'Potencijalni klijent',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Uspešno ste napravili {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> za  {{formatDate date_start}}.',

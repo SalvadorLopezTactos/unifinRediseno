@@ -152,7 +152,7 @@ if (!empty($_REQUEST['record'])) {
     $user_id = $_REQUEST['record'];
     $db = DBManagerFactory::getConnection();
     $sql = 'SELECT is_admin FROM users WHERE id = ?';
-    $is_admin = $db->executeQuery($sql, [$user_id])->fetchColumn();
+    $is_admin = $db->executeQuery($sql, [$user_id])->fetchOne();
     if (!is_admin($current_user) && ($current_user->isAdminForModule('Users')) && ($is_admin == 1)) {
         $layout_defs['Users']['subpanel_setup']['holidays']['top_buttons'] = array();
     }

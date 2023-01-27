@@ -58,13 +58,6 @@ $dictionary['calls_leads'] = array(
             ),
         ),
         array(
-            'name' => 'idx_lead_call_call',
-            'type' => 'index',
-            'fields' => array(
-                'call_id',
-            ),
-        ),
-        array(
             'name' => 'idx_lead_call_lead',
             'type' => 'index',
             'fields' => array(

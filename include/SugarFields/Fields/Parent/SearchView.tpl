@@ -32,7 +32,6 @@ onchange='document.{{$form_name}}.{{sugarvar key='name'}}.value="";document.{{$f
 </button>
 {{/if}}
 </span>
-{literal}
 <script type="text/javascript">
 if (typeof(changeParentQSSearchView) == 'undefined'){
 function changeParentQSSearchView(field) {
@@ -67,16 +66,12 @@ function changeParentQSSearchView(field) {
     enableQS(false);
 }}
 YAHOO.util.Event.onContentReady(
-{/literal}
 "{{sugarvar key='name'}}"
-{literal}
 , function() {
     changeParentQSSearchView(
-{/literal}
 "{{sugarvar key='name'}}"
-{literal}
+
     );
 });
 </script>
 {{$displayParams.disabled_parent_types}}
-{/literal}

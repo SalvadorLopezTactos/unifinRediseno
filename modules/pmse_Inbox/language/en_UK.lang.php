@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Processes Record Dashboard',
 
     'LBL_CAS_ID' => 'Process Number',
+    'LBL_CAS_STATUS' => 'Process Status',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Unknown (according UserId:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "task has been",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "task was ",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "was assigned to Process #%s %s the %s record by the %s Activity %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "on",
     'LBL_PMSE_HISTORY_LOG_AND'  => "and",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'linked or unlinked a record to',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Approve',
     'LBL_PMSE_LABEL_REJECT' => 'Reject',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Processes In Progress',
     'LBL_STATUS_CANCELLED' => 'Processes Cancelled',
     'LBL_STATUS_ERROR' => 'Processes Error',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Completed',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Terminated',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'In Progress',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Cancelled',
+    'LBL_STATUS_ERROR_ENUM' => 'Error',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Processes List',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Unattended Processes',

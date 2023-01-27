@@ -23,6 +23,7 @@ class EndpointService implements EndpointInterface
             EndpointInterface::AUTH_ENDPOINT,
             EndpointInterface::TOKEN_ENDPOINT,
             EndpointInterface::INTROSPECT_ENDPOINT,
+            EndpointInterface::REVOCATION_ENDPOINT,
         ];
 
     /**
@@ -113,7 +114,7 @@ class EndpointService implements EndpointInterface
     public function getConsentDataRequestEndpoint($requestId)
     {
         return sprintf(
-            '%s/%s/%s/%s',
+            '%s/%s/%s?consent_challenge=%s',
             $this->stsHost,
             EndpointInterface::OAUTH2_ENDPOINT,
             EndpointInterface::CONSENT_ENDPOINT,
@@ -129,12 +130,12 @@ class EndpointService implements EndpointInterface
     public function getConsentAcceptRequestEndpoint($requestId)
     {
         return sprintf(
-            '%s/%s/%s/%s/%s',
+            '%s/%s/%s/%s?consent_challenge=%s',
             $this->stsHost,
             EndpointInterface::OAUTH2_ENDPOINT,
             EndpointInterface::CONSENT_ENDPOINT,
-            $requestId,
-            EndpointInterface::CONSENT_ACCEPT_ENDPOINT
+            EndpointInterface::ACCEPT_ENDPOINT,
+            $requestId
         );
     }
 
@@ -146,12 +147,12 @@ class EndpointService implements EndpointInterface
     public function getConsentRejectRequestEndpoint($requestId)
     {
         return sprintf(
-            '%s/%s/%s/%s/%s',
+            '%s/%s/%s/%s?consent_challenge=%s',
             $this->stsHost,
             EndpointInterface::OAUTH2_ENDPOINT,
             EndpointInterface::CONSENT_ENDPOINT,
-            $requestId,
-            EndpointInterface::CONSENT_REJECT_ENDPOINT
+            EndpointInterface::REJECT_ENDPOINT,
+            $requestId
         );
     }
 
@@ -162,5 +163,61 @@ class EndpointService implements EndpointInterface
     public function getUserInfoEndpoint()
     {
         return sprintf('%s/%s', $this->stsHost, EndpointInterface::USER_INFO_ENDPOINT);
+    }
+
+    /**
+     * Get Login Request endpoint (Hydra specific)
+     *
+     * @param string $loginRequestId
+     * @return string
+     */
+    public function getLoginRequestEndpoint(string $loginRequestId): string
+    {
+        return sprintf(
+            '%s/%s/%s/%s?login_challenge=%s',
+            $this->stsHost,
+            EndpointInterface::OAUTH2_ENDPOINT,
+            EndpointInterface::AUTH_ENDPOINT,
+            EndpointInterface::LOGIN_REQUESTS_ENDPOINT,
+            $loginRequestId
+        );
+    }
+
+    /**
+     * Get Login Request Accept endpoint (Hydra specific)
+     *
+     * @param string $loginRequestId
+     * @return string
+     */
+    public function getLoginRequestAcceptEndpoint(string $loginRequestId): string
+    {
+        return sprintf(
+            '%s/%s/%s/%s/%s?login_challenge=%s',
+            $this->stsHost,
+            EndpointInterface::OAUTH2_ENDPOINT,
+            EndpointInterface::AUTH_ENDPOINT,
+            EndpointInterface::LOGIN_REQUESTS_ENDPOINT,
+            EndpointInterface::ACCEPT_ENDPOINT,
+            $loginRequestId
+        );
+    }
+
+    /**
+     * Get Login Request Reject endpoint (Hydra specific)
+     *
+     * @param string $loginRequestId
+     * @return string
+     */
+    public function getLoginRequestRejectEndpoint(string $loginRequestId): string
+    {
+        return sprintf(
+            '%s/%s/%s/%s/%s?login_challenge=%s',
+            $this->stsHost,
+            EndpointInterface::OAUTH2_ENDPOINT,
+            EndpointInterface::AUTH_ENDPOINT,
+            EndpointInterface::LOGIN_REQUESTS_ENDPOINT,
+            EndpointInterface::REJECT_ENDPOINT,
+            $loginRequestId
+        );
     }
 }

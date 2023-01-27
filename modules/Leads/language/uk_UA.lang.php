@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Запропонований:',
     'LBL_LIST_STATUS' => 'Статус',
     'LBL_LIST_TITLE' => 'Посада',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Прогноз ринкового інтересу',
+    'LBL_MARKET_SCORE' => 'Оцінка ринку',
     'LBL_MOBILE_PHONE' => 'Телефон (моб.):',
     'LBL_MODULE_NAME' => 'інтереси',
     'LBL_MODULE_NAME_SINGULAR' => 'Інтерес',
@@ -330,4 +332,9 @@ $mod_strings = array (
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Передбачення щодо конвертації потенційних клієнтів',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Переглянути докладні відомості про певного потенційного клієнта',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Увімкнути позиції доходів по продуктам',
+    'LBL_REQUIRE_RLIS' => 'Для створення нової угоди необхідно вказати позиції доходів по продуктам',
+    'LBL_COPY_DATA_RLIS' => 'Копіювати дані потенційних клієнтів у позиції доходів по продуктам при створенні нової угоди',
 );

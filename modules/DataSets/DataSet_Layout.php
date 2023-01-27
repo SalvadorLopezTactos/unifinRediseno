@@ -178,7 +178,7 @@ class DataSet_Layout extends SugarBean {
         $stmt = $qb->execute();
 
 			// Print out the calculation column info
-        while ($beanId = $stmt->fetchColumn()) {
+        while ($beanId = $stmt->fetchOne()) {
 				//Mark all attributes deleted
             BeanFactory::deleteBean('DataSet_Attribute', $beanId);
 

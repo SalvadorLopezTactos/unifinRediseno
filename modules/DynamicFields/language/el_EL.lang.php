@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Το Όνομα του Πεδίου υπάρχει ήδη',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Το Όνομα πεδίου πρέπει να περιέχει μόνο τους ακόλουθους χαρακτήρες: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Δεν περιλαμβάνεται Ενότητα και δεν μπόρεσε να Αποθηκεύσει',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Το αναπτυσσόμενο όνομα υπάρχει ήδη',
     'LBL_BTN_ADD' => 'Προσθήκη',
     'LBL_BTN_EDIT' => 'Επεξεργασία',
     'LBL_GENERATE_URL' => 'Δημιουργία διεύθυνσης URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Προσθήκη στήλης {0} σε',
     'LBL_DONE' => 'Έτοιμο',
     'LBL_EXE_NON_SIM_MODE' => 'Εκτελέστε τη λειτουργία μη-προσομοίωση',
+    'LBL_CALCULATION_VISIBLE' => 'Εμφανίστε για υπολογισμούς',
 );
-
-
-?>

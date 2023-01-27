@@ -26,6 +26,21 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class SugarLocalUserProvider implements UserProviderInterface
 {
     /**
+     * @var bool
+     */
+    protected $allowInactive = false;
+
+    /**
+     * Set allow inactive user
+     *
+     * @param bool $allowInactive
+     */
+    public function setAllowInactive(bool $allowInactive): void
+    {
+        $this->allowInactive = $allowInactive;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function loadUserByUsername($username)
@@ -110,7 +125,7 @@ class SugarLocalUserProvider implements UserProviderInterface
 
         $sugarUser->emailAddress->handleLegacyRetrieve($sugarUser);
 
-        if ($sugarUser->status !== User::USER_STATUS_ACTIVE) {
+        if (!$this->allowInactive && $sugarUser->status !== User::USER_STATUS_ACTIVE) {
             throw new InactiveUserException('Inactive user', 0, null, $sugarUser);
         }
 

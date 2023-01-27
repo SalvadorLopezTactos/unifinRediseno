@@ -33,8 +33,8 @@ $dictionary['MobileDevice'] = [
             'len' => 256,
             'required' => true,
         ],
-        'platform' => [
-            'name' => 'platform',
+        'device_platform' => [
+            'name' => 'device_platform',
             'vname' => 'LBL_DEVICE_PLATFORM',
             'type' => 'varchar',
             'len' => 32,
@@ -50,7 +50,7 @@ $dictionary['MobileDevice'] = [
             'fields' => [
                 'assigned_user_id',
                 'device_id',
-                'platform',
+                'device_platform',
                 'deleted',
             ],
         ],

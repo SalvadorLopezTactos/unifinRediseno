@@ -1,7 +1,6 @@
 /* PAGINATION
   ----------------*/
 .pagination {
-  text-align: center;
   padding: 10px;
 
   ul {
@@ -60,7 +59,7 @@
         font-size: smaller;
 
         &:hover {
-          background-color: @grayLighter;
+          background-color: @gray20;
           color: @btnPrimaryBackground;
         }
 
@@ -70,7 +69,7 @@
         }
 
         &.disabled {
-          color: @gray;
+          color: @gray80;
           background-color: @btnSecondaryBackgroundDisabled;
         }
       }
@@ -79,7 +78,7 @@
     //Previous button
     .nav-previous {
       padding: 3px 6px;
-      border: 1px solid @grayLighter;
+      border: 1px solid @gray20;
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
     }
@@ -87,7 +86,7 @@
     //Next button
     .nav-next {
       padding: 3px 6px;
-      border: 1px solid @grayLighter;
+      border: 1px solid @gray20;
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
     }
@@ -106,20 +105,20 @@
       line-height: 12px;
       border: none;
       width: 40%;
-      color: @grayDark;
+      color: @gray90;
       background-color: @bodyBackground;
       padding: 6px 8px;
       text-decoration: none;
       transition: 400ms ease;
 
       &:hover {
-        color: @grayDark;
-        background-color: @grayLighter;
+        color: @gray90;
+        background-color: @gray20;
         border-radius: 5px;
       }
 
       &.disabled {
-        background-color: @gray;
+        background-color: @gray80;
         color: @white;
         border-radius: 5px;
       }

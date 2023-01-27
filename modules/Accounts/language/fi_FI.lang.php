@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Asiakkaan nimi / Toimiala',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Sijainti',
     'LBL_PURCHASES' => 'Ostot',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tilin yhteydet',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tilin aikajana',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Kaaviot',

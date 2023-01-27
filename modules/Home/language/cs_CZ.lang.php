@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Budík přidán',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Prvky nástěnky budou znovu uspořádány. Jste si jisti, že chcete změnit rozvržení sloupců?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Jste si jist, že chcete budík odstranit ?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Není nakonfigurován žádný řídicí panel',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Nejsou nakonfigurovány žádné dashlety',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Vytvořit řídicí panel',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Webová stránka',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Webová stránka',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Zdrojový kód',
   'LBL_SOURCE_SUGAR' => 'Sugar - The world&#39;s most popular sales force automation application created by SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - A template engine for PHP created by Barnabás Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP – Sada tříd PHP, které umožňují vývojářům vytvářet a využívat webové služby vytvořené společností NuSphere Corporation a Dietrichem Ayalou',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar – Kalendář pro zadávání dat vytvořený Mihaiem Bazonem',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF – Knihovna pro vytváření dokumentů PDF vytvořená Waynem Munroem',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'PHP PDF – Knihovna pro vytváření dokumentů PDF vytvořená Waynem Munroem',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Nápověda zobrazuje konkrétní informace o modulu, který si právě prohlížíte, poskytuje podrobné kroky k provádění některých akcí v modulu a ukazuje, kam přejít, pokud si přejete získat ucelenější informace a podporu.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtr',
+
+    'LBL_ABOUT_VERSION' => 'Používáte verzi {{version}} s následujícími licencemi:',
 );

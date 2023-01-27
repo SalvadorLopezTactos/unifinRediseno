@@ -66,11 +66,9 @@
 	</table>
 	</form>
 <script type="text/javascript">
-{literal}
 Calendar.setup ({
-	inputField : "holiday_date", ifFormat : "{/literal}{$CALENDAR_DATEFORMAT}{literal}", showsTime : false, button : "jscal_trigger", singleClick : true, step : 1, weekNumbers:false
+	inputField : "holiday_date", ifFormat : "{$CALENDAR_DATEFORMAT}", showsTime : false, button : "jscal_trigger", singleClick : true, step : 1, weekNumbers:false
 });
-{/literal}
 {$additionalScripts}
 </script>
 

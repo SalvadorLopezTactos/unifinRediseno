@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Betjeningspanel til optegnelser over processer',
 
     'LBL_CAS_ID' => 'Procesnummer',
+    'LBL_CAS_STATUS' => 'Processtatus',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Ukendt (i henhold til bruger-id:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "opgave har været",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "opgave blev ",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "er blevet tildelt Proces #%s %s %s posten af %s Handling %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "på",
     'LBL_PMSE_HISTORY_LOG_AND'  => "og",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'tilknyt eller ophæv en post til',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Godkend',
     'LBL_PMSE_LABEL_REJECT' => 'Afvis',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Processer i gang',
     'LBL_STATUS_CANCELLED' => 'Processer annulleret',
     'LBL_STATUS_ERROR' => 'Procesfejl',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Fuldført',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Fratrådt',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'I gang',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Annulleret',
+    'LBL_STATUS_ERROR_ENUM' => 'Fejl',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Procesadministration',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Uovervågede processer',

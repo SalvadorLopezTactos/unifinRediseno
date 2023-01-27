@@ -58,22 +58,8 @@ $ListView->xTemplateAssign("RETURN_URL",
 	"&return_module=".$currentModule."&return_action=DetailView&return_id=".$focus->id);
 
 $header_text = '';
-if(is_admin($current_user)
-	&& $_REQUEST['module'] != 'DynamicLayout'
-	&& !empty($_SESSION['editinplace']))
-{
-	$header_text = " <a href='index.php?action=index"
-		. "&module=DynamicLayout"
-		. "&from_action=SubPanelView"
-		. "&from_module=ProjectTask"
-		. "'>"
-		.SugarThemeRegistry::current()->getImage("EditLayout", "border='0' align='bottom'"
-,null,null,'.gif',$mod_strings['LBL_EDITLAYOUT'])."</a>";
-}
 $ListView->setHeaderTitle($project_module_strings['LBL_PROJECT_TASK_SUBPANEL_TITLE'] . $header_text);
 
 $ListView->setHeaderText($button);
 $ListView->setQuery('', '', 'order_number', 'project_task');
 $ListView->processListView($focus_list, 'main', 'project_task');
-
-?>

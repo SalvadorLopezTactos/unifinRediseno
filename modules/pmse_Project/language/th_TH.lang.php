@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'สร้างโดยผู้ใช้',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'แก้ไขครั้งล่าสุดโดยผู้ใช้',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'อีเมลระบบ',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'เทมเพลทเอกสาร',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'ผสานเอกสาร',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'เลือก...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'ผสานเอกสารเป็น PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'ผสานเอกสาร',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'กฎทางธุรกิจ',
     'LBL_PMSE_LABEL_RULE' => 'กฎ',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'ระเบียนที่อัปเดตเท่านั้น (อัปเดตทั้งหมด - ดูข้อความช่วยเหลือ)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'ระเบียนใหม่ หรือการอัปเดตครั้งแรก',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'ระเบียนใหม่และการอัปเดตทั้งหมด',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'การเปลี่ยนแปลงความสัมพันธ์',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'เลือกว่ากระบวนการจะเริ่มต้นเมื่อใด<br><br>ใหม่: เรียกใช้กระบวนการเมื่อมีการสร้างระเบียนใหม่<br><br>อัปเดตครั้งแรก: เรียกใช้กระบวนการเฉพาะเมื่อมีเงื่อนไขเป็นไปตามเกณฑ์เป็นครั้งแรกสำหรับระเบียนที่มีอยู่<br><br>อัปเดตทั้งหมด: เรียกใช้กระบวนการทุกครั้งที่มีเงื่อนไขเป็นไปตามเกณฑ์สำหรับระเบียนที่มีอยู่<br><br>ระเบียนใหม่หรือการอัปเดตครั้งแรก: เรียกใช้กระบวนการเฉพาะเมื่อมีเงื่อนไขเป็นไปตามเกณฑ์สำหรับระเบียน ทั้งในระหว่างการสร้างระเบียนหรือการอัปเดตระเบียน<br><br>ระเบียนใหม่และการอัปเดตทั้งหมด: เรียกใช้กระบวนการทุกครั้งสำหรับระเบียนใหม่และระเบียนที่มีอยู่ทั้งหมด',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'เลือกว่ากระบวนการจะเริ่มต้นเมื่อใด<br><br>ใหม่: เรียกใช้กระบวนการเมื่อมีการสร้างระเบียนใหม่<br><br>อัปเดตครั้งแรก: เรียกใช้กระบวนการเฉพาะเมื่อมีเงื่อนไขเป็นไปตามเกณฑ์เป็นครั้งแรกสำหรับระเบียนที่มีอยู่<br><br>อัปเดตทั้งหมด: เรียกใช้กระบวนการทุกครั้งที่มีเงื่อนไขเป็นไปตามเกณฑ์สำหรับระเบียนที่มีอยู่<br><br>ระเบียนใหม่หรือการอัปเดตครั้งแรก: เรียกใช้กระบวนการเฉพาะเมื่อมีเงื่อนไขเป็นไปตามเกณฑ์สำหรับระเบียน ทั้งในระหว่างการสร้างระเบียนหรือการอัปเดตระเบียน<br><br>ระเบียนใหม่และการอัปเดตทั้งหมด: เรียกใช้กระบวนการทุกครั้งสำหรับระเบียนใหม่และระเบียนที่มีอยู่ทั้งหมด<br><br>การเปลี่ยนแปลงความสัมพันธ์: เรียกใช้กระบวนการทุกครั้งเมื่อมีการเปลี่ยนแปลงความสัมพันธ์',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'เลือกโมดูล SugarCRM ที่จะใช้ทริกเกอร์ของเหตุการณ์',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'วันที่แน่นอน',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => ' ข้อผิดพลาด',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'การประเมินการเปลี่ยนแปลงความสัมพันธ์',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'ฟิลด์',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'การประมวลผลฟิลด์ของโมดูล',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'โมดูล',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'บันทึกทั้งหมดที่เกี่ยวข้อง',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'บันทึกทั้งหมดที่เกี่ยวข้อง',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'เพิ่มแล้ว',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'นำออกแล้ว',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'เพิ่ม หรือ นำออก',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'ทุกความสัมพันธ์',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'ระยะเวลาดำเนินการ',
 

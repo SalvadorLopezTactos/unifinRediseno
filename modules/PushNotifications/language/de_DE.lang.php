@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Übergeordneter Typ',
     'LBL_PARENT_ID' => 'Übergeordnete ID',
     'LBL_EXTRA_DATA' => 'Zusätzliche Daten',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM – in {{module_name_singular}} erwähnt',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} hat Sie in {{module_name_singular}} {{record_name}} erwähnt.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM – {{module_name_singular}} zugewiesen',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} hat Ihnen {{module_name_singular}} {{record_name}} zugewiesen.',
 ];

@@ -77,6 +77,14 @@ $viewdefs['base']['view']['dashablerecord'] = [
                         'options' => ['' => ''],
                     ],
                     [
+                        'name' => 'freeze_first_column',
+                        'label' => 'LBL_DASHLET_FREEZE_FIRST_COLUMN',
+                        'type' => 'bool',
+                        'span' => 12,
+                        'default' => true,
+                        'showOnConfig' => 'allowFreezeFirstColumn',
+                    ],
+                    [
                         'name' => 'limit',
                         'label' => 'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS',
                         'type' => 'enum',

@@ -110,6 +110,11 @@
                   <td><slot>{$MOD.LBL_EXTERNAL_AUTH_ONLY} {$EXTERNAL_AUTH_CLASS}</slot></td>
                 </tr>
                 {/if}
+                <tr>
+                    <td scope="row" valign="top">{$MOD.LBL_APPEARANCE|strip_semicolon}:</td>
+                    <td><slot>{$APPEARANCE_DISPLAY}</slot></td>
+                    <td><slot>{$MOD.LBL_APPEARANCE_DESC}</slot></td>
+                </tr>
             </table>
         </div>
 

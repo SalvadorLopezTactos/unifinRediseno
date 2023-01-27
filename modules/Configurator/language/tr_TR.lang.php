@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Varsayılan Saat Formatı',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Sunucu yanıt verme zamanlarını göster',
+    'FREEZE_FIRST_COLUMN' => 'Sütun Dondurulmasına İzin Ver',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Kullanıcıların modül listesi görünümleri, alt paneller, gösterge panelleri ve konsollar dahil olmak' .
+        'üzere çeşitli liste görünümlerinde ilk sütunu dondurmasına izin vermek için bu ayarı etkinleştirin.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Yavaş sorguları kaydet',
     'LOCK_HOMEPAGE_HELP'=>'Bu ayarlar <br>1)yeni ana sayfalarını ve Ana sayfa modülündeki dashlet&#39;leri,<br>2)ana sayfadaki dashlet yerleşimini sürükle bırak yöntemiyle özelleştirmeyi engellemek içindir.',
     'CURRENT_LOGO'=>'Mevcut Logo:',
+    'CURRENT_LOGO_DARK' => 'Mevcut Koyu Modlu Logo:',
     'CURRENT_LOGO_HELP'=>'Bu logo Sugar uygulamasının en üst sol köşesinde görünür.',
+    'CURRENT_LOGO_DARK_HELP' => "Sugar uygulaması koyu modda olduğunda kullanıcının Görünüm tercihine göre bu logo, alt bilginin sol köşesinde görüntülenir.",
     'NEW_LOGO'=>'Logo seç:',
     'NEW_LOGO_HELP' => 'Dosya formatı ya jpg ya da .png olabilir. Önerilen boyut 212x40 pikseldir.',
+    'NEW_LOGO_DARK' => 'Koyu Modlu Logo Seçin:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Dosya formatı .png veya .jpg olabilir. Maksimum yükseklik 17px, maksimum genişlik 450px olmalıdır. Herhangi bir açıdan daha büyük olan resim, bu büyüklüğe ölçeklenecektir. Resim dosyasının ismi boşluk içermemelidir.',
     'NEW_QUOTE_LOGO'=>'Yeni teklif logolarını yükle',
     'NEW_QUOTE_LOGO_HELP'=>'Gerekli görüntü dosya biçimi .jpg. <br>Önerilen boyut 867x74 pikseldir.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Devam Et',
     'LBL_WIZARD_FINISH_TAB' => 'Bitir',
     'LBL_WIZARD_FINISH_TITLE' => 'Basit sistem ayarları tamamlandı',
-    'LBL_WIZARD_FINISH' => 'Kullanıcı ayarlarını yapılandırmak için <b>Devam et</b>&#39;e tıklayınız. <br /><br />Ek sistem ayarlarını yapılandırmak için, <a href="index.php?module=Administration&action=index" target="_blank">burayı</a> tıklayınız.',
+    'LBL_WIZARD_FINISH' => 'Kullanıcı ayarlarınızı yapılandırmak için <b>Devam et</b>&#39;e tıklayın.<br/><br />
+Ek sistem ayarlarını yapılandırmak için <a href="#Administration" target="_blank">buraya tıklayın</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Markala',
     'LBL_WIZARD_SYSTEM_DESC' => 'Sugar Kurulumunu özelleştirmek için organizasyonunuzun ismini ve logosunu temin ediniz.',
     'LBL_WIZARD_LOCALE_DESC' => 'Coğrafik lokasyonunuza bağlı olarak verinin Sugar&#39;da nasıl görünmesini istediğinizi belirleyin. Burada gerçekleştirdiğiniz ayarlar varsayılan ayarlar olacaktır. Kullanıcılar kendi tercihlerini ayarlayacaklardır.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Yüklüyor...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Sil' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Hoş geldiniz' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Koyu Modlu Logo',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Raporlar modülü sadece Sugar Mobile iPhone kullanıcısı için mevcuttur',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Raporlar modülü tarayıcı tabanlı mobil görünüm için mevcut değil.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Selle aruande ajakava',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Aruande graafikute kirjete töölaud',
+    'LBL_FILE_TYPE' => 'Faili tüüp (tüübid)',
 );

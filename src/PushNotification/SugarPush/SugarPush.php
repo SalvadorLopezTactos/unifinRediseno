@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\PushNotification\SugarPush;
 
+use Exception;
 use GuzzleHttp;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\HandlerStack;
@@ -22,6 +23,9 @@ use Sugarcrm\IdentityProvider\Srn\Converter as SrnConverter;
 
 class SugarPush implements NotificationService
 {
+    /** @var int Connection timeout in seconds */
+    private const SOCKET_TIMEOUT_SEC = 3;
+
     /**
      * Send requests through this HTTP client.
      *
@@ -30,9 +34,19 @@ class SugarPush implements NotificationService
     protected $client;
 
     /**
+     * Default mapping of platform to the application ID
+     * Can be overridden in config
+     */
+    private const PLATFORM_APPLICATION_DEFAULTS = [
+        'android' => 'fcm',
+        'ios' => 'apns',
+        'ios_sandbox' => 'apns_sandbox',
+    ];
+
+    /**
      * Creates a http client for SugarPush service.
      *
-     * @throws \Exception Throws if the instance cannot be created.
+     * @throws Exception Throws if the instance cannot be created.
      */
     public function __construct()
     {
@@ -41,7 +55,7 @@ class SugarPush implements NotificationService
         if ($url) {
             $this->client = $this->getHTTPClient($url);
         } else {
-            throw new \Exception('SugarPush is not available');
+            throw new Exception('SugarPush is not available');
         }
     }
 
@@ -76,24 +90,35 @@ class SugarPush implements NotificationService
     {
         $sugarConfig = \SugarConfig::getInstance();
         $pushConfig = $sugarConfig->get('sugar_push');
-        $region = $this->getRegion($sugarConfig);
+        [$region, $environment] = $this->getRegionAndEnvironment($sugarConfig);
 
-        if ($region && !empty($pushConfig['service_urls'][$region])) {
-            return $pushConfig['service_urls'][$region];
-        } else {
-            return $pushConfig['service_urls']['default'] ?? '';
+        if (!$region) {
+            return "";
         }
+
+        if (!empty($pushConfig['service_urls'][$region])) {
+            $url = $pushConfig['service_urls'][$region];
+        } else {
+            $url = sprintf($pushConfig['service_urls']['default'] ?? '', $region);
+        }
+
+        if ($environment === 'stage') {
+            $url = str_replace('prod.service', 'stage.service', $url);
+        }
+
+        return $url;
     }
 
     /**
-     * Gets aws region from idm config.
+     * Gets aws region and environment(stage, prod) from idm config.
      *
-     * @param \SugarConfig $sugarConfig
-     * @return string
+     * @return array [$stage, $environment]
      */
-    protected function getRegion(\SugarConfig $sugarConfig) : string
+    protected function getRegionAndEnvironment(\SugarConfig $sugarConfig): array
     {
         $region = '';
+        $environment = '';
+
         $idmConfig = new IdmConfig($sugarConfig);
         $config = $idmConfig->getIDMModeConfig();
 
@@ -102,10 +127,14 @@ class SugarPush implements NotificationService
 
             if ($tenantSrn) {
                 $region = $tenantSrn->getRegion();
+                $environment = 'prod';
+                if ($tenantSrn->getPartition() === 'stage') {
+                    $environment = 'stage';
+                }
             }
         }
 
-        return $region;
+        return [$region, $environment];
     }
 
     /**
@@ -146,8 +175,10 @@ class SugarPush implements NotificationService
             'PUT',
             '/device',
             [
+                'timeout' => self::SOCKET_TIMEOUT_SEC,
+                'connect_timeout' => self::SOCKET_TIMEOUT_SEC,
                 GuzzleHttp\RequestOptions::JSON => [
-                    'platform' => $platform,
+                    'application_id' => $this->getApplicationId($platform),
                     'device_id' => $deviceId,
                 ],
             ]
@@ -170,8 +201,10 @@ class SugarPush implements NotificationService
             'POST',
             '/device',
             [
+                'timeout' => self::SOCKET_TIMEOUT_SEC,
+                'connect_timeout' => self::SOCKET_TIMEOUT_SEC,
                 GuzzleHttp\RequestOptions::JSON => [
-                    'platform' => $platform,
+                    'application_id' => $this->getApplicationId($platform),
                     'device_id' => $oldDeviceId,
                     'new_device_id' => $newDeviceId,
                 ],
@@ -194,14 +227,57 @@ class SugarPush implements NotificationService
             'DELETE',
             '/device',
             [
+                'timeout' => self::SOCKET_TIMEOUT_SEC,
+                'connect_timeout' => self::SOCKET_TIMEOUT_SEC,
                 GuzzleHttp\RequestOptions::JSON => [
-                    'platform' => $platform,
+                    'application_id' => $this->getApplicationId($platform),
                     'device_id' => $deviceId,
                 ],
             ]
         );
 
         return $this->isSuccess($response);
+    }
+
+    /**
+     * Activates/deactivates a user (makes possible/impossible to receive push notifications on user's devices)
+     * Important: This must not block user login/logout processes:
+     * - use short timeouts
+     * - do not throw errors or exceptions
+     */
+    public function setActive(string $userId, bool $flag): bool
+    {
+        $log = \LoggerManager::getLogger();
+        if ($flag) {
+            $payload = ['user_logged_in' => true];
+        } else {
+            $payload = ['user_logged_out' => true];
+        }
+        $payload['user_id'] = $userId;
+
+        try {
+            $response = $this->client->request(
+                'POST',
+                '/device',
+                [
+                    'timeout' => self::SOCKET_TIMEOUT_SEC,
+                    'connect_timeout' => self::SOCKET_TIMEOUT_SEC,
+                    GuzzleHttp\RequestOptions::JSON => $payload,
+                    'authorize_as_application' => true,
+                ]
+            );
+
+            $statusCode = $response->getStatusCode();
+            if ($statusCode !== 200) {
+                $body = (string) $response->getBody();
+                $log->error('sugar push [setActive]: statusCode: ' . $statusCode . ' body: ' . $body);
+            }
+        } catch (\Throwable $e) {
+            $log->error('sugar push [setActive]: ' . $e);
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -226,10 +302,36 @@ class SugarPush implements NotificationService
             'PUT',
             '/notification',
             [
+                'timeout' => self::SOCKET_TIMEOUT_SEC,
+                'connect_timeout' => self::SOCKET_TIMEOUT_SEC,
                 GuzzleHttp\RequestOptions::JSON => $data,
+                'authorize_as_application' => true,
             ]
         );
 
         return $this->isSuccess($response);
+    }
+
+    /**
+     * Mobile device provides a platform name and the request should be directed to an appropriate application.
+     * The Application ID is based on the platform name and can be defined in the config. If it's not
+     * configured - the default value will be taken from PLATFORM_APPLICATION_DEFAULTS constant.
+     *
+     * @param string $platform
+     * @return string
+     * @throws Exception
+     */
+    private function getApplicationId(string $platform): string
+    {
+        $sugarConfig = \SugarConfig::getInstance();
+        $config = $sugarConfig->get('sugar_push');
+
+        $applicationId = $config['platform_applications'][$platform]
+            ?? self::PLATFORM_APPLICATION_DEFAULTS[$platform] ?? null;
+        if ($applicationId === null) {
+            throw new Exception('cannot find Application ID for the provided platform');
+        }
+
+        return $applicationId;
     }
 }

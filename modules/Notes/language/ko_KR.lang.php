@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => '이메일 주소',
     'LBL_EMAIL_ATTACHMENT' => '이메일 첨부',
     'LBL_EMAIL_ATTACHMENT_FOR' => '이메일 첨부:',
+    'LBL_NOTE_ATTACHMENT' => '메모 첨부',
+    'LBL_KB_ATTACHMENT' => 'KBDocument 첨부',
+    'LBL_CASE_ATTACHMENT' => '사례 첨부',
     'LBL_FILE_MIME_TYPE' => 'Mime유형',
     'LBL_FILE_EXTENSION' => '파일 확장',
     'LBL_FILE_SOURCE' => '파일 소스',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => '노트 소스',
     'LBL_SOURCE_EXTERNAL' => '외부',
     'LBL_SOURCE_INTERNAL' => '내부',
+    'LBL_PORTAL' => '포탈',
 
     // Help Text
     // List View Help Text

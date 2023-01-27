@@ -300,8 +300,8 @@ class SAMLAuthenticationProvider implements AuthenticationProviderInterface
 
         $resultToken = new ResultToken($token->getCredentials(), $token->getAttributes());
 
-        $user = $this->userProvider->loadUserByUsername($response->getNameId());
         $identityMap = $this->mapper->mapIdentity($response);
+        $user = $this->userProvider->loadUserByUsername($identityMap['value']);
 
         $user->setAttribute('provision', $authService->isUserProvisionNeeded());
         $user->setAttribute('identityField', $identityMap['field']);

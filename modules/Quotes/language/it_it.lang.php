@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Configurazione quote',
 
     'LBL_RENEWAL' => 'Rinnovo',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interazioni offerta',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tempistica quota',
 );

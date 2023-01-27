@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Vastausosoitteen tunnus',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Vastausosoite',
     'LBL_PRIMARY_TEAM' => 'Ensisijainen tiimi',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Ensisijainen sähköpostitili viestien lähettämiseen',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Sähköpostiasetukset-tietolaatikko',
 );

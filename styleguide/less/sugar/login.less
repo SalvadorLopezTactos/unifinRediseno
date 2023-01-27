@@ -10,8 +10,11 @@
   .modal-header {
     padding: 9px 10px;
 
-    .step-circle .fa-check-circle {
-      display: inline-block;
+    .step-circle {
+      .sicon-check-circle-lg,
+      .fa-check-circle {
+        display: inline-block;
+      }
     }
   }
 
@@ -19,12 +22,17 @@
     padding: 10px 8px 54px;
     min-height: 168px;
     margin: 0;
+    background-color: @primaryContentBackground;
 
     &.record .record-cell {
       &:first-child {
         margin-left: 5px;
       }
     }
+  }
+
+  .record {
+    background-color: @primaryContentBackground;
   }
 
   .modal-header-firstlogin {
@@ -69,6 +77,7 @@
     input[type="password"],
     input[type="text"] {
       margin-bottom: 10px;
+      width: 224px;
     }
   }
 
@@ -85,20 +94,22 @@
     }
 
     .thumbnail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
       height: 60px;
       padding: 6px;
-      text-align: center;
-      color: @gray;
-      font-size: @fontSizeSmall;
-      #gradient > .vertical(@grayLighter, darken(@grayLighter, 1%));
-
+      color: @textColor;
+      background-color: @contentBackground;
       transition: all 0s;
 
-      i {
-        font-size: 24px;
-        display: inline-block;
-        width: 100%;
-        color: @grayLight;
+      span {
+        text-align: center;
+      }
+
+      img {
+        width: 18px;
       }
 
       &:hover {
@@ -107,7 +118,7 @@
 
         i {
           text-decoration: none;
-          color: @gray;
+          color: @sicon-hover-color;
         }
       }
     }
@@ -125,7 +136,7 @@
       }
 
       span {
-        color: @black;
+        color: @textColor;
       }
     }
   }
@@ -164,7 +175,7 @@
 .signup-footer,
 .login-footer {
   text-align: right;
-  margin-right: 10px;
+  margin-right: 20px;
   margin-top: 8px;
 }
 
@@ -196,7 +207,7 @@
 .thumbnail.login {
   /* additive */
   border-radius: 0;
-  background: @white;
+  background: @primaryContentBackground;
   position: relative;
   z-index: @zindexDefault;
 

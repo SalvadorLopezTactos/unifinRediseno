@@ -98,6 +98,7 @@ class PMSEHookHandler extends PMSEAbstractRequestHandler
             return;
         }
 
+        $arguments['event'] = $event;
         $this->executeRequest($arguments, false, $bean, '');
     }
 
@@ -109,9 +110,27 @@ class PMSEHookHandler extends PMSEAbstractRequestHandler
             return;
         }
 
+        $arguments['event'] = $event;
         $this->executeRequest($arguments, false, $bean, 'TERMINATE_CASE');
     }
 
+    /**
+     *
+     * @param SugarBean $bean
+     * @param string $event
+     * @param array $arguments
+     * @return boolean
+     */
+    public function runStartEventAfterRelationship($bean, $event, $arguments)
+    {
+        // If we are disabled we need to bail immediately
+        if (!$this->isEnabled()) {
+            return;
+        }
+
+        $arguments['event'] = $event;
+        $this->executeRequest($arguments, false, $bean, '');
+    }
     /**
      * Execute the cron tasks.
      */

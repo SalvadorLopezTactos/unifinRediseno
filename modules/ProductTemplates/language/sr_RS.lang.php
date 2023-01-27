@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Naziv podrške:',
   'LBL_SUPPORT_TERM' => 'Uslovi podrške:',
   'LBL_TAX_CLASS' => 'Poreska stopa:',
+  'LBL_ACTIVE_STATUS' => 'Status',
   'LBL_TYPE_NAME'=>'Naziv tipa',
   'LBL_TYPE' => 'Tip',
   'LBL_PRODUCT_TYPE' => 'Tip proizvoda',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Kontrolna tabla liste kataloga proizvoda',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa kataloga proizvoda',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusas za katalog proizvoda',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Status je aktivan',
 );

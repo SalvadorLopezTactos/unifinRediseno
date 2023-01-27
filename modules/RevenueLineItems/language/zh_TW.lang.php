@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => '續訂營收單項 ID',
     'LBL_PARENT_RLIS' => '母營收項目',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => '母營收項目',
+    'LBL_FORECASTED_LIKELY' => '預測可能性',
     'LBL_EXPERT_ID' => '產品專家',
     'LBL_FORECAST' => '包括於預測中',
     'LBL_SUBTOTAL' => '小計',

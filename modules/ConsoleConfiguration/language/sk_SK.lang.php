@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'Filter',
     'LBL_CONSOLE_FILTER_RULES' => 'Pravidlá filtrovania',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'Ukotviť prvý stĺpec',
+
     'LBL_CONSOLE_COLUMNS' => 'Stĺpce',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'Stĺpec s viacerými poľami',
     'LBL_CONSOLE_PRIMARY_SORT' => 'Primárne zoradenie',

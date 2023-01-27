@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'แดชบอร์ดทั้งหมดสำหรับโมดูล {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'แดชบอร์ดทั้งหมดสำหรับโมดูล {{module}} มุมมอง {{view}}',
     'LBL_COPY_OF' => 'สำเนาของ {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'ไม่สามารถลบแดชบอร์ดระบบลิ้นชักได้',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'สร้างแดชบอร์ด',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "คุณแน่ใจหรือว่าต้องการกู้คืนแผงแดชบอร์ดไปเป็นเลย์เอาต์ค่าเริ่มต้น",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'คุณแน่ใจหรือว่าต้องการกู้คืนแผงแดชบอร์ดไปเป็นเลย์เอาต์ค่าเริ่มต้น',
+    'LBL_FILTER_UTILS_SELECT' => 'ระบุแล้ว',
 );

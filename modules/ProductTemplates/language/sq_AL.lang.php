@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Emri i mbështetësit',
   'LBL_SUPPORT_TERM' => 'termi mbështetës',
   'LBL_TAX_CLASS' => 'Klasa e taksës',
+  'LBL_ACTIVE_STATUS' => 'Statusi',
   'LBL_TYPE_NAME'=>'Emri i llojit',
   'LBL_TYPE' => 'Lloji',
   'LBL_PRODUCT_TYPE' => 'Lloji i produktit',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Paneli i listës së katalogut të produkteve',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Paneli i regjistrimeve në katalogun e produkteve',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te katalogu i produkteve',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Statusi është aktiv',
 );

@@ -14,7 +14,6 @@
 <script type="text/javascript" src="{sugar_getjspath file='include/connectors/formatters/default/company_detail.js'}"></script>
 <script type="text/javascript">
 function show_ext_rest_twitter(event)
-{literal} 
 {
     var xCoordinate = event.clientX;
     var yCoordinate = event.clientY;
@@ -26,8 +25,6 @@ function show_ext_rest_twitter(event)
         yCoordinate = yCoordinate + document.body.scrollTop;
     }
 
-{/literal}
-
     cd = new CompanyDetailsDialog("twitter_popup_div", '<div id="twitter_div" name="twitter_div">' + SUGAR.language.get('app_strings', 'LBL_TWITTER_DATA_LOADING') + '</div>', xCoordinate, yCoordinate);
     cd.setHeader("{$fields.{{$mapping_name}}.value|trim}");
     cd.display();
@@ -36,7 +33,7 @@ function show_ext_rest_twitter(event)
 
     if (mapping_name_value.length > 0) 
     {ldelim}
-        twitter_popup = new TWTR.Widget({literal}{
+        twitter_popup = new TWTR.Widget({
           id: 'twitter_div',
           version: 2,
           type: 'profile',
@@ -64,7 +61,7 @@ function show_ext_rest_twitter(event)
             avatars: false,
             behavior: 'all'
           }
-        }{/literal}).render().setUser('{$fields.{{$mapping_name}}.value}').start();
+        }).render().setUser('{$fields.{{$mapping_name}}.value}').start();
     {rdelim} 
     else 
     {ldelim}

@@ -30,7 +30,7 @@ class Email implements Formatter
                 array_filter(
                     $rows,
                     function ($row) {
-                        return $row['data_type'] == 'email';
+                        return isset($row['data_type']) && $row['data_type'] == 'email';
                     }
                 )
             )
@@ -41,7 +41,7 @@ class Email implements Formatter
         array_walk(
             $rows,
             function (&$row) use ($addresses) {
-                if ($row['data_type'] == 'email') {
+                if (isset($row['data_type']) && $row['data_type'] == 'email') {
                     foreach (['before', 'after'] as $key) {
                         if (!empty($row[$key]) && !empty($addresses[$row[$key]])) {
                             $row[$key] = [

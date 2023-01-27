@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,20 +10,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['row-model-data'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['base']['layout']['row-model-data'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'base',
                 'name' => 'row-model-data',
                 'css_class' => 'row-model-data dashboard-pane',
-                'components' => array(
-                    array(
-                        'layout' => 'dashboard',
+                'components' => [
+                    [
+                        'layout' => [
+                            'label' => 'LBL_DASHBOARD',
+                            'type' => 'dashboard',
+                            'last_state' => [
+                                'id' => 'last-visit',
+                            ],
+                        ],
                         'loadModule' => 'Dashboards',
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

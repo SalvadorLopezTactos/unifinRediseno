@@ -135,6 +135,7 @@ $dictionary['User'] = array(
             'type' => 'name',
             'len' => '30',
             'idm_mode_disabled' => true,
+            'calculation_visible' => true,
         ) ,
         'last_name' => array(
             'name' => 'last_name',
@@ -145,6 +146,7 @@ $dictionary['User'] = array(
             'importable' => 'required',
         	'required' => true,
             'idm_mode_disabled' => true,
+            'calculation_visible' => true,
         ) ,
         'full_name' => array(
             'name' => 'full_name',
@@ -224,6 +226,7 @@ $dictionary['User'] = array(
             'name' => 'description',
             'vname' => 'LBL_DESCRIPTION',
             'type' => 'text',
+            'calculation_visible' => true,
         ) ,
         'date_entered' => array(
             'name' => 'date_entered',
@@ -236,6 +239,7 @@ $dictionary['User'] = array(
                 'wirelesseditview' => false,
             ),
             'readonly' => true,
+            'calculation_visible' => true,
         ) ,
         'date_modified' => array(
             'name' => 'date_modified',
@@ -248,6 +252,7 @@ $dictionary['User'] = array(
                 'wirelesseditview' => false,
             ),
             'readonly' => true,
+            'calculation_visible' => true,
         ),
         'last_login' => array(
             'name' => 'last_login',
@@ -256,6 +261,7 @@ $dictionary['User'] = array(
             'required' => false,
             'readonly' => true,
             'massupdate' => false,
+            'calculation_visible' => true,
         ),
         'modified_user_id' => array(
             'name' => 'modified_user_id',
@@ -327,6 +333,7 @@ $dictionary['User'] = array(
             'type' => 'varchar',
             'len' => '50',
             'idm_mode_disabled' => true,
+            'calculation_visible' => true,
         ) ,
         'department' => array(
             'name' => 'department',
@@ -334,6 +341,7 @@ $dictionary['User'] = array(
             'type' => 'varchar',
             'len' => '50',
             'idm_mode_disabled' => true,
+            'calculation_visible' => true,
         ) ,
         'phone_home' => array(
             'name' => 'phone_home',
@@ -341,6 +349,7 @@ $dictionary['User'] = array(
             'type' => 'phone',
 			'dbType' => 'varchar',
             'len' => '50',
+            'calculation_visible' => true,
         ) ,
         'phone_mobile' => array(
             'name' => 'phone_mobile',
@@ -348,6 +357,7 @@ $dictionary['User'] = array(
             'type' => 'phone',
 			'dbType' => 'varchar',
             'len' => '50',
+            'calculation_visible' => true,
         ) ,
         'phone_work' => array(
             'name' => 'phone_work',
@@ -356,6 +366,7 @@ $dictionary['User'] = array(
 			'dbType' => 'varchar',
             'len' => '50',
             'idm_mode_disabled' => true,
+            'calculation_visible' => true,
         ) ,
         'phone_other' => array(
             'name' => 'phone_other',
@@ -363,6 +374,7 @@ $dictionary['User'] = array(
             'type' => 'phone',
 			'dbType' => 'varchar',
             'len' => '50',
+            'calculation_visible' => true,
         ) ,
         'phone_fax' => array(
             'name' => 'phone_fax',
@@ -370,6 +382,7 @@ $dictionary['User'] = array(
             'type' => 'phone',
 			'dbType' => 'varchar',
             'len' => '50',
+            'calculation_visible' => true,
         ) ,
         'status' => array(
             'name' => 'status',
@@ -380,6 +393,7 @@ $dictionary['User'] = array(
             'importable' => 'required',
             'required' => true,
             'idm_mode_disabled' => true,
+            'calculation_visible' => true,
         ) ,
         'address_street' => array(
             'name' => 'address_street',
@@ -390,6 +404,7 @@ $dictionary['User'] = array(
             'group' => 'address',
             'group_label' => 'LBL_ADDRESS',
             'idm_mode_disabled' => true,
+            'calculation_visible' => true,
         ) ,
         'address_city' => array(
             'name' => 'address_city',
@@ -398,6 +413,7 @@ $dictionary['User'] = array(
             'len' => '100',
             'group' => 'address',
             'idm_mode_disabled' => true,
+            'calculation_visible' => true,
         ) ,
         'address_state' => array(
             'name' => 'address_state',
@@ -406,6 +422,7 @@ $dictionary['User'] = array(
             'len' => '100',
             'group' => 'address',
             'idm_mode_disabled' => true,
+            'calculation_visible' => true,
         ) ,
         'address_country' => array(
             'name' => 'address_country',
@@ -414,6 +431,7 @@ $dictionary['User'] = array(
             'len' => 100,
             'group' => 'address',
             'idm_mode_disabled' => true,
+            'calculation_visible' => true,
         ) ,
         'address_postalcode' => array(
             'name' => 'address_postalcode',
@@ -422,6 +440,7 @@ $dictionary['User'] = array(
             'len' => '20',
             'group' => 'address',
             'idm_mode_disabled' => true,
+            'calculation_visible' => true,
         ) ,
         // This is a fake field for the edit view
         // This field is disabled for IDM-mode in UserViewHelper and MassUpdate explicitly.
@@ -449,6 +468,7 @@ $dictionary['User'] = array(
             'isMultiSelect' => true,
             'showNullOption' => false,
             'studio' => array('formula' => false),
+            'idm_mode_disabled' => true,
         ),
         'default_team' => array(
             'name' => 'default_team',
@@ -644,7 +664,6 @@ $dictionary['User'] = array(
 		        'source' => 'non-db',
 				'vname' => 'LBL_TEAMS',
 				'link_class' => 'TeamSetLink',
-				'link_file' => 'modules/Teams/TeamSetLink.php',
 				'studio' => 'false',
 				'reportable'=>false,
 			),
@@ -700,12 +719,14 @@ $dictionary['User'] = array(
             'type' => 'enum',
             'options' => 'employee_status_dom',
             'len' => 100,
+            'calculation_visible' => true,
         ) ,
         'messenger_id' => array(
             'name' => 'messenger_id',
             'vname' => 'LBL_MESSENGER_ID',
             'type' => 'varchar',
             'len' => 100,
+            'calculation_visible' => true,
         ) ,
         'messenger_type' => array(
             'name' => 'messenger_type',
@@ -713,6 +734,7 @@ $dictionary['User'] = array(
             'type' => 'enum',
             'options' => 'messenger_type_dom',
             'len' => 100,
+            'calculation_visible' => true,
         ) ,
         'calls' => array(
             'name' => 'calls',
@@ -721,12 +743,18 @@ $dictionary['User'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_CALLS'
         ) ,
+        'message_invites' => [
+            'name' => 'message_invites',
+            'type' => 'link',
+            'relationship' => 'messages_users',
+            'source' => 'non-db',
+            'vname' => 'LBL_MESSAGES',
+        ],
         'kbusefulness' => array(
             'name' => 'kbusefulness',
             'type' => 'link',
             'reportable' => false,
             'relationship' => 'kbusefulness',
-            'link_file' => 'modules/KBContents/UsefulnessLink.php',
             'link_class' => 'UsefulnessLink',
             'source' => 'non-db',
             'vname' => 'LBL_USEFULNESS'
@@ -816,6 +844,9 @@ $dictionary['User'] = array(
             'db_field' => array(
                 'id',
             ),
+            'link' => 'email_addresses_primary',
+            'rname' => 'email_address',
+            'module' => 'EmailAddresses',
             'vname' =>'LBL_ANY_EMAIL',
             'studio' => array(
                 'visible' => false,
@@ -956,6 +987,18 @@ $dictionary['User'] = array(
             'link' => 'meetings',
             'rname_link' => 'accept_status',
         ),
+        'accept_status_messages' => array(
+            'massupdate' => false,
+            'name' => 'accept_status_messages',
+            'type' => 'enum',
+            'studio' => 'false',
+            'source' => 'non-db',
+            'vname' => 'LBL_LIST_ACCEPT_STATUS',
+            'options' => 'dom_meeting_accept_status',
+            'importable' => 'false',
+            'link' => 'meetings',
+            'rname_link' => 'accept_status',
+        ),
         'prospect_lists' => array(
             'name' => 'prospect_lists',
             'type' => 'link',
@@ -1051,6 +1094,7 @@ $dictionary['User'] = array(
                 'wirelessdetailview' => false,
                 'wirelesslistview' => false,
             ),
+            'calculation_visible' => true,
       ),
 
 
@@ -1094,6 +1138,7 @@ $dictionary['User'] = array(
             'audited' => true,
             'comment' => 'Indicator whether this user accepts cookies',
             'duplicate_on_record_copy' => 'no',
+            'calculation_visible' => true,
         ],
         'cookie_consent_received_on' => [
             'name' => 'cookie_consent_received_on',
@@ -1104,6 +1149,7 @@ $dictionary['User'] = array(
             'options' => 'date_range_search_dom',
             'comment' => 'Date cookie consent received on',
             'duplicate_on_record_copy' => 'no',
+            'calculation_visible' => true,
         ],
         'sync_key' => [
             'is_sync_key' => true,
@@ -1141,6 +1187,14 @@ $dictionary['User'] = array(
                 'portalrecordview' => false,
                 'portaleditview' => false,
             ],
+            'calculation_visible' => true,
+        ],
+        'previously_licensed' => [
+            'name' => 'previously_licensed',
+            'vname' => 'LBL_PREVIOUSLY_LICENSED',
+            'label' => 'LBL_PREVIOUSLY_LICENSED',
+            'type' => 'bool',
+            'comment' => 'Previously Licensed',
         ],
     ) ,
     'name_format_map' => array(
@@ -1178,37 +1232,24 @@ $dictionary['User'] = array(
                 )
             ) ,
             array(
-                'name' => 'idx_user_last_first',
-                'type' => 'index',
-                'fields' => array(
-                'last_name',
-                'first_name',
-                'deleted'
-                )
-            ) ,
-            array(
 			'name' => 'idx_users_reports_to_id',
 			'type' => 'index',
 			'fields' => array('reports_to_id', 'id')
 		),
-        array(
-            'name' => 'idx_last_login',
-            'type' => 'index',
-            'fields' => array('last_login')
-        ),
-		array(
-			'name' => 'idx_users_tmst_id',
-			'type' => 'index',
-			'fields' => array('team_set_id')
-		),
-        array('name' => 'idx_user_title', 'type' => 'index', 'fields' => array('title')),
-        array('name' => 'idx_user_department', 'type' => 'index', 'fields' => array('department')),
         array('name' => 'idx_user_type_status', 'type' => 'index', 'fields' => array('status', 'is_admin', 'deleted')),
         [
             'name' => 'idx_users_skey',
             'type' => 'unique',
             'fields' => ['sync_key'],
         ],
+        array(
+            'name' => 'idx_users_del_businesscenter',
+            'type' => 'index',
+            'fields' => array(
+                'deleted',
+                'business_center_id',
+            ),
+        ),
     ) ,
     'required_import_indexes' => array('idx_user_name::user_name'),
 	'relationships' => array (
@@ -1329,3 +1370,5 @@ $dictionary['User'] = array(
 
     'acls' => array('SugarACLUsers' => true, 'SugarACLStatic' => true),
 );
+
+$dictionary['User']['fields']['previously_licensed'] = false;

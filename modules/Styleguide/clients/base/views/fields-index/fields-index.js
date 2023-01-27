@@ -38,9 +38,6 @@
 
             //build meta data for field examples from model fields
             fieldMeta = _.find(self.model.fields, function(field) {
-                if (field.type === 'datetime' && fieldType.indexOf('date') === 0) {
-                    field.type = fieldType;
-                }
                 return field.type === fieldType;
             }, self);
 
@@ -66,7 +63,7 @@
             if (descTpl) {
                 this.documentation = descTpl();
             } else {
-                this.page.description = 'Sugar7 ' + fieldTypeReq + ' field';
+                this.page.description = 'SugarCRM ' + fieldTypeReq + ' field';
             }
         }
 

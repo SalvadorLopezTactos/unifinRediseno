@@ -77,6 +77,9 @@ class Config
             return [];
         }
         $definition = $this->getCache()->get();
+        if (is_null($definition)) {
+            return [];
+        }
         return (array) json_decode($definition, true);
     }
 

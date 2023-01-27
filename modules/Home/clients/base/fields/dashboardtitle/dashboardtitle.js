@@ -181,7 +181,7 @@
         var padding = 0,
             $cell = this.$('.dropdown-toggle');
 
-        if (!_.isEmpty($cell)) {
+        if ($cell.length > 0) {
             padding = parseInt($cell.css('padding-left'), 10) + parseInt($cell.css('padding-right'), 10);
         }
 

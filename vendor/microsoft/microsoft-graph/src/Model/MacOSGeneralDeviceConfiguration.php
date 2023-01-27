@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,53 +18,22 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class MacOSGeneralDeviceConfiguration extends DeviceConfiguration
 {
-
-     /** 
-     * Gets the compliantAppsList
-    * List of apps in the compliance (either allow list or block list, controlled by CompliantAppListType). This collection can contain a maximum of 10000 elements.
-     *
-     * @return array The compliantAppsList
-     */
-    public function getCompliantAppsList()
-    {
-        if (array_key_exists("compliantAppsList", $this->_propDict)) {
-           return $this->_propDict["compliantAppsList"];
-        } else {
-            return null;
-        }
-    }
-    
-    /** 
-    * Sets the compliantAppsList
-    * List of apps in the compliance (either allow list or block list, controlled by CompliantAppListType). This collection can contain a maximum of 10000 elements.
-    *
-    * @param AppListItem $val The compliantAppsList
-    *
-    * @return MacOSGeneralDeviceConfiguration
-    */
-    public function setCompliantAppsList($val)
-    {
-		$this->_propDict["compliantAppsList"] = $val;
-        return $this;
-    }
-    
     /**
     * Gets the compliantAppListType
     * List that is in the CompliantAppsList. Possible values are: none, appsInListCompliant, appsNotInListCompliant.
     *
-    * @return AppListType The compliantAppListType
+    * @return AppListType|null The compliantAppListType
     */
     public function getCompliantAppListType()
     {
         if (array_key_exists("compliantAppListType", $this->_propDict)) {
-            if (is_a($this->_propDict["compliantAppListType"], "Microsoft\Graph\Model\AppListType")) {
+            if (is_a($this->_propDict["compliantAppListType"], "\Microsoft\Graph\Model\AppListType") || is_null($this->_propDict["compliantAppListType"])) {
                 return $this->_propDict["compliantAppListType"];
             } else {
                 $this->_propDict["compliantAppListType"] = new AppListType($this->_propDict["compliantAppListType"]);
@@ -89,11 +57,41 @@ class MacOSGeneralDeviceConfiguration extends DeviceConfiguration
         return $this;
     }
     
+
+     /** 
+     * Gets the compliantAppsList
+    * List of apps in the compliance (either allow list or block list, controlled by CompliantAppListType). This collection can contain a maximum of 10000 elements.
+     *
+     * @return array|null The compliantAppsList
+     */
+    public function getCompliantAppsList()
+    {
+        if (array_key_exists("compliantAppsList", $this->_propDict)) {
+           return $this->_propDict["compliantAppsList"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the compliantAppsList
+    * List of apps in the compliance (either allow list or block list, controlled by CompliantAppListType). This collection can contain a maximum of 10000 elements.
+    *
+    * @param AppListItem $val The compliantAppsList
+    *
+    * @return MacOSGeneralDeviceConfiguration
+    */
+    public function setCompliantAppsList($val)
+    {
+        $this->_propDict["compliantAppsList"] = $val;
+        return $this;
+    }
+    
     /**
     * Gets the emailInDomainSuffixes
     * An email address lacking a suffix that matches any of these strings will be considered out-of-domain.
     *
-    * @return string The emailInDomainSuffixes
+    * @return string|null The emailInDomainSuffixes
     */
     public function getEmailInDomainSuffixes()
     {
@@ -122,7 +120,7 @@ class MacOSGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordBlockSimple
     * Block simple passwords.
     *
-    * @return bool The passwordBlockSimple
+    * @return bool|null The passwordBlockSimple
     */
     public function getPasswordBlockSimple()
     {
@@ -151,7 +149,7 @@ class MacOSGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordExpirationDays
     * Number of days before the password expires.
     *
-    * @return int The passwordExpirationDays
+    * @return int|null The passwordExpirationDays
     */
     public function getPasswordExpirationDays()
     {
@@ -180,7 +178,7 @@ class MacOSGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordMinimumCharacterSetCount
     * Number of character sets a password must contain. Valid values 0 to 4
     *
-    * @return int The passwordMinimumCharacterSetCount
+    * @return int|null The passwordMinimumCharacterSetCount
     */
     public function getPasswordMinimumCharacterSetCount()
     {
@@ -209,7 +207,7 @@ class MacOSGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordMinimumLength
     * Minimum length of passwords.
     *
-    * @return int The passwordMinimumLength
+    * @return int|null The passwordMinimumLength
     */
     public function getPasswordMinimumLength()
     {
@@ -238,7 +236,7 @@ class MacOSGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordMinutesOfInactivityBeforeLock
     * Minutes of inactivity required before a password is required.
     *
-    * @return int The passwordMinutesOfInactivityBeforeLock
+    * @return int|null The passwordMinutesOfInactivityBeforeLock
     */
     public function getPasswordMinutesOfInactivityBeforeLock()
     {
@@ -267,7 +265,7 @@ class MacOSGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordMinutesOfInactivityBeforeScreenTimeout
     * Minutes of inactivity required before the screen times out.
     *
-    * @return int The passwordMinutesOfInactivityBeforeScreenTimeout
+    * @return int|null The passwordMinutesOfInactivityBeforeScreenTimeout
     */
     public function getPasswordMinutesOfInactivityBeforeScreenTimeout()
     {
@@ -296,7 +294,7 @@ class MacOSGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordPreviousPasswordBlockCount
     * Number of previous passwords to block.
     *
-    * @return int The passwordPreviousPasswordBlockCount
+    * @return int|null The passwordPreviousPasswordBlockCount
     */
     public function getPasswordPreviousPasswordBlockCount()
     {
@@ -322,43 +320,10 @@ class MacOSGeneralDeviceConfiguration extends DeviceConfiguration
     }
     
     /**
-    * Gets the passwordRequiredType
-    * Type of password that is required. Possible values are: deviceDefault, alphanumeric, numeric.
-    *
-    * @return RequiredPasswordType The passwordRequiredType
-    */
-    public function getPasswordRequiredType()
-    {
-        if (array_key_exists("passwordRequiredType", $this->_propDict)) {
-            if (is_a($this->_propDict["passwordRequiredType"], "Microsoft\Graph\Model\RequiredPasswordType")) {
-                return $this->_propDict["passwordRequiredType"];
-            } else {
-                $this->_propDict["passwordRequiredType"] = new RequiredPasswordType($this->_propDict["passwordRequiredType"]);
-                return $this->_propDict["passwordRequiredType"];
-            }
-        }
-        return null;
-    }
-    
-    /**
-    * Sets the passwordRequiredType
-    * Type of password that is required. Possible values are: deviceDefault, alphanumeric, numeric.
-    *
-    * @param RequiredPasswordType $val The passwordRequiredType
-    *
-    * @return MacOSGeneralDeviceConfiguration
-    */
-    public function setPasswordRequiredType($val)
-    {
-        $this->_propDict["passwordRequiredType"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the passwordRequired
     * Whether or not to require a password.
     *
-    * @return bool The passwordRequired
+    * @return bool|null The passwordRequired
     */
     public function getPasswordRequired()
     {
@@ -380,6 +345,39 @@ class MacOSGeneralDeviceConfiguration extends DeviceConfiguration
     public function setPasswordRequired($val)
     {
         $this->_propDict["passwordRequired"] = boolval($val);
+        return $this;
+    }
+    
+    /**
+    * Gets the passwordRequiredType
+    * Type of password that is required. Possible values are: deviceDefault, alphanumeric, numeric.
+    *
+    * @return RequiredPasswordType|null The passwordRequiredType
+    */
+    public function getPasswordRequiredType()
+    {
+        if (array_key_exists("passwordRequiredType", $this->_propDict)) {
+            if (is_a($this->_propDict["passwordRequiredType"], "\Microsoft\Graph\Model\RequiredPasswordType") || is_null($this->_propDict["passwordRequiredType"])) {
+                return $this->_propDict["passwordRequiredType"];
+            } else {
+                $this->_propDict["passwordRequiredType"] = new RequiredPasswordType($this->_propDict["passwordRequiredType"]);
+                return $this->_propDict["passwordRequiredType"];
+            }
+        }
+        return null;
+    }
+    
+    /**
+    * Sets the passwordRequiredType
+    * Type of password that is required. Possible values are: deviceDefault, alphanumeric, numeric.
+    *
+    * @param RequiredPasswordType $val The passwordRequiredType
+    *
+    * @return MacOSGeneralDeviceConfiguration
+    */
+    public function setPasswordRequiredType($val)
+    {
+        $this->_propDict["passwordRequiredType"] = $val;
         return $this;
     }
     

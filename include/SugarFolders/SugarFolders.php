@@ -10,8 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\FetchMode;
+use Doctrine\DBAL\Exception as DBALException;
 use Sugarcrm\Sugarcrm\Util\Uuid;
 
 require_once("vendor/ytree/Tree.php");
@@ -134,7 +133,7 @@ class SugarFolder {
             . " WHERE polymorphic_module = ? AND polymorphic_id = ? AND folder_id = ?",
             1
         );
-        $result = $connection->executeQuery($query, ['Emails', $id, $this->id])->fetchColumn();
+        $result = $connection->executeQuery($query, ['Emails', $id, $this->id])->fetchOne();
         return $result !== false;
     }
 
@@ -200,7 +199,7 @@ class SugarFolder {
         return $this->db->getConnection()->executeQuery(
             'SELECT folder_id FROM folders_subscriptions WHERE assigned_user_id = ?',
             [$user->id]
-        )->fetchAll(\PDO::FETCH_COLUMN);
+        )->fetchFirstColumn();
 	}
 
 	/**
@@ -224,7 +223,7 @@ class SugarFolder {
 				$cleanSubscriptions[] = $id;
                 $parentFolder = $this->db->getConnection()
                     ->executeQuery('SELECT parent_folder FROM folders WHERE id = ?', [$id])
-                    ->fetchColumn();
+                    ->fetchOne();
                 if (!empty($parentFolder)) {
                     $cleanSubscriptions = $this->getParentIDRecursive($parentFolder, $cleanSubscriptions);
 				}
@@ -267,7 +266,7 @@ class SugarFolder {
 		}
 
         $parentFolder = $this->db->getConnection()
-            ->executeQuery('SELECT parent_folder FROM folders WHERE id = ? AND deleted = 0', [$id])->fetchColumn();
+            ->executeQuery('SELECT parent_folder FROM folders WHERE id = ? AND deleted = 0', [$id])->fetchOne();
         if (!empty($parentFolder)) {
             $ret = $this->getParentIDRecursive($parentFolder, $ret);
         }
@@ -612,7 +611,7 @@ ENDW;
 		$return = array();
 
 		$found = array();
-        while ($a = $stmt->fetch()) {
+        while ($a = $stmt->fetchAssociative()) {
             $a['created_by'] = $this->db->fromConvert($a['created_by'], 'id');
 
 			if ((($a['folder_type'] == $myEmailTypeString) ||
@@ -681,7 +680,7 @@ ENDW;
                     $this->core . $this->coreWhere . 'AND parent_folder = ?',
                     [$a['id']]
                 );
-                while ($aGetChildren = $getChildrenStmt->fetch()) {
+                while ($aGetChildren = $getChildrenStmt->fetchAssociative()) {
 					if($a['is_group']) {
 						$this->_depth = 1;
 						$grp = $this->getFoldersChildForSettings($aGetChildren, $grp, $subscriptions);
@@ -722,7 +721,7 @@ ENDW;
                 $this->core . $this->coreWhere . 'AND parent_folder = ?',
                 [$a['id']]
             );
-            while ($aGetChildren = $getChildrenStmt->fetch()) {
+            while ($aGetChildren = $getChildrenStmt->fetchAssociative()) {
 				$collection = $this->getFoldersChildForSettings($aGetChildren, $collection, $subscriptions);
 			}
 		}
@@ -802,7 +801,7 @@ ENDW;
                     $this->core . $this->coreWhere . 'AND parent_folder = ?',
                     [$a['id']]
                 );
-                while ($aGetChildren = $getChildrenStmt->fetch()) {
+                while ($aGetChildren = $getChildrenStmt->fetchAssociative()) {
                     if (in_array($aGetChildren['id'], $subscriptions)) {
 						$folderNode->add_node($this->buildTreeNodeFolders($aGetChildren, $nodePath, $folderStates, $subscriptions));
 					}
@@ -894,7 +893,7 @@ ENDW;
                 [$a['id']]
             );
 
-            while ($aGetChildren = $getChildrenStmt->fetch()) {
+            while ($aGetChildren = $getChildrenStmt->fetchAssociative()) {
 				$folderNode->add_node($this->buildTreeNodeFolders($aGetChildren, $nodePath, $folderStates, $subscriptions));
 			}
 		}
@@ -939,7 +938,7 @@ ENDW;
             "SELECT NULL FROM inbound_email WHERE groupfolder_id = ? and deleted = 0",
             1
         );
-        $result = $conn->executeQuery($query, [$id])->fetchColumn();
+        $result = $conn->executeQuery($query, [$id])->fetchOne();
         if ($result !== false) {
             return false;
         } // if
@@ -947,18 +946,18 @@ ENDW;
             "SELECT NULL FROM folders_rel where polymorphic_module = ? and folder_id = ? and deleted = 0",
             1
         );
-        $result = $conn->executeQuery($query, ['Emails', $id])->fetchColumn();
+        $result = $conn->executeQuery($query, ['Emails', $id])->fetchOne();
         if ($result !== false) {
             return false;
         } // if
-        $doesFolderHaveChild = $conn->executeQuery('SELECT has_child FROM folders WHERE id = ?', [$id])->fetchColumn();
+        $doesFolderHaveChild = $conn->executeQuery('SELECT has_child FROM folders WHERE id = ?', [$id])->fetchOne();
         $canContinue = true;
         if ($doesFolderHaveChild == 1) {
             $subFolderStmt = $conn->executeQuery(
                 'SELECT id FROM folders WHERE parent_folder = ?',
                 [$id]
             );
-            while ($subFolder = $subFolderStmt->fetch()) {
+            while ($subFolder = $subFolderStmt->fetchAssociative()) {
                 $canContinue = $this->deleteChildrenCascade($subFolder['id']);
             }
         }
@@ -1120,7 +1119,7 @@ ENDW;
             sprintf('SELECT NULL FROM %s WHERE parent_folder = ? AND deleted = 0', $this->table),
             2
         );
-        $result = $connection->executeQuery($query, [$this->parent_folder])->fetchAll(FetchMode::COLUMN);
+        $result = $connection->executeQuery($query, [$this->parent_folder])->fetchFirstColumn();
         if (count($result) == 1) {
             $this->db->getConnection()->update($this->table, ['has_child' => 0], ['id' => $this->parent_folder]);
         } // if
@@ -1146,13 +1145,13 @@ ENDW;
         $conn = $this->db->getConnection();
         $doesFolderHaveChild = $conn
             ->executeQuery('SELECT has_child FROM folders WHERE id = ?', [$folderId])
-            ->fetchColumn();
+            ->fetchOne();
         if ($doesFolderHaveChild == 1) {
             $subFolderStmt = $conn->executeQuery(
                 'SELECT id FROM folders WHERE parent_folder = ? AND deleted = 0',
                 [$folderId]
             );
-            while ($a2 = $subFolderStmt->fetch()) {
+            while ($a2 = $subFolderStmt->fetchAssociative()) {
 				$childrenArray[] = $a2['id'];
 				$this->findAllChildren($a2['id'], $childrenArray);
 			} // while
@@ -1169,7 +1168,7 @@ ENDW;
         $data = $this->db->getConnection()->executeQuery(
             'SELECT * FROM folders WHERE id = ? AND deleted = 0',
             [$id]
-        )->fetch();
+        )->fetchAssociative();
         if ($data) {
             foreach ($data as $name => $value) {
                 $this->$name = $this->db->fromConvert($value, $this->fields[$name]['type']);

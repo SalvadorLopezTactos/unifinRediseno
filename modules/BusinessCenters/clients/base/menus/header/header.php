@@ -16,7 +16,7 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' => 'LNK_NEW_BUSINESS_CENTER',
         'acl_action' => 'create',
         'acl_module' => $moduleName,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
         'route'=> '#' . $moduleName . '/create',
     ),
     array(
@@ -24,7 +24,7 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' =>'LNK_BUSINESS_CENTERS_LIST',
         'acl_action'=>'list',
         'acl_module'=>$moduleName,
-        'icon' => 'fa-bars',
+        'icon' => 'sicon-list-view',
     ),
     array(
         'route' => '#bwc/index.php?' . http_build_query(
@@ -37,6 +37,6 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' =>'LNK_IMPORT_BUSINESS_CENTERS',
         'acl_action' => 'import',
         'acl_module' => $moduleName,
-        'icon' => 'fa-arrow-circle-o-up',
+        'icon' => 'sicon-upload',
     ),
 );

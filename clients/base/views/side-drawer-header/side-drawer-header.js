@@ -12,6 +12,7 @@
  * @class View.Views.Base.SideDrawerHeaderView
  * @alias SUGAR.App.view.views.BaseSideDrawerHeaderView
  * @extends View.Views.Base.HeaderpaneView
+ * @deprecated SideDrawerHeader View is deprecated as of 11.2.0. Use SideDrawerHeaderpane instead.
  */
 ({
     /**
@@ -33,6 +34,7 @@
     },
 
     initialize: function(options) {
+        app.logger.warn('SideDrawerHeader View is deprecated as of 11.2.0. Use SideDrawerHeaderpane instead.');
         if (options.context.parent) {
             options.meta = app.metadata.getView(options.context.parent.get('module'), options.type, options.loadModule);
             options.template = app.template.getView(options.type);

@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Графики процесса с привязкой по времени',
 'LBL_OOTB_DATA_ARCHIVER' => 'Запустить активные архивы данных / удаление',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Геокодер записей',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Арбитр геокодера',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Интервал:',
 'LBL_LIST_LIST_ORDER' => 'Планировщик заданий:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Настройка сrontab',
 'LBL_CRON_LINUX_DESC' => 'Примечание: Для запуска планировщика заданий Sugar добавьте эту строку в файл crontab:',
 'LBL_CRON_WINDOWS_DESC' => 'Примечание: Для запуска планировщика заданий Sugar создайте пакетный файл и выполняйте его при помощи планировщика заданий Windows. Пакетный файл должен содержать следующие команды:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Журнал заданий',
 'LBL_EXECUTE_TIME'			=> 'Время выполнения',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Удалить временные файлы',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Восстановить денормализованные данные безопасности команды',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Обновить определение продукта',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Карты геокодера',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Арбитр геокодера',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Запускать ночью массовую рассылку писем',
 'LBL_ASYNCMASSUPDATE' => 'Произвести асинхронные массовые обновления',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Очистить списки со старыми записями',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Модуль очистки данных мероприятий',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Время процесса - графики',
+'LBL_SUGARJOBDATAARCHIVER' => 'Запустить активные архивы данных/удаление',
 'LBL_PMSEENGINECRON' => 'Планировщик SugarBPM',
 );
 

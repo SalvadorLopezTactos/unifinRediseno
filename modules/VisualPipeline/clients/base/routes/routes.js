@@ -30,12 +30,18 @@
                 route: 'VisualPipeline/:id',
                 callback: function(id) {
                     if (id === 'config') {
-                        app.drawer.open({
-                            layout: 'config-drawer',
-                            context: {
-                                module: 'VisualPipeline',
-                                fromRouter: true
-                            }
+                        // Making a ping call to update/refresh the metadata. When there is a change made in studio and
+                        // the tile view config was opened it wouldn't have the updated metadata until refreshed
+                        app.api.call('read', app.api.buildURL('ping'), null, {
+                            success: function(data) {
+                                app.drawer.open({
+                                    layout: 'config-drawer',
+                                    context: {
+                                        module: 'VisualPipeline',
+                                        fromRouter: true
+                                    }
+                                });
+                            },
                         });
                     } else {
                         app.router.redirect('#Opportunities/pipeline');

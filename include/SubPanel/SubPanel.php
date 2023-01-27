@@ -135,14 +135,6 @@ class SubPanel
 		$ListView->xTemplateAssign("REMOVE_INLINE_PNG", SugarThemeRegistry::current()->getImage('delete_inline','align="absmiddle" border="0"',null,null,'.gif',$app_strings['LBL_ID_FF_REMOVE']));
 		$header_text= '';
 
-		if(is_admin($current_user) && $_REQUEST['module'] != 'DynamicLayout' && !empty($_SESSION['editinplace']))
-		{
-			$exploded = explode('/', $xTemplatePath);
-			$file_name = $exploded[sizeof($exploded) - 1];
-			$mod_name =  $exploded[sizeof($exploded) - 2];
-			$header_text= "&nbsp;<a href='index.php?action=index&module=DynamicLayout&from_action=$file_name&from_module=$mod_name&mod_lang="
-				.$_REQUEST['module']."'>".SugarThemeRegistry::current()->getImage("EditLayout","border='0' align='bottom'",null,null,'.gif','Edit Layout')."</a>";
-		}
 		$ListView->setHeaderTitle('');
 		$ListView->setHeaderText('');
 

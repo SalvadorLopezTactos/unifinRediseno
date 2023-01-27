@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => '电子邮件地址：',
     'LBL_EMAIL_ATTACHMENT' => '电子邮件附件',
     'LBL_EMAIL_ATTACHMENT_FOR' => '电子邮件附件用于',
+    'LBL_NOTE_ATTACHMENT' => '笔记与附件',
+    'LBL_KB_ATTACHMENT' => 'KB 文档附件',
+    'LBL_CASE_ATTACHMENT' => '案例附件',
     'LBL_FILE_MIME_TYPE' => 'Mime 类型',
     'LBL_FILE_EXTENSION' => '文件扩展名',
     'LBL_FILE_SOURCE' => '文件来源',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => '笔记来源',
     'LBL_SOURCE_EXTERNAL' => '外部',
     'LBL_SOURCE_INTERNAL' => '内部',
+    'LBL_PORTAL' => '门户',
 
     // Help Text
     // List View Help Text

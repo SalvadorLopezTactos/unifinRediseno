@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Podpora Názov:',
   'LBL_SUPPORT_TERM' => 'Podpora Podmienky:',
   'LBL_TAX_CLASS' => 'Daňova trieda',
+  'LBL_ACTIVE_STATUS' => 'Stav',
   'LBL_TYPE_NAME'=>'Názov typu',
   'LBL_TYPE' => 'Typ',
   'LBL_PRODUCT_TYPE' => 'Typ produktu',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Informačný panel so zoznamom katalógu produktov',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Informačný panel so záznamom katalógu produktov',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na katalóg produktov',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Stav je Aktívny',
 );

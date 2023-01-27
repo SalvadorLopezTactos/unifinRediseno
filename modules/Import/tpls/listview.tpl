@@ -10,27 +10,27 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-<style type="text/css">{literal}
+<style type="text/css">
 .warn { font-style:italic;
         font-weight:bold;
         color:red;
-}{/literal}
+}
 </style>
 
 <script type='text/javascript' src='{sugar_getjspath file='include/javascript/popup_helper.js'}'></script>
 
-<div id="{$tableID}_content">
+<div id="{$tableID|escape:'html':'UTF-8'}_content">
     <table cellpadding='0' cellspacing='0' width='50%' border='0' class='list view'>
         {include file='modules/Import/tpls/listviewpaginator.tpl'}
         <tr height='20'>
             {counter start=0 name="colCounter" print=false assign="colCounter"}
             {if $displayColumns eq false}
-                <th scope='col'  style="text-align: left;" nowrap="nowrap" colspan="{$maxColumns}">{$MOD.LBL_MISSING_HEADER_ROW}</th>
+                <th scope='col'  style="text-align: left;" nowrap="nowrap" colspan="{$maxColumns|escape:'html':'UTF-8'}">{$MOD.LBL_MISSING_HEADER_ROW}</th>
             {else}
                 {foreach from=$displayColumns key=colHeader item=label}
                     <th scope='col' nowrap="nowrap">
                         <div style='white-space: nowrap;'width='100%' align='left' >
-                        {$label}
+                        {$label|escape:'html':'UTF-8'}
                         </div>
                     </th>
                     {counter name="colCounter"}
@@ -46,7 +46,7 @@
             {else}
                 {assign var='_rowColor' value=$rowColor[1]}
             {/if}
-            <tr height='20' class='{$_rowColor}S1'>
+            <tr height='20' class='{$_rowColor|escape:'html':'UTF-8'}S1'>
                 {counter start=0 name="colCounter" print=false assign="colCounter"}
                 {foreach from=$rowData key=col item=params}
                     {strip}
@@ -58,8 +58,8 @@
                 {/foreach}
                 </tr>
         {foreachelse}
-        <tr height='20' class='{$rowColor[0]}S1'>
-            <td colspan="{$colCounter}">
+        <tr height='20' class='{$rowColor[0]|escape:'html':'UTF-8'}S1'>
+            <td colspan="{$colCounter|escape:'html':'UTF-8'}">
                 <em>{$APP.LBL_NO_DATA}</em>
             </td>
         </tr>

@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Sablonok megtekintése',
     'LNK_LIST_KBCATEGORIES' => 'Kategóriák megtekintése',
     'LBL_TEMPLATES' => 'Sablonok',
+    'LBL_TEMPLATE' => 'Sablon',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'A sablon felülír minden tartalmat.' .
         ' Biztosan használja ezt a sablont?',
     'LNK_IMPORT_KBCONTENTS' => 'Cikkek importálása',

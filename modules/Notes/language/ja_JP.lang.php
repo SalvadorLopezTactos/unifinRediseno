@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Eメールアドレス:',
     'LBL_EMAIL_ATTACHMENT' => 'Eメール添付',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Eメール添付',
+    'LBL_NOTE_ATTACHMENT' => 'ノートの添付ファイル',
+    'LBL_KB_ATTACHMENT' => 'KBDocumentの添付ファイル',
+    'LBL_CASE_ATTACHMENT' => 'ケースの添付ファイル',
     'LBL_FILE_MIME_TYPE' => 'Mimeタイプ',
     'LBL_FILE_EXTENSION' => 'ファイル拡張子',
     'LBL_FILE_SOURCE' => 'ファイル ソース',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => '注記ソース',
     'LBL_SOURCE_EXTERNAL' => '外部',
     'LBL_SOURCE_INTERNAL' => '内部',
+    'LBL_PORTAL' => 'ポータル',
 
     // Help Text
     // List View Help Text

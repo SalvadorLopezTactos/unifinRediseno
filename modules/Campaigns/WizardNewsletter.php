@@ -188,15 +188,6 @@ else if($current_user->getPreference('currency') && !isset($focus->id))
 
 }
 global $current_user;
-if(is_admin($current_user) && $_REQUEST['module'] != 'DynamicLayout' && !empty($_SESSION['editinplace'])){
-    $record = '';
-    if(!empty($_REQUEST['record'])){
-        $record =   $_REQUEST['record'];
-    }
-    $ss->assign("ADMIN_EDIT","<a href='index.php?action=index&module=DynamicLayout&from_action=".$_REQUEST['action'] ."&from_module=".$_REQUEST['module'] ."&record=".$record. "'>".SugarThemeRegistry::current()->getImage("EditLayout","border='0' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDIT_LAYOUT'])."</a>");
-
-}
-
 
 if (empty($focus->id) && !isset($_REQUEST['isDuplicate'])) {
     $ss->assign("TEAM_OPTIONS", get_select_options_with_id(get_team_array(), $current_user->default_team));

@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Modul izraza',
-  'LBL_MODULE_NAME_SINGULAR' => 'Modul izraza',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Prethodno' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Sljedeće' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Proširi' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Modul izraza',
+    'LBL_MODULE_NAME_SINGULAR' => 'Modul izraza',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Prethodno' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Sljedeće' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Proširi' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Nepoznato polje',
+];

@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => '아카이브',
     'LBL_PROCESS_TYPE_DELETE' => '하드 삭제',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => '아카이브 실행',
+    'LBL_ARCHIVER_WARNING_TITLE' => '경고',
+    'LBL_ARCHIVER_WARNING' => '사용량이 적거나 근무 외 시간에 작업을 수행하는 것이 좋습니다.'
+        . '시스템 성능에 영향을 미칠 수 있습니다. 지금 작업을 실행하시겠습니까?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => '{{moduleName}} 모듈에 대한 아카이버는 필터로 {{fieldName}} 설정이 필요합니다',
 );

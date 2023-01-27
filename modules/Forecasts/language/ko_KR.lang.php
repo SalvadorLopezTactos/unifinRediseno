@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'설명:',
     'LBL_OW_TYPE'=>'유형',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => '<span class="sicon sicon-user-group mx-1"></span> {{name}}에 대한 팀 예측',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'직접 보고',
     'LBL_FDR_OPPORTUNITIES'=>'예측에 포함된 영업기회',
     'LBL_FDR_WEIGH'=>'금액(수주확도 반영)',
     'LBL_FDR_COMMIT'=>'커밋 금액',
     'LBL_FDR_DATE_COMMIT'=>'커밋 날짜',
+    'LBL_FDR_FORECAST_HEADER' => '<span class="sicon sicon-user mx-1"></span> {{name}}에 대한 판매자 예측',
 
     //detail view.
     'LBL_DV_HEADER' => '예측:워크시트',
     'LBL_DV_MY_FORECASTS' => '내 예측',
-    'LBL_DV_MY_TEAM' => "내 팀의 예측" ,
+    'LBL_DV_MY_TEAM' => "내 팀의 예측",
     'LBL_DV_TIMEPERIODS' => '기간',
     'LBL_DV_FORECAST_PERIOD' => '예측 기간',
     'LBL_DV_FORECAST_OPPORTUNITY' => '영업기회 예측',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => '기본율',
 
     'LBL_QUOTA' => '견적',
-    'LBL_QUOTA_ADJUSTED' => '쿼터(조정)',
+    'LBL_QUOTA_ADJUSTED' => '조정된 할당량',
 
     'LBL_FORECAST_FOR'=>'다음 대상을 위한 예측 워크시트',
     'LBL_FMT_ROLLUP_FORECAST'=>'롤업',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'쿼터 vs. 커밋 vs. 실제',
 
     'LBL_FORECAST' => '예측',
+    'LBL_COMMITMENT' => '기여',
+    'LBL_TEAM_COMMITMENT' => '팀 기여',
+    'LBL_FORECASTED' => '예상됨',
+    'LBL_ADJUSTED_TOTAL' => '조정된 합계',
     'LBL_COMMIT_STAGE' => '커밋 단계',
     'LBL_SALES_STAGE' => '단계',
     'LBL_AMOUNT' => '금액',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, and {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => '가능{{{direction}}}{{{from}}}에서 {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => '최고{{{direction}}}{{{from}}}에서 {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => '최하{{{direction}}}{{{from}}}에서 {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => '가능이 동일선에 머무름',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => '최고와 동일선에 머무름',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => '최하가 동일선에 머무름',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => '기여도(예상) {{{direction}}} {{{from}}}~{{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => '기여도(최고) {{{direction}}} {{{from}}}~{{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => '기여도(최악) {{{direction}}} {{{from}}}~{{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => '기여도(예상) 동일',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => '기여도(최고) 동일',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => '기여도(최악) 동일',
 
 
     'LBL_COMMITTED_THIS_MONTH' => '이번 달 {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => '표시되는 합계',
     'LBL_TOTAL' => '합계',
     'LBL_OVERALL_TOTAL' => '전체 합계',
-    'LBL_EDITABLE_INVALID' => '{0}에 유효하지 않은 값',
+    'LBL_EDITABLE_INVALID' => '{{field_name}}에 유효하지 않은 값',
     'LBL_EDITABLE_INVALID_RANGE' => '값이 {0}과 {1} 사이여야 합니다.',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => '작업계획안의 변경사항을 저장하지 않았습니다.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => '저장되었거나 수용한 데이타만이 보내기가 가능합니다. 계속 보내기를 하려면 확인 버튼을 클릭하고 작업계획안으로 돌아가려면 취소버튼을 클릭하십시오.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => '포함',
     'LBL_CHART_NOT_INCLUDED' => '포함되지 않음',
     'LBL_CHART_ADJUSTED' => '(조정)',
-    'LBL_SAVE_DRAFT' => '임시로 보관',
+    'LBL_SAVE_DRAFT' => '저장',
     'LBL_CHANGES_BY' => '{0}에 의한 변경사항',
     'LBL_FORECAST_SETTINGS' => '설정',
 
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => '초과',
     'LBL_FORECAST_DETAILS_NO_DATA' => '데이타가 없습니다.',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => '쿼터에 적합',
+    'LBL_OPEN_LIKELY' => '예상 열기',
+    'LBL_OPEN_BEST' => '최고 열기',
+    'LBL_OPEN_WORST' => '최악 열기',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => '쿼터 할당',
     'LBL_ASSIGNING_QUOTA' => '할당된 쿼터',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "내 팀의 예측",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => '저장되지 않은 변경 사항이 있습니다. 페이지를 떠나 변경 사항을 취소하시겠습니까?',
+
+    'LBL_SAVE_TOOLTIP' => '워크시트 행의 변경 사항 저장',
+    'LBL_COMMIT_TOOLTIP_REP' => '변경 사항을 레코드에 저장하고 관리자에게 예측 제출',
+    'LBL_COMMIT_TOOLTIP_MGR' => '관리자에게 예측 제출 및 할당량 할당',
+
+    'LBL_SAVE_LABEL_REP' => '저장',
+    'LBL_SAVE_LABEL_MGR' => '조정 값 저장',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => '{{plural_module_name}} 모듈은 {{모듈 _}} ing {{worksheet_module}}들을 구축하고 판매를 예측하기 {{opportunities_singular_module}} 기록을 포함한다. 사용자는 개인, 팀에서 판매 할당량 및 판매 조직 수준으로 작업 할 수 있습니다. 사용자가 건물 {{모듈 _}} ing {{worksheet_module}}의를 시작하기 위해 {{plural_module_name}} 모듈에 액세스하기 전에, 관리자 액세스 권한이있는 사용자는 조직의 원하는 기간에 {{plural_module_name}} 모듈을 구성, 범위, 및 시나리오해야합니다. 판매 담당자가 기간이 진행됨에 현재 시간으로 {} {} opportunities_module 할당 된 작업 할 {{plural_module_name}} 모듈을 사용합니다. 이러한 사용자에 따라 자신의 개인 판매를위한 총 예측을 마련하기 위해 최선을 다할 것 {{opportunities_module}}가 종료 할 전망이다. 영업 관리자는 다른 영업 사원과 마찬가지로 자신의 {{opportunities_singular_module}} 기록과 함께 작동합니다. 또한, 그들은 총 팀의 판매를 예측하기 위해 자신의 reportee의 헌신적 인 {{모듈 _}} 금액을 집계

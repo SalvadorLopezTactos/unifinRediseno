@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'ID kontaktu',
     'LBL_DESCRIPTION_INFORMATION' => 'Popis',
     'LBL_DESCRIPTION' => 'Popis:',
+    'LBL_INTERNAL_NOTES' => 'Interní poznámky:',
     'LBL_STATUS' => 'Stav:',
     'LBL_DIRECTION' => 'Směr:',
     'LBL_DATE' => 'Počáteční datum:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Doba trvání musí být větší než 0',
     'LBL_CALL_INFORMATION' => 'Přehled úkolu',
     'LBL_REMOVE' => 'odstranit',
-    'LBL_ACCEPT_STATUS' => 'Přijato ?',
     'LBL_ACCEPT_LINK' => 'Přijmout odkaz',
     //For export labels
     'LBL_PARENT_ID' => 'Zdrojové ID',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Volání:',
     'LBL_CALL_RECORDING_URL' => 'Nahrávání URL',
     'LBL_CALL_RECORDING' => 'Nahrávání',
+
+    'LBL_LEAD_ID' => 'ID zájemce',
+    'LBL_LEAD_NAME' => 'Zájemce',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Úspěšně jste vytvořil {{moduleSingularLower}} {{name}} pro {{formatDate date_start}}.',

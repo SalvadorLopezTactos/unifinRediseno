@@ -25,7 +25,7 @@
                 {{/unless}}
             {{/each}}
             <li class="tab dropdown more hidden">
-                <a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-chevron-down"></b></a>
+                <a class="dropdown-toggle" data-toggle="dropdown"><b class="sicon sicon-chevron-down"></b></a>
                 <ul class="dropdown-menu scroll pull-right" role="menu">
                     {{#each meta.panels}}
                         {{#unless header}}
@@ -53,7 +53,7 @@
                 <div class="row-fluid record-panel-header {{#eq panelState "collapsed"}}panel-inactive{{/eq}}{{#notEq panelState "collapsed"}}panel-active{{/notEq}}">
                     <span class="pull-left">
                         <button class="btn btn-invisible record-panel-arrow">
-                            <i class="fa fa-chevron-{{#eq panelState "collapsed"}}right{{/eq}}{{#notEq panelState "collapsed"}}down{{/notEq}}" rel="tooltip" data-container="body" data-title="Toggle Visibility"></i>
+                            <i class="sicon sicon-chevron-{{#eq panelState "collapsed"}}right{{/eq}}{{#notEq panelState "collapsed"}}down{{/notEq}}" rel="tooltip" data-container="body" data-title="Toggle Visibility"></i>
                         </button>
                         {{str label ../../../this.module}}
                     </span>
@@ -82,7 +82,7 @@
                                     <span class="record-edit-link-wrapper" data-name="{{name}}">
                                                                         <a class="record-edit-link btn btn-invisible"
                                                                            data-type="{{type}}" data-name="{{name}}"><i
-                                                                                class="fa fa-pencil"></i></a>
+                                                                                class="sicon sicon-edit"></i></a>
                                                                         </span>
                                 {{/notHas}}
                             {{/unless}}

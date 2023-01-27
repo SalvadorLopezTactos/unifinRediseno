@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'ID do item da linha de receita de renovação',
     'LBL_PARENT_RLIS' => 'Itens da linha de receita primários',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Itens da linha de receita primários',
+    'LBL_FORECASTED_LIKELY' => 'Previsto como provável',
     'LBL_EXPERT_ID' => 'Especialista no produto',
     'LBL_FORECAST' => 'Incluir na Previsão',
     'LBL_SUBTOTAL' => 'Subtotal',

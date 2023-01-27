@@ -6,16 +6,12 @@
     width: 700px;
     margin-left: -350px;
     top: 20%;
-
-    img.logo {
-      height: 18px;
-    }
   }
 
   .modal-header {
     padding: 9px 10px;
 
-    .step-circle .fa-check-circle {
+    .step-circle .sicon-check-circle-lg {
       display: inline-block;
     }
   }
@@ -24,6 +20,7 @@
     .version {
       float: left;
       padding: 4px 12px;
+      color: @labelColor;
     }
   }
 
@@ -76,16 +73,15 @@
     h1 {
       margin-left: 36px;
       margin-bottom: 0;
-      font-size: @upgradeFontSizeHeader;
+      font-size: @fontSizeHeader;
       font-weight: 600;
-      color: @black;
+      color: @textColor;
     }
 
-    .fa {
+    .sicon {
       position: absolute;
       left: 16px;
-      margin-top: 3px;
-      font-size: 18px;
+      margin-top: 4px;
     }
 
     p {
@@ -123,28 +119,28 @@
       height: 60px;
       padding: 6px;
       text-align: center;
-      color: @gray;
+      color: @textColor;
       font-size: 11px;
-      background-color: @grayLighter;
-      background-image: linear-gradient(to bottom, @grayLighter, @white);
+      background-color: @primaryContentBackground;
+      background-image: linear-gradient(to bottom, @gray20, @white);
       background-repeat: repeat-x;
       transition: all 0s;
 
       &:hover {
-        box-shadow: 1px 1px 1px fade(@black, 20%), 2px 2px 1px fade(@black, 10%);
+        box-shadow: @shadowWidget;
         border: none;
       }
 
       &:hover i {
         text-decoration: none;
-        color: @gray;
+        color: @textColorHover;
       }
 
       i {
         font-size: 24px;
         display: inline-block;
         width: 100%;
-        color: @grayLightish;
+        color: @sicon-color;
       }
     }
   }
@@ -159,7 +155,6 @@
   }
 
   .file-upload.focus {
-    color: @white;
     margin-bottom: 0;
     font-weight: normal;
 
@@ -183,7 +178,7 @@
 
 .upgrade .alert-danger {
   background-color: @darkRed;
-  color: @white;
+  color: @textColor;
   text-shadow: none !important;
 }
 
@@ -194,7 +189,7 @@
 
 .upgrade .alert-success {
   background-color: @darkGreen;
-  color: @white;
+  color: @textColor;
   text-shadow: none !important;
 }
 
@@ -207,29 +202,29 @@
   top: 1px;
 }
 
-.upgrade .alert .close .fa-times {
-  color: @black;
+.upgrade .alert .close .sicon-close {
+  color: @sicon-color;
 }
 
-.upgrade .fa-ellipsis-h {
-  background: @orange;
+.upgrade .sicon-warning-lg {
   border-radius: 10px;
   padding: 2px 1px 0;
-  line-height: 14px;
-  color: @white;
 }
 
 .upgrade .upload-file {
-  border: 3px solid @grayLighter;
-  display: inline-block;
+  border: 3px solid @borderColor;
+  display: flex;
+  align-items: center;
   height: 36px;
   padding-top: 4px;
+  padding-bottom: 4px;
   border-radius: 4px;
   width: 75%;
 }
 
 .upgrade .upload-file > span:first-child {
   margin-left: 4px;
+  margin-right: 4px;
 }
 
 .upgrade .upgrade-check {

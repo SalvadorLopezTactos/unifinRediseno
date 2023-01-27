@@ -32,7 +32,7 @@
 <td width="90%">
 <input autocomplete='off' class='sqsEnabled' type='text' name='team_name' id='team_name' size='30' maxlength='' value=''> 
 <input type="hidden"  name='team_id' id='team_id' value=''>
-<input type="button" name="btn_team_name" tabindex="" title="{$APP_STRINGS.LBL_SELECT_BUTTON_TITLE}" class="button" value="{$APP_STRINGS.LBL_SELECT_BUTTON_LABEL}" onclick='open_popup("Teams", 600, 400, "", true, false, {literal}{"call_back_function":"set_return","form_name":"reassign_team","field_to_name_array":{"id":"team_id","name":"team_name"}}{/literal}, "single", true);'>
+<input type="button" name="btn_team_name" tabindex="" title="{$APP_STRINGS.LBL_SELECT_BUTTON_TITLE}" class="button" value="{$APP_STRINGS.LBL_SELECT_BUTTON_LABEL}" onclick='open_popup("Teams", 600, 400, "", true, false, { "call_back_function": "set_return","form_name":"reassign_team","field_to_name_array":{ "id": "team_id","name":"team_name" }}, "single", true);'>
 <input type="button" name="btn_clr_team_name" tabindex="" title="{$APP_STRINGS.LBL_CLEAR_BUTTON_TITLE}" class="button" onclick="this.form.team_name.value = ''; this.form.id_team_name.value = '';" value="{$APP_STRINGS.LBL_CLEAR_BUTTON_LABEL}">
 </td>
 </tr>
@@ -44,14 +44,12 @@
 </form>
 
 
-{literal}
 <script language="javascript">
 if(typeof sqs_objects == 'undefined') {
    var sqs_objects = new Array();
 }
    
-sqs_objects['reassign_team_team_name']={"form":"reassign_team","method":"query","modules":["Teams"],"group":"or","field_list":["name","id"],"populate_list":["team_name","team_id"],"required_list":["team_id"],"conditions":[{"name":"name","op":"like_custom","end":"%","value":""},{"name":"name","op":"like_custom","begin":"(","end":"%","value":""}],"order":"name","limit":"30","no_match_text":"No Match"};
-{/literal}
+sqs_objects['reassign_team_team_name'] = { "form": "reassign_team","method":"query","modules":["Teams"],"group":"or","field_list":["name","id"],"populate_list":["team_name","team_id"],"required_list":["team_id"],"conditions":[{ "name": "name","op":"like_custom","end":"%","value":"" },{ "name": "name","op":"like_custom","begin":"(","end":"%","value":"" }],"order":"name","limit":"30","no_match_text":"No Match"};
 addToValidate('reassign_team', 'team_name', 'varchar', true, '{$MOD_STRINGS.LBL_NEW_FORM_TITLE}');
 enableQS();
 </script>

@@ -3,69 +3,78 @@
 
 .navbar {
   .search {
-    padding: 0 6px 0 22px;
+    padding: 0 6px;
     position: relative;
     min-width: 170px !important;
 
-    // Outer wrapper around tag search results
-    .quicksearch-tags-wrapper {
-      position: relative;
-    }
     // Tags UL dropdown menu
     .quicksearch-tags {
       display: block;
-      width: 100%;
-      height: 29px;
-      top: 0;
+      height: 2.25rem;
+      top: 100%;
       right: 0;
-      left: 1px;
       margin-top: 0;
       font-size: 0;
-      background: @white;
-      border: 1px solid darken(@grayLighter, 10%);
+      background: @primaryContentBackground;
+      border: @borderWidget;
       border-radius: 0 0 3px 3px;
-      box-shadow: 0 2px 1px fade(@black, 10%);
       box-sizing: border-box;
+      // Match left margin from ul element styling.
+      margin-left: 25px;
+
+      .tags {
+        .tag-wrapper {
+          .mt-2();
+          .mb-0\.5();
+          .ml-1();
+          .px-0\.5();
+
+          .tag-name {
+            line-height: 0.175rem;
+
+            a {
+              .p-1();
+              .border-t-0();
+
+              background-color: @gray80;
+            }
+          }
+        }
+      }
 
       &.hide {
         display: none;
       }
 
-      .qs-tag-icon > .fa {
-        color: @grayDark;
+      .qs-tag-icon > .sicon {
+        color: @sicon-color;
       }
 
       .qs-tags-row {
         font-size: 12px;
         display: inline-block;
-        border-right: 2px solid @grayLighter;
+        border-right: 2px solid @borderColor;
         position: relative;
-        padding: 5px 10px 4px;
 
         &.active {
           background: @dropdownLinkBackgroundHover;
         }
 
         a {
-          color: @gray;
+          color: @textColor;
           padding: 0;
           border-top: 0;
         }
       }
     }
 
-    // Needed by firefox because of navbar table-layout
-    .typeahead-wrapper {
-      position: relative;
-    }
     // Typeahead UL dropdown menu
     .typeahead {
       height: auto;
-      top: 0;
+      top: 100%;
       right: -1px;
       left: 1px;
       overflow: hidden;
-      border-radius: @baseBorderRadius;
 
       li {
         min-width: 120px;
@@ -107,8 +116,12 @@
         pointer-events: all;
       }
 
+      // A non-ideal solution for the rendering position of the search results list. This is necessary
+      // because we need to give some room to the tags list before the typeahead/results list. Using
+      // top: 100% on the typeahead normally allows us to always render under the navbar, and using
+      // top: 175% here we are doing the same thing, just allowing some room for the tags list.
       .typeahead {
-        top: 30px;
+        top: 175%;
       }
     }
   }
@@ -119,14 +132,15 @@
   float: none;
   margin: 0;
   white-space: nowrap;
-  background: @white;
   // Module type table cell
   .quicksearch-modulelist-wrapper {
     vertical-align: top;
     cursor: pointer;
 
     .module-dropdown {
-      // padding: 4px 0;
+      display: flex;
+      align-items: center;
+      padding: 8px;
       font-size: 0;
     }
 
@@ -143,7 +157,7 @@
     }
 
     .fa.fa-caret-down {
-      color: @grayLight;
+      color: @gray70;
     }
 
     &.open {
@@ -190,19 +204,22 @@
       &:hover {
         text-decoration: none;
         filter: none;
+
+        .sicon.sicon-check {
+          color: @white;
+        }
       }
 
-      .fa.fa-check {
-        color: @grayLight;
+      .sicon.sicon-check {
+        color: @gray70;
         visibility: hidden;
-        font-size: 15px;
         margin-right: 10px;
       }
 
       &.selected {
-        font-weight: bold;
+        font-weight: 600;
 
-        .fa.fa-check {
+        .sicon.sicon-check {
           visibility: visible;
         }
       }
@@ -219,7 +236,7 @@
     line-height: 12px;
     color: @white;
     white-space: nowrap;
-    background: @gray;
+    background: @gray80;
     border: none;
     border-radius: 11px;
     box-shadow: none;
@@ -268,14 +285,14 @@
   .search-query {
     border: none;
     float: none;
-    color: @gray;
+    color: @textColor;
     min-height: 28px;
     min-width: 140px;
     text-overflow: ellipsis;
     width: 100%;
     box-sizing: border-box;
     transition: none;
-    .placeholder(@grayLight);
+    .placeholder(@placeholderText);
   }
 }
 
@@ -289,13 +306,17 @@
     .tab-focus();
   }
 
-  > .btn .fa-search {
-    display: inline-block;
-    text-shadow: none;
+  > .btn {
+    padding: 7px;
+
+    .fa-search {
+      display: inline-block;
+      text-shadow: none;
+    }
   }
 
   &:hover > .btn .fa-search {
-    color: @grayDark;
+    color: @gray90;
     text-decoration: none;
   }
 
@@ -304,18 +325,22 @@
     color: @white;
   }
 
+  > .btn .sicon-close,
   > .btn .fa-times {
     display: inline-block;
-    color: @grayLight;
+    color: @gray70;
     text-shadow: none;
   }
 
+  &:hover > .btn .sicon-close,
   &:hover > .btn .fa-times {
-    color: @grayDark;
+    color: @gray90;
     text-decoration: none;
   }
 
+  &.open > .btn .sicon-close,
   &.open > .btn .fa-times,
+  &.open:hover > .btn .sicon-close,
   &.open:hover > .btn .fa-times {
     color: @white;
   }
@@ -334,7 +359,6 @@ li.search-result {
   min-height: 45px;
   line-height: 12px;
   position: relative;
-  border-bottom: 1px solid darken(@grayLighter, 7%);
   padding-top: 14px;
   padding-right: 50px;
 
@@ -364,11 +388,11 @@ li.search-result {
     &.current {
       .btn.preview-list-item,
       .rowaction.btn:not(.btn-invisible) {
-        background: @gray;
+        background: @gray80;
       }
 
       .fa-eye {
-        color: @grayLighter !important;
+        color: @gray20;
       }
 
       background: @dropdownLinkBackgroundHover;
@@ -391,6 +415,10 @@ li.search-result {
 
 .sidebar-content {
   .dashboard .facets-dashboard {
+    .dashlet-header {
+      .h-9();
+    }
+
     .well .dashlet-container + .dashlet-container {
       padding-top: 10px;
     }
@@ -421,15 +449,16 @@ li.search-result {
       -ms-user-select: none;
       user-select: none;
 
+      .sicon,
       .fa.fa-check {
         visibility: hidden;
-        font-size: 15px;
-        margin-right: 10px;
+        margin-right: 8px;
       }
 
       &.selected {
         font-weight: bold;
 
+        .sicon,
         .fa.fa-check {
           visibility: visible;
         }
@@ -438,7 +467,7 @@ li.search-result {
 
     .dashlet-content {
       .disabled {
-        color: @grayLight;
+        color: @gray70;
 
         .facet-item {
           cursor: default;
@@ -482,9 +511,6 @@ li.search-result {
 
   // Module type table cell
   .quicksearch-modulelist-wrapper {
-    /* override */
-    padding: 12px 0 0 4px;
-
     .menu-item {
       &:focus,
       &:hover {
@@ -521,11 +547,6 @@ li.search-result {
     /* additive */
     box-shadow: none;
   }
-}
-
-/* additive */
-.search-query {
-  .placeholder(@navbarSearchPlaceholderColor) !important;
 }
 
 /* NEW SKIN END */

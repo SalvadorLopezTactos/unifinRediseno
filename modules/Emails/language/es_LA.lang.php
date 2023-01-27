@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Usuarios',
     'LBL_EMAILS_PRODUCTS_REL' => 'Partidas Individuales Cotizadas',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Partidas Individuales de Ingresos',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Escalamientos',
     'LBL_EMAILS_MESSAGES_REL' => 'Mensajes',
     'LBL_EMAILS_PURCHASES_REL' => 'Adquisiciones',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Partidas Individuales Adquiridas',
@@ -473,4 +474,5 @@ Puede utilizar una plantilla predefinida con el botón Plantilla o incluir una d
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Enviar correo electrónico',
     'LBL_MAILBOX' => 'Cuenta de entrada',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Configure una cuenta de correo electrónico saliente mediante <a href="#OutboundEmail">Configuración de Correo Electrónico</a> a fin de enviar correos electrónicos.',
 );

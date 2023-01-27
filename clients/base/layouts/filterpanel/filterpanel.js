@@ -93,8 +93,14 @@
             }
         }, this);
 
+        this.on('filter:collapse', function() {
+            this.togglePanelHide();
+            this.collapseAndUpdateDisplay(true);
+        }, this);
+
         this.on('filter:create:close', function() {
-            this.$('.filter-options').addClass('hide');
+            this.togglePanelHide();
+            this.collapseAndUpdateDisplay(false);
 
             // "filter:create:close" is triggered even when filter:create:open has not been called
             var activeShortcutSession = app.shortcuts.getCurrentSession();
@@ -129,6 +135,40 @@
             defaultModule = this.module || this.model.get('module') || this.context.get('module');
 
         this.trigger('filterpanel:change:module', (moduleMeta.activityStreamEnabled && lastViewed === 'activitystream') ? 'Activities' : defaultModule);
+    },
+
+    /**
+     * Toggles hiding the filter panel
+     */
+    togglePanelHide: function() {
+        this.$('.filter-options').addClass('hide');
+    },
+
+    /**
+     * Called when collapsing the filter panel. Controls updating the the displayed filter name
+     * @param {boolean} collapse
+     */
+    collapseAndUpdateDisplay: function(collapse) {
+        const filter = this.context.editingFilter;
+        if (!filter) {
+            return;
+        }
+        const filterId = filter.get('id');
+
+        if (!filterId) {
+            if (collapse) {
+                this.context.trigger('filter:collapse', {
+                    id: 'create',
+                    text: app.lang.get('LBL_FILTER_CREATE_NEW_UNSAVED')
+                });
+            }
+        } else {
+            const filterName = filter.get('name');
+            if (collapse) {
+                this.context.trigger('filter:collapse', {id: `${filterId}`,
+                    text: `${filterName} ${app.lang.get('LBL_FILTER_EDIT_UNSAVED_SUFFIX')}`});
+            }
+        }
     },
 
     /**

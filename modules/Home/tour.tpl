@@ -69,11 +69,9 @@
 </div>
 
 <script type="text/javascript">
-    {literal}
     $('#thumbnail_0').live("click", function(){
-        $("#tour_screenshot .modal-header h3").html("{/literal}{$APP.LBL_TOUR_WELCOME}{literal}");
+        $("#tour_screenshot .modal-header h3").html("{$APP.LBL_TOUR_WELCOME}");
         $("#tour_screenshot .modal-body").html("<img src='themes/default/images/pt-screen0-full.png' width='600'>");
         $("#tour_screenshot").modal("show");
     });
-    {/literal}
 </script>

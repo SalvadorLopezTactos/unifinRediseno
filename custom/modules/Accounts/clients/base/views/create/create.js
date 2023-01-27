@@ -273,6 +273,7 @@
 
         //Hide Vista360
         this._hideVista360();
+
         //this.model.set("tipo_registro_cuenta_c", 'Cliente');
         //this.model.set("tipo_registro_cuenta_c", 'Prospecto');
         //callback(null, fields, errors);
@@ -353,7 +354,8 @@
         if(!listaUsuarios.includes(app.user.attributes.id)) {
 			this.$('div[data-name=denominacion_c]').css("pointer-events", "none");
 			this.$('div[data-name=regimen_fiscal_sat_c]').css("pointer-events", "none");
-		}
+        }
+        
     },
 
     initialize: function (options) {
@@ -756,7 +758,6 @@
             this.$("li.tab.LBL_RECORDVIEW_PANEL2").hide();
         }
     },
-
 
     /* F. Javier G. Solar
      OBS299 Validar que las Direcciones no se repitan 21/11/2018
@@ -3415,7 +3416,7 @@
     valida_actividad_economica: function (fields, errors, callback){
         //Validacion de Actividad Economica si el Tipo de Cuenta es "3" - Cliente
         if (this.model.get('tipo_registro_cuenta_c') == '3' && this.model.get('tipo_registro_cuenta_c') != '1' && this.model.get('subtipo_registro_cuenta_c') != '2' &&
-        ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null)) {
+        ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae').select2('val') == null)) {
 
             app.alert.show("tipo_cuenta_cliente_ae", {
                 level: "error",

@@ -18,7 +18,7 @@
 
     events: {
         'keyup [data-action="search"]': 'searchKBs',
-        'click .fa-times': 'clearQuickSearch'
+        'click .sicon-close': 'clearQuickSearch'
     },
 
     /**
@@ -62,10 +62,10 @@
      * @param {boolean} addIt TRUE if you want to add it, FALSE to remove
      */
     toggleClearQuickSearchIcon: function(addIt) {
-        if (addIt && !this.$('.fa-times')[0]) {
-            this.$('.search-container').append('<i class="fa fa-times"></i>');
+        if (addIt && !this.$('.sicon-close.add-on')[0]) {
+            this.$('.search-container').append('<i class="sicon sicon-close add-on"></i>');
         } else if (!addIt) {
-            this.$('.fa-times').remove();
+            this.$('.sicon-close.add-on').remove();
         }
     },
 

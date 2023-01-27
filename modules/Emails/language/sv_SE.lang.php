@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Användare',
     'LBL_EMAILS_PRODUCTS_REL' => 'Offererade radartiklar',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Intäkter radartiklar',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Eskaleringar',
     'LBL_EMAILS_MESSAGES_REL' => 'Meddelanden',
     'LBL_EMAILS_PURCHASES_REL' => 'Inköp',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Inköpta radartiklar',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Skicka e-post',
     'LBL_MAILBOX' => 'Inkommande konto',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Konfigurera ett utgående e-postkonto via <a href="#OutboundEmail">E-postinställningar</a> för att skicka e-post.',
 );

@@ -11,7 +11,7 @@
  */
 --}}
 {{#with rowModel}}
-    <tr class="single">
+    <tr class="single"{{#if id}} data-id="{{id}}"{{/if}}>
         {{#each ../metaFields}}
             <td{{#if align}} class="{{align}}"{{/if}} data-type="{{type}}">{{field ../../this model=../this template=../../viewName}}</td>
         {{/each}}

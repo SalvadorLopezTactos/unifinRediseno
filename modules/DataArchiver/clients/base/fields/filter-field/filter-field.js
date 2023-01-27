@@ -29,6 +29,14 @@
     filterFields: {},
 
     /**
+     * Modules that are marked as needing the field list API call in order to get a more full field list for filtering
+     * Normally we only use the call for non-visible modules since we dont store their filterable fields in metadata.
+     */
+    needForcedAPICall: [
+        'pmse_Inbox',
+    ],
+
+    /**
      * fields to be removed from filtering options
      */
     removeProps: [
@@ -134,7 +142,7 @@
     loadFilterFields: function(module) {
         if (_.isUndefined(module)) { return; }
 
-        if (!_.isUndefined(app.metadata.getModule(module))) {
+        if (!_.isUndefined(app.metadata.getModule(module)) && !this.needForcedAPICall.includes(module)) {
             this.fieldList = app.data.getBeanClass('Filters').prototype.getFilterableFields(module);
             if (_.isUndefined(this.fieldList.deleted)) {
                 this.fieldList.deleted = app.metadata.getField({module: module, name: 'deleted'});

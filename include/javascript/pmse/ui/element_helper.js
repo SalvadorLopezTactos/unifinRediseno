@@ -504,14 +504,15 @@ PMSE.ElementHelper.prototype.initObject = function(options) {
 };
 
 /**
- * Processes the module field evaluation into the proper data format
+ * Function to set itemData for moduleFieldEvalGeneration and relationshipChangeEvalGeneration
  * @param {Object} fieldPanel
  * @param {Object} fieldPanelItem
  * @param {Object} data
  * @param {Boolean} related
+ * @param {Boolean} relationshipEval
  * @return {Object}
  */
-PMSE.ElementHelper.prototype.moduleFieldEvalGeneration = function(fieldPanel, fieldPanelItem, data, related) {
+PMSE.ElementHelper.prototype.setItemData = function(fieldPanel, fieldPanelItem, data, related, relationshipEval) {
     var aux, modItem, fieldItem, opItem, valItem, val, valueField, value, valueType, op, label, itemData = {};
 
     if (related) {
@@ -529,7 +530,8 @@ PMSE.ElementHelper.prototype.moduleFieldEvalGeneration = function(fieldPanel, fi
         opItem = 'operator';
         val = data.value;
     }
-    if (aux.length > 1 && (aux[0] != 'null' || aux[1] != 'null')) {
+    var fieldValue = (aux.length > 1 && (aux[0] != 'null' || aux[1] != 'null'));
+    if (relationshipEval || fieldValue) {
         valueField = fieldPanelItem.getItem(valItem);
         if (aux[1] === 'Currency') {
             value = valueField.getAmount();
@@ -540,38 +542,53 @@ PMSE.ElementHelper.prototype.moduleFieldEvalGeneration = function(fieldPanel, fi
         }
         valueType = typeof val === 'string' ? typeof value : typeof val;
         op = fieldPanelItem.getItem(opItem).getSelectedText();
-        label = fieldPanelItem.getItem(modItem).getSelectedData().module_label + ' (' +
-            fieldPanelItem.getItem(fieldItem).getSelectedText() + ' ' +
-            op + ' ';
-        if (data.rel) {
-            label = data.rel + ' ' + label;
-        }
-        if (op != 'changes') {
-            switch (aux[1]) {
-                case 'Date':
-                case 'Datetime':
-                    label += '%VALUE%';
+        label = fieldPanelItem.getItem(modItem).getSelectedData().module_label;
+        if (relationshipEval && data.rel) {
+            switch (data.rel) {
+                case 'Added':
+                    label += ' ' + translate('LBL_PMSE_EXPCONTROL_RELATION_ADDED') + ' ';
                     break;
-                case 'user':
-                case 'Relate':
-                case 'DropDown':
-                    label += valueField.getSelectedText();
+                case 'Removed':
+                    label += ' ' + translate('LBL_PMSE_EXPCONTROL_RELATION_REMOVED') + ' ';
                     break;
-                case 'Currency':
-                    label += valueField.getCurrencyText() + ' %VALUE%';
-                    break;
-                case 'MultiSelect':
-                    label += valueField.getSelectionAsText();
-                    break;
-                default:
-                    label += (valueType === 'string' ? '"' + value + '"' : val);
+                case 'AddedOrRemoved':
+                    label += ' ' + translate('LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED') + ' ';
             }
         }
-        label += ')';
+        if (fieldValue) {
+            label += ' (' +
+                fieldPanelItem.getItem(fieldItem).getSelectedText() + ' ' +
+                op + ' ';
+            if (!relationshipEval && data.rel) {
+                label = data.rel + ' ' + label;
+            }
+            if (op != 'changes') {
+                switch (aux[1]) {
+                    case 'Date':
+                    case 'Datetime':
+                        label += '%VALUE%';
+                        break;
+                    case 'user':
+                    case 'Relate':
+                    case 'DropDown':
+                        label += valueField.getSelectedText();
+                        break;
+                    case 'Currency':
+                        label += valueField.getCurrencyText() + ' %VALUE%';
+                        break;
+                    case 'MultiSelect':
+                        label += valueField.getSelectionAsText();
+                        break;
+                    default:
+                        label += (valueType === 'string' ? '"' + value + '"' : val);
+                }
+            }
+            label += ')';
+        }
 
         itemData = {
             expType: "MODULE",
-            expSubtype: aux[1],
+            expSubtype: aux[1] || '',
             expLabel: label,
             expValue: value,
             expOperator: related ? data.relOperator : data.operator,
@@ -587,6 +604,30 @@ PMSE.ElementHelper.prototype.moduleFieldEvalGeneration = function(fieldPanel, fi
     }
 
     return itemData;
+};
+
+/**
+ * Processes the module field evaluation into the proper data format
+ * @param {Object} fieldPanel
+ * @param {Object} fieldPanelItem
+ * @param {Object} data
+ * @param {Boolean} related
+ * @return {Object}
+ */
+PMSE.ElementHelper.prototype.moduleFieldEvalGeneration = function(fieldPanel, fieldPanelItem, data, related) {
+    return this.setItemData(fieldPanel, fieldPanelItem, data, related, false)
+};
+
+/**
+ * Processes the relationship change evaluation into the proper data format
+ * @param {Object} fieldPanel
+ * @param {Object} fieldPanelItem
+ * @param {Object} data
+ * @param {Boolean} related
+ * @return {Object}
+ */
+PMSE.ElementHelper.prototype.relationshipChangeEvalGeneration = function(fieldPanel, fieldPanelItem, data, related) {
+    return this.setItemData(fieldPanel, fieldPanelItem, data, related, true)
 };
 
 /**

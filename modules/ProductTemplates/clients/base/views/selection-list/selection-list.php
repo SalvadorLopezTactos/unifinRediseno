@@ -35,6 +35,11 @@ $viewdefs['ProductTemplates']['base']['view']['selection-list'] = array(
                     'enabled' => true,
                     'default' => true,
                 ),
+                [
+                    'name' => 'active_status',
+                    'enabled' => true,
+                    'default' => true,
+                ],
                 array(
                     'name' => 'qty_in_stock',
                     'enabled' => true,
@@ -52,6 +57,8 @@ $viewdefs['ProductTemplates']['base']['view']['selection-list'] = array(
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => false,
+                    'convertToBase' => true,
+                    'showTransactionalAmount' => true,
                 ),
                 array(
                     'name' => 'list_price',
@@ -65,6 +72,8 @@ $viewdefs['ProductTemplates']['base']['view']['selection-list'] = array(
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => false,
+                    'convertToBase' => true,
+                    'showTransactionalAmount' => true,
                 ),
                 array(
                     'name' => 'discount_price',
@@ -78,6 +87,8 @@ $viewdefs['ProductTemplates']['base']['view']['selection-list'] = array(
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => false,
+                    'convertToBase' => true,
+                    'showTransactionalAmount' => true,
                 ),
             ),
         ),

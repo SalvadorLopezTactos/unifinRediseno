@@ -224,7 +224,7 @@ SQL;
             ->executeQuery(
                 $query,
                 [$related_id]
-            )->fetchColumn();
+            )->fetchOne();
         if (false !== $emailAddress) {
             $temp_array['RECIPIENT_EMAIL'] = $emailAddress;
         }
@@ -656,7 +656,7 @@ SQL;
 
 				// cn: bug 4684 - initialize the notes array, else old data is still around for the next round
 				$this->notes_array = array();
-                while ($noteId = $stmt->fetchColumn()) {
+                while ($noteId = $stmt->fetchOne()) {
                     $noteTemplate = BeanFactory::getBean('Notes', $noteId);
 					$this->notes_array[] = $noteTemplate;
 				}
@@ -814,30 +814,29 @@ SQL;
                 $mail->send();
                 $success = true;
 
-                $email_id = null;
+                $this->set_as_sent($module->email1, true, $this->marketing_id, 'Emails', 'targeted');
                 if ($save_emails == 1) {
-                    $email_id = $this->create_indiv_email($module, $mail);
+                    $this->create_indiv_email($module, $mail);
                 } else {
                     //find/create reference email record. all campaign targets reveiving this message will be linked with this message.
                     $decodedFromName = mb_decode_mimeheader($this->current_emailmarketing->from_name);
                     $fromAddressName = "{$decodedFromName} <{$this->mailbox_from_addr}>";
 
-                    $email_id         = $this->create_ref_email($this->marketing_id,
-                                                                $this->current_emailtemplate->subject,
-                                                                $this->current_emailtemplate->body,
-                                                                $this->current_emailtemplate->body_html,
-                                                                $this->current_campaign->name,
-                                                                $this->mailbox_from_addr,
-                                                                $this->user_id,
-                                                                $this->notes_array,
-                                                                $macro_nv,
-                                                                $this->newmessage,
-                                                                $fromAddressName
+                    $this->create_ref_email(
+                        $this->marketing_id,
+                        $this->current_emailtemplate->subject,
+                        $this->current_emailtemplate->body,
+                        $this->current_emailtemplate->body_html,
+                        $this->current_campaign->name,
+                        $this->mailbox_from_addr,
+                        $this->user_id,
+                        $this->notes_array,
+                        $macro_nv,
+                        $this->newmessage,
+                        $fromAddressName
                     );
                     $this->newmessage = false;
                 }
-
-                $this->set_as_sent($module->email1, true, $email_id, 'Emails', 'targeted');
             } catch (MailerException $me) {
                 //log send error. save for next attempt after 24hrs. no campaign log entry will be created.
                 $this->set_as_sent($module->email1,false,null,null,'send error');

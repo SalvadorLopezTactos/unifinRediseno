@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Sil' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'SugarCRM Tarafından Geliştirildi' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Rol',
+    'LBL_BASE_LAYOUT' => 'Temel Düzen',
+    'LBL_FIELD_NAME' => 'Alan İsmi',
+    'LBL_FIELD_VALUE' => 'Değer',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Yerleşimi belirleyen:',
+    'layoutDeterminedBy' => [
+        'std' => 'Standart Düzen',
+        'role' => 'Görev',
+        'dropdown' => 'Açılır Alan',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Tüm özel düzenler kaldırılacak. Mevcut düzen tanımlarınızı değiştirmek istediğinizden emin misiniz?',
 'help'=>array(
     'package'=>array(
             'create'=>'Paket için <b>İsim</b> belirtin. Girdiğiniz isim  alfa numerik olmalıdır ve boşluk içermemelidir. (Örnek: HR_Management)<br/><br/>Paket için <b>Yazar</b> ve <b>Açıklama</b> bilgilerini kullanabilirsiniz.<br/><br/>Paketi oluşturmak için  <b>Kaydet</b> butonuna tıklayın.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Görünebilirlik Düzenleyicisi',
 'LBL_ROLLUP' => 'Arttırmak',
 'LBL_RELATED_FIELD' => 'İlişkili Alan',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL to custom logomark image. The recommended logomark dimensions are 22 x 22 pixels. Any image uploaded that is larger in either direction will be scaled to these max dimensions.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL to custom logo image. The recommended logo width is 200 pixels. Any image uploaded that is larger in either direction will be scaled to these max dimensions. This logo will be used on the login screen. If no image is uploaded, the logomark will be used.',
 'LBL_PORTAL_ROLE_DESC' => 'Bu rolü silmeyiniz. Müşteri Self-Servis Portal Rolü (Customer Self-Service Portal Role), Sugar Portal aktivasyonu sırasında sistem tarafından oluşturulmuş roldür. Rol içindeki Erişim Kontrolleri ile Hatalar, Talepler veya Bilgi Bankası modüllerine Portal üzerinden erişimi kontrol edin. Beklenmeyen veya bilinmeyen sistem davranışına izin vermemesi için, bu rol için diğer erişim kontrollerini değiştirmeyin. Bu rolün yanlışlıkla silinmesi durumunda, Sugar Portali deaktif ve tekrar aktif hale getirerek tekrar oluşturun.',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'İlişki ekle',
 'LBL_BTN_RENAME_MODULE' => 'Modül İsmini Değiştirin',
 'LBL_BTN_INSERT'=>'Gir',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Temel Düzeni Geri Yükle',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'Bir hata oluştu',
 'ERROR_REQUIRED_FIELDS' => 'Devam etmek istediğinizden emin misiniz? Aşağıdaki zorunlu alanlar yerleşimde yer almamaktadır:',
 'ERROR_ARE_YOU_SURE' => 'Devam etmek istediğinizden emin misiniz?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Alan oluşturulamıyor. Veri tabanınızdaki bu tablonun sütun büyüklüğü sınırına ulaştınız. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Daha fazla bilgi edinin</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Bu alanlar, hesaplanmış değerler olup, SugarCRM Mobile Değişiklik Görünümünde otomatik hesaplanmayacaktır:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Bu alanlar, hesaplanmış değerler olup, SugarCRM Portal Değişiklik Görünümünde otomatik hesaplanmayacaktır:',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => '"Eğer portalde aktive etmek istiyorsanız, lütfen <br /><a id=""configure_tabs"" href=""./index.php?module=Administration&action=ConfigureTabs"" target=""_blank"">bu linki</a>  kullanınız.<br />."',
     'LBL_PORTAL_CONFIGURE' => 'Portal&#39;ı yapılandırın',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Enable portal',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Enable search before opening a case',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Bilgi Bankası modülündeki notları etkinleştirin',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Portal kullanıcılarının talep kapatmasına izin ver',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Yeni kullanıcıların kaydolmasına izin verin',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Kullanıcı İzinleri',
     'LBL_PORTAL_THEME' => 'Portal Teması',
     'LBL_PORTAL_ENABLE' => 'Etkinleştir',
     'LBL_PORTAL_SITE_URL' => 'Portal sitenizin adresi:',
     'LBL_PORTAL_APP_NAME' => 'Uygulama Adı',
-    'LBL_PORTAL_LOGOMARK_URL' => 'Logomark URL',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Logomark Preview',
-    'LBL_PORTAL_LOGO_URL' => 'Logo URL&#39;si',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Logo Preview',
     'LBL_PORTAL_CONTACT_PHONE' => 'Phone',
     'LBL_PORTAL_CONTACT_EMAIL' => 'Email',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Must enter a valid email address',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Drag and drop the names of the Portal modules to set them to be displayed or hidden in the Portal&#39;s top navigation bar. To control Portal user access to modules, use <a href="?module=ACLRoles&action=index">Role Management.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Displayed Modules',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Hidden Modules',
+    'LBL_CONFIG_VISIBILITY' => 'Görünürlük',
+    'LBL_CASE_VISIBILITY_HELP' => 'Hangi portal kullanıcılarının bir talebi görebileceğini belirleyin.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Hangi portal kullanıcılarının bir taleple ilgili e-postaları görebileceğini belirleyin. Katılımcı kontaklar Kime, Kimden, Bilgi ve Gizli alanlarında bulunanlardır.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Hangi portal kullanıcılarının bir taleple ilgili mesajları görebileceğini belirleyin. Katılımcı kontaklar, Davetliler alanında bulunanlardır.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Hesapla bağlantılı tüm kontaklar',
+        'related_contacts' => 'Sadece birincil kontak ve taleple bağlantılı kontaklar',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Sadece katılımcı kontaklar',
+        'all' => 'Talebi görebilen tüm kontaklar',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Sadece katılımcı kontaklar',
+        'all' => 'Talebi görebilen tüm kontaklar',
+    ],
+
 
 'LBL_PORTAL'=>'Portal',
 'LBL_PORTAL_LAYOUTS'=>'Portal Yerleşimleri',
@@ -790,8 +815,8 @@ $mod_strings = array(
 'LBL_POPHELP_READONLY'=>"Bu alanın yerleşim planlarında salt okunur olup olmadığını belirlemek için bir formül oluşturun.<br/>"
         . "Salt okunur alanlar, tarayıcı tabanlı mobil görünümde formüle uyacak, <br/>"
         . "ancak iPhone için Sugar Mobile gibi bağımsız uygulamalardaki formüle uymayacaktır. <br/>"
-        . "Sugar Self-Service Portalındaki formüle uymayacaklar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Bu moduldeki Genel Aramayı kullanarak kayıtları ararken bu alanı kullanmayı seçin.',
+        . "They will not follow the formula in the Sugar Self-Service Portal.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Bu modülde Global Aramayı kullanarak kayıtları ararken bu alanı kullanmak için seçin.',
 //Revert Module labels
 'LBL_RESET' => 'Sıfırla',
 'LBL_RESET_MODULE' => 'Modülü Sıfırla',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Tarih Saat',
                 'decimal'=>'Ondalık',
                 'autoincrement' => 'Oto Arttırma',
+                'actionbutton' => 'Aksiyon Düğmesi',
 ),
 'labelTypes' => array(
     "" => "Sık kullanılan etiketler",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} ({1} ID ilişkili)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Yerleşim planından kopyala',
 'LBL_RELATIONSHIP_TYPE' => 'İlişki',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Karşılaştırma Dili',
+'LBL_LABEL_NOT_TRANSLATED' => 'Bu etiket çevrilmeyebilir',
 );

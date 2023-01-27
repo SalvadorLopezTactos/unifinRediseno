@@ -14,6 +14,8 @@
  * @extends View.Layout
  */
 ({
+    className: 'footer-item flex flex-row items-center',
+
     /**
      * Places all components within this layout inside `more-logos` div.
      *
@@ -31,7 +33,7 @@
     _render: function() {
         // FiXME SC-5765 the logo should be a separate view, so we can update it based
         // on the re-render of this layout
-        this.$('[data-metadata="logo"]').attr('src', app.metadata.getLogoUrl());
+        this.$('[data-metadata="logo"]').attr('src', app.metadata.getLogoUrl(app.utils.isDarkMode()));
         return this._super('_render');
     }
 })

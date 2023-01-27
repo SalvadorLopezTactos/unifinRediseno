@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Kirjeldus',
     'LBL_OW_TYPE'=>'Tüüp',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Meeskonnaprognoos kasutajagrupile <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Otsene aruanne',
     'LBL_FDR_OPPORTUNITIES'=>'Müügivõimalused prognoosis:',
     'LBL_FDR_WEIGH'=>'Müügivõimaluste kaalutud summa:',
     'LBL_FDR_COMMIT'=>'Plaanitav summa',
     'LBL_FDR_DATE_COMMIT'=>'Soorituskuupäev',
+    'LBL_FDR_FORECAST_HEADER' => 'Müüjaprognoos kasutajale <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognoosid: tööleht',
     'LBL_DV_MY_FORECASTS' => 'Minu prognoosid',
-    'LBL_DV_MY_TEAM' => "Minu  meeskonna prognoosid" ,
+    'LBL_DV_MY_TEAM' => "Minu  meeskonna prognoosid",
     'LBL_DV_TIMEPERIODS' => 'Ajaperioodid:',
     'LBL_DV_FORECAST_PERIOD' => 'Prognoosi ajaperiood',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Prognoosi müügivõimalused',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Baasmäär',
 
     'LBL_QUOTA' => 'Kvoot',
-    'LBL_QUOTA_ADJUSTED' => 'Kvoot (kohandatud)',
+    'LBL_QUOTA_ADJUSTED' => 'Kohandatud kvoot',
 
     'LBL_FORECAST_FOR'=>'Prognoosi tööleht:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(rulluv)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Kvoot vs Plaanitud vs Tegelik',
 
     'LBL_FORECAST' => 'Prognoos',
+    'LBL_COMMITMENT' => 'Kohustus',
+    'LBL_TEAM_COMMITMENT' => 'Meeskonna kohustus',
+    'LBL_FORECASTED' => 'Prognoositav',
+    'LBL_ADJUSTED_TOTAL' => 'Kohandatud kokku',
     'LBL_COMMIT_STAGE' => 'Sooritusetapp',
     'LBL_SALES_STAGE' => 'Etapp',
     'LBL_AMOUNT' => 'Summa',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}} ja {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'tõenäoline {{{direction}}} {{{from}}} kuni {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'parim {{{direction}}} {{{from}}} kuni {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'halvim {{{direction}}} {{{from}}} kuni {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'tõenäoliselt jäi samaks',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'parim jäänud samaks',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'halvim jäänud samaks',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Kohustunud (tõenäoline) {{{direction}}} {{{from}}} kuni {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Kohustunud (parim) {{{direction}}} {{{from}}} kuni {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Kohustunud (halvim) {{{direction}}} {{{from}}} kuni {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Kohustunud (tõenäoline) ei muutunud',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Kohustunud (parim) ei muutunud',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Kohustunud (halvim) ei muutunud',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Sel kuul {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Kuvatud kokku',
     'LBL_TOTAL' => 'Kokku',
     'LBL_OVERALL_TOTAL' => 'Üldine kokku',
-    'LBL_EDITABLE_INVALID' => '{0} kehtetu väärtus',
+    'LBL_EDITABLE_INVALID' => 'Välja {{field_name}} kehtetu väärtus',
     'LBL_EDITABLE_INVALID_RANGE' => 'Väärtus peab olema vahemikus {0} kuni {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Teie töölehel on salvestamata muudatusi.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Eksporditakse ainult salvestatud või kehtestatud andmed. Lõpetamiseks tühistage. Salvestatud andmete eksportimiseks kinnitage.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Lisatud',
     'LBL_CHART_NOT_INCLUDED' => 'Pole lisatud',
     'LBL_CHART_ADJUSTED' => ' (kohandatud)',
-    'LBL_SAVE_DRAFT' => 'Salvesta mustand',
+    'LBL_SAVE_DRAFT' => 'Salvesta',
     'LBL_CHANGES_BY' => 'Muutub {0} võrra',
     'LBL_FORECAST_SETTINGS' => 'Sätted',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Majandusaasta alguskuupäev:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigureerige moodulis Prognoosid kasutatav ajaperiood. <br><br>Pange tähele, et ajaperioodi sätteid ei saa pärast algsseadistust muuta.<br><br>Esmalt valige majandusaasta alguskuupäev. Seejärel valige prognoosi ajaperioodi tüüp. Ajaperioodide kuupäevavahemik arvutatakse teie valikute põhjal automaatselt. Alam ajaperiood on prognoosi töölehe aluseks. <br><br>Kuvatavad tulevased ja möödunud ajaperioodid määratlevad prognooside mooduli nähtavad alamperioodid. Kasutajad saavad prognoosi arve nähtavates alamperioodides vaadata ja redigeerida.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigureerige, kuidas soovite liigitada moodulit {{forecastByModule}}. <br><br>Pange tähele, et vahemiku sätteid pole võimalik pärast esimest kinnitamist enam muuta. Täiendatud eksemplaridel on vahemiku säte olemasolevatesse prognoosiandmetesse lukustatud.<br><br>Võite valida kaks või enam tõenäosusvahemikel põhinevat kategooriat või luua kategooriaid, mis ei põhine tõenäosusel. <br><br>Teie kohandatud kategooriatest vasakul asuvad märkeruudud. Kasutage neid, et otsustada, millised vahemikud kaasatakse kinnitatavatesse ja juhtidele saadetavatesse prognoosisummadesse. <br><br>Kasutaja saab oma töölehelt kaasamise/väljajätmise olekut ja mooduli {{forecastByModule}} kategooriat käsitsi muuta.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigureerige, kuidas soovite moodulit {{forecastByModule}} liigitada. <br><br>Pange tähele, et vahemiku sätteid pole võimalik pärast esimest kinnitamist enam muuta. Täiendatud eksemplaridel on vahemiku säte olemasolevatesse prognoosiandmetesse lukustatud.<br><br>Võite valida kaks või enam tõenäosusvahemikel põhinevat kategooriat või luua kategooriaid, mis ei põhine tõenäosusel. <br><br>Teie kohandatud kategooriatest vasakul asuvad märkeruudud. Kasutage neid, et otsustada, millised vahemikud kaasatakse kinnitatavatesse ja juhtidele saadetavatesse prognoosisummadesse. <br><br>Kasutaja saab oma töölehelt kaasamise/väljajätmise olekut ja mooduli {{forecastByModule}} kategooriat käsitsi muuta.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Valige veerud, mille puhul soovite, et kasutajad need iga {{forecastByModuleSingular}} puhul oma prognoosides täidaks. Pange tähele, et summa Tõenäoline on seotud suvandis {{forecastByModule}} näidatud summaga; seetõttu ei saa veergu Tõenäoline peita.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Valige, milliseid veerge soovite moodulis Prognoos kuvada. Väljade loend ühendab töölehe ja võimaldab kasutajal valida, kuidas selle vaadet konfigureerida.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Olen prognoosimise viisi teksti Prognoosi kohatäide!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Üle',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Andmed puuduvad',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Kooskõla kvoodiga',
+    'LBL_OPEN_LIKELY' => 'Ava „Tõenäoline“',
+    'LBL_OPEN_BEST' => 'Ava „Parim“',
+    'LBL_OPEN_WORST' => 'Ava „Halvim“',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Määra kvoot',
     'LBL_ASSIGNING_QUOTA' => 'Kvoodi määramine',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Minu meeskonna prognoos",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Teil on salvestamata muudatusi. Kas olete kindel, et soovite töölehe sortida ja muudatustest loobuda?',
+
+    'LBL_SAVE_TOOLTIP' => 'Salvesta töölehe ridadel tehtud muudatused',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Salvesta kirjete muudatused ja esita prognoos juhile',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Esita prognoos juhile ja määra kvoot',
+
+    'LBL_SAVE_LABEL_REP' => 'Salvesta ',
+    'LBL_SAVE_LABEL_MGR' => 'Salvesta kohandatud väärtused',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Moodulid {{plural_module_name}} sisaldavad mooduli {{forecastby_singular_module}} kirjeid mooduli {{forecastworksheets_module}} loomiseks ja müügi prognoosimiseks. Kasutajad saavad töötada müügi {{quotas_module}} suunas üksikisiku, meeskonna ja müügiorganisatsiooni tasandil. Enne, kui kasutajad mooduli {{plural_module_name}} juurde pääsevad, peab administraator valima organisatsiooni soovitud ajaperioodid, vahemikud ja stsenaariumid.

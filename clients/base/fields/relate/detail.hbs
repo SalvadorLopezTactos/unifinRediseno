@@ -9,15 +9,13 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-       --}}
+--}}
 <div class="relate-field-container">
     {{#if href}}
         <a class="ellipsis_inline" data-placement="bottom" title="{{value}}" href="{{href}}">
             {{value}}
         </a>
-        <span class="focus-icon-container hide">
-            <span class="focus-icon"></span>
-        </span>
+        {{partial 'focus-icon' this this}}
     {{else}}
         <span class="ellipsis_inline" data-placement="bottom"
             title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}"

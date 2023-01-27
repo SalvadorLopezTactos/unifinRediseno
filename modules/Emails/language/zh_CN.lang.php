@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => '用户',
     'LBL_EMAILS_PRODUCTS_REL' => '已报价单项',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => '营收单项',
+    'LBL_EMAILS_ESCALATIONS_REL' => '升级',
     'LBL_EMAILS_MESSAGES_REL' => '消息',
     'LBL_EMAILS_PURCHASES_REL' => '购买',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => '已购买单项',
@@ -473,4 +474,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => '发送电子邮件',
     'LBL_MAILBOX' => '收件帐户',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => '请通过<a href="#OutboundEmail">电子邮件设置</a> 配置传出电子邮件帐户以发送电子邮件。',
 );

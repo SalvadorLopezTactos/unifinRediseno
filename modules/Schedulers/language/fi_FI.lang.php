@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Suorita ajastetut toiminnot',
 'LBL_OOTB_DATA_ARCHIVER' => 'Suorita aktiivisten tietojen arkistointi/poisto',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Tietueiden geokoodaus',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Geokoodauksen ratkaisija',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Aikaväli:',
 'LBL_LIST_LIST_ORDER' => 'Ajastimet:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Asettaaksesi Crontabin',
 'LBL_CRON_LINUX_DESC' => 'Huomio: ajaaksesi Sugarin ajastettuja tehtäviä, lisää seuraava rivi crontab-tiedostoon:',
 'LBL_CRON_WINDOWS_DESC' => 'Huomio: ajaaksesi Sugarin ajastettuja tehtäviä, luo komentotiedosto Windowsin ajastettujen tehtävien ajamaksi. Komentotiedoston tulisi sisältää seuraavat komennot:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Tehtäväloki',
 'LBL_EXECUTE_TIME'			=> 'Suoritusaika',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Poista väliaikaiset tiedostot',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Muodosta uudelleen denormalisoidut tiimin suojaustiedot',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Päivitä tuotemääritelmä',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Geokoodauskartat',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Geokoodauksen ratkaisija',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Suorita yölliset massaviestikampanjat',
 'LBL_ASYNCMASSUPDATE' => 'Suorita asynkroniset massapäivitykset',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Siisti vanhat tietuelistat',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Aktiviteettivirran poistaminen',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Ajastettujen aikataulujen prosessointi',
+'LBL_SUGARJOBDATAARCHIVER' => 'Suorita aktiivisten tietojen arkistointi/poisto',
 'LBL_PMSEENGINECRON' => 'SugarBPM-vuorontaja',
 );
 

@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'De exemplu, puteţi utiliza asta pentru a găsi o problemă care a mai fost semnalată anterior.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Dacă aveţi un nou Caz de asistenţă pe care doriţi să-l transmiteţi, puteţi face clic aici pentru a transmite un Caz nou.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Făcând clic aici veţi reveni la această fereastră de vizualizare în orice moment.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interacțiuni cazuri',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologie caz',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Note',
 

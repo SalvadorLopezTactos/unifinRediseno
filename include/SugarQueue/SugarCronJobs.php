@@ -219,8 +219,12 @@ class SugarCronJobs
      * @param int    $errline
      * @throws Exception
      */
-    protected function errorHandler($errno, $errstr, $errfile, $errline)
+    public function errorHandler($errno, $errstr, $errfile, $errline)
     {
+        if (!(error_reporting() & $errno)) {
+            // this severity of errors is suppressed by error_reporting or @, so don't throw/log anything
+            return;
+        }
         $GLOBALS['log']->fatal("$errfile Error: $errno: $errstr");
         if (!empty($this->job)) {
             throw new Exception("Job {$this->job->id} ({$this->job->name}) failed, errstr: {$errstr}");

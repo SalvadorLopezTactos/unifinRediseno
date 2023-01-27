@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'Forecasts',
     'ForecastWorksheets' => 'Forecastwerkbladen',
     'ForecastManagerWorksheets' => 'Management Forecastwerkbladen',
-    'MergeRecords'=>'Samenvoegen Records',
       'VisualPipeline'=>'Visuele pijplijn',
       'ConsoleConfiguration' => 'Configuratie console',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'Rollen',
     'Notifications'=>'Notificaties',
     'Sync'=>'Synchronisatie',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'Doelen HintMelding',
+    'HintNewsNotifications' => 'MeldingenHintNieuws',
+    'HintEnrichFieldConfigs' => 'VeldConfigHintVerrijken',
     'ReportMaker' => 'Geavanceerde rapporten',
     'DataSets' => 'Data formaten',
     'CustomQueries' => 'Custom queries',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'Aangeschafte regelitems',
     'MobileDevices' => 'Mobiele apparaten',
     'PushNotifications' => 'Pushmeldingen',
+    'Escalations' => 'Escalaties',
+    'DocumentTemplates' => 'Documentsjablonen',
+    'DocumentMerges' => 'Samenvoegingen document',
     'WorkFlow' => 'Workflow Definities',
     'EAPM' => 'Externe Accounts',
     'Worksheet' => 'Werkblad',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'Vakanties',
     'ChangeTimers' => 'Timers veranderen',
     'Messages' => 'Berichten',
+    'Audit' => 'Auditeren',
+    'RevenueLineItems' => 'Omzetregelitems',
+    'DocuSignEnvelopes' => 'DocuSign Enveloppen',
+    'Geocode' => 'Geocodering',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Ta',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'ZC',
         'PurchasedLineItems' => 'PL',
+        'DocumentTemplates' => 'DT',
+        'DocumentMerges' => 'DM',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Forecastwerkblad',
     'ForecastManagerWorksheets' => 'Management Forecastwerkblad',
     'Quotas' => 'Quota',
-    'MergeRecords'=>'Samenvoegen Record',
     'Teams' => 'Team',
     'TeamNotices' => 'Teambericht',
     'Activities' => 'Activiteit',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'Aankoop',
     'PurchasedLineItems' => 'Aangeschaft regelitem',
     'PushNotifications' => 'Pushmelding',
+    'Escalations' => 'Escalatie',
+    'DocumentTemplates' => 'Documentsjabloon',
+    'DocumentMerges' => 'Document samenvoegen',
     'WorkFlow' => 'Workflow',
     'EAPM' => 'Externe Account',
     'Worksheet' => 'Werkblad',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'Vakantie',
     'ChangeTimers' => 'Timer veranderen',
     'Messages' => 'Bericht',
+    'Audit' => 'Auditeren',
+    'DocuSignEnvelopes' => 'DocuSignEnvelop',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'Doelen HintMelding',
+    'HintNewsNotifications' => 'MeldingenHintNieuws',
+    'HintEnrichFieldConfigs' => 'VeldConfigHintVerrijken',
+    'Geocode' => 'Geocodering',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'Nutsbedrijven',
     'Other' => 'Anders',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF en CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'In bewerking',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'Knowledge Base',
       'PurchasedLineItems' => 'Aangeschaft regelitem',
       'Purchases' => 'Aankoop',
+      'Escalations' => 'Escalatie',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Account',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'Opmerking',
     'PurchasedLineItems' => 'Aangeschaft regelitem',
     'Purchases' => 'Aankoop',
+    'Escalations' => 'Escalatie',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'Besteld',
       'Ship' => 'Verzonden',
   ),
+    'active_status_dom' => [
+        'Active' => 'Actief',
+        'Inactive' => 'Inactief',
+        'Retired' => 'Verouderd',
+    ],
+    'appearance_options' => [
+        'system_default' => 'Systeeminstelling gebruiken',
+        'light' => 'Licht',
+        'dark' => 'Donker',
+    ],
 
 
   'pricing_formula_default_key' => 'Fixed',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'Televisie',
         'NewsLetter' => 'Nieuwsbrief',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GET',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,13 +2049,15 @@ $app_list_strings = array (
         'print'       => 'Afdrukken',
         'pieWedgeName'      => 'Secties',
     ),
-    'd3_chart_types' => array (
+    'chart_types' => array (
         'pie chart' => 'Taartdiagram',
-        'bar chart' => 'Verticaal staafdiagram',
-        'group by chart' => 'Verticaal gegroepeerd staafdiagram',
-        'horizontal bar chart' => 'Horizontale balkgrafiek',
-        'horizontal group by chart' => 'Horizontaal gegroepeerd staafdiagram',
-        'line chart' => 'Lijngrafiek',
+        'donut chart' => 'Cirkeldiagram',
+        'treemap chart' => 'Boomdiagram',
+        'bar chart' => 'Verticale staafdiagram',
+        'group by chart' => 'Verticale staafdiagram in groepen',
+        'horizontal bar chart' => 'Horizontale staafdiagram',
+        'horizontal group by chart' => 'Horizontale staafdiagram in groepen',
+        'line chart' => 'Lijndiagram',
         'funnel chart' => 'Trechterdiagram',
     ),
     'd3_value_placement' => array (
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'Prijs (hoogste totaal)',
             'total_revenue:asc' => 'Prijs (laagste totaal)',
         ],
+        'calendar_type_list' => [
+          'main' => 'Midden agenda',
+        ],
+        'calendar_views_options' => [
+          'day' => 'Dag',
+          'week' => 'Week',
+          'workWeek' => 'Werkweek',
+          'expandedMonth' => 'Maand',
+          'agenda' => 'Agenda',
+          'timeline' => 'Tijdlijn',
+          'monthSchedule' => 'Planner',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'Aangemaakt',
+          'completed' => 'Afgerond',
+          'declined' => 'Afgewezen',
+          'delivered' => 'Afgeleverd',
+          'sent' => 'Verzonden',
+          'signed' => 'Ondertekend',
+          'voided' => 'Ongeldig gemaakt',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'Standaard',
+            'color' => 'Kleur',
+            'image' => 'Afbeelding',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'Nieuw',
+            'In Progress' => 'In Bewerking',
+            'Closed' => 'Gesloten',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'Inactiviteit',
+            'Lack of Progress' => 'Te weinig voortgang',
+            'Customer-Imposed Deadline' => 'Door de klant opgelegde deadline',
+            'Account at Risk' => 'Account dat risico loopt',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'Klant verzocht',
+            'Internally Requested' => 'Intern verzocht',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'Casus',
+            'Bugs' => 'Bug',
+            'Accounts' => 'Account',
+            'Opportunities' => 'Opportunity',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'Positief',
+            'Negative' => 'Negatief',
+            'Neutral' => 'Neutraal',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'Niet waarschijnlijk',
+            '02_less_likely' => 'Minder waarschijnlijk',
+            '03_neutral' => 'Neutraal',
+            '04_more_likely' => 'Waarschijnlijker',
+            '05_very_likely' => 'Heel waarschijnlijk',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'Komt niet overeen met klanten',
+            '02_no_match' => '',
+            '01_matches_customers' => 'Komt overeen met klanten',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Volg koppeling',
   'LBL_TOGGLE_VISIBILITY' => 'Toon zichtbaarheid', // Record view header panel element
   'LBL_ACTIVITIES' => 'Activity Stream',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar en de 3-D kubus zijn geregistreerde handelsmerken van SugarCRM Inc. '.
         'Alle andere bedrijfs- en productnamen die in dit product verschijnen, kunnen handelsmerken zijn van de'.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ zijn handelsmerken van SugarCRM Inc.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'Toevoegen' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Organisatie logo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Agenda' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'Een vervolgkeuzewaarde die u hebt geselecteerd, heeft de lay-out van uw recordweergave gewijzigd. ' .
+        'Velden die zijn verborgen in deze nieuwe lay-out, hebben hun waarden gewist. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'navigatie hoofdmodule',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'Sluiten',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} marked as {{status}}.',
 
+    'LBL_FOCUS' => 'Focus',
+
     'LBL_QUERY_VALID'=>'Geldig',
     'LBL_QUERY_ERROR'=>'Fout!',
     'LBL_QUERY_CHILD'=>'Geldige sub-query',
@@ -3068,8 +3185,12 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_CASES'=>'Cases',
     'LBL_MESSAGE'=>'Bericht',
     'LBL_MESSAGES'=>'Berichten',
+    'LBL_ESCALATIONS' => 'Escalaties',
+    'LBL_ESCALATION' => 'Escalatie',
+    'LBL_DOCUSIGN_ENVELOPES' => 'DocuSign Enveloppen',
+    'LBL_DOCUSIGN_ENVELOPE' => 'DocuSign Envelop',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
-    'LBL_CHANGE_PASSWORD' => 'Wachtwoord wijzigen',
+    'LBL_CHANGE_PASSWORD' => 'Verander wachtwoord',
     'LBL_CHANGE_BUTTON_LABEL' => 'Wijzig',
     'LBL_CHANGE_BUTTON_TITLE' => 'Wijzig',
     'LBL_CHARSET' => 'UTF-8',
@@ -3093,6 +3214,7 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_OPEN_ITEMS' => 'Open Items:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'E-mail opstellen',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'E-mail',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Nieuwe e-mail [Alt+E]',
     'LBL_SEARCH_DROPDOWN_YES'=>'Ja',
     'LBL_SEARCH_DROPDOWN_NO'=>'Nee',
@@ -3118,6 +3240,7 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_DOCUMENTS'=>'Documenten',
     'LBL_DATE_ENTERED' => 'Datum aangemaakt:',
     'LBL_DATE_MODIFIED' => 'Datum gewijzigd:',
+    'LBL_ACTIVITY_MODIFIED' => 'Gewijzigd',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Tabblad Overzicht bewerken',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'Tabbladen Module bewerken',
     'LBL_EDIT_BUTTON' => 'Wijzigen',
@@ -3140,6 +3263,8 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_FILTER_SELECT_FIELD' => 'Selecteer veld...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Selecteer operator...',
     'LBL_FILTER_CREATE_NEW' => 'Aanmaken',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'Build-filter (niet-opgeslagen)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(Niet-opgeslagen)',
     'LBL_FILTER_CREATE_FILTER' => 'Nieuw filter aanmaken',
     'LBL_FILTER_CLOSE_FILTER' => 'Sluit filter',
     'LBL_FILTER_EDIT_FILTER' => 'Filter bewerken',
@@ -3202,6 +3327,8 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_SHOW_MORE_GENERIC' => 'Meer {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Activiteiten van vandaag',
     'LBL_LEADS'=>'Leads',
+    'LBL_LEAD'=>'Lead',
+    'LBL_QUOTES_BILL_TO' => 'Offertes (factureren aan)',
     'LBL_LESS' => 'minder',
     'LBL_CAMPAIGN' => 'Campagne:',
     'LBL_CAMPAIGNS' => 'Campagnes',
@@ -3229,19 +3356,21 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_LISTVIEW_TWO_REQUIRED' => 'Kies a.u.b. tenminste 2 records om door te kunnen gaan.',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'Kies a.u.b. minder dan 10 records om door te kunnen gaan.',
     'LBL_LISTVIEW_ALL' => 'Alle',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'Bevries kolom 1',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'Alle duplicaten',
     'LBL_LISTVIEW_NONE' => 'Geen',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'Huidige pagina',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Complete lijst',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Geselecteerde records',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Geselecteerd:',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Selecties verwijderen.',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Alle selecties verwijderen.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'Selecteer alle records',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'Het resultaat bevat meer dan {{num}} records. U heeft de eerste {{num}} records geselecteerd.',
     'TPL_LISTVIEW_SELECTED' => 'U heeft {{num}} record(s) geselecteerd in deze weergave.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'U heeft 1 record geselecteerd in de resultatenset.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'U heeft alle {{num}} records geselecteerd van het zoekresultaat.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'U heeft alle {{num}} records geselecteerd in deze weergave. {{link}} in de zoekresultaten.',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Bezig met bijwerken. {{num}} van {{total}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Bijwerken {{num}} van {{total}}',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(resterende tijd ±{{time}} {{unit}})',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Massaal wijzigen mislukt. Nieuwe poging ({{num}} van {{total}}) wordt gestart.',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Massaal wijzigen onvolledig. {{num}} records ongewijzigd gebleven.',
@@ -3249,7 +3378,7 @@ Gelieve een van de waardes te wijzigen.",
     'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} record(s) werd(en) genegeerd wegens rechten of fouten.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} records zijn succesvol bijgewerkt.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} massaal bijwerken',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Verwijder {{num}} van {{total}}.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Verwijderen {{num}} van {{total}}',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(resterende tijd ±{{time}} {{unit}})',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => 'Massaal verwijderen mislukt. Nieuwe poging ({{num}} van {{total}}) wordt gestart.',
     'TPL_MASSDELETE_WARNING_CLOSE' => 'Massaal verwijderen onvolledig. {{num}} records niet verwijderd',
@@ -3274,10 +3403,17 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Selecteer en wijzig',
     'LBL_LISTVIEW_ACTIONS' => 'Acties',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'Selecteer alle records op deze pagina',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'Deselecteer alle records op deze pagina',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} van {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '{{num}} van laden...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Klik voor totaal',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'van',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'Aantal pagina&#39;s ophalen',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'David',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Livingstone',
@@ -3285,10 +3421,15 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Code Monkey Extraordinaire',
     'LBL_LOGIN_TO_ACCESS' => 'Meld u a.u.b. aan om toegang tot dit gebied te krijgen',
     'LBL_LOGOUT' => 'Uitloggen',
+    'LBL_FINISH_IMPERSONATING' => 'Impersonatie afronden',
+    'LBL_RESET_MFA' => 'Meerfactorauthenticatie resetten',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, u doet zich momenteel voor als {{user}}.',
     'LBL_PROFILE' => 'Profiel',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'Mail samenvoegen',
     'LBL_MASS_UPDATE' => 'Massaal wijzigen',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'Selecteer alle records voor de massa-update',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'Sluit record in voor massa-update',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Veld toevoegen',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Verwijder veld',
     'LBL_GENERATE_QUOTE' => 'Genereer offerte',
@@ -3343,6 +3484,7 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_PANEL_ADVANCED' => 'Meer informatie',
     'LBL_PANEL_BODY' => 'Overzicht',
     'LBL_PARENT_TYPE' => 'Type bovenliggend',
+    'LBL_RELATED_TYPE' => 'Gerelateerd type',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'Fase',
     'LBL_PICTURE_FILE' => 'Afbeelding',
@@ -3416,7 +3558,7 @@ Gelieve een van de waardes te wijzigen.",
 
     'LBL_RELATED' => 'Gerelateerd',
     'LBL_RELATED_INFORMATION' => 'Gerelateerde informatie',
-    'LBL_RELATED_RECORDS' => 'Gerelateerde records',
+    'LBL_RELATED_RECORDS' => 'Gerelateerde {{module}}',
     'LBL_REPORTS_TO' => 'Rapporteert aan:',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'Geeft een vereist veld aan',
@@ -3535,7 +3677,7 @@ Gelieve een van de waardes te wijzigen.",
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Alle rechten voorbehouden.<br />SugarCRM, Sugar en de 3-D kubus zijn geregistreerde handelsmerken van SugarCRM Inc. '.
         'Alle andere bedrijfs- en productnamen die in dit product verschijnen, kunnen handelsmerken zijn van de'.
         'respectievelijke bedrijven waar zij aan zijn gekoppeld.',
@@ -3598,6 +3740,7 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_UNDELETE' => 'Verwijderen ongedaan maken',
     'LBL_UNSYNC' => 'Niet synchroniseren',
     'LBL_UPDATE' => 'Bijwerken',
+    'LBL_UPDATES' => 'Updates',
     'LBL_USER_LIST' => 'Gebruikers',
     'LBL_USER_MENU' => 'Gebruikersmenu',
     'LBL_USERS_SYNC'=>'Gebruiker synchroniseren',
@@ -3664,6 +3807,8 @@ Gelieve een van de waardes te wijzigen.",
     'NTC_DELETE_SUCCESS' => 'U heeft het {0} verwijderd.',
     'NTC_UNLINK_CONFIRMATION' => 'Weet u zeker dat u deze koppeling ongedaan wilt maken?',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'Weet u zeker dat u de relatie met {0} wilt verwijderen?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'Weet u zeker dat u de {0} wilt ontkoppelen? Daardoor wordt deze ook uit het veld Primaire contactpersoon van de case verwijderd.',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => 'De {0} kan niet worden ontkoppeld omdat deze de primaire contactpersoon is van deze case. Werk het veld Primaire contactpersoon bij voordat u deze record ontkoppelt.',
     'NTC_UNLINK_SUCCESS' => 'U heeft het {0} ontkoppeld.',
     'NTC_LOGIN_MESSAGE' => 'Eerst inloggen a.u.b.',
     'NTC_NO_ITEMS_DISPLAY' => 'geen',
@@ -3695,6 +3840,9 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Door de browser te vernieuwen, worden alle SugarLive oproepen of chatsessies die u geopend hebt automatisch gesloten en gaan alle niet-opgeslagen veranderingen verloren. Wilt u doorgaan?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Niet alle wijzigingen zijn opgeslagen. Weet u zeker dat u de pagina wilt verlaten en de wijzigingen wilt negeren?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'Weet u zeker dat u uw <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">meerfactorauthenticatie</a> wilt resetten? 
+Als u dit doet, wordt u direct afgemeld en moet u opnieuw authenticeren met de authenticatie-app als u weer wilt aanmelden.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'Bevestigen & afmelden',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Een of meer dashlets bevatten niet-opgeslagen veranderingen. Weet u zeker dat u de lade wilt sluiten?',
     'LBL_NAVIGATE_TO_REPORTS' => 'U gaat nu naar de rapportagemodule. Uw wijzigingen aan het dashlet worden niet opgeslagen. Wilt u doorgaan?',
     'ERROR_NO_RECORD' => 'Fout bij het ophalen van het record. Het record is verwijderd of u heeft geen autorisatie om het te bekijken.',
@@ -3790,6 +3938,11 @@ Gelieve een van de waardes te wijzigen.",
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "U heeft geen records opgeslagen. Maak nu een <item2> record aan.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "You can create <item1> from a <item2>. <item3> <item2> list.",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'Positief',
+    'LBL_SENTIMENT_NEUTRAL' => 'Neutraal',
+    'LBL_SENTIMENT_NEGATIVE' => 'Negatief',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Klik hier",
     // contextMenu strings
@@ -3799,11 +3952,16 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_CREATE_NOTE' => 'Notitie aanmaken',
     'LBL_CREATE_OPPORTUNITY' => 'Opportunity aanmaken',
     'LBL_SCHEDULE_CALL' => 'Plan telefoongesprek',
+    'LBL_SCHEDULE_CALL2' => 'Telefoongesprek',
     'LBL_SCHEDULE_MEETING' => 'Plan afspraak',
+    'LBL_SCHEDULE_MEETING2' => 'Afspraak',
     'LBL_CREATE_MESSAGE' => 'Bericht opstellen',
+    'LBL_CREATE_MESSAGE2' => 'Bericht',
     'LBL_CREATE_TASK' => 'Taak aanmaken',
+    'LBL_CREATE_TASK2' => 'Taak',
     'LBL_REMOVE_FROM_FAVORITES' => 'Verwijder uit mijn favorieten',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'Notitie',
     'LBL_DOWNLOAD_ALL' => 'Alle downloaden',
     'LBL_DOWNLOAD_ONE' => 'Downloaden',
     'LBL_ATTACHMENTS' => 'Bijlagen',
@@ -3843,13 +4001,14 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Rijen weergeven',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Koppel aan huidige record',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Gekoppeld veld',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'Eerste kolom bevriezen',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Weet u het zeker dat u dit dashlet wilt verwijderen?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Weet u zeker dat u de rij wilt verwijderen?',
     'LBL_MAXIMUM_OF' => 'Maximum van&nbsp;',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => '&nbsp;kolommen kunnen getoond worden.',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'Dashboard',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Mijn dashboard',
     'LBL_COLLAPSE_ALL' => 'Alles inklappen',
@@ -3866,12 +4025,15 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_DASHLET_CONFIGURE' => 'Configureer',
     'LBL_DASHLET_TOGGLE' => 'Kies zichtbaarheid dashboard',
     'LBL_SIDEPANE_TOGGLE' => 'Zijpaneel openen/sluiten',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'Standaard dashlets herstellen',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'Geen dashboard geconfigureerd',
+    'LBL_CREATE_DASHBOARD_LINK' => 'Maak dashboard',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'Hulp',
     'LBL_HELPLET_TOGGLE' => 'Openen/Sluiten',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'Modules',
     'LBL_FACET_MODIFIED_BY_ME' => 'Modified by Me',
     'LBL_FACET_CREATED_BY_ME' => 'Aangemaakt door mij',
@@ -3888,6 +4050,7 @@ Gelieve een van de waardes te wijzigen.",
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Recordweergave',
+    'LBL_RELATED_RECORDS' => 'Gerelateerde {{module}}',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Geeft een record en mogelijk bijbehorende records weer in tabbladen.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Type basis record',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Deze {{moduleSingular}}',
@@ -3937,7 +4100,7 @@ Gelieve een van de waardes te wijzigen.",
 
     'LBL_DASHLET_NO_RECORDS' => 'Er werden nu geen gegevens gevonden.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Samenvatting van Cases',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'Interacties',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'Tijdlijn',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Bijlagen',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notities & bijlagen behoren bij het record',
     'LBL_DASHLET_PIPLINE_NAME' => 'Pijplijn',
@@ -4208,6 +4371,8 @@ Gelieve een van de waardes te wijzigen.",
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Upload van uw computer',
     'LBL_SEARCH_EXTERNAL_API' => 'Bestand op een externe bron',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'Uploaden naar externe bron',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'Koppelen van externe bron',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'Beveiliging',
     'LBL_SHARE_PRIVATE' => 'Privé',
     'LBL_SHARE_COMPANY' => 'Bedrijf',
@@ -4316,6 +4481,9 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Sneltoetsen',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>Form Functionality - Alt+</strong><br/> I = aanpass<b>I</b>ng (detailview)<br/> U = d<b>U</b>plicaat (detailview)<br/> D = verwij<b>D</b>er (detailview)<br/> R = Sha<b>R</b>e (detailview)<br/> A = opsl<b>A</b>an (editview)<br/> L = annu<b>L</b>eer (editview) <br/><br/></p><p><strong>Zoeken en navigeren  - Alt+</strong><br/> 7 = eerste veld op editscherm<br/> 8 = Geavanceerd zoeken<br/> 9 = eerste veld op zoekscherm<br/> 0 = globaal zoeken<br></p>' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'Escaleren',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'Delen',
     'TPL_RECORD_SHARE_SUBJECT' => 'Gedeeld {{module}} {{name}} vanuit {{appId}}',
@@ -4388,7 +4556,7 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'U staat op het punt om te wisselen van record zonder de wijzigingen op te slaan die u heeft gemaakt. Alle wijzigingen zullen verloren gaan.. Weet u zeker dat u door wilt gaan?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'Voeg gerelateerde records samen',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Samengevoegd: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Samengevoegd: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'Samenvoegen gerelateerd {{objectName}} mislukt. Nieuwe poging wordt gestart ({{num}} van {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4442,14 +4610,14 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_LANGUAGE' => 'Taal',
     'LBL_LOADING_LANGUAGE' => 'Taalpakket aan het laden',
     'LBL_UPLOADING' => 'Uploading',
+    'LBL_UPLOADING_DOTS' => 'Uploading...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Weet u zeker dat u deze afbeelding wilt verwijderen?',
     'LBL_FILE_DELETE_CONFIRM' => "Weet u zeker dat u dit bestand wilt verwijderen? Deze handeling kan niet ongedaan gemaakt worden.",
     'LBL_FILE_DELETED' => 'Bestand is met succes verwijderd',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'Thema van de portal',
-    'LBL_COFIGURE_PORTAL_THEME' => 'Configureer portal thema',
-    'LBL_THEME_PREVIEW' => 'Voorvertoning thema',
+    'LBL_THEME_PREVIEW' => 'Voorvertoning thema portaal',
     'LBL_LOADING_PREVIEW' => 'Voorvertoning laden',
     'LBL_RESET' => 'Resetten',
     'LBL_COLORS' => 'Kleuren',
@@ -4601,10 +4769,18 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Afspraken',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Taken',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Telefoongesprekken',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Accounts',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'Contactpersonen',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'E-mails',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'Ploegen',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Geoffreerde producten',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Uitzonderingen ploeg',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documenten',
+    'LBL_ESCALATIONS' => 'Escalaties',
+    'LBL_ESCALATED' => 'Geëscaleerd',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'Escalaties',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'Andere gerelateerde escalaties',
+    'LBL_ESCALATIONS' => 'Escalaties',
     'LNK_SETTINGS' => 'Instellingen',
     'LBL_MOBILE_SUPPORT' => 'Ondersteuning',
     'LBL_MOBILE_SHOW_MORE' => 'Toon meer...',
@@ -4812,6 +4988,55 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'Server time niet beschikbaar',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'Kon offline modus niet activeren. Kan server niet bereiken.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'Uiterlijk',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'Systeeminstelling gebruiken',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'Licht',
+    'LBL_MOBILE_APP_THEME_DARK' => 'Donker',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'Nieuwe bestandsnaam',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'Bestand nieuwe naam geven',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'Aangemaakt door mij',
+    'LBL_OPERATOR_CONTAINS' => 'is een van de',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'is geen van de',
+    'LBL_OPERATOR_EMPTY' => 'is leeg',
+    'LBL_OPERATOR_NOT_EMPTY' => 'is niet leeg',
+    'LBL_OPERATOR_MATCHES' => 'komt overeen met',
+    'LBL_OPERATOR_STARTS_WITH' => 'begint met',
+    'LBL_OPERATOR_EQUALS' => 'is gelijk aan',
+    'LBL_OPERATOR_NOT_EQUALS' => 'is ongelijk aan',
+    'LBL_OPERATOR_GREATER_THAN' => 'is groter dan',
+    'LBL_OPERATOR_LESS_THAN' => 'is kleiner dan',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'is groter of gelijk aan',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'is kleiner of gelijk aan',
+    'LBL_OPERATOR_BETWEEN' => 'ligt tussen',
+    'LBL_OPERATOR_BEFORE' => 'voor',
+    'LBL_OPERATOR_AFTER' => 'na',
+    'LBL_OPERATOR_YESTERDAY' => 'gisteren',
+    'LBL_OPERATOR_TODAY' => 'vandaag',
+    'LBL_OPERATOR_TOMORROW' => 'morgen',
+    'LBL_OPERATOR_LAST_7_DAYS' => 'afgelopen 7 dagen',
+    'LBL_OPERATOR_NEXT_7_DAYS' => 'komende 7 dagen',
+    'LBL_OPERATOR_LAST_30_DAYS' => 'afgelopen 30 dagen',
+    'LBL_OPERATOR_NEXT_30_DAYS' => 'komende 30 dagen',
+    'LBL_OPERATOR_LAST_MONTH' => 'afgelopen maand',
+    'LBL_OPERATOR_THIS_MONTH' => 'deze maand',
+    'LBL_OPERATOR_NEXT_MONTH' => 'volgende maand',
+    'LBL_OPERATOR_LAST_YEAR' => 'afgelopen jaar',
+    'LBL_OPERATOR_THIS_YEAR' => 'dit jaar',
+    'LBL_OPERATOR_NEXT_YEAR' => 'volgend jaar',
+    'LBL_OPERATOR_IS' => 'is',
+    'LBL_OPERATOR_IS_NOT' => 'is niet',
+    'LBL_ERROR_FILTER_EMPTY' => 'Voeg filtercriteria toe.',
+    'LBL_ADD_FILTER' => 'Criteria toevoegen',
+    'LBL_FILTER_NAME' => 'Filternaam',
+    'LBL_FILTER_FIELD' => 'Veld',
+    'LBL_FILTER_OPERATOR' => 'Aanbieder',
+    'LBL_FILTER_VALUE' => 'Waarde',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Opgeslagen in desktopapp',
+    'LBL_FILTER_LOCAL' => 'Lokaal filter',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'Welkom bij {{{brandName}}}.<br /><br />Laat ons enkele nieuwe features toelichten...',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'Hoofdmenu navigatie',
@@ -4857,6 +5082,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_COMMENT_ADD' => 'Een opmerking toevoegen',
     'LBL_REQUIRED' => 'Verplicht',
     'LBL_MORE_BUTTON' => 'Meer',
+    'LBL_NO_OPTIONS' => 'Geen opties beschikbaar',
     'LBL_TRY_AGAIN' => 'Probeer opnieuw',
     'LBL_NEW_RECORDS' => 'Laatst aangemaakt',
     'LBL_ASSIGNED_TO_ME' => 'Mijn {{{module}}}',
@@ -5082,11 +5308,15 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Weet u zeker dat u de chat wilt sluiten?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'Nieuwe Notitie of Bijlage',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'Voeg een notitie toe',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Uw aanmelding was niet succesvol. Probeer het opnieuw.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Invalid Credentials',
-    'LBL_PORTAL_INVALID_GRANT' => 'Uw &#39;token&#39; is ongeldig of verlopen. Log opnieuw in.',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => '&#39;Token&#39; verlopen',
+    'LBL_PORTAL_INVALID_GRANT' => 'Uw sessie is vervallen. Log opnieuw in.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Sessie vervallen',
     'LBL_PORTAL_AUTH_FAILED' => 'Client-verificatie mislukt.',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'Ongeldige Client',
     'LBL_PORTAL_INVALID_REQUEST' => 'The request made is invalid or malformed. Neem contact op met technische ondersteuning.',
@@ -5120,6 +5350,8 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'Standaard dashboard herstellen',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'Vernieuwingenconsole',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Overzicht',
@@ -5139,6 +5371,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Samenvatting bericht',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Samenvatting oproep',
     'LBL_OMNICHANNEL_LINK_TO' => 'Koppel {{fromModule}} aan {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'Koppeling naar {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'Gekoppeld',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Uw browser wordt niet ondersteund voor chatten. Gebruik Google Chrome of Mozilla Firefox.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Neem contact op met uw Sugar Administrator voor hulp.',
@@ -5146,6 +5379,8 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Voltooi de configuratie van SugarLive voordat u een uitgaande oproep doet.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Voltooi de configuratie van de layout van SugarLive voordat u het opent in SugarLive.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Zet uzelf op "Offline" in SugarLive voordat u de layout van SugarLive configureert.',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'Compacte weergave',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'Volledige weergave',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'Tabblad naar standaard resetten',
@@ -5557,9 +5792,12 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_BEST' => 'Beste',
     'LBL_WORST' => 'Slechtste',
     'LBL_LIKELY' => 'Meest waarschijnlijk',
-    'LBL_BEST_ADJUSTED' => 'Beste (gewogen)',
-    'LBL_WORST_ADJUSTED' => 'Slechtste (gewogen)',
-    'LBL_LIKELY_ADJUSTED' => 'Meest waarschijnlijk (gewogen)',
+    'LBL_BEST_FORECAST' => 'Commitment (beste)',
+    'LBL_WORST_FORECAST' => 'Commitment (slechtste)',
+    'LBL_LIKELY_FORECAST' => 'Commitment (waarschijnlijk)',
+    'LBL_BEST_ADJUSTED' => 'Gewijzigde commitment (beste)',
+    'LBL_WORST_ADJUSTED' => 'Gewijzigde commitment (slechtste)',
+    'LBL_LIKELY_ADJUSTED' => 'Gewijzigde commitment (waarschijnlijk)',
     'LBL_AMOUNT_USDOLLAR' => 'Bedrag',
     'LBL_OVERDUE' => 'Achterstallig',
 
@@ -5580,6 +5818,8 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'Voor meer informatie, kijk dan {{{more_info_url}}} in de documentatie voor {{plural_module_name}}.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'Geen gegevens beschikbaar',
+    'LBL_NEED_HELP' => 'Hulp met iets nieuws nodig?',
+    'LBL_NEW_CASE' => 'Nieuwe case',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'Het help dashlet geeft specifieke informatie behorend bij de module die u bekijkt, in combinatie met een sneltoets naar de bijbehorende documentatie (bijv. Leads documentatie) in de engelstalige handleiding voor meer informatie.',
@@ -5727,9 +5967,19 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'Geen antwoord',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Agenda niet beschikbaar',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'Beschikbare weergaves',
+    'LBL_CALENDAR_DASHLET_NAME' => 'Agendaplanner',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'Standaard weergave',
+    'LBL_CALENDAR_MY_CALENDARS' => 'Mijn agenda&#39;s',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'Gebruikers- en teamagenda&#39;s',
+    'LBL_CALENDAR' => 'Agenda',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'Error occurred while retrieving schedule.',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'Bewaar en verstuur uitnodiging(en)',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'Acceptatiestatus',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Processen',
@@ -5846,15 +6096,21 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Link kopieerbevestiging',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Interacties',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interacties {{moduleSingular}}',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn',
+    'LBL_NO_ACTIVITY' => 'Geen activiteit',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn {{moduleSingular}}',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'Meer',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'Minder',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Tijdlijn geeft weer: telefoongesprekken, e-mails, ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Toon meer...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Toon minder...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Geen gegevens beschikbaar',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'Module bevat geen licentie.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Actieve abonnementen',
@@ -5903,8 +6159,10 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'Focus drawer sluiten',
     'LBL_EXTERNAL_GUESTS' => 'Externe gasten',
     'LBL_MY_FAVORITE_TASKS' => 'Mijn favoriete taken',
+
     'LBL_MY_TASKS' => 'Mijn taken',
 
     // Sugar Integrate
@@ -5921,7 +6179,367 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
     'LBL_TIME_AWARE_TYPE' => 'Type',
     'LBL_TIME_AWARE_BEAN_ID' => 'Bean-ID',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'Weergavelabel',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'Recordweergave openen',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'Toevoegen',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'Hulp niet beschikbaar',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'Functies',
+    'LBL_ACTIONBUTTON_FIELDS' => 'Velden',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'Selecteer veld...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Samenstellen',
+    'LBL_ACTIONBUTTON_RELATED' => 'Gerelateerd',
+    'LBL_ACTIONBUTTON_SAVE' => 'Opslaan',
+    'LBL_ACTIONBUTTON_CANCEL' => 'Annuleren',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'Related Module',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'Soortgelijke velden',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'Roll-upmodule',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'Roll-upvelden',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'Roll-upfunctie',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'Min',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'Max',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'Gemiddeld',
+    'LBL_ACTIONBUTTON_SUM' => 'Som',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'Record toewijzen',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'E-mail opstellen',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'Record aanmaken',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Doc samenvoegen',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'URL openen',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'Rapport uitvoeren',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'Record bijwerken',
+    'LBL_ACTIONBUTTON_ACTION' => 'Actie',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'Toewijzen aan',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'E-mail aan',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'PMSE gebruiken',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'Sjabloon',
+    'LBL_ACTIONBUTTON_MODULE' => 'Module',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'Weergave-instellingen',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'Type',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'Vervolgkeuze',
+    'LBL_ACTIONBUTTON_BUTTON' => 'Knop',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'Knopgroep',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'Label weergeven in record',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'Weergeven in kop',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'Verbergen bij bewerken',
+    'LBL_ACTIONBUTTON_SIZE' => 'Formaat',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'Standaard',
+    'LBL_ACTIONBUTTON_SMALL' => 'Klein',
+    'LBL_ACTIONBUTTON_LARGE' => 'Groot',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'Berekend',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'Converteren naar pdf',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Doc samenvoegen',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'Voorvertoning',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'Eigenschappen',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'Label',
+    'LBL_ACTIONBUTTON_DESC' => 'Tooltip',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'Label tonen',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'Pictogram tonen',
+    'LBL_ACTIONBUTTON_SCHEME' => 'Kleurschema',
+    'LBL_ACTIONBUTTON_ICON' => 'Pictogram',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'Afhankelijk',
+    'LBL_ACTIONBUTTON_DESIGN' => 'Configuratie layout',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'Stoppen bij fout',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'Automatisch opslaan',
+    'LBL_ACTIONBUTTON_CONFIG' => 'Config',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'Configureer uw actieknop voordat u opslaat.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'Knoppen configureren',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'Automatisch aanmaken',
+    'LBL_ACTIONBUTTON_LINK' => 'Koppeling',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'Bovenliggende waarden kopiëren',
+    'LBL_ACTIONBUTTON_PRESET' => 'Voorinstellen',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'Voorinstellen vanaf bovenliggend',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'Kies...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'Van bovenliggend veld ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'Weet u zeker dat u deze knop wilt verwijderen?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'Weet u zeker dat u deze actie wilt verwijderen?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'Ongeldige gegevens actieknop',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'Selecteer een module voordat u opslaat.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'Selecteer een koppeling voordat u opslaat. Als er geen koppeling beschikbaar is, deselecteert u de koppelingsoptie.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'Selecteer een record voordat u opslaat.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'Selecteer een sjabloon voordat u opslaat.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'Primair',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'Secundair',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HogeZichtb',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'Oceaan',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'Roze',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'Leger',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'Beige',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'Zee',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'Groen',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'Geel',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'Oranje',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'Rood',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'Koraal',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'Paars',
+    'LBL_ACTIONBUTTON_FORMULA' => 'Formule',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'Acties',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'Fout tijdens valideren knopgegevens.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'Knoppen moeten minimaal een label of pictogramset bevatten.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'Voer een geldig label voor de knop in.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'De record kon niet worden aangemaakt vanwege ontbrekende verplichte waarden. Neem contact op met uw beheerder.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'U moet minimaal twee actieve knoppen hebben voor dit type knop.',
+    'LBL_ACTIONBUTTON_RECORD' => 'Recordweergaves',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'Actiemenu&#39;s',
+    'LBL_ACTIONBUTTON_ORDER' => 'Order',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'Lijstweergave',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'Recordweergave',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'Recordweergave dashlet',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'Subpanelen',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'De engine voor de uitvoering van de taakvolgorde heeft de volgende acties niet kunnen uitvoeren: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'Voeg een actie toe',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'Verwijder deze actie',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'Doc samenvoegen',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'Doc samenvoegen naar pdf',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'Bedrijfsgrootte',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'Industrie',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'Industrietags',
+    'LBL_HINT_COMPANY_LOCATION' => 'Bedrijfslocatie',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'Beschrijving bedrijf',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'Jaar opgericht',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Facebook bedrijf',
+    'LBL_HINT_COMPANY_TWITTER' => 'Twitter bedrijf',
+    'LBL_HINT_COMPANY_PIC' => 'Bedrijfslogo',
+    'LBL_HINT_CONTACT_PIC' => 'Foto contactpersoon',
+    'LBL_HINT_COMPANY_WEBSITE' => 'Bedrijfswebsite',
+    'LBL_HINT_PHOTO' => 'Link foto',
+    'LBL_HINT_JOB_2' => 'Vorige baan',
+    'LBL_HINT_EDUCATION' => 'Opleiding',
+    'LBL_HINT_EDUCATION_2' => 'Aanvullende opleiding',
+    'LBL_HINT_TWITTER' => 'Link Twitter',
+    'LBL_HINT_FACEBOOK' => 'Link Facebook',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'NAICS code',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'SIC code',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'Einde FY',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'Jaaromzet',
+    'LBL_HINT_PHONE_1' => 'Tel. 1',
+    'LBL_HINT_PHONE_2' => 'Tel. 2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'Tabel samenvoegen',
+    'LBL_HINT_FULL_NAME' => 'Volledige naam',
+    'LBL_HINT_JOB_TITLE' => 'Naam functie',
+    'LBL_HINT_OFFICE_PHONE' => 'Telefoon (werk)',
+    'LBL_HINT_MOBILE_PHONE' => 'Mobiel',
+    'LBL_HINT_OTHER_PHONE' => 'Andere tel.',
+    'LBL_HINT_WEBSITE' => 'Website',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'Wilt u alle bestaande gegevens van dit record overschrijven door de nieuwe gegevens die in Hint zijn gevonden?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'Wilt u de bestaande {{fieldName}} van deze record overschrijven door de nieuwe {{fieldName}}, gevonden in Hint?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'Alle accountgerelateerde gegevens worden verwijderd. Weet u zeker dat u wilt doorgaan ?',
+    'LBL_HINT_COMPANY_LOGO' => 'Beeldmerk',
+    'LBL_HINT_CONTACTS_AVATAR' => 'Foto',
+    'LBL_HINT_ACCOUNTSETS' => 'Hint accountsets tags',
+
+    'LBL_HINT_LOADING' => 'Laden ...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'Hint deïnstalleren, een ogenblik',
+    'LBL_HINT_VALUE_ERASED' => ' Waarde gewist ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'Deze informatie werd gewist via gegevensaanvraag privacy',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'Selecteer een van de deïnstallatiemogelijkheden hieronder:',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Alleen Hint-pakket deïnstalleren',
+    'LBL_HINT_UNINSTALL_FULL' => 'Hint compleet deïnstalleren',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'Met deze optie wordt de Hint MLP verwijderd en alle actieve abonnementen op Hint Insights.
+    Herinstallatie van Hint heractiveert automatisch abonnementen.',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'Deze optie voert een volledige deïnstallatie uit van Hint, waaronder verwijdering van de MLP en verwijdering van alle configuratie- en abonnementsgegevens.',
+    'LBL_HINT_UNINSTALL' => 'De-installeer',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Deïnstalleer Hint',
+    'LBL_HINT_CANCEL' => 'Annuleren',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'WAARSCHUWING: Kies deze optie alleen als u Hint in de toekomst niet meer wilt gebruiken.
+    Voordat u deïnstalleert, voert u een volledige back-up uit van uw Sugar-database en zet u Sugar in onderhoudsmodus. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'Zie de ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Hint-Administratiegids ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'voor informatie over het deïnstallatieproces.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Weet u zeker dat u alleen het Hint-pakket wilt deïnstalleren?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Weet u zeker dat u Hint in zijn geheel wilt deïnstalleren?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(LET OP: U KUNT DIT NIET ONGEDAAN MAKEN)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Hintvelden',
+    'LBL_HINT_NO_RESULTS_MSG' => 'Geen resultaten gevonden.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'Basis Hint-paneelindeling',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'Accounts',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'Contactpersonen',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'Leads',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'Uitgebreide Hint-paneelindeling',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'Deel de velden opnieuw in door ze hierboven te slepen naar de Hint-paneelindeling.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'Voor meer instructies en een lijst met standaardvelden raadpleegt u de ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' om de standaardinstellingen terug te zetten ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'van de module.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'Weet u zeker dat u de standaardwaarden van de module {{mmodule}} terug wilt zetten?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'Klik hier',
+    'LBL_HINT_CONFIG_NAME' => 'Hint-Administratiegids.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'Velden',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'Verrijkte velden',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'In dit deel staan alle Hint-velden en de Sugar-velden die zijn verrijkt door Hint. Hint-velden zijn gemarkeerd met een sterretje (*) en kunnen alleen in het Hint-paneel worden getoond als ze verrijkt zijn.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'Veldnaam',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'Veld verrijken',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Tonen in Hint',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Tonen in Hint-paneel',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'Aanvullende Sugar-velden',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'In dit deel staan alle Sugar-velden die niet zijn verrijkt door Hint.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'Waarschuwing',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'Let op: U staat op het punt te synchroniseren met de Hint Insights-service. Eventuele in behandeling zijn de samenvattingen via e-mail gaan verloren en bestaad nieuws wordt uit de Insights-dashlet verwijderd. Meldingen van alle soorten worden hervat nadat de synchronisatie is voltooid.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'Voorgestelde bedrijven die betrekking hebben op uw {{_moduleSingular}} staan hieronder. Selecteer weer te geven bedrijfsgegevens.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'Er is geen account geselecteerd',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'Meerdere e-mails gevonden, selecteer te importeren e-mails: ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'Op basis van de ingevoerde gegevens kon Hint geen overeenkomst vinden in het systeem.',
+    'LBL_HINT_HELP_MESSAGE2' => 'De beste resultaten in Hint kunnen worden gevonden met de naam en het e-mailadres van een persoon.',
+    'LBL_HINT_HELP_MESSAGE3' => 'De beste resultaten in Hint kunnen worden gevonden met de URL van de bedrijfswebsite.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "Voer de bedrijfsnaam van uw {{_moduleSingular}} in, dan zal Hint zoeken naar aanvullende gegevens.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "Voer het e-mailadres van uw {{currentModule}} in, dan zal Hint zoeken naar aanvullende gegevens.",
+
+    'LBL_HINT_HISTORY_NONE' => 'Geen gegevens beschikbaar voor historische weergave',
+    'LBL_HINT_HISTORY_TITLE' => 'Activiteitgeschiedenis',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'Gegevensverrijking',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'De licentie voor uw SugarCRM Hint-service is verlopen. Neem contact op met uw SugarCRM-beheerder om uw licentie te verlengen.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'Wilt u zien wat SugarCRM Hint kan doen voor u en uw bedrijf? Neem contact op met uw SugarCRM-beheer om Hint toe te voegen.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'Accountgegevens niet gevonden',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'Verrijkte gegevens gevonden - klik om alle verrijkte gegevens op te slaan in uw record.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'Klik om verrijkte gegevens op te slaan in uw record.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'Gerelateerde Contactpersonen',
+    'LBL_HINT_CONTACTS_NONE' => 'Geen gerelateerde Contactpersonen',
+
+    'LBL_HINT_NEWS' => 'Nieuws',
+    'LBL_HINT_GENERAL' => 'Algemeen',
+    'LBL_HINT_ALL_NEWS' => 'Alle Nieuws',
+    'LBL_HINT_FILTER_NEWS' => 'Nieuws filteren',
+    'LBL_HINT_FINANCIAL_NEWS' => 'Financieel',
+    'LBL_HINT_PERSONNEL_NEWS' => 'Personeel',
+    'LBL_HINT_PRESS_RELEASES' => 'Persberichten',
+    'LBL_HINT_OTHER_NEWS' => 'Anders',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'Nieuwsartikelen zoeken',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => 'Geen nieuws beschikbaar',
+    'LBL_NEW_NOTIFICATIONS' => 'Nieuwe meldingen',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'U hebt een Hint-licentie nodig om de Hint Insights dashlet te bekijken.
+    Vraag uw beheerder naar een Hint-licentie.',
+
+    'LBL_HINT_FOR' => 'Voor',
+    'LBL_HINT_WITH' => 'met',
+    'LBL_HINT_SHOW_ME' => 'Toon me: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'Licht me in door: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Hint Insights Voorkeurencentrum',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'Voorkeur-optietoets',
+    'LBL_HINT_PREFERENCES' => 'Voorkeuren',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'Uitgeschakeld verwijderen, minimaal één voorkeursverklaring vereist',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'Uitgeschakeld toevoegen, u hebt het maximumaantal voorkeursverklaringen bereikt',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Opnemen in Hint Insights dashlet',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'Pop-up als desktopmelding',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'Meldingen moeten zijn ingeschakeld in alle browsers en op alle desktopcomputers om consistent meldingen te ontvangen.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Bepaalde browsers, zoals Internet Explorer, ondersteunen meldingen niet. Meldingen kunnen niet worden ingeschakeld als u een browser gebriukt die geen meldingen ondersteunt.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'Onmiddellijk e-mailmelding sturen voor elke melding',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'Een dagelijkse samenvatting sturen per e-mail',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'Een wekelijkse samenvatting sturen per e-mail',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'Voorkeuren konden niet worden opgeslagen. Controleer uw systeemverbinding en probeer het opnieuw.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'In bepaalde verplichte velden ontbreekt een waarde. Controleer uw voorkeuren en contrroleer of alle verplichte velden zijn ingevuld.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'U staat op het punt browsermeldingen in te schakelen voor Hint Insights. Klik op Bevestigen om door te gaan. Uw browser vraagt u vervolgens om toestemming voor het ontvangen van meldingen.',
+    'LBL_HINT_PUSH_ERROR' => 'De plug-in Pusmeldingen is geregistreerd voor {{options.type}} zonder afhankelijkheden. De plug-in werkt niet zoals bedoeld. Controleer of u een pad naar het werkbestand hebt opgegeven en een methode voor het opslaan van het abonnement op de server.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'Schakel Hint-meldingen IN voor alle gebruikers',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'Schakel Hint-meldingen UIT voor alle gebruikers',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'WAARSCHUWING: Meldingen uitschakelen tijdens deïnstallatie van Sugar Hint mislukt. Om meldingen uit te schakelen, installeert u Hint 5.4.0 of hoger en voert u een volledige deïnstallatie uit d. m. v. de Hint Uninstaller, welke te vinden is in het deel Beheer van Sugar.',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'Configuratie Kaarten',
+    'LBL_MAP_MAP' => 'Kaart',
+    'LBL_MAP_MAPS' => 'Kaarten',
+    'LBL_MAP_GEOCODING_RECORD' => 'Geocodering',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'Geocodering record succesvol verlopen.',
+    'LBL_MAP_LATITUDE' => 'Lengtegraad',
+    'LBL_MAP_LONGITUDE' => 'Breedtegraad',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'Zoeken op adres...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'Gecodering huidige record reeds voltooid. Weet u zeker dat u de geocodering van deze record wilt overschrijven?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'Handmatige geocodering',
+    'LBL_MAP_POINT_COORDINATES' => 'Coördinaten kaartpunt',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'De optimale route berekenen...',
+    'LBL_MAP_DIRECTIONS' => 'Richtingen',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'Richtingen, beginnend vanaf huidige gebruiker',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'Richtingen, beginnend vanaf deze record',
+    'LBL_MAPS_RADIUS_INPUT' => 'Straal (0-250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'In een straal van postcode',
+    'LBL_MAPS_DISTANCE' => 'Afstand',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'Postcode',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'Ongeldige config.: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => '<strong>{{module}}</strong> veldtoewijzingen is ongeldig.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'Type kaart',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'Zoomniveau',
+    'LBL_MAPS_DASHLET' => 'Kaarten',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'Geeft record(s) met geocodering aan op kaart.',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'Kaaarten is niet beschikbaar voor deze module. Schakel het in het Beheerconsole in.',
+    'LBL_MAP_MODULES' => 'Module',
+    'LBL_MAP_FILTER_BY' => 'Filter op',
+    'LBL_MAP_UNIT_TYPE' => 'Type eenheid',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'Mijl',
+    'LBL_MAP_UNIT_TYPE_KM' => 'Kilometer',
+    'LBL_MAP_ADDRESS' => 'Adres',
+    'LBL_MAP_NO_STARTING_POINT' => 'Startpunt bevat geen geocodering.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'Record startpunt bevat geen geocodering.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'Bepaalde geselecteerde records bevatten geen geocodering en worden niet weergegeven op de kaart.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'Record(s) bevatten geen geocodering.',
+    'LBL_MAPS_MODULE_FIELDS' => 'Modulevelden',
+    'LBL_MAPS_SELECT_FIELD' => 'Selecteer veld',
+    'LBL_MAPS_RELATE_RECORD' => 'Gerelateerde record',
+    'LBL_MAPS_MAPPING_TYPE' => 'Type toewijzing',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'Geen records met geocodering',
+    'LBL_MAPS_ADDRESS' => 'Adres',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'Toegewezen gebruiker',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'Straatweergave is niet beschikbaar voor opgegeven punt',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> records kunnen niet in kaart worden gebruikt. Verwijder de module uit de lijst.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'Sluiten',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'Uitklappen',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'Opslaan als PDF',
+    'LBL_MAPS_EMAIL_LINK' => 'Link e-mailen',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'U moet minimaal één record met geocodering hebben.',
+    'LBL_MAPS_GENERATING' => 'Kaart genereren...',
+    'LBL_MAPS_POINTS' => 'Kaartpunten',
+    'LBL_MAPS_POINT' => 'Punt',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'Reisgegevens',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'Totale afstand',
+    'LBL_MAPS_TOTAL_DURATION' => 'Totale duur',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'Totale duur zonder verkeer',
+    'LBL_MAPS_ITINERARY' => 'Reisgegevens',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'Reisafstand',
+    'LBL_MAPS_TRAVEL_DURATION' => 'Reisduur',
+    'LBL_MAPS_TRAVEL_STEPS' => 'Stappen',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'Waarschuwingen',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Bing Maps ondersteunt maximaal 10 punten op een gedeelde kaart. Controleer uw selectie.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'Maps-licentie vereist',
+
+    'LBL_INVALID_FORMULA' => 'Ongeldige formule',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'Retourtype functie komt niet overeen',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'Voorspelling',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'Profiel ideale klant',
+
+    // User last state
+    'LBL_LAST_STATE' => 'Laatste status',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'Stuur naar DocuSign',
+
+    // Base sales stages
+    'LBL_OPEN' => 'Openen',
+    'LBL_CLOSED_WON' => 'Afgesloten, gewonnen',
+    'LBL_CLOSED_LOST' => 'Afgesloten, verloren',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6758,8 +7376,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google Docs',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Google Contacten',
@@ -7099,6 +7717,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Ingesloten bestand';
     'YER' => 'Rials',
     'ZWD' => 'Zimbabwaanse dollar',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'Zeer hoog',
+        '4' => 'Hoog',
+        '3' => 'Neutraal',
+        '2' => 'Laag',
+        '1' => 'Zeer laag',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'Geen',
         'future' => 'Huidige waarde',
@@ -7108,3 +7734,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Ingesloten bestand';
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'Single-Hit',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'Verwerken',
+        'error' => 'Fout',
+        'success' => 'Geslaagd',
+        'canceled' => 'Geannuleerd',
+        'document_load' => 'Sjabloon laden',
+        'tags_extract' => 'Tags extraheren',
+        'tags_validate' => 'Tags valideren',
+        'data_retrieving' => 'Gegevens ophalen',
+        'serialize_document' => 'Het document weer in elkaar zetten',
+        'send_document' => 'Het document naar u sturen',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'Samenvoegen',
+        'convert' => 'Pdf samenvoegen',
+        'multimerge' => 'Meerdere samenvoegen',
+        'multimerge_convert' => 'Meerdere pdf&#39;s samenvoegen',
+        'labelsgenerate' => 'Labels genereren',
+        'labelsgenerate_convert' => 'Pdf labels genereren',
+        'excel' => 'Excel samenvoegen',
+        'excel_convert' => 'Samenvoeging Excel converteren',
+        'presentation' => 'PowerPoint samenvoegen',
+        'presentation_convert' => 'PowerPoint samenvoegen in pdf',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'Mijn accounts',
+      'favorites' => 'Favoriete accounts',
+      'tags' => 'Getagde accounts',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'Alle nieuws',
+      'General' => 'Algemeen',
+      'Finance' => 'Financieel',
+      'People' => 'Personeel',
+      'Press Releases' => 'Persberichten',
+      'Other' => 'Overige gegevens',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'Eigenaars';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Cloud Drive';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'Integratiedashlet Cloud Drive';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'Link kopiëren';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'Downloaden';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Sugar Document aanmaken';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Synchroniseren naar Google Drive';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'Alle synchroniseren naar Google Drive';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'Kan dit bestand niet downloaden';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'Cloud dashlet niet aanwezig';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Sugar-document aangemaakt';
+
+    $app_string['LBL_MY_FILES'] = 'Mijn bestanden';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Gedeeld met mij';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'Cloud-aanbieder';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google Drive',
+      'onedrive' => 'Microsoft Onedrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Gedeeld met mij';
+    $app_strings['LBL_MY_FILES'] = 'Mijn bestanden';
+    $app_strings['LBL_UPLOAD_FILE'] = 'Geüpload bestand';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'Map niet gevonden';
+    $app_strings['LBL_CREATE_FOLDER'] = 'Map aanmaken';
+    $app_strings['LBL_LOAD_MORE'] = 'Meer laden...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'Verbinding met Google niet gevonden...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'Verbinding met Microsoft niet gevonden...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-leeg-',
+      'Exact' => 'Precies',
+      'Null_address_components' => 'Een of meerdere adrescomponenten zijn leeg',
+      'Invalid_address' => 'Ongeldig adres, server retourneerde Fout',
+      'Invalid_server_response_not_XML' => 'Ongeldige serverrespons, geen XML',
+      'Invalid_address_no_location' => 'Ongeldig adres, server retourneerde geen locatie',
+      'Ambiguous_address' => 'Dubbelzinnig adres, meerdere resultaten',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'Weg',
+      'a' => 'Lucht',
+      'be' => 'Vogelvlucht',
+      'rd' => 'Weg, donker',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '3',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

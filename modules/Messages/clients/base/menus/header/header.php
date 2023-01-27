@@ -17,7 +17,7 @@ $viewdefs[$module_name]['base']['menu']['header'] = [
         'label' =>'LNK_NEW_MESSAGE',
         'acl_action'=>'create',
         'acl_module'=>$module_name,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
         'route'=>'#'.$module_name.'/create',
     ],
     [
@@ -25,14 +25,14 @@ $viewdefs[$module_name]['base']['menu']['header'] = [
         'label' =>'LNK_MESSAGE_LIST',
         'acl_action'=>'list',
         'acl_module'=>$module_name,
-        'icon' => 'fa-bars',
+        'icon' => 'sicon-list-view',
     ],
     [
         'route' => '#Reports?filterModule=' . $module_name,
         'label' =>'LNK_MESSAGE_REPORTS',
         'acl_action'=>'list',
         'acl_module' => 'Reports',
-        'icon' => 'fa-bar-chart-o',
+        'icon' => 'sicon-reports',
     ],
     [
         'route' => '#bwc/index.php?' . http_build_query(
@@ -45,6 +45,6 @@ $viewdefs[$module_name]['base']['menu']['header'] = [
         'label' =>'LNK_IMPORT_MESSAGES',
         'acl_action'=>'import',
         'acl_module'=>$module_name,
-        'icon' => 'fa-arrow-circle-o-up',
+        'icon' => 'sicon-upload',
     ],
 ];

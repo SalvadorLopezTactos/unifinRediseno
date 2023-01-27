@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Renewal Revenue Line Item ID',
     'LBL_PARENT_RLIS' => 'Parent Revenue Line Items',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Parent Revenue Line Items',
+    'LBL_FORECASTED_LIKELY' => 'Forecasted Likely',
     'LBL_EXPERT_ID' => 'Product Expert',
     'LBL_FORECAST' => 'Include in Forecast',
     'LBL_SUBTOTAL' => 'Subtotal',

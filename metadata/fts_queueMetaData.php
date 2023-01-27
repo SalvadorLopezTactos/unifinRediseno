@@ -54,38 +54,6 @@ $dictionary['fts_queue'] = array(
                 'id',
             ),
         ),
-        array(
-            'name' => 'idx_fts_queue_bean_id',
-            'type' => 'index',
-            'fields' => array(
-                'bean_id',
-            ),
-        ),
-        array(
-            'name' => 'idx_beans_bean_id',
-            'type' => 'index',
-            'fields' => array(
-                'bean_module',
-                'bean_id',
-            ),
-        ),
-        array(
-            'name' => 'idx_bean_id_processed',
-            'type' => 'index',
-            'fields' => array(
-                'bean_id',
-                'processed',
-            ),
-        ),
-        array(
-            'name' => 'idx_beans_bean_id_processed',
-            'type' => 'index',
-            'fields' => array(
-                'bean_module',
-                'bean_id',
-                'processed',
-            ),
-        ),
     ),
     'relationships' => array(
     ),

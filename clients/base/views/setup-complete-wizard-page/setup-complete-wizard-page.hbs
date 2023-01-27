@@ -16,37 +16,66 @@
 {{#eq wizardName "admin"}}
     <ul class="thumbnails row-fluid">
         <li class="span2">
-            <a class="thumbnail" href="#bwc/index.php?module=Administration&action=Locale&view=default"><i class="fa fa-globe"></i>{{str "LBL_WIZ_SYSTEM_LOCALE_SETTINGS" module}}</a>
+            <a class="thumbnail" href="#bwc/index.php?module=Administration&action=Locale&view=default">
+                <i class="sicon sicon-lg sicon-flag-lg"></i>
+                <span>{{str "LBL_WIZ_SYSTEM_LOCALE_SETTINGS" module}}</span>
+            </a>
         </li>
         <li class="span2">
-            <a class="thumbnail" href="#bwc/index.php?module=EmailMan&action=config"><i class="fa fa-envelope"></i>{{str "LBL_WIZ_EMAIL_SETTINGS" module}}</a>
+            <a class="thumbnail" href="#bwc/index.php?module=EmailMan&action=config">
+                <i class="sicon sicon-lg sicon-email-lg"></i>
+                <span>{{str "LBL_WIZ_EMAIL_SETTINGS" module}}</span>
+            </a>
         </li>
         <li class="span2">
-            <a class="thumbnail" href="#bwc/index.php?module=Configurator&action=EditView"><i class="fa fa-cogs"></i>{{str "LBL_WIZ_APPLICATION_SETTINGS" module}}</a>
+            <a class="thumbnail" href="#bwc/index.php?module=Configurator&action=EditView">
+                <i class="sicon sicon-lg sicon-settings-lg"></i>
+                <span>{{str "LBL_WIZ_APPLICATION_SETTINGS" module}}</span>
+            </a>
         </li>
         <li class="span2">
-            <a class="thumbnail" href="#bwc/index.php?module=Users&action=index"><i class="fa fa-plus-square"></i>{{str "LBL_WIZ_CREATE_USERS" module}}</a>
+            <a class="thumbnail" href="#bwc/index.php?module=Users&action=index">
+                <i class="sicon sicon-lg sicon-contact-lg"></i>
+                <span>{{str "LBL_WIZ_CREATE_USERS" module}}</span>
+            </a>
         </li>
         <li class="span2">
-            <a class="thumbnail" href="#bwc/index.php?module=Import&action=step1&import_module=Administration"><i class="fa fa-arrow-circle-o-up"></i>{{str "LBL_WIZ_IMPORT_DATA" module}}</a>
+            <a class="thumbnail" href="#bwc/index.php?module=Import&action=step1&import_module=Administration">
+                <i class="sicon sicon-lg sicon-upload-lg"></i>
+                <span>{{str "LBL_WIZ_IMPORT_DATA" module}}</span>
+            </a>
         </li>
         <li class="span2">
-            <a class="thumbnail" href="#bwc/index.php?module=ModuleBuilder&action=index&type=studio"><i class="fa fa-wrench"></i>{{str "LBL_WIZ_CONFIGURE_APPLICATION" module}}</a>
+            <a class="thumbnail" href="#bwc/index.php?module=ModuleBuilder&action=index&type=studio">
+                <i class="sicon sicon-lg sicon-studio-lg"></i>
+                <span>{{str "LBL_WIZ_CONFIGURE_APPLICATION" module}}</span>
+            </a>
         </li>
     </ul>
 {{/eq}}
     <ul class="thumbnails row-fluid">
         <li class="span3">
-            <a class="thumbnail" target="_blank" href="http://support.sugarcrm.com/03_Training"><i class="fa fa-info-circle"></i>{{str "LBL_WIZ_SUGAR_TRAINING" module}}</a>
+            <a class="thumbnail" target="_blank" href="http://support.sugarcrm.com/03_Training">
+                <img src="{{buildUrl url='styleguide/assets/img/setup-wizard-sugar-u.png'}}">
+                <span>{{str "LBL_WIZ_SUGAR_TRAINING" module}}</span>
+            </a>
         </li>
         <li class="span3">
-            <a class="thumbnail" target="_blank" href="http://support.sugarcrm.com/02_Documentation"><i class="fa fa-book"></i>{{str "LBL_WIZ_DOCUMENTATION" module}}</a>
+            <a class="thumbnail" target="_blank" href="http://support.sugarcrm.com/02_Documentation">
+                <img src="{{buildUrl url='styleguide/assets/img/setup-wizard-documentation.png'}}">
+                <span>{{str "LBL_WIZ_DOCUMENTATION" module}}</span>
+            </a>
         </li>
         <li class="span3">
-            <a class="thumbnail" target="_blank" href="http://support.sugarcrm.com/04_Find_Answers/02KB"><i class="fa fa-briefcase"></i>{{str "LBL_WIZ_KNOWLEDGE_BASE" module}}</a>
+            <a class="thumbnail" target="_blank" href="http://support.sugarcrm.com/04_Find_Answers/02KB">
+                <img src="{{buildUrl url='styleguide/assets/img/setup-wizard-kb.png'}}"
+                <span>{{str "LBL_WIZ_KNOWLEDGE_BASE" module}}</span></a>
         </li>
         <li class="span3">
-            <a class="thumbnail" target="_blank" href="http://community.sugarcrm.com"><i class="fa fa-comments-o"></i>{{str "LBL_WIZ_FORUMS" module}}</a>
+            <a class="thumbnail" target="_blank" href="http://community.sugarcrm.com">
+                <img src="{{buildUrl url='styleguide/assets/img/setup-wizard-sugar-club.png'}}"
+                <span>{{str "LBL_WIZ_FORUMS" module}}</span>
+            </a>
         </li>
     </ul>
 </div>

@@ -61,12 +61,10 @@ abstract class AbstractTestSessionListener implements EventSubscriberInterface
             return;
         }
 
-        $request = $event->getRequest();
-        if (!$request->hasSession()) {
+        if (!$session = $event->getRequest()->getSession()) {
             return;
         }
 
-        $session = $request->getSession();
         if ($wasStarted = $session->isStarted()) {
             $session->save();
         }

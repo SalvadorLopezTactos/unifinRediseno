@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class LicenseDetails extends Entity
 {
@@ -31,7 +29,7 @@ class LicenseDetails extends Entity
      * Gets the servicePlans
     * Information about the service plans assigned with the license. Read-only, Not nullable
      *
-     * @return array The servicePlans
+     * @return array|null The servicePlans
      */
     public function getServicePlans()
     {
@@ -52,7 +50,7 @@ class LicenseDetails extends Entity
     */
     public function setServicePlans($val)
     {
-		$this->_propDict["servicePlans"] = $val;
+        $this->_propDict["servicePlans"] = $val;
         return $this;
     }
     
@@ -60,7 +58,7 @@ class LicenseDetails extends Entity
     * Gets the skuId
     * Unique identifier (GUID) for the service SKU. Equal to the skuId property on the related SubscribedSku object. Read-only
     *
-    * @return string The skuId
+    * @return string|null The skuId
     */
     public function getSkuId()
     {
@@ -89,7 +87,7 @@ class LicenseDetails extends Entity
     * Gets the skuPartNumber
     * Unique SKU display name. Equal to the skuPartNumber on the related SubscribedSku object; for example: 'AAD_Premium'. Read-only
     *
-    * @return string The skuPartNumber
+    * @return string|null The skuPartNumber
     */
     public function getSkuPartNumber()
     {

@@ -18,14 +18,14 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' => 'LNK_NEW_CALL',
         'acl_action' => 'create',
         'acl_module' => $moduleName,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
     ),
     array(
         'route' => "#{$moduleName}",
         'label' => 'LNK_CALL_LIST',
         'acl_action' => 'list',
         'acl_module' => $moduleName,
-        'icon' => 'fa-bars',
+        'icon' => 'sicon-list-view',
     ),
     array(
         'route' => '#bwc/index.php?' . http_build_query(
@@ -40,13 +40,13 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' => 'LNK_IMPORT_CALLS',
         'acl_action' => 'import',
         'acl_module' => $moduleName,
-        'icon' => 'fa-arrow-circle-o-up',
+        'icon' => 'sicon-upload',
     ),
     array(
         'route' => '#Reports?filterModule=' . $moduleName,
         'label' => 'LBL_ACTIVITIES_REPORTS',
         'acl_action' => 'list',
         'acl_module' => 'Reports',
-        'icon' => 'fa-bar-chart-o',
+        'icon' => 'sicon-reports',
     ),
 );

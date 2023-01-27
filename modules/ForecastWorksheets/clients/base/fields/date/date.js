@@ -18,6 +18,14 @@
 
     /**
      * @inheritdoc
+     */
+    initialize: function(options) {
+        options.highlightChangedValues = true;
+        this._super('initialize', [options]);
+    },
+
+    /**
+     * @inheritdoc
      *
      * Add `ClickToEdit` plugin to the list of required plugins.
      */

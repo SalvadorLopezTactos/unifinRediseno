@@ -71,7 +71,7 @@ class ProjectTask extends SugarBean {
 			global $current_user;
 			if(empty($current_user))
 			{
-				$this->assigned_user_id = 1;
+                $this->assigned_user_id = '1';
 				$admin_user = BeanFactory::getBean('Users', $this->assigned_user_id);
 				$this->assigned_user_name = $admin_user->user_name;
 			}
@@ -217,7 +217,8 @@ class ProjectTask extends SugarBean {
 	}
 
 	function get_list_view_data(){
-		global $action, $currentModule, $focus, $current_module_strings, $app_list_strings, $timedate, $locale;
+        global $action, $currentModule, $current_language, $focus, $app_list_strings, $timedate, $locale;
+        $current_module_strings = return_module_language($current_language, 'ProjectTask');
 		$today = $timedate->handle_offset(date($GLOBALS['timedate']->get_db_date_time_format(), time()), $timedate->dbDayFormat, true);
 		$task_fields =$this->get_list_view_array();
         if (isset($this->parent_type))
@@ -227,10 +228,11 @@ class ProjectTask extends SugarBean {
             $task_fields["FIRST_NAME"] = '';
         if ( !isset($task_fields["LAST_NAME"]) )
             $task_fields["LAST_NAME"] = '';
-		$task_fields['CONTACT_NAME']= $locale->getLocaleFormattedName($task_fields["FIRST_NAME"],$task_fields["LAST_NAME"]);
+        $task_fields['CONTACT_NAME'] = trim($locale->getLocaleFormattedName($task_fields["FIRST_NAME"], $task_fields["LAST_NAME"]));
 		$task_fields['TITLE'] = '';
 		if (!empty($task_fields['CONTACT_NAME'])) {
-			$task_fields['TITLE'] .= $current_module_strings['LBL_LIST_CONTACT'].": ".$task_fields['CONTACT_NAME'];
+            $task_fields['TITLE'] .= ($current_module_strings['LBL_LIST_CONTACT'] ?? 'LBL_LIST_CONTACT')
+                . ": " . $task_fields['CONTACT_NAME'];
 		}
 
 		return $task_fields;
@@ -314,7 +316,7 @@ class ProjectTask extends SugarBean {
             ->executeQuery(
                 'SELECT DISTINCT resource_type FROM project_resources WHERE resource_id = ?',
                 [$resource_id]
-            )->fetchColumn();
+            )->fetchOne();
         if (false !== $resourceType) {
             if (empty($resourceType)) {
                 return '&nbsp;';
@@ -329,7 +331,7 @@ class ProjectTask extends SugarBean {
                 ->executeQuery(
                     "SELECT {$resource} as resource_name FROM {$resourceTableName} WHERE id = ?",
                     [$resource_id]
-                )->fetchColumn();
+                )->fetchOne();
         } else {
             return '';
         }

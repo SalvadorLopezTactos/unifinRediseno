@@ -516,6 +516,15 @@ $dictionary['Email'] = array(
             'bean_name' => 'Contact',
             'source' => 'non-db',
         ),
+        'escalations' => [
+            'name' => 'escalations',
+            'vname' => 'LBL_EMAILS_ESCALATIONS_REL',
+            'type' => 'link',
+            'relationship' => 'emails_escalations_rel',
+            'module' => 'Escalations',
+            'bean_name' => 'Escalation',
+            'source' => 'non-db',
+        ],
         'leads' => array(
             'name' => 'leads',
             'vname' => 'LBL_EMAILS_LEADS_REL',
@@ -1126,6 +1135,9 @@ $dictionary['Email'] = array(
             ),
         ),
     ),
+    'portal_visibility' => [
+        'class' => 'Emails',
+    ],
 );
 
 VardefManager::createVardef(

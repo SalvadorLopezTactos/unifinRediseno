@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Overordnet type',
     'LBL_PARENT_ID' => 'Overordnet-ID',
     'LBL_EXTRA_DATA' => 'Ekstra data',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM - Nevnt på {{module_name_singular}}',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} nevnte deg på {{module_name_singular}} {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM - Tildelt {{module_name_singular}}',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} tildelte {{module_name_singular}} {{record_name}} til deg.',
 ];

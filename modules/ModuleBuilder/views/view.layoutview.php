@@ -19,6 +19,16 @@ class ViewLayoutView extends SugarView
     /** @var GridLayoutMetaDataParser */
     protected $parser;
 
+    /**
+     * @var string
+     */
+    protected $existingLayout;
+
+    /**
+     * @var bool
+     */
+    protected $warnSave = false;
+
     public function __construct($bean = null, $view_object_map = array(), $request = null)
     {
         parent::__construct($bean, $view_object_map, $request);
@@ -68,6 +78,42 @@ class ViewLayoutView extends SugarView
         if (!empty($role)) {
             $params['role'] = $role;
         }
+        $layoutOption = $this->request->getValidInputRequest('layoutOption');
+        if (!empty($layoutOption)) {
+            $params['layoutOption'] = $layoutOption;
+        }
+        $dropdownField = $this->request->getValidInputRequest('dropdownField');
+        if (!empty($dropdownField)) {
+            $params['dropdownField'] = $dropdownField;
+        }
+        $dropdownValue = $this->request->getValidInputRequest('dropdownValue');
+        if (!empty($dropdownValue)) {
+            $params['dropdownValue'] = $dropdownValue;
+        }
+        // The first time the layout is opened, $layoutOption and $dropdownField will be null and in that case check
+        // if there already exist custom layout on specific base, to preselect values on the dropdown
+        $params = array_merge($params, $this->checkExistingCustomLayouts($params));
+        if (!empty($params['layoutOption']) && empty($layoutOption)) {
+            $layoutOption = $params['layoutOption'];
+        }
+        if (!empty($params['dropdownField']) && empty($dropdownField)) {
+            $dropdownField = $params['dropdownField'];
+        }
+        // When there is already a custom record.php existing and the layout type is changed from role-dropdown based
+        // or vice-versa, the user will be warned while saving and delete any existing layouts when user confirms
+        if (!empty($this->existingLayout) && $layoutOption !== $this->existingLayout) {
+            $this->warnSave = true;
+        }
+
+        $resetToBase =  $this->request->getValidInputRequest('resetToBase');
+        // Resetting to base on a particular role-id/dropdown field-value will remove the custom record.php
+        if (!empty($resetToBase) && $resetToBase === 'true') {
+            if (!empty($params['layoutOption']) && $params['layoutOption'] === 'role') {
+                $this->deleteExistingCustomLayout($params['layoutOption'], [$params['role']]);
+            } elseif ($params['layoutOption'] === 'dropdown') {
+                $this->deleteExistingCustomLayout($params['layoutOption'], [$params['dropdownField'], $params['dropdownValue']]);
+            }
+        }
         $this->parser = $parser = ParserFactory::getParser(
             $this->editLayout,
             $this->editModule,
@@ -96,6 +142,7 @@ class ViewLayoutView extends SugarView
         $requiredFields = implode(',', $parser->getRequiredFields());
         $buttons = array ( ) ;
         $disableLayout = false;
+        $layoutButtons = [];
 
         if ($preview)
         {
@@ -123,9 +170,16 @@ class ViewLayoutView extends SugarView
 
             $buttons = $this->getButtons($history, $disableLayout, $params);
 
+            $layoutButtons = $this->getLayoutButtons($params);
             $implementation = $parser->getImplementation();
             $roles = $this->getRoleList($implementation);
-            $copyFromOptions = $this->getRoleListWithMetadata($roles, $role);
+            if (!empty($params['layoutOption']) && $params['layoutOption'] === 'dropdown') {
+                $dropdownWithMetadata = $this->getDropdownWithMetadata($implementation, $params);
+                $copyFromOptions = !empty($dropdownWithMetadata['resultsForCopy']) ? $dropdownWithMetadata['resultsForCopy'] : [];
+            } else {
+                $rolesWithMetadata = $this->getRoleListWithMetadata($roles, $role);
+                $copyFromOptions = !empty($rolesWithMetadata['resultsForCopy']) ? $rolesWithMetadata['resultsForCopy'] : [];
+            }
             $smarty->assign('copy_from_options', $copyFromOptions);
         }
 
@@ -140,6 +194,7 @@ class ViewLayoutView extends SugarView
         }
 
         $smarty->assign('buttons', $this->getButtonHTML($buttons));
+        $smarty->assign('layoutButtons', $this->getButtonHTML($layoutButtons));
 
         // assign fields and layout
         $smarty->assign ( 'available_fields', $available_fields ) ;
@@ -151,6 +206,9 @@ class ViewLayoutView extends SugarView
         $smarty->assign ( 'view_module', $this->editModule ) ;
         $smarty->assign ( 'view', $this->editLayout ) ;
         $smarty->assign('selected_role', $role);
+        $smarty->assign('selected_layoutOption', $layoutOption);
+        $smarty->assign('selected_dropdownField', $dropdownField);
+        $smarty->assign('selected_dropdownValue', $dropdownValue);
         $smarty->assign ( 'maxColumns', $parser->getMaxColumns() ) ;
         $smarty->assign ( 'nextPanelId', $parser->getFirstNewPanelId() ) ;
         $smarty->assign ( 'displayAsTabs', $parser->getUseTabs() ) ;
@@ -285,13 +343,13 @@ class ViewLayoutView extends SugarView
             $buttons [] = array(
                 'id' => 'saveBtn',
                 'text' => translate('LBL_BTN_SAVE'),
-                'actionScript' => "onclick='if(Studio2.checkGridLayout(\"{$this->editLayout}\")) Studio2.handleSave();'",
+                'actionScript' => "onclick='if(Studio2.checkGridLayout(\"{$this->editLayout}\")) Studio2.handleSaveWarn({$this->warnSave});'",
                 'disabled' => $disableLayout,
             );
             $buttons [] = array(
                 'id' => 'publishBtn',
                 'text' => translate('LBL_BTN_SAVEPUBLISH'),
-                'actionScript' => "onclick='if(Studio2.checkGridLayout(\"{$this->editLayout}\")) Studio2.handlePublish();'",
+                'actionScript' => "onclick='if(Studio2.checkGridLayout(\"{$this->editLayout}\")) Studio2.handlePublishWarn({$this->warnSave});'",
                 'disabled' => $disableLayout,
             );
         } else {
@@ -328,18 +386,20 @@ class ViewLayoutView extends SugarView
 
         // Handle Opps+RLI mode switch creating one history item on install.
         if ($this->editModule == 'Opportunities') {
-            if ($history->getCount() == 1) {
-                $restoreDefaultDisabled = true;
-            } else if ($history->getCount() > 1) {
-                $historyList = $history->getList();
-                $historyItem = $historyList[1];
+            if (empty($GLOBALS['sugar_config']['roleBasedViews']) || empty($params) || empty($params['role'])) {
+                if ($history->getCount() == 1) {
+                    $restoreDefaultDisabled = true;
+                } elseif ($history->getCount() > 1) {
+                    $historyList = $history->getList();
+                    $historyItem = $historyList[1];
 
-                $action = 'ModuleBuilder.history.revert('
-                    . '"' . $this->editModule . '",'
-                    . '"' . $this->editLayout . '",'
-                    . '"' . $historyItem . '",'
-                    . '""'
-                    . ')';
+                    $action = 'ModuleBuilder.history.revert('
+                        . '"' . $this->editModule . '",'
+                        . '"' . $this->editLayout . '",'
+                        . '"' . $historyItem . '",'
+                        . '""'
+                        . ')';
+                }
             }
         }
 
@@ -349,7 +409,6 @@ class ViewLayoutView extends SugarView
             'actionScript' => "onclick='$action'",
             'disabled' => $restoreDefaultDisabled,
         );
-        $implementation = $this->parser->getImplementation();
         if ($this->editLayout == MB_DETAILVIEW || $this->editLayout == MB_QUICKCREATE) {
             $buttons [] = array(
                 'id' => 'copyFromEditView',
@@ -357,31 +416,186 @@ class ViewLayoutView extends SugarView
                 'actionScript' => "onclick='ModuleBuilder.copyFromView(\"{$this->editModule}\", \"{$this->editLayout}\")'",
                 'disabled' => $disableLayout,
             );
-        } elseif (!empty($GLOBALS['sugar_config']['roleBasedViews'])
+        }
+        return $buttons;
+    }
+
+    /**
+     * Check if role based or dropdown based layouts already exist
+     *
+     * @param array $params
+     * @return mixed
+     */
+    protected function checkExistingCustomLayouts($params)
+    {
+        $folder = [
+            'custom',
+            'modules',
+            $this->editModule,
+            'clients',
+            MetaDataFiles::getViewClient($this->editLayout),
+            'views',
+            MetaDataFiles::$names[$this->editLayout],
+        ];
+        $folderRole = implode('/', $folder) . '/roles';
+        $isRoleTrue = is_dir($folderRole);
+
+        $folderDropdown = implode('/', $folder) . '/dropdowns';
+        $isDropdownTrue = is_dir($folderDropdown);
+
+        if ($isDropdownTrue && $isRoleTrue) {
+            $this->existingLayout = $params['layoutOption'] === 'role'? 'dropdown' : 'role';
+        } elseif ($isRoleTrue) {
+            $this->existingLayout = 'role';
+        } elseif ($isDropdownTrue) {
+            $this->existingLayout = 'dropdown';
+        }
+        // Determining if a specific role based/dropdown based layout already exist. Preselect values accordingly
+        if (empty($params['layoutOption'])) {
+             $params['layoutOption'] = $this->existingLayout ? $this->existingLayout : 'std';
+        }
+        // Similarly checking if there are existing dropdown field custom records, when there are multiple
+        // preselect the first
+        if ($params['layoutOption'] === 'dropdown' && empty($params['dropdownField'])) {
+            $dropdownFields = $this->getDropdownFields();
+            $params['dropdownField'] = $dropdownFields[0]['name'];
+            foreach ($dropdownFields as $field) {
+                $isEmpty = true;
+                if (is_dir($folderDropdown . '/' . $field['name'])) {
+                    $isEmpty = (count(scandir($folderDropdown . '/' . $field['name'])) === 2);
+                }
+                if (!$isEmpty) {
+                    $params['dropdownField'] = $field['name'];
+                    break;
+                }
+            }
+        }
+        return $params;
+    }
+
+    /**
+     * Delete a specific custom layout (role base/dropdown based only)
+     *
+     * @param string $layoutType
+     * @param array $layoutPath
+     */
+    protected function deleteExistingCustomLayout($layoutType, $layoutPath = [])
+    {
+        if ($layoutType === 'role') {
+            $layoutType = 'roles';
+        } elseif ($layoutType === 'dropdown') {
+            $layoutType = 'dropdowns';
+        }
+        $folder = [
+            'custom',
+            'modules',
+            $this->editModule,
+            'clients',
+            MetaDataFiles::getViewClient($this->editLayout),
+            'views',
+            MetaDataFiles::$names[$this->editLayout],
+            $layoutType,
+        ];
+        $dir = implode('/', array_merge($folder, $layoutPath));
+        rmdir_recursive($dir);
+    }
+
+    /**
+     * Generate the buttons for role and dropdown based layouts
+     *
+     * @param array $params
+     * @return array
+     */
+    protected function getLayoutButtons($params)
+    {
+        global $mod_strings;
+        $buttons = [];
+        $implementation = $this->parser->getImplementation();
+        if (!empty($GLOBALS['sugar_config']['roleBasedViews'])
             && !isModuleBWC($this->editModule)
             && ($this->editLayout == MB_RECORDVIEW
+                || $this->editLayout == MB_RECORDDASHLETVIEW
                 || $this->editLayout == MB_WIRELESSEDITVIEW
-                || $this->editLayout == MB_WIRELESSDETAILVIEW)
+                || $this->editLayout == MB_WIRELESSDETAILVIEW
+                || $this->editLayout == MB_PREVIEWVIEW
+            )
             && $implementation->isDeployed()) {
             $availableRoles = $this->getRoleList($implementation);
-            $buttons [] = array('type' => 'spacer', 'width' => '33px');
-            $buttons [] = array('type' => 'label', "text" => translate('LBL_ROLE') . ":");
-            $buttons [] = array(
-                'id' => 'roleList',
-                'type' => 'enum',
-                'actionScript' => 'style="max-width:150px" onchange="ModuleBuilder.switchLayoutRole(this)"',
-                "options" => $this->getAvailableRoleList($implementation),
-                "selected" => empty($params['role']) ? "" :  $params['role'],
-            );
 
-            if (!empty($params['role'])) {
-                $rolesWithMetadata = $this->getRoleListWithMetadata($availableRoles, $params['role']);
-                $buttons [] = array(
+            $buttons [] = [
+                'id' => 'layoutList',
+                'type' => 'enum',
+                'actionScript' => 'style="max-width:150px" onchange="ModuleBuilder.switchLayout(this,\'layoutOption\')"',
+                "options" => $mod_strings['layoutDeterminedBy'],
+                "selected" => $params['layoutOption'],
+                "label" => translate('LBL_LAYOUT_DETERMINED_BY'),
+            ];
+            if (!empty($params['layoutOption']) && $params['layoutOption'] === 'role') {
+                $buttons [] = ['type' => 'spacer', 'width' => '33px'];
+                $buttons [] = [
+                    'id' => 'roleList',
+                    'type' => 'enum',
+                    'actionScript' => 'style="max-width:150px" onchange="ModuleBuilder.switchLayout(this,\'role\')"',
+                    "options" => $this->getAvailableRoleList($implementation),
+                    "selected" => empty($params['role']) ? "" :  $params['role'],
+                    "label" => translate('LBL_ROLE'),
+                ];
+            } elseif (!empty($params['layoutOption']) && $params['layoutOption'] === 'dropdown') {
+                $dropdownFields = $this->getDropdownFields();
+                $fieldNames = [];
+                foreach ($dropdownFields as $field) {
+                    $fieldNames[$field['name']] = translate($field['vname']);
+                }
+                $buttons [] = ['type' => 'spacer', 'width' => '33px'];
+                $buttons [] = [
+                    'id' => 'dropdownFields',
+                    'type' => 'enum',
+                    'actionScript' => 'style="max-width:150px" onchange="ModuleBuilder.switchLayout(this,\'dropdownField\')"',
+                    "options" => $fieldNames,
+                    "selected" => empty($params['dropdownField']) ? "" :  $params['dropdownField'],
+                    "label" => translate('LBL_FIELD_NAME'),
+                ];
+                $buttons [] = ['type' => 'spacer', 'width' => '10px'];
+                if (!empty($params['dropdownField'])) {
+                    $fieldOptions = $this->getDropdownValuesList($implementation, $params, $dropdownFields);
+                } else {
+                    $fieldOptions = ['' => translate('LBL_BASE_LAYOUT')];
+                }
+                $buttons [] = [
+                    'id' => 'dropdownValues',
+                    'type' => 'enum',
+                    'actionScript' => 'style="max-width:150px" onchange="ModuleBuilder.switchLayout(this,\'dropdownValue\')"',
+                    "options" => $fieldOptions,
+                    "selected" => empty($params['dropdownValue']) ? "" :  $params['dropdownValue'],
+                    "label" => translate('LBL_FIELD_VALUE'),
+                ];
+            }
+            $layoutWithMetadata = [];
+            if (!empty($params['layoutOption']) && $params['layoutOption'] === 'role' && !empty($params['role'])) {
+                $layoutWithMetadata = $this->getRoleListWithMetadata($availableRoles, $params['role']);
+            }
+            if (!empty($params['layoutOption']) && $params['layoutOption'] === 'dropdown' && !empty($params['dropdownValue'])) {
+                $layoutWithMetadata = $this->getDropdownWithMetadata($implementation, $params);
+            }
+            if (!empty($params['layoutOption']) && $params['layoutOption'] !== 'std') {
+                $buttons [] = ['type' => 'spacer', 'width' => '10px'];
+                $resetDisabled = !(isset($layoutWithMetadata['resultForReset']) &&
+                    count($layoutWithMetadata['resultForReset']));
+                $copyDisabled = !(isset($layoutWithMetadata['resultsForCopy']) &&
+                    count($layoutWithMetadata['resultsForCopy']));
+
+                $buttons [] = [
+                    'id' => 'resetToBase',
+                    'text' => translate('LBL_BTN_RESTORE_BASE_LAYOUT'),
+                    'actionScript' => "onclick='ModuleBuilder.resetToBase();'",
+                    'disabled' => $resetDisabled,
+                ];
+                $buttons [] = [
                     'id' => 'copyBtn',
                     'text' => translate('LBL_BTN_COPY_FROM'),
                     'actionScript' => "onclick='ModuleBuilder.copyLayoutFromRole();'",
-                    'disabled' => !count($rolesWithMetadata),
-                );
+                    'disabled' => $copyDisabled,
+                ];
             }
         }
         return $buttons;
@@ -390,6 +604,18 @@ class ViewLayoutView extends SugarView
     protected function getButtonHTML(array $buttons)
     {
         $html = "";
+        $html .= "<tr>";
+        foreach ($buttons as $button) {
+            if (isset($button['label'])) {
+                $html .= "<td><span class='label'>{$button['label']}</span></td>";
+            }
+            if ((isset($button['id']) && $button['id'] == "spacer") ||
+                (isset($button['type']) && $button['type'] == "spacer")
+            ) {
+                $html .= "<td style='width:{$button['width']}'> </td>";
+            }
+        }
+        $html .= "</tr><tr>";
         foreach ($buttons as $button) {
             if ((isset($button['id']) && $button['id'] == "spacer") ||
                 (isset($button['type']) && $button['type'] == "spacer")
@@ -414,6 +640,7 @@ class ViewLayoutView extends SugarView
                 $html .= "></td>";
             }
         }
+        $html .= "</tr>";
         return $html;
     }
 
@@ -441,6 +668,32 @@ class ViewLayoutView extends SugarView
     }
 
     /**
+     * Returns object storage containing available dropdown values as keys
+     * and flags indicating if there is dropdown value specific metadata as value
+     *
+     * @param MetaDataImplementationInterface $implementation
+     * @param array $params
+     * @param array $dropdownFields
+     * @return array
+     */
+    protected function getDropdownValuesList(MetaDataImplementationInterface $implementation, $params, $dropdownFields)
+    {
+        return MBHelper::getAvailableDropdownValuesList($this->getHasMetaCallback($implementation), $params, $dropdownFields);
+    }
+
+    /**
+     * Returns list of dropdowns which have role specific metadata
+     *
+     * @param MetaDataImplementationInterface $implementation
+     * @param array $params
+     * @return array
+     */
+    protected function getDropdownWithMetadata(MetaDataImplementationInterface $implementation, $params)
+    {
+        return MBHelper::getDropdownValueWithMetadata($this->getHasMetaCallback($implementation), $params, $this->getDropdownFields());
+    }
+
+/**
      * Returns list of roles which have role specific metadata
      *
      * @param SplObjectStorage $roles
@@ -452,12 +705,63 @@ class ViewLayoutView extends SugarView
         $result = array();
         foreach ($roles as $role) {
             $hasMetadata = $roles->offsetGet($role);
-            if ($hasMetadata && $role->id != $currentRole) {
-                $result[$role->id] = $role->name;
+            if ($hasMetadata) {
+                if ($role->id === $currentRole) {
+                    $result['resultForReset'][$role->id] = $role->name;
+                } else {
+                    $result['resultsForCopy'][$role->id] = $role->name;
+                }
             }
         }
 
         return $result;
+    }
+
+    /**
+     * Get vardefs for all dropdown type of fields of a specific module
+     *
+     * @return array
+     */
+    protected function getDropdownFields()
+    {
+        $fieldDefs = VardefManager::getFieldDefs($this->editModule);
+        $newAry = [];
+        foreach ($fieldDefs as $field) {
+            if (isset($field['type'])
+                && $field['type'] === 'enum'
+                && isset($field['name'])
+                && empty($field['readonly'])
+                && $this->checkStudio($field)
+            ) {
+                array_push($newAry, $field);
+            }
+        }
+        return $newAry;
+    }
+
+    /**
+     * Function to check if the field has studio property set to true
+     *
+     * @param array $field
+     * @return bool
+     */
+    protected function checkStudio($field)
+    {
+        $studioSet = isset($field['studio']);
+        if ($studioSet && is_bool($field['studio'])) {
+            return $field['studio'];
+        }
+        if ($studioSet && is_string($field['studio'])) {
+            return $field['studio'] === 'true' || $field['studio'] === 'visible' ? true : false;
+        }
+        if ($studioSet && is_array($field['studio']) && !empty($field['studio'][$this->editLayout])) {
+            $value = $field['studio'][$this->editLayout];
+            if (is_string($value)) {
+                return $value === 'true' || $value === 'visible' ? true : false;
+            }
+            return $value;
+        }
+        return true;
     }
 
     /**
@@ -475,9 +779,7 @@ class ViewLayoutView extends SugarView
                 $editLayout,
                 $editModule,
                 MB_CUSTOMMETADATALOCATION,
-                array(
-                    'role' => $params['role'],
-                )
+                $params
             );
         };
     }

@@ -18,7 +18,7 @@
 
     _render: function() {
         // FIXME: This will be cleaned up by SC-3478.
-        if (this.view.name === 'audit') {
+        if (['audit', 'side-drawer-headerpane'].includes(this.view.name)) {
             this.def.link = false;
         } else if (this.view.name === 'preview') {
             this.def.link = _.isUndefined(this.def.link) ? true : this.def.link;
@@ -45,5 +45,27 @@
      */
     getFocusContextModule: function() {
         return this.model && this.model.get('_module') ? this.model.get('_module') : '';
+    },
+
+    /**
+     * Called by record view to set max width of inner record-cell div
+     * to prevent long names from overflowing the outer record-cell container
+     */
+    setMaxWidth: function(width) {
+        this.$el.css({'max-width': width});
+    },
+
+    /**
+     * Return the width of padding on inner record-cell
+     */
+    getCellPadding: function() {
+        let padding = 0;
+        let $cell = this.$('.dropdown-toggle');
+
+        if ($cell.length > 0) {
+            padding = parseInt($cell.css('padding-left'), 10) + parseInt($cell.css('padding-right'), 10);
+        }
+
+        return padding;
     }
 })

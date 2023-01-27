@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'デフォルト時間フォーマット',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'サーバ応答時間の表示',
+    'FREEZE_FIRST_COLUMN' => 'カラムの固定を許可',
+    'FREEZE_FIRST_COLUMN_HELP' => 'この設定を有効にすると、モジュールリストビュー、サブパネル、ダッシュレット、' .
+        'コンソールなどのさまざまなリストビューで、ユーザーが最初の列を固定できるようになります。',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'スロークエリーのログ',
     'LOCK_HOMEPAGE_HELP'=>'この設定は以下を非許可にします。<BR> 1) ホームで新規ホームページとダッシュレットを追加 <BR>2) ドラッグアンドドロップによるホームのダッシュレットの配置のカスタマイズ',
     'CURRENT_LOGO'=>'現在のロゴ',
+    'CURRENT_LOGO_DARK' => '現在のダークモードのロゴ：',
     'CURRENT_LOGO_HELP'=>'このロゴはSugarアプリケーションのフッタの左端に表示されます。',
+    'CURRENT_LOGO_DARK_HELP' => "このロゴは、Sugarアプリケーションがダークモードになっているときに、ユーザーの外観の設定に応じて、フッターの左隅に表示されます。",
     'NEW_LOGO'=>'ロゴを選択:',
     'NEW_LOGO_HELP' => '画像ファイルのフォーマットは.pngか.jpgが使用できます。高さの最大値は17px、幅の最大値は450pxです。このサイズより大きい画像をアップロードした場合は、最大値にあわせて画像の大きさが変更されます。',
+    'NEW_LOGO_DARK' => 'ダークモードのロゴを選択：',
     'NEW_LOGO_HELP_NO_SPACE' => '画像のフォーマットは.pngか.jpgを利用出来ます。画像の高さは最大17ピクセル、幅は最大450ピクセルまでです。それ以上のサイズの画像はこのサイズまでスケールダウンします。画像のファイル名にスペースを使えません。',
     'NEW_QUOTE_LOGO'=>'新たな見積用ロゴをアップロード',
     'NEW_QUOTE_LOGO_HELP'=>'画像フォーマットはJPEGである必要があります。<br>推奨サイズは 867x74pxです。',
@@ -412,7 +418,7 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => '続ける',
     'LBL_WIZARD_FINISH_TAB' => '完了',
     'LBL_WIZARD_FINISH_TITLE' => '基本的なシステム設定が完了しました。',
-    'LBL_WIZARD_FINISH' => 'ユーザ設定を行う場合は<b>続ける</b>をクリックしてください。<br/><br /><br />さらにシステム設定を行う場合は<a href="index.php?module=Administration&action=index" target="_blank">ここ</a>をクリックしてください。',
+    'LBL_WIZARD_FINISH' => 'ユーザー設定を行う場合は<b>続ける</b>をクリックしてください。<br/><br />さらにシステム設定を行う場合は<a href="#Administration" target="_blank">ここ</a>をクリックしてください。',
     'LBL_WIZARD_SYSTEM_TITLE' => '名称設定',
     'LBL_WIZARD_SYSTEM_DESC' => 'システム名とロゴを設定してください。',
     'LBL_WIZARD_LOCALE_DESC' => 'データを表示する形式を指定してください。ここで設定した内容はデフォルト値になりますが、ユーザが個別に設定することも可能です。',
@@ -423,7 +429,8 @@ BSOFR
 	'LBL_LOADING' => '読み込み中...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => '削除' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'ようこそ' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'ロゴ' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'ロゴ' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'ダークモードのロゴ',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* レポートモジュールはSugar Mobileのネイティブクライアントのみで有効です。',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '*レポートモジュールはブラウザベースのモバイルビューでは使用できません。',
 
@@ -462,5 +469,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

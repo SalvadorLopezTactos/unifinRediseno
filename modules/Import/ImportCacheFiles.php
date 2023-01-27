@@ -81,7 +81,7 @@ class ImportCacheFiles
         global $current_user;
         $importdir = self::getImportDir();
         // ensure dir exists and writable
-        UploadStream::ensureDir($importdir, true);
+        UploadStream::ensureDir($importdir);
 
         return "$importdir/{$type}_{$current_user->id}.csv";
     }

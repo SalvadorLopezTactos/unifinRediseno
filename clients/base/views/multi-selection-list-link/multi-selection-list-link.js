@@ -19,6 +19,7 @@
 
     plugins: [
         'SugarLogic',
+        'Pagination'
     ],
 
     /**
@@ -62,9 +63,10 @@
      */
     _selectMultipleAndClose: function() {
         var selections = this.context.get('mass_collection');
-        if (selections && selections.length > 0) {
-            this.layout.once('list:masslink:complete', this._closeDrawer, this);
-            this.layout.trigger('list:masslink:fire');
+        var layout = this.layout.layout;
+        if (selections && selections.length > 0 && layout) {
+            layout.once('list:masslink:complete', this._closeDrawer, this);
+            layout.trigger('list:masslink:fire');
         }
     },
 
@@ -99,6 +101,8 @@
         }
 
         context.set('skipFetch', false);
+        // this tells 'collection-count' field to fetch new count in subpanels
+        context.set('isLink', true);
         context.reloadData();
     }
 })

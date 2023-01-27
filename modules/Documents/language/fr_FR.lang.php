@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Lignes de revenu',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Achats',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Lignes d&#39;achats',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement des documents',
+    'LBL_MY_DOCUMENTS' => 'Mes documents',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Envoyer à DocuSign',
 );

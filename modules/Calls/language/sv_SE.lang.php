@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Kontakt ID',
     'LBL_DESCRIPTION_INFORMATION' => 'Beskrivande information',
     'LBL_DESCRIPTION' => 'Beskrivning:',
+    'LBL_INTERNAL_NOTES' => 'Interna anteckningar:',
     'LBL_STATUS' => 'Status:',
     'LBL_DIRECTION' => 'Riktning:',
     'LBL_DATE' => 'Startdatum',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Varaktighetstiden måste vara större än 0',
     'LBL_CALL_INFORMATION' => 'Översikt',
     'LBL_REMOVE' => 'radera',
-    'LBL_ACCEPT_STATUS' => 'Acceptera status',
     'LBL_ACCEPT_LINK' => 'Acceptera Länk',
     //For export labels
     'LBL_PARENT_ID' => 'Föräldra ID',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Samtal:',
     'LBL_CALL_RECORDING_URL' => 'Inspelnings-URL',
     'LBL_CALL_RECORDING' => 'Inspelning',
+
+    'LBL_LEAD_ID' => 'Möjlig kund ID',
+    'LBL_LEAD_NAME' => 'Möjlig kund',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Du schemalade {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> på {{formatDate date_start}}.',

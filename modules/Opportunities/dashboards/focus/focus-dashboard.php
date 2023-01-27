@@ -31,6 +31,25 @@ return [
                                         'link' => '',
                                         'module' => 'Opportunities',
                                     ],
+                                    [
+                                        'active' => false,
+                                        'link' => 'revenuelineitems',
+                                        'module' => 'RevenueLineItems',
+                                        'limit' => 5,
+                                        'fields' => [
+                                            'name',
+                                            'quantity',
+                                            'likely_case',
+                                            'service_duration',
+                                            'service_start_date',
+                                            'service_end_date',
+                                            'commit_stage',
+                                        ],
+                                    ],
+                                ],
+                                'tab_list' => [
+                                    'Opportunities',
+                                    'revenuelineitems',
                                 ],
                             ],
                             'context' => [

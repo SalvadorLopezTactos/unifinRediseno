@@ -572,7 +572,7 @@ class TimeDate
                 return $this->asUserDate($date, true, $user);
                 break;
             case 'time':
-                return $this->asUserTime($date, true, $user);
+                return $this->asUserTime($date, $user);
                 break;
             case 'datetime':
             case 'datetimecombo':
@@ -860,7 +860,7 @@ class TimeDate
      */
     public function asIsoDate(DateTime $date, $tz = false, User $user = null)
     {
-        return $this->asDbDate($date,$tz,$user);
+        return $this->asDbDate($date, $tz);
     }
 
     /**

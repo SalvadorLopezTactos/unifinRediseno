@@ -34,5 +34,6 @@ $viewdefs['Bugs']['base']['filter']['default'] = array(
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
         ),
+        'is_escalated' => [],
     ),
 );

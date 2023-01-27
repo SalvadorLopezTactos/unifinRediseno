@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Configuración de presupuestos',
 
     'LBL_RENEWAL' => 'Renovación',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interacciones de presupuestos',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línea de tiempo de presupuesto',
 );

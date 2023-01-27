@@ -50,6 +50,12 @@
                 name: 'signup',
                 route: 'signup',
                 callback: function() {
+                    // If self sign up isn't enabled, redirect back to the portal login page
+                    if (app.config.enableSelfSignUp !== 'enabled') {
+                        app.router.redirect('/');
+                        return;
+                    }
+
                     app.controller.loadView({
                         module: 'Signup',
                         layout: 'signup',

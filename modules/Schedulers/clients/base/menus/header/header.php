@@ -16,13 +16,13 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'label' =>'LNK_NEW_SCHEDULER',
         'acl_action'=>'admin',
         'acl_module'=>'',
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
     ),
     array(
         'route'=>'#bwc/index.php?module=Schedulers&action=index',
         'label' =>'LNK_LIST_SCHEDULER',
         'acl_action'=>'admin',
         'acl_module'=>'',
-        'icon' => 'fa-list',
+        'icon' => 'sicon-list-view',
     ),
 );

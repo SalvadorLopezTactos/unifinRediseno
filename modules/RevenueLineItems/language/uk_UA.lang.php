@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Ідентифікатор поновленої позиції статті доходів',
     'LBL_PARENT_RLIS' => 'Вихідні позиції статті доходів',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Вихідні позиції статті доходів',
+    'LBL_FORECASTED_LIKELY' => 'Найбільш імовірні прогнози',
     'LBL_EXPERT_ID' => 'Експерт по продукту',
     'LBL_FORECAST' => 'Включити в прогноз',
     'LBL_SUBTOTAL' => 'Підсумок',

@@ -73,6 +73,8 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
             // this is an update to handle changes/to/from
             $criteria = $this->validateUpdateState($criteria, $request->getArguments());
 
+            $this->setLogicHookArgs($request->getArguments());
+
             // Now check if the evaluation is valid as well
             if ($this->getEvaluator()->evaluateExpression($criteria, $bean, $paramsRelated)) {
                 $request->validate();

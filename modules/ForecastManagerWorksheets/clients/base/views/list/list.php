@@ -61,7 +61,7 @@ $viewdefs['ForecastManagerWorksheets']['base']['view']['list'] = array(
                 array(
                     'name' => 'worst_case',
                     'type' => 'currency',
-                    'label' => 'LBL_WORST',
+                    'label' => 'LBL_WORST_FORECAST',
                     'sortable' => true,
                     'default' => true,
                     'enabled' => true,
@@ -92,7 +92,7 @@ $viewdefs['ForecastManagerWorksheets']['base']['view']['list'] = array(
                 array(
                     'name' => 'likely_case',
                     'type' => 'currency',
-                    'label' => 'LBL_LIKELY',
+                    'label' => 'LBL_LIKELY_FORECAST',
                     'sortable' => true,
                     'default' => true,
                     'enabled' => true,
@@ -123,7 +123,7 @@ $viewdefs['ForecastManagerWorksheets']['base']['view']['list'] = array(
                 array(
                     'name' => 'best_case',
                     'type' => 'currency',
-                    'label' => 'LBL_BEST',
+                    'label' => 'LBL_BEST_FORECAST',
                     'sortable' => true,
                     'default' => true,
                     'enabled' => true,

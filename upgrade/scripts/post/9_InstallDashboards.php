@@ -89,6 +89,27 @@ class SugarUpgradeInstallDashboards extends UpgradeScript
             'version' => '11.1',
             'version_operator' => '<',
         ],
+        [
+            'file' => 'modules/Documents/dashboards/record/record-dashboard.php',
+            'module' => 'Documents',
+            'layout' => 'record',
+            'version' => '11.1',
+            'version_operator' => '<',
+        ],
+        [
+            'file' => 'modules/Escalations/dashboards/record/record-dashboard.php',
+            'module' => 'Escalations',
+            'layout' => 'record',
+            'version' => '11.2',
+            'version_operator' => '<',
+        ],
+        [
+            'file' => 'modules/Escalations/dashboards/records/list-dashboard.php',
+            'module' => 'Escalations',
+            'layout' => 'records',
+            'version' => '11.2',
+            'version_operator' => '<',
+        ],
     ];
 
     /**

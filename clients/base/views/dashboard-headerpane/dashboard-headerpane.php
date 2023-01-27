@@ -137,7 +137,7 @@ $viewdefs["base"]["view"]["dashboard-headerpane"] = array(
                     "name" => "name",
                     "placeholder" => "LBL_DASHBOARD_TITLE",
                 ),
-            )
-        )
-    )
+            ),
+        ),
+    ),
 );

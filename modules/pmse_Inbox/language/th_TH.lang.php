@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนกระบวนการ',
 
     'LBL_CAS_ID' => 'เลขที่กระบวนการ',
+    'LBL_CAS_STATUS' => 'สถานะกระบวนการ',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "ไม่ทราบ (จาก UserId:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "งานได้รับการ",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "งาน ",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "ได้รับมอบหมายกระบวนการ #%s %s ข้อความ%s บันทึกโดย %s การดำเนินการ%s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "ใน",
     'LBL_PMSE_HISTORY_LOG_AND'  => "และ",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'เชื่อมต่อลิงก์หรือยกเลิกลิงก์ระเบียนไปยัง',
 
     'LBL_PMSE_LABEL_APPROVE' => 'อนุมัติ',
     'LBL_PMSE_LABEL_REJECT' => 'ปฏิเสธ',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'กระบวนการอยู่ระหว่างดำเนินการ',
     'LBL_STATUS_CANCELLED' => 'ยกเลิกกระบวนการแล้ว',
     'LBL_STATUS_ERROR' => 'กระบวนการมีข้อผิดพลาด',
+    'LBL_STATUS_COMPLETED_ENUM' => 'เสร็จสมบูรณ์',
+    'LBL_STATUS_TERMINATED_ENUM' => 'ยุติ',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'อยู่ระหว่างดำเนินการ',
+    'LBL_STATUS_CANCELLED_ENUM' => 'ยกเลิก',
+    'LBL_STATUS_ERROR_ENUM' => 'ข้อผิดพลาด',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'การจัดการกระบวนการ',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'กระบวนการที่ไม่มีการกำกับดูแล',

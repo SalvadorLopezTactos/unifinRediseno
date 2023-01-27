@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Benutzer',
     'LBL_EMAILS_PRODUCTS_REL' => 'Produkte',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Umsatzposten',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Eskalationen',
     'LBL_EMAILS_MESSAGES_REL' => 'Nachrichten',
     'LBL_EMAILS_PURCHASES_REL' => 'Einkäufe',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Gekaufte Produkte',
@@ -473,4 +474,5 @@ Sie können auch auf E-Mail-Vorlagen oder E-Mail-Signaturen zugreifen, indem Sie
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'E-Mail senden',
     'LBL_MAILBOX' => 'Eingehendes Konto',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Konfigurieren Sie bitte das ausgehende E-Mail-Konto unter <a href="#OutboundEmail">E-Mail-Einstellungen</a>, um E-Mail zu senden.',
 );

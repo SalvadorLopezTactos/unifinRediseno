@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Nom del Suport:',
   'LBL_SUPPORT_TERM' => 'Plaç del Suport:',
   'LBL_TAX_CLASS' => 'Tipus d´Impost:',
+  'LBL_ACTIVE_STATUS' => 'Estat',
   'LBL_TYPE_NAME'=>'Nom del tipus',
   'LBL_TYPE' => 'Tipus:',
   'LBL_PRODUCT_TYPE' => 'Tipus de producte',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Quadre de comandament de la llista del catàleg de productes',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Quadre de comandament del registre del catàleg de productes',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat al catàleg de productes',
+    'LBL_FILTER_ACTIVE_STATUS' => 'L&#39;estat és actiu',
 );

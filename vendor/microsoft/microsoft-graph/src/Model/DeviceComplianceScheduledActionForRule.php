@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class DeviceComplianceScheduledActionForRule extends Entity
 {
@@ -30,7 +28,7 @@ class DeviceComplianceScheduledActionForRule extends Entity
     * Gets the ruleName
     * Name of the rule which this scheduled action applies to.
     *
-    * @return string The ruleName
+    * @return string|null The ruleName
     */
     public function getRuleName()
     {
@@ -60,7 +58,7 @@ class DeviceComplianceScheduledActionForRule extends Entity
      * Gets the scheduledActionConfigurations
     * The list of scheduled action configurations for this compliance policy.
      *
-     * @return array The scheduledActionConfigurations
+     * @return array|null The scheduledActionConfigurations
      */
     public function getScheduledActionConfigurations()
     {
@@ -81,7 +79,7 @@ class DeviceComplianceScheduledActionForRule extends Entity
     */
     public function setScheduledActionConfigurations($val)
     {
-		$this->_propDict["scheduledActionConfigurations"] = $val;
+        $this->_propDict["scheduledActionConfigurations"] = $val;
         return $this;
     }
     

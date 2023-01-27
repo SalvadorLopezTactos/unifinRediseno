@@ -34,10 +34,18 @@ class CalendarViewSaveSettings extends SugarView {
 		$current_user->setPreference('show_tasks', $_REQUEST['show_tasks'], 0, 'global', $current_user);
 		$current_user->setPreference('show_calls', $_REQUEST['show_calls'], 0, 'global', $current_user);
 
-		if(isset($_REQUEST['day']) && !empty($_REQUEST['day']))
-			header("Location: index.php?module=Calendar&action=index&view=".$_REQUEST['view']."&hour=0&day=".$_REQUEST['day']."&month=".$_REQUEST['month']."&year=".$_REQUEST['year']);
-		else
-			header("Location: index.php?module=Calendar&action=index");
+        if (!empty($_REQUEST['day'])) {
+            header('Location: index.php?'.http_build_query([
+                    'module' => 'Calendar',
+                    'action' => 'index',
+                    'view' => $_REQUEST['view'],
+                    'hour' => 0,
+                    'day' => $_REQUEST['day'],
+                    'month' => $_REQUEST['month'],
+                    'year' => $_REQUEST['year']]));
+        } else {
+            header("Location: index.php?module=Calendar&action=index");
+        }
 	}
 	
 	private function to_db_time($hours,$minutes,$mer){

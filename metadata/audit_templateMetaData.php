@@ -31,10 +31,8 @@ $dictionary['audit'] =
 				'indices' => array (
 				      //name will be re-constructed adding idx_ and table name as the prefix like 'idx_accounts_'
 				      array ('name' => 'pk', 'type' => 'primary', 'fields' => array('id')),
-                      array ('name' => 'parent_id', 'type' => 'index', 'fields' => array('parent_id')),
                       array ('name' => 'event_id', 'type' => 'index', 'fields' => array('event_id')),
                       array ('name' => 'pa_ev_id', 'type' => 'index', 'fields' => array('parent_id', 'event_id')),
                       array ('name' => 'after_value', 'type' => 'index', 'fields' => array('after_value_string')),
 				)
-		)
-?>
+        );

@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Standardklokkeslætsformat',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Vis serverens svartider',
+    'FREEZE_FIRST_COLUMN' => 'Tillad frysning af kolonne',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Aktivér denne indstilling for at tillade brugere at fryse den første kolonne blandt flere forskellige ' .
+        'listevisninger, herunder visninger af modulliste, underpaneler, dashlets og konsoller.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Logfør langsomme forespørgsler',
     'LOCK_HOMEPAGE_HELP'=>'Brug denne indstilling til at forhindre, at <BR> 1" nye startsider og dashlets tilføjes i modulet Startside, <BR>2" placeringen af en dashlet på startsiderne tilpasses ved at trække og slippe.',
     'CURRENT_LOGO'=>'Aktuelt logo',
+    'CURRENT_LOGO_DARK' => 'Nuværende Logo for Mørk Tilstand:',
     'CURRENT_LOGO_HELP'=>'Dette logo vises i øverste venstre hjørne af Sugar-programmet.',
+    'CURRENT_LOGO_DARK_HELP' => "Dette logo vises i venstre hjørne af sidefoden, når Sugar-programmet er i mørk tilstand, afhængigt af brugerens præferencer for Udseende.",
     'NEW_LOGO'=>'Vælg nyt logo',
     'NEW_LOGO_HELP' => 'Billedfilformatet kan enten være .png eller .jpg.<BR>Den anbefalede størrelse er 212x40 px.',
+    'NEW_LOGO_DARK' => 'Vælg Logo for Mørk Tilstand:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Billedets filformat kan enten være .png eller .jpg. Den maksimale højde er 17px, og den maksimale bredde er 450px. Ethvert oploadet billede, der er større vil blive skaleret til disse maks. dimensioner. Billedets filnavnet må ikke indeholde et mellemrum.',
     'NEW_QUOTE_LOGO'=>'Upload nyt tilbudslogo',
     'NEW_QUOTE_LOGO_HELP'=>'Det obligatoriske billedfilformat er .jpg.<BR>Den anbefalede størrelse er 867x74 px.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Fortsæt',
     'LBL_WIZARD_FINISH_TAB' => 'Udfør',
     'LBL_WIZARD_FINISH_TITLE' => 'Basis system konfiguration er udført.',
-    'LBL_WIZARD_FINISH' => 'For at konfigurere ekstra systemindstillinger klik <a href="index.php?module=Administration&action=index" target="_blank">her</a>.',
+    'LBL_WIZARD_FINISH' => 'Klik på <b>Fortsæt</b> for at konfigurere dine brugerindstillinger.<br/><br />
+Hvis du vil konfigurere yderligere systemindstillinger, skal du klikke <a href="#Administration" target="_blank">her</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Branding',
     'LBL_WIZARD_SYSTEM_DESC' => 'Opgiv dit firmanavn og logo med henblik på at brande din Sugar.',
     'LBL_WIZARD_LOCALE_DESC' => 'Angive hvordan du gerne vil have data i Sugar til at blive vist baseret på din geografiske placering. De indstillinger, du giver her, vil være standard-indstillingerne. Brugerne vil være i stand til at sætte deres egne præferencer.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Indlæser...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Slet' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Velkommen' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logo for Mørk Tilstand',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Rapportmodulet er kun tilfængeligt for Sugar Mobile iPhone klienten.',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Rapport-modulet er ikke tilgængelig til browser-baserede mobil visning.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

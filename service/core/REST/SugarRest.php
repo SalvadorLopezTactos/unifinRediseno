@@ -101,6 +101,6 @@ class SugarRest
             $arguments = array_pad($arguments, $numRequiredArgs, null);
         }
 
-        return $re->invokeArgs($this->implementation, $arguments);
+        return $re->invokeArgs($this->implementation, array_values($arguments));
     }
 }

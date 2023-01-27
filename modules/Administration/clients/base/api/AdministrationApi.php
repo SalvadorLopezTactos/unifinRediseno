@@ -228,6 +228,7 @@ class AdministrationApi extends SugarApi
                 'longHelp' => 'include/api/help/administration_get_aws_config_get_help.html',
                 'exceptions' => ['SugarApiExceptionNotAuthorized'],
                 'ignoreSystemStatusError' => true,
+                'maxVersion' => '11.14',
             ],
             'setAWSConfig' => [
                 'reqType' => ['POST'],
@@ -238,6 +239,7 @@ class AdministrationApi extends SugarApi
                 'longHelp' => 'include/api/help/administration_set_aws_config_post_help.html',
                 'exceptions' => ['SugarApiExceptionNotAuthorized'],
                 'ignoreSystemStatusError' => true,
+                'maxVersion' => '11.14',
             ],
             'getCSPConfig' => [
                 'reqType' => ['GET'],
@@ -248,6 +250,7 @@ class AdministrationApi extends SugarApi
                 'longHelp' => 'include/api/help/administration_get_csp_setting_get_help.html',
                 'exceptions' => ['SugarApiExceptionNotAuthorized'],
                 'ignoreSystemStatusError' => true,
+                'maxVersion' => '11.14',
             ],
             'setCSPConfig' => [
                 'reqType' => ['POST'],
@@ -258,6 +261,7 @@ class AdministrationApi extends SugarApi
                 'longHelp' => 'include/api/help/administration_set_csp_setting_post_help.html',
                 'exceptions' => ['SugarApiExceptionNotAuthorized'],
                 'ignoreSystemStatusError' => true,
+                'maxVersion' => '11.14',
             ],
             'getValidateIPAddress' => [
                 'reqType' => ['GET'],
@@ -269,7 +273,55 @@ class AdministrationApi extends SugarApi
                 'exceptions' => ['SugarApiExceptionNotAuthorized'],
                 'minVersion' => '11.12',
             ],
+            'getErrors' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'errors'],
+                'pathVars' => [''],
+                'method' => 'getErrors',
+                'shortHelp' => 'Get errors',
+                'longHelp' => 'include/api/help/administration_errors_get_help.html',
+                'exceptions' => [
+                    'SugarApiExceptionNotAuthorized',
+                ],
+                'minVersion' => '11.15',
+            ],
+            'getPortalModules' => [
+                'reqType' => 'GET',
+                'path' => ['Administration', 'portalmodules'],
+                'pathVars' => ['module', ''],
+                'method' => 'getPortalModules',
+                'shortHelp' => 'This method returns the modules currently enabled in Portal Settings',
+                'longHelp' => 'include/api/help/administration_get_portal_modules.html',
+                'minVersion' => '11.13',
+            ],
+            'getAdminPanelDefs' => [
+                'reqType' => 'GET',
+                'path' => ['Administration', 'adminPanelDefs'],
+                'pathVars' => ['module', ''],
+                'method' => 'getAdminPanelDefs',
+                'shortHelp' => 'Get metadata for Admin Panels',
+                'longHelp' => 'include/api/help/administration_get_admin_panel_defs.html',
+                'minVersion' => '11.15',
+            ],
+            'retrieve' => [
+                'reqType' => 'GET',
+                'path' => ['Administration','?'],
+                'pathVars' => ['module','record'],
+                'method' => 'retrieveRecord',
+            ],
         );
+    }
+
+    /**
+     * Added to prevent handling of `/Administration/<something>` with \ModuleApi::retrieveRecord
+     * if `/Administration/<something>` doesn't match any of the routes registered in AdministrationApi
+     * @param ServiceBase $api
+     * @param array $args
+     * @throws SugarApiExceptionNotFound
+     */
+    public function retrieveRecord(ServiceBase $api, array $args)
+    {
+        throw new SugarApiExceptionNotFound();
     }
 
     /**
@@ -566,6 +618,19 @@ class AdministrationApi extends SugarApi
     }
 
     /**
+     * Ensure current user has admin permissions, or he is developer for any module
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    public function ensureDeveloperUser()
+    {
+        if (empty($GLOBALS['current_user']) || !$GLOBALS['current_user']->isDeveloperForAnyModule()) {
+            throw new SugarApiExceptionNotAuthorized(
+                $GLOBALS['app_strings']['EXCEPTION_NOT_AUTHORIZED']
+            );
+        }
+    }
+
+    /**
      * Get refresh status for all indices
      * @param ServiceBase $api
      * @param array $args
@@ -735,26 +800,32 @@ class AdministrationApi extends SugarApi
         $admin = Administration::getSettings();
 
         return [
+            'license_key' => SubscriptionManager::instance()->getLicenseKey(),
             'default_limit' => $seats[$defaultType],
             'default_license_type' => $defaultType,
             'limit_enforced' => empty($admin->settings['license_enforce_user_limit']) ? 0 : 1,
             'seats' => $seats,
             'available_seats' => $availableSeats,
+            'metadata' => SubscriptionManager::instance()->getSystemSubscriptions(),
         ];
     }
 
     /**
      * Gets AWS configuration details for Serve instances
      *
+     * @deprecated Since 11.2.0. Please use getConfig in ConfigApi instead.
      * @param ServiceBase $api The RestService object
      * @param array $args Arguments passed to the service
      * @return array
      */
     public function getAWSConfig(ServiceBase $api, array $args)
     {
+        $msg = 'This endpoint is deprecated as of 11.2.0 and will be removed in a future release.';
+        LoggerManager::getLogger()->deprecated($msg);
+
         $this->ensureAdminUser();
         $admin = BeanFactory::getBean('Administration');
-        if ($admin->isLicensedForServe()) {
+        if ($admin->isLicensedForServe() || $admin->isLicensedForSell()) {
             return $admin->retrieveSettings('aws', true)->settings;
         }
 
@@ -764,17 +835,21 @@ class AdministrationApi extends SugarApi
     /**
      * Saves new AWS configuration details for Serve instances and returns what was saved
      *
+     * @deprecated Since 11.2.0. Please use setConfig in ConfigApi instead.
      * @param ServiceBase $api The RestService object
      * @param array $args Arguments passed to the service
      * @return array
      */
     public function setAWSConfig(ServiceBase $api, array $args)
     {
+        $msg = 'This endpoint is deprecated as of 11.2.0 and will be removed in a future release.';
+        LoggerManager::getLogger()->deprecated($msg);
+
         $this->ensureAdminUser();
         $admin = BeanFactory::getBean('Administration');
 
-        // We only want to do this for Serve licensed intances
-        if ($admin->isLicensedForServe()) {
+        // We only want to do this for Serve and Sell licensed intances
+        if ($admin->isLicensedForServe() || $admin->isLicensedForSell()) {
             $category = 'aws';
             $prefix = $category . '_';
             $changes = [];
@@ -871,12 +946,16 @@ class AdministrationApi extends SugarApi
     /**
      * Gets CSP configuration settings
      *
+     * @deprecated Since 11.2.0. Please use getConfig in ConfigApi instead.
      * @param ServiceBase $api The RestService object
      * @param array $args Arguments passed to the service
      * @return array
      */
     public function getCSPSConfig(ServiceBase $api, array $args): array
     {
+        $msg = 'This endpoint is deprecated as of 11.2.0 and will be removed in a future release.';
+        LoggerManager::getLogger()->deprecated($msg);
+
         $this->ensureAdminUser();
         $admin = BeanFactory::getBean('Administration');
         $settings = $admin->retrieveSettings('csp', true)->settings;
@@ -888,6 +967,7 @@ class AdministrationApi extends SugarApi
     /**
      * Saves new CSP settings configuration and returns what was saved
      *
+     * @deprecated Since 11.2.0. Please use setConfig in ConfigApi instead.
      * @param ServiceBase $api The RestService object
      * @param array $args Arguments passed to the service
      * @return array
@@ -895,6 +975,9 @@ class AdministrationApi extends SugarApi
      */
     public function setCSPConfig(ServiceBase $api, array $args): array
     {
+        $msg = 'This endpoint is deprecated as of 11.2.0 and will be removed in a future release.';
+        LoggerManager::getLogger()->deprecated($msg);
+
         $this->ensureAdminUser();
         $prefix =  'csp_';
         $directives = [];
@@ -954,5 +1037,204 @@ class AdministrationApi extends SugarApi
     public function getSugarConfig(): ?SugarConfig
     {
         return SugarConfig::getInstance();
+    }
+
+    /**
+     * Get errors
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    public function getErrors(ServiceBase $api, array $args): array
+    {
+        $this->ensureDeveloperUser();
+        $errorMessages = [];
+        $GLOBALS['system_notification_buffer'] = [];
+        $GLOBALS['buffer_system_notifications'] = true;
+        $GLOBALS['system_notification_count'] = 0;
+        $sv = new SugarView();
+        $sv->includeClassicFile('modules/Administration/DisplayWarnings.php');
+        if (!empty($GLOBALS['system_notification_buffer'])) {
+            foreach ($GLOBALS['system_notification_buffer'] as $errorMessage) {
+                // remove tag, eg, <p class="error">there is an error</p>
+                $errorMessages[] = substr(substr($errorMessage, 17), 0, -4);
+            }
+        }
+        $errorMessages = array_merge($errorMessages, SugarApplication::getErrorMessages());
+        // convert bwc links to sidecar links
+        foreach ($errorMessages as &$errorMessage) {
+            $errorMessage = $this->convertBWCLinks($errorMessage);
+        }
+        return $errorMessages;
+    }
+
+    /**
+     * Convert bwc links in a message to sidecar links, eg, index.php?module=EmailMan&action=config
+     * will be converted to #bwc/index.php?module=EmailMan&action=config
+     * @param string $message
+     * @return string
+     */
+    protected function convertBWCLinks(string $message): string
+    {
+        $regexp = "<a\s[^>]*href\s*=\s*([\"\']??)(index\.php[^\" >]*?)\\1[^>]*>(.*)<\/a>";
+        if (preg_match_all("/$regexp/siU", $message, $matches, PREG_SET_ORDER)) {
+            foreach ($matches as $match) {
+                $link = $match[2];
+                $message = str_replace($link, '#bwc/' . $link, $message);
+            }
+        }
+        return $message;
+    }
+
+    /**
+     * Method to check which modules are currently enabled for Sugar Portal
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array Array of modules enabled in portal
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    public function getPortalModules(ServiceBase $api, array $args): array
+    {
+        $this->ensureAdminUser();
+        $tabController = new TabController();
+        return $tabController::getPortalTabs();
+    }
+
+    /**
+     * Get metadata for Admin Panels
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    public function getAdminPanelDefs(ServiceBase $api, array $args): array
+    {
+        $this->ensureDeveloperUser();
+
+        return $this->getParsedAdminPanelDefsFromLegacyDefs();
+    }
+
+    /**
+     * Get and return the legacy Admin Panels metadata
+     *
+     * @return array
+     */
+    public function getAdminPanelLegacyDefs(): array
+    {
+        $admin_group_header = [];
+        require 'modules/Administration/metadata/adminpaneldefs.php';
+
+        return $admin_group_header;
+    }
+
+    /**
+     * Get and parse the Admin Panels metadata
+     *
+     * @return array
+     */
+    public function getParsedAdminPanelDefsFromLegacyDefs(): array
+    {
+        $legacyDefs = $this->getAdminPanelLegacyDefs();
+        $defs = [];
+
+        foreach ($legacyDefs as $legacyDef) {
+            $newDefs = [];
+
+            // the label is at index 0 in legacy metadata
+            $newDefs['label'] = array_key_exists(0, $legacyDef) ? $legacyDef[0] : '';
+
+            // the description is at index 4 in legacy metadata
+            $newDefs['description'] = array_key_exists(4, $legacyDef) ? $legacyDef[4] : '';
+
+            // $legacyDef[3] = [
+            //      [module] => [
+            //          [section_key] => [
+            //              [0] => module,
+            //              [link] => sicon,
+            //              [1] => label,
+            //              [2] => description,
+            //              [3] => link,
+            //          ]
+            //      ]
+            // ]
+            if (array_key_exists(3, $legacyDef)) {
+                $legacyOptionDefs = $legacyDef[3];
+
+                $newDefs['options'] = [];
+
+                // each [module]
+                foreach ($legacyOptionDefs as $legacyOptionDef) {
+                    $optionDefSections = array_values($legacyOptionDef);
+
+                    // each [section_key]
+                    foreach ($optionDefSections as $section) {
+                        $option = [];
+
+                        $option['label'] = array_key_exists(1, $section) ? $section[1] : '';
+                        $option['description'] = array_key_exists(2, $section) ? $section[2] : '';
+
+                        if (array_key_exists(3, $section)) {
+                            $link = $section[3];
+                            $linkBwcIndex = strpos($link, '#bwc/');
+
+                            // append '#bwc/' if it does not already exist in the link
+                            if ($linkBwcIndex === false) {
+                                // the index where '#bwc/' should be inserted
+                                $bwcIndex = strpos($link, 'index.php');
+
+                                if ($bwcIndex !== false) {
+                                    // convert '...index.php...' to '...#bwc/index.php...'
+                                    $link = substr($link, 0, $bwcIndex) . '#bwc/' . substr($link, $bwcIndex);
+                                }
+                            }
+
+                            $option['link'] = $link;
+                        }
+
+                        // If there is a icon defined, use it
+                        // If no icon, but we have a legacy image use that
+                        // If neither, use the default icon
+                        if (!empty($section['icon'])) {
+                            $option['icon'] = $section['icon'];
+                            $option['customIcon'] = '';
+                        } elseif (!empty($section[0])) {
+                            $imageName = $section[0] . '.gif';
+                            if ($imageURL = $this->getImageFromTheme($imageName)) {
+                                $option['customIcon'] = $imageURL;
+                                $option['icon'] = '';
+                            } else {
+                                $option['customIcon'] = '';
+                                $option['icon'] = 'sicon-sugar-logo-12';
+                            }
+                        } else {
+                            $option['icon'] = 'sicon-sugar-logo-12';
+                            $option['customIcon'] = '';
+                        }
+
+                        array_push($newDefs['options'], $option);
+                    }
+                }
+            }
+
+            if ($newDefs['options']) {
+                array_push($defs, $newDefs);
+            }
+        }
+
+        return $defs;
+    }
+
+    /**
+     * Helper function to grab the image url from the current theme
+     *
+     * @param $imageName
+     * @return false|string
+     */
+    protected function getImageFromTheme($imageName)
+    {
+        return SugarThemeRegistry::current()->getImageURL($imageName, false, false);
     }
 }

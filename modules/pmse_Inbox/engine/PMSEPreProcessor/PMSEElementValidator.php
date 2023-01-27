@@ -345,6 +345,7 @@ class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
                     }
                     break;
                 case 'newallupdates':
+                case 'relationshipchange':
                     if (!$this->isCaseDuplicated($bean, $flowData, true)) {
                         $request->validate();
                     } else {

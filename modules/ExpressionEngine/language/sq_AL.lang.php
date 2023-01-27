@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Makina e shprehjes',
-  'LBL_MODULE_NAME_SINGULAR' => 'Makina e shprehjes',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Mëparshëm' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Vijues' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Zgjero' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Makina e shprehjes',
+    'LBL_MODULE_NAME_SINGULAR' => 'Makina e shprehjes',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Mëparshëm' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Vijues' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Zgjero' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Fushë e panjohur',
+];

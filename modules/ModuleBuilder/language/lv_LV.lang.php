@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Dzēst' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Nodrošina SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Loma',
+    'LBL_BASE_LAYOUT' => 'Pamata izkārtojums',
+    'LBL_FIELD_NAME' => 'Lauka nosaukums',
+    'LBL_FIELD_VALUE' => 'Vērtība',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Izkārtojumu noteica:',
+    'layoutDeterminedBy' => [
+        'std' => 'Standarta izkārtojums',
+        'role' => 'Loma',
+        'dropdown' => 'Nolaižamais lauks',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Visi pielāgotie izkārtojumi tiks noņemti. Vai tiešām vēlaties mainīt pašreizējās izkārtojuma definīcijas?',
 'help'=>array(
     'package'=>array(
             'create'=>'Ievadi  <b>Nosaukumu</b> priekš pakotnes.  Ievadītajam nosaukumam jābūt burtiem un cipariem un bez atstarpēm (Piemērs: HR_Management)<br/><br/> Tu vari ievadīt  pakotnes <b>Autora</b> and <b>Apraksta</b> informāciju. <br/><br/>Klikšķini <b>Saglabāt</b> lai izveidotu pakotni.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Redzamības redaktors',
 'LBL_ROLLUP' => 'Apkopojums',
 'LBL_RELATED_FIELD' => 'Saistītais lauks',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL uz pielāgoto firmas zīmes attēlu. Firmas zīmes ieteicamie izmēri ir 22 x 22 pikseļi. Augšupielādētie attēli, kuru izmērs jebkurā virzienā būs lielāks, tiks mērogoti līdz šiem maksimālajiem izmēriem.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL uz pielāgoto logotipa attēlu. Logotipa ieteicamais platums ir 200 pikseļi. Augšupielādētie attēli, kuru izmērs jebkurā virzienā būs lielāks, tiks mērogoti līdz šiem maksimālajiem izmēriem. Šis logotips tiks izmantots pieteikšanās ekrānā. Ja attēls netiks augšupielādēts, tad tiks izmantota firmas zīme.',
 'LBL_PORTAL_ROLE_DESC' => 'Nedzēsiet šo lomu. Customer Self-Service Portal Role ir sistēmas ģenerēta loma, kas ir izveidota Sugar Portal aktivēšanas laikā. Izmantojot lietotāja pieejas kontroles uzstādījumus šajā lomā lai aktivētu un/vai deaktivētu Kļūdu, Pieteikumu, Zināšanas bāzes moduļus Sugar Portālā. Nemainiet citas pieejas kontroles tiesības šajā lomā lai izvairītos no neparedzamas sistēmas uzvedības. Ja loma netīšām ir izdzēsta atjaunojiet to deaktivējot un atkal aktivējot Sugar Portālu.',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Pievienot relāciju',
 'LBL_BTN_RENAME_MODULE' => 'Mainīt moduļa nosaukumu',
 'LBL_BTN_INSERT'=>'Ievietot',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Atjaunot pamata izkārtojumu',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'Notikusi kļūda',
 'ERROR_REQUIRED_FIELDS' => 'Vai tiešām vēlaties turpināt? Sekojoši obligātie lauki iztrūkst izkārtojumā:',
 'ERROR_ARE_YOU_SURE' => 'Vai tiešām vēlaties turpināt?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Lauku nevar izveidot. Jūs sasniedzāt rindas izmēra ierobežojumu šai tabulai jūsu datu bāzē. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Uzzināt vairāk</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Sekojoši lauki satur aprēķinātas vērtības, kuras netiks pārrēķinātas reālajā laikā SugarCRM Mobile rediģēšanas skatījumā:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Sekojoši lauki satur aprēķinātas vērtības, kuras netiks pārrēķinātas reālajā laikā SugarCRM Portāla rediģēšanas skatījumā:',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Ja vēlaties tos aktivēt portālā, tad aktivējiet tos  <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">šeit</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Konfigurēt portālu',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Aktivizēt portālu',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Aktivizēt meklēšanu pirms pieteikuma atvēršanas',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Iespējojiet piezīmes Zināšanu bāzes modulī',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Atļaut portāla lietotājiem slēgt pieteikumu',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Atļaut reģistrēties jauniem lietotājiem',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Lietotāja atļaujas',
     'LBL_PORTAL_THEME' => 'Portāla tēma',
     'LBL_PORTAL_ENABLE' => 'Aktivēt',
     'LBL_PORTAL_SITE_URL' => 'Jūsu portāla vietne ir pieejama:',
     'LBL_PORTAL_APP_NAME' => 'Aplikācijas nosaukums',
-    'LBL_PORTAL_LOGOMARK_URL' => 'Firmas zīmes URL',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Firmas zīmes priekšskatījums',
-    'LBL_PORTAL_LOGO_URL' => 'Logotipa URL',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Logotipa priekšskatījums',
     'LBL_PORTAL_CONTACT_PHONE' => 'Tālrunis',
     'LBL_PORTAL_CONTACT_EMAIL' => 'E-pasts',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Ir jāievada derīga e-pasta adrese',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Pavelciet un nometiet Portāla moduļu nosaukumus, lai iestatītu tos kā parādītus vai slēptus Portāla augšējā navigācijas joslā. Lai kontrolētu Portāla lietotāja piekļuvi moduļiem, izmantojiet <a href="?module=ACLRoles&action=index">Lomu pārvaldība.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Parādītie moduļi',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Slēptie moduļi',
+    'LBL_CONFIG_VISIBILITY' => 'Redzamība',
+    'LBL_CASE_VISIBILITY_HELP' => 'Nosakiet, kuri portāla lietotāji var redzēt pieteikumu.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Nosakiet, kuri portāla lietotāji var redzēt ar pieteikumu saistītus e-pastus. Piedalās kontaktpersonas, kuras ir laukos Kam, No, Kopija un Slēptā kopija.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Nosakiet, kuri portāla lietotāji var redzēt ar pieteikumu saistītus ziņojumus. Piedalās kontaktpersonas, kuras ir Viesu laukos.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Visi kontakti, kas ir saistīti ar uzņēmumu',
+        'related_contacts' => 'Tikai primārā kontaktpersona un ar pieteikumu saistītās kontaktpersonas',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Tikai kontaktpersonas - dalībnieki',
+        'all' => 'Visas kontaktpersonas, kuras var redzēt pieteikumu',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Tikai kontaktpersonas - dalībnieki',
+        'all' => 'Visas kontaktpersonas, kuras var redzēt pieteikumu',
+    ],
+
 
 'LBL_PORTAL'=>'Portāls',
 'LBL_PORTAL_LAYOUTS'=>'Portāla izkārtojumi',
@@ -776,7 +801,7 @@ $mod_strings = array(
 'LBL_POPHELP_CALCULATED'=>"Izveidojiet formulu, lai noteiktu vērtību šajā laukā.<br>"
    . "Darbplūsmas definīcijas, kas satur darbību un ir iestatītas, lai atjauninātu šo lauku, vairs nepildīs šo darbību.<br>"
    . "Lauki, kuros izmantotas formulas, netiks aprēķināti reāllaikā "
-   . "Sugar pašapkalpošanās portālā vai "
+   . "sugar pašapkalpošanās portālā vai "
    . "Mobilās rediģēšanas skatījuma izkārtojumos.",
 
 'LBL_POPHELP_DEPENDENT'=>"Izveidojiet formulu, lai noteiktu, vai šis lauks ir redzams izkārtojumos.<br/>"
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Datums/laiks',
                 'decimal'=>'Decimālais',
                 'autoincrement' => 'Automātiskā palielināšana',
+                'actionbutton' => 'Darbības poga',
 ),
 'labelTypes' => array(
     "" => "Biežāk izmantotās etiķetes",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (saistīts ar {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopēt no izkārtojuma',
 'LBL_RELATIONSHIP_TYPE' => 'Relācija',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Salīdzināšanas valoda',
+'LBL_LABEL_NOT_TRANSLATED' => 'Šo etiķeti nevar tulkot',
 );

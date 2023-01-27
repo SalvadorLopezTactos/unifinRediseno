@@ -15,7 +15,7 @@
  */
 ({
     events: {
-        'click .add-on.fa-times': 'clearQuickSearch',
+        'click .add-on.sicon-close': 'clearQuickSearch',
         'keyup .search-name': 'throttledSearch',
         'paste .search-name': 'throttledSearch',
     },
@@ -85,7 +85,7 @@
      * @param {boolean} show TRUE if you want show the clear icon, FALSE to hide
      */
     toggleClearQuickSearchIcon: function(show) {
-        this.$('.fa-times.add-on').toggle(show);
+        this.$('.sicon-close.add-on').toggle(show);
     },
 
     /**

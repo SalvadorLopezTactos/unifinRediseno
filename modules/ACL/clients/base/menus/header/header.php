@@ -23,6 +23,6 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'label' =>'LIST_ROLES_BY_USER',
         'acl_module'=>$module_name,
         'acl_action'=>'list',
-        'icon' => 'fa-bars',
+        'icon' => 'sicon-list-view',
     ),
 );

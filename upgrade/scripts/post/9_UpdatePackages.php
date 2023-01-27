@@ -110,7 +110,7 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
      * @return array
      * @throws PackageManifestException
      * @throws SugarQueryException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      * @throws \Sugarcrm\Sugarcrm\PackageManager\Exception\NoPackageManifestFileException
      * @throws \Sugarcrm\Sugarcrm\PackageManager\Exception\PackageExistsException
@@ -275,7 +275,7 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
     /**
      * delete old broken history from DB because it can't be used
      * @param UpgradeHistory $history
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
     private function deleteHistoryFromDb(UpgradeHistory $history)
@@ -368,7 +368,7 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
      * @param string $type
      * @throws PackageManifestException
      * @throws SugarQueryException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
     private function processInstalledSystemPackageByType(string $type)

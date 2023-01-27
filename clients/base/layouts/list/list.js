@@ -23,8 +23,6 @@
      * @method
      */
     _placeComponent: function(comp, def) {
-        var size = def.size || 12;
-
         // Helper to create boiler plate layout containers
         function createLayoutContainers(self) {
             // Only creates the containers once

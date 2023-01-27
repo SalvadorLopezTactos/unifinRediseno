@@ -13,9 +13,11 @@
 <!-- MIXINS
 ================================================== -->
 <section id="mixins">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <h2>About mixins</h2>
   <div class="row-fluid">

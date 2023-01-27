@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => '推薦人：',
     'LBL_LIST_STATUS' => '狀態',
     'LBL_LIST_TITLE' => '標題',
+    'LBL_MARKET_INTEREST_PREDICTION' => '市場興趣預測',
+    'LBL_MARKET_SCORE' => '市場分數',
     'LBL_MOBILE_PHONE' => '行動電話：',
     'LBL_MODULE_NAME' => '潛在客戶',
     'LBL_MODULE_NAME_SINGULAR' => '潛在客戶',
@@ -330,4 +332,9 @@ $mod_strings = array (
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => '潛在客戶對話預測',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => '查看特定潛在客戶的預測詳細訊息',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => '啟用營收單項',
+    'LBL_REQUIRE_RLIS' => '創建新商機時需要營收單項',
+    'LBL_COPY_DATA_RLIS' => '創建新商機時，將潛在客戶的數據複製到營收單項',
 );

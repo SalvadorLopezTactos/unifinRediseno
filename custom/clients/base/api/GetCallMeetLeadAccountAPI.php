@@ -34,6 +34,7 @@ class GetCallMeetLeadAccountAPI extends SugarApi
     {
         //$GLOBALS['log']->fatal('args',$args);
         $id_cliente=$args['id_Account'];
+        $salida=array();
         //$GLOBALS['log']->fatal('id cliente: '. $id_cliente);
         $GLOBALS['log']->fatal('>>>>>>>Entro Encuentra llamadas reuniones Cuentas  y Lead'. $id_cliente);//------------------------------------
         //------------------------------------
@@ -51,7 +52,7 @@ class GetCallMeetLeadAccountAPI extends SugarApi
         }
         $GLOBALS['log']->fatal('Total accounts: ',$total);//----------------------
 
-        $salida->total_account = $total;
+        $salida['total_account'] = $total;
 
         $query = "select call_account + call_lead + meet_account + meet_lead as total from 
         (select count(parent_id) call_account from calls where status = 'Held' 
@@ -75,7 +76,7 @@ class GetCallMeetLeadAccountAPI extends SugarApi
         }
         $GLOBALS['log']->fatal('Total comunicación: ',$total);//----------------------
 
-        $salida->total = $total;
+        $salida['total'] = $total;
 
         $myJSON = json_encode($salida);
         return $myJSON;

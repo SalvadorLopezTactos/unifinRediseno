@@ -273,7 +273,7 @@ class ImportFile extends ImportDataSource
      */
     public function getFieldCount()
     {
-        return count($this->_currentRow);
+        return (!empty($this->_currentRow)) ? count($this->_currentRow): 0;
     }
 
     /**

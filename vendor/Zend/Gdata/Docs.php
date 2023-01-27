@@ -104,7 +104,7 @@ class Zend_Gdata_Docs extends Zend_Gdata
      *          when communicating with the Google servers.
      * @param string $applicationId The identity of the app in the form of Company-AppName-Version
      */
-    public function __construct($client = null, $applicationName)
+    public function __construct(Zend_Http_Client $client, string $applicationName)
     {
         $this->registerPackage('Zend_Gdata_Docs');
         $this->registerPackage('Zend_Gdata_Docs_Extension_WritersCanInvite');

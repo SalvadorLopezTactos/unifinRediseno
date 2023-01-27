@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID e-mailové adresy příjemce odpovědi',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'E-mailová adresa příjemce odpovědi',
     'LBL_PRIMARY_TEAM' => 'Primární tým',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Preferovaný odesílací účet',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na nastavení e-mailu',
 );

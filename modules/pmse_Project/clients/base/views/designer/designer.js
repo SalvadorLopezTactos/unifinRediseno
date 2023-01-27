@@ -15,6 +15,8 @@
         'click .btn-close-designer': 'closeDesigner'
     },
 
+    designerBackgroundImage: 'grid_20',
+
     closeDesigner: function() {
         var route = app.router.buildRoute(this.module, this.prj_uid);
         app.router.navigate(route, {trigger: true});
@@ -28,6 +30,8 @@
     initialize: function (options) {
         this._super('initialize', [options]);
         app.routing.before('route', this.beforeRouteChange, this);
+
+        this._setDesignerBackgroundImage();
     },
 
     render: function () {
@@ -60,6 +64,12 @@
         }
         project.dispose();
         return true;
+    },
+
+    // Update the wallpaper of the process definition designer to use the correct background image
+    _setDesignerBackgroundImage: function() {
+        let imageName = app.utils.isDarkMode() ? 'dark_grid_20' : 'grid_20';
+        this.designerBackgroundImage = `modules/pmse_Project/img/${imageName}.png`;
     },
 
     _dispose: function () {

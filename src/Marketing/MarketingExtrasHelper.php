@@ -34,7 +34,7 @@ class MarketingExtrasHelper
     {
         global $sugar_build, $sugar_flavor, $sugar_version;
 
-        $subscriptions = SubscriptionManager::instance()->getSystemSubscriptionKeys();
+        $subscriptions = SubscriptionManager::instance()->getTopLevelSystemSubscriptionKeys();
         $readableProductNames = getReadableProductNames(array_keys($subscriptions));
 
         return [

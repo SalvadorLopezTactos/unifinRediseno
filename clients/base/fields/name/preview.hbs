@@ -20,9 +20,7 @@
             >
                 {{value}}
             </a>
-            <span class="focus-icon-container hide">
-                <span class="focus-icon"></span>
-            </span>
+            {{partial 'focus-icon' this this}}
         {{else}}
             <span class="ellipsis_inline" data-placement="bottom" title="{{value}}">
                 {{value}}

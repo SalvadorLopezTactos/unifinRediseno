@@ -319,14 +319,20 @@ class Sugarpdf extends TCPDF
 
         // HEADER
         if(!isset($options['isheader']) || $options['isheader'] == true){
+            $header = [];
             $headerOptions = $options;
             if(!empty($options['header']) && is_array($options['header'])){
                 $headerOptions = $this->initOptionsForWriteCellTable($options['header'], $item);
             }
-            foreach($item[0] as $k => $v){
-                $header[$k]=$k;
+            if (!empty($item[0]) && is_array($item[0])) {
+                foreach ($item[0] as $k => $v) {
+                    $header[$k] = $k;
+                }
             }
-            $h = $this->getLineHeightFromArray($header, $options["width"]);
+            $h = 0;
+            if (!empty($options['width'])) {
+                $h = $this->getLineHeightFromArray($header, $options['width']);
+            }
             foreach ($header as $v)
                 $this->MultiCell($options["width"][$v],$h,$v,$headerOptions['border'],$headerOptions['align'],$headerOptions['fillstate'],0,'','',true, $options['stretch'][$v], $headerOptions['ishtml']);
             $this->SetFillColorArray($this->convertHTMLColorToDec($options['fill']));
@@ -497,14 +503,16 @@ class Sugarpdf extends TCPDF
      */
     private function getLineHeightFromArray($line, $width){
         $h=0;
-        foreach($line as $kk=>$cell){
-            $cellValue = $cell;
-            if(is_array($cellValue)){
-                $tmp = $cellValue['value'];
-                $cellValue = $tmp;
-            }
-            if($h<$this->getNumLines($cellValue, $width[$kk])){
-                $h=$this->getNumLines($cellValue, $width[$kk]);
+        if (!empty($line) && is_array($line)) {
+            foreach ($line as $kk => $cell) {
+                $cellValue = $cell;
+                if (is_array($cellValue)) {
+                    $tmp = $cellValue['value'];
+                    $cellValue = $tmp;
+                }
+                if ($h < $this->getNumLines($cellValue, $width[$kk])) {
+                    $h = $this->getNumLines($cellValue, $width[$kk]);
+                }
             }
         }
         return $h * $this->FontSize * $this->cell_height_ratio + 2 * $this->cMargin;
@@ -526,11 +534,15 @@ class Sugarpdf extends TCPDF
             $options=array();
         }
         // set to default if empty
-        if(empty($options["width"]) || !is_array($options["width"])){
-            $colNum = count($item[0]);
-            $defaultWidth = $this->getRemainingWidth()/$colNum;
-            foreach($item[0] as $k => $v){
-                $options["width"][$k]=$defaultWidth;
+        if (empty($options["width"]) || !is_array($options["width"])) {
+            if (isset($item[0]) && is_array($item[0])) {
+                $colNum = count($item[0]);
+                if ($colNum > 0) {
+                    $defaultWidth = $this->getRemainingWidth() / $colNum;
+                    foreach ($item[0] as $k => $v) {
+                        $options["width"][$k] = $defaultWidth;
+                    }
+                }
             }
         }else{
             foreach($options["width"] as $k => $v){
@@ -553,9 +565,13 @@ class Sugarpdf extends TCPDF
         if(empty($options['border'])){
             $options['border'] = 0;
         }
-        foreach($item[0] as $k => $v)
-            if (empty($options['stretch'][$k]))
-                $options['stretch'][$k] = self::STRETCH_NONE;
+        if (isset($item[0]) && is_array($item[0])) {
+            foreach ($item[0] as $k => $v) {
+                if (empty($options['stretch'][$k])) {
+                    $options['stretch'][$k] = self::STRETCH_NONE;
+                }
+            }
+        }
 
         if(!empty($options['fill'])){
             $this->SetFillColorArray($this->convertHTMLColorToDec($options['fill']));

@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Обновяване на ИД на приходна позиция',
     'LBL_PARENT_RLIS' => 'Позиции на приходи на родител',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Позиции на приходи на родител',
+    'LBL_FORECASTED_LIKELY' => 'Прогнозирани Вероятни',
     'LBL_EXPERT_ID' => 'Продуктов експерт',
     'LBL_FORECAST' => 'Включи в прогнозата',
     'LBL_SUBTOTAL' => 'Междинна сума',

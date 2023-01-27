@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'Creează document',
 	'LNK_DOCUMENT_LIST'=> 'Vezi documente',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'Revizii pentru documentul asociat',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'Ați creat cu succes {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a>.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'Revizuire numar',
 	'LBL_FILENAME' => 'Nume Fisier',
 	'LBL_MIME' => 'Tipul de mima',

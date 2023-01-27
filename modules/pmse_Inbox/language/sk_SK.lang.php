@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Informačný panel so záznamom procesov',
 
     'LBL_CAS_ID' => 'Process Number',
+    'LBL_CAS_STATUS' => 'Stav procesu',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Unknown (according UserId:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "task has been",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "task was ",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "bol priradený proces #%s %s %s záznam %s akciou %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "dňa",
     'LBL_PMSE_HISTORY_LOG_AND'  => "a",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'prepojil alebo zrušil prepojenie záznamu s',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Approve',
     'LBL_PMSE_LABEL_REJECT' => 'Reject',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Processes In Progress',
     'LBL_STATUS_CANCELLED' => 'Processes Cancelled',
     'LBL_STATUS_ERROR' => 'Processes Error',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Dokončené',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Ukončené',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Prebieha',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Zrušené',
+    'LBL_STATUS_ERROR_ENUM' => 'Chyba',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Process Management',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Unattended Processes',

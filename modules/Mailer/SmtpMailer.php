@@ -1,4 +1,7 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception as PHPMailerException;
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -54,6 +57,22 @@ class SmtpMailer extends BaseMailer
      * Internal PHPMailer instance
      */
     protected $mailer;
+
+    /**
+     * Fixed time duration for connection command to SMTP (for prevent port scanning on connection)
+     *
+     * @var int|null
+     */
+    public $connectionCommandTimeDuration = null;
+
+    /**
+     * @param int|null $seconds
+     * @return void
+     */
+    public function setConnectionCommandTimeDuration(?int $seconds): void
+    {
+        $this->connectionCommandTimeDuration = $seconds;
+    }
 
     /**
      * {@inheritDoc}
@@ -185,6 +204,7 @@ class SmtpMailer extends BaseMailer
             $api = $this->getExternalApi($eapmBean->application);
             if (!empty($api)) {
                 $mailer->accessToken = $api->getAccessToken($eapmId);
+                $mailer->getOAUTHInstance();
             }
         }
     }
@@ -223,9 +243,36 @@ class SmtpMailer extends BaseMailer
      */
     protected function connectToHost(PHPMailer &$mailer)
     {
+        if (!is_null($this->connectionCommandTimeDuration)) {
+            if ($this->connectionCommandTimeDuration < 3) {
+                $this->setConnectionCommandTimeDuration(3);
+            }
+
+            $setTimeout = $mailer->getSMTPInstance()->Timeout;
+            $setTimelimit = $mailer->getSMTPInstance()->Timelimit;
+
+            $halfTimeDuration = floor($this->connectionCommandTimeDuration / 2);
+
+            $timeDurationMicroseconds = $this->connectionCommandTimeDuration * 1000000;
+
+            $mailer->getSMTPInstance()->Timeout = $halfTimeDuration;
+            $mailer->getSMTPInstance()->Timelimit = $halfTimeDuration;
+
+            $connectionStartTime = round(microtime(true));
+        }
+
         try {
             // have PHPMailer attempt to connect to the SMTP server
             $result = $mailer->smtpConnect();
+
+            if (!is_null($this->connectionCommandTimeDuration)) {
+                $connectionDurationMicroseconds = round((microtime(true) - $connectionStartTime) * 1000000);
+                if ($connectionDurationMicroseconds < $timeDurationMicroseconds) {
+                    $sleepTimeMicroseconds = $timeDurationMicroseconds - $connectionDurationMicroseconds;
+                    usleep($sleepTimeMicroseconds);
+                }
+            }
+
             // returns true if connection is successful
             if (!$result) {
                 throw new Exception('Connection Failed');
@@ -241,6 +288,11 @@ class SmtpMailer extends BaseMailer
                 MailerException::FailedToConnectToRemoteServer
             );
         }
+
+        if (!is_null($this->connectionCommandTimeDuration)) {
+            $mailer->getSMTPInstance()->Timeout = $setTimeout;
+            $mailer->getSMTPInstance()->Timelimit = $setTimelimit;
+        }
     }
 
     /**
@@ -249,7 +301,7 @@ class SmtpMailer extends BaseMailer
      * @access protected
      * @param PHPMailer $mailer
      * @throws MailerException
-     * @throws phpmailerException
+     * @throws \PHPMailer\PHPMailer\Exception
      */
     protected function transferHeaders(PHPMailer &$mailer)
     {
@@ -300,8 +352,8 @@ class SmtpMailer extends BaseMailer
                         // want the same behavior to be applied for both false and on error, so throw a
                         // phpMailerException on failure.
                         if (!$mailer->addReplyTo($value[0], $value[1])) {
-                            // doesn't matter what the message is since we're going to eat phpmailerExceptions
-                            throw new phpmailerException();
+                            // doesn't matter what the message is since we're going to eat \PHPMailer\PHPMailer\Exception
+                            throw new PHPMailerException();
                         }
                     } catch (Exception $e) {
                         throw new MailerException(

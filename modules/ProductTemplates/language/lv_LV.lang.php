@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Atbalsta sniedzēja vārds:',
   'LBL_SUPPORT_TERM' => 'Atbalsta termiņš:',
   'LBL_TAX_CLASS' => 'Nodokļu klase:',
+  'LBL_ACTIVE_STATUS' => 'Statuss',
   'LBL_TYPE_NAME'=>'Tipa nosaukums',
   'LBL_TYPE' => 'Tips:',
   'LBL_PRODUCT_TYPE' => 'Produkta veids',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Produktu kataloga saraksta informācijas panelis',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Produktu kataloga ieraksta informācijas panelis',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Produktu kataloga fokusa panelis',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Statuss ir aktīvs',
 );

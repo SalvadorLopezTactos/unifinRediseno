@@ -206,9 +206,9 @@
      */
     toggleSearchIcon: function(hide) {
         this.$('[data-role=secondinputaddon]')
-            .toggleClass('fa-search', !hide)
-            .toggleClass('fa-spinner', hide)
-            .toggleClass('fa-spin', hide);
+            .toggleClass('sicon-search', !hide)
+            .toggleClass('sicon-reset', hide)
+            .toggleClass('sicon-is-spinning', hide);
     },
 
     /**
@@ -544,7 +544,7 @@
     exclamationMarkTemplate: function() {
         var extraClass = this.view.tplName === 'record' ? 'top0' : 'top4';
         return '<span class="error-tooltip ' + extraClass + ' add-on" data-contexclamationMarkTemplateainer="body">' +
-        '<i class="fa fa-exclamation-circle">&nbsp;</i>' +
+        '<i class="sicon sicon-warning-circle">&nbsp;</i>' +
         '</span>';
     }
 })

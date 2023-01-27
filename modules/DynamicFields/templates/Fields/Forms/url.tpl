@@ -51,7 +51,6 @@
 	<td>
 	{if $hideLevel < 5}
 		<input type='text' name='len' value='{$vardef.len|default:255}' onchange="forceRange(this,1,4096);changeMaxLength(document.getElementById('default'),this.value);">
-		{literal}
 		<script>
 		function forceRange(field, min, max){
 			field.value = parseInt(field.value);
@@ -64,7 +63,6 @@
 			field.value = field.value.substr(0, field.maxLength);
 		}
 		</script>
-		{/literal}
 	{else}
 		<input type='hidden' name='len' value='{$vardef.len}'>{$vardef.len}
 	{/if}

@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Configuração de cotações',
 
     'LBL_RENEWAL' => 'Renovação',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interações de cotações',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Linha do tempo da cotação',
 );

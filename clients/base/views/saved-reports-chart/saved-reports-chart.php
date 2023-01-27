@@ -21,6 +21,11 @@ $viewdefs['base']['view']['saved-reports-chart'] = array(
             'preview' => array(
 
             ),
+            'filter' => [
+                'blacklist' => [
+                    'module' => 'Administration',
+                ],
+            ],
         )
     ),
     'custom_toolbar' => array(
@@ -28,7 +33,7 @@ $viewdefs['base']['view']['saved-reports-chart'] = array(
             array(
                 "type" => "dashletaction",
                 "css_class" => "btn btn-invisible dashlet-toggle minify",
-                "icon" => "fa-chevron-up",
+                "icon" => "sicon-chevron-up",
                 "action" => "toggleMinify",
                 "tooltip" => "LBL_DASHLET_TOGGLE",
                 "is_chart" => true,
@@ -95,7 +100,7 @@ $viewdefs['base']['view']['saved-reports-chart'] = array(
                     'sort_alpha' => true,
                     'ordered' => true,
                     'searchBarThreshold' => -1,
-                    'options' => 'd3_chart_types',
+                    'options' => 'chart_types',
                 ),
 
                 array(

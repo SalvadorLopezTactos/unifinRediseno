@@ -253,11 +253,11 @@ function buildInstall($path){
 }
 
     function getPackageDir(){
-        return MB_PACKAGE_PATH . '/' . $this->name;
+        return MB_PACKAGE_PATH . '/' . basename($this->name);
     }
 
     function getBuildDir(){
-        return MB_PACKAGE_BUILD . DIRECTORY_SEPARATOR . $this->name;
+        return MB_PACKAGE_BUILD . DIRECTORY_SEPARATOR . basename($this->name);
     }
 
     function getZipDir(){

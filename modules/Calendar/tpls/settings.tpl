@@ -12,7 +12,6 @@
 *}
 
 <script type="text/javascript">
-{literal}
 function toggleDisplayTimeslots() {
 	if (document.getElementById('display_timeslots').checked) {
 		$(".time_range_options_row").css('display', '');
@@ -25,7 +24,6 @@ $(function() {
 	toggleDisplayTimeslots();
 });
 
-{/literal}
 </script>
 
 <div id="settings_dialog" style="width: 450px; display: none;">

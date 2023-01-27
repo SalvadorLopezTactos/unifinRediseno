@@ -12,7 +12,8 @@
 
 use Sugarcrm\Sugarcrm\PackageManager\Entity\PackageManifest;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\PackageManifestException;
-use Doctrine\DBAL\DBALException;
+use Sugarcrm\Sugarcrm\PackageManager\VersionComparator;
+use Doctrine\DBAL\Exception as DBALException;
 
 /**
  * External module class
@@ -21,6 +22,10 @@ class UpgradeHistory extends SugarBean
 {
     const STATUS_STAGED = 'staged';
     const STATUS_INSTALLED = 'installed';
+
+    // Defence against the case where a package makes the whole application broken.
+    // If a FATAL or PARSE error caught, the package with age below this timeout will be removed.
+    const PACKAGE_EMERGENCY_ROLLBACK_TIMEOUT_MIN = 5;
 
     var $new_schema = true;
     var $module_dir = 'Administration';
@@ -66,6 +71,12 @@ class UpgradeHistory extends SugarBean
      * @var string
      */
     public $enabled;
+
+    /**
+     * installation progress and related values
+     * @var string
+     */
+    public $process_status;
 
     /**
      * is upgrade history deleted?
@@ -247,6 +258,68 @@ class UpgradeHistory extends SugarBean
     }
 
     /**
+     * find a last package that was installed less than PACKAGE_EMERGENCY_ROLLBACK_TIMEOUT_MIN minutes ago
+     */
+    public function getJustInstalled(): ?UpgradeHistory
+    {
+        $history = BeanFactory::getBean($this->getModuleName());
+        $query = new SugarQuery();
+        $query->select('*');
+        $query->from($history);
+        $date = new SugarDateTime();
+        $date->modify('-' . self::PACKAGE_EMERGENCY_ROLLBACK_TIMEOUT_MIN . ' minutes');
+        $query->where()->gte('date_modified', $date->asDb());
+        $query->where()->equals('deleted', 0);
+        $query->orderBy('date_modified', 'DESC');
+        $query->limit(1);
+        $result = $query->compile()->execute()->fetchAssociative();
+        if ($result) {
+            $history->populateFromRow($result);
+            return $history;
+        }
+        return null;
+    }
+
+    /**
+     * immediately update a record status
+     */
+    public function updateStatus(string $status): void
+    {
+        $this->status = $status;
+        $this->db->updateParams(
+            $this->getTableName(),
+            ['status' => $this->getFieldDefinition('status'), 'id' => $this->getFieldDefinition('id')],
+            ['status' => $status],
+            ['id' => $this->id],
+        );
+    }
+
+    /**
+     * immediately update a record status
+     */
+    public function updateProcessStatus(array $processStatus): void
+    {
+        $this->process_status = json_encode($processStatus);
+        $this->db->updateParams(
+            $this->getTableName(),
+            [
+                'process_status' => $this->getFieldDefinition('process_status'),
+                'id' => $this->getFieldDefinition('id'),
+            ],
+            ['process_status' => $this->process_status],
+            ['id' => $this->id],
+        );
+    }
+
+    /**
+     * returns installation process status
+     */
+    public function getProcessStatus(): array
+    {
+        return (array) @json_decode($this->process_status, true);
+    }
+
+    /**
      * retrieve upgrade history by id_name
      * @param string $idName
      * @return SugarBean|null
@@ -343,19 +416,19 @@ class UpgradeHistory extends SugarBean
         $requiredDependencies = $this->getPackageManifest()->getManifestValue('dependencies', []);
 
         $conn = $this->db->getConnection();
-        $stmt = $conn->prepare(sprintf(
+        $sql = sprintf(
             'SELECT version FROM %s WHERE id_name = ? AND status = ? AND deleted = 0',
-            $this->table_name,
-        ));
+            $this->db->getValidDBName($this->table_name, false, 'table')
+        );
 
         foreach ($requiredDependencies as $dependency) {
             if (empty($dependency['id_name']) || empty($dependency['version'])) {
                 continue;
             }
-            $stmt->execute([$dependency['id_name'], self::STATUS_INSTALLED]);
+            $installedVersions = $conn->fetchFirstColumn($sql, [$dependency['id_name'], self::STATUS_INSTALLED]);
             $isRequiredVersionInstalled = false;
-            while ($row = $stmt->fetch()) {
-                if (version_compare($row['version'], $dependency['version'], '>=')) {
+            foreach ($installedVersions as $installedVersion) {
+                if (VersionComparator::greaterThanOrEqualTo($installedVersion, $dependency['version'])) {
                     $isRequiredVersionInstalled = true;
                     break;
                 }
@@ -392,8 +465,9 @@ class UpgradeHistory extends SugarBean
         }
 
         $previousInstalled = array_shift($versions);
+        $ph = new VersionComparator();
         foreach ($versions as $version) {
-            if (version_compare($version->version, $previousInstalled->version, '>')) {
+            if (VersionComparator::greaterThan($version->version, $previousInstalled->version)) {
                 $previousInstalled = $version;
             }
         }

@@ -41,52 +41,29 @@ class InitProductDefinition
         return <<<JSON
 {
     "MODULES": {
-        "Bugs":["CURRENT","SUGAR_SERVE"],
-        "BusinessCenters":["SUGAR_SERVE","SUGAR_SELL"],
         "CampaignLog":["CURRENT","SUGAR_SELL"],
         "CampaignTrackers":["CURRENT","SUGAR_SELL"],
         "Campaigns":["CURRENT","SUGAR_SELL"],
-        "Cases":["CURRENT","SUGAR_SERVE"],
         "ChangeTimers":["SUGAR_SERVE"],
-        "ContractTypes":["CURRENT","SUGAR_SELL"],
-        "Contracts":["CURRENT","SUGAR_SELL"],
         "EmailMarketing":["CURRENT","SUGAR_SELL"],
         "ForecastManagerWorksheets":["CURRENT","SUGAR_SELL"],
         "ForecastWorksheets":["CURRENT","SUGAR_SELL"],
         "Forecasts":["CURRENT","SUGAR_SELL"],
         "Leads":["CURRENT","SUGAR_SELL"],
-        "Messages":["SUGAR_SERVE"],
-        "MobileDevices":["SUGAR_SERVE","SUGAR_SELL"],
         "Opportunities":["CURRENT","SUGAR_SELL"],
         "ProductBundleNotes":["CURRENT","SUGAR_SELL"],
         "ProductBundles":["CURRENT","SUGAR_SELL"],
         "Products":["CURRENT","SUGAR_SELL"],
-        "Project":["CURRENT"],
-        "ProjectTask":["CURRENT"],
         "ProspectLists":["CURRENT","SUGAR_SELL"],
         "Prospects":["CURRENT","SUGAR_SELL"],
-        "PurchasedLineItems":["SUGAR_SERVE","SUGAR_SELL"],
-        "Purchases":["SUGAR_SERVE","SUGAR_SELL"],
-        "PushNotifications":["SUGAR_SERVE","SUGAR_SELL"],
         "Quotas":["CURRENT","SUGAR_SELL"],
         "Quotes":["CURRENT","SUGAR_SELL"],
-        "Releases":["CURRENT","SUGAR_SERVE"],
         "RevenueLineItems":["CURRENT","SUGAR_SELL"],
         "Shippers":["CURRENT","SUGAR_SELL"],
-        "TaxRates":["CURRENT","SUGAR_SELL"],
-        "WorkFlow":["CURRENT"],
-        "WorkFlowActionShells":["CURRENT"],
-        "WorkFlowActions":["CURRENT"],
-        "WorkFlowAlertShells":["CURRENT"],
-        "WorkFlowAlerts":["CURRENT"],
-        "WorkFlowTriggerShells":["CURRENT"]
+        "TaxRates":["CURRENT","SUGAR_SELL"]
     },
     "DASHLETS": {
-        "commentlog-dashlet":["CURRENT","SUGAR_SERVE","SUGAR_SELL"],
-        "activity-timeline":["CURRENT","SUGAR_SERVE","SUGAR_SELL"],
-        "dashablerecord":["CURRENT","SUGAR_SERVE","SUGAR_SELL"],
         "bubblechart":["CURRENT","SUGAR_SELL"],
-        "casessummary":["CURRENT","SUGAR_SERVE"],
         "forecast-pareto":["CURRENT","SUGAR_SELL"],
         "forecast-pipeline":["CURRENT","SUGAR_SELL"],
         "forecastdetails":["CURRENT","SUGAR_SELL"],
@@ -98,22 +75,19 @@ class InitProductDefinition
         "product-catalog":["CURRENT","SUGAR_SELL"],
         "sales-pipeline":["CURRENT","SUGAR_SELL"],
         "twitter":["CURRENT"],
-        "dashlet-searchable-kb-list":["SUGAR_SERVE","SUGAR_SELL"],        
-        "active-subscriptions":["SUGAR_SERVE","SUGAR_SELL"],
         "request-closed-cases-dashlet":["SUGAR_SERVE"],
-        "purchase-history":["SUGAR_SELL", "SUGAR_SERVE"]
+        "leads-conversion-scoring-dashlet":["PREDICT_ADVANCED","PREDICT_PREMIER"],
+        "opportunity-conversion-scoring-dashlet":["PREDICT_ADVANCED","PREDICT_PREMIER"]
     },
     "RECORDS": {
         "Dashboards": {
-            "32bc5cd0-b1a0-11ea-ad16-f45c898a3ce7":["SUGAR_SERVE"],
+            "32bc5cd0-b1a0-11ea-ad16-f45c898a3ce7":["SUGAR_SERVE","SUGAR_SELL"],
             "c108bb4a-775a-11e9-b570-f218983a1c3e":["SUGAR_SERVE"],
-            "da438c86-df5e-11e9-9801-3c15c2c53980":["SUGAR_SELL"],
+            "da438c86-df5e-11e9-9801-3c15c2c53980":["CURRENT","SUGAR_SELL"],
             "5d670ec4-7b52-11e9-b9e0-f218983a1c3e":["CURRENT","SUGAR_SELL"],
             "5d671a22-7b52-11e9-b2bc-f218983a1c3e":["CURRENT","SUGAR_SELL"],
             "5d671d06-7b52-11e9-83cf-f218983a1c3e":["CURRENT","SUGAR_SELL"],
             "5d671fae-7b52-11e9-92e0-f218983a1c3e":["CURRENT","SUGAR_SELL"],
-            "5d672260-7b52-11e9-93ba-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d6724f4-7b52-11e9-a725-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
             "5d672788-7b52-11e9-8440-f218983a1c3e":["CURRENT","SUGAR_SELL"],
             "5d672a1c-7b52-11e9-8ddb-f218983a1c3e":["CURRENT","SUGAR_SELL"],
             "5d672ca6-7b52-11e9-a6f5-f218983a1c3e":["CURRENT","SUGAR_SELL"],
@@ -122,8 +96,6 @@ class InitProductDefinition
             "5d673462-7b52-11e9-8929-f218983a1c3e":["CURRENT","SUGAR_SELL"],
             "5d6736ec-7b52-11e9-a00e-f218983a1c3e":["CURRENT","SUGAR_SELL"],
             "5d67396c-7b52-11e9-8826-f218983a1c3e":["CURRENT","SUGAR_SELL"],
-            "5d673c00-7b52-11e9-871e-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d673e80-7b52-11e9-833f-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
             "5d67410a-7b52-11e9-afc1-f218983a1c3e":["CURRENT","SUGAR_SELL"]
         },
         "Reports": {
@@ -192,25 +164,6 @@ class InitProductDefinition
             "efc19162-7905-11e9-a98b-f218983a1c3e":["CURRENT","SUGAR_SELL"],
             "efc193e2-7905-11e9-9bfa-f218983a1c3e":["CURRENT","SUGAR_SELL"],
             "ff5d5d0e-7905-11e9-a6cc-f218983a1c3e":["CURRENT","SUGAR_SELL"],
-            "5d674394-7b52-11e9-9740-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d674614-7b52-11e9-8f84-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d6748a8-7b52-11e9-9e9f-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d674b28-7b52-11e9-a18e-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d674db2-7b52-11e9-a8be-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d675032-7b52-11e9-990d-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d6752b2-7b52-11e9-acfc-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d67553c-7b52-11e9-bcf2-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d6757c6-7b52-11e9-9ead-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d675a50-7b52-11e9-83cb-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d675cda-7b52-11e9-9155-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d675f5a-7b52-11e9-9420-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d6761ee-7b52-11e9-aa07-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d676464-7b52-11e9-90b4-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d6766f8-7b52-11e9-8da8-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d676978-7b52-11e9-9ad3-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d676c02-7b52-11e9-901c-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d676e8c-7b52-11e9-b187-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
-            "5d677116-7b52-11e9-b8c7-f218983a1c3e":["CURRENT","SUGAR_SERVE"],
             "c2908254-7606-11e9-a121-f218983a1c3e":["SUGAR_SERVE"],
             "c2908fc4-7606-11e9-a83a-f218983a1c3e":["SUGAR_SERVE"],
             "c290929e-7606-11e9-a555-f218983a1c3e":["SUGAR_SERVE"],
@@ -284,72 +237,59 @@ class InitProductDefinition
         }
     },
     "FIELDS": {
-        "Accounts": {
-            "business_center_id":["SUGAR_SERVE","SUGAR_SELL"],
-            "business_center_name":["SUGAR_SERVE","SUGAR_SELL"]
-        },
         "Bugs": {
-            "hours_to_resolution":["SUGAR_SERVE"],
-            "business_hours_to_resolution":["SUGAR_SERVE"]
+            "hours_to_resolution":["SUGAR_SERVE","SUGAR_SELL"],
+            "business_hours_to_resolution":["SUGAR_SERVE","SUGAR_SELL"]
         },
         "Calls": {
-            "transcript":["SUGAR_SERVE"],
-            "aws_contact_id":["SUGAR_SERVE"],
-            "call_recording_url":["SUGAR_SERVE"],
-            "call_recording":["SUGAR_SERVE"]
+            "transcript":["SUGAR_SERVE","SUGAR_SELL"],
+            "aws_contact_id":["SUGAR_SERVE","SUGAR_SELL"],
+            "call_recording_url":["SUGAR_SERVE","SUGAR_SELL"],
+            "call_recording":["SUGAR_SERVE","SUGAR_SELL"],
+            "aws_lens_data":["SUGAR_SERVE","SUGAR_SELL"],
+            "sentiment_score_agent":["SUGAR_SERVE","SUGAR_SELL"],
+            "sentiment_score_customer":["SUGAR_SERVE","SUGAR_SELL"],
+            "sentiment_score_agent_string":["SUGAR_SERVE","SUGAR_SELL"],
+            "sentiment_score_customer_string":["SUGAR_SERVE","SUGAR_SELL"],
+            "sentiment_score_agent_first_quarter":["SUGAR_SERVE","SUGAR_SELL"],
+            "sentiment_score_agent_second_quarter":["SUGAR_SERVE","SUGAR_SELL"],
+            "sentiment_score_agent_third_quarter":["SUGAR_SERVE","SUGAR_SELL"],
+            "sentiment_score_agent_fourth_quarter":["SUGAR_SERVE","SUGAR_SELL"],
+            "sentiment_score_customer_first_quarter":["SUGAR_SERVE","SUGAR_SELL"],
+            "sentiment_score_customer_second_quarter":["SUGAR_SERVE","SUGAR_SELL"],
+            "sentiment_score_customer_third_quarter":["SUGAR_SERVE","SUGAR_SELL"],
+            "sentiment_score_customer_fourth_quarter":["SUGAR_SERVE","SUGAR_SELL"]
         },
         "Cases": {
-            "business_center_id":["SUGAR_SERVE"],
-            "business_center_name":["SUGAR_SERVE"],
-            "first_response_target_datetime":["SUGAR_SERVE"],
-            "first_response_actual_datetime":["SUGAR_SERVE"],
-            "hours_to_first_response":["SUGAR_SERVE"],
-            "business_hrs_to_first_response":["SUGAR_SERVE"],
-            "first_response_var_from_target":["SUGAR_SERVE"],
-            "first_response_sla_met":["SUGAR_SERVE"],
-            "first_response_user_id":["SUGAR_SERVE"],
-            "first_response_user_name":["SUGAR_SERVE"],
-            "first_response_user_link":["SUGAR_SERVE"],
-            "first_response_sent":["SUGAR_SERVE"],
-            "hours_to_resolution":["SUGAR_SERVE"],
-            "business_hours_to_resolution":["SUGAR_SERVE"],
-            "request_close":["SUGAR_SERVE"],
-            "request_close_date":["SUGAR_SERVE"]
-        },
-        "Contacts": {
-            "business_center_id":["SUGAR_SERVE","SUGAR_SELL"],
-            "business_center_name":["SUGAR_SERVE","SUGAR_SELL"]
+            "first_response_target_datetime":["SUGAR_SERVE","SUGAR_SELL"],
+            "first_response_actual_datetime":["SUGAR_SERVE","SUGAR_SELL"],
+            "hours_to_first_response":["SUGAR_SERVE","SUGAR_SELL"],
+            "business_hrs_to_first_response":["SUGAR_SERVE","SUGAR_SELL"],
+            "first_response_var_from_target":["SUGAR_SERVE","SUGAR_SELL"],
+            "first_response_sla_met":["SUGAR_SERVE","SUGAR_SELL"],
+            "first_response_user_id":["SUGAR_SERVE","SUGAR_SELL"],
+            "first_response_user_name":["SUGAR_SERVE","SUGAR_SELL"],
+            "first_response_user_link":["SUGAR_SERVE","SUGAR_SELL"],
+            "first_response_sent":["SUGAR_SERVE","SUGAR_SELL"],
+            "hours_to_resolution":["SUGAR_SERVE","SUGAR_SELL"],
+            "business_hours_to_resolution":["SUGAR_SERVE","SUGAR_SELL"],
+            "request_close":["SUGAR_SERVE","SUGAR_SELL"],
+            "request_close_date":["SUGAR_SERVE","SUGAR_SELL"]
         },
         "DataPrivacy": {
             "hours_to_resolution":["SUGAR_SERVE","SUGAR_SELL"],
             "business_hours_to_resolution":["SUGAR_SERVE","SUGAR_SELL"]
         },
-        "KBContents": {
-            "kbscase_name":["SUGAR_SERVE"]
-        },
         "Leads": {
-            "business_center_id":["SUGAR_SELL"],
-            "business_center_name":["SUGAR_SELL"]
+            "ai_conv_score_classification":["PREDICT_ADVANCED","PREDICT_PREMIER"],
+            "ai_icp_fit_score_classification":["PREDICT_ADVANCED","PREDICT_PREMIER"]
+        },
+        "Opportunities": {
+            "ai_opp_conv_score_enum":["PREDICT_ADVANCED","PREDICT_PREMIER"]
         },
         "PurchasedLineItems": {
-            "renewal_opp_id": ["SUGAR_SELL"],
-            "renewal_opp_name": ["SUGAR_SELL"]
-        },
-        "RevenueLineItems": {
-            "purchasedlineitem":["SUGAR_SELL"],
-            "purchasedlineitem_name":["SUGAR_SELL"],
-            "purchasedlineitem_id":["SUGAR_SELL"],
-            "generate_purchase":["SUGAR_SELL"],
-            "add_on_to_id": ["SUGAR_SELL"],
-            "add_on_to_name": ["SUGAR_SELL"]
-        },
-        "Products": {
-            "add_on_to_id": ["SUGAR_SELL"],
-            "add_on_to_name": ["SUGAR_SELL"]
-        },
-        "Users": {
-            "business_center_id":["SUGAR_SERVE","SUGAR_SELL"],
-            "business_center_name":["SUGAR_SERVE","SUGAR_SELL"]
+            "renewal_opp_id":["CURRENT","SUGAR_SELL"],
+            "renewal_opp_name":["CURRENT","SUGAR_SELL"]
         }
     }
 }

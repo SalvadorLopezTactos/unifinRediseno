@@ -20,7 +20,7 @@
  *
  */
 
-function packSortingHat($archive, $params, $installdefs = null, $internalPath = '')
+function packSortingHat(Phar $archive, $params, $installdefs = null, $internalPath = '')
 {
     $defaults = array(
         'version' => '7.5.0.0',
@@ -40,7 +40,9 @@ function packSortingHat($archive, $params, $installdefs = null, $internalPath = 
         'Scanner/version.json',
         'language/en_us.lang.php',
     );
-
+    foreach (new RecursiveIteratorIterator(new Phar(__DIR__ . '/smarty.phar')) as $f) {
+        $archive->addFile($f, str_replace('phar://' . __DIR__ . '/smarty.phar/', '', $f));
+    }
     foreach ($files as $file) {
         $archive->addFile(dirname(__FILE__) . '/' . $file, $internalPath . $file);
         if(is_array($installdefs)) {
@@ -80,6 +82,11 @@ $stub = <<<'STUB'
 <?php
 Phar::mapPhar();
 set_include_path('phar://' . __FILE__ . PATH_SEPARATOR . get_include_path());
+$basePath = 'phar://' . __FILE__ . '/';
+require $basePath . 'vendor/autoload.php';
+require $basePath . 'scanner/convert.php';
+require $basePath . 'converter/Lexer.php';
+require $basePath . 'converter/Service.php';
 require_once "Scanner/ScannerCli.php"; HealthCheckScannerCli::start($argv); __HALT_COMPILER();
 STUB;
 $phar->setStub($stub);

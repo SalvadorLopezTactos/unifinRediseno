@@ -92,7 +92,7 @@ $resultText = sprintf(
 );
 $buttonText = htmlspecialchars(translate('LBL_UW_BTN_BACK_TO_MOD_LOADER', 'Administration'));
 $csrfFieldName = CsrfAuthenticator::FORM_TOKEN_FIELD;
-$csrfToken = CsrfAuthenticator::getInstance()->getFormToken();
+$csrfToken = htmlspecialchars(CsrfAuthenticator::getInstance()->getFormToken(), ENT_QUOTES, 'UTF-8');
 
 echo <<<HTML
 <form action="index.php?module=Administration&view=module&action=UpgradeWizard" method="post">

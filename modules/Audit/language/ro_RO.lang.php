@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Domenii auditate în acest modul:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Nu sunt domeniile auditate în acest modul',
     'LBL_CHANGE_LOG' => 'Jurnal de audit',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Când câmpurile de monedă auditate sunt salvate într-o monedă care nu este implicită în sistem, jurnalul de modificări va afişa valori vechi şi noi în moneda convertită, implicită, definită de sistem.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Când câmpurile de monedă auditate sunt salvate într-o monedă care nu este implicită în sistem, jurnalul de modificări va afişa valori vechi şi noi în moneda convertită, implicită, definită de sistem.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Actualizare la',
+    'LBL_BLANK' => '-necompletat-',
 );

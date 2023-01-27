@@ -14,11 +14,11 @@ class SugarWebServiceUtilv3_1 extends SugarWebServiceUtilv3
 
     function get_return_module_fields($value, $module,$fields, $translate=true)
     {
-		$GLOBALS['log']->info('Begin: SoapHelperWebServices->get_return_module_fields');
+        $this->getLogger()->info('Begin: SoapHelperWebServices->get_return_module_fields');
 		global $module_name;
 		$module_name = $module;
 		$result = $this->get_field_list($value,$fields,  $translate);
-		$GLOBALS['log']->info('End: SoapHelperWebServices->get_return_module_fields');
+        $this->getLogger()->info('End: SoapHelperWebServices->get_return_module_fields');
 
 		$tableName = $value->getTableName();
 
@@ -182,7 +182,7 @@ class SugarWebServiceUtilv3_1 extends SugarWebServiceUtilv3
 
     function get_field_list($value,$fields,  $translate=true) {
 
-	    $GLOBALS['log']->info('Begin: SoapHelperWebServices->get_field_list');
+        $this->getLogger()->info('Begin: SoapHelperWebServices->get_field_list');
 		$module_fields = array();
 		$link_fields = array();
 		if(!empty($value->field_defs)){
@@ -303,7 +303,7 @@ class SugarWebServiceUtilv3_1 extends SugarWebServiceUtilv3
 			$module_fields['created_by_name']['name'] = 'created_by_name';
 		}
 
-		$GLOBALS['log']->info('End: SoapHelperWebServices->get_field_list');
+        $this->getLogger()->info('End: SoapHelperWebServices->get_field_list');
 		return array('module_fields' => $module_fields, 'link_fields' => $link_fields);
 	}
 
@@ -344,7 +344,7 @@ class SugarWebServiceUtilv3_1 extends SugarWebServiceUtilv3
         $singleSelect = false,
         $fields = []
     ) {
-		$GLOBALS['log']->debug("get_list:  order_by = '$order_by' and where = '$where' and limit = '$limit'");
+        $this->getLogger()->debug("get_list:  order_by = '$order_by' and where = '$where' and limit = '$limit'");
 		if(isset($_SESSION['show_deleted']))
 		{
 			$show_deleted = 1;
@@ -461,9 +461,7 @@ class SugarWebServiceUtilv3_1 extends SugarWebServiceUtilv3
 	}
 
 	/**
-	 * Return the field level acl raw value.  We cannot use the hasAccess call as we do not have a valid bean
-	 * record at the moment and therefore can not specify the is_owner flag.  We need the raw access value so we
-	 * can do the computation on the client side.  TODO: Move function into ACLField class.
+    * Return the field level acl raw value.
 	 *
 	 * @param String $module Name of the module
 	 * @param String $field Name of the field
@@ -474,14 +472,7 @@ class SugarWebServiceUtilv3_1 extends SugarWebServiceUtilv3
 	    if($current_user == null)
 	       $current_user = $GLOBALS['current_user'];
 
-	    if( is_admin($current_user) )
-	         return 99;
-
-	    if(!isset($_SESSION['ACL'][$current_user->id][$module]['fields'][$field])){
-			 return 99;
-		}
-
-		return $_SESSION['ACL'][$current_user->id][$module]['fields'][$field];
+        return ACLField::hasAccess($field, $module, $current_user->id);
 	}
 
     /**

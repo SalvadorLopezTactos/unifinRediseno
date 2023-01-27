@@ -21,6 +21,7 @@ use Sugarcrm\IdentityProvider\Srn\Converter;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\IdmNonrecoverableException;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\OAuth2\Client\Provider\IdmProvider;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount\Checker;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount\ServiceAccount;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\CodeToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\IntrospectToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\JWTBearerToken;
@@ -93,7 +94,7 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
     public function __construct(
         AbstractProvider $oAuthProvider,
         UserProviderInterface $userProvider,
-        UserCheckerInterface $userChecker,
+        SugarOIDCUserChecker $userChecker,
         MappingInterface $userMapping,
         Checker $SAChecker
     ) {
@@ -207,7 +208,7 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         $resultToken->setAttributes($result);
         $resultToken->setAttribute('platform', $token->getAttribute('platform'));
 
-        /** @var User $user */
+        /** @var User|ServiceAccount $user */
         $user = $this->userProvider->loadUserBySrn($result['sub']);
 
         if ($user->isServiceAccount()) {
@@ -216,6 +217,14 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
                     sprintf('Service account is not allowed: %s', $result['sub'])
                 );
             }
+            if (!empty($result['ext']['dataSourceSRN'])) {
+                $user->setDataSourceSRN($result['ext']['dataSourceSRN']);
+            }
+
+            if (!empty($result['ext']['dataSourceName'])) {
+                $user->setDataSourceName($result['ext']['dataSourceName']);
+            }
+
             $resultToken->setUser($user);
             $resultToken->setAuthenticated(true);
             return $resultToken;
@@ -225,6 +234,10 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
             throw new IdmNonrecoverableException(
                 sprintf('Access token does not belong to tenant %s', $token->getTenant())
             );
+        }
+
+        if (isset($result['ext']['sudoer'])) {
+            $this->userChecker->setAllowInactive(true);
         }
 
         $userSRN = Converter::fromString($result['sub'] ?? '');
@@ -261,7 +274,7 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
      * @param TokenInterface $token
      * @return RevokeToken
      */
-    protected function revokeToken(TokenInterface $token): RevokeToken
+    protected function revokeToken(TokenInterface $token)
     {
         $accessToken = new AccessToken(['access_token' => $token->getCredentials()]);
 
@@ -280,6 +293,7 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
     {
         $userSrn = Converter::fromString($token->getIdentity());
         $userResource = $userSrn->getResource();
+        $this->userProvider->setAllowInactive($token->hasAttribute('sudoer'));
         $user = $this->userProvider->loadUserByField($userResource[1], 'id');
         $token->setUser($user);
 

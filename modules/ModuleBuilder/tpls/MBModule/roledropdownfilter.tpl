@@ -128,7 +128,7 @@
             </tr>
         </table>
     </form>
-    {literal}
+    
     <script>
 (function(){
         $("#saveBtn").on("click", function(e) {
@@ -150,11 +150,11 @@
         addForm('dropdown_form');
         addToValidate('dropdown_form', 'dropdown_name', 'DBName', false, SUGAR.language.get("ModuleBuilder", "LBL_JS_VALIDATE_NAME"));
         addToValidate('dropdown_form', 'drop_value', 'varchar', false, SUGAR.language.get("ModuleBuilder", "LBL_JS_VALIDATE_LABEL"));
-        eval({/literal}{$ul_list}{literal});
-        SimpleList.name = {/literal}'{$dropdown_name}'{literal};
-        SimpleList.requiredOptions = {/literal}{$required_items}{literal};
+        eval({$ul_list});
+        SimpleList.name = '{$dropdown_name}';
+        SimpleList.requiredOptions = {$required_items};
         SimpleList.ul_list = list;
-        SimpleList.init({/literal}'{$editImage}'{literal}, {/literal}'{$deleteImage}'{literal});
+        SimpleList.init('{$editImage}', '{$deleteImage}');
         ModuleBuilder.helpSetup('dropdowns', 'editdropdown');
 
         var addListenerFields = ['drop_name', 'drop_value'];
@@ -182,8 +182,8 @@
         SimpleList.jstransaction.register('toggleDropdown', toggleItem, toggleItem);
         SimpleList.jstransaction.register(
                 'toggleAll',
-                function(checked){toggleAll(!checked)}, // undo
-                function(checked){toggleAll(checked)}   // redo
+                function(checked){ toggleAll(!checked) }, // undo
+                function(checked){ toggleAll(checked) }   // redo
         );
 
         $("#ul1").on("change", "input[type=checkbox]", function(event, record){
@@ -210,6 +210,6 @@
 })();
     </script>
     <script>// Bug in FF4 where it doesn't run the last script. Remove when the bug is fixed.</script>
-    {/literal}
+    
 </div>
 

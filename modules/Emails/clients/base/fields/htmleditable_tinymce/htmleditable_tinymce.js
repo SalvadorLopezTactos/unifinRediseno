@@ -158,18 +158,6 @@
     },
 
     /**
-     * @inheritdoc
-     */
-    getTinyMCEConfig: function() {
-        var config = this._super('getTinyMCEConfig');
-        // need this call back so the file picker can be enabled in tinymce's image dialog box
-        // tinyMCEFileBrowseCallback is defined in the tinymce plugin
-        config.file_browser_callback = _.bind(this.tinyMCEFileBrowseCallback, this);
-
-        return config;
-    },
-
-    /**
      * Suppress calling the sidecar _render method in detail view
      *
      * @inheritdoc
@@ -180,6 +168,11 @@
             this.$el.toggleClass('detail', false).toggleClass('edit', true);
         } else {
             this.destroyTinyMCEEditor();
+
+            // Hide the field for now. Once the field loads its contents completely, we will show it. This helps
+            // to prevent a momentary white background/flash in the iframe before it finishes loading in dark mode
+            this.hide();
+
             this._renderView();
             this.$el.toggleClass('detail', true).toggleClass('edit', false);
         }
@@ -243,30 +236,34 @@
      * Resize the field's container based on the height of the iframe content
      * for preview.
      */
-    setViewContent: function(value) {
-        var field;
-        // Pad this to the final height due to the iframe margins/padding
-        var padding = (this.tplName === 'detail') ? 0 : 25;
-        var contentHeight = 0;
-
-        this._super('setViewContent', [value]);
-
+    setViewContent: function(value, styleSrc = 'styleguide/assets/css/iframe-sugar.css') {
+        this._super('setViewContent', [value, styleSrc]);
         // Only set this field height if it is in the preview or detail pane
         if (!_.contains(['preview', 'detail'], this.tplName)) {
             return;
         }
-        contentHeight = this._getContentHeight() + padding;
-
-        // Only resize the editor when the content is fully loaded
-        if (contentHeight > padding) {
-            // Set the maximum height to 400px
-            if (contentHeight > 400) {
-                contentHeight = 400;
-            }
-
-            field = this._getHtmlEditableField();
-            field.css('height', contentHeight);
+        if (!this._iframeHasBody(this._getHtmlEditableField())) {
+            return;
         }
+        _.debounce(_.bind(function() {
+            var field;
+            // Pad this to the final height due to the iframe margins/padding
+            var padding = (this.tplName === 'detail') ? 0 : 25;
+            var contentHeight = 0;
+            contentHeight = this._getContentHeight() + padding;
+            // Only resize the editor when the content is fully loaded
+            if (contentHeight > padding) {
+                // Set the maximum height to 400px
+                if (contentHeight > 400) {
+                    contentHeight = 400;
+                }
+                field = this._getHtmlEditableField();
+                field.css('height', contentHeight);
+                if (this.view) {
+                    this.view.trigger('tinymce:resize');
+                }
+            }
+        }, this), 150)();
     },
 
     /**

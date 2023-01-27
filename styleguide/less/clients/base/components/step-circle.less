@@ -4,14 +4,14 @@
   width: 26px;
   position: relative;
   display: inline-block;
-  background: @grayLighter;
+  background: @primaryContentBackground;
   text-align: center;
   margin-right: 12px;
   border: @borderWidget;
 
   > span {
     display: inline-block;
-    background: @white;
+    background: @contentBackground;
     width: 18px;
     height: 18px;
     border: @borderWidget;
@@ -20,14 +20,10 @@
     font-weight: bold;
   }
 
-  .fa-check-circle {
+  .sicon-check-circle-lg {
     display: none;
     color: @green;
-    font-size: 22px;
-    line-height: 22px;
-    margin-top: 3px;
-    width: 18px;
-    height: 18px;
+    margin-top: 5px;
   }
 
   &.complete {
@@ -35,7 +31,7 @@
       display: none;
     }
 
-    .fa-check-circle {
+    .sicon-check-circle-lg {
       display: inline-block;
     }
   }

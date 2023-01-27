@@ -3378,6 +3378,7 @@
     },
 
     deshabilitaOrigen:function(){
+        this.hideRowsNoHideByDependencyOpps();
        if(this.model.get('onboarding_chk_c')==1){ //La solicitud llegó desde onboarding, por lo tanto el origen se bloquea
             $('[data-name="origen_c"]').attr('style', 'pointer-events:none');
             $('[data-name="detalle_origen_c"]').attr('style', 'pointer-events:none');
@@ -3408,6 +3409,16 @@
            }
        }
 
+    },
+
+    hideRowsNoHideByDependencyOpps: function(){
+        var hidden_rows=$('.LBL_RECORDVIEW_PANEL4 > .vis_action_hidden');
+        hidden_rows.each(function(i, obj) {
+            //Se oculta la fila cuando se detecta que el campo está oculto y además el campo que está junto a el es el campo custom "blank_space" o es una celda "relleno" habilitada desde studio
+            if($(obj).siblings('[data-name="blank_space"]').length > 0 || $(obj).siblings('.filler-cell').length > 0){
+                $(obj).parent().addClass('hide');
+            }
+        });
     },
 
     validaUserCartera: function (fields, errors, callback) {

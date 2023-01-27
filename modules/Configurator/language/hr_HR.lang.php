@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Zadani oblik vremena',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Prikaz vremena odaziva poslužitelja',
+    'FREEZE_FIRST_COLUMN' => 'Dopusti zamrzavanje stupca',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Omogućite ovu postavku kako biste korisnicima omogućili zamrzavanje prvog stupca na različite ' .
+        'prikaze popisa, uključujući prikaze popisa modula, podploča, dashleta i konzola.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Zabilježi spore upite',
     'LOCK_HOMEPAGE_HELP'=>'Ova postavka sprečava<BR> 1.) dodavanje novih početnih stranica i dashleta u početni modul; <BR>2.) prilagodbu rasporeda dashleta na početnim stranicama povlačenjem i ispuštanjem.',
     'CURRENT_LOGO'=>'Trenutačni logotip:',
+    'CURRENT_LOGO_DARK' => 'Trenutačni logotip u tamnom načinu:',
     'CURRENT_LOGO_HELP'=>'Ovaj logotip prikazuje se u lijevom kutu podnožja aplikacije Sugar.',
+    'CURRENT_LOGO_DARK_HELP' => "Logotip je prikazan u lijevom kutu podnožja dok je aplikacija Sugar u tamnom načinu u skladu s preferencijama korisnika u pogledu izgleda.",
     'NEW_LOGO'=>'Odaberite logotip:',
     'NEW_LOGO_HELP' => 'Format slikovne datoteke može biti .png ili .jpg. Maksimalna je visina 24 piksela, a maksimalna širina 180 piksela. Učitane slike koje su u bilo kojem smjeru veće bit će umanjene na te maksimalne dimenzije.',
+    'NEW_LOGO_DARK' => 'Odaberite logotip u tamnom načinu:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Format slikovne datoteke može biti .png ili .jpg. Maksimalna je visina 24 piksela, a maksimalna širina 450 piksela. Učitane slike koje su u bilo kojem smjeru veće bit će umanjene na te maksimalne dimenzije. Naziv slikovne datoteke ne smije sadržavati razmak.',
     'NEW_QUOTE_LOGO'=>'Učitavanje novog logotipa za ponude',
     'NEW_QUOTE_LOGO_HELP'=>'Obavezni je format slikovne datoteke .jpg.<BR>Preporučena je veličina 867 x 74 piksela.',
@@ -412,8 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Nastavi',
     'LBL_WIZARD_FINISH_TAB' => 'Završi',
     'LBL_WIZARD_FINISH_TITLE' => 'Dovršena je osnovna konfiguracija sustava',
-    'LBL_WIZARD_FINISH' => 'Kliknite na <b>Nastavi</b> da biste konfigurirali svoje korisničke postavke.<br/><br />
-Da biste konfigurirali dodatne postavke sustava, kliknite <a href="index.php?module=Administration&action=index" target="_blank">ovdje</a>.',
+    'LBL_WIZARD_FINISH' => 'Kliknite na <b>Nastavi</b> kako biste konfigurirali svoje korisničke postavke.<br/><br />
+Kako biste konfigurirali dodatne postavke sustava, kliknite <a href="#Administration" target="_blank">ovdje</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Brendiranje',
     'LBL_WIZARD_SYSTEM_DESC' => 'Navedite naziv i logotip organizacije da biste brendirali Sugar.',
     'LBL_WIZARD_LOCALE_DESC' => 'Navedite kako biste željeli da se prikazuju podaci u Sugaru na temelju vaše geografske lokacije. Postavke koje ovdje navedete bit će zadane postavke. Korisnici će moći postaviti osobne postavke.',
@@ -424,7 +430,8 @@ Da biste konfigurirali dodatne postavke sustava, kliknite <a href="index.php?mod
 	'LBL_LOADING' => 'Učitavanje...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Izbriši' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Dobro došli' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logotip' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logotip' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logotip u tamnom načinu',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Modul izvješća dostupan je samo za izvorne klijente aplikacija SugarCRM i Sugar Mobile',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Modul izvješća nije dostupan u mobilnom prikazu temeljenom na pregledniku.',
 
@@ -463,5 +470,3 @@ Da biste konfigurirali dodatne postavke sustava, kliknite <a href="index.php?mod
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

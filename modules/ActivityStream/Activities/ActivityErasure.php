@@ -90,9 +90,10 @@ class ActivityErasure
                 $GLOBALS['log']->debug("[processComments] SQL: {$sql}");
                 $GLOBALS['log']->debug('PARAMS: ' . print_r($params, true));
 
+                /** @var \Sugarcrm\Sugarcrm\Dbal\Connection $conn */
                 $conn = $GLOBALS['db']->getConnection();
                 $stmt = $conn->executeQuery($sql, $params);
-                while ($row = $stmt->fetch()) {
+                while ($row = $stmt->fetchAssociative()) {
                     $GLOBALS['log']->debug("COMMENT-ID: {$row['id']} ACTIVITY-ID: {$row['parent_id']}");
                     $activityId = $row['parent_id'];
                     $commentData = $row['data'];
@@ -171,9 +172,10 @@ class ActivityErasure
             $GLOBALS['log']->debug("[processModuleActivities] SQL: {$sql}");
             $GLOBALS['log']->debug('PARAMS: ' . print_r($params, true));
 
+            /** @var \Sugarcrm\Sugarcrm\Dbal\Connection $conn */
             $conn = $GLOBALS['db']->getConnection();
             $stmt = $conn->executeQuery($sql, $params);
-            while ($row = $stmt->fetch()) {
+            while ($row = $stmt->fetchAssociative()) {
                 $GLOBALS['log']->debug("ACTIVITY-ID: {$row['id']} ACTIVITY-TYPE: {$row['activity_type']}");
                 $this->updateActivityData($row);
             }
@@ -206,9 +208,10 @@ class ActivityErasure
                 $GLOBALS['log']->debug("[processUnreferencedActivities] SQL: {$sql}");
                 $GLOBALS['log']->debug('PARAMS: ' . print_r($params, true));
 
+                /** @var \Sugarcrm\Sugarcrm\Dbal\Connection $conn */
                 $conn = $GLOBALS['db']->getConnection();
                 $stmt = $conn->executeQuery($sql, $params);
-                while ($row = $stmt->fetch()) {
+                while ($row = $stmt->fetchAssociative()) {
                     $GLOBALS['log']->debug("ACTIVITY-ID: {$row['id']} ACTIVITY-TYPE: {$row['activity_type']}");
                     $this->updateActivityData($row);
                 }

@@ -12,11 +12,17 @@
 --}}
 <div class="quicksearch-tags-wrapper">
 	<div class="quicksearch-tags dropdown-menu hide">
-	    <span class="qs-tags-row qs-tag-icon"><i class="fa fa-tag"></i></span>
+	    <span class="qs-tags-row qs-tag-icon px-2.5 py-2 pull-left"><i class="sicon sicon-tag"></i></span>
 	    {{#if tagCollection}}
+        <div class="tags">
 	        {{#each tagCollection}}
-	            <span class="qs-tags-row qs-tag"><a track="click:{{name}}" href="javascript:void(0);">{{name}}</a></span>
+                <span class="tag-wrapper">
+                    <div class="tag-name qs-tag" rel="tooltip" data-placement="bottom" title="{{name}}">
+                        <a class="tag-name" href="javascript:void(0);" track="click:{{name}}">{{name}}</a>
+                    </div>
+                </span>
 	        {{/each}}
+        </div>
 	    {{/if}}
 	</div>
 </div>

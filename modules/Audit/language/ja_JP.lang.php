@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'このモジュールで監査されるフィールド:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'このモジュールで監査されているフィールドはありません',
     'LBL_CHANGE_LOG' => '監査ログ',
-    'LBL_CURRENCY_CONVERSION_TEXT' => '監査対象通貨フィールドがシステム既定以外の通貨で保存されると、変換されたシステム既定のデフォルト通貨の古い値と新しい値が変更ログに表示されます。'
+    'LBL_CURRENCY_CONVERSION_TEXT' => '監査対象通貨フィールドがシステム既定以外の通貨で保存されると、変換されたシステム既定のデフォルト通貨の古い値と新しい値が変更ログに表示されます。',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => '以下に更新:',
+    'LBL_BLANK' => '-空欄-',
 );

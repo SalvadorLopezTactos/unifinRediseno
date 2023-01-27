@@ -292,7 +292,7 @@
      */
     _getParentLayoutWidth: function(layout) {
         if (!layout) {
-            return 0;
+            return window.innerWidth;
         } else if (_.isFunction(layout.getPaneWidth)) {
             return layout.getPaneWidth(this);
         }

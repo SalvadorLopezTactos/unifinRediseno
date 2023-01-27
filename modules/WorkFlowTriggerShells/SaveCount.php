@@ -175,6 +175,12 @@ else $return_action = "CreateStep1";
 if(!empty($_POST['return_id'])) $return_id = $_POST['return_id'];
 
 $GLOBALS['log']->debug("Saved record with id of ".$return_id);
-//exit;
-header("Location: index.php?action=$return_action&module=$return_module&record=$return_id&workflow_id=$parent_id&parent_id=$parent_id&special_action=refresh");
-?>
+
+header('Location: index.php?'.http_build_query([
+    'action' => $return_action,
+    'module' => $return_module,
+    'record' => $return_id,
+    'workflow_id' => $parent_id,
+    'parent_id' => $parent_id,
+    'special_action' => 'refresh',
+]));

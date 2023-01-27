@@ -101,7 +101,12 @@ $viewdefs['Meetings']['base']['view']['preview'] = array(
                     'type' => 'participants',
                     'label' => 'LBL_INVITEES',
                     'span' => 12,
-                    'fields' => array('name', 'accept_status_meetings', 'picture'),
+                    'fields' => [
+                        'name',
+                        'accept_status_meetings',
+                        'picture',
+                        'email',
+                    ],
                 ),
                 'assigned_user_name',
                 'team_name',

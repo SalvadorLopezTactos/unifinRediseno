@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'עיבוד תזמונים תלויי-זמן',
 'LBL_OOTB_DATA_ARCHIVER' => 'הפעלת מחיקות/אחסונים בארכיון של נתונים פעילים',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'כלי להמרת כתובות לקואורדינטות (geocoder) ברשומות',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'מפענח כתובות לקואורדינטות',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'מרווחים:',
 'LBL_LIST_LIST_ORDER' => 'תיזמונים:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'לכוון תיזמון Crontab',
 'LBL_CRON_LINUX_DESC' => 'Note: In order to run Sugar Schedulers, add the following line to the crontab file:',
 'LBL_CRON_WINDOWS_DESC' => 'Note: In order to run the Sugar schedulers, create a batch file to run using Windows Scheduled Tasks. The batch file should include the following commands:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>עבור curl‏: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'יומן גובים',
 'LBL_EXECUTE_TIME'			=> 'זמן ביצוע',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'הסר קבצים זמניים',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'בנה מחדש נתוני אבטחת צוות לא מנורמל',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'עדכן הגדרת מוצר',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'מפות של הכלי להמרת כתובות לקואורדינטות',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'מפענח כתובות לקואורדינטות',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'הרץ קמפיין דואר אלקטרוני לילי',
 'LBL_ASYNCMASSUPDATE' => 'בצע עדכון אסינכרוני מסיבי',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'נקה רשימת רשומות ישנה',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'מטהר פעילויות',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'עיבוד תזמונים תלויי-זמן',
+'LBL_SUGARJOBDATAARCHIVER' => 'הפעלת מחיקות/אחסונים בארכיון של נתונים פעילים',
 'LBL_PMSEENGINECRON' => 'מתזמן SugarBPM',
 );
 

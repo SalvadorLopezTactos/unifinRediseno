@@ -19,5 +19,6 @@ $exemptModules[] = 'pmse_Business_Rules';
 $exemptModules[] = 'pmse_Emails_Templates';
 $exemptModules[] = 'OutboundEmail';
 $exemptModules[] = 'EmailParticipants';
+$exemptModules[] = 'Calendar';
 
 // For $additionalModules, set the value to the module name to add

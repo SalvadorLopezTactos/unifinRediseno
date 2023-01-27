@@ -14,6 +14,25 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 	var $reporter;
 	var $assigned_user=null;
 
+// @codingStandardsIgnoreStart
+    /**
+     * Add timezone offset.
+     * {@inheritDoc}
+     * @see SugarWidgetReportField::_get_column_select()
+     */
+	
+    function _get_column_select($layout_def)
+    {
+        $column = parent::_get_column_select($layout_def);
+
+        if ($this->isDateTimeField($layout_def['type'])) {
+            $column = $this->reporter->db->convert($column, 'add_tz_offset');
+        }
+
+        return $column;
+    }
+// @codingStandardsIgnoreEnd
+
 	// get the reporter attribute
     // deprecated, now called in the constructor
     /**
@@ -277,7 +296,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
                 array("' '", $this->reporter->db->convert($layout_def['rel_field'], 'time_format'))
             );
         } else {
-            $field_name = $this->_get_column_select($layout_def);
+            $field_name = parent::_get_column_select($layout_def);
         }
 
         $query = $field_name . " >= " . $this->reporter->db->convert($this->reporter->db->quoted($this->formatDate($begin)), $layout_def['type']) . " AND " .
@@ -591,8 +610,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
                 return $this-> $func_name ($layout_def);
             }
         }
-        $content = parent :: displayListPlain($layout_def);
-        return $timedate->to_display_date_time($content);
+        return parent :: displayListPlain($layout_def);
     }
 
 	function querySelect(& $layout_def) {
@@ -646,7 +664,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
      *
      * @return DateTime - Fiscal start date in user TZ
      */
-    private function getFiscalStartDate()
+    protected function getFiscalStartDate()
     {
         // Pick fiscal start date
         $admin = BeanFactory::newBean('Administration');
@@ -680,17 +698,20 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 
         $column = $this->_get_column_select($layout_def);
 
-        if ($this->isDateTimeField($layout_def['type'])) {
-            // Need to add tz offset for grouping
-            $column = $this->reporter->db->convert($column, 'add_tz_offset');
-        }
-
         if ($fiscalDate->day_of_year > 0) {
             $column = $this->reporter->db->convert(
                 $column,
                 'add_date',
                 array('-' . $fiscalDate->day_of_year, 'DAY')
             );
+
+            if (($layout_def['column_function'] ?? '') == 'fiscalYear') {
+                $column = $this->reporter->db->convert(
+                    $column,
+                    'add_date',
+                    ['+1', 'YEAR']
+                );
+            }
         }
 
         return $column;
@@ -878,9 +899,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
     function querySelectmonth($layout_def)
     {
         $return = $this->_get_column_select($layout_def);
-        if ($this->isDateTimeField($layout_def['type'])) {
-            $return = $this->reporter->db->convert($return, 'add_tz_offset');
-        }
+
         return $this->reporter->db->convert($return, "date_format", array('%Y-%m')) . ' ' . $this->_get_column_alias($layout_def) . "\n";
     }
 
@@ -893,9 +912,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
     function queryGroupByMonth($layout_def)
     {
         $return = $this->_get_column_select($layout_def);
-        if ($this->isDateTimeField($layout_def['type'])) {
-            $return = $this->reporter->db->convert($return, 'add_tz_offset');
-        }
+
         return $this->reporter->db->convert($return, "date_format", array('%Y-%m')) . "\n";
     }
 
@@ -908,9 +925,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
     function queryOrderByMonth($layout_def)
     {
         $return = $this->_get_column_select($layout_def);
-        if ($this->isDateTimeField($layout_def['type'])) {
-            $return = $this->reporter->db->convert($return, 'add_tz_offset');
-        }
+
         $orderBy = $this->reporter->db->convert($return, "date_format", array('%Y-%m'));
 
         if (empty($layout_def['sort_dir']) || $layout_def['sort_dir'] == 'a')
@@ -932,9 +947,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
     function querySelectday($layout_def)
     {
         $return = $this->_get_column_select($layout_def);
-        if ($this->isDateTimeField($layout_def['type'])) {
-            $return = $this->reporter->db->convert($return, 'add_tz_offset');
-        }
+
         return $this->reporter->db->convert($return, "date_format", array('%Y-%m-%d')) . ' ' . $this->_get_column_alias($layout_def) . "\n";
     }
 
@@ -947,9 +960,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
     function queryGroupByDay($layout_def)
     {
         $return = $this->_get_column_select($layout_def);
-        if ($this->isDateTimeField($layout_def['type'])) {
-            $return = $this->reporter->db->convert($return, 'add_tz_offset');
-        }
+
         return $this->reporter->db->convert($return, "date_format", array('%Y-%m-%d')) . "\n";
     }
 
@@ -962,9 +973,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
     function querySelectyear($layout_def)
     {
         $return = $this->_get_column_select($layout_def);
-        if ($this->isDateTimeField($layout_def['type'])) {
-            $return = $this->reporter->db->convert($return, 'add_tz_offset');
-        }
+
         return $this->reporter->db->convert($return, "date_format", array('%Y')) . ' ' . $this->_get_column_alias($layout_def) . "\n";
     }
 
@@ -977,9 +986,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
     function queryGroupByYear($layout_def)
     {
         $return = $this->_get_column_select($layout_def);
-        if ($this->isDateTimeField($layout_def['type'])) {
-            $return = $this->reporter->db->convert($return, 'add_tz_offset');
-        }
+
         return $this->reporter->db->convert($return, "date_format", array('%Y')) . "\n";
     }
 

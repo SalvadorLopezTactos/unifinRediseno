@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => '{{module}} 模組的所有儀表板',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => '{{module}} 模組 {{view}} 視圖的所有儀表板',
     'LBL_COPY_OF' => '{{{name}}} 的副本',
-    'LBL_DELETE_FOCUS_DRAWER' => '無法刪除焦點抽屜儀表板',
     'LBL_CREATE_DASHBOARD_BUTTON' => '建立儀表板',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "是否確定要將儀表板恢復為默認佈局？",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => '你確定要將這個儀表版重置為原本的樣式嗎？',
+    'LBL_FILTER_UTILS_SELECT' => '已指派',
 );

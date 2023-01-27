@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'מזהה איש קשר',
     'LBL_DESCRIPTION_INFORMATION' => 'תיאור המידע',
     'LBL_DESCRIPTION' => 'תיאור',
+    'LBL_INTERNAL_NOTES' => 'הערות פנימיות:',
     'LBL_STATUS' => 'מצב:',
     'LBL_DIRECTION' => 'הנחיות',
     'LBL_DATE' => 'תאריך התחלה',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'משך זמן חייב להיות גדול מאפס',
     'LBL_CALL_INFORMATION' => 'סקירה',
     'LBL_REMOVE' => 'הערה',
-    'LBL_ACCEPT_STATUS' => 'אשר מצב',
     'LBL_ACCEPT_LINK' => 'קבל קישור',
     //For export labels
     'LBL_PARENT_ID' => 'זהות הורה:',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'התקשר',
     'LBL_CALL_RECORDING_URL' => 'כתובת URL של הקלטה',
     'LBL_CALL_RECORDING' => 'הקלטה',
+
+    'LBL_LEAD_ID' => 'מזהה ליד',
+    'LBL_LEAD_NAME' => 'ליד',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'יצרת בהצלחה את {{moduleSingularLower}} {{name}} עבור {{formatDate date_start}}',

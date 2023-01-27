@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => '필드명이 이미 존재합니다.',
     'ERR_FIELD_NAME_NON_DB_CHARS' => '필드 이름은 다음 문자를 포함해야합니다:a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => '저장 불가내용을 포함한 모듈이 없습니다.',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => '존재하는 드롭다운 이름입니다',
     'LBL_BTN_ADD' => '추가하기',
     'LBL_BTN_EDIT' => '편집하기',
     'LBL_GENERATE_URL' => 'URL 생성하기',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => '에 칼럼 더하기',
     'LBL_DONE' => '완료',
     'LBL_EXE_NON_SIM_MODE' => '모의 형태가 아닌 실행',
+    'LBL_CALCULATION_VISIBLE' => '계산 시 표시',
 );
-
-
-?>

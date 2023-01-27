@@ -27,6 +27,7 @@ class Configurator
 	var $useAuthenticationClass = false;
 
     const COMPANY_LOGO_UPLOAD_PATH = 'upload://tmp_logo_company_upload/logo.png';
+    const COMPANY_LOGO_UPLOAD_PATH_DARK = 'upload://tmp_logo_company_upload/logo_dark.png';
     /**
      * List of allowed undefined `$sugar_config` keys to be set
      * @var array
@@ -302,17 +303,8 @@ class Configurator
 	}
 	function saveOverride($override) {
         require_once('install/install_utils.php');
-	    if ( !file_exists('config_override.php') ) {
-	    	touch('config_override.php');
-	    }
-	    if ( !(make_writable('config_override.php')) ||  !(is_writable('config_override.php')) ) {
-	        $GLOBALS['log']->fatal("Unable to write to the config_override.php file. Check the file permissions");
-	        return;
-	    }
 
-        // write out contents to file
-        $result = sugar_file_put_contents_atomic('config_override.php', $override);
-        if ($result === false) {
+        if (sugar_file_put_contents_atomic('config_override.php', $override) === false) {
             $GLOBALS['log']->fatal("Unable to write to the config_override.php file. Check the php_errors for detail");
         }
     }
@@ -334,18 +326,12 @@ class Configurator
 		$this->override = str_replace('?>', "$new_entry\n?>", $this->override);
 	}
 
-	function restoreConfig() {
-		$this->readOverride();
-		$this->overrideClearDuplicates('sugar_config', '[a-zA-Z0-9\_]+');
-		$this->saveOverride();
-		ob_clean();
-		header('Location: index.php?action=EditView&module=Configurator');
-	}
-
     private function saveImages()
     {
-        if (!empty($_POST['commit_company_logo'])) {
-            $this->commitCompanyLogo();
+        $saveLightModeLogo = !empty($_POST['commit_company_logo']);
+        $saveDarkModeLogo = !empty($_POST['commit_company_logo_dark']);
+        if ($saveLightModeLogo || $saveDarkModeLogo) {
+            $this->commitCompanyLogo($saveLightModeLogo, $saveDarkModeLogo);
         }
     }
 
@@ -360,19 +346,39 @@ class Configurator
 
     /**
      * Commits images uploaded by the user as the company logo for default theme
+     *
+     * @param boolean $saveLightModeLogo If we need to update the light mode logo
+     * @param boolean $saveDarkModeLogo If we need to update the dark mode logo
      */
-    private function commitCompanyLogo(): void
+    private function commitCompanyLogo($saveLightModeLogo, $saveDarkModeLogo): void
     {
         $path = self::COMPANY_LOGO_UPLOAD_PATH;
-        if (!file_exists($path)) {
+        $pathDark = self::COMPANY_LOGO_UPLOAD_PATH_DARK;
+        if (($saveLightModeLogo && !file_exists($path)) || ($saveDarkModeLogo && !file_exists($pathDark))) {
             return;
         }
-        $logo = create_custom_directory(SugarThemeRegistry::current()->getDefaultImagePath() . '/company_logo.png');
-        copy($path, $logo);
-        sugar_cache_clear('company_logo_attributes');
+
+        $cacheUpdate = [];
+        $imgPath = SugarThemeRegistry::current()->getDefaultImagePath();
+
+        if ($saveLightModeLogo) {
+            $logo = create_custom_directory($imgPath . '/company_logo.png');
+            copy($path, $logo);
+            sugar_cache_clear('company_logo_attributes');
+            $cacheUpdate[] = MetaDataManager::MM_LOGOURL;
+            SugarThemeRegistry::current()->clearImageCache('company_logo.png');
+        }
+
+        if ($saveDarkModeLogo) {
+            $logoDark = create_custom_directory($imgPath . '/company_logo_dark.png');
+            copy($pathDark, $logoDark);
+            sugar_cache_clear('company_logo_attributes_dark');
+            $cacheUpdate[] = MetaDataManager::MM_LOGOURLDARK;
+            SugarThemeRegistry::current()->clearImageCache('company_logo_dark.png');
+        }
+
         SugarThemeRegistry::clearAllCaches();
-        SugarThemeRegistry::current()->clearImageCache('company_logo.png');
-        $this->updateMetadataCache(array(MetaDataManager::MM_LOGOURL));
+        $this->updateMetadataCache($cacheUpdate);
     }
 
 

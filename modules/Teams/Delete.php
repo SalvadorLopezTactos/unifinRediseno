@@ -39,7 +39,7 @@ if ($focus->isGlobalTeam()) {
 //Check if there are module records where this team is assigned to in a team_set_id
 //if so, redirect to prompt the Administrator to select a new team
 if($focus->has_records_in_modules()) {
-   header("Location: index.php?module=Teams&action=ReassignTeams&record={$focus->id}");
+    header('Location: index.php?module=Teams&action=ReassignTeams&record=' . urlencode($focus->id));
 } else {
 	
 	//Check if the associated user is deleted
@@ -49,7 +49,7 @@ if($focus->has_records_in_modules()) {
 		$msg = string_format($GLOBALS['app_strings']['LBL_MASSUPDATE_DELETE_USER_EXISTS'], array(Team::getDisplayName($focus->name, $focus->name_2), $user->full_name));
 		$GLOBALS['log']->error($msg);
         SugarApplication::appendErrorMessage($msg);
-		header('Location: index.php?module=Teams&action=DetailView&record='.$focus->id);
+        header('Location: index.php?module=Teams&action=DetailView&record=' . urlencode($focus->id));
 		return;
 	}
 

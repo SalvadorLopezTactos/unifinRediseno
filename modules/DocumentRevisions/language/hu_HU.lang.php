@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'Dokumentum létrehozása',
 	'LNK_DOCUMENT_LIST'=> 'Dokumentumok megtekintése',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'A kapcsolódó dokumentumok változatai',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'Sikeresen létrehozta a következőt: {{moduleSingularLower}}<a href="#{{buildRoute model=this}}">{{revision}}</a>.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'Módosítás száma',
 	'LBL_FILENAME' => 'Fájlnév',
 	'LBL_MIME' => 'Mime típus',

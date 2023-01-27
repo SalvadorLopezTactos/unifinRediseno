@@ -111,11 +111,6 @@ if(isset($focus->campaign_type) && $focus->campaign_type == "NewsLetter"){
 
     $request = InputValidation::getService();
     $request_module = $request->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
-    if (is_admin($current_user) && $request_module != 'DynamicLayout' && !empty($_SESSION['editinplace'])) {
-        $request_action = $request->getValidInputRequest('action');
-        $request_record = $request->getValidInputRequest('record', 'Assert\Guid');
-        $smarty->assign("ADMIN_EDIT","<a href='index.php?action=index&module=DynamicLayout&from_action=". urlencode($request_action) ."&from_module=". urlencode($request_module) ."&record=". urlencode($request_record) . "'>".SugarThemeRegistry::current()->getImage("EditLayout","border='0' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDIT_LAYOUT'])."</a>");
-    }
 
     $smarty->assign('HAS_EDIT_ACCESS', $focus->ACLAccess('edit'));
 
@@ -138,7 +133,12 @@ if(isset($focus->campaign_type) && $focus->campaign_type == "NewsLetter"){
 
         $options_str .= '<option value="all">--None--</option>';
         //query for all email marketing records related to this campaign
-        $latest_marketing_query = "select id, name, date_modified from email_marketing where campaign_id = '$focus->id' order by date_modified desc";
+        $campaignId = $focus->db->quoted($focus->id);
+        $latest_marketing_query = <<<SQL
+SELECT id, name, date_modified FROM email_marketing 
+WHERE campaign_id = {$campaignId} 
+ORDER BY date_modified DESC
+SQL;
 
         //build string with value(s) retrieved
         $result =$focus->db->query($latest_marketing_query);
@@ -150,28 +150,28 @@ if(isset($focus->campaign_type) && $focus->campaign_type == "NewsLetter"){
             }
 
             //fill in first option value
-            $options_str .= '<option value="'. $row['id'] .'"';
+            $options_str .= '<option value="'. htmlspecialchars($row['id']) .'"';
             // if the marketing id is same as selected marketing id, set this option to render as "selected"
             if (!empty($selected_marketing_id) && $selected_marketing_id == $row['id']) {
-                $options_str .=' selected>'. $row['name'] .'</option>';
+                $options_str .=' selected>'. htmlspecialchars($row['name']) .'</option>';
             // if the marketing id is empty then set this first option to render as "selected"
             }elseif(empty($selected_marketing_id) && $focus->campaign_type == 'NewsLetter'){
-                $options_str .=' selected>'. $row['name'] .'</option>';
+                $options_str .=' selected>'. htmlspecialchars($row['name']) .'</option>';
             // if the marketing is not empty, but not same as selected marketing id, then..
             //.. do not set this option to render as "selected"
             }else{
-                $options_str .='>'. $row['name'] .'</option>';
+                $options_str .='>'. htmlspecialchars($row['name']) .'</option>';
             }
         }
         //process rest of records, if they exist
         while ($row = $focus->db->fetchByAssoc($result)){
             //add to list of option values
-            $options_str .= '<option value="'. $row['id'] .'"';
+            $options_str .= '<option value="'. htmlspecialchars($row['id']) .'"';
             //if the marketing id is same as selected marketing id, then set this option to render as "selected"
             if (!empty($selected_marketing_id) && $selected_marketing_id == $row['id']) {
-                $options_str .=' selected>'. $row['name'] .'</option>';
+                $options_str .=' selected>'. htmlspecialchars($row['name']) .'</option>';
             }else{
-                $options_str .=' >'. $row['name'] .'</option>';
+                $options_str .=' >'. htmlspecialchars($row['name']) .'</option>';
             }
          }
          $options_str .="</select>";

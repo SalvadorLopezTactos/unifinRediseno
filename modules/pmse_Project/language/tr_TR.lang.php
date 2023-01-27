@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Oluşturan Kullanıcı',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Son Değiştiren Kullanıcı',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Sistem E-postası',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Doküman Şablonu',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Belge Birleştirme',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Seç…',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'PDF&#39;e Belge Birleştirme',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Belge Birleştirme',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'İş Kuralı',
     'LBL_PMSE_LABEL_RULE' => 'Kural',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Sadece Güncellenmiş Kayıtlar (Tüm Güncellemeler - Yardım Metnine Bakın)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Yeni Kayıtlar veya Birinci Güncelleme',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Yeni Kayıtlar ve Tüm Güncellemeler',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'İlişki Değişikliği',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Sürecin ne zaman başlayacağını seçin.<br><br>Yeni: Yeni kayıt oluşturulduğunda süreci çalıştır.<br><br>Birinci Güncelleme: Süreç sadece ilk kez kriteri mevcut kayıtla eşleştiğinde çalışır.<br><br>Tüm Güncellemeler: Süreç, her zaman kriteri mevcut kayıtla eşleştiğinde çalışır.<br><br>Yeni Kayıtlar veya Birinci Güncelleme: Süreç, kayot oluşturma veya kayıt güncelleme esnasında sadece ilk kez kriteri bir kayıtla eşleştiğinde çalışır.<br><br>Yeni Kayıtlar ve Tüm Güncellemeler: Süreç, tüm yeni ve mevcut kayıtlar için her zaman çalışır.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Sürecin ne zaman başlayacağını seçin.<br><br>Yeni: Yeni kayıt oluşturulduğunda süreci çalıştır.<br><br>Birinci Güncelleme: Süreç sadece ilk kez kriteri mevcut kayıtla eşleştiğinde çalışır.<br><br>Tüm Güncellemeler: Süreç, her zaman kriteri mevcut kayıtla eşleştiğinde çalışır.<br><br>Yeni Kayıtlar veya Birinci Güncelleme: Süreç, kayot oluşturma veya kayıt güncelleme esnasında sadece ilk kez kriteri bir kayıtla eşleştiğinde çalışır.<br><br>Yeni Kayıtlar ve Tüm Güncellemeler: Süreç, tüm yeni ve mevcut kayıtlar için her zaman çalışır.<br><br>İlişki Değişiklikleri: Süreç, her ilişki değişikliği olduğunda çalışır.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Olay tetikleyicisini uygulamak için SugarCRM modülünü seçin',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Sabit Tarih',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => ' Hata',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'İlişki Değişikliği Değerlendirmesi',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Alanlar',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Modül Alanı Değerlendirmesi',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modül',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Tüm İlişkili Kayıtlar',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Bazı İlişkili Kayıtlar',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Eklendi',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Kaldırıldı',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Eklendi veya Kaldırıldı',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Tüm İlişkiler',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Çalışma Zamanı',
 

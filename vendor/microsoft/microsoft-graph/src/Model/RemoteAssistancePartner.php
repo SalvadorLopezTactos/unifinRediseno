@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class RemoteAssistancePartner extends Entity
 {
@@ -30,7 +28,7 @@ class RemoteAssistancePartner extends Entity
     * Gets the displayName
     * Display name of the partner.
     *
-    * @return string The displayName
+    * @return string|null The displayName
     */
     public function getDisplayName()
     {
@@ -56,10 +54,76 @@ class RemoteAssistancePartner extends Entity
     }
     
     /**
+    * Gets the lastConnectionDateTime
+    * Timestamp of the last request sent to Intune by the TEM partner.
+    *
+    * @return \DateTime|null The lastConnectionDateTime
+    */
+    public function getLastConnectionDateTime()
+    {
+        if (array_key_exists("lastConnectionDateTime", $this->_propDict)) {
+            if (is_a($this->_propDict["lastConnectionDateTime"], "\DateTime") || is_null($this->_propDict["lastConnectionDateTime"])) {
+                return $this->_propDict["lastConnectionDateTime"];
+            } else {
+                $this->_propDict["lastConnectionDateTime"] = new \DateTime($this->_propDict["lastConnectionDateTime"]);
+                return $this->_propDict["lastConnectionDateTime"];
+            }
+        }
+        return null;
+    }
+    
+    /**
+    * Sets the lastConnectionDateTime
+    * Timestamp of the last request sent to Intune by the TEM partner.
+    *
+    * @param \DateTime $val The lastConnectionDateTime
+    *
+    * @return RemoteAssistancePartner
+    */
+    public function setLastConnectionDateTime($val)
+    {
+        $this->_propDict["lastConnectionDateTime"] = $val;
+        return $this;
+    }
+    
+    /**
+    * Gets the onboardingStatus
+    * A friendly description of the current TeamViewer connector status. Possible values are: notOnboarded, onboarding, onboarded.
+    *
+    * @return RemoteAssistanceOnboardingStatus|null The onboardingStatus
+    */
+    public function getOnboardingStatus()
+    {
+        if (array_key_exists("onboardingStatus", $this->_propDict)) {
+            if (is_a($this->_propDict["onboardingStatus"], "\Microsoft\Graph\Model\RemoteAssistanceOnboardingStatus") || is_null($this->_propDict["onboardingStatus"])) {
+                return $this->_propDict["onboardingStatus"];
+            } else {
+                $this->_propDict["onboardingStatus"] = new RemoteAssistanceOnboardingStatus($this->_propDict["onboardingStatus"]);
+                return $this->_propDict["onboardingStatus"];
+            }
+        }
+        return null;
+    }
+    
+    /**
+    * Sets the onboardingStatus
+    * A friendly description of the current TeamViewer connector status. Possible values are: notOnboarded, onboarding, onboarded.
+    *
+    * @param RemoteAssistanceOnboardingStatus $val The onboardingStatus
+    *
+    * @return RemoteAssistancePartner
+    */
+    public function setOnboardingStatus($val)
+    {
+        $this->_propDict["onboardingStatus"] = $val;
+        return $this;
+    }
+    
+    /**
     * Gets the onboardingUrl
     * URL of the partner's onboarding portal, where an administrator can configure their Remote Assistance service.
     *
-    * @return string The onboardingUrl
+    * @return string|null The onboardingUrl
     */
     public function getOnboardingUrl()
     {
@@ -81,72 +145,6 @@ class RemoteAssistancePartner extends Entity
     public function setOnboardingUrl($val)
     {
         $this->_propDict["onboardingUrl"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the onboardingStatus
-    * TBD. Possible values are: notOnboarded, onboarding, onboarded.
-    *
-    * @return RemoteAssistanceOnboardingStatus The onboardingStatus
-    */
-    public function getOnboardingStatus()
-    {
-        if (array_key_exists("onboardingStatus", $this->_propDict)) {
-            if (is_a($this->_propDict["onboardingStatus"], "Microsoft\Graph\Model\RemoteAssistanceOnboardingStatus")) {
-                return $this->_propDict["onboardingStatus"];
-            } else {
-                $this->_propDict["onboardingStatus"] = new RemoteAssistanceOnboardingStatus($this->_propDict["onboardingStatus"]);
-                return $this->_propDict["onboardingStatus"];
-            }
-        }
-        return null;
-    }
-    
-    /**
-    * Sets the onboardingStatus
-    * TBD. Possible values are: notOnboarded, onboarding, onboarded.
-    *
-    * @param RemoteAssistanceOnboardingStatus $val The onboardingStatus
-    *
-    * @return RemoteAssistancePartner
-    */
-    public function setOnboardingStatus($val)
-    {
-        $this->_propDict["onboardingStatus"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the lastConnectionDateTime
-    * Timestamp of the last request sent to Intune by the TEM partner.
-    *
-    * @return \DateTime The lastConnectionDateTime
-    */
-    public function getLastConnectionDateTime()
-    {
-        if (array_key_exists("lastConnectionDateTime", $this->_propDict)) {
-            if (is_a($this->_propDict["lastConnectionDateTime"], "\DateTime")) {
-                return $this->_propDict["lastConnectionDateTime"];
-            } else {
-                $this->_propDict["lastConnectionDateTime"] = new \DateTime($this->_propDict["lastConnectionDateTime"]);
-                return $this->_propDict["lastConnectionDateTime"];
-            }
-        }
-        return null;
-    }
-    
-    /**
-    * Sets the lastConnectionDateTime
-    * Timestamp of the last request sent to Intune by the TEM partner.
-    *
-    * @param \DateTime $val The lastConnectionDateTime
-    *
-    * @return RemoteAssistancePartner
-    */
-    public function setLastConnectionDateTime($val)
-    {
-        $this->_propDict["lastConnectionDateTime"] = $val;
         return $this;
     }
     

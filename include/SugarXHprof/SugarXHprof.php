@@ -265,7 +265,7 @@ class SugarXHprof
                 $action .= $GLOBALS['app']->controller->module . '.' . $GLOBALS['app']->controller->action;
             }
         } // soap.php
-        elseif (!empty($GLOBALS['server']) && $GLOBALS['server'] instanceof soap_server) {
+        elseif (!empty($GLOBALS['server']) && $GLOBALS['server'] instanceof SoapServer) {
             if ($GLOBALS['server']->methodname) {
                 $action .= 'soap.' . $GLOBALS['server']->methodname;
             } else {
@@ -274,7 +274,7 @@ class SugarXHprof
         } // service soap
         elseif (!empty($GLOBALS['service_object']) && $GLOBALS['service_object'] instanceof SugarSoapService) {
             $action .= 'soap.' . $GLOBALS['service_object']->getRegisteredClass();
-            if ($GLOBALS['service_object']->getServer() instanceof soap_server) {
+            if ($GLOBALS['service_object']->getServer() instanceof SoapServer) {
                 if ($GLOBALS['service_object']->getServer()->methodname) {
                     $action .= '.' . $GLOBALS['service_object']->getServer()->methodname;
                 } else {

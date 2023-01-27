@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Käyttäjät',
     'LBL_EMAILS_PRODUCTS_REL' => 'Tarjotut tuoterivit',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Tuoterivit',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Eskaloidut',
     'LBL_EMAILS_MESSAGES_REL' => 'Viestit',
     'LBL_EMAILS_PURCHASES_REL' => 'Ostot',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Ostojen tuoterivit',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Lähetä sähköpostia',
     'LBL_MAILBOX' => 'Saapuva tili',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Määritä sähköpostitili lähteville viesteille <a href="#OutboundEmail">Sähköposti-asetuksista</a>, jotta voit lähettää sähköposteja.',
 );

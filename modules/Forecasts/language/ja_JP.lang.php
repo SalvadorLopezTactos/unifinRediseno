@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'詳細',
     'LBL_OW_TYPE'=>'タイプ',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => '<span class="sicon sicon-user-group mx-1"></span> {{name}} のチーム予測',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'個人レポート',
     'LBL_FDR_OPPORTUNITIES'=>'売上予測中の商談:',
     'LBL_FDR_WEIGH'=>'商談の加重金額:',
     'LBL_FDR_COMMIT'=>'確定金額',
     'LBL_FDR_DATE_COMMIT'=>'確定日',
+    'LBL_FDR_FORECAST_HEADER' => '<span class="sicon sicon-user mx-1"></span> {{name}} の販売者予測',
 
     //detail view.
     'LBL_DV_HEADER' => '売上予測: ワークシート',
     'LBL_DV_MY_FORECASTS' => '私の売上予測',
-    'LBL_DV_MY_TEAM' => "私のチームの売上予測" ,
+    'LBL_DV_MY_TEAM' => "私のチームの売上予測",
     'LBL_DV_TIMEPERIODS' => '期間:',
     'LBL_DV_FORECAST_PERIOD' => '売上予測期間',
     'LBL_DV_FORECAST_OPPORTUNITY' => '商談予測',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => '基本レート',
 
     'LBL_QUOTA' => 'ノルマ',
-    'LBL_QUOTA_ADJUSTED' => 'ノルマ（調整済）',
+    'LBL_QUOTA_ADJUSTED' => 'アサイン済みノルマ',
 
     'LBL_FORECAST_FOR'=>'売上予測ワークシート: ',
     'LBL_FMT_ROLLUP_FORECAST'=>'(積み上げ)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'ノルマ 対 確定 対 実績',
 
     'LBL_FORECAST' => '売上予測',
+    'LBL_COMMITMENT' => 'コミットメント',
+    'LBL_TEAM_COMMITMENT' => 'チームコミットメント',
+    'LBL_FORECASTED' => '予測済み',
+    'LBL_ADJUSTED_TOTAL' => '調整済み合計',
     'LBL_COMMIT_STAGE' => 'コミットステージ',
     'LBL_SALES_STAGE' => 'ステージ',
     'LBL_AMOUNT' => '金額',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}と{{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => '期待値{{{direction}}} {{{from}}}から{{{to}}}まで',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'ベスト{{{direction}}} {{{from}}}から{{{to}}}まで',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'ワースト{{{direction}}} {{{from}}}から{{{to}}}まで',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'たぶん止められる同じ',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => '最もよく止められる同じ',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => '同じくワースト',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'コミット済み(可能性が高い) {{{direction}}} {{{from}}} から {{{to}}} まで',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'コミット済み(最高) {{{direction}}} {{{from}}} から {{{to}}} まで',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'コミット済み(最低) {{{direction}}} {{{from}}} から {{{to}}} まで',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'コミット済み(可能性が高い)は変更なし',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'コミット済み(最高)は変更なし',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'コミット済み(最低)は変更なし',
 
 
     'LBL_COMMITTED_THIS_MONTH' => '{0}での今月',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => '表示合計',
     'LBL_TOTAL' => '計',
     'LBL_OVERALL_TOTAL' => '総合計',
-    'LBL_EDITABLE_INVALID' => '{0}は無効な数値',
+    'LBL_EDITABLE_INVALID' => '{{field_name}} の値が無効です',
     'LBL_EDITABLE_INVALID_RANGE' => '数値は{0}から{1}の間であるべきです',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'ワークシートの変更を保存しませんでした',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => '保存もしくはコミットされたデータのみエキスポートできます。OKをクリックするとエキスポートを続行します。キャンセルをクリックするとワークシートに戻ります。',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => '含む',
     'LBL_CHART_NOT_INCLUDED' => '含まない',
     'LBL_CHART_ADJUSTED' => '（調整済）',
-    'LBL_SAVE_DRAFT' => '下書き保存',
+    'LBL_SAVE_DRAFT' => '保存',
     'LBL_CHANGES_BY' => '{0}による変更',
     'LBL_FORECAST_SETTINGS' => '設定',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '会計年度開始日:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '売上予測モジュールで使われる期間を設定してください。<br />会計年度の開始日を選択することから始めてください。そして売上予測を設定したい期間のタイプを選択してください。その選択により、期間の日にちの範囲は自動的に計算されます。サブ期間は売上予測ワークシートに基づいています。<br />閲覧できる将来と過去の期間は売上予測モジュールのサブ期間の数を決定します。ユーザーは売上予測の数値をサブ期間で閲覧したり編集したりすることができます。',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} のカテゴリ分類方法を設定します。<br><br> [範囲] 設定は初回コミット後に変更できなくなることに注意してください。アップグレード済みのインスタンスの場合、[範囲] 設定は既存の[予報] データでロックされます。<br><br>確率範囲に基づいて2つ以上のカテゴリを選択するか、確率に基づかないカテゴリを作成できます。 <br><br>カスタムカテゴリの左側にチェックボックスがあります。 これらを使用して、コミットされてマネージャに報告される予測金額に含まれる範囲を決定します。<br><br>ユーザーは、自分のワークシートから追加/除外ステータスを変更したり、 {{forecastByModule}} のカテゴリを手動で変更したりすることができます。',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} の分類方法を設定します。<br><br>範囲設定は、最初のコミット後は変更できません。アップグレードされたインスタンスでは、範囲設定は既存の予測データに固定されます。<br><br>確率の範囲に基づいて2つ以上のカテゴリーを選択することも、確率に基づかないカテゴリーを作成することも可能です。<br><br>カスタムカテゴリーの左側にはチェックボックスがあります。これらを使用して、どの範囲をコミットされた予測量に含め、マネージャーに報告するかを決定します。<br><br>ユーザは、ワークシートから {{forecastByModule}} の包含/除外ステータスおよびカテゴリーを手動で変更できます。',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'ユーザに記入させたいそれぞれの {{forecastByModuleSingular}} の売上予測のカラムを選択してください。達成可能の金額は、{{forecastByModule}} で表示される金額と結びついていますので注意してください。その理由で、達成可能のカラムは隠すことはできません。',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '売上予測モジュールで閲覧したいカラムを選択してください。フィールドのリストがワークシートを組み合わせて、ユーザがビューをどのように設定するかを選ぶことができます。',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => '私はhow-to textによる売上予測の代理人です!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => '以下により余剰',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'データがありません',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => '会議ノルマ',
+    'LBL_OPEN_LIKELY' => '可能性の高いものを開く',
+    'LBL_OPEN_BEST' => '最高のものを開く',
+    'LBL_OPEN_WORST' => '最低のものを開く',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'アサインノルマ',
     'LBL_ASSIGNING_QUOTA' => 'アサインされるノルマ',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "チームの売上予測",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => '保存していない変更があります。本当にワークシートをソートして変更を破棄しますか？',
+
+    'LBL_SAVE_TOOLTIP' => 'ワークシートの行に対する変更を保存する',
+    'LBL_COMMIT_TOOLTIP_REP' => 'レコードへの変更を保存し、マネージャーに予測を送信する',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'マネージャーに予測を送信し、ノルマを割り当てる',
+
+    'LBL_SAVE_LABEL_REP' => '保存 ',
+    'LBL_SAVE_LABEL_MGR' => '調整した値を保存',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => '{{plural_module_name}} モジュールは {{forecastby_singular_module}} レコードを組み込むことで{{forecastworksheets_module}} を構築して売上を予測します。ユーザーは売上の {{quotas_module}} を目指して個人、チーム、営業組織レベルで働きます。ユーザーが {{plural_module_name}} モジュールにアクセスする前に、管理者が組織に必要な期間、範囲およびシナリオを選択する必要があります。

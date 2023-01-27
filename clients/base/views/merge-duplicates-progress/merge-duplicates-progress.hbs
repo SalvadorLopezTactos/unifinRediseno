@@ -10,14 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="modal progress-modal">
-    <div class="modal-header header">
-        <h3 data-holder="title">{{str 'TPL_MASSUPDATE_TITLE' this.module this}}</h3>
-    </div>
-    <div class="modal-body">
+<div class="modal progress-modal rounded-md shadow-lg bg-alert-background modal-stack">
+    <div class="modal-body my-12">
         <div class="row-fluid">
-            <div class="offset1 span10">
-                <div class="progress-label">
+            <h3 data-holder="title" class="text-center text-2xl">{{str 'TPL_MASSUPDATE_TITLE' this.module this}}</h3>
+            <div class="mx-auto w-9/12">
+                <div class="progress-label text-center text-sm my-2">
                     <span data-holder="message"></span>
                     <span data-holder="estimate"></span>
                 </div>

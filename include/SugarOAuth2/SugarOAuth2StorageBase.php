@@ -191,7 +191,7 @@ class SugarOAuth2StorageBase extends SugarOAuth2StoragePlatform {
      * @return SugarBean The user from the name
      * @throws SugarApiExceptionNeedLogin
      */
-    public function loadUserFromName($username)
+    public function loadUserFromName($username, bool $allowInactive = false)
     {
         if (!empty($GLOBALS['current_user']) &&
                 (empty($username) || $GLOBALS['current_user']->user_name == $username)) {
@@ -199,14 +199,22 @@ class SugarOAuth2StorageBase extends SugarOAuth2StoragePlatform {
             return $GLOBALS['current_user'];
         }
         $userBean = BeanFactory::newBean('Users');
-        $userBean = $userBean->retrieve_by_string_fields(
-            array(
-                'user_name'=>$username,
-                'deleted'=>'0',
-                'status'=>'Active',
-                'portal_only'=>'0',
-                'is_group'=>'0',
-            ));
+        $query = new \SugarQuery();
+        $query->from($userBean, ['add_deleted' => true, 'team_security' => false]);
+        $query->select('id');
+        $query->where()->equals('user_name', $username);
+        $query->where()->equals('deleted', 0);
+        $query->where()->equals('portal_only', 0);
+        $query->where()->equals('is_group', 0);
+        if (!$allowInactive) {
+            $query->where()->equals('status', 'Active');
+        }
+        $id = $query->getOne();
+        if (!$id) {
+            throw new SugarApiExceptionNeedLogin();
+        }
+        $userBean->retrieve($id);
+
         if (empty($userBean)) {
             throw new SugarApiExceptionNeedLogin();
         }

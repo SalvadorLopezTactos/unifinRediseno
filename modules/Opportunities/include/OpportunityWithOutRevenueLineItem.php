@@ -36,6 +36,11 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'massupdate' => true,
             'importable' => 'required',
         ),
+        'forecasted_likely' => [
+            'formula' => '',
+            'calculated' => false,
+            'enforced' => false,
+        ],
         'best_case' => array(
             'calculated' => false,
             'enforced' => false,
@@ -58,12 +63,6 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'required' => true,
             'massupdate' => true,
             'hidemassupdate' => false,
-        ),
-        'commit_stage' => array(
-            'massupdate' => true,
-            'studio' => true,
-            'reportable' => true,
-            'workflow' => true
         ),
         'sales_stage' => array(
             'calculated' => false,
@@ -104,7 +103,20 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'reportable' => false,
             'workflow' => false
         ),
-
+        'closed_won_revenue_line_items' => [
+            'reportable' => false,
+            'workflow' => false,
+        ],
+        'commit_stage' => [
+            'hidemassupdate' => false,
+            'importable' => true,
+            'massupdate' => true,
+            'studio' => true,
+            'reportable' => true,
+            'workflow' => true,
+            'calculated' => true,
+            'formula' => 'forecastCommitStage($probability)',
+        ],
     );
 
     /**
@@ -129,33 +141,34 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
      */
     public function doMetadataConvert()
     {
-        // always runt he parent first, since we need to fix the vardefs before doing the viewdefs
+        // always run the parent first, since we need to fix the vardefs before doing the viewdefs
         parent::doMetadataConvert();
 
         // fix the record view first
-        // only add the commit_stage field if forecasts is setup
         $this->fixRecordView(
             array(
-                'commit_stage' => $this->isForecastSetup(),
+                'forecasted_likely' => false,
                 'sales_status' => false,
                 'service_start_date' => false,
                 'probability' => true,
                 'renewal' => false,
                 'renewal_parent_name' => false,
                 'service_duration' => false,
+                'commit_stage' => false,
             )
         );
 
         // fix the various list views
         $this->fixListViews(
             array(
-                'commit_stage' => $this->isForecastSetup(),
+                'forecasted_likely' => false,
                 'service_start_date' => false,
                 'sales_status' => false,
                 'probability' => true,
                 'renewal' => false,
                 'renewal_parent_name' => false,
                 'service_duration' => false,
+                'commit_stage' => false,
             )
         );
 
@@ -168,6 +181,10 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
                 'service_duration' => false,
             )
         );
+
+        if ($this->isForecastSetup()) {
+            $this->fixForecastFields(true);
+        }
     }
 
     /**
@@ -256,6 +273,14 @@ EOL;
         // remove RLI from lead convert settings
         $parser = new ConvertLayoutMetadataParser('RevenueLineItems');
         $parser->removeLayout('RevenueLineItems');
+        $oppDefs = $parser->getDefForModule('Opportunities');
+        $disableProps = ['enableRlis', 'requireRlis', 'copyDataToRlis'];
+        foreach ($disableProps as $disableProp) {
+            $oppDefs[$disableProp] = false;
+        }
+        $parser->setDefForModule('Opportunities', $oppDefs);
+        $parser->deploy();
+
 
         // add the RLI module
         $affected_modules[] = 'RevenueLineItems';
@@ -700,5 +725,14 @@ EOL;
 EOL;
         
         sugar_file_put_contents($this->accModuleExtFolder . '/Vardefs/' . $this->accModuleExtVardefFile, $file_contents);
+    }
+
+    /**
+     * Fix Lead Convert views
+     */
+    protected function fixLeadConvertView()
+    {
+        $view = new LeadViews();
+        $view->toggleConvertDashboardProductDashlets(false);
     }
 }

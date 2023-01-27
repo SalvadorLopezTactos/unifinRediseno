@@ -52,8 +52,26 @@
                 return;
             }
             var target = event.target;
-            var $target = $(target);
-            var showTooltip = ($target.attr('rel') === 'tooltip' || target.offsetWidth < target.scrollWidth);
+            var $target = $(target).first();
+
+            /**
+             * With the addition of display: flex in some areas, our tooltips don't populate because of the child
+             * elements. This block allows a child with class text-overflow to be used whenever we need tooltips.
+             */
+            let isChildEllipsed = false;
+            if (target.children.length > 0 && target.querySelectorAll(':scope > .text-overflow')) {
+                let ellipsedChild = target.querySelectorAll(':scope > .text-overflow').item(0);
+
+                if (ellipsedChild) {
+                    isChildEllipsed = ellipsedChild.offsetWidth < ellipsedChild.scrollWidth;
+                }
+            }
+
+            var showTooltip = (
+                $target.attr('rel') === 'tooltip' ||
+                target.offsetWidth < target.scrollWidth ||
+                isChildEllipsed
+            );
 
             if (!showTooltip) {
                 event.preventDefault();

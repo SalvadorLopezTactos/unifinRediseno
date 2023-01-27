@@ -54,10 +54,15 @@ class Logger extends BaseLogger
 
         // Sometimes no exceptions are thrown, log failure here in this case.
         if (!$response->isOk()) {
+            $partialData = '';
+            if (!empty($response->getData())) {
+                $partialData = substr($this->encodeData($response->getData()), 0, 256);
+            }
             $msg = sprintf(
-                "Elasticsearch response failure: code %s [%s] %s",
+                "Elasticsearch response failure: code %s [%s] [%s] [%s]",
                 $response->getStatus(),
                 $request->getMethod(),
+                $partialData,
                 $info['url'] ?? $request->getPath()
             );
             $this->log(LogLevel::CRITICAL, $msg);
@@ -131,7 +136,11 @@ class Logger extends BaseLogger
             return;
         }
 
-        $this->log(LogLevel::CRITICAL, "Elasticsearch request failure: " . $e->getMessage());
+        $partialData = '';
+        if (!empty($data)) {
+            $partialData = substr($this->encodeData($data), 0, 256);
+        }
+        $this->log(LogLevel::CRITICAL, "Elasticsearch request failure: " . $e->getMessage() . ' request data: ' . $partialData);
 
         // Additional debug logging
         if ($this->logger->wouldLog(LogLevel::DEBUG)) {

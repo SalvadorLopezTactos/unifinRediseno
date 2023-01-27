@@ -236,7 +236,8 @@
                     view: this.view,
                     nested: true,
                     viewName: this.options.viewName,
-                    model: this.model
+                    model: this.model,
+                    module: fieldDef.module
                 });
                 this.fields.push(field);
                 field.parent = this;

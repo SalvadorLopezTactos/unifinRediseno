@@ -7,24 +7,15 @@
 // ----------
 
 .nav {
-  margin-left: 0;
+  .ml-0();
+
   margin-bottom: @baseLineHeight;
   list-style: none;
-}
 
-// Make links block level
-.nav > li > a {
-  display: block;
-}
-
-.nav > li > a:hover {
-  text-decoration: none;
-  background-color: @grayLighter;
-}
-
-// Redeclare pull classes because of specifity
-.nav > .pull-right {
-  float: right;
+  // Make links block level
+  & > li > a {
+    .block();
+  }
 }
 
 // Nav headers (for dropdowns and lists)
@@ -34,8 +25,8 @@
   font-size: 11px;
   font-weight: bold;
   line-height: @baseLineHeight;
-  color: @grayLight;
-  text-shadow: 0 1px 0 fade(@white, 50%);
+  color: @gray70;
+  text-shadow: 0 1px 0 @gray10;
   text-transform: uppercase;
 }
 // Space them out when they follow another list item (link)
@@ -68,10 +59,17 @@
   color: @white;
   text-shadow: 0 -1px 0 fade(@black, 20%);
   background-color: @linkColor;
+
+  .sicon {
+    color: @white;
+  }
 }
 
-.nav-list .fa {
-  margin-right: 2px;
+.nav-list {
+  &.sicon,
+  &.fa {
+    margin-right: 2px;
+  }
 }
 // Dividers (basically an hr) within the dropdown
 .nav-list .divider {
@@ -105,7 +103,7 @@
 
 // Give the tabs something to sit on
 .nav-tabs {
-  border-bottom: 1px solid @grayMid;
+  border-bottom: @borderWidget;
 }
 // Make the list-items overlay the bottom border
 .nav-tabs > li {
@@ -116,20 +114,11 @@
   padding-top: 8px;
   padding-bottom: 8px;
   line-height: @baseLineHeight;
-  border: 1px solid @transparent;
-  border-radius: 4px 4px 0 0;
-
-  &:hover {
-    border-color: @grayLighter @grayLighter @grayLightish;
-  }
 }
 // Active state, and it's :hover to override normal :hover
 .nav-tabs > .active > a,
 .nav-tabs > .active > a:hover {
-  color: @gray;
-  background-color: @tabBackgroundActive;
-  border: 1px solid @grayLighter;
-  border-bottom-color: @transparent;
+  color: @textColor;
   cursor: default;
 }
 
@@ -150,6 +139,10 @@
 .nav-pills > .active > a:hover {
   color: @white;
   background-color: @linkColor;
+
+  .sicon {
+    color: @white;
+  }
 }
 
 // STACKED NAV
@@ -170,7 +163,7 @@
 }
 
 .nav-tabs.nav-stacked > li > a {
-  border: 1px solid @grayLighter;
+  border: @borderWidget;
   border-radius: 0;
 }
 
@@ -185,7 +178,7 @@
 }
 
 .nav-tabs.nav-stacked > li > a:hover {
-  border-color: @grayLighter;
+  border-color: @borderColor;
   z-index: 2;
 }
 
@@ -236,8 +229,8 @@
 }
 
 .nav-tabs .active .dropdown-toggle .caret {
-  border-top-color: @gray;
-  border-bottom-color: @gray;
+  border-top-color: @gray80;
+  border-bottom-color: @gray80;
 }
 
 // Active:hover dropdown links
@@ -252,8 +245,12 @@
 .nav-pills .open .dropdown-toggle,
 .nav > li.dropdown.open.active > a:hover {
   color: @white;
-  background-color: @grayLight;
-  border-color: @grayLight;
+  background-color: @gray70;
+  border-color: @gray70;
+
+  .sicon {
+    color: @white;
+  }
 }
 
 .nav li.dropdown.open .caret,
@@ -266,7 +263,7 @@
 
 // Dropdowns in stacked tabs
 .tabs-stacked .open > a:hover {
-  border-color: @grayLight;
+  border-color: @gray70;
 }
 
 // TABBABLE
@@ -320,13 +317,13 @@
 
   &:hover {
     border-bottom-color: @transparent;
-    border-top-color: @grayLighter;
+    border-top-color: @gray20;
   }
 }
 
 .tabs-below > .nav-tabs > .active > a,
 .tabs-below > .nav-tabs > .active > a:hover {
-  border-color: @transparent @grayLighter @grayLighter;
+  border-color: @transparent @borderColor @borderColor;
 }
 
 // LEFT & RIGHT
@@ -349,7 +346,7 @@
 .tabs-left > .nav-tabs {
   float: left;
   margin-right: 19px;
-  border-right: 1px solid @grayLighter;
+  border-right: @borderWidget;
 }
 
 .tabs-left > .nav-tabs > li > a {
@@ -358,19 +355,19 @@
 }
 
 .tabs-left > .nav-tabs > li > a:hover {
-  border-color: @grayLighter @grayLightish @grayLighter @grayLighter;
+  border-color: @borderColor @gray60 @borderColor @borderColor;
 }
 
 .tabs-left > .nav-tabs .active > a,
 .tabs-left > .nav-tabs .active > a:hover {
-  border-color: @grayLighter @transparent @grayLighter @grayLighter;
+  border-color: @borderColor @transparent @borderColor @borderColor;
 }
 
 // Tabs on the right
 .tabs-right > .nav-tabs {
   float: right;
   margin-left: 19px;
-  border-left: 1px solid @grayLighter;
+  border-left: @borderWidget;
 }
 
 .tabs-right > .nav-tabs > li > a {
@@ -379,12 +376,12 @@
 }
 
 .tabs-right > .nav-tabs > li > a:hover {
-  border-color: @grayLighter @grayLighter @grayLighter @grayLightish;
+  border-color: @borderColor @borderColor @borderColor @gray60;
 }
 
 .tabs-right > .nav-tabs .active > a,
 .tabs-right > .nav-tabs .active > a:hover {
-  border-color: @grayLighter @grayLighter @grayLighter @transparent;
+  border-color: @borderColor @borderColor @borderColor @transparent;
 }
 
 // DISABLED STATES
@@ -392,7 +389,7 @@
 
 // Gray out text
 .nav > .disabled > a {
-  color: @grayLight;
+  color: @gray70;
 }
 // Nuke hover effects
 .nav > .disabled > a:hover {
@@ -415,23 +412,18 @@
       width: 33.333%;
 
       > a {
-        background-color: @tableBackgroundAccent;
-        border: 1px solid darken(@tableBackgroundAccent, 5%);
+        border: 1px solid @primaryContentBackground;
         font-size: 11px;
         margin: 0;
         border-radius: 0;
 
         &:hover {
-          background: @dropdownLinkBackgroundHover;
-          border: 1px solid darken(@tableBackgroundAccent, 5%);
+          .bg-tab-background-hover-color();
         }
       }
 
       &.active {
-        > a {
-          background-color: @white;
-          border-bottom: none;
-        }
+        .active-tab();
       }
     }
   }
@@ -476,20 +468,12 @@
 
 // Actual tabs (as links)
 .nav-tabs > li > a {
-  background-color: @transparent;
-  color: @gray;
-  margin: 0 4px;
-  //border: 1px solid darken(@grayLight, 5%);
+  color: @labelColor;
   padding: 6px 8px;
-  //border-bottom: 1px solid @grayLight;
+
   &:hover {
-    //border: 1px solid darken(@grayLight, 5%);
-    color: @dropdownLinkColorHover;
+    color: @textColorHover;
     text-decoration: none;
-    //this causes sharp corners on dropdown-menu
-    //fixed by setting border radius on li > a
-    background: @dropdownLinkBackgroundHover;
-    //background-color: transparent;
   }
 }
 
@@ -498,56 +482,48 @@
   color: @errorText;
 }
 
-// Active state, and it's :hover to override normal :hover
-.nav-tabs > .active > a,
-.nav-tabs > .active > a:hover {
-  border: @borderWidgetLight;
-  border-bottom-color: @navbarLinkBackgroundActive;
-  font-weight: bold;
-}
-
 .nav-tabs.nav-stacked > li > a {
-  border: 1px solid @grayLight;
+  border: 1px solid @gray70;
 }
 
 .nav-tabs.nav-stacked > li > a:hover {
-  border-color: @grayLight;
+  border-color: @gray70;
 }
 
 // Make carets use linkColor to start
 .nav-tabs .dropdown-toggle .fa-caret-down,
 .nav-pills .dropdown-toggle .fa-caret-down {
-  border-top-color: @gray;
-  border-bottom-color: @gray;
+  border-top-color: @gray80;
+  border-bottom-color: @gray80;
 }
 
 .tabs-below > .nav-tabs {
-  border-top: 1px solid @grayLight;
+  border-top: 1px solid @gray70;
 }
 
 .tabs-below > .nav-tabs > li > a {
   &:hover {
-    border-top-color: @grayLight;
+    border-top-color: @gray70;
   }
 }
 
 .tabs-below > .nav-tabs > .active > a,
 .tabs-below > .nav-tabs > .active > a:hover {
-  border-color: @transparent @grayLight @grayLight @grayLight;
+  border-color: @transparent @gray70 @gray70 @gray70;
 }
 
 // Tabs on the left
 .tabs-left > .nav-tabs {
-  border-right: 1px solid @grayLight;
+  border-right: 1px solid @gray70;
 }
 
 .tabs-left > .nav-tabs > li > a:hover {
-  border-color: @grayLight @grayLight @grayLight @grayLight;
+  border-color: @gray70 @gray70 @gray70 @gray70;
 }
 
 .tabs-left > .nav-tabs .active > a,
 .tabs-left > .nav-tabs .active > a:hover {
-  border-color: @grayLight @transparent @grayLight @grayLight;
+  border-color: @gray70 @transparent @gray70 @gray70;
 }
 
 .tabs-left > .nav-tabs > li > a,
@@ -559,7 +535,7 @@
 
 // Tabs on the right
 .tabs-right > .nav-tabs {
-  border-left: 1px solid @grayLight;
+  border-left: 1px solid @gray70;
 }
 //twitter bootstrap override
 .tabs-right > .nav-tabs > li > a {
@@ -567,12 +543,12 @@
 }
 
 .tabs-right > .nav-tabs > li > a:hover {
-  border-color: @grayLight @grayLight @grayLight @grayLight;
+  border-color: @gray70;
 }
 
 .tabs-right > .nav-tabs .active > a,
 .tabs-right > .nav-tabs .active > a:hover {
-  border-color: @grayLight @grayLight @grayLight @transparent;
+  border-color: @gray70 @gray70 @gray70 @transparent;
 }
 
 //These changes are from the initial bs commit but have changed in new bs
@@ -594,40 +570,39 @@
       height: 50px;
       text-align: center;
       font-size: 11px;
-      color: @gray;
-      background-color: @grayLighter;
-      border: @borderWidgetLight;
+      border-bottom: @borderWidget;
 
       &.active {
-        font-weight: bold;
-        border-bottom: @transparent;
-        background: @white;
+        .tbold();
+        .active-tab();
       }
 
       &:first-child {
-        border-left: 0;
+        .border-l-0();
       }
 
       &:last-child {
-        border-right: 0;
+        .border-r-0();
       }
 
       a {
-        color: @gray;
-        display: inline-block;
+        .flex();
+        .flex-column();
+        .items-center();
+
+        color: @dropdownLinkColor;
         width: 100%;
         height: 100%;
-        padding-top: 0.5em;
         text-decoration: none;
+        justify-content: center;
       }
     }
   }
 }
 
-.dashlet-tabs .dashlet-tab:not(.active) a:hover {
-  color: @dropdownLinkColorHover;
+.dashlet-tabs .dashlet-tab:not(.active):hover {
   text-decoration: none;
-  background: @dropdownLinkBackgroundHover;
+  .bg-tab-background-hover-color();
 }
 
 .dashlet-tabs.tab2 .dashlet-tab {
@@ -656,34 +631,6 @@
 }
 
 .content-tabs {
-  .nav.nav-tabs {
-    margin-bottom: 0;
-    background-color: @grayLighter;
-    border-top: 1px solid @white;
-    padding-left: 20px;
-
-    .tab {
-      &.active {
-        border: @borderWidgetLight;
-        border-bottom: 1px solid @white;
-        background: @white;
-        margin-top: -2px;
-
-        a {
-          padding: 12px 8px 10px;
-        }
-      }
-
-      a {
-        font-size: 11px;
-        border: none;
-        margin: -1px 0 1px;
-        padding: 11px 8px;
-        border-radius: 0;
-      }
-    }
-  }
-
   .tab-pane {
     padding-top: 13px;
 
@@ -696,13 +643,21 @@
 }
 
 // Tabbed dashboard
+.tabbed-dashboard-pane {
+  .nav-tabs {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
 .nav-tabs-indented li.tab:first-child {
   margin-left: 40px;
 }
 
 li.tab.tab-badgeable {
   height: 36px;
-  margin-bottom: 1px;
+  max-width: 162px;
+  flex-grow: 1;
 
   .tab-title {
     text-align: left;
@@ -734,21 +689,21 @@ li.tab.tab-badgeable {
   }
 
   &.active {
-    // Paint over the border (from the ul element) for the active tab only
-    border-bottom: 1px solid @tabBackgroundActive;
+    .active-tab();
   }
 
   &:not(.active) {
-    background-color: @tabBackgroundInactive;
+    &:hover {
+      a {
+        .bg-tab-background-hover-color();
+      }
+    }
   }
 
   a {
     margin-left: 0;
     margin-right: 0;
-    padding-top: 3px;
-    padding-bottom: 3px;
     height: 30px;
-    width: 162px;
     line-height: @countBadgeHeight;
     // vertical centering hack for badgeless tabs, based off https://css-tricks.com/centering-in-the-unknown/
     vertical-align: middle;
@@ -760,3 +715,4 @@ li.tab.tab-badgeable {
     }
   }
 }
+

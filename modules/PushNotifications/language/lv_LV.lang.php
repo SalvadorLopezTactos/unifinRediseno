@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Priekšteča tips',
     'LBL_PARENT_ID' => 'Sākotnējais ID',
     'LBL_EXTRA_DATA' => 'Papildu dati',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM - norādīts modulī {{module_name_singular}}',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} pieminēja jūs {{module_name_singular}} {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM - piešķirtais {{module_name_singular}}',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} piešķīra {{module_name_singular}} {{record_name}} jums.',
 ];

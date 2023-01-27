@@ -115,7 +115,7 @@ class Repository
         );
 
         $stmt = $this->conn->executeQuery($query, array($id, $table));
-        $data = $stmt->fetchColumn();
+        $data = $stmt->fetchOne();
         if ($data === false) {
             return null;
         }

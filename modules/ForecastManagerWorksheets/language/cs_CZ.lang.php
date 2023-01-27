@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Základní kurz',
 
     'LBL_QUOTA' => 'Kvóta',
-    'LBL_QUOTA_ADJUSTED' => 'Kvóta (upravená)',
+    'LBL_QUOTA_ADJUSTED' => 'Upravená kvóta',
 
     'LBL_FORECAST' => 'Předpověď',
     'LBL_COMMIT_STAGE' => 'Fáze schválení',

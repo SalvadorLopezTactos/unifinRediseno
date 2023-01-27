@@ -26,12 +26,10 @@
     </tr>
 </table>
 <script>
-    {literal}
 // TODO no more DCMenu
     //lets overwrite dcmenu value that is prepoulated and passed into ajaxui to navigate.  This makes sure we go to
     //projectstemplate list view after the save has been processed.
 //    if(DCMenu){
 //        DCMenu.qe_refresh = 'SUGAR.ajaxUI.loadContent("index.php?module=Project&action=ProjectTemplatesListView&ignore='+new Date().getTime()+'");';
 //    }
-    {/literal}
 </script>

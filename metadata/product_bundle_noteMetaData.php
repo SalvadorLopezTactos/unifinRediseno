@@ -59,13 +59,6 @@ $dictionary['product_bundle_note'] = array(
             ),
         ),
         array(
-            'name' => 'idx_pbn_note',
-            'type' => 'index',
-            'fields' => array(
-                'note_id',
-            ),
-        ),
-        array(
             'name' => 'idx_pbn_pb_nb',
             'type' => 'alternate_key',
             'fields' => array(

@@ -70,27 +70,8 @@ foreach(SugarAutoLoader::existing('modules/Quotes/Layouts.override.php', 'custom
     include_once $file;
 }
 
-if(isset($_REQUEST['email_action']) && $_REQUEST['email_action']=="EmailLayout") {
-	//check to make sure the layout is set
-	if (isset($_REQUEST['layout'])) {
-		include_once('modules/Quotes/EmailPDF.php');
-		$email_id = email_layout($_REQUEST['layout']);
-	}
-
-	//redirect
-	if($email_id=="") {
-		//Redirect to quote, since something went wrong
-		echo "There was an error with your request";
-		exit; //end if email id is blank
-	} else {
-		//Redirect to new email draft just created
-		header("Location: index.php?action=Compose&module=Emails&parent_type=Quotes&return_module=Quotes&return_action=DetailView&return_id=".$_REQUEST['record']."&recordId=$email_id"."&parent_id=".$_REQUEST['record']);
-	}
-//end if email layout
-} else {
-	if (isset($_REQUEST['layout'])) {
-		print_layout($_REQUEST['layout']);
-	}//end if else traditional print layout
-}
+if (isset($_REQUEST['layout'])) {
+    print_layout($_REQUEST['layout']);
+}//end if else traditional print layout
 
 ?>

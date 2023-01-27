@@ -137,7 +137,6 @@ Touched:
 - modules/Campaigns/Save.php
 - modules/Emails/Save.php
 - modules/KBOLDDocuments/Save.php
-- modules/Accounts/AccountFormBase.php
 - modules/Meetings/MeetingFormBase.php
 - modules/DocumentRevisions/Save.php
 - modules/Prospects/ProspectFormBase.php
@@ -801,7 +800,7 @@ ENDB;
        replaceFormClick($dom_tree, $js_form, $hidden_exists);
        if($hidden_exists) {
            //If the customCode contains hidden fields, the extracted hidden fields need to append in the original form
-           $form = $smarty->get_template_vars('form');
+            $form = $smarty->getTemplateVars('form');
            $hidden_fields = $dom_tree;
            extractHiddenInputs($hidden_fields);
            if(!isset($form)) {

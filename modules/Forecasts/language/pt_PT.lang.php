@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Descrição',
     'LBL_OW_TYPE'=>'Tipo',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Previsão da equipa para <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Relatório Directo',
     'LBL_FDR_OPPORTUNITIES'=>'Oportunidades previstas',
     'LBL_FDR_WEIGH'=>'Valor Ponderado das Oportunidades:',
     'LBL_FDR_COMMIT'=>'Valor Final',
     'LBL_FDR_DATE_COMMIT'=>'Data do Registo',
+    'LBL_FDR_FORECAST_HEADER' => 'Previsão de vendedor para <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Previsões: Folha de Trabalho',
     'LBL_DV_MY_FORECASTS' => 'As Minhas Previsões',
-    'LBL_DV_MY_TEAM' => "As Previsões da Minha Equipa" ,
+    'LBL_DV_MY_TEAM' => "As Previsões da Minha Equipa",
     'LBL_DV_TIMEPERIODS' => 'Períodos Temporais:',
     'LBL_DV_FORECAST_PERIOD' => 'Período Temporal da Previsão',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Previsão de Oportunidades',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Taxa Base',
 
     'LBL_QUOTA' => 'Quota',
-    'LBL_QUOTA_ADJUSTED' => 'Quota (Ajustada)',
+    'LBL_QUOTA_ADJUSTED' => 'Quota ajustada',
 
     'LBL_FORECAST_FOR'=>'Folha de Trabalho de Previsão para:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Revisão)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Quota vs Registado vs Real',
 
     'LBL_FORECAST' => 'Previsão',
+    'LBL_COMMITMENT' => 'Compromisso',
+    'LBL_TEAM_COMMITMENT' => 'Compromisso da equipa',
+    'LBL_FORECASTED' => 'Previsto',
+    'LBL_ADJUSTED_TOTAL' => 'Total ajustado',
     'LBL_COMMIT_STAGE' => 'Etapa de Commit',
     'LBL_SALES_STAGE' => 'Fase',
     'LBL_AMOUNT' => 'Valor',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, e {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => '{{{direction}}} provável {{{from}}} para {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'melhor {{{direction}}} {{{from}}} para {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'pior {{{direction}}} {{{from}}} para {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'provavelmente permaneceu na mesma',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'no melhor permaneceu na mesma',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'no pior permaneceu na mesma',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Confirmado (provável) {{{direction}}} {{{from}}} para {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Confirmado (melhor) {{{direction}}} {{{from}}} para {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Confirmado (pior) {{{direction}}} {{{from}}} para {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Confirmado (provável) permaneceu o mesmo',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Confirmado (Melhor) permaneceu o mesmo',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Confirmado (Pior) permaneceu o mesmo',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Este mês em {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Total Apresentado',
     'LBL_TOTAL' => 'Total',
     'LBL_OVERALL_TOTAL' => 'Total Global',
-    'LBL_EDITABLE_INVALID' => 'Valor Inválido para {0}',
+    'LBL_EDITABLE_INVALID' => 'Valor Inválido para {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'O valor tem que estar entre {0} e {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Tem alterações não gravadas na sua Folha de Cálculo.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Por favor note que apenas informação gravada ou inserida pode ser exportada. Clique em Cancelar para abortar. Confirme para exportar os dados gravados.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Incluído',
     'LBL_CHART_NOT_INCLUDED' => 'Não Incluído',
     'LBL_CHART_ADJUSTED' => '(Ajustado)',
-    'LBL_SAVE_DRAFT' => 'Gravar como Rascunho',
+    'LBL_SAVE_DRAFT' => 'Guardar',
     'LBL_CHANGES_BY' => 'Alterações efetuadas por {0}',
     'LBL_FORECAST_SETTINGS' => 'Definições',
 
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Excedido por',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Sem dados',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'A atingir a quota',
+    'LBL_OPEN_LIKELY' => 'Abrir Provável',
+    'LBL_OPEN_BEST' => 'Abrir Melhor',
+    'LBL_OPEN_WORST' => 'Abrir Pior',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Atribuir Quota',
     'LBL_ASSIGNING_QUOTA' => 'A atribuir quota',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "A Previsão da Minha Equipa",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Tem alterações não gravadas. Tem a certeza que quer ordenar a folha de trabalho e perder as alterações?',
+
+    'LBL_SAVE_TOOLTIP' => 'Guardar as alterações feitas nas linhas da folha de cálculo',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Guardar as alterações nos registos e enviar a previsão ao gestor',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Enviar previsão ao gestor e atribuir quota',
+
+    'LBL_SAVE_LABEL_REP' => 'Guardar ',
+    'LBL_SAVE_LABEL_MGR' => 'Guardar valores ajustados',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'O módulo {{plural_module_name}} incorpora registos {{forecastby_singular_module}} para construir {{forecastworksheets_module}} e prever vendas. Os utilizadores podem focar-se nas vendas {{quotas_module}} a nível individual, de equipa, e de organização de vendas. Antes de um utilizador ter acesso ao módulo de {{plural_module_name}}, um administrador deverá selecionar os intervalos de Tempo, Intervalos e Cenários pretendidos pela organização.

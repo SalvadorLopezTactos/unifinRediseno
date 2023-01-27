@@ -25,13 +25,13 @@ legend {
   margin-bottom: @baseLineHeight;
   font-size: @baseFontSize * 1.5;
   line-height: @baseLineHeight * 2;
-  color: @grayDark;
+  color: @gray80;
   border: 0;
 
   // Small
   small {
     font-size: @baseLineHeight * 0.75;
-    color: @grayLight;
+    color: @gray70;
   }
 }
 
@@ -84,7 +84,7 @@ input[type="color"],
   margin-bottom: @baseLineHeight / 2;
   font-size: @baseFontSize;
   line-height: @baseLineHeight;
-  color: @gray;
+  color: @textColor;
   border-radius: @inputBorderRadius;
   vertical-align: middle;
 }
@@ -132,8 +132,7 @@ input[type="color"],
 }
 
 // Position radios and checkboxes better
-input[type="radio"],
-input[type="checkbox"] {
+input[type="radio"] {
   margin: 4px 0 0;
   line-height: normal;
 }
@@ -144,8 +143,7 @@ input[type="image"],
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
-input[type="radio"],
-input[type="checkbox"] {
+input[type="radio"] {
   width: auto; // Override of generic input selector
 }
 
@@ -183,8 +181,8 @@ input[type="checkbox"]:focus {
 // Make uneditable inputs look inactive
 .uneditable-input,
 .uneditable-textarea {
-  color: @grayLight;
-  background-color: darken(@inputBackground, 1%);
+  color: @gray70;
+  background-color: @inputDisabledBackground;
   border-color: @inputBorder;
   box-shadow: inset 0 1px 2px fade(@black, 2.5%);
   cursor: not-allowed;
@@ -363,7 +361,7 @@ select:focus:invalid {
 
 .help-block,
 .help-inline {
-  color: lighten(@textColor, 15%); // lighten the text some for contrast
+  color: @textColorLight; // lighten the text some for contrast
 }
 
 .help-block {
@@ -409,17 +407,13 @@ select:focus:invalid {
 
   .add-on {
     display: inline-block;
-    width: auto;
     height: @baseLineHeight;
-    min-width: 16px;
     padding: 4px 5px;
     font-size: @baseFontSize;
     font-weight: normal;
     line-height: @baseLineHeight;
     text-align: center;
-    text-shadow: 0 1px 0 @white;
-    background-color: @grayLighter;
-    border: 1px solid @grayLighter;
+    border: @borderWidget;
   }
 
   .add-on,
@@ -647,7 +641,7 @@ legend {
 }
 
 label {
-  color: @grayDark;
+  color: @labelColor;
 }
 
 // Reset the file input to browser defaults
@@ -671,7 +665,6 @@ input[type="image"] {
   width: auto;
   height: auto;
   padding: 0;
-  margin: 3px 0;
   line-height: normal;
   cursor: pointer;
   background-color: transparent;
@@ -729,22 +722,22 @@ input[type="hidden"] {
 // Placeholder text gets special styles; can't be bundled together though for some reason
 //.placeholder(@grayLight);
 ::-webkit-input-placeholder {
-  color: @grayLight;
+  color: @gray70;
   font-weight: normal;
 }
 
 ::-moz-placeholder { /* firefox 19+ */
-  color: @grayLight;
+  color: @gray70;
   font-weight: normal;
 }
 
 :-ms-input-placeholder { /* ie */
-  color: @grayLight;
+  color: @gray70;
   font-weight: normal;
 }
 
 input:-moz-placeholder {
-  color: @grayLight;
+  color: @gray70;
   font-weight: normal;
 }
 
@@ -820,29 +813,43 @@ input[type=radio] {
   }
 }
 
+.input-append,
+.input-prepend {
+  &.date {
+    .add-on i {
+      width: 12px;
+      height: 12px;
+    }
+  }
+}
+
 .input-append {
   position: relative;
-  display: inline-block;
   vertical-align: top;
   width: 100%;
   margin-bottom: 0;
   font-size: inherit;
 
   .add-on {
-    top: 3px;
-    left: -28px;
     margin-left: 0;
-    height: 16px;
     padding: 3px;
     position: relative;
+    right: 24px;
+    top: 5px;
     border: none;
-    background: @white;
-    line-height: 16px;
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
     border-radius: 0;
     z-index: 2;
 
+    &.datetime {
+      right: 28px;
+      position: relative;
+    }
+
     i {
-      line-height: 16px;
+      line-height: 12px;
     }
   }
 
@@ -865,6 +872,7 @@ input[type=radio] {
     top: 0;
     left: 7px;
     display: inline;
+    position: relative;
   }
 
   &.widget {
@@ -905,18 +913,16 @@ input[type=radio] {
     font-size: @baseFontSize;
 
     li {
-      color: @gray;
+      color: @gray80;
     }
   }
 
   &.error {
-    font-size: @fontSizeLarge;
-
     .add-on {
-      left: -23px;
       color: @errorText;
       z-index: 1;
 
+      .sicon,
       .fa {
         color: @errorText;
       }
@@ -940,16 +946,21 @@ input[type=radio] {
 
   &.date,
   &.datetime {
+    .date-wrapper {
+      display: flex;
+
+      input[type="text"],
+      .input-append {
+        flex-shrink: 0;
+      }
+    }
+
     &.error {
       .add-on {
-        left: -28px;
+        left: -46px;
 
         &.error-tooltip {
           left: -41px;
-
-          & + .add-on {
-            left: -50px;
-          }
         }
       }
     }
@@ -963,6 +974,7 @@ input[type=radio] {
 
 .control-group {
   display: flex;
+  align-items: center;
   flex-direction: row;
   margin-bottom: 4px;
 
@@ -980,10 +992,15 @@ input[type=radio] {
 
   .btn-toolbar {
     margin: 0 0 0 8px;
-    display: inline;
+    display: inline-flex;
 
     .btn-group {
       float: left;
+
+      .btn {
+        line-height: 12px;
+        padding: 7px;
+      }
     }
   }
 
@@ -1016,7 +1033,7 @@ input[type=radio] {
 
     & > span,
     & > del {
-      color: @grayLight;
+      color: @gray70;
     }
 
     input[type="text"] {
@@ -1070,6 +1087,9 @@ input[type=radio] {
       position: absolute;
       top: 0;
       right: 0;
+      font-size: 12px;
+      line-height: 12px;
+      padding: 7px;
 
       &.fourth {
         right: 108px;
@@ -1152,7 +1172,7 @@ input[type="color"],
 }
 
 input.required {
-  border: 1px solid @grayLight;
+  border: 1px solid @gray70;
 }
 
 //flex-relate field
@@ -1201,6 +1221,11 @@ input[type="radio"][readonly] {
   span.month:hover,
   span.year:hover {
     border-radius: 50%;
+    background: @borderColor;
+  }
+
+  thead tr:first-child th:hover {
+    background: @borderColor;
   }
 }
 
@@ -1224,4 +1249,55 @@ input[type="color"],
   border-radius: 2px;
 }
 
+[data-type='date'],
+[data-type='date-cascade'] {
+  .input-append.error {
+    + .add-on[data-icon='calendar'] {
+      .fa-calendar,
+      .sicon-calendar {
+        color: @red;
+      }
+    }
+
+    .error-tooltip.add-on {
+      position: relative;
+      left: -41px;
+    }
+  }
+}
+
 /* NEW SKIN END */
+
+// Correct autocomplete styles from the browser, ensure we have the correct background and text color
+// -------------------------
+
+:-moz-autofill,
+:-moz-autofill:hover,
+:-moz-autofill:focus,
+:-moz-autofill-preview,
+:-moz-autofill-preview:hover,
+:-moz-autofill-preview:focus {
+  border: 1px solid @borderColorFocus !important;
+  filter: none;
+  -moz-box-shadow: 0 0 0 @baseFontSize @inputBackground inset !important;
+  -moz-text-fill-color: @textColor !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-internal-autofill-selected,
+input:-internal-autofill-selected:hover,
+input:-internal-autofill-selected:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid @borderColorFocus !important;
+  -webkit-box-shadow: 0 0 0 @baseFontSize @inputBackground inset !important;
+  -webkit-text-fill-color: @textColor !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}

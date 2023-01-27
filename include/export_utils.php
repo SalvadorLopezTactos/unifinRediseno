@@ -344,15 +344,7 @@ function getExportContentFromFilter($args, $remove_from_members, $focus, $member
     $delimiter = getDelimiter();
 
     //set up labels to be used for the header row
-    $field_labels = array();
-    foreach ($fields_array as $key => $dbName) {
-        //Remove fields that are only used for logic
-        if ($members && (in_array($dbName, $remove_from_members))) {
-            continue;
-        }
-        //default to the db name of label does not exist
-        $field_labels[$key] = translateForExport($dbName, $focus);
-    }
+    $field_labels = getExportHeaderLabels($focus, $fields_array, $members, $remove_from_members);
 
     // set up the "header" line with proper delimiters
     $content = "\"".implode("\"". $delimiter ."\"", array_values($field_labels))."\"\r\n";
@@ -397,7 +389,10 @@ function getExportContentFromFilter($args, $remove_from_members, $focus, $member
             // getting content values depending on their types
             $fieldNameMapKey = $fields_array[$key];
 
-            if (isset($focus->field_defs[$fieldNameMapKey])  && $focus->field_defs[$fieldNameMapKey]['type']) {
+            if (isset($focus->field_defs[$fieldNameMapKey]) &&
+                $focus->field_defs[$fieldNameMapKey]['type'] &&
+                $focus->field_defs[$fieldNameMapKey]['type'] !== 'multienum'
+            ) {
                 $sfh = SugarFieldHandler::getSugarField($focus->field_defs[$fieldNameMapKey]['type']);
                 $value = $sfh->exportSanitize($value, $focus->field_defs[$key], $focus);
             }
@@ -407,6 +402,12 @@ function getExportContentFromFilter($args, $remove_from_members, $focus, $member
             }
 
             array_push($new_arr, preg_replace("/\"/", "\"\"", $value));
+
+            // If this is an enum or multienum, export the display label as well
+            $display_label = getTranslatedFieldValue($focus, $key, $value, $record);
+            if (is_string($display_label) && array_key_exists($key . '_export_label', $field_labels)) {
+                $new_arr[$key . '_export_label'] = $display_label;
+            }
         } //foreach
 
         $line = implode("\"". $delimiter ."\"", $new_arr);
@@ -442,7 +443,6 @@ function getExportContentFromResult(
     global $current_user, $locale, $app_strings;
     $sampleRecordNum = 5;
     $delimiter = getDelimiter();
-    $timedate = TimeDate::getInstance();
     $db = DBManagerFactory::getInstance();
     $fields_array = $db->getFieldsArray($result, true);
 
@@ -453,15 +453,7 @@ function getExportContentFromResult(
     $fields_array = get_field_order_mapping($focus->module_dir, $fields_array, true, $focus->fields_to_exclude);
 
     // set up labels to be used for the header row
-    $field_labels = array();
-    foreach ($fields_array as $key => $dbname) {
-        // Remove fields that are only used for logic
-        if ($members && (in_array($dbname, $remove_from_members))) {
-            continue;
-        }
-        // default to the db name of label does not exist
-        $field_labels[$key] = translateForExport($dbname, $focus);
-    }
+    $field_labels = getExportHeaderLabels($focus, $fields_array, $members, $remove_from_members);
 
     $user_agent = (isset($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
     // Bug 60377 - Mac Excel doesn't support UTF-8
@@ -529,7 +521,8 @@ function getExportContentFromResult(
                 $fieldNameMapKey = $fields_array[$key];
 
                 if (isset($focus->field_defs[$fieldNameMapKey]) &&
-                    $focus->field_defs[$fieldNameMapKey]['type']
+                    $focus->field_defs[$fieldNameMapKey]['type'] &&
+                    $focus->field_defs[$fieldNameMapKey]['type'] !== 'multienum'
                 ) {
                     $sfh = SugarFieldHandler::getSugarField($focus->field_defs[$fieldNameMapKey]['type']);
                     $sfh->setOptions($options);
@@ -561,7 +554,14 @@ function getExportContentFromResult(
                 }
 
                 // Keep as $key => $value for post-processing
+                $base_value = $value;
                 $new_arr[$key] = str_replace('"', '""', $value);
+
+                // If this is an enum or multienum, export the display label as well
+                $display_label = getTranslatedFieldValue($focus, $key, $base_value, $val);
+                if (is_string($display_label) && array_key_exists($key . '_export_label', $field_labels)) {
+                    $new_arr[$key . '_export_label'] = $display_label;
+                }
             } //foreach
 
             // Use Bean ID as key for records if it exists
@@ -641,6 +641,73 @@ function getNonPrimaryEmailsData(SugarBean $bean, array $ids)
 }
 
 /**
+ * Gets the translated header labels for the export
+ * @param $focus
+ * @param $fields_array
+ * @param $members
+ * @param $remove_from_members
+ * @return array
+ */
+function getExportHeaderLabels($focus, $fields_array, $members, $remove_from_members)
+{
+    $field_labels = [];
+    $display_label = translate('LBL_ENUM_DISPLAY_LABEL');
+    foreach ($fields_array as $key => $dbname) {
+        // Remove fields that are only used for logic
+        if ($members && (in_array($dbname, $remove_from_members))) {
+            continue;
+        }
+
+        $field_labels[$key] = translateForExport($dbname, $focus);
+
+        // For enums and multienums, add a second column for the field label
+        if (!empty($focus->field_defs[$key])) {
+            $field_type = $focus->field_defs[$key]['type'];
+            if (in_array($field_type, ['enum', 'multienum'])) {
+                $field_labels[$key . '_export_label'] = $field_labels[$key] . ' ' . $display_label;
+            }
+        }
+    }
+
+    return $field_labels;
+}
+
+/**
+ * Translates the db values for enum and multienum fields into the user-facing values.
+ * @param $focus
+ * @param $key
+ * @param $base_value
+ * @param $row
+ * @return string|bool
+ */
+function getTranslatedFieldValue($focus, $key, $base_value, $row)
+{
+    if (empty($focus->field_defs[$key])) {
+        return false;
+    }
+
+    $field_vardef = $focus->field_defs[$key];
+    $field_type = $field_vardef['type'];
+
+    if (!in_array($field_type, ['enum', 'multienum'])) {
+        return false;
+    }
+
+    $display_label = '';
+    if ($field_type === 'enum' && (!empty($field_vardef['options']) || !empty($field_vardef['function']))) {
+        $enum_options = getOptionsFromVardef($field_vardef);
+        if (!empty($enum_options) && isset($enum_options[$base_value])) {
+            $display_label = $enum_options[$base_value];
+        }
+    } elseif ($field_type === 'multienum') {
+        $sfh = SugarFieldHandler::getSugarField('multienum');
+        $display_label = $sfh->exportSanitize($base_value, $field_vardef, $focus, $row);
+    }
+
+    return str_replace('"', '""', $display_label);
+}
+
+/**
  * Generates query for fetching non-primary emails for the given beans
  *
  * @param SugarBean $bean Bean instance
@@ -694,22 +761,6 @@ function generateSearchWhere($module, $query)
         if (file_exists('modules/' . $module . '/metadata/SearchFields.php')) {
             require_once('include/SearchForm/SearchForm.php');
             $searchForm = new SearchForm($module, $seed);
-        } elseif (!empty($_SESSION['export_where'])) {
-            // bug 26026, sometimes some module doesn't have a metadata/SearchFields.php, the searchfrom is generated
-            // in the ListView.php. Currently, massupdate will not generate the where sql. It will use the sql stored
-            // in the SESSION. But this will cause bug 24722, and it cannot be avoided now.
-            $where = $_SESSION['export_where'];
-            $whereArr = explode(" ", trim($where));
-            if ($whereArr[0] == trim('where')) {
-                $whereClean = array_shift($whereArr);
-            }
-            $where = implode(" ", $whereArr);
-            // rrs bug: 31329 - previously this was just returning $where, but the problem is this function's caller
-            // expects the results in an array, not just a string. So rather than fixing the caller, I felt it would be
-            // best for the function to return the results in a standard format.
-            $ret_array['where'] = $where;
-            $ret_array['searchFields'] =array();
-            return $ret_array;
         } else {
             return;
         }

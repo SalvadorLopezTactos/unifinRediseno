@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Имя/отрасль контрагента',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Расположение',
     'LBL_PURCHASES' => 'Покупки',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаимодействие с контрагентом',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Временная шкала учетной записи',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Графики',

@@ -10,14 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="dashlet-container" type="{{meta.type}}"{{#if meta.moduleName}} module-name="{{meta.moduleName}}"{{/if}} name="dashlet_{{meta.name}}">
-    <div class="thumbnail dashlet" data-type="dashlet" data-action="droppable">
-        {{#if meta.preview}}
-            <h4 data-toggle="dashlet" class="dashlet-title">{{meta.label}}</h4>
-        {{else}}
-            <div data-dashlet="toolbar"></div>
-        {{/if}}
-        <div data-dashlet="dashlet" class="dashlet-content"></div>
-        <div class="fa fa-download swappable-dashlet"></div>
-    </div>
+<div
+    class="dashlet-container h-full rounded-md mx-2 mb-4 p-0 shadow hover:shadow-lg transition-shadow bg-dashlet-background hover:bg-dashlet-background-hover"
+    type="{{meta.type}}"
+    {{#if meta.moduleName}} module-name="{{meta.moduleName}}"{{/if}}
+    name="dashlet_{{meta.name}}"
+>
+    {{{subLayoutTemplate 'dashlet' this}}}
 </div>

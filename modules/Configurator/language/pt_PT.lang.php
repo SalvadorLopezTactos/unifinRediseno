@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Formato de hora padrão',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Mostrar o tempo de resposta do servidor',
+    'FREEZE_FIRST_COLUMN' => 'Permitir congelamento de coluna',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Acrive esta definição para permitir que os utilizadores congelem a primeira coluna numa variedade de ' .
+        'visualizações de lista, incluindo visualizações de lista de módulos, subpainéis, dashlets e consolas.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Registar as consultas mais lentas',
     'LOCK_HOMEPAGE_HELP'=>'Esta definição destina-se a prever<BR> 1) a adição de novas páginas principais e dashlets no módulo Página Principal, <BR>2) personalização do posicionamento do dashlet nas páginas principais através de arrastar e soltar.',
     'CURRENT_LOGO'=>'Logótipo actual',
+    'CURRENT_LOGO_DARK' => 'Logótipo actual do Modo Escuro:',
     'CURRENT_LOGO_HELP'=>'Este logótipo é exibido no canto superior esquerdo da aplicação Sugar.',
+    'CURRENT_LOGO_DARK_HELP' => "Este logótipo é exibido no canto esquerdo do rodapé quando a aplicação Sugar está no modo escuro, de acordo com a preferência de Aparência do utilizador.",
     'NEW_LOGO'=>'Selecionar Logótipo:',
     'NEW_LOGO_HELP' => 'O formato do ficheiro de imagem pode ser em .png ou .jpg. A altura máxima é de 24px e a largura máxima é de 180px. Qualquer imagem carregada que seja maior em qualquer direcção será dimensionada para estes valores máximos.',
+    'NEW_LOGO_DARK' => 'Seleccionar Logótipo do Modo Escuro:',
     'NEW_LOGO_HELP_NO_SPACE' => 'O formato do ficheiro da imagem pode ser .png ou .jpg. A altura máxima é 24px e a largura máxima é 450px. Qualquer imagem carregada que seja maior em qualquer uma das dimensões será redimensionada para as medidas indicadas. O nome dos ficheiros não deverá conter espaços.',
     'NEW_QUOTE_LOGO'=>'Carregar um novo logótipo para Cotações',
     'NEW_QUOTE_LOGO_HELP'=>'O formato do ficheiro de imagem necessário é em .jpg. <BR> O tamanho recomendado é 867x74 px.',
@@ -413,7 +419,7 @@ BSOFR
     'LBL_WIZARD_FINISH_TAB' => 'Concluir',
     'LBL_WIZARD_FINISH_TITLE' => 'Você está pronto para usar o Sugar!',
     'LBL_WIZARD_FINISH' => 'Clique em <b>Continuar</b> para configurar as definições de utilizador.<br/><br />
-Para configurar definições adicionais do sistema, clique <a href="index.php?module=Administration&action=index" target="_blank">aqui</a>.',
+Para configurar definições adicionais do sistema, clique <a href="#Administration" target="_blank">aqui</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Marca',
     'LBL_WIZARD_SYSTEM_DESC' => 'Insira o nome de sua organização e logo para a marca do seu Sugar.',
     'LBL_WIZARD_LOCALE_DESC' => 'Especifique o fuso horário e a forma como deseja que datas, moedas e nomes apareçam no Sugar. Estas serão as definições padrão. Cada utilizador poderá definir suas próprias preferências.',
@@ -424,7 +430,8 @@ Para configurar definições adicionais do sistema, clique <a href="index.php?mo
 	'LBL_LOADING' => 'A carregar...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Eliminar' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Bem-vindo' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logótipo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logótipo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logótipo do Modo Escuro',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* O módulo de Relatórios apenas está disponível para os clientes nativos SugarCRM e Sugar Mobile',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* O módulo de Relatórios não está disponível para a visualização móvel baseada num navegador.',
 
@@ -463,5 +470,3 @@ Para configurar definições adicionais do sistema, clique <a href="index.php?mo
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

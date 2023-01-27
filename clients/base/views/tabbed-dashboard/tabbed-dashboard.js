@@ -14,7 +14,7 @@
  * @extends View.View
  */
 ({
-    className: 'tabbed-dashboard-pane',
+    className: 'tabbed-dashboard-pane bg-primary-content-background',
 
     events: {
         'click [data-toggle=tab]': 'tabClicked',
@@ -218,6 +218,7 @@
         }
 
         if (!_.isUndefined(options.tabs)) {
+            this.$el.addClass('mb-2');
             this.tabs = options.tabs;
             this.context.set('tabs', this.tabs);
             this.context.set('activeTab', this.activeTab);

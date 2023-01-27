@@ -29,8 +29,6 @@ $dictionary['Currency'] = array(
             'dbType' => 'varchar',
             'len' => '36',
             'required' => true,
-            'calculated' => true,
-            'formula' => 'ifElse(equal(getDropdownValue("iso_currency_name", $iso4217), ""), $name, getDropdownValue("iso_currency_name", $iso4217))',
             'comment' => 'Name of the currency',
             'importable' => 'required',
         ),
@@ -41,9 +39,6 @@ $dictionary['Currency'] = array(
             'len' => '36',
             'required' => true,
             'comment' => 'Symbol representing the currency',
-            'formula' => 'ifElse(or(equal($id, -99), equal($iso4217, "")), $symbol, ifElse(equal(getDropdownValue("iso_currency_symbol", $iso4217), ""), $symbol, getDropdownValue("iso_currency_symbol", $iso4217)))',
-            'calculated' => true,
-            'enforced' => false,
             'importable' => 'required',
         ),
         'iso4217' => array(

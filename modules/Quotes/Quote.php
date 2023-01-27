@@ -225,7 +225,7 @@ class Quote extends SugarBean
         $this->billing_contact_name_mod = '';
         $this->shipping_contact_name_mod = '';
 
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             if ($row != null && $row['contact_role'] == 'Ship To') {
                 $this->shipping_contact_name = $locale->formatName('Contacts', $row);
                 $this->shipping_contact_id = stripslashes($row['id']);
@@ -261,7 +261,7 @@ class Quote extends SugarBean
         $this->billing_account_mod = '';
         $this->shipping_account_mod = '';
 
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             if ($row != null && $row['account_role'] == 'Ship To') {
                 $this->shipping_account_name = stripslashes($row['name']);
                 $this->shipping_account_id = stripslashes($row['id']);
@@ -293,7 +293,7 @@ class Quote extends SugarBean
         $stmt = $conn->executeQuery($query, array($this->id));
 
         // Get the id and the name.
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
 
         if ($row != null) {
             $this->taxrate_name = stripslashes($row['name']);
@@ -319,7 +319,7 @@ class Quote extends SugarBean
         $stmt = $conn->executeQuery($query, array($this->id));
 
         // Get the id and the name.
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
 
         if ($row != null) {
             $this->shipper_name = $row['name'];
@@ -343,7 +343,7 @@ class Quote extends SugarBean
         $stmt = $conn->executeQuery($query, array($this->id));
 
         // Get the id and the name.
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
 
         if ($row != null) {
             $this->opportunity_name = stripslashes($row['name']);
@@ -620,7 +620,7 @@ class Quote extends SugarBean
         $results = array();
         $query = "select * from quotes_opportunities where quote_id = ? and deleted = 0";
         $stmt = $this->db->getConnection()->executeQuery($query, array($this->id));
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $results[] = $row;
         }
         return $results;
@@ -635,7 +635,7 @@ class Quote extends SugarBean
     {
         $query = "select count(id) from quotes_opportunities where quote_id = ? and deleted = 0";
         $conn = $this->db->getConnection();
-        $count = $conn->executeQuery($query, array($this->id))->fetchColumn();
+        $count = $conn->executeQuery($query, array($this->id))->fetchOne();
 
         return $count;
     }

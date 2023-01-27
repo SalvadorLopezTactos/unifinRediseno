@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => '売上予測',
     'ForecastWorksheets' => '売上予測ワークシート',
     'ForecastManagerWorksheets' => '売上予測マネージャワークシート',
-    'MergeRecords'=>'レコードマージ',
       'VisualPipeline'=>'ビジュアルパイプライン',
       'ConsoleConfiguration' => 'コンソール設定',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'役割',
     'Notifications'=>'通知',
     'Sync'=>'同期',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
     'ReportMaker' => 'エンタープライズレポート',
     'DataSets' => 'データフォーマット',
     'CustomQueries' => 'カスタムクエリ',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => '購入商品',
     'MobileDevices' => 'モバイルデバイス',
     'PushNotifications' => 'プッシュ通知',
+    'Escalations' => 'エスカレーション',
+    'DocumentTemplates' => 'ドキュメントのテンプレート',
+    'DocumentMerges' => 'ドキュメントマージ',
     'WorkFlow' => 'ワークフロー:',
     'EAPM' => '外部アカウント',
     'Worksheet' => 'ワークシート',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => '休日',
     'ChangeTimers' => 'タイマー変更',
     'Messages' => 'メッセージ',
+    'Audit' => '監査',
+    'RevenueLineItems' => '商談品目',
+    'DocuSignEnvelopes' => 'DocuSignエンベロープ',
+    'Geocode' => 'ジオコード',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'タスク',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'BC',
         'PurchasedLineItems' => 'PL',
+        'DocumentTemplates' => 'DT',
+        'DocumentMerges' => 'DM',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => '売上予測ワークシート',
     'ForecastManagerWorksheets' => '売上予測マネージャーワークシート',
     'Quotas' => 'ノルマ',
-    'MergeRecords'=>'統合記録',
     'Teams' => 'チーム',
     'TeamNotices' => 'チームへの連絡',
     'Activities' => 'アクティビティ',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => '購入',
     'PurchasedLineItems' => '購入商品',
     'PushNotifications' => 'プッシュ通知',
+    'Escalations' => 'エスカレーション',
+    'DocumentTemplates' => 'ドキュメントのテンプレート',
+    'DocumentMerges' => 'ドキュメントマージ',
     'WorkFlow' => 'ワークフロー',
     'EAPM' => '外部アカウント',
     'Worksheet' => 'ワークシート',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => '休日',
     'ChangeTimers' => 'タイマー変更',
     'Messages' => 'メッセージ',
+    'Audit' => '監査',
+    'DocuSignEnvelopes' => 'DocuSignEnvelope',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
+    'Geocode' => 'ジオコード',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => '公共',
     'Other' => 'その他',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF および CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => '進行中',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'ナレッジベース',
       'PurchasedLineItems' => '購入商品',
       'Purchases' => '購入',
+      'Escalations' => 'エスカレーション',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => '取引先',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'メモ',
     'PurchasedLineItems' => '購入商品',
     'Purchases' => '購入',
+    'Escalations' => 'エスカレーション',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => '注文完了',
       'Ship' => '出荷完了',
   ),
+    'active_status_dom' => [
+        'Active' => 'アクティブ',
+        'Inactive' => '非アクティブ',
+        'Retired' => '退職',
+    ],
+    'appearance_options' => [
+        'system_default' => 'システム設定を使用する',
+        'light' => '明るい',
+        'dark' => '暗い',
+    ],
 
 
   'pricing_formula_default_key' => '修理済み',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'テレビ',
         'NewsLetter' => 'ニュースレター',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GET',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,14 +2049,16 @@ $app_list_strings = array (
         'print'       => '印刷',
         'pieWedgeName'      => 'セクション',
     ),
-    'd3_chart_types' => array (
+    'chart_types' => array (
         'pie chart' => '円グラフ',
+        'donut chart' => 'ドーナツグラフ',
+        'treemap chart' => 'ツリーマップグラフ',
         'bar chart' => '縦棒グラフ',
-        'group by chart' => 'グループ縦棒グラフ',
+        'group by chart' => '集合縦棒グラフ',
         'horizontal bar chart' => '横棒グラフ',
-        'horizontal group by chart' => 'グループ横棒グラフ',
-        'line chart' => '線グラフ',
-        'funnel chart' => '円錐形グラフ',
+        'horizontal group by chart' => '集合横棒グラフ',
+        'line chart' => '折れ線グラフ',
+        'funnel chart' => 'ファネルチャート',
     ),
     'd3_value_placement' => array (
         '0'            => 'なし',
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => '価格 (最高合計)',
             'total_revenue:asc' => '価格 (最低合計)',
         ],
+        'calendar_type_list' => [
+          'main' => 'カレンダーセンター',
+        ],
+        'calendar_views_options' => [
+          'day' => '日',
+          'week' => '週',
+          'workWeek' => '勤務週',
+          'expandedMonth' => '月',
+          'agenda' => 'アジェンダ',
+          'timeline' => 'タイムライン',
+          'monthSchedule' => 'スケジューラー',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => '作成済み',
+          'completed' => '完了',
+          'declined' => '拒否',
+          'delivered' => '提出済み',
+          'sent' => '送信済み',
+          'signed' => 'サイン済み',
+          'voided' => '無効',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'デフォルト',
+            'color' => '色',
+            'image' => '画像',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => '新規',
+            'In Progress' => '進行中',
+            'Closed' => '完了',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => '非アクティブ',
+            'Lack of Progress' => '進捗状況の不足',
+            'Customer-Imposed Deadline' => '顧客負担の締め切り',
+            'Account at Risk' => 'リスクのあるアカウント',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'お客様がリクエストしました',
+            'Internally Requested' => '内部でリクエスト済み',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'ケース',
+            'Bugs' => 'バグ',
+            'Accounts' => 'アカウント',
+            'Opportunities' => '商談',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => '肯定的',
+            'Negative' => '否定的',
+            'Neutral' => '中立',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => '可能性はない',
+            '02_less_likely' => '可能性は低い',
+            '03_neutral' => 'どちらでもない',
+            '04_more_likely' => '可能性は高い',
+            '05_very_likely' => '可能性は非常に高い',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => '顧客と一致しません',
+            '02_no_match' => '',
+            '01_matches_customers' => '顧客と一致します',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'リンクをフォローする',
   'LBL_TOGGLE_VISIBILITY' => '表示/非表示', // Record view header panel element
   'LBL_ACTIVITIES' => 'アクティビティストリーム',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM、Sugarおよび3-DキューブはSugarCRM Inc. の登録商標です。 '.
         'この製品に使用される、または出現するその他すべての会社名および製品名は '.
         'SugarCRM ®, Sugar Enterprise™ そしてSugar™は、SugarCRM Inc.の登録商標です。',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => '追加' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => '会社ロゴ' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'カレンダー' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => '選択したドロップダウンの値によって、レコードビューのレイアウトが変更されました。' .
+        'この新しいレイアウトで非表示になったフィールドの値はクリアされます。',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'メインモジュールのナビゲーション',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => '閉じる',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} はマークされました {{status}}.',
 
+    'LBL_FOCUS' => 'フォーカス',
+
     'LBL_QUERY_VALID'=>'有効',
     'LBL_QUERY_ERROR'=>'エラー!',
     'LBL_QUERY_CHILD'=>'有効なサブクエリ',
@@ -3066,6 +3183,10 @@ $app_strings = array (
     'LBL_CASES'=>'ケース',
     'LBL_MESSAGE'=>'メッセージ',
     'LBL_MESSAGES'=>'メッセージ',
+    'LBL_ESCALATIONS' => 'エスカレーション',
+    'LBL_ESCALATION' => 'エスカレーション',
+    'LBL_DOCUSIGN_ENVELOPES' => 'DocuSignエンベロープ',
+    'LBL_DOCUSIGN_ENVELOPE' => 'DocuSignエンベロープ',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'パスワード変更',
     'LBL_CHANGE_BUTTON_LABEL' => '変更',
@@ -3091,6 +3212,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => '未完了',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Eメール作成',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'Eメールアドレス',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Eメール作成',
     'LBL_SEARCH_DROPDOWN_YES'=>'はい',
     'LBL_SEARCH_DROPDOWN_NO'=>'いいえ',
@@ -3116,6 +3238,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'ドキュメント',
     'LBL_DATE_ENTERED' => '作成日:',
     'LBL_DATE_MODIFIED' => '更新日:',
+    'LBL_ACTIVITY_MODIFIED' => '変更済み',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'オーバービュータブの編集',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'モジュールタブの編集',
     'LBL_EDIT_BUTTON' => '編集',
@@ -3138,6 +3261,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'フィールドを選択',
     'LBL_FILTER_SELECT_OPERATOR' => 'オペレーターを選択',
     'LBL_FILTER_CREATE_NEW' => '作成',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'フィルターを作成(未保存)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(未保存)',
     'LBL_FILTER_CREATE_FILTER' => '新規フィルターの作成',
     'LBL_FILTER_CLOSE_FILTER' => 'フィルタを閉じる',
     'LBL_FILTER_EDIT_FILTER' => 'フィルターの編集',
@@ -3200,6 +3325,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => '更に {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => '今日のアクティビティ',
     'LBL_LEADS'=>'リード',
+    'LBL_LEAD'=>'リード',
+    'LBL_QUOTES_BILL_TO' => '見積（請求先）',
     'LBL_LESS' => '以下',
     'LBL_CAMPAIGN' => 'キャンペーン:',
     'LBL_CAMPAIGNS' => 'キャンペーン',
@@ -3227,19 +3354,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => '進めるには最低2つのレコードを選択してください。',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => '進めるには最低10個のレコードを選択してください。',
     'LBL_LISTVIEW_ALL' => 'すべて',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'カラム1を固定',
     'LBL_DUPECHECK_FILTER_DEFAULT' => '全ての複製',
     'LBL_LISTVIEW_NONE' => '全てを非選択',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'このページを選択する',
     'LBL_LISTVIEW_OPTION_ENTIRE' => '全てを選択',
     'LBL_LISTVIEW_OPTION_SELECTED' => '選択されたレコード',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => '選択済: ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => '選択をクリア。',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => '選択した項目をすべて消去します。',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => '全てのレコードを選択する',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => '結果には {{num}} を超えるレコードがあります。最初の {{num}} レコードを選択されました。',
     'TPL_LISTVIEW_SELECTED' => '検索結果から{{num}}レコードを選択しました。',
+    'TPL_LISTVIEW_SELECTED_ONE' => '検索結果から1つのレコードを選択しました。',
     'TPL_LISTVIEW_SELECTED_ALL' => '結果内の全ての{{num}} レコードを選択しました。',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'このビューの全ての{{num}} レコードを選択しました。 結果内の{{link}}',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => '{{total}}中{{num}}をアップデート中。',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => '{{total}} 中 {{num}} を更新中',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(残り約{{time}} {{unit}})',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => '一括更新失敗。再度実行({{total}中{{num}}回目}',
     'TPL_MASSUPDATE_WARNING_CLOSE' => '一括更新は未完了。{{num}} レコードが変更されていません。',
@@ -3247,7 +3376,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => '許可またはエラーのため、{{remain}} レコードは無視されました',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} レコードのアップデートに成功しました。',
     'TPL_MASSUPDATE_TITLE' => '{{module}} 一括更新',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => '{{total}}中{{num}}の削除中',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => '{{total}} 中 {{num}} を削除中',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(残り約{{time}} {{unit}})',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => '一括削除に失敗。再度実行 ({{total}}中{{num}}回目 )',
     'TPL_MASSDELETE_WARNING_CLOSE' => '一括削除に失敗。{{num}}レコードが残っています。',
@@ -3272,10 +3401,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => '選択',
     'LBL_LISTVIEW_ACTIONS' => 'アクション',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'このページのすべてのレコードを選択する',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'このページのすべてのレコードの選択を解除する',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} / {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '読み込み中 {{num}}...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'クリックして総数を表示',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => '/',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'ページ数を取得',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => '太郎',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => '佐藤',
@@ -3283,10 +3419,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => '非凡なコード モンキー',
     'LBL_LOGIN_TO_ACCESS' => 'このエリアにアクセスするにはサインインしてください。',
     'LBL_LOGOUT' => 'ログアウト',
+    'LBL_FINISH_IMPERSONATING' => '偽装を終了する',
+    'LBL_RESET_MFA' => '多要素認証をリセットする',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}、あなたは現在 {{user}} になりすましています。',
     'LBL_PROFILE' => 'プロフィール',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'メールマージ',
     'LBL_MASS_UPDATE' => '一括更新',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => '大型アップデート用にすべての記録を選択する',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => '大型アップデートの記録を含める',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'フィールド追加',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'フィールドの削除',
     'LBL_GENERATE_QUOTE' => '見積を生成',
@@ -3341,6 +3482,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => '詳細情報',
     'LBL_PANEL_BODY' => '概要',
     'LBL_PARENT_TYPE' => '親タイプ',
+    'LBL_RELATED_TYPE' => '関連タイプ',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => '範囲',
     'LBL_PICTURE_FILE' => 'アバター',
@@ -3414,7 +3556,7 @@ $app_strings = array (
 
     'LBL_RELATED' => '関連',
     'LBL_RELATED_INFORMATION' => '関連情報',
-    'LBL_RELATED_RECORDS' => '関連レコード',
+    'LBL_RELATED_RECORDS' => '関連{{module}}',
     'LBL_REPORTS_TO' => '上司',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => '必須フィールド',
@@ -3533,7 +3675,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         '無断複写・転載を禁じます。<br />SugarCRM、Sugarおよび3-DキューブはSugarCRM Inc. の登録商標です。 '.
         'この製品に使用される、または出現するその他すべての会社名および製品名は '.
         'それらが関連する各会社の登録商標である可能性があります。',
@@ -3598,6 +3740,7 @@ $app_strings = array (
     'LBL_UNDELETE' => '削除しない',
     'LBL_UNSYNC' => '同期しない',
     'LBL_UPDATE' => '更新',
+    'LBL_UPDATES' => '更新',
     'LBL_USER_LIST' => 'ユーザーリスト',
     'LBL_USER_MENU' => 'ユーザーメニュー',
     'LBL_USERS_SYNC'=>'ユーザー同期',
@@ -3664,6 +3807,8 @@ $app_strings = array (
     'NTC_DELETE_SUCCESS' => '{0}を削除しました。',
     'NTC_UNLINK_CONFIRMATION' => '本当にこのレコードのリンクをはずしますか？',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => '本当に{0}のリンクをはずしますか？',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => '{0} のリンクを解除しますか？この操作を行うと、案件の[第一連絡先] フィールドも削除されます。',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => '{0} はこの案件の第一の連絡先であるため、リンク解除することはできません。この記録のリンクを解除する前に[第一の連絡先] フィールドを更新してください。',
     'NTC_UNLINK_SUCCESS' => '{0}のリンクをはずしました。',
     'NTC_LOGIN_MESSAGE' => 'ユーザー名とパスワードを入力してください。',
     'NTC_NO_ITEMS_DISPLAY' => 'なし',
@@ -3695,6 +3840,9 @@ $app_strings = array (
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'ブラウザを更新すると、開いているすべてのSugarLive通話またはチャットセッションが自動的に閉じられ、保存されていない変更はすべて失われます。 続行しますか？',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => '保存されていない変更があります。本当にこのページを離れて変更を破棄しますか？',
+    'LBL_MFA_RESET_CONFIRMATION' => '<a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">多要素認証</a>をリセットしてもよろしいですか？ 
+このアクションを実行するとすぐにログアウトされ、次回ログイン時に認証アプリを使用して認証する必要があります。',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => '確認してログアウトする',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => '1つ以上のダッシュレットの変更が保存されていません。引き出しを閉じてもよいですか？',
     'LBL_NAVIGATE_TO_REPORTS' => 'レポートモジュールを動かしています。ダッシュレットへの変更は保存されません。続けますか？',
     'ERROR_NO_RECORD' => 'エラー　レコードを受信しています。レコードは削除されるか、閲覧する権限が無くなります。',
@@ -3790,6 +3938,11 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "保存された <item1> レコードはありません。<item2>しましょう。",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "リストから作成できます。",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => '肯定的',
+    'LBL_SENTIMENT_NEUTRAL' => '中立',
+    'LBL_SENTIMENT_NEGATIVE' => '否定的',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "ここをクリック",
     // contextMenu strings
@@ -3799,11 +3952,16 @@ $app_strings = array (
     'LBL_CREATE_NOTE' => 'メモ作成',
     'LBL_CREATE_OPPORTUNITY' => '商談作成',
     'LBL_SCHEDULE_CALL' => '電話を記録',
+    'LBL_SCHEDULE_CALL2' => '電話',
     'LBL_SCHEDULE_MEETING' => '会議作成',
+    'LBL_SCHEDULE_MEETING2' => '会議',
     'LBL_CREATE_MESSAGE' => 'メッセージを作成',
+    'LBL_CREATE_MESSAGE2' => 'メッセージ',
     'LBL_CREATE_TASK' => 'タスク作成',
+    'LBL_CREATE_TASK2' => 'タスク',
     'LBL_REMOVE_FROM_FAVORITES' => 'お気に入りからはずす',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'メモ',
     'LBL_DOWNLOAD_ALL' => 'すべてダウンロード',
     'LBL_DOWNLOAD_ONE' => 'ダウンロード',
     'LBL_ATTACHMENTS' => '添付ファイル',
@@ -3843,13 +4001,14 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => '列の表示',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => '現在のレコードに関連付けする',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'リンクされたフィールド',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => '最初のカラムを固定',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => '本当にSugarダッシュレットをはずしてよいですか？',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => '列を本当に削除しますか？',
     'LBL_MAXIMUM_OF' => '最大の',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => '表示できるカラム',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'ダッシュボード',
     'LBL_DEFAULT_DASHBOARD_TITLE' => '私のダッシュボード',
     'LBL_COLLAPSE_ALL' => 'すべて閉じる',
@@ -3866,12 +4025,15 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE' => '設定する',
     'LBL_DASHLET_TOGGLE' => '開く/閉じる',
     'LBL_SIDEPANE_TOGGLE' => 'サイドペインを開く/閉じる',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'デフォルトのダッシュレットに戻す',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'ダッシュボードは設定されていません',
+    'LBL_CREATE_DASHBOARD_LINK' => 'ダッシュボードの作成',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'ヘルプ',
     'LBL_HELPLET_TOGGLE' => '開く/閉じる',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'モジュール',
     'LBL_FACET_MODIFIED_BY_ME' => '私が修正',
     'LBL_FACET_CREATED_BY_ME' => '私が作成',
@@ -3888,6 +4050,7 @@ $app_strings = array (
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => '記録ビュー',
+    'LBL_RELATED_RECORDS' => '関連 {{module}}',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'タブに記録を表示するほか、オプションで関連する記録も表示します。',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'ベース記録タイプ',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'この {{moduleSingular}}',
@@ -3937,7 +4100,7 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => '今回はレコードは見つかりませんでした。',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'ケースサマリー',
-    'LBL_DASHLET_ITERACTIONS_NAME' => '交流',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'タイムライン',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'ノート＆添付ファイル',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'レコードに属するメモと添付',
     'LBL_DASHLET_PIPLINE_NAME' => 'パイプライン',
@@ -4208,6 +4371,8 @@ $app_strings = array (
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'コンピューターからアップデート',
     'LBL_SEARCH_EXTERNAL_API' => '外部ソースからのファイル',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => '外部ソースへのアップロード',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => '外部ソースからのリンク',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'セキュリティ',
     'LBL_SHARE_PRIVATE' => 'プライベート',
     'LBL_SHARE_COMPANY' => '会社',
@@ -4332,6 +4497,9 @@ $app_strings = array (
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'キーボ－ドショートカット',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => 'フォームの機能 - Altキー+<br />I = 編集（detailview）<br />U =複製（detailview）<br />D =削除（detailview）<br />R=シェア（detailview）<br />A = 保存（editview）<br />L = キャンセル（editview）<br /><br />検索とナビゲーション - Altキー+<br />7= 編集フォーム上最初の入力<br />8= 高度な検索]リンク<br />9= 最初の検索フォームに入力<br />0= 統合検索入力' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'エスカレーションする',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'シェア',
     'TPL_RECORD_SHARE_SUBJECT' => '{{appId}}からシェアされた {{module}} {{name}}',
@@ -4404,7 +4572,7 @@ $app_strings = array (
     'LBL_MERGE_UNSAVED_CHANGES'=>
         '新しいプライマリ·レコードに切り替えるとすべての変更は破棄されます。本当に切り替えしますか？',
     'LBL_MERGE_DUPLICATES_TITLE' => '関連するレコードをマージする',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'マージ済: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'マージ済み: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         '関連する{{objectName}}のマージに失敗。新規に試みます({{total}}中{{num}}回).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4458,14 +4626,14 @@ $app_strings = array (
     'LBL_LANGUAGE' => '言語',
     'LBL_LOADING_LANGUAGE' => '言語パックをロード中',
     'LBL_UPLOADING' => 'アップロード中',
+    'LBL_UPLOADING_DOTS' => 'アップロード中...',
     'LBL_IMAGE_DELETE_CONFIRM' => '本当にこの画像を削除しますか？',
     'LBL_FILE_DELETE_CONFIRM' => "本当にこのファイルを削除しますか？これは取り消せません。",
     'LBL_FILE_DELETED' => 'ファイルの削除に成功しました。',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'ポータルテーマ',
-    'LBL_COFIGURE_PORTAL_THEME' => 'ポータルテーマを設定',
-    'LBL_THEME_PREVIEW' => 'テーマプレビュー',
+    'LBL_THEME_PREVIEW' => 'ポータルテーマのプレビュー',
     'LBL_LOADING_PREVIEW' => 'プレビューをロード中',
     'LBL_RESET' => 'リセット',
     'LBL_COLORS' => '色',
@@ -4616,10 +4784,18 @@ $app_strings = array (
     'LBL_MEETINGS_SUBPANEL_TITLE' => '会議',
     'LBL_TASKS_SUBPANEL_TITLE' => 'タスク',
     'LBL_CALLS_SUBPANEL_TITLE' => '電話',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'アカウント',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => '取引先担当者',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Eメール',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'シフト',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => '見積済商品',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'シフトの例外',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'ドキュメント',
+    'LBL_ESCALATIONS' => 'エスカレーション',
+    'LBL_ESCALATED' => 'エスカレーション済み',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'エスカレーション',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'その他の関連エスカレーション',
+    'LBL_ESCALATIONS' => 'エスカレーション',
     'LNK_SETTINGS' => '設定',
     'LBL_MOBILE_SUPPORT' => 'サポート',
     'LBL_MOBILE_SHOW_MORE' => 'さらに表示',
@@ -4827,6 +5003,55 @@ $app_strings = array (
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'サーバータイムの取得に失敗',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'オフライン モードを有効にできませんでした。サーバーに到達できません。',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => '外観',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'システム設定を使用する',
+    'LBL_MOBILE_APP_THEME_LIGHT' => '明るい',
+    'LBL_MOBILE_APP_THEME_DARK' => '暗い',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => '新しいファイル名',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'ファイルの名前変更',
+    // Filters related
+    'LBL_CREATED_BY_ME' => '自作',
+    'LBL_OPERATOR_CONTAINS' => '次のいずれか',
+    'LBL_OPERATOR_NOT_CONTAINS' => '次のいずれでもない',
+    'LBL_OPERATOR_EMPTY' => '空である',
+    'LBL_OPERATOR_NOT_EMPTY' => '空でない',
+    'LBL_OPERATOR_MATCHES' => '次の値と一致する',
+    'LBL_OPERATOR_STARTS_WITH' => '次で始まる',
+    'LBL_OPERATOR_EQUALS' => '次と等しい',
+    'LBL_OPERATOR_NOT_EQUALS' => '次と等しくない',
+    'LBL_OPERATOR_GREATER_THAN' => '次より大きい',
+    'LBL_OPERATOR_LESS_THAN' => '次より小さい',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => '次より多いか同じ',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => '次より少ないか同じ',
+    'LBL_OPERATOR_BETWEEN' => '次の範囲内',
+    'LBL_OPERATOR_BEFORE' => '以前',
+    'LBL_OPERATOR_AFTER' => '以降',
+    'LBL_OPERATOR_YESTERDAY' => '昨日',
+    'LBL_OPERATOR_TODAY' => '今日',
+    'LBL_OPERATOR_TOMORROW' => '翌日',
+    'LBL_OPERATOR_LAST_7_DAYS' => '過去7日間',
+    'LBL_OPERATOR_NEXT_7_DAYS' => '翌7日間',
+    'LBL_OPERATOR_LAST_30_DAYS' => '過去30日間',
+    'LBL_OPERATOR_NEXT_30_DAYS' => '翌30日間',
+    'LBL_OPERATOR_LAST_MONTH' => '昨月',
+    'LBL_OPERATOR_THIS_MONTH' => '今月',
+    'LBL_OPERATOR_NEXT_MONTH' => '翌月',
+    'LBL_OPERATOR_LAST_YEAR' => '昨年',
+    'LBL_OPERATOR_THIS_YEAR' => '今年',
+    'LBL_OPERATOR_NEXT_YEAR' => '翌年',
+    'LBL_OPERATOR_IS' => 'は',
+    'LBL_OPERATOR_IS_NOT' => 'ではない',
+    'LBL_ERROR_FILTER_EMPTY' => 'フィルタ条件を追加してください。',
+    'LBL_ADD_FILTER' => '検索条件を追加',
+    'LBL_FILTER_NAME' => 'フィルタ名',
+    'LBL_FILTER_FIELD' => 'フィールド',
+    'LBL_FILTER_OPERATOR' => 'オペレータ',
+    'LBL_FILTER_VALUE' => '値',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'デスクトップアプリに保存',
+    'LBL_FILTER_LOCAL' => 'ローカルフィルタ',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => '{{{brandName}}}にようこそ。<br />新しい機能をご紹介します。',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'メインメニューナビゲーション',
@@ -4872,6 +5097,7 @@ $app_strings = array (
     'LBL_COMMENT_ADD' => 'コメントを追加',
     'LBL_REQUIRED' => '必須',
     'LBL_MORE_BUTTON' => '追加',
+    'LBL_NO_OPTIONS' => '使用可能なオプションはありません',
     'LBL_TRY_AGAIN' => '再度試す',
     'LBL_NEW_RECORDS' => '最新の作成履歴',
     'LBL_ASSIGNED_TO_ME' => '私の {{{module}}}',
@@ -5097,11 +5323,15 @@ $app_strings = array (
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'チャットを閉じます、よろしいですか？',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'メモの作成または添付ファイルの追加',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'メモの追加',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'ログインできませんでした。もう一度お試しください。',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => '無効な認証',
-    'LBL_PORTAL_INVALID_GRANT' => 'トークンが無効もしくは期限切れ。再度ログインしてください。',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'トークンが期限切れ',
+    'LBL_PORTAL_INVALID_GRANT' => 'セッションの有効期限が切れました。もう一度ログインしてください。',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'セッションの有効期限が切れました',
     'LBL_PORTAL_AUTH_FAILED' => 'クライアント認証に失敗しました。',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => '無効なクライアント',
     'LBL_PORTAL_INVALID_REQUEST' => 'リクエストは無効または不正な形式である。テクニカルサポートに連絡してください。',
@@ -5135,6 +5365,8 @@ $app_strings = array (
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'デフォルトのダッシュボードに戻す',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'コンソールの更新',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'オーバービュー',
@@ -5154,6 +5386,7 @@ $app_strings = array (
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'メッセージの要約',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => '電話要約',
     'LBL_OMNICHANNEL_LINK_TO' => '{{fromModule}} から {{toModule}} へのリンク',
+    'LBL_OMNICHANNEL_LINK_RECORD' => '{{module}} へのリンク',
     'LBL_OMNICHANNEL_LINKED' => 'リンク済み',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'ご利用のブラウザはチャットに対応していません。Google ChromeまたはMozilla Firefoxを使用してください。',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'ヘルプが必要な場合は、担当のSugar管理者にお問い合わせください。',
@@ -5161,6 +5394,8 @@ $app_strings = array (
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => '発信コールを行う前に、SugarLiveの設定を完了してください。',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'SugarLiveを開く前に、SugarLiveの設定を完了してください。',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'SugarLiveレイアウトを設定する前に、SugarLiveの自分のステータスを「オフライン」に設定してください。',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'コンパクトビュー',
+    'LBL_OMNICHANNEL_FULL_VIEW' => '全画面',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'タブをデフォルトに戻す',
@@ -5572,9 +5807,12 @@ $app_strings = array (
     'LBL_BEST' => 'ベスト',
     'LBL_WORST' => 'ワースト',
     'LBL_LIKELY' => '達成可能',
-    'LBL_BEST_ADJUSTED' => 'ベスト（修正）',
-    'LBL_WORST_ADJUSTED' => 'ワースト（修正）',
-    'LBL_LIKELY_ADJUSTED' => '達成可能（修正）',
+    'LBL_BEST_FORECAST' => 'コミットメント(最高)',
+    'LBL_WORST_FORECAST' => 'コミットメント(最低)',
+    'LBL_LIKELY_FORECAST' => 'コミットメント(可能性が高い)',
+    'LBL_BEST_ADJUSTED' => '調整済みコミットメント(最高)',
+    'LBL_WORST_ADJUSTED' => '調整済みのコミットメント(最低)',
+    'LBL_LIKELY_ADJUSTED' => '調整済みのコミットメント(可能性が高い)',
     'LBL_AMOUNT_USDOLLAR' => '変換された金額',
     'LBL_OVERDUE' => '期限切れ',
 
@@ -5595,6 +5833,8 @@ $app_strings = array (
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => '更なる情報は下記を参照 {{{more_info_url}}} {{plural_module_name}} ドキュメンテーション。{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'データがありません',
+    'LBL_NEED_HELP' => '新しいモノ/サービスにヘルプが必要ですか？',
+    'LBL_NEW_CASE' => 'ケース作成',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'ヘルプダッシュレットは、現在閲覧しているモジュールに関連する、より多くの情報のためのアプリケーションガイドの対応するドキュメントへのリンクと一緒に表示されている特定の情報を（例えば、リードドキュメンテーション）を提供します。',
@@ -5739,9 +5979,19 @@ $app_strings = array (
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => '返事無し',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'スケジュール不可',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => '使用可能なビュー',
+    'LBL_CALENDAR_DASHLET_NAME' => 'カレンダースケジューラー',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'デフォルトのビュー',
+    'LBL_CALENDAR_MY_CALENDARS' => 'マイカレンダー',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'ユーザーおよびチームのカレンダー',
+    'LBL_CALENDAR' => 'カレンダー',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'スケジュール取得中にエラーが発生。',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => '保存して招待を送る',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => '出欠確認',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'プロセス',
@@ -5858,15 +6108,21 @@ $app_strings = array (
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => '確認リンクのコピー',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => '通信',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} 通信',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'タイムライン',
+    'LBL_NO_ACTIVITY' => 'アクティビティなし',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} タイムライン',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => '以下より多い',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => '以下より少ない',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'タイムラインには通話とEメールが表示され、 ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => '更に表示...',
     'LBL_COMMENT_LOG_SHOW_LESS' => '更に表示しない...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => '利用可能なデータはありません',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'モジュールがライセンス発行されません。',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'アクティブサブスクライバー',
@@ -5915,8 +6171,10 @@ $app_strings = array (
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'フォーカス ドロワ',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'フォーカス ドロワを閉じる',
     'LBL_EXTERNAL_GUESTS' => '外部ゲスト',
     'LBL_MY_FAVORITE_TASKS' => 'お気に入りのタスク',
+
     'LBL_MY_TASKS' => 'マイタスク',
 
     // Sugar Integrate
@@ -5933,7 +6191,367 @@ $app_strings = array (
     'LBL_TIME_AWARE_TYPE' => 'タイプ',
     'LBL_TIME_AWARE_BEAN_ID' => 'ビーンID',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'ラベルを表示',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => '記録ビューを開く',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => '追加',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'ヘルプは使用できません',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => '機能',
+    'LBL_ACTIONBUTTON_FIELDS' => 'フィールド',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'フィールドを選択...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'ロールアップ',
+    'LBL_ACTIONBUTTON_RELATED' => '関連',
+    'LBL_ACTIONBUTTON_SAVE' => '保存',
+    'LBL_ACTIONBUTTON_CANCEL' => 'キャンセル',
+    'LBL_ACTIONBUTTON_R_MODULE' => '関連するモジュール',
+    'LBL_ACTIONBUTTON_R_FIELDS' => '関連フィールド',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'モジュールのロールアップ',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'フィールドのロールアップ',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => '関数のロールアップ',
+    'LBL_ACTIONBUTTON_MINIMUM' => '最小',
+    'LBL_ACTIONBUTTON_MAXIMUM' => '最大',
+    'LBL_ACTIONBUTTON_AVERAGE' => '平均',
+    'LBL_ACTIONBUTTON_SUM' => '合計',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'レコードを割り当てる',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'Eメール作成',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => '作成済みレコード',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'ドキュメントマージ',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'URLを開く',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'レポート実行',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => '記録を更新',
+    'LBL_ACTIONBUTTON_ACTION' => 'アクション',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => '割り当て先',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'Eメール宛先',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'PMSEを使用する',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'テンプレート',
+    'LBL_ACTIONBUTTON_MODULE' => 'モジュール',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => '表示設定',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'タイプ',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'ドロップダウン',
+    'LBL_ACTIONBUTTON_BUTTON' => 'ボタン',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'ボタングループ',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => '記録にラベルを表示',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'ヘッダーにを表示',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => '編集で隠す',
+    'LBL_ACTIONBUTTON_SIZE' => 'サイズ',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'デフォルト',
+    'LBL_ACTIONBUTTON_SMALL' => '小さい',
+    'LBL_ACTIONBUTTON_LARGE' => '大きい',
+    'LBL_ACTIONBUTTON_CALCULATED' => '計算中',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'PDFに変換',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'ドキュメントマージ',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'プレビュー',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'プロパティ',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'ラベル',
+    'LBL_ACTIONBUTTON_DESC' => 'ツールのヒント',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'ラベルを表示',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'アイコンを表示',
+    'LBL_ACTIONBUTTON_SCHEME' => 'カラースキーム',
+    'LBL_ACTIONBUTTON_ICON' => 'アイコン',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => '依存',
+    'LBL_ACTIONBUTTON_DESIGN' => 'レイアウト構成',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'On Errorの停止',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => '自動保存',
+    'LBL_ACTIONBUTTON_CONFIG' => 'コンフィグ',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => '保存する前にActionButtonを設定してください。',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => '設定ボタン',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => '自動作成',
+    'LBL_ACTIONBUTTON_LINK' => 'リンク',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => '親値をコピー',
+    'LBL_ACTIONBUTTON_PRESET' => 'プリセット',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => '親からのプリセット',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => '選択...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => '親フィールドから ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'このボタンを削除してもよろしいですか？',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'このアクションを削除してもよろしいですか？',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => '無効なアクションボタンデータ',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => '保存前にモジュールを選択してください。',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => '保存前にリンクを選択してください。リンクが使用不可能な場合は、リンクオプションのチェックをオフにしてください。',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => '保存前に記録を選択してください。',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => '保存前にテンプレートを選択してください。',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => '第一',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => '第二',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HighViz',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'オーシャン',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'ピンク',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'アーミー',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'ティール',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'パシフィック',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'グリーン',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'イエロー',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'オレンジ',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'レッド',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'コーラル',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'パープル',
+    'LBL_ACTIONBUTTON_FORMULA' => '計算式',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'アクション',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'ボタンデータの検証中にエラーが発生しました。',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'ボタンには、少なくともラベルまたはアイコンが設定されている必要があります。',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => '有効なボタンラベルを入力してください。',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => '必須の値がないため、レコードを作成できませんでした。管理者にお問い合わせください。',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'このボタンタイプには、少なくとも2つのアクティブなボタンが必要です。',
+    'LBL_ACTIONBUTTON_RECORD' => '記録ビュー',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'アクションメニュー',
+    'LBL_ACTIONBUTTON_ORDER' => '順番',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'リストビュー',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => '記録ビュー',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => '記録ビューのダッシュレット',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'サブパネル',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'タスクシーケンス実行エンジンが以下のアクションの実行に失敗しました：',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => '操作を追加',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'この操作を削除',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'ドキュメントマージ',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'PDF にドキュメントマージ',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => '企業規模',
+    'LBL_HINT_COMPANY_INDUSTRY' => '業界',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => '業界タグ',
+    'LBL_HINT_COMPANY_LOCATION' => '会社所在地',
+    'LBL_HINT_COMPANY_DESCRIPTION' => '会社概要',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => '設立年',
+    'LBL_HINT_COMPANY_FACEBOOK' => '会社のFacebook',
+    'LBL_HINT_COMPANY_TWITTER' => '会社のTwitter',
+    'LBL_HINT_COMPANY_PIC' => '会社ロゴ',
+    'LBL_HINT_CONTACT_PIC' => '担当者写真',
+    'LBL_HINT_COMPANY_WEBSITE' => '会社のWebサイト',
+    'LBL_HINT_PHOTO' => '写真のリンク',
+    'LBL_HINT_JOB_2' => '前職',
+    'LBL_HINT_EDUCATION' => '学歴',
+    'LBL_HINT_EDUCATION_2' => 'その他の学歴',
+    'LBL_HINT_TWITTER' => 'Twitterリンク',
+    'LBL_HINT_FACEBOOK' => 'Facebookリンク',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'NAICSコード',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'SICコード',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => '決算期',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => '年間売上',
+    'LBL_HINT_PHONE_1' => '電話1',
+    'LBL_HINT_PHONE_2' => '電話2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'テーブル結合',
+    'LBL_HINT_FULL_NAME' => '氏名',
+    'LBL_HINT_JOB_TITLE' => '職務',
+    'LBL_HINT_OFFICE_PHONE' => '会社電話',
+    'LBL_HINT_MOBILE_PHONE' => '携帯',
+    'LBL_HINT_OTHER_PHONE' => 'その他の電話',
+    'LBL_HINT_WEBSITE' => 'Webサイト',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'このレコードのすべての既存のデータをHintで見つけた新しいデータで上書きしますか？',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'このレコードの既存の {{fieldName}} をHintで見つけた新しい {{fieldName}} で上書きしますか？',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'すべてのアカウント関連データが削除されます。続行しますか？',
+    'LBL_HINT_COMPANY_LOGO' => 'ロゴ',
+    'LBL_HINT_CONTACTS_AVATAR' => '写真',
+    'LBL_HINT_ACCOUNTSETS' => 'Hint Accountsetsタグ',
+
+    'LBL_HINT_LOADING' => '読み込み中 ...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'Hintをアンインストールしています。しばらくお待ちください',
+    'LBL_HINT_VALUE_ERASED' => ' 値が消去されました ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'この情報はデータプライバシー要求を介して消去されました',
+
+    'LBL_HINT_UNINSTALL_TITLE' => '以下のいずれかのアンインストールオプションを選択してください。',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Hintパッケージのみアンインストール',
+    'LBL_HINT_UNINSTALL_FULL' => 'Hintを完全にアンインストール',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'このオプションは、Hint MLPを削除し、Hint Insightsへのすべてのアクティブなサブスクリプションを無効にします。
+    Hintを再インストールすると、自動的にサブスクリプションが再アクティブ化されます。',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'このオプションを選択すると、MLPの削除、すべての設定とサブスクリプション情報の削除など、Hintの完全なアンインストールが実行されます。',
+    'LBL_HINT_UNINSTALL' => 'アンインストール',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Hintをアンインストール',
+    'LBL_HINT_CANCEL' => 'キャンセル',
+    'LBL_HINT_UNINSTALL_WARNING1' => '警告: 今後、Hintを使用する予定がない場合のみこのオプションを選択してください。
+    アンインストールを実行する前に、Sugarデータベースの完全バックアップを完了し、Sugarをメンテナンスモードにします。',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'アンインストールプロセスの詳細については、',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Hint管理ガイド ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'を参照してください。',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Hintパッケージのみをアンインストールしてもよろしいですか？',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Hintパッケージを完全にアンインストールしてもよろしいですか？',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(注: この操作を元に戻すことはできません。)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Hintフィールド',
+    'LBL_HINT_NO_RESULTS_MSG' => '結果がありません。',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => '基本Hintパネルレイアウト',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => '取引先',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => '取引先担当者',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'リード',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => '拡張Hintパネルレイアウト',
+    'LBL_HINT_CONFIG_DIR_PAR1' => '上記のHintパネルレイアウトセクションで、ドラッグアンドドロップしてフィールドを並べ替えます。',
+    'LBL_HINT_CONFIG_DIR_PAR2' => '詳しい説明とデフォルトフィールド一覧については、以下を参照してください:',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' 以下をデフォルト設定に戻す:',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'モジュール。',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => '{{module}} モジュールをデフォルトに戻してもよろしいですか？',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'ここをクリック',
+    'LBL_HINT_CONFIG_NAME' => 'Hint管理ガイド。',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'フィールド',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'エンリッチ化されたフィールド',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'このセクションでは、すべてのHintフィールドと、Hintによってエンリッチ化されたSugarフィールドの一覧を示します。Hintフィールドにはアスタリスク(*)が付いており、エンリッチ化されている場合のみ、Hintパネルに表示できます。',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'フィールド名',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'フィールドをエンリッチ化',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Hintで表示',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Hintパネルで表示',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'その他のSugarフィールド',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'このセクションでは、Hintによってエンリッチ化されていないすべてのSugarフィールドの一覧を示します。',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => '警告',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => '注意: Hint Insightsサービスと同期しようとしています。保留中のメールダイジェストのストーリーは失われ、既存のニュースはInsightsダッシュレットから削除されます。同期が完了すると、すべてのタイプの通知が再開されます。',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'ご使用の {{_moduleSingular}} に関連する推奨企業を以下に示します。表示する企業データを選択してください。',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'アカウントが選択されていません',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => '複数のEメールが見つかりました。インポートするEメールを選択してください。',
+
+    'LBL_HINT_HELP_MESSAGE1' => '入力されたデータに基づいて、ヒントはシステム内で一致するものを見つけることができませんでした。',
+    'LBL_HINT_HELP_MESSAGE2' => 'ヒントで最適な結果を得るには、個人の名前とメールアドレスを使用します。',
+    'LBL_HINT_HELP_MESSAGE3' => 'ヒントで最適な結果を得るには、会社のWebサイトのURLを使用します。',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "{{_moduleSingular}} の会社名やWebサイトを入力すると、ヒントが追加データを検索します。",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "{{currentModule}} のメールアドレスを入力すると、ヒントが追加データを検索します。",
+
+    'LBL_HINT_HISTORY_NONE' => '履歴ビューに使用できるデータがありません',
+    'LBL_HINT_HISTORY_TITLE' => 'アクティビティ履歴',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'データのエンリッチ化',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'SugarCRM Hintサービスのライセンスは失効しています。ライセンスを更新するには、SugarCRM管理者に連絡してください。',
+    'LBL_HINT_PREVIEW_QUESTION' => 'SugarCRM Hintで何ができるのか、あなたの会社で試してみませんか？Hintを追加するには、SugarCRM管理者に連絡してください。',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'アカウント情報が見つかりません',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'エンリッチ化されたデータが見つかりました - クリックすると、すべてのエンリッチ化されたデータがレコードに保存されます。',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'クリックすると、エンリッチ化したデータをレコードに保存します。',
+
+    'LBL_HINT_CONTACTS_TITLE' => '関連担当者',
+    'LBL_HINT_CONTACTS_NONE' => '関連担当者なし',
+
+    'LBL_HINT_NEWS' => 'ニュース',
+    'LBL_HINT_GENERAL' => '一般',
+    'LBL_HINT_ALL_NEWS' => 'すべてのニュース',
+    'LBL_HINT_FILTER_NEWS' => 'ニュースをフィルタリング',
+    'LBL_HINT_FINANCIAL_NEWS' => '金融',
+    'LBL_HINT_PERSONNEL_NEWS' => '人事',
+    'LBL_HINT_PRESS_RELEASES' => 'プレスリリース',
+    'LBL_HINT_OTHER_NEWS' => 'その他',
+    'LBL_HINT_NEWS_PLACEHOLDER' => '新しい記事を検索',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => '利用可能なニュースはありません',
+    'LBL_NEW_NOTIFICATIONS' => '新規通知',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'Hint Insightsダッシュレットを表示するには、Hintライセンスが必要です。
+    Hintライセンスの取得については、管理者にお問い合わせください。',
+
+    'LBL_HINT_FOR' => '以下のため',
+    'LBL_HINT_WITH' => '以下と一緒に',
+    'LBL_HINT_SHOW_ME' => '表示:',
+    'LBL_HINT_NOTIFY_ME_BY' => '通知方法:',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Hint Insightsプリファレンスセンター',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => '初期設定オプションキー',
+    'LBL_HINT_PREFERENCES' => '初期設定',
+    'LBL_HINT_MINIMUM_PREFERENCES' => '削除を無効にしました。少なくとも1つの初期設定ステートメントが必要です',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => '追加を無効にしました。初期設定ステートメントの最大数に達しました',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Hint Insightsダッシュレットを含める',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'デスクトップ通知としてポップアップ表示',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => '常に通知を受け取るためには、すべてのブラウザとすべてのデスクトップコンピューターで通知を有効にする必要があります。',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Internet Explorerなど、一部のブラウザは通知に対応していません。通知に対応していないブラウザを使用している場合は、通知を有効にすることはできません。',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => '各通知に対して即座にメールアラートを送信',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => '毎日メールダイジェストを送信',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => '毎週メールダイジェストを送信',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => '初期設定を保存できませんでした。システムの接続を確認し、もう一度試してください。',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => '一部の必須フィールドに値がありません。初期設定を確認し、すべての必須フィールドが入力されていることを確認してください。',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'Hint Insightsのブラウザ通知を有効にしようとしています。「確認」をクリックして続行します。通知イベントの受信を許可するかどうかを確認するメッセージがブラウザに表示されます。',
+    'LBL_HINT_PUSH_ERROR' => 'プッシュ通知プラグインが依存関係なしで {{options.type}} に登録されました。プラグインは意図したとおりに動作しません。ワーカーファイルへのパスと、サブスクリプションをサーバーに保存する方法を必ず指定してください。',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'すべてのユーザのHint通知をオンにする',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'すべてのユーザのHint通知をオフにする',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => '警告: Sugar Hintのアンインストール中に通知を無効にできませんでした。通知を無効にするには、Hint 5.4.0以降をインストールし、Sugarの「管理」セクションにあるHint Uninstallerを使用して完全アンインストールを実行します。',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => '地図設定',
+    'LBL_MAP_MAP' => '地図',
+    'LBL_MAP_MAPS' => '地図',
+    'LBL_MAP_GEOCODING_RECORD' => 'ジオコード',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'レコードが正常にジオコーディングされました。',
+    'LBL_MAP_LATITUDE' => '緯度',
+    'LBL_MAP_LONGITUDE' => '経度',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => '住所で検索...',
+    'LBL_MAP_ALREADY_GEOCODED' => '現在のレコードはすでにジオコーディングされています。このレコードのジオコーディングを上書きしてよろしいですか？',
+    'LBL_MAPS_MANUAL_GEOCODING' => '手動ジオコーディング',
+    'LBL_MAP_POINT_COORDINATES' => '地図上の点の座標',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => '最適なルートを計算中...',
+    'LBL_MAP_DIRECTIONS' => '方向',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => '現在のユーザから開始する方向',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'このレコードから開始する方向',
+    'LBL_MAPS_RADIUS_INPUT' => '半径(0-250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => '郵便番号から半径の範囲',
+    'LBL_MAPS_DISTANCE' => '距離',
+    'LBL_MAPS_CENTER_ZIP_CODE' => '郵便番号',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => '無効な設定: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => '<strong>{{module}}</strong> フィールドマッピングは無効です。',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => '地図タイプ',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'ズームレベル',
+    'LBL_MAPS_DASHLET' => '地図',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'ジオコーディングされたレコードを地図上に表示します。',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'このモジュールでは地図は使用できません。管理者コンソールで有効にしてください。',
+    'LBL_MAP_MODULES' => 'モジュール',
+    'LBL_MAP_FILTER_BY' => 'フィルター条件',
+    'LBL_MAP_UNIT_TYPE' => 'ユニットタイプ',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'マイル',
+    'LBL_MAP_UNIT_TYPE_KM' => 'キロメートル',
+    'LBL_MAP_ADDRESS' => '住所',
+    'LBL_MAP_NO_STARTING_POINT' => '開始地点がジオコーディングされていません。',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => '開始地点レコードがジオコーディングされていません。',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => '選択したレコードの一部はジオコーディングされておらず、地図に表示されません。',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'レコードがジオコーディングされていません。',
+    'LBL_MAPS_MODULE_FIELDS' => 'モジュールフィールド',
+    'LBL_MAPS_SELECT_FIELD' => 'フィールドを選択',
+    'LBL_MAPS_RELATE_RECORD' => '関連するレコード',
+    'LBL_MAPS_MAPPING_TYPE' => 'マッピングタイプ',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'ジオコーディングされたレコードはありません',
+    'LBL_MAPS_ADDRESS' => '住所',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'アサインされたユーザ',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => '指定した地点のストリートサイドビューは利用できません',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> レコードはマッピングに有効ではありません。モジュールをリストから削除してください。',
+    'LBL_MAPS_CLOSE_TOOLTIP' => '閉じる',
+    'LBL_MAPS_EXPAND_TOOLTIP' => '拡張',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'PDFで保存',
+    'LBL_MAPS_EMAIL_LINK' => 'Eメールリンク',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => '少なくとも1つのジオコーディングされたレコードが必要です。',
+    'LBL_MAPS_GENERATING' => '地図を生成中...',
+    'LBL_MAPS_POINTS' => '地図上のポイント',
+    'LBL_MAPS_POINT' => 'ポイント',
+    'LBL_MAPS_TRAVEL_DETAILS' => '移動の詳細',
+    'LBL_MAPS_TOTAL_DISTANCE' => '総距離',
+    'LBL_MAPS_TOTAL_DURATION' => '合計時間',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'トラフィックがない場合の合計時間',
+    'LBL_MAPS_ITINERARY' => '旅程',
+    'LBL_MAPS_TRAVEL_DISTANCE' => '移動距離',
+    'LBL_MAPS_TRAVEL_DURATION' => '移動時間',
+    'LBL_MAPS_TRAVEL_STEPS' => 'ステップ',
+    'LBL_MAPS_TRAVEL_WARNINGS' => '警告',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Bing Mapsは、共有地図上で最大10個のピンポイントに対応しています。選択内容を確認してください。',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => '地図ライセンスが必要です',
+
+    'LBL_INVALID_FORMULA' => '不正な計算式です',
+    'LBL_RETURN_TYPE_MISSMATCH' => '関数の戻り値の型が一致しません',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => '予測',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => '理想的なお客様像',
+
+    // User last state
+    'LBL_LAST_STATE' => '前回の状態',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'DocuSignに送信',
+
+    // Base sales stages
+    'LBL_OPEN' => '開く',
+    'LBL_CLOSED_WON' => '受注',
+    'LBL_CLOSED_LOST' => '失注',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6770,8 +7388,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Google 連絡先',
@@ -7111,6 +7729,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '埋め込みファ�
     'YER' => 'リアル',
     'ZWD' => 'ジンバブエ ドル',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => '非常に高い',
+        '4' => '高い',
+        '3' => 'どちらでもない',
+        '2' => '低い',
+        '1' => '非常に低い',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'なし',
         'future' => '現在の値',
@@ -7120,3 +7746,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '埋め込みファ�
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'シングルヒット',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => '実行中',
+        'error' => 'エラー',
+        'success' => '成功',
+        'canceled' => 'キャンセル済み',
+        'document_load' => 'テンプレートを読み込んでいます',
+        'tags_extract' => 'タグを抽出しています',
+        'tags_validate' => 'タグを有効にしています',
+        'data_retrieving' => 'タグを取得しています',
+        'serialize_document' => 'ドキュメントを元に戻しています',
+        'send_document' => 'ドキュメントをあなたに送信中',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'マージ',
+        'convert' => 'PDFマージ',
+        'multimerge' => '複数マージ',
+        'multimerge_convert' => 'PDFの複数マージ',
+        'labelsgenerate' => 'ラベルの生成',
+        'labelsgenerate_convert' => 'ラベルPDFの生成',
+        'excel' => 'Excelマージ',
+        'excel_convert' => 'Excelマージ変換',
+        'presentation' => 'PowerPointマージ',
+        'presentation_convert' => 'PowerPointマージPDF',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => '私の取引先',
+      'favorites' => 'お気に入りの取引先',
+      'tags' => 'タグ付けされた取引先',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'すべてのニュース',
+      'General' => '一般',
+      'Finance' => '金融',
+      'People' => '人事',
+      'Press Releases' => 'プレスリリース',
+      'Other' => 'その他',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'オーナー';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'クラウドドライブ';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'クラウドドライブ統合ダッシュレット';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'リンクをコピー';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'ダウンロード';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Sugarドキュメントを作成';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Google ドライブに同期';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'すべてをGoogle ドライブに同期';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'このファイルをダウンロードできません';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'クラウドダッシュレットは存在しません';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Sugar キュメントが作成されました';
+
+    $app_string['LBL_MY_FILES'] = 'マイファイル';
+    $app_strings['LBL_SHARED_WITH_ME'] = '共有アイテム';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'クラウドプロバイダー';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google ドライブ',
+      'onedrive' => 'Microsoft Onedrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = '共有アイテム';
+    $app_strings['LBL_MY_FILES'] = 'マイファイル';
+    $app_strings['LBL_UPLOAD_FILE'] = 'ファイルをアップロード';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'フォルダが見つかりません';
+    $app_strings['LBL_CREATE_FOLDER'] = 'フォルダを作成';
+    $app_strings['LBL_LOAD_MORE'] = 'さらに読み込む...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'Googleとの接続が見つかりません...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'Microsoftとの接続が見つかりません...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-なし-',
+      'Exact' => '完全に一致',
+      'Null_address_components' => '1つまたは複数の住所コンポーネントが空です',
+      'Invalid_address' => '無効な住所、サーバーがFalseを返しました',
+      'Invalid_server_response_not_XML' => '無効なサーバー応答、XMLではありません',
+      'Invalid_address_no_location' => '無効な住所、サーバーが場所を返しませんでした',
+      'Ambiguous_address' => 'あいまいな住所、複数一致',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => '道路',
+      'a' => '空中',
+      'be' => '鳥瞰図',
+      'rd' => '道路が暗い',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

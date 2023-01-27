@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare procese',
 
     'LBL_CAS_ID' => 'Număr proces',
+    'LBL_CAS_STATUS' => 'Stare proces',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Necunoscut (conform UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "sarcina a fost",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "sarcina a fost",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "i-a fost alocat Procesul #%s %s înregistrarea %s de către Acțiunea %s %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "la",
     'LBL_PMSE_HISTORY_LOG_AND'  => "și",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'o înregistrare conectată sau neconectată',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Aprobă',
     'LBL_PMSE_LABEL_REJECT' => 'Refuză',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Procese în derulare',
     'LBL_STATUS_CANCELLED' => 'Procese anulate',
     'LBL_STATUS_ERROR' => 'Eroare procese',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Finalizat',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Încheiat',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'În curs',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Anulat',
+    'LBL_STATUS_ERROR_ENUM' => 'Eroare',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Gestionare procese',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Procese negestionate',

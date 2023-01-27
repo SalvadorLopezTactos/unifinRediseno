@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'К примеру, Вы можете воспользоваться этим для поиска кейса, который был уже оформлен.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Если вы хотите оформить кейс в поддержку, нажмите здесь, чтобы создать новый кейс.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Для возврата в предыдущее окно в любое время нажмите здесь.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаимодействие с обращением',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Временная шкала обращения',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Заметки',
 

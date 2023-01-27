@@ -244,6 +244,10 @@ class LayoutManager
             $widget_def['widget_class'] = 'Fieldlongtext';
         }
 
+        if (!empty($widget_def['type']) && $widget_def['type'] === 'discount-amount') {
+            $widget_def['widget_class'] = 'Fielddiscountamount';
+        }
+
 		if(empty($widget_def['widget_class']))
 		{
 			// Default the class to SugarWidgetField

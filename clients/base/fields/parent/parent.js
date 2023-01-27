@@ -79,6 +79,11 @@
 
         this._super("_render");
 
+        // Make sure that we are in list view and that a record has been specified before we render the module avatar
+        if (this.view && this.view.action === 'list' && this.model.get('parent_id')) {
+            this._createListViewAvatar(moduleName);
+        }
+
         /**
          * Only allow modification of the select2 functionality under the specified templates
          */
@@ -284,6 +289,27 @@
         ) {
             this._createSearchCollection();
         }
+    },
+
+    /**
+     * Creates and renders the module specific avatar in list view
+     *
+     * @private
+     */
+    _createListViewAvatar: function(moduleName) {
+        var avatarField = app.view.createField({
+            def: {
+                type: 'avatar',
+                size: 'small',
+            },
+            view: this.view,
+            nested: true,
+            viewName: 'list',
+            model: this.model,
+            module: moduleName,
+        });
+        avatarField.render();
+        this.$el.find('.parent_avatar').prepend(avatarField.$el.children());
     },
 
     /**

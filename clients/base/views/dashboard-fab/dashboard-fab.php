@@ -10,12 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['base']['view']['dashboard-fab'] = [
-    'icon' => 'fab-icon',
+    'icon' => 'sicon-hamburger-lg',
     'buttons' => [
         [
             'name' => 'add_dashlet_button',
             'type' => 'rowaction',
-            'icon' => 'add-dashlet-icon',
+            'icon' => 'sicon-add-dashlet-lg',
             'label' => 'LBL_ADD_DASHLET_BUTTON',
             'events' => [
                 'click' => 'button:add_dashlet_button:click',

@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Kapcsolattartási azonosító',
     'LBL_DESCRIPTION_INFORMATION' => 'Információk leírása',
     'LBL_DESCRIPTION' => 'Leírás:',
+    'LBL_INTERNAL_NOTES' => 'Belső megjegyzések:',
     'LBL_STATUS' => 'Állapot:',
     'LBL_DIRECTION' => 'Irány:',
     'LBL_DATE' => 'Kezdés dátuma:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Az időtartamnak nagyobbnak kell lennie 0-nál',
     'LBL_CALL_INFORMATION' => 'Hívás áttekintő',
     'LBL_REMOVE' => 'Eltávolítás',
-    'LBL_ACCEPT_STATUS' => 'Státusz elfogadása',
     'LBL_ACCEPT_LINK' => 'Link elfogadása',
     //For export labels
     'LBL_PARENT_ID' => 'Szülő azonosítója',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Hívás:',
     'LBL_CALL_RECORDING_URL' => 'Felvétel hivatkozása',
     'LBL_CALL_RECORDING' => 'Felvétel',
+
+    'LBL_LEAD_ID' => 'Ajánlás azonosítója',
+    'LBL_LEAD_NAME' => 'Ajánlás',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Ön ezt ütemezte: {{moduleSingularLower}} {{name}} ehhez {{formatDate date_start}}.',

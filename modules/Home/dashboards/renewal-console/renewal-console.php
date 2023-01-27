@@ -83,13 +83,13 @@ return [
                         'context' => [
                             'module' => 'Accounts',
                         ],
-                        'view' => 'multi-line-list',
+                        'layout' => 'multi-line-filterpanel',
                     ],
                     [
-                        'layout' => [
-                            'name' => 'side-drawer',
-                            'type' => 'console-side-drawer',
+                        'context' => [
+                            'module' => 'Accounts',
                         ],
+                        'view' => 'multi-line-list',
                     ],
                 ],
             ],
@@ -101,13 +101,13 @@ return [
                         'context' => [
                             'module' => 'Opportunities',
                         ],
-                        'view' => 'multi-line-list',
+                        'layout' => 'multi-line-filterpanel',
                     ],
                     [
-                        'layout' => [
-                            'name' => 'side-drawer',
-                            'type' => 'console-side-drawer',
+                        'context' => [
+                            'module' => 'Opportunities',
                         ],
+                        'view' => 'multi-line-list',
                     ],
                 ],
             ],

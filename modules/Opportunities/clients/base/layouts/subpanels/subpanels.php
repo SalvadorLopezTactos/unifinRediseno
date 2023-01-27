@@ -104,6 +104,13 @@ $viewdefs['Opportunities']['base']['layout']['subpanels'] = array(
             'context' => array(
                 'link' => 'project',
             )
-        )
+        ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_ESCALATIONS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'escalations',
+            ],
+        ],
     ),
 );

@@ -915,6 +915,16 @@ AdamEvent.prototype._makeCriteriaField = function() {
                             userRolesDataRoot: 'result',
                             usersDataURL: 'pmse_Project/CrmData/users',
                             usersDataRoot: 'result'
+                        },
+                        relationship: {
+                            dataURL: 'pmse_Project/CrmData/related/' + PROJECT_MODULE,
+                            dataRoot: 'result',
+                            fieldDataURL: 'pmse_Project/CrmData/fields/{{MODULE}}',
+                            fieldDataURLAttr: {
+                                // RM = Received Message
+                                call_type: 'RM'
+                            },
+                            fieldDataRoot: 'result'
                         }
                     }
                 };
@@ -1093,12 +1103,21 @@ AdamEvent.prototype.createConfigureAction = function () {
                     {
                         text: translate('LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS'),
                         value: 'newallupdates'
+                    },
+                    {
+                        text: translate('LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE'),
+                        value: 'relationshipchange'
                     }
                 ],
                 required: true,
                 change: function() {
                     criteriaField._panel._evaluationPanels.module.getItem('field').fireDependentFields();
                     criteriaField.isValid();
+                    if (this.value === 'relationshipchange') {
+                        criteriaField._panel._evaluationPanels.relationship.enable();
+                    } else if (!criteriaField._panel._evaluationPanels.relationship.isDisabled()) {
+                        criteriaField._panel._evaluationPanels.relationship.disable();
+                    }
                 },
                 helpTooltip: {
                     message: translate('LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT')
@@ -1138,6 +1157,21 @@ AdamEvent.prototype.createConfigureAction = function () {
                             usersDataURL: 'pmse_Project/CrmData/users',
                             usersDataRoot: 'result',
                             usersValueField: "value"
+                        }).setRelationshipEvaluation({
+                            dataURL: 'pmse_Project/CrmData/related/' + ddlModules.value,
+                            dataRoot: 'result',
+                            textField: 'text',
+                            valueField: 'value',
+                            fieldDataURL: 'pmse_Project/CrmData/fields/{{MODULE}}',
+                            fieldDataURLAttr: {
+                                // ST = Start
+                                call_type: 'ST'
+                            },
+                            fieldDataRoot: 'result',
+                            fieldTextField: 'text',
+                            fieldValueField: 'value',
+                            fieldTypeField: 'type',
+                            evn_params: data.evn_params
                         });
                         App.alert.dismiss('upload');
                         w.html.style.display = 'inline';
@@ -2129,8 +2163,13 @@ AdamEvent.prototype.validateSendMessageData = function(data, element, validation
         criteria = JSON.parse(data.evn_params);
     }
 
+    let criteriaComponents = {
+        type: 'TEMPLATE',
+        value: data.evn_criteria
+    };
+
     // Check that the email template field is set and the template exists
-    validationTools.validateAtom('TEMPLATE', null, null, data.evn_criteria, element, validationTools);
+    validationTools.validateAtom(criteriaComponents, element, validationTools);
 
     // Check that the "From:" field is set (required field)
     if (!criteria.from || !criteria.from.name || !criteria.from.id) {
@@ -2186,13 +2225,14 @@ AdamEvent.prototype.validateCriteriaBoxAtoms = function(element, validationTools
         if (atom.chainedRelationship) {
             module = atom.chainedRelationship.moduleLabel;
         }
-        validationTools.validateAtom(
-            sendEvent ? atom.type : atom.expType,
-            module,
-            sendEvent ? atom.field : atom.expField,
-            sendEvent ? atom.value : atom.expValue,
-            element,
-            validationTools);
+        let criteriaComponents = {
+            type: sendEvent ? atom.type : atom.expType,
+            module: module,
+            field: sendEvent ? atom.field : atom.expField,
+            value: sendEvent ? atom.value : atom.expValue,
+            relation: atom.expRel
+        };
+        validationTools.validateAtom(criteriaComponents, element, validationTools);
     }
 };
 

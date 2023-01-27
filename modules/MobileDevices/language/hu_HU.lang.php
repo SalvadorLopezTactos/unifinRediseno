@@ -14,5 +14,5 @@ $mod_strings = [
     'LBL_MODULE_NAME' => 'Mobileszközök',
     'LBL_MODULE_NAME_SINGULAR' => 'Mobileszköz',
     'LBL_DEVICE_ID' => 'Eszközazonosító',
-    'LBL_DEVICE_PLATFORM' => 'Platform',
+    'LBL_DEVICE_PLATFORM' => 'Eszközplatform',
 ];

@@ -10,7 +10,8 @@
     }
 
     .dashlet-content .list-view {
-      overflow: visible;
+      overflow: scroll;
+      height: calc(~'100% - 1px');
     }
     // parent - 16px (chart margins)
     .sc-chart,
@@ -114,7 +115,7 @@
 }
 
 .drillthrough-pane .sc-chart {
-  height: 348px !important;
+  min-height: 348px;
 }
 
 //interactions
@@ -168,7 +169,7 @@ span.count {
 .nv-chart-org {
   .sc-org-bkgd,
   .nv-org-bkgd {
-    stroke: darken(@grayLighter, 15%);
+    stroke: @gray40;
     stroke-width: 2px;
   }
 
@@ -216,12 +217,11 @@ span.count {
 
     .zoom-control {
       position: absolute;
-      top: 1px;
-      font-size: 18px;
+      top: 3px;
       cursor: pointer;
 
       &.disabled {
-        color: lighten(@grayLight, 10%) !important;
+        color: @gray60 !important;
       }
     }
 

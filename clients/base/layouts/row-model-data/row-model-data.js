@@ -43,7 +43,15 @@
 
             rowModelBean.fetch({
                 success: _.bind(function() {
-                    this.options.context.set('rowModel', rowModelBean);
+                    if (this.disposed) {
+                        return;
+                    }
+                    this.context.parent.set('rowModel', rowModelBean);
+                    _.each(app.sideDrawer._breadcrumbs, function(bread) {
+                        if (bread.context.modelId === rowModelBean.get('id')) {
+                            bread.context.model = rowModelBean;
+                        }
+                    });
                     this._super('loadData', [options]);
                 }, this),
                 complete: function() {
@@ -68,5 +76,15 @@
             return true;
         }
         return false;
+    },
+
+    /**
+     * Retrieves the current row model
+     *
+     * @return {Bean|null} the current row model if it exists; null otherwise
+     */
+    getRowModel: function() {
+        var focusedRecord = this.context && this.context.parent && this.context.parent.get('rowModel');
+        return focusedRecord || null;
     }
 })

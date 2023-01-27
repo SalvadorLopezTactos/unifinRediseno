@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Kişi Kimliği',
     'LBL_DESCRIPTION_INFORMATION' => 'Tanım Bilgisi',
     'LBL_DESCRIPTION' => 'Tanım:',
+    'LBL_INTERNAL_NOTES' => 'Dahili Notlar:',
     'LBL_STATUS' => 'Durum:',
     'LBL_DIRECTION' => 'Yön:',
     'LBL_DATE' => 'Başlangıç Tarihi:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Süre 0 dan büyük olmalıdır',
     'LBL_CALL_INFORMATION' => 'Genel Bilgi',
     'LBL_REMOVE' => 'sil',
-    'LBL_ACCEPT_STATUS' => 'Kabul Durumu',
     'LBL_ACCEPT_LINK' => 'Bağlantıyı Kabul et',
     //For export labels
     'LBL_PARENT_ID' => 'Üst ID',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Çağrı:',
     'LBL_CALL_RECORDING_URL' => 'Kayıt URL&#39;si',
     'LBL_CALL_RECORDING' => 'Kayıt',
+
+    'LBL_LEAD_ID' => 'Potasiyel ID',
+    'LBL_LEAD_NAME' => 'Potansiyel',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> , {{formatDate date_start}} için planladınız.',

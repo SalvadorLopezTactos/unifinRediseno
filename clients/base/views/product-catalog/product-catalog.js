@@ -96,6 +96,16 @@
     hasAccess: false,
 
     /**
+     * Height to be set on the canvas element
+     */
+    canvasHeight: null,
+
+    /**
+     * Width to be set on the canvas element
+     */
+    canvasWidth: null,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -156,14 +166,8 @@
             return;
         }
 
-        var closestComp = this.closestComponent('record') ?
-            this.closestComponent('record') :
-            this.closestComponent('create');
-        if (!closestComp) {
-            // if it's not on record or create it's on a list.
-            closestComp = this.closestComponent('records');
-        }
-        if (!_.isUndefined(closestComp)) {
+        let closestComp = this._getClosestComponent();
+        if (closestComp) {
             // need to trigger on app.controller.context because of contexts changing between
             // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
             // app.controller.context is the only consistent context to use
@@ -171,7 +175,7 @@
                 this._onProductDashletAddComplete, this);
         }
 
-        $(window).on('resize', _.bind(this._resizePhaserCanvas, this));
+        $(window).on('resize', _.bind(_.debounce(this._resizePhaserCanvas, 200), this));
 
         sidebarLayout = this.closestComponent('sidebar');
         if (sidebarLayout) {
@@ -413,6 +417,8 @@
             iconName = 'list-alt';
         } else if (itemType === 'showMore') {
             iconName = 'empty';
+        } else if (itemType === 'preview') {
+            iconName = 'preview';
         }
 
         return iconName;
@@ -488,7 +494,11 @@
             this.game._view._onTreeNodeCategoryClicked(target, isIcon);
         } else {
             if (isIcon) {
-                this.game._view._onTreeNodeIconClicked(target);
+                if (target._itemAction === 'preview') {
+                    this.game._view._onTreeNodePreviewClicked(target);
+                } else {
+                    this.game._view._onTreeNodeIconClicked(target);
+                }
             } else {
                 this.game._view._onTreeNodeNameClicked(target);
             }
@@ -551,15 +561,13 @@
     },
 
     /**
-     * When a tree item's icon gets clicked
+     * When a tree item's card icon gets clicked
      *
-     * @param {Phaser.Image} target The icon that was clicked
+     * @param {Phaser.Image} target The card icon that was clicked
      * @protected
      */
     _onTreeNodeIconClicked: function(target) {
-        this._fetchRecord(target._itemId, {
-            success: _.bind(this._openItemInDrawer, this)
-        });
+        this._onTreeNodeNameClicked(target);
     },
 
     /**
@@ -569,8 +577,50 @@
      * @protected
      */
     _onTreeNodeNameClicked: function(target) {
+        // We could show a loading message here, but not all views do something with the PC data. Trigger an event to
+        // let individual views decide what to do when the tree name is clicked
+        var closestComp = this._getClosestComponent();
+        if (!_.isUndefined(closestComp)) {
+            app.controller.context.trigger(closestComp.cid + ':productCatalogDashlet:add:loading');
+        }
+
+        // Fetch the record data and send it to the applicable context
         this._fetchRecord(target._itemId, {
-            success: _.bind(this._sendItemToRecord, this)
+            success: _.bind(this._sendItemToRecord, this),
+            complete: _.bind(function() {
+                if (!_.isUndefined(closestComp)) {
+                    app.controller.context.trigger(`${closestComp.cid}:productCatalogDashlet:add:loaded`);
+                }
+            }, this)
+        });
+    },
+
+    /**
+     * When a tree item's preview icon gets clicked
+     *
+     * @param {Phaser.Image} target The preview icon that was clicked
+     * @private
+     */
+    _onTreeNodePreviewClicked: function(target) {
+        // Show loading alert
+        app.alert.show('fetching_product_catalog_preview', {
+            level: 'process',
+            title: app.lang.get('LBL_LOADING'),
+            autoClose: false
+        });
+
+        // Fetch the record data and display it in a drawer
+        this._fetchRecord(target._itemId, {
+            success: _.bind(function(data) {
+                this._openItemInDrawer(data);
+
+                // Fixes issue with Phaser not making the preview icon disappear if the cursor was still over the
+                // preview button when the drawer opened
+                target.visible = false;
+            }, this),
+            complete: _.bind(function() {
+                app.alert.dismiss('fetching_product_catalog_preview');
+            }, this)
         });
     },
 
@@ -637,12 +687,13 @@
     getPhaserGameConfig: function() {
         var elIdName = this._getPhaserCanvasId();
         var $el = this.$('#' + elIdName);
+        this._calculateCanvasSizes($el);
         var gameConfig = {
-            height: 260,
+            height: this.canvasHeight,
             parent: elIdName,
             renderer: Phaser.CANVAS,
             transparent: true,
-            width: $el.width()
+            width: this.canvasWidth
         };
 
         return this._getPhaserGameConfig(gameConfig);
@@ -785,9 +836,13 @@
     },
 
     getTreeStateConfigSettings: function() {
+        const isDarkMode = app.utils.isDarkMode();
+
         var config = {
-            categoryColor: '#000000',
-            itemColor: '#167DE5',
+            categoryColor: isDarkMode ? '#E5EAED' : '#2B2D2E',
+            itemColor: isDarkMode ? '#E5EAED' : '#2B2D2E',
+            iconColor: isDarkMode ? 0x9BA1A6 : 0x6F777B,
+            iconHoverColor: isDarkMode ? 0xFFFFFF : 0x0679C8,
             itemFont: '12px open sans',
             iconTextPadding: 5,
             iconWidth: 16,
@@ -806,13 +861,13 @@
             showMoreNodeIconName: 'folder-open-o',
             scrollBarBkgdBorderLineSize: 1,
             scrollBarBkgdWidth: 15,
-            scrollBarBkgdBorderColor: 0xE8E8E8,
-            scrollBarBkgdFill: 0xFAFAFA,
-            scrollBarBkgdFillIE: 0xF0F0F0,
+            scrollBarBkgdBorderColor: isDarkMode ? 0x2B2D2E : 0xE8E8E8,
+            scrollBarBkgdFill: isDarkMode ? 0x2B2D2E : 0xFAFAFA,
+            scrollBarBkgdFillIE: isDarkMode ? 0x2B2D2E : 0xF0F0F0,
             scrollThumbWidth: 8,
             scrollThumbHeight: 16,
-            scrollThumbFillColor: 0xC1C1C1,
-            scrollThumbFillHoverColor: 0x7D7D7D,
+            scrollThumbFillColor: isDarkMode ? 0x4D5154 : 0xC1C1C1,
+            scrollThumbFillHoverColor: isDarkMode ? 0x6F777B : 0x7D7D7D,
             scrollThumbTopBottomPadding: 3
         };
 
@@ -1032,7 +1087,8 @@
                 }, this);
 
                 if (treeData.next_offset !== -1) {
-                    this._createLevel(this.rootGroup.childGroup, this.showMoreNode, groupIndex, treeData.next_offset);
+                    let showMorePos = this.rootGroup.childGroup.length;
+                    this._createLevel(this.rootGroup.childGroup, this.showMoreNode, groupIndex, showMorePos);
                 }
 
                 this._updateGameWorldSize();
@@ -1130,6 +1186,7 @@
                 iconName = gameView._getTreeNodeIconName(itemType, node);
                 iconSpriteSheetId = gameView._getTreeNodeSpriteSheetId(itemType, iconName, node);
 
+                // Create the Product/Category card icon and add it to the group
                 startX = this.iconStartX + 8;
                 startY = this.iconYOffset;
 
@@ -1137,63 +1194,248 @@
                     startX = this.gameWorldWidth - (startX * (groupIndex + 1)) - (this.iconWidthHalf * groupIndex);
                 }
 
-                // create the icon
-                icon = this.game.add.image(
-                    startX,
-                    startY,
-                    iconSpriteSheetId,
-                    iconName
-                );
-                icon.height = gameView._getTreeIconHeight(iconName, node);
-                icon.width = gameView._getTreeIconWidth(iconName, node);
-                icon.anchor.setTo(0.5, 0.5);
-                icon._itemName = itemName;
-                icon._itemId = itemId;
-                icon._itemType = itemType;
-                icon._tween = this.game.add.tween(icon).to({
-                    angle: 360
-                }, 3600, null, false, 0, -1);
+                icon = this._createNodeIcon(node,{
+                    startX: startX,
+                    startY: startY,
+                    iconSpriteSheetId: iconSpriteSheetId,
+                    iconName: iconName,
+                    itemName: itemName,
+                    itemId: itemId,
+                    itemType: itemType
+                });
+                group.add(icon);
 
-                icon.inputEnabled = true;
-                icon.events.onInputDown.add(gameView._onTreeNodeItemClicked, this);
-                icon.input.useHandCursor = true;
-
+                // Create the Product/Category text and add it to the group
                 if (this.isLangRTL) {
-                    startX -= this.iconWidth - this.iconTextPadding;
+                    startX -= (this.iconWidth + this.iconTextPadding);
                 } else {
                     startX = this.iconStartX + this.iconWidth + this.iconTextPadding;
                 }
-
-                text = this.game.add.text(
-                    startX,
-                    0,
-                    node.data,
-                    {
+                text = this._createNodeText(node, {
+                    startX: startX,
+                    startY: 0,
+                    display: {
                         font: this.itemFont,
                         fill: textColor
-                    }
-                );
+                    },
+                    itemName: itemName,
+                    itemId: itemId,
+                    itemType: itemType
+                });
+                group.add(text);
 
-                if (this.isLangRTL) {
-                    text.anchor.setTo(1, 0);
+                // If this is a product, also create the Product preview icon
+                if (itemType === 'product') {
+                    if (this.isLangRTL) {
+                        startX -= (this.iconWidth + (2 * this.iconTextPadding) + text.width);
+                    } else {
+                        startX = this.iconStartX + this.iconWidth + (2 * this.iconTextPadding) + text.width;
+                    }
+
+                    // Create the preview icon object and add it to the group
+                    var preview = this._createNodePreview(node, {
+                        startX: startX,
+                        startY: startY,
+                        iconSpriteSheetId: iconSpriteSheetId,
+                        iconName: gameView._getTreeNodeIconName('preview', node),
+                        itemName: itemName,
+                        itemId: itemId,
+                        itemType: itemType
+                    });
+                    group.add(preview);
+
+                    // Create an invisible element and add it to the group. This will give us a row-size place
+                    // to put a hover listener to show the preview icon
+                    if (this.isLangRTL) {
+                        startX -= (this.iconWidth + this.iconTextPadding);
+                    } else {
+                        startX = this.iconStartX + 8;
+                    }
+
+                    var hoverElem = this._createNodeHoverElem(node, group, {
+                        startX: startX,
+                        startY: 0,
+                        iconName: ''
+                    });
+                    hoverElem.width += preview.width;
+                    group.addAt(hoverElem, 0);
+
+                    // Add the listeners for preview icon visibility on all elements in the group
+                    group.onChildInputOver.add(function() {
+                        preview.visible = true;
+                    });
+                    group.onChildInputOut.add(function() {
+                        preview.visible = false;
+                    });
                 }
 
-                text._itemName = itemName;
-                text._itemId = itemId;
-                text._itemType = itemType;
-
-                text.inputEnabled = true;
-                text.events.onInputDown.add(gameView._onTreeNodeItemClicked, this);
-                text.input.useHandCursor = true;
-
-                group.name = group.name + '-' + itemName;
+                // Finish setting up the group
+                group.name = `${group.name}-${itemName}`;
                 group._itemName = itemName;
                 group._itemId = itemId;
                 group._itemType = itemType;
                 group._icon = icon;
                 group._text = text;
-                group.add(icon);
-                group.add(text);
+            },
+
+            /**
+             * Creates the icon for the tree node
+             *
+             * @param {Object} node The JSON Object data from the tree for this node level
+             * @param {Object} params the parameters to use for the icon
+             * @return {Phaser.Image} the Phaser icon image object
+             * @private
+             */
+            _createNodeIcon: function(node, params) {
+                var gameView = this.game._view;
+                var iconName = params.iconName || '';
+
+                // Create the icon object
+                var icon = this.game.add.image(
+                    params.startX || 0,
+                    params.startY || 0,
+                    params.iconSpriteSheetId || '',
+                    iconName
+                );
+
+                // Give the icon the proper dimensions
+                icon.height = gameView._getTreeIconHeight(iconName, node);
+                icon.width = gameView._getTreeIconWidth(iconName, node);
+
+                // Give the icon the proper anchor
+                icon.anchor.setTo(0.5, 0.5);
+
+                // Give the icon data to store
+                icon._itemName = params.itemName || '';
+                icon._itemId = params.itemId || '';
+                icon._itemType = params.itemType || '';
+
+                icon.tint = gameView.treeConfig.iconColor;
+
+                // Give tween to the icon
+                icon._tween = this.game.add.tween(icon).to({
+                    angle: 360
+                }, 3600, null, false, 0, -1);
+
+                // Add event handling to the icon
+                icon.inputEnabled = true;
+                icon.events.onInputDown.add(gameView._onTreeNodeItemClicked, this);
+                icon.input.useHandCursor = true;
+
+                return icon;
+            },
+
+            /**
+             * Creates the text for the tree node
+             *
+             * @param {Object} node The JSON Object data from the tree for this node level
+             * @param {Object} params the parameters to use for the text
+             * @return {Phaser.Text} the Phaser text object
+             * @private
+             */
+            _createNodeText: function(node, params) {
+                var gameView = this.game._view;
+
+                // Create the text object
+                var text = this.game.add.text(
+                    params.startX || 0,
+                    params.startY || 0,
+                    node.data || {},
+                    params.display || {}
+                );
+
+                // Give the text the proper anchor
+                if (this.isLangRTL) {
+                    text.anchor.setTo(1, 0);
+                }
+
+                // Give the text data to store
+                text._itemName = params.itemName || '';
+                text._itemId = params.itemId || '';
+                text._itemType = params.itemType || '';
+
+                // Add event handling to the text
+                text.inputEnabled = true;
+                text.events.onInputDown.add(gameView._onTreeNodeItemClicked, this);
+                text.input.useHandCursor = true;
+
+                return text;
+            },
+
+            /**
+             * Creates the preview button for the tree node
+             *
+             * @param {Object} node The JSON Object data from the tree for this node level
+             * @param {Object} params the parameters to use for the preview button
+             * @return {Phaser.Image} the Phaser image object
+             * @private
+             */
+            _createNodePreview: function(node, params) {
+                var gameView = this.game._view;
+                var iconName = params.iconName || '';
+
+                // Create the preview object
+                var preview = this.game.add.image(
+                    params.startX || 0,
+                    params.startY || 0,
+                    params.iconSpriteSheetId || '',
+                    iconName
+                );
+
+                // Give the preview icon the proper dimensions
+                preview.height = gameView._getTreeIconHeight(iconName, node);
+                preview.width = gameView._getTreeIconWidth(iconName, node);
+
+                // Give the preview icon the proper anchor
+                preview.anchor.setTo(-0.2, 0.5);
+
+                // Give the preview data to store
+                preview._itemName = params.itemName || '';
+                preview._itemId = params.itemId || '';
+                preview._itemType = params.itemType || '';
+                preview._itemAction = 'preview';
+
+                // The preview icon is invisible by default
+                preview.visible = false;
+
+                // Add event handling to the preview icon. By default, the preview icon is black. On hover over the
+                // icon, "tint" its color with white so that its true blue color shows. Off hover, "tint" its color back
+                // to black so it no longer looks highlighted. On click, call the on click handler
+                preview.inputEnabled = true;
+                preview.input.useHandCursor = true;
+                preview.tint = gameView.treeConfig.iconColor;
+                preview.events.onInputOver.add(_.bind(function() {
+                    preview.tint = gameView.treeConfig.iconHoverColor;
+                }, this));
+                preview.events.onInputOut.add(_.bind(function() {
+                    preview.tint = gameView.treeConfig.iconColor;
+                }, this));
+                preview.events.onInputDown.add(gameView._onTreeNodeItemClicked, this);
+
+                return preview;
+            },
+
+            /**
+             * Creates an invisible game object spanning the length and width of the row group, used
+             * for creating a row-wide hover listener
+             *
+             * @param {Object} node The JSON Object data from the tree for this node level
+             * @param {Object} params the parameters to use for the preview button
+             * @return {Phaser.Image} the Phaser image object
+             * @private
+             */
+            _createNodeHoverElem: function(node, group, params) {
+                // Create an invisible object that spans the width and height of the entire row group
+                var hoverElem = this.game.add.image(
+                    params.startX || this.iconStartX + 8,
+                    params.startY || 0,
+                    ''
+                );
+                hoverElem.width = group.width + this.iconTextPadding;
+                hoverElem.height = group.height;
+                hoverElem.inputEnabled = true;
+
+                return hoverElem;
             },
 
             /**
@@ -1487,7 +1729,8 @@
                 }, this);
 
                 if (data.next_offset !== -1) {
-                    this._createLevel(childGroup, this.showMoreNode, groupIndex, data.next_offset);
+                    let showMorePos = nextRowIndex + data.records.length;
+                    this._createLevel(childGroup, this.showMoreNode, groupIndex, showMorePos);
                 }
 
                 icon.frameName = this.showMoreNodeIconName;
@@ -1604,6 +1847,22 @@
     },
 
     /**
+     * Gets the closest component to the dashlet
+     * @return {Object|null}
+     * @private
+     */
+    _getClosestComponent: function() {
+        let componentNames = ['record', 'create', 'convert', 'records', 'side-drawer', 'omnichannel-dashboard'];
+        for (let componentName of componentNames) {
+            let component = this.closestComponent(componentName);
+            if (component) {
+                return component;
+            }
+        }
+        return null;
+    },
+
+    /**
      * Sends the ProductTemplate data item to the record
      *
      * @param {Object} data The ProductTemplate data
@@ -1612,17 +1871,11 @@
     _sendItemToRecord: function(data) {
         this._massageDataBeforeSendingToRecord(data);
 
-        var closestComp = this.closestComponent('record') ?
-            this.closestComponent('record') :
-            this.closestComponent('create');
-        if (!closestComp) {
-            // if it's not on record or create it's on a list.
-            closestComp = this.closestComponent('records');
-        }
+        let closestComp = this._getClosestComponent();
         // need to trigger on app.controller.context because of contexts changing between
         // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
         // app.controller.context is the only consistent context to use
-        if (!_.isUndefined(closestComp)) {
+        if (closestComp && closestComp.triggerBefore('productCatalogDashlet:add:allow')) {
             app.controller.context.trigger(closestComp.cid + ':productCatalogDashlet:add', data);
         }
     },
@@ -1645,6 +1898,8 @@
         delete data.date_entered;
         delete data.date_modified;
         delete data.pricing_formula;
+        delete data.my_favorite;
+        delete data.sync_key;
     },
 
     /**
@@ -1655,19 +1910,14 @@
      */
     _openItemInDrawer: function(data) {
         var model = app.data.createBean('ProductTemplates', data);
-        var closestComp = this.closestComponent('record') ?
-            this.closestComponent('record') :
-            this.closestComponent('create');
-        if (!closestComp) {
-            // if it's not on record or create it's on a list.
-            closestComp = this.closestComponent('records');
-        }
+        let closestComp = this._getClosestComponent();
         model.viewId = closestComp.cid;
         app.drawer.open({
             layout: 'product-catalog-dashlet-drawer-record',
             context: {
                 module: 'ProductTemplates',
-                model: model
+                model: model,
+                closestComponent: closestComp
             }
         });
     },
@@ -1691,9 +1941,22 @@
         var $el = this.$('.product-catalog-container-' + this.cid);
 
         if (this.phaser && $el.length && this.phaser.scale) {
-            this.phaser.scale.setGameSize($el.width(), $el.height());
+            this._calculateCanvasSizes($el);
+            this.phaser.scale.setGameSize(this.canvasWidth, this.canvasHeight);
             this.phaser.events.onResize.dispatch();
         }
+    },
+
+    /**
+     * Calculate height and width to be set on the canvas
+     * @param $el Canvas element
+     * @private
+     */
+    _calculateCanvasSizes: function($el) {
+        let dashletEl = $el.closest('div.dashlet-content');
+        let searchBarHeight = dashletEl.find('div.product-catalog-search').innerHeight();
+        this.canvasHeight = dashletEl.height() - searchBarHeight;
+        this.canvasWidth = dashletEl.find('div.product-catalog-container').width();
     },
 
     /**
@@ -1727,14 +1990,8 @@
                 return;
             }
 
-            var closestComp = this.closestComponent('record') ?
-                this.closestComponent('record') :
-                this.closestComponent('create');
-            if (!closestComp) {
-                // if it's not on record or create it's on a list.
-                closestComp = this.closestComponent('records');
-            }
-            if (!_.isUndefined(closestComp)) {
+            let closestComp = this._getClosestComponent();
+            if (closestComp) {
                 app.controller.context.off(closestComp.cid + ':productCatalogDashlet:add:complete', null, this);
             }
         }

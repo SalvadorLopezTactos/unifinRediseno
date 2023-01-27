@@ -16,7 +16,7 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'label' =>'LBL_ALL_REPORTS',
         'acl_action'=>'',
         'acl_module'=>'',
-        'icon' => 'fa-bar-chart-o',
+        'icon' => 'sicon-reports',
     ),
     array(
         'route'=>'#bwc/index.php?module=CustomQueries&action=EditView&return_module=CustomQueries&return_action=DetailView',

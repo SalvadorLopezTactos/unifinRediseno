@@ -11,7 +11,7 @@
  */
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Security\Teams\TeamSet;
@@ -67,7 +67,7 @@ class TeamSetManager {
         $query = 'SELECT team_set_id, module_table_name FROM team_sets_modules WHERE team_sets_modules.deleted = 0';
         $stmt = $conn->executeQuery($query);
 
-        while (($tsmRow = $stmt->fetch())) {
+        while (($tsmRow = $stmt->fetchAssociative())) {
 			//pull off the team_set_id and module and run a query to see if we find if the module is still using this team_set
 			//of course we have to be careful not to remove a set before we have gone through all of the modules containing that
 			//set otherwise.
@@ -82,7 +82,7 @@ class TeamSetManager {
                     $query = 'SELECT contents FROM user_preferences WHERE category = ? AND deleted = 0';
                     $prefStmt = $conn->executeQuery($query, array($tokens[1]));
 
-                    while (($userPrefRow = $prefStmt->fetch())) {
+                    while (($userPrefRow = $prefStmt->fetchAssociative())) {
                         $prefs = unserialize(
                             base64_decode($userPrefRow['contents']),
                             ['allowed_classes' => false]
@@ -171,7 +171,7 @@ class TeamSetManager {
                 $excludeId === null ? 1 : 2
             );
             $ids = $connection->executeQuery($query, [$teamSetId, 0])
-                ->fetchAll(\PDO::FETCH_COLUMN);
+                ->fetchFirstColumn();
 
             foreach ($ids as $id) {
                 if ($excludeId === null || $id != $excludeId) {
@@ -212,7 +212,7 @@ class TeamSetManager {
         $query = $platform->modifyLimitQuery('SELECT NULL FROM team_sets_modules WHERE team_set_id = ?', 1);
         $stmt = $conn->executeQuery($query, [$teamSetId]);
 
-        if ($stmt->fetchColumn() !== false) {
+        if ($stmt->fetchOne() !== false) {
             return;
         }
 
@@ -421,7 +421,7 @@ FROM team_sets_teams
 WHERE team_id = ?';
         $stmt1 = $conn->executeQuery($query, array($team_id));
 
-        while (($teamSetId = $stmt1->fetchColumn())) {
+        while (($teamSetId = $stmt1->fetchOne())) {
             $teamSet->id = $teamSetId;
             $teamSet->removeTeamFromSet($team_id);
 
@@ -431,7 +431,7 @@ WHERE team_id = ?';
             $query = 'SELECT id FROM team_sets WHERE team_md5 = ? AND id != ?';
             $stmt = $conn->executeQuery($query, array($teamSet->team_md5, $teamSet->id));
 
-            if (!($existing_team_set_id = $stmt->fetchColumn())) {
+            if (!($existing_team_set_id = $stmt->fetchOne())) {
                 continue;
             }
 
@@ -443,7 +443,7 @@ SQL;
             $stmt2 = $conn->executeQuery($query, [$teamSetId]);
 
             //Update the records
-            while (($table = $stmt2->fetchColumn())) {
+            while (($table = $stmt2->fetchOne())) {
                 $conn->update($table, array(
                     'team_set_id' => $existing_team_set_id,
                 ), array(
@@ -482,7 +482,7 @@ SQL;
 
         $db = DBManagerFactory::getInstance();
 
-        while (($row = $stmt->fetch())) {
+        while (($row = $stmt->fetchAssociative())) {
             $data[
                 $db->fromConvert($row['team_set_id'], 'id')
             ][] = $db->fromConvert($row['team_id'], 'id');
@@ -502,7 +502,7 @@ SELECT DISTINCT tsm.module_table_name
 SQL;
 
         $stmt = $conn->executeQuery($query, [$oldTeamIds], [Connection::PARAM_STR_ARRAY]);
-        $modules = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        $modules = $stmt->fetchFirstColumn();
 
         foreach ($data as $oldTeamSetId => $teamIds) {
             $teamSetTeams = array_map(function ($id) {
@@ -570,7 +570,7 @@ SQL
             ]);
 
         // delete the records which would produce duplicates after update
-        while (($module = $stmt->fetchColumn())) {
+        while (($module = $stmt->fetchOne())) {
             $conn->executeUpdate(<<<SQL
 DELETE FROM team_sets_modules
  WHERE team_set_id = ?
@@ -635,7 +635,7 @@ SQL
         // find affected users
         $query = 'SELECT id FROM users WHERE default_team = ?';
         $userIds = $conn->executeQuery($query, array($oldTeam->id))
-            ->fetchAll(PDO::FETCH_COLUMN);
+            ->fetchFirstColumn();
 
         // for User bean team_id is default_team
         $logger->debug(sprintf(

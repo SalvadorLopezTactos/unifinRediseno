@@ -16,6 +16,8 @@ use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 class WebLogicHook extends SugarBean implements RunnableSchedulerJob
 {
+    const DEFAULT_CURL_TIMEOUT = 10;
+
     public $id;
     public $name;
     public $webhook_target_module;
@@ -78,7 +80,7 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
      * Dispatch request.
      * @param SugarBean $seed a bean that fired event
      * @param string $event event name
-     * @param array $arguments event arguments 
+     * @param array $arguments event arguments
      * @param string $id web logic hook id
      */
     public function dispatchRequest(SugarBean $seed, $event, $arguments, $id)
@@ -132,7 +134,7 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
             CURLOPT_HTTPHEADER      => false,
             CURLOPT_RETURNTRANSFER  => true,
             CURLOPT_CONNECTTIMEOUT  => 5,
-            CURLOPT_TIMEOUT         => 1,
+            CURLOPT_TIMEOUT         => $this->getCURLTimeout($data),
             CURLOPT_MAXREDIRS       => 1,
             CURLOPT_USERAGENT       => 'SugarCrm',
             CURLOPT_VERBOSE         => false,
@@ -147,9 +149,11 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
 
         curl_setopt_array($curlHandler, $options);
 
+        $this->beforeExec();
         if (false === curl_exec($curlHandler)) {
             $GLOBALS['log']->error('WebLogicHook failed: ' . curl_error($curlHandler));
         }
+        $this->afterExec();
 
         curl_close($curlHandler);
         $this->job->succeedJob();
@@ -167,5 +171,23 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
         }
         remove_logic_hook($this->webhook_target_module, $this->trigger_event, $this->getActionArray());
         parent::mark_deleted($id);
+    }
+
+    private function getCURLTimeout(array $data = []): int
+    {
+        if (!empty($data['request_timeout'])) {
+            return (int)$data['request_timeout'];
+        }
+        return (int)SugarConfig::getInstance()->get('web_logic_hook_timeout', self::DEFAULT_CURL_TIMEOUT);
+    }
+
+    private function beforeExec(): void
+    {
+        DBManagerFactory::disconnectAll();
+    }
+
+    private function afterExec(): void
+    {
+        DBManagerFactory::getInstance();
     }
 }

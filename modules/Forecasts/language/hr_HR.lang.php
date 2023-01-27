@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Opis',
     'LBL_OW_TYPE'=>'Vrsta',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Predviđanje tima za <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Izravno izvješće',
     'LBL_FDR_OPPORTUNITIES'=>'Prilike u predviđanju:',
     'LBL_FDR_WEIGH'=>'Ponderirani iznos prilika:',
     'LBL_FDR_COMMIT'=>'Potvrđeni iznos',
     'LBL_FDR_DATE_COMMIT'=>'Datum potvrđivanja',
+    'LBL_FDR_FORECAST_HEADER' => 'Predviđanje prodavatelja za <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Predviđanja: radni list',
     'LBL_DV_MY_FORECASTS' => 'Moja predviđanja',
-    'LBL_DV_MY_TEAM' => "Predviđanja mog tima" ,
+    'LBL_DV_MY_TEAM' => "Predviđanja mog tima",
     'LBL_DV_TIMEPERIODS' => 'Vremenska razdoblja:',
     'LBL_DV_FORECAST_PERIOD' => 'Vremensko razdoblje predviđanja',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Prilike predviđanja',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Osnovna stopa',
 
     'LBL_QUOTA' => 'Kvota',
-    'LBL_QUOTA_ADJUSTED' => 'Kvota (prilagođeno)',
+    'LBL_QUOTA_ADJUSTED' => 'Prilagođena kvota',
 
     'LBL_FORECAST_FOR'=>'Radni listovi s predviđanjima za: ',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Skupna vrijed.)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Kvota vs. potvrđeno vs. stvarno',
 
     'LBL_FORECAST' => 'Predviđanje',
+    'LBL_COMMITMENT' => 'Obveza',
+    'LBL_TEAM_COMMITMENT' => 'Obveza tima',
+    'LBL_FORECASTED' => 'Predviđeno',
+    'LBL_ADJUSTED_TOTAL' => 'Prilagođeno ukupno',
     'LBL_COMMIT_STAGE' => 'Faza potvrđivanja',
     'LBL_SALES_STAGE' => 'Faza',
     'LBL_AMOUNT' => 'Iznos',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}} i {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'vjerojatno {{{direction}}} {{{from}}} do {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'najbolje {{{direction}}} {{{from}}} do {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'najgore {{{direction}}} {{{from}}} do {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'vjerojatni je ostao isti',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'najbolji je ostao isti',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'najgori je ostao isti',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Potvrđeno (vjerojatno) {{{direction}}} {{{from}}} do {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Potvrđeno (najbolje) {{{direction}}} {{{from}}} do {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Potvrđeno (najgore) {{{direction}}} {{{from}}} do {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Potvrđeno (vjerojatno) ostalo je na istoj razini',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Potvrđeno (najbolje) ostalo je na istoj razini',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Potvrđeno (najgore) ostalo je na istoj razini',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Ovaj mjesec {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Prikazan ukupni iznos',
     'LBL_TOTAL' => 'Ukupno',
     'LBL_OVERALL_TOTAL' => 'Opći ukupni iznos',
-    'LBL_EDITABLE_INVALID' => 'Neispravna vrijednost za {0}',
+    'LBL_EDITABLE_INVALID' => 'Neispravna vrijednost za {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Vrijednost mora biti između {0} i {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Imate promjene u radnom listu koje niste spremili.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Izvest će se samo spremljeni ili potvrđeni podaci. Odustanite da biste prekinuli. Potvrdite da biste izvezli spremljene podatke.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Uključeno',
     'LBL_CHART_NOT_INCLUDED' => 'Nije uključeno',
     'LBL_CHART_ADJUSTED' => ' (Prilagođeno)',
-    'LBL_SAVE_DRAFT' => 'Spremi skicu',
+    'LBL_SAVE_DRAFT' => 'Spremi',
     'LBL_CHANGES_BY' => 'Promijenio/la {0}',
     'LBL_FORECAST_SETTINGS' => 'Postavke',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Datum početka fiskalne godine:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurirajte vremensko razdoblje koje će se upotrebljavati u modulu predviđanja. <br><br>Imajte na umu da se postavke vremenskog razdoblja ne mogu promijeniti nakon prvog postavljanja.<br><br>Započnite tako da odaberete datum početka fiskalne godine. Zatim odaberite vrstu vremenskog razdoblja za predviđanja. Raspon datuma za vremenska razdoblja automatski će se izračunati na temelju vaših odabira. Podrazdoblje je osnova za radni list s predviđanjima. <br><br> Putem budućih i prošlih vremenskih razdoblja koja se mogu prikazati odredit će se broj vidljivih podrazdoblja u modulu predviđanja. Korisnici mogu pregledati i urediti brojeve predviđanja u vidljivim podrazdobljima.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurirajte kako želite kategorizirati {{forecastByModule}}. <br><br>Imajte na umu da postavke raspona ne možete više mijenjati nakon prvotne potvrde. Za nadograđene instance postavke raspona zaključane su s postojećim podacima o predviđanjima.<br><br>Možete odabrati dvije ili više kategorija ovisno o rasponima vjerojatnosti ili izraditi kategorije koje se ne temelje na vjerojatnosti.<br><br>Nalijevo od prilagođenih kategorija nalaze se potvrdni okviri koje možete upotrijebiti za odabir raspona koje želite uključiti u predviđeni iznos koji se izvršava i prijavljuje voditeljima.<br><br>U radnom listu korisnik može ručno promijeniti status uključenja/isključenja i kategoriju {{forecastByModule}}.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurirajte kako želite kategorizirati {{forecastByModule}}. <br><br>Imajte na umu da postavke raspona ne možete više mijenjati nakon prvotne potvrde. Za nadograđene instance postavke raspona zaključane su s postojećim podacima o predviđanjima.<br><br>Možete odabrati dvije ili više kategorija ovisno o rasponima vjerojatnosti ili izraditi kategorije koje se ne temelje na vjerojatnosti.<br><br>Nalijevo od prilagođenih kategorija nalaze se potvrdni okviri koje možete upotrijebiti za odabir raspona koje želite uključiti u predviđeni iznos koji se izvršava i prijavljuje voditeljima.<br><br>U radnom listu korisnik može ručno promijeniti status uključenja/isključenja i kategoriju predviđanja {{forecastByModule}}.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Odaberite stupce koje korisnik treba ispuniti za predviđanja kod svakog {{forecastByModuleSingular}}. Imajte na umu da je vjerojatni iznos povezan s iznosom koji se prikazuje u {{forecastByModule}}; iz tog razloga nije moguće sakriti stupac Vjerojatno.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Odaberite koji stupci će se prikazivati u modulu predviđanja. Putem popisa polja sastavit će se radni list i time će korisnik moći odabrati način konfiguracije prikaza.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ja sam rezervirano mjesto teksta objašnjenja za predviđanja prema!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Premašuje za',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Nema podataka',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Ispunjavanje kvote',
+    'LBL_OPEN_LIKELY' => 'Otvori vjerojatno',
+    'LBL_OPEN_BEST' => 'Otvori najbolje',
+    'LBL_OPEN_WORST' => 'Otvori najgore',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Dodijeli kvotu',
     'LBL_ASSIGNING_QUOTA' => 'Dodjela kvote',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Predviđanja mog tima",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Imate nespremljene promjene. Jeste li sigurni da želite razvrstati radni list i odbaciti promjene?',
+
+    'LBL_SAVE_TOOLTIP' => 'Spremi promjene u recima radnog lista',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Spremi izmjene zapisa i pošalji predviđanje upravitelju',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Pošalji predviđanje upravitelju i dodijeli kvotu',
+
+    'LBL_SAVE_LABEL_REP' => 'Spremi ',
+    'LBL_SAVE_LABEL_MGR' => 'Spremi prilagođene vrijednosti',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} uključuje zapise za modul {{forecastby_singular_module}} da bi se izgradili {{forecastworksheets_module}} i predvidjela prodaja. Korisnici mogu raditi na prodaji za {{quotas_module}} na pojedinačnoj razini, na razini tima i na prodajnoj razini organizacije. Prije nego što korisnici mogu pristupiti modulu {{plural_module_name}}, administrator mora odabrati željena vremenska razdoblja, raspone i scenarije organizacije.

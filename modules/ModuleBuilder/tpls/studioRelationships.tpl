@@ -15,7 +15,7 @@
 <div id='relGrid'></div>
 {if $studio}{sugar_translate label='LBL_CUSTOM_RELATIONSHIPS' module='ModuleBuilder'}</h3>{/if}
 <script>
-{literal}
+
 //Workaround for YUI bug 2527707: http://yuilibrary.com/projects/yui2/ticket/913efafad48ce433199f3e72e4847b18, should be removed when YUI 2.8+ is used
 YAHOO.widget.DataTable.prototype.getColumn = function(column) {
     var oColumn = this._oColumnSet.getColumn(column);
@@ -45,7 +45,7 @@ YAHOO.widget.DataTable.prototype.getColumn = function(column) {
     }
     return oColumn;
 };
-{/literal}
+
 var relationships = {ldelim}relationships:{$relationships}{rdelim};
 var grid = new YAHOO.widget.ScrollingDataTable('relGrid',
 	[
@@ -53,14 +53,14 @@ var grid = new YAHOO.widget.ScrollingDataTable('relGrid',
 	    {ldelim}key:'lhs_module', label: SUGAR.language.get('ModuleBuilder','LBL_LHS_MODULE'),      width: 120, sortable: true{rdelim},
 	    {ldelim}key:'relationship_type', label: SUGAR.language.get('ModuleBuilder','LBL_REL_TYPE'), width: 120, sortable: true{rdelim},
 	    {ldelim}key:'rhs_module', label: SUGAR.language.get('ModuleBuilder','LBL_RHS_MODULE'),      width: 120, sortable: true{rdelim}
-	],{literal}
+	],
 	new YAHOO.util.LocalDataSource(relationships, {
 	    responseSchema: {
 		   resultsList : "relationships",
-		   fields : [{key : "name"}, {key: "lhs_module"}, {key: "relationship_type"}, {key: "rhs_module"}]
+		   fields : [{ key : "name"}, { key: "lhs_module"}, { key: "relationship_type"}, { key: "rhs_module"}]
 	    }
 	}),
-    {MSG_EMPTY: SUGAR.language.get('ModuleBuilder','LBL_NO_RELS'), height:"auto"}
+    { MSG_EMPTY: SUGAR.language.get('ModuleBuilder','LBL_NO_RELS'), height:"auto" }
 );
 grid.subscribe("rowMouseoverEvent", grid.onEventHighlightRow); 
 grid.subscribe("rowMouseoutEvent", grid.onEventUnhighlightRow); 
@@ -73,7 +73,7 @@ grid.subscribe("rowClickEvent", function(args){
 });
 grid.render();
 
-{/literal}
+
 ModuleBuilder.module = '{$view_module}';
 ModuleBuilder.MBpackage = '{$view_package}';
 ModuleBuilder.helpRegisterByID('relGrid');

@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-{literal}
 <style>
 .view tr td table.action tr td  {
 	border-bottom: thin solid #CCC;
@@ -63,7 +62,7 @@ table.list tr td.toggleDown, table.list:hover tr td.toggleDown:hover {
 	width:7px;
 }
 </style>
-{/literal}
+
 <div id='depGrid'></div>
 {if $empty}{sugar_translate label='LBL_NO_RELS' module='ModuleBuilder'}</h3>{/if}
 {if $studio}{sugar_translate label='LBL_CUSTOM_RELATIONSHIPS' module='ModuleBuilder'}</h3>{/if}
@@ -120,7 +119,7 @@ onclick="ModuleBuilder.moduleLoadFormula(Ext.getDom('newDepTrigger').value, 'new
 <div id=yuiTable/>
 <script type="text/javascript">
 var dependencies = {ldelim}"dependencies":{$dependencies}{rdelim};
-{literal}
+
 ModuleBuilder.Dependencies = {
 	visibleActions:[],
 	toggleAction : function(id) {
@@ -173,19 +172,19 @@ ModuleBuilder.Dependencies = {
 	        }; 
 		this.dataTable = new YAHOO.widget.DataTable("yuiTable", 
 			[
-				{key:"name",sortable:true},
-				{key:"condition"},
-				{key:"actions"},
-				{key:"type"}
+				{ key:"name",sortable:true },
+				{ key:"condition" },
+				{ key:"actions" },
+				{ key:"type" }
 			], 
 			this.dataSource, 
-			{}
+			{ }
 		); 
 	}
 	
 }
 
-{/literal}
+
 ModuleBuilder.module = '{$view_module}';
 ModuleBuilder.MBpackage = '{$view_package}';
 //ModuleBuilder.helpRegisterByID('depGrid');

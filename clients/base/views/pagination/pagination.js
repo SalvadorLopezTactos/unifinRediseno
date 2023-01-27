@@ -194,6 +194,10 @@
      */
     getPageNumClicked: function(evt) {
         evt.preventDefault();
+        // To stop the click event as it's not needed any more and may cause the contentsearch-dropdown to be hidden
+        // due to race condition, depending on whether the "active" attribute is added by the "show" function here,
+        // or the event being handled by contentsearch-dropdown's show()
+        evt.stopPropagation();
         var pageId = this.$(evt.target).data('page-id');
         if (this.pageNumClicked === pageId) {
             return;
@@ -209,6 +213,7 @@
      */
     onPageNavClicked: function(evt) {
         evt.preventDefault();
+        evt.stopPropagation();
         var $el = this.$(evt.target);
         var currentPageNum = $el.data('page-id');
         if ($el.hasClass('previous-fav') || $el.hasClass('nav-previous')) {

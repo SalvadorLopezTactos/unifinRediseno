@@ -214,5 +214,22 @@
             return false;
         });
 
+        /**
+         * Helpers implements a utility that allows different versions of icons to be rendered.
+         * @param iconClass defined icon class passed in through metadata
+         * @return {string} iconClass with its based font class
+         * Usage:
+         *
+         *   {{buildIcon <icon-class>}}
+         *
+         * Example:
+         *
+         *   {{buildIcon 'sicon-plus'}} returns 'sicon sicon-plus'
+         */
+        Handlebars.registerHelper('buildIcon', function(iconClass) {
+            return iconClass.includes('sicon') ?
+                `sicon ${iconClass}` :
+                `fa ${iconClass}`;
+        });
     });
 })(SUGAR.App);

@@ -210,8 +210,9 @@ class Forecast extends SugarBean
      * @param String $user_id
      * @param String $timeperiod_id
      * @param bool   $should_rollup     False to use direct numbers, true to use rollup.
+     * @return array|false
      */
-    function getForecastForUser($user_id=NULL, $timeperiod_id, $should_rollup=FALSE)
+    public function getForecastForUser(?string $user_id, ?string $timeperiod_id, bool $should_rollup = false)
     {
         global $current_user;
         if ( is_null($user_id) ) {
@@ -298,6 +299,16 @@ class Forecast extends SugarBean
         }
 
         return static::$settings;
+    }
+
+    /**
+     * Returns true if forecasts are set up, and false otherwise
+     * @return bool
+     */
+    public static function isSetup()
+    {
+        $forecast_config = Forecast::getSettings();
+        return !empty($forecast_config['is_setup']);
     }
 }
 function getTimePeriodsDropDownForForecasts(){

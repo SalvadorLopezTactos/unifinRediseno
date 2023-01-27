@@ -22,7 +22,7 @@ function packUpgradeWizardWeb($zip, $manifest, $installdefs, $params) {
 
     $params = array_merge($defaults, $params);
 
-    file_put_contents(__DIR__ . '/version.json', json_encode($params, true));
+    file_put_contents(__DIR__ . '/version.json', json_encode($params));
 
     $chdir = dirname(__FILE__) . "/../..";
 
@@ -43,6 +43,7 @@ function packUpgradeWizardWeb($zip, $manifest, $installdefs, $params) {
         'include/SugarSystemInfo/SugarSystemInfo.php',
         'include/SugarHeartbeat/SugarHeartbeatClient.php',
         'include/SugarHttpClient.php',
+        'modules/HealthCheck/smarty.phar',
     );
 
     if (!is_array($params['from'])) {

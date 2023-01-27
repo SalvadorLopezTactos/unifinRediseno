@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Arkiv',
     'LBL_PROCESS_TYPE_DELETE' => 'Slet permanent',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Arkivkørsler',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Advarsel',
+    'LBL_ARCHIVER_WARNING' => 'Det anbefales at udføre denne handling når brugen er lav eller uden for åbentid '
+        . 'da det kan påvirke systemets ydeevne. Er du sikker på, at du vil udføre denne handling nu?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Arkiver for modulet {{moduleName}} skal have {{fieldName}} indstillet som filter',
 );

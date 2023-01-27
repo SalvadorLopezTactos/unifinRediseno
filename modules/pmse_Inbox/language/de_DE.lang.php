@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Prozessbericht-Dashboard',
 
     'LBL_CAS_ID' => 'Prozessnummer',
+    'LBL_CAS_STATUS' => 'Prozessstatus',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Unbekannt (gemäß Benutzer-ID:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "Aufgabe wurde",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "Aufgabe wurde",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "wurde Prozess #%s zugeweisen, %s den %s Datensatz durch die %s Aktion %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "am",
     'LBL_PMSE_HISTORY_LOG_AND'  => "und",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'Datensatz damit verlinkt oder nicht verlinkt',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Annehmen',
     'LBL_PMSE_LABEL_REJECT' => 'Ablehnen',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Laufende Prozesse',
     'LBL_STATUS_CANCELLED' => 'Abgebrochene Prozesse',
     'LBL_STATUS_ERROR' => 'Prozesse mit Fehler',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Abgeschlossen',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Beendet',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'In Bearbeitung',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Abgebrochen',
+    'LBL_STATUS_ERROR_ENUM' => 'Fehler',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Prozessverwaltung',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Unbeaufsichtigte Prozesse',

@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Feuille de travail',
     'LBL_PURCHASED_LINE_ITEMS' => 'Lignes d&#39;achats',
 
+    'LBL_FORECASTED_LIKELY' => 'Prévisions probables',
     'LBL_RENEWAL' => 'Renouvellement',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Possibilités de renouvellement',
     'LBL_RENEWAL_PARENT' => 'Affaire parent',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# du total des lignes de revenu',
     'LBL_CLOSED_RLIS' => '# de lignes de revenu gagnées',
+    'LBL_CLOSED_WON_RLIS' => '# de lignes de revenu gagnées et closes',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Nombre de lignes de revenu du service ouvert à durée flexible',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Vous ne pouvez pas supprimer une Affaire qui contient des lignes de revenu terminées',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Un ou plusieurs enregistrements sélectionnés contient des lignes de revenu terminées et ne peuvent donc pas être supprimés.',
     'LBL_INCLUDED_RLIS' => '# éléments de ligne de revenu inclus',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Mise à jour ouverte',
+    'LBL_CASCADE_RLI_EDIT' => 'Mettre à jour les lignes de revenu ouvertes',
+    'LBL_CASCADE_RLI_CREATE' => 'Définir entre les Lignes de revenu',
     'LBL_SERVICE_START_DATE_INVALID' => 'La date de début du service ne peut pas être fixée après la date de fin du service des lignes de revenu supplémentaires ouvertes.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Devis',
@@ -210,21 +214,19 @@ $mod_strings = array(
     'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} progressera à travers plusieurs étapes de vente jusqu&#39;à être marqué « Gagné » ou « Perdu ». {{plural_module_name}} peut être exploité encore plus en utilisation le module de {{forecasts_singular_module}} de Sugar pour comprendre et prédire les tendances de ventes, ainsi que pour axer le travail sur l&#39;atteinte de quotas de vente.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes de revenu appartenant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de{{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. 
 
 - Éditer les champs de cet enregistrement en cliquant sur un champ individuel ou sur le bouton Éditer. 
 - Afficher ou modifier les liaisons avec les autres enregistrements via le sous-panel en bas à gauche "Vue données". 
-- Afficher et participer aux commentaires et à l&#39;historique des modifications d&#39;enregistrements dans le {{activitystream_singular_module}} en sélectionnant "Flux d&#39;activité" dans le volet inférieur gauche. 
-- Suivre ou mettre en favori l&#39;enregistrement en utilisant les icônes prévues à cet effet à droite du nom de l&#39;enregistrement. 
-- Des actions complémentaires sont disponibles dans la liste déroulante des actions à droite du bouton Éditer.',
+- Afficher et participer aux commentaires et à l&#39;historique des modifications d&#39;enregistrements dans le {{activitystream_singular_module}} en sélectionnant "Flux d&#39;activité" dans le volet inférieur gauche. - Suivre ou mettre en favori l&#39;enregistrement en utilisant les icônes prévues à cet effet à droite du nom de l&#39;enregistrement. - Des actions complémentaires sont disponibles dans la liste déroulante des actions à droite du bouton Éditer.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes de revenu appartenant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de{{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. 
 
-Pour créer un enregistrement {{module_name}}, les étapes suivantes sont nécessaires :
-1. Remplir les champs souhaités.
- - Les champs identifiés comme "Obligatoire" doivent être complétés avant la sauvegarde.
- - Cliquer sur "Voir plus" pour afficher plus de champs, si nécessaire. 
+Pour créer un enregistrement {{module_name}}, les étapes suivantes sont nécessaires : 
+1. Remplir les champs souhaités. 
+- Les champs identifiés comme "Obligatoire" doivent être complétés avant la sauvegarde. 
+- Cliquer sur "Afficher plus" pour afficher plus de champs, si nécessaire. 
 2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
 
 // END ENT/ULT
@@ -239,7 +241,10 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Les Affaires de mon équipe",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Impossible de modifier {{fieldName}} car ce {{moduleSingular}} n&#39;a pas de lignes ouvertes.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interactions entre les possibilités',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie de l&#39;affaire',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' ne peut être défini sur aucune de ces lignes de revenus car il ne s&#39;agit pas de services. Voulez-vous procéder à la création ?',
+    'LBL_CASCADE_DURATION_WARNING' => ' ne peut être défini sur aucune de ces lignes de revenus car leurs durées sont verrouillées. Voulez-vous procéder à la création ?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Prévision de clôture d&#39;affaire',

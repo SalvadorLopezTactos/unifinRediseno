@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Kontakt-ID',
     'LBL_DESCRIPTION_INFORMATION' => 'Beskrivelsesinformasjon',
     'LBL_DESCRIPTION' => 'Beskrivelse:',
+    'LBL_INTERNAL_NOTES' => 'Interne notater:',
     'LBL_STATUS' => 'Status:',
     'LBL_DIRECTION' => 'Retning:',
     'LBL_DATE' => 'Startdato:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Varigheten i tid må väre større enn 0',
     'LBL_CALL_INFORMATION' => 'Samtale oversikt',
     'LBL_REMOVE' => 'fjern',
-    'LBL_ACCEPT_STATUS' => 'Akseptér Status',
     'LBL_ACCEPT_LINK' => 'Akseptér Link',
     //For export labels
     'LBL_PARENT_ID' => 'Overordnet ID',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Oppringing:',
     'LBL_CALL_RECORDING_URL' => 'Oppførings-URL',
     'LBL_CALL_RECORDING' => 'Opptak',
+
+    'LBL_LEAD_ID' => 'Lead ID',
+    'LBL_LEAD_NAME' => 'Lead',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Du lyktes i å opprette {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.',

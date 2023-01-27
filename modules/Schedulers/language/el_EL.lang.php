@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Επεξεργασία χρονοδιαγραμμάτων',
 'LBL_OOTB_DATA_ARCHIVER' => 'Εκτελέστε ενεργά αρχεία / διαγραφές δεδομένων',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Καταγράφει τον Γεωκωδικοποιητή',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Αναλυτής Γεωκωδικοποιητή',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Διάστημα:',
 'LBL_LIST_LIST_ORDER' => 'Χρονοπρογραμματιστές εργασιών:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Για Εγκατάσταση Crontab',
 'LBL_CRON_LINUX_DESC' => 'Σημείωση: Προκειμένου να εκτελέσετε τους Χρονοπρογραμματιστές Εργασιών του Sugar, προσθέστε την ακόλουθη γραμμή στο αρχείο crontab:',
 'LBL_CRON_WINDOWS_DESC' => 'Σημείωση: Προκειμένου να εκτελέσετε τους Χρονοπρογραμματιστές Εργασιών του Sugar, δημιουργήστε μία στίβα αρχείου να εκτελεί, χρησιμοποιώντας στα Windows τους Χρονοπρογραμματιστές Εργασιών. Η στίβα φακέλου πρέπει να περιλαμβάνει τις ακόλουθες εντολές:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> '<b>Σύνδεση Εργασίας</b>',
 'LBL_EXECUTE_TIME'			=> '<b>Χρόνος Εκτέλεσης</b>',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Κατάργηση προσωρινών αρχείων',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Αναδόμηση απομαλοποιημένων δεδομένων ασφαλείας ομάδας',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Ενημέρωση ορισμού προϊόντος',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Χάρτες Γεωκωδικοποιητή',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Αναλυτής Γεωκωδικοποιητή',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '<b>Εκτέλεση Νυχτερινών Μαζικών Emails Εκστρατείας</b>',
 'LBL_ASYNCMASSUPDATE' => 'Εκτέλεση Ασύγχρονων Μαζικών Ενημερώσεων',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Εκκαθάριση Λιστών Παλαιών Εγγραφών',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Καθαριστής ροής δραστηριότητας',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Επεξεργασία χρονοδιαγραμμάτων',
+'LBL_SUGARJOBDATAARCHIVER' => 'Εκτελέστε ενεργά αρχεία / διαγραφές δεδομένων',
 'LBL_PMSEENGINECRON' => 'Χρονοδιάγραμμα SugarBPM',
 );
 

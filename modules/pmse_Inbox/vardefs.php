@@ -13,7 +13,6 @@
 
 $dictionary['pmse_Inbox'] = array(
     'table' => 'pmse_inbox',
-    'archive' => false,
     'audited' => false,
     'activity_enabled' => true,
     'reassignable' => false,
@@ -68,7 +67,9 @@ $dictionary['pmse_Inbox'] = array(
             'required' => true,
             'name' => 'cas_status',
             'vname' => 'LBL_CAS_STATUS',
-            'type' => 'varchar',
+            'type' => 'enum',
+            'function' => 'getCasStatusTypes',
+            'function_bean' => 'pmse_Inbox',
             'massupdate' => false,
             'default' => 'IN PROGRESS',
             'no_default' => false,

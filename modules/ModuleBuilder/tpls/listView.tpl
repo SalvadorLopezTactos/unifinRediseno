@@ -12,11 +12,11 @@
 *}
 <form name='edittabs' id='edittabs' method='POST' action='index.php'{if isset($onsubmit)} onsubmit="{$onsubmit|escape}"{/if}>
 {sugar_csrf_form_token}
-{literal}
+
 <script>
 studiotabs.reset();
 </script>
-{/literal}
+
 <input type='hidden' name='action' value={$action}>
 <input type='hidden' name='view' value={$view}>
 <input type='hidden' name='module' value='{$module}'>
@@ -136,12 +136,12 @@ if(typeof(studiotabs.subtabModules['subslot{$modCounter}']) == 'undefined') {lde
 
 <script>
 
-{literal}
+
 function dragDropInit(){
-    studiotabs.fields = {};
-    studiotabs.slotCount = {/literal}{$slotCounter};
+    studiotabs.fields = { };
+    studiotabs.slotCount = {$slotCounter};
     studiotabs.modCount = {$modCounter};
-    {literal}
+    
     for(msi = 0; msi < studiotabs.slotCount ; msi++){
         studiotabs.fields["topslot"+ msi] = new Studio2.ListDD("topslot" + msi, "subTabs", true);
     }
@@ -166,7 +166,7 @@ resizeDDLists = function() {
         if (targetHeight > 0 )
         	Dom.setStyle("ul" + msi, "height", targetHeight + "px");
     }
-	Studio2.scrollZones = {}
+	Studio2.scrollZones = { }
 	for (var i = 0; Dom.get("ul" + i); i++){
 		Studio2.scrollZones["ul" + i] = Studio2.getScrollZones("ul" + i);
 	}
@@ -181,7 +181,7 @@ function countListFields() {
 	return count;
 };
 
-{/literal}
+
 dragDropInit();
 setTimeout(resizeDDLists, 100);
 ModuleBuilder.helpRegister('edittabs');

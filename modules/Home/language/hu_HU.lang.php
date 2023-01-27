@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugar Dashlet hozzáadva',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Biztos benne, hogy megváltoztatja az elrendezést? Az elrendezés zavaros lehet.',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Biztosan el akarja távolítani a Sugar Dashlet-et?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Nincsenek műszerfalak beállítva',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Nincsenek dashletek beállítva',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Műszerfal létrehozása',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Weboldal',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Weboldal',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Forráskód',
   'LBL_SOURCE_SUGAR' => 'Sugar - a világ legnépszerűbb Sales Force Automation alkalmazása a SugarCRM Inc. fejlesztésében.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - sablon motor PHP-ben Debreceni Barnabás fejlesztése alapján',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - PHP készletek, amelyek a NuSphere Corporation és Dietrich Ayala által kialakított webes szolgáltatások használatát és kibővítését teszik lehetővé a fejlesztők számára',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - naptár a dátumok beviteléhez, Mihai Bazon ötlete alapján',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - könyvtár PDF dokumentumok készítéséhez, Wayne Munro ötlete alapján',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP-WebDAV_Server - WebDAV szerver megvalósítás PHP-ben',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'A súgó az éppen megtekintett modullal kapcsolatos információkat jeleníti meg, részletes lépéseket ad bizonyos műveletek elvégzéséhez a modulon belül, és ötleteket ad ahhoz, hogy hol talál átfogóbb információt és támogatást.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Szűrő',
+
+    'LBL_ABOUT_VERSION' => 'A következő verziót használja: {{version}} a következő licenccel/lincencekkel:',
 );

@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o procesima',
 
     'LBL_CAS_ID' => 'Broj procesa',
+    'LBL_CAS_STATUS' => 'Status procesa',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Nepoznato (prema ID-u korisnika: „%s”)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "zadatak je",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "zadatak je ",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "dodijeljen proces #%s %s %s zapisa %s radnje %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "na",
     'LBL_PMSE_HISTORY_LOG_AND'  => "i",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'zapis povezan ili odvojen u odnosu na',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Odobri',
     'LBL_PMSE_LABEL_REJECT' => 'Odbij',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Procesi u tijeku',
     'LBL_STATUS_CANCELLED' => 'Procesi otkazani',
     'LBL_STATUS_ERROR' => 'Pogreška procesa',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Dovršen',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Prekinut',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'U tijeku',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Otkazan',
+    'LBL_STATUS_ERROR_ENUM' => 'Pogreška',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Upravljanje procesima',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Nenadzirani procesi',

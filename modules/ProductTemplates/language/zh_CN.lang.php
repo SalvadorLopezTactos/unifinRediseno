@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => '服务名称：',
   'LBL_SUPPORT_TERM' => '服务期限:',
   'LBL_TAX_CLASS' => '赋税类别:',
+  'LBL_ACTIVE_STATUS' => '状态',
   'LBL_TYPE_NAME'=>'类型名称',
   'LBL_TYPE' => '类型:',
   'LBL_PRODUCT_TYPE' => '产品类型',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => '产品目录列表仪表板',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => '产品目录记录仪表板',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '产品目录焦点抽屉',
+    'LBL_FILTER_ACTIVE_STATUS' => '状态为活动',
 );

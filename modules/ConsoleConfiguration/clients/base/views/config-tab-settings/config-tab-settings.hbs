@@ -15,38 +15,39 @@
         {{#if collection.length}}
             <ul class="ul nav nav-tabs">
                 {{#each collection.models}}
-                    <li class="tab"><a
-                            href="#{{attributes.enabled_module}}">{{getModuleName attributes.enabled_module
-                                                                                  plural=true}}</a>
+                    <li class="tab tab-badgeable">
+                        <a href="#{{attributes.enabled_module}}">
+                            <span class="tab-title font-semibold">{{getModuleName attributes.enabled_module plural=true}}</span>
+                        </a>
                     </li>
                 {{/each}}
             </ul>
             {{#each collection.models}}
-                    <div id="{{attributes.enabled_module}}" class="console-config-fields">
-                        {{#each ../meta.panels}}
-                            <h4>
-                                {{str label ../../../this.module}}
-                            </h4>
-                            {{#each fields}}
-                                <div class="row-fluid">
-                                    <div class="{{#if span}}span{{span}}{{/if}} record-cell">
-                                        {{#if label}}
-                                             {{#unless dismiss_label}}
-                                                  <div class="record-label pipeline-record-label" data-name="{{../name}}">
-                                                       <h5>
-                                                           {{str label ../../../../../this.module}}
-                                                       </h5>
-                                                   </div>
-                                             {{/unless}}
-                                        {{/if}}
-                                        <span class="normal">
-                                            {{field ../../../../this model=../../this template="edit"}}
-                                        </span>
-                                    </div>
+                <div id="{{attributes.enabled_module}}" class="console-config-fields">
+                    {{#each ../meta.panels}}
+                        <h4>
+                            {{str label ../../../this.module}}
+                        </h4>
+                        {{#each fields}}
+                            <div class="row-fluid">
+                                <div class="{{#if span}}span{{span}}{{/if}} record-cell">
+                                    {{#if label}}
+                                            {{#unless dismiss_label}}
+                                                <div class="record-label pipeline-record-label" data-name="{{../name}}">
+                                                    <h5>
+                                                        {{str label ../../../../../this.module}}
+                                                    </h5>
+                                                </div>
+                                            {{/unless}}
+                                    {{/if}}
+                                    <span class="normal">
+                                        {{field ../../../../this model=../../this template="edit"}}
+                                    </span>
                                 </div>
-                            {{/each }}
+                            </div>
                         {{/each }}
-                    </div>
+                    {{/each }}
+                </div>
             {{/each}}
         {{else}}
             <div class="block-footer">

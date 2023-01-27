@@ -30,7 +30,7 @@
         var newMultiField = '<li class="pill outer multi-field-block">' +
             '<ul class="multi-field-sortable multi-field connectedSortable">' +
             '<li class="list-header" rel="tooltip" data-original-title="' + multiRow + '">' + multiRow +
-            '<i class="fa fa-times-circle multi-field-column-remove"></i></li><div class="multi-field-hint">' +
+            '<i class="sicon sicon-remove multi-field-column-remove"></i></li><div class="multi-field-hint">' +
             multiRowHint + '</div></ul></li>';
 
         var columnBox = $(e.currentTarget).closest('div.column').find('ul.field-list:first');

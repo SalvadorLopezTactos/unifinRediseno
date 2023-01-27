@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Teklifler Konfigürasyonu',
 
     'LBL_RENEWAL' => 'Yenileme',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Teklif Etkileşimleri',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Teklif Zaman Çizelgesi',
 );

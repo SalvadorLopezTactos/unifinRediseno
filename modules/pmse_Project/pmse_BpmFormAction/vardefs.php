@@ -36,7 +36,6 @@ $dictionary['pmse_BpmFormAction'] = array(
             'unified_search' => false,
             'merge_filter' => 'disabled',
             'calculated' => false,
-            'len' => '4',
             'size' => '20',
             'enable_range_search' => false,
             'disable_num_format' => '',

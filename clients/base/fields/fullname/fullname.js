@@ -166,6 +166,14 @@
 
         // set max width if this field is in headerpane
         if (this.$el.parents('.headerpane').length > 0 && _.isFunction(this.view.adjustHeaderpaneFields)) {
+            // When edit field template is used on a detail record view, that means an error occurs
+            // on this field while saving; we need to update fullname field to use edit styling
+            if (this.view.action === 'detail' && this.tplName === 'edit') {
+                var recordCell = this.$el.closest('.record-cell');
+                if (recordCell) {
+                    recordCell.addClass('edit');
+                }
+            }
             this.view.adjustHeaderpaneFields();
         }
     },

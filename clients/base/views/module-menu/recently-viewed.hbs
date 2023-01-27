@@ -11,13 +11,17 @@
  */
 --}}
 {{#each collection.models}}
-    <li>
-        <a class="ellipsis_inline" tabindex="-1" href="#{{buildRoute model=this}}" data-route="#{{buildRoute model=this}}" title="{{fieldValue this 'name'}}">
-            <i class="fa fa-clock-o active"></i>
+    <li class="megamenu-dropdown-item-container">
+        <a class="ellipsis_inline megamenu-dropdown-item" tabindex="-1" href="#{{buildRoute model=this}}"
+           data-route="#{{buildRoute model=this}}" title="{{fieldValue this 'name'}}" rel="tooltip"
+        >
+            <i class="sicon sicon-clock active"></i>
             {{#if attributes.erased}}
                 <span class="label">{{fieldValue this 'erasedText'}}</span>
             {{else}}
-                {{fieldValue this 'name'}}
+                <span class="text-overflow">
+                    {{fieldValue this 'name'}}
+                </span>
             {{/if}}
         </a>
     </li>

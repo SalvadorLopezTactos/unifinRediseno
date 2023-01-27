@@ -1,0 +1,84 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div class="headerpane">
+    {{#if createView}}
+        <h1>
+            {{#each meta.panels}}
+                {{#each fields}}
+                    <span class="record-cell" data-type="{{type}}" data-name="{{name}}">
+                        {{field ../../this model=../../this.model template=../../this.action}}
+                    </span>
+                {{/each}}
+            {{/each}}
+            <div class="btn-toolbar">
+                {{#each meta.buttons}}
+                    {{field ../this model=../this.model template="detail"}}
+                {{/each}}
+            </div>
+        </h1>
+    {{else}}
+        {{#each meta.panels}}
+            <h1 class="breadcrumbs">
+                {{#each ../breadcrumbModels}}
+                    <span class="sep"><i class="sicon sicon-chevron-right"></i></span>
+                    <div class="bread {{#if ../../singleBreadcrumb}}single{{/if}}" data-index="{{id}}">
+                        {{#each ../breadcrumbs}}
+                            <span class="record-cell {{#if ../../../singleBreadcrumb}}single{{/if}}"
+                                  data-type="{{type}}"
+                                  data-name="{{name}}"
+                                  rel="tooltip"
+                            >
+                                {{field ../../../this model=../this.context.model template="detail"}}
+                            </span>
+                        {{/each}}
+                    </div>
+                {{/each}}
+                {{#if ../truncatedBreadcrumbs.length}}
+                    <span class="sep"><i class="sicon sicon-chevron-right"></i></span>
+                    <div class="trim-menu dropdown" data-mode="init">
+                        <i class="sicon sicon-kebab toggle dropdown-toggle" data-toggle="dropdown"></i>
+                        <div class="option-layout-open dropdown-menu">
+                            <ul data-menu="dropdown" class="dropdown-menu" role="menu">
+                                {{#each ../../truncatedBreadcrumbs}}
+                                    <li class="bread" data-index="{{id}}"><a id="{{this.context.modelId}}" title="{{this.context.model.attributes.name}}" href="javascript:void(0);" role="button">
+                                        {{str "LBL_MODULE_NAME_SINGULAR" this.context.module}} - {{this.context.model.attributes.name}}
+                                    </a></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                {{/if}}
+                {{#each ../breadcrumbLastModels}}
+                    <span class="sep"><i class="sicon sicon-chevron-right"></i></span>
+                    <div class="bread" data-index="{{id}}">
+                        {{#each ../breadcrumbs}}
+                            <span class="record-cell" data-type="{{type}}" data-name="{{name}}" rel="tooltip">
+                                {{field ../../../this model=../this.context.model template="detail"}}
+                            </span>
+                        {{/each}}
+                    </div>
+                {{/each}}
+            </h1>
+            {{#if ../../dashboardTitle}}
+                <h1 class="dashboardtitle">
+                    {{#each ../fields}}
+                        <span class="record-cell" data-type="{{type}}" data-name="{{name}}" rel="tooltip">
+                            {{field ../../../this model=../../../this.model template=../../../this.action}}
+                        </span>
+                    {{/each}}
+                </h1>
+            {{/if}}
+        {{/each}}
+    {{/if}}
+
+</div>

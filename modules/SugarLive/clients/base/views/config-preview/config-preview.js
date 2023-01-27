@@ -22,6 +22,15 @@
     inputTypes: ['input', 'select', 'checkbox', 'textarea'],
 
     /**
+     * Fields to be displayed in omnichannel detail panel.
+     * @property [Array]
+     */
+    summaryFields: [
+        'LBL_INVITEES',
+        'LBL_LIST_RELATED_TO',
+    ],
+
+    /**
      * Shows the active tab index used for when switching tabs.
      */
     activeTabIndex: 0,

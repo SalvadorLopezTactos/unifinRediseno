@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Kontakti ID',
     'LBL_DESCRIPTION_INFORMATION' => 'Kirjelduse teave',
     'LBL_DESCRIPTION' => 'Kirjeldus:',
+    'LBL_INTERNAL_NOTES' => 'Sisemärkmed:',
     'LBL_STATUS' => 'Olek:',
     'LBL_DIRECTION' => 'Suund:',
     'LBL_DATE' => 'Alguskuupäev:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Kestusaeg peab olema suurem kui 0',
     'LBL_CALL_INFORMATION' => 'Ülevaade',
     'LBL_REMOVE' => 'eemalda',
-    'LBL_ACCEPT_STATUS' => 'Aktsepteeri olek',
     'LBL_ACCEPT_LINK' => 'Aktsepteeri link',
     //For export labels
     'LBL_PARENT_ID' => 'Ema ID',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Kõne:',
     'LBL_CALL_RECORDING_URL' => 'Salvestamise URL',
     'LBL_CALL_RECORDING' => 'Salvestamine',
+
+    'LBL_LEAD_ID' => 'Müügivihje ID',
+    'LBL_LEAD_NAME' => 'Müügivihje',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Plaanisite {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> ajaks {{formatDate date_start}}.',

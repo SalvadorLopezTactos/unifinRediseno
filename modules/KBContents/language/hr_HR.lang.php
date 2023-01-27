@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Prikaži predloške',
     'LNK_LIST_KBCATEGORIES' => 'Prikaži kategorije',
     'LBL_TEMPLATES' => 'Predlošci',
+    'LBL_TEMPLATE' => 'Predložak',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Predložak će prebrisati sav sadržaj.' .
         ' Jeste li sigurni da želite upotrijebiti ovaj predložak?',
     'LNK_IMPORT_KBCONTENTS' => 'Uvezi članke',

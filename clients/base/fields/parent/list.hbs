@@ -12,14 +12,16 @@
 --}}
 <div class="relate-field-container">
     {{# if href}}
-        <a class="ellipsis_inline" href="{{href}}" data-placement="bottom"
-            title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}"
-        >
-            {{value}}
-        </a>
-        <span class="focus-icon-container hide">
-            <span class="focus-icon"></span>
-        </span>
+        <div class="ellipsis_inline">
+            <span class="parent_avatar"></span>
+            <a href="{{href}}" rel="tooltip" data-placement="bottom"
+               title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}"
+            >
+                {{value}}
+            </a>
+
+        </div>
+        {{partial 'focus-icon' this this}}
     {{else}}
         <span class="ellipsis_inline" data-placement="bottom"
             title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}"

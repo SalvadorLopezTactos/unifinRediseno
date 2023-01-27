@@ -58,12 +58,12 @@
 	</table>
 	</form>
 <script>
-	Calendar.setup ({literal}{{/literal}
+	Calendar.setup ({
 		inputField : "jscal_field_start", ifFormat : "{$CALENDAR_DATEFORMAT}", showsTime : false, button : "jscal_trigger_start", singleClick : true, step : 1, weekNumbers:false
-	{literal}}{/literal});
-	Calendar.setup ({literal}{{/literal}
+	});
+	Calendar.setup ({
 		inputField : "jscal_field_end", ifFormat : "{$CALENDAR_DATEFORMAT}", showsTime : false, button : "jscal_trigger_end", singleClick : true, step : 1, weekNumbers:false
-	{literal}}{/literal});
+	});
 	
 	{$additionalScripts}
 </script>

@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => '推荐人',
     'LBL_LIST_STATUS' => '状态',
     'LBL_LIST_TITLE' => '职称',
+    'LBL_MARKET_INTEREST_PREDICTION' => '市场兴趣预测',
+    'LBL_MARKET_SCORE' => '市场得分',
     'LBL_MOBILE_PHONE' => '移动电话：',
     'LBL_MODULE_NAME' => '潜在客户',
     'LBL_MODULE_NAME_SINGULAR' => '潜在客户',
@@ -330,4 +332,9 @@ $mod_strings = array (
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => '潜在客户转化预测',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => '查看特定潜在客户的预测详细信息',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => '启用营收单项',
+    'LBL_REQUIRE_RLIS' => '创建新商机时需要营收单项',
+    'LBL_COPY_DATA_RLIS' => '创建新商机时，将潜在客户的数据复制到营收单项',
 );

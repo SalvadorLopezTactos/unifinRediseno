@@ -9,14 +9,9 @@
 // Base class and wrapper
 .navbar {
   overflow: visible;
-  margin-bottom: @baseLineHeight;
 }
 
 .navbar-inner {
-
-  // Simplifying here, in new theme, we won't have a gradient, it's a solid white colour
-  background: @navbarBackground;
-
   // Prevent floats from breaking the navbar
   .clearfix();
 }
@@ -109,20 +104,17 @@
 // Fixed navbar
 // -------------------------
 
-// Shared (top/bottom) styles
-.navbar-fixed-top {
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: @zindexFixedNavbar;
-  margin-bottom: 0; // remove 18px margin for default navbar
-  top: 0;
+.banner-shifted {
+  .navbar-fixed-top {
+    top: @bannerHeight;
+  }
 
-  .navbar-inner {
-    border-width: 0 0 1px;
-    padding-left: 0;
-    padding-right: 0;
-    border-radius: 0;
+  .navbar .megamenu > .dropdown .dropdown-menu {
+    top: @bannerHeight + 44px;
+  }
+
+  .navbar-search .quicksearch-modulelist-wrapper .module-dropdown-list {
+    top: @bannerHeight + 50px;
   }
 }
 
@@ -171,7 +163,7 @@
   color: @navbarLinkColorActive;
   text-decoration: none;
   background-color: @navbarLinkBackgroundActive;
-  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 8px @gray10;
 }
 
 // Navbar button for toggling navbar items in responsive layouts
@@ -182,8 +174,6 @@
   padding: 7px 10px;
   margin-left: 5px;
   margin-right: 5px;
-  .buttonBackground(darken(@navbarBackgroundHighlight, 5%), darken(@navbarBackground, 5%));
-
   box-shadow: inset 0 1px 0 fade(@white, 10%), 0 1px 0 fade(@white, 7.5%);
 }
 
@@ -191,7 +181,7 @@
   display: block;
   width: 18px;
   height: 2px;
-  background-color: @grayLighter;
+  background-color: @gray20;
   border-radius: 1px;
   box-shadow: 0 1px 0 fade(@black, 25%);
 }
@@ -210,7 +200,7 @@
     display: inline-block;
     border-left: 7px solid @transparent;
     border-right: 7px solid @transparent;
-    border-bottom: 7px solid @grayLighter;
+    border-bottom: 7px solid @borderColor;
     border-bottom-color: @dropdownBorder;
     position: absolute;
     top: -7px;
@@ -276,7 +266,6 @@
     right: 100%;
     margin-left: 0;
     margin-right: -1px;
-    border-radius: 6px 0 6px 6px;
   }
 }
 
@@ -284,31 +273,23 @@
 
 .navbar {
   &.navbar-fixed-top {
-    position: absolute;
+    left: 0;
     z-index: (@zindexFixedNavbar + 2);
   }
 
   // General layout
   // ==============
   .navbar-inner {
-    border: none;
-    width: 100%;
-    display: table;
     min-height: 0;
-    padding: 0;
-    margin: 0;
   }
 
   .nav-collapse {
-    display: table-row;
-
     > div {
-      display: table-cell;
-      float: none;
-      vertical-align: top;
+      display: flex;
+      align-items: center;
 
       &.module-list {
-        width: 100%;
+        flex: 1;
 
         .dropdown-menu {
           max-width: 240px;
@@ -345,8 +326,6 @@
 // ======================================
 .megamenu {
   > .dropdown {
-    padding: 0;
-
     &.active {
       .btn-group:not(.open) {
         .dropdown-toggle:not(.cube) {
@@ -356,8 +335,6 @@
 
           &:focus {
             .tab-focus-light();
-
-            outline-offset: 3px;
           }
         }
       }
@@ -386,6 +363,10 @@
 
         &:hover {
           text-decoration: none;
+
+          .sicon {
+            color: @sicon-hover-color;
+          }
         }
 
         &:active {
@@ -430,7 +411,6 @@
       position: fixed;
       left: auto;
       right: auto;
-      border-radius: 0 0 @baseBorderRadius @baseBorderRadius;
       max-height: ~"-moz-calc(100% - 100px)";
       max-height: ~"-webkit-calc(100% - 100px)";
       max-height: ~"calc(100% - 100px)";
@@ -439,7 +419,6 @@
       overflow-y: auto;
       overflow-x: hidden;
       background: none;
-      box-shadow: none;
       min-width: 160px;
 
       &.pull-right {
@@ -467,26 +446,48 @@
         display: none;
       }
 
-      li a {
-        display: block;
-        padding: 8px 10px;
-        text-indent: 16px;
-        position: relative;
+      li.megamenu-dropdown-item-container {
+        .megamenu-dropdown-item {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 8px 10px;
+          color: @textColor;
+          background-color: @dropdownBackground;
 
-        i.fa {
-          position: relative;
-          top: -1px;
-          text-indent: -12px;
-          vertical-align: middle;
-        }
+          .sicon {
+            margin-right: 8px;
+          }
 
-        .label {
-          text-indent: 0;
-        }
+          .label {
+            text-indent: 0;
+          }
 
-        &.module-list-link {
-          text-indent: 0;
-          padding-right: 20px;
+          &.module-list-link {
+            text-indent: 0;
+            padding-right: 20px;
+          }
+
+          &:focus,
+          &:hover {
+            color: @dropdownLinkColor;
+            background: @dropdownLinkBackgroundHover;
+
+            i.sicon,
+            i.fa {
+              color: @dropdownLinkColor;
+            }
+          }
+
+          &:active {
+            color: @dropdownLinkColorActive;
+            background: @dropdownLinkBackgroundActive;
+
+            i.sicon,
+            i.fa {
+              color: @dropdownLinkColorActive;
+            }
+          }
         }
       }
     }
@@ -515,7 +516,10 @@
 
     &.more {
       .btn-group {
-        padding: 8px 2px;
+        .dropdown-toggle {
+          .ml-0();
+          .p-2();
+        }
       }
     }
 
@@ -525,8 +529,12 @@
 
     .btn-group {
       .dropdown-toggle {
-        padding: 5px 0 5px 8px;
-        margin-left: 1px;
+        margin-left: 2px;
+        .p-1();
+
+        .sicon {
+          vertical-align: top;
+        }
       }
 
       /*cube container*/
@@ -534,11 +542,6 @@
         .dropdown-menu {
           left: 0;
           right: auto;
-        }
-
-        .dropdown-toggle {
-          padding: 5px 2px;
-          margin-left: 0;
         }
 
         /*img*/
@@ -561,9 +564,16 @@
         }
       }
     }
+
     // module name link buttons
     .module-name {
+      color: @textColor;
       padding: 0;
+
+      &:focus,
+      &:hover {
+        text-decoration: none;
+      }
     }
 
     &[data-module="Forecasts"] {
@@ -584,7 +594,7 @@
   }
 
   & > .btn-group {
-    padding-right: 6px;
+    padding-right: 8px;
   }
 
   .dropdown-toggle {
@@ -599,6 +609,10 @@
       top: 0;
       font-size: 16px;
     }
+
+    .sicon {
+      vertical-align: middle;
+    }
   }
 
   .profileactions-change-password {
@@ -607,235 +621,85 @@
     }
   }
 
+  .profileactions-reset-mfa {
+    .fa-lock {
+      text-indent: -9px;
+    }
+  }
+
   .profileactions-profile {
     > a {
       > span {
-        display: inline-block;
-        width: 14px;
-        height: 0;
-
-        .avatar {
-          position: absolute;
-          left: 11px;
-          top: 7px;
-        }
+        line-height: 12px;
+        margin-right: 4px;
       }
     }
   }
 }
 
+// A temporary fix because there's an entangled web of selectors around dropdown-toggles and it's not going to be
+// refactored at the moment. This is much easier.
 #createList {
-  .fa-plus.fa-md {
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
-    top: -1px;
+  .btn-group {
+    .dropdown-toggle {
+      .p-2();
+    }
   }
 }
 
 /* NEW SKIN START */
 
+// Nav links (both module list and other)
+// ======================================
+
 .navbar {
-
-  // General layout
-  // ==============
-  .navbar-inner {
-    /* additive */
-    border-bottom: 1px solid @BorderColor;
-  }
-
-  .nav {
-    /* additive */
-    #createList {
-      border-left: 1px solid @navbarSearchBorder;
-    }
-  }
-
-  /* additive */
-  .btn-group:hover > .btn.btn-invisible {
-    color: @navbarLinkColorActive;
-  }
-
   .nav-collapse > div.module-list .nav .dropdown {
     > .btn-group:not(.home) {
       .dropdown-menu {
         /* override */
-        margin-left: -10px;
+        margin-left: -8px;
       }
     }
 
     &.more .btn-group.open .dropdown-menu {
-      margin-left: -2px;
+      margin-left: -8px;
     }
   }
-}
 
-// Nav links (both module list and other)
-// ======================================
-
-.navbar .megamenu {
-  > .dropdown {
-    &.active {
-      .btn-group {
-        &:not(.open) {
-          &:not(.home) {
-            /* override */
-            background-color: @navbarLinkBackgroundActive;
-
-            .fa-caret-down {
-              color: @black;
-            }
-          }
-
-          &.home {
-            background: none;
-
-            .fa-caret-down {
-              color: @black;
-            }
-          }
-        }
-      }
-    }
-
-    &:hover {
-      /* additive */
-      background: @navbarDropdownBackgroundHover;
-
-      .btn-group {
-        > .btn,
-        > .btn:hover {
-          /* additive */
-          color: @navbarLinkColorHover;
-        }
-
-        & > .dropdown-toggle {
-          .fa {
-            /* additive */
-            color: @navbarLinkColorHover;
-          }
-        }
-      }
-    }
-
-    /*This is the actual content in nav item*/
-    .btn-group {
-      padding: 8px 10px;
-
-      &.home {
-        padding: 7px 20px;
-      }
-
-      & > .dropdown-toggle {
-        .fa {
-          /* additive */
-          width: 10px;
-        }
-      }
-
-      &.open {
-        /* new variable */
-        background-color: @navbarLinkBackgroundActive;
-
-        /* additive */
-        .btn.btn-invisible:not(.disabled):hover {
-          background: none;
-          color: inherit;
-        }
-      }
-    }
-
-    /*Menu position and menu carets*/
-    .dropdown-menu {
-      /* override */
-      top: 44px;
-
-      li a {
-        /* additive */
-        color: initial;
-
-        &:focus,
-        &:hover {
-          /* new variable */
-          color: @navbarDropdownLinkHover;
-
-          /* new variable */
-          background: @navbarDropdownItemHover;
-
-          i.fa {
-            /* new variable */
-            color: @navbarDropdownLinkHover;
-          }
-        }
-
-        /* additive */
-        &:active {
-          color: @navbarDropdownLinkHover;
-          background: @navbarDropdownBackgroundActive;
-
-          i.fa {
-            color: @navbarDropdownLinkHover;
-          }
-        }
-      }
-    }
-  }
-}
-
-// Styling specific to module list
-// ======================================
-.module-list .megamenu {
-  > .dropdown {
-    &.more {
-      /* override */
-      .fa {
-        color: @black !important;
-
-        &::before {
-          content: "\f142";
-        }
-      }
-
-      /* override */
-      &:focus,
+  .megamenu {
+    > .dropdown {
       &:hover {
-        .fa {
-          color: @grayDark !important;
+        .btn-group {
+          .bg-tab-background-hover-color();
         }
       }
 
-      .btn-group {
-        /* override */
-        padding-top: 13px;
-        padding-bottom: 13px;
-
-        .dropdown-toggle {
-          padding: 0 6px;
-        }
+      .btn-group.open,
+      &.active .btn-group:not(.home) {
+        .active-tab();
+        .pb-1();
       }
-    }
-    // module name link buttons
-    .module-name {
-      /* override */
-      color: @black;
 
-      &:focus,
-      &:hover {
+      /*Menu position and menu carets*/
+      .dropdown-menu {
         /* override */
-        color: @grayDark;
-        text-decoration: none;
+        top: 44px;
       }
-    }
-  }
-}
-
-#userActions {
-  .dropdown-toggle {
-    .avatar {
-      /* override */
-      min-width: 24px;
     }
   }
 }
 
 /* NEW SKIN END */
+
+// Dark mode settings
+// ======================================
+// Change the SugarCRM black cube to white for dark theme
+body.sugar-dark-theme {
+  .module-list {
+    .megamenu > .dropdown {
+      .btn-group.home .cube img {
+        filter: invert(100%) saturate(100%) brightness(115%);
+      }
+    }
+  }
+}

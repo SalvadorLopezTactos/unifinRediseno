@@ -17,6 +17,7 @@ namespace Sugarcrm\Sugarcrm\AccessControl;
 // License Agreement.  Neither the Company nor the Users
 // may modify any portion of the Critical Control Software.
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 
 /**
  * Class AccessControlManager
@@ -33,6 +34,7 @@ class AccessControlManager
     const DASHLETS_KEY = 'DASHLETS';
     const RECORDS_KEY = 'RECORDS';
     const FIELDS_KEY = 'FIELDS';
+    const WIDGETS_KEY = 'WIDGETS';
 
     /**
      * flag to allow admin user to override access control
@@ -108,7 +110,7 @@ class AccessControlManager
      */
     protected function registerVoters()
     {
-        // MODULES_KEY and DASHLETS_KEY are shared same voter
+        // MODULES, DASHLETS and WIDGETS are shared same voter
         $this->registerVoter(self::MODULES_KEY, SugarVoter::class);
         $this->registerVoter(self::RECORDS_KEY, SugarRecordVoter::class);
         $this->registerVoter(self::FIELDS_KEY, SugarFieldVoter::class);
@@ -130,12 +132,13 @@ class AccessControlManager
      */
     protected function getRegisteredVoter(string $key)
     {
-        if ($key != self::DASHLETS_KEY && !isset($this->voters[$key])) {
+        if ($key != self::DASHLETS_KEY && $key != self::WIDGETS_KEY  && !isset($this->voters[$key])) {
             throw new \Exception("wrong section key is provided" . $key);
         }
         switch ($key) {
             case self::MODULES_KEY:
             case self::DASHLETS_KEY:
+            case self::WIDGETS_KEY:
                 return $this->voters[self::MODULES_KEY];
             default:
                 return $this->voters[$key];
@@ -190,6 +193,21 @@ class AccessControlManager
         $allowAccess = $this->allowAccess(self::MODULES_KEY, $module);
         $this->moduleAclList[$module] = $allowAccess;
         return $allowAccess;
+    }
+
+    /**
+     * Check if user has access to a relationship through a link name
+     * @param string $linkName
+     * @param string $baseModule
+     * @return bool
+     */
+    public function allowRelationshipAccess(string $linkName, string $baseModule) : bool
+    {
+        $bean = \BeanFactory::newBean($baseModule);
+        if ($bean->load_relationship($linkName)) {
+            return $this->allowModuleAccess($bean->$linkName->getRelatedModuleName());
+        }
+        return true;
     }
 
     /**
@@ -362,7 +380,8 @@ class AccessControlManager
         if (empty($current_user) || empty($module)) {
             return [];
         }
-        $userLicenseTypes = SubscriptionManager::instance()->getUserSubscriptions($current_user);
+        $sm = SubscriptionManager::instance();
+        $userLicenseTypes = $sm->getAllImpliedSubscriptions($sm->getAllUserSubscriptions($current_user));
         $inaccessibleList = AccessConfigurator::instance()->getNotAccessibleRecordListByLicenseTypes($userLicenseTypes);
         if (isset($inaccessibleList[$module])) {
             return $inaccessibleList[$module];

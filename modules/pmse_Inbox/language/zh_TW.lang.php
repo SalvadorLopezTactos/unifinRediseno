@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => '流程紀錄儀表板',
 
     'LBL_CAS_ID' => '處理程序編號',
+    'LBL_CAS_STATUS' => '流程狀態',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "未知（依據 UserId：'%s'）",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "工作已",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "工作",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "已通過 %s 操作 %s 為 %s %s 號流程分配了 %s 紀錄",
     'LBL_PMSE_HISTORY_LOG_ON'  => "在",
     'LBL_PMSE_HISTORY_LOG_AND'  => "和",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => '將記錄連結或取消連結到',
 
     'LBL_PMSE_LABEL_APPROVE' => '核准',
     'LBL_PMSE_LABEL_REJECT' => '拒絕',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => '流程處理中',
     'LBL_STATUS_CANCELLED' => '流程已取消',
     'LBL_STATUS_ERROR' => '流程錯誤',
+    'LBL_STATUS_COMPLETED_ENUM' => '已完成',
+    'LBL_STATUS_TERMINATED_ENUM' => '已終止',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => '正在進行',
+    'LBL_STATUS_CANCELLED_ENUM' => '已取消',
+    'LBL_STATUS_ERROR_ENUM' => '錯誤',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => '流程管理',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => '自動流程',

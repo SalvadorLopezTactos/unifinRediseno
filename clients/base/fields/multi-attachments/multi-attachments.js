@@ -24,7 +24,7 @@
         'click [data-action=download-all]': 'startDownloadArchive'
     },
 
-    plugins: ['DragdropAttachments'],
+    plugins: ['DragdropAttachments', 'Attachments'],
 
     /**
      * @property {Object} `Select2` object.
@@ -57,27 +57,38 @@
     download_label: '',
 
     /**
+     * Count of uploaded files.
+     */
+    uploaded: 0,
+
+    /**
+     * Count of files to upload.
+     */
+    filesToUpload: 0,
+
+    /**
      * @inheritdoc
      */
     initialize: function (opts) {
         var evt = {},
             relate,
             self = this;
-        evt['change ' + this.fileInputSelector + '[data-type=fileinput]'] = 'uploadFile';
+        evt['change ' + this.fileInputSelector + '[data-type=fileinput]'] = '_uploadFile';
         this.events = _.extend({}, this.events, opts.def.events, evt);
 
         this.fileInputSelector = opts.def.fileinput || '';
         this.fieldSelector = opts.def.field || '';
+        this.value = opts.view.attachments || [];
         this.cid = _.uniqueId('attachment');
 
         this._super('initialize', [opts]);
         this._select2formatSelectionTemplate = app.template.get('f.multi-attachments.selection-partial');
+        this._select2formatTmpSelectionTemplate = app.template.get('f.multi-attachments.selection-partial-tmp');
 
         /**
          * Override handling on drop attachment.
          */
         this.before('attachments:drop', this._onAttachmentDrop, this);
-        this.context.on('button:cancel_button:click', this.cancelClicked, this);
     },
 
     /**
@@ -86,7 +97,9 @@
      */
     bindDataChange: function() {
         if (this.model) {
+            this.createTooltipText();
             this.model.on('change:' + this.name, function() {
+                this.createTooltipText();
                 if (!_.isEmpty(this.$node.data('select2'))) {
                     this.$node.select2('data', this.getFormattedValue());
                 } else {
@@ -103,37 +116,28 @@
      * TODO: In the future this could be improved to not create Note records for
      * Attachments during edit/create until the user clicks save. That change
      * seems too risky for the week before release freeze.
+     * @deprecated
      */
     cancelClicked: function() {
-        if (!this.value || !this.value.length) {
-            return;
-        }
-        var syncedIds = [];
-        if (!_.isEmpty(this.model)) {
-            syncedIds = _.pluck(this.model.getSynced('attachment_list'), 'id');
-        }
-        _.each(this.value, function(pill) {
-            if (syncedIds.indexOf(pill.id) === -1) {
-                var attachment = app.data.createBean('Notes', {id: pill.id});
-                attachment.fetch({
-                    success: function(model) {
-                        model.destroy();
-                    }
-                });
-            }
-        }, this);
+        app.logger.warn('View.Fields.Base.MultiAttachmentsField#cancelClicked is deprecated.');
     },
 
     /**
      * @inheritdoc
      */
     format: function (value) {
+        var value = value instanceof app.BeanCollection ? value.models : value;
+
         return _.map(value, function (item) {
-            var forceDownload = !item.isImage,
-                mimeType = item.isImage ? 'image' : 'application/octet-stream',
-                fileName = item.name.substring(0, item.name.lastIndexOf(".")),
-                fileExt = item.name.substring(item.name.lastIndexOf(".") + 1).toLowerCase(),
-                urlOpts = {
+            item = item instanceof Backbone.Model ? item.toJSON() : item;
+            var id = item.id || item.filename_guid;
+            var name = item.name || item.filename;
+            var isImage = item.file_mime_type && item.file_mime_type.indexOf('image') !== -1;
+            var forceDownload = !isImage;
+            var mimeType = isImage ? 'image' : 'application/octet-stream';
+            var fileName = name.substring(0, name.lastIndexOf('.'));
+            var fileExt = name.substring(name.lastIndexOf('.') + 1).toLowerCase();
+            var urlOpts = {
                     module: this.def.module,
                     id: item.id,
                     field: this.def.modulefield
@@ -141,38 +145,54 @@
 
             fileExt = !_.isEmpty(fileExt) ? '.' + fileExt : fileExt;
 
-            return _.extend(
-                {},
-                {
-                    mimeType: mimeType,
-                    fileName: fileName,
-                    fileExt: fileExt,
-                    url: app.api.buildFileURL(
-                        urlOpts,
-                        {
-                            htmlJsonFormat: false,
-                            passOAuthToken: false,
-                            cleanCache: true,
-                            forceDownload: forceDownload
-                        }
-                    )
-                },
-                item
-            );
+            return {
+                id: id,
+                mimeType: mimeType,
+                fileName: fileName,
+                fileExt: fileExt,
+                tmpFile: (typeof(item.id) === 'undefined'),
+                url: app.api.buildFileURL(
+                    urlOpts,
+                    {
+                        htmlJsonFormat: false,
+                        passOAuthToken: false,
+                        cleanCache: true,
+                        forceDownload: forceDownload
+                    }
+                )
+            };
         }, this);
+    },
+
+    /**
+     * Creates a list of file names that could be shown on a list view
+     * in case the list of files is collapsed.
+     *
+     * @return {string} The list of files.
+     */
+    createTooltipText() {
+        var files = this.model.get(this.name);
+        this.fileList = '';
+
+        if (files && files.length) {
+            this.fileList = _.reduce(files.models, function(list, model) {
+                list.push(model.get('filename'));
+                return list;
+            }, []).join(', ');
+        }
     },
 
     /**
      * @inheritdoc
      */
-    _render: function () {
+    _render: function() {
         if (this.action == 'noaccess') {
             return;
         }
         this.download_label = (this.value && this.value.length > 1) ? 'LBL_DOWNLOAD_ALL' : 'LBL_DOWNLOAD_ONE';
         // Please, do not put this._super call before acl check,
         // due to _loadTemplate function logic from sidecar/src/view.js file
-        this._super('_render',[]);
+        this._super('_render', []);
 
         this.$node = this.$(this.fieldSelector + '[data-type=attachments]');
         this.setSelect2Node();
@@ -230,11 +250,7 @@
      *  Update `Select2` data from model.
      */
     refreshFromModel: function () {
-        var attachments = [];
-        if (this.model.has(this.name)) {
-            attachments = this.model.get(this.name);
-        }
-        this.$node.select2('data', this.format(attachments));
+        this.$node.select2('data', this.getFormattedValue());
     },
 
     /**
@@ -250,17 +266,9 @@
         this.$node.off('select2-opening');
 
         this.$node.on('select2-removed', function(evt) {
-            app.alert.show('delete_confirmation', {
-                level: 'confirmation',
-                messages: 'LBL_FILE_DELETE_CONFIRM',
-                onConfirm: function () {
-                    self.removeAttachment(evt);
-                },
-                onCancel: function() {
-                    self._render();
-                }
-            });
+            self.removeAttachment(evt);
         });
+
         /**
          * Disables dropdown for `Select2`
          */
@@ -270,31 +278,18 @@
 
     },
 
+    /**
+     * Remove selected attachment.
+     * @param {Event} event
+     */
     removeAttachment: function(event) {
-        var self = this;
-        var name = this.name;
-        var note = app.data.createBean('Notes', {id: event.val});
-        note.fetch({
-            success: function(model) {
-                // Do nothing with a note of original record.
-                if (!self.model.id && model.get('parent_id')) {
-                    return;
-                }
-                model.destroy();
-            }
+        var file = _.find(this.model.get(this.name).models, function(model) {
+            return model.get('id') === event.val || model.get('filename_guid') === event.val;
         });
-        var filteredList = _.filter(self.model.get(name),
-            function(file) {
-                return (file.id !== event.val);
-            }
-        )
-        var attrs = {}
-        attrs[name] = filteredList;
-        self.model.set(attrs);
-        self.model.setSyncedAttributes(attrs);
-        this.render();
+        if (file) {
+            this.model.get(this.name).remove(file);
+        }
     },
-
 
     /**
      * Return file input.
@@ -312,50 +307,111 @@
     },
 
     /**
-     * Upload file to server.
-     * Create a real note for an attachment to use drag and drop and the file in body.
-     * Do not create a related note because the attachment field is enabled on create view.
+     * A private helper function to call Attachment's uploadFile, as it needs extra arguments
+     *
+     * @private
      */
-    uploadFile: function() {
-        var self = this,
-            $input = this.getFileNode(),
-            note = app.data.createBean('Notes'),
-            fieldName = 'filename';
-        var noteAttrs = {
-            name: $input[0].files[0].name,
-            portal_flag: true,
-            attachment_flag: true
-        };
+    _uploadFile: function() {
+        this._toggleUploading(true);
 
-        note.save(noteAttrs, {
-            success: function(model) {
-                // FileApi uses one name for file key and defs.
-                var $cloneInput = _.clone($input);
-                $cloneInput.attr('name', fieldName);
-                model.uploadFile(
-                    fieldName,
-                    $input,
-                    {
-                        success: function(rsp) {
-                            var att = {};
-                            att.id = rsp.record.id;
-                            att.isImage = (rsp[fieldName]['content-type'].indexOf('image') !== -1);
-                            att.name = rsp[fieldName].name;
-                            self.model.set(self.name, _.union([], self.model.get(self.name) || [], [att]));
-                            $input.val('');
-                            self.render();
-                        },
-                        error: function(error) {
-                            app.alert.show('delete_confirmation', {
-                                level: 'error',
-                                title: 'LBL_EMAIL_ATTACHMENT_UPLOAD_FAILED',
-                                messages: [error.error_message]
-                            });
-                        }
-                    }
-                );
-            }
-        });
+        $input = this.getFileNode();
+        this.uploaded = 0;
+        this.filesToUpload = $input[0].files.length;
+
+        _.each($input[0].files, _.bind(function(file) {
+            var dt = new DataTransfer();
+            dt.items.add(file);
+
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.files = dt.files;
+
+            this.uploadFile([input], 'filename', {
+                temp: true,
+            });
+        }, this));
+    },
+
+    /**
+     * Private function which toggles the "Uploading..." message on file uplaods
+     *
+     * @param flag true to show, false to dismiss
+     * @private
+     */
+    _toggleUploading: function(flag) {
+        if (flag && _.isUndefined(app.alert.get('uploading_file'))) {
+            app.alert.show('uploading_file', {
+                level: 'process',
+                title: app.lang.get('LBL_UPLOADING_DOTS'),
+            });
+        } else if (app.alert.get('uploading_file')) {
+            app.alert.dismiss('uploading_file');
+        }
+    },
+
+    /**
+     * Handle a successful file upload
+     *
+     * @param {Object} data
+     * @private
+     */
+    _handleFileUploadSuccess: function(data) {
+        if (!data.record || !data.record.id) {
+            error = new Error('Temporary file has no GUID');
+            app.logger.error(error.message);
+            app.alert.show('upload_error', {
+                level: 'error',
+                messages: app.lang.get('ERROR_UPLOAD_FAILED')
+            });
+            return;
+        }
+        var file = this.getUploadedFileBean(data);
+        this.addUploadedFileToCollection(this.model.get(this.name), file);
+
+        this.uploaded++;
+        if (this.filesToUpload <= this.uploaded) {
+            this._toggleUploading(false);
+        }
+    },
+
+    /**
+     * Clear input field after file is uploaded.
+     *
+     * @param {Object} data
+     * @private
+     */
+    _handleFileUploadComplete: function(data) {
+        $input = this.getFileNode();
+        $input.val('');
+    },
+
+    /**
+     * Handles an error response from the API for uploading the file.
+     *
+     * If the error code is 'request_too_large' or status is 413, then an error is
+     * shown to the user indicating that the error was due to exceeding the
+     * maximum filesize. Otherwise, the error is handled by the framework.
+     *
+     * @param {HttpError} error.
+     * @private
+     */
+    _handleFileUploadError: function(error) {
+        if (error && (error.code === 'request_too_large' || error.status === 413)) {
+            // Mark the error as having been handled so that it doesn't get
+            // handled again.
+            error.handled = true;
+            app.alert.show(error.code, {
+                level: 'error',
+                autoClose: true,
+                messages: app.lang.get('ERROR_MAX_FILESIZE_EXCEEDED')
+            });
+        }
+
+        if (error && !error.handled && _.isFunction(app.api.defaultErrorHandler)) {
+            app.api.defaultErrorHandler(error);
+        }
+
+        this._toggleUploading(false);
     },
 
     /**
@@ -367,41 +423,13 @@
      */
     _onAttachmentDrop: function(event) {
         event.preventDefault();
-        var self = this,
-            data = new FormData(),
-            fieldName = 'filename';
+        $input = this.getFileNode();
 
         _.each(event.dataTransfer.files, function(file) {
-            data.append(this.name, file);
-
-            var note = app.data.createBean('Notes');
-            note.save({name: file.name}, {
-                success: function(model) {
-                    var url = app.api.buildFileURL({
-                        module: model.module,
-                        id: model.id,
-                        field: 'filename'
-                    }, {htmlJsonFormat: false});
-                    data.append('filename', file);
-                    data.append('OAuth-Token', app.api.getOAuthToken());
-
-                    $.ajax({
-                        url: url,
-                        type: 'POST',
-                        data: data,
-                        processData: false,
-                        contentType: false,
-                        success: function(rsp) {
-                            var att = {};
-                            att.id = rsp.record.id;
-                            att.isImage = (rsp[fieldName]['content-type'].indexOf('image') !== -1);
-                            att.name = rsp[fieldName].name;
-                            self.model.set(self.name, _.union([], self.model.get(self.name) || [], [att]));
-                            self.render();
-                        }
-                    });
-                }
-            });
+            var dt = new DataTransfer();
+            dt.items.add(file);
+            $input[0].files = dt.files;
+            this._uploadFile();
         }, this);
 
         return false;
@@ -413,7 +441,8 @@
      * @return {string}
      */
     formatSelection: function (attachment) {
-        return this._select2formatSelectionTemplate(attachment);
+        return (attachment.tmpFile) ?
+            this._select2formatTmpSelectionTemplate(attachment) : this._select2formatSelectionTemplate(attachment);
     },
 
     /**
@@ -452,6 +481,9 @@
      * Disposes event listeners on `Select2` object.
      */
     dispose: function () {
+        // Clean up uploading popup if its still there
+        this._toggleUploading(false);
+
         if (this.$node) {
             this.$node.off('select2-removed');
             this.$node.off('select2-opening');

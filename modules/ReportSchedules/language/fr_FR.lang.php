@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Ce calendrier de rapports',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrements de calendriers de rapports',
+    'LBL_FILE_TYPE' => 'Type(s) de fichier',
 );

@@ -16,6 +16,7 @@ namespace Sugarcrm\Sugarcrm\Entitlements;
 // to as Critical Control Software under the End User
 // License Agreement.  Neither the Company nor the Users
 // may modify any portion of the Critical Control Software.
+use Administration;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 
 /**
@@ -47,6 +48,13 @@ class SubscriptionManager
      * @var array
      */
     protected $systemSubscriptionKeys = [];
+    protected $systemSubscriptionKeysAllLevels = [];
+
+    /**
+     * old system subscription keys
+     * @var array
+     */
+    protected $oldSystemSubscriptionKeys = [];
 
     /**
      * array of license types which exceed the limit
@@ -70,6 +78,12 @@ class SubscriptionManager
      * @var bool
      */
     protected $ignoreMedatdataDiff = false;
+
+    /**
+     * fix license in process
+     * @var bool
+     */
+    protected $fixLicenseTypeInProcess = false;
 
     /**
      * timeout for the request
@@ -117,7 +131,7 @@ class SubscriptionManager
      * @param null|string $licenseKey
      * @return null|Subscription
      */
-    protected function getSubscription(?string $licenseKey)
+    protected function getSubscription(?string $licenseKey) : ?Subscription
     {
         if (empty($licenseKey)) {
             return null;
@@ -151,6 +165,9 @@ class SubscriptionManager
             $data = $admin->settings['license_subscription'];
             if (is_array($data)) {
                 $data = json_encode($admin->settings['license_subscription']);
+                if (!empty($data)) {
+                    $this->setOldSubscriptionKeys($data);
+                }
             }
         }
 
@@ -185,36 +202,143 @@ class SubscriptionManager
         } else {
             $admin->saveSetting('license', 'subscription', self::USE_DEFAULT_SETTING);
         }
+        $admin->saveSetting('license', 'subscription_downloaded', '');
 
         // refresh metadata cache if not in installation stage and subscription has changed
         if ((!(isset($GLOBALS['installing'])) || $GLOBALS['installing'] != true)
             && !$this->ignoreMedatdataDiff
-            && !($data === false && $response === false)
-            && $this->isSubscriptionChanged($data)) {
-            $this->refreshMetadataCache();
+            && !($data === false && $response === false)) {
+            $data = empty($data)? '' : $data;
+            $needUpdate = !empty($this->getInvalidUsersLicenseTypes());
+            if ($this->isSubscriptionChanged($data) || $needUpdate) {
+                if (!empty($data) || $needUpdate) {
+                    // don't need to do it at first time since it was taken cared by performanceSetup
+                    $this->updateUsersLicenseTypesAfterSubscriptionChanges($needUpdate);
+                }
+                $this->refreshMetadataCache();
+            }
         }
-
         return $response;
     }
 
     /**
-     * check if there is any entitlement changes, it'll ignore any expiration date and quantity changes
-     * @param bool|string $oldSubscrptionData
-     * @return bool
+     * update license tpye after license entitlement changes, we only check the top level changes
+     * @param bool $forceToUpdate force to update license types
+     * @throws SugarApiExceptionNotFound
+     * @throws SugarQueryException
      */
-    protected function isSubscriptionChanged($oldSubscrptionData)
+    public function updateUsersLicenseTypesAfterSubscriptionChanges(bool $forceToUpdate = false)
     {
-        if (empty($oldSubscrptionData)) {
-            return true;
+        global $current_user;
+        if (empty($current_user) || !is_admin($current_user)) {
+            $GLOBALS['log']->fatal('must be admin to do license type update!');
+            return;
         }
-        $oldSubscrptionData = new Subscription($oldSubscrptionData);
-        $this->ignoreMedatdataDiff = true;
-        $currentKeys = $this->getSystemSubscriptionKeys();
-        $this->ignoreMedatdataDiff = false;
-        $oldKeys = $oldSubscrptionData->getSubscriptionKeys();
-        return $currentKeys != $oldKeys;
+
+        $current_user->updateUsersLicenseTypesAfterSubscriptionChanges([], [], $forceToUpdate);
     }
 
+    /**
+     * get Mango only keys
+     * @param array|null keys
+     * @return array
+     */
+    public function getMangoKeys(?array $keys) : array
+    {
+        if (empty($keys)) {
+            return [];
+        }
+
+        $retKeys = [];
+        foreach ($keys as $key => $value) {
+            if (Subscription::isMangoKey($key)) {
+                $retKeys[$key] = $value;
+            }
+        }
+        return $retKeys;
+    }
+
+    /**
+     * API to check subscription by key
+     * @param string $key
+     * @param bool $includeImplied to include inplied, such as $key='SELL' for a bundle
+     * @return bool
+     */
+    public function hasSubscription(string $key, bool $includeImplied = true) : bool
+    {
+        $subscriptions = $this->getAllSystemSubscriptionKeys();
+        if (!empty($subscriptions[$key])) {
+            return true;
+        }
+
+        if ($includeImplied) {
+            $parentKeys = $this->getSubscriptionKeysContains($key);
+            foreach ($parentKeys as $parentKey) {
+                if (!empty($subscriptions[$parentKey])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    /**
+     * check if the entitlement contains hint
+     * @return bool
+     */
+    public function hasHintInTopLevel() : bool
+    {
+        return $this->getTopLevelSystemSubscriptionKeys()[Subscription::SUGAR_HINT_KEY] ?? false;
+    }
+
+    /**
+     * check if there is any entitlement changes, it'll ignore any expiration date and quantity changes
+     * @param  string $oldSubscrptionData old subscription data
+     * @param  bool $checkMangoOnly       only check changes for mango license types
+     * @return bool
+     */
+    protected function isSubscriptionChanged(string $oldSubscrptionData, bool $checkMangoOnly = false) : bool
+    {
+        if (empty($oldSubscrptionData)) {
+            $this->oldSystemSubscriptionKeys = [];
+            return true;
+        }
+        $this->setOldSubscriptionKeys($oldSubscrptionData);
+        $this->ignoreMedatdataDiff = true;
+        $currentKeys = $this->getTopLevelSystemSubscriptionKeys();
+        $this->ignoreMedatdataDiff = false;
+
+        $newAddedKeys = array_diff_key($currentKeys, $this->getOldSystemSubscriptionKeys());
+        $removedKeys = array_diff_key($this->getOldSystemSubscriptionKeys(), $currentKeys);
+        if ($checkMangoOnly) {
+            $newAddedKeys = $this->getMangoKeys($newAddedKeys);
+            $removedKeys = $this->getMangoKeys($removedKeys);
+        }
+        return !empty($newAddedKeys) || !empty($removedKeys);
+    }
+
+    /**
+     * set old subscription keys
+     *
+     * @param string $oldSubscrptionData
+     */
+    protected function setOldSubscriptionKeys(string $oldSubscrptionData): void
+    {
+        if (empty($oldSubscrptionData)) {
+            $this->oldSystemSubscriptionKeys = [];
+            return;
+        }
+        $oldSubscrptionData = new Subscription($oldSubscrptionData);
+        $this->oldSystemSubscriptionKeys = $oldSubscrptionData->getTopLevelSubscriptionKeys();
+    }
+
+    /**
+     * get Old system subscription keys
+     * @return array
+     */
+    public function getOldSystemSubscriptionKeys() : array
+    {
+        return !empty($this->oldSystemSubscriptionKeys)? $this->oldSystemSubscriptionKeys : $this->systemSubscriptionKeys;
+    }
     /**
      * refresh metadata cache
      *
@@ -240,10 +364,27 @@ class SubscriptionManager
     }
 
     /**
+     * check if this is single license type entitmenet
+     * @return bool
+     */
+    public function isSingleMangoTypeEntitlement() : bool
+    {
+        $total = 0;
+        foreach ($this->getSystemSubscriptions() as $key => $subscripion) {
+            if (Subscription::isMangoKey($key)) {
+                $total += 1;
+            }
+        }
+        if ($total <= 1) {
+            return true;
+        }
+        return false;
+    }
+    /**
      * get license key
      * @return string/null
      */
-    protected function getLicenseKey()
+    public function getLicenseKey()
     {
         if (!empty($this->licenseKey)) {
             return $this->licenseKey;
@@ -274,6 +415,7 @@ class SubscriptionManager
 
         // need to go to license server to get subscription data
         $this->getSubscriptionContent($licenseKey, false);
+
     }
 
     /**
@@ -292,13 +434,17 @@ class SubscriptionManager
 
     /**
      * get subscription keys
-     *
+     * @param bool $getAll only retrive top level if true
      * @return array
      */
-    public function getSystemSubscriptionKeys() : array
+    protected function getSystemSubscriptionKeys(bool $getAll) : array
     {
-        if (!empty($this->systemSubscriptionKeys)) {
+        if (!$getAll && !empty($this->systemSubscriptionKeys)) {
             return $this->systemSubscriptionKeys;
+        }
+
+        if ($getAll && !empty($this->systemSubscriptionKeysAllLevels)) {
+            return $this->systemSubscriptionKeysAllLevels;
         }
 
         $licenseKey = $this->getLicenseKey();
@@ -310,17 +456,86 @@ class SubscriptionManager
             return [];
         }
 
-        $this->systemSubscriptionKeys = $subscription->getSubscriptionKeys();
-        return $this->systemSubscriptionKeys;
+        if (!$getAll) {
+            // top level only
+            $subscriptionKeys = $subscription->getTopLevelSubscriptionKeys();
+            $this->systemSubscriptionKeys = $subscriptionKeys;
+        } else {
+            $subscriptionKeys = $subscription->getAllSubscriptionKeys();
+            $this->systemSubscriptionKeysAllLevels = $subscriptionKeys;
+        }
+        return $subscriptionKeys;
     }
 
+    /**
+     * get all system subscription keys
+     * @return array
+     */
+    public function getAllSystemSubscriptionKeys() : array
+    {
+        return $this->getSystemSubscriptionKeys(true);
+    }
+
+    /**
+     * get top level system subscription keys only
+     * @return array
+     */
+    public function getTopLevelSystemSubscriptionKeys() : array
+    {
+        return $this->getSystemSubscriptionKeys(false);
+    }
+
+    /**
+     * get subscription by key
+     * @param string $key the key to search
+     * @return array
+     */
+    public function getSystemSubscriptionByKey(string $key) : array
+    {
+        $licenseKey = $this->getLicenseKey();
+        if (empty($licenseKey)) {
+            return [];
+        }
+        $subscription = $this->getSubscription($licenseKey);
+        if (empty($subscription)) {
+            return [];
+        }
+        return $subscription->getSubscriptionByKey($key);
+    }
+
+    /**
+     * get bundled subscriptions by key, not including itself
+     * @param string $key
+     * @return array
+     */
+    public function getBundledSubscriptionsByKey(string $key) : array
+    {
+        if (!Subscription::isBundleKey($key)) {
+            return [];
+        }
+
+        $bundlesSubscription = $this->getSystemSubscriptionByKey($key);
+        return $bundlesSubscription[Addon::BUNDLED_PRODUCTS_KEY] ?? [];
+    }
+
+    /**
+     * get customer product name for a product key, such as SUGAR_SELL, SUGAR_SERVE etc
+     * @param string $key
+     * @return string
+     */
+    public function getCustomerProductNameByKey(string $key) : string
+    {
+        $subscription = $this->getSystemSubscriptionByKey($key);
+        return $subscription['customer_product_name'] ?? '';
+    }
     /**
      * get subscription keys in value-sorted array
      * @return array
      */
     public function getSystemSubscriptionKeysInSortedValueArray() : array
     {
-        $results = array_keys($this->getSystemSubscriptionKeys());
+        // only need top level CRM product keys
+        $results = array_keys($this->getTopLevelSystemSubscriptionKeys());
         $this->sortSubscriptionKeys($results);
         return $results;
     }
@@ -357,46 +572,69 @@ class SubscriptionManager
     /**
      * get user's subscriptions, it compares system subscriptions with user's license type
      * @param null|\User $user
+     * @param bool $getAll, only fetch top level, no bundled level product returned if $shallow is true
      * @return array
      */
-    public function getUserSubscriptions(?\User $user) : array
+    protected function getUserSubscriptions(?\User $user, bool $getAll) : array
     {
         if (empty($user)) {
             return [];
         }
-        // get system subscriptions
-        $systemSubscriptionKeys = $this->getSystemSubscriptionKeys();
+        // get all top level system subscriptions
+        $systemSubscriptionKeys = $this->getTopLevelSystemSubscriptionKeys();
 
         if (empty($systemSubscriptionKeys)) {
             return [];
         }
 
-        $userLicenseTypes = $user->getLicenseTypes();
+        $userSubscriptions = [];
+        $userLicenseTypes = $user->getTopLevelLicenseTypes();
         // one prod subscription, license type = current or empty will be using current product
         if (count($systemSubscriptionKeys) === 1) {
             if (empty($userLicenseTypes)) {
                 // never assigned before
-                return array_keys($systemSubscriptionKeys);
-            }
-            // check if user has current license type
-            foreach ($userLicenseTypes as $type) {
-                if (Subscription::SUGAR_BASIC_KEY === $type) {
-                    return array_keys($systemSubscriptionKeys);
+                $userSubscriptions = array_keys($systemSubscriptionKeys);
+            } else {
+                // check if user has current license type
+                foreach ($userLicenseTypes as $type) {
+                    if (Subscription::SUGAR_BASIC_KEY === $type) {
+                        $userSubscriptions = array_keys($systemSubscriptionKeys);
+                    }
                 }
+            }
+
+            if ($getAll) {
+                // get all sub levels
+                if (isset($userSubscriptions[0]) && Subscription::isBundleKey($userSubscriptions[0])) {
+                    $subs = $this->getSystemSubscriptionByKey($userSubscriptions[0]);
+                    $foundSubs = array_keys($subs[Addon::BUNDLED_PRODUCTS_KEY] ?? []);
+                    if (!empty($foundSubs)) {
+                        $userSubscriptions = array_unique(array_merge($userSubscriptions, $foundSubs) ?? []);
+                    }
+                }
+            }
+            if (!empty($userSubscriptions)) {
+                return $userSubscriptions;
             }
         }
 
         // pick up a license type
         if (empty($userLicenseTypes)) {
             // never assigned before, pick up one based on the order in getAllSupportedProducts()
-            return [$this->getUserDefaultLicenseType()];
+            $userLicenseTypes = [$this->getUserDefaultLicenseType()];
         }
 
         // loop through the license keys
-        $userSubscriptions = [];
         foreach ($userLicenseTypes as $type) {
             if (isset($systemSubscriptionKeys[$type])) {
                 $userSubscriptions[] = $type;
+                if ($getAll && Subscription::isBundleKey($type)) {
+                    $subs = $this->getSystemSubscriptionByKey($type);
+                    $foundSubs = array_keys($subs[Addon::BUNDLED_PRODUCTS_KEY] ?? []);
+                    if (!empty($foundSubs)) {
+                        $userSubscriptions = array_unique(array_merge($userSubscriptions, $foundSubs));
+                    }
+                }
             }
         }
 
@@ -410,20 +648,41 @@ class SubscriptionManager
     }
 
     /**
-     * get user's invalid subscriptions, it compares system subscriptions with user's license type
+     * get a user's all valid subscriptions
+     * @param \User|null $user
+     * @return array|string[]
+     */
+    public function getAllUserSubscriptions(?\User $user) : array
+    {
+        return $this->getUserSubscriptions($user, true);
+    }
+
+    /**
+     * get user's top level subscription
+     * @param \User|null $user
+     * @return array|string[]
+     */
+    public function getTopLevelUserSubscriptions(?\User $user) : array
+    {
+        return $this->getUserSubscriptions($user, false);
+    }
+
+    /**
+     * get user's invalid subscriptions, it compares system subscriptions with user's license type.
+     * Top level only, since we only store the top level license types in DB
      *
      * @param null|\User $user
      * @return array
      */
     public function getUserInvalidSubscriptions(?\User $user) : array
     {
-        if (empty($user)) {
+        if (empty($user) || empty($user->id)) {
             return [];
         }
-        // get system subscriptions
-        $systemSubscriptionKeys = $this->getSystemSubscriptionKeys();
+        // get top level system subscriptions
+        $systemSubscriptionKeys = $this->getTopLevelSystemSubscriptionKeys();
 
-        $userLicenseTypes = $user->getLicenseTypes();
+        $userLicenseTypes = $user->getTopLevelLicenseTypes();
         if (empty($systemSubscriptionKeys)) {
             return $userLicenseTypes;
         }
@@ -457,7 +716,7 @@ class SubscriptionManager
 
         $userLicenseTypesOverLimit = [];
         // check current user's license types against $exceededLicenseTypes
-        $userLicenseTypes = $this->getUserSubscriptions($user);
+        $userLicenseTypes = $this->getTopLevelUserSubscriptions($user);
         if (!empty($userLicenseTypes)) {
             foreach ($userLicenseTypes as $type) {
                 if (isset($exceededLicenseTypes[$type])) {
@@ -485,12 +744,41 @@ class SubscriptionManager
             Subscription::SUGAR_BASIC_KEY,
             Subscription::SUGAR_SERVE_KEY,
             Subscription::SUGAR_SELL_KEY,
+            Subscription::SUGAR_SELL_ESSENTIALS_KEY,
+            Subscription::SUGAR_SELL_BUNDLE_KEY,
+            Subscription::SUGAR_SELL_ADVANCED_BUNDLE_KEY,
+            Subscription::SUGAR_SELL_PREMIER_BUNDLE_KEY,
             Subscription::SUGAR_HINT_KEY,
+            Subscription::SUGAR_DISCOVER_KEY,
+            Subscription::SUGAR_CONNECT_KEY,
+            Subscription::SUGAR_PREDICT_ADVANCED_KEY,
+            Subscription::SUGAR_PREDICT_PREMIER_KEY,
+            Subscription::SUGAR_MAPS_KEY,
         ];
     }
 
     /**
-     * get default license type
+     * get list of product keys contains $key feature
+     * @param string $key
+     * @return array|string[]
+     */
+    public function getSubscriptionKeysContains(string $key) : array
+    {
+        switch ($key) {
+            case (Subscription::SUGAR_SELL_KEY):
+                return [
+                    Subscription::SUGAR_SELL_KEY,
+                    Subscription::SUGAR_SELL_ESSENTIALS_KEY,
+                    Subscription::SUGAR_SELL_PREMIER_BUNDLE_KEY,
+                    Subscription::SUGAR_SELL_ADVANCED_BUNDLE_KEY,
+                    Subscription::SUGAR_SELL_BUNDLE_KEY,
+                ];
+            default:
+                return [$key];
+        }
+    }
+    /**
+     * get default license type, must be a Mango product type, Hint can't be used as default key
      *
      * @return string
      */
@@ -498,10 +786,10 @@ class SubscriptionManager
     {
         // Warning to Dev: if modifying logic here, you must notify MTS team!
         // MTS team needs to do corresponding changes on their user reports
-        $systemSubscriptionKeys = $this->getSystemSubscriptionKeys();
+        $systemSubscriptionKeys = $this->getTopLevelSystemSubscriptionKeys();
         $allProducts = $this->getAllSupportedProducts();
         foreach ($allProducts as $type) {
-            if (isset($systemSubscriptionKeys[$type])) {
+            if (isset($systemSubscriptionKeys[$type]) && Subscription::isMangoKey($type)) {
                 // The first valid key in AllSupportedProducts array will be the default license type
                 return $type;
             }
@@ -550,7 +838,7 @@ class SubscriptionManager
             return '';
         }
 
-        $userSubscriptions = $this->getUserSubscriptions($user);
+        $userSubscriptions = $this->getTopLevelUserSubscriptions($user);
 
         if (empty($userSubscriptions)) {
             return '';
@@ -563,11 +851,12 @@ class SubscriptionManager
     /**
      * get number of users exceed limit by license type
      * @param int $license_seats_needed total number of license needed
+     * @param bool $ignoreCache ignore previous check, redo DB access
      * @return array
      */
-    public function getSystemLicenseTypesExceededLimit(int &$license_seats_needed) : array
+    public function getSystemLicenseTypesExceededLimit(int &$license_seats_needed, bool $ignoreCache = false) : array
     {
-        if ($this->hasCheckedLimit) {
+        if ($this->hasCheckedLimit && !$ignoreCache) {
             return $this->exceededLimitTypes;
         }
 
@@ -619,7 +908,7 @@ class SubscriptionManager
         }
         $usedSeats = $this->getSystemUserCountByLicenseTypes();
         $allowedSeats = $this->getSystemSubscriptions();
-        $userTypes = $this->getUserSubscriptions($user);
+        $userTypes = $this->getTopLevelUserSubscriptions($user);
 
         if (empty($allowedSeats)) {
             return $userTypes;
@@ -689,6 +978,114 @@ class SubscriptionManager
         }
 
         return $userCountByType;
+    }
+
+    /**
+     * get invalid license types for all users
+     * @return array
+     */
+    protected function getInvalidUsersLicenseTypes() : array
+    {
+        $invalidLicenseTypes = [];
+        $userLicenseTypes = $this->getSystemUserCountByLicenseTypes();
+        $topLevelTypes = $this->getTopLevelSystemSubscriptionKeys();
+        foreach ($userLicenseTypes as $type => $count) {
+            if ($count > 0 && !isset($topLevelTypes[$type])) {
+                // invalid key for cuyrrent subscription
+                $invalidLicenseTypes[] = $type;
+            }
+        }
+        return $invalidLicenseTypes;
+    }
+    /**
+     * From a list of subscription keys, gets all implied keys as well
+     * Ex:
+     * [Subscription::SUGAR_SELL_BUNDLE_KEY] -> [Subscription::SUGAR_SELL_KEY, Subscription::SUGAR_SELL_BUNDLE_KEY]
+     *
+     * @param array $keys
+     * @return array
+     */
+    public function getAllImpliedSubscriptions(array $keys) : array
+    {
+        $subscriptions = [];
+        foreach ($keys as $key) {
+            if (Subscription::isBundleKey($key)) {
+                foreach (Subscription::getBundledKeys($key) as $bundledKey) {
+                    // get all sub keys for this bundle, implied subscriptions
+                    $subscriptions[] = $bundledKey;
+                }
+            } else {
+                $subscriptions[] = $key;
+            }
+        }
+
+        return array_unique($subscriptions);
+    }
+
+    /**
+     * A part of license polling mechanism. This makes subscription updates to appear quickly on app instances without
+     * need of manual revalidation.
+     * 1. Check update of subscription details on license server and save them locally. This action should
+     *      be performed periodically with a bit of time randomization to avoid load spikes on license server
+     *      @see \Sugarcrm\Sugarcrm\Entitlements\SubscriptionPrefetcher
+     * 2. (this method) Install updated subscription data, also update License Type for users if needed. This action
+     *      requires admin privileges, e.g. running from cron job
+     *
+     * @param bool $forceToUpdate force to update license types
+     * @return bool whether a change exited and was applied successfully
+     */
+    public function applyDownloadedLicense(bool $forceToUpdate = false): bool
+    {
+        /** @var Administration $admin */
+        $admin = \BeanFactory::newBean('Administration');
+        $admin->retrieveSettings('license');
+
+        $downloadedSubscription = $admin->settings['license_subscription_downloaded'] ?? '';
+        if (empty($downloadedSubscription) && !$forceToUpdate) {
+            return false;
+        }
+        if (!empty($downloadedSubscription)) {
+            if (is_array($downloadedSubscription)) {
+                $downloadedSubscription = json_encode($downloadedSubscription);
+            }
+            $this->subscription = new Subscription($downloadedSubscription);
+            $this->systemSubscriptionKeys = [];
+            $this->systemSubscriptionKeysAllLevels = [];
+            $this->oldSystemSubscriptionKeys = [];
+
+            $admin->saveSetting('license', 'subscription', $downloadedSubscription);
+            $admin->saveSetting('license', 'subscription_downloaded', '');
+        }
+
+        $oldSubscriptionData = $admin->settings['license_subscription'] ?? '';
+        if (!is_string($oldSubscriptionData)) {
+            $oldSubscriptionData = json_encode($oldSubscriptionData);
+        }
+
+        $needUpdate = $forceToUpdate || !empty($this->getInvalidUsersLicenseTypes());
+        if (!($GLOBALS['installing'] ?? false) && ($this->isSubscriptionChanged($oldSubscriptionData) || $needUpdate)) {
+            $this->updateUsersLicenseTypesAfterSubscriptionChanges($needUpdate);
+            $this->refreshMetadataCache();
+        }
+        return true;
+    }
+
+    /**
+     * get Fix License Process State
+     * @return bool
+     */
+    public function getFixLicenseProcessState() : bool
+    {
+        return $this->fixLicenseTypeInProcess;
+    }
+
+    /**
+     * set Fix License Process State
+     * @param bool $state
+     */
+    public function setFixLicenseProcessState(bool $state) : void
+    {
+        $this->fixLicenseTypeInProcess = true;
     }
 }
 //END REQUIRED CODE DO NOT MODIFY

@@ -972,42 +972,71 @@ SQL;
 
     // Get the id and the name.
         foreach ($stmt as $row) {
-			$alert_string .="\t \$alertshell_array = array(); \n\n";
+            $alert_string .= <<<'PHP'
+    $alertshell_array = [];
 
-			if($row['source_type']=="Custom Template"){
-				//use custom msg
-				$alert_string .="\t \$alertshell_array['alert_msg'] = \"".$row['custom_template_id']."\"; \n\n";
+PHP;
 
-			} else {
-				//use regular msg
-				$alert_string .="\t \$alertshell_array['alert_msg'] = \"".$row['alert_text']."\"; \n\n";
+            if ($row['source_type'] === 'Custom Template') {
+                //use custom msg
+                $alert_string .= sprintf(
+                    <<<'PHP'
+    $alertshell_array['alert_msg'] = '%s';
 
-			}
+PHP
+                    ,
+                    filter_var($row['custom_template_id'], FILTER_SANITIZE_ADD_SLASHES)
+                );
+            } else {
+                //use regular msg
+                $alert_string .= sprintf(
+                    <<<'PHP'
+    $alertshell_array['alert_msg'] = '%s';
 
-			$alert_string .="\t \$alertshell_array['source_type'] = \"".$row['source_type']."\"; \n\n";
-			$alert_string .="\t \$alertshell_array['alert_type'] = \"".$row['alert_type']."\"; \n\n";
+PHP
+                    ,
+                    filter_var($row['alert_text'], FILTER_SANITIZE_ADD_SLASHES)
+                );
+            }
+            $alert_string .= sprintf(
+                <<<'PHP'
+    $alertshell_array['source_type'] = '%s';
+    $alertshell_array['alert_type'] = '%s';
 
+PHP
+                ,
+                filter_var($row['source_type'], FILTER_SANITIZE_ADD_SLASHES),
+                filter_var($row['alert_type'], FILTER_SANITIZE_ADD_SLASHES)
+            );
 
-			//Check for bridging object.  This is for meetings/calls
-			if($row['alert_type']=="Invite"){
-				$check_for_bridge = "true";
-			} else {
-				$check_for_bridge = "false";
-			}
+            //Check for bridging object.  This is for meetings/calls
+            if ($row['alert_type'] == "Invite") {
+                $check_for_bridge = 'true';
+            } else {
+                $check_for_bridge = 'false';
+            }
 
+            $sanitized_array_position_name = filter_var("{$alert_array_name}{$trigger_count}_alert{$alert_count}", FILTER_SANITIZE_ADD_SLASHES);
+            $this->glue_object->build_trigger_alerts($row['id'], $sanitized_array_position_name);
+            $alert_string .= sprintf(
+                <<<'PHP'
+    process_workflow_alerts($focus, $alert_meta_array['%s'], $alertshell_array, %s);
 
-			$array_position_name = $alert_array_name."".$trigger_count."_alert".$alert_count;
-
-			$this->glue_object->build_trigger_alerts($row['id'], $array_position_name);
-
-			$alert_string .= "\t process_workflow_alerts(\$focus, \$alert_meta_array['".$array_position_name."'], \$alertshell_array, ".$check_for_bridge."); \n ";
+PHP
+                ,
+                $sanitized_array_position_name,
+                $check_for_bridge
+            );
 
 		++ $alert_count;
 
 		//end while statement
 		}
+        $alert_string .= <<<'PHP'
+    unset($alertshell_array);
 
-		$alert_string .= "\t unset(\$alertshell_array); \n";
+PHP;
+
 return $alert_string;
 
 //end function get_alert_contents
@@ -1044,23 +1073,46 @@ SQL;
         foreach ($stmt as $row) {
             $array_position_name = $alert_array_name."".$trigger_count."_alert".$alert_count;
             $eval_dump .= '\''.$array_position_name.'\',';
-            $alert_string .= 'function process_wflow_'.$array_position_name.'(&$focus){
-            include("custom/modules/'.$alert_array_name. '/workflow/alerts_array.php");';
-            $alert_string .="\n\n\t \$alertshell_array = array(); \n\n";
 
-            if($row['source_type']=="Custom Template"){
+            $alert_string .= sprintf(
+                <<<'PHP'
+function process_wflow_%s(&$focus) {
+    include("custom/modules/%s/workflow/alerts_array.php");
+    $alertshell_array = [];
+PHP
+                ,
+                $array_position_name,
+                $alert_array_name
+            );
+            if ($row['source_type'] == "Custom Template") {
                 //use custom msg
-                $alert_string .="\t \$alertshell_array['alert_msg'] = \"".$row['custom_template_id']."\"; \n\n";
-
+                $alert_string .= sprintf(
+                    <<<'PHP'
+    $alertshell_array['alert_msg'] = '%s';
+PHP
+                    ,
+                    filter_var($row['custom_template_id'], FILTER_SANITIZE_ADD_SLASHES)
+                );
             } else {
                 //use regular msg
-                $alert_string .="\t \$alertshell_array['alert_msg'] = \"".$row['alert_text']."\"; \n\n";
-
+                $alert_string .= sprintf(
+                    <<<'PHP'
+$alertshell_array['alert_msg'] = '%s';
+PHP
+                    ,
+                    filter_var($row['alert_text'], FILTER_SANITIZE_ADD_SLASHES)
+                );
             }
 
-            $alert_string .="\t \$alertshell_array['source_type'] = \"".$row['source_type']."\"; \n\n";
-            $alert_string .="\t \$alertshell_array['alert_type'] = \"".$row['alert_type']."\"; \n\n";
-
+            $alert_string .= sprintf(
+                <<<'PHP'
+$alertshell_array['source_type'] = '%s';
+$alertshell_array['alert_type'] = '%s';
+PHP
+                ,
+                filter_var($row['source_type'], FILTER_SANITIZE_ADD_SLASHES),
+                filter_var($row['alert_type'], FILTER_SANITIZE_ADD_SLASHES)
+            );
 
             //Check for bridging object.  This is for meetings/calls
             if($row['alert_type']=="Invite"){

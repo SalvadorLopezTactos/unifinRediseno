@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Grunnlagsrente',
 
     'LBL_QUOTA' => 'Budsjett',
-    'LBL_QUOTA_ADJUSTED' => 'Budsjett (Korrigert)',
+    'LBL_QUOTA_ADJUSTED' => 'Justert kvote',
 
     'LBL_FORECAST' => 'Prognose',
     'LBL_COMMIT_STAGE' => 'Forpliktet stadie',

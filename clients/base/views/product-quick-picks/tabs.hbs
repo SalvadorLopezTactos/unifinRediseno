@@ -14,7 +14,7 @@
     {{#each this.tabs}}
         <div class="dashlet-tab{{#eq ../settings.attributes.activeTab @index}} active{{/eq}}">
             <a data-toggle="tab" data-action="tab-switcher" data-index="{{@index}}">
-                {{str label module}}
+                <span class="tab-title font-semibold">{{str label module}}</span>
             </a>
         </div>
     {{/each}}

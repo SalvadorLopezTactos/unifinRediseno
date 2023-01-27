@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Archiver',
     'LBL_PROCESS_TYPE_DELETE' => 'Supprimer définitivement',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Exécution des archives',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Attention',
+    'LBL_ARCHIVER_WARNING' => 'Il est recommandé d&#39;effectuer cette action pendant les périodes de faible utilisation ou en dehors des heures de travail, '
+        . 'car elle peut affecter les performances du système. Êtes-vous sûr de vouloir exécuter cette action maintenant ?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'L&#39;archiveur du module {{moduleName}} doit avoir {{fieldName}} comme filtre',
 );

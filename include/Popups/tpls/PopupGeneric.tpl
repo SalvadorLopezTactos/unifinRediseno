@@ -250,7 +250,9 @@
 	</table>
 	{if $prerow}
 	<script>
-	{literal}function lvg_dtails(id){return SUGAR.util.getAdditionalDetails( '{/literal}{$module}{literal}',id, 'adspan_'+id);}{/literal}
+        function lvg_dtails(id) {
+            return SUGAR.util.getAdditionalDetails('{$module}', id, 'adspan_' + id);
+        }
 	</script>
 	{/if}
 {else}

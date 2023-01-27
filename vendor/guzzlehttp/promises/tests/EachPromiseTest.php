@@ -1,22 +1,32 @@
 <?php
+
 namespace GuzzleHttp\Promise\Tests;
 
-use GuzzleHttp\Promise\RejectedPromise;
+use GuzzleHttp\Promise as P;
+use GuzzleHttp\Promise\EachPromise;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Promise\Promise;
-use GuzzleHttp\Promise\PromiseInterface;
-use GuzzleHttp\Promise\EachPromise;
-use GuzzleHttp\Promise as P;
+use GuzzleHttp\Promise\RejectedPromise;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers GuzzleHttp\Promise\EachPromise
  */
-class EachPromiseTest extends \PHPUnit_Framework_TestCase
+class EachPromiseTest extends TestCase
 {
     public function testReturnsSameInstance()
     {
         $each = new EachPromise([], ['concurrency' => 100]);
         $this->assertSame($each->promise(), $each->promise());
+    }
+
+    public function testResolvesInCaseOfAnEmptyList()
+    {
+        $promises = [];
+        $each = new EachPromise($promises);
+        $p = $each->promise();
+        $this->assertNull($p->wait());
+        $this->assertTrue(P\Is::fulfilled($p));
     }
 
     public function testInvokesAllPromises()
@@ -32,9 +42,9 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $promises[0]->resolve('a');
         $promises[1]->resolve('c');
         $promises[2]->resolve('b');
-        P\queue()->run();
-        $this->assertEquals(['a', 'c', 'b'], $called);
-        $this->assertEquals(PromiseInterface::FULFILLED, $p->getState());
+        P\Utils::queue()->run();
+        $this->assertSame(['a', 'c', 'b'], $called);
+        $this->assertTrue(P\Is::fulfilled($p));
     }
 
     public function testIsWaitable()
@@ -47,8 +57,8 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         ]);
         $p = $each->promise();
         $this->assertNull($p->wait());
-        $this->assertEquals(PromiseInterface::FULFILLED, $p->getState());
-        $this->assertEquals(['a', 'b'], $called);
+        $this->assertTrue(P\Is::fulfilled($p));
+        $this->assertSame(['a', 'b'], $called);
     }
 
     public function testCanResolveBeforeConsumingAll()
@@ -59,7 +69,7 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $each = new EachPromise([$a, $b], [
             'fulfilled' => function ($value, $idx, Promise $aggregate) use (&$called) {
                 $this->assertSame($idx, 0);
-                $this->assertEquals('a', $value);
+                $this->assertSame('a', $value);
                 $aggregate->resolve(null);
                 $called++;
             },
@@ -70,12 +80,12 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $p = $each->promise();
         $p->wait();
         $this->assertNull($p->wait());
-        $this->assertEquals(1, $called);
-        $this->assertEquals(PromiseInterface::FULFILLED, $a->getState());
-        $this->assertEquals(PromiseInterface::PENDING, $b->getState());
+        $this->assertSame(1, $called);
+        $this->assertTrue(P\Is::fulfilled($a));
+        $this->assertTrue(P\Is::pending($b));
         // Resolving $b has no effect on the aggregate promise.
         $b->resolve('foo');
-        $this->assertEquals(1, $called);
+        $this->assertSame(1, $called);
     }
 
     public function testLimitsPendingPromises()
@@ -84,22 +94,22 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $promises = new \ArrayIterator($pending);
         $each = new EachPromise($promises, ['concurrency' => 2]);
         $p = $each->promise();
-        $this->assertCount(2, $this->readAttribute($each, 'pending'));
+        $this->assertCount(2, PropertyHelper::get($each, 'pending'));
         $pending[0]->resolve('a');
-        $this->assertCount(2, $this->readAttribute($each, 'pending'));
+        $this->assertCount(2, PropertyHelper::get($each, 'pending'));
         $this->assertTrue($promises->valid());
         $pending[1]->resolve('b');
-        P\queue()->run();
-        $this->assertCount(2, $this->readAttribute($each, 'pending'));
+        P\Utils::queue()->run();
+        $this->assertCount(2, PropertyHelper::get($each, 'pending'));
         $this->assertTrue($promises->valid());
         $promises[2]->resolve('c');
-        P\queue()->run();
-        $this->assertCount(1, $this->readAttribute($each, 'pending'));
-        $this->assertEquals(PromiseInterface::PENDING, $p->getState());
+        P\Utils::queue()->run();
+        $this->assertCount(1, PropertyHelper::get($each, 'pending'));
+        $this->assertTrue(P\Is::pending($p));
         $promises[3]->resolve('d');
-        P\queue()->run();
-        $this->assertNull($this->readAttribute($each, 'pending'));
-        $this->assertEquals(PromiseInterface::FULFILLED, $p->getState());
+        P\Utils::queue()->run();
+        $this->assertNull(PropertyHelper::get($each, 'pending'));
+        $this->assertTrue(P\Is::fulfilled($p));
         $this->assertFalse($promises->valid());
     }
 
@@ -114,23 +124,23 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $promises = new \ArrayIterator($pending);
         $each = new EachPromise($promises, ['concurrency' => $pendingFn]);
         $p = $each->promise();
-        $this->assertCount(2, $this->readAttribute($each, 'pending'));
+        $this->assertCount(2, PropertyHelper::get($each, 'pending'));
         $pending[0]->resolve('a');
-        $this->assertCount(2, $this->readAttribute($each, 'pending'));
+        $this->assertCount(2, PropertyHelper::get($each, 'pending'));
         $this->assertTrue($promises->valid());
         $pending[1]->resolve('b');
-        $this->assertCount(2, $this->readAttribute($each, 'pending'));
-        P\queue()->run();
+        $this->assertCount(2, PropertyHelper::get($each, 'pending'));
+        P\Utils::queue()->run();
         $this->assertTrue($promises->valid());
         $promises[2]->resolve('c');
-        P\queue()->run();
-        $this->assertCount(1, $this->readAttribute($each, 'pending'));
-        $this->assertEquals(PromiseInterface::PENDING, $p->getState());
+        P\Utils::queue()->run();
+        $this->assertCount(1, PropertyHelper::get($each, 'pending'));
+        $this->assertTrue(P\Is::pending($p));
         $promises[3]->resolve('d');
-        P\queue()->run();
-        $this->assertNull($this->readAttribute($each, 'pending'));
-        $this->assertEquals(PromiseInterface::FULFILLED, $p->getState());
-        $this->assertEquals([0, 1, 1, 1], $calls);
+        P\Utils::queue()->run();
+        $this->assertNull(PropertyHelper::get($each, 'pending'));
+        $this->assertTrue(P\Is::fulfilled($p));
+        $this->assertSame([0, 1, 1, 1], $calls);
         $this->assertFalse($promises->valid());
     }
 
@@ -147,23 +157,33 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
             'rejected'  => function () {}
         ]);
         $each->promise()->wait();
-        $this->assertNull($this->readAttribute($each, 'onFulfilled'));
-        $this->assertNull($this->readAttribute($each, 'onRejected'));
-        $this->assertNull($this->readAttribute($each, 'iterable'));
-        $this->assertNull($this->readAttribute($each, 'pending'));
-        $this->assertNull($this->readAttribute($each, 'concurrency'));
+        $this->assertNull(PropertyHelper::get($each, 'onFulfilled'));
+        $this->assertNull(PropertyHelper::get($each, 'onRejected'));
+        $this->assertNull(PropertyHelper::get($each, 'iterable'));
+        $this->assertNull(PropertyHelper::get($each, 'pending'));
+        $this->assertNull(PropertyHelper::get($each, 'concurrency'));
         $this->assertTrue($called);
     }
 
     public function testCanBeCancelled()
     {
-        $this->markTestIncomplete();
-    }
-
-    public function testFulfillsImmediatelyWhenGivenAnEmptyIterator()
-    {
-        $each = new EachPromise(new \ArrayIterator([]));
-        $result = $each->promise()->wait();
+        $called = false;
+        $a = new FulfilledPromise('a');
+        $b = new Promise(function () use (&$called) { $called = true; });
+        $each = new EachPromise([$a, $b], [
+            'fulfilled' => function ($value, $idx, Promise $aggregate) {
+                $aggregate->cancel();
+            },
+            'rejected' => function ($reason) use (&$called) {
+                $called = true;
+            },
+        ]);
+        $p = $each->promise();
+        $p->wait(false);
+        $this->assertTrue(P\Is::fulfilled($a));
+        $this->assertTrue(P\Is::pending($b));
+        $this->assertTrue(P\Is::rejected($p));
+        $this->assertFalse($called);
     }
 
     public function testDoesNotBlowStackWithFulfilledPromises()
@@ -183,9 +203,9 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
             $called = true;
         });
         $this->assertFalse($called);
-        P\queue()->run();
+        P\Utils::queue()->run();
         $this->assertTrue($called);
-        $this->assertEquals(range(0, 99), $values);
+        $this->assertSame(range(0, 99), $values);
     }
 
     public function testDoesNotBlowStackWithRejectedPromises()
@@ -206,9 +226,9 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
             function () { $this->fail('Should not have rejected.'); }
         );
         $this->assertFalse($called);
-        P\queue()->run();
+        P\Utils::queue()->run();
         $this->assertTrue($called);
-        $this->assertEquals(range(0, 99), $values);
+        $this->assertSame(range(0, 99), $values);
     }
 
     public function testReturnsPromiseForWhatever()
@@ -220,7 +240,7 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         ]);
         $p = $each->promise();
         $this->assertNull($p->wait());
-        $this->assertEquals(['a', 'b'], $called);
+        $this->assertSame(['a', 'b'], $called);
     }
 
     public function testRejectsAggregateWhenNextThrows()
@@ -234,9 +254,9 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $e = null;
         $received = null;
         $p->then(null, function ($reason) use (&$e) { $e = $reason; });
-        P\queue()->run();
-        $this->assertInstanceOf('Exception', $e);
-        $this->assertEquals('Failure', $e->getMessage());
+        P\Utils::queue()->run();
+        $this->assertInstanceOf(\Exception::class, $e);
+        $this->assertSame('Failure', $e->getMessage());
     }
 
     public function testDoesNotCallNextOnIteratorUntilNeededWhenWaiting()
@@ -259,7 +279,7 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
             }
         ]);
         $each->promise()->wait();
-        $this->assertEquals(range(10, 1), $results);
+        $this->assertSame(range(10, 1), $results);
     }
 
     public function testDoesNotCallNextOnIteratorUntilNeededWhenAsync()
@@ -287,9 +307,9 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $each->promise();
         while ($promise = array_pop($pending)) {
             $promise->resolve($i++);
-            P\queue()->run();
+            P\Utils::queue()->run();
         }
-        $this->assertEquals(range(0, 9), $results);
+        $this->assertSame(range(0, 9), $results);
     }
 
     private function createSelfResolvingPromise($value)
@@ -297,12 +317,17 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $p = new Promise(function () use (&$p, $value) {
             $p->resolve($value);
         });
+        $trickCsFixer = true;
 
         return $p;
     }
 
     public function testMutexPreventsGeneratorRecursion()
     {
+        if (defined('HHVM_VERSION')) {
+            $this->markTestIncomplete('Broken on HHVM.');
+        }
+
         $results = $promises = [];
         for ($i = 0; $i < 20; $i++) {
             $p = $this->createSelfResolvingPromise($i);
@@ -332,5 +357,53 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
 
         $each->promise()->wait();
         $this->assertCount(20, $results);
+    }
+
+    public function testIteratorWithSameKey()
+    {
+        if (defined('HHVM_VERSION')) {
+            $this->markTestIncomplete('Broken on HHVM.');
+        }
+
+        $iter = function () {
+            yield 'foo' => $this->createSelfResolvingPromise(1);
+            yield 'foo' => $this->createSelfResolvingPromise(2);
+            yield 1 => $this->createSelfResolvingPromise(3);
+            yield 1 => $this->createSelfResolvingPromise(4);
+        };
+        $called = 0;
+        $each = new EachPromise($iter(), [
+            'fulfilled' => function ($value, $idx, Promise $aggregate) use (&$called) {
+                $called++;
+                if ($value < 3) {
+                    $this->assertSame('foo', $idx);
+                } else {
+                    $this->assertSame(1, $idx);
+                }
+            },
+        ]);
+        $each->promise()->wait();
+        $this->assertSame(4, $called);
+    }
+
+    public function testIsWaitableWhenLimited()
+    {
+        $promises = [
+            $this->createSelfResolvingPromise('a'),
+            $this->createSelfResolvingPromise('c'),
+            $this->createSelfResolvingPromise('b'),
+            $this->createSelfResolvingPromise('d')
+        ];
+        $called = [];
+        $each = new EachPromise($promises, [
+            'concurrency' => 2,
+            'fulfilled' => function ($value) use (&$called) {
+                $called[] = $value;
+            }
+        ]);
+        $p = $each->promise();
+        $this->assertNull($p->wait());
+        $this->assertSame(['a', 'c', 'b', 'd'], $called);
+        $this->assertTrue(P\Is::fulfilled($p));
     }
 }

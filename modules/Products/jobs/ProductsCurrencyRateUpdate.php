@@ -146,7 +146,7 @@ class ProductsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
         $sq->from($product);
 
         // join in the product bundles table
-        $product->load_relationships('product_bundles');
+        $product->load_relationships();
         // we use a left join here so we can get products that do not have quotes
         $product->product_bundles->buildJoinSugarQuery($sq, array('joinType' => 'LEFT'));
 

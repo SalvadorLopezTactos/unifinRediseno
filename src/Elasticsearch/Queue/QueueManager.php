@@ -17,6 +17,7 @@ use Sugarcrm\Sugarcrm\Dbal\Connection;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Document;
 use Sugarcrm\Sugarcrm\Elasticsearch\Container;
 use Doctrine\DBAL\ParameterType;
+use Sugarcrm\Sugarcrm\Util\MemoryUsageRecorderTrait;
 
 /**
  *
@@ -25,9 +26,20 @@ use Doctrine\DBAL\ParameterType;
  */
 class QueueManager
 {
+    use MemoryUsageRecorderTrait;
+
     const FTS_QUEUE = 'fts_queue';
     const PROCESSED_NEW = '0';
     const DEFAULT_BUCKET_ID = -1;
+
+    /**
+     * memory check interval
+     */
+    const MEMORY_CHECK_INTERVAL = 100;
+    /**
+     * max percentage of memory usage before stopping iteration
+     */
+    const MEMORY_USAGE_MAX_PERCENTAGE = 80;
 
     /**
      * config key name for enabling caching teamset Ids, this is for performance gain for those
@@ -422,11 +434,13 @@ class QueueManager
         $errorMsg = '';
         $success = true;
 
-        $query = $this->generateQueryModuleFromQueue($this->getNewBean($module), $bucketId);
-        $data = $query->execute();
+        $this->startRecord();
         $beans = [];
         $ftsIds = [];
-        foreach ($data as $row) {
+        $it = 0;
+        $query = $this->generateQueryModuleFromQueue($this->getNewBean($module), $bucketId);
+        foreach ($query->executeAndReturnAsGenerator() as $row) {
+            $it++;
             // setup erased_fields
             if (!isset($row['erased_fields'])) {
                 $row['erased_fields'] = null;
@@ -442,11 +456,18 @@ class QueueManager
             $bean->fetchedFtsData['user_favorites'] = [];
 
             $beans[$bean->id] = $bean;
+            // check memory Usage, if it uses up to 80% of the memory
+            if ($it % self::MEMORY_CHECK_INTERVAL === 0
+                && $this->checkMemoryUsageVsLimit() > self::MEMORY_USAGE_MAX_PERCENTAGE
+            ) {
+                // stop getting more rows
+                break;
+            }
         }
 
         // batch retrieve tags, emails, and favorites
         $processed = $this->batchRetrieveRelatedDataAndIndexBeans($module, $beans, $ftsIds);
-
+        $this->recordMemoryUsge("MEMCHECK: module = $module after batchRetrieveRelatedDataAndIndexBeans");
         // flush ids from queue if any left
         if (!empty($this->deleteFromQueue)) {
             $this->flushDeleteFromQueue($module);
@@ -458,6 +479,7 @@ class QueueManager
 
     /**
      * Get a list of modules for which records are queued
+     * @param int $bucketId
      * @return array
      */
     public function getQueuedModules(int $bucketId = self::DEFAULT_BUCKET_ID) : array
@@ -698,7 +720,7 @@ class QueueManager
                 $query,
                 ['1', $teamSetIdsToCheck],
                 [ParameterType::STRING, Connection::PARAM_STR_ARRAY]
-            )->fetchAll(\PDO::FETCH_COLUMN);
+            )->fetchFirstColumn();
 
             static::$fetchedTeamSetIds = array_merge(
                 static::$fetchedTeamSetIds,
@@ -753,7 +775,7 @@ class QueueManager
                 [null, Connection::PARAM_STR_ARRAY]
             );
 
-            while ($row = $stmt->fetch()) {
+            while ($row = $stmt->fetchAssociative()) {
                 $id = $row['bean_id'];
                 $beans[$id]->fetchedFtsData['tags'][] = $row['tag_id'];
             }
@@ -784,7 +806,7 @@ class QueueManager
                 [null, Connection::PARAM_STR_ARRAY]
             );
 
-            while ($row = $stmt->fetch()) {
+            while ($row = $stmt->fetchAssociative()) {
                 $id = $row['record_id'];
                 $beans[$id]->fetchedFtsData['user_favorites'][] = $row['assigned_user_id'];
             }
@@ -813,7 +835,7 @@ class QueueManager
             $conn = $this->db->getConnection();
             $stmt = $conn->executeQuery($query, [$ids], [Connection::PARAM_STR_ARRAY]);
 
-            while ($row = $stmt->fetch()) {
+            while ($row = $stmt->fetchAssociative()) {
                 $id = $row['email_id'];
                 $beans[$id]->description = $row['description'];
                 $beans[$id]->description_html = $row['description_html'];
@@ -983,5 +1005,22 @@ class QueueManager
         return SugarContainer::getInstance()
             ->get(\SugarConfig::class)
             ->get(self::CONFIG_PERF_GS_TEAM_KEY, false);
+    }
+
+    /**
+     * record memory usage: log the currant used memory and memory usage delta
+     * @param string $msg
+     */
+    protected function recordMemoryUsge(string $msg) : void
+    {
+        $currntUsage = 0;
+        $memoryDelta = $this->stopRecord($currntUsage);
+        $percentageOfMemoryLimit = $this->checkMemoryUsageVsLimit();
+        if (\SugarConfig::getInstance()->get('memory_check', false)) {
+            $logger = $this->getLogger();
+            if (!empty($logger) && method_exists($logger, 'critical')) {
+                $logger->critical($msg . ': used: ' . $currntUsage . ' delta: ' . $memoryDelta . ' percentage: ' . $percentageOfMemoryLimit);
+            }
+        }
     }
 }

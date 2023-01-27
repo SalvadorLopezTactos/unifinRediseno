@@ -46,7 +46,7 @@
      * Toggles the commit history log
      */
     triggerHistoryLog: function() {
-        this.$('i').toggleClass('fa-caret-down fa-caret-up');
+        this.$('#show_hide_history_log').toggleClass('sicon-chevron-down').toggleClass('sicon-chevron-up');
         this.context.trigger('forecast:commit_log:trigger');
     },
 
@@ -57,10 +57,18 @@
         this.collection.on('reset', function() {
             // get the first line
             this.data_points = [];
-            var model = _.first(this.collection.models)
+            var model = _.first(this.collection.models);
 
             if (!_.isUndefined(model)) {
                 this.commit_date = model.get('date_modified');
+                //FIXME: SS-2576 We should determine a better way to verify
+                //server time and bowser having small differences in time
+                let commitDate = app.date(this.commit_date);
+                let currentTime = app.date();
+
+                if (currentTime.isBefore(commitDate)) {
+                    this.commit_date = currentTime.format(commitDate._f);
+                }
 
                 this.data_points = this.processDataPoints(model);
             } else {

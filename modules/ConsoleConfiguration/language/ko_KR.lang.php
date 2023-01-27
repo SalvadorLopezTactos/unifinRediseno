@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => '필터',
     'LBL_CONSOLE_FILTER_RULES' => '필터 규칙',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => '첫 열 고정',
+
     'LBL_CONSOLE_COLUMNS' => '세로줄(열)',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => '다중 필드 열',
     'LBL_CONSOLE_PRIMARY_SORT' => '최우선 정렬',

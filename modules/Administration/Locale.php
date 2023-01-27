@@ -21,7 +21,7 @@ if (!is_admin($current_user)) {
 echo getClassicModuleTitle(
     "Administration",
     array(
-        "<a href='index.php?module=Administration&action=index'>" . translate(
+        "<a href='#Administration'>" . translate(
             'LBL_MODULE_NAME',
             'Administration'
         ) . "</a>",
@@ -74,7 +74,7 @@ if (isset($_REQUEST['process']) && $_REQUEST['process'] == 'true') {
         <script>
         var app = window.parent.SUGAR.App;
         app.api.call('read', app.api.buildURL('ping'));
-        app.router.navigate('#bwc/index.php?module=Administration&action=index', {trigger:true, replace:true});
+        app.router.navigate('#Administration', {trigger:true, replace:true});
         </script>
     ";
 } else {
@@ -116,7 +116,7 @@ if (isset($_REQUEST['process']) && $_REQUEST['process'] == 'true') {
     if ($locale->invalidLocaleNameFormatUpgrade()) {
         $sugar_smarty->assign('upgradeInvalidLocaleNameFormat', 'bad name format upgrade');
     } else {
-        $sugar_smarty->clear_assign('upgradeInvalidLocaleNameFormat');
+        $sugar_smarty->clearAssign('upgradeInvalidLocaleNameFormat');
     }
 
     $sugar_smarty->assign('getNameJs', $locale->getNameJs());

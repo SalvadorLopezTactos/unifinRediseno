@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'ID de partida individual de ingresos de renovación',
     'LBL_PARENT_RLIS' => 'Partidas individuales de ingresos principales',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Partidas individuales de ingresos principales',
+    'LBL_FORECASTED_LIKELY' => 'Pronosticado Probablemente',
     'LBL_EXPERT_ID' => 'Especialista de Producto',
     'LBL_FORECAST' => 'Incluyen en el pronóstico',
     'LBL_SUBTOTAL' => 'Subtotal',

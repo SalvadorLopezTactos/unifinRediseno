@@ -67,6 +67,11 @@ $viewdefs['ReportSchedules']['base']['view']['list'] = array(
                     'enabled' => true,
                     'default' => false,
                 ),
+                [
+                    'name' => 'file_type',
+                    'enabled' => true,
+                    'default' => false,
+                ],
             ),
         ),
     ),

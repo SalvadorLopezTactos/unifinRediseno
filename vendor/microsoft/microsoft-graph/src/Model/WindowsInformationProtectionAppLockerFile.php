@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class WindowsInformationProtectionAppLockerFile extends Entity
 {
@@ -30,7 +28,7 @@ class WindowsInformationProtectionAppLockerFile extends Entity
     * Gets the displayName
     * The friendly name
     *
-    * @return string The displayName
+    * @return string|null The displayName
     */
     public function getDisplayName()
     {
@@ -56,10 +54,43 @@ class WindowsInformationProtectionAppLockerFile extends Entity
     }
     
     /**
+    * Gets the file
+    * File as a byte array
+    *
+    * @return \GuzzleHttp\Psr7\Stream|null The file
+    */
+    public function getFile()
+    {
+        if (array_key_exists("file", $this->_propDict)) {
+            if (is_a($this->_propDict["file"], "\GuzzleHttp\Psr7\Stream") || is_null($this->_propDict["file"])) {
+                return $this->_propDict["file"];
+            } else {
+                $this->_propDict["file"] = \GuzzleHttp\Psr7\stream_for($this->_propDict["file"]);
+                return $this->_propDict["file"];
+            }
+        }
+        return null;
+    }
+    
+    /**
+    * Sets the file
+    * File as a byte array
+    *
+    * @param \GuzzleHttp\Psr7\Stream $val The file
+    *
+    * @return WindowsInformationProtectionAppLockerFile
+    */
+    public function setFile($val)
+    {
+        $this->_propDict["file"] = $val;
+        return $this;
+    }
+    
+    /**
     * Gets the fileHash
     * SHA256 hash of the file
     *
-    * @return string The fileHash
+    * @return string|null The fileHash
     */
     public function getFileHash()
     {
@@ -85,43 +116,10 @@ class WindowsInformationProtectionAppLockerFile extends Entity
     }
     
     /**
-    * Gets the file
-    * File as a byte array
-    *
-    * @return \GuzzleHttp\Psr7\Stream The file
-    */
-    public function getFile()
-    {
-        if (array_key_exists("file", $this->_propDict)) {
-            if (is_a($this->_propDict["file"], "\GuzzleHttp\Psr7\Stream")) {
-                return $this->_propDict["file"];
-            } else {
-                $this->_propDict["file"] = \GuzzleHttp\Psr7\stream_for($this->_propDict["file"]);
-                return $this->_propDict["file"];
-            }
-        }
-        return null;
-    }
-    
-    /**
-    * Sets the file
-    * File as a byte array
-    *
-    * @param \GuzzleHttp\Psr7\Stream $val The file
-    *
-    * @return WindowsInformationProtectionAppLockerFile
-    */
-    public function setFile($val)
-    {
-        $this->_propDict["file"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the version
     * Version of the entity.
     *
-    * @return string The version
+    * @return string|null The version
     */
     public function getVersion()
     {

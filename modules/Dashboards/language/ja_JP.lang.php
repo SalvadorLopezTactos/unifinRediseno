@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => '{{module}} モジュールのすべてのダッシュ ボード',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => '{{module}} モジュール {{view}} ビューのすべてのダッシュ ボード',
     'LBL_COPY_OF' => '{{{name}}} のコピー',
-    'LBL_DELETE_FOCUS_DRAWER' => 'フォーカス ドロワ ダッシュボードを削除することはできません。',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'ダッシュボードを作成する',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "このダッシュボードをデフォルトのレイアウトに戻します、よろしいですか？",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'ダッシュボードパネルをデフォルトのレイアウトに戻します、よろしいですか？',
+    'LBL_FILTER_UTILS_SELECT' => 'アサイン済み',
 );

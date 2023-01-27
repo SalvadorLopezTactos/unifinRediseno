@@ -312,7 +312,7 @@ class PortalPasswordApi extends SugarApi
             ->andWhere($qb->expr()->eq('deleted', $qb->createPositionalParameter(0)))
             ->andWhere($qb->expr()->eq('id', $qb->createPositionalParameter($resetID)))
             ->setMaxResults(1);
-        $token = $qb->execute()->fetch();
+        $token = $qb->execute()->fetchAssociative();
         return $token;
     }
 
@@ -375,7 +375,7 @@ class PortalPasswordApi extends SugarApi
         }
 
         // Place the site URL into the template
-        $url = \SugarConfig::getInstance()->get('site_url') . '/portal/index.html';
+        $url = \SugarConfig::getInstance()->get('site_url') . '/portal/index.php';
         $emailTemplate->body = str_replace('$portal_login_url', $url, $emailTemplate->body);
 
         // Try to build and send the email

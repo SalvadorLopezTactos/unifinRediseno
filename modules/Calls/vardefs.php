@@ -24,13 +24,19 @@ $dictionary['Call'] = array(
     'vname' => 'LBL_SUBJECT',
     'dbType' => 'varchar',
     'type' => 'name',
-    'len' => '50',
+    'len' => '255',
     'comment' => 'Brief description of the call',
     'unified_search' => true,
     'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 1.41),
 	'required'=>true,
     'importable' => 'required',
   ),
+        'internal_notes' => [
+            'name' => 'internal_notes',
+            'vname' => 'LBL_INTERNAL_NOTES',
+            'type' => 'text',
+            'comment' => 'Internal notes for the call',
+        ],
 
   'duration_hours' =>
   array (
@@ -254,7 +260,7 @@ $dictionary['Call'] = array(
     'join_name' => 'contacts',
     'dbType' => 'varchar',
     'source'=>'non-db',
-    'len' => 36,
+    'len' => 255,
     'importable' => 'false',
     'studio' => false,
   ),
@@ -275,6 +281,37 @@ $dictionary['Call'] = array(
     'source'=>'non-db',
         'vname'=>'LBL_LEADS',
   ),
+    'lead_id' => [
+        'name' => 'lead_id',
+        'type' => 'relate',
+        'rname' => 'id',
+        'vname' => 'LBL_LEAD_ID',
+        'link' => 'leads',
+        'source' => 'non-db',
+        'studio' => false,
+    ],
+    'lead_name' => [
+        'name' => 'lead_name',
+        'rname' => 'name',
+        'db_concat_fields' => [
+            0 => 'first_name',
+            1 => 'last_name',
+        ],
+        'id_name' => 'lead_id',
+        'massupdate' => false,
+        'vname' => 'LBL_LEAD_NAME',
+        'type' => 'relate',
+        'link' => 'leads',
+        'table' => 'leads',
+        'isnull' => 'true',
+        'module' => 'Leads',
+        'join_name' => 'leads',
+        'dbType' => 'varchar',
+        'source' => 'non-db',
+        'len' => 255,
+        'importable' => 'false',
+        'studio' => false,
+    ],
     // Bug #42619 Missed back-relation from Project module
     'project'=> array (
         'name' => 'project',
@@ -394,6 +431,13 @@ $dictionary['Call'] = array(
             'bean_name'=>'Note',
             'source'=>'non-db',
             'vname'=>'LBL_MESSAGES',
+        ],
+        'escalations' => [
+            'name' => 'escalations',
+            'type' => 'link',
+            'relationship' => 'escalation_calls',
+            'source' => 'non-db',
+            'vname' => 'LBL_ESCALATIONS',
         ],
   'created_by_link' =>
   array (
@@ -734,11 +778,6 @@ $dictionary['Call'] = array(
 		'fields'=> array('status'),
 	),
     array(
-        'name' => 'idx_calls_date_start',
-        'type' => 'index',
-        'fields' => array('date_start'),
-    ),
-    array(
         'name' => 'idx_calls_recurrence_id',
         'type' => 'index',
         'fields' => array('recurrence_id'),
@@ -829,6 +868,9 @@ $dictionary['Call'] = array(
     'duplicate_check' => array(
         'enabled' => false,
     ),
+    'uses' => [
+        'sentiments_lens',
+    ],
 );
 
 VardefManager::createVardef('Calls', 'Call', array(

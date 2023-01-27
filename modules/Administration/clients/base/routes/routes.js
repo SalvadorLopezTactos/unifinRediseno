@@ -12,6 +12,16 @@
     app.events.on('router:init', function(router) {
         var routes = [
             {
+                name: 'administration',
+                route: 'Administration',
+                callback: function() {
+                    app.controller.loadView({
+                        layout: 'administration',
+                        module: 'Administration'
+                    });
+                }
+            },
+            {
                 name: 'relate-denormalization',
                 route: ':Administration/denormalization',
                 callback: function(module) {
@@ -22,22 +32,26 @@
                 }
             },
             {
-                name: 'aws-connect',
-                route: ':Administration/awsconnect',
-                callback: function(module) {
+                // route for Config Framework
+                name: 'admin-config',
+                route: ':Administration/config/:category',
+                callback: function(module, category) {
+                    var layout = app.metadata.getLayout(module, category + '-config') ? category + '-config' : 'config';
                     app.controller.loadView({
-                        layout: 'aws-connect',
+                        layout: layout,
+                        category: category,
                         module: module
                     });
                 }
             },
             {
-                name: 'csp-setting',
-                route: ':Administration/cspsetting',
-                callback: function(module) {
+                name: 'drive-path',
+                route: ':Administration/drive-path/:type',
+                callback: function(module, type) {
                     app.controller.loadView({
-                        layout: 'csp-setting',
-                        module: module
+                        layout: 'drive-path',
+                        module: module,
+                        driveType: type,
                     });
                 }
             },

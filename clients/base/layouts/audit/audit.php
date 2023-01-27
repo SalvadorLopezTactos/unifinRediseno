@@ -13,14 +13,14 @@ $viewdefs['base']['layout']['audit'] = array(
     'components' => array(
         array(
             'layout' => array(
-                'type' => 'default',
-                'name' => 'sidebar',
+                'type' => 'base',
+                'name' => 'main-pane',
                 'components' => array(
                     array(
                         'layout' => array(
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
+                            'css_class' => 'main-pane span12',
                             'components' => array(
                                 array(
                                     'view' => 'audit-headerpane',
@@ -33,18 +33,6 @@ $viewdefs['base']['layout']['audit'] = array(
                                 ),
                                 array(
                                     'view' => 'audit-footer',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
-                            'type' => 'base',
-                            'name' => 'preview-pane',
-                            'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
-                                    'layout' => 'preview',
                                 ),
                             ),
                         ),

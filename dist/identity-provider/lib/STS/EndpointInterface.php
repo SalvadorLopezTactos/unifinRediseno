@@ -20,72 +20,82 @@ interface EndpointInterface
     /**
      * oAuth2 token retrieval endpoint
      */
-    const TOKEN_ENDPOINT = 'token';
+    public const TOKEN_ENDPOINT = 'token';
 
     /**
      * oAuth2 auth endpoint
      */
-    const AUTH_ENDPOINT = 'auth';
+    public const AUTH_ENDPOINT = 'auth';
 
     /**
      * oAuth2 auth endpoint
      */
-    const OAUTH2_ENDPOINT = 'oauth2';
+    public const OAUTH2_ENDPOINT = 'oauth2';
 
     /**
      * oAuth2 introspect endpoint
      */
-    const INTROSPECT_ENDPOINT = 'introspect';
+    public const INTROSPECT_ENDPOINT = 'introspect';
+
+    /**
+     * oAuth2 token revocation endpoint
+     */
+    public const REVOCATION_ENDPOINT = 'revoke';
 
     /**
      * oAuth2 consent data endpoint
      */
-    const CONSENT_ENDPOINT = 'consent/requests';
+    public const CONSENT_ENDPOINT = 'auth/requests/consent';
+
+    /**
+     * Hydra Login Requests endpoint
+     */
+    public const LOGIN_REQUESTS_ENDPOINT = 'requests/login';
 
     /**
      *  oAuth2 user info endpoint
      */
-    const USER_INFO_ENDPOINT = 'userinfo';
+    public const USER_INFO_ENDPOINT = 'userinfo';
 
     /**
-     * oAuth2 consent data endpoint
+     * Accept endpoint
      */
-    const CONSENT_ACCEPT_ENDPOINT = 'accept';
+    public const ACCEPT_ENDPOINT = 'accept';
 
     /**
-     * oAuth2 consent data endpoint
+     * Reject endpoint
      */
-    const CONSENT_REJECT_ENDPOINT = 'reject';
+    public const REJECT_ENDPOINT = 'reject';
 
     /**
      * A RSA public/private key pair for signing and validating OpenID Connect ID Tokens
      */
-    const OPENID_KEYS = 'hydra.openid.id-token';
+    public const OPENID_KEYS = 'hydra.openid.id-token';
 
     /**
      * A RSA public/private key pair for signing and validating the consent challenge
      */
-    const CONSENT_CHALLENGE_KEYS = 'hydra.consent.challenge';
+    public const CONSENT_CHALLENGE_KEYS = 'hydra.consent.challenge';
 
     /**
      * A RSA public/private key pair for signing and validating the consent response
      */
-    const CONSENT_RESPONSE_KEYS = 'hydra.consent.response';
+    public const CONSENT_RESPONSE_KEYS = 'hydra.consent.response';
 
     /**
      * A RSA public/private key pair and a certificate for signing HTTP over TLS
      */
-    const HTTPS_TLS_KEYS = 'https-tls';
+    public const HTTPS_TLS_KEYS = 'https-tls';
 
     /**
      * A public key
      */
-    const PUBLIC_KEY = 'public';
+    public const PUBLIC_KEY = 'public';
 
     /**
      * A private key
      */
-    const PRIVATE_KEY = 'private';
+    public const PRIVATE_KEY = 'private';
 
     /**
      * Build path to STS oAuth2 server endpoints for token and auth.

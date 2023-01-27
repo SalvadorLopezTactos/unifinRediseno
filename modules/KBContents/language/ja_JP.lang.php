@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'テンプレートの表示',
     'LNK_LIST_KBCATEGORIES' => 'カテゴリ表示',
     'LBL_TEMPLATES' => 'テンプレート',
+    'LBL_TEMPLATE' => 'テンプレート',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'テンプレートはすべての内容を上書きします。' .
         ' 本当にこのテンプレートを使用してよいですか？',
     'LNK_IMPORT_KBCONTENTS' => '記事のインポート',

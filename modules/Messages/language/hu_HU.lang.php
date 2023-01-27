@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Üzenet jelentések megtekintése',
     'LNK_IMPORT_MESSAGES' => 'Üzenetek importálása',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'Ajánlás azonosítója',
+    'LBL_LEAD_NAME' => 'Ajánlás',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Ügyféloldali csevegés',
+    'LBL_ACTIVITY_CUSTOMER' => 'Ügyfél',
+    'LBL_ACTIVITY_FINISHED' => 'véget ért',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'folyamatban',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Üzenetek figyelemfelhívás',
 ];

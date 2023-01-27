@@ -12,9 +12,9 @@
 *}
 {php}
 	require_once('modules/Reports/templates/templates_reports.php');
-	$reporter = $this->get_template_vars('reporter');
-	$args = $this->get_template_vars('args');
-	$header_row = $this->get_template_vars('header_row');
+	$reporter = $_smarty_tpl->getTemplateVars('reporter');
+	$args = $_smarty_tpl->getTemplateVars('args');
+	$header_row = $_smarty_tpl->getTemplateVars('header_row');
 	$got_row = 0;
 	$maximumCellSize = 0;
 	$rowsAndColumnsData = array();
@@ -25,7 +25,7 @@
 	getColumnDataAndFillRowsFor3By3GPBY($reporter, $header_row, $rowsAndColumnsData, $columnDataFor2ndGroup, $columnDataFor3rdGroup, $maximumCellSize, $legend, $grandTotal);
 	$headerColumnNameArray = getHeaderColumnNamesForMatrix($reporter, $header_row, $columnDataFor2ndGroup);
 	$totalColumns = count($headerColumnNameArray) + count($columnDataFor3rdGroup) - 1;
-	$this->assign('legend', implode(",", $legend));
+	$_smarty_tpl->assign('legend', implode(",", $legend));
 	$maximumCellSize = $maximumCellSize - $reporter->addedColumns;
 {/php}
 
@@ -36,26 +36,26 @@
 {php}
 	$columnDataFor3rdGroup[] = 'Total';
 	for ($i = 0 ; $i < (count($headerColumnNameArray) -1) ; $i++) {
-		$this->assign('headerColumnName', $headerColumnNameArray[$i]);
+		$_smarty_tpl->assign('headerColumnName', $headerColumnNameArray[$i]);
 		$headerColumnClassName = "reportlistViewMatrixThS1";
 		if ($i == (count($headerColumnNameArray) - 2)) {
 			$headerColumnClassName = "reportlistViewMatrixThS2";
-			$this->assign('headerColumnName', "Grand Total");
+			$_smarty_tpl->assign('headerColumnName', "Grand Total");
 		} // if
-		$this->assign('headerColumnClassName', $headerColumnClassName);
+		$_smarty_tpl->assign('headerColumnClassName', $headerColumnClassName);
 		if ($i == 0 || ($i == (count($headerColumnNameArray) - 2))) {
-		$this->assign('topLevelRowSpan', 4);
+		$_smarty_tpl->assign('topLevelRowSpan', 4);
 		if (empty($columnDataFor2ndGroup)) {
-			$this->assign('topLevelRowSpan', 0);
+			$_smarty_tpl->assign('topLevelRowSpan', 0);
 		} // if
 {/php}
-	<th scope="col" align='center' rowspan="{$topLevelRowSpan}" class="{$headerColumnClassName}" valign=middle wrap>{$headerColumnName}</td>
+	<th scope="col" align='center' rowspan="{$topLevelRowSpan|escape:'html':'UTF-8'}" class="{$headerColumnClassName|escape:'html':'UTF-8'}" valign=middle wrap>{$headerColumnName|escape:'html':'UTF-8'}</td>
 {php}
 		} else {
-			$this->assign('topLevelColSpan', (count($columnDataFor3rdGroup) * count($columnDataFor2ndGroup)));
+			$_smarty_tpl->assign('topLevelColSpan', (count($columnDataFor3rdGroup) * count($columnDataFor2ndGroup)));
 
 {/php}
-			<th scope="col" align='center' colspan="{$topLevelColSpan}" class="{$headerColumnClassName}" valign=middle wrap>{$headerColumnName}</td>
+			<th scope="col" align='center' colspan="{$topLevelColSpan|escape:'html':'UTF-8'}" class="{$headerColumnClassName|escape:'html':'UTF-8'}" valign=middle wrap>{$headerColumnName|escape:'html':'UTF-8'}</td>
 {php}
 
 		} // else
@@ -70,15 +70,15 @@
 {php}
 	for ($i = 0 ; $i < count($columnDataFor2ndGroup) ; $i++) {
 		$headerColumn2ClassName = "reportlistViewMatrixThS1";
-		$this->assign('headerColumn2ClassName', $headerColumn2ClassName);
+		$_smarty_tpl->assign('headerColumn2ClassName', $headerColumn2ClassName);
 		$cellData = $columnDataFor2ndGroup[$i];
 		if (empty($cellData)) {
-			$cellData = "&nbsp;";
+			$cellData = " ";
 		} // if
-		$this->assign('topLevelColSpan', count($columnDataFor3rdGroup));
-		$this->assign('columnDataFor2ndGroup', $cellData);
+		$_smarty_tpl->assign('topLevelColSpan', count($columnDataFor3rdGroup));
+		$_smarty_tpl->assign('columnDataFor2ndGroup', $cellData);
 {/php}
-	<th scope="col" colspan="{$topLevelColSpan}" align='center' class="{$headerColumn2ClassName}" valign=middle wrap>{$columnDataFor2ndGroup}</td>
+	<th scope="col" colspan="{$topLevelColSpan|escape:'html':'UTF-8'}" align='center' class="{$headerColumn2ClassName|escape:'html':'UTF-8'}" valign=middle wrap>{$columnDataFor2ndGroup}</td>
 {php}
 	} // for
 {/php}
@@ -95,15 +95,15 @@
 {php}
 	for ($i = 0 ; $i < count($columnDataFor2ndGroup) ; $i++) {
 		$headerColumn2ClassName = "reportlistViewMatrixThS1";
-		$this->assign('headerColumn2ClassName', $headerColumn2ClassName);
+		$_smarty_tpl->assign('headerColumn2ClassName', $headerColumn2ClassName);
 		$cellData = $headerColumnNameArray[2];
 		if (empty($cellData)) {
-			$cellData = "&nbsp;";
+			$cellData = " ";
 		} // if
-		$this->assign('topLevelColSpan', count($columnDataFor3rdGroup));
-		$this->assign('columnDataFor2ndGroup', $cellData);
+		$_smarty_tpl->assign('topLevelColSpan', count($columnDataFor3rdGroup));
+		$_smarty_tpl->assign('columnDataFor2ndGroup', $cellData);
 {/php}
-	<th scope="col" colspan="{$topLevelColSpan}" align='center' class="{$headerColumn2ClassName}" valign=middle wrap>{$columnDataFor2ndGroup}</td>
+	<th scope="col" colspan="{$topLevelColSpan|escape:'html':'UTF-8'}" align='center' class="{$headerColumn2ClassName|escape:'html':'UTF-8'}" valign=middle wrap>{$columnDataFor2ndGroup}</td>
 {php}
 	} // for
 {/php}
@@ -115,14 +115,14 @@
 	for ($i = 0 ; $i < count($columnDataFor2ndGroup) ; $i++) {
 		for ($j = 0 ; $j < count($columnDataFor3rdGroup) ; $j++) {
 			$headerColumn2ClassName = "reportlistViewMatrixThS1";
-			$this->assign('headerColumn2ClassName', $headerColumn2ClassName);
+			$_smarty_tpl->assign('headerColumn2ClassName', $headerColumn2ClassName);
 			$cellData = $columnDataFor3rdGroup[$j];
 			if (empty($cellData)) {
-				$cellData = "&nbsp;";
+				$cellData = " ";
 			} // if
-			$this->assign('columnDataFor3rdGroup', $cellData);
+			$_smarty_tpl->assign('columnDataFor3rdGroup', $cellData);
 {/php}
-	<th scope="col" align='center' class="{$headerColumn2ClassName}" valign=middle wrap>{$columnDataFor3rdGroup}</td>
+	<th scope="col" align='center' class="{$headerColumn2ClassName|escape:'html':'UTF-8'}" valign=middle wrap>{$columnDataFor3rdGroup}</td>
 {php}
 		} // for
 	} // for
@@ -143,7 +143,7 @@
 			<tr height="20">
 {php}
 			for ($j = 0 ; $j < count($columnDataFor2ndGroup) ; $j++) {
-				$topLevelGpByData = "&nbsp;";
+				$topLevelGpByData = " ";
 				$set2ndstGroupBy = true;
 				if ($j == (count($columnDataFor2ndGroup) -1)) {
 					$columnDataFor3rdGroup1 = array();
@@ -156,20 +156,20 @@
 						if (isset($rowData[$headerColumnNameArray[0]])) {
 							$topLevelGpByData = $rowData[$headerColumnNameArray[0]];
 							if (empty($topLevelGpByData)) {
-								$topLevelGpByData = "&nbsp;";
+								$topLevelGpByData = " ";
 							} // if
 						} // if
-						$this->assign('topLevelGpByData', $topLevelGpByData);
-						$this->assign('rowSpanForTopGpByData', $noofrows);
+						$_smarty_tpl->assign('topLevelGpByData', $topLevelGpByData);
+						$_smarty_tpl->assign('rowSpanForTopGpByData', $noofrows);
 						$dataCellClass = "reportlistViewMatrixRightEmptyData";
-						$this->assign('dataCellClass', $dataCellClass);
+						$_smarty_tpl->assign('dataCellClass', $dataCellClass);
 {/php}
-						<td scope="col" align='center' rowspan={$rowSpanForTopGpByData} class="{$dataCellClass}" valign=middle wrap>{$topLevelGpByData}</td>
+						<td scope="col" align='center' rowspan={$rowSpanForTopGpByData|escape:'html':'UTF-8'} class="{$dataCellClass|escape:'html':'UTF-8'}" valign=middle wrap>{$topLevelGpByData}</td>
 {php}
 						$set1stGroupBy = false;
 					} // if
 
-					$topLevelGp3ByData = "&nbsp;";
+					$topLevelGp3ByData = " ";
 					if (isset($rowData[$columnDataFor2ndGroup[$j]])) {
 						if (isset($rowData[$columnDataFor2ndGroup[$j]][$columnDataFor3rdGroup1[$m]])) {
 							$cellDataArray = $rowData[$columnDataFor2ndGroup[$j]][$columnDataFor3rdGroup1[$m]];
@@ -177,12 +177,12 @@
 							$cellData = $cellDataArray[$arrayKeys[$k]];
 							$topLevelGp3ByData = $cellData;
 							if (empty($topLevelGp3ByData)) {
-								$topLevelGp3ByData = "&nbsp;";
+								$topLevelGp3ByData = " ";
 							} // if
 						} // if
 					} // if
 
-					$this->assign('topLevelGp3ByData', $topLevelGp3ByData);
+					$_smarty_tpl->assign('topLevelGp3ByData', $topLevelGp3ByData);
 					$dataCellClass = "reportGroupByDataMatrixEvenListRowS1";
 					if ($j == (count($columnDataFor2ndGroup)-1)) {
 						$dataCellClass = "reportGroupByDataMatrixEvenListRowS2";
@@ -190,9 +190,9 @@
 					if ($j == 0) {
 						//$dataCellClass = "reportlistViewMatrixRightEmptyData11";
 					} // if
-					$this->assign('dataCellClass', $dataCellClass);
+					$_smarty_tpl->assign('dataCellClass', $dataCellClass);
 {/php}
-					<td scope="col" align='center' class="{$dataCellClass}" valign=middle wrap>{$topLevelGp3ByData}</td>
+					<td scope="col" align='center' class="{$dataCellClass|escape:'html':'UTF-8'}" valign=middle wrap>{$topLevelGp3ByData}</td>
 {php}
 
 				} // for
@@ -220,18 +220,18 @@
 
 		for ($m = 0 ; $m < count($columnDataFor3rdGroup1) ; $m++) {
 			$grandTotalString = $grandTotal[$headerColumnNameArray[0]];
-			$this->assign('grandTotalData', $grandTotalString);
+			$_smarty_tpl->assign('grandTotalData', $grandTotalString);
 			$dataCellClass = "reportlistViewMatrixRightEmptyData1";
-			$this->assign('dataCellClass', $dataCellClass);
+			$_smarty_tpl->assign('dataCellClass', $dataCellClass);
 			if ($setGrandTotalString) {
 				$setGrandTotalString = false;
-				//$this->assign('colSpanFor2ndGpByData', 1 + (count($columnDataFor3rdGroup) * (count($columnDataFor2ndGroup) - 1)));
-				$this->assign('rowSpanFor2ndGpByData', $maximumCellSize);
+				//$_smarty_tpl->assign('colSpanFor2ndGpByData', 1 + (count($columnDataFor3rdGroup) * (count($columnDataFor2ndGroup) - 1)));
+				$_smarty_tpl->assign('rowSpanFor2ndGpByData', $maximumCellSize);
 {/php}
-	<td scope="col" align='center' rowspan="{$rowSpanFor2ndGpByData}" class="{$dataCellClass}" valign=middle wrap>{$grandTotalData}</td>
+	<td scope="col" align='center' rowspan="{$rowSpanFor2ndGpByData|escape:'html':'UTF-8'}" class="{$dataCellClass|escape:'html':'UTF-8'}" valign=middle wrap>{$grandTotalData|escape:'html':'UTF-8'}</td>
 {php}
 			} // if
-			$grandTotalData = "&nbsp;";
+			$grandTotalData = " ";
 			if ($j == (count($columnDataFor2ndGroup) - 1)) {
 				if (isset($grandTotal[$columnDataFor3rdGroup1[$m]])) {
 					$cellDataArray = $grandTotal[$columnDataFor3rdGroup1[$m]];
@@ -239,7 +239,7 @@
 					$cellData = $cellDataArray[$arrayKeys[$k]];
 					$grandTotalData = $cellData;
 					if (empty($grandTotalData)) {
-						$grandTotalData = "&nbsp;";
+						$grandTotalData = " ";
 					} // if
 
 				} // if
@@ -249,10 +249,10 @@
 				$cellData = $cellDataArray[$arrayKeys[$k]];
 				$grandTotalData = $cellData;
 				if (empty($grandTotalData)) {
-					$grandTotalData = "&nbsp;";
+					$grandTotalData = " ";
 				} // if
 			} // else
-			$this->assign('grandTotalData', $grandTotalData);
+			$_smarty_tpl->assign('grandTotalData', $grandTotalData);
 			$dataCellClass = "reportGroupByDataMatrixEvenListRowS1";
 			if ($j == (count($columnDataFor2ndGroup)-1)) {
 				$dataCellClass = "reportGroupByDataMatrixEvenListRowS2";
@@ -266,9 +266,9 @@
 				} // if
 			} // if
 			//$dataCellClass = "reportlistViewMatrixRightEmptyData";
-			$this->assign('dataCellClass', $dataCellClass);
+			$_smarty_tpl->assign('dataCellClass', $dataCellClass);
 {/php}
-	<td scope="col" align='center' class="{$dataCellClass}" valign=middle wrap>{$grandTotalData}</td>
+	<td scope="col" align='center' class="{$dataCellClass|escape:'html':'UTF-8'}" valign=middle wrap>{$grandTotalData|escape:'html':'UTF-8'}</td>
 {php}
 		} // for
 	} // for

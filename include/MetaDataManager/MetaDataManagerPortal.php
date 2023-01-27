@@ -15,6 +15,15 @@ use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
 class MetaDataManagerPortal extends MetaDataManager
 {
     /**
+     * Names of logo configs
+     * @var array
+     */
+    public static $LOGO_CONFIGS = [
+        'portaltheme_navigation_bar_logo_image_url' => 'logomarkURL',
+        'portaltheme_login_page_image_url' => 'logoURL',
+    ];
+
+    /**
      * Find all modules with Portal metadata
      *
      * @param boolean $filtered Ignored
@@ -96,6 +105,17 @@ class MetaDataManagerPortal extends MetaDataManager
             }
         }
 
+        // Theme settings
+        foreach ($admin->settings as $key => $value) {
+            if (strpos($key, 'portaltheme_') === 0) {
+                if (!empty(self::$LOGO_CONFIGS[$key])) {
+                    $configs[self::$LOGO_CONFIGS[$key]] = $value;
+                } else {
+                    $configs[$this->translateConfigProperty(substr($key, 12))] = $value;
+                }
+            }
+        }
+
         return $configs;
     }
 
@@ -161,7 +181,7 @@ class MetaDataManagerPortal extends MetaDataManager
      * @param MetaDataContextInterface $context
      * @return array Portal metadata
      */
-    protected function loadMetadata($args = array(), MetaDataContextInterface $context)
+    protected function loadMetadata($args, MetaDataContextInterface $context)
     {
         $data = parent::loadMetadata($args, $context);
 

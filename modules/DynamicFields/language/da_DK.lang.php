@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Feltnavnet findes allerede',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Feltnavn bør kun indeholde følgende tegn: a-za-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Intet modul Inkluderet Kunne ikke gemme',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Rullelistenavn findes allerede',
     'LBL_BTN_ADD' => 'Tilføj',
     'LBL_BTN_EDIT' => 'Rediger',
     'LBL_GENERATE_URL' => 'Generer URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Lægger til kolonne  {0} til',
     'LBL_DONE' => 'Udført',
     'LBL_EXE_NON_SIM_MODE' => 'Udfør ikke-simulationsmodus',
+    'LBL_CALCULATION_VISIBLE' => 'Gør synligt for beregninger',
 );
-
-
-?>

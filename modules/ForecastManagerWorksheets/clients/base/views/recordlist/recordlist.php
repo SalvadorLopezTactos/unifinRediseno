@@ -15,20 +15,12 @@ $viewdefs['ForecastManagerWorksheets']['base']['view']['recordlist'] = array(
     'selection' => array(),
     'rowactions' => array(
         'actions' => array(
-            /*array(
-                'type' => 'rowaction',
-                'css_class' => 'btn disabled',
-                'tooltip' => 'LBL_PREVIEW',
-                'event' => 'list:preview:fire',
-                'icon' => 'fa-eye',
-                'acl_action' => 'view',
-            ),*/
             array(
                 'type' => 'rowaction',
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_HISTORY_LOG',
                 'event' => 'list:history_log:fire',
-                'icon' => 'fa-exclamation-circle',
+                'icon' => 'sicon-warning-circle',
                 'acl_action' => 'view',
             ),
         ),

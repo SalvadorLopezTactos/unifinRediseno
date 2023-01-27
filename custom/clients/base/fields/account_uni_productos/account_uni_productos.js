@@ -164,6 +164,13 @@
     _render: function () {
         this._super("_render");
 
+        if($('[data-fieldname="account_uni_productos"] > span').length >0){
+            $('[data-fieldname="account_uni_productos"] > span').show();
+        }
+
+        //Formatea campo de Origen para evitar que se muestren filas con espacio en blanco
+        this.hideRowsNoHideByDependencyCreate();
+
         this.$("div.record-label[data-name='accounts_uni_productos']").attr('style', 'display:none;');
 
         $("span.normal[data-fieldname='account_uni_productos']").find('.row-fluid > .record-label').attr('style', 'display:none;');
@@ -338,6 +345,17 @@
         if(App.user.attributes.excluir_precalifica_c== 1){
             $('[data-field="chk_ls_excluir"]').attr('style','pointer-events:block');
         }
+    },
+
+    hideRowsNoHideByDependencyCreate:function(){
+        //La clase vis_action_hidden se agrega cuando un campo se oculta a través de una fórmula en studio o una dependencia
+        var hidden_rows=$('.LBL_RECORDVIEW_PANEL16 > .vis_action_hidden');
+        hidden_rows.each(function(i, obj) {
+            //Se oculta la fila cuando se detecta que el campo está oculto y además el campo que está junto a el es el campo custom "blank_space" o es una celda "relleno" habilitada desde studio
+            if($(obj).siblings('[data-name="blank_space"]').length > 0 || $(obj).siblings('.filler-cell').length > 0){
+                $(obj).parent().addClass('hide');
+            }
+        });
     },
 
     /*************************************PRODUCTO LEASING*********************************************/

@@ -44,7 +44,7 @@ r41724 - 2008-11-13 08:55:42 -0800 (Thu, 13 Nov 2008) - Collin Lee - Made change
 
 function smarty_function_sugarvar_connector($params, &$smarty) {
       
-      $displayParams = $smarty->get_template_vars('displayParams');
+      $displayParams = $smarty->getTemplateVars('displayParams');
       if(!isset($displayParams['module'])) {
          $smarty->trigger_error("sugarvar_connector: missing 'module' parameter");
          $GLOBALS['log']->error("sugarvar_connector: missing 'module' parameter");

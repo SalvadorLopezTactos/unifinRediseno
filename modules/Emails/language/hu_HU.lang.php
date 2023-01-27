@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Felhasználók',
     'LBL_EMAILS_PRODUCTS_REL' => 'Megajánlott Tételek',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Bevételi sor tételek',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Eszkalálások',
     'LBL_EMAILS_MESSAGES_REL' => 'Üzenetek',
     'LBL_EMAILS_PURCHASES_REL' => 'Vásárlások',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Megvásárolt tételsorok',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'E-mail küldése',
     'LBL_MAILBOX' => 'Bejövő fiók',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Kérjük, állítsa be a kimenő e-mail fiókot az <a href="#OutboundEmail">E-mail beállítások</a> menüponton keresztül, ha e-maileket szeretne küldeni.',
 );

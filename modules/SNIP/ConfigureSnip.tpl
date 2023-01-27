@@ -11,7 +11,6 @@
  */
 *}
 
-{literal}
 <style>
 #snip_title {
 	float:left;
@@ -103,7 +102,6 @@ div.snipError{
 
 }
 </style>
-{/literal}
 {$TITLE}
 
 	{if $SNIP_STATUS!='notpurchased'}
@@ -121,7 +119,7 @@ div.snipError{
 	                <input title="" class="button primary" name="tryagain" value="  {$MOD.LBL_SNIP_BUTTON_RETRY}  " onclick='window.location.reload()' type="button">
 	            {/if}
 
-	            &nbsp;<input title="" onclick="document.location.href='index.php?module=Administration&amp;action=index'" class="button" name="cancel" value="  {$MOD.LBL_CANCEL_BUTTON_TITLE}  " type="button">
+	            &nbsp;<input title="" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} class="button" name="cancel" value="  {$MOD.LBL_CANCEL_BUTTON_TITLE}  " type="button">
 
 	            </form>
 	        </td>

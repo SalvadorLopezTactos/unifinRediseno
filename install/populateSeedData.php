@@ -1000,6 +1000,11 @@ $GLOBALS['mod_strings']  = $installerStrings;
 
     installLog("DemoData: Done Forecasts");
 
+    installLog('DemoData: Set up Opp forecast fields');
+    $converter = new OpportunityWithRevenueLineItem();
+    $converter->fixForecastFields(true);
+    installLog('DemoData: Done with set up Opp forecast fields');
+
     echo '.';
 
     installLog("DemoData: VisualPipeline");

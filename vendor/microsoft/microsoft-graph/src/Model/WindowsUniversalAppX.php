@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,23 +18,22 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class WindowsUniversalAppX extends MobileLobApp
 {
     /**
     * Gets the applicableArchitectures
-    * The Windows architecture(s) for which this app can run on. Possible values are: none, x86, x64, arm, neutral.
+    * The Windows architecture(s) for which this app can run on. Possible values are: none, x86, x64, arm, neutral, arm64.
     *
-    * @return WindowsArchitecture The applicableArchitectures
+    * @return WindowsArchitecture|null The applicableArchitectures
     */
     public function getApplicableArchitectures()
     {
         if (array_key_exists("applicableArchitectures", $this->_propDict)) {
-            if (is_a($this->_propDict["applicableArchitectures"], "Microsoft\Graph\Model\WindowsArchitecture")) {
+            if (is_a($this->_propDict["applicableArchitectures"], "\Microsoft\Graph\Model\WindowsArchitecture") || is_null($this->_propDict["applicableArchitectures"])) {
                 return $this->_propDict["applicableArchitectures"];
             } else {
                 $this->_propDict["applicableArchitectures"] = new WindowsArchitecture($this->_propDict["applicableArchitectures"]);
@@ -47,7 +45,7 @@ class WindowsUniversalAppX extends MobileLobApp
     
     /**
     * Sets the applicableArchitectures
-    * The Windows architecture(s) for which this app can run on. Possible values are: none, x86, x64, arm, neutral.
+    * The Windows architecture(s) for which this app can run on. Possible values are: none, x86, x64, arm, neutral, arm64.
     *
     * @param WindowsArchitecture $val The applicableArchitectures
     *
@@ -63,12 +61,12 @@ class WindowsUniversalAppX extends MobileLobApp
     * Gets the applicableDeviceTypes
     * The Windows device type(s) for which this app can run on. Possible values are: none, desktop, mobile, holographic, team.
     *
-    * @return WindowsDeviceType The applicableDeviceTypes
+    * @return WindowsDeviceType|null The applicableDeviceTypes
     */
     public function getApplicableDeviceTypes()
     {
         if (array_key_exists("applicableDeviceTypes", $this->_propDict)) {
-            if (is_a($this->_propDict["applicableDeviceTypes"], "Microsoft\Graph\Model\WindowsDeviceType")) {
+            if (is_a($this->_propDict["applicableDeviceTypes"], "\Microsoft\Graph\Model\WindowsDeviceType") || is_null($this->_propDict["applicableDeviceTypes"])) {
                 return $this->_propDict["applicableDeviceTypes"];
             } else {
                 $this->_propDict["applicableDeviceTypes"] = new WindowsDeviceType($this->_propDict["applicableDeviceTypes"]);
@@ -96,7 +94,7 @@ class WindowsUniversalAppX extends MobileLobApp
     * Gets the identityName
     * The Identity Name.
     *
-    * @return string The identityName
+    * @return string|null The identityName
     */
     public function getIdentityName()
     {
@@ -125,7 +123,7 @@ class WindowsUniversalAppX extends MobileLobApp
     * Gets the identityPublisherHash
     * The Identity Publisher Hash.
     *
-    * @return string The identityPublisherHash
+    * @return string|null The identityPublisherHash
     */
     public function getIdentityPublisherHash()
     {
@@ -154,7 +152,7 @@ class WindowsUniversalAppX extends MobileLobApp
     * Gets the identityResourceIdentifier
     * The Identity Resource Identifier.
     *
-    * @return string The identityResourceIdentifier
+    * @return string|null The identityResourceIdentifier
     */
     public function getIdentityResourceIdentifier()
     {
@@ -180,10 +178,39 @@ class WindowsUniversalAppX extends MobileLobApp
     }
     
     /**
+    * Gets the identityVersion
+    * The identity version.
+    *
+    * @return string|null The identityVersion
+    */
+    public function getIdentityVersion()
+    {
+        if (array_key_exists("identityVersion", $this->_propDict)) {
+            return $this->_propDict["identityVersion"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the identityVersion
+    * The identity version.
+    *
+    * @param string $val The identityVersion
+    *
+    * @return WindowsUniversalAppX
+    */
+    public function setIdentityVersion($val)
+    {
+        $this->_propDict["identityVersion"] = $val;
+        return $this;
+    }
+    
+    /**
     * Gets the isBundle
     * Whether or not the app is a bundle.
     *
-    * @return bool The isBundle
+    * @return bool|null The isBundle
     */
     public function getIsBundle()
     {
@@ -212,12 +239,12 @@ class WindowsUniversalAppX extends MobileLobApp
     * Gets the minimumSupportedOperatingSystem
     * The value for the minimum applicable operating system.
     *
-    * @return WindowsMinimumOperatingSystem The minimumSupportedOperatingSystem
+    * @return WindowsMinimumOperatingSystem|null The minimumSupportedOperatingSystem
     */
     public function getMinimumSupportedOperatingSystem()
     {
         if (array_key_exists("minimumSupportedOperatingSystem", $this->_propDict)) {
-            if (is_a($this->_propDict["minimumSupportedOperatingSystem"], "Microsoft\Graph\Model\WindowsMinimumOperatingSystem")) {
+            if (is_a($this->_propDict["minimumSupportedOperatingSystem"], "\Microsoft\Graph\Model\WindowsMinimumOperatingSystem") || is_null($this->_propDict["minimumSupportedOperatingSystem"])) {
                 return $this->_propDict["minimumSupportedOperatingSystem"];
             } else {
                 $this->_propDict["minimumSupportedOperatingSystem"] = new WindowsMinimumOperatingSystem($this->_propDict["minimumSupportedOperatingSystem"]);
@@ -238,35 +265,6 @@ class WindowsUniversalAppX extends MobileLobApp
     public function setMinimumSupportedOperatingSystem($val)
     {
         $this->_propDict["minimumSupportedOperatingSystem"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the identityVersion
-    * The identity version.
-    *
-    * @return string The identityVersion
-    */
-    public function getIdentityVersion()
-    {
-        if (array_key_exists("identityVersion", $this->_propDict)) {
-            return $this->_propDict["identityVersion"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the identityVersion
-    * The identity version.
-    *
-    * @param string $val The identityVersion
-    *
-    * @return WindowsUniversalAppX
-    */
-    public function setIdentityVersion($val)
-    {
-        $this->_propDict["identityVersion"] = $val;
         return $this;
     }
     

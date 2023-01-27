@@ -30,7 +30,7 @@ class ServiceDictionary {
                 $fileexists = (is_file($thedir."/". $children)) ? "TRUE" : "FALSE";
                 if ($children != "." && $children != "..") {
                     if (is_dir($thedir . "/" . $children)) {
-                        $this->clearCache($thedir . "/" . $children, 'php');
+                        $this->clearCache();
                     }
                     elseif (is_file($thedir . "/" . $children) && (substr_count($children, 'php'))) {
                         unlink($thedir . "/" . $children);

@@ -22,18 +22,15 @@ if(isset($globalteam->name)){
     $globalteam->create_team("Global", $mod_strings['LBL_GLOBAL_TEAM_DESC'], $globalteam->global_team);
 }
 
-$results = $GLOBALS['db']->query("SELECT id, user_name FROM users WHERE default_team != '' AND default_team IS NOT NULL
-    AND user_name NOT IN (" . $GLOBALS['db']->quoted(SugarSNIP::SNIP_USER) . ", 'SugarCustomerSupportPortalUser')");
+/** @var \Sugarcrm\Sugarcrm\Dbal\Connection $connection */
+$connection = $GLOBALS['db']->getConnection();
+$sql = "SELECT id, user_name FROM users WHERE default_team != '' AND default_team IS NOT NULL AND user_name NOT IN (?, ?)";
+$result = $connection->executeQuery($sql, [SugarSNIP::SNIP_USER, 'SugarCustomerSupportPortalUser']);
 
 $team = BeanFactory::newBean('Teams');
 $user = BeanFactory::newBean('Users');
-while($row = $GLOBALS['db']->fetchByAssoc($results)) {
-    $row2 = $GLOBALS['db']->getConnection()
-        ->executeQuery(
-            'SELECT id, name FROM teams WHERE associated_user_id = ?',
-            [$row['id']]
-        )
-        ->fetch();
+foreach ($result->iterateAssociative() as $row) {
+    $row2 = $connection->fetchAssociative('SELECT id, name FROM teams WHERE associated_user_id = ?', [$row['id']]);
     if (false === $row2) {
 		$user->retrieve($row['id']);
 		$team->new_user_created($user);

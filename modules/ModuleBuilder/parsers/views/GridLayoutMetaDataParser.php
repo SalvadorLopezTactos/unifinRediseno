@@ -45,6 +45,12 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
      */
     protected $baseViewFields = array();
 
+    /**
+     * Additional fielddefs to use when programmatically adding a field
+     * @var array
+     */
+    public $additionalFieldDefs = [];
+
 	/**
      * Constructor
      * @param string $view           The view type, that is, editview, searchview etc
@@ -86,6 +92,11 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
 
         $viewdefs = $this->getDefsFromArray($viewdefs, $view);
         $this->validateMetaData($viewdefs);
+
+        $mm = MetaDataManager::getManager('base', false);
+
+        $viewdefs = $mm->applyLicensesFilter($viewdefs);
+
         $this->_viewdefs = $viewdefs ;
         if ($this->getMaxColumns () < 1)
             sugar_die ( get_class ( $this ) . ": maxColumns=" . $this->getMaxColumns () . " - must be greater than 0!" ) ;
@@ -696,6 +707,13 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
                 	{
                         $trimmedDef = self::trimReadonlyFields($fielddefs[$fieldname]);
                         $def = self::_trimFieldDefs($trimmedDef);
+
+                        // If there are additional fielddefs provided for the field, combine them with the
+                        // filtered fielddefs
+                        if (!empty($fieldname) && !empty($def) && !empty($this->additionalFieldDefs[$fieldname])) {
+                            $def = array_merge($def, $this->additionalFieldDefs[$fieldname]);
+                        }
+
                         $newRow[$colID - $offset] = $def;
                 	}
                 	//No additional info on this field can be found, jsut use the name;

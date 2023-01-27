@@ -53,7 +53,7 @@ $out =<<<EOQ
    <meta http-equiv="Content-Script-Type" content="text/javascript">
    <meta http-equiv="Content-Style-Type" content="text/css">
    <title>{$mod_strings['LBL_WIZARD_TITLE']} {$next_step}</title>
-   <link REL="SHORTCUT ICON" HREF="include/images/sugar_icon.ico">
+   <link REL="SHORTCUT ICON" type="image/png" HREF="include/images/sugar-favicon.png">
    <link rel="stylesheet" href="install/install.css" type="text/css" />
 	<script type="text/javascript" src="include/javascript/sugar_3.js"></script>
    <script type="text/javascript" src="install/installCommon.js"></script>
@@ -70,7 +70,8 @@ $out =<<<EOQ
 		</p>
 		{$mod_strings['LBL_STEP']} {$next_step}: {$mod_strings['LBL_LICENSE_TITLE']}</th>
 
-   <th width="200" style="text-align: right;"><a href="http://www.sugarcrm.com" target="_blank"><IMG src="include/images/sugarcrm_login.png" alt="SugarCRM" border="0"></a></th>
+   <th width="200" style="text-align: right;"><a href="http://www.sugarcrm.com" target="_blank">
+    <img src="{$loginImage}" alt="SugarCRM" border="0" class="sugarcrm-logo"></a></th>
    </tr>
 <tr>
     <td colspan="2">

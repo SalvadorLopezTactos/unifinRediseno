@@ -42,7 +42,7 @@ class SugarSessionHandler extends SessionHandler
     public function __construct()
     {
         $this->max_session_time = SugarConfig::getInstance()->get('max_session_time');
-        $this->log = LoggerManager::getLogger('SugarCRM');
+        $this->log = LoggerManager::getLogger();
     }
 
     /**

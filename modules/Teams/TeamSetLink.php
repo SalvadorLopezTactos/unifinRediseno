@@ -11,7 +11,7 @@
  */
 
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Psr\Log\LoggerInterface;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
@@ -21,7 +21,6 @@ require_once('modules/Teams/TeamSetManager.php');
  * This class extends the Link object to implement custom handling for team sets behavior
  * This is defined in include/SugarObjects/team_security/vardefs.php as:
  * 'link_type' => 'TeamSetLink',
- * 'link_file' => 'modules/Teams/TeamSetLink.php'
  *
  */
 class TeamSetLink extends Link2 {

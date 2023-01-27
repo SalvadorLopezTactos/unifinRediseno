@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Default time format',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Display server response times',
+    'FREEZE_FIRST_COLUMN' => 'Allow Column Freezing',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Enable this setting to allow users to freeze the first column in a variety of ' .
+        'list views, including module list views, subpanels, dashlets, and consoles.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Log slow queries',
     'LOCK_HOMEPAGE_HELP'=>'This setting is to prevent<BR> 1) the addition of new home pages and dashlets in the Home module, <BR>2) customisation of dashlet placement in the home pages by dragging and dropping.',
     'CURRENT_LOGO'=>'Current Logo:',
+    'CURRENT_LOGO_DARK' => 'Current Dark Mode Logo:',
     'CURRENT_LOGO_HELP'=>'This logo is displayed at the top left-hand corner of the Sugar application.',
+    'CURRENT_LOGO_DARK_HELP' => "This logo is displayed in the left-hand corner of the footer when the Sugar application is in dark mode, according to the user's Appearance preference.",
     'NEW_LOGO'=>'Select Logo:',
     'NEW_LOGO_HELP' => 'The image file format can be either .png or .jpg.<BR>The recommended size is 212x40 px.',
+    'NEW_LOGO_DARK' => 'Select Dark Mode Logo:',
     'NEW_LOGO_HELP_NO_SPACE' => 'The image file format can be either .png or .jpg. The maximum height is 17px, and the maximum width is 450px. Any image uploaded that is larger in any direction will be scaled to these max dimensions. Image file name must not contain a space character.',
     'NEW_QUOTE_LOGO'=>'Upload new Quotes logo',
     'NEW_QUOTE_LOGO_HELP'=>'The required image file format is .jpg.<BR>The recommended size is 867x74 px.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Continue',
     'LBL_WIZARD_FINISH_TAB' => 'Finish',
     'LBL_WIZARD_FINISH_TITLE' => 'Basic system configuration is complete',
-    'LBL_WIZARD_FINISH' => 'Click <b>Continue</b> to configure your user settings.<br/><br /><br />To configure additional system settings, click <a href="index.php?module=Administration&action=index" target="_blank">here</a>.',
+    'LBL_WIZARD_FINISH' => 'Click <b>Continue</b> to configure your user settings.<br/><br />
+To configure additional system settings, click <a href="#Administration" target="_blank">here</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Branding',
     'LBL_WIZARD_SYSTEM_DESC' => 'Provide your organisation&#39;s name and logo in order to brand your Sugar.',
     'LBL_WIZARD_LOCALE_DESC' => 'Specify how you would like data in Sugar to be displayed, based on your geographical location. The settings you provide here will be the default settings. Users will be able set their own preferences.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Loading...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Delete' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Welcome' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Dark Mode Logo',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* The Reports module is only available for the Sugar Mobile iPhone client.',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* The Reports module is not available for the browser-based mobile view.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

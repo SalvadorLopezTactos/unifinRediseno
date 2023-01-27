@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Механізм висловлювань',
-  'LBL_MODULE_NAME_SINGULAR' => 'Механізм висловлювань',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Попередній' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Наступний' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Розширити' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Механізм висловлювань',
+    'LBL_MODULE_NAME_SINGULAR' => 'Механізм висловлювань',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Попередній' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Наступний' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Розширити' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Невідоме поле',
+];

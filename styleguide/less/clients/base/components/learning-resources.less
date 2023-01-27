@@ -1,14 +1,13 @@
 .resource-list {
   min-height: 86px;
   display: block;
-  margin: 5px 20px;
 }
 
 .resource {
   display: block;
   width: 100%;
   padding: 12px 0 10px;
-  border-bottom: 1px dashed #d3d3d3;
+  border-bottom: @borderWidget;
 
   &:last-child {
     border-bottom: none;
@@ -48,12 +47,8 @@
   .popover-content {
     padding-top: 0;
 
-    ul {
-      margin-left: 0;
-    }
-
     .helplet-body {
-      max-height: 75px;
+      max-height: 300px;
       overflow-y: auto;
       margin: 10px 0;
 
@@ -63,6 +58,17 @@
 
       p.body-text {
         margin-top: 10px;
+      }
+    }
+
+    .feedback-close {
+      top: 12px;
+      right: 12px;
+      .m-0();
+      .absolute();
+
+      &:hover {
+        text-decoration: none;
       }
     }
   }
@@ -76,7 +82,7 @@
     width: auto;
     padding: 10px 15px 10px 0;
     border-right: none;
-    border-bottom: 1px solid lighten(@grayLight, 40%);
+    border-bottom: @borderWidget;
 
     &:last-child {
       border-bottom: none;

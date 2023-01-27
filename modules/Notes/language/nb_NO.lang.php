@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'E-postadresse:',
     'LBL_EMAIL_ATTACHMENT' => 'E-postvedlegg',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'E-postvedlegg for',
+    'LBL_NOTE_ATTACHMENT' => 'Merk vedlegg',
+    'LBL_KB_ATTACHMENT' => 'KBDocument vedlegg',
+    'LBL_CASE_ATTACHMENT' => 'Saksvedlegg',
     'LBL_FILE_MIME_TYPE' => 'Mimetype',
     'LBL_FILE_EXTENSION' => 'Filtype',
     'LBL_FILE_SOURCE' => 'Filkilde',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Notatkilde',
     'LBL_SOURCE_EXTERNAL' => 'Ekstern',
     'LBL_SOURCE_INTERNAL' => 'Intern',
+    'LBL_PORTAL' => 'Portal',
 
     // Help Text
     // List View Help Text

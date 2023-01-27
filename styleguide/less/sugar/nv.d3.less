@@ -44,7 +44,7 @@ svg .title {
 .nv-chart-background {
   fill: transparent;
   stroke-width: 0.5px;
-  stroke: @grayLight;
+  stroke: @gray70;
 }
 
 .nv-chart-texture {
@@ -110,7 +110,7 @@ svg .title {
 
 .nv-labels text {
   font-weight: bold;
-  fill: @gray;
+  fill: @gray80;
 }
 
 .nv-label-value text,
@@ -141,8 +141,8 @@ text.nv-label-value {
 }
 
 .nv-brush .resize path {
-  fill: @grayLighter;
-  stroke: @gray;
+  fill: @gray20;
+  stroke: @gray80;
 }
 
 .nv-brush .extent {
@@ -178,8 +178,8 @@ text.nv-label-value {
 }
 
 .nv-legend-background {
-  fill: fade(@white, 90%);
-  stroke: fade(@grayLightish, 75%);
+  fill: @gray10;
+  stroke: @gray30;
   stroke-width: 1px;
 }
 
@@ -227,7 +227,7 @@ text.nv-label-value {
 
 .nv-axis path.domain {
   stroke-width: 2px;
-  stroke: @grayLightish;
+  stroke: @gray60;
 }
 
 .nv-axis .nv-axisMaxMin text {
@@ -449,7 +449,7 @@ text.nv-pie-hole-label {
 
 .nv-sparklineplus .nv-xValue,
 .nv-sparklineplus .nv-yValue {
-  stroke: @gray;
+  stroke: @gray80;
   font-size: 0.5em;
   font-weight: normal;
 }
@@ -472,7 +472,7 @@ text.nv-pie-hole-label {
 }
 
 .nv-pointer {
-  fill: @grayLightish;
+  fill: @gray60;
   stroke: @white;
 }
 
@@ -522,7 +522,7 @@ text.nv-pie-hole-label {
 .nv-pareto {
   .nv-quotaWrap line {
     opacity: 0.8;
-    stroke: @gray;
+    stroke: @gray80;
     stroke-width: 4px;
     fill: none;
 
@@ -530,7 +530,7 @@ text.nv-pie-hole-label {
   }
 
   .nv-quotaWrap line.nv-quotaLineTarget {
-    stroke: @grayLight;
+    stroke: @gray70;
   }
 
   .nv-quotaWrap line.nv-quotaLineBackground {
@@ -578,7 +578,7 @@ text.nv-pie-hole-label {
 
   .nv-grandparent text {
     font-weight: bold;
-    fill: @gray;
+    fill: @gray80;
   }
 
   rect {
@@ -624,8 +624,8 @@ text.nv-pie-hole-label {
 */
 
 .nv-card {
-  fill: @grayLighter;
-  stroke: @grayLightish;
+  fill: @gray20;
+  stroke: @gray60;
   stroke-width: 0.5px;
 
   .nv-circ-front {
@@ -644,7 +644,7 @@ text.nv-pie-hole-label {
 .nv-tree {
   path.link {
     fill: none;
-    stroke: @grayLighter;
+    stroke: @gray20;
     stroke-width: 1.5px;
   }
 }
@@ -699,21 +699,23 @@ text.nv-pie-hole-label {
   background-color: @blue;
 }
 
+// Note: This is a special case - we don't usually want to use off palette colors like this but since we have less than
+// 13 colors we will generate fills based on the middle gray, @gray50.
 @media all and (monochrome) {
-  @fill00: darken(@gray, 30%);
-  @fill01: lighten(@gray, 30%);
-  @fill02: darken(@gray, 15%);
-  @fill03: lighten(@gray, 35%);
-  @fill04: darken(@gray, 10%);
-  @fill05: lighten(@gray, 40%);
-  @fill06: darken(@gray, 05%);
-  @fill07: lighten(@gray, 45%);
-  @fill08: darken(@gray, 0%);
-  @fill09: lighten(@gray, 48%);
-  @fill10: lighten(@gray, 5%);
-  @fill11: lighten(@gray, 51%);
-  @fill12: lighten(@gray, 10%);
-  @fill13: lighten(@gray, 54%);
+  @fill00: darken(@gray50, 30%);
+  @fill01: lighten(@gray50, 30%);
+  @fill02: darken(@gray50, 15%);
+  @fill03: lighten(@gray50, 35%);
+  @fill04: darken(@gray50, 10%);
+  @fill05: lighten(@gray50, 40%);
+  @fill06: darken(@gray50, 05%);
+  @fill07: lighten(@gray50, 45%);
+  @fill08: darken(@gray50, 0%);
+  @fill09: lighten(@gray50, 48%);
+  @fill10: lighten(@gray50, 5%);
+  @fill11: lighten(@gray50, 51%);
+  @fill12: lighten(@gray50, 10%);
+  @fill13: lighten(@gray50, 54%);
 }
 
 .nv-fill00 {

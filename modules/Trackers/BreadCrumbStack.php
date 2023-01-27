@@ -98,7 +98,7 @@ class BreadCrumbStack {
 			//to visible = 0 and add our new item to the stack
 			$item = $this->stack[$this->stackMap[$row['item_id']]];
 	   	  	if(!empty($item['id']) && $row['id'] != $item['id']){
-	   	  		$this->makeItemInvisible($item['id'], 0);
+                    $this->makeItemInvisible($item['id']);
 	   	  	}
 	   	  	$this->popItem($item['item_id']);
 	   	  }

@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => '欄位名稱已存在',
     'ERR_FIELD_NAME_NON_DB_CHARS' => '欄位名稱只能包含以下字元：a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => '沒有模組無法儲存',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => '下拉列表名已经存在',
     'LBL_BTN_ADD' => '新增',
     'LBL_BTN_EDIT' => '編輯',
     'LBL_GENERATE_URL' => '產生 URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => '新增欄 {0} 至',
     'LBL_DONE' => '已完成',
     'LBL_EXE_NON_SIM_MODE' => '執行非模擬模式',
+    'LBL_CALCULATION_VISIBLE' => '使計算可見',
 );
-
-
-?>

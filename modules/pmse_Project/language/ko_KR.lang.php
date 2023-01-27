@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => '사용자에 의해 생성',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => '사용자에 의해 최종 수정',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => '시스템 이메일',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => '문서 템플릿',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => '문서 병합',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => '선택...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'PDF로 문서 병합',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => '문서 병합',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => '비즈니스 규칙',
     'LBL_PMSE_LABEL_RULE' => '규칙',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => '업데이트된 레코드만 해당 (전체 업데이트 - 도움말 전문 참조)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => '새로운 기록 또는 첫 업데이트',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => '새로운 기록 및 모든 업데이트',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => '관계 변화',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => '프로세스가 시작되는 시기를 선택하십시오.<br><br>신규: 새 기록가 생성될 때 프로세스를 실행합니다.<br><br>첫 업데이트: 기존 기록에 대한 기준이 처음 충족될 때만 프로세스가 실행됩니다.<br><br>모든 업데이트: 기존 기록에 대한 기준이 충족될 때마다 프로세스가 실행됩니다.<br><br>새 기록 또는 첫 업데이트: 기록 생성 또는 기록 업데이트 중 기록에 대한 기준이 처음 충족될 때만 프로세스가 실행됩니다.<br><br>새 기록 및 모든 업데이트: 모든 새 기록과 기존 기록에 대해 매번 프로세스가 실행됩니다.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => '프로세스가 시작되는 시기를 선택하십시오.<br><br>신규: 새 기록가 생성될 때 프로세스를 실행합니다.<br><br>첫 업데이트: 기존 기록에 대한 기준이 처음 충족될 때만 프로세스가 실행됩니다.<br><br>모든 업데이트: 기존 기록에 대한 기준이 충족될 때마다 프로세스가 실행됩니다.<br><br>새 기록 또는 첫 업데이트: 기록 생성 또는 기록 업데이트 중 기록에 대한 기준이 처음 충족될 때만 프로세스가 실행됩니다.<br><br>새 기록 및 모든 업데이트: 모든 새 기록과 기존 기록에 대해 매번 프로세스가 실행됩니다.<br><br>관계 변화: 관계 변화가 발생할 때마다 프로세스가 실행됩니다.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => '이벤트 트리거를 적용 슈가 모듈을 선택',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => '기일',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => '오류',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => '관계 변화 평가',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => '필드',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => '모듈 필드 평가',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => '모듈',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => '모든 관련 레코드',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => '여하한 관련 레코드',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => '추가됨',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => '제거됨',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => '추가 또는 제거됨',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => '모든 관계',
 
     'LBL_PMSE_RUNTIME_BUTTON' => '실행 시간',
 

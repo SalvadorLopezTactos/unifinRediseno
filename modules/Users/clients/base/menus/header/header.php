@@ -25,7 +25,7 @@ if ($isIDMModeEnabled) {
         'label' => 'LNK_NEW_USER',
         'acl_action' => 'admin',
         'acl_module' => $moduleName,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
     ];
 } else {
     $newUserLink = [
@@ -38,75 +38,90 @@ if ($isIDMModeEnabled) {
         'label' => 'LNK_NEW_USER',
         'acl_action' => 'admin',
         'acl_module' => $moduleName,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
     ];
 }
 
-$viewdefs[$moduleName]['base']['menu']['header'] = array(
+$viewdefs[$moduleName]['base']['menu']['header'] = [
     $newUserLink,
-    array(
+    [
         'route' => '#bwc/index.php?' . http_build_query(
-            array(
+            [
                 'module' => $moduleName,
                 'action' => 'EditView',
                 'usertype'=>'group',
                 'return_module' => $moduleName,
                 'return_action' => 'DetailView',
-            )
+            ]
         ),
         'label' => 'LNK_NEW_GROUP_USER',
         'acl_action' => 'admin',
         'acl_module' => $moduleName,
-        'icon' => 'fa-plus',
-    ),
-);
+        'icon' => 'sicon-plus',
+    ],
+];
 if (!empty($sugar_config['enable_web_services_user_creation'])) {
     $viewdefs[$moduleName]['base']['menu']['header'][] =
-        array(
+        [
             'route' => '#bwc/index.php?' . http_build_query(
-                array(
+                [
                     'module' => $moduleName,
                     'action' => 'EditView',
                     'usertype'=>'portal',
                     'return_module' => $moduleName,
                     'return_action' => 'DetailView',
-                )
+                ]
             ),
             'label' => 'LNK_NEW_PORTAL_USER',
             'acl_action' => 'admin',
             'acl_module' => $moduleName,
-            'icon' => 'fa-plus',
-        );
+            'icon' => 'sicon-plus',
+        ];
 }
 $viewdefs[$moduleName]['base']['menu']['header'][] =
-    array(
+    [
         'route' => '#bwc/index.php?' . http_build_query(
-                array(
-                    'module' => $moduleName,
-                    'action' => 'EditView',
-                    'usertype'=>'portal',
-                    'return_module' => $moduleName,
-                    'return_action' => 'DetailView',
-                )
-            ),
+            [
+                'module' => $moduleName,
+                'action' => 'EditView',
+                'usertype'=>'portal',
+                'return_module' => $moduleName,
+                'return_action' => 'DetailView',
+            ]
+        ),
         'label' => 'LNK_NEW_PORTAL_USER',
         'acl_action' => 'admin',
         'acl_module' => $moduleName,
-        'icon' => 'fa-plus',
-    );
-$viewdefs[$moduleName]['base']['menu']['header'][] =
-    array(
-        'route' => '#bwc/index.php?' . http_build_query(
-            array(
-                'module' => $moduleName,
-                'action' => 'reassignUserRecords',
-            )
-        ),
-        'label' => 'LNK_REASSIGN_RECORDS',
-        'acl_action' => 'admin',
-        'acl_module' => $moduleName,
-        'icon' => 'fa-arrows',
-    );
+        'icon' => 'sicon-plus',
+    ];
+
+$viewdefs[$moduleName]['base']['menu']['header'][] = [
+    'route' => '#Users/copy-content',
+    'label' => 'LNK_COPY_CONTENT',
+    'acl_action' => 'admin',
+    'acl_module' => $moduleName,
+    'icon' => 'sicon-copy',
+];
+$viewdefs[$moduleName]['base']['menu']['header'][] = [
+    'route' => '#Users/update-locale',
+    'label' => 'LNK_COPY_USER_SETTINGS',
+    'acl_action' => 'admin',
+    'acl_module' => $moduleName,
+    'icon' => 'sicon-copy',
+];
+
+$viewdefs[$moduleName]['base']['menu']['header'][] = [
+    'route' => '#bwc/index.php?' . http_build_query(
+        [
+            'module' => $moduleName,
+            'action' => 'reassignUserRecords',
+        ]
+    ),
+    'label' => 'LNK_REASSIGN_RECORDS',
+    'acl_action' => 'admin',
+    'acl_module' => $moduleName,
+    'icon' => 'sicon-edit',
+];
 
 $viewdefs[$moduleName]['base']['menu']['header'][] = [
     'route' => '#bwc/index.php?' . http_build_query([
@@ -119,5 +134,5 @@ $viewdefs[$moduleName]['base']['menu']['header'][] = [
     'label' => 'LNK_IMPORT_USERS',
     'acl_action' => 'admin',
     'acl_module' => $moduleName,
-    'icon' => 'fa-arrow-circle-o-up',
+    'icon' => 'sicon-upload',
 ];

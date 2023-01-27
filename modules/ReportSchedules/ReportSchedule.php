@@ -516,7 +516,7 @@ QUERY;
      */
     public function getInfo($id)
     {
-        $query = "SELECT report_id, next_run, time_interval
+        $query = "SELECT report_id, next_run, time_interval, file_type
         FROM {$this->table_name}
         WHERE id = " . $this->db->quoted($id);
         $result = $this->db->query($query);

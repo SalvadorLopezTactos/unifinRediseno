@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'График на тази справка',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Електронно табло със запис на графици на справки',
+    'LBL_FILE_TYPE' => 'Тип(ове) файлове',
 );

@@ -12,8 +12,8 @@
 
 namespace Sugarcrm\Sugarcrm\Dbal\IbmDb2;
 
-use Doctrine\DBAL\Driver\AbstractDriverException;
+use Doctrine\DBAL\Driver\AbstractException;
 
-class Db2Exception extends AbstractDriverException
+class Db2Exception extends AbstractException
 {
 }

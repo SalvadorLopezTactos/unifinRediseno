@@ -24,16 +24,19 @@ class ViewRepair extends SugarView
 	 */
 	public function display()
 	{
-	    // To prevent lag in the rendering of the page after clicking the quick repair link...
-        echo "<h2>{$GLOBALS['mod_strings']['LBL_BEGIN_QUICK_REPAIR_AND_REBUILD']}</h2>";
+        $rc = new RepairAndClear(!empty($_REQUEST['async']));
+
+        // To prevent lag in the rendering of the page after clicking the quick repair link...
+        $rc->log("<h2>{$GLOBALS['mod_strings']['LBL_BEGIN_QUICK_REPAIR_AND_REBUILD']}</h2>");
         ob_flush();
-        $randc = new RepairAndClear();
+
         $actions = array();
         $actions[] = 'clearAll';
-        $randc->repairAndClearAll($actions, array(translate('LBL_ALL_MODULES')), false,true,'');
-        
-        echo <<<EOHTML
-<br /><br /><a href="index.php?module=Administration&action=index">{$GLOBALS['mod_strings']['LBL_DIAGNOSTIC_DELETE_RETURN']}</a>
-EOHTML;
+        $rc->repairAndClearAll($actions, array(translate('LBL_ALL_MODULES')), false, true, '');
+
+        $rc->log(
+            '<br><br><a href="javascript:void(parent.SUGAR.App.router.navigate(\'#Administration\', {trigger: true}))">'
+            . $GLOBALS['mod_strings']['LBL_DIAGNOSTIC_DELETE_RETURN'] . '</a>'
+        );
 	}
 }

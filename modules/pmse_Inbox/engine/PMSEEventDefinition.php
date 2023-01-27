@@ -62,8 +62,7 @@ class PMSEEventDefinition
                     } else {
                         // @codeCoverageIgnoreStart
                         $relBean = new Relationship();
-                        $tmpObj->rel_element_module = $relBean->get_other_module($token->expModule,
-                            $tmpObj->rel_process_module, $this->db);
+                        $tmpObj->rel_element_module = $relBean->get_other_module($token->expModule, $tmpObj->rel_process_module);
                         // @codeCoverageIgnoreEnd
                     }
 

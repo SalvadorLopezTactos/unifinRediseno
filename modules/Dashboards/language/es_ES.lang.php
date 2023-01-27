@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Todos los cuadros de mando del módulo {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Todos los cuadros de mando de la vista {{view}} del módulo {{module}}',
     'LBL_COPY_OF' => 'Copia de {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'No se pueden borrar los paneles de control del panel de enfoque.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Crear cuadro de mando',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "¿Seguro que desea restaurar este cuadro de mando al diseño predeterminado?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => '¿Seguro que desea restaurar el panel del cuadro de mando a su diseño predeterminado?',
+    'LBL_FILTER_UTILS_SELECT' => 'Asignado',
 );

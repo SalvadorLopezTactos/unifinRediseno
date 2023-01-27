@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Izveidoja lietotājs',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Pēdējoreiz modificēja lietotājs',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Sistēmas e-pasts',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Dokumenta veidne',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Dokumentu sapludināšana',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Atlasīt...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Dokumentu sapludināšana uz PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Dokumentu sapludināšana',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Biznesa noteikums',
     'LBL_PMSE_LABEL_RULE' => 'Noteikums',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Tikai atjauninātie ieraksti (Vsis atjauninājumi - skat. palīga tekstu)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Jauni ieraksti vai pirmais atjauninājums',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Jauni ieraksti vai visi atjauninājumi',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Relācijas maiņa',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Atlasiet, kad process sāksies.<br><br>Jauns: Palaidiet procesu, kad ir izveidots jauns ieraksts.<br><br>Pirmais atjauninājums: Process tiek palaists tikai tad, kad pirmo reizi izpildās kritēriji esošajam ierakstam.<br><br>Visi atjauninājumi: Process tiek palaists katru reizi, kad izpildās kritēriji esošajam ierakstam.<br><br>Jauni ieraksti vai pirmais atjauninājums: Process tiek palaists tikai tad, kad pirmo reizi izpildās kritēriji ierakstam, ieraksta izveides vai atjaunināšanas laikā.<br><br>Jauni ieraksti vai visi atjauninājumi: Process tiek palaists katru reizi visiem jaunajiem un esošajiem ierakstiem.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Atlasiet, kad process sāksies.<br><br>Jauns: Palaidiet procesu, kad ir izveidots jauns ieraksts.<br><br>Pirmais atjauninājums: Process tiek palaists tikai tad, kad pirmo reizi izpildās kritēriji esošajam ierakstam.<br><br>Visi atjauninājumi: Process tiek palaists katru reizi, kad izpildās kritēriji esošajam ierakstam.<br><br>Jauni ieraksti vai pirmais atjauninājums: Process tiek palaists tikai tad, kad pirmo reizi izpildās kritēriji ierakstam, ieraksta izveides vai atjaunināšanas laikā.<br><br>Jauni ieraksti vai visi atjauninājumi: Process tiek palaists katru reizi visiem jaunajiem un esošajiem ierakstiem.<br><br>Relācijas maiņas: Process tiek palaists katru reizi, kad notiek relācijas maiņa.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Izvēlieties SugarCRM moduli, uz kuru attiecināt notikuma triggeri',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fiksēts datums',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => ' Kļūda',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Relācijas maiņas novērtējums',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Lauki',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Moduļa lauka izvērtēšana',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modulis',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Visi saistītie ieraksti',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Jebkuri saistītie ieraksti',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Pievienots',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Noņemts',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Pievienots vai noņemts',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Jebkāda relācija',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Izpildes laiks',
 

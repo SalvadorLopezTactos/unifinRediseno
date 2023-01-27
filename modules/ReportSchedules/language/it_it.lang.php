@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Questa Pianificazione report',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Dashboard record Pianificazioni report',
+    'LBL_FILE_TYPE' => 'Tipo File',
 );

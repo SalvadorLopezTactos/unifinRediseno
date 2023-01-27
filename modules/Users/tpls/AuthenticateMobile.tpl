@@ -13,7 +13,6 @@
 <!DOCTYPE html>
 <head>
 <script language="javascript">
-    {literal}
     function loadApp(auth, siteUrl, appPrefix) {
         localStorage.setItem('_AuthAccessToken', auth.access_token);
         localStorage.setItem('_AuthRefreshToken', auth.refresh_token);
@@ -21,7 +20,6 @@
         let externalAuthLastPage = localStorage.getItem(appPrefix + 'externalAuthLastPage') || '';
         window.location.href = (siteUrl || '').replace(/\/*$/, '') + '/mobile/' + externalAuthLastPage;
     }
-    {/literal}    
     loadApp({$authorization|@json}, '{$siteUrl|escape:javascript}', '{$appPrefix|escape:javascript}')
 </script>
 </head>

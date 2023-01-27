@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Configuration des devis',
 
     'LBL_RENEWAL' => 'Renouvellement',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interactions entre les devis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie du devis',
 );

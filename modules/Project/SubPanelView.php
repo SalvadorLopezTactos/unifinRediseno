@@ -59,18 +59,7 @@ $ListView->xTemplateAssign("RETURN_URL",
 $ListView->setHeaderTitle($current_module_strings['LBL_PROJECT_SUBPANEL_TITLE'] );
 
 $header_text = '';
-if(is_admin($current_user)
-	&& $_REQUEST['module'] != 'DynamicLayout'
-	&& !empty($_SESSION['editinplace']))
-{
-	$header_text = " <a href='index.php?action=index&module=DynamicLayout&from_action="
-		.$_REQUEST['action']
-		."&from_module=".$_REQUEST['module'] ."&record="
-		.$_REQUEST['record']. "'>"
-		.SugarThemeRegistry::current()->getImage("EditLayout", "border='0' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDITLAYOUT'])."</a>";
-}
+
 $ListView->setHeaderTitle($current_module_strings['LBL_PROJECT_SUBPANEL_TITLE'] . $header_text);
 
 $ListView->processListView($focus_list, "main", "PROJECT");
-
-?>

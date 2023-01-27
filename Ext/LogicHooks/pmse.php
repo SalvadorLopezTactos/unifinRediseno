@@ -29,6 +29,20 @@ $hook_array['after_delete'][] = array(
     $pmseHookClassName,
     'after_delete'
 );
+$hook_array['after_relationship_add'][] = [
+    100,
+    'pmse',
+    $pmseHookClassPath,
+    $pmseHookClassName,
+    'after_relationship',
+];
+$hook_array['after_relationship_delete'][] = [
+    100,
+    'pmse',
+    $pmseHookClassPath,
+    $pmseHookClassName,
+    'after_relationship',
+];
 //remove unnecessary globals
 unset($pmseHookClassPath);
 unset($pmseHookClassName);

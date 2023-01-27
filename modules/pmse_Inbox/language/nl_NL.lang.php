@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Dashboard record processen',
 
     'LBL_CAS_ID' => 'Procesnummer',
+    'LBL_CAS_STATUS' => 'Processtatus',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Unknown (according UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "taak werd",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "task was",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "heeft proces #%s toegewezen gekregen %s het %s record door de %s actie %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "op",
     'LBL_PMSE_HISTORY_LOG_AND'  => "en",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'koppelde of ontkoppelde een record caan',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Goedkeuren',
     'LBL_PMSE_LABEL_REJECT' => 'Weigeren',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Processen in uitvoering',
     'LBL_STATUS_CANCELLED' => 'Processen geannuleerd',
     'LBL_STATUS_ERROR' => 'Processenfout',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Afgerond',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Uit dienst',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'In bewerking',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Geannuleerd',
+    'LBL_STATUS_ERROR_ENUM' => 'Fout',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Procesbeheer',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Niet-bijgewoonde processen',

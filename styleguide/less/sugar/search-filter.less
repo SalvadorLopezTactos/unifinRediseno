@@ -12,18 +12,31 @@
   .control-group {
     padding: 5px 8px;
     margin-bottom: 0;
-    border-top: @borderWidget;
+  }
+}
+
+.subpanels-container:not(.btn-group) {
+  border-top: @borderWidget;
+  padding: 0.75rem 1rem 0;
+
+  .search-filter {
+    .control-group {
+      background: none;
+      padding: 0;
+
+      .filter-view {
+        border: none;
+      }
+    }
   }
 }
 
 // search filter inputs
 .filter-view {
-  border: @inputBorder;
   //display: table-row;
   position: relative;
   white-space: nowrap;
   margin-left: 0;
-  background-color: @white;
   margin-bottom: 0;
   overflow: hidden;
   min-height: 28px;
@@ -95,6 +108,7 @@
       .select2-arrow {
         background: none;
 
+        .sicon-chevron-down,
         .fa-caret-down {
           display: none;
         }
@@ -138,6 +152,10 @@
         font-weight: 600;
         vertical-align: top;
         line-height: 11px;
+
+        .sicon {
+          margin-left: 4px;
+        }
       }
 
       .select2-arrow {
@@ -146,18 +164,21 @@
 
       .select2-chosen {
         border-radius: 10px 0 0 10px;
-        color: @gray;
         padding: 4px 4px 4px 6px;
         line-height: 13px;
         height: 12px;
-        background: @grayLighter;
+        background: @btnSecondaryBackground;
 
         i.fa {
           margin-left: 4px;
         }
 
         &:hover {
-          background: darken(@grayLighter, 10%);
+          background: @btnSecondaryBackgroundHover;
+
+          .sicon {
+            color: @sicon-hover-color;
+          }
         }
       }
 
@@ -170,7 +191,7 @@
       }
 
       .select2-choice-filter {
-        background: @gray;
+        background: @gray80;
         color: @white;
       }
 
@@ -179,12 +200,12 @@
       }
 
       .filter-disabled a {
-        background: @grayLighter;
-        color: @gray;
+        background: @gray20;
+        color: @gray80;
         cursor: pointer;
 
         &:hover {
-          color: @gray;
+          color: @gray90;
         }
       }
 
@@ -205,7 +226,7 @@
           margin-top: 0;
 
           &[disabled=disabled]:hover {
-            background: @grayLighter;
+            background: @gray20;
           }
         }
       }
@@ -216,16 +237,16 @@
 
       span.select2-choice-type {
         border-radius: 10px 0 0 10px;
-        color: @gray;
+        color: @gray80;
         padding: 4px 4px 4px 6px;
         margin-right: 5px;
         margin-top: 3px;
         line-height: 12px;
         height: 12px;
-        background: @grayLighter;
+        background: @gray20;
 
         &:hover {
-          background: darken(@grayLighter, 10%);
+          background: @gray30;
         }
       }
     }
@@ -234,22 +255,17 @@
       .select2-choices {
         padding-right: 0;
       }
-
-      .select2-choice .select2-chosen {
-        &:hover {
-          background: @grayLighter;
-        }
-      }
     }
   }
   // search input field
   .search-name {
     width: 100%;
+    border: @borderWidget;
+    background-color: @inputBackground;
     box-sizing: border-box;
-    height: 26px;
-    border: 0;
     padding: 4px 20px 4px 8px;
     box-shadow: none;
+    height: 26px;
     //the intent was to make the outer .filter-view div have a border
     //but that is not working so an outline is needed on the input
     &:focus {
@@ -263,12 +279,11 @@
     }
   }
   // clear search text
-  .add-on.fa-times {
+  .add-on.sicon-close {
     position: absolute;
     right: 0;
     top: 0;
     padding: 7px 10px;
-    color: @gray;
 
     &:hover {
       cursor: pointer;
@@ -277,8 +292,6 @@
 }
 
 .extend {
-  background: @grayLighter;
-
   .filter-header {
     padding: 5px 8px;
 
@@ -298,7 +311,6 @@
   .filter-body {
     padding: 5px 0;
     margin: 0 8px;
-    border-top: 1px dashed darken(@grayLighter, 15%);
 
     > .row-fluid {
       position: relative;
@@ -338,7 +350,7 @@
 
         .add-on:first-child {
           background: none;
-          color: @grayLight;
+          color: @gray70;
           left: 0;
           display: inline-block;
           padding: 3px 3px 10px;
@@ -410,10 +422,9 @@
 
     .select2-choices {
       min-height: 20px;
-      border: 1px solid @grayLight;
+      border: @borderWidget;
       background-image: none;
       border-radius: @inputBorderRadius;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     }
 
     .select2-search-field {
@@ -440,8 +451,8 @@
 
       span {
         border-radius: 10px 0 0 10px;
-        background: darken(@grayLighter, 10%);
-        color: @gray;
+        background: @gray30;
+        color: @gray80;
         padding: 2px 4px 2px 6px;
         margin-right: 2px;
       }
@@ -452,7 +463,7 @@
       }
 
       span:last-child {
-        background: @grayLighter;
+        background: @gray20;
       }
 
       a {
@@ -464,12 +475,12 @@
       }
 
       .filter-disabled a {
-        background: @grayLighter;
-        color: @gray;
+        background: @gray20;
+        color: @gray80;
         cursor: pointer;
 
         &:hover {
-          color: @gray;
+          color: @gray80;
         }
       }
     }
@@ -495,7 +506,6 @@
   .filter-definition-container:first-child {
     .filter-body {
       border-top: none;
-      border-bottom: 1px dashed #d0d0d0;
     }
   }
 
@@ -522,10 +532,9 @@
 .search-filter-dropdown {
   border: 0 none;
   width: auto;
-  margin-top: 5px;
 
   &.select2-drop.select2-drop-active {
-    border: 1px solid darken(@grayLighter, 10%);
+    border: @borderWidget;
     box-shadow: none;
     border-radius: 2px;
   }
@@ -538,16 +547,31 @@
     li {
       line-height: 26px;
       border-bottom: @borderWidgetLight;
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
 
     li:hover,
     .select2-highlighted {
       background: @dropdownLinkBackgroundHover;
       color: @dropdownLinkColorHover;
+
+      &:hover {
+        .select2-icon-prepend .sicon {
+          color: @linkColor;
+        }
+      }
+
+      .select2-icon-prepend .sicon {
+        color: @linkColor;
+      }
     }
   }
 }
 
+.search-related-dropdown,
 .search-filter-dropdown {
   .result-selected {//MOOT: this selector may be no longer used
     display: block;
@@ -555,12 +579,14 @@
   }
 
   .select2-result {
+    background-color: @dropdownBackground;
+
     &.select2-result-border-top {
-      border-top: 1px solid darken(@grayLighter, 20%);
+      border-top: 1px solid @borderColor;
     }
 
     &.select2-result-border-bottom {
-      border-bottom: 1px solid darken(@grayLighter, 20%);
+      border-bottom: 1px solid @borderColor;
     }
 
     .select2-fa-prepend {
@@ -574,8 +600,17 @@
       }
     }
 
+    .select2-icon-prepend {
+      display: flex;
+      align-items: center;
+
+      .sicon {
+        margin-right: 4px;
+      }
+    }
+
     .select2-no-icon {
-      padding-left: 20px;
+      margin-left: 16px;
     }
   }
 
@@ -590,7 +625,7 @@
     position: relative;
     left: 20px;
     font-size: 11px;
-    color: @grayLight;
+    color: @gray70;
     cursor: text;
     margin-bottom: 0;
   }
@@ -612,15 +647,6 @@
 }
 
 /* NEW SKIN START */
-
-// search filter widget
-.search-filter {
-  // outer wrapper
-  .control-group {
-    /* override with variable */
-    background: @contentBackground;
-  }
-}
 
 // search filter inputs
 .filter-view {

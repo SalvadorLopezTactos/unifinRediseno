@@ -45,7 +45,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-processes'] = array(
             array(
                 'type' => 'actiondropdown',
                 'no_default_action' => true,
-                'icon' => 'fa-plus',
+                'icon' => 'sicon-plus',
                 'buttons' => array(
                     array(
                         'type' => 'dashletaction',
@@ -142,7 +142,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-processes'] = array(
             'row_actions' => array(
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-pencil',
+                    'icon' => 'sicon-edit',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-processes:designer:fire',
                     'target' => 'view',
@@ -151,7 +151,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-processes'] = array(
                 ),
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-times',
+                    'icon' => 'sicon-close',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-processes:delete-record:fire',
                     'target' => 'view',
@@ -160,7 +160,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-processes'] = array(
                 ),
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa fa-download',
+                    'icon' => 'sicon sicon-download',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-processes:download:fire',
                     'target' => 'view',
@@ -169,7 +169,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-processes'] = array(
                 ),
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-eye-slash',
+                    'icon' => 'sicon-hide',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-processes:disable-record:fire',
                     'target' => 'view',
@@ -178,7 +178,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-processes'] = array(
                 ),
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-info-circle',
+                    'icon' => 'sicon-info',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-processes:description-record:fire',
                     'target' => 'view',
@@ -207,7 +207,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-processes'] = array(
             'row_actions' => array(
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-pencil',
+                    'icon' => 'sicon-edit',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-processes:designer:fire',
                     'target' => 'view',
@@ -216,7 +216,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-processes'] = array(
                 ),
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-times',
+                    'icon' => 'sicon-close',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-processes:delete-record:fire',
                     'target' => 'view',
@@ -225,7 +225,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-processes'] = array(
                 ),
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa fa-download',
+                    'icon' => 'sicon sicon-download',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-processes:download:fire',
                     'target' => 'view',
@@ -234,7 +234,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-processes'] = array(
                 ),
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-eye',
+                    'icon' => 'sicon-preview',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-processes:enable-record:fire',
                     'target' => 'view',
@@ -243,7 +243,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-processes'] = array(
                 ),
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-info-circle',
+                    'icon' => 'sicon-info',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-processes:description-record:fire',
                     'target' => 'view',

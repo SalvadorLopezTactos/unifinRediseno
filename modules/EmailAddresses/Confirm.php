@@ -29,7 +29,7 @@ $ea = BeanFactory::retrieveBean('EmailAddresses', $id);
 if (!empty($ea)) {
     if ($ea->opt_out) {
         $ea->opt_out = 0;
-        $subject = new EmailAddressConfirmationLink($ea);
+        $subject = new EmailAddressConfirmationLink();
         $context = Container::getInstance()->get(Context::class);
 
         try {

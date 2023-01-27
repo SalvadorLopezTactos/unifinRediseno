@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'اسم الحقل موجود بالفعل',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'يجب أن يحتوي اسم الحقل على الحروف التالية فقط: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'لا توجد وحدة متضمنة يمكن حفظها',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'اسم القائمة المنسدلة موجود بالفعل',
     'LBL_BTN_ADD' => 'إضافة',
     'LBL_BTN_EDIT' => 'تحرير',
     'LBL_GENERATE_URL' => 'إنشاء عنوان URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'إضافة عمود {0} إلى',
     'LBL_DONE' => 'تم',
     'LBL_EXE_NON_SIM_MODE' => 'تنفيذ وضع عدم المحاكاة',
+    'LBL_CALCULATION_VISIBLE' => 'جعله مرئيًا للحسابات',
 );
-
-
-?>

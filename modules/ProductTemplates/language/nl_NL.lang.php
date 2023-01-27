@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Supportnaam:',
   'LBL_SUPPORT_TERM' => 'Support periode:',
   'LBL_TAX_CLASS' => 'BTW-tarief:',
+  'LBL_ACTIVE_STATUS' => 'Status',
   'LBL_TYPE_NAME'=>'Typenaam',
   'LBL_TYPE' => 'Type',
   'LBL_PRODUCT_TYPE' => 'Producttype',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Dashboard productcataloguslijst',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Dashboard productcatalogusrecord',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer productcatalogus',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Status is actief',
 );

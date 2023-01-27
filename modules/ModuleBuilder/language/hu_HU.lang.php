@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Törlés' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Szolgáltató: SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Szerepkör',
+    'LBL_BASE_LAYOUT' => 'Alap elrendezés',
+    'LBL_FIELD_NAME' => 'Mező neve',
+    'LBL_FIELD_VALUE' => 'Érték',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Az elrendezést meghatározta:',
+    'layoutDeterminedBy' => [
+        'std' => 'Alapértelmezett elrendezés',
+        'role' => 'Szerep',
+        'dropdown' => 'Legördülő mező',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Minden egyéni elrendezés eltávolításra került. Biztos benne, hogy szeretné megváltoztatni a jelenlegi elrendezés meghatározásait?',
 'help'=>array(
     'package'=>array(
             'create'=>'Nevezze el a csomagot! A név csak alfanumerikus karaktereket tartalmazhat, szóközt nem (pl.: HR_Management)<br /><br />Megadhat egy Szerzőt és egy Leírást is a csomaghoz.<br /><br />Kattintson a Mentés gombra.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Láthatósági szerkesztő',
 'LBL_ROLLUP' => 'Felgöngyölít',
 'LBL_RELATED_FIELD' => 'Kapcsolódó mezők',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'Egyedi logó védjegy képének URL-je. A logó védjegy javasolt mérete 22 x 22 pixel. Minden olyan feltöltött kép méretét csökkenteni fogjuk, amely meghaladja ezeket az értékeket valamelyik irányban.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'Egyedi logó védjegy képének URL-je. A logó védjegy javasolt szélessége 200 pixel. Minden feltöltött kép méretét csökkenteni fogjuk, amely meghaladja ezeket az értékeket valamelyik irányban. Ezt a logót a bejelentkezési képernyőn fogjuk használni. Ha nem tölt fel képet, a logó védjegy fog megjelenni.',
 'LBL_PORTAL_ROLE_DESC' => 'Ne törölje ki ez a szerepet! Az önkiszolgáló vásárló szerepét a rendszer a Sugar Portál aktiválása során automatikusan hozza létre. A hozzáférés szabályozásával megadhatja, hogy a Hibák, Esetek és Tudásbázis modulok közül melyek jelenjenek meg a Sugar Portálban. A rendszer előre be nem számítható működésének elkerülése végett ne módosítson a további hozzáféréseken. Ha véletlenül kitörölné ezt a szerepet, tiltsa le, majd engedélyezze ismét a Sugar Portált, hogy visszanyerje azt!',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Kapcsolat hozzáadása',
 'LBL_BTN_RENAME_MODULE' => 'Modul nevének megváltoztatása',
 'LBL_BTN_INSERT'=>'Beszúr',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Alap elrendezés visszaállítása',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'Hiba történt',
 'ERROR_REQUIRED_FIELDS' => 'Biztos benne, hogy folytatni kívánja? Az alábbi kötelezően kitöltendő mezők hiányoznak az elrendezésből:',
 'ERROR_ARE_YOU_SURE' => 'Biztos benne, hogy folytatni kívánja?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'A mezőt nem lehetett létrehozni. Elérte a sorok méretének határát az adatbázisa ezen táblázatában. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Tudjon meg többet</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Az alábbi mezők számolt értékeket tartalmaznak, amelyeket valós időben nem lehet frissíteni a SugarCRM mobil szerkesztő nézetében.',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Az alábbi mezők számolt értékeket tartalmaznak, amelyeket valós időben nem lehet frissíteni a SugarCRM portál szerkesztő nézetében.',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Ha engedélyezni szeretné ezeket a portálon, kérjük, tegye meg azt <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">itt</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Portál konfigurálása',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Portál engedélyezése',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Keresés engedélyezése az eset megnyitása előtt',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Megjegyzések engedélyezése a Tudásbázis modulban',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Esetzárások engedélyezése a portál felhasználói számára',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Új felhasználók feliratkozásának engedélyezése',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Felhasználói engedélyek',
     'LBL_PORTAL_THEME' => 'Portál téma',
     'LBL_PORTAL_ENABLE' => 'Engedélyezés',
     'LBL_PORTAL_SITE_URL' => 'Az Ön portál oldala:',
     'LBL_PORTAL_APP_NAME' => 'Alkalmazás neve',
-    'LBL_PORTAL_LOGOMARK_URL' => 'Logó védjegy URL',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Logó védjegy előnézet',
-    'LBL_PORTAL_LOGO_URL' => 'Logo URL',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Logó előnézet',
     'LBL_PORTAL_CONTACT_PHONE' => 'Telefon',
     'LBL_PORTAL_CONTACT_EMAIL' => 'E-mail',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Adjon meg érvényes e-mail címet',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Húzza be a portál modulok nevét a megfelelő helyre aszerint, hogy láthatóvá akarja tenni vagy el akarja rejteni őket a portál felső navigációs sávjában. A portál modulokhoz való felhasználói hozzáférés meghatározásához használja a <a href="?module=ACLRoles&action=index">Feladatkörök kezelését.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Megjelenített modulok',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Elrejtett modulok',
+    'LBL_CONFIG_VISIBILITY' => 'Láthatóság',
+    'LBL_CASE_VISIBILITY_HELP' => 'Határozza meg, hogy az esetet mely portálok felhasználói láthatják.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Határozza meg, hogy mely portálok felhasználói láthatják az esethez kapcsolódó e-maileket. A résztvevő kapcsolatok azok, akik a Címzett, Feladó, Másolat és Titkos másolat mezőkben szerepelnek.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Határozza meg, hogy mely portálok felhasználói láthatják az esethez kapcsolódó üzeneteket. A résztvevő kapcsolatok azok, amelyet a Vendégek mezőben szerepelnek.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'A fiókhoz tartozó minden kapcsolat',
+        'related_contacts' => 'Csak az elsődleges kapcsolattartók és az ügyhöz tartozó kapcsolattartók',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Csak a résztvevő kapcsolattartók',
+        'all' => 'Minden kapcsolattartó, aki látja az esetet',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Csak a résztvevő kapcsolattartók',
+        'all' => 'Minden kapcsolattartó, aki látja az esetet',
+    ],
+
 
 'LBL_PORTAL'=>'Portál',
 'LBL_PORTAL_LAYOUTS'=>'Portál elrendezések',
@@ -787,11 +812,11 @@ $mod_strings = array(
     . "A kötelező mezők követik a képletet a böngészőalapú mobilnézetben, <br/>"
     . "de nem követik a képletet a natív alkalmazásokban, így például a Sugar Mobile for iPhone alkalmazásban. <br/>"
     . "Nem követik a képletet a Sugar Önkiszolgáló Portálban.",
-'LBL_POPHELP_READONLY'=>"Hozzon létre képletet annak meghatározására, hogy a mező csak olvasható legyen-e az elrendezésekben.<br/>"
+'LBL_POPHELP_READONLY'=>"Hozzon létre képletet annak meghatározására, hogy a mező csak olvasható-e az elrendezésekben.<br/>"
         . "A csak olvasható mezők követik a képletet a böngészőalapú mobilnézetben, <br/>"
-        . "de nem követik a képletet a natív alkalmazásokban, így például a Sugar Mobile alkalmazásban iPhone-ra. <br/>"
+        . "de nem követik a képletet a natív alkalmazásokban, így például a Sugar Mobile for iPhone alkalmazásban. <br/>"
         . "Nem követik a képletet a Sugar Önkiszolgáló Portálban.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Használja ezt a mezőt, ha a Globális kereső használatával szeretne bejegyzéseket keresni ebben a modulban.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Válassza ki ennek a mezőnek a használatát, ha rekordokat keres a Globális kereső használatával ebben a modulban.',
 //Revert Module labels
 'LBL_RESET' => 'Visszaállít',
 'LBL_RESET_MODULE' => 'Modul visszaállítása',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Dátum-Idő',
                 'decimal'=>'Decimális',
                 'autoincrement' => 'Automatikus növelés',
+                'actionbutton' => 'AkcióGomb',
 ),
 'labelTypes' => array(
     "" => "gyakran használt címkék",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (kapcsolódó {1} azon.)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Másolás az elrendezésből',
 'LBL_RELATIONSHIP_TYPE' => 'Kapcsolat',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Összehasonlítás nyelv',
+'LBL_LABEL_NOT_TRANSLATED' => 'Elképzelhető, hogy ez a címke nincs lefordítva',
 );

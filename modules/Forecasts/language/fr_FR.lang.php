@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Description',
     'LBL_OW_TYPE'=>'Type',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Prévisions de l&#39;équipe pour <span class="sicon sicon-user-group mx-1"> </span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Rend compte à',
     'LBL_FDR_OPPORTUNITIES'=>'Affaires dans la Prévision :',
     'LBL_FDR_WEIGH'=>'Montant pondéré des affaires :',
     'LBL_FDR_COMMIT'=>'Montant soumis',
     'LBL_FDR_DATE_COMMIT'=>'Date de soumission',
+    'LBL_FDR_FORECAST_HEADER' => 'Prévisions du vendeur pour <span class="sicon sicon-user mx-1"> </span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prévisions :Tableau',
     'LBL_DV_MY_FORECASTS' => 'Mes prévisions',
-    'LBL_DV_MY_TEAM' => "Les prévisions de mon équipe" ,
+    'LBL_DV_MY_TEAM' => "Les prévisions de mon équipe",
     'LBL_DV_TIMEPERIODS' => 'Périodes :',
     'LBL_DV_FORECAST_PERIOD' => 'Période de la prévision',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Affaires de la Prévision',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Taux par défaut',
 
     'LBL_QUOTA' => 'Objectif',
-    'LBL_QUOTA_ADJUSTED' => 'Quota (ajusté)',
+    'LBL_QUOTA_ADJUSTED' => 'Quota ajusté',
 
     'LBL_FORECAST_FOR'=>'Tableau des Prévisions pour :',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Consolidé)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Objectif vs. Soumis vs. Actuel',
 
     'LBL_FORECAST' => 'Prévision',
+    'LBL_COMMITMENT' => 'Soumission',
+    'LBL_TEAM_COMMITMENT' => 'Soumission de l&#39;équipe',
+    'LBL_FORECASTED' => 'Prévisions',
+    'LBL_ADJUSTED_TOTAL' => 'Total ajusté',
     'LBL_COMMIT_STAGE' => 'Étape de soumission',
     'LBL_SALES_STAGE' => 'Étape',
     'LBL_AMOUNT' => 'Montant',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, et {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'réaliste {{{direction}}} {{{from}}} à {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'meilleur {{{direction}}} {{{from}}} à {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'pire {{{direction}}} {{{from}}} à {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'réaliste est resté le même',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'meilleur est resté le même',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'pire est resté le même',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Soumis (réaliste) {{{direction}}}{{{from}}} à {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Soumis (meilleur) {{{direction}}}{{{from}}} à {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Soumis (pire) {{{direction}}}{{{from}}} à {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Soumission (réaliste) est restée inchangée',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Soumission (meilleure) est restée inchangée',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Soumission (pire) est restée inchangée',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Ce mois le {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Total affiché',
     'LBL_TOTAL' => 'Total',
     'LBL_OVERALL_TOTAL' => 'Total général',
-    'LBL_EDITABLE_INVALID' => 'Valeur invalide pour {0}',
+    'LBL_EDITABLE_INVALID' => 'Valeur invalide pour {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'La valeur doit être entre {0} et {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Vous avez des modifications non sauvegardées dans votre prévision.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Veuillez noter que seules les données soumises peuvent être exportées. Cliquez sur OK pour continuer cet export ou Annuler pour retourner à votre feuille de travail.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Inclus',
     'LBL_CHART_NOT_INCLUDED' => 'Non inclus',
     'LBL_CHART_ADJUSTED' => '(Ajusté)',
-    'LBL_SAVE_DRAFT' => 'Sauvegarder en brouillon',
+    'LBL_SAVE_DRAFT' => 'Sauvegarder',
     'LBL_CHANGES_BY' => 'Modif par {0}',
     'LBL_FORECAST_SETTINGS' => 'Paramètres',
 
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Supérieur de',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Aucune donnée',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Objectif rempli',
+    'LBL_OPEN_LIKELY' => 'Ouvert réaliste',
+    'LBL_OPEN_BEST' => 'Ouvert meilleur',
+    'LBL_OPEN_WORST' => 'Ouvert pire',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Assigner Objectif',
     'LBL_ASSIGNING_QUOTA' => 'Assignation Objectif',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Les Prévision de mon équipe",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Vous avez des modifications non sauvegardées. Êtes-vous sur de vouloir sortir de cette feuille de prévision et perdre vos changements ?',
+
+    'LBL_SAVE_TOOLTIP' => 'Sauvegarder les modifications apportées aux lignes de la feuille de calcul',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Sauvegarder les modifications apportées aux enregistrements et soumettre les prévisions au responsable',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Soumettre les prévisions au responsable et attribuer les quotas',
+
+    'LBL_SAVE_LABEL_REP' => 'Sauvegarder ',
+    'LBL_SAVE_LABEL_MGR' => 'Sauvegarder les valeurs ajustées',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} utilise les enregistrements du module {{opportunities_singular_module}} pour initialiser les tableaux des prévisions pour les forces commerciales. Les utilisateurs peuvent travailler sur des quotas individuels, par équipes ou par niveau d&#39;organisations. Avant que les utilisateurs accèdent au module {{plural_module_name}} pour commencer à construire des tableaux de prévisions, un administrateur de l&#39;application doit au préalable configurer le module {{plural_module_name}} avec les différentes périodes, intervalles et scénarios. Les responsables des ventes utilisent le module {{plural_module_name}} en se basant sur les enregistrements du module {{opportunities_module}} qui leurs sont assignés pour la période en cour. Ces utilisateurs soumettent leur prévisions basées sur leur portefeuille présent dans le module {{opportunities_module}} et qu&#39;ils pensent clôturer. Les responsables des ventes travaillent eux aussi sur leur portefeuille personne à l&#39;image de leurs commerciaux. En plus de cela, ils agrègent les prévisions soumissent par leurs commerciaux afin de soumettre une prévision pour l&#39;ensemble de leur équipe pour chaque période. Des éléments complémentaires sont mis à disposition au travers du panneau d&#39;intelligence contextuelle avec des analyses basées sur leurs tableaux de prévisions pour les commerciaux ou bien ceux de leur équipe pour les responsables.'

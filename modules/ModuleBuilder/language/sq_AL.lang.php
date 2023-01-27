@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Fshi' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Mundësuar nga SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Roli',
+    'LBL_BASE_LAYOUT' => 'Struktura bazë',
+    'LBL_FIELD_NAME' => 'Emri i fushës',
+    'LBL_FIELD_VALUE' => 'Vlera',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Struktura e përcaktuar nga:',
+    'layoutDeterminedBy' => [
+        'std' => 'Strukturë standarde',
+        'role' => 'Roli',
+        'dropdown' => 'Fushë me lëshim poshtë',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Të gjitha strukturat e personalizuara do të hiqen. Je i sigurt që dëshiron të ndryshosh përkufizimet e tua aktuale të strukturës?',
 'help'=>array(
     'package'=>array(
             'create'=>'krijoni<br />Ofroni emrin për paketën. Emri që ju keni shkruar duhet të jetë alfanumerik dhe nuk duhet të përmbaje hapësira. (Shembull: HR_Management)<br /><br />Ju mund të ofroni Autorin dhe Përshkrimin e informacionit për paketën.<br /><br />Klikoni Ruaj për të krijuar paketën.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Ndryshuesi i pamjes',
 'LBL_ROLLUP' => 'Mbështjell',
 'LBL_RELATED_FIELD' => 'Fusha të ngjashme',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL për fotografinë e logos së porositur. Dimensionet e rekomanduara të logos është 22 x 22 piksela. Çdo imazh i ngarkuar që është më i madh në çdo drejtim do të jetë i shkallëzuar me këto dimensione maksimale.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL për fotografinë e logos së porositur. Gjerësia e rekomanduar e logos është 200 piksela. Çdo imazh i ngarkuar që është më i madh në çdo drejtim do të jetë i shkallëzuar me këto dimensione maksimale. Kjo logo do të përdoret në ekranin e identifikimit. Nëse nuk shfaqet asnjë fotografi, do të përdoret logoja.',
 'LBL_PORTAL_ROLE_DESC' => 'Mos e fshini këtë rol. Roli portal i vetëshërbimit të klientit është një rol që gjenerohet nga sistemi, i krijuar gjatë procesit të aktivizimit të portalit Sugar. Përdorni kontrollet e hyrjes brenda këtij roli për të aktivizuar dhe/ose çaktivizuar gabimet, rastet ose modulet e bazës së njohurive në portalin Sugar. Mos modifikoni asnjë kontroll tjetër hyrjeje për këtë rol për të shmangur sjelljen e panjohur dhe të paparashikueshme të sistemit. Në rastin e fshirjes aksidentale të këtij roli, rikrijojeni atë duke çaktivizuar dhe aktivizuar portalin Sugar.',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Shto lidhje',
 'LBL_BTN_RENAME_MODULE' => 'Ndrysho emrin e modulës',
 'LBL_BTN_INSERT'=>'Shto',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Rivendos strukturën bazë',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'Ka ndodhur një gabim',
 'ERROR_REQUIRED_FIELDS' => 'A jeni i sigurt që dëshironi të vazhdoni? Fushat vijuese të nevojshme mungojnë nga formati:',
 'ERROR_ARE_YOU_SURE' => 'A jeni i sigurt që dëshironi të vazhdoni?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Fusha nuk mund të krijohet. Ke arritur limitin e madhësisë së rreshtit të kësaj tabele në bazën tënde të të dhënave. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Mëso më shumë</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Fusha(t) në vijim kanë llogaritur vlerat të cilat nuk do të ri-llogaritën në kohën reale në pamjen e ndryshimit të SugarCRM Celular:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Fusha(t) në vijim kanë llogaritur vlerat të cilat nuk do të ri-llogaritën në kohën reale në pamjen e ndryshimit të SugarCRM Celular:',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Nëse ju do të dëshironit për të mundësuar ato në portal ju lutemi aktivizoni ato këtu.',
     'LBL_PORTAL_CONFIGURE' => 'Konfiguroni portalin',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Aktivizo portalin',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Aktivizo kërkimin përpara se të hapësh një rast',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Aktivizo shënimet në modulin "Baza e njohurive"',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Lejo përdoruesit e portalit që të mbyllin rastin',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Lejo përdoruesit e rinj që të regjistrohen',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Lejet e përdoruesit',
     'LBL_PORTAL_THEME' => 'Tema e portalit',
     'LBL_PORTAL_ENABLE' => 'Aktivizo',
     'LBL_PORTAL_SITE_URL' => 'Sajti i portalit tuaj është në dispozicion në:',
     'LBL_PORTAL_APP_NAME' => 'Emri i aplikacionit',
-    'LBL_PORTAL_LOGOMARK_URL' => 'URL-ja e logos',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Pasqyrë e logos',
-    'LBL_PORTAL_LOGO_URL' => 'URL e logos',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Pasqyrë e logos',
     'LBL_PORTAL_CONTACT_PHONE' => 'Telefoni',
     'LBL_PORTAL_CONTACT_EMAIL' => 'Emaili',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Duhet të shkruash një adresë emaili të vlefshme',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Tërhiqi emrat e moduleve më poshtë për t&#39;i vendosur ato të shfaqen apo të fshehen në krye të shtyllës së navigacionit. Për të kontrolluar qasjen në module, përdorni <a href="?module=ACLRoles&action=index">Rolin e Menaxhimit.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Shfaqja e moduleve',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Modulet e fshehura',
+    'LBL_CONFIG_VISIBILITY' => 'Dukshmëria',
+    'LBL_CASE_VISIBILITY_HELP' => 'Përcakto cilët përdorues të portalit mund ta shikojnë në rast.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Përcakto cilët përdorues të portalit mund të shikojnë email-et e lidhura me një rast. Kontaktet pjesëmarrëse janë ato që gjenden në fushat "Për:", "Nga:", "CC:" dhe "BCC:".',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Përcakton cilët përdorues të portalit mund të shikojnë mesazhet e lidhura me një rast. Kontaktet pjesëmarrëse janë ato në fushën "Të ftuarit".',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Të gjitha kontaktet e lidhura me llogarinë',
+        'related_contacts' => 'Vetëm kontakti kryesor dhe kontaktet e lidhura me rastin',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Vetëm kontaktet pjesëmarrëse',
+        'all' => 'Të gjitha kontaktet që mund ta shikojnë rastin',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Vetëm kontaktet pjesëmarrëse',
+        'all' => 'Të gjitha kontaktet që mund ta shikojnë rastin',
+    ],
+
 
 'LBL_PORTAL'=>'Portali',
 'LBL_PORTAL_LAYOUTS'=>'Formatet e portalit',
@@ -787,11 +812,11 @@ $mod_strings = array(
     . "Fushat e kërkuara do të ndjekin formulën në pamjen celulare të bazuar në shfletues,<br/>"
     . "por nuk do të ndjekin formulën në aplikacionet origjinale, si \"Sugar Mobile\" për \"iPhone\". <br/>"
     . "Ato nuk do të ndjekin formulën në portalin e vetëshërbimit të \"Sugar\".",
-'LBL_POPHELP_READONLY'=>"Krijo një formulë për të përcaktuar nëse kjo fushë është vetëm për lexim në formate.<br/>"
-        . "Fushat vetëm për lexim do të ndjekin formulën në pamjen celulare të bazuar në shfletues,<br/>"
-        . "por nuk do të ndjekin formulën në aplikacionet origjinale, si \"Sugar Mobile\" për \"iPhone\". <br/>"
-        . "Ato nuk do të ndjekin formulën në portalin e vetëshërbimit të \"Sugar\".",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Zgjidh të përdorësh këtë fushë kur kërkon për regjistrime duke përdorur "Kërkimi global" në këtë modul.',
+'LBL_POPHELP_READONLY'=>"Krijo një formulë për të përcaktuar nëse kjo fushë lexohet vetëm në skica.<br/>"
+        . "Fushat vetëm për lexim do të ndjekin formulën në pamjen e celularit në shfletues, <br/>"
+        . "por nuk do ta ndjekin formulën në aplikacionet origjinale, si p.sh. Sugar Mobile për iPhone. <br/><0/>"
+        . "Ata nuk do ta ndjekin formulën në portalin e vetëshërbimit të Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Zgjidh përdorimin e kësaj fushe gjatë kërkimit për të dhënat duke përdorur "Kërkimi global" në këtë modul.',
 //Revert Module labels
 'LBL_RESET' => 'Rivendos',
 'LBL_RESET_MODULE' => 'Rivendosni Module',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Data dhe koha',
                 'decimal'=>'Dhjetor',
                 'autoincrement' => 'Rritje automatike',
+                'actionbutton' => 'Buton veprimi',
 ),
 'labelTypes' => array(
     "" => "Labelat e përdorura shpesh",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => 'LBL_E_NDERLIDHUR_FUSHE_ID_EMRI_ETIKETIM',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopjo nga faqosja',
 'LBL_RELATIONSHIP_TYPE' => 'Lidhja',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Gjuha e krahasimit',
+'LBL_LABEL_NOT_TRANSLATED' => 'Kjo etiketë mund të mos përkthehet',
 );

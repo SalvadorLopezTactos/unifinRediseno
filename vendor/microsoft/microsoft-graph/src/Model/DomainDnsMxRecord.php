@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class DomainDnsMxRecord extends DomainDnsRecord
 {
@@ -30,7 +28,7 @@ class DomainDnsMxRecord extends DomainDnsRecord
     * Gets the mailExchange
     * Value used when configuring the answer/destination/value of the MX record at the DNS host.
     *
-    * @return string The mailExchange
+    * @return string|null The mailExchange
     */
     public function getMailExchange()
     {
@@ -59,7 +57,7 @@ class DomainDnsMxRecord extends DomainDnsRecord
     * Gets the preference
     * Value used when configuring the Preference/Priority property of the MX record at the DNS host.
     *
-    * @return int The preference
+    * @return int|null The preference
     */
     public function getPreference()
     {

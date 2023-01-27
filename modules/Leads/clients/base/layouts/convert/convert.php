@@ -45,6 +45,26 @@ $viewdefs['Leads']['base']['layout']['convert'] = array(
                             ),
                         ),
                     ),
+                    [
+                        'layout' => [
+                            'type' => 'base',
+                            'name' => 'dashboard-pane',
+                            'css_class' => 'dashboard-pane',
+                            'components' => [
+                                [
+                                    'layout' => [
+                                        'type' => 'base',
+                                        'name' => 'convert-dashboard-container',
+                                        'components' => [
+                                            [
+                                                'layout' => 'convert-dashboard',
+                                            ]
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
                 ),
             ),
         ),

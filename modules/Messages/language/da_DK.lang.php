@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Se meddelelsesrapporter',
     'LNK_IMPORT_MESSAGES' => 'Importér meddelelser',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'Kundeemne-id',
+    'LBL_LEAD_NAME' => 'Kundeemne',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Kundeside-chat',
+    'LBL_ACTIVITY_CUSTOMER' => 'Kunde',
+    'LBL_ACTIVITY_FINISHED' => 'afsluttet',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'i gang',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Beskeder',
 ];

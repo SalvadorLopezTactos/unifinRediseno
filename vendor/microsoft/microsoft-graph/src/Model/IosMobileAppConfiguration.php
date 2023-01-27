@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class IosMobileAppConfiguration extends ManagedDeviceMobileAppConfiguration
 {
@@ -30,12 +28,12 @@ class IosMobileAppConfiguration extends ManagedDeviceMobileAppConfiguration
     * Gets the encodedSettingXml
     * mdm app configuration Base64 binary.
     *
-    * @return \GuzzleHttp\Psr7\Stream The encodedSettingXml
+    * @return \GuzzleHttp\Psr7\Stream|null The encodedSettingXml
     */
     public function getEncodedSettingXml()
     {
         if (array_key_exists("encodedSettingXml", $this->_propDict)) {
-            if (is_a($this->_propDict["encodedSettingXml"], "\GuzzleHttp\Psr7\Stream")) {
+            if (is_a($this->_propDict["encodedSettingXml"], "\GuzzleHttp\Psr7\Stream") || is_null($this->_propDict["encodedSettingXml"])) {
                 return $this->_propDict["encodedSettingXml"];
             } else {
                 $this->_propDict["encodedSettingXml"] = \GuzzleHttp\Psr7\stream_for($this->_propDict["encodedSettingXml"]);
@@ -64,7 +62,7 @@ class IosMobileAppConfiguration extends ManagedDeviceMobileAppConfiguration
      * Gets the settings
     * app configuration setting items.
      *
-     * @return array The settings
+     * @return array|null The settings
      */
     public function getSettings()
     {
@@ -85,7 +83,7 @@ class IosMobileAppConfiguration extends ManagedDeviceMobileAppConfiguration
     */
     public function setSettings($val)
     {
-		$this->_propDict["settings"] = $val;
+        $this->_propDict["settings"] = $val;
         return $this;
     }
     

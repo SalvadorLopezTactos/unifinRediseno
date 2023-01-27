@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'ID de l&#39;element de línia d&#39;ingressos de renovació',
     'LBL_PARENT_RLIS' => 'Elements de línia d&#39;ingressos principals',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Elements de línia d&#39;ingressos principals',
+    'LBL_FORECASTED_LIKELY' => 'Previst com a Probable',
     'LBL_EXPERT_ID' => 'Expert de producte',
     'LBL_FORECAST' => 'Incloure en la previsió',
     'LBL_SUBTOTAL' => 'Subtotal',

@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Laiko formatas pagal nutylėjimą',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Rodyti serverio atsakymo laikus',
+    'FREEZE_FIRST_COLUMN' => 'Leisti įšaldyti stulpelius',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Įjunkite šį nustatymą, kad naudotojai galėtų įšaldyti pirmąjį stulpelį įvairiuose ' .
+        'sąrašo rodiniai, įskaitant modulių sąrašo rodinius, papildomus skydelius, prietaisų skydelius ir konsoles.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Sekti lėtas užklausas',
     'LOCK_HOMEPAGE_HELP'=>'Šis nustatymas neleis<BR> 1) įdėti naujų panelių į pradinį puslapį ir <BR>2) keisti panelių padėti pradiniame puslapyje.',
     'CURRENT_LOGO'=>'Dabartinis logotipas',
+    'CURRENT_LOGO_DARK' => 'Dabartinis tamsaus režimo logotipas:',
     'CURRENT_LOGO_HELP'=>'Šis logotipas yra atvaizduojamas Sugar programoje viršuj kairėje.',
+    'CURRENT_LOGO_DARK_HELP' => "Šis logotipas rodomas kairiajame poraštės kampe, kai programa „Sugar“ veikia tamsiu režimu, atsižvelgiant į vartotojo išvaizdos nuostatas.",
     'NEW_LOGO'=>'Užkrauti naujos firmos ženklą (212x40)',
     'NEW_LOGO_HELP' => 'Paveiksliuko formatas .png arba .jpg.<BR>rekomenduojamas dydis 212x40 px.',
+    'NEW_LOGO_DARK' => 'Pasirinkite tamsaus režimo logotipą:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Paveiksliukas gali būti tik .png arba .jpg formato. Maksimalus paveiksliuko aukštis 17px, maksimalus plotis - 450px. Jeigu bus užkrautas paveiksliukas su didesniais išmatavimais, jis bus automatiškai sumažintas.',
     'NEW_QUOTE_LOGO'=>'Užkrauti naują pasiūlymo logo',
     'NEW_QUOTE_LOGO_HELP'=>'Privalomas paveiksliuko formatas yra .jpg.<BR> Rekomenduojamas dydis  867x74 px.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Tęsti',
     'LBL_WIZARD_FINISH_TAB' => 'Užbaigti',
     'LBL_WIZARD_FINISH_TITLE' => 'Bazinė sistemos konfigūracija baigta',
-    'LBL_WIZARD_FINISH' => 'Paspauskite <b>Tęsti</b> norėdami sukonfigūruoti vartotojo nustatymus.<br/><br /><br />Norėdami konfigūruoti papildomus sistemos nustatymus, spauskite <a href="index.php?module=Administration&action=index" target="_blank">čia</a>.',
+    'LBL_WIZARD_FINISH' => 'Paspauskite <b>Tęsti</b> norėdami sukonfigūruoti vartotojo nustatymus.<br/><br />
+Norėdami konfigūruoti papildomus sistemos nustatymus, spauskite <a href="#Administration" target="_blank">čia</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Firmos vardas',
     'LBL_WIZARD_SYSTEM_DESC' => 'Pateikite savo organizacijos pavadinimą ir logotipą.',
     'LBL_WIZARD_LOCALE_DESC' => 'Nurodykite kaip norėtumėte matyti duomenų formatus pagal vietovę. Pateikti nustatymai bus pateikti kaip standartiniai.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Kraunama...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Trinti' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Sveiki' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Tamsaus režimo logotipas',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Ataskaitų modulis prieinamas tik per Sugar Mobile iPhone klientą.',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Ataskaitų modulis yra nepasiekiamas dirbant per mobilią Interneto naršyklę.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

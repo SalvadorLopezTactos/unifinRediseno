@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Vastamise aadressi ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Vastamise aadress',
     'LBL_PRIMARY_TEAM' => 'Esmane meeskond',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Eelistatud saatmiskonto',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Meiliseadete fookuse sahtel',
 );

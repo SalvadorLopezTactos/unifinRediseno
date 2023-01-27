@@ -13,11 +13,9 @@
 <script type="text/javascript" src="{sugar_getjspath file='modules/ModuleBuilder/javascript/JSTransaction.js'}" ></script>
 <script>
 	var jstransaction = new JSTransaction();
-	{literal}
 	if (SUGAR.themes.tempHideLeftCol){
     	SUGAR.themes.tempHideLeftCol();
     }
-    {/literal}
 </script>
 
 <link rel="stylesheet" type="text/css" href="{sugar_getjspath file="modules/ModuleBuilder/tpls/LayoutEditor.css"}" />

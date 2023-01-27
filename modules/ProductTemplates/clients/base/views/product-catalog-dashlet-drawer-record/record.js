@@ -94,6 +94,13 @@
                 }
             }
 
+            let closestComponent = options.context.get('closestComponent');
+            if (closestComponent && closestComponent.name === 'side-drawer') {
+                removeAddBtn = true;
+            } else if (closestComponent.name === 'convert') {
+                removeAddBtn = closestComponent.triggerBefore('productcatalog:preview:add:disable');
+            }
+
             if (removeAddBtn) {
                 options.meta.buttons = _.without(options.meta.buttons, addBtn);
             }

@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Programes sensibles al temps del procés',
 'LBL_OOTB_DATA_ARCHIVER' => 'Executa arxiu/esborrat de dades actives',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geocodificador de registres',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Resolutor del geocodificador',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intèrval:',
 'LBL_LIST_LIST_ORDER' => 'Planificadors:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Per configurar Crontab',
 'LBL_CRON_LINUX_DESC' => 'Afegeixi aquesta línia en el seu crontab:',
 'LBL_CRON_WINDOWS_DESC' => 'Crear un arxiu de procés per lots amb els següents comandos:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>per a curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Registre de Tasques',
 'LBL_EXECUTE_TIME'			=> 'Temps d´Execució',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Esborra els arxius temporals',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Reconstuïu les dades de seguretat desregularitzades de l&#39;equip',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Actualitza la definició de producte',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Mapes del geocodificador',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Resolutor del geocodificador',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Executar campanyes de Correu Massiu Nocturnes',
 'LBL_ASYNCMASSUPDATE' => 'Fer actualitzacions massives asíncrones',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Netejar antigues llistes de registres',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Purgador de la seqüència d&#39;activitats',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Programes sensibles al temps del procés',
+'LBL_SUGARJOBDATAARCHIVER' => 'Executa arxiu/esborrat de dades actives',
 'LBL_PMSEENGINECRON' => 'Planificador de SugarBPM',
 );
 

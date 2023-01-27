@@ -12,13 +12,11 @@
 *}
 
 <script>
-    {literal}
     $(document).ready(function(){
 	    $("ul.clickMenu").each(function(index, node){
 	        $(node).sugarActionMenu();
 	    });
     });
-    {/literal}
 </script>
 <div class="clear"></div>
 <form action="index.php" method="POST" name="{$form_name}" id="{$form_id}" {$enctype}>

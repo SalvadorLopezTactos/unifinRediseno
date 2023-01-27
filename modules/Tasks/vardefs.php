@@ -21,7 +21,7 @@ $dictionary['Task'] = array(
             'vname' => 'LBL_SUBJECT',
             'dbType' => 'varchar',
             'type' => 'name',
-            'len' => '50',
+            'len' => '255',
             'unified_search' => true,
             'full_text_search' => array(
                 'enabled' => true,
@@ -289,6 +289,13 @@ $dictionary['Task'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_MESSAGES',
         ],
+        'escalations' => [
+            'name' => 'escalations',
+            'type' => 'link',
+            'relationship' => 'escalation_tasks',
+            'source' => 'non-db',
+            'vname' => 'LBL_ESCALATIONS',
+        ],
         'quotes' => array(
             'name' => 'quotes',
             'type' => 'link',
@@ -427,11 +434,6 @@ $dictionary['Task'] = array(
             'name' => 'idx_task_par_del',
             'type' => 'index',
             'fields' => array('parent_id', 'parent_type', 'deleted')
-        ),
-        array(
-            'name' => 'idx_task_assigned',
-            'type' => 'index',
-            'fields' => array('assigned_user_id')
         ),
         array(
             'name' => 'idx_task_status',

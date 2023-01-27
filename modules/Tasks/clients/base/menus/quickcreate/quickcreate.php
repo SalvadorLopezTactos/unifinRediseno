@@ -16,5 +16,5 @@ $viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
     'label' => 'LNK_NEW_TASK',
     'visible' => true,
     'order' => 9,
-    'icon' => 'fa-plus',
+    'icon' => 'sicon-plus',
 );

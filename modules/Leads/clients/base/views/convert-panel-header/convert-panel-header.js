@@ -74,7 +74,7 @@
      */
     getCurrentState: function() {
         var currentState = _.extend({}, this.layout.currentState, {
-            create: (this.layout.currentToggle === this.layout.TOGGLE_CREATE),
+            create: (this.layout.currentToggle === this.layout.TOGGLE_CREATE_LAYOUT),
             labelModule: this.module,
             moduleInfo: {'moduleName': this.meta.moduleSingular},
             required: this.meta.required
@@ -284,7 +284,7 @@
      * @param {string} nextToggle Css class labeling the next toggle
      */
     setSubViewToggle: function(nextToggle) {
-        _.each(['dupecheck', 'create'], function(currentToggle) {
+        _.each(['dupecheck', 'create-layout'], function(currentToggle) {
             this.toggleSubViewLink(currentToggle, (nextToggle === currentToggle));
         }, this);
     },
@@ -307,10 +307,10 @@
     setSubViewToggleLabels: function(duplicateCount) {
         if (duplicateCount > 0) {
             this.setSubViewToggleLabel('dupecheck', 'LBL_CONVERT_IGNORE_DUPLICATES');
-            this.setSubViewToggleLabel('create', 'LBL_CONVERT_BACK_TO_DUPLICATES');
+            this.setSubViewToggleLabel('create-layout', 'LBL_CONVERT_BACK_TO_DUPLICATES');
         } else {
             this.setSubViewToggleLabel('dupecheck', 'LBL_CONVERT_SWITCH_TO_CREATE');
-            this.setSubViewToggleLabel('create', 'LBL_CONVERT_SWITCH_TO_SEARCH');
+            this.setSubViewToggleLabel('create-layout', 'LBL_CONVERT_SWITCH_TO_SEARCH');
         }
     },
 
@@ -354,14 +354,14 @@
 
         //use current state to determine activate if not explicit in call
         if (_.isUndefined(activate)) {
-            if (this.layout.currentToggle === this.layout.TOGGLE_CREATE) {
+            if (this.layout.currentToggle === this.layout.TOGGLE_CREATE_LAYOUT) {
                 activate = true;
             } else {
                 activate = this.layout.currentState.dupeSelected;
             }
         }
 
-        this.setAssociateButtonLabel(this.layout.currentToggle === this.layout.TOGGLE_CREATE);
+        this.setAssociateButtonLabel(this.layout.currentToggle === this.layout.TOGGLE_CREATE_LAYOUT);
 
         //only activate if current panel is active
         if (activate && panelActive) {
@@ -391,8 +391,8 @@
      */
     toggleActiveIndicator: function(active) {
         var $activeIndicator = this.$('.active-indicator i');
-        $activeIndicator.toggleClass('fa-chevron-down', active);
-        $activeIndicator.toggleClass('fa-chevron-right', !active);
+        $activeIndicator.toggleClass('sicon-chevron-down', active);
+        $activeIndicator.toggleClass('sicon-chevron-right', !active);
     },
 
     /**

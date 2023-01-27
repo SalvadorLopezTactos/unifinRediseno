@@ -93,6 +93,10 @@
                     self_disposiciones.render();
 
                 }
+
+                if($('[data-fieldname="account_disposiciones"] > span').length >0){
+                    $('[data-fieldname="account_disposiciones"] > span').show();
+                }
             },
             error: function (e) {
                 throw e;

@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Arkiv',
     'LBL_PROCESS_TYPE_DELETE' => 'Hard sletting',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Arkivkjøringer',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Advarsel',
+    'LBL_ARCHIVER_WARNING' => 'Det anbefales å utføre denne handlingen under lite bruk eller når stengt '
+        . 'da det kan påvirke systemytelsen. Er du sikker på at du vil utføre denne handlingen nå?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Arkiv for {{moduleName}}-modul må ha {{fieldName}} angitt som filter',
 );

@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Denne rapportkalenderen',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Registerdashbord for rapportkalendere',
+    'LBL_FILE_TYPE' => 'Filtype(r)',
 );

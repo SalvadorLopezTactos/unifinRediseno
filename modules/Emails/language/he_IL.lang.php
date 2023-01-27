@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'משתמשים',
     'LBL_EMAILS_PRODUCTS_REL' => 'הצעות מחיר לשורות פריטים',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'שורות פריט של רווחים',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'הסלמות',
     'LBL_EMAILS_MESSAGES_REL' => 'הודעות',
     'LBL_EMAILS_PURCHASES_REL' => 'רכישות',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'שורות פריט של רכישות',
@@ -473,4 +474,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'שלח דוא&#39;ל',
     'LBL_MAILBOX' => 'חשבון נכנס',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'כדי לשלוח דוא"ל, יש להגדיר חשבון דוא"ל יוצא ב<a href="#OutboundEmail">הגדרות דוא"ל</a>.',
 );

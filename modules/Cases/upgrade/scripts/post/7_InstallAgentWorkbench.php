@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 /**
  * Install the Agent Workbench and its corresponding drawer dashboard.
@@ -50,9 +49,6 @@ class SugarUpgradeInstallAgentWorkbench extends UpgradeScript
      */
     public function installAgentWorkbench()
     {
-        $this->log('Temporarily enabling admin work for Agent Workbench installation');
-        AccessControlManager::instance()->setAdminWork(true);
-
         $this->log('Installing Agent Workbench and dependencies');
 
         $this->defaultDashboardInstaller = new DefaultDashboardInstaller();
@@ -64,7 +60,6 @@ class SugarUpgradeInstallAgentWorkbench extends UpgradeScript
         // Agent Workbench itself
         $agentWorkbenchDashboardFile = 'modules/Home/dashboards/agent-dashboard/agent-dashboard.php';
         $this->installDashboard($agentWorkbenchDashboardFile, 'Home', 'agent-dashboard');
-        AccessControlManager::instance()->setAdminWork(false);
     }
 
     /**

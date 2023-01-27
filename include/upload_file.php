@@ -162,11 +162,11 @@ class UploadFile
 		global $sugar_config;
 
 		// current file system (GUID)
-		$source = "upload://$old_id";
+        $source = 'upload://' . $old_id;
 
 		if(!file_exists($source)) {
 			// old-style file system (GUID.filename.extension)
-			$oldStyleSource = $source.$file_name;
+            $oldStyleSource = $source . $file_name;
 			if(file_exists($oldStyleSource)) {
 				// change to new style
 				if(copy($oldStyleSource, $source)) {
@@ -183,7 +183,7 @@ class UploadFile
 			}
 		}
 
-		$destination = "upload://$new_id";
+        $destination = 'upload://' . $new_id;
 		if(!copy($source, $destination)) {
             $GLOBALS['log']->error("upload_file could not copy [ {$source} ] to [ {$destination} ]");
             return false;
@@ -378,10 +378,11 @@ class UploadFile
 	 */
 	function final_move($bean_id, $temporary = false)
 	{
-	    $destination = $bean_id;
-	    if(substr($destination, 0, 9) != "upload://") {
+        $destination = $bean_id;
+        if (substr($destination, 0, 9) !== 'upload://') {
             $destination = "upload://$bean_id";
-	    }
+        }
+
         if ($temporary === true) {
             $tempFolder = "upload://tmp/";
             if (!is_dir($tempFolder)) {
@@ -597,6 +598,7 @@ class UploadStream
     const STREAM_NAME = "upload";
     protected static $upload_dir;
     public static $wrapper_class = __CLASS__;
+    /** @var self */
     protected static $instance;
 
     /**
@@ -751,10 +753,12 @@ class UploadStream
      */
     public static function move_uploaded_file($upload, $path)
     {
-    	if(move_uploaded_file($upload, self::path($path))) {
-    	    return self::$instance->registerFile($path);
-    	}
-    	return false;
+        $to = self::path($path);
+        sugar_mkdir(dirname($to), null, true);
+        if (move_uploaded_file($upload, $to)) {
+            return self::$instance->registerFile($path);
+        }
+        return false;
     }
 
     /**
@@ -791,6 +795,13 @@ class UploadStream
     		$GLOBALS['log']->fatal("Invalid uploaded file name supplied: $path");
     		return null;
     	}
+
+        // split to directories only guid-named files
+        if (is_guid($path)) {
+            // lower digits of timestamp in UUID-v1 should have good enough distribution
+            $path = substr($path, 5, 3) . "/" . $path;
+        }
+
         return self::getDir()."/".$path;
     }
 
@@ -843,7 +854,9 @@ class UploadStream
 
     public function rename($path_from, $path_to)
     {
-        return rename($this->getFSPath($path_from), $this->getFSPath($path_to));
+        $to = $this->getFSPath($path_to);
+        sugar_mkdir(dirname($to), null, true);
+        return rename($this->getFSPath($path_from), $to);
     }
 
     public function rmdir($path, $options)

@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Разглеждане на отчетите за съобщенията',
     'LNK_IMPORT_MESSAGES' => 'Импортиране на съобщения',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'Идентификатор на потенциален клиент',
+    'LBL_LEAD_NAME' => 'Потенциален клиент',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Чат от страна на клиента',
+    'LBL_ACTIVITY_CUSTOMER' => 'Клиент',
+    'LBL_ACTIVITY_FINISHED' => 'завършил',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'в процес на изпълнение',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на съобщения',
 ];

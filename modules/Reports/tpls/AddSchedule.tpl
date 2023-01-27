@@ -11,58 +11,64 @@
  */
 *}
  
-{$PAGE_TITLE}
+<div class="moduleTitle">
+    <h2>{$PAGE_TITLE|escape:'html':'UTF-8'}</h2>
+</div>
 <head>
-<title>{$MOD.LBL_SCHEDULE_EMAIL}</title>
+<title>{$MOD.LBL_SCHEDULE_EMAIL|escape:'html':'UTF-8'}</title>
 
 {$STYLESHEET}
 
-<script type="text/javascript" src='{sugar_getjspath file="$CACHE_DIR/include/javascript/sugar_grp1_jquery.js"}'></script>
+<script type="text/javascript" src='{sugar_getjspath file="{$CACHE_DIR|escape:'url'}/include/javascript/sugar_grp1_jquery.js"}'></script>
 <script type="text/javascript" src='{sugar_getjspath file="include/javascript/sugar_3.js"}'></script>
-<script type="text/javascript" src='{sugar_getjspath file="$CACHE_DIR/include/javascript/sugar_grp1_yui.js"}'></script>
-<script type="text/javascript" src='{sugar_getjspath file="$CACHE_DIR/include/javascript/sugar_grp1.js"}'></script>
+<script type="text/javascript" src='{sugar_getjspath file="{$CACHE_DIR|escape:'url'}/include/javascript/sugar_grp1_yui.js"}'></script>
+<script type="text/javascript" src='{sugar_getjspath file="{$CACHE_DIR|escape:'url'}/include/javascript/sugar_grp1.js"}'></script>
 <script type="text/javascript" src='{sugar_getjspath file="include/SugarFields/Fields/Datetimecombo/Datetimecombo.js"}'></script>
-<script type="text/javascript" src="{$CACHE_DIR}/jsLanguage/{$CURRENT_LANGUAGE}.js?s={$JS_VERSION}&c={$JS_CUSTON_VERSION}&j={$JS_LANGUAGE_VERSION}"></script>
+<script type="text/javascript" src="{$CACHE_DIR|escape:'url'}/jsLanguage/{$CURRENT_LANGUAGE|escape:'url'}.js?s={$JS_VERSION|escape:'url'}&c={$JS_CUSTON_VERSION|escape:'url'}&j={$JS_LANGUAGE_VERSION|escape:'url'}"></script>
 </head>
 <body class='tabForm'>
 <form action='index.php' name='add_schedule' method='POST'>
 {sugar_csrf_form_token}
 <table  width='100%'  id='schedule_table' border='0'>
 <tr>
-    <td scope="row" id="date_start_label" ><slot>{$MOD.LBL_START_DATE}: </slot></td>
+    <td scope="row" id="date_start_label" ><slot>{$MOD.LBL_START_DATE|escape:'html':'UTF-8'}: </slot></td>
     <td ><slot>
         <table  cellpadding="0" cellspacing="0">
             <tr>
-                <td nowrap><input name='schedule_date_start' id='date_start_date' onchange="parseDate(this, '{$CALENDAR_DATEFORMAT}');combo_date_start.update();" tabindex='1' size='11' maxlength='10' type="text" disabled="">
-                            <img src="index.php?entryPoint=getImage&themeName={$THEME}&imageName=jscalendar.gif" alt="{$CALENDAR_DATEFORMAT}"  id="jscal_trigger" align="absmiddle" >&nbsp;
-                            <input type="hidden" id="date_start" name="date_start" value="{$DATE_START}">
+                <td nowrap><input name='schedule_date_start' id='date_start_date' onchange="parseDate(this, '{$CALENDAR_DATEFORMAT|escape:javascript}');combo_date_start.update();" tabindex='1' size='11' maxlength='10' type="text" disabled="">
+                            <img src="index.php?entryPoint=getImage&themeName={$THEME|escape:'url'}&imageName=jscalendar.gif" alt="{$CALENDAR_DATEFORMAT|escape:'html':'UTF-8'}"  id="jscal_trigger" align="absmiddle" >&nbsp;
+                            <input type="hidden" id="date_start" name="date_start" value="{$DATE_START|escape:'html':'UTF-8'}">
                             <span id="schedule_time_section"></span>
                 </td>
            </tr>
            <tr>
-                <td nowrap><span class="dateFormat">{$USER_DATEFORMAT}</span>
+                <td nowrap><span class="dateFormat">{$USER_DATEFORMAT|escape:'html':'UTF-8'}</span>
                 </td>
           </tr>
         </table></slot>
     </td>
-    <td scope="row" ><slot>{$MOD.LBL_SCHEDULE_ACTIVE}: </td>
-    <td ><slot><input type='checkbox' class="checkbox" name='schedule_active' id='schedule_active' {$SCHEDULE_ACTIVE_CHECKED}></slot></td>
+    <td scope="row" ><slot>{$MOD.LBL_SCHEDULE_ACTIVE|escape:'html':'UTF-8'}: </td>
+    <td ><slot><input type='checkbox' class="checkbox" name='schedule_active' id='schedule_active' {$SCHEDULE_ACTIVE_CHECKED|escape:'html':'UTF-8'}></slot></td>
 </tr>
 <tr>
-    <td scope="row"><slot>{$MOD.LBL_TIME_INTERVAL}: </slot></td>
-    <td ><slot><select name='schedule_time_interval' id='schedule_time_interval'>{$TIME_INTERVAL_SELECT}</select></slot></td>
-    <td scope="row"><slot>{$MOD.LBL_NEXT_RUN}:</slot></td>
-    <td ><slot>{$NEXT_RUN}</slot></td>
+    <td scope="row"><slot>{$MOD.LBL_TIME_INTERVAL|escape:'html':'UTF-8'}: </slot></td>
+    <td ><slot><select name='schedule_time_interval' id='schedule_time_interval'>
+    {{foreach name=TIME_INTERVAL from=$TIME_INTERVAL_OPTIONS key=intervalValue item=intervalLabel}}
+        <option value='{$intervalValue|escape:html}'{{if $TIME_INTERVAL == $intervalValue}} selected{{/if}}>{$intervalLabel|escape:html}</option>
+    {{/foreach}}
+    </select></slot></td>
+    <td scope="row"><slot>{$MOD.LBL_NEXT_RUN|escape:'html':'UTF-8'}:</slot></td>
+    <td ><slot>{$NEXT_RUN|escape:'html':'UTF-8'}</slot></td>
 </tr>
 <tr>
 <td scope="row">&nbsp; </td>
 <td >&nbsp;</td>
 <td scope="row">&nbsp;</td>
-<td ><input class="button" type='submit' name='update_schedule' value='{$MOD.LBL_UPDATE_SCHEDULE}' onclick="return check_form('add_schedule');"></td>
+<td ><input class="button" type='submit' name='update_schedule' value='{$MOD.LBL_UPDATE_SCHEDULE|escape:'html':'UTF-8'}' onclick="return check_form('add_schedule');"></td>
 </tr>
 <tr><td height='100%'></td></tr>
 </table>
-<input type='hidden' name='schedule_id' value='{$SCHEDULE_ID}'>
+<input type='hidden' name='schedule_id' value='{$SCHEDULE_ID|escape:'html':'UTF-8'}'>
 <input type='hidden' name='save_schedule_msi' value='true'>
 <input type='hidden' name='schedule_type' value='{$SCHEDULE_TYPE|escape:'html':'UTF-8'}'>
 <input type='hidden' name='refreshPage' value='{$REFRESH_PAGE|escape:'html':'UTF-8'}'>
@@ -79,7 +85,6 @@
 var combo_date_start = new Datetimecombo("{$DATE_START}", "date_start", "{$TIME_FORMAT}", "", '', '', true);
 text = combo_date_start.html(false);
 document.getElementById('schedule_time_section').innerHTML = text;
-eval(combo_date_start.jsscript(''));
 
 function update_date_start_available() {ldelim}
       YAHOO.util.Event.onAvailable("date_start_date", this.handleOnAvailable, this); 
@@ -88,16 +93,15 @@ function update_date_start_available() {ldelim}
 update_date_start_available.prototype.handleOnAvailable = function(me) 
 {ldelim}
 	Calendar.setup ({ldelim}
-	onClose : update_date_start,
 	inputField : "date_start_date",
-	ifFormat : "{$CALENDAR_DATEFORMAT}",
-	daFormat : "{$CALENDAR_DATEFORMAT}",
+	ifFormat : "{$CALENDAR_DATEFORMAT|escape:javascript}",
+	daFormat : "{$CALENDAR_DATEFORMAT|escape:javascript}",
 	button : "jscal_trigger",
 	singleClick : true,
 	step : 1,
 	weekNumbers:false
 	{rdelim});
-	
+ 
 	//Call update for first time to round hours and minute values
 	combo_date_start.update();
 {rdelim}
@@ -105,9 +109,9 @@ update_date_start_available.prototype.handleOnAvailable = function(me)
 var obj_date_start = new update_date_start_available();
 
 addToValidate('add_schedule',"date_start_date",'date',false,"Start Date");
-addToValidateBinaryDependency('add_schedule',"date_start_hours", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS} {$APP.LBL_HOURS}" ,"date_start_date");
-addToValidateBinaryDependency('add_schedule', "date_start_minutes", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS} {$APP.LBL_MINUTES}" ,"date_start_date");
-addToValidateBinaryDependency('add_schedule', "date_start_meridiem", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS} {$APP.LBL_MERIDIEM}","date_start_date");
+addToValidateBinaryDependency('add_schedule',"date_start_hours", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS|escape:javascript} {$APP.LBL_HOURS|escape:javascript}" ,"date_start_date");
+addToValidateBinaryDependency('add_schedule', "date_start_minutes", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS|escape:javascript} {$APP.LBL_MINUTES|escape:javascript}" ,"date_start_date");
+addToValidateBinaryDependency('add_schedule', "date_start_meridiem", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS|escape:javascript} {$APP.LBL_MERIDIEM|escape:javascript}","date_start_date");
 </script>
 {$TIMEDATE_JS}
 </body>

@@ -35,7 +35,7 @@
                                     {{#notHas name ../../../../../../../noEditFields}}
                                         <span class="record-edit-link-wrapper" data-name="{{name}}">
                                                 <a class="record-edit-link btn btn-invisible" data-type="{{type}}"
-                                                   data-name="{{name}}"><i class="fa fa-pencil"></i></a>
+                                                   data-name="{{name}}"><i class="sicon sicon-edit"></i></a>
                                             </span>
                                     {{/notHas}}
                                 {{/unless}}
@@ -72,7 +72,7 @@
                                                 <span class="record-edit-link-wrapper" data-name="{{name}}">
                                                         <a class="record-edit-link btn btn-invisible"
                                                            data-type="{{type}}" data-name="{{name}}"><i
-                                                                class="fa fa-pencil"></i></a>
+                                                                class="sicon sicon-edit"></i></a>
                                                     </span>
                                             {{/notHas}}
                                         {{/unless}}
@@ -90,9 +90,9 @@
     <div class="record-cell">
         <button class="btn-link btn-invisible more{{#if hideMoreButton}} hide{{/if}}"
                 data-moreless="more"
-                data-target=".panel_hidden">{{str "LBL_SHOW_MORE"}} <i class="fa fa-chevron-down"></i></button>
+                data-target=".panel_hidden">{{str "LBL_SHOW_MORE"}} <i class="sicon sicon-chevron-down"></i></button>
         <button class="btn-link btn-invisible less{{#if hideLessButton}} hide{{/if}}"
                 data-moreless="less"
-                data-target=".panel_hidden">{{str "LBL_SHOW_LESS"}} <i class="fa fa-chevron-up"></i></button>
+                data-target=".panel_hidden">{{str "LBL_SHOW_LESS"}} <i class="sicon sicon-chevron-up"></i></button>
     </div>
 </div>

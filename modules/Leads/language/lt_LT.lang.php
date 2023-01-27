@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Rekomendavo:',
     'LBL_LIST_STATUS' => 'Statusas',
     'LBL_LIST_TITLE' => 'Pareigos',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Rinkos palūkanų prognozavimas',
+    'LBL_MARKET_SCORE' => 'Rinkos balas',
     'LBL_MOBILE_PHONE' => 'Mobilus:',
     'LBL_MODULE_NAME' => 'Potencialūs kontaktai',
     'LBL_MODULE_NAME_SINGULAR' => 'Potencialus kontaktas',
@@ -330,4 +332,9 @@ After confirming each required and desired module, click the Save and Convert bu
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Potencialių klientų konvertavimo numatymas',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Peržiūrėti konkretaus potencialaus klientu numatymo išsamią informaciją',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Įgalinti pajamų eilutės prekes',
+    'LBL_REQUIRE_RLIS' => 'Kuriant naują galimybę reikalauti pajamų eilutės prekių',
+    'LBL_COPY_DATA_RLIS' => 'Kurdami naują galimybę, nukopijuokite potencialaus kliento duomenis į pajamų eilutės prekes',
 );

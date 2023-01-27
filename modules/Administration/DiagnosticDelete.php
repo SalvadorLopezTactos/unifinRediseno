@@ -23,7 +23,7 @@ if (isset($GLOBALS['sugar_config']['hide_admin_diagnostics']) && $GLOBALS['sugar
 echo getClassicModuleTitle(
         "Administration",
         array(
-            "<a href='index.php?module=Administration&action=index'>{$mod_strings['LBL_MODULE_NAME']}</a>",
+            "<a href='#Administration'>{$mod_strings['LBL_MODULE_NAME']}</a>",
            translate('LBL_DIAGNOSTIC_TITLE')
            ),
         true
@@ -60,6 +60,8 @@ else
 	  echo $mod_strings['LBL_DIAGNOSTIC_FILE'] . $file . $mod_strings['LBL_DIAGNOSTIC_ZIP'];
 }
 
-print "<a href=\"index.php?module=Administration&action=index\">" . $mod_strings['LBL_DIAGNOSTIC_DELETE_RETURN'] . "</a><br>";
+$onclick = "if(parent.SUGAR.App) parent.SUGAR.App.router.navigate('#Administration', {trigger: true});" .
+    " else window.location=window.location.href.substr(0,window.location.href.indexOf('index.php'))+'#Administration';";
+print "<a onclick=\"$onclick\" href=\"javascript:void(0)\">" . $mod_strings['LBL_DIAGNOSTIC_DELETE_RETURN'] . "</a><br>";
 
 ?>

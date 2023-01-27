@@ -331,7 +331,7 @@ class Expression extends SugarBean {
 
 
 		//Grab label for operator
-		$this->display_array['operator'] = $this->get_display_operator($this->operator);
+        $this->display_array['operator'] = $this->get_display_operator();
 
 
 

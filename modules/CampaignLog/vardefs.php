@@ -109,7 +109,7 @@ $dictionary['CampaignLog'] = array ('audited'=>false,
 		),
 		'recipient_name' => array(
 			'name' => 'recipient_name',
-			'type' => 'varchar',
+            'type' => 'fullname',
 			'len' => '255',
 			'source'=>'non-db',
 		),
@@ -280,12 +280,6 @@ $dictionary['CampaignLog'] = array ('audited'=>false,
 
 			'type' =>'index',
 			'fields'=>array('more_information')
-		),
-		array (
-			'name' =>'idx_target_id',
-
-			'type' =>'index',
-			'fields'=>array('target_id')
 		),
         array (
 			'name' =>'idx_target_id_deleted',

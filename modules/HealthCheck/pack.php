@@ -36,6 +36,11 @@ function packHealthCheck(ZipArchive $zip, $manifest = array(), $installdefs = ar
         'styleguide/assets/fonts/fontawesome-webfont.ttf',
         'styleguide/assets/fonts/fontawesome-webfont.woff',
         'styleguide/assets/fonts/FontAwesome.otf',
+        // SugarIcons font
+        'styleguide/assets/fonts/SugarIcons/SugarIcons.svg',
+        'styleguide/assets/fonts/SugarIcons/SugarIcons.ttf',
+        'styleguide/assets/fonts/SugarIcons/SugarIcons.woff',
+        'styleguide/assets/fonts/SugarIcons/SugarIcons.woff2',
         'modules/HealthCheck/tpls/index.tpl',
         'modules/HealthCheck/views/view.index.php',
         'modules/HealthCheck/controller.php',
@@ -43,6 +48,7 @@ function packHealthCheck(ZipArchive $zip, $manifest = array(), $installdefs = ar
         'modules/HealthCheck/HealthCheckClient.php',
         'modules/HealthCheck/HealthCheckHelper.php',
         'modules/HealthCheck/vardefs.php',
+        'modules/HealthCheck/smarty.phar',
     );
 
     $chdir = dirname(__FILE__) . "/../..";

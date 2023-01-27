@@ -28,6 +28,7 @@ class DocumentsViewExtdoc extends SugarView
         $apiName = $this->request->getValidInputRequest('apiName');
         $isPopup = $this->request->getValidInputRequest('isPopup');
         $elemBaseName = $this->request->getValidInputRequest('elemBaseName');
+        $sidecarCid = $this->request->getValidInputRequest('sidecarCid');
 
         if ($apiName === null) {
             $apiName = 'IBMSmartCloud';
@@ -41,7 +42,7 @@ class DocumentsViewExtdoc extends SugarView
         }
 
         // See if we are running as a popup window
-        if (isTruthy($isPopup) && !empty($elemBaseName) ) {
+        if (isTruthy($isPopup) && (!empty($elemBaseName) || !empty($sidecarCid))) {
             $isPopup = true;
         } else {
             $isPopup = false;
@@ -111,13 +112,22 @@ class DocumentsViewExtdoc extends SugarView
 
                 if ( $isPopup ) {
                     // We are running as a popup window, we need to replace the direct url with some javascript
-                    $newRow['DOC_URL'] = "javascript:window.opener.SUGAR.field.file.populateFromPopup('"
-                        . htmlspecialchars($elemBaseName, ENT_QUOTES, 'UTF-8')
-                        . "','" . htmlspecialchars($newRow['ID'], ENT_QUOTES, 'UTF-8')
-                        . "','" . htmlspecialchars($newRow['NAME'], ENT_QUOTES, 'UTF-8')
-                        . "','" . htmlspecialchars($newRow['URL'], ENT_QUOTES, 'UTF-8')
-                        . "','" . htmlspecialchars($newRow['URL'], ENT_QUOTES, 'UTF-8')
-                        . "'); window.close();";
+                    if ($sidecarCid) {
+                        $newRow['DOC_URL'] = $this->getSidecarOnSelectJavascript(
+                            $sidecarCid,
+                            htmlspecialchars($newRow['ID'], ENT_QUOTES, 'UTF-8'),
+                            htmlspecialchars($newRow['NAME'], ENT_QUOTES, 'UTF-8'),
+                            htmlspecialchars($newRow['URL'], ENT_QUOTES, 'UTF-8')
+                        );
+                    } else {
+                        $newRow['DOC_URL'] = "javascript:window.opener.SUGAR.field.file.populateFromPopup('"
+                            . htmlspecialchars($elemBaseName, ENT_QUOTES, 'UTF-8')
+                            . "','" . htmlspecialchars($newRow['ID'], ENT_QUOTES, 'UTF-8')
+                            . "','" . htmlspecialchars($newRow['NAME'], ENT_QUOTES, 'UTF-8')
+                            . "','" . htmlspecialchars($newRow['URL'], ENT_QUOTES, 'UTF-8')
+                            . "','" . htmlspecialchars($newRow['URL'], ENT_QUOTES, 'UTF-8')
+                            . "'); window.close();";
+                    }
                 }else{
                     $newRow['DOC_URL'] = $newRow['URL'];
                 }
@@ -150,6 +160,7 @@ class DocumentsViewExtdoc extends SugarView
             $ss->assign('linkTarget','');
             $ss->assign('isPopup',1);
             $ss->assign('elemBaseName',$elemBaseName);
+            $ss->assign('sidecarCid', $sidecarCid);
         } else {
             $ss->assign('linkTarget','_new');
             $ss->assign('isPopup',0);
@@ -178,4 +189,22 @@ class DocumentsViewExtdoc extends SugarView
             echo('</div>');
         }
  	}
+
+    /**
+     * Returns the Javascript used to define the action when a document is
+     * selected from the external API
+     *
+     * @param $sidecarCid string CID of the Sidecar element that initiated this view
+     * @param $docId string the ID of the external document selected
+     * @param $docName string the name of the external document selected
+     * @param $docUrl string the URL pointing to the external document selected
+     * @return string the Javascript code to run after the document is selected
+     */
+    public function getSidecarOnSelectJavascript($sidecarCid, $docId, $docName, $docUrl)
+    {
+        return 'javascript:' . <<<JS
+window.opener.App.events.trigger('external:document:selected:' + '$sidecarCid', '$docId', '$docName', '$docUrl');
+window.close();
+JS;
+    }
 }

@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Pakkumiste konfiguratsioon',
 
     'LBL_RENEWAL' => 'Uuendamine',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Pakkumuse interaktsioonid',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Hinnapakkumise ajaskaala',
 );

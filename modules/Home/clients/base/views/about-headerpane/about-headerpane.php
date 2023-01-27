@@ -13,6 +13,7 @@
 
 $viewdefs['Home']['base']['view']['about-headerpane'] = array(
     'template' => 'headerpane',
+    'css_class' => 'about-headerpane',
     'fields' => array(
         array(
             'name' => 'title',

@@ -84,7 +84,7 @@ $viewdefs['Emails']['base']['view']['subpanel-for-accounts-archived-emails'] = a
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
-                'icon' => 'fa-eye',
+                'icon' => 'sicon-preview',
                 'acl_action' => 'view',
                 'allow_bwc' => false,
             ),

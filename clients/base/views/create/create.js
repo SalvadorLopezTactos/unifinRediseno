@@ -211,6 +211,13 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    _getDropdownBasedViewName: function() {
+        return 'record';
+    },
+
+    /**
      * Extends in order to set the {@link #action} to `create` while the fields
      * are rendering.
      *
@@ -279,25 +286,17 @@
         this.model.on('change', function() {
             app.events.trigger('create:model:changed', this.hasUnsavedChanges());
         }, this);
-
-        this.focusFirstInput();
     },
 
     /*
      * Pre-populate the record if Omnichannel is opened
      */
     populateFromOmnichanel: function() {
-        if (app.omniConsole && this.omniPopulation) {
-            var ccp = app.omniConsole.getComponent('omnichannel-ccp');
-            ccp.layout._addQuickcreateModelDataToContext();
-            var context = ccp.layout._getTopLevelContext();
-            var quickcreateModelData = context.get('quickcreateModelData');
-
-            if (!_.isEmpty(quickcreateModelData)) {
-                this.model.set(quickcreateModelData);
+        if (app.omniConsole && app.omniConsole.isOpen() && this.omniPopulation) {
+            var prepopulateValues = app.omniConsole.getModelPrepopulateData(this.module);
+            if (!_.isEmpty(prepopulateValues)) {
+                this.model.set(prepopulateValues);
             }
-
-            context.unset('quickcreateModelData');
         }
     },
 
@@ -325,6 +324,8 @@
      * Handle click on the cancel link
      */
     cancel: function () {
+        app.alert.dismiss('cancel-dropdown-view-change');
+
         //Clear unsaved changes on cancel.
         app.events.trigger('create:model:changed', false);
         this.$el.off();
@@ -334,6 +335,14 @@
         } else {
             app.router.navigate(this.module, {trigger: true});
         }
+    },
+
+    /**
+     * Cancels the create view when the user cancels a dropdown view change
+     * @private
+     */
+    _cancelDropdownViewChange: function() {
+        this.cancel();
     },
 
     /**
@@ -477,6 +486,7 @@
                     });
                     callback(false);
                 }
+                app.events.trigger('list:create:success');
             }, this),
             error = _.bind(function(model, e) {
                 if (e.status == 412 && !e.request.metadataRetry) {
@@ -560,9 +570,20 @@
         this.applyAfterCreateOptions(options);
 
         // Check if this has subpanel create models
+        this.addSubpanelCreateModels();
+
+        options = _.extend({}, options, self.getCustomSaveOptions(options));
+        self.model.save(null, options);
+    },
+
+    /**
+     * Sets the link field(s) on the parent model so that on save, the subpanel-create models will
+     * be created as related records through those links
+     */
+    addSubpanelCreateModels: function() {
         if (this.hasSubpanelModels) {
             _.each(this.context.children, function(child) {
-                if (child.get('isCreateSubpanel')) {
+                if (child.get('isCreateSubpanel') && child.get('collection').models.length) {
                     // create the child collection JSON structure to save
                     var childCollection = {
                             create: []
@@ -588,9 +609,6 @@
                 }
             }, this);
         }
-
-        options = _.extend({}, options, self.getCustomSaveOptions(options));
-        self.model.save(null, options);
     },
 
     /**

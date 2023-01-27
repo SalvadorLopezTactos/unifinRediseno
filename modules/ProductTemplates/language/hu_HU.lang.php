@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Támogatás neve:',
   'LBL_SUPPORT_TERM' => 'Támogatás időtartama:',
   'LBL_TAX_CLASS' => 'Áfa kulcs:',
+  'LBL_ACTIVE_STATUS' => 'Állapot',
   'LBL_TYPE_NAME'=>'Típus név',
   'LBL_TYPE' => 'Típus',
   'LBL_PRODUCT_TYPE' => 'Terméktípus',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Termékkatalógus-lista irányítópult',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Termékkatalógus-bejegyzés irányítópult',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Termékkatalógus figyelemfelhívás',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Az állapot aktív',
 );

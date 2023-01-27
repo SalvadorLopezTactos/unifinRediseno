@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'สร้างเอกสาร',
 	'LNK_DOCUMENT_LIST'=> 'ดูเอกสาร',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'การแก้ไขเอกสารที่เกี่ยวข้อง',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'คุณสร้าง {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a> สำเร็จแล้ว', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'เลขที่รุ่น',
 	'LBL_FILENAME' => 'ไฟล์:',
 	'LBL_MIME' => 'ประเภท Mime',

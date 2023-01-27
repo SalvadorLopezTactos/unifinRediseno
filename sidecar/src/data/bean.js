@@ -99,6 +99,14 @@ const Bean = Backbone.Model.extend({
         this._relatedCollections = this._relatedCollections || null;
 
         /**
+         * List of persistent fetch options.
+         *
+         * @type {Object}
+         * @private
+         */
+        this._persistentOptions = {};
+
+        /**
          * The request object that is currently syncing against the server.
          *
          * This object is needed to determine if a fetch request should be

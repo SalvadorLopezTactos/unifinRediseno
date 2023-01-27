@@ -71,7 +71,9 @@
         }, this);
 
         this.listenTo(this.context, 'refresh:count', function(hasAtLeast, properties) {
-            this.$('.subpanel').toggleClass('empty', !properties.length);
+            if (!_.isEmpty(properties)) {
+                this.$('.subpanel').toggleClass('empty', !properties.length);
+            }
         }, this);
 
         this.listenTo(this.context.parent, 'panel-top:refresh', function(link) {

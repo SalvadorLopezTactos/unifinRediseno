@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Tento postup môžete napríklad použiť na vyhľadanie problému, ktorý bol nahlásený už predtým.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Ak máte nový prípad pre podporu, ktorý by ste radi nahlásili, kliknite tu a odošlite nový prípad.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Kliknutím tu sa kedykoľvek vrátite do tohto náhľadu.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcie s prípadom',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os prípadu',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Poznámky',
 

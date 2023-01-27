@@ -15,7 +15,7 @@
 
     events: {
         'click [name=name]': 'gotoDetail',
-        'click .fa-eye': 'loadPreview',
+        'click .sicon-preview': 'loadPreview',
         'click [name=show_more_button]': 'showMoreResults'
     },
 

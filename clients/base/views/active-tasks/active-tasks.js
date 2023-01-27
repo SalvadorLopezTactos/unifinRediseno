@@ -182,7 +182,7 @@
 
         var tab = this.tabs[this.settings.get('activeTab')];
 
-        if (tab.overdue_badge) {
+        if (tab && tab.overdue_badge) {
             this.overdueBadge = tab.overdue_badge;
         }
 

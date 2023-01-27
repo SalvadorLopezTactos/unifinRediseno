@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Механизм выражений',
-  'LBL_MODULE_NAME_SINGULAR' => 'Механизм выражений',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Назад' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Дальше' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Расширить' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Механизм выражений',
+    'LBL_MODULE_NAME_SINGULAR' => 'Механизм выражений',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Назад' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Дальше' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Расширить' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Неизвестное поле',
+];

@@ -249,7 +249,7 @@ class PMSEEngineFilterApi extends FilterApi
                     PMSELogger::getInstance()->alert($sugarApiExceptionInvalidParameter->getMessage());
                     throw $sugarApiExceptionInvalidParameter;
                 }
-                self::processFilterPA($filter, $expression, $where, $q);
+                self::processFilterPA($filter, $expression, $where);
             }
         }
 

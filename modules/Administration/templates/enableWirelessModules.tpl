@@ -22,7 +22,7 @@
 		<tr>
 			<td>
 			<input title="{$APP.LBL_SAVE_BUTTON_LABEL}" accessKey="{$APP.LBL_SAVE_BUTTON_TITLE}" class="button primary" onclick="SUGAR.saveMobileSettings();" type="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">
-			<input title="{$APP.LBL_CANCEL_BUTTON_LABEL}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="document.enableWirelessModules.action.value='';" type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+			<input title="{$APP.LBL_CANCEL_BUTTON_LABEL}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
 			</td>
 		</tr>
 	</table>
@@ -82,7 +82,7 @@
 		<tr>
 			<td>
 				<input title="{$APP.LBL_SAVE_BUTTON_LABEL}" class="button primary" onclick="SUGAR.saveMobileSettings();" type="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">
-				<input title="{$APP.LBL_CANCEL_BUTTON_LABEL}" class="button" onclick="document.enableWirelessModules.action.value='';" type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+				<input title="{$APP.LBL_CANCEL_BUTTON_LABEL}" class="button" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
 			</td>
 		</tr>
 	</table>
@@ -100,29 +100,28 @@
 	var lblEnabled = '{sugar_translate label="LBL_ACTIVE_MODULES"}';
 	var lblDisabled = '{sugar_translate label="LBL_DISABLED_MODULES"}';
 
-	{literal}
 	SUGAR.mobileEnabledTable = new YAHOO.SUGAR.DragDropTable(
 		"enabled_div",
-		[{key:"label",  label: lblEnabled, width: 200, sortable: false},
-		 {key:"module", label: lblEnabled, hidden:true}],
+		[{ key:"label",  label: lblEnabled, width: 200, sortable: false },
+		 { key:"module", label: lblEnabled, hidden:true }],
 		new YAHOO.util.LocalDataSource(enabled_modules, {
-			responseSchema: {fields : [{key : "module"}, {key : "label"}]}
+			responseSchema: { fields : [{ key : "module"}, { key : "label" }]}
 		}),  
-		{height: "300px"}
+		{ height: "300px"}
 	);
 	SUGAR.mobileDisabledTable = new YAHOO.SUGAR.DragDropTable(
 		"disabled_div",
-		[{key:"label",  label: lblDisabled, width: 200, sortable: false},
-		 {key:"module", label: lblDisabled, hidden:true}],
+		[{ key:"label",  label: lblDisabled, width: 200, sortable: false},
+		 { key:"module", label: lblDisabled, hidden:true }],
 		new YAHOO.util.LocalDataSource(disabled_modules, {
-			responseSchema: {fields : [{key : "module"}, {key : "label"}]}
+			responseSchema: { fields : [{ key : "module" }, { key : "label" }]}
 		}),
-		{height: "300px"}
+		{ height: "300px"}
 	);
 	SUGAR.mobileEnabledTable.disableEmptyRows = true;
 	SUGAR.mobileDisabledTable.disableEmptyRows = true;
-	SUGAR.mobileEnabledTable.addRow({module: "", label: ""});
-	SUGAR.mobileDisabledTable.addRow({module: "", label: ""});
+	SUGAR.mobileEnabledTable.addRow({ module: "", label: "" });
+	SUGAR.mobileDisabledTable.addRow({ module: "", label: "" });
 	SUGAR.mobileEnabledTable.render();
 	SUGAR.mobileDisabledTable.render();
 	
@@ -149,7 +148,7 @@
 		Connect.asyncRequest(
             Connect.method, 
             Connect.url, 
-            {success: SUGAR.saveCallBack},
+            { success: SUGAR.saveCallBack },
 			SUGAR.util.paramsToUrl(urlParams) + "to_pdf=1"
         );
 		
@@ -160,13 +159,12 @@
 	   ajaxStatus.flashStatus(SUGAR.language.get('app_strings', 'LBL_DONE'));
         var response = YAHOO.lang.trim(o.responseText);
         if (response === "true") {
-	       window.location.assign('index.php?module=Administration&action=index');
+            parent.SUGAR.App.router.navigate("#Administration", {ldelim}trigger: true{rdelim});
 	   } 
 	   else 
 	   {
-           YAHOO.SUGAR.MessageBox.show({msg: response});
+           YAHOO.SUGAR.MessageBox.show({ msg: response });
 	   }
 	}	
 })();
-{/literal}
 </script>

@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Раздел добавлен',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Дашлеты будут перекомпонированы, вы точно хотите изменить внешний вид колонки?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Вы действительно хотите удалить этот раздел?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Информационная панель не настроена',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Разделы не настроены',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Создать информационную панель',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Web-страница',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Web-страница',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Исходный код',
   'LBL_SOURCE_SUGAR' => 'SugarCRM - самое популярное в мире приложение по автоматизации процесса продаж, созданное компанией SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - движок шаблонов для PHP. автор: Barnabás Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - Набор PHP классов, которые дают возможность разработчикам создавать и пользоваться веб-сервисами, автор: корпорация NuSphere и Dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calenda - Календарь для введения дат, автор:Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - библиотека для создания PDF-документов, автор: Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - Реализация сервера WebDAV в PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Справка содержит сведения о просматриваемом модуле, предоставляет подробные инструкции для выполнения конкретных действий в модуле, а также указания для получения более полной информации и поддержки.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Фильтр',
+
+    'LBL_ABOUT_VERSION' => 'Вы используете версию {{version}} со следующими лицензиями:',
 );

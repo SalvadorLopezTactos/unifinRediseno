@@ -12,4 +12,4 @@
 --}}
 <input type="hidden" class="select2 select2-choices-pills-close attachments" name="{{name}}" />
 {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
-<input type="file" class="hidden" name="filename"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}} />
+<input type="file" class="hidden" name="filename" {{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}} multiple />

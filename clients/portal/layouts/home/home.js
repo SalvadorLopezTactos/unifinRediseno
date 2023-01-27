@@ -51,7 +51,7 @@
             });
             this.$el.append(
                 $('<div></div>')
-                    .addClass('dashboard' + css)
+                    .addClass('dashboard bg-content-background w-full absolute' + css)
                     .attr({'data-section': 'true'})
                     .append(dashboardEl)
             );

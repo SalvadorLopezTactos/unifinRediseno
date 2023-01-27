@@ -683,7 +683,7 @@ class OpportunitiesSeedData {
             // if this is an even number, assign a product template
             if ($doPT) {
                 $rli->product_template_id = $pt_id;
-                $rli->discount_amount = rand(100, $rli->cost_price);
+                $rli->discount_amount = rand(100, intval($rli->cost_price));
                 $rli->discount_rate_percent = (($rli->discount_amount/$rli->discount_price)*100);
                 foreach($pt as $field => $value) {
                     if ($field != 'id') {

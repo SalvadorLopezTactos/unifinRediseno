@@ -22,7 +22,7 @@
     <input type="hidden" name="module" value="Administration">
     <input type="hidden" name="action" value="saveTBAConfiguration">
 
-    <span class="error">{$error.main}</span>
+    <span class="error">{$error.main|escape:'html':'UTF-8'}</span>
 
     <table width="100%" cellpadding="0" cellspacing="0" border="0" class="actionsContainer">
         <tr>
@@ -49,7 +49,7 @@
         </tr>
         <tr>
             <td align="left" scope="row" width="300" class="left">{$MOD.LBL_TBA_CONFIGURATION_LABEL}</td>
-            <td scope="row" class="left bg-white">
+            <td scope="row" class="left">
                 <input id="tba_set_enabled" type="checkbox" name="team_based[enable]" value="true"
                        {if $config.enabled}checked="checked"{/if} />
             </td>
@@ -69,9 +69,9 @@
                         <td class="title {if $value|in_array:$config.enabled_modules}active{/if}">
                             <div class="tba-container">
                                 <input type="checkbox" name="team_based[enabled_modules][]"
-                                       data-group="tba_em" data-module-name="{$value}" value="{$value}" id="tba_em_{$key}"
+                                       data-group="tba_em" data-module-name="{$value|escape:'html':'UTF-8'}" value="{$value|escape:'html':'UTF-8'}" id="tba_em_{$key|escape:'html':'UTF-8'}"
                                        {if $value|in_array:$config.enabled_modules}checked="checked"{/if}/>
-                                <label for="tba_em_{$key}">{$APP_LIST.moduleList[$value]}</label>
+                                <label for="tba_em_{$key|escape:'html':'UTF-8'}">{$APP_LIST.moduleList[$value]}</label>
                             </div>
                         </td>
                         {if $smarty.foreach.tba.iteration % 4 eq 0}</tr><tr>{/if}

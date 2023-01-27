@@ -66,7 +66,8 @@
         name: 'total',
         label: 'LBL_LIST_GRAND_TOTAL',
         type: 'currency',
-        css_class: 'grand-total'
+        css_class: 'grand-total',
+        convertToBase: false
     }],
 
     /**

@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,22 +18,21 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class DirectoryObject extends Entity
 {
     /**
     * Gets the deletedDateTime
     *
-    * @return \DateTime The deletedDateTime
+    * @return \DateTime|null The deletedDateTime
     */
     public function getDeletedDateTime()
     {
         if (array_key_exists("deletedDateTime", $this->_propDict)) {
-            if (is_a($this->_propDict["deletedDateTime"], "\DateTime")) {
+            if (is_a($this->_propDict["deletedDateTime"], "\DateTime") || is_null($this->_propDict["deletedDateTime"])) {
                 return $this->_propDict["deletedDateTime"];
             } else {
                 $this->_propDict["deletedDateTime"] = new \DateTime($this->_propDict["deletedDateTime"]);

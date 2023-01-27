@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,18 +18,46 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class SubscribedSku extends Entity
 {
     /**
-    * Gets the capabilityStatus
-    * For example, 'Enabled'.
+    * Gets the appliesTo
+    * For example, 'User' or 'Company'.
     *
-    * @return string The capabilityStatus
+    * @return string|null The appliesTo
+    */
+    public function getAppliesTo()
+    {
+        if (array_key_exists("appliesTo", $this->_propDict)) {
+            return $this->_propDict["appliesTo"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the appliesTo
+    * For example, 'User' or 'Company'.
+    *
+    * @param string $val The appliesTo
+    *
+    * @return SubscribedSku
+    */
+    public function setAppliesTo($val)
+    {
+        $this->_propDict["appliesTo"] = $val;
+        return $this;
+    }
+    
+    /**
+    * Gets the capabilityStatus
+    * Possible values are: Enabled, Warning, Suspended, Deleted, LockedOut.
+    *
+    * @return string|null The capabilityStatus
     */
     public function getCapabilityStatus()
     {
@@ -43,7 +70,7 @@ class SubscribedSku extends Entity
     
     /**
     * Sets the capabilityStatus
-    * For example, 'Enabled'.
+    * Possible values are: Enabled, Warning, Suspended, Deleted, LockedOut.
     *
     * @param string $val The capabilityStatus
     *
@@ -59,7 +86,7 @@ class SubscribedSku extends Entity
     * Gets the consumedUnits
     * The number of licenses that have been assigned.
     *
-    * @return int The consumedUnits
+    * @return int|null The consumedUnits
     */
     public function getConsumedUnits()
     {
@@ -88,12 +115,12 @@ class SubscribedSku extends Entity
     * Gets the prepaidUnits
     * Information about the number and status of prepaid licenses.
     *
-    * @return LicenseUnitsDetail The prepaidUnits
+    * @return LicenseUnitsDetail|null The prepaidUnits
     */
     public function getPrepaidUnits()
     {
         if (array_key_exists("prepaidUnits", $this->_propDict)) {
-            if (is_a($this->_propDict["prepaidUnits"], "Microsoft\Graph\Model\LicenseUnitsDetail")) {
+            if (is_a($this->_propDict["prepaidUnits"], "\Microsoft\Graph\Model\LicenseUnitsDetail") || is_null($this->_propDict["prepaidUnits"])) {
                 return $this->_propDict["prepaidUnits"];
             } else {
                 $this->_propDict["prepaidUnits"] = new LicenseUnitsDetail($this->_propDict["prepaidUnits"]);
@@ -122,7 +149,7 @@ class SubscribedSku extends Entity
      * Gets the servicePlans
     * Information about the service plans that are available with the SKU. Not nullable
      *
-     * @return array The servicePlans
+     * @return array|null The servicePlans
      */
     public function getServicePlans()
     {
@@ -143,7 +170,7 @@ class SubscribedSku extends Entity
     */
     public function setServicePlans($val)
     {
-		$this->_propDict["servicePlans"] = $val;
+        $this->_propDict["servicePlans"] = $val;
         return $this;
     }
     
@@ -151,7 +178,7 @@ class SubscribedSku extends Entity
     * Gets the skuId
     * The unique identifier (GUID) for the service SKU.
     *
-    * @return string The skuId
+    * @return string|null The skuId
     */
     public function getSkuId()
     {
@@ -178,9 +205,9 @@ class SubscribedSku extends Entity
     
     /**
     * Gets the skuPartNumber
-    * The SKU part number; for example: 'AAD_PREMIUM' or 'RMSBASIC'.
+    * The SKU part number; for example: 'AAD_PREMIUM' or 'RMSBASIC'. To get a list of commercial subscriptions that an organization has acquired, see List subscribedSkus.
     *
-    * @return string The skuPartNumber
+    * @return string|null The skuPartNumber
     */
     public function getSkuPartNumber()
     {
@@ -193,7 +220,7 @@ class SubscribedSku extends Entity
     
     /**
     * Sets the skuPartNumber
-    * The SKU part number; for example: 'AAD_PREMIUM' or 'RMSBASIC'.
+    * The SKU part number; for example: 'AAD_PREMIUM' or 'RMSBASIC'. To get a list of commercial subscriptions that an organization has acquired, see List subscribedSkus.
     *
     * @param string $val The skuPartNumber
     *
@@ -202,35 +229,6 @@ class SubscribedSku extends Entity
     public function setSkuPartNumber($val)
     {
         $this->_propDict["skuPartNumber"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the appliesTo
-    * For example, 'User' or 'Company'.
-    *
-    * @return string The appliesTo
-    */
-    public function getAppliesTo()
-    {
-        if (array_key_exists("appliesTo", $this->_propDict)) {
-            return $this->_propDict["appliesTo"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the appliesTo
-    * For example, 'User' or 'Company'.
-    *
-    * @param string $val The appliesTo
-    *
-    * @return SubscribedSku
-    */
-    public function setAppliesTo($val)
-    {
-        $this->_propDict["appliesTo"] = $val;
         return $this;
     }
     

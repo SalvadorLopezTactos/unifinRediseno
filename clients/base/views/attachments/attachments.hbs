@@ -13,7 +13,7 @@
 {{#if collection.dataFetched}}
     <ul class="unstyled listed" data-action="pagination-body">
     {{#each this.collection.models}}
-        <li>
+        <li class="tabbed-dashlet-list-item">
             <div class="actions pull-right">
                 {{#each ../../dashletConfig.rowactions}}
                     {{field ../../../this model=../this}}
@@ -25,7 +25,19 @@
                 <div class="label label-module label-module-md label-{{../module}} pull-left">{{moduleIconLabel ../module}}</div>
             {{/if}}
             <p>
-                <a href="#{{buildRoute model=this}}">{{fieldValue this "name"}}</a>
+                {{#if fields.name}}
+                    {{#with ../fields.name}}
+                        <div class="details">
+                            <div class="name">
+                                <span class="tabbed-dashlet-field" data-fieldname="{{name}}">
+                                    {{field ../../../this model=../../this template="list"}}
+                                </span>
+                            </div>
+                        </div>
+                    {{/with}}
+                {{else}}
+                    {{str 'LBL_NO_SUBJECT' this.module}}
+                {{/if}}
             </p>
             <div class="details">
                 <date class="date">

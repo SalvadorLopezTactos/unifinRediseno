@@ -74,7 +74,6 @@
 
 
 <script type="text/javascript">
-{literal}
 
 var Dom = YAHOO.util.Dom;
 var Event = YAHOO.util.Event;
@@ -112,7 +111,6 @@ function save() {
 
 YAHOO.example.DDApp = {
 init: function() {
-{/literal}
     new YAHOO.util.DDTarget("enabled_ul");
     new YAHOO.util.DDTarget("disabled_ul");
 
@@ -123,7 +121,6 @@ init: function() {
     {foreach from=$disabled_subs key=module item=moduleDisplay}
          new YAHOO.example.DDList("{$module}");
     {/foreach}
-{literal}
 }
 };
 
@@ -244,5 +241,4 @@ YAHOO.extend(YAHOO.example.DDList, YAHOO.util.DDProxy, {
 Event.onDOMReady(YAHOO.example.DDApp.init, YAHOO.example.DDApp, true);
 
 })();
-{/literal}
 </script>

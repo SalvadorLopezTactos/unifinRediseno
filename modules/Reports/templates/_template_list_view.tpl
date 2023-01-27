@@ -20,19 +20,19 @@
 <th scope="col" align='center'  valign=middle nowrap>&nbsp;</th>
 {/if}
 {if ($isSummaryComboHeader)}
-<td><span id="img_{$divId}"><a href="javascript:expandCollapseComboSummaryDiv('{$divId}')"><img width="8" height="8" border="0" absmiddle="" alt=$mod_strings.LBL_SHOW src="{$image_path}advanced_search.gif"/></a></span></td>
+<td><span id="img_{$divId|escape:'html':'UTF-8'}"><a href="javascript:expandCollapseComboSummaryDiv('{$divId|escape:javascript}')"><img width="8" height="8" border="0" absmiddle="" alt="{$mod_strings.LBL_SHOW}" src="{$image_path}advanced_search.gif"/></a></span></td>
 {/if}
 {php}
 	$count = 0;
-	$this->assign('count', $count);
+	$_smarty_tpl->assign('count', $count);
 {/php}
 {foreach from=$header_row key=module item=cell}
 	{if (($args.group_column_is_invisible != "") && ($args.group_pos eq $count))}
 {php}	
 	$count = $count + 1;
-	$this->assign('count', $count);
+	$_smarty_tpl->assign('count', $count);
 {/php}
-	{ else }
+	{else}
 		{if strtolower($field_types[$module]) == 'currency' || strtolower($field_types[$module]) == 'int' ||strtolower($field_types[$module]) == 'float' || strtolower($field_types[$module]) == 'double' || strtolower($field_types[$module]) == 'decimal'}
 			<th scope="num" align='center'  valign=middle nowrap>
 		{else}
@@ -45,30 +45,30 @@
 
 {php}
 require_once('modules/Reports/templates/templates_reports.php');
-$reporter = $this->get_template_vars('reporter');
-$args = $this->get_template_vars('args');
+$reporter = $_smarty_tpl->getTemplateVars('reporter');
+$args = $_smarty_tpl->getTemplateVars('args');
 $got_row = 0;
 while (( $row = $reporter->get_next_row() ) != 0 ) {
 	$got_row = 1;
-	template_list_row($row,true);
+	template_list_row($row, true, false, '', $_smarty_tpl);
 {/php}
-<tr height=20 class="{$row_class[$module]}" onmouseover="setPointer(this, '{$rownum}', 'over', '{$bg_color}', '{$hilite_bg}', '{$click_bg}');" onmouseout="setPointer(this, '{$rownum}', 'out', '{$bg_color}', '{$hilite_bg}', '{$click_bg}');" onmousedown="setPointer(this, '{$rownum}', 'click', '{$bg_color}', '{$hilite_bg}', '{$click_bg}');">
+<tr height=20 class="{$row_class[$module]|escape:'html':'UTF-8'}" onmouseover="setPointer(this, '{$rownum|escape:javascript}', 'over', '{$bg_color|escape:javascript}', '{$hilite_bg|escape:javascript}', '{$click_bg|escape:javascript}');" onmouseout="setPointer(this, '{$rownum|escape:javascript}', 'out', '{$bg_color|escape:javascript}', '{$hilite_bg|escape:javascript}', '{$click_bg|escape:javascript}');" onmousedown="setPointer(this, '{$rownum|escape:javascript}', 'click', '{$bg_color|escape:javascript}', '{$hilite_bg|escape:javascript}', '{$click_bg|escape:javascript}');">
 {if ($isSummaryComboHeader)}
-<td><span id="img_{$divId}"><a href="javascript:expandCollapseComboSummaryDiv('{$divId}')"><img width="8" height="8" border="0" absmiddle="" alt=$mod_strings.LBL_SHOW src="{$image_path}advanced_search.gif"/></a></span></td>
+<td><span id="img_{$divId|escape:'html':'UTF-8'}"><a href="javascript:expandCollapseComboSummaryDiv('{$divId|escape:javascript}')"><img width="8" height="8" border="0" absmiddle="" alt="{$mod_strings.LBL_SHOW}" src="{$image_path}advanced_search.gif"/></a></span></td>
 {/if}
 {php}
 	$count = 0;
-	$this->assign('count', $count);
+	$_smarty_tpl->assign('count', $count);
 {/php}
 {assign var='scope_row' value=true}
 {foreach from=$column_row.cells key=module item=cell}
 	{if (($column_row.group_column_is_invisible != "") && ($count|in_array:$column_row.group_pos)) }
 {php}	
 	$count = $count + 1;
-	$this->assign('count', $count);
+	$_smarty_tpl->assign('count', $count);
 {/php}
-	{ else }
-	<td width="{$width}%" valign=TOP class="{$row_class[$module]}" bgcolor="{$bg_color}" {if $scope_row} scope='row' {/if}>
+	{else}
+	<td width="{$width|escape:'html':'UTF-8'}%" valign=TOP class="{$row_class[$module]|escape:'html':'UTF-8'}" bgcolor="{$bg_color|escape:'html':'UTF-8'}" {if $scope_row} scope='row' {/if}>
 	
 	{if $cell eq '' }
    		&nbsp;

@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Użytkownicy',
     'LBL_EMAILS_PRODUCTS_REL' => 'Pozycje oferty',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Pozycje przychodu',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Eskalacje',
     'LBL_EMAILS_MESSAGES_REL' => 'Wiadomości',
     'LBL_EMAILS_PURCHASES_REL' => 'Zakupy',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Zakupione pozycje',
@@ -473,4 +474,5 @@ Możesz użyć wstępnie zdefiniowanego szablonu (przycisk Szablony) lub dodać 
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Wyślij wiadomość e-mail',
     'LBL_MAILBOX' => 'Konto przychodzące',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Aby móc wysyłać wiadomości email, skonfiguruj konto poczty wychodzącej w obszarze <a href="#OutboundEmail">Ustawienia poczty e-mail</a>.',
 );

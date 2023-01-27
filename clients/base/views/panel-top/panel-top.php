@@ -19,7 +19,7 @@ $viewdefs['base']['view']['panel-top'] = array(
             'buttons' => array(
                 array(
                     'type' => 'sticky-rowaction',
-                    'icon' => 'fa-plus',
+                    'icon' => 'sicon-plus',
                     'name' => 'create_button',
                     'label' => ' ',
                     'acl_action' => 'create',

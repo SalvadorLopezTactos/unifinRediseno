@@ -18,5 +18,13 @@ $viewdefs['BusinessCenters']['base']['filter']['default'] = array(
         'address_state' => array(),
         'address_country' => array(),
         'timezone' => array(),
+        '$distance' => [
+            'name' => '$distance',
+            'vname' => 'LBL_MAPS_DISTANCE',
+            'type' => 'maps-distance',
+            'source' => 'non-db',
+            'merge_filter' => 'enabled',
+            'licenseFilter' => ['MAPS'],
+        ],
     ),
 );

@@ -35,8 +35,8 @@
                    id="btn_save" type="submit" onclick="addcheck(form);return check_form('ConfigurePasswordSettings');"
                    name="save" value="{$APP.LBL_SAVE_BUTTON_LABEL}">
             &nbsp;<input title="{$MOD.LBL_CANCEL_BUTTON_TITLE}" id="btn_cancel"
-                         onclick="document.location.href='index.php?module=Administration&action=index'" class="button"
-                         type="button" name="cancel" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+                         onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal}
+                         class="button" type="button" name="cancel" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
             <div style="display: inline-block;">
                 <div id="saml_top_buttons" style='display:{$saml_display}'>
                     <input title="{$MOD.LBL_EXPORT_METADATA_BUTTON_TITLE}" class="button btn_export_metadata"
@@ -939,7 +939,7 @@
            onclick="addcheck(form);return check_form('ConfigurePasswordSettings');" name="save"
            value="{$APP.LBL_SAVE_BUTTON_LABEL}"/>
     &nbsp;<input title="{$MOD.LBL_CANCEL_BUTTON_TITLE}"
-                 onclick="document.location.href='index.php?module=Administration&action=index'" class="button"
+                 onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} class="button"
                  type="button" name="cancel" value="{$APP.LBL_CANCEL_BUTTON_LABEL}"/>
     <div style="display: inline-block;">
         <div id="saml_bottom_buttons" style='display:{$saml_display}'>
@@ -961,27 +961,22 @@
 </form>
 {$JAVASCRIPT}
 
-{literal}
 <script>
-function addcheck(form) {{/literal}
+function addcheck(form) {
     addForm('ConfigurePasswordSettings');
 
 
     removeFromValidate('ConfigurePasswordSettings', 'passwordsetting_minpwdlength');
     addToValidateLessThan('ConfigurePasswordSettings', 'passwordsetting_minpwdlength', 'int', false, "{$MOD.LBL_PASSWORD_MINIMUM_LENGTH}", document.getElementById('passwordsetting_maxpwdlength').value, "{$MOD.LBL_PASSWORD_MAXIMUM_LENGTH}");
 
-    if (document.getElementById('forgotpassword_checkbox').checked) {literal}{{/literal}
+    if (document.getElementById('forgotpassword_checkbox').checked) {
         addToValidate('ConfigurePasswordSettings', 'passwordsetting_linkexpirationtime', 'int', form.required_link_exp_time.checked, "{$MOD.ERR_PASSWORD_LINK_EXPIRE_TIME} ");
-        {literal}
     }
-    {/literal}
 
-    if (document.getElementById('SystemGeneratedPassword_checkbox').checked) {literal}{{/literal}
+    if (document.getElementById('SystemGeneratedPassword_checkbox').checked) {
         addToValidate('ConfigurePasswordSettings', 'passwordsetting_systexpirationtime', 'int', form.required_sys_pwd_exp_time.checked, "{$MOD.ERR_PASSWORD_EXPIRE_TIME}");
         addToValidate('ConfigurePasswordSettings', 'passwordsetting_systexpirationlogin', 'int', form.required_sys_pwd_exp_login.checked, "{$MOD.ERR_PASSWORD_EXPIRE_LOGIN}");
-        {literal}
     }
-    {/literal}
 
 
     addToValidate('ConfigurePasswordSettings', 'passwordsetting_userexpirationtime', 'int', form.required_user_pwd_exp_time.checked, "{$MOD.ERR_PASSWORD_EXPIRE_TIME}");
@@ -1006,7 +1001,6 @@ function addcheck(form) {{/literal}
     if (document.getElementById('customregex').value != '')
         addToValidate('ConfigurePasswordSettings', 'passwordsetting_regexcomment', 'alpha', 'true', "{$MOD.ERR_EMPTY_REGEX_DESCRIPTION}");
 
-    {literal}
 }
 
 
@@ -1128,12 +1122,12 @@ function toggleDisplay_2(id) {
 
     if (this.document.getElementById(id).style.display == 'none') {
         this.document.getElementById(id).style.display = '';
-        this.document.getElementById(id + "_lbl").innerHTML = '{/literal}{$MOD.LBL_HIDE_ADVANCED_OPTIONS}{literal}';
-        this.document.getElementById("regex_config_display_img").src = '{/literal}{sugar_getimagepath file="basic_search.gif"}{literal}';
+        this.document.getElementById(id + "_lbl").innerHTML = '{$MOD.LBL_HIDE_ADVANCED_OPTIONS}';
+        this.document.getElementById("regex_config_display_img").src = '{sugar_getimagepath file="basic_search.gif"}';
     } else {
         this.document.getElementById(id).style.display = 'none'
-        this.document.getElementById(id + "_lbl").innerHTML = '{/literal}{$MOD.LBL_SHOW_ADVANCED_OPTIONS}{literal}';
-        this.document.getElementById("regex_config_display_img").src = '{/literal}{sugar_getimagepath file="advanced_search.gif"}{literal}';
+        this.document.getElementById(id + "_lbl").innerHTML = '{$MOD.LBL_SHOW_ADVANCED_OPTIONS}';
+        this.document.getElementById("regex_config_display_img").src = '{sugar_getimagepath file="advanced_search.gif"}';
     }
 }
 
@@ -1180,12 +1174,12 @@ if (document.getElementById('system_ldap_enabled').checked)enableDisablePassword
 clickToEditPassword('#ldap_admin_password', '::PASSWORD::');
 </script>
 
-{/literal}
-{literal}
+
+
 <script>
-    var wrongImportFileTitle = '{/literal}{$MOD.WRONG_IMPORT_XML_TITLE}{literal}',
-        wrongImportFileTypeError = '{/literal}{$MOD.WRONG_IMPORT_FILE_TYPE_ERROR}{literal}',
-        csrfFieldName = '{/literal}{$csrf_field_name}{literal}';
+    var wrongImportFileTitle = '{$MOD.WRONG_IMPORT_XML_TITLE}',
+        wrongImportFileTypeError = '{$MOD.WRONG_IMPORT_FILE_TYPE_ERROR}',
+        csrfFieldName = '{$csrf_field_name}';
     $('.btn_import_metadata').on('click', function () {
         $('#import_metadata_file').click();
         return false;
@@ -1232,4 +1226,4 @@ clickToEditPassword('#ldap_admin_password', '::PASSWORD::');
         return true;
     });
 </script>
-{/literal}
+

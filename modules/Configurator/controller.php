@@ -23,6 +23,8 @@ class ConfiguratorController extends SugarController
         'list_max_entries_per_subpanel',
         'collapse_subpanels',
         'calculate_response_time',
+        'freeze_list_headers',
+        'allow_freeze_first_column',
         'default_module_favicon',
         'use_real_names',
         'show_download_tab',
@@ -63,16 +65,6 @@ class ConfiguratorController extends SugarController
         'error_number_of_cycles',
     );
 
-    /**
-     * Go to the font manager view
-     */
-    function action_FontManager(){
-        global $current_user;
-        if(!is_admin($current_user)){
-            sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
-        }
-        $this->view = 'fontmanager';
-    }
 
     function action_listview(){
         global $current_user;
@@ -81,56 +73,7 @@ class ConfiguratorController extends SugarController
         }
         $this->view = 'edit';
     }
-    /**
-     * Show the addFont view
-     */
-    function action_addFontView(){
-        global $current_user;
-        if(!is_admin($current_user)){
-            sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
-        }
-        $this->view = 'addFontView';
-    }
-    /**
-     * Add a new font and show the addFontResult view
-     */
-    function action_addFont(){
-        global $current_user, $mod_strings;
-        if(!is_admin($current_user)){
-            sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
-        }
-        if(empty($_FILES['pdf_metric_file']['name'])){
-            $this->errors[]=translate("ERR_MISSING_REQUIRED_FIELDS")." ".translate("LBL_PDF_METRIC_FILE", "Configurator");
-            $this->view = 'addFontView';
-            return;
-        }
-        if(empty($_FILES['pdf_font_file']['name'])){
-            $this->errors[]=translate("ERR_MISSING_REQUIRED_FIELDS")." ".translate("LBL_PDF_FONT_FILE", "Configurator");
-            $this->view = 'addFontView';
-            return;
-        }
-        $path_info = pathinfo($_FILES['pdf_font_file']['name']);
-        $path_info_metric = pathinfo($_FILES['pdf_metric_file']['name']);
-        if(($path_info_metric['extension']!="afm" && $path_info_metric['extension']!="ufm") ||
-        ($path_info['extension']!="ttf" && $path_info['extension']!="otf" && $path_info['extension']!="pfb")){
-            $this->errors[]=translate("JS_ALERT_PDF_WRONG_EXTENSION", "Configurator");
-            $this->view = 'addFontView';
-            return;
-        }
 
-        if($_REQUEST['pdf_embedded'] == "false"){
-            if(empty($_REQUEST['pdf_cidinfo'])){
-                $this->errors[]=translate("ERR_MISSING_CIDINFO", "Configurator");
-                $this->view = 'addFontView';
-                return;
-            }
-            $_REQUEST['pdf_embedded']=false;
-        }else{
-            $_REQUEST['pdf_embedded']=true;
-            $_REQUEST['pdf_cidinfo']="";
-        }
-        $this->view = 'addFontResult';
-    }
     function action_saveadminwizard()
     {
         global $current_user;
@@ -176,6 +119,12 @@ class ConfiguratorController extends SugarController
                 return (strpos($value, 'logger_') === 0) ? false : true;
             });
         }
+        // Remove developerMode key if developerMode is not visible
+        if (!SugarConfig::getInstance()->get('developer_mode_visible', true)) {
+            $allowKeys = array_filter($allowKeys, function ($value) {
+                return $value !== 'developerMode';
+            });
+        }
 
         $configurator = new Configurator();
         $configurator->setAllowKeys($allowKeys);
@@ -192,7 +141,7 @@ class ConfiguratorController extends SugarController
 
         echo '<script type="text/javascript">';
         echo 'parent && parent.SUGAR && parent.SUGAR.App && parent.SUGAR.App.sync();';
-        echo 'window.location.href = "index.php?module=Administration&action=index";';
+        echo 'parent.SUGAR.App.router.navigate("#Administration", {trigger: true})';
         echo '</script>';
         exit();
     }
@@ -219,6 +168,8 @@ class ConfiguratorController extends SugarController
      */
     function action_historyContactsEmailsSave()
     {
+        require_once 'include/formbase.php';
+
         if (!empty($_POST['modules']) && is_array($_POST['modules'])) {
 
             $modules = array();
@@ -251,6 +202,6 @@ class ConfiguratorController extends SugarController
             $configurator->handleOverride();
         }
 
-        SugarApplication::redirect('index.php?module=Administration&action=index');
+        SugarApplication::redirect(buildRedirectURL('', 'Administration'));
     }
 }

@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'List',
     'LBL_PURCHASED_LINE_ITEMS' => 'Zakoupené řádkové položky',
 
+    'LBL_FORECASTED_LIKELY' => 'Prognózováno jako pravděpodobné',
     'LBL_RENEWAL' => 'Obnovení',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Příležitosti obnovení',
     'LBL_RENEWAL_PARENT' => 'Nadřazená příležitost',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# celkových řádků',
     'LBL_CLOSED_RLIS' => '# uzavřených řádků',
+    'LBL_CLOSED_WON_RLIS' => '# řádkových položek výnosů uzavřených úspěšně',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# řádkových položek výnosů z doby trvání Open Service Flex',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Nemůžete smazat příležitosti, které obsahují uzavřené řádky',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Jeden nebo více vybraných záznamů obsahuje uzavřené řádky a nemůže být smazán.',
     'LBL_INCLUDED_RLIS' => '# zahrnutých položek Příjmy',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Aktualizace otevření',
+    'LBL_CASCADE_RLI_EDIT' => 'Aktualizujte řádkové položky Otevřené výnosy',
+    'LBL_CASCADE_RLI_CREATE' => 'Nastavit řádkové položky Výnosy napříč',
     'LBL_SERVICE_START_DATE_INVALID' => 'Datum zahájení služby nelze nastavit za datum ukončení služby u žádných otevřených doplňkových řádkových položek výnosů.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Nabídky',
@@ -210,21 +214,21 @@ $mod_strings = array(
     'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje od začátku do konce. Každý záznam modulu {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd. {{module_name}} typicky postupuje přes několik prodejních fází, dokud není označen buď jako „Uzavřeno úspěšně“ nebo „Uzavřeno neúspěšně“. {{plural_module_name}} lze využít ještě dále pomocí modulu Sugar {{forecasts_singular_module}}, abyste mohli porozumět prodejním trendům a předpovídat je, jakož i zaměřit své úsilí na dosažení prodejních kvót.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd. 
 
-- Upravte pole tohoto záznamu klepnutím na jednotlivé pole nebo na tlačítko Upravit.
-- Zobrazte nebo upravte odkazy na jiné záznamy v podpanelech přepnutím spodního levého podokna na „Zobrazení dat“.
-- Vytvořte a zobrazte uživatelské komentáře a historii změn v modulu {{activitystream_singular_module}} přepnutím spodního levého podokna na „Tok aktivit“.
-- Sledujte záznam nebo si ho přidejte do oblíbených pomocí tlačítek vpravo od názvu záznamu.
+- Upravte pole tohoto záznamu klepnutím na jednotlivé pole nebo na tlačítko Upravit. 
+- Zobrazte nebo upravte odkazy na jiné záznamy v podpanelech přepnutím spodního levého podokna na „Zobrazení dat“. 
+- Vytvořte a zobrazte uživatelské komentáře a historii změn v modulu {{activitystream_singular_module}} přepnutím spodního levého podokna na „Tok aktivit“. 
+- Sledujte záznam nebo si ho přidejte do oblíbených pomocí tlačítek vpravo od názvu záznamu. 
 - Další akce jsou k dispozici v rozevírací nabídce Akce vpravo od tlačítka Upravit.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
+    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd. 
 
-Vytvoření modulu {{module_name}}:
-1. Vyplňte hodnoty polí dle potřeby.
- - Pole označená jako „Povinné“ musí být vyplněna před uložením.
- - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí.
+Vytvoření modulu {{module_name}}: 
+1. Vyplňte hodnoty polí dle potřeby. 
+ - Pole označená jako „Povinné“ musí být vyplněna před uložením. 
+ - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí. 
 2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
 
 // END ENT/ULT
@@ -239,7 +243,10 @@ Vytvoření modulu {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Příležitosti mého týmu",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => '{{fieldName}} nelze změnit, protože tento {{moduleSingular}} nemá žádné otevřené řádkové položky.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakce s příležitostí',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa příležitosti',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' nelze nastavit napříč žádnou z těchto řádkových položek výnosů, protože se nejedná o služby. Chcete pokračovat ve vytvoření?',
+    'LBL_CASCADE_DURATION_WARNING' => ' nelze nastavit napříč žádnou z těchto řádkových položek výnosů, protože jejich trvání je uzamčeno. Chcete pokračovat ve vytvoření?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Predikce uzavření příležitosti',

@@ -34,7 +34,7 @@
 <table name='{$displayParams.formName}_{$vardef.name}_table' id='{$displayParams.formName}_{$vardef.name}_table' style="border-spacing: 0pt;">
     <tr>
     	<td colspan="2" NOWRAP>
-            {if empty($displayParams.clearOnly) }<button type="button" class="button firstChild" value="{sugar_translate label='LBL_SELECT_BUTTON_LABEL'}" onclick='javascript:open_popup("Teams", 600, 400, "", true, false, {literal}{"call_back_function":"set_return_teams_for_editview","form_name": {/literal} "{$displayParams.formName}" {literal},"field_name":"team_name_advanced","field_to_name_array":{"id":"team_id","name":"team_name_advanced"}}{/literal}, "MULTISELECT", true);' name="teamSelect">{sugar_getimage alt=$app_strings.LBL_ID_FF_SELECT name="id-ff-select" ext=".png" other_attributes='' alt="$alt_selectButton"}</button>{/if}<button type="button" class="button lastChild" value="{sugar_translate label='LBL_ADD_BUTTON'}" onclick="javascript:collection['{$displayParams.formName}_{$vardef.name}'].add();" name="teamAdd">{sugar_getimage alt=$app_strings.LBL_ID_FF_ADD name="id-ff-add" ext=".png" other_attributes='' alt="$alt_addButton"}</button>
+            {if empty($displayParams.clearOnly) }<button type="button" class="button firstChild" value="{sugar_translate label='LBL_SELECT_BUTTON_LABEL'}" onclick='javascript:open_popup("Teams", 600, 400, "", true, false, { "call_back_function": "set_return_teams_for_editview", "form_name": "{$displayParams.formName}", "field_name": "team_name_advanced", "field_to_name_array": { "id": "team_id", "name": "team_name_advanced" } }, "MULTISELECT", true);' name="teamSelect">{sugar_getimage alt=$app_strings.LBL_ID_FF_SELECT name="id-ff-select" ext=".png" other_attributes='' alt="$alt_selectButton"}</button>{/if}<button type="button" class="button lastChild" value="{sugar_translate label='LBL_ADD_BUTTON'}" onclick="javascript:collection['{$displayParams.formName}_{$vardef.name}'].add();" name="teamAdd">{sugar_getimage alt=$app_strings.LBL_ID_FF_ADD name="id-ff-add" ext=".png" other_attributes='' alt="$alt_addButton"}</button>
 			</span>
         </td>
         <th scope='col' id="lineLabel_{$vardef.name}_primary">
@@ -108,36 +108,28 @@
 Put this button in here since we have moved the Add and Select buttons above the text fields, the accesskey will skip these. So create this button
 and push it outside the screen.
 -->
- <input style='position:absolute; left:-9999px; width: 0px; height: 0px;' halign='left' type="button" class="button" value="{sugar_translate label='LBL_SELECT_BUTTON_LABEL'}" onclick='javascript:open_popup("Teams", 600, 400, "", true, false, {literal}{"call_back_function":"set_return_teams_for_editview","form_name": {/literal} "{$displayParams.formName}" {literal},"field_name":"team_name_advanced","field_to_name_array":{"id":"team_id","name":"team_name_advanced"}}{/literal}, "MULTISELECT", true);'>
+ <input style='position:absolute; left:-9999px; width: 0px; height: 0px;' halign='left' type="button" class="button" value="{sugar_translate label='LBL_SELECT_BUTTON_LABEL'}" onclick='javascript:open_popup("Teams", 600, 400, "", true, false, { "call_back_function": "set_return_teams_for_editview", "form_name": "{$displayParams.formName}", "field_name": "team_name_advanced", "field_to_name_array": { "id": "team_id", "name": "team_name_advanced" } }, "MULTISELECT", true);'>
 
 <script type="text/javascript">
 collection["{$displayParams.formName}_{$vardef.name}"].add_secondaries(collection["{$displayParams.formName}_{$vardef.name}"].secondaries_values);
 
 //If the searchType (any, all, exact) is specified, select it 
 {if !empty($displayParams.searchType)}
-{literal}
 YAHOO.util.Event.onDOMReady(function() {
-{/literal}
     radio_el = document.forms.{$displayParams.formName}.{$vardef.name}_type;
-{literal}
     for (var i=0; i< radio_el.length; i++)  {
-        if(typeof radio_el[i] != 'undefined' && radio_el[i].value == {/literal}'{$displayParams.searchType}'{literal}) {
+        if(typeof radio_el[i] != 'undefined' && radio_el[i].value == '{$displayParams.searchType}') {
            radio_el[i].checked = true;
         }
     }
 });
-{/literal}
 {/if}
 
 //If there was a primary team chosen, select it
 {if $hasPrimaryTeam}
-{literal}
 YAHOO.util.Event.onDOMReady(function() {
-{/literal}
     set_primary_team('{$displayParams.formName}', 'primary_{$vardef.name}_collection', '{$values.primary.id}');
-{literal}
 });
-{/literal}
 {/if}
 </script>
 {if !empty($values.primary.id) && !empty($values.primary.name)}

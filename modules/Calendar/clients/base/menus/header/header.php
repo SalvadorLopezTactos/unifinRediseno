@@ -10,33 +10,34 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Calendar';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
-        'route'=>'#Meetings/create',
-        'label' =>'LNK_NEW_MEETING',
-        'acl_action'=>'create',
-        'acl_module'=>'Meetings',
-        'icon' => 'fa-plus',
-    ),
-    array(
-        'route'=>'#Calls/create',
-        'label' =>'LNK_NEW_CALL',
-        'acl_action'=>'create',
-        'acl_module'=>'Calls',
-        'icon' => 'fa-plus',
-    ),
-    array(
-        'route'=>'#Tasks/create',
-        'label' =>'LNK_NEW_TASK',
-        'acl_action'=>'create',
-        'acl_module'=>'Tasks',
-        'icon' => 'fa-plus',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=Calendar&action=index&view=day',
-        'label' =>'LNK_VIEW_CALENDAR',
-        'acl_action'=>'list',
-        'acl_module'=>$module_name,
-        'icon' => 'fa-bars',
-    ),
-);
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
+        'route' => '#'.$module_name.'/create',
+        'label' => 'LNK_NEW_CALENDAR',
+        'acl_action' => 'create',
+        'acl_module' => $module_name,
+        'icon' => 'sicon sicon-plus',
+    ],
+    [
+        'route' => '#'.$module_name,
+        'label' => 'LNK_CALENDAR_LIST',
+        'acl_action' => 'list',
+        'acl_module' => $module_name,
+        'icon' => 'sicon-list-view',
+    ],
+    [
+        'route' => '#bwc/index.php?module=Calendar&action=index',
+        'label' => 'LNK_CALENDAR_LEGACY',
+        'acl_action' => 'list',
+        'acl_module' => $module_name,
+        'icon' => 'sicon-calendar',
+    ],
+    [
+        'route' => '#bwc/index.php?module=Import&action=Step1&import_module='.$module_name
+                    .'&return_module='.$module_name.'&return_action=index',
+        'label' => 'LBL_IMPORT_CALENDAR',
+        'acl_action' => 'import',
+        'acl_module' => $module_name,
+        'icon' => 'sicon-upload',
+    ],
+];

@@ -12,12 +12,10 @@
 *}
 
 <style>
-{literal}
 .moduleTitle h2
 {
     font-size: 18px;
 }
-{/literal}
 </style>
 <script type="text/javascript" src="{sugar_getjspath file='cache/include/javascript/sugar_grp_yui_widgets.js'}"></script>
 <div class="dashletPanelMenu wizard">

@@ -18,7 +18,7 @@
 		display: inline-block;
 		border-left:   7px solid @transparent;
 		border-right:  7px solid @transparent;
-		border-bottom: 7px solid @grayLighter;
+		border-bottom: 7px solid @borderColor;
 		border-bottom-color: fade(@black, 20%);
 		position: absolute;
 		top: -7px;
@@ -59,17 +59,17 @@
 	}
 	td {
 		&.day:hover {
-			background: @grayLighter;
+			background: @borderColor;
 			cursor: pointer;
 		}
 		&.old,
 		&.new {
-			color: @grayLight;
+			color: @gray70;
 		}
 		&.disabled,
 		&.disabled:hover {
 			background: none;
-			color: @grayLight;
+			color: @gray70;
 			cursor: default;
 		}
 		&.active,
@@ -81,7 +81,7 @@
       box-shadow: @shadow;
       color: @white;
       text-shadow: none;
-      background-color: @gray;
+      background-color: @gray80;
       outline: 0;
 		}
 		span {
@@ -94,12 +94,12 @@
 			cursor: pointer;
 			border-radius: 4px;
 			&:hover {
-				background: @grayLighter;
+				background: @borderColor;
 			}
 			&.disabled,
 			&.disabled:hover {
 				background:none;
-				color: @grayLight;
+				color: @gray70;
 				cursor: default;
 			}
 			&.active,
@@ -110,7 +110,7 @@
 				text-shadow: 0 -1px 0 fade(@black, 25%);
 			}
 			&.old {
-				color: @grayLight;
+				color: @gray70;
 			}
 		}
 	}
@@ -122,7 +122,7 @@
 	thead tr:first-child th {
 		cursor: pointer;
 		&:hover{
-			background: @grayLighter;
+			background: @borderColor;
 		}
 	}
 	/*.dow {

@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Shiko shabllonet',
     'LNK_LIST_KBCATEGORIES' => 'Shiko kategoritë',
     'LBL_TEMPLATES' => 'Shabllonet',
+    'LBL_TEMPLATE' => 'Shablloni',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Shablloni do të mbivendosë të gjitha përmbajtjet.' .
         ' Je i sigurt që dëshiron të përdorësh këtë shabllon?',
     'LNK_IMPORT_KBCONTENTS' => 'Importo artikuj',

@@ -53,9 +53,8 @@ if(!empty($_REQUEST['identifier'])) {
                 ' INNER JOIN email_addr_bean_rel eabr ON eabr.email_address_id = ea.id' .
                 ' WHERE  eabr.bean_module = ? AND eabr.bean_id = ? AND eabr.deleted = 0 AND ea.opt_out = 0';
             $conn = $db->getConnection();
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$module, $id]);
-            while ($row = $stmt->fetch()) {
+            $queryResult = $conn->executeQuery($sql, [$module, $id]);
+            while ($row = $queryResult->fetchAssociative()) {
                 $status = $status && (bool) $db->updateParams(
                     $email->getTableName(),
                     $email->field_defs,

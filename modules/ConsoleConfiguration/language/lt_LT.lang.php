@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'Filtras',
     'LBL_CONSOLE_FILTER_RULES' => 'Filtravimo taisyklės',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'Įšaldykite pirmą stulpelį',
+
     'LBL_CONSOLE_COLUMNS' => 'Stulpeliai',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'Kelių laukų stulpelis',
     'LBL_CONSOLE_PRIMARY_SORT' => 'Pirminis rikiavimas',

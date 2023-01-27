@@ -170,7 +170,7 @@ class aCase extends Issue
     public function save($check_notify = false)
     {
         if ($this->isResolvedStatus($this->status)) {
-            if (empty($this->resolved_datetime)) {
+            if (empty($this->resolved_datetime) && $this->isNewlyResolved()) {
                 $this->resolved_datetime = TimeDate::getInstance()->nowDb();
             }
         } elseif ($this->fetched_row !== false
@@ -238,6 +238,10 @@ class aCase extends Issue
 
         if (!empty($this->contact_id)) {
             $this->set_case_contact_relationship($this->contact_id);
+        }
+
+        if (!empty($this->primary_contact_id)) {
+            $this->set_case_contact_relationship($this->primary_contact_id);
         }
     }
 

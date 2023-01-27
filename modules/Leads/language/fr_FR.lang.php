@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Fait référence à',
     'LBL_LIST_STATUS' => 'Statut',
     'LBL_LIST_TITLE' => 'Fonction',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Prévision de l&#39;intérêt du marché',
+    'LBL_MARKET_SCORE' => 'Score du marché',
     'LBL_MOBILE_PHONE' => 'Téléphone Mobile :',
     'LBL_MODULE_NAME' => 'Leads',
     'LBL_MODULE_NAME_SINGULAR' => 'Lead',
@@ -330,4 +332,9 @@ Après avoir confirmé chacun des modules souhaités, cliquez sur le bouton Enre
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Prévision de conversion des Leads',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Afficher les détails des prévisions pour un Lead spécifique',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Activer les lignes de revenu',
+    'LBL_REQUIRE_RLIS' => 'Exiger les lignes de revenu lors de la création d&#39;une nouvelle affaire',
+    'LBL_COPY_DATA_RLIS' => 'Copier les données du Lead dans les lignes de revenu lors de la création d&#39;une nouvelle affaire',
 );

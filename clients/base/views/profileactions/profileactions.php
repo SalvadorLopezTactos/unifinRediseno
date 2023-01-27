@@ -20,7 +20,7 @@ $viewdefs['base']['view']['profileactions'] = [
         'label' => 'LBL_PROFILE',
         'css_class' => 'profileactions-profile',
         'acl_action' => 'view',
-        'icon' => 'fa-user',
+        'icon' => 'sicon-user',
     ],
 ];
 
@@ -30,7 +30,7 @@ if ($isIDMModeEnabled) {
         'label' => 'LBL_CHANGE_PASSWORD',
         'css_class' => 'profileactions-change-password',
         'acl_action' => 'view',
-        'icon' => 'fa-lock',
+        'icon' => 'sicon-lock',
     ];
 }
 
@@ -42,28 +42,53 @@ $viewdefs['base']['view']['profileactions'] = array_merge(
             'label' => 'LBL_EMPLOYEES',
             'css_class' => 'profileactions-employees',
             'acl_action' => 'list',
-            'icon' => 'fa-users',
+            'icon' => 'sicon-user-group',
         ),
         array(
-            'route' => '#bwc/index.php?module=Administration&action=index',
+            'route' => '#Administration',
             'label' => 'LBL_ADMIN',
             'css_class' => 'administration',
             'module' => 'Administration',
             'acl_action' => 'admin',
-            'icon' => 'fa-cogs',
+            'icon' => 'sicon-settings',
         ),
         array(
             'route' => '#about',
             'label' => 'LNK_ABOUT',
             'css_class' => 'profileactions-about',
             'acl_action' => 'view',
-            'icon' => 'fa-info-circle',
+            'icon' => 'sicon-info',
         ),
         array(
             'route' => '#logout/?clear=1',
             'label' => 'LBL_LOGOUT',
             'css_class' => 'profileactions-logout',
-            'icon' => 'fa-sign-out',
+            'icon' => 'sicon-logout',
         ),
+
     ]
 );
+
+if ($isIDMModeEnabled) {
+    $viewdefs['base']['view']['profileactions'][] = [
+        'route' => '#finishImpersonation',
+        'label' => 'LBL_FINISH_IMPERSONATING',
+        'css_class' => 'profileactions-finish-impersonating',
+        'icon' => 'sicon sicon-logout',
+    ];
+
+    if ($idpConfig->isMultiFactorAuthenticationEnabled()) {
+        array_splice(
+            $viewdefs['base']['view']['profileactions'],
+            3,
+            0,
+            [
+                [
+                    'label' => 'LBL_RESET_MFA',
+                    'css_class' => 'profileactions-reset-mfa',
+                    'icon' => 'sicon-lock',
+                ],
+            ],
+        );
+    }
+}

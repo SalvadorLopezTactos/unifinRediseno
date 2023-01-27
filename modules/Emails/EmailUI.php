@@ -11,8 +11,7 @@
  */
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\FetchMode;
+use Doctrine\DBAL\Exception as DBALException;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
@@ -392,10 +391,7 @@ eoq;
 
     	$quickComposeOptions = array('fullComposeUrl' => $fullLinkUrl,'composePackage' => $composePackage);
 
-    	$j_quickComposeOptions = JSON::encode($quickComposeOptions, false ,true);
-
-
-    	return $j_quickComposeOptions;
+        return JSON::encode($quickComposeOptions);
     }
 
     /**
@@ -538,7 +534,7 @@ eoq;
     /**
      * Retrieves all relationship metadata for a user's address book
      * @return array
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     public function getContacts()
     {
@@ -562,7 +558,7 @@ eoq;
     /**
      * Saves changes to a user's address book
      * @param array contacts
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     public function setContacts($contacts)
     {
@@ -583,7 +579,7 @@ eoq;
     /**
      * Removes contacts from the user's address book
      * @param array ids
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     public function removeContacts($ids)
     {
@@ -713,7 +709,7 @@ eoq;
             'SELECT bean_id FROM address_book_list_items WHERE list_id = ?',
             [$list_id]
         );
-        $check = $stmt->fetchAll(FetchMode::COLUMN);
+        $check = $stmt->fetchFirstColumn();
 
         if (is_array($contacts)) {
             for ($i = 0; $i < count($contacts); $i++) {
@@ -730,7 +726,7 @@ eoq;
     /**
      * Removes selected lists from User's preferences
      * @param array $removeIds IDs of lists to remove
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     public function removeLists(array $removeIds)
     {
@@ -1990,12 +1986,10 @@ function distLeastBusy($userIds, $mailIds) {
 	$assignedTeamInfo = $this->getTeams();
 	foreach($mailIds as $k => $mailId) {
 		$email = BeanFactory::getBean('Emails', $mailId);
-		foreach($userIds as $k => $id) {
-            $counts[$id] = $this->db->getConnection()->executeQuery(
-                'SELECT COUNT(*) AS c FROM emails WHERE assigned_user_id = ? AND status = ?',
-                [$id, 'unread']
-            )->fetchColumn();
-		}
+            $query = 'SELECT COUNT(*) AS c FROM emails WHERE assigned_user_id = ? AND status = ?';
+            foreach ($userIds as $k => $id) {
+                $counts[$id] = $this->db->getConnection()->executeQuery($query, [$id, 'unread'])->fetchOne();
+            }
 		asort($counts); // lowest to highest
 		$countsKeys = array_flip($counts); // keys now the 'count of items'
 		$leastBusy = array_shift($countsKeys); // user id of lowest item count
@@ -3035,28 +3029,6 @@ eoq;
 
 		return $ieAccountsShowOptionsMeta;
 	}
-	/**
-	 * Formats a display message on successful async call
-	 * @param string $type Type of message to display
-	 */
-	function displaySuccessMessage($type) {
-		global $app_strings, $mod_strings;
-
-		switch($type) {
-			case "delete":
-				$message = $app_strings['LBL_EMAIL_DELETE_SUCCESS'];
-			break;
-
-			default:
-				$message = $mod_strings['LBL_INVALID_TYPE'];
-			break;
-		}
-
-		$this->smarty->assign('app_strings', $app_strings);
-		$this->smarty->assign('message', $message);
-		echo $this->smarty->fetch("modules/Emails/templates/successMessage.tpl");
-	}
-
 
     /**
      * Returns a filename for a cache file based on a hashed mbox and uid

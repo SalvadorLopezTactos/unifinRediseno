@@ -26,7 +26,8 @@
      * @inheritdoc
      */
     initialize: function(options) {
-        var fieldModule = options.model.get('_module');
+        var fieldModule = options.model.get('_module') || options.model.module;
+
         this.isBwcEnabled = app.metadata.getModule(fieldModule).isBwcEnabled;
 
         this._super('initialize', [options]);

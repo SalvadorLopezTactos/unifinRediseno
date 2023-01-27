@@ -291,7 +291,12 @@ class ModuleBuilderController extends SugarController
 
                 $engine = SearchEngine::getInstance()->getEngine();
                 if (isset($engine)) {
-                    $engine->addMappings($modules);
+                    if (!$engine->addMappings($modules)) {
+                        if ($GLOBALS['log']) {
+                            $GLOBALS['log']->fatal('add Mapping failed!');
+                        }
+                        echo 'add Mapping failed!';
+                    }
                 }
             }
         }
@@ -463,6 +468,12 @@ class ModuleBuilderController extends SugarController
                 $mod = BeanFactory::newBean($module);
                 $obj = BeanFactory::getObjectName($module);
                 $df->setup($mod);
+
+                try {
+                    (new DynamicFieldVerification())->verifyField($field, $df);
+                } catch (\DynamicFieldVerificationException $e) {
+                    sugar_die($GLOBALS['mod_strings'][$e->getMessage()] ?? '');
+                }
 
                 $field->save($df);
                 $this->action_SaveLabel();
@@ -832,7 +843,7 @@ class ModuleBuilderController extends SugarController
     public function DeleteLabel($language, $label, $labelvalue, $modulename, $basepath = null, $forRelationshipLabel = false)
     {
         // remove the label
-        ParserLabel::removeLabel($language, $label, $labelvalue, $modulename, $basepath, $forRelationshipLabel);
+        ParserLabel::removeLabel($language, $label, $labelvalue, $modulename, $basepath);
     }
 
     public function action_CloneField()
@@ -910,6 +921,15 @@ class ModuleBuilderController extends SugarController
         if (!empty($_REQUEST['role'])) {
             $params['role'] = $_REQUEST['role'];
         }
+        if (!empty($_REQUEST['layoutOption'])) {
+            $params['layoutOption'] = $_REQUEST['layoutOption'];
+        }
+        if (!empty($_REQUEST['dropdownField'])) {
+            $params['dropdownField'] = $_REQUEST['dropdownField'];
+        }
+        if (!empty($_REQUEST['dropdownValue'])) {
+            $params['dropdownValue'] = $_REQUEST['dropdownValue'];
+        }
         $parser = ParserFactory::getParser(
             $parserview,
             $_REQUEST['view_module'],
@@ -945,6 +965,15 @@ class ModuleBuilderController extends SugarController
         $params = array();
         if (!empty($_REQUEST['role'])) {
             $params['role'] = $_REQUEST['role'];
+        }
+        if (!empty($_REQUEST['layoutOption'])) {
+            $params['layoutOption'] = $_REQUEST['layoutOption'];
+        }
+        if (!empty($_REQUEST['dropdownField'])) {
+            $params['dropdownField'] = $_REQUEST['dropdownField'];
+        }
+        if (!empty($_REQUEST['dropdownValue'])) {
+            $params['dropdownValue'] = $_REQUEST['dropdownValue'];
         }
         $parser = ParserFactory::getParser(
             $parserview,
@@ -1211,15 +1240,42 @@ class ModuleBuilderController extends SugarController
         $view = $_REQUEST['view'];
         $role = $_REQUEST['role'];
         $source = $_REQUEST['source'];
+        $layoutOption = $_REQUEST['layoutOption'];
+        $dropdownField = $_REQUEST['dropdownField'];
+        $dropdownValue = $_REQUEST['dropdownValue'];
+        $sourceDir = [];
+        $destDir = [];
 
-        $sourceParser = ParserFactory::getParser($view, $module, null, null, null, array('role' => $source));
+        if ($layoutOption === 'role') {
+            $sourceDir = [
+                'role' => $source,
+                'layoutOption' => $layoutOption,
+            ];
+            $destDir = [
+                'role' => $role,
+                'layoutOption' => $layoutOption,
+            ];
+        } elseif ($layoutOption === 'dropdown') {
+            $sourceDir = [
+                'layoutOption' => $layoutOption,
+                'dropdownField' => $dropdownField,
+                'dropdownValue' => $source,
+            ];
+            $destDir = [
+                'layoutOption' => $layoutOption,
+                'dropdownField' => $dropdownField,
+                'dropdownValue' => $dropdownValue,
+            ];
+        }
+
+        $sourceParser = ParserFactory::getParser($view, $module, null, null, null, $sourceDir);
         $sourceImplementation = $sourceParser->getImplementation();
         $fileName = $sourceImplementation->getFileNameNoDefault($view, $module);
         if (!file_exists($fileName)) {
             return;
         }
 
-        $parser = ParserFactory::getParser($view, $module, null, null, null, array('role' => $role));
+        $parser = ParserFactory::getParser($view, $module, null, null, null, $destDir);
         $history = $parser->getHistory();
         $history->savePreview($fileName);
 

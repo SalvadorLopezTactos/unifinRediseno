@@ -190,6 +190,27 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
     }
 
     /**
+     * Check if the expRel is one of relationship change condition and check if event was trigger with
+     * one of the appropriate after_relationship hooks
+     * @param string $expRel
+     * @param string $event
+     * @return bool
+     */
+    public function checkRelationshipChange($expRel = '', $event = '')
+    {
+        switch ($expRel) {
+            case 'Added':
+                return ($event === 'after_relationship_add');
+            case 'Removed':
+                return ($event === 'after_relationship_delete');
+            case 'AddedOrRemoved':
+                return ($event === 'after_relationship_add' || $event === 'after_relationship_delete');
+            default:
+                return true;
+        }
+    }
+
+    /**
      * Takes in a criteria object and updates it as needed
      * @param stdClass $criteriaToken Object made from definitions
      * @param array $params
@@ -295,10 +316,28 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
         return $this->relatedBeans[$link];
     }
 
+    /**
+     * Get the bean due to which the relationship change was triggered
+     * @param string $link The link name to get the related bean from
+     * @return array
+     */
+    public function getRelationshipChangeBean($link)
+    {
+        if (empty($this->relatedBeans[$link])) {
+            $args = PMSEBaseValidator::getLogicHookArgs();
+            $expRel = isset($this->criteriaToken->expRel) ? $this->criteriaToken->expRel : '';
+            $event = isset($args['event']) ? $args['event'] : '';
+            if (((isset($args['link']) && $link === $args['link']) || (isset($args['module']) && $args['module'] === $link)) &&
+                $this->checkRelationshipChange($expRel, $event)) {
+                return [BeanFactory::retrieveBean($args['related_module'], $args['related_id'])];
+            }
+        }
+        return [];
+    }
 
     /**
      * parser a token for a field element, is this: bool or custom fields
-     * @param string $token field contains a parser
+     * @param array $token field contains a parser
      * @return array of field values, in the case of a currency type it returns a serialized array with the amount and
      * the currency id.
      */
@@ -310,7 +349,15 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
             // This logic is a fairly bad assumption, but works in most cases. The
             // assumption is that a link name won't be in the bean list so try to load
             // a related bean instead.
-            if (!isset($this->beanList[$token[0]]) && empty($params['useEvaluatedBean'])) {
+            $expRel = isset($this->criteriaToken->expRel) ? $this->criteriaToken->expRel : '';
+            $relationshipChange = in_array($expRel, ['Added', 'Removed', 'AddedOrRemoved']);
+            if ($relationshipChange) {
+                $beans = $this->getRelationshipChangeBean($token[0]);
+                $bean = reset($beans);
+                if (!empty($bean)) {
+                    PMSEEngineUtils::setRegistry($bean, false);
+                }
+            } elseif (!isset($this->beanList[$token[0]]) && empty($params['useEvaluatedBean'])) {
                 // Get the related bean instead
                 $beans = $this->getRelatedBean($token[0]);
                 // Required for wait event timer and business rules to get business center

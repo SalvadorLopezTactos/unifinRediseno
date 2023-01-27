@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => '预测',
     'ForecastWorksheets' => '预测工作表',
     'ForecastManagerWorksheets' => '预测经理工作表',
-    'MergeRecords'=>'合并记录',
       'VisualPipeline'=>'可视管道',
       'ConsoleConfiguration' => '控制台配置',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'角色',
     'Notifications'=>'通知',
     'Sync'=>'同步',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
     'ReportMaker' => '高级报表',
     'DataSets' => '数据格式',
     'CustomQueries' => '自定义查询',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => '已购买单项',
     'MobileDevices' => '移动设备',
     'PushNotifications' => '推送通知',
+    'Escalations' => '升级',
+    'DocumentTemplates' => '文档模板',
+    'DocumentMerges' => '文档合并',
     'WorkFlow' => '工作流定义',
     'EAPM' => '外部帐户',
     'Worksheet' => '工作表',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => '假期',
     'ChangeTimers' => '更改计时器',
     'Messages' => '消息',
+    'Audit' => '审计',
+    'RevenueLineItems' => '营收单项',
+    'DocuSignEnvelopes' => 'DocuSign 信封',
+    'Geocode' => '地理编码',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => '任务',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'BC',
         'PurchasedLineItems' => 'PL',
+        'DocumentTemplates' => '数据技术',
+        'DocumentMerges' => '数据管理',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => '预测工作表',
     'ForecastManagerWorksheets' => '预测经理工作表',
     'Quotas' => '定额',
-    'MergeRecords'=>'合并记录',
     'Teams' => '团队',
     'TeamNotices' => '团队通知',
     'Activities' => '活动',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => '购买',
     'PurchasedLineItems' => '已购买单项',
     'PushNotifications' => '推送通知',
+    'Escalations' => '升级',
+    'DocumentTemplates' => '文档模板',
+    'DocumentMerges' => '文档合并',
     'WorkFlow' => '工作流',
     'EAPM' => '外部帐户',
     'Worksheet' => '工作表',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => '假期',
     'ChangeTimers' => '更改计时器',
     'Messages' => '消息',
+    'Audit' => '审计',
+    'DocuSignEnvelopes' => 'DocuSignEnvelope',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
+    'Geocode' => '地理编码',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => '公共事业',
     'Other' => '其他',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF 和 CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => '处理中',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => '知识库',
       'PurchasedLineItems' => '已购买单项',
       'Purchases' => '购买',
+      'Escalations' => '升级',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => '账户',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => '笔记',
     'PurchasedLineItems' => '已购买单项',
     'Purchases' => '购买',
+    'Escalations' => '升级',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => '已订购',
       'Ship' => '已发货',
   ),
+    'active_status_dom' => [
+        'Active' => '启用',
+        'Inactive' => '停用',
+        'Retired' => '已过期',
+    ],
+    'appearance_options' => [
+        'system_default' => '使用系统设置',
+        'light' => '光',
+        'dark' => '暗',
+    ],
 
 
   'pricing_formula_default_key' => '固定',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => '电视',
         'NewsLetter' => '简讯',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GET',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,12 +2049,14 @@ $app_list_strings = array (
         'print'       => '打印',
         'pieWedgeName'      => '段',
     ),
-    'd3_chart_types' => array (
+    'chart_types' => array (
         'pie chart' => '饼状图表',
-        'bar chart' => '纵条图',
-        'group by chart' => '纵条组合图',
-        'horizontal bar chart' => '水平柱状图表',
-        'horizontal group by chart' => '横条组合图',
+        'donut chart' => '圈图',
+        'treemap chart' => '矩形树图表',
+        'bar chart' => '垂直柱图表',
+        'group by chart' => '垂直柱分组图表',
+        'horizontal bar chart' => '水平柱图表',
+        'horizontal group by chart' => '水平柱分组图表',
         'line chart' => '线状图表',
         'funnel chart' => '漏斗图',
     ),
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => '价格（最高总计）',
             'total_revenue:asc' => '价格（最低总计）',
         ],
+        'calendar_type_list' => [
+          'main' => '日历中心',
+        ],
+        'calendar_views_options' => [
+          'day' => '天',
+          'week' => '周',
+          'workWeek' => '工作周',
+          'expandedMonth' => '月',
+          'agenda' => '议程',
+          'timeline' => '时间表',
+          'monthSchedule' => '计划任务',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => '已创建',
+          'completed' => '已完成',
+          'declined' => '已拒绝',
+          'delivered' => '已交付',
+          'sent' => '已发送',
+          'signed' => '已签署',
+          'voided' => '无效',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => '默认',
+            'color' => '颜色',
+            'image' => '图片',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => '新',
+            'In Progress' => '正在进行',
+            'Closed' => '已关闭',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => '停用',
+            'Lack of Progress' => '进展中断',
+            'Customer-Imposed Deadline' => '客户设置的截止日期',
+            'Account at Risk' => '账户存在风险',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => '客户要求',
+            'Internally Requested' => '内部要求',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => '案例',
+            'Bugs' => '漏洞',
+            'Accounts' => '账户',
+            'Opportunities' => '机会',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => '肯定',
+            'Negative' => '否定',
+            'Neutral' => '中性',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => '不可能',
+            '02_less_likely' => '不太可能',
+            '03_neutral' => '中性',
+            '04_more_likely' => '很有可能',
+            '05_very_likely' => '非常有可能',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => '与客户不匹配',
+            '02_no_match' => '',
+            '01_matches_customers' => '与客户匹配',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => '跟踪链接',
   'LBL_TOGGLE_VISIBILITY' => '切换可见选择', // Record view header panel element
   'LBL_ACTIVITIES' => '活动流',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM、Sugar 和 3-D 立方体均为 SugarCRM Inc. 的注册商标。'.
         '该产品中使用或出现的任何其他公司和产品名称可能是 '.
         'SugarCRM ®、Sugar Enterprise™ 和Sugar™ 是 SugarCRM Inc.的商标。',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => '添加' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => '公司Logo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => '日历' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => '您选择的下拉列表值更改了记录视图布局。 ' .
+        '此新布局中隐藏的字段的值已清除。 ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => '主模块导航',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => '关闭',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} 标记为 {{status}}。',
 
+    'LBL_FOCUS' => '焦点',
+
     'LBL_QUERY_VALID'=>'有效',
     'LBL_QUERY_ERROR'=>'错误！',
     'LBL_QUERY_CHILD'=>'有效的子查询',
@@ -3068,6 +3185,10 @@ $app_strings = array (
     'LBL_CASES'=>'客户反馈',
     'LBL_MESSAGE'=>'消息',
     'LBL_MESSAGES'=>'消息',
+    'LBL_ESCALATIONS' => '升级',
+    'LBL_ESCALATION' => '升级',
+    'LBL_DOCUSIGN_ENVELOPES' => 'DocuSign 信封',
+    'LBL_DOCUSIGN_ENVELOPE' => 'DocuSign 信封',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => '修改密码',
     'LBL_CHANGE_BUTTON_LABEL' => '更改',
@@ -3093,6 +3214,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => '开放项目:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => '撰写电子邮件',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => '电子邮件',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => '撰写电子邮件[Alt+L]',
     'LBL_SEARCH_DROPDOWN_YES'=>'是',
     'LBL_SEARCH_DROPDOWN_NO'=>'否',
@@ -3118,6 +3240,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'文档',
     'LBL_DATE_ENTERED' => '创建日期：',
     'LBL_DATE_MODIFIED' => '修改日期:',
+    'LBL_ACTIVITY_MODIFIED' => '已修改',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => '编辑概述选项卡',
     'LBL_EDIT_MODULE_TABS_BUTTON' => '编辑模块选项卡',
     'LBL_EDIT_BUTTON' => '编辑',
@@ -3140,6 +3263,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => '选择字段',
     'LBL_FILTER_SELECT_OPERATOR' => '选择运营商',
     'LBL_FILTER_CREATE_NEW' => '创建',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => '生成筛选器（未保存）',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '（未保存）',
     'LBL_FILTER_CREATE_FILTER' => '创建新筛选器',
     'LBL_FILTER_CLOSE_FILTER' => '关闭筛选器',
     'LBL_FILTER_EDIT_FILTER' => '编辑筛选器',
@@ -3202,6 +3327,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => '更多{{name}}...',
     'LBL_TODAYS_ACTIVITIES' => '今日市场活动',
     'LBL_LEADS'=>'潜在客户',
+    'LBL_LEAD'=>'潜在客户',
+    'LBL_QUOTES_BILL_TO' => '报价（账单抬头）',
     'LBL_LESS' => '少于',
     'LBL_CAMPAIGN' => '市场活动:',
     'LBL_CAMPAIGNS' => '市场扩东',
@@ -3229,19 +3356,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => '请选择至少2条记录进行操作。',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => '请选择10条以下的记录来执行操作',
     'LBL_LISTVIEW_ALL' => '全部',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => '冻结第 1 列',
     'LBL_DUPECHECK_FILTER_DEFAULT' => '所有重复',
     'LBL_LISTVIEW_NONE' => '删除全部',
     'LBL_LISTVIEW_OPTION_CURRENT' => '选择此页',
     'LBL_LISTVIEW_OPTION_ENTIRE' => '选择全部',
     'LBL_LISTVIEW_OPTION_SELECTED' => '已选择的记录',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => '已选择: ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => '清除选择',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => '清除所有选择。',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => '选择所有记录',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => '结果中有超出 {{num}} 记录. 您已经选择了前 {{num}} 记录.',
     'TPL_LISTVIEW_SELECTED' => 'You have selected {{num}} records in the result set.',
+    'TPL_LISTVIEW_SELECTED_ONE' => '您已经选择了结果集中的 1 条记录。',
     'TPL_LISTVIEW_SELECTED_ALL' => '您已经选择了结果中的全部 {{num}}记录.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => '您已经选择了此视图中的全部 {{num}} 记录. {{link}} .',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => '正在更新 {{total}}之{{num}}。',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => '在 {{total}}条记录中上传 {{num}} 条',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(尚存约{{time}} {{unit}})',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => '批量更新失败，重新尝试({{num}} of {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => '批量更新未完成. {{num}}条记录无变化.',
@@ -3249,7 +3378,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => '由于权限或错误，{{remain}}个记录被忽略。',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}}条记录更新成功',
     'TPL_MASSUPDATE_TITLE' => '{{module}}批量更新',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => '删除 {{num}} 条在 {{total}}条记录中.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => '在 {{total}}条记录中删除 {{num}} 条',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(尚存约{{time}} {{unit}})',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => '批量删除失败. 重新尝试 ({{num}} of {{total}}).',
     'TPL_MASSDELETE_WARNING_CLOSE' => '批量删除失败. {{num}} record(s) remain.',
@@ -3274,10 +3403,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => '选择后编辑',
     'LBL_LISTVIEW_ACTIONS' => '操作',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => '选择此页面上的所有记录',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => '取消选择此页面上的所有记录',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} / {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '加载的 {{num}} 条',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => '点击查看全部',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => '的',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => '获取页数',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => '大卫',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => '利文斯通',
@@ -3285,10 +3421,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => '异常代码',
     'LBL_LOGIN_TO_ACCESS' => '请登录以访问这个区域。',
     'LBL_LOGOUT' => '注销',
+    'LBL_FINISH_IMPERSONATING' => '结束模仿',
+    'LBL_RESET_MFA' => '重置多因素验证',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}，您目前正在模仿 {{user}}.',
     'LBL_PROFILE' => '用户资料',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => '邮件合并',
     'LBL_MASS_UPDATE' => '批量更新',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => '选择所有记录进行批量更新',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => '将记录包含在批量更新中',
     'LBL_MASS_UPDATE_ADD_FIELD' => '添加字段',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => '删除字段',
     'LBL_GENERATE_QUOTE' => '生成报价',
@@ -3343,6 +3484,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => '更多信息',
     'LBL_PANEL_BODY' => '概述',
     'LBL_PARENT_TYPE' => '父类型',
+    'LBL_RELATED_TYPE' => '相关类型',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => '阶段',
     'LBL_PICTURE_FILE' => '阿凡达',
@@ -3416,7 +3558,7 @@ $app_strings = array (
 
     'LBL_RELATED' => '关联',
     'LBL_RELATED_INFORMATION' => '相关信息',
-    'LBL_RELATED_RECORDS' => '相关记录',
+    'LBL_RELATED_RECORDS' => '关联{{module}}',
     'LBL_REPORTS_TO' => '汇报对象',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => '表示必填字段',
@@ -3535,7 +3677,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         '保留所有权利。<br />SugarCRM、Sugar 和 3-D Cube 均为 SugarCRM Inc. 的注册商标。 '.
         '该产品中使用或出现的任何其他公司和产品名称可能是'.
         '与此类名称有关的公司的商标。',
@@ -3598,6 +3740,7 @@ $app_strings = array (
     'LBL_UNDELETE' => '不删除',
     'LBL_UNSYNC' => '不同步',
     'LBL_UPDATE' => '更新',
+    'LBL_UPDATES' => '更新',
     'LBL_USER_LIST' => '用户列表',
     'LBL_USER_MENU' => '用户菜单',
     'LBL_USERS_SYNC'=>'用户同步',
@@ -3664,6 +3807,8 @@ $app_strings = array (
     'NTC_DELETE_SUCCESS' => '您已删除 {0}。',
     'NTC_UNLINK_CONFIRMATION' => '您确定要取消链接',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => '您确定要断开 {0}？',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => '是否确定要取消链接 {0}？这还会将其从客户反馈的“主要联系人”字段中移除。',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => '{0} 无法取消链接，因为他们是此客户反馈上的主要联系人。请先更新“主要联系人”字段，然后再取消链接此记录。',
     'NTC_UNLINK_SUCCESS' => '已取消链接 {0}。',
     'NTC_LOGIN_MESSAGE' => '请输入用户名和密码',
     'NTC_NO_ITEMS_DISPLAY' => '无',
@@ -3695,6 +3840,9 @@ $app_strings = array (
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => '刷新浏览器将自动关闭您已打开的所有 SugarLive 通话或聊天会话，任何未保存更改将丢失。是否想要继续？',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => '您的更改未保存，您确定要离开页面放弃更改吗？',
+    'LBL_MFA_RESET_CONFIRMATION' => '您是否确定要重置您的<a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">多因素验证</a>？
+执行此操作会立即使您注销，下次登录时您将需要使用验证器应用验证身份。',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => '确认并注销',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => '一个或多个 Dashlet 包含未保存的更改。是否确定要关闭抽屉？',
     'LBL_NAVIGATE_TO_REPORTS' => '您将打开报告模块，您对dashlet的修改将不会被保存，是否继续？',
     'ERROR_NO_RECORD' => '检索记录出错。这条记录可能已被删除，或者您可能没有权限查看。',
@@ -3790,6 +3938,11 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "您目前没有保存<item1>记录<item2>。",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "你从 <item2>、<item3>和<item2>列表可以创建 <item1>。",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => '积极',
+    'LBL_SENTIMENT_NEUTRAL' => '中性',
+    'LBL_SENTIMENT_NEGATIVE' => '消极',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "点击此处",
     // contextMenu strings
@@ -3799,11 +3952,16 @@ $app_strings = array (
     'LBL_CREATE_NOTE' => '创建笔记',
     'LBL_CREATE_OPPORTUNITY' => '创建商业机会',
     'LBL_SCHEDULE_CALL' => '记录电话',
+    'LBL_SCHEDULE_CALL2' => '电话',
     'LBL_SCHEDULE_MEETING' => '安排会议',
+    'LBL_SCHEDULE_MEETING2' => '会议',
     'LBL_CREATE_MESSAGE' => '创建消息',
+    'LBL_CREATE_MESSAGE2' => '消息',
     'LBL_CREATE_TASK' => '创建任务',
+    'LBL_CREATE_TASK2' => '任务',
     'LBL_REMOVE_FROM_FAVORITES' => '从我的收藏夹中移除',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => '笔记',
     'LBL_DOWNLOAD_ALL' => '全部下载',
     'LBL_DOWNLOAD_ONE' => '下载',
     'LBL_ATTACHMENTS' => '附件',
@@ -3843,13 +4001,14 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => '显示行',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => '关联当前记录',
     'LBL_DASHLET_CONFIGURE_LINKED' => '相关领域',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => '冻结第一列',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => '您确定要删除这个 Sugar 仪表吗?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => '您确定想要删除行吗?',
     'LBL_MAXIMUM_OF' => '最大值',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => '显示列',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => '仪表板',
     'LBL_DEFAULT_DASHBOARD_TITLE' => '我的仪表板',
     'LBL_COLLAPSE_ALL' => '全部折叠',
@@ -3866,12 +4025,15 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE' => '配置',
     'LBL_DASHLET_TOGGLE' => '打开/关闭仪表板',
     'LBL_SIDEPANE_TOGGLE' => '打开/关闭侧边窗格',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => '恢复默认仪表',
+    'LBL_NO_DASHBOARD_CONFIGURED' => '没有配置仪表板',
+    'LBL_CREATE_DASHBOARD_LINK' => '创建仪表板',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => '说明',
     'LBL_HELPLET_TOGGLE' => '打开/关闭',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => '模块',
     'LBL_FACET_MODIFIED_BY_ME' => '由我修改',
     'LBL_FACET_CREATED_BY_ME' => '由我创建',
@@ -3888,6 +4050,7 @@ $app_strings = array (
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => '记录视图',
+    'LBL_RELATED_RECORDS' => '相关 {{{module}}}',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => '在选项卡中显示记录和可选的相关记录。',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => '基本记录类型',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => '此 {{moduleSingular}}',
@@ -3937,7 +4100,7 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => '没有发现记录。',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => '客户反馈总结',
-    'LBL_DASHLET_ITERACTIONS_NAME' => '互动',
+    'LBL_DASHLET_ITERACTIONS_NAME' => '时间表',
     'LBL_DASHLET_ATTACHMENTS_NAME' => '笔记与附件',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => '注释和附件所属的记录',
     'LBL_DASHLET_PIPLINE_NAME' => '管道',
@@ -4208,6 +4371,8 @@ $app_strings = array (
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => '从您的电脑上传',
     'LBL_SEARCH_EXTERNAL_API' => '存档在外部文件',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => '上传到外部来源',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => '从外部来源链接',
     'LBL_EXTERNAL_SECURITY_LEVEL' => '安全',
     'LBL_SHARE_PRIVATE' => '私人的',
     'LBL_SHARE_COMPANY' => '公司',
@@ -4329,6 +4494,9 @@ $app_strings = array (
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => '键盘快捷方式',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>表格功能- Alt+</strong><br/> I = ed<b>I</b>t (查看详情)<br/> U = d<b>U</b>复制(查看详情)<br/> D = <b>D</b>删除 (查看详情)<br/> A = s<b>A</b>ve (编辑视图)<br/> L = cance<b>L</b> (编辑视图) <br/><br/></p><p><strong>搜索和导航  - Alt+</strong><br/> 7 = 在编辑表上的首次输入<br/> 8 = 高级搜索链接<br/> 9 = 首次的搜索表格输入<br/> 0 = 统一的搜索输入<br></p>' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => '升级',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => '分享',
     'TPL_RECORD_SHARE_SUBJECT' => '分享 {{module}} {{name}} from {{appId}}',
@@ -4401,7 +4569,7 @@ $app_strings = array (
     'LBL_MERGE_UNSAVED_CHANGES'=>
         '您将要更改主记录不保存您所作的任何更改。所有的更改将会丢失。您确定要继续吗？',
     'LBL_MERGE_DUPLICATES_TITLE' => '合并相关记录',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => '合并: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => '合并：{{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         '合并关联 {{objectName}} 失败.开始新的尝试从 ({{num}} of {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4455,14 +4623,14 @@ $app_strings = array (
     'LBL_LANGUAGE' => '语言:',
     'LBL_LOADING_LANGUAGE' => '载入语言包',
     'LBL_UPLOADING' => '上传',
+    'LBL_UPLOADING_DOTS' => '正在上传……',
     'LBL_IMAGE_DELETE_CONFIRM' => '您确定要删除这张图片？',
     'LBL_FILE_DELETE_CONFIRM' => "您确定要删除这个文件？这不能撤消。",
     'LBL_FILE_DELETED' => '文件被成功删除',
 
     //theme roller
     'LBL_PORTAL_THEME' => '门户主题',
-    'LBL_COFIGURE_PORTAL_THEME' => '配置Portal主题',
-    'LBL_THEME_PREVIEW' => '主题预览',
+    'LBL_THEME_PREVIEW' => '门户主题预览',
     'LBL_LOADING_PREVIEW' => '加载预览',
     'LBL_RESET' => '重置',
     'LBL_COLORS' => '颜色',
@@ -4613,10 +4781,18 @@ $app_strings = array (
     'LBL_MEETINGS_SUBPANEL_TITLE' => '会议',
     'LBL_TASKS_SUBPANEL_TITLE' => '任务',
     'LBL_CALLS_SUBPANEL_TITLE' => '电话',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => '帐户',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => '联系人',
     'LBL_EMAILS_SUBPANEL_TITLE' => '电子邮件',
     'LBL_SHIFTS_SUBPANEL_TITLE' => '班次',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => '已报价单项',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => '班次异常',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => '文档',
+    'LBL_ESCALATIONS' => '升级',
+    'LBL_ESCALATED' => '已升级',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => '背景',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => '其他相关升级',
+    'LBL_ESCALATIONS' => '升级',
     'LNK_SETTINGS' => '设置',
     'LBL_MOBILE_SUPPORT' => '支持',
     'LBL_MOBILE_SHOW_MORE' => '显示更多...',
@@ -4824,6 +5000,55 @@ $app_strings = array (
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => '获取服务器时间失败',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => '无法启用脱机模式。无法访问服务器。',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => '外观',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => '使用系统设置',
+    'LBL_MOBILE_APP_THEME_LIGHT' => '浅色',
+    'LBL_MOBILE_APP_THEME_DARK' => '深色',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => '新文件名',
+    'LBL_ATTACHMENT_RENAME_MSG' => '重命名文件',
+    // Filters related
+    'LBL_CREATED_BY_ME' => '由我创建',
+    'LBL_OPERATOR_CONTAINS' => '其中的',
+    'LBL_OPERATOR_NOT_CONTAINS' => '不是其中的',
+    'LBL_OPERATOR_EMPTY' => '为空',
+    'LBL_OPERATOR_NOT_EMPTY' => '不为空',
+    'LBL_OPERATOR_MATCHES' => '完全符合',
+    'LBL_OPERATOR_STARTS_WITH' => '开始于',
+    'LBL_OPERATOR_EQUALS' => '等于',
+    'LBL_OPERATOR_NOT_EQUALS' => '不等于',
+    'LBL_OPERATOR_GREATER_THAN' => '大于',
+    'LBL_OPERATOR_LESS_THAN' => '小于',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => '大于或等于',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => '小于或等于',
+    'LBL_OPERATOR_BETWEEN' => '之间',
+    'LBL_OPERATOR_BEFORE' => '早于',
+    'LBL_OPERATOR_AFTER' => '晚于',
+    'LBL_OPERATOR_YESTERDAY' => '昨天',
+    'LBL_OPERATOR_TODAY' => '今天',
+    'LBL_OPERATOR_TOMORROW' => '明天',
+    'LBL_OPERATOR_LAST_7_DAYS' => '最近 7 天',
+    'LBL_OPERATOR_NEXT_7_DAYS' => '未来 7 天',
+    'LBL_OPERATOR_LAST_30_DAYS' => '最近 30 天',
+    'LBL_OPERATOR_NEXT_30_DAYS' => '未来 30 天',
+    'LBL_OPERATOR_LAST_MONTH' => '上个月',
+    'LBL_OPERATOR_THIS_MONTH' => '本月',
+    'LBL_OPERATOR_NEXT_MONTH' => '下个月',
+    'LBL_OPERATOR_LAST_YEAR' => '去年',
+    'LBL_OPERATOR_THIS_YEAR' => '今年',
+    'LBL_OPERATOR_NEXT_YEAR' => '下一年',
+    'LBL_OPERATOR_IS' => '是',
+    'LBL_OPERATOR_IS_NOT' => '不是',
+    'LBL_ERROR_FILTER_EMPTY' => '请添加筛选器条件。',
+    'LBL_ADD_FILTER' => '添加条件',
+    'LBL_FILTER_NAME' => '筛选器名称',
+    'LBL_FILTER_FIELD' => '字段',
+    'LBL_FILTER_OPERATOR' => '运算符',
+    'LBL_FILTER_VALUE' => '值',
+    'LBL_FILTER_SYNC_TO_SERVER' => '保存至桌面应用',
+    'LBL_FILTER_LOCAL' => '本地筛选器',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => '欢迎来到 {{{brandName}}}。<br/> <br/>让我们着重介绍一些新的功能......',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => '主导航菜单。',
@@ -4869,6 +5094,7 @@ $app_strings = array (
     'LBL_COMMENT_ADD' => '添加注释',
     'LBL_REQUIRED' => '必填',
     'LBL_MORE_BUTTON' => '更多',
+    'LBL_NO_OPTIONS' => '无可用选项',
     'LBL_TRY_AGAIN' => '重试',
     'LBL_NEW_RECORDS' => '最近创建的',
     'LBL_ASSIGNED_TO_ME' => '我的 {{{module}}}',
@@ -5098,11 +5324,15 @@ $app_strings = array (
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => '您确定想要关闭聊天吗？',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => '新增笔记或添加附件',
+    'LBL_PORTAL_NEW_NOTE_BTN' => '添加笔记',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => '您的登录不成功。请重试。',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => '无效的认证',
-    'LBL_PORTAL_INVALID_GRANT' => '您的令牌是无效或已过期。请重新登录。',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Token过期',
+    'LBL_PORTAL_INVALID_GRANT' => '您的会话已过期。请重新登录。',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => '会话已过期',
     'LBL_PORTAL_AUTH_FAILED' => '客户端身份验证失败。',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => '无效的客户端',
     'LBL_PORTAL_INVALID_REQUEST' => '提出请求无效或格式不正确。请联系技术支持。',
@@ -5136,6 +5366,8 @@ $app_strings = array (
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => '恢复默认仪表板',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => '续订控制台',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => '概述',
@@ -5155,6 +5387,7 @@ $app_strings = array (
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => '信息摘要',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => '通话摘要',
     'LBL_OMNICHANNEL_LINK_TO' => '将 {{fromModule}} 链接到 {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => '链接至 {{module}}',
     'LBL_OMNICHANNEL_LINKED' => '已链接',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => '您的浏览器不支持聊天。请使用 Google Chrome 或 Mozilla Firefox。',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => '请联系您的 Sugar 管理员获取帮助。',
@@ -5162,6 +5395,8 @@ $app_strings = array (
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => '请在拨出电话前结束配置 SugarLive。',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => '请在打开 SugarLive 前结束配置 SugarLive 布局。',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => '在配置 SugarLive 布局前，在 SugarLive 中将您自己设置为“离线”。',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => '紧凑视图',
+    'LBL_OMNICHANNEL_FULL_VIEW' => '完整视图',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => '将选项卡恢复为默认',
@@ -5573,9 +5808,12 @@ $app_strings = array (
     'LBL_BEST' => '最佳',
     'LBL_WORST' => '最差',
     'LBL_LIKELY' => '大概金额',
-    'LBL_BEST_ADJUSTED' => '最好(调整后)',
-    'LBL_WORST_ADJUSTED' => '最坏(调整后)',
-    'LBL_LIKELY_ADJUSTED' => '可能(调整后)',
+    'LBL_BEST_FORECAST' => '提交（最佳）',
+    'LBL_WORST_FORECAST' => '提交（最差）',
+    'LBL_LIKELY_FORECAST' => '提交（可能）',
+    'LBL_BEST_ADJUSTED' => '调整后提交（最佳）',
+    'LBL_WORST_ADJUSTED' => '调整后提交（最差）',
+    'LBL_LIKELY_ADJUSTED' => '调整后提交（可能）',
     'LBL_AMOUNT_USDOLLAR' => '折算金额',
     'LBL_OVERDUE' => '过期的',
 
@@ -5596,6 +5834,8 @@ $app_strings = array (
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => '更多信息，请参阅 {{{more_info_url}}} {{plural_module_name}} 文件。{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => '没有可用的数据',
+    'LBL_NEED_HELP' => '有些新内容需要帮助？',
+    'LBL_NEW_CASE' => '新增客户反馈',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => '帮助仪表提供您正常浏览的模块的详细信息，并提供链接到其他相关文档以便您获取很多信息。',
@@ -5742,9 +5982,19 @@ $app_strings = array (
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => '无回复',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => '日程安排不能用',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => '可用视图',
+    'LBL_CALENDAR_DASHLET_NAME' => '日程计划任务',
+    'LBL_CALENDAR_DEFAULT_VIEW' => '默认视图',
+    'LBL_CALENDAR_MY_CALENDARS' => '我的日程',
+    'LBL_CALENDAR_OTHER_CALENDARS' => '用户和团队日程',
+    'LBL_CALENDAR' => '日程',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => '调出日程时出错。',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => '保存并发送邀请',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => '接收状态',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => '流程',
@@ -5861,15 +6111,21 @@ $app_strings = array (
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => '复制确认链接',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => '互动',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} 互动',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => '时间表',
+    'LBL_NO_ACTIVITY' => '无活动',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} 时间表',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => '更多',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => '更少',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => '时间表显示通话、电子邮件、 ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => '显示更多...',
     'LBL_COMMENT_LOG_SHOW_LESS' => '简略显示...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => '无可用数据',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => '模块未获许可。',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => '活动订阅',
@@ -5918,8 +6174,10 @@ $app_strings = array (
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => '焦点抽屉',
+    'LBL_CLOSE_FOCUS_DRAWER' => '关闭焦点抽屉',
     'LBL_EXTERNAL_GUESTS' => '外部客户',
     'LBL_MY_FAVORITE_TASKS' => '我的收藏夹任务',
+
     'LBL_MY_TASKS' => '我的任务',
 
     // Sugar Integrate
@@ -5936,7 +6194,364 @@ $app_strings = array (
     'LBL_TIME_AWARE_TYPE' => '类型',
     'LBL_TIME_AWARE_BEAN_ID' => 'Bean ID',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => '显示标签',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => '打开记录视图',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => '添加',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => '帮助不可用',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => '函数',
+    'LBL_ACTIONBUTTON_FIELDS' => '字段',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => '选择字段...',
+    'LBL_ACTIONBUTTON_ROLLUP' => '汇总',
+    'LBL_ACTIONBUTTON_RELATED' => '关联',
+    'LBL_ACTIONBUTTON_SAVE' => '保存',
+    'LBL_ACTIONBUTTON_CANCEL' => '取消',
+    'LBL_ACTIONBUTTON_R_MODULE' => '关联模块',
+    'LBL_ACTIONBUTTON_R_FIELDS' => '关联字段',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => '汇总模块',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => '汇总字段',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => '汇总函数',
+    'LBL_ACTIONBUTTON_MINIMUM' => '最小值',
+    'LBL_ACTIONBUTTON_MAXIMUM' => '最大值',
+    'LBL_ACTIONBUTTON_AVERAGE' => '平均值',
+    'LBL_ACTIONBUTTON_SUM' => '总和',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => '分配记录',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => '撰写电子邮件',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => '创建记录',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => '文档合并',
+    'LBL_ACTIONBUTTON_OPEN_URL' => '打开 Url',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => '运行报表',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => '更新记录',
+    'LBL_ACTIONBUTTON_ACTION' => '操作',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => '分配给',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => '发送电子邮件至',
+    'LBL_ACTIONBUTTON_USE_PMSE' => '使用 PMSE',
+    'LBL_ACTIONBUTTON_TEMPLATE' => '模板',
+    'LBL_ACTIONBUTTON_MODULE' => '模块',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => '显示设置',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => '类型',
+    'LBL_ACTIONBUTTON_DROPDOWN' => '下拉列表',
+    'LBL_ACTIONBUTTON_BUTTON' => '按钮',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => '按钮组',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => '显示记录标签',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => '查看头',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => '在编辑中隐藏',
+    'LBL_ACTIONBUTTON_SIZE' => '大小',
+    'LBL_ACTIONBUTTON_DEFAULT' => '默认',
+    'LBL_ACTIONBUTTON_SMALL' => '小',
+    'LBL_ACTIONBUTTON_LARGE' => '大',
+    'LBL_ACTIONBUTTON_CALCULATED' => '已计算',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => '转换成 PDF 格式',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => '文档合并',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => '预览',
+    'LBL_ACTIONBUTTON_PROPERTIES' => '属性',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => '标签',
+    'LBL_ACTIONBUTTON_DESC' => '工具提示',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => '显示标签',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => '显示图标',
+    'LBL_ACTIONBUTTON_SCHEME' => '配色方案',
+    'LBL_ACTIONBUTTON_ICON' => '图标',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => '附属',
+    'LBL_ACTIONBUTTON_DESIGN' => '布局配置',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => '错误时停止',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => '自动保存',
+    'LBL_ACTIONBUTTON_CONFIG' => '配置',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => '请在保存前配置您的操作按钮。',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => '配置按钮',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => '自动创建',
+    'LBL_ACTIONBUTTON_LINK' => '链接',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => '复制父值',
+    'LBL_ACTIONBUTTON_PRESET' => '预置',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => '根据父项预置',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => '选择…',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => '从父字段 ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => '是否确定要删除此按钮？',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => '是否确定要删除此操作？',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => '无效操作按钮数据',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => '请在保存前选择一个模块。',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => '请在保存前选择一个链接。如果无可用链接，请取消选中链接选项。',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => '请在保存前选择一个记录。',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => '请在保存前选择一个模板。',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => '主要',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => '次要',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HighViz',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => '海洋',
+    'LBL_ACTIONBUTTON_THEME_PINK' => '粉色',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => '军队',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => '青色',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => '太平洋',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => '绿色',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => '黄色',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => '橙色',
+    'LBL_ACTIONBUTTON_THEME_RED' => '红色',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => '珊瑚色',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => '紫色',
+    'LBL_ACTIONBUTTON_FORMULA' => '公式',
+    'LBL_ACTIONBUTTON_ACTIONS' => '操作',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => '验证按钮数据时出错。',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => '按钮需要设置至少一个标签或图标。',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => '请输入有效的按钮标签。',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => '由于缺少必要的值，无法创建记录。请联系您的管理员。',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => '此按钮类型必须至少有两个活动按钮。',
+    'LBL_ACTIONBUTTON_RECORD' => '记录视图',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => '操作菜单',
+    'LBL_ACTIONBUTTON_ORDER' => '排序',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => '列表视图',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => '记录视图',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => '记录视图 Dashlet',
+    'LBL_ACTIONBUTTON_SUBPANELS' => '子面板',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => '任务序列执行引擎执行以下操作失败： ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => '添加操作',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => '删除此操作',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => '文档合并',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => '文档合并到 PDF',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => '公司规模',
+    'LBL_HINT_COMPANY_INDUSTRY' => '行业',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => '行业标签',
+    'LBL_HINT_COMPANY_LOCATION' => '公司地址',
+    'LBL_HINT_COMPANY_DESCRIPTION' => '公司描述',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => '成立年份',
+    'LBL_HINT_COMPANY_FACEBOOK' => '公司 Facebook',
+    'LBL_HINT_COMPANY_TWITTER' => '公司 Twitter',
+    'LBL_HINT_COMPANY_PIC' => '公司标志',
+    'LBL_HINT_CONTACT_PIC' => '联系人照片',
+    'LBL_HINT_COMPANY_WEBSITE' => '公司网站',
+    'LBL_HINT_PHOTO' => '照片链接',
+    'LBL_HINT_JOB_2' => '以前的工作',
+    'LBL_HINT_EDUCATION' => '教育',
+    'LBL_HINT_EDUCATION_2' => '额外教育',
+    'LBL_HINT_TWITTER' => 'Twitter 链接',
+    'LBL_HINT_FACEBOOK' => 'Facebook 链接',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'NAICS 代码',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'SIC 代码',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => '财政年度末',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => '年营业额',
+    'LBL_HINT_PHONE_1' => '电话 1',
+    'LBL_HINT_PHONE_2' => '电话 2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => '连接表',
+    'LBL_HINT_FULL_NAME' => '全名',
+    'LBL_HINT_JOB_TITLE' => '职位名称',
+    'LBL_HINT_OFFICE_PHONE' => '办公电话',
+    'LBL_HINT_MOBILE_PHONE' => '手机',
+    'LBL_HINT_OTHER_PHONE' => '其他电话',
+    'LBL_HINT_WEBSITE' => '网站',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => '是否要用 Hint 中的新数据覆盖此记录的所有现有数据？',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => '是否要使用 Hint 中的新 {{fieldName}} 覆盖此记录的现有 {{fieldName}}?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => '将删除所有与帐户相关的数据，是否确实要继续?',
+    'LBL_HINT_COMPANY_LOGO' => '标志',
+    'LBL_HINT_CONTACTS_AVATAR' => '照片',
+    'LBL_HINT_ACCOUNTSETS' => 'Hint 帐套表标记',
+
+    'LBL_HINT_LOADING' => '加载 ...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => '正在卸载 Hint，请稍候',
+    'LBL_HINT_VALUE_ERASED' => '值已删除',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => '此信息已通过数据隐私请求删除',
+
+    'LBL_HINT_UNINSTALL_TITLE' => '请从下面选择一个卸载选项：',
+    'LBL_HINT_UNINSTALL_PARTIAL' => '仅卸载 Hint 包',
+    'LBL_HINT_UNINSTALL_FULL' => '完全卸载 Hint',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => '此选项将删除提示 MLP，并禁用 Hint Insights 的所有活动订阅。重新安装 Hint 将自动重新激活订阅。',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => '此选项将执行 Hint 完全卸载，包括删除 MLP 和删除所有配置和订阅信息。',
+    'LBL_HINT_UNINSTALL' => '卸载',
+    'LBL_HINT_UNINSTALL_HEADER' => '卸载 Hint',
+    'LBL_HINT_CANCEL' => '取消',
+    'LBL_HINT_UNINSTALL_WARNING1' => '警告：只有在以后不打算再次使用 Hint 时，才选择此选项。在执行卸载之前，请完成 Sugar 数据库的完整备份，并将 Sugar 置于维护模式。',
+    'LBL_HINT_UNINSTALL_WARNING2' => '查看',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Hint 管理指南 ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => '了解卸载过程的详细信息。',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => '是否确定只卸载 Hint 包？',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => '是否确定要完全卸载 Hint？',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '（注意：无法撤消此操作）',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Hint 字段',
+    'LBL_HINT_NO_RESULTS_MSG' => '未找到结果。',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => '基本 Hint 面板布局',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => '帐户',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => '联系人',
+    'LBL_HINT_CONFIG_TAB_LEADS' => '潜在客户',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => '展开的 Hint 面板布局',
+    'LBL_HINT_CONFIG_DIR_PAR1' => '通过在上面的 Hint 面板布局部分中拖放来重新排列字段。',
+    'LBL_HINT_CONFIG_DIR_PAR2' => '有关详细说明和默认字段列表，请参阅 ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' 以恢复默认设置 ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => '模块。',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => '是否确实要还原回 {{module}} 模块的默认值？',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => '点击此处',
+    'LBL_HINT_CONFIG_NAME' => 'Hint 管理指南。',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => '字段',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => '充实的字段',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => '本节列出了所有 Hint 字段和通过 Hint 充实后的所有 Sugar 字段。提示字段用星号（*）标记，并且只有在经过充实后才能显示在 Hint 面板中。',
+    'LBL_HINT_CONFIG_FIELD_NAME' => '字段名称',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => '充实字段',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => '在 Hint 中显示',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => '在 Hint 面板中显示',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => '其他 Sugar 字段',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => '本节列出了所有未通过 Hint 充实的 Sugar 字段。',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => '警告',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => '警告：您即将与 Hint Insights 服务同步。任何待处理的电子邮件摘要故事都将丢失，现有新闻将从消息渠道中清除。所有类型的通知都将在同步完成后恢复。',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => '下面列出了与您的 {{_moduleSingular}} 相关的建议公司。选择要显示的公司数据。',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => '未选择任何帐户',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => '找到多封电子邮件，请选择要导入的电子邮件： ',
+
+    'LBL_HINT_HELP_MESSAGE1' => '根据输入的数据，Hint 无法在系统中找到匹配项。',
+    'LBL_HINT_HELP_MESSAGE2' => 'Hint 中的最佳结果可以通过一个人的姓名和电子邮件地址找到。',
+    'LBL_HINT_HELP_MESSAGE3' => 'Hint 中的最佳结果可以通过公司网站 url 找到。',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "输入 {{_moduleSingular}} 的公司名称或网站，Hint 将搜索其他数据。",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "输入您的 {{currentModule}} 的电子邮件地址，Hint 将搜索其他数据。",
+
+    'LBL_HINT_HISTORY_NONE' => '无可用于历史视图的数据',
+    'LBL_HINT_HISTORY_TITLE' => '活动历史',
+
+    'LBL_HINT_PREVIEW_TITLE' => '数据充实',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'SugarCRM Hint 服务的许可证已过期。请联系 SugarCRM 管理员以续订许可证。',
+    'LBL_HINT_PREVIEW_QUESTION' => '想知道 SugarCRM Hint 能为您和您的公司做些什么吗？请联系您的 SugarCRM 管理员以添加 Hint。',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => '找不到帐户信息',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => '找到充实的数据 - 点击以将所有充实的数据保存到记录中。',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => '点击以将充实的数据保存到记录中。',
+
+    'LBL_HINT_CONTACTS_TITLE' => '相关联系人',
+    'LBL_HINT_CONTACTS_NONE' => '无相关联系人',
+
+    'LBL_HINT_NEWS' => '新闻',
+    'LBL_HINT_GENERAL' => '常规',
+    'LBL_HINT_ALL_NEWS' => '所有新闻',
+    'LBL_HINT_FILTER_NEWS' => '过滤新闻',
+    'LBL_HINT_FINANCIAL_NEWS' => '财务',
+    'LBL_HINT_PERSONNEL_NEWS' => '全体人员',
+    'LBL_HINT_PRESS_RELEASES' => '新闻稿',
+    'LBL_HINT_OTHER_NEWS' => '其他',
+    'LBL_HINT_NEWS_PLACEHOLDER' => '搜索新闻文章',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => '无可用新闻',
+    'LBL_NEW_NOTIFICATIONS' => '新通知',
+    'LBL_HINT_DASHLET_ALLOWED1' => '您必须拥有 Hint 许可证才能查看 Hint Insights 渠道。询问您的管理员关于获取 Hint 许可证的信息。',
+
+    'LBL_HINT_FOR' => '为',
+    'LBL_HINT_WITH' => '和',
+    'LBL_HINT_SHOW_ME' => '显示更多： ',
+    'LBL_HINT_NOTIFY_ME_BY' => '通过以下方式通知我： ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Hint Insights 首选项中心',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => '首选项选项键',
+    'LBL_HINT_PREFERENCES' => '首选项',
+    'LBL_HINT_MINIMUM_PREFERENCES' => '已禁用删除，至少需要一条偏好声明',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => '添加已禁用，您已达到首选项声明的最大值',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => '包含在 Hint Insights 渠道中',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => '弹出式桌面通知',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => '必须在所有浏览器和所有台式计算机上启用通知才能始终接收通知。',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => '有些浏览器，如 Internet Explorer，不支持通知。使用不支持通知的浏览器时，无法启用通知。',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => '为每个通知发送即时电子邮件警报',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => '发送每日电子邮件摘要',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => '发送每周电子邮件摘要',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => '无法保存首选项。请检查系统连接，然后重试。',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => '某些必填字段缺少值。请检查您的首选项，并确保填写了所有必填字段。',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => '您将启用浏览器通知以获取 Hint Insights。点击确认继续。然后，浏览器将请求您允许接收通知事件。',
+    'LBL_HINT_PUSH_ERROR' => '已在没有依赖项的情况下为 {{options.type}} 注册了推送通知插件。插件将无法正常工作，请确保提供工作文件的路径以及在服务器上保存订阅的方法。',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => '为所有用户启用 Hint 通知',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => '为所有用户关闭 Hint 通知',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => '警告：卸载 Sugar Hint 期间无法禁用通知。要禁用通知，请安装 Hint 5.4.0 或更高版本，然后使用 Sugar 的 “管理”部分中的 Hint 卸载程序执行完全卸载。',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => '映射配置',
+    'LBL_MAP_MAP' => '映射',
+    'LBL_MAP_MAPS' => '映射',
+    'LBL_MAP_GEOCODING_RECORD' => '地理编码',
+    'LBL_MAP_GEOCODE_SUCCESS' => '记录已成功进行地理编码。',
+    'LBL_MAP_LATITUDE' => '纬度',
+    'LBL_MAP_LONGITUDE' => '经度',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => '按地址搜索...',
+    'LBL_MAP_ALREADY_GEOCODED' => '当前记录已进行地理编码。是否确实要覆盖此记录的地理编码？',
+    'LBL_MAPS_MANUAL_GEOCODING' => '手工地理编码',
+    'LBL_MAP_POINT_COORDINATES' => '地图点坐标',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => '计算最优路径...',
+    'LBL_MAP_DIRECTIONS' => '指示',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => '从当前用户开始的方向',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => '从此记录开始的方向',
+    'LBL_MAPS_RADIUS_INPUT' => '半径（0-250）',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => '在距离邮政编码的半径范围内',
+    'LBL_MAPS_DISTANCE' => '距离',
+    'LBL_MAPS_CENTER_ZIP_CODE' => '邮政编码',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => '无效配置： ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => '<strong>{{module}}</strong> 字段映射无效。',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => '映射类型',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => '缩放级别',
+    'LBL_MAPS_DASHLET' => '映射',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => '在地图上显示地理编码记录。',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => '映射不适用于此模块。请在管理控制台中启用它。',
+    'LBL_MAP_MODULES' => '模块',
+    'LBL_MAP_FILTER_BY' => '筛选条件',
+    'LBL_MAP_UNIT_TYPE' => '单位类型',
+    'LBL_MAP_UNIT_TYPE_MILES' => '英里',
+    'LBL_MAP_UNIT_TYPE_KM' => '千米',
+    'LBL_MAP_ADDRESS' => '地址',
+    'LBL_MAP_NO_STARTING_POINT' => '起点未进行地理编码。',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => '起点记录未进行地理编码。',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => '一些选定的记录未进行地理编码，因此也不会显示在地图上。',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => '记录未进行地理编码。',
+    'LBL_MAPS_MODULE_FIELDS' => '模块字段',
+    'LBL_MAPS_SELECT_FIELD' => '选择字段',
+    'LBL_MAPS_RELATE_RECORD' => '相关记录',
+    'LBL_MAPS_MAPPING_TYPE' => '映射类型',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => '无地理编码记录',
+    'LBL_MAPS_ADDRESS' => '地址',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => '指派的用户',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => '给定点的街道侧视图不可用',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> 记录对映射无效。请从列表中删除该模块。',
+    'LBL_MAPS_CLOSE_TOOLTIP' => '关闭',
+    'LBL_MAPS_EXPAND_TOOLTIP' => '展开',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => '另存为 PDF',
+    'LBL_MAPS_EMAIL_LINK' => '电子邮件链接',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => '您必须至少有一条地理编码记录。',
+    'LBL_MAPS_GENERATING' => '正在生成地图...',
+    'LBL_MAPS_POINTS' => '映射点',
+    'LBL_MAPS_POINT' => '点',
+    'LBL_MAPS_TRAVEL_DETAILS' => '行进详情',
+    'LBL_MAPS_TOTAL_DISTANCE' => '总距离',
+    'LBL_MAPS_TOTAL_DURATION' => '总持续时间',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => '交通顺畅情况下总持续时间',
+    'LBL_MAPS_ITINERARY' => '行程',
+    'LBL_MAPS_TRAVEL_DISTANCE' => '行进距离',
+    'LBL_MAPS_TRAVEL_DURATION' => '行进持续时间',
+    'LBL_MAPS_TRAVEL_STEPS' => '步数',
+    'LBL_MAPS_TRAVEL_WARNINGS' => '警告',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => '必应地图在共享地图上最多支持 10 个精确定位点。请检查您的选择。',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => '所需的地图许可证',
+
+    'LBL_INVALID_FORMULA' => '无效公式',
+    'LBL_RETURN_TYPE_MISSMATCH' => '函数返回类型不匹配',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => '预测',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => '理想客户特征',
+
+    // User last state
+    'LBL_LAST_STATE' => '最后状态',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => '发送到 DocuSign',
+
+    // Base sales stages
+    'LBL_OPEN' => '打开',
+    'LBL_CLOSED_WON' => '谈成结束',
+    'LBL_CLOSED_LOST' => '丢单结束',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6773,8 +7388,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM 智慧云',
     'Google' => '谷歌',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => '谷歌联系人',
@@ -7114,6 +7729,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '嵌入的文件';
     'YER' => '里亚尔',
     'ZWD' => '津巴布韦元',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => '很高',
+        '4' => '高',
+        '3' => '中性',
+        '2' => '低',
+        '1' => '很低',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => '无',
         'future' => '当前值',
@@ -7123,3 +7746,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '嵌入的文件';
     $app_list_strings['business_rule_type_list'] = array(
         'single' => '单击',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => '正在处理',
+        'error' => '错误',
+        'success' => '成功',
+        'canceled' => '已取消',
+        'document_load' => '正在加载模板',
+        'tags_extract' => '正在提取标签',
+        'tags_validate' => '正在验证标签',
+        'data_retrieving' => '正在检索数据',
+        'serialize_document' => '拼接文档',
+        'send_document' => '向您发送文档',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => '合并',
+        'convert' => 'PDF 合并',
+        'multimerge' => '批量合并',
+        'multimerge_convert' => '批量合并 PDF',
+        'labelsgenerate' => '生成标签',
+        'labelsgenerate_convert' => '生成标签 PDF',
+        'excel' => 'Excel 合并',
+        'excel_convert' => 'Excel 合并转换',
+        'presentation' => 'PowerPoint 合并',
+        'presentation_convert' => 'PowerPoint 合并 PDF',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => '我的帐户',
+      'favorites' => '收藏夹账户',
+      'tags' => '标记的帐户',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => '所有新闻',
+      'General' => '常规',
+      'Finance' => '财务',
+      'People' => '全体人员',
+      'Press Releases' => '新闻稿',
+      'Other' => '其他',
+    ];
+
+    $app_strings['LBL_OWNERS'] = '负责人';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = '云驱动';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = '云驱动集成渠道';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = '复制链接';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = '下载';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = '创建 Sugar 文档';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = '同步到谷歌驱动器';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = '全部同步到谷歌驱动器';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = '无法下载此文件';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = '云渠道不存在';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Sugar 文件已创建';
+
+    $app_string['LBL_MY_FILES'] = '我的文件';
+    $app_strings['LBL_SHARED_WITH_ME'] = '已与我共享';
+    $app_strings['LBL_CLOUD_PROVIDER'] = '云提供商';
+
+    $app_list_strings['drive_types'] = [
+      'google' => '谷歌驱动器',
+      'onedrive' => '微软网盘',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = '已与我共享';
+    $app_strings['LBL_MY_FILES'] = '我的文件';
+    $app_strings['LBL_UPLOAD_FILE'] = '上传文件';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = '找不到文件夹';
+    $app_strings['LBL_CREATE_FOLDER'] = '创建文件夹';
+    $app_strings['LBL_LOAD_MORE'] = '加载更多...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = '未找到与 Google 的连接...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = '找不到与 Microsoft 的连接...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-空白-',
+      'Exact' => '精确',
+      'Null_address_components' => '一个或多个地址组件为空',
+      'Invalid_address' => '地址无效，服务器返回错误',
+      'Invalid_server_response_not_XML' => '无效的服务器响应，不是 XML',
+      'Invalid_address_no_location' => '地址无效，服务器未返回任何位置',
+      'Ambiguous_address' => '地址不明确，多个匹配项',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => '道路',
+      'a' => '航空',
+      'be' => '鸟瞰',
+      'rd' => '道路漆黑',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

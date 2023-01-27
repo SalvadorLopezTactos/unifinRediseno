@@ -33,6 +33,8 @@ $dictionary['Document'] = array('table' => 'documents',
             'type' => 'varchar',
             'fields' => array('document_name'),
             'sort_on' => 'name',
+            'required' => true,
+            'massupdate' => false,
         ),
         'doc_id' =>
         array(
@@ -43,6 +45,7 @@ $dictionary['Document'] = array('table' => 'documents',
             'comment' => 'Document ID from documents web server provider',
             'importable' => false,
             'studio' => 'false',
+            'massupdate' => false,
         ),
         'doc_type' =>
         array(
@@ -54,9 +57,10 @@ $dictionary['Document'] = array('table' => 'documents',
             'comment' => 'Document type (ex: Google, box.net, IBM SmartCloud)',
             'popupHelp' => 'LBL_DOC_TYPE_POPUP',
             'massupdate' => false,
-            'options' => 'eapm_list',
             'default' => 'Sugar',
             'studio' => array('wirelesseditview' => false, 'wirelessdetailview' => false, 'wirelesslistview' => false, 'wireless_basic_search' => false),
+            'readonly' => true,
+            'readonly_formula' => 'not(equal($filename, ""))',
         ),
         'doc_url' =>
         array(
@@ -141,6 +145,7 @@ $dictionary['Document'] = array('table' => 'documents',
             'source' => 'non-db',
             'comment' => 'Document status for Meta-Data framework',
             'studio' => 'false',
+            'massupdate' => false,
         ),
 
         'document_revision_id' =>
@@ -178,8 +183,8 @@ $dictionary['Document'] = array('table' => 'documents',
             'required' => true,
             'source' => 'non-db',
             'importable' => 'required',
-            'required' => true,
             'default' => '1',
+            'readonly' => true,
         ),
 
         'last_rev_created_name' =>
@@ -197,7 +202,8 @@ $dictionary['Document'] = array('table' => 'documents',
             'type' => 'varchar',
             'reportable' => false,
             'studio' => 'false',
-            'source' => 'non-db'
+            'source' => 'non-db',
+            'massupdate' => false,
         ),
         'latest_revision' =>
         array(
@@ -205,7 +211,7 @@ $dictionary['Document'] = array('table' => 'documents',
             'vname' => 'LBL_LATEST_REVISION',
             'type' => 'varchar',
             'reportable' => false,
-            'source' => 'non-db'
+            'source' => 'non-db',
         ),
         'latest_revision_file_mime_type' => array(
             'name' => 'latest_revision_file_mime_type',
@@ -216,6 +222,7 @@ $dictionary['Document'] = array('table' => 'documents',
             'rname' => 'file_mime_type',
             'source' => 'non-db',
             'vname' => 'LBL_MIME',
+            'massupdate' => false,
         ),
         'latest_revision_file_size' => array(
             'name' => 'latest_revision_file_size',
@@ -226,6 +233,7 @@ $dictionary['Document'] = array('table' => 'documents',
             'rname' => 'file_size',
             'source' => 'non-db',
             'vname' => 'LBL_FILE_SIZE',
+            'massupdate' => false,
         ),
         'latest_revision_file_ext' => array(
             'name' => 'latest_revision_file_ext',
@@ -236,6 +244,7 @@ $dictionary['Document'] = array('table' => 'documents',
             'rname' => 'file_ext',
             'source' => 'non-db',
             'vname' => 'LBL_FILE_EXTENSION',
+            'massupdate' => false,
         ),
         'last_rev_create_date' =>
         array(
@@ -247,6 +256,7 @@ $dictionary['Document'] = array('table' => 'documents',
             'join_name' => 'document_revisions',
             'vname' => 'LBL_LAST_REV_CREATE_DATE',
             'rname' => 'date_entered',
+            'module' => 'DocumentRevisions',
             'reportable' => false,
             'source' => 'non-db'
         ),
@@ -344,6 +354,13 @@ $dictionary['Document'] = array('table' => 'documents',
             'source' => 'non-db',
             'vname' => 'LBL_PLIS_SUBPANEL_TITLE',
         ],
+        'escalations' => [
+            'name' => 'escalations',
+            'type' => 'link',
+            'relationship' => 'documents_escalations',
+            'source' => 'non-db',
+            'vname' => 'LBL_ESCALATIONS',
+        ],
         'related_doc_id' =>
         array(
             'name' => 'related_doc_id',
@@ -389,6 +406,8 @@ $dictionary['Document'] = array('table' => 'documents',
             'join_name' => 'document_revisions',
             'vname' => 'LBL_DET_RELATED_DOCUMENT_VERSION',
             'source' => 'non-db',
+            'readonly' => true,
+            'readonly_formula' => 'equal($related_doc_id, "")',
             'comment' => 'The related document version number for Meta-Data framework',
             'module' => 'DocumentRevisions', // If the module is not set, sidecar should look at the link to determine the module. This is just temp solution.
         ),
@@ -450,7 +469,8 @@ $dictionary['Document'] = array('table' => 'documents',
             'vname' => 'LBL_LINKED_ID',
             'type' => 'varchar',
             'reportable' => false,
-            'source' => 'non-db'
+            'source' => 'non-db',
+            'massupdate' => false,
         ),
         'selected_revision_id' =>
         array(
@@ -458,7 +478,8 @@ $dictionary['Document'] = array('table' => 'documents',
             'vname' => 'LBL_SELECTED_REVISION_ID',
             'type' => 'varchar',
             'reportable' => false,
-            'source' => 'non-db'
+            'source' => 'non-db',
+            'massupdate' => false,
         ),
         'latest_revision_id' =>
         array(
@@ -466,7 +487,8 @@ $dictionary['Document'] = array('table' => 'documents',
             'vname' => 'LBL_LATEST_REVISION_ID',
             'type' => 'varchar',
             'reportable' => false,
-            'source' => 'non-db'
+            'source' => 'non-db',
+            'massupdate' => false,
         ),
         'selected_revision_filename' =>
         array(
@@ -479,6 +501,7 @@ $dictionary['Document'] = array('table' => 'documents',
         'related_docs' => array(
             'name' => 'related_docs',
             'type' => 'link',
+            'link_type' => 'one',
             'relationship' => 'related_documents',
             'source' => 'non-db',
             'vname' => 'LBL_DET_RELATED_DOCUMENT',

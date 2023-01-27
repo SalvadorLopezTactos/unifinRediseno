@@ -40,9 +40,8 @@
         var url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' + serverInfo.flavor +
             '&version=' + serverInfo.version + '&lang=' + lang + '&module=' + module + '&route=' + route;
 
-        url += app.user.get('products') ?
-            '&products=' + encodeURIComponent(app.user.get('products').join(',')) :
-            '';
+        let products = app.user.getProductCodes();
+        url += products ? '&products=' + encodeURIComponent(products.join(',')) : '';
 
         return '<a href="' + url + '" target="_blank">';
     }

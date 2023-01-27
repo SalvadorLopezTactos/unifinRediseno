@@ -15,7 +15,6 @@
 <script type="text/javascript">
 	var ERR_NO_SINGLE_QUOTE = '{$APP.ERR_NO_SINGLE_QUOTE|strip}';
 	var cannotEq = "{$APP.ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP|strip}";
-{literal}
 	function verify_data(formName) {
 		var f = document.getElementById(formName);
 
@@ -33,7 +32,6 @@
 		return true;
 	}
 </script>
-{/literal}
 <BR>
 <form id="ConfigureSettings" name="ConfigureSettings" enctype='multipart/form-data' method="POST"
 	action="index.php?module=Administration&action=Locale&process=true">
@@ -52,7 +50,7 @@
 			name="save"
 			onclick="return verify_data('ConfigureSettings');"
 			value="  {$APP.LBL_SAVE_BUTTON_LABEL}  " >
-		&nbsp;<input title="{$MOD.LBL_CANCEL_BUTTON_TITLE}"  onclick="document.location.href='index.php?module=Administration&action=index'" class="button"  type="button" name="cancel" value="  {$APP.LBL_CANCEL_BUTTON_LABEL}  " > </td>
+		&nbsp;<input title="{$MOD.LBL_CANCEL_BUTTON_TITLE}"  onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} class="button"  type="button" name="cancel" value="  {$APP.LBL_CANCEL_BUTTON_LABEL}  " > </td>
 	</tr>
 </table>
 
@@ -180,7 +178,7 @@
 {/if}
 <div style="padding-top: 2px;">
 <input title="{$APP.LBL_SAVE_BUTTON_TITLE}" class="button primary"  type="submit" name="save" value="  {$APP.LBL_SAVE_BUTTON_LABEL}  " />
-		&nbsp;<input title="{$MOD.LBL_CANCEL_BUTTON_TITLE}"  onclick="document.location.href='index.php?module=Administration&action=index'" class="button"  type="button" name="cancel" value="  {$APP.LBL_CANCEL_BUTTON_LABEL}  " />
+		&nbsp;<input title="{$MOD.LBL_CANCEL_BUTTON_TITLE}"  onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} class="button"  type="button" name="cancel" value="  {$APP.LBL_CANCEL_BUTTON_LABEL}  " />
 </div>
 {$JAVASCRIPT}
 </form>

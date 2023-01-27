@@ -92,7 +92,6 @@ abstract class SugarRelationship
      * This is currently public, but should prob be made protected later.
      * See Link2->getQuery
      *
-     * @deprecated Use SugarRelationship::load() instead
      * @abstract
      *
      * @param  $link Link Object to get query for.
@@ -331,7 +330,7 @@ abstract class SugarRelationship
         $this->applyQueryBuilderFilter($builder, $table, false, true);
 
         $stmt = $builder->execute();
-        return $stmt->fetch();
+        return $stmt->fetchAssociative();
     }
 
     /**
@@ -430,7 +429,7 @@ abstract class SugarRelationship
                     $roleCheck = " AND $table.$column";
                 }
                 //role column value.
-                if (empty($value)) {
+                if (is_null($value)) {
                     $roleCheck .= ' IS NULL';
                 } else {
                     $roleCheck .= " = ".$db->quoted($value);

@@ -17,7 +17,7 @@ $viewdefs['Cases']['portal']['view']['list-bottom'] = array(
         array(
             'name' => 'create_new',
             'type' => 'navelement',
-            'icon' => 'fa-plus',
+            'icon' => 'sicon-plus',
             'label' => ' ',
             'route' =>
             array(
@@ -29,14 +29,14 @@ $viewdefs['Cases']['portal']['view']['list-bottom'] = array(
         array(
             'name' => 'show_more_button_back',
             'type' => 'navelement',
-            'icon' => 'fa-chevron-left',
+            'icon' => 'sicon-chevron-left',
             'label' => ' '
         ),
         2 =>
         array(
             'name' => 'show_more_button_forward',
             'type' => 'navelement',
-            'icon' => 'fa-chevron-right',
+            'icon' => 'sicon-chevron-right',
             'label' => ' '
         ),
     ),

@@ -51,7 +51,7 @@ class SessionListener
             if (session_id()) {
                 session_write_close();
             }
-            ini_set("session.use_cookies", false);
+            ini_set("session.use_cookies", '0');
             session_id($sessionId);
             session_start();
         }

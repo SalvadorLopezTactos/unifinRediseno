@@ -110,7 +110,7 @@ function smarty_function_sugar_field($params, &$smarty)
         $displayParams['accesskey'] = $params['accesskey'];
     }
 
-    $_contents = $sfh->displaySmarty($params['parentFieldArray'], $params['vardef'], $params['displayType'], $displayParams, $params['tabindex']);
+    $_contents = $sfh->displaySmarty($params['parentFieldArray'], $params['vardef'], $params['displayType'], $displayParams, $params['tabindex'] ?? 1);
     
     return $_contents;
 }

@@ -25,40 +25,48 @@
         {{#each ../_fields.visible}}
             <th class="{{#isSortable ../../module this}}sorting{{#eq ../../../orderBy.field name}}_{{../../../../orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
                 {{#if name}} data-fieldname="{{name}}"{{/if}} data-orderby="{{orderBy}}">
-                {{#has "ReorderableColumns" ../../plugins}}
-                {{! Insert a <div> around all the inner element of the column.
-                    This is a fix for firefox because the <th> does not support
-                    a relative positioning.}}
-                <div>
-                    <div class="th-droppable-placeholder" data-droppableindex="{{@index}}"></div>
-                    {{! Insert a <div> around the <span> containing the field label.
-                        That <div> is the draggable element.
-                        This is a fix for firefox because dragging a <th> is not
-                        supported.}}
-                    <div{{#has "ReorderableColumns" ../../../plugins}} data-draggable="true"{{/has}}>
-                {{/has}}
-                        <span>
-                            {{str label ../../module}}
-                        </span>
-                {{#has "ReorderableColumns" ../../plugins}}
-                    </div>
-                    {{#if @last}}
-                        <div class="th-droppable-placeholder th-droppable-placeholder-last" data-droppableindex="{{../../../../_fields.visible.length}}"></div>
-                    {{/if}}
+                <div class="sortable-row-header-container">
+                    {{#has "ReorderableColumns" ../../plugins}}
+                    {{! Insert a <div> around all the inner element of the column.
+                        This is a fix for firefox because the <th> does not support
+                        a relative positioning.}}
+
+                        <div class="th-droppable-placeholder" data-droppableindex="{{@index}}"></div>
+                        {{! Insert a <div> around the <span> containing the field label.
+                            That <div> is the draggable element.
+                            This is a fix for firefox because dragging a <th> is not
+                            supported.}}
+                        <div{{#has "ReorderableColumns" ../../../plugins}} data-draggable="true"{{/has}}>
+                    {{/has}}
+                    <span class="sortable-row-header-column-name">
+                        {{#if icon}}
+                            <span class="{{buildIcon icon.type}}" rel="tooltip"  title="{{str icon.tooltip ../../view.module}} "></span>
+                        {{/if}}
+                        {{str label ../../module}}
+                    </span>
+                    {{#has "ReorderableColumns" ../../plugins}}
+                        </div>
+                        {{#if @last}}
+                            <div class="th-droppable-placeholder th-droppable-placeholder-last" data-droppableindex="{{../../../../_fields.visible.length}}"></div>
+                        {{/if}}
+                    {{/has}}
+                    <span class="sortable-row-header-arrows">
+                        <span class="sicon sicon-arrow-up"></span>
+                        <span class="sicon sicon-arrow-down"></span>
+                    </span>
                 </div>
-                {{/has}}
             </th>
         {{/each}}
         {{#each ../rightColumns}}
             {{#if isColumnDropdown}}
             <th class="nosort morecol sticky-column stick-right">
                 <div class="dropdown">
-                    <button class="btn btn-invisible" data-toggle="dropdown" data-action="fields-toggle" aria-label="{{str 'LBL_COLUMNS'}}" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></button>
+                    <button class="btn btn-invisible" data-toggle="dropdown" data-action="fields-toggle" aria-label="{{str 'LBL_COLUMNS'}}" aria-haspopup="true" aria-expanded="false"><i class="sicon sicon-kebab"></i></button>
                     <ul class="dropdown-menu left carettop">
                     {{#each ../../../_fields.all}}
                         <li>
                             <button{{#if selected}} class="active"{{/if}} data-field-toggle="{{name}}">
-                                {{#if selected}}<i class="fa fa-check"></i> {{/if}}{{str label ../../../../module}}
+                                {{#if selected}}<i class="sicon sicon-check"></i> {{/if}}{{str label ../../../../module}}
                             </button>
                         </li>
                     {{/each}}

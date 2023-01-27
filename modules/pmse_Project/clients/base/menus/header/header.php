@@ -19,20 +19,20 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' => 'LNK_NEW_PMSE_PROJECT',
         'acl_action' => 'create',
         'acl_module' => $moduleName,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
     ),
     array(
         'route' => "#$moduleName",
         'label' => 'LNK_LIST',
         'acl_action' => 'list',
         'acl_module' => $moduleName,
-        'icon' => 'fa-bars',
+        'icon' => 'sicon-list-view',
     ),
     array(
         'route'=>'#'.$moduleName.'/layout/project-import',
         'label' =>'LNK_IMPORT_PMSE_PROJECT',
         'acl_action'=>'import',
         'acl_module'=>$moduleName,
-        'icon' => 'fa-arrow-circle-o-up',
+        'icon' => 'sicon-upload',
     ),
 );

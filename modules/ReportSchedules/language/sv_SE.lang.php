@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Detta rapportschema',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Instrumentpanel för rapportschemaposter',
+    'LBL_FILE_TYPE' => 'Filtyp(er)',
 );

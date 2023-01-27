@@ -169,7 +169,7 @@ echo '<tr>
 				</td>
 				<td valign="top">
 					<div id="sf_deletedFoldersList" style="display:none;">
-					'.$deletedFoldersList.'
+					'. htmlspecialchars($deletedFoldersList).'
 					</div>
 				</td>
 			</tr>
@@ -254,7 +254,7 @@ echo '
 		if(typeof(document.getElementById("sf_msg")) != "undefined") {
 			document.getElementById("sf_msg").innerHTML = "'.$msg.'";
 			var deletedFoldersList = document.getElementById("sf_deletedFoldersList");
-			deletedFoldersList.innerHTML = "'. $deletedFoldersList .'";
+			deletedFoldersList.textContent = "'. $deletedFoldersList .'";
 			if (deletedFoldersList.innerHTML.length > 0) {
 				deletedFoldersList.style.display = "";
 			} // if

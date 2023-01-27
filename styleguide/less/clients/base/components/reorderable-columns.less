@@ -8,25 +8,28 @@ table.reorderable-columns {
 
     /* Disable table.dataTable th > *   */
     > div {
-      position: relative;
-      display: block;
       overflow-x: visible;
       white-space: normal;
       word-break: normal;
       vertical-align: middle;
       text-overflow: initial;
-      padding: 0;
       box-sizing: border-box;
+      width: 100%;
       width: calc(~"100% - 16px");
       margin-left: 8px;
 
       > div {
         &[data-draggable="true"] {
-          padding: 8px 8px 8px 0;
+          display: flex;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          padding-left: 0;
+          width: 100%;
 
           /* Column being dragged */
           &.ui-draggable-dragging {
-            background-color: @white;
+            background-color: @primaryContentHover;
+            color: @textColor;
             z-index: 1;
             cursor: ew-resize;
           }
@@ -42,7 +45,6 @@ table.reorderable-columns {
           white-space: nowrap;
           vertical-align: middle;
           text-overflow: ellipsis;
-          padding-right: 10px;
         }
       }
     }
@@ -62,7 +64,7 @@ table.reorderable-columns {
 
       &::before,
       &::after {
-        font-family: FontAwesome;
+        font-family: 'SugarIcons';
         -webkit-font-smoothing: antialiased;
         font-size: 14px;
         line-height: 6px;
@@ -71,13 +73,13 @@ table.reorderable-columns {
         top: 17px;
         right: 4px;
         float: right;
-        content: "\f0da";
+        content: @sicon-chevron-right;
         font-weight: normal;
       }
 
       &::after {
         left: 4px;
-        content: "\f0d9";
+        content: @sicon-chevron-left;
       }
     }
 

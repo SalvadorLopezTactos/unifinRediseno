@@ -45,13 +45,6 @@ $dictionary['prospects_dataprivacy'] = array(
             ),
         ),
         array(
-            'name' => 'idx_prospect_dataprivacy_prospect',
-            'type' => 'index',
-            'fields' => array(
-                'prospect_id',
-            ),
-        ),
-        array(
             'name' => 'idx_prospect_dataprivacy_dataprivacy',
             'type' => 'index',
             'fields' => array(

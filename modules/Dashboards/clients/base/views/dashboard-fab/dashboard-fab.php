@@ -11,24 +11,31 @@
  */
 
 $viewdefs['Dashboards']['base']['view']['dashboard-fab'] = [
-    'icon' => 'fab-icon',
+    'icon' => 'sicon-hamburger-lg',
     'buttons' => [
         [
             'name' => 'add_button',
             'type' => 'rowaction',
-            'icon' => 'new-dashboard-icon',
+            'icon' => 'sicon-dashboard-lg',
             'label' => 'LBL_DASHBOARD_CREATE',
             'showOn' => 'view',
             'disallowed_layouts' => [
                 [
                     'name' => 'dashboard', // omnichannel-console-config
                     'id' => '32bc5cd0-b1a0-11ea-ad16-f45c898a3ce7',
+                ], [
+                    'name' => 'dashboard', // Portal preview dashboard
+                    'id' => '0ca2d773-0bb3-4bf3-ae43-68569968af57',
+                ],
+                [
+                    'name' => 'dashboard', // service console case
+                    'id' => 'c290ef46-7606-11e9-9129-f218983a1c3e',
                 ],
             ],
         ], [
             'name' => 'edit_module_tabs_button',
             'type' => 'rowaction',
-            'icon' => 'edit-icon',
+            'icon' => 'sicon-edit-lg',
             'label' => 'LBL_EDIT_MODULE_TABS_BUTTON',
             'acl_action' => 'edit',
             'showOn' => 'view',
@@ -44,7 +51,7 @@ $viewdefs['Dashboards']['base']['view']['dashboard-fab'] = [
         ], [
             'name' => 'duplicate_button',
             'type' => 'rowaction',
-            'icon' => 'duplicate-dashboard-icon',
+            'icon' => 'sicon-copy-lg',
             'label' => 'LBL_DASHBOARD_DUPLICATE',
             'acl_module' => 'Dashboards',
             'acl_action' => 'create',
@@ -59,12 +66,19 @@ $viewdefs['Dashboards']['base']['view']['dashboard-fab'] = [
                 ], [
                     'name' => 'dashboard', // omnichannel-console-config
                     'id' => '32bc5cd0-b1a0-11ea-ad16-f45c898a3ce7',
+                ], [
+                    'name' => 'dashboard', // Portal preview dashboard
+                    'id' => '0ca2d773-0bb3-4bf3-ae43-68569968af57',
+                ],
+                [
+                    'name' => 'dashboard', // service console case
+                    'id' => 'c290ef46-7606-11e9-9129-f218983a1c3e',
                 ],
             ],
         ], [
             'name' => 'delete_button',
             'type' => 'rowaction',
-            'icon' => 'delete-dashboard',
+            'icon' => 'sicon-trash-lg',
             'label' => 'LBL_DASHBOARD_DELETE',
             'acl_action' => 'delete',
             'showOn' => 'view',
@@ -78,12 +92,19 @@ $viewdefs['Dashboards']['base']['view']['dashboard-fab'] = [
                 ], [
                     'name' => 'dashboard', // omnichannel-console-config
                     'id' => '32bc5cd0-b1a0-11ea-ad16-f45c898a3ce7',
+                ], [
+                    'name' => 'dashboard', // Portal preview dashboard
+                    'id' => '0ca2d773-0bb3-4bf3-ae43-68569968af57',
+                ],
+                [
+                    'name' => 'dashboard', // service console case
+                    'id' => 'c290ef46-7606-11e9-9129-f218983a1c3e',
                 ],
             ],
         ], [
             'name' => 'collapse_button',
             'type' => 'rowaction',
-            'icon' => 'collapse-dashlets',
+            'icon' => 'sicon-collapse-lg',
             'label' => 'LBL_DASHLET_MINIMIZE_ALL',
             'showOn' => 'view',
             'disallowed_layouts' => [
@@ -96,12 +117,19 @@ $viewdefs['Dashboards']['base']['view']['dashboard-fab'] = [
                 ], [
                     'name' => 'dashboard', // omnichannel-console-config
                     'id' => '32bc5cd0-b1a0-11ea-ad16-f45c898a3ce7',
+                ], [
+                    'name' => 'dashboard', // Portal preview dashboard
+                    'id' => '0ca2d773-0bb3-4bf3-ae43-68569968af57',
+                ],
+                [
+                    'name' => 'dashboard', // service console case
+                    'id' => 'c290ef46-7606-11e9-9129-f218983a1c3e',
                 ],
             ],
         ], [
             'name' => 'expand_button',
             'type' => 'rowaction',
-            'icon' => 'expand-dashlets',
+            'icon' => 'sicon-expand-lg',
             'label' => 'LBL_DASHLET_MAXIMIZE_ALL',
             'showOn' => 'view',
             'disallowed_layouts' => [
@@ -114,12 +142,19 @@ $viewdefs['Dashboards']['base']['view']['dashboard-fab'] = [
                 ], [
                     'name' => 'dashboard', // omnichannel-console-config
                     'id' => '32bc5cd0-b1a0-11ea-ad16-f45c898a3ce7',
+                ], [
+                    'name' => 'dashboard', // Portal preview dashboard
+                    'id' => '0ca2d773-0bb3-4bf3-ae43-68569968af57',
+                ],
+                [
+                    'name' => 'dashboard', // service console case
+                    'id' => 'c290ef46-7606-11e9-9129-f218983a1c3e',
                 ],
             ],
         ], [
             'name' => 'restore_tab_button',
             'type' => 'rowaction',
-            'icon' => 'restore-icon',
+            'icon' => 'sicon-reset-lg',
             'label' => 'LBL_RESTORE_TAB_DEFAULT',
             'showOn' => 'view',
             'allowed_layouts' => [
@@ -129,9 +164,21 @@ $viewdefs['Dashboards']['base']['view']['dashboard-fab'] = [
                 ],
             ],
         ], [
+            'name' => 'restore_dashlets_button',
+            'type' => 'rowaction',
+            'icon' => 'sicon-refresh',
+            'label' => 'LBL_RESTORE_DEFAULT_DASHLETS',
+            'showOn' => 'view',
+            'allowed_layouts' => [
+                [
+                    'name' => 'dashboard', // Portal preview dashboard
+                    'id' => '0ca2d773-0bb3-4bf3-ae43-68569968af57',
+                ],
+            ]
+        ],[
             'name' => 'configure_summary_button',
             'type' => 'rowaction',
-            'icon' => 'edit-icon',
+            'icon' => 'sicon-edit-lg',
             'label' => 'LBL_CONFIGURE_SUMMARY_PANEL',
             'showOn' => 'view',
             'allowed_layouts' => [
@@ -143,7 +190,7 @@ $viewdefs['Dashboards']['base']['view']['dashboard-fab'] = [
         ], [
             'name' => 'add_dashlet_button',
             'type' => 'rowaction',
-            'icon' => 'add-dashlet-icon',
+            'icon' => 'sicon-add-dashlet-lg',
             'label' => 'LBL_ADD_DASHLET_BUTTON',
             'events' => [
                 'click' => 'button:add_dashlet_button:click',

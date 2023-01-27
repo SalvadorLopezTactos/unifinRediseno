@@ -18,12 +18,12 @@
       border: 0 none;
       background-image: none;
       background-color: transparent;
+      color: @textColor;
       box-shadow: none;
       padding-left: 0;
       //this is the font and text
       span {
         font-size: @fontSizeLarge;
-        line-height: 28px;
       }
     }
 
@@ -41,19 +41,10 @@
     width: 130px;
   }
 
-  h2 {
-    padding: 0 !important;
-    margin: 0;
-    font-size: @fontSizeLarge;
-    line-height: 28px;
-    display: inline-block;
-    margin-right: 0;
-  }
-
   hr {
     margin: 8px 0 -1px;
     padding: 0;
-    border-top: 2px solid @grayLight;
+    border-top: 2px solid @gray70;
   }
 
   table {
@@ -78,22 +69,11 @@
 
     div.pull-right .info:last-child .datapoint {
       border-right: 0;
-      padding-right: 0;
-      padding-left: 10px;
-    }
-
-    div.pull-right .info:nth-last-of-type(2) .datapoint {
-      padding-left: 10px;
     }
   }
 
   .datapoint {
-    float: left;
-    padding-top: 35px;
-    padding-bottom: 5px;
-    padding-right: 10px;
     min-width: 120px;
-    border-right: @borderWidgetLight;
   }
 
   .datapoint1 {
@@ -113,7 +93,7 @@
     position: absolute;
     overflow: hidden;
     top: 57px;
-    color: lighten(@gray, 20%) !important;
+    color: @gray60;
 
     .datapoint1,
     .datapoint2 {
@@ -167,21 +147,15 @@
     padding: 0;
   }
 
-  .fa.committed_arrow {
-    line-height: 28px;
-    float: left;
-    margin-right: 8px;
-  }
-
   .span4 {
-    margin-left: 2% !important;
+    margin-left: 1rem;
     width: 29.914893614%;
     padding: 10px 10px 0 0;
 
     &::before {
       width: 6px;
       background-color: @blue;
-      height: 80px;
+      height: 74px;
       left: 5px;
       content: "";
       top: 3px;
@@ -191,7 +165,6 @@
 
   .span8 {
     width: 63.957447%;
-    margin-right: 2%;
   }
 
   .span12 {
@@ -209,12 +182,14 @@
 
 .topline,
 .info .results.extend {
-  .fa-arrow-down::before {
-    color: @red;
-  }
+  .sicon {
+    &.font-green {
+      color: @green;
+    }
 
-  .fa-arrow-up::before {
-    color: @green;
+    &.font-red {
+      color: @red;
+    }
   }
 }
 
@@ -222,8 +197,8 @@
   article:nth-child(even),
   article:nth-child(odd) {
     background-color: transparent;
-    border-top: 1px solid lighten(@grayDarker, 15%);
-    border-bottom-color: @grayDarker;
+    border-top: 1px solid @gray70;
+    border-bottom-color: @gray90;
     padding: 10px 20px;
   }
 }
@@ -231,14 +206,13 @@
 .info {
   .results.extend {
     max-height: 118px;
-    overflow-y: scroll;
-    background-color: darken(@gray, 10%);
-    background-color: darken(@gray, 15%) e("\9");
+    background-color: @gray70;
+    background-color: @gray80 e("\9");
     background-image: none;
-    color: @grayLighter !important;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+    color: @gray30;
+    text-shadow: 0 1px 1px @gray80;
     outline: 0;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 1px 3px @gray70;
     position: relative;
     margin: 0;
     padding: 0;
@@ -252,21 +226,15 @@
   .last-commit {
     .datapoint {
       float: left;
-      padding: 8px 7px 8px 0;
       min-width: 120px;
-      border-right: @borderWidgetLight;
       text-align: right;
-    }
 
-    .datapoint:last-child {
-      border-right: 0;
-      padding-right: 0;
+      &:first-child {
+        .border-l-0();
+      }
     }
 
     .span8 {
-      width: 63.957447%;
-      margin-right: 2%;
-      margin-left: 2%;
       float: right;
     }
 
@@ -298,7 +266,7 @@
 }
 
 .topline-timeperiod-dropdown {
-  border: 1px solid @grayLight;
+  border: @borderWidget;
   width: auto;
   margin-top: 5px;
 

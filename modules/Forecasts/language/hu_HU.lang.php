@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Leírás',
     'LBL_OW_TYPE'=>'Típus',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Csapat előrejelzés a következőnek: <span class="sicon sicon-user-group mx-1"></span>{{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Közvetlen riport',
     'LBL_FDR_OPPORTUNITIES'=>'Lehetőségek az előrejelzésben:',
     'LBL_FDR_WEIGH'=>'Súlyozott összeg a lehetőségekből:',
     'LBL_FDR_COMMIT'=>'Elkötelezett összeg',
     'LBL_FDR_DATE_COMMIT'=>'Elkötelezés időpontja',
+    'LBL_FDR_FORECAST_HEADER' => 'Eladó előrejelzés a következőnek: <span class="sicon sicon-user mx-1"></span>{{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Előrejelzés: Munkalap',
     'LBL_DV_MY_FORECASTS' => 'Előrejelzéseim',
-    'LBL_DV_MY_TEAM' => "Csoportom előrejelzései" ,
+    'LBL_DV_MY_TEAM' => "Csoportom előrejelzései",
     'LBL_DV_TIMEPERIODS' => 'Időszakok:',
     'LBL_DV_FORECAST_PERIOD' => 'Előrejelzés időszaka',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Lehetőségek előrejelzése',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Alap árfolyam',
 
     'LBL_QUOTA' => 'Előírás',
-    'LBL_QUOTA_ADJUSTED' => 'Kvóta (korrigált)',
+    'LBL_QUOTA_ADJUSTED' => 'Igazított kvóta',
 
     'LBL_FORECAST_FOR'=>'Előrejelzés munkalap a:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Összegzés)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Előírás vs. Elkötelezett vs. Tényleges',
 
     'LBL_FORECAST' => 'Előrejelzés',
+    'LBL_COMMITMENT' => 'Elkötelezettség',
+    'LBL_TEAM_COMMITMENT' => 'Csapat elkötelezettség',
+    'LBL_FORECASTED' => 'Előrejelezve',
+    'LBL_ADJUSTED_TOTAL' => 'Igazított összeg',
     'LBL_COMMIT_STAGE' => 'Elköteleződés szintje',
     'LBL_SALES_STAGE' => 'Szint',
     'LBL_AMOUNT' => 'Összeg',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, és {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'valószínű {{{direction}}} {{{from}}} ezzé: {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'legjobb {{{direction}}} {{{from}}} ezzé: {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'legrosszabb {{{direction}}} {{{from}}} ezzé: {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'a valószínű változatlan maradt',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'a legjobb változatlan maradt',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'a legrosszabb változatlan maradt',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Elkötelezett (valószínű) {{{direction}}} {{{from}}}-tól {{{to}}}-ig',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Elkötelezett (legjobb) {{{direction}}} {{{from}}}-tól {{{to}}}-ig',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Elkötelezett (legrosszabb) {{{direction}}} {{{from}}}-tól {{{to}}}-ig',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Elkötelezett (valószínű) nem változott',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Elkötelezett (legjobb) nem változtott',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Elkötelezett (legrosszabb) nem változtott',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'E hónapban ekkor: {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Megjelenített Összeg',
     'LBL_TOTAL' => 'Összesen',
     'LBL_OVERALL_TOTAL' => 'Mindösszesen',
-    'LBL_EDITABLE_INVALID' => 'Érvénytelen adat itt: {0}',
+    'LBL_EDITABLE_INVALID' => 'Érvénytelen érték itt: {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Az értéknek az alábbi határokon belül kell mozognia: {0} és {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Nem mentett változások szerepelnek a munkalapján.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Ügyeljen rá, hogy csak a mentett, vagy hozzárendelt adatok exportálhatók. Kattintson az OK gombra az exportálás folytatásához, vagy a Mégsem gomb megnyomásával térjen vissza munkalapjához!',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Beleértve',
     'LBL_CHART_NOT_INCLUDED' => 'Kihagyva',
     'LBL_CHART_ADJUSTED' => '(korrigált)',
-    'LBL_SAVE_DRAFT' => 'Piszkozat mentése',
+    'LBL_SAVE_DRAFT' => 'Mentés',
     'LBL_CHANGES_BY' => 'Változások itt: {0}',
     'LBL_FORECAST_SETTINGS' => 'Beállítások',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Üzleti év kezdő dátuma:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Állítsa be az időszakot, amivel az Előrejelzések modul dolgozni fog!<br /><br />Első lépésként adja meg az üzleti év első napját! Ezt követően válassza ki, mely időszakot kíván vizsgálni a jövőben! A kiválasztott időszaki bontást a rendszer automatikusan hozzáigazítja a kezdő dátumhoz.<br /><br />A megtekinthető jövőbeni és elmúlt időszakok száma meghatározza, hogy hány alperiódust jelenít meg az Előrejelzések modul. Ezt a felhasználók később szerkeszthetik.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Állítsa be, hogy miként szeretné csoportosítani a következőt: {{forecastByModule}}. <br><br>Kérjük, ne feledje, hogy a Range beállításai az első jóváhagyást követően nem megváltoztathatók. A továbbfejlesztett munkamenetek érdekében a Range beállítása zárolva lesz a meglévő előrejelzésekhez.<br><br>Kiválaszthat két vagy több kategóriát a valószínűségtartomány alapján vagy létrehozhat olyan új kategóriákat, amelyek nem a valószínűségtartományra alapulnak.<br><br>Az egyedi kategóriái mellett bal oldalon jelölőnégyzeteket talál; használja ezeket annak eldöntéséhez, hogy mely tartományokat szeretné belefoglalni a felhasznált előrejelzési mennyiségbe és jelenteni a vezetőknek.<br><br>Egy felhasználó kézileg megváltoztathatja a(z) {{forecastByModule}} kategóriák belefoglalt/kihagyott állapotát a munkalapján.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Állítsa be, hogyan szeretné testre szabni a következőt: {{forecastByModule}}.<br><br>Kérjük, ne feledje, hogy a tartományt nem lehet módosítani az első elkötelezés után. A frissített munkamenetek esetén a tartománybeállítások a meglévő előrejelzési adatokhoz vannak kötve.<br><br>Kiválaszthat két vagy több kategóriát a valószínűségtartományok alapján vagy kiválaszthat kategóriákat, amelyek nem a valószínűségen alapulnak. <br><br>Az egyedi kategóriák bal oldalán jelölőnégyzetrek találhatóak; használja ezeket annak eldöntéséhez, hogy mely kategóriák szerepeljenek az elkötelezett előrejelzési mennyiségben és legyenek jelentve a vezetőknek. <br><br>Egy felhasználó megváltoztathatja a {{forecastByModule}} kategóriáját és befoglalás/kizárás állapotát kézileg a saját munkalapjáról.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Adja meg, a felhasználóknak mely oszlopokat kell majd kitölteniük lehetőségeik előrejelzése során! Vegye figyelembe, hogy a "valószínű összeg" kapcsolódik a Lehetőség változójához, így azt az oszlopot nem lehet elrejteni.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Adja meg, mely oszlopokat kíván megjeleníteni az Előrejelzések modulban! A mezők listája tartalmazza majd a munkalapot és a felhasználók módosíthatják a nézet beállításait.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ez egy helykitöltő mintaszöveg!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Ennyivel túllépve:',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Nincs adat',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Találkozó kvóta',
+    'LBL_OPEN_LIKELY' => 'Nyitott valószínű',
+    'LBL_OPEN_BEST' => 'Nyitott legjobb',
+    'LBL_OPEN_WORST' => 'Nyitott legrosszabb',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Kvóták kiosztása',
     'LBL_ASSIGNING_QUOTA' => 'Kvóták kiosztása',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Csoportom előrejelzései",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Nem mentett változtatások szerepelnek az oldalon. Biztos benne, hogy elhagyja a munkalapot?',
+
+    'LBL_SAVE_TOOLTIP' => 'Változtatások mentése a munkalap soraiba',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Változtatások mentése a rekordba és előrejelzés küldése a vezetőnek',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Előrejelzés küldése a vezetőnek és kvóta hozzárendelése',
+
+    'LBL_SAVE_LABEL_REP' => 'Mentés ',
+    'LBL_SAVE_LABEL_MGR' => 'Módosított értékek mentése',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'A {{plural_module_name}} modul {{opportunities_singular_module}} adatokat tartalmaz a {{module_name}} elnevezés {{worksheet_module}} modulok létrehozásához és eladások előrejelzéséhez. A felhasználók eladási kvótákat hozhatnak létre az egyedi csoportokban és az eladási szervezet szintjén. Mielőtt a felhasználók el tudják érni a {{plural_module_name}} modult, hogy elkezdhessék létrehozni a {{module_name}} elnevezés {{worksheet_module}} modulokat, egy adminisztrátori jogosultságokkal rendelkező felhasználónak konfigurálnia kell a {{plural_module_name}} modult a szervezet kívánt idő intervallumaival, hatásköveivel és forgatókönyveivel. Az üzletkötők a {{plural_module_name}} modult arra használják, hogy folymatosan dolgozzanak a részükre kiosztott {{opportunities_module}} modulokkal. Ezek a felhasználók teljeskörű előrejelzéseket fognak  készíteni a személyes eladásaikra vonatkozóan a {{opportunities_module}} modult alapul véve, amit bezárni szándékoznak. Az üzletvezetők a saját {{opportunities_singular_module}} adataikkal dolgoznak, hasonlóan az üzletkötőkhöz. Ezenkívűl összesítik a nekik jelentett {{module_name}} összegeket, hogy előrejelzést tudjanak készíteni a teljes csoportjuk eladásairól, és hogy minden időszakra igyekezzenek elérni a csoport részére előírt kvótákat. További betekintést kínálnak a bővíthető információs táblák elemei, melyek elemzéseket tartalmaznak az egyes dolgozók {{opportunities_module}} és a vezető csoportjának munkalapjaira vonatkozóan.'

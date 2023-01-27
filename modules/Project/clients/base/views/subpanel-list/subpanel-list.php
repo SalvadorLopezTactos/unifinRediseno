@@ -51,7 +51,7 @@ $viewdefs['Project']['base']['view']['subpanel-list'] = array(
             array(
                 'type' => 'rowaction',
                 'name' => 'edit_button',
-                'icon' => 'fa-pencil',
+                'icon' => 'sicon-edit',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',
@@ -59,7 +59,7 @@ $viewdefs['Project']['base']['view']['subpanel-list'] = array(
             array(
                 'type' => 'unlink-action',
                 'name' => 'unlink_button',
-                'icon' => 'fa-chain-broken',
+                'icon' => 'sicon-unlink',
                 'label' => 'LBL_UNLINK_BUTTON',
             ),
         ),

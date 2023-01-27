@@ -1,6 +1,6 @@
 // Setting widths for filter row fields
 .console-config .row-fluid div {
-  width: 28%;
+  min-width: 120px;
   display: inline-block;
 }
 
@@ -36,10 +36,10 @@
 }
 
 .console-config-fields .bordered {
-  border: 1px solid @grayLightish;
+  border: 1px solid @gray60;
   cursor: pointer;
   padding: 5px;
-  color: #176de5;
+  color: @blue;
   border-radius: 5px;
 }
 
@@ -50,12 +50,12 @@
 }
 
 .multi-line-list-view {
-  height: 100%;
   overflow: auto;
+  flex: 1;
 
   &.console-preview {
     .multi-line-table {
-      border: 1px solid @tableTheadRowBorderColor;
+      border: @borderWidget;
       width: 30%;
 
       th,
@@ -67,7 +67,7 @@
       }
 
       tbody tr:not(:last-child) {
-        border-bottom: 1px solid @tableTheadRowBorderColor;
+        border-bottom: @borderWidget;
       }
 
       .cell-bar--long,
@@ -75,7 +75,7 @@
         border-radius: 4px;
         height: 10px;
         margin: 6px 0;
-        background-color: @grayMid;
+        background-color: @configPillBackground;
       }
 
       .cell-bar--long {
@@ -89,19 +89,134 @@
   }
 }
 
+.agent_workbench_dashboard,
+.console_dashboard {
+  .multi-line-list-view {
+    background: @contentBackground;
+
+    .dataTable {
+      &.table-striped.sticky-first-column {
+        thead {
+          tr {
+            th[data-fieldname]:not(.stick-left) {
+              &:nth-child(2) {
+                .sticky();
+
+                left: @multiLineFirstColumnLeft;
+                z-index: 10;
+
+                &.column-border::after {
+                  .h-full();
+                  .absolute();
+
+                  content: '';
+                  width: 1px;
+                  background-color: @borderColor;
+                  min-width: 1px;
+                  max-width: 1px;
+                  border-right: none;
+                  top: 0;
+                  bottom: 0;
+                  right: -1px;
+                }
+              }
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            td:nth-child(2) {
+              .sticky();
+
+              left: @multiLineFirstColumnLeft;
+              z-index: 10;
+              overflow: visible;
+
+              &.column-border::after {
+                .absolute();
+
+                content: '';
+                width: 1px;
+                background-color: @borderColor;
+                min-width: 1px;
+                max-width: 1px;
+                top: 0;
+                bottom: 0;
+                right: -1px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    td.left-column .fieldset.btn-group {
+      .static();
+    }
+
+    &.frozen-list-headers {
+      thead {
+        .sticky();
+
+        top: 0;
+        z-index: 12;
+      }
+    }
+
+    thead {
+      .left-column {
+        .sticky();
+
+        left: 0;
+        z-index: 12;
+        height: 28px;
+        min-width: 38px;
+      }
+    }
+
+    tbody .left-column {
+      .sticky();
+
+      left: 0;
+      border-top: @borderWidget;
+      height: 44px;
+
+      &:focus-within {
+        z-index: 11;
+      }
+
+      .dropdown-menu {
+        left: 9px;
+        top: 34px;
+      }
+
+      .dropup {
+        .dropdown-menu {
+          top: auto;
+        }
+      }
+    }
+  }
+}
+
 .console-config-instructions {
-  background-color: fade(@lightPacific, 20%);
-  color: @darkTeal;
+  background-color: @secondaryContentBackground;
+  color: @infoText;
   padding: 20px;
 
   ul {
     margin-left: 15px;
     margin-bottom: 0;
+
+    li.unstyled {
+      list-style: none;
+    }
   }
 
   a {
     text-decoration: underline;
     font-weight: bold;
-    color: @darkTeal;
+    color: @infoText;
   }
 }

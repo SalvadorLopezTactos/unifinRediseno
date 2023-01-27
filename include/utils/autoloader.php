@@ -140,7 +140,6 @@ class SugarAutoLoader
         'portal',
         'vendor/HTMLPurifier',
         'vendor/ytree',
-        'vendor/nusoap',
         'vendor/bin',
     );
 
@@ -559,6 +558,10 @@ class SugarAutoLoader
      */
     public static function requireWithCustom($file, $both = false)
     {
+        if (!check_file_name($file)) {
+            return false;
+        }
+
         if (file_exists("custom/$file")) {
             if($both) {
                 // when loading both, core file goes first so custom can override it

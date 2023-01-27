@@ -55,7 +55,7 @@ $viewdefs['Users']['base']['view']['subpanel-for-reportschedules'] = array(
         'actions' => array(
             array(
                 'type' => 'unlink-action',
-                'icon' => 'fa-chain-broken',
+                'icon' => 'sicon-unlink',
                 'label' => 'LBL_UNLINK_BUTTON',
             ),
         ),

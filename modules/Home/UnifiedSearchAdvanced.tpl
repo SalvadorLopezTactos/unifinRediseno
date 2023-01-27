@@ -21,8 +21,8 @@
 
 <table border="0" class="actionsContainer">
 <tr><td>
-<input title="{$APP.LBL_SAVE_BUTTON_LABEL}" accessKey="{$APP.LBL_SAVE_BUTTON_TITLE}" type="submit" class="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">
-<input title="{$APP.LBL_CANCEL_BUTTON_LABEL}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="document.UnifiedSearchAdvanced.action.value='index'; document.UnifiedSearchAdvanced.module.value='Administration';" type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+<input title="{$APP.LBL_SAVE_BUTTON_LABEL|escape:'html':'UTF-8'}" accessKey="{$APP.LBL_SAVE_BUTTON_TITLE|escape:'html':'UTF-8'}" type="submit" class="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL|escape:'html':'UTF-8'}">
+<input title="{$APP.LBL_CANCEL_BUTTON_LABEL|escape:'html':'UTF-8'}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY|escape:'html':'UTF-8'}" class="button" onclick="document.UnifiedSearchAdvanced.action.value='index'; document.UnifiedSearchAdvanced.module.value='Administration';" type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL|escape:'html':'UTF-8'}">
 </td></tr>
 </table>
 
@@ -32,9 +32,9 @@
 	<tr style='padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px'>
 {/if}
 	<td width='1' style='border: none; padding: 0px 10px 0px 0px; margin: 0px 0px 0px 0px'>
-		<input class='checkbox' id='cb_{$module}' type='checkbox' name='search_mod_{$module}' value='true' {if $info.checked}checked{/if}>
+		<input class="checkbox" id="cb_{$module|escape:'html':'UTF-8'}" type="checkbox" name="search_mod_{$module|escape:'html':'UTF-8'}" value="true" {if $info.checked}checked{/if}>
 	</td>
-	<td style='border: none; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px; cursor: hand; cursor: pointer' onclick="document.getElementById('cb_{$module}').checked = !document.getElementById('cb_{$module}').checked;">
+	<td style='border: none; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px; cursor: hand; cursor: pointer' onclick="document.getElementById('cb_{$module|escape:javascript}').checked = !document.getElementById('cb_{$module|escape:javascript}').checked;">
 		{$info.translated}
 	</td>
 {if $smarty.foreach.m.index % 2 == 1}
@@ -46,8 +46,8 @@
 
 <table border="0" class="actionsContainer">
 <tr><td>
-<input title="{$APP.LBL_SAVE_BUTTON_LABEL}" accessKey="{$APP.LBL_SAVE_BUTTON_TITLE}" type="submit" class="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">
-<input title="{$APP.LBL_CANCEL_BUTTON_LABEL}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="document.UnifiedSearchAdvanced.action.value='index'; document.UnifiedSearchAdvanced.module.value='Administration';" type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+<input title="{$APP.LBL_SAVE_BUTTON_LABEL|escape:'html':'UTF-8'}" accessKey="{$APP.LBL_SAVE_BUTTON_TITLE|escape:'html':'UTF-8'}" type="submit" class="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL|escape:'html':'UTF-8'}">
+<input title="{$APP.LBL_CANCEL_BUTTON_LABEL|escape:'html':'UTF-8'}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY|escape:'html':'UTF-8'}" class="button" onclick="document.UnifiedSearchAdvanced.action.value='index'; document.UnifiedSearchAdvanced.module.value='Administration';" type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL|escape:'html':'UTF-8'}">
 </td></tr>
 </table>
 </form>

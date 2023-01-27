@@ -14,7 +14,6 @@
 {sugar_getscript file="modules/Calendar/Cal.js"}
 <script type="text/javascript">
 
-	{literal}
 	YAHOO.util.Event.onDOMReady(function(){
 		dom_loaded = true;
 	});
@@ -22,9 +21,9 @@
 	function check_cal_loaded(){
 		return (typeof cal_loaded != 'undefined' && cal_loaded == true && typeof dom_loaded != 'undefined' && dom_loaded == true);
 	}
-	{/literal}
 	
-	SUGAR.util.doWhen(check_cal_loaded, function(){literal}{{/literal}
+
+	SUGAR.util.doWhen(check_cal_loaded, function(){
 	
 		CAL.view = "{$view|escape:'javascript':'UTF-8'}";
 		CAL.style = "{$style|escape:'javascript':'UTF-8'}";
@@ -36,7 +35,7 @@
 		CAL.items_draggable = "{$items_draggable|escape:'javascript':'UTF-8'}";
 		CAL.items_resizable = "{$items_resizable|escape:'javascript':'UTF-8'}";
 		CAL.cells_per_day = {$cells_per_day|escape:'javascript':'UTF-8'};
-		CAL.current_params = {literal}{}{/literal};
+		CAL.current_params = {};
 		CAL.grid_start_ts = {$grid_start_ts|escape:'javascript':'UTF-8'};
 		CAL.scroll_slot = {$scroll_slot|escape:'javascript':'UTF-8'};
 		CAL.basic.min_height = {$basic_min_height|escape:'javascript':'UTF-8'};
@@ -61,7 +60,7 @@
 
 		CAL.print = {$isPrint|escape:'javascript':'UTF-8'};
 		
-		{literal}
+
 		var scrollable = CAL.get("cal-scrollable");
 		if(scrollable){
 
@@ -76,7 +75,7 @@
                 scrollable.scrollTop++;
             }
 		}
-		{/literal}			
+
 
 		{if $view == "shared"}
 			{counter name="un" start=0 print=false assign="un"}
@@ -102,7 +101,7 @@
 		CAL.act_types['Calls'] = 'call';
 		CAL.act_types['Tasks'] = 'task';
 
-		{literal}
+
 
 		if(CAL.items_draggable){			
 			var target_slots = [];			
@@ -144,8 +143,8 @@
 		});				
 		
 		CAL.init_edit_dialog({
-			width: "{/literal}{$editview_width|escape:'javascript':'UTF-8'}{literal}",
-			height: "{/literal}{$editview_height|escape:'javascript':'UTF-8'}{literal}"
+			width: "{$editview_width|escape:'javascript':'UTF-8'}",
+			height: "{$editview_height|escape:'javascript':'UTF-8'}"
 		});
 		
 		YAHOO.util.Event.on(window, 'resize', function(){
@@ -195,15 +194,15 @@
 			CAL.get("form_settings").submit();
 		});
 		
-		{/literal}
+
 				
 		var calendar_items = {$a_str};
 					
-		{literal}
+
 		CAL.each(calendar_items, function(i,v){
 			CAL.add_item_to_grid(calendar_items[i]);
 		});
-		{/literal}
+
 		
 		{if $view != "year"}
 		CAL.arrange_advanced();
@@ -259,7 +258,7 @@
 </script>
 	
 <script type="text/javascript">	
-{literal}
+
 YAHOO.util.Event.onDOMReady(function(){	
 	var schedulerLoader = new YAHOO.util.YUILoader({
 		require : ["jsclass_scheduler"],
@@ -272,38 +271,38 @@ YAHOO.util.Event.onDOMReady(function(){
 	schedulerLoader.addModule({
 		name :"jsclass_scheduler",
 		type : "js",
-{/literal}
+
 		fullpath: "{sugar_getjspath file='modules/Meetings/jsclass_scheduler.js'}",
-{literal}
+
 		varName: "global_rpcClient",
 		requires: []
 	});
 	schedulerLoader.insert();
 });	
-{/literal}	
+
 </script>
 	
 <script type="text/javascript" src="{sugar_getjspath file='include/javascript/jsclass_base.js'}"></script>
 <script type="text/javascript" src="{sugar_getjspath file='include/javascript/jsclass_async.js'}"></script>	
 	
 <style type="text/css">
-{literal}
+
 	.schedulerDiv h3{
 		display: none;
 	}
 	.schedulerDiv{
 		width: auto !important;
 	}
-{/literal}
+
 </style>	
 {if $view == 'day'}
 <style type="text/css">
-{literal}
+
 	#cal-grid div.col, #cal-grid div.left_col{
 		border-top: 1px solid silver;
 		border-bottom: 1px solid silver;
 	}
-{/literal}
+
 </style>
 {/if}
 

@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'تمت إضافة لوحة معلومات Sugar',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'ستتم إعادة ترتيب خانات المعلومات، هل أنت متأكد من رغبتك في تغيير تصميم العمود؟',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'هل تريد بالتأكيد حذف لوحة معلومات Sugar؟',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'لم يتم تكوين لوحة معلومات',
   'LBL_NO_DASHLETS_CONFIGURED' => 'لم يتم تكوين لوحات معلومات',
-  'LBL_CREATE_DASHBOARD_LINK' => 'إنشاء لوحة معلومات',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'صفحة الويب',
   'LBL_DASHLET_WEBPAGE_DESC' => 'صفحة الويب',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'تعليمات المصدر البرمجية',
   'LBL_SOURCE_SUGAR' => 'Sugar - تطبيق أتمتة قوة المبيعات الأكثر شهرة عالميًا والذي تم عمله من خلال SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - محرك قوالب لـ PHP تم إنشاؤه من خلال Barnabás Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - مجموعة من فئات PHP التي تسمح للمطورين بإنشاء خدمات الويب والاستفادة منها تم إنشاؤها من خلال NuSphere Corporation وDietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - تقويم لإدخال التواريخ تم إنشاؤها من خلال Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - مكتبة لإنشاء وثائق PDF تم إنشاؤها من خلال Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - تنفيذ لملقم WebDAV في PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'تعرض التعليمات معلومات معينة تتعلق بالوحدة التي تشاهدها، وتوفر خطوات تفصيلية لتنفيذ بعض الإجراءات في الوحدة، وتشير عليك بالاتجاه المطلوب السير فيه، وذلك للحصول على مزيد من المعلومات الشاملة والدعم.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'الفلتر',
+
+    'LBL_ABOUT_VERSION' => 'أنت تستخدم الإصدار {{version}} من خلال الترخيص (التراخيص) التالية:',
 );

@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Підтримка:',
   'LBL_SUPPORT_TERM' => 'Термін надання підтримки:',
   'LBL_TAX_CLASS' => 'Розряд оподаткування:',
+  'LBL_ACTIVE_STATUS' => 'Статус',
   'LBL_TYPE_NAME'=>'Назва типу',
   'LBL_TYPE' => 'Тип',
   'LBL_PRODUCT_TYPE' => 'Тип продукту',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Інформаційна панель зі списком каталогів продуктів',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Інформаційна панель із записами каталогу продуктів',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель каталогу продуктів',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Статус "Активно"',
 );

@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Tabela',
     'LBL_PURCHASED_LINE_ITEMS' => 'Kupljene stavke',
 
+    'LBL_FORECASTED_LIKELY' => 'Predviđeno kao verovatno',
     'LBL_RENEWAL' => 'Obnova',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Obnova prodajnih prilika',
     'LBL_RENEWAL_PARENT' => 'Nadređena prodajna prilika',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => 'Ukupno stavki prihoda',
     'LBL_CLOSED_RLIS' => 'Ukupno zatvorenih stavki prihoda',
+    'LBL_CLOSED_WON_RLIS' => '# zatvorenih dobijenih stavki prihoda',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'br. stavki prihoda sa trajanjem Open Service Flex',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Nije moguće obirsati prodajne prilike koje sadrže stavke prihoda.',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Jedan ili više izabranih zapisa sadrži zatvorene stavke prihoda i nije ih moguće obrisati.',
     'LBL_INCLUDED_RLIS' => '# od priloženih stavki linije prihoda',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Ažuriranje je otvoreno',
+    'LBL_CASCADE_RLI_EDIT' => 'Ažurirajte otvorene stavke prihoda',
+    'LBL_CASCADE_RLI_CREATE' => 'Postavite širom stavki prihoda',
     'LBL_SERVICE_START_DATE_INVALID' => 'Datum početka usluge ne može da se postavi kao datuma završetka usluge za bilo koji otvoreni dodatak stavke prihoda.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Ponude',
@@ -207,24 +211,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Kada pokrenete ovu promenu, zapisi o stavci prihoda će biti kreirani za svaki postojeći {{module_name}} u pozadini. Kada se stavke prihoda formiraju i kada budu dostupne, biće poslato obaveštenje na e-mail adresu sa Vašeg profila. Obratite pažnju da Vaša instanca mora da bude konfigurisana da pošalje e-mail putem Admin > E-mail postavke kako bi se obaveštenja poslala.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} omogućavaju praćenje pojedinačnih prodaja od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd. Modul {{module_name}} obično prolazi kroz nekoliko faza prodaje dok ne dobije oznaku „Zatvoreni dobitak” ili „Zatvoreni gubitak”. Moduli {{plural_module_name}} mogu dodatno da se iskoriste upotrebom Sugar modula za {{forecasts_singular_module}} da bi se razumeli i predviđali trendova prodaje, kao i da bi se poslovanja usmerilo na dostizanje prodajnih kvota.',
+    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} omogućava praćenje pojedinačnih prodaja od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd. Modul {{module_name}} obično prolazi kroz nekoliko faza prodaje dok ne dobije oznaku „Zatvoreni dobitak” ili „Zatvoreni gubitak”. Moduli {{plural_module_name}} mogu dodatno da se iskoriste upotrebom Sugar modula za {{forecasts_singular_module}} da bi se razumeli i predviđali trendovi prodaje, kao i da bi se poslovanje usmerilo na dostizanje prodajnih kvota.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} vam omogućavaju praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd.
 
 - Uredite ova polja zapisa klikom na pojedinačno polje ili na dugme Uredi.
-- Pogledajte ili izmenite veze na ostalim zapisima u podpločama prebacivanjem donjeg levog okna na „Pregled podataka”.
+- Pogledajte ili izmenite veze ka ostalim zapisima u potpanelima prebacivanjem donjeg levog okna na „Prikaz podataka”.
 - Pravite i gledajte komentare korisnika i beležite promene u istoriji u modulu {{activitystream_singular_module}} prebacivanjem donjeg levog okna na „Tok aktivnosti”.
-- Pratite ili označite ovaj zapis kao omiljen korišćenjem ikonica sa desne strane od naziva zapisa.
+- Pratite ili označite ovaj zapis kao omiljen korišćenjem ikonica sa desne strane naziva zapisa.
 - Dodatne radnje dostupne su u padajućem meniju Radnji koje se nalaze levo od dugmeta Uredi.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} vam omogućavaju da pratite pojedinačne prodaje i stavke koje pripadaju tim prodajama od početka do kraja. Svaki zapis {{module_name}} o modulu predstavlja potencijalnu prodaju i uključuje bitne podatke o prodaji, kao i podatke povezane sa ostalim bitnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}}, itd.
+    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} vam omogućavaju da pratite pojedinačne prodaje i stavke koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje bitne podatke o prodaji, kao i podatke povezane sa ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}}, itd.
 
 Kreiranje modula {{module_name}}:
 1. Unesite vrednost u polja po želji.
- - polja označena sa „Obavezno” moraju da budu popunjena pre čuvanja.
- - kliknite na „Prikaži više” da biste otkrili dodatna polja ako je potrebno.
+ - Polja označena sa „Obavezno” moraju da budu popunjena pre čuvanja.
+ - Kliknite na „Prikaži više” da biste otkrili dodatna polja ako je potrebno.
 2. Kliknite na „Sačuvaj” da biste završili novi zapis i vratili se na prethodnu stranicu.',
 
 // END ENT/ULT
@@ -239,7 +243,10 @@ Kreiranje modula {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Prodajne prilike moga tima",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Nije moguće promeniti {{fieldName}} jer modul {{moduleSingular}} nema otvorene stavke.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcije prodajnih prilika',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija prilike',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' ne može da se postavi ni na jednu od ovih stavki prihoda je one nisu usluge. Želite li da nastavite kreiranje?',
+    'LBL_CASCADE_DURATION_WARNING' => ' ne može da se postavi na bilo koju od ovih stavki prihoda jer je njihovo trajanje zaključano. Želite li da nastavite kreiranje?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Prognoza u pogledu zatvaranja prilike',

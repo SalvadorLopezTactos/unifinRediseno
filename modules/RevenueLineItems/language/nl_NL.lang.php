@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Verlenging opportunityregel-ID',
     'LBL_PARENT_RLIS' => 'Bovenliggende opportunityregels',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Bovemliggende opportunityregels',
+    'LBL_FORECASTED_LIKELY' => 'Voorspeld hoogstwaarschijnlijk',
     'LBL_EXPERT_ID' => 'Productexpert',
     'LBL_FORECAST' => 'Meenemen in de forecast',
     'LBL_SUBTOTAL' => 'Subtotaal',

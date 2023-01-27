@@ -12,7 +12,6 @@
 *}
 
 <script type="text/javascript">
-{literal}
 var ajxProgress;
 var showMSG = 'true';
 //when called, this function will make ajax call to rebuild/repair js files
@@ -42,7 +41,7 @@ function callRebuildSprites() {
         }
 
         //make asynchronous call to process js files
-        var ajxProgress = YAHOO.util.Connect.asyncRequest('POST','index.php', {success: success, failure: success}, postData);
+        var ajxProgress = YAHOO.util.Connect.asyncRequest('POST','index.php', { success: success, failure: success }, postData);
     };//end ajaxCall method
 
     window.setTimeout('ajaxCall()', 2000);
@@ -51,5 +50,4 @@ function callRebuildSprites() {
 }
 //call function, so it runs automatically
 callRebuildSprites();
-{/literal}
 </script>

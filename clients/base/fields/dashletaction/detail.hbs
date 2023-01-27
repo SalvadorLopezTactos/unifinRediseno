@@ -26,4 +26,10 @@
     track="click:{{name}}"
 {{/if}}
     role="button" tabindex="{{tabIndex}}"
-    name="{{name}}">{{#if def.icon}}<i class="fa {{def.icon}}"></i>{{/if}}{{str label}}</a>
+    name="{{name}}"
+>
+    {{#if def.icon}}
+        <i class="{{buildIcon def.icon}}"></i>
+    {{/if}}
+    {{str label}}
+</a>

@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'มีชื่อฟิลด์แล้ว',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'ชื่อฟิลด์ควรมีเฉพาะอักขระต่อไปนี้: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'ไม่มีโมดูลที่รวม ไม่สามารถบันทึก',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'มีชื่อดรอปดาวน์แล้ว',
     'LBL_BTN_ADD' => 'เพิ่ม',
     'LBL_BTN_EDIT' => 'แก้ไข',
     'LBL_GENERATE_URL' => 'สร้าง URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'กำลังเพิ่มคอลัมน์ {0} ใน',
     'LBL_DONE' => 'เสร็จสิ้น',
     'LBL_EXE_NON_SIM_MODE' => 'เรียกใช้โหมดที่ไม่ใช่การจำลอง',
+    'LBL_CALCULATION_VISIBLE' => 'ทำให้สามารถมองเห็นเพื่อการคำนวณได้',
 );
-
-
-?>

@@ -58,13 +58,6 @@ $dictionary['meetings_leads'] = array(
             ),
         ),
         array(
-            'name' => 'idx_lead_meeting_meeting',
-            'type' => 'index',
-            'fields' => array(
-                'meeting_id',
-            ),
-        ),
-        array(
             'name' => 'idx_lead_meeting_lead',
             'type' => 'index',
             'fields' => array(

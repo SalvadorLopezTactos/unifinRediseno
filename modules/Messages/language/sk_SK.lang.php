@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Zobraziť hlásenia o správach',
     'LNK_IMPORT_MESSAGES' => 'Importovať správy',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'ID záujemcu',
+    'LBL_LEAD_NAME' => 'Záujemca',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Chat na strane zákazníka',
+    'LBL_ACTIVITY_CUSTOMER' => 'Zákazník',
+    'LBL_ACTIVITY_FINISHED' => 'ukončené',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'prebieha',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na správy',
 ];

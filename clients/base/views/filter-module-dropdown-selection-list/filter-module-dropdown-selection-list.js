@@ -74,12 +74,12 @@
     },
 
     /**
-     * Always returns the module with a downward-facing caret button for
+     * Always returns the module with a downward-facing chevron button for
      * selecting other modules.
      *
      * @return {string}
      */
     getSelectionLabel: function() {
-        return app.lang.get('LBL_MODULE') + '<i class="fa fa-caret-down"></i>';
+        return app.lang.get('LBL_MODULE') + '<i class="sicon sicon-chevron-down"></i>';
     }
 })

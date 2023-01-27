@@ -29,9 +29,9 @@ class ViewConfiguretabs extends SugarView
 	    global $mod_strings;
 	    
     	return array(
-    	   "<a href='index.php?module=Administration&action=index'>".$mod_strings['LBL_MODULE_NAME']."</a>",
-    	   $mod_strings['LBL_CONFIG_TABS']
-    	   );
+            "<a href='#Administration'>".$mod_strings['LBL_MODULE_NAME']."</a>",
+            $mod_strings['LBL_CONFIG_TABS'],
+        );
     }
     
     /**
@@ -70,9 +70,11 @@ class ViewConfiguretabs extends SugarView
             $enabled[] = array("module" => $key, 'label' => translate($key));
         }
         $disabled = array();
-        foreach ($tabs[1] as $key=>$value)
-        {
-            $disabled[] = array("module" => $key, 'label' => translate($key));
+        foreach ($tabs[1] as $key => $value) {
+            // only show accessible modules, remove nonaccessibles
+            if (SugarACL::checkAccess($key, 'access')) {
+                $disabled[] = array("module" => $key, 'label' => translate($key));
+            }
         }
         
         $user_can_edit = $controller->get_users_can_edit();

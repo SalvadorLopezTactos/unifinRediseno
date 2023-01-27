@@ -12,13 +12,7 @@
 require_once('soap/SoapRelationshipHelper.php');
 set_time_limit(360);
 
-$server->register(
-    'sync_get_modified_relationships',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string','related_module'=>'xsd:string', 'from_date'=>'xsd:string', 'to_date'=>'xsd:string','offset'=>'xsd:int', 'max_results'=>'xsd:int','deleted'=>'xsd:int', 'module_id'=>'xsd:string', 'select_fields'=>'tns:select_fields', 'ids'=>'tns:select_fields', 'relationship_name'=>'xsd:string', 'deletion_date'=>'xsd:string', 'php_serialize'=>'xsd:int'),
-    array('return'=>'tns:get_entry_list_result_encoded'),
-    $NAMESPACE);
-
-
+$server->addFunction('sync_get_modified_relationships');
 
 /**
  * Get a list of the relationship records that have been modified within a
@@ -43,6 +37,9 @@ $server->register(
  */
 function sync_get_modified_relationships($session, $module_name, $related_module,$from_date,$to_date,$offset, $max_results, $deleted, $module_id = '', $select_fields = array(), $ids = array(), $relationship_name = '', $deletion_date = '', $php_serialize = 1){
 	global  $beanList, $beanFiles;
+    $select_fields = object_to_array_deep($select_fields);
+    $ids = object_to_array_deep($ids);
+
 	$error = new SoapError();
 	$output_list = array();
 	if(!validate_authenticated($session)){
@@ -124,14 +121,12 @@ function sync_get_modified_relationships($session, $module_name, $related_module
 	return array('result_count'=>sizeof($output_list),'next_offset'=>0, 'total_count'=>sizeof($output_list), 'field_list'=>array(), 'entry_list'=>$myoutput , 'error'=>$error->get_soap_array());
 }
 
-
-$server->register(
-    'get_modified_entries',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string', 'ids'=>'tns:select_fields', 'select_fields'=>'tns:select_fields'),
-    array('return'=>'tns:get_sync_result_encoded'),
-    $NAMESPACE);
+$server->addFunction('get_modified_entries');
 
 function get_modified_entries($session, $module_name, $ids, $select_fields ){
+    $ids = object_to_array_deep($ids);
+    $select_fields = object_to_array_deep($select_fields);
+
 	global  $beanList, $beanFiles;
 	$error = new SoapError();
 	$field_list = array();
@@ -221,11 +216,7 @@ function get_modified_entries($session, $module_name, $ids, $select_fields ){
 	return array('result'=>$xml, 'error'=>$error->get_soap_array());
 }
 
-$server->register(
-    'get_attendee_list',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string', 'id'=>'xsd:string'),
-    array('return'=>'tns:get_sync_result_encoded'),
-    $NAMESPACE);
+$server->addFunction('get_attendee_list');
 
 function get_attendee_list($session, $module_name, $id){
 	$error = new SoapError();

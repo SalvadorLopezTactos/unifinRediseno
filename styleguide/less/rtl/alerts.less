@@ -7,16 +7,28 @@
   margin: 0;
 }
 
-.alert .text {
-  padding: 20px 18px 20px 0;
-}
-
 .alert.closeable {
   padding-right: 0;
   padding-left: 40px;
 }
 
-.alert-confirmation .alert .row-fluid .alert-btn-cancel {
-  border-left: 1px solid @warningBorder;
-  border-right: none;
+.alert-confirmation {
+  .alert {
+    .text {
+      .pr-0();
+      .pl-4();
+    }
+  }
+}
+
+.alert {
+  &:not(.alert-process)::before {
+    transform: scaleX(-1);
+  }
+}
+
+.alert-top {
+  .alert {
+    .text-right();
+  }
 }

@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => '답장할 이메일 주소 ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => '답장할 이메일 주소',
     'LBL_PRIMARY_TEAM' => '기본 팀',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => '선호하는 전송 계정',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => '이메일 설정 포커스 서랍',
 );

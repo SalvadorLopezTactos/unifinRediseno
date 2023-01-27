@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Visualitza informes de missatges',
     'LNK_IMPORT_MESSAGES' => 'Importa missatges',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'ID de client potencial',
+    'LBL_LEAD_NAME' => 'Client potencial',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Xat del costat del client',
+    'LBL_ACTIVITY_CUSTOMER' => 'Client',
+    'LBL_ACTIVITY_FINISHED' => 'finalitzat',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'en curs',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als missatges',
 ];

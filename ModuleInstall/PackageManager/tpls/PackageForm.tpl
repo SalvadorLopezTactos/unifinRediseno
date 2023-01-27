@@ -15,44 +15,67 @@
 {else}
 {$scripts}
 {$TREEHEADER}
-{literal}
-
 <style type="text/css">
-#demo { width:100%; }
-#demo .yui-content {
-    padding:1em; /* pad content container */
-}
-.list {list-style:square;width:500px;padding-left:16px;}
-.list li{padding:2px;font-size:8pt;}
+	#demo {
+		width: 100%;
+	}
 
-/* hide the tab content while loading */
-.tab-content{display:none;}
+	#demo .yui-content {
+		padding: 1em; /* pad content container */
+	}
 
-pre {
-   font-size:11px;
-}
+	.list {
+		list-style: square;
+		width: 500px;
+		padding-left: 16px;
+	}
 
-#tabs1 {width:100%;}
-#tabs1 .yui-ext-tabbody {border:1px solid #999;border-top:none;}
-#tabs1 .yui-ext-tabitembody {display:none;padding:10px;}
+	.list li {
+		padding: 2px;
+		font-size: 8pt;
+	}
 
-/* default loading indicator for ajax calls */
-.loading-indicator {
-	font-size:8pt;
-	background-image:url('../../resources/images/grid/loading.gif?v={VERSION_MARK}');
-	background-repeat: no-repeat;
-	background-position: left;
-	padding-left:20px;
-}
-/* height of the rows in the grids */
-.ygrid-row {
-    height:27px;
-}
-.ygrid-col {
-    height:27px !important;
-}
+	/* hide the tab content while loading */
+	.tab-content {
+		display: none;
+	}
+
+	pre {
+		font-size: 11px;
+	}
+
+	#tabs1 {
+		width: 100%;
+	}
+
+	#tabs1 .yui-ext-tabbody {
+		border: 1px solid #999;
+		border-top: none;
+	}
+
+	#tabs1 .yui-ext-tabitembody {
+		display: none;
+		padding: 10px;
+	}
+
+	/* default loading indicator for ajax calls */
+	.loading-indicator {
+		font-size: 8pt;
+		background-image: url('../../resources/images/grid/loading.gif?v={literal}{VERSION_MARK}{/literal}');
+		background-repeat: no-repeat;
+		background-position: left;
+		padding-left: 20px;
+	}
+
+	/* height of the rows in the grids */
+	.ygrid-row {
+		height: 27px;
+	}
+
+	.ygrid-col {
+		height: 27px !important;
+	}
 </style>
-{/literal}
 {$INSTALLED_PACKAGES_HOLDER}
 <br>
 
@@ -73,10 +96,5 @@ pre {
 <div id='upload_table'>
 <table width='100%'><tr><td><div id='patch_downloads' class='ygrid-mso' style='height:205px;'></div></td></tr></table>
 </div>
-
-{literal}<script>
-//PackageManager.toggleView('browse');
-</script>
-{/literal}
 {/if}
 {/if}

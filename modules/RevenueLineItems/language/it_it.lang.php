@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'ID prodotti di profitto per rinnovo',
     'LBL_PARENT_RLIS' => 'Prodotti di profitto padre',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Prodotti di profitto padre',
+    'LBL_FORECASTED_LIKELY' => 'Probabilmente previsto',
     'LBL_EXPERT_ID' => 'Esperto di Prodotto',
     'LBL_FORECAST' => 'Includi nella Previsione',
     'LBL_SUBTOTAL' => 'Subtotale',

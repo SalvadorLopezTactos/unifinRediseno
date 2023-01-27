@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Vizualizare şabloane',
     'LNK_LIST_KBCATEGORIES' => 'Vizualizare categorii',
     'LBL_TEMPLATES' => 'Modele',
+    'LBL_TEMPLATE' => 'Șablon',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Şablonul va suprascrie toate conţinuturile.' .
         ' Sigur doriţi să utilizaţi acest şablon?',
     'LNK_IMPORT_KBCONTENTS' => 'Importare articole',

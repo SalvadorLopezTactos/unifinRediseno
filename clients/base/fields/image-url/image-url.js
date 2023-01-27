@@ -58,7 +58,11 @@
      * Set preview value
      */
     setPreview: function() {
-        this.preview = this.model.get(this.name) || this.def.default || '';
+        this.preview = this.model.get(this.name) || '';
+
+        if (!this.preview && this.def.default) {
+            this.preview = this.def.default + '?v=' + app.config.versionMark;
+        }
     },
 
     /**

@@ -15,17 +15,17 @@
 {if $helpFileExists}
 <html {$langHeader}>
 <head>
-<title>{$title}</title>
+<title>{$title|escape:html}</title>
 {$styleSheet}
-<meta http-equiv="Content-Type" content="text/html; charset={$charset}">
+<meta http-equiv="Content-Type" content="text/html; charset={$charset|escape:html}">
 </head>
 <body onLoad='window.focus();'>
 <table width='100%'>
 <tr>
     <td align='right'>
-        <a href='javascript:window.print()'>{$MOD.LBL_HELP_PRINT}</a> - 
-        <a href='mailto:?subject="{$MOD.LBL_SUGARCRM_HELP}&body={$currentURL|escape:url}'>{$MOD.LBL_HELP_EMAIL}</a> -
-        <a href='#' onmousedown="createBookmarkLink('{$MOD.LBL_SUGARCRM_HELP} - {$moduleName}', '{$currentURL|escape:url}')">{$MOD.LBL_HELP_BOOKMARK}</a>
+        <a href='javascript:window.print()'>{$MOD.LBL_HELP_PRINT|escape:html}</a> -
+        <a href='mailto:?subject="{$MOD.LBL_SUGARCRM_HELP|escape:url}&body={$currentURL|escape:url}'>{$MOD.LBL_HELP_EMAIL|escape:html}</a> -
+        <a href='#' onmousedown="createBookmarkLink('{$title|escape:javascript|escape:html}', '{$currentURL|escape:html}')">{$MOD.LBL_HELP_BOOKMARK|escape:html}</a>
     </td>
 </tr>
 </table>
@@ -34,7 +34,6 @@
     <td>{include file="$helpPath"}</td>
 </tr>
 </table>
-{literal}
 <script type="text/javascript" language="JavaScript">
 <!--
 function createBookmarkLink(title, url){
@@ -45,9 +44,8 @@ function createBookmarkLink(title, url){
 }
 -->
 </script>
-{/literal}
 </body>
 </html>	
 {else}
-<IFRAME frameborder="0" marginwidth="0" marginheight="0" bgcolor="#FFFFFF" SRC="{$iframeURL}" TITLE="{$iframeURL}" NAME="SUGARIFRAME" ID="SUGARIFRAME" WIDTH="100%" height="1000"></IFRAME>
+<IFRAME frameborder="0" marginwidth="0" marginheight="0" bgcolor="#FFFFFF" SRC="{$iframeURL|escape:html}" TITLE="{$iframeURL|escape:html}" NAME="SUGARIFRAME" ID="SUGARIFRAME" WIDTH="100%" height="1000"></IFRAME>
 {/if}

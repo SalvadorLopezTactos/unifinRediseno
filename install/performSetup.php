@@ -16,6 +16,8 @@ use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 use Sugarcrm\Sugarcrm\Security\Context;
 use Sugarcrm\Sugarcrm\Security\Subject\Installer;
+use Sugarcrm\Sugarcrm\Denormalization\Relate\FieldConfig;
+use Sugarcrm\Sugarcrm\Denormalization\Relate\Process\Entity;
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 
 // This file will load the configuration settings from session data,
@@ -27,7 +29,7 @@ if (!isset($install_script) || !$install_script) {
 ini_set("output_buffering", "0");
 
 // Disable zlib compression as this will interfere with live scrolling
-ini_set('zlib.output_compression', 0);
+ini_set('zlib.output_compression', '0');
 
 // Give the install ample time to finish
 set_time_limit(3600);
@@ -124,7 +126,7 @@ $out = <<<EOQ
 		</p>
 		{$mod_strings['LBL_PERFORM_TITLE']}</th>
     <th width="200" style="text-align: right;"><a href="http://www.sugarcrm.com" target="_blank">
-    <IMG src="$loginImage" alt="SugarCRM" border="0"></a></th>
+    <img src="{$loginImage}" alt="SugarCRM" border="0" class="sugarcrm-logo"></a></th>
 </tr>
 <tr>
    <td colspan="2">
@@ -484,6 +486,7 @@ $enabled_tabs[] = 'Campaigns';
 $enabled_tabs[] = 'Calls';
 $enabled_tabs[] = 'Meetings';
 $enabled_tabs[] = 'Tasks';
+$enabled_tabs[] = 'Escalations';
 $enabled_tabs[] = 'Notes';
 $enabled_tabs[] = 'Forecasts';
 $enabled_tabs[] = 'Cases';
@@ -519,6 +522,20 @@ require_once('install/createSnipUser.php');
  * installLog("Enable InsideView Connector");
  * enableInsideViewConnector();
  **/
+
+installLog('Adding default maps configurations');
+require_once 'install/MapsDefaultData.php';
+$admin = BeanFactory::newBean('Administration');
+$mapsDefaultConfig = [
+    'logLevel' => $mapsDefaultLogLevel,
+    'unitType' => $mapsDefaultUnitType,
+    'enabled_modules' => $mapsDefaultEnabledModules,
+    'modulesData' => $mapsDefaultModulesData,
+];
+
+foreach ($mapsDefaultConfig as $name => $value) {
+    $admin->saveSetting('maps', $name, $value, 'base');
+}
 
 
 installLog("Converting Opportunities to use RevenueLineItems");
@@ -588,6 +605,7 @@ installLog("done populating the db with seed data");
 installLog('Installing Business Process Management designs');
 
 require 'install/installBusinessProcesses.php';
+require 'install/Hint/AddSchedulers.php';
 
 installLog('Completed installation of Business Process Management designs');
 
@@ -619,6 +637,9 @@ include 'install/seed_data/Advanced_Password_SeedData.php';
 
 ////    INSTALL PDF TEMPLATES
 include('install/seed_data/PdfManager_SeedData.php');
+
+////    INSTALL Calendars
+include 'install/seed_data/Calendar_SeedData.php';
 
 ///////////////////////////////////////////////////////////////////////////////
 ////    SETUP DONE
@@ -700,6 +721,68 @@ installerHook('post_installModules');
 installerHook('pre_handleMissingSmtpServerSettingsNotifications');
 handleMissingSmtpServerSettingsNotifications();
 installerHook('post_handleMissingSmtpServerSettingsNotifications');
+
+// Adds the jobs related to the denormalized fields in 4 modules
+$updateRelateDenormalizationState = function () {
+    $modules = [
+        'Contacts',
+        'Opportunities',
+        'RevenueLineItems',
+        'Cases',
+    ];
+    $fieldName = 'account_name';
+
+    $jobsAdded = [];
+    $adminUser = BeanFactory::newBean('Users')->getSystemUser();
+    foreach ($modules as $module) {
+        $bean = BeanFactory::newBean($module);
+        $def = $bean->getFieldDefinition($fieldName);
+        if (!empty($def['is_denormalized'])) {
+            continue;
+        }
+        $entity = new Entity($bean, $fieldName);
+
+        $config = new FieldConfig();
+        $config->markFieldAsDenormalized($entity, true);
+
+        $options = [
+            'module_name' => $entity->getTargetModuleName(),
+            'field_name' => $entity->fieldName,
+            'tmp_table_name' => 'denorm_tmp_' . $module,
+        ];
+
+        /* @var $job SchedulersJob */
+        $job = BeanFactory::newBean('SchedulersJobs');
+        $job->name = 'Upgrade_Denormalization_' . $module . '_' . $fieldName;
+        $job->target = 'class::' . SugarJobFieldDenormalization::class;
+        $job->data = json_encode($options);
+        $job->retry_count = 0;
+        $job->job_group = 'install';
+        $job->assigned_user_id = $adminUser->id;
+
+        $queue = new SugarJobQueue();
+        $queue->submitJob($job);
+        // mark as deleted to disable execution from cron.php. It will be enabled by the Watcher Job added below
+        $job->deleted = 1;
+        $job->save();
+        $jobsAdded[$job->id] = false;
+    }
+
+    if (!empty($jobsAdded)) {
+        /* @var $job SchedulersJob */
+        $job = BeanFactory::newBean('SchedulersJobs');
+        $job->name = 'Upgrade_Denormalization_Watcher';
+        $job->target = 'function::upgradeDenormalizationStateForSugar11';
+        $job->data = json_encode($jobsAdded);
+        $job->retry_count = 0;
+        $job->job_group = 'install';
+        $job->assigned_user_id = $adminUser->id;
+
+        $queue = new SugarJobQueue();
+        $queue->submitJob($job);
+    }
+};
+$updateRelateDenormalizationState();
 
 // rebuild cache after all is said and done
 installLog("Populating file cache");

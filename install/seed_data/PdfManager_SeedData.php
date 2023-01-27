@@ -38,6 +38,8 @@ if (empty($templatesArray)) {
     $ss = new Sugar_Smarty();
     $ss->assign('logoUrl', $logoUrl);
     $ss->assign('MOD', $modStringSrc);
+    $ss->assign('withServices', false);
+
     $pdfTemplate = new PdfManager();
     $pdfTemplate->base_module = 'Quotes';
     $pdfTemplate->name = $modStringSrc['LBL_TPL_QUOTE_NAME'];

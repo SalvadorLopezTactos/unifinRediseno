@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Raspored izvješća',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o rasporedima izvješća',
+    'LBL_FILE_TYPE' => 'Vrsta/vrste datoteke',
 );

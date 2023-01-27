@@ -8,7 +8,7 @@
   }
 
   .opportunities_cascade_condition::after {
-    color: @grayLight;
+    color: @gray70;
     font-size: @baseFontSize;
   }
 }
@@ -22,9 +22,9 @@
 
 .flex-list-view-content .select2-container.select2-container-disabled .select2-choice {
   cursor: not-allowed;
-  color: @slate;
-  background: @grayLighter;
-  border: 1px solid @grayLighter;
+  color: @placeholderText;
+  background: @inputDisabledBackground;
+  border: @borderWidget;
 
   .select2-arrow {
     display: none;
@@ -39,7 +39,7 @@
     margin: 0 1px 2px 0;
   }
 
-  span {
-    color: @black;
+  &.disabled {
+    cursor: not-allowed;
   }
 }

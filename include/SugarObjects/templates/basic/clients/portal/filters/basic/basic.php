@@ -11,7 +11,7 @@
  */
 
 $viewdefs['<module_name>']['portal']['filter']['basic'] = [
-    'create' => false,
+    'create' => true,
     'quicksearch_field' => ['name'],
     'quicksearch_priority' => 1,
     'filters' => [

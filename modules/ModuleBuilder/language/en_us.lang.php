@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Delete' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Powered By SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Role',
+    'LBL_BASE_LAYOUT' => 'Base Layout',
+    'LBL_FIELD_NAME' => 'Field Name',
+    'LBL_FIELD_VALUE' => 'Value',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Layout determined by:',
+    'layoutDeterminedBy' => [
+        'std' => 'Standard Layout',
+        'role' => 'Role',
+        'dropdown' => 'Dropdown Field',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'All custom layouts will be removed. Are you sure you want to change your current layout definitions?',
 'help'=>array(
     'package'=>array(
             'create'=>'Provide a <b>Name</b> for the package. The name must start with a letter and may only consist of letters, numbers, and underscores. No spaces or other special characters may be used. (Example: HR_Management)<br/><br/> You can provide <b>Author</b> and <b>Description</b> information for package. <br/><br/>Click <b>Save</b> to create the package.',
@@ -458,8 +468,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Visibility Editor',
 'LBL_ROLLUP' => 'Rollup',
 'LBL_RELATED_FIELD' => 'Related Field',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL to custom logomark image. The recommended logomark dimensions are 22 x 22 pixels. Any image uploaded that is larger in either direction will be scaled to these max dimensions.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL to custom logo image. The recommended logo width is 200 pixels. Any image uploaded that is larger in either direction will be scaled to these max dimensions. This logo will be used on the login screen. If no image is uploaded, the logomark will be used.',
 'LBL_PORTAL_ROLE_DESC' => 'Do not delete this role. Customer Self-Service Portal Role is a system-generated role created during the Sugar Portal activation process. Use Access controls within this Role to enable and/or disable Bugs, Cases or Knowledge Base modules in Sugar Portal. Do not modify any other access controls for this role to avoid unknown and unpredictable system behavior. In case of accidental deletion of this role, recreate it by disabling and enabling Sugar Portal.',
 
 //RELATIONSHIPS
@@ -582,6 +590,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Add Relationship',
 'LBL_BTN_RENAME_MODULE' => 'Change Module Name',
 'LBL_BTN_INSERT'=>'Insert',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Restore Base Layout',
 //TABS
 
 //ERRORS
@@ -592,6 +601,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'An error has occurred',
 'ERROR_REQUIRED_FIELDS' => 'Are you sure you wish to continue? The following required fields are missing from the layout:  ',
 'ERROR_ARE_YOU_SURE' => 'Are you sure you wish to continue?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Field cannot be created. You have reached the row size limit of this table in your database. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Learn more</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'The following field(s) have calculated values which will not be re-calculated in real time in the SugarCRM Mobile Edit View:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'The following field(s) have calculated values which will not be re-calculated in real time in the SugarCRM Portal Edit View:',
@@ -601,16 +611,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'If you would like to enable them in the portal please enable them <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">here</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Configure Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Enable portal',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Enable search before opening a case',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Enable notes on the Knowledge Base module',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Allow portal users to close case',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Allow new users to sign up',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'User Permissions',
     'LBL_PORTAL_THEME' => 'Theme Portal',
     'LBL_PORTAL_ENABLE' => 'Enable',
     'LBL_PORTAL_SITE_URL' => 'Your portal site is available at:',
     'LBL_PORTAL_APP_NAME' => 'Application Name',
-    'LBL_PORTAL_LOGOMARK_URL' => 'Logomark URL',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Logomark Preview',
-    'LBL_PORTAL_LOGO_URL' => 'Logo URL',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Logo Preview',
     'LBL_PORTAL_CONTACT_PHONE' => 'Phone',
     'LBL_PORTAL_CONTACT_EMAIL' => 'Email',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Must enter a valid email address',
@@ -626,6 +634,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Drag and drop the names of the Portal modules to set them to be displayed or hidden in the Portal\'s top navigation bar. To control Portal user access to modules, use <a href="?module=ACLRoles&action=index">Role Management.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Displayed Modules',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Hidden Modules',
+    'LBL_CONFIG_VISIBILITY' => 'Visibility',
+    'LBL_CASE_VISIBILITY_HELP' => 'Define which portal users can see a case.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Define which portal users can see emails related to a case. Participating contacts are those in the To, From, CC, and BCC fields.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Define which portal users can see messages related to a case. Participating contacts are those in the Guests field.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'All contacts related to the account',
+        'related_contacts' => 'Only primary contact and contacts related to the case',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Only participating contacts',
+        'all' => 'All contacts who can see the case',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Only participating contacts',
+        'all' => 'All contacts who can see the case',
+    ],
+
 
 'LBL_PORTAL'=>'Portal',
 'LBL_PORTAL_LAYOUTS'=>'Portal Layouts',
@@ -838,6 +863,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Datetime',
                 'decimal'=>'Decimal',
                 'autoincrement' => 'AutoIncrement',
+                'actionbutton' => 'ActionButton',
 ),
 'labelTypes' => array(
     "" => "Frequently used labels",
@@ -856,4 +882,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (related {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copy from layout',
 'LBL_RELATIONSHIP_TYPE' => 'Relationship',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Comparison Language',
+'LBL_LABEL_NOT_TRANSLATED' => 'This label may not be translated',
 );

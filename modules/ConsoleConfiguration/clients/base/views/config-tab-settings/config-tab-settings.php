@@ -57,6 +57,16 @@ $viewdefs['ConsoleConfiguration']['base']['view']['config-tab-settings'] = array
                 ),
             ),
         ),
+        [
+            'label' => 'LBL_FREEZE_FIRST_COLUMN',
+            'fields' => [
+                [
+                    'name' => 'freeze_first_column',
+                    'type' => 'freeze-first-column',
+                    'dismiss_label' => true,
+                ],
+            ],
+        ],
         array(
             'label' => 'LBL_CONSOLE_FILTER',
             'fields' => array(

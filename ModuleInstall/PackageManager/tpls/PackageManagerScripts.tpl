@@ -11,7 +11,6 @@
  */
 *}
 {sugar_getscript file="cache/include/javascript/sugar_grp_yui_widgets.js"}
-{literal}
 <script>
  /*
         *  a reference to an instance of PackageManagerGrid
@@ -25,8 +24,10 @@ if(typeof PackageManager == 'undefined') {
         var _treeHeight;
         var _listHeight;
         var _attributes = {
-        		height: { to: MAX_HEIGHT }
-            };
+            height: {
+                to: MAX_HEIGHT
+            }
+        };
         var _anim;
         var keys = [ "local_upload","server_upload"];
         var tabPreviousKey = '';
@@ -52,8 +53,15 @@ if(typeof PackageManager == 'undefined') {
 	        	PackageManager.showWaiting();
 	        	var searchTerm = document.getElementById('search_term').value;
 	        	postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=performBasicSearch&search_term=' + searchTerm + '&csrf_token=' + SUGAR.csrf.form_token;
-				var cObj = YAHOO.util.Connect.asyncRequest('POST','index.php',
-								  {success: PackageManager.completeSearch, failure: PackageManager.completeSearch}, postData);
+                var cObj = YAHOO.util.Connect.asyncRequest(
+                    'POST',
+                    'index.php',
+                    {
+                        success: PackageManager.completeSearch,
+                        failure: PackageManager.completeSearch
+                    },
+                    postData
+                );
 	        },
 	        initWorkingDiv : function(){
 	        	statusDiv = document.getElementById('workingStatusDiv');
@@ -69,8 +77,6 @@ if(typeof PackageManager == 'undefined') {
 	        },
 	        initDocumentationDiv : function(){
 	        	documentationDiv = document.createElement('div');
-				//documentationDiv.className = 'dataLabel';
-				//documentationDiv.style.background = '#ffffff';
 				documentationDiv.style.position = 'absolute';
 				var fileview = document.getElementById('catview');
 				var top = fileview.offsetTop;
@@ -86,80 +92,71 @@ if(typeof PackageManager == 'undefined') {
 				document.body.appendChild(documentationDiv);
 	        },
 	        initPMG: function(){
-
-
-
 	        	//PackageManager.showLoginDialog();
-	        	 {/literal}{if $module_load == 'true'}{literal}
+	        	 {if $module_load == 'true'}
 	        	 PackageManager.initTabs();
 	        	 _pmg = new PackageManagerGrid();
 	        	 _pmg.renderAll();
-	        	//PackageManager.initWorkingDiv();
-	        	//PackageManager.initDocumentationDiv();
-	        	{/literal}{elseif $IS_ALIVE == 'true'}{literal}
-	        									_loadingBar =
-							new YAHOO.widget.Panel("wait",
-															{ width:"240px",
-															  fixedcenter:true,
-															  close:false,
-															  draggable:false,
-															  modal:true,
-															  visible:false,
-															  effect:{effect:YAHOO.widget.ContainerEffect.FADE, duration:0.5}
-															}
-														);
-
-					_loadingBar.setHeader("{/literal}{$MOD.SEARCHING_UPDATES}{literal}");
-					_loadingBar.setBody("<img src=\"include/javascript/yui/assets/rel_interstitial_loading.gif?v={VERSION_MARK}\"/>");
+	        	{elseif $IS_ALIVE == 'true'}
+                _loadingBar =
+                    new YAHOO.widget.Panel("wait",
+                        {
+                            width: "240px",
+                            fixedcenter: true,
+                            close: false,
+                            draggable: false,
+                            modal: true,
+                            visible: false,
+                            effect: {
+                                effect: YAHOO.widget.ContainerEffect.FADE,
+                                duration:0.5
+                            }
+                        }
+                    );
+					_loadingBar.setHeader("{$MOD.SEARCHING_UPDATES}");
+					_loadingBar.setBody("<img src=\"include/javascript/yui/assets/rel_interstitial_loading.gif?v={literal}{VERSION_MARK}{/literal}\"/>");
 					_loadingBar.render(document.body);
 					_loadingBar.show();
 	        		_pmg = new PackageManagerGrid();
-	        		//PackageManager.refreshGrid();
 	        	 	_pmg.renderAll();
-	        	 {/literal}{/if}{literal}
-	        	//PackageManager.initLicenseDiv();
-	        	//PackageManager.initModuleStaging();
-
+	        	 {/if}
     			var tabView = new YAHOO.widget.TabView('demo');
-				//PackageManager.checkForUpdates();
 	        },
 	        download : function(){
-	        	if(confirm('{/literal}{$MOD.DOWNLOAD_QUESTION}{literal}')){
-
+	        	if(confirm('{$MOD.DOWNLOAD_QUESTION}')){
 	        		_numDownloadsComplete = 0;
 	        		_numPackagesToDownload = 0;
 	        		var tree = YAHOO.widget.TreeView.getTree('treeview');
 	        		var nodes = tree.getNodesByProperty('isSelected', true);
-
-	        		//var nodes = YAHOO.widget.TreeView.getNode(treeid, index);
 	        		if(nodes){
 	        			PackageManager.showWaiting();
-	        										_loadingBar =
-							new YAHOO.widget.Panel("wait",
-															{ width:"240px",
-															  fixedcenter:true,
-															  close:false,
-															  draggable:false,
-															  modal:true,
-															  visible:false,
-															  effect:{effect:YAHOO.widget.ContainerEffect.FADE, duration:0.5}
-															}
-														);
+                        _loadingBar =
+                            new YAHOO.widget.Panel("wait",
+                                {
+                                    width: "240px",
+                                    fixedcenter: true,
+                                    close: false,
+                                    draggable: false,
+                                    modal: true,
+                                    visible: false,
+                                    effect: {
+                                        effect: YAHOO.widget.ContainerEffect.FADE,
+                                        duration: 0.5
+                                    }
+                                }
+                            );
 
-					_loadingBar.setHeader("{/literal}{$MOD.DOWNLOADING}{literal}");
-					_loadingBar.setBody("<img src=\"include/javascript/yui/assets/rel_interstitial_loading.gif?v={VERSION_MARK}\"/>");
+					_loadingBar.setHeader("{$MOD.DOWNLOADING}");
+					_loadingBar.setBody("<img src=\"include/javascript/yui/assets/rel_interstitial_loading.gif?v={literal}{VERSION_MARK}{/literal}\"/>");
 					_loadingBar.render(document.body);
 					_loadingBar.show();
-	        			//_numPackagesToDownload = nodes.length;
 	        			var count = nodes.length;
 	        			for(j = 0; j < count; j++){
 	   						if(nodes[j].type == 'release'){
 	   							_numPackagesToDownload++;
 	   						}
 	   					}
-	        			_loadingBar.setHeader("{/literal}{$MOD.DL_PACKAGES_DOWNLOADING}{literal} "+_numPackagesToDownload+" {/literal}{$MOD.DL_PACKAGES_PACKAGES}{literal}");
-
-
+	        			_loadingBar.setHeader("{$MOD.DL_PACKAGES_DOWNLOADING} "+_numPackagesToDownload+" {$MOD.DL_PACKAGES_PACKAGES}");
 	        			for (i = 0; i < count; i++){
 							var release_id = -1;
 	        				var package_id = -1;
@@ -173,8 +170,15 @@ if(typeof PackageManager == 'undefined') {
 								var package_id = nodes[i].package_id;
 								var category_id = nodes[i].category_id;
 								postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=download&release_id=' + release_id + '&package_id=' + package_id + '&category_id=' + category_id + '&csrf_token=' + SUGAR.csrf.form_token;
-								var cObj = YAHOO.util.Connect.asyncRequest('POST','index.php',
-								 	{success: PackageManager.downloadComplete, failure: PackageManager.downloadComplete}, postData);
+                                var cObj = YAHOO.util.Connect.asyncRequest(
+                                    'POST',
+                                    'index.php',
+                                    {
+                                        success: PackageManager.downloadComplete,
+                                        failure: PackageManager.downloadComplete
+                                    },
+                                    postData
+                                );
 							}
 						}
 					}//fi
@@ -186,10 +190,10 @@ if(typeof PackageManager == 'undefined') {
                 var result = JSON.parse(data.responseText);
 	        	if(typeof result != 'undefined') {
 	        		_numDownloadsComplete++;
-					_loadingBar.setHeader("{/literal}{$MOD.DL_PACKAGES_DOWNLOADING}{literal} "+_numDownloadsComplete+" {/literal}{$MOD.DL_PACKAGES_OF}{literal} "+_numPackagesToDownload+ " {/literal}{$MOD.DL_PACKAGES_PACKAGES}{literal}");
+					_loadingBar.setHeader("{$MOD.DL_PACKAGES_DOWNLOADING} "+_numDownloadsComplete+" {$MOD.DL_PACKAGES_OF} "+_numPackagesToDownload+ " {$MOD.DL_PACKAGES_PACKAGES}");
 	        		if(_numPackagesToDownload == _numDownloadsComplete){
 						_loadingBar.hide();
-	        			if(!{/literal}{$INSTALLATION}{literal}){
+	        			if(!{$INSTALLATION}){
 	        				PackageManager.getPackagesInStaging();
 	        			}else{
 	        				document.installForm.run.value = '';
@@ -201,14 +205,21 @@ if(typeof PackageManager == 'undefined') {
 
 	        },
 	        getPackagesInStaging : function(){
-	        	postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=getPackagesInStaging&csrf_token=' + SUGAR.csrf.form_token;
-							var cObj = YAHOO.util.Connect.asyncRequest('POST','index.php',
-							{success: PackageManager.populateGrid, failure: PackageManager.populateGrid}, postData);
+                postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=getPackagesInStaging&csrf_token=' + SUGAR.csrf.form_token;
+                var cObj = YAHOO.util.Connect.asyncRequest(
+                    'POST',
+                    'index.php',
+                    {
+                        success: PackageManager.populateGrid,
+                        failure: PackageManager.populateGrid
+                    },
+                    postData
+                );
 	        },
 	        buildListView : function(result, showDownloadButton){
 	        	var result_div = document.getElementById('search_results_div');
 				display = "<table class='list view' width='100%'  cellpadding='0' cellspacing='0' width='100%' border='0'>";
-		        display += "<tr><th align=left class='listViewThLinkS1'>{/literal}{$MOD.LBL_ML_NAME}{literal}</th><th align=left class='listViewThLinkS1'>{/literal}{$MOD.LBL_ML_TYPE}{literal}</th><th align=left class='listViewThLinkS1'>{/literal}{$MOD.LBL_ML_VERSION}{literal}</th><th align=left class='listViewThLinkS1'>{/literal}{$MOD.LBL_ML_PUBLISHED}{literal}</th><th class='listViewThLinkS1'>{/literal}{$MOD.LBL_ML_DESCRIPTION}{literal}</th><th class='listViewThLinkS1'>{/literal}{$MOD.LBL_ML_ACTION}{literal}</th></tr>";
+		        display += "<tr><th align=left class='listViewThLinkS1'>{$MOD.LBL_ML_NAME}</th><th align=left class='listViewThLinkS1'>{$MOD.LBL_ML_TYPE}</th><th align=left class='listViewThLinkS1'>{$MOD.LBL_ML_VERSION}</th><th align=left class='listViewThLinkS1'>{$MOD.LBL_ML_PUBLISHED}</th><th class='listViewThLinkS1'>{$MOD.LBL_ML_DESCRIPTION}</th><th class='listViewThLinkS1'>{$MOD.LBL_ML_ACTION}</th></tr>";
 		        for (var x = 0; x < result['packages'].length; x++)
 	   			{
 	   				var class_css = "oddListRowS1";
@@ -217,7 +228,7 @@ if(typeof PackageManager == 'undefined') {
                 	}
 	   				install_link = '';
 	   				if(showDownloadButton){
-                		install_link += "<input type=submit class='button' name=\"btn_mode\" onclick=\"this.form.mode.value='Install';this.form.package_id.value="+result['packages'][x]['id']+";this.form.submit();\" value=\"{/literal}{$MOD.LBL_UW_BTN_DOWNLOAD}{literal}\" />";
+                		install_link += "<input type=submit class='button' name=\"btn_mode\" onclick=\"this.form.mode.value='Install';this.form.package_id.value="+result['packages'][x]['id']+";this.form.submit();\" value=\"{$MOD.LBL_UW_BTN_DOWNLOAD}\" />";
                 	}
                 	display += "<tr class=\""+class_css+"\"><td nowrap=\"nowrap\">"+result['packages'][x]['name']+"</td><td nowrap=\"nowrap\">"+result['packages'][x]['type']+"</td><td nowrap=\"nowrap\">"+result['packages'][x]['version']+"</td><td nowrap=\"nowrap\">"+result['packages'][x]['date_published']+"</td><td nowrap=\"nowrap\">"+result['packages'][x]['description']+"</td><td nowrap=\"nowrap\">"+install_link+"</td></tr>";
 	   			}//rof
@@ -260,10 +271,8 @@ if(typeof PackageManager == 'undefined') {
 				PackageManager.hideWaiting();
 	        },
 	        toggleLowerDiv: function(outer_div, animate_div){
-	        {/literal}
                 var show_img = '{$SHOW_IMG}';
                 var hide_img = '{$HIDE_IMG}';
-            {literal}
                 var spn = document.getElementById(outer_div);
                 var anim_div = document.getElementById(animate_div);
 
@@ -275,10 +284,8 @@ if(typeof PackageManager == 'undefined') {
                 spn.innerHTML =(anim_div.style.display == 'none') ? show_img+"&nbsp;Expand" : hide_img+"&nbsp;Collapse";
             },
             toggleDiv: function(outer_div, animate_div){
-            {/literal}
                 var show_img = '{$SHOW_IMG}';
                 var hide_img = '{$HIDE_IMG}';
-            {literal}
                 var spn = document.getElementById(outer_div);
                 var anim_div = document.getElementById(animate_div);
                 _attributes.height.to = (_attributes.height.to == MAX_HEIGHT) ? MIN_HEIGHT : MAX_HEIGHT;
@@ -339,7 +346,10 @@ if(typeof PackageManager == 'undefined') {
 							for ( key in result['nodes'] ) {
 								if(result['nodes'][key]['type']){
 
-									var myobj = { label: result['nodes'][key]['label'], id:result['nodes'][key]['id']};
+									var myobj = {
+									    label: result['nodes'][key]['label'],
+                                        id: result['nodes'][key]['id']
+									};
 		   							tmpNode= new YAHOO.widget.TextNode(myobj, node, false);
 									tmpNode.href = "javascript:PackageManager.catClick('treeview',"+tmpNode.index+");";
 		   							tmpNode.setDynamicLoad(PackageManager.loadDataForNodeForPackage);
@@ -351,7 +361,10 @@ if(typeof PackageManager == 'undefined') {
 									for(pKey in result['nodes'][key]['packages']){
 
 										if(result['nodes'][key]['packages'][pKey]['releases'] && !result['nodes'][key]['packages'][pKey]['releases'].length && result['nodes'][key]['packages'][pKey]['releases'].length != 0){
-											var myobj = { label: result['nodes'][key]['packages'][pKey]['label'], id:result['nodes'][key]['packages'][pKey]['id']};
+											var myobj = {
+                                                label: result['nodes'][key]['packages'][pKey]['label'],
+                                                id: result['nodes'][key]['packages'][pKey]['id']
+                                            };
 			   								var tmpNodePackage = new YAHOO.widget.TaskNode(myobj, tmpNode, true);
 			   								tmpNodePackage.href = "javascript:PackageManager.packageClick('treeview',"+tmpNodePackage.index+");"
 											tmpNodePackage.description = result['nodes'][key]['packages'][pKey]['description']
@@ -365,12 +378,17 @@ if(typeof PackageManager == 'undefined') {
 																		  };
 											if(result['nodes'][key]['packages'][pKey]['releases']){
 												for(releaseKey in result['nodes'][key]['packages'][pKey]['releases']){
-													var myobj = { label: result['nodes'][key]['packages'][pKey]['releases'][releaseKey]['label'], id:result['nodes'][key]['packages'][pKey]['releases'][releaseKey]['id']};
+                                                    var myobj = {
+                                                        label: result['nodes'][key]['packages'][pKey]['releases'][releaseKey]['label'],
+                                                        id: result['nodes'][key]['packages'][pKey]['releases'][releaseKey]['id']
+                                                    };
 
 			   										if(result['nodes'][key]['packages'][pKey]['releases'][releaseKey]['enable'] == true){
 			   											var tmpNodeRelease = new YAHOO.widget.TaskNode(myobj, tmpNodePackage, false);
 														tmpNodeRelease.setDynamicLoad(PackageManager.loadDataForNodeForRelease);
-														tmpNodeRelease.onCheckClick = function(){this.data['isSelected'] = this.checked;};
+                                                        tmpNodeRelease.onCheckClick = function () {
+                                                            this.data['isSelected'] = this.checked;
+                                                        };
 													}else{
 														var tmpNodeRelease = new YAHOO.widget.TextNode(myobj, tmpNodePackage, true);
 													}
@@ -390,7 +408,9 @@ if(typeof PackageManager == 'undefined') {
 	   				PackageManager.hideWaiting();
 	   				if (typeof onCompleteCallback == 'function') onCompleteCallback();
 		  			},
-		  			failure: function(data) {if (typeof onCompleteCallback == 'function') onCompleteCallback();}
+		  			failure: function(data) {
+		  			    if (typeof onCompleteCallback == 'function') onCompleteCallback();
+		  			}
 				}
 
 				postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=getNodes&category_id=' + id + '&csrf_token=' + SUGAR.csrf.form_token;
@@ -425,7 +445,9 @@ if(typeof PackageManager == 'undefined') {
 	   				PackageManager.hideWaiting();
 	   				if (typeof onCompleteCallback == 'function') onCompleteCallback();
 		  			},
-		  			failure: function(data) { if (typeof onCompleteCallback == 'function') onCompleteCallback();}
+		  			failure: function(data) {
+		  			    if (typeof onCompleteCallback == 'function') onCompleteCallback();
+		  			}
 				}
 
 				postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=getLicenseText&file='+ file + '&csrf_token=' + SUGAR.csrf.form_token;
@@ -454,7 +476,9 @@ if(typeof PackageManager == 'undefined') {
 	   				PackageManager.hideWaiting();
 	   				if (typeof onCompleteCallback == 'function') onCompleteCallback();
 		  			},
-		  			failure: function(data) { if (typeof onCompleteCallback == 'function') onCompleteCallback();}
+		  			failure: function(data) {
+		  			    if (typeof onCompleteCallback == 'function') onCompleteCallback();
+		  			}
 				}
 
 				postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=performInstall&file=' + file + '&csrf_token=' + SUGAR.csrf.form_token;
@@ -504,14 +528,15 @@ if(typeof PackageManager == 'undefined') {
         					detailsTab.setContent(html, false);
         					var screenShotTab = _tabs.getTab(2);
         					screenShotTab.setContent(screenshot_html, false);
-        					//detailsTab.activate();
-							//documentationDiv.innerHTML = html;
-							//documentationWorkingDiv.style.display = 'none';
 							PackageManager.hideWaiting();
 	   					}//fi
 	   				if (typeof onCompleteCallback == 'function') onCompleteCallback();
 		  			},
-		  			failure: function(data) { documentationWorkingDiv.style.display = 'none'; PackageManager.hideWaiting();if (typeof onCompleteCallback == 'function') onCompleteCallback();}
+		  			failure: function(data) {
+		  			    documentationWorkingDiv.style.display = 'none';
+		  			    PackageManager.hideWaiting();
+		  			    if (typeof onCompleteCallback == 'function') onCompleteCallback();
+		  			}
 				}
 
 				postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=getDocumentation&package_id='+package_id+'&release_id='+release_id+ '&csrf_token=' + SUGAR.csrf.form_token;
@@ -523,7 +548,9 @@ if(typeof PackageManager == 'undefined') {
 		  			success: function(data) {
 	   					if (typeof onCompleteCallback == 'function') onCompleteCallback();
 		  			},
-		  			failure: function(data) { if (typeof onCompleteCallback == 'function') onCompleteCallback();}
+		  			failure: function(data) {
+		  			    if (typeof onCompleteCallback == 'function') onCompleteCallback();
+		  			}
 				}
 
 				postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=downloadedDocumentation&document_id=' + document_id + '&csrf_token=' + SUGAR.csrf.form_token;
@@ -538,7 +565,6 @@ if(typeof PackageManager == 'undefined') {
 				html += "<tr><td>Name:</td><td>"+node.label+"</td></tr>";
 				html += "<tr><td>Description:</td><td>"+node.description+"</td></tr>";
 				html += "</table>";
-				//dt.innerHTML = html;
 				PackageManager.getDocumentation(node.data.id, '');
 				var detailsTab = _tabs.getTab(0);
         		detailsTab.setContent(html, false);
@@ -546,26 +572,21 @@ if(typeof PackageManager == 'undefined') {
             },
             releaseClick : function(treeid, index){
 				node=YAHOO.widget.TreeView.getNode(treeid, index);
-				//var dt = document.getElementById('Details');
 				var html ="<table>";
 				html += "<tr><td>Description:</td><td>"+node.label+"</td></tr>";
 				html += "<tr><td>Version:</td><td>"+node.version+"</td></tr>";
 				html += "</table>";
-				//dt.innerHTML = html;
 				var detailsTab = _tabs.getTab(0);
         		detailsTab.setContent(html, false);
         		detailsTab.activate();
 				PackageManager.getDocumentation('', node.data.id);
-
             },
             catClick : function(treeid, index){
            		var node = YAHOO.namespace(treeid).selectednode;
-				//var dt = document.getElementById('Details');
 				var html ="<table>";
 				html += "<tr><td>Name:</td><td>"+node.label+"</td></tr>";
 				html += "<tr><td>Description:</td><td>"+node.data['description']+"</td></tr>";
 				html += "</table>";
-				//dt.innerHTML = html;
 				var detailsTab = _tabs.getTab(0);
         		detailsTab.setContent(html, false);
         		detailsTab.activate();
@@ -583,7 +604,6 @@ if(typeof PackageManager == 'undefined') {
             },
             showErrors : function(errors){
             	 dialog = new YAHOO.ext.BasicDialog("loginView", {
-                        //modal:true,
                         autoTabs:true,
                         width:500,
                         height:300,
@@ -608,7 +628,10 @@ if(typeof PackageManager == 'undefined') {
 	        				if(typeof result != 'undefined') {
 	        					var tree = YAHOO.widget.TreeView.getTree('treeview');
 								var root = tree.getRoot();
-								var myobj = { label: 'Updates', id:'updates'};
+                                var myobj = {
+                                    label: 'Updates',
+                                    id: 'updates'
+                                };
 								tmpNode = tree.getNodeByProperty('id', 'updates');
 								if(!tmpNode){
 		   							tmpNode= new YAHOO.widget.TextNode(myobj, root, false);
@@ -619,15 +642,25 @@ if(typeof PackageManager == 'undefined') {
 								tmpNode.expanded = true;
 
 								for (var x = 0; x < result['updates'].length; x++){
-									var myobj = { label: result['updates'][x]['label'], id:result['updates'][x]['id']};
+									var myobj = {
+									    label: result['updates'][x]['label'],
+                                        id:result['updates'][x]['id']
+									};
 		   							var tmpNodeRelease = new YAHOO.widget.TaskNode(myobj, tmpNode, false);
 									tmpNodeRelease.version = result['updates'][x]['version'];
 		   							tmpNodeRelease.href = "javascript:PackageManager.releaseClick('treeview',"+tmpNodeRelease.index+");"
 		   							tmpNodeRelease.setDynamicLoad(PackageManager.loadDataForNodeForRelease);
 									if(result['updates'][x]['type'] == 'patch'){
-										tmpNodeRelease.onCheckClick = function(){this.uncheck();if(confirm('{/literal}{$MOD.MI_REDIRECT_TO_UPGRADE_WIZARD}{literal}')){location.href = '{/literal}{$UPGARDE_WIZARD_URL}{literal}'}};
+										tmpNodeRelease.onCheckClick = function(){
+                                            this.uncheck();
+                                            if(confirm('{$MOD.MI_REDIRECT_TO_UPGRADE_WIZARD}')){
+                                                location.href = '{$UPGARDE_WIZARD_URL}'
+                                            }
+										};
 									}else{
-										tmpNodeRelease.onCheckClick = function(){this.data['isSelected'] = this.checked;};
+										tmpNodeRelease.onCheckClick = function(){
+                                            this.data['isSelected'] = this.checked;
+										};
 									}
 									tmpNodeRelease.type = 'release';
 									tmpNodeRelease.category_id = '';
@@ -637,7 +670,9 @@ if(typeof PackageManager == 'undefined') {
 							}//fi
 				    if (typeof onCompleteCallback == 'function') onCompleteCallback();
 		  			},
-		  			failure: function(data) { if (typeof onCompleteCallback == 'function') onCompleteCallback();}
+		  			failure: function(data) {
+		  			    if (typeof onCompleteCallback == 'function') onCompleteCallback();
+		  			}
 				}
 				PackageManager.hideWaiting();
 				postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=checkForUpdates&type=modules&csrf_token=' + SUGAR.csrf.form_token;
@@ -663,7 +698,7 @@ if(typeof PackageManager == 'undefined') {
 			},
 			refreshTreeRoot : function(){
 				PackageManager.showWaiting();
-				_loadingBar.setHeader("{/literal}{$MOD.LOADING_CATEGORIES}{literal}");
+				_loadingBar.setHeader("{$MOD.LOADING_CATEGORIES}");
  				var callback =	{
 		  			success: function(data) {
 						_loadingBar.hide();
@@ -674,7 +709,10 @@ if(typeof PackageManager == 'undefined') {
 							var node = tree.getRoot();
 							for (var x = 0; x < result['nodes'].length; x++){
 
-								var myobj = { label: result['nodes'][x]['label'], id:result['nodes'][x]['id']};
+								var myobj = {
+								    label: result['nodes'][x]['label'],
+                                    id: result['nodes'][x]['id']
+								};
 		   						tmpNode= new YAHOO.widget.TextNode(myobj, node, false);
 								tmpNode.href = "javascript:PackageManager.catClick('treeview',"+tmpNode.index+");";
 		   						tmpNode.setDynamicLoad(PackageManager.loadDataForNodeForPackage);
@@ -686,7 +724,10 @@ if(typeof PackageManager == 'undefined') {
 	   				PackageManager.hideWaiting();
 	   				if (typeof onCompleteCallback == 'function') onCompleteCallback();
 		  			},
-		  			failure: function(data) {_loadingBar.hide();if (typeof onCompleteCallback == 'function') onCompleteCallback();}
+		  			failure: function(data) {
+                        _loadingBar.hide();
+                        if (typeof onCompleteCallback == 'function') onCompleteCallback();
+		  			}
 				}
 
 				postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=getCategories&csrf_token=' + SUGAR.csrf.form_token;
@@ -695,14 +736,13 @@ if(typeof PackageManager == 'undefined') {
 			},
 			refreshGrid : function(){
 				PackageManager.showWaiting();
-				_loadingBar.setHeader("{/literal}{$MOD.SEARCHING_PACKAGES}{literal}");
+				_loadingBar.setHeader("{$MOD.SEARCHING_PACKAGES}");
  				var callback =	{
 		  			success: function(data) {
 		  			_loadingBar.hide();
                         var result = JSON.parse(data.responseText);
 			    		if(typeof result != 'undefined') {
 			    			_pmg.clearGrid();
-
 	   						for (var x = 0; x < result['releases'].length; x++){
 								var row = new Array();
 								row[0] = result['releases'][x]['description'];
@@ -716,10 +756,12 @@ if(typeof PackageManager == 'undefined') {
 	   				PackageManager.hideWaiting();
 	   				if (typeof onCompleteCallback == 'function') onCompleteCallback();
 		  			},
-		  			failure: function(data) {_loadingBar.hide();if (typeof onCompleteCallback == 'function') onCompleteCallback();}
+		  			failure: function(data) {
+                        _loadingBar.hide();
+                        if (typeof onCompleteCallback == 'function') onCompleteCallback();
+		  			}
 				}
-				var types = "{/literal}{$GRID_TYPE}{literal}";
-				//postData = 'to_pdf=1&module=Administration&action=HandleAjaxCall&method=getReleases&types='+types;
+				var types = "{$GRID_TYPE}";
 				postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=checkForUpdates&type=modules&csrf_token=' + SUGAR.csrf.form_token;
 				var cObj = YAHOO.util.Connect.asyncRequest('POST','index.php',
 								  callback, postData);
@@ -736,24 +778,20 @@ if(typeof PackageManager == 'undefined') {
 	   				PackageManager.hideWaiting();
 	   				if (typeof onCompleteCallback == 'function') onCompleteCallback();
 		  			},
-		  			failure: function(data) {if (typeof onCompleteCallback == 'function') onCompleteCallback();}
+		  			failure: function(data) {
+		  			    if (typeof onCompleteCallback == 'function') onCompleteCallback();
+		  			}
 				}
 
 				postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=getPromotion&csrf_token=' + SUGAR.csrf.form_token;
 				var cObj = YAHOO.util.Connect.asyncRequest('POST','index.php',
 								  callback, postData);
 			},
-			initTabs : function(){
-				/*_tabs = new YAHOO.ext.TabPanel('tabs1');
-				var detailTab = _tabs.addTab('details', "{/literal}{$MOD.ML_LBL_DETAIILS}{literal}");
-				detailTab.setContent('{/literal}{$MOD.ML_DESC_DOCUMENTATION}{literal}', false);
-        		_tabs.addTab('documentation', "{/literal}{$MOD.ML_LBL_DOCUMENTATION}{literal}");
-        		_tabs.addTab('screenshots', "{/literal}{$MOD.ML_LBL_SCREENSHOTS}{literal}");
-        		_tabs.addTab('reviews', "{/literal}{$MOD.ML_LBL_REVIEWS}{literal}");
-        		_tabs.activate('details');*/
-			},
+            initTabs: function () {
+
+            },
 			remove : function(file){
-				if(confirm('{/literal}{$MOD.REMOVE_QUESTION}{literal}')){
+				if(confirm('{$MOD.REMOVE_QUESTION}')){
 				//PackageManager.showWaiting();
 				var callback =	{
 		  			success: function(data) {
@@ -764,7 +802,9 @@ if(typeof PackageManager == 'undefined') {
 	   				PackageManager.hideWaiting();
 	   				if (typeof onCompleteCallback == 'function') onCompleteCallback();
 		  			},
-		  			failure: function(data) {if (typeof onCompleteCallback == 'function') onCompleteCallback();}
+		  			failure: function(data) {
+		  			    if (typeof onCompleteCallback == 'function') onCompleteCallback();
+		  			}
 				}
 
 				postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=remove&file=' + file + '&csrf_token=' + SUGAR.csrf.form_token
@@ -774,20 +814,24 @@ if(typeof PackageManager == 'undefined') {
 			},
 			authenticate : function(username, password, servername){
 			//rrs
-								_loadingBar =
-							new YAHOO.widget.Panel("wait",
-															{ width:"240px",
-															  fixedcenter:true,
-															  close:false,
-															  draggable:false,
-															  modal:true,
-															  visible:false,
-															  effect:{effect:YAHOO.widget.ContainerEffect.FADE, duration:0.5}
-															}
-														);
+                _loadingBar =
+                    new YAHOO.widget.Panel("wait",
+                        {
+                            width: "240px",
+                            fixedcenter: true,
+                            close: false,
+                            draggable: false,
+                            modal: true,
+                            visible: false,
+                            effect: {
+                                effect: YAHOO.widget.ContainerEffect.FADE,
+                                duration: 0.5
+                            }
+                        }
+                    );
 
-					_loadingBar.setHeader("{/literal}{$MOD.AUTHENTICATING}{literal}");
-					_loadingBar.setBody("<img src=\"include/javascript/yui/assets/rel_interstitial_loading.gif?v={VERSION_MARK}\"/>");
+					_loadingBar.setHeader("{$MOD.AUTHENTICATING}");
+					_loadingBar.setBody("<img src=\"include/javascript/yui/assets/rel_interstitial_loading.gif?v={literal}{VERSION_MARK}{/literal}\"/>");
 					_loadingBar.render(document.body);
 					_loadingBar.show();
 				//PackageManager.showWaiting();
@@ -806,24 +850,25 @@ if(typeof PackageManager == 'undefined') {
 									var header_div = document.getElementById('span_display_html');
 			    					if(header_div)
 			    						header_div.innerHTML = '';
-									 {/literal}{if $module_load == 'true'}{literal}
-
+									 {if $module_load == 'true'}
 										PackageManager.refreshTreeRoot();
-									 {/literal}{else}{literal}
+									 {else}
 									_pmg = new PackageManagerGrid();
-
-									 	//PackageManager.refreshGrid();
 									 	_pmg.renderAll();
-									  {/literal}{/if}{literal}
+									  {/if}
 								}else{
 									_loadingBar.hide();
 									alert(result['status']);
 								}
 							}
-	   				//PackageManager.hideWaiting();
 	   				if (typeof onCompleteCallback == 'function') onCompleteCallback();
 		  			},
-		  			failure: function(data) { _loadingBar.hide();btn.value = 'Login';btn.disabled = false;if (typeof onCompleteCallback == 'function') onCompleteCallback();}
+		  			failure: function(data) {
+		  			    _loadingBar.hide();
+		  			    btn.value = 'Login';
+		  			    btn.disabled = false;
+		  			    if (typeof onCompleteCallback == 'function') onCompleteCallback();
+		  			}
 				}
 
 				postData = 'entryPoint=HandleAjaxCall&to_pdf=1&module=Administration&action=HandleAjaxCall&method=authenticate&username='+username+'&password='+password + '&servername=' + servername + '&terms_checked=' + cbTerms.value + '&csrf_token=' + SUGAR.csrf.form_token;
@@ -837,10 +882,10 @@ if(typeof PackageManager == 'undefined') {
 var _fileGrid;
 var _fileDownloadGrid;
 var _fileGridInstalled;
-{/literal}{$PATCHES}{literal}
-{/literal}{$INSTALLED_MODULES}{literal}
+{$PATCHES}
+{$INSTALLED_MODULES}
 PackageManagerGrid = function(){
-{/literal}{if $module_load == 'true'}{literal}
+{if $module_load == 'true'}
         YAHOO.widget.DataTable.MSG_EMPTY = "Empty1";
         YAHOO.widget.DataTable.CLASS_EMPTY = "CLASS EMPT";
         YAHOO.widget.ScrollingDataTable.MSG_EMPTY = "Empty2";
@@ -850,27 +895,68 @@ PackageManagerGrid = function(){
         var patch_downloads_tableWidth = moduleTitleEl.clientWidth - 2+ "px";
 		var patch_downloads_minWidth = moduleTitleEl.clientWidth / 8.5;
 		_fileGrid = new YAHOO.widget.ScrollingDataTable(
-                'patch_downloads',
-                [
-					{key:'name', label: '{/literal}{$ML_FILEGRID_COLUMN.Name}{literal}', minWidth: Math.round(patch_downloads_minWidth*1.5), sortable: true, resizeable: true},
-                    {key:'file', label: '{/literal}{$ML_FILEGRID_COLUMN.Install}{literal}', minWidth: Math.round(patch_downloads_minWidth/1.5), formatter: this.renderInstallButton, resizeable: true},
-                    {key:'unFile', label: '{/literal}{$ML_FILEGRID_COLUMN.Delete}{literal}', minWidth: Math.round(patch_downloads_minWidth), formatter: this.renderDeleteButton, resizeable: true},
-        		    {key:'type', label: '{/literal}{$ML_FILEGRID_COLUMN.Type}{literal}', minWidth: Math.round(patch_downloads_minWidth/1.5)},
-        		    {key:'version', label: '{/literal}{$ML_FILEGRID_COLUMN.Version}{literal}', minWidth: Math.round(patch_downloads_minWidth)},
-        		    {key:'date', label: '{/literal}{$ML_FILEGRID_COLUMN.Published}{literal}', minWidth: Math.round(patch_downloads_minWidth)},
-        	 	    {key:'uninstallable',  label: '{/literal}{$ML_FILEGRID_COLUMN.Uninstallable}{literal}', minWidth: Math.round(patch_downloads_minWidth/1.5)},
-        		    {key:'description',label: '{/literal}{$ML_FILEGRID_COLUMN.Description}{literal}', minWidth: Math.round(patch_downloads_minWidth*1.5), sortable: true}
-        		],
-        		new YAHOO.util.LocalDataSource(mti_data, {
-            		responseSchema: {fields: ['name', 'file', 'unFile', 'type', 'version', 'date', 'uninstallable', 'description', 'upload_file'] },
-            		height: "190px"
-        		}),
+            'patch_downloads',
+            [
                 {
-                    MSG_EMPTY: "",
-                    width : (YAHOO.util.Selector.query('table','content',true).clientWidth - 15) + "px",
-                    height: (document.getElementById("patch_downloads").clientHeight - 25 ) + "px"
+                    key: 'name',
+                    label: '{$ML_FILEGRID_COLUMN.Name}',
+                    minWidth: Math.round(patch_downloads_minWidth * 1.5),
+                    sortable: true,
+                    resizeable: true
+                },
+                {
+                    key: 'file',
+                    label: '{$ML_FILEGRID_COLUMN.Install}',
+                    minWidth: Math.round(patch_downloads_minWidth / 1.5),
+                    formatter: this.renderInstallButton,
+                    resizeable: true
+                },
+                {
+                    key: 'unFile',
+                    label: '{$ML_FILEGRID_COLUMN.Delete}',
+                    minWidth: Math.round(patch_downloads_minWidth),
+                    formatter: this.renderDeleteButton,
+                    resizeable: true
+                },
+                {
+                    key: 'type',
+                    label: '{$ML_FILEGRID_COLUMN.Type}',
+                    minWidth: Math.round(patch_downloads_minWidth / 1.5)
+                },
+                {
+                    key: 'version',
+                    label: '{$ML_FILEGRID_COLUMN.Version}',
+                    minWidth: Math.round(patch_downloads_minWidth)
+                },
+                {
+                    key: 'date',
+                    label: '{$ML_FILEGRID_COLUMN.Published}',
+                    minWidth: Math.round(patch_downloads_minWidth)
+                },
+                {
+                    key: 'uninstallable',
+                    label: '{$ML_FILEGRID_COLUMN.Uninstallable}',
+                    minWidth: Math.round(patch_downloads_minWidth / 1.5)
+                },
+                {
+                    key: 'description',
+                    label: '{$ML_FILEGRID_COLUMN.Description}',
+                    minWidth: Math.round(patch_downloads_minWidth * 1.5),
+                    sortable: true
                 }
-            );
+            ],
+            new YAHOO.util.LocalDataSource(mti_data, {
+                responseSchema: {
+                    fields: ['name', 'file', 'unFile', 'type', 'version', 'date', 'uninstallable', 'description', 'upload_file']
+                },
+                height: "190px"
+            }),
+            {
+                MSG_EMPTY: "",
+                width: (YAHOO.util.Selector.query('table', 'content', true).clientWidth - 15) + "px",
+                height: (document.getElementById("patch_downloads").clientHeight - 25) + "px"
+            }
+        );
         _fileGrid.autoSizeColumns = true;
         _fileGrid.MSG_EMPTY = "empty4";
         _fileGrid.subscribe("beforeWidthChange", function() {
@@ -893,29 +979,63 @@ PackageManagerGrid = function(){
         var moduleTitleEl2 = YAHOO.util.Dom.getElementsByClassName("moduleTitle")[0];
         var installed_grid_tableWidth = moduleTitleEl2.clientWidth - 2+ "px";
 		var minWidth = moduleTitleEl2.clientWidth / 7.45;
-	    _fileGridInstalled = new YAHOO.widget.ScrollingDataTable('installed_grid',
-            [
-			    {key:'name', label: '{/literal}{$ML_FILEGRIDINSTALLED_COLUMN.Name}{literal}', sortable: true, 'minWidth' : Math.round(minWidth*1.5)},
-                {key:'unFile', label: '{/literal}{$ML_FILEGRIDINSTALLED_COLUMN.Action}{literal}', formatter: this.renderUninstallButton, 'minWidth' : Math.round(minWidth/1.5)},
-                {key:'state_file', label: '{/literal}{$ML_FILEGRIDINSTALLED_COLUMN.Enable_Or_Disable}{literal}',formatter: this.renderEnableDisableButton, 'minWidth' : Math.round(minWidth/1.5)},
-      		    {key:'type', label: '{/literal}{$ML_FILEGRIDINSTALLED_COLUMN.Type}{literal}', 'minWidth' : Math.round(minWidth/1.5)},
-      		    {key:'version', label: '{/literal}{$ML_FILEGRIDINSTALLED_COLUMN.Version}{literal}', 'minWidth' : Math.round(minWidth)},
-      		    {key:'date', label: '{/literal}{$ML_FILEGRIDINSTALLED_COLUMN.Date_Installed}{literal}', 'minWidth' : Math.round(minWidth)},
-      		    {key:'description', label: '{/literal}{$ML_FILEGRIDINSTALLED_COLUMN.Description}{literal}', sortable: true, 'minWidth' : Math.round(minWidth*1.5)}
-      		],
-      		new YAHOO.util.LocalDataSource(mti_installed_data, {
-          		responseSchema: {fields: ['name', 'file', 'unFile', 'state_file', 'type', 'version', 'date', 'uninstallable', 'description'] },
-          	    height: "200px"}),
+    _fileGridInstalled = new YAHOO.widget.ScrollingDataTable('installed_grid',
+        [
             {
-	    	   MSG_EMPTY: "",
-	    	   width : (YAHOO.util.Selector.query('table','content',true).clientWidth - 15 ) + "px",
-	    	   height: (document.getElementById("installed_grid").clientHeight - 20 ) + "px"
-	    	}
-    	);
+                key: 'name',
+                label: '{$ML_FILEGRIDINSTALLED_COLUMN.Name}',
+                sortable: true,
+                'minWidth': Math.round(minWidth * 1.5)
+            },
+            {
+                key: 'unFile',
+                label: '{$ML_FILEGRIDINSTALLED_COLUMN.Action}',
+                formatter: this.renderUninstallButton,
+                'minWidth': Math.round(minWidth / 1.5)
+            },
+            {
+                key: 'state_file',
+                label: '{$ML_FILEGRIDINSTALLED_COLUMN.Enable_Or_Disable}',
+                formatter: this.renderEnableDisableButton,
+                'minWidth': Math.round(minWidth / 1.5)
+            },
+            {
+                key: 'type',
+                label: '{$ML_FILEGRIDINSTALLED_COLUMN.Type}',
+                'minWidth': Math.round(minWidth / 1.5)
+            },
+            {
+                key: 'version',
+                label: '{$ML_FILEGRIDINSTALLED_COLUMN.Version}',
+                'minWidth': Math.round(minWidth)
+            },
+            {
+                key: 'date',
+                label: '{$ML_FILEGRIDINSTALLED_COLUMN.Date_Installed}',
+                'minWidth': Math.round(minWidth)
+            },
+            {
+                key: 'description',
+                label: '{$ML_FILEGRIDINSTALLED_COLUMN.Description}',
+                sortable: true,
+                'minWidth': Math.round(minWidth * 1.5)
+            }
+        ],
+        new YAHOO.util.LocalDataSource(mti_installed_data, {
+            responseSchema: {
+                fields: ['name', 'file', 'unFile', 'state_file', 'type', 'version', 'date', 'uninstallable', 'description']
+            },
+            height: "200px"
+        }),
+        {
+            MSG_EMPTY: "",
+            width: (YAHOO.util.Selector.query('table', 'content', true).clientWidth - 15) + "px",
+            height: (document.getElementById("installed_grid").clientHeight - 20) + "px"
+        }
+    );
 
 	    _fileGridInstalled.autoSizeColumns = true;
         _fileGridInstalled.MSG_EMPTY = "empty5";
-        //bugfix for http://yuilibrary.com/projects/yui2/ticket/2528034
        	_fileGridInstalled.getColumn = YAHOO.SUGAR.SelectionGrid.prototype.getColumn;
 
        	_fileGridInstalled.on("renderEvent", function(){
@@ -927,35 +1047,43 @@ PackageManagerGrid = function(){
             }
         });
 
-{/literal}{else}{literal}
+{else}
   		_fileGrid = new YAHOO.ext.grid.DDGrid(
                 'patch_downloads',
                 new YAHOO.ext.grid.DefaultDataModel([]),
                 new YAHOO.ext.grid.DefaultColumnModel([
-					{label: '{/literal}{$ML_FILEGRID_COLUMN.Description}{literal}', width: 215},
-        		    {label: '{/literal}{$ML_FILEGRID_COLUMN.Version}{literal}', width: 72},
-        		    {label: '{/literal}{$ML_FILEGRID_COLUMN.Build}{literal}', width: 80, sortable: true, sortType: sort.asUCString},
-        		    {label: '{/literal}{$ML_FILEGRID_COLUMN.Action}{literal}', width: 90, renderer: this.renderButtons}
+					{
+                        label: '{$ML_FILEGRID_COLUMN.Description}', width: 215
+                    },
+        		    {
+                        label: '{$ML_FILEGRID_COLUMN.Version}', width: 72
+                    },
+        		    {
+                        label: '{$ML_FILEGRID_COLUMN.Build}', width: 80, sortable: true, sortType: sort.asUCString
+                    },
+        		    {
+                        label: '{$ML_FILEGRID_COLUMN.Action}', width: 90, renderer: this.renderButtons
+        		    }
         		])
             );
   	    _fileGrid.autoSizeColumns = true;
     	_fileGrid.autoSizeHeaders = true;
-	{/literal}{/if}{literal}
-	PackageManager.showStatusMessages('{/literal}{$ML_STATUS_MESSAGE}{literal}');
+	{/if}
+	PackageManager.showStatusMessages('{$ML_STATUS_MESSAGE}');
 }
 
 PackageManagerGrid.prototype.renderModuleButtons = function(file){
 	var output =  '<table border=0 cellpadding=0 cellspacing=0><tr><td><form action="index.php?module=Administration&view=module&action=UpgradeWizard_prepare" method="post">';
-    	output += '<input type=submit class=\'button\' name="btn_mode" onclick="this.form.mode.value=\'Install\';this.form.submit();" value="{/literal}{$MOD.LBL_UW_BTN_INSTALL}{literal}" />';
+    	output += '<input type=submit class=\'button\' name="btn_mode" onclick="this.form.mode.value=\'Install\';this.form.submit();" value="{$MOD.LBL_UW_BTN_INSTALL}" />';
         output += '<input type=hidden name="install_file" value="'+file+'" />';
 		output += '<input type=hidden name="mode"/>';
-        output += '{/literal}{sugar_csrf_form_token}{literal}';
+        output += '{sugar_csrf_form_token}';
         output += '</form></td><td>&nbsp;</td>';
 
         output += '<td><form action="index.php?module=Administration&view=module&action=UpgradeWizard" method="post">';
-        output += '<input type=submit class=\'button\' name="run" value="{/literal}{$MOD.LBL_UW_BTN_DELETE_PACKAGE}{literal}" />';
+        output += '<input type=submit class=\'button\' name="run" value="{$MOD.LBL_UW_BTN_DELETE_PACKAGE}" />';
         output += '<input type=hidden name="install_file" value="'+file+'" />';
-        output += '{/literal}{sugar_csrf_form_token}{literal}';
+        output += '{sugar_csrf_form_token}';
         output += '</form></td></tr></table>';
         elCell.innerHTML = output;
 }
@@ -966,10 +1094,10 @@ PackageManagerGrid.prototype.renderInstallButton = function(elCell, oRecord, col
 		var output = "<input type='button' class='button' value='Errors' onClick='javascript:alert(\""+file.substring(7)+"\");'>";
 	}else{
 		var output =  '<span style="text-align:center;"><form action="index.php?module=Administration&view=module&action=UpgradeWizard_prepare" method="post">';
-    	output += '<input type=submit class=\'button\' name="btn_mode" onclick="this.form.mode.value=\'Install\';this.form.submit();" value="{/literal}{$MOD.LBL_UW_BTN_INSTALL}{literal}" />';
+    	output += '<input type=submit class=\'button\' name="btn_mode" onclick="this.form.mode.value=\'Install\';this.form.submit();" value="{$MOD.LBL_UW_BTN_INSTALL}" />';
         output += '<input type=hidden name="install_file" value="'+file+'" />';
 		output += '<input type=hidden name="mode"/>';
-        output += '{/literal}{sugar_csrf_form_token}{literal}';
+        output += '{sugar_csrf_form_token}';
         output += '</form></span>';
     }
 	elCell.innerHTML = output;
@@ -982,10 +1110,10 @@ PackageManagerGrid.prototype.renderUninstallButton = function(elCell, oRecord, c
 		var output = '';
 	}else{
 		var output =  '<span style="text-align:center;"><form action="index.php?module=Administration&view=module&action=UpgradeWizard_prepare" method="post">';
-    	output += '<input type=submit class=\'button\' name="btn_mode" onclick="this.form.mode.value=\'Uninstall\';this.form.submit();" value="{/literal}{$MOD.LBL_UW_UNINSTALL}{literal}" />';
+    	output += '<input type=submit class=\'button\' name="btn_mode" onclick="this.form.mode.value=\'Uninstall\';this.form.submit();" value="{$MOD.LBL_UW_UNINSTALL}" />';
         output += '<input type=hidden name="install_file" value="'+file+'" />';
 		output += '<input type=hidden name="mode"/>';
-        output += '{/literal}{sugar_csrf_form_token}{literal}';
+        output += '{sugar_csrf_form_token}';
         output += '</form></span>';
     }
 
@@ -998,20 +1126,20 @@ PackageManagerGrid.prototype.renderEnableDisableButton = function(elCell, oRecor
 		//enabled
 		var output = '<span style="text-align:center;"><form action="index.php?module=Administration&view=module&action=UpgradeWizard_prepare" method="post">';
 		file = state_file.substring(8);
-		output += '<input type=submit class=\'button\' name="btn_mode" onclick="this.form.mode.value=\'Disable\';this.form.submit();" value="{/literal}{$MOD.LBL_UW_DISABLE}{literal}" />';
+		output += '<input type=submit class=\'button\' name="btn_mode" onclick="this.form.mode.value=\'Disable\';this.form.submit();" value="{$MOD.LBL_UW_DISABLE}" />';
 		 output += '<input type=hidden name="install_file" value="'+file+'" />';
 		output += '<input type=hidden name="mode"/>';
-        output += '{/literal}{sugar_csrf_form_token}{literal}';
+        output += '{sugar_csrf_form_token}';
     	output += '</form></span>';
 	}else if(state_file.indexOf('UNINSTALLABLE') == 0){
 		var output = '';
 	}else{
 		var output = '<span style="text-align:center;"><form action="index.php?module=Administration&view=module&action=UpgradeWizard_prepare" method="post">';
 		file = state_file.substring(9);
-    	output += '<input type=submit class=\'button\' name="btn_mode" onclick="this.form.mode.value=\'Enable\';this.form.submit();" value="{/literal}{$MOD.LBL_UW_ENABLE}{literal}" />';
+    	output += '<input type=submit class=\'button\' name="btn_mode" onclick="this.form.mode.value=\'Enable\';this.form.submit();" value="{$MOD.LBL_UW_ENABLE}" />';
     	output += '<input type=hidden name="install_file" value="'+file+'" />';
 		output += '<input type=hidden name="mode"/>';
-        output += '{/literal}{sugar_csrf_form_token}{literal}';
+        output += '{sugar_csrf_form_token}';
     	output += '</form></span>';
     }
 
@@ -1021,17 +1149,12 @@ PackageManagerGrid.prototype.renderEnableDisableButton = function(elCell, oRecor
 PackageManagerGrid.prototype.renderDeleteButton = function(elCell, oRecord, col, file) {
 
 	var upload_file = oRecord.getData().file;
-var output = "<span style='text-align:center;'><input type='button' class='button' value='{/literal}{$MOD.LBL_UW_BTN_DELETE_PACKAGE}{literal}' onClick='PackageManager.remove(\""+file+"\");'></span>";
-	 	//var output = '<form action="index.php?module=Administration&view=module&action=UpgradeWizard" method="post">';
-       // output += '<input type=submit class=\'button\' name="run" value="{/literal}{$MOD.LBL_UW_BTN_DELETE_PACKAGE}{literal}" />';
-        //output += '<input type=hidden name="install_file" value="'+file+'" />';
-        //output += '</form>';
-
+var output = "<span style='text-align:center;'><input type='button' class='button' value='{$MOD.LBL_UW_BTN_DELETE_PACKAGE}' onClick='PackageManager.remove(\""+file+"\");'></span>";
     elCell.innerHTML = output;
 }
 
 PackageManagerGrid.prototype.renderButtons = function(packageID){
-	var output = "<input type='button' value='Download' class='button' onClick=\"{/literal}{if $INSTALLATION != 0}{literal}this.form.run.value='upload';{/literal}{/if}{literal}this.form.release_id.value='"+packageID+"';this.form.submit();\">";
+	var output = "<input type='button' value='Download' class='button' onClick=\"{if $INSTALLATION != 0}this.form.run.value='upload';{/if}this.form.release_id.value='"+packageID+"';this.form.submit();\">";
     return output;
 }
 PackageManagerGrid.prototype.renderErrorLink = function(show){
@@ -1042,7 +1165,6 @@ PackageManagerGrid.prototype.clearGrid = function(){
     _fileGrid.deleteRows(0, _fileGrid.getRecordSet().getLength())
 }
 PackageManagerGrid.prototype.renderAll = function(){
-   // _fileGrid.render();
 }
 
 PackageManagerGrid.prototype.addData = function(data){
@@ -1051,4 +1173,3 @@ PackageManagerGrid.prototype.addData = function(data){
 
 YAHOO.util.Event.on(window, 'load', PackageManager.initPMG, PackageManager, true);
 </script>
-{/literal}

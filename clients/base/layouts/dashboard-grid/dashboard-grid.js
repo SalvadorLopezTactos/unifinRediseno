@@ -17,7 +17,7 @@
     /**
      * Class applied to HTML element that holds the dashlet grid
      */
-    className: 'dashboard-grid',
+    className: 'dashboard-grid relative mx-2',
 
     /**
      * Event listeners
@@ -50,6 +50,9 @@
             appendTo: 'body',
             containment: null,
             cancel: 'input,textarea,button,select,option,[role="button"]'
+        },
+        resizable: {
+            handles: 'sw,se'
         }
     },
 
@@ -59,6 +62,14 @@
     dashletsLoaded: false,
 
     /**
+     * Flag to know if grid events have been bound
+     *
+     * This prevents duplicate grid event bindings if dashletsLoaded
+     * was changed to force dashlet reload
+     */
+    gridEventsBound: false,
+
+    /**
      * Default options passed to each dashlet container when initilizing the grid
      * item that holds it.
      *
@@ -66,7 +77,6 @@
      */
     defaultElementOptions: {
         autoPosition: false,
-        resizeHandles: 'se, sw',
         x: 0,
         y: 0,
         width: 12,
@@ -100,6 +110,10 @@
         this._setDefaultElementOptions();
         this.tabIndex = this._getTabIndex(options);
         this._setInitialDashlets();
+
+        if (this.isSearchContext()) {
+            this._setupSearchDashboard();
+        }
 
         try {
             this.grid = GridStack.init(this._getGridOptions(), this.el);
@@ -137,7 +151,14 @@
         if (!this.dashletsLoaded) {
             this.loadDashlets();
             this.dashletsLoaded = true;
+
+            // only bind grid events after the initial load
+            if (!this.gridEventsBound) {
+                this.bindGridEvents();
+                this.gridEventsBound = true;
+            }
         }
+        this.grid.$el.toggleClass('grid-stack-empty', this.grid.isAreaEmpty());
     },
 
     /**
@@ -157,15 +178,60 @@
             return;
         }
 
-        var self = this;
         this._super('bindDataChange');
         this.context.on('button:add_dashlet_button:click', this.addDashletClicked, this);
+    },
 
-        // This event is fired on drag, drop, resize, adding, or removing elements
+    /**
+     * Bind GridStack events
+     */
+    bindGridEvents: function() {
+        /* The search's filter dashboard is a special dashboard:
+           1. It's not saved in database by design.
+           2. User can't add/remove dashlets.
+           3. When dashlet is resized/moved, the dashboard shouldn't be saved since it doesn't exist in the database.
+         */
+        if (this.isSearchContext()) {
+            return;
+        }
+
+        // to prevent a race condition, only save after the last save-able event has arrived
+        var debouncedSave = _.debounce(_.bind(this.handleSave, this), 100);
+
+        this.grid.on('removed', _.bind(function(event, items) {
+            debouncedSave();
+        }, this));
+
+        // This event is fired on drag, drop, resize, or adding elements
         // from the grid
-        this.grid.on('change', function(event, items) {
-            self._handleGridChange(event, items);
-        });
+        this.grid.on('change', _.bind(function(event, items) {
+            this._handleGridChange(event, items);
+            debouncedSave();
+        }, this));
+
+        this.grid.on('resizestop', _.bind(function(event, el) {
+            const dashletId = _.first(el.element).getAttribute('data-gs-id');
+            const targetDashlet = _.find(this.dashlets, function(dashlet) {
+                return dashlet.id === dashletId;
+            }, this);
+
+            const dashletView = targetDashlet.view;
+
+            if (_.isUndefined(dashletView)) {
+                return;
+            }
+
+            const viewType = dashletView.type;
+            const panelWrapper = _.find(this._components, function getPanel(panel) {
+                return panel.meta.type === viewType;
+            }, this);
+
+            if (_.isUndefined(panelWrapper)) {
+                return;
+            }
+
+            panelWrapper.manageSizeUpdated();
+        }, this));
     },
 
     /**
@@ -269,8 +335,6 @@
      * @param {View.Layout} dashlet Backbone layout holding our dashlet
      */
     removeDashlet: function(dashlet) {
-        this.grid.removeWidget(dashlet.el);
-
         // We use the unique ID to get its index in our components list and
         // dashlet metadata collection so we can remove the correct dashlet
         // from each
@@ -280,8 +344,12 @@
         });
         this.dashlets.splice(index, 1);
         this._components.splice(index, 1);
+
+        // this action should be performed after splicing the old dashlet
+        // to prevent re-saving it on the grid
+        this.grid.removeWidget(dashlet.el);
+
         dashlet.model.unset('updated');
-        this.handleSave();
     },
 
     collapseDashlet: function(dashlet) {
@@ -301,9 +369,11 @@
                 .resize(el, null, 0);
         } else {
             grid
-                .resizable(el, true)
                 .minHeight(el, el.data('expand-min-height'))
                 .resize(el, null, el.data('expand-height'));
+            if (!this.isSearchContext()) {
+                grid.resizable(el, true);
+            }
         }
     },
 
@@ -349,7 +419,10 @@
             silent: true,
             showAlerts: false,
             success: _.bind(function() {
-                this.model.unset('updated');
+                if (!this.disposed) {
+                    this.model.unset('updated');
+                }
+                this.grid.$el.toggleClass('grid-stack-empty', this.grid.isAreaEmpty());
             }, this),
             error: function() {
                 app.alert.show('error_while_save', {
@@ -386,7 +459,7 @@
 
     /**
      * Ensure our dashlet metadata has the current height/width/position for
-     * each element before saving
+     * each element
      * @param {Event} event ignored
      * @param {Array} items Dashlet grid containers
      * @private
@@ -400,7 +473,6 @@
                 this.dashlets[index] = _.extend(this.dashlets[index], this._getItemAttributes(item));
             }
         }, this);
-        this.handleSave();
     },
 
     /**
@@ -475,6 +547,8 @@
                         height: height,
                     });
                     dashlets.push(dashletDef);
+                    // increment y-value after every row
+                    y += height;
                 });
                 // increment y-value after every dashlet-row
                 y += height;
@@ -555,6 +629,28 @@
     },
 
     /**
+     * Setups dashboard settings for search dasahboard.
+     *
+     * @private
+     */
+    _setupSearchDashboard() {
+        this.defaultGridOptions.cellHeight = 42;
+        this.defaultGridOptions.disableResize = true;
+        this.defaultGridOptions.disableDrag = true;
+        this.defaultGridOptions.marginTop = 50;
+
+        _.each(this.dashlets, function(dashletMeta, index) {
+            this.dashlets[index].minHeight = 1;
+            this.dashlets[index].height = 1;
+
+            if (this.dashlets[index].view.ui_type === 'multi') {
+                this.dashlets[index].minHeight = 4;
+                this.dashlets[index].height = 4;
+            }
+        }, this);
+    },
+
+    /**
      * @inheritdoc
      * @private
      */
@@ -563,6 +659,7 @@
             this.context.off('button:add_dashlet_button:click');
         }
         this.grid.off('change');
+        this.grid.off('removed');
         this._super('_dispose');
     },
 

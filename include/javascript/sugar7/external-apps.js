@@ -71,6 +71,11 @@
 
                 var layoutName = _fixViewName(layoutPieces[0]);
                 var layoutEventName = layoutName === 'list' ? 'recordlist' : layoutName;
+                // Defensive code to make sure layoutName is supported
+                // e.g. PRO doesn't support 'multi-line-list', the process will be skipped
+                if (layoutName && _.isUndefined(modMeta.views[layoutName])) {
+                    return;
+                }
 
                 // get the view: 'list' or 'record'
                 view = modMeta.views[layoutName];
@@ -171,6 +176,9 @@
      */
     var _findFieldInMeta = function(fieldDef, viewMeta) {
         var found = null;
+        if (_.isUndefined(fieldDef) || _.isUndefined(viewMeta)) {
+            return null;
+        }
         _.some(viewMeta.meta.panels, function(panel) {
             return _.some(panel.fields, function(metaField) {
                 if (metaField.subfields) {
@@ -275,6 +283,9 @@
                 });
             };
             var addCatalogToLayout = function(catalog) {
+                if (!catalog || !catalog.layouts) {
+                    return;
+                }
                 _.each(catalog.layouts, function(def) {
                     if (def.module && def.layout) {
                         catalog.type = 'external-app';

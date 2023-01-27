@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Empfohlen von',
     'LBL_LIST_STATUS' => 'Status',
     'LBL_LIST_TITLE' => 'Name',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Vorhersage des Marktzinses',
+    'LBL_MARKET_SCORE' => 'Marktwert',
     'LBL_MOBILE_PHONE' => 'Mobiltelefon:',
     'LBL_MODULE_NAME' => 'Interessenten',
     'LBL_MODULE_NAME_SINGULAR' => 'Interessent',
@@ -330,4 +332,9 @@ Nach der Bestätigung der einzelnen gewünschten Module klicken Sie auf "Speiche
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Interessenten-Konvertierungsvorhersage',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Vorhersagedetails für einen bestimmten Interessenten anzeigen',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Umsatzposten aktivieren',
+    'LBL_REQUIRE_RLIS' => 'Beim Erstellen einer neuen Verkaufschance Umsatzposten erfordern',
+    'LBL_COPY_DATA_RLIS' => 'Beim Erstellen einer neuen Verkaufschance Interessentendaten kopieren',
 );

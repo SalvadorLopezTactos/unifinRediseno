@@ -20,32 +20,6 @@ class QuotesViewSugarpdf extends ViewSugarpdf{
     function display(){
         $this->sugarpdfBean->process();
 
-        // This case is for "email as PDF"
-        if (isset($_REQUEST['email_action']) && $_REQUEST['email_action']=="EmailLayout") {
-            // After the output the object is destroy
-            $fileName = $this->sugarpdfBean->fileName;
-            $bean = $this->sugarpdfBean->bean;
-
-            $tmp = $this->sugarpdfBean->Output('','S');
-            $badoutput = ob_get_contents();
-            if(strlen($badoutput) > 0) {
-                ob_end_clean();
-            }
-            file_put_contents("upload://$fileName", ltrim($tmp));
-
-            $email_id = $this->email_layout($fileName, $bean);
-
-            //redirect
-            if($email_id=="") {
-                //Redirect to quote, since something went wrong
-                echo "There was an error with your request";
-                exit; //end if email id is blank
-            } else {
-                //Redirect to new email draft just created
-                header("Location: index.php?action=Compose&module=Emails&parent_type=Quotes&return_module=Quotes&return_action=DetailView&return_id=".$_REQUEST['record']."&recordId=$email_id"."&parent_id=".$_REQUEST['record']);
-            }
-        }
-
         $this->sugarpdfBean->Output($this->sugarpdfBean->fileName,'D');
         sugar_cleanup(true);
     }

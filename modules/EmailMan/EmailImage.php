@@ -20,7 +20,7 @@ if (!$note->retrieve_by_string_fields(array('id' => $_REQUEST['id'], 'email_type
 	die($mod_strings['LBL_INVALID_ENTRY_POINT']);
 }
 
-$location = $GLOBALS['sugar_config']['upload_dir']."/" . $_REQUEST['id'];
+$location = "upload://" . $_REQUEST['id'];
 
 $mime = getimagesize($location);
 

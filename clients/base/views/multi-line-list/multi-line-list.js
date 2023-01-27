@@ -49,6 +49,7 @@
     className: 'multi-line-list-view',
     drawerModelId: null,
     sideDrawer: null,
+    plugins: ['ConfigDrivenList'],
 
     /**
      * Event handlers for left row actions.
@@ -95,11 +96,26 @@
             };
         }
         this.events = _.extend({}, this.events, leftColumnsEvents, {
-            'click .multi-line-row': 'handleRowClick',
+            'click .multi-line-row td:not(:first-child)': 'handleRowClick',
         });
 
+        if (this.hasFrozenColumn) {
+            this.$el.on('scroll', _.bind(this.toggleFrozenColumnBorder, this));
+        }
         this.autoRefresh(true);
     },
+
+    /**
+     * Show/hide border when scrolling horizontally if the first column is frozen.
+     */
+    toggleFrozenColumnBorder: _.throttle(function() {
+        if (!this.hasFrozenColumn) {
+            return;
+        }
+
+        let $firstColumns = this.$('.table tbody tr td:nth-child(2), .table thead tr th:nth-child(2)');
+        $firstColumns.toggleClass('column-border', this.$el[0].scrollLeft > 0);
+    }, 100),
 
     /**
      * Get fields names from metadata
@@ -131,12 +147,13 @@
         var configMeta = app.metadata.getModule('ConsoleConfiguration');
 
         if (configMeta && options.context && options.context.parent) {
+            let config = configMeta.config;
             var module = options.context.get('module');
             var consoleId = options.context.parent.get('modelId');
             options.meta = options.meta || {};
-            options.meta.filterDef = configMeta.config.filter_def[consoleId][module] || [];
-            var orderByPrimary = configMeta.config.order_by_primary[consoleId][module] || '';
-            var orderBySecondary = configMeta.config.order_by_secondary[consoleId][module] || '';
+            options.meta.filterDef = config.filter_def[consoleId][module] || [];
+            var orderByPrimary = config.order_by_primary[consoleId][module] || '';
+            var orderBySecondary = config.order_by_secondary[consoleId][module] || '';
             var orderBy = orderByPrimary.trim();
             if (orderBySecondary) {
                 orderBy += ',' + orderBySecondary.trim();
@@ -144,6 +161,10 @@
             options.meta.collectionOptions = options.meta.collectionOptions || {};
             options.meta.collectionOptions.params = options.meta.collectionOptions.params || {};
             options.meta.collectionOptions.params.order_by = orderBy;
+            let freezeFirstColumn = config.freeze_first_column && config.freeze_first_column[consoleId] &&
+                !_.isUndefined(config.freeze_first_column[consoleId][module]) ?
+                config.freeze_first_column[consoleId][module] : true;
+            this.hasFrozenColumn = app.config.allowFreezeFirstColumn && freezeFirstColumn;
         }
     },
 
@@ -173,8 +194,26 @@
     setFilterDef: function(options) {
         var meta = options.meta || {};
         if (meta.filterDef) {
+            // filterDef maybe altered by other methods like applyFilter()
+            // but defaultFilterDef always maintains a copy of original default filters
+            options.context.get('collection').defaultFilterDef = meta.filterDef;
             options.context.get('collection').filterDef = meta.filterDef;
         }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    focusRow: function(id) {
+        this.drawerModelId = id;
+        this._super('focusRow', [id]);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    getRowDomForModelId: function(id) {
+        return this.$(`.multi-line-row[data-id="${id}"]`);
     },
 
     /**
@@ -184,13 +223,19 @@
      * @param {jQuery} $el Element to find the row to highlight
      */
     highlightRow: function($el) {
-        var prevRow = this.$('.multi-line-row.current.highlighted');
-        var currRow = $el.closest('.multi-line-row');
-        if (prevRow.length) {
-            prevRow.removeClass('current highlighted');
+        this.unhighlightRows();
+        if ($el.length) {
+            $el.addClass('current highlighted');
         }
-        if (currRow.length) {
-            currRow.addClass('current highlighted');
+    },
+
+    /**
+     * @inheritdoc
+     */
+    unhighlightRows: function() {
+        let highlightedRows = this.$('.multi-line-row.current.highlighted');
+        if (highlightedRows.length) {
+            highlightedRows.removeClass('current highlighted');
         }
     },
 
@@ -207,48 +252,59 @@
             return;
         }
 
-        // highlight the current row
-        this.highlightRow($el);
-
         var modelId = $el.closest('.multi-line-row').data('id');
         var model = this.collection.get(modelId);
-        var sideDrawer = this._getSideDrawer();
-        if (sideDrawer) {
-            if (!sideDrawer.isOpen()) {
-                sideDrawer.open({
+        if (app.sideDrawer && model) {
+            const openDrawer = _.bind(function() {
+                app.sideDrawer.open({
                     layout: 'row-model-data',
                     context: {
                         model: model,
                         module: model.get('_module'),
-                        layout: 'multi-line'
+                        layout: 'multi-line',
+                        modelId: model.id,
+                        parentContext: this.context,
+                        baseModelId: model.get('id'),
+                        fieldDefs: this._getNameFieldDefs(model.get('_module'))
                     }
                 });
                 this.drawerModelId = modelId;
-            } else if (this.drawerModelId !== modelId) {
-                var setRowModel = _.bind(function() {
-                    var rowModelDataLayout = sideDrawer.getComponent('row-model-data');
-                    if (rowModelDataLayout && rowModelDataLayout.setRowModel(model)) {
-                        this.drawerModelId = modelId;
-                    }
-                }, this);
-                if (!sideDrawer.triggerBefore('side-drawer:content-changed', {callback: setRowModel})) {
+            }, this);
+
+            if (app.sideDrawer.isOpen()) {
+                // If the same row was selected again, don't re-open the drawer
+                if (modelId === this.drawerModelId) {
                     return;
                 }
-                setRowModel();
+
+                // If the decided to stay after the unsaved changes warning, don't open the drawer
+                if (!app.sideDrawer.triggerBefore('side-drawer:content-changed', {callback: openDrawer})) {
+                    return;
+                }
             }
+
+            openDrawer();
         }
+    },
+
+    /**
+     * Gets the field defs for the given module's name field
+     * @param module
+     * @return {Object}
+     * @private
+     */
+    _getNameFieldDefs: function(module) {
+        return app.metadata.getModule(module, 'fields').name;
     },
 
     /**
      * Get side drawer.
      * @return {Object} The side drawer.
      * @private
+     * @deprecated since 11.2.0, use app.sideDrawer instead
      */
     _getSideDrawer: function() {
-        if (!this.sideDrawer) {
-            this.sideDrawer = this.layout.getComponent('side-drawer');
-        }
-        return this.sideDrawer;
+        return app.sideDrawer;
     },
 
     /**
@@ -376,8 +432,20 @@
     /**
      * @inheritdoc
      */
+    _render: function() {
+        this._super('_render');
+        this.$el.closest('.dashboard').css('overflow-y', 'hidden');
+    },
+
+    /**
+     * @inheritdoc
+     */
     _dispose: function() {
         this.autoRefresh(false);
+        if (this.hasFrozenColumn) {
+            this.$el.off('scroll', _.bind(this.toggleFrozenColumnBorder, this));
+        }
+        this.$el.closest('.dashboard').css('overflow-y', 'auto');
         this._super('_dispose');
     }
 })

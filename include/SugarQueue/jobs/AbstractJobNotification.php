@@ -118,8 +118,9 @@ abstract class JobNotification
 
     protected function appendHelpLink($body)
     {
-        $readableProductNames =
-            getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+        global $current_user;
+
+        $readableProductNames = $current_user->getProductCodes();
         $readableProductNames = urlencode(implode(',', $readableProductNames));
 
         $link = "https://www.sugarcrm.com/crm/product_doc.php?edition={$GLOBALS['sugar_flavor']}&version={$GLOBALS['sugar_version']}&lang=&module={$this->helpModule}&route=list";

@@ -95,5 +95,13 @@
     _toggleDisable: function() {
         var opportunityId = this.model.get('opportunity_id');
         this.setDisabled(!(_.isUndefined(opportunityId) || _.isEmpty(opportunityId)));
+    },
+
+    /**
+     * @inheritdoc
+     */
+    isAllowedDropdownButton: function() {
+        // Filter logic for when it's on a dashlet
+        return this.view.name !== 'dashlet-toolbar';
     }
 });

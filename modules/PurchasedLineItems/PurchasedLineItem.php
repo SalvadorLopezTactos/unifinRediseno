@@ -158,7 +158,7 @@ class PurchasedLineItem extends Basic
      * @return string The purchase End Date
      * @throws SugarQueryException
      */
-    public function getPurchaseEndDate(string $purchaseId = null): string
+    public function getPurchaseEndDate(string $purchaseId): string
     {
         return $this->getPurchaseDateByType('end', $purchaseId);
     }
@@ -170,7 +170,7 @@ class PurchasedLineItem extends Basic
      * @return string The purchase Start Date
      * @throws SugarQueryException
      */
-    public function getPurchaseStartDate(string $purchaseId = null): string
+    public function getPurchaseStartDate(string $purchaseId): string
     {
         return $this->getPurchaseDateByType('start', $purchaseId);
     }

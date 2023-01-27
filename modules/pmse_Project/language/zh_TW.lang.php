@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => '由使用者建立',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => '上次修改人',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => '系統電子郵件',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => '文件範本',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => '文檔合併',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => '選取...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => '合併文檔至 PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => '文檔合併',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => '商務規則',
     'LBL_PMSE_LABEL_RULE' => '規則',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => '僅限更新記錄（所有更新—參見說明文字）',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => '新紀錄或首次更新',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => '新紀錄和所有更新',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => '關係變更',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => '選擇流程開始的時間。<br><br>新的：建立新記錄後，運行流程。<br><br>首次更新：僅當現有記錄首次滿足條件時，運行流程。<br><br>所有更新：現有記錄每次滿足時，運行流程。<br><br>新記錄或首次更新：無論是在建立記錄期間還是更新記錄期間，僅當記錄首次滿足條件時，運行流程。<br><br>新記錄和所有更新：每次對所有新記錄和現有記錄運行流程。',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => '選擇流程何時開始。<br><br>新建：在創建新記錄時運行流程。<br><br>首次更新：流程僅在現有記錄首次滿足條件時運行。<br><br>所有更新：流程在每次滿足現有記錄的條件時運行。<br><br>新記錄或首次更新：流程僅在記錄創建或記錄更新期間首次滿足記錄的條件時運行。 <br><br>新記錄和所有更新：每次對所有新記錄和現有記錄運行流程。<br><br>關係更改：每次發生關係更改時都會運行流程。',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => '選擇要套用事件觸發程序的 SugarCRM 模組',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => '修復日期',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => ' 錯誤',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => '關係變化評估',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => '欄位',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => '模組欄位評估',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => '模組',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => '所有關聯紀錄',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => '任何關聯紀錄',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => '已新增',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => '已移除',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => '添加或刪除',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => '任何關係',
 
     'LBL_PMSE_RUNTIME_BUTTON' => '執行時間',
 

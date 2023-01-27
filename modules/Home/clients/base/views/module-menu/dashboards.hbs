@@ -11,13 +11,18 @@
  */
 --}}
 {{#each collection.models}}
-    <li{{#eq id ../active.id}} class="active"{{/eq}}>
-        <a class="ellipsis_inline" data-name="{{fieldValue this 'name'}}"  tabindex="-1" href="#{{buildRoute model=this}}" data-route="#{{buildRoute model=this}}">
+    <li class="megamenu-dropdown-item-container {{#eq id ../active.id}}active{{/eq}}">
+        <a class="megamenu-dropdown-item" data-name="{{fieldValue this 'name'}}" tabindex="-1"
+           href="#{{buildRoute model=this}}" data-route="#{{buildRoute model=this}}" rel="tooltip"
+        >
             {{#if this.attributes.default_dashboard}}
-                <i class="fa fas fa-dashboard-default"></i>
+                <i class="sicon sicon-dashboard-default"></i>
             {{else}}
-                <i class="fa fa-th"></i>
+                <i class="sicon sicon-dashboard"></i>
             {{/if}}
-            {{fieldValue this 'name'}}
-        </a></li>
+            <span class="ellipsis_inline">
+                {{fieldValue this 'name'}}
+            </span>
+        </a>
+    </li>
 {{/each}}

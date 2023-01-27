@@ -26,7 +26,7 @@
         // currently the only buttons that set acl_action == 'current_user' are the save_draft and commit buttons
         // if it's not equal to 'current_user' then go up the prototype chain.
         if(this.def.acl_action == 'current_user') {
-            var su = this.context.get('selectedUser') || app.user.toJSON();
+            var su = (this.context && this.context.get('selectedUser')) || app.user.toJSON();
             return su.id === app.user.get('id');
         } else {
             return this._super('hasAccess');

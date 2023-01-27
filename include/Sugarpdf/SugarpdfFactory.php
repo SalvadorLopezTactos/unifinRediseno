@@ -15,7 +15,7 @@ class SugarpdfFactory{
     /**
      * load the correct Tcpdf
      * @param string $type Tcpdf Type
-     * @return valid Tcpdf
+     * @return Sugarpdf
      */
     public static function loadSugarpdf($type, $module, $bean = null, $sugarpdf_object_map = array())
     {

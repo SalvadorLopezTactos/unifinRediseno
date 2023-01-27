@@ -32,7 +32,7 @@
 </td>
 <td width="*">
 {if $lockedFields.{{$street}} === true}
-{$fields.{{$street}}.value|escape:'htmlentitydecode'|escape:'html'|url2html|nl2br}
+{$fields.{{$street}}.value|url2html|nl2br}
 {else}
 {{if $displayParams.maxlength}}
 <textarea id="{{$street}}" name="{{$street}}" maxlength="{{$displayParams.maxlength}}" rows="{{$displayParams.rows|default:4}}" cols="{{$displayParams.cols|default:60}}" tabindex="{{$tabindex}}">{$fields.{{$street}}.value}</textarea>
@@ -56,7 +56,7 @@
 </td>
 <td>
 {if $lockedFields.{{$city}} === true}
-{$fields.{{$city}}.value|escape:'htmlentitydecode'|escape:'html'|url2html|nl2br}
+{$fields.{{$city}}.value|url2html|nl2br}
 {else}
 <input type="text" name="{{$city}}" id="{{$city}}" size="{{$displayParams.size|default:30}}" {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}} value='{$fields.{{$city}}.value}' tabindex="{{$tabindex}}">
 {/if}
@@ -75,7 +75,7 @@
 </td>
 <td>
 {if $lockedFields.{{$state}} === true}
-{$fields.{{$state}}.value|escape:'htmlentitydecode'|escape:'html'|url2html|nl2br}
+{$fields.{{$state}}.value|url2html|nl2br}
 {else}
 <input type="text" name="{{$state}}" id="{{$state}}" size="{{$displayParams.size|default:30}}" {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}} value='{$fields.{{$state}}.value}' tabindex="{{$tabindex}}">
 {/if}
@@ -96,7 +96,7 @@
 </td>
 <td>
 {if $lockedFields.{{$postalcode}} === true}
-{$fields.{{$postalcode}}.value|escape:'htmlentitydecode'|escape:'html'|url2html|nl2br}
+{$fields.{{$postalcode}}.value|url2html|nl2br}
 {else}
 <input type="text" name="{{$postalcode}}" id="{{$postalcode}}" size="{{$displayParams.size|default:30}}" {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}} value='{$fields.{{$postalcode}}.value}' tabindex="{{$tabindex}}">
 {/if}
@@ -117,7 +117,7 @@
 </td>
 <td>
 {if $lockedFields.{{$country}} === true}
-{$fields.{{$country}}.value|escape:'htmlentitydecode'|escape:'html'|url2html|nl2br}
+{$fields.{{$country}}.value|url2html|nl2br}
 {else}
 <input type="text" name="{{$country}}" id="{{$country}}" size="{{$displayParams.size|default:30}}" {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}} value='{$fields.{{$country}}.value}' tabindex="{{$tabindex}}">
 {/if}

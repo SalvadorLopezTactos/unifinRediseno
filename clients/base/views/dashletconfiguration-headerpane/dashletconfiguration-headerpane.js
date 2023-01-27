@@ -132,6 +132,9 @@
             this.model.attributes
         );
         this._translatedLabel = label;
+        if (this.model.get('templateEdit') !== 'detail') {
+            this.model.set('templateEdit', 'edit');
+        }
         this.model.set('label', label, {silent: true});
         app.view.View.prototype._renderHtml.call(this);
     }

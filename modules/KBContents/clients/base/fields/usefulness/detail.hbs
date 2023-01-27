@@ -12,7 +12,15 @@
 }}
 <div class="btn-group pull-right">
 	<a class="btn{{#if voted}} disabled{{/if}}{{#if votedNotUseful}} voted active{{/if}}"
-	   data-action="notuseful"><i class="fa fa-thumbs-o-down"></i> {{str "LBL_NOT_USEFUL" this.module}}</a>
+	   data-action="notuseful"
+        >
+            <i class="sicon sicon-thumbs-down"></i>
+            {{str "LBL_NOT_USEFUL" this.module}}
+        </a>
 	<a class="btn{{#if voted}} disabled{{/if}}{{#if votedUseful}} voted active{{/if}}"
-	   data-action="useful"><i class="fa fa-thumbs-o-up"></i> {{str "LBL_USEFUL" this.module}}</a>
+	   data-action="useful"
+        >
+            <i class="sicon sicon-thumbs-up"></i>
+            {{str "LBL_USEFUL" this.module}}
+        </a>
 </div>

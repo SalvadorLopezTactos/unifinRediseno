@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Toate tablourile de bord pentru modulul {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Toate tablourile de bord pentru modulul {{module}} vizualizarea {{view}}',
     'LBL_COPY_OF' => 'Copie {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Tablourile de bord Sertar de focalizare nu pot fi șterse.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Creare Tablou de bord',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Sigur doriți să restabiliți acest tablou de bord la aspectul implicit?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Sigur doriți să restabiliți tabloul de bord la aspectul implicit?',
+    'LBL_FILTER_UTILS_SELECT' => 'Atribuit',
 );

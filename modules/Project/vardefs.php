@@ -164,7 +164,7 @@ $dictionary['Project'] = array(
 			'required' => true,
 			'dbType' => 'varchar',
 			'type' => 'name',
-			'len' => 50,
+            'len' => 50,
 			'unified_search' => true,
             'full_text_search' => array(
                 'enabled' => true,
@@ -173,7 +173,6 @@ $dictionary['Project'] = array(
             ),
 			'comment' => 'Project name',
 			'importable' => 'required',
-            'required' => true,
 		),
 		'description' => array(
 			'name' => 'description',

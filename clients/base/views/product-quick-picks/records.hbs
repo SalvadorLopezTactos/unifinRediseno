@@ -13,35 +13,25 @@
 {{#if this.dataFetched}}
     <div class="tab-pane active">
     {{#if recentCollection.length}}
-        {{#eq this.activeTab 'recent-product'}}
-                <ul class="unstyled listed recent-records-list">
-                    {{#each recentCollection.models}}
-                        <li class="recent-records">
-                            <a data-record-id="{{fieldValue this "id"}}" href="javascript:void(0)">
-                                <i class="fa fa-list-alt"></i>
-                                <span class="recent-link" rel="tooltip" data-original-title="{{fieldValue this "name"}}">{{fieldValue this "name"}}</span>
-                            </a>
-                        </li>
-                    {{/each}}
-                </ul>
-        {{else}}
-                <ul class="unstyled listed recent-records-list">
-                    {{#each recentCollection.models}}
-                        <li class="recent-records">
-                            <a data-record-id="{{fieldValue this "id"}}" href="javascript:void(0)">
-                                <i class="fa fa-list-alt"></i>
-                                <span class="recent-link" rel="tooltip" data-original-title="{{fieldValue this "name"}}">{{fieldValue this "name"}}</span>
-                            </a>
-                        </li>
-                    {{/each}}
-                </ul>
+        <ul class="unstyled listed recent-records-list">
+            {{#each recentCollection.models}}
+                <li class="recent-records" data-record-id="{{fieldValue this "id"}}">
+                    <i class="sicon sicon-list quick-picks-list"></i>
+                    <a href="javascript:void(0)">
+                        <span class="recent-link" rel="tooltip" data-original-title="{{fieldValue this "name"}}">{{fieldValue this "name"}}</span>
+                    </a>
+                    <i class="sicon sicon-preview quick-picks-preview" rel="tooltip" data-original-title="{{str 'LBL_PREVIEW'}}"></i>
+                </li>
+            {{/each}}
+        </ul>
+        {{#eq this.activeTab 'favorites'}}
             {{#notEq this.pageNumList.pageNum '1'}}
                     <div class="block-footer">
                         <nav class="pagination" aria-label="page-navigation">
                             <ul>
                                 <li class="favorite-pagination">
                                     <a class="paginate-aria-button nav-previous btn btn-link btn-invisible {{#if this.isPrevDisabled}}disabled{{/if}}" data-page-id="{{this.pageNumClicked}}" data-action="{{#unless this.isPrevDisabled}}page-nav-clicked{{/unless}}" aria-label="Previous">
-                                        <span class="previous-fav fa fa-chevron-left {{#if this.isPrevDisabled}}disabled{{/if}}" data-page-id="{{this.pageNumClicked}}" aria-hidden="true"></span>
+                                        <span class="previous-fav sicon sicon-chevron-left {{#if this.isPrevDisabled}}disabled{{/if}}" data-page-id="{{this.pageNumClicked}}" aria-hidden="true"></span>
                                     </a>
                                 </li>
                                 {{#each this.pageNumList}}
@@ -56,7 +46,7 @@
                                 {{/each}}
                                 <li class="favorite-pagination">
                                     <a class="paginate-aria-button nav-next btn btn-link btn-invisible {{#if this.isNextDisabled}}disabled{{/if}}" data-page-id="{{this.pageNumClicked}}" data-action="{{#unless this.isNextDisabled}}page-nav-clicked{{/unless}}" aria-label="Next">
-                                        <span class="next-fav fa fa-chevron-right {{#if this.isNextDisabled}}disabled{{/if}}" data-page-id="{{this.pageNumClicked}}" aria-hidden="true"></span>
+                                        <span class="next-fav sicon sicon-chevron-right {{#if this.isNextDisabled}}disabled{{/if}}" data-page-id="{{this.pageNumClicked}}" aria-hidden="true"></span>
                                     </a>
                                 </li>
                             </ul>

@@ -26,6 +26,7 @@ use Sugarcrm\Sugarcrm\Security\Context;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Language;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 use Sugarcrm\Sugarcrm\ProductDefinition\Config\Config as ProductDefinitionConfig;
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 /**
  * To get human readable, non-localized subscriptions such Enterprise, Sell, Serve, etc.
@@ -46,19 +47,30 @@ function getReadableProductNames(array $subscriptions) : array
     static $licenseMapping = [
         'SUGAR_SELL' => 'Sell',
         'SUGAR_SERVE' => 'Serve',
+        'SUGAR_SELL_ESSENTIALS' => 'Sell Essentials',
+        'SUGAR_SELL_BUNDLE' => 'Sell Bundle',
+        'SUGAR_SELL_PREMIER_BUNDLE' => 'Sell Premier',
+        'SUGAR_SELL_ADVANCED_BUNDLE' => 'Sell Advanced',
     ];
 
     if (!empty($sugar_flavor) && $flavorMapping[$sugar_flavor]) {
         $currentFlavor = $flavorMapping[$sugar_flavor];
     }
+
     foreach ($subscriptions as $sub) {
-        if ($sub == 'CURRENT' && !empty($currentFlavor)) {
-            $readableNames[] = $currentFlavor;
-        } elseif (!empty($licenseMapping[$sub])) {
-            $readableNames[] = $licenseMapping[$sub];
+        $customerProductName = SubscriptionManager::instance()->getCustomerProductNameByKey($sub);
+        if (!empty($customerProductName)) {
+            // using customer_product_name for readable name
+            $readableNames[] = $customerProductName;
         } else {
-            // just in case
-            $readableNames[] = $sub;
+            if ($sub === 'CURRENT' && !empty($currentFlavor)) {
+                $readableNames[] = $currentFlavor;
+            } elseif (!empty($licenseMapping[$sub])) {
+                $readableNames[] = $licenseMapping[$sub];
+            } else {
+                // just in case
+                $readableNames[] = $sub;
+            }
         }
     }
     return $readableNames;
@@ -70,6 +82,8 @@ function make_sugar_config(&$sugar_config)
     global $admin_export_only;
     global $cache_dir;
     global $calculate_response_time;
+    global $allow_freeze_first_column;
+    global $freeze_list_headers;
     global $clear_resolved_date;
     global $create_default_user;
     global $dateFormats;
@@ -126,9 +140,11 @@ function make_sugar_config(&$sugar_config)
     'export_delimiter' => empty($export_delimiter) ? ',' : $export_delimiter,
     'cache_dir' => empty($cache_dir) ? 'cache/' : $cache_dir,
     'calculate_response_time' => empty($calculate_response_time) ? true : $calculate_response_time,
+    'allow_freeze_first_column' => empty($allow_freeze_first_column) ? true : $allow_freeze_first_column,
+    'freeze_list_headers' => empty($freeze_list_headers) ? true : $freeze_list_headers,
     'clear_resolved_date' => empty($clear_resolved_date) ? true : $clear_resolved_date,
     'create_default_user' => empty($create_default_user) ? false : $create_default_user,
-    'chartEngine' => 'sucrose',
+    'chartEngine' => 'chartjs',
     'catalog_enabled' => false,
     'catalog_url' => 'https://appcatalog.service.sugarcrm.com',
     'commentlog' => array(
@@ -289,9 +305,19 @@ function make_sugar_config(&$sugar_config)
         'sugar_push' => [
             'max_retries' => 2,
             'service_urls' => [
-                'default' => 'https://sugarpush.service.sugarcrm.com',
+                'default' => 'https://sugarpush-%s-prod.service.sugarcrm.com', // sprintf template
                 'us-west-2' => 'https://sugarpush-us-west-2-prod.service.sugarcrm.com',
             ],
+        ],
+        'document_merge' => [
+            'max_retries' => 3,
+            'service_urls' => [
+                'default' => 'https://document-merge-us-west-2-prod.service.sugarcrm.com',
+            ],
+        ],
+        'additional_http_referer' => [
+            'account-d.docusign.com',
+            'account.docusign.com',
         ],
     );
 }
@@ -318,11 +344,13 @@ function get_sugar_config_defaults()
     'clear_resolved_date' => true,
     'cache_dir' => 'cache/',
     'calculate_response_time' => true,
+    'allow_freeze_first_column' => true,
+    'freeze_list_headers' => true,
     'commentlog' => array(
         'maxchars' => 500,
     ),
     'create_default_user' => false,
-    'chartEngine' => 'sucrose',
+    'chartEngine' => 'chartjs',
     'catalog_enabled' => false,
     'catalog_url' => 'https://appcatalog.service.sugarcrm.com',
     'date_formats' => array (
@@ -559,6 +587,12 @@ function get_sugar_config_defaults()
                 'timeout_ms' => 300, // max number of ms to allow cURL execution (default is connect_timeout_ms * 2)
             ],
         ],
+        'gcs_client' => [
+          'service_url' => 'https://gcs-api-us-west-2-prod.service.sugarcrm.com',
+        ],
+        'map_key' => [
+          'bing' => 'AuIEmeKGjvNV037yKiYGV0B3cxqNmx6FWnode0Hj8tjQPjK1zJP-7GAESccoCDUA',
+        ],
         'enable_link_to_drawer' => true,
         'push_notification' => [
             'enabled' => false,
@@ -566,8 +600,14 @@ function get_sugar_config_defaults()
         'sugar_push' => [
             'max_retries' => 2,
             'service_urls' => [
-                'default' => 'https://sugarpush.service.sugarcrm.com',
+                'default' => 'https://sugarpush-%s-prod.service.sugarcrm.com', // sprintf template
                 'us-west-2' => 'https://sugarpush-us-west-2-prod.service.sugarcrm.com',
+            ],
+        ],
+        'document_merge' => [
+            'max_retries' => 3,
+            'service_urls' => [
+                'default' => 'https://document-merge-us-west-2-prod.service.sugarcrm.com',
             ],
         ],
         'aws_connect' => [
@@ -575,6 +615,13 @@ function get_sugar_config_defaults()
                 '*.amazonaws.com', // used by AWS Connect chat and Portal chat
                 '*.static.connect.aws', // used by AWS Connect to serve static content
             ],
+            'portal_allow_list_domains' => [
+                'wss://*.amazonaws.com', // used by Portal to initiate chat
+            ],
+        ],
+        'additional_http_referer' => [
+            'account-d.docusign.com',
+            'account.docusign.com',
         ],
     );
 
@@ -786,7 +833,7 @@ function get_assigned_team_name($assigned_team_id)
     static $team_list = null;
 
     if(empty($team_list))
-    $team_list =get_team_array(false,"");
+    $team_list = get_team_array(false);
 
     if (isset($team_list[$assigned_team_id])) {
         return $team_list[$assigned_team_id];
@@ -1767,6 +1814,44 @@ function is_admin($user)
 }
 
 /**
+ * Check if the current user has Maps license
+ *
+ * @return bool
+ */
+function hasMapsLicense(): bool
+{
+    global $current_user;
+
+    if (empty($current_user) || empty($current_user->id)) {
+        return false;
+    }
+
+    $sm = SubscriptionManager::instance();
+    $licenses = $sm->getAllImpliedSubscriptions($sm->getAllUserSubscriptions($current_user));
+
+    return in_array('MAPS', $licenses);
+}
+
+/**
+ * Check if the current user has Hint license
+ *
+ * @return bool
+ */
+function hasHintLicense(): bool
+{
+    global $current_user;
+
+    if (empty($current_user) || empty($current_user->id)) {
+        return false;
+    }
+
+    $sm = SubscriptionManager::instance();
+    $licenses = $sm->getAllImpliedSubscriptions($sm->getAllUserSubscriptions($current_user));
+
+    return in_array('HINT', $licenses);
+}
+
+/**
  * Return the display name for a theme if it exists.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -1878,7 +1963,7 @@ function sugar_die($error_message, $exit_code = 1)
     @header("HTTP/1.0 500 Server Error");
     @header("Status: 500 Server Error");
     sugar_cleanup();
-    echo $error_message;
+    echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8');
     die($exit_code);
 }
 
@@ -2664,7 +2749,7 @@ function values_to_keys($array)
     return $new_array;
 }
 
-function clone_relationship(&$db, $tables = array(), $from_column, $from_id, $to_id)
+function clone_relationship(DBManager $db, array $tables, string $from_column, string $from_id, string $to_id): void
 {
     global $dictionary;
     foreach ($tables as $table) {
@@ -2822,7 +2907,7 @@ function number_empty($value)
     return empty($value) && $value != '0';
 }
 
-function get_bean_select_array($add_blank=true, $bean_name, $display_columns, $where='', $order_by='', $blank_is_none=false)
+function get_bean_select_array($add_blank, $bean_name, $display_columns, $where = '', $order_by = '', $blank_is_none = false)
 {
     $focus = BeanFactory::newBeanByName($bean_name);
     $user_array = array();
@@ -3076,7 +3161,7 @@ function check_php_version(string $version = PHP_VERSION)
         return -1;
     }
 
-    if (version_compare($version, '7.5.0-dev', '>=')) {
+    if (version_compare($version, '8.1.0-dev', '>=')) {
         return -1;
     }
 
@@ -3172,6 +3257,16 @@ function sugar_cleanup($exit = false)
 
     $container = Container::getInstance();
     $context = $container->get(Context::class);
+
+    $err = error_get_last();
+    // In case of FATAL error:
+    // This will rollback any installed package if any was installed in a last few minutes.
+    // Note: Kind of defense against a package putting the whole application in a broken state.
+    if (in_array($err['type'] ?? 0, [E_ERROR, E_COMPILE_ERROR, E_PARSE])) {
+        (new Sugarcrm\Sugarcrm\PackageManager\PackageManager())->handleApplicationFatalError(
+            new ErrorException($err['message'], 0, 0, $err['file'], $err['line'])
+        );
+    }
 
     if ($context->hasActiveSubject()) {
         $logger = $container->get(LoggerInterface::class . '-security');
@@ -3368,7 +3463,7 @@ function display_stack_trace($textOnly=false)
     echo $out;
 }
 
-function StackTraceErrorHandler($errno, $errstr, $errfile,$errline, $errcontext)
+function StackTraceErrorHandler($errno, $errstr, $errfile, $errline)
 {
     // prevent handling errors suppressed by @-operator
     // @link http://php.net/set_error_handler#example-470
@@ -3515,7 +3610,7 @@ function is_windows()
 function is_writable_windows($file)
 {
     if ($file[strlen($file)-1]=='/') {
-        return is_writable_windows($file.uniqid(mt_rand()).'.tmp');
+        return is_writable_windows($file.uniqid(strval(mt_rand())).'.tmp');
     }
 
     // the assumption here is that Windows has an inherited permissions scheme
@@ -3916,10 +4011,9 @@ function setPhpIniSettings()
         // set Secure flag for sesion cookie only for HTTPS protocol
         if (isHTTPS()) {
             ini_set('session.cookie_secure', '1');
+            //set SameSite = Lax for session
+            ini_set('session.cookie_samesite', 'None');
         }
-
-        //set SameSite = Lax for session
-        ini_set('session.cookie_samesite', 'Lax');
     }
 }
 
@@ -4124,87 +4218,6 @@ function getTrackerSubstring($name)
     }
 
     return $chopped;
-}
-function generate_search_where ($field_list=array(),$values=array(),&$bean,$add_custom_fields=false,$module='')
-{
-    $where_clauses= array();
-    $like_char='%';
-    $table_name=$bean->object_name;
-    foreach ($field_list[$module] as $field=>$parms) {
-        if (isset($values[$field]) && $values[$field] != "") {
-            $operator='like';
-            if (!empty($parms['operator'])) {
-                $operator=$parms['operator'];
-            }
-            if (is_array($values[$field])) {
-                $operator='in';
-                $field_value='';
-                foreach ($values[$field] as $key => $val) {
-                    if ($val != ' ' and $val != '') {
-                        if (!empty($field_value)) {
-                            $field_value.=',';
-                        }
-                        $field_value .= "'".$GLOBALS['db']->quote($val)."'";
-                    }
-                }
-            } else {
-                $field_value=$GLOBALS['db']->quote($values[$field]);
-            }
-            //set db_fields array.
-            if (!isset($parms['db_field']) ) {
-                $parms['db_field'] = array($field);
-            }
-            if (isset($parms['my_items']) and $parms['my_items'] == true) {
-                global $current_user;
-                $field_value = $GLOBALS['db']->quote($current_user->id);
-                $operator='=';
-            }
-
-            $where='';
-            $itr=0;
-            if ($field_value != '') {
-
-                foreach ($parms['db_field'] as $db_field) {
-                    if (strstr($db_field,'.')===false) {
-                        $db_field=$bean->table_name.".".$db_field;
-                    }
-                    if ($GLOBALS['db']->supports('case_sensitive') &&  isset($parms['query_type']) && $parms['query_type']=='case_insensitive') {
-                        $db_field='upper('.$db_field.")";
-                        $field_value=strtoupper($field_value);
-                    }
-
-                    $itr++;
-                    if (!empty($where)) {
-                        $where .= " OR ";
-                    }
-                    switch (strtolower($operator)) {
-                        case 'like' :
-                            $where .=  $db_field . " like '".$field_value.$like_char."'";
-                            break;
-                        case 'in':
-                            $where .=  $db_field . " in (".$field_value.')';
-                            break;
-                        case '=':
-                            $where .=  $db_field . " = '".$field_value ."'";
-                            break;
-                    }
-                }
-            }
-            if (!empty($where)) {
-                if ($itr>1) {
-                    array_push($where_clauses, '( '.$where.' )');
-                } else {
-                    array_push($where_clauses, $where);
-                }
-            }
-        }
-    }
-    if ($add_custom_fields) {
-        $bean->setupCustomFields($module);
-        $bean->custom_fields->setWhereClauses($where_clauses);
-    }
-
-    return $where_clauses;
 }
 
 function add_quotes($str)
@@ -4617,8 +4630,11 @@ function can_start_session()
 function load_link_class($properties)
 {
     $class = 'Link2';
-    if (!empty($properties['link_class']) && !empty($properties['link_file'])) {
-        require_once $properties['link_file'];
+    if (!empty($properties['link_class'])) {
+        if (!class_exists($properties['link_class']) && !empty($properties['link_file'])) {
+            LoggerManager::getLogger()->fatal('Usage of "link_file" in vardefs has been deprecated. This code will stop working from the next release');
+            require_once $properties['link_file'];
+        }
         $class = $properties['link_class'];
     }
 
@@ -4923,6 +4939,25 @@ function getMajorMinorVersion($version)
     return $version;
 }
 
+/**
+ * decode the version string to get the minor version
+ * @param string $version version string
+ * @return int
+ */
+function getMinorVersion(string $version) : int
+{
+    $versions = explode('.', $version);
+    return (int) $versions[1] ?? '0';
+}
+
+/**
+ * check if the instance is on cloud
+ */
+function isOnCloud() : bool
+{
+    $insights = \SugarConfig::getInstance()->get('cloud_insight', []);
+    return !empty($insights['enabled']);
+}
 /**
  * Return string composed of seconds & microseconds of current time, without dots
  * @return string
@@ -6012,4 +6047,80 @@ function isHTTPS() : bool
 function isFromApi() : bool
 {
     return (defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') === 'api');
+}
+
+function stable_asort(array &$input) : bool
+{
+    $i = 0;
+    foreach ($input as $key => $value) {
+        $input[$key] = [$i++, $value];
+    }
+
+    $result = uasort($input, function ($x, $y) {
+        if ($x[1] == $y[1]) {
+            return $x[0] - $y[0];
+        }
+
+        $array = [-1 => $x[1], 1 => $y[1]];
+        asort($array, SORT_REGULAR);
+        reset($array);
+        return key($array);
+    });
+
+    foreach ($input as $key => $value) {
+        $input[$key] = $value[1];
+    }
+
+    return $result;
+}
+
+function stable_uasort(array &$input, callable $comparator) : bool
+{
+    $i = 0;
+    foreach ($input as &$value) {
+        $value = [$i++, $value];
+    }
+
+    $result = uasort($input, function (array $a, array $b) use ($comparator) : int {
+        $result = call_user_func($comparator, $a[1], $b[1]);
+        return $result == 0 ? $a[0] - $b[0] : $result;
+    });
+
+    foreach ($input as &$value) {
+        $value = $value[1];
+    }
+
+    return $result;
+}
+
+/**
+ * Given a string of help text, generates HTML for a help button for use in BWC modules.
+ * Clicking the help icon will show the given help text
+ *
+ * @param string $helpText the help text to show
+ * @return string the HTML for the help text button
+ */
+function generateBwcHelpIcon($helpText)
+{
+    $helpText = str_replace("'", "\'", htmlspecialchars($helpText));
+    $helpImage = SugarThemeRegistry::current()->getImageURL('helpInline.png');
+    $onClick  = "return SUGAR.util.showHelpTips(this,'$helpText')";
+    $altTag = $GLOBALS['app_strings']['LBL_ALT_INFO'];
+
+    return <<<EOHTML
+<img border="0"
+    onclick="$onClick"
+    src="$helpImage"
+    alt="$altTag"
+    class="inlineHelpTip"
+    />
+EOHTML;
+}
+
+function disableXmlEntityLoader(): void
+{
+    if (version_compare(PHP_VERSION, '8.0.0', '<')) {
+        // libxml_disable_entity_loader function is removed in PHP8 since external entity loading is disabled by default
+        libxml_disable_entity_loader(true);
+    }
 }

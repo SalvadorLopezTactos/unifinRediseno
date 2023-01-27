@@ -11,7 +11,6 @@
  */
 *}
 <script>
-{literal}
 	$(function() {
 	var $dialog = $('<div></div>')
 		.html(SUGAR.language.get('app_strings', 'LBL_SEARCH_HELP_TEXT'))
@@ -27,7 +26,6 @@
 	});
 	
 	});
-{/literal}
 </script>
 <table width="100%" cellspacing="0" cellpadding="0" border="0">
 <tr>
@@ -142,9 +140,7 @@
 </table>
 
 <script>
-{literal}
 	if(typeof(loadSSL_Scripts)=='function'){
 		loadSSL_Scripts();
 	}
-{/literal}	
 </script>

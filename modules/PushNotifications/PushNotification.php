@@ -40,16 +40,17 @@ class PushNotification extends Basic
         if ($service && $user) {
             $extraData = $this->extra_data ? json_decode($this->extra_data, true) : [];
 
-            $data = array_merge([
+            $data = [
                 'notification_type' => $this->notification_type,
                 'module_name' => $this->parent_type,
                 'record_id' => $this->parent_id,
-            ], $extraData['data'] ?? []);
+                'extra_data' => isset($extraData['data']) ? json_encode($extraData['data']) : '',
+            ];
 
             $message = [
                 'title' => $this->name,
                 'body' => $this->description,
-                'data' => json_encode($data),
+                'data' => $data,
             ];
 
             foreach (self::$PLATFORMS as $platform) {

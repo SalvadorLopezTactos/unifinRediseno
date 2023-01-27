@@ -38,12 +38,18 @@
      */
     initialize: function(options) {
         this._super('initialize', [options]);
+        this.events = _.extend({}, this.events, {
+            'click [data-action=addRow]': 'onAddRow'
+        });
 
         // undo flex-list's hardcoding and re-hardcode to use the subpanel-list-create.hbs
         this.template = app.template.getView('subpanel-list-create');
 
+        // Set necessary context values
+        let settings = this.context.get('settings');
         this.context.set({
-            isCreateSubpanel: true
+            isCreateSubpanel: true,
+            allowEmpty: settings && settings.allowEmpty
         });
     },
 
@@ -70,9 +76,9 @@
                 // need to trigger on app.controller.context because of contexts changing between
                 // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
                 // app.controller.context is the only consistent context to use
-                var viewDetails = this.closestComponent('create') ?
-                    this.closestComponent('create') :
-                    this.closestComponent('record');
+                var viewDetails = this.closestComponent('create') ||
+                    this.closestComponent('record') ||
+                    this.closestComponent('convert');
 
                 if (!_.isUndefined(viewDetails)) {
                     app.controller.context.on(viewDetails.cid + ':productCatalogDashlet:add',
@@ -122,7 +128,11 @@
      */
     resetSubpanel: function() {
         this.collection.reset();
-        this._addBeanToList(true);
+
+        // Unless we allow an empty list of models, add a default model
+        if (!this.context.get('allowEmpty')) {
+            this._addBeanToList(true);
+        }
     },
 
     /**
@@ -170,8 +180,10 @@
         }
         var delBtns = this.$('.deleteBtn');
         var addBtns = this.$('.addBtn');
-        if (delBtns && delBtns.length === 1 && !delBtns.hasClass('disabled')) {
-            // if we have only one button, disable it, otherwise leave them all open
+
+        // When there is only one row, disable the delete button on it
+        // unless an empty collection is allowed
+        if (!this.context.get('allowEmpty') && delBtns && delBtns.length === 1 && !delBtns.hasClass('disabled')) {
             delBtns.addClass('disabled');
         }
 
@@ -241,32 +253,47 @@
      * @param {undefined|Boolean} [fromCreateView] If this function is being called from Create view or not
      */
     validateModels: function(callback, fromCreateView) {
+        this.clearValidationErrors();
+
         fromCreateView = fromCreateView || false;
 
-        var returnCt = 0;
+        // Wrap the callback function to be called with different parameters based
+        // on the view we are in
         this.hasValidModels = true;
+        let runCallback = () => {
+            if (!_.isFunction(callback)) {
+                return;
+            }
+            if (fromCreateView) {
+                // the create waterfall wants the opposite of if this is validated
+                callback(!this.hasValidModels);
+            } else {
+                // this view wants if the models are valid or not
+                callback(this.hasValidModels);
+            }
+        };
 
+        // If there are no created models in the subpanel, there's nothing to do
+        if (_.isEmpty(this.collection.models)) {
+            runCallback();
+            return;
+        }
+
+        // There are created models in the subpanel, so loop through all models
+        // and call doValidate on each model
+        let returnCt = 0;
         _.each(this.collection.models, function(model) {
-            // loop through all models and call doValidate on each model
             model.doValidate(
                 this.getFields(this.module, model),
                 _.bind(function(isValid) {
                     returnCt++;
 
-                    if (this.hasValidModels && !isValid) {
-                        // hasValidModels was true, but a model returned false from validation
-                        this.hasValidModels = isValid;
-                    }
+                    // Keep track of whether any model has failed validation
+                    this.hasValidModels = this.hasValidModels && isValid;
 
-                    // check if all model validations have occurred
+                    // If all model validations have occurred, run the callback function
                     if (returnCt === this.collection.length) {
-                        if (fromCreateView) {
-                            // the create waterfall wants the opposite of if this is validated
-                            callback(!this.hasValidModels);
-                        } else {
-                            // this view wants if the models are valid or not
-                            callback(this.hasValidModels);
-                        }
+                        runCallback();
                     }
                 }, this));
         }, this);
@@ -334,7 +361,10 @@
             }
 
             bean.set(prepopulateData);
-            this._addCustomFieldsToBean(bean, addAtZeroIndex);
+            this._addCustomFieldsToBean(bean, addAtZeroIndex, prepopulateData);
+            this._addCustomEventHandlers(bean);
+
+            this.context.trigger('subpanel-list-create:row:added', bean);
         }
 
         this.checkButtons();
@@ -346,10 +376,22 @@
      *
      * @param {Data.Bean} bean The bean to add new properties to
      * @param {boolean} skipCurrency Skip or set currency properties
+     * @param {Object} prepopulatedData data that has already been pre-populated on the bean
      * @return {Data.Bean}
      * @private
      */
-    _addCustomFieldsToBean: function(bean, skipCurrency) {
+    _addCustomFieldsToBean: function(bean, skipCurrency, prepopulatedData) {
+        return bean;
+    },
+
+    /**
+     * Allows subpanels that extend this to add module-specific event listeners to the bean,
+     * for example to update fields when another changes
+     * @param {Data.Bean} bean
+     * @return {Data.Bean}
+     * @private
+     */
+    _addCustomEventHandlers: function(bean) {
         return bean;
     },
 

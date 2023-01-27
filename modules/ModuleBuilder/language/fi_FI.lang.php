@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Poista' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Powered By SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Rooli',
+    'LBL_BASE_LAYOUT' => 'Kannan asettelu',
+    'LBL_FIELD_NAME' => 'Kentän nimi',
+    'LBL_FIELD_VALUE' => 'Arvo',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Asettelun määrittänyt:',
+    'layoutDeterminedBy' => [
+        'std' => 'Normaali asettelu',
+        'role' => 'Rooli',
+        'dropdown' => 'Pudotusvalikon kenttä',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Kaikki mukautetut asettelut poistetaan. Haluatko varmasti muuttaa nykyisiä asettelumäärityksiä?',
 'help'=>array(
     'package'=>array(
             'create'=>'Anna <b>nimi</b> paketille. Nimen on oltava aakkosnumeerinen, eikä se saa sisältää välilyöntejä. (Esimerkki: HR_Management) <br/><br/>Voit antaa paketille myös <b>tekijän</b> tiedot ja <b>kuvauksen</b>. <br/>Napsauta <b>Tallenna</b> luodaksesi paketin.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Näkyvyyseditori',
 'LBL_ROLLUP' => 'Yhteenveto',
 'LBL_RELATED_FIELD' => 'Liittyvä kenttä',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL logomerkin kuvan mukauttamiseen. Logomerkin suositeltu resoluutio on 22 x 22 pikseliä. Tätä suuremmat kuvat pienennetään enimmäismittoihin.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL logon kuvan mukauttamiseen. Logon suositeltu leveys on 200 pikseliä. Tätä suuremmat kuvat pienennetään enimmäismittoihin. Tätä logoa käytetään kirjautumisnäkymässä. Jos kuvaa ei ole ladattu, käytetään logomerkkiä.',
 'LBL_PORTAL_ROLE_DESC' => 'Älä poista tätä roolia. <i>Customer Self-Service Portal Role</i> on järjestelmän generoima rooli, joka luotiin Sugar Portalin aktivointiprosessissa. Käytä pääsykontrolleja tässä roolissa ottaaksesi käyttöön tai poistaaksesi Sugar Portalista <i>bugit-</i>, <i>palvelupyynnöt-</i> tai <i>knowlege base-</i>moduulit. Älä muokkaa muita pääsykontrolleja tässä roolissa välttääksesi ennalta arvaamattomia järjestelmäongelmia. Jos vahingossa poistat tämän roolin, voit luoda sen uudelleen poistamalla käytöstä ja jälleen ottamalla käyttöön Sugar Portalin.',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Lisää suhde',
 'LBL_BTN_RENAME_MODULE' => 'Vaihda moduulin nimi',
 'LBL_BTN_INSERT'=>'Lisää',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Palauta kannan asettelu',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'Virhe on tapahtunut',
 'ERROR_REQUIRED_FIELDS' => 'Oletko varma, että haluat jatkaa? Seuraavat vaaditut kentät puuttuvat asettelusta:',
 'ERROR_ARE_YOU_SURE' => 'Oletko varma, että haluat jatkaa?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Kenttää ei voi luoda. Tietokantasi rivien kokoraja on saavutettu tässä taulukossa. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Lue lisää</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Seuraavissa kentissä on laskettuja arvoja joita ei lasketa uudelleen reaaliajassa SugarCRM Mobilen muokkausnäkymässä:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Seuraavissa kentissä on laskettuja arvoja joita ei lasketa uudelleen reaaliajassa SugarCRM Portalin muokkausnäkymässä:',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Jos haluat ottaa käyttöön ne portaalissa, klikkaa <a id=&#39;configure_tabs&#39; target=&#39;_blank&#39; href=&#39;./index.php?module=Administration&amp;action=ConfigureTabs&#39;>tästä</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Konfiguroi Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Ota portaali käyttöön',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Ota haku käyttöön ennen palvelupyynnön avaamista',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Ota muistiinpanot käyttöön Tietokanta-moduulissa',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Salli portaalin käyttäjien sulkea palvelupyyntö',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Salli uusien käyttäjien rekisteröityä',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Käyttäjäoikeudet',
     'LBL_PORTAL_THEME' => 'Portal-teema',
     'LBL_PORTAL_ENABLE' => 'Ota käyttöön',
     'LBL_PORTAL_SITE_URL' => 'Portal-sivusi on saatavilla osoitteessa:',
     'LBL_PORTAL_APP_NAME' => 'Sovelluksen nimi',
-    'LBL_PORTAL_LOGOMARK_URL' => 'Logomerkin URL',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Logomerkin esikatselu',
-    'LBL_PORTAL_LOGO_URL' => 'Logon URL',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Logon esikatselu',
     'LBL_PORTAL_CONTACT_PHONE' => 'Puhelinnumero',
     'LBL_PORTAL_CONTACT_EMAIL' => 'Sähköpostiosoite',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Anna kelvollinen sähköpostisoite',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Voit näyttää tai piilottaa portaalin moduulien nimet portaalin ylänavigointipalkissa vetämällä ja pudottamalla. Portaalin käyttäjien pääsyä moduuleihin hallinnoidaan <a href="?module=ACLRoles&action=index">roolienhallinnassa.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Näkyvät moduulit',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Piilotetut moduulit',
+    'LBL_CONFIG_VISIBILITY' => 'Näkyvyys',
+    'LBL_CASE_VISIBILITY_HELP' => 'Määritä, mitkä portaalin käyttäjät voivat nähdä tapauksen.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Määritä, mitkä portaalin käyttäjät voivat nähdä tapaukseen liittyviä sähköposteja. Osallistuvat yhteystiedot ovat kentissä Vastaanottaja, Lähettäjä, Kopio ja Piilokopio.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Määritä, mitkä portaalin käyttäjät voivat nähdä tapaukseen liittyviä viestejä. Osallistuvat yhteystiedot ovat kentässä Vieraat.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Kaikki tiliin liittyvät yhteystiedot',
+        'related_contacts' => 'Vain ensisijainen yhteystieto ja tapaukseen liittyvät yhteystiedot',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Vain osallistuvat yhteystiedot',
+        'all' => 'Kaikki yhteystiedot, jotka voivat nähdä tapauksen',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Vain osallistuvat yhteystiedot',
+        'all' => 'Kaikki yhteystiedot, jotka voivat nähdä tapauksen',
+    ],
+
 
 'LBL_PORTAL'=>'Portaali',
 'LBL_PORTAL_LAYOUTS'=>'Portal-asettelut',
@@ -787,11 +812,11 @@ $mod_strings = array(
     . "Pakolliset kentät noudattavat selainpohjaisesessa mobiilinäkymässä olevaa mallia, <br/>"
     . "mutta ne eivät noudata alkuperäisissä sovelluksissa, kuten Sugar Mobile iPhone-laitteille, olevaa mallia.<br/>"
     . "Ne eivät noudata Sugarin itsepalveluportaalissa olevaa mallia.",
-'LBL_POPHELP_READONLY'=>"Luo asettelumalli joka määrittää, onko tämä vain luku -kenttä.<br/>"
-        . "Vain luku -kentät noudattavat selainpohjaisesessa mobiilinäkymässä olevaa mallia, <br/>"
-        . "mutta ne eivät noudata alkuperäisten sovellusten, kuten Sugar Mobilen iPhone-laitteille, mallia.<br/>"
+'LBL_POPHELP_READONLY'=>"Luo asettelumalli, joka määrittää, onko tämä vain luku -muotoinen kenttä.<br/>"
+        . "Vain luku -muotoiset kentät noudattavat selainpohjaisesessa mobiilinäkymässä olevaa mallia, <br/>"
+        . "mutta ne eivät noudata alkuperäisissä sovelluksissa, kuten Sugar Mobile iPhone-laitteille, olevaa mallia.<br/>"
         . "Ne eivät noudata Sugarin itsepalveluportaalissa olevaa mallia.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Valitse, haluatko käyttää tätä kenttää, kun etsit tietueita tämän moduulin yleisen haun avulla.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Käytä tätä kenttää, kun haet tietueita yleishaulla tässä moduulissa.',
 //Revert Module labels
 'LBL_RESET' => 'Palauta',
 'LBL_RESET_MODULE' => 'Palauta moduuli',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Päivä ja aika',
                 'decimal'=>'Desimaalinumero',
                 'autoincrement' => 'Automaattinen lisäys',
+                'actionbutton' => 'Toimintapainike',
 ),
 'labelTypes' => array(
     "" => "Usein käytetyt selitteet",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (liittyviä {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopioi asettelusta...',
 'LBL_RELATIONSHIP_TYPE' => 'Suhde',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Vertailukieli',
+'LBL_LABEL_NOT_TRANSLATED' => 'Tätä selitettä ei käännetä',
 );

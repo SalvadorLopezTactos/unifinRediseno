@@ -14,8 +14,8 @@
   color: @white;
   vertical-align: baseline;
   white-space: nowrap;
-  text-shadow: 0 -1px 0 fade(@black, 25%);
-  background-color: @grayLight;
+  text-shadow: 0 -1px 0 @gray80;
+  background-color: @gray80;
 }
 // Set unique padding and border-radius
 .label {
@@ -55,31 +55,31 @@ a {
     background-color: @errorBackground;
     color: @errorText;
   }
-  &-important[href] { background-color: darken(@errorBackground, 10%); }
+  &-important[href] { background-color: @errorBackground; }
   // Warnings (orange)
   &-warning {
     background-color: @warningBackground;
     color: @warningText;
   }
-  &-warning[href] { background-color: darken(@warningBackground, 10%); }
+  &-warning[href] { background-color: @warningBackground; }
   // Success (green)
   &-success {
     background-color: @successBackground;
     color: @successText;
   }
-  &-success[href] { background-color: darken(@successBackground, 10%); }
+  &-success[href] { background-color: @successBackground; }
   // Info (turquoise)
   &-info {
     background-color: @infoBackground;
     color: @infoText;
   }
-  &-info[href] { background-color: darken(@infoText, 10%); }
+  &-info[href] { background-color: @infoBackground; }
   // Inverse (black)
   &-inverse {
-    background-color: @grayLight;
-    color: @grayDark;
+    background-color: @gray70;
+    color: @gray90;
   }
-  &-inverse[href] { background-color: darken(@grayLight, 10%); }
+  &-inverse[href] { background-color: @gray80; }
 }
 
 // Quick fix for labels/badges in buttons
@@ -107,8 +107,8 @@ a {
   max-width: 100%;
   cursor: default;
   padding: 2px 4px;
-  background: @gray;
-  border: 1px solid @gray;
+  background: @gray80;
+  border: 1px solid @gray80;
   color: @white;
   font-weight: 600;
   text-align: center;
@@ -143,15 +143,15 @@ a > .label {
   [data-type="follow"] .label,
   [data-type="follow"] .label:hover {
   background-color: @transparent;
-  border: 1px solid @gray;
-  color: @grayDark;
+  border: 1px solid @gray80;
+  color: @gray90;
   font-weight: 500;
 }
 
 [data-type="follow"] {
   .label[class*="label-"] {
-    background-color: @gray;
-    border: 1px solid @gray;
+    background-color: @gray80;
+    border: 1px solid @gray90;
     color: @white;
     font-weight: 600;
     width: 100%;
@@ -161,9 +161,9 @@ a > .label {
 [data-type="follow"],
 [data-type="badge"] {
   .label:not([class*="label-"]) {
-    background: @transparent;
-    border-color: @gray;
-    color: @grayDark;
+    background: @secondaryContentBackground;
+    border-color: @borderColor;
+    color: @textColor;
     font-weight: 500;
     width: 100%;
   }
@@ -171,8 +171,8 @@ a > .label {
 
 [data-type="badge"] [data-action="convert"]:hover {
   cursor: pointer;
-  background-color: @gray;
-  color: @white;
+  background-color: @secondaryContentBackground;
+  color: @textColor;
   font-weight: 600;
 }
 
@@ -275,11 +275,11 @@ a > .label {
   &-info {
     background-color: @infoBackground;
     border: 1px solid @infoBackground;
-    color: @infoText;
+    color: @inform;
   }
 
   &-inverse,
-  &-unknown { background-color: @gray; }
+  &-unknown { background-color: @gray80; }
   &-log { background-color: @black; }
 
   /* Modules */
@@ -383,6 +383,16 @@ a > .label {
     }
   }
 
+  &-DocuSignEnvelopes {
+    background-color: @el-docusignenvelopes-bg;
+    border: 1px solid @el-docusignenvelopes-bg;
+    color: @el-docusignenvelopes-text;
+
+    a {
+      color: @el-docusignenvelopes-text;
+    }
+  }
+
   &-Emails {
     background-color: @el-emails-bg;
     border: 1px solid @el-emails-bg;
@@ -390,6 +400,16 @@ a > .label {
 
     a {
       color: @el-emails-text;
+    }
+  }
+
+  &-Escalations {
+    background-color: @el-escalations-bg;
+    border: 1px solid @el-escalations-bg;
+    color: @el-escalations-text;
+
+    a {
+      color: @el-escalations-text;
     }
   }
 
@@ -690,7 +710,7 @@ a > .label {
 
 // had to move &-dark-text out because a > .label was overriding
 a .label-dark-text {
-  color: @grayDark;
+  color: @gray90;
 }
 
 /* Disabled: no box-shadow*/

@@ -28,7 +28,7 @@ $dictionary['Meeting'] = array(
     'dbType' => 'varchar',
 	'unified_search' => true,
     'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 1.43),
-    'len' => '50',
+    'len' => '255',
     'comment' => 'Meeting name',
     'importable' => 'required',
   ),
@@ -381,6 +381,12 @@ $dictionary['Meeting'] = array(
       'link' => 'users',
       'rname_link' => 'accept_status',
   ),
+        'internal_notes' => [
+            'name' => 'internal_notes',
+            'vname' => 'LBL_INTERNAL_NOTES',
+            'type' => 'text',
+            'comment' => 'Internal notes for the meeting',
+        ],
   'accounts' =>
   array (
   	'name' => 'accounts',
@@ -483,6 +489,13 @@ $dictionary['Meeting'] = array(
             'bean_name'=>'Message',
             'source'=>'non-db',
             'vname'=>'LBL_MESSAGES',
+        ],
+        'escalations' => [
+            'name' => 'escalations',
+            'type' => 'link',
+            'relationship' => 'escalation_meetings',
+            'source' => 'non-db',
+            'vname' => 'LBL_ESCALATIONS',
         ],
 	'contact_id' => array(
 		'name' => 'contact_id',
@@ -761,11 +774,8 @@ $dictionary['Meeting'] = array(
 
 
     'indices' => array (
-       array('name' =>'idx_mtg_name', 'type'=>'index', 'fields'=>array('name')),
        array('name' =>'idx_meet_par_del', 'type'=>'index', 'fields'=>array('parent_id','parent_type','deleted')),
        array('name' => 'idx_meet_stat_del', 'type' => 'index', 'fields'=> array('assigned_user_id', 'status', 'deleted')),
-       array('name' => 'idx_meet_date_start', 'type' => 'index', 'fields'=> array('date_start')),
-       array('name' => 'idx_meet_recurrence_id', 'type' => 'index', 'fields' => array('recurrence_id')),
        array('name' => 'idx_meet_date_start_end_del', 'type' => 'index', 'fields'=> array('date_start', 'date_end', 'deleted')),
        array(
            'name' => 'idx_meet_repeat_parent_id',

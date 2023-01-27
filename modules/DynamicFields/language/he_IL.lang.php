@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'שם שדה כבר קיים',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'שם השדה יכול להכיל רק את התווים הבאים: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'לא נכלל מודול. לא ניתן לשמור',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'שם הפריט הנפתח כבר קיים',
     'LBL_BTN_ADD' => 'הוסף',
     'LBL_BTN_EDIT' => 'ערוך',
     'LBL_GENERATE_URL' => 'צור URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'מוסיף עמודה {0} ל',
     'LBL_DONE' => 'בוצע',
     'LBL_EXE_NON_SIM_MODE' => 'בצע מצב שאינו סימולציה',
+    'LBL_CALCULATION_VISIBLE' => 'הפוך לזמין לצורך חישובים',
 );
-
-
-?>

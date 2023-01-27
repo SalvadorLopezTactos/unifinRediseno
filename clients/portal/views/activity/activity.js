@@ -13,6 +13,8 @@
  * @class View.Views.ActivityView
  * @alias SUGAR.App.layout.ActivityView
  * @extends View.View
+ * @deprecated as of 11.2 and will be removed in a future release.
+ * Please use {@link View.Views.Portal.ActivityTimelineView} instead.
  */
 ({
     events: {

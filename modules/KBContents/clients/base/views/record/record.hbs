@@ -30,11 +30,13 @@
                                         </span>
                                         {{#unless ../../../../createMode}}
                                             <span class="record-edit-link-wrapper {{#has name ../../../../../noEditFields}}hide{{/has}}" data-name="{{name}}" data-wrapper="edit">
-                                                <a class="record-edit-link btn btn-invisible" data-type="{{type}}" data-name="{{name}}"><i class="fa fa-pencil"></i></a>
+                                                <a class="record-edit-link btn btn-invisible" data-type="{{type}}" data-name="{{name}}">
+                                                    <i class="sicon sicon-edit"></i>
+                                                </a>
                                             </span>
                                             <span class="record-lock-link-wrapper hide" data-name="{{name}}">
                                                 <a class="record-lock-link btn btn-invisible" data-type="{{type}}" data-name="{{name}}">
-                                                    <i class="fa fa-lock" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="right"></i>
+                                                    <i class="sicon sicon-lock" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="right"></i>
                                                 </a>
                                             </span>
                                         {{/unless}}
@@ -52,16 +54,21 @@
                                     <button class="btn btn-invisible previous-row{{#unless showPrevious}} disabled{{/unless}}"
                                             data-action="scroll" data-action-type="prev"
                                             data-id="{{fieldValue model "id"}}">
-                                        <i class="fa fa-chevron-left"></i>
+                                        <i class="sicon sicon-chevron-left"></i>
                                     </button>
                                     <button class="btn btn-invisible next-row{{#unless showNext}} disabled{{/unless}}"
                                             data-action="scroll" data-action-type="next"
                                             data-id="{{fieldValue model "id"}}">
-                                        <i class="fa fa-chevron-right"></i>
+                                        <i class="sicon sicon-chevron-right"></i>
                                     </button>
                                 </div>
                             {{/if}}
                         {{/unless}}
+                        {{#each meta.actionButtons}}
+                            {{#if decodedOptions.settings.showInRecordHeader}}
+                                {{field ../../this}}
+                            {{/if}}
+                        {{/each}}
                         {{#each meta.buttons}}
                             {{field ../this}}
                         {{/each}}
@@ -87,7 +94,7 @@
                         {{/unless}}
                     {{/each}}
                     <li class="tab dropdown more hidden">
-                        <a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-chevron-down"></b></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown"><b class="sicon sicon-chevron-down"></b></a>
                         <ul class="dropdown-menu scroll pull-right" role="menu">
                             {{#each meta.panels}}
                                 {{#unless header}}
@@ -115,7 +122,7 @@
                         <div class="row-fluid record-panel-header {{#eq panelState "collapsed"}}panel-inactive{{/eq}}{{#notEq panelState "collapsed"}}panel-active{{/notEq}}">
                             <span class="pull-left">
                                 <button class="btn btn-invisible record-panel-arrow">
-                                    <i class="fa fa-chevron-{{#eq panelState "collapsed"}}right{{/eq}}{{#notEq panelState "collapsed"}}down{{/notEq}}" rel="tooltip" data-container="body" data-title="Toggle Visibility"></i>
+                                    <i class="sicon sicon-chevron-{{#eq panelState "collapsed"}}right{{/eq}}{{#notEq panelState "collapsed"}}down{{/notEq}}" rel="tooltip" data-container="body" data-title="Toggle Visibility"></i>
                                 </button>
                                 {{str label ../../../this.module}}
                             </span>

@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Kontaktin ID',
     'LBL_DESCRIPTION_INFORMATION' => 'Kuvauksen tiedot',
     'LBL_DESCRIPTION' => 'Kuvaus',
+    'LBL_INTERNAL_NOTES' => 'Sisäiset muistiinpanot:',
     'LBL_STATUS' => 'Tila:',
     'LBL_DIRECTION' => 'Suunta:',
     'LBL_DATE' => 'Aloituspäivä:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Keston on oltava enemmän kuin 0',
     'LBL_CALL_INFORMATION' => 'Yleiskatsaus',
     'LBL_REMOVE' => 'Poista',
-    'LBL_ACCEPT_STATUS' => 'Hyväksynnän tila',
     'LBL_ACCEPT_LINK' => 'Hyväksymislinkki',
     //For export labels
     'LBL_PARENT_ID' => 'Vanhemman ID',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Puhelu:',
     'LBL_CALL_RECORDING_URL' => 'Tallennetaan URL',
     'LBL_CALL_RECORDING' => 'Tallennetaan',
+
+    'LBL_LEAD_ID' => 'Liidin tunnus',
+    'LBL_LEAD_NAME' => 'Liidi',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Luotiin {{moduleSingularLower}} ‘<a href=&#39;#{{buildRoute model=this}}&#39;>{{name}}</a>’ {{formatDate date_start}}.',

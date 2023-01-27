@@ -947,13 +947,13 @@ AdamGateway.prototype.validateCriteriaBoxAtoms = function(element, validationToo
     // Validate the individual logical atoms in the criteria box
     for (i = 0; i < criteria.length; i++) {
         atom = criteria[i];
-        validationTools.validateAtom(
-            atom.expType,
-            atom.expModule,
-            atom.expField,
-            atom.expValue,
-            element,
-            validationTools);
+        let criteriaComponents = {
+            type: atom.expType,
+            module: atom.expModule,
+            field: atom.expField,
+            value: atom.expValue,
+        };
+        validationTools.validateAtom(criteriaComponents, element, validationTools);
     }
 };
 

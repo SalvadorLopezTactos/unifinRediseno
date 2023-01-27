@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'عرض تقارير الرسائل',
     'LNK_IMPORT_MESSAGES' => 'استيراد الرسائل',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'معرّف العميل المتوقع',
+    'LBL_LEAD_NAME' => 'العميل المتوقع',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'دردشة جانب العميل',
+    'LBL_ACTIVITY_CUSTOMER' => 'العميل',
+    'LBL_ACTIVITY_FINISHED' => 'انتهى',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'في تقدم',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم الرسائل',
 ];

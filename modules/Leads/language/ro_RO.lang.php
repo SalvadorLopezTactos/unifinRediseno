@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Mentionat De',
     'LBL_LIST_STATUS' => 'Status',
     'LBL_LIST_TITLE' => 'Titlu',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Predicția dobânzii de piață',
+    'LBL_MARKET_SCORE' => 'Scor de piață',
     'LBL_MOBILE_PHONE' => 'Mobil:',
     'LBL_MODULE_NAME' => 'Prospecte',
     'LBL_MODULE_NAME_SINGULAR' => 'Client potențial',
@@ -324,4 +326,9 @@ După confirmarea fiecărui modul solicitat şi dorit, faceţi clic pe butonul S
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Predicție Conversie Clienți',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Vedeți detaliile de predicție pentru un anumit candidat potențial',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Activare Elemente linie de venit',
+    'LBL_REQUIRE_RLIS' => 'Solicitați Elementele liniei de venit atunci când creați o nouă Oportunitate',
+    'LBL_COPY_DATA_RLIS' => 'Copiați datele Clientului potențial în Elementele liniei de venit atunci când creați o nouă Oportunitate',
 );

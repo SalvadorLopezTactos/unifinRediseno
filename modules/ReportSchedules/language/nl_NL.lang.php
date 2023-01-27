@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Dit rapportschema',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Dashboard record rapportschema&#39;s',
+    'LBL_FILE_TYPE' => 'Bestandstype(&#39;s)',
 );

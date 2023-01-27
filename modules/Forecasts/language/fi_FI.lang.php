@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Kuvaus',
     'LBL_OW_TYPE'=>'Tyyppi',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Tiimin ennuste kohteelle <span class="sicon sicon-user-group mx-1"></span>{{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Suora raportti',
     'LBL_FDR_OPPORTUNITIES'=>'Myyntimahdollisuuksia ennusteessa:',
     'LBL_FDR_WEIGH'=>'Myyntimahdollisuuksien painotettu määrä:',
     'LBL_FDR_COMMIT'=>'Commitoitu määrä',
     'LBL_FDR_DATE_COMMIT'=>'Commitin päiväys',
+    'LBL_FDR_FORECAST_HEADER' => 'Myyjän ennuste kohteelle <span class="sicon sicon-user mx-1"></span>{{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Ennusteet: Työkirja',
     'LBL_DV_MY_FORECASTS' => 'Omat ennusteet',
-    'LBL_DV_MY_TEAM' => "Tiimini ennusteet" ,
+    'LBL_DV_MY_TEAM' => "Tiimini ennusteet",
     'LBL_DV_TIMEPERIODS' => 'Ajanjaksot:',
     'LBL_DV_FORECAST_PERIOD' => 'Ennusteen ajanjakso',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Ennusteen myyntimahdollisuudet',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Peruskorko',
 
     'LBL_QUOTA' => 'Tavoite',
-    'LBL_QUOTA_ADJUSTED' => 'Tavoite (säädetty)',
+    'LBL_QUOTA_ADJUSTED' => 'Muutettu tavoite',
 
     'LBL_FORECAST_FOR'=>'Ennustetyökirja for:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Rollup)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Tavoite vs. commitoitu vs. todellinen',
 
     'LBL_FORECAST' => 'Ennuste',
+    'LBL_COMMITMENT' => 'Sitoumus',
+    'LBL_TEAM_COMMITMENT' => 'Tiimin sitoumus',
+    'LBL_FORECASTED' => 'Ennustettu',
+    'LBL_ADJUSTED_TOTAL' => 'Muutettu kokonaismäärä',
     'LBL_COMMIT_STAGE' => 'Commitin vaihe',
     'LBL_SALES_STAGE' => 'Vaihe',
     'LBL_AMOUNT' => 'Määrä',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, ja {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'todennäköisesti {{{direction}}} {{{from}}} - {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'paras {{{direction}}} tästä: ‘{{{from}}}’ tähän: ‘{{{to}}}’',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'huonoin {{{direction}}} tästä: ‘{{{from}}}’ tähän: ‘{{{to}}}’',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'todennäköisesti pysyi samana',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'paras pysyi samana',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'huonoin pysyi samana',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Sitoutunut (todennäköinen) {{{direction}}}{{{from}}}-{{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Sitoutunut (paras) {{{direction}}}{{{from}}}-{{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Sitoutunut (heikoin) {{{direction}}}{{{from}}}-{{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Sitoutunut (todennäköinen) pysyi samana',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Sitoutunut (paras) pysyi samana',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Sitoutunut (heikoin) pysyi samana',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Tässä kuukaudessa: {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Näytetty summa',
     'LBL_TOTAL' => 'Summa',
     'LBL_OVERALL_TOTAL' => 'Kokonaissumma',
-    'LBL_EDITABLE_INVALID' => 'Kelpaamaton arvo: {0}',
+    'LBL_EDITABLE_INVALID' => 'Virheellinen arvo kentälle {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Arvon on oltava välillä {0} &ndash; {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Työkirjassasi on tallentamattomia muutoksia.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Huomioi, että vain tallennettua tai commitoitua dataa voi viedä. Klikkaa OK jatkaaksesi vientiä, tai klikkaa Peruuta palataksesi työkirjaan.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Sisällytetty',
     'LBL_CHART_NOT_INCLUDED' => 'Ei sisällytetty',
     'LBL_CHART_ADJUSTED' => '(Säädetty)',
-    'LBL_SAVE_DRAFT' => 'Tallenna luonnos',
+    'LBL_SAVE_DRAFT' => 'Tallenna',
     'LBL_CHANGES_BY' => '{0}:n muutokset',
     'LBL_FORECAST_SETTINGS' => 'Asetukset',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Tilivuoden alkupäivä:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfiguroi Ennusteet-moduulissa käytettävä ajanjakso.<br /><br />Aloita valitsemalla tilivuoden alkupäivä. Valitse sitten ennustettavan ajanjakson tyyppi. Ajanjakson päivämäärät lasketaan automaattisesti valintojesi perusteella. Ali-ajanjakso on ennustetyökirjan pohja.<br /><br />Näytettävät tulevat ja menneet ajanjaksot määrittävät näkyvien alijaksojen määrän Ennusteet-moduulissa. Käyttäjät voivat nähdä ja muokata ennustelukuja näkyvissä alijaksoissa.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Määritä, kuinka haluat luokitella kohteen {{forecastByModule}}. <br><br>Ota huomioon, että alueen asetuksia ei voi muuttaa ensimmäisen lähetyksen jälkeen. Jos kyseessä on päivitetty instanssi, alueasetus lukitaan olemassa olevilla ennusteen tiedoilla.<br><br>Voit valita kaksi tai useamman luokan todennäköisyyden mukaan tai luoda luokkia, jotka eivät perustu todennäköisyyteen. <br><br>Omien luokkiesi vasemmalla puolella on valintaruutuja. Valitse niillä, mitkä alueet sisällytetään lähetettyyn ennustemäärään ja raportoidaan päälliköille. <br><br>Käyttäjä voi muuttaa sisällytä-/älä sisällytä -tilan ja kohteen {{forecastByModule}} luokan manuaalisesti työkirjassaan.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Määritä, kuinka haluat luokitella kohteen {{forecastByModule}}. <br><br>Ota huomioon, että alueen asetuksia ei voi muuttaa ensimmäisen vahvistuksen jälkeen. Jos kyseessä on päivitetty instanssi, alueasetus lukitaan olemassa olevilla ennusteen tiedoilla.<br><br>Voit valita kaksi luokkaa tai useampia luokkia todennäköisyyden mukaan tai luoda luokkia, jotka eivät perustu todennäköisyyteen. <br><br>Omien luokkiesi vasemmalla puolella on valintaruutuja. Valitse niillä, mitkä alueet sisällytetään lähetettyyn ennustemäärään ja raportoidaan päälliköille. <br><br>Käyttäjä voi muuttaa sisällytä-/älä sisällytä -tilan ja kohteen {{forecastByModule}} luokan manuaalisesti työkirjassaan.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Valitse ne sarakkeet, jotka haluaisit käyttäjien täydentävän heidän ennusteissaan jokaiselle {{forecastByModuleSingular}}lle. Huomioi, että todennäköinen arvo on sidottuna {{forecastByModuleSingular}}issä näkyviin määrään. Tästä syystä ‘Todennäköinen’-saraketta ei voida piilottaa.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Valitse ne sarakkeet, jotka haluaisit näyttää Ennusteet-moduulissa. Kenttälista yhdistää työkirjan, ja antaa käyttäjän valita, miten näkymä konfiguroidaan.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Olen ‘Ennusta seuraavan mukaan’ -aputekstin paikanvaraaja! :D',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Ylittää',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Ei dataa',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Tavoittaa tavoitteen',
+    'LBL_OPEN_LIKELY' => 'Avaa todennäköinen',
+    'LBL_OPEN_BEST' => 'Avaa paras',
+    'LBL_OPEN_WORST' => 'Avaa heikoin',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Määritä tavoite',
     'LBL_ASSIGNING_QUOTA' => 'Määritetään tavoitetta',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Tiimini ennuste",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Sinulla on tallentamattomia muutoksia.<br />Haluatko varmasti järjestää työkirjan? <em>Tämä tuhoaa muutokset.</em>',
+
+    'LBL_SAVE_TOOLTIP' => 'Tallenna työkirjan riveille tehdyt muutokset',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Tallenna tietueisiin tehdyt muutokset ja lähetä ennuste päällikölle',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Lähetä ennuste päällikölle ja määritä tavoite',
+
+    'LBL_SAVE_LABEL_REP' => 'Tallenna ',
+    'LBL_SAVE_LABEL_MGR' => 'Tallenna muutetut arvot',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Moduuli {{plural_module_name}} sisältää {{forecastby_singular_module}} tiedot, joilla luodaan {{forecastworksheets_module}} ja ennustetaan myyntiä. Käyttäjät voivat tavoitella myynnin {{quotas_module}} -tavoitteita yksilön, tiimin tai myyntiorganisaation tasolla. Ennen kuin käyttäjät voivat käyttää moduulia {{plural_module_name}}, järjestelmänvalvojan on valittava organisaation ajanjaksot, alueet ja skenaariot.

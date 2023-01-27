@@ -12,19 +12,19 @@
 --}}
 <div class="block preview-data">
     <div>
-        <div class="thumbnail dashlet ui-draggable" data-type="dashlet" data-action="droppable">
+        <div class="thumbnail dashlet h-full flex flex-column ui-draggable" data-type="dashlet" data-action="droppable">
             <div data-dashlet="toolbar"><div class="dashlet-header">
                 <div class="btn-toolbar pull-right">
                     <span sfuuid="54" class="dashlet-toolbar">
                     <a href="javascript:void(0);" track="click:" data-dashletaction="toggleMinify" rel="tooltip" data-placement="bottom" title="" name="" class="dashlet-toggle btn btn-invisible minify" data-original-title="Open/Close">
-                        <i class="fa fa-chevron-up"></i></a>
+                        <i class="sicon sicon-chevron-up"></i></a>
                     </span>
 
                 </div>
-                <h4 data-toggle="dashlet" class="dashlet-title">{{str 'LBL_PMSE_LABEL_PREVIEW' 'pmse_Inbox'}}</h4>
+                <h4 data-toggle="dashlet" class="dashlet-title text-initial flex-grow m-0">{{str 'LBL_PMSE_LABEL_PREVIEW' 'pmse_Inbox'}}</h4>
             </div></div>
 
-            <div data-dashlet="dashlet" class="dashlet-content"><div>
+            <div data-dashlet="dashlet" class="dashlet-content flex-grow"><div>
                 <div class="help-dashlet-content">
                     <div class="help-body">
 
@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </div></div>
-            <div class="swappable-dashlet fa fa-download"></div>
+            <div class="swappable-dashlet sicon sicon-download"></div>
         </div>
     </div>
 </div>

@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Përpunoni programe ndërgjegjësimi për kohën',
 'LBL_OOTB_DATA_ARCHIVER' => 'Ekzekutoni arkiva të të dhënave/fshirje aktive',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Gjeokoduesi i regjistrave',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Rregulluesi i gjeokoduesit',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervali',
 'LBL_LIST_LIST_ORDER' => 'Planifikimet',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Për të themeluar etiketim planifikues',
 'LBL_CRON_LINUX_DESC' => 'Vërejtje: Në mënyrë për të drejtuar orarin Sugar, shtoni linjën në vijim për dosjen e skedës planifikuese:',
 'LBL_CRON_WINDOWS_DESC' => 'Vërejtje: Në mënyrë për të drejtuar orarin Sugar, krijoni serinë e dosjes për të drejtuar përdorimin e detyrave të planifikuara të Windows. Seria e dosjes duhet të përfshijë komandat vijuese:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Regjisrtim i punës',
 'LBL_EXECUTE_TIME'			=> 'Koha e ekzekutimit',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Hiq skedarët e përkohshëm',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Rindërto të dhënat e denormalizuara të sigurisë së ekipit',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Përditëso përkufizimin e produktit',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Hartat e gjeokoduesit',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Rregulluesi i gjeokoduesit',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Drejtimi i natës së Emailave masive të Kampanjës',
 'LBL_ASYNCMASSUPDATE' => 'Kryeni përditësim masive të josinkronik',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Pastro listat e vjetra të regjistrimit',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Pastruesi i listës së aktiviteteve',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Përpunoni programe ndërgjegjësimi për kohën',
+'LBL_SUGARJOBDATAARCHIVER' => 'Ekzekuto arkivat/fshirjet e të dhënave aktive',
 'LBL_PMSEENGINECRON' => 'Planifikuesi i SugarBPM',
 );
 

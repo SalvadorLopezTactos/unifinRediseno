@@ -85,6 +85,15 @@ $viewdefs['Bugs']['base']['view']['list'] = array(
                     'enabled' => true,
                     'default' => true,
                 ),
+                [
+                    'name' => 'is_escalated',
+                    'label' => 'LBL_ESCALATED',
+                    'badge_label' => 'LBL_ESCALATED',
+                    'warning_level' => 'important',
+                    'type' => 'badge',
+                    'enabled' => true,
+                    'default' => false,
+                ],
             ),
 
         ),

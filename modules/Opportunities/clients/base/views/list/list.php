@@ -101,6 +101,15 @@ $viewdefs['Opportunities']['base']['view']['list'] = array(
                     'disable_field' => 'service_open_flex_duration_rlis',
                     'default' => false,
                 ],
+                [
+                    'name' => 'is_escalated',
+                    'label' => 'LBL_ESCALATED',
+                    'badge_label' => 'LBL_ESCALATED',
+                    'warning_level' => 'important',
+                    'type' => 'badge',
+                    'enabled' => true,
+                    'default' => false,
+                ],
                 array(
                     'name' => 'commit_stage',
                     'enabled' => true,

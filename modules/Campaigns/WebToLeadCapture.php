@@ -181,6 +181,8 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
                 }
             }
 
+            // Get the redirect configuration. WTL forms generated prior to
+            // 11.3 should default to a 'GET' request
             $redirect_url = $request->getValidInputPost(
                 'redirect_url',
                 array(
@@ -190,8 +192,10 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
                 ),
                 ''
             );
+            $redirectRequestType = $request->getValidInputPost('redirectRequestType') ?? 'GET';
+            $useRedirect = !empty($redirect_url) && in_array($redirectRequestType, ['GET', 'POST']);
 
-    if (!empty($redirect_url)) {
+    if ($useRedirect) {
                 $params = array();
                 foreach ($_REQUEST as $param => $_) {
                     if (is_array($_)) {
@@ -205,30 +209,27 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
                     $params['error'] = 1;
                 }
 
-				// Check if the headers have been sent, or if the redirect url is greater than 2083 characters (IE max URL length)
-				//   and use a javascript form submission if that is the case.
-			    if(headers_sent() || strlen($redirect_url) > 2083){
-    				echo '<html ' . get_language_header() . '><head><title>SugarCRM</title></head><body>';
-    				echo '<form name="redirect" action="' . htmlspecialchars($redirect_url, ENT_COMPAT, 'UTF-8') . '" method="GET">';
-    				foreach ($params as $param => $value) {
-						echo '<input type="hidden" name="'
-                            . htmlspecialchars($param, ENT_COMPAT, 'UTF-8') . '" value="'
-                            . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '">';
-    				}
-    				echo '</form><script language="javascript" type="text/javascript">document.redirect.submit();</script>';
-    				echo '</body></html>';
-    			}
-				else{
-                    if (count($params) > 0) {
-                        $query_string = http_build_query($params);
-                        $delimiter = strpos($redirect_url, '?') === false ? '?' : '&';
-                        $redirect_url .= $delimiter . $query_string;
-                    }
-                    // deactivate the subject for audit
-                    $context->deactivateSubject($subject);
-    				header("Location: {$redirect_url}");
-    				die();
-			    }
+        // Use a javascript form submission in order to construct this redirect
+        // as either a GET or a POST depending on the Web to Lead form settings
+        echo '<html ' . get_language_header() . '><head><title>SugarCRM</title></head><body>';
+        echo '<form name="redirect" action="' .
+            htmlspecialchars($redirect_url, ENT_COMPAT, 'UTF-8') .
+            '" method="' . htmlspecialchars($redirectRequestType) . '">';
+
+        // Determine whether form values should be passed back to the redirect
+        // URL. WTL forms generated prior to 11.3 should default to sending the
+        // parameters. Otherwise, use the form configuration to determine this
+        $redirectIncludeParams = $request->getValidInputPost('redirectIncludeParams') ?? true;
+        if ($redirectIncludeParams) {
+            foreach ($params as $param => $value) {
+                echo '<input type="hidden" name="'
+                    . htmlspecialchars($param, ENT_COMPAT, 'UTF-8') . '" value="'
+                    . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '">';
+            }
+        }
+
+        echo '</form><script type="text/javascript">document.redirect.submit();</script>';
+        echo '</body></html>';
 			}
 			else{
 				echo $mod_strings['LBL_THANKS_FOR_SUBMITTING_LEAD'];

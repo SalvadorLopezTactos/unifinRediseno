@@ -59,10 +59,18 @@ $viewdefs['Documents']['base']['view']['subpanel-list'] = array(
     ),
     'rowactions' => array(
         'actions' => array(
+            [
+                'type' => 'rowaction',
+                'css_class' => 'btn',
+                'tooltip' => 'LBL_PREVIEW',
+                'event' => 'list:preview:fire',
+                'icon' => 'sicon-preview',
+                'acl_action' => 'view',
+            ],
             array(
                 'type' => 'rowaction',
                 'name' => 'edit_button',
-                'icon' => 'fa-pencil',
+                'icon' => 'sicon-edit',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',
@@ -70,9 +78,16 @@ $viewdefs['Documents']['base']['view']['subpanel-list'] = array(
             array(
                 'type' => 'unlink-action',
                 'name' => 'unlink_button',
-                'icon' => 'fa-chain-broken',
+                'icon' => 'sicon-unlink',
                 'label' => 'LBL_UNLINK_BUTTON',
             ),
+            [
+                'type' => 'send-docusign',
+                'name' => 'send-docusign',
+                'icon' => 'sicon-preview',
+                'label' => 'LBL_SEND_TO_DOCUSIGN_BUTTON',
+                'event' => 'list:senddocusignrow:fire',
+            ],
         ),
     ),
 );

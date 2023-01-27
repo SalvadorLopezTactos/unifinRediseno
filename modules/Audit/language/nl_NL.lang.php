@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Velden gecontroleerd in deze module:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Er zijn geen velden gecontroleerd in deze module',
     'LBL_CHANGE_LOG' => 'Auditlogboek',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Wanneer gecontroleerde valutavelden in een niet-systeem-standaard valuta worden opgeslagen, dan zal het wijzigingslogbestand de oude en nieuwe waarden in de geconverteerde, systeembepaalde standaard valuta weergeven.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Wanneer gecontroleerde valutavelden in een niet-systeem-standaard valuta worden opgeslagen, dan zal het wijzigingslogbestand de oude en nieuwe waarden in de geconverteerde, systeembepaalde standaard valuta weergeven.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Update naar',
+    'LBL_BLANK' => '-blank-',
 );

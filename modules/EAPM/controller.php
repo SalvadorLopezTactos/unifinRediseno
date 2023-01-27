@@ -272,6 +272,11 @@ class EAPMController extends SugarController
         $this->view = 'microsoftoauth2redirect';
     }
 
+    public function action_DocuSignOauth2Redirect()
+    {
+        $this->view = 'docusignoauth2redirect';
+    }
+
     protected function post_QuickSave(){
         $this->post_save();
     }

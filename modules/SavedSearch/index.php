@@ -45,8 +45,15 @@ elseif(!empty($_REQUEST['saved_search_select'])) { // requesting a search here.
 	if($_REQUEST['saved_search_select'] == '_none') { // none selected
 		$_SESSION['LastSavedView'][$_REQUEST['search_module']] = '';
         $current_user->setPreference('ListViewDisplayColumns', array(), 0, $_REQUEST['search_module']);
-        $ajaxLoad = empty($_REQUEST['ajax_load']) ? "" : "&ajax_load=" . $_REQUEST['ajax_load'];
-        header("Location: index.php?action=index&module={$_REQUEST['search_module']}&searchFormTab={$searchFormTab}&query=true&clear_query=true$ajaxLoad");
+        $location = 'Location: index.php?' . http_build_query(array_filter([
+            'action' => 'index',
+            'module' => $_REQUEST['search_module'],
+            'searchFormTab' => $searchFormTab,
+            'query' => 'true',
+            'clear_query' => 'true',
+            'ajax_load' => empty($_REQUEST['ajax_load']) ? '' : $_REQUEST['ajax_load'],
+        ]));
+        header($location);
 		die();
 	}
 	else {
@@ -60,5 +67,3 @@ elseif(!empty($_REQUEST['saved_search_select'])) { // requesting a search here.
 else {
 	include('modules/SavedSearch/ListView.php');
 }
-
-?>

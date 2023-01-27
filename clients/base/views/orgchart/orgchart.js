@@ -379,7 +379,7 @@
         switch (button.data('control')) {
             case 'orientation':
                 this.chart.orientation();
-                button.find('i').toggleClass('fa-arrow-right fa-arrow-down');
+                button.find('i').toggleClass('sicon-arrow-right sicon-arrow-down');
                 break;
 
             case 'show-all-nodes':

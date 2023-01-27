@@ -31,7 +31,7 @@ class EndpointServiceTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $hydraConfig = [
-            'host' => 'http://oath.host',
+            'host' => 'http://oauth.host',
             'clientId' => 'clientId',
             'clientSecret' => 'clientSecret',
         ];
@@ -55,7 +55,7 @@ class EndpointServiceTest extends \PHPUnit_Framework_TestCase
     public function testGetOAuth2ValidEndpoint()
     {
         $this->assertEquals(
-            'http://oath.host/oauth2/token',
+            'http://oauth.host/oauth2/token',
             $this->endpointService->getOAuth2Endpoint(EndpointInterface::TOKEN_ENDPOINT)
         );
     }
@@ -77,7 +77,7 @@ class EndpointServiceTest extends \PHPUnit_Framework_TestCase
     public function testGetWellKnownConfigurationEndpoint()
     {
         $this->assertEquals(
-            'http://oath.host/.well-known/openid-configuration',
+            'http://oauth.host/.well-known/openid-configuration',
             $this->endpointService->getWellKnownConfigurationEndpoint()
         );
     }
@@ -93,12 +93,12 @@ class EndpointServiceTest extends \PHPUnit_Framework_TestCase
             'endpointWithAllKeysType' => [
                 'endpoint' => EndpointInterface::CONSENT_RESPONSE_KEYS,
                 'keyType' => null,
-                'expected' => 'http://oath.host/keys/hydra.consent.response',
+                'expected' => 'http://oauth.host/keys/hydra.consent.response',
             ],
             'endpointWithPrivateKeyType' => [
                 'endpoint' => EndpointInterface::CONSENT_RESPONSE_KEYS,
                 'keyType' => EndpointInterface::PRIVATE_KEY,
-                'expected' => 'http://oath.host/keys/hydra.consent.response/private',
+                'expected' => 'http://oauth.host/keys/hydra.consent.response/private',
             ],
         ];
     }
@@ -164,7 +164,7 @@ class EndpointServiceTest extends \PHPUnit_Framework_TestCase
     public function testGetConsentDataRequestEndpoint()
     {
         $this->assertEquals(
-            'http://oath.host/oauth2/consent/requests/test-consent-id',
+            'http://oauth.host/oauth2/auth/requests/consent?consent_challenge=test-consent-id',
             $this->endpointService->getConsentDataRequestEndpoint('test-consent-id')
         );
     }
@@ -175,8 +175,19 @@ class EndpointServiceTest extends \PHPUnit_Framework_TestCase
     public function testGetConsentAcceptRequestEndpoint()
     {
         $this->assertEquals(
-            'http://oath.host/oauth2/consent/requests/test-consent-id/accept',
+            'http://oauth.host/oauth2/auth/requests/consent/accept?consent_challenge=test-consent-id',
             $this->endpointService->getConsentAcceptRequestEndpoint('test-consent-id')
+        );
+    }
+
+    /**
+     * @covers ::getConsentRejectRequestEndpoint
+     */
+    public function testGetConsentRejectRequestEndpoint()
+    {
+        $this->assertEquals(
+            'http://oauth.host/oauth2/auth/requests/consent/reject?consent_challenge=test-consent-id',
+            $this->endpointService->getConsentRejectRequestEndpoint('test-consent-id')
         );
     }
 
@@ -185,6 +196,39 @@ class EndpointServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUserInfoEndpoint()
     {
-        $this->assertEquals('http://oath.host/userinfo', $this->endpointService->getUserInfoEndpoint());
+        $this->assertEquals('http://oauth.host/userinfo', $this->endpointService->getUserInfoEndpoint());
+    }
+
+    /**
+     * @covers ::getLoginRequestEndpoint
+     */
+    public function testGetLoginRequestEndpoint()
+    {
+        $this->assertEquals(
+            'http://oauth.host/oauth2/auth/requests/login?login_challenge=login-id',
+            $this->endpointService->getLoginRequestEndpoint('login-id')
+        );
+    }
+
+    /**
+     * @covers ::getLoginRequestAcceptEndpoint
+     */
+    public function testGetLoginRequestAcceptEndpoint()
+    {
+        $this->assertEquals(
+            'http://oauth.host/oauth2/auth/requests/login/accept?login_challenge=login-id',
+            $this->endpointService->getLoginRequestAcceptEndpoint('login-id')
+        );
+    }
+
+    /**
+     * @covers ::getLoginRequestRejectEndpoint
+     */
+    public function testGetLoginRequestRejectEndpoint()
+    {
+        $this->assertEquals(
+            'http://oauth.host/oauth2/auth/requests/login/reject?login_challenge=login-id',
+            $this->endpointService->getLoginRequestRejectEndpoint('login-id')
+        );
     }
 }

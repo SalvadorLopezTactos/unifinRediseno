@@ -29,6 +29,30 @@ class MobileDevice extends Basic
     protected $service = false;
 
     /**
+     * Designed to be called from Logic Hooks after a user logged out.
+     * Sends user deactivation request to the Service
+     */
+    public function onLoggedOut(): void
+    {
+        $service = $this->getService();
+        if ($service && $this->getCurrentUser()->hasRegisteredDevices()) {
+            $service->setActive($this->getCurrentUser()->id, false);
+        }
+    }
+
+    /**
+     * Designed to be called from Logic Hooks after a user logged in.
+     * Sends user activation request to the Service
+     */
+    public function onLoggedIn(): void
+    {
+        $service = $this->getService();
+        if ($service && $this->getCurrentUser()->hasRegisteredDevices()) {
+            $service->setActive($this->getCurrentUser()->id, true);
+        }
+    }
+
+    /**
      * @param false $check_notify
      * @return string
      */
@@ -40,7 +64,7 @@ class MobileDevice extends Basic
             $this->assigned_user_id = $current_user->id;
         }
 
-        // ensure uniqueness of assigned_user_id, platform and device_id combination
+        // ensure uniqueness of assigned_user_id, device_platform and device_id combination
         // avoiding use of db unique key since we are using soft delete
         $id = $this->getIdOfSameCombo();
         if (!empty($id)) {
@@ -65,7 +89,7 @@ class MobileDevice extends Basic
     public function mark_deleted($id)
     {
         $service = $this->getService();
-        if (!$service || $service->delete($this->platform, $this->device_id) === false) {
+        if (!$service || $service->delete($this->device_platform, $this->device_id) === false) {
             return;
         }
         parent::mark_deleted($id);
@@ -92,9 +116,9 @@ class MobileDevice extends Basic
         $service = $this->getService();
         if ($service) {
             if ($this->isUpdate()) {
-                $ret = $service->update($this->platform, $this->fetched_row['device_id'], $this->device_id);
+                $ret = $service->update($this->device_platform, $this->fetched_row['device_id'], $this->device_id);
             } else {
-                $ret = $service->register($this->platform, $this->device_id);
+                $ret = $service->register($this->device_platform, $this->device_id);
             }
         }
         return $ret;
@@ -115,7 +139,7 @@ class MobileDevice extends Basic
         $query->where()->queryAnd()
             ->equals('assigned_user_id', $this->assigned_user_id)
             ->equals('device_id', $this->device_id)
-            ->equals('platform', $this->platform);
+            ->equals('device_platform', $this->device_platform);
         $query->limit(1);
 
         $rows = $query->execute();

@@ -33,19 +33,6 @@ class Hash
     protected $backend;
 
     /**
-     * Allow md5 legacy password support for password verification.
-     * This setting allows to verify users using an old md5 hash but
-     * will not result in new hashes to be created through md5.
-     *
-     * Its not recommended to use this legacy approach as plain md5
-     * hashes are not secure. Also note that this validation is
-     * sensitive to time based attacks.
-     *
-     * @var boolean
-     */
-    protected $allowLegacy = false;
-
-    /**
      * Enable/disable backend rehash check
      * @var boolean
      */
@@ -74,10 +61,6 @@ class Hash
     /**
      * Get instance based on \SugarConfig settings
      *
-     *  $sugar_config['passwordHash']['allowLegacy'] = true/false
-     *      Whether or not to allow legacy md5 database hashes,
-     *      defaults to false
-     *
      *  $sugar_config['passwordHash']['rehash'] = true/false
      *      Enable or disable the rehash capability for the selected
      *      backend, defaults to true
@@ -105,7 +88,6 @@ class Hash
 
             self::$instance = $instance = new self(self::getHashBackend($backend, $algo, $options));
 
-            $instance->setAllowLegacy($config->get('passwordHash.allowLegacy', false));
             $instance->setRehash($config->get('passwordHash.rehash', true));
         }
         return self::$instance;
@@ -141,15 +123,6 @@ class Hash
     }
 
     /**
-     * Set allow legacy flag
-     * @param boolean $toggle
-     */
-    public function setAllowLegacy($toggle)
-    {
-        $this->allowLegacy = (bool) $toggle;
-    }
-
-    /**
      * Set rehash flag
      * @param boolean $toggle
      */
@@ -181,9 +154,6 @@ class Hash
 
         // using lower case encoded password
         $password = strtolower($password);
-        if ($this->allowLegacy && $this->isLegacyHash($hash)) {
-            return $this->verifyLegacy($password, $hash);
-        }
 
         return $this->backend->verify($password, $hash);
     }
@@ -194,7 +164,7 @@ class Hash
      */
     public function hash($password)
     {
-        // Passwords are always hased first using md5 before passing to the
+        // Passwords are always hashed first using md5 before passing to the
         // backend. This is for historical reasons and more in specific to
         // be able to support the SOAP api which can take directly md5 hashed
         // passwords.
@@ -212,28 +182,5 @@ class Hash
     public function needsRehash($hash)
     {
         return $this->rehash ? $this->backend->needsRehash($hash) : false;
-    }
-
-    /**
-     * Check if given hash is a legacy md5 hash
-     * @param string $hash
-     * @return boolean
-     */
-    protected function isLegacyHash($hash)
-    {
-        return $hash[0] !== '$' && strlen($hash) === 32;
-    }
-
-    /**
-     * Legacy password validation, assuming the password is
-     * already md5 encoded.
-     *
-     * @param string $password
-     * @param string $hash
-     * @return boolean
-     */
-    protected function verifyLegacy($password, $hash)
-    {
-        return strtolower($password) === $hash;
     }
 }

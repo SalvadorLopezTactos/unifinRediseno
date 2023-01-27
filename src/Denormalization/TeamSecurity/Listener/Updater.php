@@ -13,7 +13,6 @@
 namespace Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
 
 use Doctrine\DBAL\Connection;
-use PDO;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
 
 /**
@@ -56,7 +55,7 @@ DELETE FROM %s WHERE user_id = ?
 SQL
         );
 
-        $this->conn->executeUpdate($query, [$userId]);
+        $this->conn->executeStatement($query, [$userId]);
     }
 
     /**
@@ -106,8 +105,8 @@ DELETE FROM %s
 SQL
         );
 
-        while (($row = $stmt->fetch(PDO::FETCH_NUM))) {
-            $this->conn->executeUpdate($delete, $row);
+        while (($row = $stmt->fetchNumeric())) {
+            $this->conn->executeStatement($delete, $row);
         }
     }
 
@@ -136,7 +135,7 @@ SELECT DISTINCT ?,
 SQL
         );
 
-        $this->conn->executeUpdate($query, [
+        $this->conn->executeStatement($query, [
             $teamSetId,
             $teamIds,
             $teamSetId,
@@ -160,7 +159,7 @@ DELETE FROM %s WHERE team_set_id = ?
 SQL
         );
 
-        $this->conn->executeUpdate($query, [$teamSetId]);
+        $this->conn->executeStatement($query, [$teamSetId]);
     }
 
     /**
@@ -187,7 +186,7 @@ SELECT tst.team_set_id,
 SQL
         );
 
-        $this->conn->executeUpdate($query, [
+        $this->conn->executeStatement($query, [
             $userId,
             $teamId,
             $userId,
@@ -230,7 +229,7 @@ INNER JOIN team_memberships tm
 SQL
         );
 
-        $this->conn->executeUpdate($query, [
+        $this->conn->executeStatement($query, [
             $userId,
             $userId,
             $teamId,

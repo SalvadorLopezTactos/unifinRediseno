@@ -66,7 +66,7 @@
 </form>
 
 <script type="text/javascript">
-{literal}
+
 function toggleInlineSearch()
 {
     if (document.getElementById('inlineGlobalSearch').style.display == 'none')
@@ -75,28 +75,26 @@ function toggleInlineSearch()
 		SUGAR.globalSearchDisabledTable.render();    
         document.getElementById('showGSDiv').value = 'yes'		
         document.getElementById('inlineGlobalSearch').style.display = '';
-{/literal}
+
         document.getElementById('up_down_img').src='{sugar_getimagepath file="basic_search.gif"}';
         document.getElementById('up_down_img').setAttribute('alt',"{sugar_translate label='LBL_ALT_HIDE_OPTIONS'}");
-{literal}
+
     }else{
-{/literal}			
+			
         document.getElementById('up_down_img').src='{sugar_getimagepath file="advanced_search.gif"}';
         document.getElementById('up_down_img').setAttribute('alt',"{sugar_translate label='LBL_ALT_SHOW_OPTIONS'}");
-{literal}			
+			
         document.getElementById('showGSDiv').value = 'no';		
         document.getElementById('inlineGlobalSearch').style.display = 'none';		
     }    
 }
-{/literal}
-
 
 var get = YAHOO.util.Dom.get;
 var enabled_modules = {$enabled_modules};
 var disabled_modules = {$disabled_modules};
 var lblEnabled = '{sugar_translate label="LBL_ACTIVE_MODULES" module="Administration"}';
 var lblDisabled = '{sugar_translate label="LBL_DISABLED_MODULES" module="Administration"}';
-{literal}
+
 SUGAR.saveGlobalSearchSettings = function()
 {
 	var enabledTable = SUGAR.globalSearchEnabledTable;
@@ -109,36 +107,36 @@ SUGAR.saveGlobalSearchSettings = function()
 	modules = modules == "" ? modules : modules.substr(1);
 	document.forms['UnifiedSearchAdvancedMain'].elements['search_modules'].value = modules;
 }
-{/literal}
+
 
 document.getElementById("inlineGlobalSearch").style.display={if $SHOWGSDIV == 'yes'}"";{else}"none";{/if}
 
-{literal}
+
 SUGAR.globalSearchEnabledTable = new YAHOO.SUGAR.DragDropTable(
 	"enabled_div",
-	[{key:"label",  label: lblEnabled, width: 200, sortable: false},
-	 {key:"module", label: lblEnabled, hidden:true}],
+	[{ key:"label",  label: lblEnabled, width: 200, sortable: false},
+	 { key:"module", label: lblEnabled, hidden:true}],
 	new YAHOO.util.LocalDataSource(enabled_modules, {
-		responseSchema: {fields : [{key : "module"}, {key : "label"}]}
+		responseSchema: { fields : [{ key : "module"}, { key : "label"}]}
 	}),  
-	{height: "200px"}
+	{ height: "200px"}
 );
 
 SUGAR.globalSearchDisabledTable = new YAHOO.SUGAR.DragDropTable(
 	"disabled_div",
-	[{key:"label",  label: lblDisabled, width: 200, sortable: false},
-	 {key:"module", label: lblDisabled, hidden:true}],
+	[{ key:"label",  label: lblDisabled, width: 200, sortable: false },
+	 { key:"module", label: lblDisabled, hidden:true}],
 	new YAHOO.util.LocalDataSource(disabled_modules, {
-		responseSchema: {fields : [{key : "module"}, {key : "label"}]}
+		responseSchema: { fields : [{ key : "module"}, { key : "label" }]}
 	}),
-	{height: "200px"}
+	{ height: "200px"}
 );
 
 SUGAR.globalSearchEnabledTable.disableEmptyRows = true;
 SUGAR.globalSearchDisabledTable.disableEmptyRows = true;
-SUGAR.globalSearchEnabledTable.addRow({module: "", label: ""});
-SUGAR.globalSearchDisabledTable.addRow({module: "", label: ""});
+SUGAR.globalSearchEnabledTable.addRow({ module: "", label: "" });
+SUGAR.globalSearchDisabledTable.addRow({ module: "", label: "" });
 SUGAR.globalSearchEnabledTable.render();
 SUGAR.globalSearchDisabledTable.render();
-{/literal}
+
 </script>

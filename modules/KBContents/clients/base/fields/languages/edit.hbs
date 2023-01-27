@@ -26,12 +26,18 @@
             <div class="span6">
                 {{#if @first}}<label>&nbsp;</label>{{/if}}
                 <div class="span12">
-                    <button type="button" class="btn third {{#if primary}}active{{/if}}" name="primary" data-action="set-primary-field" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_SET_ITEM_PRIMARY" ../module}}"><i class="fa fa-star"></i></button>
+                    <button type="button" class="btn third {{#if primary}}active{{/if}}" name="primary" data-action="set-primary-field" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_SET_ITEM_PRIMARY" ../module}}">
+                        <i class="sicon sicon-star-fill"></i>
+                    </button>
                     {{#if remove_button}}
-                        <button type="button" class="btn second" name="remove" data-action="remove-field" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_ITEM_REMOVE" ../../module}}"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn second" name="remove" data-action="remove-field" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_ITEM_REMOVE" ../../module}}">
+                            <i class="sicon sicon-minus"></i>
+                        </button>
                     {{/if}}
                     {{#if add_button}}
-                        <button type="button" class="btn first" name="add" data-action="add-field" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_ITEM_ADD" ../../module}}"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn first" name="add" data-action="add-field" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_ITEM_ADD" ../../module}}">
+                            <i class="sicon sicon-plus"></i>
+                        </button>
                     {{/if}}
                 </div>
             </div>

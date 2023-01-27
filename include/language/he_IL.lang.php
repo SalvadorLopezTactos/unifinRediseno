@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'תחזיות',
     'ForecastWorksheets' => 'גליונות תחזית',
     'ForecastManagerWorksheets' => 'גליונות  תחזית למנהל',
-    'MergeRecords'=>'מזג רשומות',
       'VisualPipeline'=>'צינור ויזואלי',
       'ConsoleConfiguration' => 'תצורת מסוף',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'תפקידים',
     'Notifications'=>'הודעות',
     'Sync'=>'סנכרן',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
     'ReportMaker' => 'Enterprise Reports',
     'DataSets' => 'תבניות נתונים',
     'CustomQueries' => 'שאלתות מותאמות',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'פריטי שורה - רכישות',
     'MobileDevices' => 'מכשירים ניידים',
     'PushNotifications' => 'הודעות בדחיפה',
+    'Escalations' => 'הסלמות',
+    'DocumentTemplates' => 'תבניות מסמכים',
+    'DocumentMerges' => 'מיזוגי מסמכים',
     'WorkFlow' => 'הגדרות זרימת עבודה',
     'EAPM' => 'חשבונות חיצוניים',
     'Worksheet' => 'גיליון עבודה',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'חגים וחופשות',
     'ChangeTimers' => 'שינוי טיימרים',
     'Messages' => 'הודעות',
+    'Audit' => 'ביקורת',
+    'RevenueLineItems' => 'פריטי שורות הכנסה',
+    'DocuSignEnvelopes' => 'מעטפות DocuSign',
+    'Geocode' => 'קוד גיאוגרפי',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'משימות',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'פ"נ',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'מרכזי עסקים',
         'PurchasedLineItems' => 'PL',
+        'DocumentTemplates' => 'DT',
+        'DocumentMerges' => 'DM',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'גיליון עבודה לתחזית',
     'ForecastManagerWorksheets' => 'גליון  תחזית למנהל',
     'Quotas' => 'הצעת מחיר',
-    'MergeRecords'=>'מזג רשומה',
     'Teams' => 'צוות',
     'TeamNotices' => 'הודעה לצוות',
     'Activities' => 'פעילות',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'רכישה',
     'PurchasedLineItems' => 'פריט שורה - רכישות',
     'PushNotifications' => 'הודעה בדחיפה',
+    'Escalations' => 'הסלמה',
+    'DocumentTemplates' => 'תבנית מסמך',
+    'DocumentMerges' => 'מיזוג מסמך',
     'WorkFlow' => 'זרימת עבודה',
     'EAPM' => 'חשבון חיצוני',
     'Worksheet' => 'גיליון עבודה',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'חופשה',
     'ChangeTimers' => 'שינוי טיימר',
     'Messages' => 'הודעה',
+    'Audit' => 'ביקורת',
+    'DocuSignEnvelopes' => 'DocuSignEnvelope',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
+    'Geocode' => 'קוד גיאוגרפי',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'שירותים ציבוריים',
     'Other' => 'אחר',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF ו-CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'בביצוע',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'מרכז מידע',
       'PurchasedLineItems' => 'פריט שורה - רכישות',
       'Purchases' => 'רכישה',
+      'Escalations' => 'הסלמה',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'חשבון',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'הערה',
     'PurchasedLineItems' => 'פריט שורה - רכישות',
     'Purchases' => 'רכישה',
+    'Escalations' => 'הסלמה',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'הוזמן',
       'Ship' => 'נשלח',
   ),
+    'active_status_dom' => [
+        'Active' => 'פעיל',
+        'Inactive' => 'לא פעיל',
+        'Retired' => 'יצא משימוש',
+    ],
+    'appearance_options' => [
+        'system_default' => 'השתמש בהגדרת המערכת',
+        'light' => 'בהיר',
+        'dark' => 'כהה',
+    ],
 
 
   'pricing_formula_default_key' => 'קבוע',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'טלויזיה',
         'NewsLetter' => 'עלון חדשות',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GET',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,13 +2049,15 @@ $app_list_strings = array (
         'print'       => 'הדפס',
         'pieWedgeName'      => 'מחלקות',
     ),
-    'd3_chart_types' => array (
-        'pie chart' => 'טבלת עוגה',
-        'bar chart' => 'תרשים ברים אנכיים',
-        'group by chart' => 'תרשים ברים אנכיים מקובצים',
-        'horizontal bar chart' => 'טבלת עמודות אופקיים',
-        'horizontal group by chart' => 'תרשים ברים אופקיים מקובצים',
-        'line chart' => 'טבלת קווים',
+    'chart_types' => array (
+        'pie chart' => 'תרשים עוגה',
+        'donut chart' => 'תרשים טבעת',
+        'treemap chart' => 'תרשים Treemap',
+        'bar chart' => 'תרשים עמודות אנכי',
+        'group by chart' => 'תרשים עמודות אנכי מקובץ',
+        'horizontal bar chart' => 'תרשים עמודות אופקי',
+        'horizontal group by chart' => 'תרשים עמודות אופקי מקובץ',
+        'line chart' => 'תרשים קו',
         'funnel chart' => 'תרשים משפך',
     ),
     'd3_value_placement' => array (
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'מחיר (הסה"כ הגבוה ביותר)',
             'total_revenue:asc' => 'מחיר (הסה"כ הנמוך ביותר)',
         ],
+        'calendar_type_list' => [
+          'main' => 'מרכז לוחות השנה',
+        ],
+        'calendar_views_options' => [
+          'day' => 'יום',
+          'week' => 'שבוע',
+          'workWeek' => 'שבוע עבודה',
+          'expandedMonth' => 'חודש',
+          'agenda' => 'סדר יום',
+          'timeline' => 'ציר זמן',
+          'monthSchedule' => 'מתזמן',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'נוצרה',
+          'completed' => 'הושלמה',
+          'declined' => 'נדחתה',
+          'delivered' => 'נמסרה',
+          'sent' => 'נשלחה',
+          'signed' => 'חתומה',
+          'voided' => 'משוללת תוקף',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'ברירת מחדל',
+            'color' => 'צבע',
+            'image' => 'תמונה',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'חדש',
+            'In Progress' => 'בביצוע',
+            'Closed' => 'נסגר',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'אין פעילות',
+            'Lack of Progress' => 'אין התקדמות',
+            'Customer-Imposed Deadline' => 'תאריך יעד שהלקוח מחייב',
+            'Account at Risk' => 'חשבון בסיכון',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'התבקש על ידי הלקוח',
+            'Internally Requested' => 'התבקש מתוך הארגון',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'פניית שירות',
+            'Bugs' => 'באג',
+            'Accounts' => 'חשבון',
+            'Opportunities' => 'הזדמנות',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'חיובי',
+            'Negative' => 'שלילי',
+            'Neutral' => 'נייטרלי',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'לא סביר',
+            '02_less_likely' => 'פחות סביר',
+            '03_neutral' => 'נייטרלי',
+            '04_more_likely' => 'יותר סביר',
+            '05_very_likely' => 'מאוד סביר',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'לא תואם ללקוחות',
+            '02_no_match' => '',
+            '01_matches_customers' => 'תואם ללקוחות',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'עקוב אחר קישור',
   'LBL_TOGGLE_VISIBILITY' => 'החלף נראות', // Record view header panel element
   'LBL_ACTIVITIES' => 'תזרים פעילויות',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM‏, Sugar וקוביית ‎3-D הם סימנים מסחריים רשומים של .SugarCRM Inc.'.
         'כל יתר השמות של חברות ומוצרים הנמצאים בשימוש במוצר זה או מופיעים בו עשויים להיות סימנים מסחריים של '.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ הם סימנים מסחריים של SugarCRM Inc.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'הוסף' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'לוגו חברה' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'לוח שנה' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'ערך נפתח שבחרת שינה את תצורת תצוגת הרשומות. ' .
+        'הערכים של שדות מוסתרים בתצורה חדשה זו נמחקו. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'ניווט במודול הראשי',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'סגור',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} סומן כ{{status}}',
 
+    'LBL_FOCUS' => 'פוקוס',
+
     'LBL_QUERY_VALID'=>'בר-תוקף',
     'LBL_QUERY_ERROR'=>'שגיאה!',
     'LBL_QUERY_CHILD'=>'שאילתת משנה ברת תוקף',
@@ -3068,8 +3185,12 @@ $app_strings = array (
     'LBL_CASES'=>'אירועים',
     'LBL_MESSAGE'=>'הודעה',
     'LBL_MESSAGES'=>'הודעות',
+    'LBL_ESCALATIONS' => 'הסלמות',
+    'LBL_ESCALATION' => 'הסלמה',
+    'LBL_DOCUSIGN_ENVELOPES' => 'מעטפות DocuSign',
+    'LBL_DOCUSIGN_ENVELOPE' => 'מעטפת DocuSign',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
-    'LBL_CHANGE_PASSWORD' => 'שנה סיסמא',
+    'LBL_CHANGE_PASSWORD' => 'שינוי סיסמה',
     'LBL_CHANGE_BUTTON_LABEL' => 'שנה',
     'LBL_CHANGE_BUTTON_TITLE' => 'שנה [Alt+G]',
     'LBL_CHARSET' => 'UTF-8',
@@ -3093,6 +3214,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'פריטים פתוחים:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'חבר דוא"ל',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'דוא"ל',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'חבר דוא"ל [Alt+L]',
     'LBL_SEARCH_DROPDOWN_YES'=>'כן',
     'LBL_SEARCH_DROPDOWN_NO'=>'לא',
@@ -3118,6 +3240,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'מסמכים',
     'LBL_DATE_ENTERED' => 'נוצר בתאריך:',
     'LBL_DATE_MODIFIED' => 'שונה בתאריך:',
+    'LBL_ACTIVITY_MODIFIED' => 'השתנה',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'עריכת לשונית &#39;סקירה&#39;',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'עריכת לשוניות &#39;מודול&#39;',
     'LBL_EDIT_BUTTON' => 'ערוך',
@@ -3140,6 +3263,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'בחר קובץ...',
     'LBL_FILTER_SELECT_OPERATOR' => 'בחר אופרטור...',
     'LBL_FILTER_CREATE_NEW' => 'צור',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'בניית מסנן (לא נשמר)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(לא נשמר)',
     'LBL_FILTER_CREATE_FILTER' => 'צור מסנן חדש',
     'LBL_FILTER_CLOSE_FILTER' => 'סגור מסנן',
     'LBL_FILTER_EDIT_FILTER' => 'ערוך מסנן',
@@ -3202,6 +3327,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => 'עוד {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'הפעילויות היום',
     'LBL_LEADS'=>'לידים',
+    'LBL_LEAD'=>'ליד',
+    'LBL_QUOTES_BILL_TO' => 'הצעות מחיר (חייב את)',
     'LBL_LESS' => 'פחות',
     'LBL_CAMPAIGN' => 'קמפיין:',
     'LBL_CAMPAIGNS' => 'קמפיינים',
@@ -3229,19 +3356,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'כדי להמשיך בחר לפחות שתי רשומות.',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'כדי להמשיך בחר פחות מעשר רשומות.',
     'LBL_LISTVIEW_ALL' => 'הכל',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'הקפאת עמודה 1',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'כל ההעתקים',
     'LBL_LISTVIEW_NONE' => 'בטל הכל',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'בחר עמוד זה',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'בחר הכל',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'רשומות שנבחרו',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'נבחר: ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'נקה בחירות',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'נקה את כל הבחירות.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'בחר את כל הרשומות',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'יש יותר מ {{num}} רשומות. בחרת  {{num}} רשומות ראשונות',
     'TPL_LISTVIEW_SELECTED' => 'You have selected {{num}} records in the result set.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'בחרת רשומה אחת בקבוצת התוצאות.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'בחרת את כל {{num}} הרשומות שבתוצאות',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'בחרת את כל {{num}} הרשומות שבתוצאות שבתצוגה זו.',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'מעדכן{{num}} מ {{total}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'מעדכן {{num}} מתוך {{total}}',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(נשאר כ {{time}} {{unit}} זמן)',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'עדכון גורף נכשל. מנסה שוב ({{num}} of {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'עדכון גורף לא הושלם. {{num}} רשומות נותרו ללא שינוי',
@@ -3249,7 +3378,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} רשומה(ות) זכו להתעלמות עקב הרשאות או שגיאות.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} רשומות עודכנו בהצלחה',
     'TPL_MASSUPDATE_TITLE' => '{{module}} עדכון גורף',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => 'מוחק {{num}} מתוך {{total}}.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => 'מוחק {{num}} מתוך {{total}}',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(נשאר כ {{time}} {{unit}} זמן)',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => 'עדכון גורף נכשל. מתחיל נסיון חחדש  ({{num}} מתוך {{total}}).',
     'TPL_MASSDELETE_WARNING_CLOSE' => 'מחיקה גורפת לא הושלמה. נותרו  {{num}} רשומות',
@@ -3274,10 +3403,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'בחר',
     'LBL_LISTVIEW_ACTIONS' => 'פעולות',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'בחר את כל הרשומות בדף זה',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'בטל את בחירת כל הרשומות בדף זה',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} של {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => 'טוען {{num}} מתוך...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'לחץ עבור סך הכל',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'מתוך',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'קבל את מספר הדפים',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'דוד',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'ישראלי',
@@ -3285,10 +3421,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'קוד קופיף יוצא מן הכלל',
     'LBL_LOGIN_TO_ACCESS' => 'כדי לגשת לאזור זה בצע כניסה למערכת.',
     'LBL_LOGOUT' => 'צא מהמערכת',
+    'LBL_FINISH_IMPERSONATING' => 'סיום התחזות',
+    'LBL_RESET_MFA' => 'איפוס אימות רב-גורמי',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, אתה במצב התחזות ל{{user}} כרגע.',
     'LBL_PROFILE' => 'פרופיל',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'מיזוג דואר',
     'LBL_MASS_UPDATE' => 'עדכון מאסיבי',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'בחר את כל הרשומות לביצוע עדכון גורף',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'כלול את הרשומה בעדכון גורף',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'הוסף שדה',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'הסר שדה',
     'LBL_GENERATE_QUOTE' => 'צור הצעת מחיר',
@@ -3343,6 +3484,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'מידע נוסף',
     'LBL_PANEL_BODY' => 'סקירה כללית',
     'LBL_PARENT_TYPE' => 'סוג אב',
+    'LBL_RELATED_TYPE' => 'סוג קשור',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'טווח',
     'LBL_PICTURE_FILE' => 'תמונה',
@@ -3416,7 +3558,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'קשור אל',
     'LBL_RELATED_INFORMATION' => 'מידע שקשור אל',
-    'LBL_RELATED_RECORDS' => 'רשומות קשורות',
+    'LBL_RELATED_RECORDS' => 'מודול {{module}}',
     'LBL_REPORTS_TO' => 'מדווח אל',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'מצביע על שדה נדרש',
@@ -3535,7 +3677,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'כל הזכויות שמורות.br />SugarCRM>‏, Sugar וקוביית ‎3-D הם סימנים מסחריים רשומים של .SugarCRM Inc.'.
         'כל יתר השמות של חברות ומוצרים הנמצאים בשימוש במוצר זה או מופיעים בו עשויים להיות סימנים מסחריים של '.
         'החברות שאליהן הם משויכים.',
@@ -3598,6 +3740,7 @@ $app_strings = array (
     'LBL_UNDELETE' => 'בטל מחיקה',
     'LBL_UNSYNC' => 'בטל סינכרון',
     'LBL_UPDATE' => 'עדכן',
+    'LBL_UPDATES' => 'עדכונים',
     'LBL_USER_LIST' => 'רשימת משתמשים',
     'LBL_USER_MENU' => 'תפריט משתמש',
     'LBL_USERS_SYNC'=>'סנכרן משתמשים',
@@ -3664,6 +3807,8 @@ $app_strings = array (
     'NTC_DELETE_SUCCESS' => 'מחקת את ה {0}',
     'NTC_UNLINK_CONFIRMATION' => 'אתה בטוח שברצונך לבטל את הקישור של הרשומה הזו?',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'אתה בטוח שברצונך לבטל את ה {0}?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'בטוח שברצונך לבטל את הקישור של {0}? פעולה זו תגרום גם להסרתם מהשדה &#39;איש קשר ראשי&#39; של האירוע.',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => 'לא ניתן לבטל את הקישור של {0} מאחר שהם מוגדרים כאיש הקשר הראשי של אירוע זה. עדכן את השדה &#39;איש קשר ראשי&#39; לפני ביטול הקישור של רשומה זו.',
     'NTC_UNLINK_SUCCESS' => 'ביטלת את קישור ה {0}',
     'NTC_LOGIN_MESSAGE' => 'אנא הכנס את שם המשתמש והסיסמא שלך.',
     'NTC_NO_ITEMS_DISPLAY' => 'אין',
@@ -3695,6 +3840,9 @@ $app_strings = array (
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'רענון הדפדפן יסגור אוטומטית את כל הפעלות השיחה או הצ&#39;אט ב-SugarLive הפתוחות אצלך. שינויים שלא נשמרו יאבדו. האם ברצונך להמשיך?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'יש לך שינויים שלא נשמרו. האם אתה בטוח שברצונך לעזוב דף זה?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'בטוח שברצונך לאפס את <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">האימות הרב-גורמי</a> שלך? 
+פעולה זו תגרום לניתוק מיידי שלך מהמערכת ויהיה עליך לבצע אימות באמצעות אפליקציית האימות בפעם הבאה שתיכנס.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'אישור ויציאה',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'תאסופית אחת או יותר כוללת שינויים שלא נשמרו. האם אתה בטוח שברצונך לסגור את הצייר?',
     'LBL_NAVIGATE_TO_REPORTS' => 'אתה עובר למודול דוחות. השינויים שביצעת לא יישמרו. האם להמשיך?',
     'ERROR_NO_RECORD' => 'שגיאה באיחזור הרשומה.  יתכן והרשומה נמחקה או שאינך מורשה לצפות בה.',
@@ -3790,6 +3938,11 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "אין לך רשומות שמורות.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "באופרותך ליצור מרשימת a",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'חיובי',
+    'LBL_SENTIMENT_NEUTRAL' => 'נייטרלי',
+    'LBL_SENTIMENT_NEGATIVE' => 'שלילי',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "הקלק פה",
     // contextMenu strings
@@ -3799,11 +3952,16 @@ $app_strings = array (
     'LBL_CREATE_NOTE' => 'צור פתק',
     'LBL_CREATE_OPPORTUNITY' => 'צור הזדמנות',
     'LBL_SCHEDULE_CALL' => 'צור שיחת טלפון',
+    'LBL_SCHEDULE_CALL2' => 'שיחת טלפון',
     'LBL_SCHEDULE_MEETING' => 'תזמן פגישה',
+    'LBL_SCHEDULE_MEETING2' => 'פגישה',
     'LBL_CREATE_MESSAGE' => 'צור הודעה',
+    'LBL_CREATE_MESSAGE2' => 'הודעה',
     'LBL_CREATE_TASK' => 'צור משימה',
+    'LBL_CREATE_TASK2' => 'משימה',
     'LBL_REMOVE_FROM_FAVORITES' => 'הסר מהמועדפים שלי',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'הערה',
     'LBL_DOWNLOAD_ALL' => 'הורד הכל',
     'LBL_DOWNLOAD_ONE' => 'הורד',
     'LBL_ATTACHMENTS' => 'קבצים מצורפים',
@@ -3843,13 +4001,14 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'הצג שורות',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'קשור לרשומה הנוכחית',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'קישור נכשל',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'הקפאת עמודה ראשונה',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'אתה בטוח שברצונך להסיר תאסופה?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'אתה בטוח שברצונך למחוק שורה זו?',
     'LBL_MAXIMUM_OF' => 'מקסלימלי',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'ניתן להציג עמודות',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'לוח מחוונים',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'לוח המחוונים שלי',
     'LBL_COLLAPSE_ALL' => 'סגור הכל',
@@ -3866,12 +4025,15 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE' => 'הגדר',
     'LBL_DASHLET_TOGGLE' => 'פתח/סגור',
     'LBL_SIDEPANE_TOGGLE' => 'פתח/סגור חלון צדדי',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'שחזור חלוניות ברירת המחדל',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'אין לוח מחוונים מוגדר',
+    'LBL_CREATE_DASHBOARD_LINK' => 'צור לוח מחוונים',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'עזרה',
     'LBL_HELPLET_TOGGLE' => 'פתח/סגור',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'מודולים',
     'LBL_FACET_MODIFIED_BY_ME' => 'נערך על ידי',
     'LBL_FACET_CREATED_BY_ME' => 'נוצר על ידי',
@@ -3888,6 +4050,7 @@ $app_strings = array (
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'תצוגת רשומה',
+    'LBL_RELATED_RECORDS' => '{{module}} קשור',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'מציג רשומה ורשומות קשורות אופציונליות בלשוניות.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'סוג רשומת בסיס',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => '{{moduleSingular}} זה',
@@ -3937,7 +4100,7 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'לא נמצאו רשומות',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'סיכום פניית שירות',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'אינטראקציות',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'ציר זמן',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'הודעות וצרופות',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'הודעות וצרופות השייכות לרשומה',
     'LBL_DASHLET_PIPLINE_NAME' => 'צינור',
@@ -4208,6 +4371,8 @@ $app_strings = array (
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'העלה מהמחשב שלי',
     'LBL_SEARCH_EXTERNAL_API' => 'קובץ או מקור חיצוני',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'העלאה למקור חיצוני',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'קישור ממקור חיצוני',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'ביטחון',
     'LBL_SHARE_PRIVATE' => 'פרטי',
     'LBL_SHARE_COMPANY' => 'חברה',
@@ -4316,6 +4481,9 @@ $app_strings = array (
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'קיצורי דרך של המקלדת',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>Form Functionality - Alt+</strong><br/> I = ed<b>I</b>t (detailview)<br/> U = d<b>U</b>plicate (detailview)<br/> D = <b>D</b>elete (detailview)<br/> A = s<b>A</b>ve (editview)<br/> L = cance<b>L</b> (editview) <br/><br/></p><p><strong>Search and Navigation  - Alt+</strong><br/> 7 = first input on Edit form<br/> 8 = Advanced Search link<br/> 9 = First Search Form input<br/> 0 = Unified search input<br></p>' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'בצע הסלמה',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'שתף',
     'TPL_RECORD_SHARE_SUBJECT' => '{{module}} {{name}} משותף מ {{appId}}',
@@ -4388,7 +4556,7 @@ $app_strings = array (
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'כל השינויים יעלמו כאשר תעבור לרשימה עיקרית חדשה. אתה בטוח?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'מזג רשומות קשורות',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'מוזג: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'מוזגו: ‎{{percent}}%‎',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'מיזוג {{objectName}} מקושרים נכשל. מנסה שוב  ({{num}} מתוך {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4442,14 +4610,14 @@ $app_strings = array (
     'LBL_LANGUAGE' => 'שפה:',
     'LBL_LOADING_LANGUAGE' => 'טוען חבילת שפה',
     'LBL_UPLOADING' => 'מעלה',
+    'LBL_UPLOADING_DOTS' => 'מעלה...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'אתה בטוח שברצונך למחוק תמונה זו?',
     'LBL_FILE_DELETE_CONFIRM' => "אתה בטוח שברצונך למחוק קובץ זה? לא ניתן לבטל פעולה זו",
     'LBL_FILE_DELETED' => 'הקובץ נמחק בהצלחה',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'פורטל נושא',
-    'LBL_COFIGURE_PORTAL_THEME' => 'הגדר פורטל נושא',
-    'LBL_THEME_PREVIEW' => 'תצוגה מקדימה נושא',
+    'LBL_THEME_PREVIEW' => 'תצוגה מקדימה של עיצוב הפורטל',
     'LBL_LOADING_PREVIEW' => 'טוען תצוגה מקדימה',
     'LBL_RESET' => 'איפוס',
     'LBL_COLORS' => 'צבעים',
@@ -4600,10 +4768,18 @@ $app_strings = array (
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'פגישות',
     'LBL_TASKS_SUBPANEL_TITLE' => 'משימות',
     'LBL_CALLS_SUBPANEL_TITLE' => 'שיחות',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'חשבונות',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'אנשי קשר',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'כתובות מייל',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'משמרות',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'שורות הצעות מחיר',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'החרגות למשמרות',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'מסמכים',
+    'LBL_ESCALATIONS' => 'הסלמות',
+    'LBL_ESCALATED' => 'הוסלם',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'הסלמות',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'הסלמות קשורות אחרות',
+    'LBL_ESCALATIONS' => 'הסלמות',
     'LNK_SETTINGS' => 'הגדרות',
     'LBL_MOBILE_SUPPORT' => 'תמיכה',
     'LBL_MOBILE_SHOW_MORE' => 'הצג עוד...',
@@ -4811,6 +4987,55 @@ $app_strings = array (
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'לא ניתן להשיג שעת שרת',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'לא ניתן להפעיל מצב לא מקוון. לא ניתן ליצור קשר עם השרת.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'מראה',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'השתמש בהגדרת המערכת',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'בהיר',
+    'LBL_MOBILE_APP_THEME_DARK' => 'כהה',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'שם קובץ חדש',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'שינוי שם הקובץ',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'אני יצרתי',
+    'LBL_OPERATOR_CONTAINS' => 'הינו אחד מ',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'אינו אחד מ',
+    'LBL_OPERATOR_EMPTY' => 'ריק',
+    'LBL_OPERATOR_NOT_EMPTY' => 'לא ריק',
+    'LBL_OPERATOR_MATCHES' => 'זהה בדיוק',
+    'LBL_OPERATOR_STARTS_WITH' => 'מתחיל ב',
+    'LBL_OPERATOR_EQUALS' => 'שווה ל',
+    'LBL_OPERATOR_NOT_EQUALS' => 'שונה מ',
+    'LBL_OPERATOR_GREATER_THAN' => 'גדול מ',
+    'LBL_OPERATOR_LESS_THAN' => 'קטן מ',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'גדול או שווה ל',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'קטן או שווה ל',
+    'LBL_OPERATOR_BETWEEN' => 'בטווח שבין',
+    'LBL_OPERATOR_BEFORE' => 'לפני',
+    'LBL_OPERATOR_AFTER' => 'לאחר',
+    'LBL_OPERATOR_YESTERDAY' => 'אתמול',
+    'LBL_OPERATOR_TODAY' => 'היום',
+    'LBL_OPERATOR_TOMORROW' => 'מחר',
+    'LBL_OPERATOR_LAST_7_DAYS' => '7 הימים שעברו',
+    'LBL_OPERATOR_NEXT_7_DAYS' => '7 הימים הבאים',
+    'LBL_OPERATOR_LAST_30_DAYS' => '30 הימים שעברו',
+    'LBL_OPERATOR_NEXT_30_DAYS' => '30 הימים הבאים',
+    'LBL_OPERATOR_LAST_MONTH' => 'בחודש שעבר',
+    'LBL_OPERATOR_THIS_MONTH' => 'החודש',
+    'LBL_OPERATOR_NEXT_MONTH' => 'בחודש הבא',
+    'LBL_OPERATOR_LAST_YEAR' => 'בשנה שעברה',
+    'LBL_OPERATOR_THIS_YEAR' => 'בשנה זו',
+    'LBL_OPERATOR_NEXT_YEAR' => 'בשנה הבאה',
+    'LBL_OPERATOR_IS' => 'הינו',
+    'LBL_OPERATOR_IS_NOT' => 'אינו',
+    'LBL_ERROR_FILTER_EMPTY' => 'יש להוסיף למסנן קריטריונים.',
+    'LBL_ADD_FILTER' => 'הוספת קריטריונים',
+    'LBL_FILTER_NAME' => 'שם המסנן',
+    'LBL_FILTER_FIELD' => 'שדה',
+    'LBL_FILTER_OPERATOR' => 'אופרטור',
+    'LBL_FILTER_VALUE' => 'ערך',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'שמירה באפליקציה למחשב שולחני',
+    'LBL_FILTER_LOCAL' => 'מסנן &#39;מקומי&#39;',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'ברוך הבא ל {{{brandName}}}.',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'תפריט ראשי',
@@ -4856,6 +5081,7 @@ $app_strings = array (
     'LBL_COMMENT_ADD' => 'הוסף הערה',
     'LBL_REQUIRED' => 'חובה',
     'LBL_MORE_BUTTON' => 'עוד',
+    'LBL_NO_OPTIONS' => 'אין אפשרויות זמינות',
     'LBL_TRY_AGAIN' => 'נסה שוב',
     'LBL_NEW_RECORDS' => 'נוצרו לאחרונה',
     'LBL_ASSIGNED_TO_ME' => '{{{module}}} שלי',
@@ -5081,11 +5307,15 @@ $app_strings = array (
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'האם אתה בטוח שברצונך לסגור את הצ&#39;אט?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'צור פתק או הוסף צרופה',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'הוסף פתק',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'ניסיון הכניסה שלך כשל. נסה שנית.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'פרטים שגויים',
-    'LBL_PORTAL_INVALID_GRANT' => 'האסימון שלך לא חוקי או פג תוקף. אנא התחבר שוב.',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'אסימון פג תוקף',
+    'LBL_PORTAL_INVALID_GRANT' => 'תוקף ההפעלה שלך פג. התחבר שוב.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'תוקף ההפעלה פג',
     'LBL_PORTAL_AUTH_FAILED' => 'אישור לקוח נכשל',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'לקוח שגוי',
     'LBL_PORTAL_INVALID_REQUEST' => 'הבקשה לא תקינה. אנא פנה לתמיכה טכנית',
@@ -5119,6 +5349,8 @@ $app_strings = array (
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'שחזור לוח המחוונים המוגדר כברירת מחדל',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'מסוף חידושים',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'סקירה',
@@ -5138,6 +5370,7 @@ $app_strings = array (
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'סיכום הודעה',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'סיכום שיחה',
     'LBL_OMNICHANNEL_LINK_TO' => 'קישור {{fromModule}} ל-{{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'קישור ל-{{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'מקושר',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'הדפדפן שלך אינו תומך בשיחות. יש להשתמש ב-Google Chrome או ב-Mozilla Firefox.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'לקבלת עזרה, פנה אל מנהל המערכת שלך ב-Sugar.',
@@ -5145,6 +5378,8 @@ $app_strings = array (
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'לפני ביצוע שיחה יוצאת, יש לסיים את קביעת התצורה של SugarLive.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'לפני פתיחת SugarLive, יש לסיים את קביעת התצורה של SugarLive.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'לפני קביעת התצורה של SugarLive, הגדר את עצמך כ"לא מחובר" ב-SugarLive.',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'תצוגה קומפקטית',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'תצוגה מלאה',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'שחזור הלשונית לברירת המחדל',
@@ -5556,9 +5791,12 @@ $app_strings = array (
     'LBL_BEST' => 'הטוב ביותר',
     'LBL_WORST' => 'הגרוע ביותר',
     'LBL_LIKELY' => 'הסביר ביותר',
-    'LBL_BEST_ADJUSTED' => 'הטוב ביותר (מותאם)',
-    'LBL_WORST_ADJUSTED' => 'הגרוע ביותר (מותאם)',
-    'LBL_LIKELY_ADJUSTED' => 'הסביר ביותר (מותאם)',
+    'LBL_BEST_FORECAST' => 'התחייבות (הכי טוב)',
+    'LBL_WORST_FORECAST' => 'התחייבות (הכי גרוע)',
+    'LBL_LIKELY_FORECAST' => 'התחייבות (סביר)',
+    'LBL_BEST_ADJUSTED' => 'התחייבות מותאמת (הכי טוב)',
+    'LBL_WORST_ADJUSTED' => 'התחייבות מותאמת (הכי גרוע)',
+    'LBL_LIKELY_ADJUSTED' => 'התחייבות מותאמת (סביר)',
     'LBL_AMOUNT_USDOLLAR' => 'סכום מומר',
     'LBL_OVERDUE' => 'איחור',
 
@@ -5579,6 +5817,8 @@ $app_strings = array (
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'לקבלת עזרה נוספת פנה לתיעוד הבא: {{{more_info_url}}} {{plural_module_name}}.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'אין נתונים זמינים',
+    'LBL_NEED_HELP' => 'זקוק לעזרה לגבי משהו חדש?',
+    'LBL_NEW_CASE' => 'אירוע חדש',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'חלונית העזרה מציגה מידע ספציפי לגבי המודול שאתה כרגע צופה בו, יחד עם קישור למסמכי התיעוד התואמים (כגון מסמכי תיעוד של לידים) במדריך היישום לפרטים נוספים.',
@@ -5726,9 +5966,19 @@ $app_strings = array (
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'ללא מענה',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'תזמון לא זמין',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'תצוגות זמינות',
+    'LBL_CALENDAR_DASHLET_NAME' => 'מתזמן לוחות השנה',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'תצוגת ברירת מחדל',
+    'LBL_CALENDAR_MY_CALENDARS' => 'לוחות השנה שלי',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'לוחות שנה של משתמשים וצוותים',
+    'LBL_CALENDAR' => 'לוח שנה',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'ארעה שגיעה בטעינת התזמון',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'שמור ושלח הזמנות',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'סטטוס קבלה',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'תהליכים',
@@ -5845,15 +6095,21 @@ $app_strings = array (
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'העתק את קישור האישור',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'אינטראקציות',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'אינטראקציות {{moduleSingular}}',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'ציר זמן',
+    'LBL_NO_ACTIVITY' => 'אין פעילות',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של {{moduleSingular}}',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'עוד',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'פחות',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'ציר הזמן מציג שיחות, הודעות דוא"ל, ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'הצג עוד...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'הראה פחות...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'אין נתונים זמינים',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'אין רישיון לשימוש במודול.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'מנויים פעילים',
@@ -5902,8 +6158,10 @@ $app_strings = array (
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'מגירת פוקוס סגירות',
     'LBL_EXTERNAL_GUESTS' => 'אורחים חיצוניים',
     'LBL_MY_FAVORITE_TASKS' => 'המשימות המועדפות שלי',
+
     'LBL_MY_TASKS' => 'המשימות שלי',
 
     // Sugar Integrate
@@ -5920,7 +6178,367 @@ $app_strings = array (
     'LBL_TIME_AWARE_TYPE' => 'סוג',
     'LBL_TIME_AWARE_BEAN_ID' => 'מזהה Bean',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'תווית תצוגה',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'פתיחת תצוגת הרשומות',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'הוסף',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'אין עזרה זמינה',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'פונקציות',
+    'LBL_ACTIONBUTTON_FIELDS' => 'שדות',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'בחירת שדה...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Rollup',
+    'LBL_ACTIONBUTTON_RELATED' => 'קשור',
+    'LBL_ACTIONBUTTON_SAVE' => 'שמירה',
+    'LBL_ACTIONBUTTON_CANCEL' => 'ביטול',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'מודול קשור',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'שדות קשורים',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'מודול Rollup',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'שדות Rollup',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'פונקציית Rollup',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'מינימום',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'מקסימום',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'ממוצע',
+    'LBL_ACTIONBUTTON_SUM' => 'סכום',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'הקצה רשומה',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'כתוב דוא"ל',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'יצירת רשומה',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'מיזוג מסמכים',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'פתח כתובת URL',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'הרץ דוח',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'עדכן רשומה',
+    'LBL_ACTIONBUTTON_ACTION' => 'פעולה',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'הקצה ל',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'שלח בדוא"ל ל',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'השתמש ב-PMSE',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'תבנית',
+    'LBL_ACTIONBUTTON_MODULE' => 'מודול',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'הגדרות תצוגה',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'סוג',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'תפריט נפתח',
+    'LBL_ACTIONBUTTON_BUTTON' => 'כפתור',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'קבוצת כפתורים',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'הצג תווית ברשומה',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'הצג בכותרת העליונה',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'הסתר במהלך עריכה',
+    'LBL_ACTIONBUTTON_SIZE' => 'גודל',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'ברירת מחדל',
+    'LBL_ACTIONBUTTON_SMALL' => 'קטן',
+    'LBL_ACTIONBUTTON_LARGE' => 'גדול',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'מחושב',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'המר ל-PDF',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'מיזוג מסמכים',
+    'LBL_ACTIONBUTTON_URL' => 'כתובת URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'תצוגה מקדימה',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'מאפיינים',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'תווית',
+    'LBL_ACTIONBUTTON_DESC' => 'תיאור כלי',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'הצג תווית',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'הצג סמל',
+    'LBL_ACTIONBUTTON_SCHEME' => 'ערכת צבעים',
+    'LBL_ACTIONBUTTON_ICON' => 'סמל',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'תלוי',
+    'LBL_ACTIONBUTTON_DESIGN' => 'תצורת פריסה',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'עצור בשגיאה',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'שמירה אוטומטית',
+    'LBL_ACTIONBUTTON_CONFIG' => 'הגדרה',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'הגדר את ה-ActionButton לפני השמירה.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'הגדרת כפתורים',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'יצירה אוטומטית',
+    'LBL_ACTIONBUTTON_LINK' => 'קישור',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'העתקת ערכי אב',
+    'LBL_ACTIONBUTTON_PRESET' => 'מוגדר מראש',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'מוגדר מראש מההורה',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'בחר...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'משדה האב ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'האם אתה בטוח שברצונך למחוק כפתור זה?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'אתה בטוח שברצונך למחוק פעולה זו?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'נתונים לא חוקיים של כפתור פעולה',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'יש לבחור מודול לפני השמירה.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'יש לבחור קישור לפני השמירה. אם אין קישור זמין, בטל את הבחירה באפשרות הקישור.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'יש לבחור רשומה לפני השמירה.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'יש לבחור תבנית לפני השמירה.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'ראשי',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'משני',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'ניראות גבוהה',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'ים',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'ורוד',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'צבא',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'כחול-ירקרק',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'האוקיינוס השקט',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'ירוק',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'צהוב',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'כתום',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'אדום',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'אדום-אלמוגים',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'סגול',
+    'LBL_ACTIONBUTTON_FORMULA' => 'נוסחה',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'פעולות',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'שגיאה בעת אימות נתוני הכפתור.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'כפתורים חייבים לכלול לפחות תווית או מערך סמלים.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'הזן תווית כפתור חוקית.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'לא ניתן היה ליצור את הרשומה מאחר שחסרים ערכים נדרשים. פנה אל מנהל המערכת.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'חייבים להיות לפחות שני כפתורים פעילים עבור סוג כפתור זה.',
+    'LBL_ACTIONBUTTON_RECORD' => 'תצוגות של רשומות',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'תפריטי פעולה',
+    'LBL_ACTIONBUTTON_ORDER' => 'סדר',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'תצוגת רשימה',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'תצוגת רשומות',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'חלונית תצוגת רשומות',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'פאנלי-משנה',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'מנגנון הביצוע של רצף המשימות כשל בביצוע הפעולות הבאות: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'הוספת פעולה',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'הסרת פעולה זו',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'מיזוג מסמכים',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'מיזוג מסמכים ל-PDF',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'גודל חברה',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'ענף',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'תגי ענף',
+    'LBL_HINT_COMPANY_LOCATION' => 'מיקום החברה',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'תיאור החברה',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'שנת הקמה',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'דף החברה ב-Facebook',
+    'LBL_HINT_COMPANY_TWITTER' => 'דף החברה ב-Twitter',
+    'LBL_HINT_COMPANY_PIC' => 'הלוגו של החברה',
+    'LBL_HINT_CONTACT_PIC' => 'תמונת איש קשר',
+    'LBL_HINT_COMPANY_WEBSITE' => 'אתר האינטרנט של החברה',
+    'LBL_HINT_PHOTO' => 'קישור לתמונה',
+    'LBL_HINT_JOB_2' => 'תפקידים קודמים',
+    'LBL_HINT_EDUCATION' => 'חינוך',
+    'LBL_HINT_EDUCATION_2' => 'חינוך - נוסף',
+    'LBL_HINT_TWITTER' => 'קישור ל-Twitter',
+    'LBL_HINT_FACEBOOK' => 'קישור ל-Facebook',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'קוד NAICS',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'קוד SIC',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'סוף שנת כספים',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'הכנסה שנתית',
+    'LBL_HINT_PHONE_1' => 'טלפון 1',
+    'LBL_HINT_PHONE_2' => 'טלפון 2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'טבלת איחוד',
+    'LBL_HINT_FULL_NAME' => 'שם מלא',
+    'LBL_HINT_JOB_TITLE' => 'תפקיד',
+    'LBL_HINT_OFFICE_PHONE' => 'טלפון בעבודה',
+    'LBL_HINT_MOBILE_PHONE' => 'נייד',
+    'LBL_HINT_OTHER_PHONE' => 'טלפון אחר',
+    'LBL_HINT_WEBSITE' => 'אתר אינטרנט',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'האם ברצונך להחליף את כל הנתונים הקיימים עבור רשומה זו בנתונים החדשים שנמצאו ב-Hint?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'האם ברצונך להחליף את ה{{fieldName}} הקיים עבור רשומה זו ב{{fieldName}} החדש שנמצא ב-Hint?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'כל הנתונים הקשורים לחשבון יוסרו. בטוח שברצונך להמשיך?',
+    'LBL_HINT_COMPANY_LOGO' => 'לוגו',
+    'LBL_HINT_CONTACTS_AVATAR' => 'תמונה',
+    'LBL_HINT_ACCOUNTSETS' => 'תגי קבוצות חשבונות ב-Hint',
+
+    'LBL_HINT_LOADING' => 'המערכת טוענת...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'המערכת מסירה את ההתקנה של Hint, נא להמתין',
+    'LBL_HINT_VALUE_ERASED' => ' הערך נמחק ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'מידע זה נמחק באמצעות בקשת פרטיות נתונים',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'בחר אחת מהאפשרויות הבאות להסרת התקנה:',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'הסר את ההתקנה של חבילת Hint בלבד',
+    'LBL_HINT_UNINSTALL_FULL' => 'הסר את ההתקנה של Hint לחלוטין',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'בחירה באפשרות זו תגרום להסרת ה-MLP של Hint ולהשבתת כל המינויים הפעילים ל-Hint Insights.
+    התקנה מחדש של Hint תפעיל מחדש את המינויים באופן אוטומטי.',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'בחירה באפשרות זו תגרום להסרת התקנה מלאה של Hint, כולל הסרת ה-MLP ומחיקת כל מידע התצורה והמינויים.',
+    'LBL_HINT_UNINSTALL' => 'הסר התקנה',
+    'LBL_HINT_UNINSTALL_HEADER' => 'הסרת ההתקנה של Hint',
+    'LBL_HINT_CANCEL' => 'ביטול',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'אזהרה: יש לבחור באפשרות זו רק אם אין בכוונתך להשתמש שוב ב-Hint בעתיד.
+    לפני הסרת ההתקנה, בצע גיבוי מלא של מסד הנתונים של Sugar והעבר את Sugar למצב תחזוקה. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'ראה ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'המדריך של Hint למנהלי מערכת ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'לקבלת פרטים על תהליך הסרת ההתקנה.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'בטוח שברצונך להסיר את ההתקנה של חבילת Hint בלבד?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'בטוח שברצונך להסיר את ההתקנה של Hint לחלוטין?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(הערה: פעולה זו בלתי הפיכה)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'שדות Hint',
+    'LBL_HINT_NO_RESULTS_MSG' => 'לא נמצאו תוצאות.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'פריסה בסיסית של חלונית Hint',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'חשבונות',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'אנשי קשר',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'לידים',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'פריסה מורחבת של חלונית Hint',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'שנה את סדר השדות על ידי גרירה ושחרור בתוך אזורי פריסת החלונית של Hint שתיארנו מעל.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'לקבלת הוראות מפורטות ורשימה של שדות ברירת המחדל, ראה ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' כדי לשחזר את הגדרות ברירת המחדל עבור המודול ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => '.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'בטוח שברצונך לאפס את ההגדרות לברירות המחדל עבור המודול {{module}}?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'לחץ כאן',
+    'LBL_HINT_CONFIG_NAME' => 'המדריך של Hint למנהלי מערכת.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'שדות',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'שדות מועשרים',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'באזור זה מופיעים כל השדות של Hint והשדות של Sugar המועשרים על ידי Hint. שדות של Hint מסומנים בכוכבית (*) ויכולים להופיע בחלונית של Hint רק אם הם מועשרים.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'שם שדה',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'העשרת שדה',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'הצג ב-Hint',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'הצג בחלונית של Hint',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'שדות נוספים של Sugar',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'באזור זה מופיעים כל השדות של Sugar שאינם מועשרים על ידי Hint.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'אזהרה',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'זהירות: אתה עומד לסנכרן עם שירות Hint Insights. כתבות תקציר ממתינות לשליחה בדוא"ל יאבדו, וחדשות קיימות יימחקו מהחלונית של Insights. ההודעות מכל הסוגים יתחדשו לאחר השלמת הסנכרון.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'חברות מוצעות שיש להן קשר ל{{_moduleSingular}} שלך מפורטות למטה. בחר את נתוני החברה שברצונך להציג.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'לא נבחר אף חשבון',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'נמצאו חשבונות דוא"ל מרובים, בחר את אלה שברצונך לייבא: ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'לא היתה ל-Hint אפשרות למצוא התאמה במערכת על בסיס הנתונים שהוזנו.',
+    'LBL_HINT_HELP_MESSAGE2' => 'את התוצאות הטובות ביותר ב-Hint ניתן למצוא לפי שם וכתובת דוא"ל של משתמש.',
+    'LBL_HINT_HELP_MESSAGE3' => 'את התוצאות הטובות ביותר ב-Hint ניתן למצוא לפי כתובת ה-URL של אתר החברה.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "הזן את השם או את האתר של החברה הקשורה ל{{_moduleSingular}} ו-Hint יחפש נתונים נוספים.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "הזן את כתובת הדוא\"ל שלך הקשורה ל{{currentModule}} ו-Hint יחפש נתונים נוספים.",
+
+    'LBL_HINT_HISTORY_NONE' => 'אין נתונים זמינים עבור תצוגת ההיסטוריה',
+    'LBL_HINT_HISTORY_TITLE' => 'היסטוריית פעילויות',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'העשרת נתונים',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'תוקף הרישיון עבור שירות Hint שלך ב-SugarCRM פג. פנה אל מנהל מערכת SugarCRM שלך ובקש שיחדש את הרישיון.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'רוצה לראות את היתרונות שאתה והחברה יכולים להרוויח משימוש ב-SugarCRM Hint? פנה אל מנהל מערכת SugarCRM שלך ובקש שיוסיף את Hint.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'פרטי החשבון לא נמצאו',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'נמצאו נתונים מועשרים - לחץ כדי לשמור את כל הנתונים המועשרים ברשומה.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'לחץ כדי לשמור את הנתונים המועשרים ברשומה.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'אנשי קשר רלוונטיים',
+    'LBL_HINT_CONTACTS_NONE' => 'אין אנשי קשר רלוונטיים',
+
+    'LBL_HINT_NEWS' => 'חדשות',
+    'LBL_HINT_GENERAL' => 'כללי',
+    'LBL_HINT_ALL_NEWS' => 'כל החדשות',
+    'LBL_HINT_FILTER_NEWS' => 'סינון חדשות',
+    'LBL_HINT_FINANCIAL_NEWS' => 'פיננסי',
+    'LBL_HINT_PERSONNEL_NEWS' => 'אישי',
+    'LBL_HINT_PRESS_RELEASES' => 'הודעות לעיתונות',
+    'LBL_HINT_OTHER_NEWS' => 'אחר',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'חיפוש מאמרי חדשות',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => 'אין חדשות זמינות',
+    'LBL_NEW_NOTIFICATIONS' => 'הודעות חדשות',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'כדי להציג את חלונית Hint Insights, נדרש רישיון ל-Hint.
+    שאל את מנהל המערכת איך להשיג רישיון ל-Hint.',
+
+    'LBL_HINT_FOR' => 'עבור',
+    'LBL_HINT_WITH' => 'עם',
+    'LBL_HINT_SHOW_ME' => 'הראה לי: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'שלח לי הודעה באמצעות: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'מרכז העדפות Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'מקש Option לקביעת העדפות',
+    'LBL_HINT_PREFERENCES' => 'העדפות',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'אפשרות המחיקה מושבתת; חייבת להיות מוגדרת לפחות הצהרת העדפה אחת',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'אפשרות ההוספה מושבתת; הגעת למספר המרבי של הצהרות העדפות',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'כלול בחלונית של Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'חלון קופץ כהודעה בשולחן העבודה',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'כדי לקבל הודעות בעקביות, יש להפעיל את אפשרות ההודעות בכל הדפדפנים ובכל המחשבים השולחניים.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'חלק מהדפדפנים, כגון Internet Explorer, לא תומכים בהודעות. לא ניתן להפעיל הודעות כשמשתמשים בדפדפן שלא תומך בהודעות.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'שלח התראה מיידית בדוא"ל עבור כל הודעה',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'שלח תקציר יומי בדוא"ל',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'שלח תקציר שבועי בדוא"ל',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'לא ניתן היה לשמור את ההעדפות. בדוק את החיבור למערכת ונסה שוב.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'בחלק משדות החובה חסר ערך. בדוק את ההעדפות וודא שכל שדות החובה מולאו.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'אתה עומד להפעיל הודעות בדפדפן עבור Hint Insights. לחץ על &#39;אישור&#39; כדי להמשיך. לאחר מכן תוצג לך בדפדפן בקשה למתן הרשאה לקבלת אירועי הודעות.',
+    'LBL_HINT_PUSH_ERROR' => 'תוסף התראות Push נרשם עבור {{options.type}} ללא יחסי התלות שלו. התוסף לא יעבוד כצפוי. ספק את הנתיב אל קובץ העובד ושיטה לשמירת המינוי בשרת.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'הפעל הודעות Hint עבור כל המשתמשים',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'השבת הודעות Hint עבור כל המשתמשים',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'אזהרה: לא היתה אפשרות להשבית הודעות במהלך הסרת ההתקנה של Sugar Hint. כדי להשבית הודעות, התקן את Hint 5.4.0 ואילך ובצע הסרת התקנה מלאה באמצעות הכלי Hint Uninstaller שנמצא באזור הניהול של Sugar.',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'תצורת מפות',
+    'LBL_MAP_MAP' => 'מפה',
+    'LBL_MAP_MAPS' => 'מפות',
+    'LBL_MAP_GEOCODING_RECORD' => 'קוד גיאוגרפי',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'הקידוד הגיאוגרפי של הרשומה בוצע בהצלחה.',
+    'LBL_MAP_LATITUDE' => 'קו רוחב',
+    'LBL_MAP_LONGITUDE' => 'קו אורך',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'חפש לפי כתובת...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'הרשומה הנוכחית כבר עברה קידוד גיאוגרפי. בטוח שברצונך להחליף את הקידוד הגיאוגרפי של הרשומה?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'קידוד גיאוגרפי ידני',
+    'LBL_MAP_POINT_COORDINATES' => 'קואורדינטות של נקודות במפה',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'מחשב את המסלול האופטימלי...',
+    'LBL_MAP_DIRECTIONS' => 'הנחיות הגעה',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'הנחיות הגעה החל מהמשתמש הנוכחי',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'הנחיות הגעה החל מרשומה זו',
+    'LBL_MAPS_RADIUS_INPUT' => 'רדיוס (0-250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'ברדיוס של המיקוד',
+    'LBL_MAPS_DISTANCE' => 'מרחק',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'מיקוד',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'תצורה לא חוקית: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => 'המיפויים של שדה <strong>{{module}}</strong> לא חוקיים.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'סוג מפה',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'רמת מרחק מתצוגה',
+    'LBL_MAPS_DASHLET' => 'מפות',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'הצגת רשומה(ות) שעברה(ו) קידוד גיאוגרפי על המפה.',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'הרכיב &#39;מפות&#39; לא זמין עבור מודול זה. הפוך אותו לזמין במסוף הניהול.',
+    'LBL_MAP_MODULES' => 'מודול',
+    'LBL_MAP_FILTER_BY' => 'סנן לפי',
+    'LBL_MAP_UNIT_TYPE' => 'סוג יחידה',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'מיילים',
+    'LBL_MAP_UNIT_TYPE_KM' => 'קילומטרים',
+    'LBL_MAP_ADDRESS' => 'כתובת',
+    'LBL_MAP_NO_STARTING_POINT' => 'נקודת ההתחלה לא עברה קידוד גיאוגרפי.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'רשומת נקודת ההתחלה לא עברה קידוד גיאוגרפי.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'חלק מהרשומות שנבחרו לא עברו קידוד גיאוגרפי ולא יוצגו על המפה.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'הרשומה(ות) לא עברה(ו) קידוד גיאוגרפי.',
+    'LBL_MAPS_MODULE_FIELDS' => 'שדות מודול',
+    'LBL_MAPS_SELECT_FIELD' => 'בחירת שדה',
+    'LBL_MAPS_RELATE_RECORD' => 'רשומה קשורה',
+    'LBL_MAPS_MAPPING_TYPE' => 'סוג מיפוי',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'אין רשומות שעברו קידוד גיאוגרפי',
+    'LBL_MAPS_ADDRESS' => 'כתובת',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'הוקצה למשתמש',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'תצוגה מצד הרחוב לא זמינה עבור הנקודה הנתונה',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> רשומות אינן חוקיות לצורך מיפוי. הסר מודול זה מהרשימה.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'סגירה',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'הרחבה',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'שמירה כ-PDF',
+    'LBL_MAPS_EMAIL_LINK' => 'שליחת קישור בדוא"ל',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'חייבת להיות לפחות רשומה אחת שעברה קידוד גיאוגרפי.',
+    'LBL_MAPS_GENERATING' => 'המערכת יוצרת את המפה...',
+    'LBL_MAPS_POINTS' => 'נקודות במפה',
+    'LBL_MAPS_POINT' => 'נקודה',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'פרטי נסיעה',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'מרחק כולל',
+    'LBL_MAPS_TOTAL_DURATION' => 'משך כולל',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'משך כולל ללא מרכיב התנועה בכביש',
+    'LBL_MAPS_ITINERARY' => 'לוח זמנים לנסיעה',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'מרחק הנסיעה',
+    'LBL_MAPS_TRAVEL_DURATION' => 'משך הנסיעה',
+    'LBL_MAPS_TRAVEL_STEPS' => 'שלבים',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'אזהרות',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Bing Maps תומך במספר מרבי של עד 10 מיקומים מדויקים על מפה משותפת. בדוק שוב את הבחירה שלך.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'נדרש רישיון למפות',
+
+    'LBL_INVALID_FORMULA' => 'נוסחה לא חוקית',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'סוג ההחזרה של הפונקציה אינו מתאים',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'תחזית',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'פרופיל לקוח אידאלי',
+
+    // User last state
+    'LBL_LAST_STATE' => 'מצב אחרון',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'שלח ל-DocuSign',
+
+    // Base sales stages
+    'LBL_OPEN' => 'פתח',
+    'LBL_CLOSED_WON' => 'נסגר בהצלחה',
+    'LBL_CLOSED_LOST' => 'נסגר ואבד',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6757,8 +7375,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google Docs',
     'Box' => 'Box.net',
-    'Facebook'=>'פייסבוק',
     'Twitter'=>'טוויטר',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Google Contacts',
@@ -7098,6 +7716,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'קובץ מוטמע'
     'YER' => 'ריאל',
     'ZWD' => 'דולר זימבבואי',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'מאוד גבוהה',
+        '4' => 'גבוהה',
+        '3' => 'נייטרלית',
+        '2' => 'נמוכה',
+        '1' => 'מאוד נמוכה',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'ללא',
         'future' => 'ערך נוכחי',
@@ -7107,3 +7733,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'קובץ מוטמע'
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'Single-Hit',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'מעבד',
+        'error' => 'שגיאה',
+        'success' => 'הצלחה',
+        'canceled' => 'בוטל',
+        'document_load' => 'טוען את התבנית',
+        'tags_extract' => 'מחלץ תגים',
+        'tags_validate' => 'מאמת תגים',
+        'data_retrieving' => 'מאחזר נתונים',
+        'serialize_document' => 'מרכיב את המסמך בחזרה',
+        'send_document' => 'שולח אליך את המסמך',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'מזג',
+        'convert' => 'מיזוג PDF',
+        'multimerge' => 'מולטי-מיזוג',
+        'multimerge_convert' => 'מולטי-מיזוג PDF',
+        'labelsgenerate' => 'צור תוויות',
+        'labelsgenerate_convert' => 'צור תוויות PDF',
+        'excel' => 'מיזוג ב-Excel',
+        'excel_convert' => 'המרת מיזוג ב-Excel',
+        'presentation' => 'מיזוג ב-PowerPoint',
+        'presentation_convert' => 'מיזוג PDF ב-PowerPoint',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'החשבונות שלי',
+      'favorites' => 'חשבונות מועדפים',
+      'tags' => 'חשבונות מתויגים',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'כל החדשות',
+      'General' => 'כללי',
+      'Finance' => 'פיננסי',
+      'People' => 'אישי',
+      'Press Releases' => 'הודעות לעיתונות',
+      'Other' => 'אחר',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'בעלים';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Cloud Drive';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'חלונית שילוב Cloud Drive';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'העתק קישור';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'הורד';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'יצירת מסמך Sugar';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'סנכרון עם Google Drive';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'סנכרון הכל עם Google Drive';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'אין אפשרות להוריד קובץ זה';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'חלונית הענן לא מוצגת';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'מסמך Sugar נוצר';
+
+    $app_string['LBL_MY_FILES'] = 'הקבצים שלי';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'שותף איתי';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'ספק שירותי ענן';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google Drive',
+      'onedrive' => 'Microsoft Onedrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'שותף איתי';
+    $app_strings['LBL_MY_FILES'] = 'הקבצים שלי';
+    $app_strings['LBL_UPLOAD_FILE'] = 'העלאת קובץ';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'התיקיה לא נמצאה';
+    $app_strings['LBL_CREATE_FOLDER'] = 'יצירת תיקיה';
+    $app_strings['LBL_LOAD_MORE'] = 'טען עוד...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'החיבור ל-Google לא נמצא...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'החיבור ל-Microsoft לא נמצא...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-ריק-',
+      'Exact' => 'מדויק',
+      'Null_address_components' => 'רכיב כתובת ריק אחד או יותר',
+      'Invalid_address' => 'כתובת לא חוקית, השרת החזיר את הערך False',
+      'Invalid_server_response_not_XML' => 'תגובת שרת לא חוקית, לא XML',
+      'Invalid_address_no_location' => 'כתובת לא חוקית, השרת לא החזיר כל מיקום',
+      'Ambiguous_address' => 'כתובת רב-ערכית, התאמות רבות',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'כביש',
+      'a' => 'מבט מהאוויר',
+      'be' => 'מבט מעין הציפור',
+      'rd' => 'כביש חשוך',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

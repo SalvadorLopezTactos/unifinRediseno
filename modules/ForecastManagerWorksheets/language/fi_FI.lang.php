@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Peruskorko',
 
     'LBL_QUOTA' => 'Tavoite',
-    'LBL_QUOTA_ADJUSTED' => 'Tavoite (säädetty)',
+    'LBL_QUOTA_ADJUSTED' => 'Muutettu määrä',
 
     'LBL_FORECAST' => 'Ennuste',
     'LBL_COMMIT_STAGE' => 'Commitin vaihe',

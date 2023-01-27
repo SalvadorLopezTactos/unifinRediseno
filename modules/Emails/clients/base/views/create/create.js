@@ -17,47 +17,21 @@
     extendsFrom: 'CreateView',
 
     /**
-     * The editor's height can never be smaller than this constant.
-     *
-     * @property {number}
-     */
-    MIN_EDITOR_HEIGHT: 200,
-
-    /**
-     * The padding that needs to be accounted for to prevent the scroll bar
-     * from appearing when the editor is resized.
-     *
-     * @property {number}
-     */
-    EDITOR_RESIZE_PADDING: 5,
-
-    /**
      * @inheritdoc
      */
     _titleLabel: 'LNK_NEW_ARCHIVE_EMAIL',
 
     /**
      * @inheritdoc
+     *
+     * Add 'TinymceHtmlEditor' plugin for view.
      */
     initialize: function(options) {
+        this.plugins = _.union(this.plugins || [], [
+            'Tinymce'
+        ]);
+
         this._super('initialize', [options]);
-
-        // batch queued calls to editor resize function
-        this.resizeEditor = _.debounce(_.bind(this._resizeEditor, this), 100);
-
-        this.listenTo(this.context, 'tinymce:oninit', function() {
-            this.resizeEditor();
-        });
-        this.listenTo(app.drawer, 'drawer:resize', function() {
-            this.resizeEditor();
-        });
-        this.on('more-less:toggled', function() {
-            this.resizeEditor();
-        }, this);
-        this.on('email-recipients:toggled', function() {
-            this.resizeEditor();
-        }, this);
-        $(window).on('resize.' + this.cid, this.resizeEditor);
     },
 
     /**
@@ -192,65 +166,5 @@
      */
     buildSuccessMessage: function() {
         return app.lang.get('LBL_EMAIL_ARCHIVED', this.module);
-    },
-
-    /**
-     * Resize the editor based on the height of the layout container.
-     *
-     * @private
-     */
-    _resizeEditor: function() {
-        var $editor;
-        var layoutHeight;
-        var recordHeight;
-        var showToggleHeight;
-        var editorHeight;
-        // The difference in height between the current editor and the actual
-        // available height of the space available to it.
-        var diffHeight;
-        var newEditorHeight;
-
-        if (this.disposed) {
-            return;
-        }
-
-        $editor = this.$('.mce-stack-layout .mce-stack-layout-item iframe');
-        // Cannot resize it if the editor is not already rendered.
-        if ($editor.length === 0) {
-            return;
-        }
-
-        layoutHeight = this.layout.$el.outerHeight(true);
-        // This is the total height including the html editor and other
-        // record fields. It does not include the show-hide toggle.
-        recordHeight = this.$('.record').outerHeight(true);
-
-        // Don't include the negative top margin on show-hide toggle because it
-        // has no affect on the layout because the .record has no bottom margin
-        showToggleHeight = this.$('.show-hide-toggle').outerHeight(false);
-        editorHeight = $editor.height();
-        // Calculate the difference between the current editor height and
-        // maximum available height. Subtracts padding to prevent the scrollbar.
-        diffHeight = layoutHeight - recordHeight - showToggleHeight - this.EDITOR_RESIZE_PADDING;
-        // Add the space left to fill to the current height of the editor to
-        // get the new height.
-        newEditorHeight = editorHeight + diffHeight;
-
-        // Don't drop below the minimum height.
-        if (newEditorHeight < this.MIN_EDITOR_HEIGHT) {
-            newEditorHeight = this.MIN_EDITOR_HEIGHT;
-        }
-
-        // Set the new height for the editor.
-        $editor.height(newEditorHeight);
-    },
-
-    /**
-     * Stop listening to the window resize event.
-     * @inheritdoc
-     */
-    _dispose: function() {
-        $(window).off('resize.' + this.cid);
-        this._super('_dispose');
     }
 })

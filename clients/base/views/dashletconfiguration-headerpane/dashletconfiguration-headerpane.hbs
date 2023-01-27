@@ -15,7 +15,7 @@
         {{#each meta.panels}}
             {{#each fields}}
                 <span class="record-cell">
-                    {{field ../../this model=../../this.model template="edit"}}
+                    {{field ../../this model=../../this.model template=../../this.model.attributes.templateEdit}}
                 </span>
             {{/each}}
         {{/each}}

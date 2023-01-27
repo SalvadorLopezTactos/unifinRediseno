@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Üst Kayıt Tipi',
     'LBL_PARENT_ID' => 'Üst ID',
     'LBL_EXTRA_DATA' => 'Ekstra Veri',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM - {{module_name_singular}} modülünde bahsedildi',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}}, {{module_name_singular}} modülünde sizden bahsetti {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM - {{module_name_singular}} atandı',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}}, {{module_name_singular}} {{record_name}} adını size atadı.',
 ];

@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Wszystkie pulpitu dla modułu {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Wszystkie pulpity dla modułu {{module}} widok {{view}}',
     'LBL_COPY_OF' => 'Kopia {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Nie można usuwać pulpitów widoków szczegółowych.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Utwórz pulpit',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Czy na pewno chcesz przywrócić domyślny układ pulpitu?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Czy na pewno chcesz przywrócić domyślny układ panelu pulpitu?',
+    'LBL_FILTER_UTILS_SELECT' => 'Przydzielono',
 );

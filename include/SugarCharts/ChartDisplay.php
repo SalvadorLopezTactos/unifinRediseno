@@ -400,6 +400,12 @@ class ChartDisplay
             case 'funnelF':
                 $this->chartType = 'funnel chart 3D';
                 break;
+            case 'donutF':
+                $this->chartType = 'donut chart';
+                break;
+            case 'treemapF':
+                $this->chartType = 'treemap chart';
+                break;
             default:
                 break;
         }
@@ -463,7 +469,7 @@ class ChartDisplay
         }
         $row_remap['numerical_value'] = $val;
         // format to user prefs
-        $row_remap['formatted_value'] = $this->print_currency_symbol(true) . format_number($row_remap['numerical_value']);
+        $row_remap['formatted_value'] = $this->print_currency_symbol() . format_number($row_remap['numerical_value']);
 
         $row_remap['group_text'] = $group_text = (isset($this->reporter->chart_group_position) && !is_array($this->reporter->chart_group_position)) ? chop($row['cells'][$this->reporter->chart_group_position]['val']) : '';
         $row_remap['group_key'] = ((isset($this->reporter->chart_group_position) && !is_array($this->reporter->chart_group_position)) ? $row['cells'][$this->reporter->chart_group_position]['key'] : '');

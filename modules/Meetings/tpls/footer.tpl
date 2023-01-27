@@ -31,19 +31,19 @@
 {include file='modules/Calendar/tpls/repeat.tpl'}
 {sugar_getscript file='modules/Meetings/recurrence.js'}
 <script type="text/javascript">
-{literal}
+
 SUGAR.util.doWhen(function() {
     return typeof CAL != "undefined";
 }, function () {
-    CAL.fillRepeatForm({/literal}{$repeatData}{literal});
+    CAL.fillRepeatForm({$repeatData});
 });
-{/literal}
+
 </script>
 </div>
   
 <script type="text/javascript">
-{literal}
-SUGAR.meetings = {};
+
+SUGAR.meetings = { };
 var meetingsLoader = new YAHOO.util.YUILoader({
     // Bug #48940 Skin always must be blank
     skin: {
@@ -69,7 +69,7 @@ var meetingsLoader = new YAHOO.util.YUILoader({
 	}
 });
 meetingsLoader.insert();
-YAHOO.util.Event.onContentReady("{/literal}{{$form_name}}{literal}",function() {
+YAHOO.util.Event.onContentReady("{{$form_name}}",function() {
     var durationHours = document.getElementById('duration_hours');
     if (durationHours) {
         document.getElementById('duration_minutes').tabIndex = durationHours.tabIndex;
@@ -82,7 +82,7 @@ YAHOO.util.Event.onContentReady("{/literal}{{$form_name}}{literal}",function() {
         }
     }
 });
-{/literal}
+
 </script>
 </form>
 <div class="buttons">

@@ -27,7 +27,7 @@ global $current_user, $focus;
 echo getClassicModuleTitle(
     'Administration',
     array(
-        '<a href="index.php?module=Administration&action=index">' . htmlspecialchars(translate('LBL_MODULE_NAME', 'Administration')) . '</a>',
+        '<a href="#Administration">' . htmlspecialchars(translate('LBL_MODULE_NAME', 'Administration')) . '</a>',
         $mod_strings['LBL_MODULE_NAME'],
     ),
     false
@@ -117,17 +117,6 @@ $lc->lookupCurrencies();
     <input type="hidden" name="return_id" value="">';
 
     $headerHTML = '';
-    if (is_admin($current_user) && $_REQUEST['module'] !== 'DynamicLayout' && !empty($_SESSION['editinplace'])) {
-        $href = 'index.php?' . http_build_query([
-                'action' => 'index',
-                'module' => 'DynamicLayout',
-                'from_action' => 'ListView',
-                'from_module' => $_REQUEST['module'],
-            ]);
-        $headerHTML = '&nbsp;<a href="' . htmlspecialchars($href) . '">'
-            . SugarThemeRegistry::current()->getImage('EditLayout', 'border="0" align="bottom"', null, null, '.gif', htmlspecialchars($mod_strings['LBL_EDIT_LAYOUT']))
-            . '</a>';
-    }
     $ListView = new ListView();
     $ListView->initNewXTemplate('modules/Currencies/ListView.html', $mod_strings);
     $ListView->xTemplateAssign('PRETABLE', $pretable);
@@ -140,17 +129,7 @@ $lc->lookupCurrencies();
         $focus->retrieve($_GET['record']);
         $focus->conversion_rate = format_number($focus->conversion_rate, 10, 10);
     }
-    if (is_admin($current_user) && $_REQUEST['module'] !== 'DynamicLayout' && !empty($_SESSION['editinplace'])) {
-        $href = 'index.php?' . http_build_query([
-                'action' => 'index',
-                'module' => 'DynamicLayout',
-                'from_action' => 'EditView',
-                'from_module' => $_REQUEST['module'],
-            ]);
-        $headerHTML = '&nbsp;<a href="' . htmlspecialchars($href) . '">'
-            . SugarThemeRegistry::current()->getImage('EditLayout', 'border="0" align="bottom"', null, null, '.gif', htmlspecialchars($mod_strings['LBL_EDIT_LAYOUT']))
-            . '</a>';
-    }
+
     if (empty($focus->id)) {
         echo get_form_header(htmlspecialchars($app_strings['LBL_CREATE_BUTTON_LABEL']) . ' Currency' . $headerHTML, $editButtonHTML, false);
     } else {

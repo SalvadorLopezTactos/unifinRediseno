@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'ID kontaktu',
     'LBL_DESCRIPTION_INFORMATION' => 'Informacje opisowe',
     'LBL_DESCRIPTION' => 'Opis:',
+    'LBL_INTERNAL_NOTES' => 'Notatki wewnętrzne:',
     'LBL_STATUS' => 'Status:',
     'LBL_DIRECTION' => 'Kierunek:',
     'LBL_DATE' => 'Data rozpoczęcia:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Czas trwania musi być dłuższy niż 0',
     'LBL_CALL_INFORMATION' => 'Informacje ogólne',
     'LBL_REMOVE' => 'Usuń',
-    'LBL_ACCEPT_STATUS' => 'Status akceptacji',
     'LBL_ACCEPT_LINK' => 'Link akceptacji',
     //For export labels
     'LBL_PARENT_ID' => 'ID elementu nadrzędnego',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Rozmowa telefoniczna:',
     'LBL_CALL_RECORDING_URL' => 'Adres URL rejestrowania',
     'LBL_CALL_RECORDING' => 'Rejestrowanie',
+
+    'LBL_LEAD_ID' => 'ID potencjalnego klienta',
+    'LBL_LEAD_NAME' => 'Potencjalny klient',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Zaplanowano czynność {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> na {{formatDate date_start}}.',

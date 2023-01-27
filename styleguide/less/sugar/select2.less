@@ -2,16 +2,15 @@
   ----------------*/
 
 .select2-search {
+  display: flex;
+  align-items: center;
   padding: 4px;
 
   &::after {
-    .fontawesome();
-
-    content: "\f002";
+    font-family: 'SugarIcons';
+    content: @sicon-search;
     position: absolute;
-    top: 10px;
-    right: 9px;
-    z-index: 1;
+    right: 12px;
   }
 
   input[type="text"] {
@@ -83,6 +82,7 @@
 
   .select2-choice-type {
     margin: 0 2px 0 0;
+    color: @textColor;
   }
 
   &.select2-choices-pills .select2-search-choice,
@@ -94,14 +94,14 @@
     box-shadow: none;
     line-height: 12px;
     border-radius: 11px;
-    background: @gray;
+    background: @gray80;
     color: @white;
     padding: 2px 4px 2px 6px;
     white-space: nowrap;
 
     &.select2-search-choice-focus {
       outline: 0;
-      background: @grayDark;
+      background: @gray90;
     }
 
     &.drag-drop-selected {
@@ -113,8 +113,8 @@
       background-color: @btnDangerBackground;
 
       span::before {
-        content: "\f06a";
-        font-family: 'FontAwesome';
+        content: @sicon-warning-circle;
+        font-family: 'SugarIcons';
         color: @white;
         padding-right: 3px;
       }
@@ -128,8 +128,8 @@
 
     span {
       border-radius: 10px 0 0 10px;
-      background: darken(@grayLighter, 10%);
-      color: @gray;
+      background: @gray30;
+      color: @gray80;
       padding: 2px 4px 2px 6px;
       margin-right: 2px;
     }
@@ -141,11 +141,11 @@
     }
 
     span:last-child {
-      background: @grayLighter;
+      background: @gray20;
     }
 
     a {
-      background: @grayLighter;
+      background: @gray20;
     }
 
     a:hover {
@@ -163,16 +163,22 @@
         font-size: 11px;
         line-height: 13px;
         display: inline;
+
+        &.ellipsis_inline {
+          display: block;
+        }
       }
 
       a.select2-search-choice-close {
-        font-family: FontAwesome;
+        font-family: 'SugarIcons';
         font-size: 12px;
+        line-height: 12px;
+        height: 12px;
+        width: 12px;
         font-weight: normal;
         text-decoration: none;
-        color: fade(@white, 70%);
+        color: @sicon-color-light;
         background: none;
-        line-height: 12px;
         position: static;
         display: inline;
         vertical-align: middle;
@@ -180,17 +186,17 @@
 
       a,
       a.select2-search-choice-close:hover {
-        color: @white;
+        color: @sicon-light-hover-color;
       }
 
       a.select2-search-choice-close::before {
-        content: "\f057";
+        content: @sicon-remove;
       }
 
       &.select2-locked {
         padding: 1px 4px !important; //overide bootstrap
-        background: @gray;
-        border: 1px solid @gray;
+        background: @gray80;
+        border: 1px solid @gray80;
 
         div {
           color: @white;
@@ -213,15 +219,15 @@
       .select2-search-choice {
         border-radius: 3px;
         padding: 4px 24px 4px 6px;
-        color: @gray;
-        background-color: darken(@grayLighter, 10%);
+        color: @gray80;
+        background-color: @gray30;
         font-weight: normal;
         margin: 1px 4px 1px 0;
         position: relative;
         line-height: 1px;
 
         &.select2-search-choice-focus {
-          background-color: darken(@grayLighter, 20%);
+          background-color: @gray40;
         }
 
         div {
@@ -241,6 +247,7 @@
         }
 
         a.select2-search-choice-close {
+          font-family: 'SugarIcons';
           position: absolute;
           top: 8px;
           right: 6px;
@@ -248,11 +255,11 @@
           color: inherit;
 
           &::before {
-            content: "\f00d";
+            content: @sicon-remove;
           }
 
           &:hover {
-            color: @grayDarker;
+            color: @black;
           }
         }
 
@@ -277,12 +284,12 @@
         left: auto;
 
         &::before {
-          line-height: 14px;
-          height: 14px;
+          line-height: 12px;
+          height: 12px;
           vertical-align: top;
           display: inline-block;
           margin-top: 3px;
-          font-size: 14px;
+          font-size: 12px;
         }
       }
 
@@ -337,35 +344,38 @@
       border: none;
       background: none;
       filter: none;
-      font-size: 15px;
+      font-size: 12px;
       border-radius: 0;
-      top: 0;
-      padding-left: 4px;
+      margin-left: 4px;
       box-sizing: border-box;
+      right: 6px;
+      width: unset;
 
       b {
-        .fontawesome();
-
-        position: relative;
-        top: 0;
+        display: flex;
+        align-items: center;
+        font-family: 'SugarIcons';
+        font-size: 12px;
+        line-height: 12px;
 
         &::before {
-          content: "\f0d7";
+          content: @sicon-chevron-down;
         }
       }
     }
 
     abbr {
-      .fontawesome();
-
       position: absolute;
-      top: 6px;
+      top: 7px;
       right: 18px;
+      margin-right: 6px;
       font-size: 12px;
+      line-height: 12px;
+      font-family: 'SugarIcons';
       display: none;
 
       &::before {
-        content: "\f00D";
+        content: @sicon-close;
       }
     }
   }
@@ -382,12 +392,14 @@
   }
 
   &.required .select2-choice {
-    //TODO: find out why this was set to light gray
-    //border-color: darken(@grayLighter, 10%);
-    border-color: @grayLight;
+    border-color: @select2RequiredBorderColor;
+
+    &:hover {
+      border-color: @select2RequiredBorderColor;
+    }
 
     &:focus {
-      border-color: @linkColor !important;
+      border-color: @linkColor;
     }
   }
 }
@@ -406,6 +418,7 @@
   border-color: @inputBorderColor;
   z-index: @zindexSelect2menu;
   border-radius: 0 0 @baseBorderRadius @baseBorderRadius;
+  background-color: @contentBackground;
 
   &.select2-drop-active {
     min-width: 50px;
@@ -425,6 +438,10 @@
 
   .select2-results:last-child {
     border-radius: 0 0 @baseBorderRadius @baseBorderRadius;
+  }
+
+  &.select2-drop-above .select2-search input {
+    margin-top: 0;
   }
 }
 
@@ -504,10 +521,12 @@
   }
 }
 
+.select2-results > .select2-no-results,
 .select2-no-results,
 .select2-searching {
   padding: 0 0 0 8px;
-  color: @grayLight;
+  color: @placeholderText;
+  background-color: @contentBackground;
   border-radius: 0;
 }
 
@@ -568,7 +587,7 @@
 
 .select2-container.select2-allowclear .select2-choice {
   .select2-chosen {
-    margin-right: 36px;
+    margin-right: 42px;
   }
 }
 
@@ -628,7 +647,7 @@
 
   .input-append {
     width: 50%;
-    width: calc(~"100% - 100px");
+    width: calc(~"100% - 80px");
     float: left;
 
     input[type="text"] {
@@ -675,7 +694,7 @@
     max-width: 100%;
     padding: 3px 6px 4px;
     margin: 0 4px 4px 0;
-    background: @gray;
+    background: @select2TagBackgroundColor;
     box-sizing: border-box;
     border-radius: 9px;
 
@@ -695,12 +714,12 @@
   margin: 0 0 3px;
   padding: 3px 6px;
   box-sizing: border-box;
-  color: @gray;
+  color: @textColor;
   font-size: 12px;
   line-height: 1px;
   white-space: nowrap;
-  background-color: darken(@grayLighter, 10%);
-  border: 1px solid darken(@grayLighter, 10%);
+  background-color: @contentBackground;
+  border: @borderWidget;
   border-radius: 3px;
   cursor: default;
 
@@ -714,10 +733,11 @@
   }
 
   a:hover {
-    color: @grayDarker;
+    color: @black;
     text-decoration: none;
   }
 
+  span.sicon,
   span.fa {
     position: absolute;
     top: 7px;
@@ -725,7 +745,7 @@
     color: inherit;
 
     &:hover {
-      color: @grayDarker;
+      color: @black;
     }
   }
 
@@ -754,7 +774,6 @@
         position: absolute;
         right: 2px;
         left: auto;
-        top: 2px;
       }
     }
   }
@@ -787,7 +806,7 @@
 
     &:nth-child(2) {
       top: 2px;
-      background: @grayLightish;
+      background: @gray60;
       left: 2px;
       right: -2px;
       z-index: 2;
@@ -795,7 +814,7 @@
 
     &:nth-child(3) {
       top: 4px;
-      background: @grayLighter;
+      background: @gray20;
       left: 4px;
       right: -4px;
       z-index: 1;
@@ -806,7 +825,7 @@
       display: block;
       position: absolute;
       overflow: hidden;
-      box-shadow: inset 0 0 0 1px fade(@black, 25%);
+      box-shadow: inset 0 0 0 1px @gray40;
       color: transparent;
     }
   }
@@ -821,27 +840,30 @@
 .select2-container {
   /* override */
   .select2-choice.select2-default {
-    color: @placeholderText !important;
+    color: @placeholderText;
   }
 
   .select2-choice {
     /* override */
-    color: initial;
+    color: @textColor;
 
     /* override with variables */
     background: @select2Background;
     border-color: @select2Border;
 
+    abbr,
+    b {
+      color: @sicon-color;
+    }
+
     /* additive */
     &:hover {
       background-color: @select2BackgroundHover;
       border-color: @select2BorderHover;
-    }
 
-    .select2-arrow {
+      abbr,
       b {
-        /* additive */
-        color: @black;
+        color: @sicon-hover-color;
       }
     }
   }
@@ -851,12 +873,13 @@
   li div:hover,
   .select2-highlighted {
     /* override with variables */
-    background: @select2LinkBackgroundHover;
-    color: @select2LinkColorHover;
+    background: @dropdownLinkBackgroundHover;
+    color: @dropdownLinkColor;
 
+    .sicon,
     .fa {
       /* additive */
-      color: inherit;
+      color: @linkColorHover;
     }
   }
 
@@ -864,11 +887,6 @@
     background: @select2LinkBackgroundActive;
     color: @select2LinkColorHover;
   }
-}
-
-.select2-search::after {
-  /* override */
-  color: initial;
 }
 
 /* NEW SKIN END */

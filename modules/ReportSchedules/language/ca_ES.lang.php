@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Programa d&#39;aquest informe',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de programes d&#39;informe',
+    'LBL_FILE_TYPE' => 'Tipus de fitxer',
 );

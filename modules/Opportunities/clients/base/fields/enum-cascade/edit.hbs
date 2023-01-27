@@ -16,9 +16,9 @@
         {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
     </div>
     {{#if this.displayCheckbox}}
-        <label class="cascade-label-wrapper">
-            <input type="checkbox" class="{{def.name}}_should_cascade"/>
-            <span class="cascade-label">{{str def.lblString}}</span>
+        <label class="cascade-label-wrapper{{#if cascadeCheckboxDisabled}} disabled{{/if}}">
+            <input type="checkbox" class="{{def.name}}_should_cascade" {{#if shouldCascade}}checked{{/if}} {{#if cascadeCheckboxDisabled}}disabled{{/if}}/>
+            <span class="cascade-label">{{str lblString}}</span>
         </label>
     {{/if}}
 </div>

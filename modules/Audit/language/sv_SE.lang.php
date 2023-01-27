@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Granskade fält i denna modul:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Inga fält granskas i denna modul',
     'LBL_CHANGE_LOG' => 'Granskningslogg',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'När granskade valutafält sparas i en valuta som ej är standard för systemet visar ändringsloggen både gamla och nya värden konverterade till systemets standardvaluta.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'När granskade valutafält sparas i en valuta som ej är standard för systemet visar ändringsloggen både gamla och nya värden konverterade till systemets standardvaluta.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Uppdatera till',
+    'LBL_BLANK' => '-tom-',
 );

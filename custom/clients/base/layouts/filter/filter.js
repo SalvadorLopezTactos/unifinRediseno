@@ -17,8 +17,10 @@
         this.trigger('filter:render:filter');
         this.trigger('filter:select:filter', selectedFilterId);
 
-        if(this.module=='Accounts' && this.filters.collection._byId[selectedFilterId].get('name')=='Mis Cuentas'){
-            $('.select2-container.select2.search-filter').css("pointer-events", "none");
+        if(this.filters.models.length > 0){
+            if(this.module=='Accounts' && this.filters.collection._byId[selectedFilterId].get('name')=='Mis Cuentas'){
+                $('.select2-container.select2.search-filter').css("pointer-events", "none");
+            }
         }
 
         return selectedFilterId;

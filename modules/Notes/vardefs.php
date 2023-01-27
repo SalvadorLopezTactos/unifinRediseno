@@ -427,6 +427,13 @@ $dictionary['Note'] = [
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
         ],
+        'escalations' => [
+            'name' => 'escalations',
+            'type' => 'link',
+            'relationship' => 'escalation_notes',
+            'source' => 'non-db',
+            'vname' => 'LBL_ESCALATIONS',
+        ],
         'schedulersjobs' => [
             'name' => 'schedulersjobs',
             'type' => 'link',
@@ -466,12 +473,30 @@ $dictionary['Note'] = [
         ],
         'attachment_list' => [
             'name' => 'attachment_list',
-            'type' => 'file',
+            'links' => [
+                'attachments',
+            ],
+            'order_by' => 'name:asc',
             'source' => 'non-db',
+            'type' => 'collection',
             'vname' => 'LBL_ATTACHMENTS',
-            'duplicate_on_record_copy' => 'no',
-            'studio' => false,
-            'group' => 'attachments',
+            'reportable' => false,
+            'hideacl' => true,
+            'displayParams' => [
+                'type' => 'multi-attachments',
+                'fields' => [
+                    'name',
+                    'filename',
+                    'file_mime_type',
+                ],
+                'related_fields' => [
+                    'filename',
+                    'file_mime_type',
+                ],
+                'link' => 'attachments',
+                'module' => 'Notes',
+                'modulefield' => 'filename',
+            ],
         ],
         'attachments' => [
             'name' => 'attachments',
@@ -481,6 +506,36 @@ $dictionary['Note'] = [
             'module' => 'Notes',
             'bean_name' => 'Note',
             'source' => 'non-db',
+        ],
+        // rhs link for note attachments
+        'note_attachment' => [
+            'name' => 'note_attachment',
+            'type' => 'link',
+            'relationship' => 'notes_attachments',
+            'link_type' => 'one',
+            'side' => 'right',
+            'source' => 'non-db',
+            'vname' => 'LBL_NOTE_ATTACHMENT',
+        ],
+        // rhs link for KB attachments
+        'kb_attachment' => [
+            'name' => 'kb_attachment',
+            'type' => 'link',
+            'relationship' => 'kbcontent_attachments',
+            'link_type' => 'one',
+            'side' => 'right',
+            'source' => 'non-db',
+            'vname' => 'LBL_KB_ATTACHMENT',
+        ],
+        // rhs link for case attachments
+        'case_attachment' => [
+            'name' => 'case_attachment',
+            'type' => 'link',
+            'relationship' => 'case_attachments',
+            'link_type' => 'one',
+            'side' => 'right',
+            'source' => 'non-db',
+            'vname' => 'LBL_CASE_ATTACHMENT',
         ],
     ],
     'relationships' => [
@@ -492,6 +547,8 @@ $dictionary['Note'] = [
             'rhs_table' => 'notes',
             'rhs_key' => 'note_parent_id',
             'relationship_type' => 'one-to-many',
+            'relationship_class' => 'AttachmentRelationship',
+            'relationship_file' => 'data/Relationships/AttachmentRelationship.php',
         ],
     ],
     'indices' => [
@@ -524,13 +581,6 @@ $dictionary['Note'] = [
             'type' => 'index',
             'fields' => [
                 'contact_id',
-            ],
-        ],
-        [
-            'name' => 'idx_note_email_id',
-            'type' => 'index',
-            'fields' => [
-                'email_id',
             ],
         ],
         [

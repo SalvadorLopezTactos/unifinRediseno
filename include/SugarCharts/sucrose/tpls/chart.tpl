@@ -13,11 +13,9 @@
 
 {if !$error}
 <script type="text/javascript">
-	{literal}
 	SUGAR.util.doWhen(
 		"((SUGAR && SUGAR.mySugar && SUGAR.mySugar.sugarCharts)   || (SUGAR.loadChart && typeof loadSugarChart == 'function')  || document.getElementById('showHideChartButton') != null) && typeof(loadSugarChart) != undefined",
 		function(){
-			{/literal}
 			var css = [];
 			var chartConfig = {ldelim}{rdelim};
 			var chartParams = {ldelim}{rdelim};
@@ -45,10 +43,8 @@
 			     if ($('#showHideChartButton').attr('value') != '{$showchart}')
 			        loadCustomChartForReports();
 			{/if}
-			{literal}
 		}
 	);
-	{/literal}
 </script>
 <div class="chartContainer">
 	<div id="sb{$chartId}" class="scrollBars">

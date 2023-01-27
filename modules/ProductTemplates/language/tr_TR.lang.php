@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Destek İsmi:',
   'LBL_SUPPORT_TERM' => 'Destek Süresi:',
   'LBL_TAX_CLASS' => 'Vergi Sınıfı:',
+  'LBL_ACTIVE_STATUS' => 'Status',
   'LBL_TYPE_NAME'=>'Tip İsmi',
   'LBL_TYPE' => 'Tipi',
   'LBL_PRODUCT_TYPE' => 'Ürün Tipi',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Ürün Kataloğu Listesi Panosu',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Ürün Kataloğu Kayıt Panosu',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Ürün Kataloğu Odak Bölmesi',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Durum Aktif',
 );

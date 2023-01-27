@@ -239,7 +239,6 @@ $dictionary['Campaign'] = array (
             'source' => 'non-db',
             'vname' => 'LBL_LEADS',
             'link_class' => 'ProspectLink',
-            'link_file' => 'modules/Campaigns/ProspectLink.php'
         ),
 
         'opportunities' => array (
@@ -257,7 +256,6 @@ $dictionary['Campaign'] = array (
             'source' => 'non-db',
             'vname' => 'LBL_CONTACTS',
             'link_class' => 'ProspectLink',
-            'link_file' => 'modules/Campaigns/ProspectLink.php'
         ),
         'accounts' => array (
             'name' => 'accounts',
@@ -266,7 +264,6 @@ $dictionary['Campaign'] = array (
             'source' => 'non-db',
             'vname' => 'LBL_ACCOUNTS',
             'link_class' => 'ProspectLink',
-            'link_file' => 'modules/Campaigns/ProspectLink.php'
         ),
         'forecastworksheet' =>
         array(
@@ -285,13 +282,6 @@ $dictionary['Campaign'] = array (
             'type' => 'index',
             'fields' => array (
                 'tracker_key'
-            )
-        ),
-        array (
-            'name' => 'idx_campaign_name',
-            'type' => 'index',
-            'fields' => array (
-                'name'
             )
         ),
         array('name' => 'idx_campaign_status', 'type' => 'index', 'fields' => array('status')),

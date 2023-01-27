@@ -104,23 +104,4 @@ function getHeaderText($action, $currentModule){
 	return $button;
 }
 
-function ProcessSubPanelListView($xTemplatePath, &$mod_strings, $action, $curModule='', $title){
-	global $currentModule,$app_strings, $current_user;
-	if(empty($curModule))
-		$curModule = $currentModule;
-	$ListView = new ListView();
-	$ListView->initNewXTemplate($xTemplatePath,$mod_strings);
-	$ListView->xTemplateAssign("RETURN_URL", "&return_module=".$curModule."&return_action=DetailView&return_id=".$this->focus->id);
-	$ListView->xTemplateAssign("EDIT_INLINE_PNG",  SugarThemeRegistry::current()->getImage('edit_inline','align="absmiddle" border="0"',null,null,'.gif',$app_strings['LNK_EDIT']));
-	$ListView->xTemplateAssign("DELETE_INLINE_PNG",  SugarThemeRegistry::current()->getImage('delete_inline','align="absmiddle" border="0"',null,null,'.gif',$app_strings['LNK_DELETE']));
-	$ListView->xTemplateAssign("REMOVE_INLINE_PNG",  SugarThemeRegistry::current()->getImage('delete_inline','align="absmiddle"  border="0"',null,null,'.gif',$app_strings['LNK_REMOVE']));
-	$ListView->xTemplateAssign("RECORD_ID",  $this->focus->id);
-	$header_text = '';
-if((is_admin($current_user)||is_admin_for_module($GLOBALS['current_user'],'Products')) && $_REQUEST['module'] != 'DynamicLayout' && !empty($_SESSION['editinplace'])){	
-		$header_text = "&nbsp;<a href='index.php?action=index&module=DynamicLayout&from_action=SubPanelViewProducts&from_module=Products&record=". $_REQUEST['record']."'>".SugarThemeRegistry::current()->getImage("EditLayout","border='0' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDITLAYOUT'])."</a>";
-}
-	$ListView->setHeaderTitle($title. $header_text);
-	$ListView->setHeaderText($this->getHeaderText($action, $curModule));
-	$ListView->processListView($this->products_list, "products", "PRODUCT");
-}
 }

@@ -67,16 +67,16 @@
 		</tr>
 	</table><p>
 
-	{literal}
+	
 	<script type="text/javascript">
-		Calendar.setup ({{/literal}
+		Calendar.setup ({
 			inputField : "start_date", ifFormat : "{$CALENDAR_DATEFORMAT}", showsTime : false, button : "start_date_trigger", singleClick : true, step : 1, weekNumbers:false
-			{literal}
+			
 		});
 		
-		Calendar.setup ({{/literal}
+		Calendar.setup ({
 			inputField : "end_date", ifFormat : "{$CALENDAR_DATEFORMAT}", showsTime : false, button : "end_date_trigger", singleClick : true, step : 2, weekNumbers:false
-		{literal}
+		
 		});
 	
 
@@ -112,7 +112,7 @@
             return false;
         }
         //add fields to validation and call generic validation script 
-        if(validate['wizform']!='undefined'){delete validate['wizform']};
+        if(validate['wizform']!='undefined'){ delete validate['wizform'] };
         addToValidate('wizform', 'name', 'alphanumeric', true,  document.getElementById('name').title);
 
 		addToValidate('wizform', 'team_name', 'alphanumeric', true,  document.getElementById('team_name').title);
@@ -132,4 +132,4 @@
 
 
 	</script>
-	{/literal}
+	

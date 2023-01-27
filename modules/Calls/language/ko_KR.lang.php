@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => '계약 Id',
     'LBL_DESCRIPTION_INFORMATION' => '설명',
     'LBL_DESCRIPTION' => '설명',
+    'LBL_INTERNAL_NOTES' => '내부 참고 사항:',
     'LBL_STATUS' => '상태',
     'LBL_DIRECTION' => '전화 종류',
     'LBL_DATE' => '시작일',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => '기간은 0보다 커야합니다.',
     'LBL_CALL_INFORMATION' => '기본정보',
     'LBL_REMOVE' => '제거',
-    'LBL_ACCEPT_STATUS' => '상태 수락',
     'LBL_ACCEPT_LINK' => '링크 수락',
     //For export labels
     'LBL_PARENT_ID' => '상위 ID',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => '전화',
     'LBL_CALL_RECORDING_URL' => '기록 URL',
     'LBL_CALL_RECORDING' => '기록',
+
+    'LBL_LEAD_ID' => '관심고객 ID',
+    'LBL_LEAD_NAME' => '관심고객',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => '{{formatDate date_start}} 에 대한 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> 을 예약했습니다.',

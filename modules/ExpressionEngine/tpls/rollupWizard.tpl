@@ -10,10 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-{literal}
 <script type="text/javascript">
 </script>
-{/literal}
 <table id="rollwiz_table">
     <tr>
         <td class="label">Type:</td>

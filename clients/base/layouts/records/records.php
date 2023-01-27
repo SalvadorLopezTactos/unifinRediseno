@@ -11,23 +11,29 @@
  */
 
 $viewdefs['base']['layout']['records'] = array(
+    'css_class'=> 'flex-list-layout flex flex-column h-full',
     'components' => array(
         array(
             'layout' => array(
                 'type' => 'default',
                 'name' => 'sidebar',
+                'css_class' => 'h-full',
                 'components' => array(
                     array(
                         'layout' => array(
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
+                            'css_class' => 'main-pane span8 flex flex-column',
                             'components' => array(
+                                array(
+                                    'view' => 'list-map',
+                                ),
                                 array(
                                     'view' => 'list-headerpane',
                                 ),
                                 array(
                                     'layout' => array(
+                                        'css_class' => 'flex flex-column h-full',
                                         'type' => 'filterpanel',
                                         'last_state' => array(
                                             'id' => 'list-filterpanel',
@@ -39,12 +45,12 @@ $viewdefs['base']['layout']['records'] = array(
                                         'availableToggles' => array(
                                             array(
                                                 'name' => 'list',
-                                                'icon' => 'fa-table',
+                                                'icon' => 'sicon-list-view',
                                                 'label' => 'LBL_LISTVIEW',
                                             ),
                                             array(
                                                 'name' => 'activitystream',
-                                                'icon' => 'fa-clock-o',
+                                                'icon' => 'sicon-clock',
                                                 'label' => 'LBL_ACTIVITY_STREAM',
                                             ),
                                         ),

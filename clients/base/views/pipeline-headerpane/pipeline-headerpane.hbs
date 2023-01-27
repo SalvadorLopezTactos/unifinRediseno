@@ -12,23 +12,19 @@
 --}}
 <div class="headerpane row-fluid">
     <div class="headerpaneContainer">
-            <ul class="nav nav-tabs pull-left">
-                {{#each pipelineTypes}}
-                    <li class="tab">
-                        {{field ../this model=../this.model template='detail'}}
-                    </li>
-                {{/each}}
-            </ul>
+        {{#each pipelineTypes}}
+            {{field ../this model=../this.model template='detail'}}
+        {{/each}}
         <div class="pull-right btn-toolbar">
             <div class="btn-group" data-toggle="buttons-radio">
                 <a type="button" class="btn active" data-view="pipeline" data-mode="view"
                    rel="tooltip" title="" track="click:pipeline" data-original-title="{{str 'LBL_PIPELINE_VIEW_NAME'}}" tabindex="-1"
                    name="pipeline_view">
-                    <i class="fa  fa-align-left"></i>
+                    <i class="sicon sicon-tile-view"></i>
                 </a>
                 <a type="button" class="btn" href="#{{module}}" data-view="list" data-mode="view" rel="tooltip" title=""
                    track="click:list" data-original-title="{{str 'LBL_LIST_VIEW__NAME'}}" tabindex="-1" name="back_to_list_view">
-                    <i class="fa fa-table"></i>
+                    <i class="sicon sicon-list-view"></i>
                 </a>
             </div>
             {{#each meta.buttons}}

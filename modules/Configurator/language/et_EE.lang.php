@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Aja vaikevorming',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Kuva serveri reaktsiooniajad',
+    'FREEZE_FIRST_COLUMN' => 'Luba veeru külmutamine',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Lubage see säte, võimaldamaks kasutajatel külmutada esimest veergu mitmes ' .
+        'loendivaates (sealhulgas moodulite loendivaates), alampaneelis, dashletis ja konsoolis.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Logi aeglased päringud',
     'LOCK_HOMEPAGE_HELP'=>'See säte on järgmise vältimiseks:<BR> 1) uute kodulehtede ja dashlettide lisamine moodulisse Kodu; <BR>2) dashleti paigutuse kohandamine avalehtedel pukseerimisel.',
     'CURRENT_LOGO'=>'Praegune logo:',
+    'CURRENT_LOGO_DARK' => 'Praegune tumeda režiimi logo:',
     'CURRENT_LOGO_HELP'=>'See logo kuvatakse Sugari rakenduse jaluse vasakpoolses nurgas.',
+    'CURRENT_LOGO_DARK_HELP' => "Vastavalt kasutaja eelistustele seoses välimusega kuvatakse see logo jaluse vasakpoolses nurgas, kui Sugari rakendus on tumedas režiimis.",
     'NEW_LOGO'=>'Vali logo:',
     'NEW_LOGO_HELP' => 'Pildifaili vorminguks võib olla kas .png või .jpg. Maksimaalne kõrgus on 24 pikslit ja maksimaalne laius 180 pikslit. Mis tahes suunas suurem üleslaaditud pilt mastaabitakse neile maksimummõõtudele.',
+    'NEW_LOGO_DARK' => 'Vali tumeda režiimi logo:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Pildifaili vorminguks võib olla kas .png või .jpg. Maksimaalne kõrgus on 24 pikslit ja maksimaalne laius 450 pikslit. Mis tahes suunas suurem üleslaaditud pilt mastaabitakse neile maksimummõõtudele. Pildifaili nimi ei tohi sisaldada tühikut.',
     'NEW_QUOTE_LOGO'=>'Laadi üles uus pakkumuse logo',
     'NEW_QUOTE_LOGO_HELP'=>'Nõutav pildifaili vorming on .jpg.<BR>Soovitatav suurus on 867 x 74 pikslit.',
@@ -412,8 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Jätka',
     'LBL_WIZARD_FINISH_TAB' => 'Lõpeta',
     'LBL_WIZARD_FINISH_TITLE' => 'Põhisüsteemi konfiguratsioon on lõpetatud',
-    'LBL_WIZARD_FINISH' => 'Klõpsake <b>Jätka</b> kasutajasätete konfigureerimiseks.<br/><br />
-Täiendavate süsteemi sätete konfigureerimiseks klõpsake <a href="index.php?module=Administration&action=index" target="_blank">siin</a>.',
+    'LBL_WIZARD_FINISH' => 'Oma kasutajaseadete konfigureerimiseks klõpsake <b>Jätka</b>.<br/><br />
+Täiendavate süsteemiseadete konfigureerimiseks klõpsake <a href="#Administration" target="_blank">siin</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Kaubamärgiga tähistamine',
     'LBL_WIZARD_SYSTEM_DESC' => 'Organisatsiooni nime ja logo esitamine Sugari kaubamärgiga tähistamiseks.',
     'LBL_WIZARD_LOCALE_DESC' => 'Täpsustage, kuidas soovite kuvada andmeid Sugaris, arvestades oma geograafilist asukohta. Siin määratud sätted saavad olema teie vaikesäteteks. Kasutajatel on võimalik määrata oma eelistusi.',
@@ -424,7 +430,8 @@ Täiendavate süsteemi sätete konfigureerimiseks klõpsake <a href="index.php?m
 	'LBL_LOADING' => 'Laadmine ...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Kustuta' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Tere tulemast' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Tumeda režiimi logo',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Aruannete moodul on saadaval vaid SugarCRM-i ja Sugar Mobile omaklientidele',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Aruannete moodul pole saadaval brauseripõhise mobiilivaate puhul.',
 
@@ -463,5 +470,3 @@ Täiendavate süsteemi sätete konfigureerimiseks klõpsake <a href="index.php?m
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

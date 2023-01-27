@@ -35,10 +35,12 @@ $viewdefs['KBContents']['base']['view']['dashlet-nestedset-list'] = array(
                 'module' => array(
                     'KBContents',
                     'KBContentTemplates',
+                    'Administration',
                 ),
                 'view' => array(
                     'record',
                     'records',
+                    'portaltheme-config',
                 ),
             ),
         ),

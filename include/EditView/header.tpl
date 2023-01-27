@@ -12,13 +12,11 @@
 *}
 <script type="text/javascript" src="{sugar_getjspath file='include/EditView/Panels.js'}"></script>
 <script>
-    {literal}
     $(document).ready(function(){
 	    $("ul.clickMenu").each(function(index, node){
 	        $(node).sugarActionMenu();
 	    });
     });
-    {/literal}
 </script>
 <div class="clear"></div>
 <form action="index.php" method="POST" name="{$form_name}" id="{$form_id}" {$enctype}>
@@ -55,7 +53,11 @@
 {{if empty($form.button_location) || $form.button_location == 'top'}}
 {{if !empty($form) && !empty($form.buttons)}}
    {{foreach from=$form.buttons key=val item=button}}
-      {{sugar_button module="$module" id="$button" form_id="$form_id" view="$view" appendTo="header_buttons" location="HEADER"}}
+	  {{if is_array($button)}}
+	      {{sugar_button module="$module" id=$button form_id="$form_id" view="$view" appendTo="header_buttons" location="HEADER"}}
+	  {{else}}
+	      {{sugar_button module="$module" id="$button" form_id="$form_id" view="$view" appendTo="header_buttons" location="HEADER"}}
+	  {{/if}}
    {{/foreach}}
 {{else}}
 {{sugar_button module="$module" id="SAVE" view="$view" form_id="$form_id" location="HEADER" appendTo="header_buttons"}}

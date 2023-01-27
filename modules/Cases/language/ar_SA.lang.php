@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'على سبيل المثال، يمكن استخدام ذلك للبحث عن مشكلة تم الإبلاغ عنها من قبل.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'في حالة العثور على دعم حالة جديد ترغب في الإبلاغ عنه، يمكنك أن تنقر هنا للإبلاغ عن حالة جديدة.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'يؤدي النقر هنا إلى إعادتك إلى طريقة العرض هذه في أي وقت.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'تفاعلات الحالة',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للحالة',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'ملاحظات',
 

@@ -33,7 +33,7 @@
 		<tr>
 			<td>
 				<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{$APP.LBL_SAVE_BUTTON_KEY}" class="button primary" onclick="SUGAR.saveConfigureLangs();this.form.action.value='SaveLanguages'; " type="submit" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}" >
-				<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="this.form.action.value='index'; this.form.module.value='Administration';" type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+				<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
 			</td>
 		</tr>
 	</table>
@@ -57,7 +57,7 @@
 		<tr>
 			<td>
 				<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" class="button primary" onclick="SUGAR.saveConfigureLangs();this.form.action.value='SaveLanguages'; " type="submit" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}" >
-				<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" class="button" onclick="this.form.action.value='index'; this.form.module.value='Administration';" type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+				<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" class="button" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
 			</td>
 		</tr>
 	</table>
@@ -70,35 +70,34 @@
 	var disabled_modules = {$disabled_langs};
 	var lblEnabled = '{sugar_translate label="LBL_ENABLED_LANGS"}';
 	var lblDisabled = '{sugar_translate label="LBL_DISABLED_LANGS"}';
-	{literal}
 	SUGAR.enabledLangsTable = new YAHOO.SUGAR.DragDropTable(
 		"enabled_div",
-		[{key:"label",  label: lblEnabled, width: 200, sortable: false},
-		 {key:"module", label: lblEnabled, hidden:true}],
+		[{ key:"label",  label: lblEnabled, width: 200, sortable: false},
+		 { key:"module", label: lblEnabled, hidden:true }],
 		new YAHOO.util.LocalDataSource(enabled_modules, {
 			responseSchema: {
 			   resultsList : "modules",
-			   fields : [{key : "module"}, {key : "label"}]
+			   fields : [{ key : "module"}, { key : "label" }]
 			}
 		}),
-		{height: "300px"}
+		{ height: "300px"}
 	);
 	SUGAR.disabledLangsTable = new YAHOO.SUGAR.DragDropTable(
 		"disabled_div",
-		[{key:"label",  label: lblDisabled, width: 200, sortable: false},
-		 {key:"module", label: lblDisabled, hidden:true}],
+		[{ key:"label",  label: lblDisabled, width: 200, sortable: false },
+		 { key:"module", label: lblDisabled, hidden:true }],
 		new YAHOO.util.LocalDataSource(disabled_modules, {
 			responseSchema: {
 			   resultsList : "modules",
-			   fields : [{key : "module"}, {key : "label"}]
+			   fields : [{ key : "module"}, { key : "label" }]
 			}
 		}),
-		{height: "300px"}
+		{ height: "300px"}
 	);
 	SUGAR.enabledLangsTable.disableEmptyRows = true;
     SUGAR.disabledLangsTable.disableEmptyRows = true;
-    SUGAR.enabledLangsTable.addRow({module: "", label: ""});
-    SUGAR.disabledLangsTable.addRow({module: "", label: ""});
+    SUGAR.enabledLangsTable.addRow({ module: "", label: ""});
+    SUGAR.disabledLangsTable.addRow({ module: "", label: ""});
 	SUGAR.enabledLangsTable.render();
 	SUGAR.disabledLangsTable.render();
 
@@ -123,5 +122,4 @@
 		YAHOO.util.Dom.get('disabled_langs').value = YAHOO.lang.JSON.stringify(modules);
 	}
 })();
-{/literal}
 </script>

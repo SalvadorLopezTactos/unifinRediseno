@@ -92,6 +92,18 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    _render: function() {
+        if (_.has(this.collection, 'models')) {
+            _.each(this.collection.models, function(model) {
+                model.fields.name.link = true;
+            }, this);
+        }
+        this._super('_render');
+    },
+
+    /**
      * Open create drawer to create new record.
      */
     openCreateDrawer: function() {

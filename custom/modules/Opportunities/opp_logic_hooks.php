@@ -918,43 +918,45 @@ SQL;
 
     public function AsignaCondicionesFinancieras($bean = null, $event = null, $args = null)
     {
-        //Asigna el rpimer registro del control de condiciones financieras para envíar a solicitud de UNI2
-        if (count($bean->condiciones_financieras) > 0 and $bean->tipo_producto_c != '4') {
-            $plazo_historico = $bean->plazo_c;
-            //$bean->id_activo_c = $bean->condiciones_financieras[0][''];
-            $bean->index_activo_c = $bean->condiciones_financieras['0']['idactivo'];
-            $plazos = explode("_", $bean->condiciones_financieras['0']['plazo']);
-            $bean->plazo_c = empty($plazos[1]) ? $plazo_historico : $plazos[1];
-            $bean->es_multiactivo_c = 1;
-            $bean->ca_tasa_c = $bean->condiciones_financieras['0']['tasa_minima'];
-            $bean->deposito_garantia_c = $bean->condiciones_financieras['0']['deposito_en_garantia'] ? $bean->condiciones_financieras['0']['deposito_en_garantia'] : 0;
-            $bean->porcentaje_ca_c = empty($bean->condiciones_financieras['0']['comision_minima']) ? 0 : $bean->condiciones_financieras['0']['comision_minima'];
-            $bean->porcentaje_renta_inicial_c = $bean->condiciones_financieras['0']['renta_inicial_minima'];
-            $bean->vrc_c = $bean->condiciones_financieras['0']['vrc_minimo'];
-            $bean->vri_c = $bean->condiciones_financieras['0']['vri_minimo'];
+        if(!empty($bean->condiciones_financieras)){
+            //Asigna el rpimer registro del control de condiciones financieras para envíar a solicitud de UNI2
+            if (count($bean->condiciones_financieras) > 0 and $bean->tipo_producto_c != '4') {
+                $plazo_historico = $bean->plazo_c;
+                //$bean->id_activo_c = $bean->condiciones_financieras[0][''];
+                $bean->index_activo_c = $bean->condiciones_financieras['0']['idactivo'];
+                $plazos = explode("_", $bean->condiciones_financieras['0']['plazo']);
+                $bean->plazo_c = empty($plazos[1]) ? $plazo_historico : $plazos[1];
+                $bean->es_multiactivo_c = 1;
+                $bean->ca_tasa_c = $bean->condiciones_financieras['0']['tasa_minima'];
+                $bean->deposito_garantia_c = $bean->condiciones_financieras['0']['deposito_en_garantia'] ? $bean->condiciones_financieras['0']['deposito_en_garantia'] : 0;
+                $bean->porcentaje_ca_c = empty($bean->condiciones_financieras['0']['comision_minima']) ? 0 : $bean->condiciones_financieras['0']['comision_minima'];
+                $bean->porcentaje_renta_inicial_c = $bean->condiciones_financieras['0']['renta_inicial_minima'];
+                $bean->vrc_c = $bean->condiciones_financieras['0']['vrc_minimo'];
+                $bean->vri_c = $bean->condiciones_financieras['0']['vri_minimo'];
 
-            //Obtiene la lista de activo para guardar multiactivos
-            global $app_list_strings;
-            $activos = array();
-            $multiactivo_c = array();
-            if (isset($app_list_strings['idactivo_list'])) {
-                $activos = $app_list_strings['idactivo_list'];
-            }
+                //Obtiene la lista de activo para guardar multiactivos
+                global $app_list_strings;
+                $activos = array();
+                $multiactivo_c = array();
+                if (isset($app_list_strings['idactivo_list'])) {
+                    $activos = $app_list_strings['idactivo_list'];
+                }
 
-            //Arma lista de activos
-            foreach ($bean->condiciones_financieras as $condicion) {
-                foreach ($activos as $key => $value) {
-                    if ($key == $condicion['idactivo']) {
-                        if (!in_array($value, $multiactivo_c)) {
-                            $multiactivo_c[] = $value;
+                //Arma lista de activos
+                foreach ($bean->condiciones_financieras as $condicion) {
+                    foreach ($activos as $key => $value) {
+                        if ($key == $condicion['idactivo']) {
+                            if (!in_array($value, $multiactivo_c)) {
+                                $multiactivo_c[] = $value;
+                            }
                         }
                     }
                 }
-            }
 
-            $bean->multiactivo_c = implode(",", $multiactivo_c);
-            //$bean->multiactivo_c  = 'AUTOS,OTROS';
-            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " CVV - Contenido de multiactivo: " . print_r($bean->multiactivo_c, true));
+                $bean->multiactivo_c = implode(",", $multiactivo_c);
+                //$bean->multiactivo_c  = 'AUTOS,OTROS';
+                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " CVV - Contenido de multiactivo: " . print_r($bean->multiactivo_c, true));
+            }
         }
     }
 

@@ -25,9 +25,23 @@ class campaign_charts {
 	* Portions created by SugarCRM are Copyright (C) SugarCRM, Inc..
 	* All Rights Reserved..
 	* Contributor(s): ______________________________________..
-	*/
-
-	function campaign_response_by_activity_type($datay= array(),$targets=array(),$campaign_id, $cache_file_name='a_file', $refresh=false, $marketing_id='') {
+     *
+     * @param array $datay
+     * @param array $targets
+     * @param $campaign_id
+     * @param string $cache_file_name
+     * @param false $refresh
+     * @param string $marketing_id
+     * @return string
+     */
+    public function campaign_response_by_activity_type(
+        array $datay,
+        array $targets,
+        string $campaign_id,
+        string $cache_file_name = 'a_file',
+        bool $refresh = false,
+        string $marketing_id = ''
+    ): string {
 		global $app_strings, $mod_strings, $charset, $lang, $barChartColors,$app_list_strings;
 		$sugarChart = SugarChartFactory::getInstance('','Reports');
 		$xmlFile = $sugarChart->getXMLFileName($campaign_id);
@@ -160,8 +174,30 @@ class campaign_charts {
 		return $return;
 	}
 
-	//campaign roi computations.
-	function campaign_response_roi($datay= array(),$targets=array(),$campaign_id, $cache_file_name='a_file', $refresh=false,$marketing_id='',$is_dashlet=false,$dashlet_id='') {
+    /**
+     * campaign roi computations.
+     *
+     * @param array $datay
+     * @param array $targets
+     * @param $campaign_id
+     * @param string $cache_file_name
+     * @param false $refresh
+     * @param string $marketing_id
+     * @param false $is_dashlet
+     * @param string $dashlet_id
+     * @return string
+     * @throws SugarApiExceptionNotFound
+     */
+    public function campaign_response_roi(
+        array $datay,
+        array $targets,
+        string $campaign_id,
+        string $cache_file_name = 'a_file',
+        bool $refresh = false,
+        string $marketing_id = '',
+        bool $is_dashlet = false,
+        string $dashlet_id = ''
+    ): string {
 		global $app_strings,$mod_strings, $current_module_strings, $charset, $lang, $app_list_strings, $current_language,$sugar_config;
 
 		$not_empty = false;

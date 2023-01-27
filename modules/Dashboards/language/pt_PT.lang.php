@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Todos os Dashboards para o módulo {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Todos os Dashboards para a vista {{view}} do módulo {{module}}',
     'LBL_COPY_OF' => 'Cópia de {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Os dashboards de gavetas de foco não podem ser eliminados.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Criar Dashboard',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Tem a certeza de que deseja restaurar este dashboard para o layout predefinido?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Tem a certeza de que deseja restaurar o painel do dashboard para o layout predefinido?',
+    'LBL_FILTER_UTILS_SELECT' => 'Atribuído',
 );

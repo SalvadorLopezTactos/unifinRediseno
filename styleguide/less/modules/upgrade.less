@@ -4,7 +4,6 @@
 
 // Variables and common
 @baseUrl: "../../assets";
-@fa-font-path: "../../../styleguide/assets/fonts";
 
 @import "../../themes/clients/base/default/variables.less";
 @import "../fixed_variables.less";
@@ -12,10 +11,13 @@
 
 // Third party
 @import "../lib/slider.less";
-@import "../lib/font-awesome/font-awesome.less"; //ext lib: http://fortawesome.github.com/Font-Awesome/
 @import "../lib/datepicker.less"; //ext lib: http://www.eyecon.ro/bootstrap-datepicker
 @import "../lib/select2.less"; //ext lib: http://ivaynberg.github.com/select2/
 @import "../lib/jquery.timepicker.less";
+
+// SugarIcons font library
+@sicon-font-path: "../../../styleguide/assets/fonts/SugarIcons";
+@import "../sugar/nucleo.less";
 
 // Sugar addtions and modifications to bootstrap core and third party
 @import "../sugar/reset.less";
@@ -33,7 +35,6 @@
 @import "../sugar/buttons.less";
 @import "../sugar/button-groups.less";
 @import "../sugar/dropdowns.less";
-@import "../sugar/font-awesome.less";
 @import "../sugar/misc.less";
 @import "../sugar/icons.less";
 @import "../sugar/select2.less";
@@ -48,5 +49,3 @@
 @import "../clients/base/components/upgrade-modal.less";
 @import "../sugar/responsive-sugar.less";
 @import "../sugar/utilities.less"; // Has to be last to override when necessary
-
-

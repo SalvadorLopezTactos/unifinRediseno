@@ -24,7 +24,8 @@
         'click [data-action=tab-switcher]': 'tabSwitcher',
         'click [data-action=page-nav-clicked]': 'onPageNavClicked',
         'click .recent-link': 'onNameClicked',
-        'click .recent-records i': 'onIconClicked'
+        'click .recent-records .quick-picks-list': 'onNameClicked',
+        'click .recent-records .quick-picks-preview': 'onIconClicked'
     },
 
     /**
@@ -309,7 +310,7 @@
      */
     onNameClicked: function(evt) {
         evt.preventDefault();
-        var recordId = this.$(evt.target).parent().data('record-id');
+        let recordId = this.$(evt.target).closest('li').data('record-id');
         var data = this.recentCollection.get(recordId);
         if (data) {
             data = data.toJSON();
@@ -320,21 +321,17 @@
             data.modified_user_id = data.modified_user_id && data.modified_user_id.trim();
             data.currency_id = data.currency_id && data.currency_id.trim();
             data.assigned_user_id = app.user.id;
+
             // remove ID/etc since we dont want Template ID to be the record id
             delete data.id;
             delete data.date_entered;
             delete data.date_modified;
             delete data.pricing_formula;
             delete data.my_favorite;
+            delete data.sync_key;
 
-            var closestComp = this.closestComponent('record') ?
-                this.closestComponent('record') :
-                this.closestComponent('create');
-            if (!closestComp) {
-                // if it's not on record or create it's on a list.
-                closestComp = this.closestComponent('records');
-            }
-            if (!_.isUndefined(closestComp)) {
+            let closestComp = this._getClosestComponent();
+            if (closestComp && closestComp.triggerBefore('productCatalogDashlet:add:allow')) {
                 app.controller.context.trigger(closestComp.cid + ':productCatalogDashlet:add', data);
             }
         }
@@ -386,8 +383,24 @@
      * @param evt
      */
     onIconClicked: function(evt) {
-        var recordId = this.$(evt.target).parent().data('record-id');
+        let recordId = this.$(evt.target).closest('li').data('record-id');
         this._fetchProductTemplate(recordId);
+    },
+
+    /**
+     * Gets the closest component to the dashlet
+     * @return {Object|null}
+     * @private
+     */
+    _getClosestComponent: function() {
+        let componentNames = ['record', 'create', 'convert', 'records', 'side-drawer', 'omnichannel-dashboard'];
+        for (let componentName of componentNames) {
+            let component = this.closestComponent(componentName);
+            if (component) {
+                return component;
+            }
+        }
+        return null;
     },
 
     /**
@@ -398,19 +411,14 @@
      */
     _openItemInDrawer: function(response) {
         var data = app.data.createBean('ProductTemplates', response);
-        var closestComp = this.closestComponent('record') ?
-            this.closestComponent('record') :
-            this.closestComponent('create');
-        if (!closestComp) {
-            // if it's not on record or create it's on a list.
-            closestComp = this.closestComponent('records');
-        }
+        let closestComp = this._getClosestComponent();
         data.viewId = closestComp.cid;
         app.drawer.open({
             layout: 'product-catalog-dashlet-drawer-record',
             context: {
                 module: 'ProductTemplates',
-                model: data
+                model: data,
+                closestComponent: closestComp
             }
         });
     },

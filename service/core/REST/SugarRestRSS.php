@@ -120,7 +120,7 @@ EORSS;
 	public function fault($faultObject)
 	{
 		ob_clean();
-		$this->generateResponseHeader();
+        $this->generateResponseHeader(0);
 		echo '<item><name>';
 		if(is_object($errorObject)){
 			$error = $errorObject->number . ': ' . $errorObject->name . '<br>' . $errorObject->description;

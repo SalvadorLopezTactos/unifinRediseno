@@ -222,13 +222,13 @@ return [
                         'context' => [
                             'module' => 'Cases',
                         ],
-                        'view' => 'multi-line-list',
+                        'layout' => 'multi-line-filterpanel',
                     ],
                     [
-                        'layout' => [
-                            'name' => 'side-drawer',
-                            'type' => 'console-side-drawer',
+                        'context' => [
+                            'module' => 'Cases',
                         ],
+                        'view' => 'multi-line-list',
                     ],
                 ],
             ],

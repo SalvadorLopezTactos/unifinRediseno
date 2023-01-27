@@ -1415,7 +1415,8 @@
     var self = this;
     el = $(el);
 
-    el.addClass(this.opts.itemClass);
+    // Add in utility class to match rounded dashlet edges.
+    el.addClass(this.opts.itemClass + ' rounded-md');
     var node = this._readAttr(el, {el: el.get(0), _grid: self});
     node = self.engine.addNode(node, triggerAddEvent);
     el.data('_gridstack_node', node);

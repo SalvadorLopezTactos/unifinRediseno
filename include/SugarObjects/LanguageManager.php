@@ -121,7 +121,7 @@ class LanguageManager
 		//otherwise go through each module and clean up the language
 		if(!empty($module_dir)) {
 			foreach($languages as $clean_lang) {
-                self::_clearCache($module_dir, $clean_lang);
+                self::clearCache($module_dir, $clean_lang);
 			}
 		} else {
             $cache_dir = sugar_cached('modules');
@@ -129,7 +129,7 @@ class LanguageManager
                 foreach (glob("{$cache_dir}/*", GLOB_ONLYDIR|GLOB_NOSORT) as $entry) {
                     $module = basename($entry);
                     foreach ($languages as $clean_lang) {
-                        self::_clearCache($module, $clean_lang);
+                        self::clearCache($module, $clean_lang);
                     }
                 }
             }
@@ -141,7 +141,7 @@ class LanguageManager
 	 * @param string module_dir the module_dir to clear
 	 * @param string lang the name of the language file we are clearing this is for sugar_cache
 	 */
-    private static function _clearCache($module_dir = '', $lang)
+    private static function clearCache(string $module_dir, string $lang): void
     {
 		if(!empty($module_dir) && !empty($lang)){
 			$file = sugar_cached('modules/').$module_dir.'/language/'.$lang.'.lang.php';
@@ -245,6 +245,11 @@ class LanguageManager
 
 		// Some of the vardefs do not correctly define dictionary as global.  Declare it first.
 		$cachedfile = sugar_cached('modules/').$module.'/language/'.$lang.'.lang.php';
+
+        if (!check_file_name($cachedfile)) {
+            throw new \Exception('Path traversal attack vector detected');
+        }
+
 		if($refresh || !file_exists($cachedfile)){
 			LanguageManager::refreshLanguage($module, $lang);
 		}

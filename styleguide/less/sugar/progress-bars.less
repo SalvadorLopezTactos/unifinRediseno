@@ -18,10 +18,7 @@
 // Outer container
 .progress {
   overflow: hidden;
-  #gradient > .vertical(#f5f5f5, #f9f9f9);
-
-  box-shadow: inset 0 1px 2px fade(@black, 10%);
-  border-radius: @baseBorderRadius;
+  background-color: @progressBarBackground;
 }
 
 // Bar of progress
@@ -31,14 +28,12 @@
   float: left;
   font-size: 12px;
   text-align: center;
-  text-shadow: 0 -1px 0 fade(@black, 25%);
-  box-shadow: inset 0 -1px 0 fade(@black, 15%);
   box-sizing: border-box;
   transition: width 0.6s ease;
 }
 
 .progress .bar + .bar {
-  box-shadow: inset 1px 0 0 fade(@black, 15%), inset 0 -1px 0 fade(@black, 15%);
+  box-shadow: inset 1px 0 0 @gray20, inset 0 -1px 0 @gray20;
 }
 
 // Striped bars
@@ -117,11 +112,10 @@
 
 .progress .bar {
   height: 8px;
-  border-radius: 4px;
   background-color: @blue;
 
   b {
-    color: @gray;
+    color: @gray80;
     position: absolute;
     left: 50%;
     top: 8px;
@@ -210,7 +204,7 @@
 }
 
 .progress-halt .bar {
-  background: @gray;
+  background: @gray80;
 }
 
 // COMMUNICATIONS STYLES
@@ -240,7 +234,6 @@
       height: inherit;
       margin: 2px;
       border-radius: 50px;
-      box-shadow: inset 0 0 4px 0 fade(@black, 20%);
       background-color: fade(@white, 40%);
 
       .bar {
@@ -312,8 +305,8 @@
 
     &.bar-draft {
       background: transparent !important;
-      border: 1px solid @gray;
-      color: @gray;
+      border: 1px solid @gray80;
+      color: @gray80;
 
       &::before {
         content: "Draft";
@@ -321,7 +314,7 @@
     }
 
     &.bar-optout {
-      background: @gray !important;
+      background: @gray70 !important;
     }
 
     &.bar-bounce {
@@ -333,7 +326,7 @@
     }
 
     &.bar-blank {
-      background: darken(@grayLighter, 10%) !important;
+      background: @gray30;
     }
   }
 }
@@ -345,58 +338,41 @@
   * Modified to match Sugar7 Color scheme
   */
 
-/* Make clicks pass-through */
 #nprogress {
+  /* Make clicks pass-through */
   pointer-events: none;
-}
-
-#nprogress .bar {
-  width: 100%;
-}
-
-/* Fancy blur effect */
-#nprogress .peg {
-  display: block;
-  position: absolute;
-  right: 0;
-  width: 100px;
-  height: 100%;
-  box-shadow: 0 0 10px @BorderColor, 0 0 5px @BorderColor;
-  opacity: 1;
-  transform: rotate(3deg) translate(0, -4px);
-}
-
-/* NEW SKIN START */
-
-.loading .progress {
-  /* override */
-  margin-top: 0;
-
-  /* override */
-  height: 1px;
-}
-
-.progress {
-  /* unset */
-  margin: 0;
-}
-
-#nprogress {
-  /* override */
   top: 32px;
 
   .loading.gate {
     .progress {
       /* additive */
-      background: @white;
+      background: @borderColorLight;
       box-shadow: none;
+      height: 1px;
+      .m-0();
     }
   }
-}
 
-#nprogress .bar {
-  /* override with variable */
-  background: @navbarBorder;
-}
+  .bar {
+    /* override with variable */
+    background: @linkColor;
+    .w-full();
+  }
 
-/* NEW SKIN END */
+  &.banner-shifted {
+    /* override */
+    top: @bannerHeight + 32px;
+  }
+
+  .peg {
+    .block();
+    .absolute();
+    .h-full();
+
+    right: 0;
+    width: 100px;
+    box-shadow: 0 0 10px @BorderColor, 0 0 5px @BorderColor;
+    opacity: 1;
+    transform: rotate(3deg) translate(0, -4px);
+  }
+}

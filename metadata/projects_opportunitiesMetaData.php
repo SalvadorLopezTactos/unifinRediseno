@@ -46,13 +46,6 @@ $dictionary['projects_opportunities'] = array(
             ),
         ),
         array(
-            'name' => 'idx_proj_opp_proj',
-            'type' => 'index',
-            'fields' => array(
-                'project_id',
-            ),
-        ),
-        array(
             'name' => 'idx_proj_opp_opp',
             'type' => 'index',
             'fields' => array(

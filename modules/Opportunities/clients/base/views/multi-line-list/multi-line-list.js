@@ -20,8 +20,10 @@
      */
     setFilterDef: function(options) {
         var meta = options.meta || {};
+        // if filterDef exists in meta
         if (meta.filterDef) {
-            options.context.get('collection').filterDef = meta.filterDef;
+            // perform actions as per the parent class method
+            this._super('setFilterDef', [options]);
             return;
         }
         var closedWon = ['Closed Won'];
@@ -42,5 +44,6 @@
             },
         ];
         options.context.get('collection').filterDef = filterDef;
+        options.context.get('collection').defaultFilterDef = filterDef;
     }
 })

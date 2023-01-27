@@ -12,21 +12,19 @@
 *}
 
 <b>{$MOD.LBL_IMPORT_VCARDTEXT}</b>
-{literal}
 <script type="text/javascript" src="cache/include/javascript/sugar_grp_yui_widgets.js"></script>
 <script type="text/javascript">
 <!--
 function validate_vcard()
 {
     if (document.getElementById("vcard_file").value=="") {
-        YAHOO.SUGAR.MessageBox.show({msg: '{/literal}{$ERROR_TEXT}{literal}'} );
+        YAHOO.SUGAR.MessageBox.show({ msg: '{$ERROR_TEXT}'} );
     }
     else
         document.EditView.submit();
 }
 -->
 </script>
-{/literal}
 <form name="EditView" method="POST" ENCTYPE="multipart/form-data" action="index.php">
 {sugar_csrf_form_token}
 <input type="hidden" name="max_file_size" value="30000">

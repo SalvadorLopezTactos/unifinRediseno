@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Piemēram, Jūs varat izmantot šo, lai atrastu iepriekš apstiprinātas problēmas.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Ja Jums ir jauns atbalsta Pieteikums, kuru vēlaties apstiprināt, klikšķiniet šeit, lai apstiprinātu jaunu Pieteikumu',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Spiežot šeit jūs tiksiet atgriezts šajā skatījumā jebkurā laikā.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Pieteikuma mijiedarbības',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Pieteikuma laika josla',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Piezīmes',
 

@@ -85,6 +85,27 @@ class FormulaHelper
         return array_values($fieldArray);
     }
 
+    /**
+     * Gets fields from the Users module that are valid to use in expressions
+     * @param $userFieldDefs
+     * @return array
+     */
+    public static function getValidUserFields($userFieldDefs)
+    {
+        $typeFilteredFields = FormulaHelper::cleanFields($userFieldDefs, false, true);
+        $typeFilteredFieldNames = array_column($typeFilteredFields, 0);
+
+        $filteredFields = [];
+        $includeCols = array_flip(['name', 'type']);
+        foreach ($typeFilteredFieldNames as $fieldName) {
+            if (!empty($userFieldDefs[$fieldName]['calculation_visible'])) {
+                $filteredFields[] = array_intersect_key($userFieldDefs[$fieldName], $includeCols);
+            }
+        }
+
+        return $filteredFields;
+    }
+
     protected static function isFalse($v){
         if (is_string($v)){
             return strToLower($v) == "false";

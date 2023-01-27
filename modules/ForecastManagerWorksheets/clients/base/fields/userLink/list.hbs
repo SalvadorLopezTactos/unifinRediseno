@@ -11,6 +11,8 @@
  */
 --}}
 <div class="ellipsis_inline" data-placement="right"
-     title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}">
+    title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}"
+>
     <a href="javascript:void(0)" class="worksheetManagerLink" data-uid="{{uid}}">{{{value}}}</a>
+    <span class="sicon sicon-user ml-1"></span>
 </div>

@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Darblapa',
     'LBL_PURCHASED_LINE_ITEMS' => 'Iegādātie produkti',
 
+    'LBL_FORECASTED_LIKELY' => 'Iespējamā prognoze',
     'LBL_RENEWAL' => 'Atjaunošana',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Atjaunojamie darījumi',
     'LBL_RENEWAL_PARENT' => 'Sākotnējais darījums',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# no visiem ieņēmumu posteņiem',
     'LBL_CLOSED_RLIS' => '# no slēgtajiem ieņēmumu posteņiem',
+    'LBL_CLOSED_WON_RLIS' => '# no slēgtajiem - iegūtajiem ieņēmumu posteņiem',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# ieņēmumu posteņi ar atklātās apkalpošanas mainīgu ilgumu',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Jūs nevarat dzēst iespējas, kuras satur aizvērtus ieņēmumu posteņus',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Viens vai vairāki no atlasītajiem ierakstiem satur aizvērtus ieņēmumu posteņus un nevar tikt dzēsti.',
     'LBL_INCLUDED_RLIS' => '# no ietvertajiem ieņēmumu posteņiem',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Atvēršanas atjaunināšana',
+    'LBL_CASCADE_RLI_EDIT' => 'Atjauniniet atvērtos ieņēmumu posteņus',
+    'LBL_CASCADE_RLI_CREATE' => 'Iestatiet ieņēmumu posteņos',
     'LBL_SERVICE_START_DATE_INVALID' => 'Pakalpojuma sākuma datumu nevar iestatīt vēlāk par Pakalpojuma beigu datumu attiecībā uz jebkuru atvērtu papildu ieņēmumu posteni.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Piedāvājumi',
@@ -239,7 +243,10 @@ Lai izveidotu moduli {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Manas darba grupas iespējas",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Nevar mainīt {{fieldName}}, jo šim {{moduleSingular}} nav atvērtu produktu pozīciju.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Darījuma mijiedarbības',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Iespējas laika josla',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' nevar iestatīt nevienam no šiem ieņēmumu posteņiem, jo ​​tie nav pakalpojumi. Vai vēlaties turpināt izveidi?',
+    'LBL_CASCADE_DURATION_WARNING' => ' nevar iestatīt nevienam no šiem ieņēmumu posteņiem, jo ​​to ilgumi ir bloķēti. Vai vēlaties turpināt izveidi?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Darījuma noslēgšanas prognoze',

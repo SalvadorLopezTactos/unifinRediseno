@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => '字段名已经存在',
     'ERR_FIELD_NAME_NON_DB_CHARS' => '字段名只能使用下列字符：a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => '没有模块无法保存',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => '下拉列表名已经存在',
     'LBL_BTN_ADD' => '添加',
     'LBL_BTN_EDIT' => '编辑',
     'LBL_GENERATE_URL' => '生成 URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => '添加列 {0} 到',
     'LBL_DONE' => '完成',
     'LBL_EXE_NON_SIM_MODE' => '执行非仿真模式',
+    'LBL_CALCULATION_VISIBLE' => '使其可见以用于计算',
 );
-
-
-?>

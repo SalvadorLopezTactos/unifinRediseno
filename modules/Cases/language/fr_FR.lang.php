@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Par exemple, vous pourriez l&#39;utiliser pour trouver un ticket que vous avez déclaré préalablement.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Si vous souhaitez ouvrir un demande, vous pouvez cliquer ici pour déclarer un nouveau ticket.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'En cliquant ici vous pouvez revenir sur cette page à tout moment.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interactions entre les tickets',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie du ticket',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
 

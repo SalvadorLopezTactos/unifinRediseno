@@ -16,10 +16,10 @@ class SoapResourceObserver extends ResourceObserver
     private $soapServer;
 
     /**
-     * This method accepts an instance of the nusoap soap server so that a proper
+     * This method accepts an instance of the soap server so that a proper
      * response can be returned when the notify method is triggered.
      *
-     * @param nusoap_server $server
+     * @param SoapServer $server
      */
     public function set_soap_server(&$server)
     {

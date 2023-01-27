@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Korisnici',
     'LBL_EMAILS_PRODUCTS_REL' => 'Prodane stavke',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Stavke prihoda',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Eskalacije',
     'LBL_EMAILS_MESSAGES_REL' => 'Poruke',
     'LBL_EMAILS_PURCHASES_REL' => 'Kupovine',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Kupljene stavke',
@@ -473,4 +474,5 @@ Možete primijeniti prethodno definirani predložak s pomoću gumba Predložak i
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Pošalji por. e-pošte',
     'LBL_MAILBOX' => 'Ulazni račun',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Konfigurirajte račun za izlaznu e-poštu u <a href="#OutboundEmail">Postavkama e-pošte</a> kako biste mogli slati e-poštu.',
 );

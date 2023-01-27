@@ -75,9 +75,10 @@ class DataPrivacyHooks
         $executePending = $timedate->asDb($timedate->getNow()->modify('+5 seconds'));
         $sql = 'SELECT id, execute_time, data FROM job_queue WHERE name = ? AND status = ?' .
             ' AND deleted = 0 AND execute_time >= ? ORDER BY execute_time';
+        /** @var \Sugarcrm\Sugarcrm\Dbal\Connection $conn */
         $conn = $GLOBALS['db']->getConnection();
         $stmt = $conn->executeQuery($sql, [$jobName, $queued, $executePending]);
-        while ($jobInfo = $stmt->fetch()) {
+        while ($jobInfo = $stmt->fetchAssociative()) {
             $exDateTime = $jobInfo['execute_time'];
             $data = json_decode(html_entity_decode($jobInfo['data']), true);
             $dataPrivacyIds = $data['dataPrivacyIds'];

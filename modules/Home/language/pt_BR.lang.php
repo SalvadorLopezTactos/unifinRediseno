@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugar Dashlet Adicionado',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Dashlets vão ser reorganizados, você tem certeza de que deseja alterar o layout da coluna?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Tem certeza que deseja remover este Sugar Dashlet?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Nenhum painel configurado',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Nenhum dashlet configurado',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Criar painel',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Pagina da Web',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Pagina da Web',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Código Fonte',
   'LBL_SOURCE_SUGAR' => 'Sugar - O aplicativo de automação de força de vendas mais popular do mundo criado pela SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - Um mecanismo de modelos para PHP criado por Barnabás Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - Um conjunto de classes PHP que permite aos programadores criarem e consumirem serviços web criado pela NuSphere Corporation e Dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Um calendário para inserir datas criado por Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Uma biblioteca para criar documentos PDF criada por Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - Uma Implementação de Servidor WebDAV em PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'A Ajuda exibe informações específicas sobre o módulo que está sendo exibido, fornece etapas detalhadas para executar algumas ações no módulo e informa onde é possível receber suporte e informações mais completas.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtro',
+
+    'LBL_ABOUT_VERSION' => 'Você está usando a versão {{version}} com as seguintes licenças:',
 );

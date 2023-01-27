@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => '예를 들어 이전에 접수되었던 사례들을 찾는데 사용할수 있습니다.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => '등록하고자 하는 신규 사례가 있다면 신규 사례제출을 위해 이곳을 클릭할수 있습니다.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => '이곳을 클릭하면 언제든지 이 창으로 돌아올수 있습니다.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '케이스 상호작용',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '사례 타임라인',
 
     'LBL_NOTES_SUBPANEL_TITLE' => '메모 목록',
 

@@ -11,14 +11,14 @@
  */
 --}}
 <div class="product-catalog-view product-catalog-dashlet product-catalog-dashlet-{{this.cid}}">
-    <div class="product-catalog-search">
+    <div class="product-catalog-search pt-2.5 px-2 pb-3.5">
         <input type="text" name="product-catalog-search-term" class="product-catalog-search-term hidden"
             placeholder="{{searchText}}"/>
     </div>
     <div class="product-catalog-no-results hidden">
         {{str 'LBL_NO_PRODUCT_CATALOG_RESULTS' 'ProductTemplates'}}
     </div>
-    <div class="product-catalog-container product-catalog-container-{{this.cid}}">
+    <div class="product-catalog-container product-catalog-container-{{this.cid}} pl-3.5">
         <div id="product-catalog-canvas-{{this.cid}}"></div>
     </div>
 </div>

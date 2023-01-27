@@ -111,6 +111,13 @@ class SugarQuery
     public $fields = array();
 
     /**
+     * Forces query compiler to expand 'SELECT *' in \SugarQuery_Builder_Field_Select::expandField
+     * using fields from DB, not from vardefs
+     * @var bool
+     */
+    public $verifyDBfields = false;
+
+    /**
      * Set of joined custom tables indexed by their primary table alias
      *
      * @var array
@@ -642,7 +649,7 @@ class SugarQuery
     }
 
     /**
-     * Execute this query and return the resulting data set as aarray
+     * Execute this query and return the resulting data set as array
      *
      * @return array
      */
@@ -650,13 +657,26 @@ class SugarQuery
     {
         $result = array();
         $stmt = $this->runQuery();
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             //Apply any post data cleanup/db abstraction
             $result[] = $this->formatRow($row);
         }
         return $result;
     }
 
+    /**
+     * Execute this query and return in generator
+     * @return Generator
+     * @throws \Doctrine\DBAL\Driver\Exception
+     */
+    public function executeAndReturnAsGenerator() : Generator
+    {
+        $stmt = $this->runQuery();
+        while ($row = $stmt->fetchAssociative()) {
+            //Apply any post data cleanup/db abstraction
+            yield $this->formatRow($row);
+        }
+    }
     /**
      * Get one value result from the query
      * @return false|string
@@ -668,8 +688,8 @@ class SugarQuery
        }
 
         $stmt = $this->runQuery();
-        $result = $stmt->fetchColumn();
-        $stmt->closeCursor();
+        $result = $stmt->fetchOne();
+        $stmt->free();
 
         return $result;
     }
@@ -677,7 +697,7 @@ class SugarQuery
     /**
      * Run the query and return the db result object
      *
-     * @return Doctrine\DBAL\Statement
+     * @return Doctrine\DBAL\Result
      */
     protected function runQuery()
     {

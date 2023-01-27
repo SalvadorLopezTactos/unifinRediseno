@@ -22,10 +22,10 @@
         {{#if isManager}}
         <div data-toggle="buttons-radio" class="btn-group dashlet-group">
             <button class="btn toggle-control{{#eq settings.attributes.visibility "user"}} active{{/eq}}" value="user" data-action="visibility-switcher" rel="tooltip" data-placement="bottom" title="{{str "LBL_TOP10_OPPORTUNITIES_MY_OPP" ../forecastBy}}" aria-label="{{str "LBL_TOP10_OPPORTUNITIES_MY_OPP" ../forecastBy}}" aria-pressed="{{#eq settings.attributes.visibility "user"}}true{{else}}false{{/eq}}" track="click:viewMyUserBubbleChart">
-                <i class="fa fa-user"></i>
+                <i class="sicon sicon-user"></i>
             </button>
             <button class="btn toggle-control{{#eq settings.attributes.visibility "group"}} active{{/eq}}" value="group" data-action="visibility-switcher" rel="tooltip" data-placement="bottom" title="{{str "LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP" ../forecastBy}}" aria-label="{{str "LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP" ../forecastBy}}" aria-pressed="{{#eq settings.attributes.visibility "group"}}true{{else}}false{{/eq}}" track="click:viewMyTeamsBubbleChart">
-                <i class="fa fa-group"></i>
+                <i class="sicon sicon-user-group"></i>
             </button>
         </div>
         {{/if}}

@@ -31,7 +31,6 @@
     	YAHOO.util.Event.addListener(window, 'load', SubpanelInit);
 
 <script type='text/javascript'>
-{literal}
 var GlobalSearchOnDrag = function()
 {
 //console.log('dragging');
@@ -42,7 +41,6 @@ var GlobalSearchOnDrop = function()
 //console.log('dropping');
 }
 
-{/literal}
 
 var GlobalSearchInit = function()
 {ldelim}

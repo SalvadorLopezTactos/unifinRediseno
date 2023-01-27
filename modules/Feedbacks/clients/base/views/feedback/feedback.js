@@ -78,9 +78,8 @@
          */
         this._isOpen = false;
 
-        var products = app.user.get('products') ?
-            app.user.get('products').join(',') :
-            '';
+        let products = app.user.getProductCodes();
+        products = products ? products.join(',') : '';
 
         var params = {
             edition: app.metadata.getServerInfo().flavor,

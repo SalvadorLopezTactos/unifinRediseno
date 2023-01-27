@@ -12,6 +12,6 @@
 --}}
 <div class="{{#if icon}}select2-icon-prepend{{else}}select2-no-icon{{/if}}" data-id="{{id}}">
     <span class="select2-match"></span>
-    {{#if icon}}<i class="fa {{icon}}"></i>{{/if}}
-    {{text}}
+    {{#if icon}}<i class="{{buildIcon icon}}"></i>{{/if}}
+    <span>{{text}}</span>
 </div>

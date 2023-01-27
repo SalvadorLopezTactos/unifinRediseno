@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Email adresa:',
     'LBL_EMAIL_ATTACHMENT' => 'Email prilog',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Prilog e-poruke za',
+    'LBL_NOTE_ATTACHMENT' => 'Prilozi napomeni',
+    'LBL_KB_ATTACHMENT' => 'Prilozi za KBDocument',
+    'LBL_CASE_ATTACHMENT' => 'Prilozi predmeta',
     'LBL_FILE_MIME_TYPE' => 'MIME tip',
     'LBL_FILE_EXTENSION' => 'Oznaka tipa datoteke',
     'LBL_FILE_SOURCE' => 'Izvor datoteke',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Izvor beleške',
     'LBL_SOURCE_EXTERNAL' => 'Spoljašnji',
     'LBL_SOURCE_INTERNAL' => 'Unutrašnji',
+    'LBL_PORTAL' => 'Portal',
 
     // Help Text
     // List View Help Text

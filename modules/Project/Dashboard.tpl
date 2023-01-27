@@ -16,12 +16,12 @@
 		resourceArray['{$RESOURCE->id}'] = "{$RESOURCE->full_name}";
 	{/foreach}
 	
-	function populateResourceName(resourceId, divId) {literal}{{/literal}
-		if (resourceArray[resourceId]) {literal}{{/literal}
+	function populateResourceName(resourceId, divId) {
+		if (resourceArray[resourceId]) {
 			alert(document.getElementById(divId).innerHMTL);
 			document.getElementById(divId).innerHMTL = resourceArray[resourceId];
-		{literal}}{/literal}			
-	{literal}}{/literal}
+		}
+	}
 </script>
 
 {if $PROJECTS}

@@ -126,6 +126,10 @@ class StandardField extends DynamicField
         if (isset($field->vname) && $currdef['vname'] !== $newDef['vname']) {
             $this->custom_def['vname'] = $field->vname;
         }
+
+        if (!empty($newDef['related_fields'])) {
+            $this->custom_def['related_fields'] = $newDef['related_fields'];
+        }
         
         $this->writeVardefExtension($bean_name, $field, $this->custom_def);
     }

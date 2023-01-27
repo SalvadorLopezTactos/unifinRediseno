@@ -18,7 +18,7 @@ $viewdefs['Quotes']['base']['view']['quote-data-grand-totals-header'] = array(
             'buttons' => array(
                 array(
                     'type' => 'button',
-                    'icon' => 'fa-plus',
+                    'icon' => 'sicon-plus',
                     'name' => 'create_qli_button',
                     'label' => 'LBL_CREATE_QLI_BUTTON_LABEL',
                     'acl_action' => 'create',
@@ -26,7 +26,7 @@ $viewdefs['Quotes']['base']['view']['quote-data-grand-totals-header'] = array(
                 ),
                 array(
                     'type' => 'button',
-                    'icon' => 'fa-plus',
+                    'icon' => 'sicon-plus',
                     'name' => 'create_comment_button',
                     'label' => 'LBL_CREATE_COMMENT_BUTTON_LABEL',
                     'acl_action' => 'create',
@@ -34,7 +34,7 @@ $viewdefs['Quotes']['base']['view']['quote-data-grand-totals-header'] = array(
                 ),
                 array(
                     'type' => 'button',
-                    'icon' => 'fa-plus',
+                    'icon' => 'sicon-plus',
                     'name' => 'create_group_button',
                     'label' => 'LBL_CREATE_GROUP_BUTTON_LABEL',
                     'acl_action' => 'create',

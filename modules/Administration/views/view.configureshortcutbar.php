@@ -43,7 +43,7 @@ class ViewConfigureshortcutbar extends SugarView
 	{
 	    global $mod_strings;
 
-    	return array("<a href='index.php?module=Administration&action=index'>".$mod_strings['LBL_MODULE_NAME']."</a>", $mod_strings['LBL_CONFIGURE_SHORTCUT_BAR']);
+        return array("<a href='#Administration'>".$mod_strings['LBL_MODULE_NAME']."</a>", $mod_strings['LBL_CONFIGURE_SHORTCUT_BAR']);
     }
 
     /**
@@ -69,7 +69,7 @@ class ViewConfigureshortcutbar extends SugarView
         $title = getClassicModuleTitle(
             "Administration",
             array(
-                "<a href='index.php?module=Administration&action=index'>{$mod_strings['LBL_MODULE_NAME']}</a>",
+                "<a href='#Administration'>{$mod_strings['LBL_MODULE_NAME']}</a>",
                 translate('LBL_CONFIGURE_SHORTCUT_BAR')
             ),
             false

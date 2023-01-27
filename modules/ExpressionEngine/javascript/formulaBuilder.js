@@ -179,46 +179,62 @@ SUGAR.expressions.validateReturnTypes = function(t)
      * validate functions with related fields which require a server call to validate
      * @param t expression function
      */
-SUGAR.expressions.validateRelateFunctions = function(t)
-{
-	var SU = SUGAR.util, SE = SUGAR.expressions;
-    if (t.type == "function")
-	{
-		//Depth first recursion
-		for(var i in t.args)
-		{
-			SE.validateRelateFunctions(t.args[i]);
-		}
+    SUGAR.expressions.validateRelateFunctions = function(t) {
+        let SU = SUGAR.util;
+        let SE = SUGAR.expressions;
+        if (t.type === 'function') {
 
-		//these functions all take a link and a string for a related field
-        var relFuncs = ["related", "rollupAve", "rollupMax", "rollupMin", "rollupSum"];
+            // Depth first recursion
+            for (let i in t.args) {
+                SE.validateRelateFunctions(t.args[i]);
+            }
 
-		if (SU.arrayIndexOf(relFuncs, t.name) == -1)
-            return true;
+            // These functions all take a link and a string for a related field
+            let relFuncs = ['related', 'rollupAve', 'rollupMax', 'rollupMin', 'rollupSum'];
 
-        var url = "index.php?" + SU.paramsToUrl({
-            module : "ExpressionEngine",
-            action : "validateRelatedField",
-            tmodule : ModuleBuilder.module,
-            package : ModuleBuilder.MBpackage,
-            link : t.args[0].name,
-            related : t.args[1].value
-        });
-        var resp = http_fetch_sync(url);
-        var def = YAHOO.lang.JSON.parse(resp.responseText);
+            // These functions take a single string for a Users field
+            let userFuncs = ['currentUserField'];
 
-        //Check if a field was found
-        if (typeof(def) == "string"){
-            throw(t.name + ": " + def);
+            let url;
+            if (relFuncs.includes(t.name)) {
+                url = 'index.php?' + SU.paramsToUrl({
+                    module: 'ExpressionEngine',
+                    action: 'validateRelatedField',
+                    tmodule: ModuleBuilder.module,
+                    package: ModuleBuilder.MBpackage,
+                    link: t.args[0].name,
+                    related: t.args[1].value
+                });
+            } else if (userFuncs.includes(t.name)) {
+                url = 'index.php?' + SU.paramsToUrl({
+                    module: 'ExpressionEngine',
+                    action: 'validateUserField',
+                    package: ModuleBuilder.MBpackage,
+                    related: t.args[0].value
+                });
+            } else {
+                return true;
+            }
+
+            // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+            let resp = http_fetch_sync(url);
+            // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
+            let def = YAHOO.lang.JSON.parse(resp.responseText);
+
+            // Check if a field was found
+            if (typeof(def) === 'string') {
+                throw (t.name + ': ' + def);
+            }
+
+            let genericTypeFunctions = ['related', 'currentUserField'];
+            let numberTypes = ['decimal', 'int', 'float', 'currency'];
+            if (!genericTypeFunctions.includes(t.name) && def.type && !numberTypes.includes(def.type)) {
+                throw (t.name + ': related field  ' + t.args[1].value + ' must be a number');
+            }
+
+            return def;
         }
-        if (t.name != "related" && def.type && SU.arrayIndexOf(["decimal", "int", "float", "currency"], def.type) == -1)
-        {
-            throw (t.name + ": related field  " + t.args[1].value + " must be a number ");
-        }
-
-        return def;
-	}
-};
+    };
 
     /**
      *  Grab and validate the current formula and validate it.

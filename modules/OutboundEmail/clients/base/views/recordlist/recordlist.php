@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['OutboundEmail']['base']['view']['recordlist'] = array(
-    'favorite' => false,
+    'favorite' => true,
     'following' => false,
     'sticky_resizable_columns' => false,
     'selection' => array(),
@@ -20,7 +20,7 @@ $viewdefs['OutboundEmail']['base']['view']['recordlist'] = array(
                 'type' => 'rowaction',
                 'name' => 'edit_button',
                 'dismiss_label' => true,
-                'icon' => 'fa-pencil',
+                'icon' => 'sicon-edit',
                 'tooltip' => 'LBL_EDIT_BUTTON',
                 'acl_action' => 'edit',
                 'route' => array(

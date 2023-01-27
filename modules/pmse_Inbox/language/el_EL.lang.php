@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Διεργασιών',
 
     'LBL_CAS_ID' => 'Αριθμός Διεργασίας',
+    'LBL_CAS_STATUS' => 'Κατάσταση διαδικασίας',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Άγνωστο (σύμφωνα με UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "η εργασία",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "η εργασία ήταν",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "είχε ανατεθεί διαδικασία #%s %s στην εγγραφή %s από την %s ενέργεια %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "στο",
     'LBL_PMSE_HISTORY_LOG_AND'  => "και",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'συνδέθηκε ή αποσυνδέθηκε μια εγγραφή με',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Έγκριση',
     'LBL_PMSE_LABEL_REJECT' => 'Απόρριψη',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Διεργασίες σε Εξέλιξη',
     'LBL_STATUS_CANCELLED' => 'Ακυρωμένες Διεργασίες',
     'LBL_STATUS_ERROR' => 'Σφάλμα Διεργασιών',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Ολοκληρώθηκε',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Τερματίστηκε',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Σε Εξέλιξη',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Ακυρώθηκε',
+    'LBL_STATUS_ERROR_ENUM' => 'Σφάλμα',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Διεργασίες Λίστας',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Αφύλακτες Διεργασίες',

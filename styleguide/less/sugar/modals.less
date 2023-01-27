@@ -29,10 +29,11 @@
   z-index: @zindexModal;
   width: 560px;
   margin-left: -280px;
-  background-color: @white;
+  background-color: @primaryContentBackground;
   background-clip: padding-box;
   // Remove focus outline from opened modal
   outline: none;
+  color: @textColor;
 
   &.fade {
     transition: 'opacity .3s linear, top .3s ease-out';
@@ -43,7 +44,8 @@
 
 .modal-header {
   padding: 9px 15px;
-  border-bottom: 1px solid @grayLighter;
+  border-bottom: @borderWidget;
+  background-color: @headerpaneBackground;
   // Close icon
   .close { margin-top: 2px; }
   // Heading
@@ -68,7 +70,6 @@
   padding: 14px 15px 15px;
   margin-bottom: 0;
   text-align: right; // right align buttons
-  box-shadow: inset 0 1px 0 @white;
   .clearfix(); // clear it in case folks use .pull-* classes on buttons
 
   // Properly space out buttons
@@ -155,6 +156,10 @@
     }
   }
 
+  .modal.progress-modal & {
+    .p-0();
+  }
+
   textarea {
     text-align: left;
   }
@@ -170,7 +175,7 @@
   position: absolute;
   top: 0;
   width: 100%;
-  background-color: @grayLighter;
+  background-color: @gray20;
 
   .nav-tabs {
     margin: 8px 0 0;
@@ -211,10 +216,13 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: @grayLighter;
-  border-top: @borderWidget;
   box-sizing: border-box;
   border-radius: 0 0 @baseBorderRadius @baseBorderRadius;
+
+  .modal:not(.progress-modal) & {
+    border-top: @borderWidget;
+    .bg-footer-background();
+  }
 }
 
 .modal-backdrop,
@@ -237,5 +245,18 @@ body.modal-open {
 
   .progress {
     margin-bottom: 22px;
+  }
+}
+
+.modal-stack {
+  &::before {
+    content: "";
+    background-image: @stackBackground;
+    background-repeat: no-repeat;
+    background-size: 300px;
+    background-position: right top;
+    .absolute();
+    .w-full();
+    .h-full();
   }
 }

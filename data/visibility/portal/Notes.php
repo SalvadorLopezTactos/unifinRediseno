@@ -13,6 +13,9 @@
 namespace Sugarcrm\Sugarcrm\Visibility\Portal;
 
 use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
+use BeanFactory;
+use SugarQuery;
+use Sugarcrm\Sugarcrm\Visibility\Portal\Emails;
 
 /**
  * IMPORTANT NOTE: Notes is a related module that needs to be filtered based on the visibility of the parent objects
@@ -36,6 +39,31 @@ class Notes extends Portal
         $this->addVisibilityOrQueryBugs($options);
         $this->addVisibilityOrQueryKBContents($options);
         $this->addVisibilityOrQueryAttachments($options);
+        $this->addVisibilityOrQueryEmails($options);
+    }
+
+    /**
+     * This is for the email attachment.
+     * @param array $options
+     * @throws \SugarQueryException
+     */
+    protected function addVisibilityOrQueryEmails(array $options)
+    {
+        $emailBean = BeanFactory::newBean('Emails');
+        $subQuery = new SugarQuery();
+        $subQuery->select('id');
+        $subQuery->from($emailBean);
+
+        // apply the email visibility
+        $emailVisibility = new Emails($this->context);
+        $emailVisibility->addVisibilityQuery($subQuery);
+
+        // convert the SugarQuery to a Doctrine DBAL query
+        $subQueryBuilder = $subQuery->compile();
+
+        // if the note's email_id belongs to an email that is visible, then this note
+        // should be visible as well because it's an attachment of that email
+        $this->visibilityQueryOr->in($options['table_alias'] . '.email_id', $subQueryBuilder);
     }
 
     protected function addVisibilityOrQueryCases(array $options)
@@ -44,14 +72,48 @@ class Notes extends Portal
             $accountsOfContact = PortalFactory::getInstance('Session')->getAccountIds();
             if (!empty($accountsOfContact)) {
                 // Contact with Accounts
-                $casesQb = $this->addVisibilityQueryForContactWithAccounts($this->query);
+                $caseVisibility = PortalFactory::getInstance('Settings')->getCaseVisibility();
+                if ($caseVisibility === 'related_contacts') {
+                    $casesQb = $this->addVisibilityQueryForRelatedContacts($this->query);
+                } else {
+                    $casesQb = $this->addVisibilityQueryForContactWithAccounts($this->query);
+                }
             } else {
                 // Contact without Accounts
                 $casesQb = $this->addVisibilityQueryForContactWithoutAccounts($this->query);
             }
 
             $this->visibilityQueryOr->in($options['table_alias'] . '.id', $casesQb);
+
+            // for attachments
+            $this->visibilityQueryOr->in($options['table_alias'] . '.note_parent_id', $casesQb);
         }
+    }
+
+    protected function addVisibilityQueryForRelatedContacts(\SugarQuery $query)
+    {
+        // get note ids attached to the Cases which are visible to this contact
+        $contactId = PortalFactory::getInstance('Session')->getContactId();
+        $casesQb = $this->db->getConnection()->createQueryBuilder();
+        $casesQb->select(['n.id']);
+        $casesQb->from('notes', 'n');
+        $casesQb->innerJoin(
+            'n',
+            'cases',
+            'c',
+            'c.id = n.parent_id and n.parent_type = ' . $casesQb->createPositionalParameter('Cases') .
+            ' and n.deleted = ' . $casesQb->createPositionalParameter(0) .
+            ' and c.deleted = ' . $casesQb->createPositionalParameter(0) .
+            ' and c.portal_viewable = ' . $casesQb->createPositionalParameter(1)
+        )->innerJoin(
+            'c',
+            'contacts_cases',
+            'cc',
+            'c.id = cc.case_id and cc.contact_id = ' . $casesQb->createPositionalParameter($contactId) .
+            ' and cc.deleted = ' . $casesQb->createPositionalParameter(0)
+        );
+
+        return $casesQb;
     }
 
     protected function addVisibilityQueryForContactWithAccounts(\SugarQuery $query)
@@ -116,6 +178,9 @@ class Notes extends Portal
             );
 
             $this->visibilityQueryOr->in($options['table_alias'] . '.id', $bugsQb);
+
+            // for attachments
+            $this->visibilityQueryOr->in($options['table_alias'] . '.note_parent_id', $bugsQb);
         }
     }
 
@@ -128,7 +193,7 @@ class Notes extends Portal
             $kbQb->select(['n.id']);
             $kbQb->from('notes', 'n');
             $kbQb->where(
-                $kbQb->expr()->orX(
+                $kbQb->expr()->or(
                     'n.parent_type = ' . $kbQb->createPositionalParameter('KBContents'),
                     'n.parent_type = ' . $kbQb->createPositionalParameter('KBContentsAttachments')
                 )

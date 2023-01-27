@@ -13,13 +13,22 @@
 {{#if value}}
     {{#if model.attributes.total_attachments}}
         <span class="email-has-attachments">
-            <i class="fa fa-paperclip" aria-hidden="true"></i>
+            <i class="sicon sicon-attach" aria-hidden="true"></i>
         </span>
     {{/if}}
     {{#if ../ellipsis}}
-        <div class="ellipsis_inline" data-placement="bottom" title="{{value}}">
+        <div class="ellipsis_inline relate-field-container" data-placement="bottom" title="{{value}}">
     {{/if}}
-    {{#if href}}<a href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}">{{value}}</a>{{else}}{{value}}{{/if}}
+    {{#if href}}
+        <a class="ellipsis_inline" href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}"
+            data-placement="bottom" title="{{value}}"
+        >
+            {{value}}
+        </a>
+        {{partial 'focus-icon' this this}}
+    {{else}}
+        {{value}}
+    {{/if}}
     {{#if ../ellipsis}}
         </div>
     {{/if}}

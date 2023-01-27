@@ -69,14 +69,13 @@ class PMSEEngineUtils
         'ALL' => array(
             'deleted',
             'mkto_id',
-            'parent_type',
             'user_name',
             'user_hash',
-            'portal_app',
-            'portal_active',
             'password',
             'is_admin',
             'team_count',
+            'sentiment_score_agent',
+            'sentiment_score_customer',
         ),
         // list for BR conclusions and others (write)
         'BR' => array(
@@ -92,11 +91,15 @@ class PMSEEngineUtils
             'date_modified',
             'primary_contact_name',
             'portal_name',
+            'portal_app',
+            'sentiment_score_agent_string',
+            'sentiment_score_customer_string',
         ),
         // list for BR conditions (read)
         'BRR' => array(
             'primary_contact_name',
             'portal_name',
+            'portal_app',
         ),
         // Add related record Activity item in Process Definitions
         'AC' => array(
@@ -106,6 +109,8 @@ class PMSEEngineUtils
             'created_by_name',
             'modified_by_name',
             'portal_name',
+            'portal_app',
+            'parent_type',
         ),
         // Process Definitions
         'PD' => array(
@@ -113,12 +118,14 @@ class PMSEEngineUtils
             'revision',
             'viewcount',
             'portal_name',
+            'portal_app',
         ),
         'GT' => array(
             'kbdocument_body',
             'revision',
             'viewcount',
             'portal_name',
+            'portal_app',
         ),
         // Change field action... this used to be the same as Add Related Record
         // but we needed different things from this
@@ -134,11 +141,17 @@ class PMSEEngineUtils
             'date_entered',
             'date_modified',
             'portal_name',
+            'portal_app',
+            'sentiment_score_agent_string',
+            'sentiment_score_customer_string',
+            'parent_type',
         ),
         // Readonly and Required fields in Activity
         // Locked fields in Process Definition
         'RR' => [
             'portal_name',
+            'portal_app',
+            'parent_type',
         ],
     );
 
@@ -197,7 +210,7 @@ class PMSEEngineUtils
         'All' => array('created_by_name', 'modified_by_name', 'primary_contact_name'),
         'BR' => array('assigned_user_id', 'email1', 'outlook_id'),
         'BRR' => array('assigned_user_id', 'email1', 'outlook_id'),
-        'ET' => array('email1', 'portal_name'),
+        'ET' => array('email1', 'portal_name', 'portal_app'),
         'AC' => array('assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'),
         'CF' => array('assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'),
         'RR' => array(),
@@ -415,10 +428,7 @@ class PMSEEngineUtils
      */
     public static function generateUniqueID()
     {
-        do {
-            $sUID = str_replace('.', '0', uniqid(rand(0, 999999999), true));
-        } while (strlen($sUID) != 32);
-        return $sUID;
+        return bin2hex(random_bytes(16));
     }
 
     /**
@@ -1540,7 +1550,11 @@ class PMSEEngineUtils
             static::$idmConfig = new Authentication\Config(\SugarConfig::getInstance());
         }
 
-        if (static::$idmConfig->isIDMModeEnabled() && !empty($def['idm_mode_disabled'])) {
+        if (static::$idmConfig->isIDMModeEnabled() &&
+            (!empty($def['idm_mode_disabled']) &&
+                ($def['name'] !== 'license_type' ||
+                    ($def['name'] === 'license_type' && static::$idmConfig->getUserLicenseTypeIdmModeLock())))
+        ) {
             return false;
         }
 
@@ -2133,7 +2147,7 @@ class PMSEEngineUtils
 
             $result = $db->getConnection()
                        ->executeQuery($query, array($moduleName))
-                       ->fetchColumn();
+                       ->fetchOne();
 
             SugarCache::instance()->{static::getModuleLockedFieldsCacheKey($moduleName)} = (bool) $result;
         }

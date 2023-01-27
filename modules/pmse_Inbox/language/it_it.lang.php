@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Dashboard record processi',
 
     'LBL_CAS_ID' => 'Numero Flusso',
+    'LBL_CAS_STATUS' => 'Stato processo',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Sconosciuto (secondo UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "il compito è stato",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "il compito era",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "è stato assegnato il processo #%s %s il record %s dall'azione %s %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "su",
     'LBL_PMSE_HISTORY_LOG_AND'  => "e",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'collegato o scollegato un record in',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Approva',
     'LBL_PMSE_LABEL_REJECT' => 'Rifiuta',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Flussi in Corso',
     'LBL_STATUS_CANCELLED' => 'Flussi Annullati',
     'LBL_STATUS_ERROR' => 'Errore Flussi',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Completato',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Terminato',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'In Corso',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Annullato',
+    'LBL_STATUS_ERROR_ENUM' => 'Errore',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Gestione Flussi',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Flussi Abbandonati',

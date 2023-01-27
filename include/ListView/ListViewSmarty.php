@@ -16,6 +16,9 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 class ListViewSmarty extends ListViewDisplay{
 
 	var $data;
+    /**
+     * @var Sugar_Smarty
+     */
 	var $ss; // the smarty object
 	var $displayColumns;
 	var $searchColumns; // set by view.list.php

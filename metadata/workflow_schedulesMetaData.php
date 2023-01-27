@@ -105,7 +105,6 @@ $dictionary['WorkFlowSchedule'] = array('table' => 'workflow_schedules'
 )
                                                       , 'indices' => array (
        array('name' =>'schedule_k', 'type' =>'primary', 'fields'=>array('id')),
-       array('name' =>'idx_wkfl_schedule', 'type'=>'index', 'fields'=>array('workflow_id','deleted')),
                                                       )
                             );
 ?>

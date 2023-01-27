@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Lausekemoottori',
-  'LBL_MODULE_NAME_SINGULAR' => 'Lausekemoottori',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Edellinen' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Seuraava' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Laajenna' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Lausekemoottori',
+    'LBL_MODULE_NAME_SINGULAR' => 'Lausekemoottori',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Edellinen' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Seuraava' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Laajenna' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Tuntematon kenttä',
+];

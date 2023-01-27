@@ -1454,17 +1454,18 @@ function fill_form(type) {
 	} else {
 		var summary_sort_by_elem = new Object();
 		var key_arr = form_obj.summary_sort_by.value.split(':');
+		var sumSortField = all_fields[form_obj.summary_sort_by.value];
 
-		if ( typeof(all_fields[ form_obj.summary_sort_by.value ].field_def.group_function) != 'undefined') {
-			summary_sort_by_elem.name = all_fields[ form_obj.summary_sort_by.value ].field_def.field_def_name;
-			summary_sort_by_elem.group_function = all_fields[ form_obj.summary_sort_by.value ].field_def.group_function;
+		if (typeof(sumSortField) != 'undefined' && typeof(sumSortField.field_def.group_function) != 'undefined') {
+			summary_sort_by_elem.name = sumSortField.field_def.field_def_name;
+			summary_sort_by_elem.group_function = sumSortField.field_def.group_function;
 			summary_sort_by_elem.column_function = key_arr[2];
-			summary_sort_by_elem.table_key = all_fields[ form_obj.summary_sort_by.value ].linked_field_name;
-		} else if (typeof(all_fields[ form_obj.summary_sort_by.value ].field_def.column_function) != 'undefined') {
-			summary_sort_by_elem.name = all_fields[ form_obj.summary_sort_by.value ].field_def.field_def_name;
-			summary_sort_by_elem.group_function = all_fields[ form_obj.summary_sort_by.value ].field_def.column_function;
+			summary_sort_by_elem.table_key = sumSortField.linked_field_name;
+		} else if (typeof(sumSortField) != 'undefined' && typeof(sumSortField.field_def.column_function) != 'undefined') {
+			summary_sort_by_elem.name = sumSortField.field_def.field_def_name;
+			summary_sort_by_elem.group_function = sumSortField.field_def.column_function;
 			summary_sort_by_elem.column_function = key_arr[2];
-			summary_sort_by_elem.table_key = all_fields[ form_obj.summary_sort_by.value ].linked_field_name;
+			summary_sort_by_elem.table_key = sumSortField.linked_field_name;
 		}
 		else {
 			summary_sort_by_elem = getListFieldDef(form_obj.summary_sort_by.value);

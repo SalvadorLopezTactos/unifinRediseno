@@ -96,33 +96,43 @@ class DbArchiver
 
     /**
      * Returns whether the module has a custom table associated with it or not
+     * @param $bean
      * @return bool
      * @throws RuntimeException
      */
-    private function hasCustomTable()
+    private function hasCustomTable($bean = null)
     {
-        return $this->getBean()->hasCustomFields();
+        if (is_null($bean)) {
+            $bean = $this->getBean();
+        }
+        return $bean->hasCustomFields();
     }
 
     /**
      * Returns whether there module has an audit table associated with it or not
+     * @param $bean
      * @return bool
      * @throws RuntimeException
      */
-    private function hasAuditTable()
+    private function hasAuditTable($bean = null)
     {
-        $bean = $this->getBean();
+        if (is_null($bean)) {
+            $bean = $this->getBean();
+        }
         return $bean->is_AuditEnabled() && $bean->db->tableExists($bean->get_audit_table_name());
     }
 
     /**
      * Creates the archive table based on the active table
+     * @param $bean
      * @return bool
      * @throws RuntimeException
      */
-    public function createArchiveTable() : bool
+    public function createArchiveTable($bean = null) : bool
     {
-        $bean = $this->getBean();
+        if (is_null($bean)) {
+            $bean = $this->getBean();
+        }
 
         $archiveTable = $bean->getArchiveTableName();
 
@@ -148,12 +158,12 @@ class DbArchiver
         }
 
         // Additional logic to deal with the possibility of a cstm table having been created
-        if ($this->hasCustomTable()) {
-            $bean = clone $this->getBean();
+        if ($this->hasCustomTable($bean)) {
+            $bean2 = clone $bean;
             // By changing the object name, we no longer create indices through checking globals in bean->getIndices
-            $bean->object_name = $bean->getObjectName() . '_archive';
-            $bean->table_name = $bean->get_custom_table_name();
-            $this->cstmArchiveTableName = $bean->getArchiveTableName();
+            $bean2->object_name = $bean2->getObjectName() . '_archive';
+            $bean2->table_name = $bean2->get_custom_table_name();
+            $this->cstmArchiveTableName = $bean2->getArchiveTableName();
 
             // Default cstmFieldDef for all custom tables
             $cstmFieldDefs = array(
@@ -165,7 +175,7 @@ class DbArchiver
             );
 
             // Add each fieldDef to the cstmFieldDef array
-            $cstmFieldsOnBean = $this->getBean()->getFieldDefinitions('source', array('custom_fields'));
+            $cstmFieldsOnBean = $bean2->getFieldDefinitions('source', array('custom_fields'));
             foreach ($cstmFieldsOnBean as $field => $def) {
                 unset($def['source']);
                 $cstmFieldDefs[$field] = $def;
@@ -181,11 +191,11 @@ class DbArchiver
             ];
 
             // If the table has not yet been created, create it
-            if (!$bean->db->tableExists($this->cstmArchiveTableName)) {
+            if (!$bean2->db->tableExists($this->cstmArchiveTableName)) {
                 // Create the new custom archive table
-                $bean->db->createTableParams($this->cstmArchiveTableName, $cstmFieldDefs, $indices);
+                $bean2->db->createTableParams($this->cstmArchiveTableName, $cstmFieldDefs, $indices);
             } else {
-                $bean->db->repairTableParams($this->cstmArchiveTableName, $cstmFieldDefs, $indices);
+                $bean2->db->repairTableParams($this->cstmArchiveTableName, $cstmFieldDefs, $indices);
             }
         }
         return true;
@@ -193,6 +203,8 @@ class DbArchiver
 
     /**
      * Performs the given data manipulation process (Archive and Delete or Only Delete)
+     * Also handles the special case where we attempt an archive of the pmse_bpmInbox table. This table requires a
+     * special cascading process that is unique to it.
      * @param Where $where
      * @param string $type Either archive  or delete
      * @return array array of ids that were processed
@@ -210,6 +222,12 @@ class DbArchiver
         $ids = array_column($results, 'id');
         $cstmIds = array_column($cstmResults, 'id_c');
 
+        // Custom logic needed when dealing with pmse_bpmInbox table
+        $casIds = array_column($results, 'cas_id');
+        if (count($casIds) === 0) {
+            unset($casIds);
+        }
+
         if (empty($ids)) {
             return [];
         }
@@ -221,10 +239,18 @@ class DbArchiver
         if ($type === \DataArchiver::PROCESS_TYPE_ARCHIVE) {
             $this->createArchiveTable();
             $this->archive($results, $cstmResults);
+            if (isset($casIds) && count($casIds) > 0) {
+                $this->cascadeBpmProcess($casIds, $type);
+            }
         }
 
         // Deletion always occurs
         $this->delete($ids);
+
+        // Do cascading bpm deletion if this is from the bpm inbox table
+        if (isset($casIds) && count($casIds) > 0) {
+            $this->cascadeBpmProcess($casIds, \DataArchiver::PROCESS_TYPE_DELETE);
+        }
 
         // Delete from custom table if there is one
         if ($this->hasCustomTable()) {
@@ -232,13 +258,17 @@ class DbArchiver
         }
 
         // Delete relationships if hard delete, otherwise, leave them alone
-        if ($type === \DataArchiver::PROCESS_TYPE_DELETE) {
+        // Only delete relationships if we are not working with the bpm inbox table
+        if ($type === \DataArchiver::PROCESS_TYPE_DELETE && !isset($casIds)) {
             $this->deleteRelationships($ids);
 
             // Delete audit table entries if hard delete, otherwise, leave them alone
             if ($this->hasAuditTable()) {
                 $this->delete($ids, $this->getBean()->get_audit_table_name(), 'parent_id');
             }
+        // Hard delete process with the bpm inbox table
+        } elseif ($type === \DataArchiver::PROCESS_TYPE_DELETE && isset($casIds) && count($casIds) > 0) {
+            $this->cascadeBpmProcess($casIds, $type);
         }
 
         return $ids;
@@ -248,10 +278,14 @@ class DbArchiver
      * Runs the archiving process
      * @param $rows
      * @param $cstmRows
+     * @param $bean
      * @throws RuntimeException
      */
-    private function archive($rows, $cstmRows)
+    private function archive($rows, $cstmRows, $bean = null)
     {
+        if (is_null($bean)) {
+            $bean = $this->getBean();
+        }
         // NOTE: This function can be potentially optimized in the future to use 1 SQL statement. This would require
         // changing functionality in QueryBuilder. Specifically, it would require allowing multiple values arrays
         // to be added.
@@ -261,11 +295,11 @@ class DbArchiver
         // Instantiate QueryBuilder for the insertion into archive table
         $builder = $this->conn->createQueryBuilder();
         $qbArchive = $builder
-            ->insert($this->getBean()->getArchiveTableName());
+            ->insert($bean->getArchiveTableName());
 
         $builder2 = null;
         $qbArchiveCstm = null;
-        if ($this->hasCustomTable()) {
+        if ($this->hasCustomTable($bean)) {
             $builder2 = $this->conn->createQueryBuilder();
             $qbArchiveCstm = $builder2
                 ->insert($this->cstmArchiveTableName);
@@ -281,7 +315,7 @@ class DbArchiver
 
             // If the active table has a custom table associated with it, querybuilders need to be set up in the same
             // manner as above
-            if ($this->hasCustomTable() && $i < $cm) {
+            if ($this->hasCustomTable($bean) && $i < $cm) {
                 $qbArchiveCstm
                     ->values(
                         array_map(function ($value) use ($builder2) {
@@ -292,15 +326,23 @@ class DbArchiver
 
             // Execute archiving SQL statement
             $qbArchive->execute();
-            array_push($this->rowsArchived, $rows[$i]['id']);
+
+            // Store what we have archived so we can undo it if there is an error
+            if (!key_exists($bean->getArchiveTableName(), $this->rowsArchived)) {
+                $this->rowsArchived[$bean->getArchiveTableName()] = [];
+            }
+            array_push($this->rowsArchived[$bean->getArchiveTableName()], $rows[$i]['id']);
 
             // Clear parameters for next iteration
             $qbArchive->setParameters([]);
 
             // Execute archiving and deletion SQL statements for potential custom table
-            if ($this->hasCustomTable() && $i < $cm) {
+            if ($this->hasCustomTable($bean) && $i < $cm) {
                 $qbArchiveCstm->execute();
-                array_push($this->cstmRowsArchived, $rows[$i]['id']);
+                if (!key_exists($bean->get_custom_table_name(), $this->cstmRowsArchived)) {
+                    $this->cstmRowsArchived[$bean->get_custom_table_name()] = [];
+                }
+                array_push($this->cstmRowsArchived[$bean->get_custom_table_name()], $rows[$i]['id']);
                 $qbArchiveCstm->setParameters([]);
             }
         }
@@ -308,14 +350,14 @@ class DbArchiver
 
     /**
      * Runs the deletion process
-     * @param $ids list of ids to delete
-     * @param null $table The table to delete from
+     * @param array $ids list of ids to delete
+     * @param null|string $table The table to delete from
      * @param string $id_name column id name (i.e. 'id', or 'id_c', or 'contact_id'
-     * @param bool $isCustom Whether or not this deletion is from a custom table or not
+     * @param bool $delFromCustom Whether or not this table should look for a custom table and delete from it also
      * @throws RuntimeException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
-    private function delete($ids, $table = null, $id_name = 'id', $isCustom = false)
+    private function delete(array $ids, string $table = null, string $id_name = 'id')
     {
         // Grab table name to use in queries
         if (is_null($table)) {
@@ -332,10 +374,7 @@ class DbArchiver
         // Execute query builder
         $builder->execute();
 
-        // Delete from custom table
-        if (!$isCustom && $this->hasCustomTable()) {
-            $this->delete($ids, $this->getBean()->get_custom_table_name(), 'id_c', true);
-        }
+        $this->getBean()->db->optimizeTable($table);
     }
 
     /**
@@ -396,18 +435,69 @@ class DbArchiver
     }
 
     /**
+     * Helper function when Hard Deleting from the pmse_Inbox table. This allows for cascading deletion to occur for
+     * tables that are affect by pmse_Inbox
+     * @param array $casIds
+     * @param string $type
+     */
+    private function cascadeBpmProcess(array $casIds, string $type): void
+    {
+        $flowModule = 'pmse_BpmFlow';
+        $flowTable = 'pmse_bpm_flow';
+        $threadModule = 'pmse_BpmThread';
+        $threadTable = 'pmse_bpm_thread';
+        if ($type === \DataArchiver::PROCESS_TYPE_DELETE) {
+            // Get pmse_bpmFlow table and delete rows corresponding to casID
+            $this->delete($casIds, $flowTable, 'cas_id');
+
+            // Get pmse_bpmThread table and delete rows corresponding to casID
+            $this->delete($casIds, $threadTable, 'cas_id');
+        } elseif ($type === \DataArchiver::PROCESS_TYPE_ARCHIVE) {
+            $flowBean = \BeanFactory::newBean($flowModule);
+            $threadBean = \BeanFactory::newBean($threadModule);
+            $this->createArchiveTable($flowBean);
+            $this->createArchiveTable($threadBean);
+
+            // Create special filter that can be converted to a where clause for the archival process
+            $filterApi = new \DataArchiverFilterApi();
+            $cas_filter = array_map(function ($id) {
+                return [
+                    'cas_id' => [
+                        '$equals' => $id,
+                    ],
+                ];
+            }, $casIds);
+            $cas_filter_where_flow = $filterApi->convertFiltersToWhere($cas_filter, $flowBean->getModuleName());
+            $cas_filter_where_thread = $filterApi->convertFiltersToWhere($cas_filter, $threadBean->getModuleName());
+
+            // Need to ensure we get table results using an OR Where clause instead of the default AND
+            $cascadeRowsFlow = $this->getTableResults($cas_filter_where_flow, $flowBean, true);
+            $cascadeRowsThread = $this->getTableResults($cas_filter_where_thread, $threadBean, true);
+
+            $this->archive($cascadeRowsFlow[0], $cascadeRowsFlow[1], $flowBean);
+            $this->archive($cascadeRowsThread[0], $cascadeRowsThread[1], $threadBean);
+        }
+    }
+
+    /**
      * Removes the given rows from the archive table. Psuedo transaction engine
      * @throws RuntimeException
      */
     public function removeArchivedRows()
     {
-        $ids = $this->getRowsArchived();
-        $cstmIds = $this->getCstmRowsArchived();
-        if (count($ids) > 0) {
-            $this->delete($ids, $this->getBean()->getArchiveTableName());
+        $archivedTables = $this->getRowsArchived();
+        $archivedCustomTables = $this->getCstmRowsArchived();
+
+        foreach ($archivedTables as $archiveTable => $ids) {
+            if (count($ids) > 0) {
+                $this->delete($ids, $archiveTable, 'id');
+            }
         }
-        if (count($cstmIds) > 0) {
-            $this->delete($cstmIds, $this->cstmArchiveTableName, 'id_c', true);
+
+        foreach ($archivedCustomTables as $archiveCustomTable => $ids) {
+            if (count($ids) > 0) {
+                $this->delete($ids, $archiveCustomTable, 'id_c');
+            }
         }
     }
 
@@ -432,13 +522,18 @@ class DbArchiver
     /**
      * Returns the Database rows that need to be archived for the active table
      * @param $where the where clause that defines the filter definitons
+     * @param $bean
+     * @param bool $or
      * @return array an array of rows from the database table
      * @throws \SugarQueryException|RuntimeException
      */
-    private function getTableResults($where)
+    private function getTableResults($where, $bean = null, $or = false)
     {
-        $allFieldDefs = $this->getBean()->getFieldDefinitions();
-        $cstmFieldDefs = $this->getBean()->getFieldDefinitions('source', array('custom_fields'));
+        if (is_null($bean)) {
+            $bean = $this->getBean();
+        }
+        $allFieldDefs = $bean->getFieldDefinitions();
+        $cstmFieldDefs = $bean->getFieldDefinitions('source', array('custom_fields'));
         $dbFieldDefs = array_filter($allFieldDefs, function ($field) use ($cstmFieldDefs) {
             return !key_exists('source', $field) && !in_array($field, $cstmFieldDefs);
         });
@@ -447,9 +542,13 @@ class DbArchiver
 
         $sq = new \SugarQuery();
         $sq->select($dbFields);
-        $sq->from($this->getBean(), array('add_deleted' => false));
+        $sq->from($bean, array('add_deleted' => false));
         foreach ($where->conditions as $condition) {
-            $sq->where($condition);
+            if ($or) {
+                $sq->orWhere($condition);
+            } else {
+                $sq->where($condition);
+            }
         }
         $sq->limit(self::ARCHIVE_LIMIT);
 
@@ -461,8 +560,8 @@ class DbArchiver
 
         // If this table has a custom table associated with it, grab the rows from that custom table as well
         $cstmResults = [];
-        if ($this->hasCustomTable()) {
-            $cstmResults = $this->getCstmTableResults($results);
+        if ($this->hasCustomTable($bean)) {
+            $cstmResults = $this->getCstmTableResults($results, $bean);
         }
 
         // Return a results array used to create queries
@@ -472,18 +571,23 @@ class DbArchiver
     /**
      * Returns the Database fields needed to be archived for the custom table
      * @param $rows
+     * @param $bean
      * @return array
      * @throws RuntimeException
      */
-    private function getCstmTableResults($rows)
+    private function getCstmTableResults($rows, $bean = null)
     {
+        if (is_null($bean)) {
+            $bean = $this->getBean();
+        }
+
         $ids = array_map(function ($row) {
             return $row['id'];
         }, $rows);
         $fields = array('id_c');
-        $customFields = array_keys($this->getBean()->getFieldDefinitions('source', array('custom_fields')));
+        $customFields = array_keys($bean->getFieldDefinitions('source', array('custom_fields')));
         $fields = array_merge($fields, $customFields);
-        $table = $this->getBean()->get_custom_table_name();
+        $table = $bean->get_custom_table_name();
 
         // Get connection for DB in order to instantiate QueryBuilders
         $conn = \DBManagerFactory::getConnection();
@@ -496,7 +600,7 @@ class DbArchiver
             ->where($builder->expr()->in('id_c', ':ids'))
             ->setParameter('ids', $ids, Connection::PARAM_STR_ARRAY);
 
-        return $builder->execute()->fetchAll();
+        return $builder->execute()->fetchAllAssociative();
     }
 
     /**

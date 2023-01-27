@@ -117,24 +117,22 @@
 </div>
 {$JAVASCRIPT}
 </form>
-{literal}
 <script type='text/javascript'>
 function checkFileType(id, submit) {
 	if (submit == 0) {
 		var fileName = document.getElementById(id).value;
-	  	if ({/literal}{$GD_WARNING}{literal}==1 && (fileName.lastIndexOf(".png") != -1||
+	  	if ({$GD_WARNING}==1 && (fileName.lastIndexOf(".png") != -1||
 	  		fileName.lastIndexOf(".PNG") != -1)) {
 	  		fileFields[id]=id;
-	  		//alert({/literal}SUGAR.language.get('Configurator', 'PDF_GD_WARNING'{literal}));
 	  	}
   	}
   	else if (submit == 1) {
   		for (fileField in fileFields) {
 			var fileName = document.getElementById(fileField).value;
-		  	if ({/literal}{$GD_WARNING}{literal}==1 && (fileName.lastIndexOf(".png") != -1||
+		  	if ({$GD_WARNING}==1 && (fileName.lastIndexOf(".png") != -1||
 		  		fileName.lastIndexOf(".PNG") != -1)) {
 		  		//add_error_style('ConfigureSugarpdfSettings', fileField, SUGAR.language.get('Configurator', 'PDF_GD_WARNING'));
-		  		alert({/literal}SUGAR.language.get('Configurator', 'PDF_GD_WARNING'{literal}));
+		  		alert(SUGAR.language.get('Configurator', 'PDF_GD_WARNING'));
 		  		return false;
 		  	}
   		}
@@ -188,4 +186,3 @@ function checkFileType(id, submit) {
  }
  processPDFClass();
 </script>
-{/literal}

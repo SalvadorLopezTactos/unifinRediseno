@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'שם איש התמיכה:',
   'LBL_SUPPORT_TERM' => 'תנאי התמיכה:',
   'LBL_TAX_CLASS' => 'סוגי מיסים:',
+  'LBL_ACTIVE_STATUS' => 'סטטוס',
   'LBL_TYPE_NAME'=>'שם סוג',
   'LBL_TYPE' => 'סוג:',
   'LBL_PRODUCT_TYPE' => 'סוג מוצר',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'לוח המחוונים של רשימת קטלוג מוצרים',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'לוח המחוונים של רשומת קטלוג מוצרים',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס קטלוג מוצרים',
+    'LBL_FILTER_ACTIVE_STATUS' => 'הסטטוס הוא &#39;פעיל&#39;',
 );

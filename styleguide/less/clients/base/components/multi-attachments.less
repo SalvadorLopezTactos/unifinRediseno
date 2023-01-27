@@ -51,6 +51,7 @@
         label.multi-attach-btn {
           line-height: 12px;
           margin-top: -7px;
+          padding: 4px 7px;
         }
       }
     }
@@ -88,12 +89,15 @@ div.multi-attachments-detail-view {
       span.select2-choice-type {
         margin: 0 !important;
 
-        a.multi-attachment-link {
-          margin-top: 1px;
-          padding: 2px 0 3px !important;
-          max-width: 100px;
-          display: inline-block !important;
-          line-height: 6px;
+        a,
+        span {
+          &.multi-attachment-link {
+            margin-top: 1px;
+            padding: 2px 0 3px !important;
+            max-width: 100px;
+            display: inline-block !important;
+            line-height: 6px;
+          }
         }
 
         a.multi-attachment-link-type {
@@ -115,7 +119,7 @@ div.multi-attachments-detail-view {
     padding: 0 5px;
     margin: 0 0 2px;
 
-    i.fa-download {
+    i.sicon-download {
       padding: 0 5px;
     }
   }

@@ -34,7 +34,7 @@ if(empty($db)) {
 echo getClassicModuleTitle(
         "Administration", 
         array(
-            "<a href='index.php?module=Administration&action=index'>{$mod_strings['LBL_MODULE_NAME']}</a>",
+            "<a href='#Administration'>{$mod_strings['LBL_MODULE_NAME']}</a>",
            translate('LBL_DIAGNOSTIC_TITLE')
            ), 
         false

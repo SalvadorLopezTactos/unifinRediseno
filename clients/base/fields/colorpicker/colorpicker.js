@@ -19,10 +19,7 @@
     /**
      * @inheritdoc
      */
-    initialize: function(options) {
-        this._super('initialize', [options]);
-        this._initDefaultValue();
-    },
+    shouldInitDefaultValue: true,
 
     /**
      * @inheritdoc
@@ -39,18 +36,5 @@
             preview.css('backgroundColor', value);
             this.model.set(this.name, value);
         }, this));
-    },
-
-    /**
-     * Set default value
-     */
-    _initDefaultValue: function() {
-        if (!this.model.isNew() || this.model.get(this.name) || !this.def.default) {
-            return;
-        }
-
-        if (_.isFunction(this.model.setDefault) && this.def.default) {
-            this.model.setDefault(this.name, this.def.default);
-        }
-    },
+    }
 })

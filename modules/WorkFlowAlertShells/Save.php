@@ -61,5 +61,12 @@ else $return_action = "DetailView";
 
 $GLOBALS['log']->debug("Saved record with id of ".$return_id);
 
-header("Location: index.php?action=DetailView&module=WorkFlowAlertShells&module_tab=WorkFlow&record=$return_id&workflow_id=$focus->parent_id");
+header('Location: index.php?'.http_build_query([
+    'action' => 'DetailView',
+    'module' => 'WorkFlowAlertShells',
+    'module_tab' => 'WorkFlow',
+    'record' => $return_id,
+    'workflow_id' => $focus->parent_id,
+]));
+
 ?>

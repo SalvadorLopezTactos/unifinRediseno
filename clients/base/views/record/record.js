@@ -21,6 +21,11 @@
 
     inlineEditMode: false,
 
+    /**
+     * Flag to keep track of the elements that clicked in-line on a detail view to edit view
+     */
+    inlineEditModeFields: [],
+
     createMode: false,
 
     plugins: [
@@ -31,7 +36,10 @@
         'Audit',
         'Pii',
         'FindDuplicates',
-        'ToggleMoreLess'
+        'ToggleMoreLess',
+        'ActionButton',
+        'DocumentMerge',
+        'MappableRecord',
     ],
 
     enableHeaderButtons: true,
@@ -46,7 +54,7 @@
         'click .label-pill .record-label': 'handleEdit',
         'click a[name=cancel_button]': '_deprecatedCancelClicked',
         'click [data-action=scroll]': 'paginateRecord',
-        'click .record-panel-header': 'togglePanel',
+        'click .record-panel-header-container': 'togglePanel',
         'click #recordTab > .tab > a:not(.dropdown-toggle)': 'setActiveTab',
         'click .tab .dropdown-menu a': 'triggerNavTab'
     },
@@ -88,6 +96,30 @@
     decoratorField: 'record-decor',
 
     /**
+     * Current active contact and model in SugarLive. Store these here so that we can properly hide and show
+     * the link button when leaving edit mode.
+     */
+    sugarLiveContact: null,
+    sugarLiveContactModel: null,
+
+    /**
+     * Reference to the SugarLive record link button
+     */
+    sugarLiveLinkButton: null,
+
+    /**
+     * Variables to store data related to dropdown-based views
+     * baseMetaPanels: The base record view metadata panels defintions
+     * dbvMetaPanels: A map of dropdown value -> metadata panels definitions
+     * dbvTriggerField: The name of the dropdown field that triggers dropdown-based view changes
+     * dbvCurrentKey: The key of dbvMetaPanels that is currently in use
+     */
+    baseMetaPanels: null,
+    dbvMetaPanels: null,
+    dbvTriggerField: null,
+    dbvCurrentKey: null,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -98,6 +130,7 @@
          *   consistently with the view state (`edit` or `detail`)
          */
         options.meta = _.extend({}, app.metadata.getView(null, 'record'), options.meta);
+        this.inlineEditModeFields = [];
         options.meta.hashSync = _.isUndefined(options.meta.hashSync) ? true : options.meta.hashSync;
         if (options.meta.hasExternalFields) {
             this.plugins = _.union(this.plugins || [], ['ExternalApp']);
@@ -145,7 +178,7 @@
             showInvalidModel: function() {
                 if (!this instanceof app.view.View) {
                     app.logger.error('This method should be invoked by Function.prototype.call(), passing in as argument' +
-                    'an instance of this view.');
+                        'an instance of this view.');
                     return;
                 }
                 var name = 'invalid-data';
@@ -158,7 +191,7 @@
             showNoAccessError: function() {
                 if (!this instanceof app.view.View) {
                     app.logger.error('This method should be invoked by Function.prototype.call(), passing in as argument' +
-                    'an instance of this view.');
+                        'an instance of this view.');
                     return;
                 }
                 // dismiss the default error
@@ -187,8 +220,11 @@
         this.on('editable:keydown', this.handleKeyDown, this);
         this.on('editable:mousedown', this.handleMouseDown, this);
         this.on('field:error', this.handleFieldError, this);
+        this.on('editable:toggle_fields', this.focusFirstInput, this);
         this.model.on('acl:change', this.handleAclChange, this);
         this.context.on('field:disabled', this._togglePencil, this);
+
+        this._initializeSugarLiveLink();
 
         //event register for preventing actions
         // when user escapes the page without confirming deleting
@@ -243,6 +279,175 @@
         app.events.on('preview:edit:save', function() {
             this.context.reloadData();
         }, this);
+
+        this.cancelButtonClicked = false;
+
+        this.on('init', this._initDropdownBasedViews, this);
+    },
+
+    /**
+     * Initializes any data needed to support dropdown-based views
+     *
+     * @private
+     */
+    _initDropdownBasedViews: function() {
+        // If dropdown-based views are defined, no need to do anything
+        let dropdownViews = app.metadata.getDropdownViews(this.module, this._getDropdownBasedViewName());
+        if (_.isEmpty(dropdownViews)) {
+            return;
+        }
+
+        // Store the original/base metadata the view was initialized with
+        this.baseMetaPanels = this.meta.panels;
+
+        // Store the name of the field that triggers dropdown-based view
+        // changes, and the set of possible view metadata configurations by
+        // dropdown value
+        this.dbvTriggerField = _.first(_.keys(dropdownViews));
+        this.dbvMetaPanels = _.mapObject(dropdownViews[this.dbvTriggerField], function(valueMeta) {
+            return _.get(valueMeta, ['meta', 'panels']) || null;
+        }, this);
+
+        this._initDropdownBasedViewsForModel();
+    },
+
+    /**
+     * Initializes the dropdown-conditional view metadata to be based on the
+     * current model for the view
+     *
+     * @private
+     */
+    _initDropdownBasedViewsForModel: function() {
+        if (_.isEmpty(this.dbvMetaPanels)) {
+            return;
+        }
+
+        // Consider the trigger dropdown's value on the model as a "key" that
+        // we can use to determine what the proper metadata is for the view
+        this.dbvCurrentKey = this._getDropdownBasedViewKeyForModel(this.model);
+
+        // Now, initialize the view metadata to the proper set based on the
+        // current "key"/trigger field value
+        this._setDbvMeta(this.dbvCurrentKey);
+
+        // Whenever the "key"/trigger field value changes on the model,
+        // recalculate and rerender based on which view metadata should be used
+        this.listenTo(this.model, `change:${this.dbvTriggerField}`, this._handleDbvTriggerChange);
+
+        // Don't show the dropdown-based view change warning when the record
+        // is being fetched
+        this.model.setOption('hideDbvWarning', true);
+    },
+
+    /**
+     * Returns the name used by this view for dropdown-based view metadata
+     *
+     * @return {string} the dropdown-based view name
+     * @private
+     */
+    _getDropdownBasedViewName: function() {
+        return this.name;
+    },
+
+    /**
+     * Given a model, determines which dropdown-based view metadata key to use
+     *
+     * @param {Bean} model the model for the view
+     * @return {string|null} the view metadata key to use in this.dbvMetaPanels
+     * @private
+     */
+    _getDropdownBasedViewKeyForModel: function(model) {
+        if (model && this.dbvTriggerField) {
+            let triggerFieldValue = model.get(this.dbvTriggerField);
+            if (triggerFieldValue && !_.isString(triggerFieldValue)) {
+                triggerFieldValue = triggerFieldValue.toString();
+            }
+            if (Object.keys(this.dbvMetaPanels).includes(triggerFieldValue)) {
+                return triggerFieldValue;
+            }
+        }
+
+        return null;
+    },
+
+    /**
+     * Given a dropdown-based view metadata key, returns the proper metadata
+     * to use in the view
+     *
+     * @param {string} key the dropdown-based view metadata key
+     * @return {Object} the metadata configuration associated with the key
+     * @private
+     */
+    _getMetaForDropdownBasedViewKey: function(key) {
+        return this.dbvMetaPanels[key] || this.baseMetaPanels;
+    },
+
+    /**
+     * For dropdown-based views, determines whether a change in the model's
+     * dropdown value should trigger a view metadata refresh with the updated
+     * set of panels. If it should, updates metadata and re-renders the view
+     *
+     * @private
+     */
+    _handleDbvTriggerChange: function(model, dbvTriggerFieldValue, options) {
+        _.defer(() => {
+            let newDropdownViewKey = this._getDropdownBasedViewKeyForModel(model);
+            if (newDropdownViewKey !== this.dbvCurrentKey) {
+                // Replace the view metadata with the dropdown-based view meta
+                this.dbvCurrentKey = newDropdownViewKey;
+                this._setDbvMeta(this.dbvCurrentKey);
+
+                this.render();
+
+                // If necessary, display a warning message that the view is
+                // changing
+                let hideDbvWarning = options && options.hideDbvWarning;
+                if (!hideDbvWarning) {
+                    this._displayDropdownBasedViewWarning();
+                }
+            }
+        });
+    },
+
+    /**
+     * Sets the view's metadata to the metadata specified by the given
+     * dropdown-based view key
+     *
+     * @param dbvKey
+     * @private
+     */
+    _setDbvMeta: function(dbvKey) {
+        this.meta.panels = this._getMetaForDropdownBasedViewKey(dbvKey);
+    },
+
+    /**
+     * Displays a warning to the user that a dropdown-based view change has
+     * been triggered. If the "Undo" link is clicked in the warning, the
+     * view changes are canceled
+     *
+     * @private
+     */
+    _displayDropdownBasedViewWarning: function() {
+        app.alert.show('cancel-dropdown-view-change', {
+            level: 'info',
+            autoClose: true,
+            autoCloseDelay: 4000,
+            messages: app.lang.get('LBL_DROPDOWN_VIEW_CHANGE_WARNING', this.module)
+        });
+        let alert = app.alert.get('cancel-dropdown-view-change');
+        if (alert) {
+            alert.$el.find('#cancel_button').on('click', () => {
+                this._cancelDropdownViewChange();
+            });
+        }
+    },
+
+    /**
+     * Cancels the record edit when the user cancels a dropdown view change
+     * @private
+     */
+    _cancelDropdownViewChange: function() {
+        this.cancelClicked();
     },
 
     /**
@@ -469,7 +674,7 @@
     },
 
     setLabel: function(context, value) {
-        var plus = '<i class="fa fa-plus label-plus"></i>';
+        var plus = '<i class="sicon sicon-plus-sm label-plus"></i>';
         this.$('.record-label[data-name="' + value.field + '"]')
             .html(plus).append(document.createTextNode(value.label));
     },
@@ -505,7 +710,7 @@
 
     _render: function() {
         this._buildGridsFromPanelsMetadata(this.meta.panels);
-        if (this.meta && this.meta.panels) {
+        if (!_.isEmpty(_.get(this, ['meta', 'panels']))) {
             this._initTabsAndPanels();
         }
         // it seems like this.fields gets set somewhere here...
@@ -549,6 +754,20 @@
             this.editClicked();
             this.saveClicked();
         }
+
+        this.createSugarLiveLinkButton();
+
+        // If any fields were in inline edit mode when the view re-renderd,
+        // place them back into that mode
+        if (this.inlineEditMode) {
+            _.each(this.inlineEditModeFields, function(field) {
+                let element = this.getField(field);
+                if (element) {
+                    this.toggleField(element, true, true);
+                }
+            }, this);
+            this.setButtonStates(this.STATE.EDIT);
+        }
     },
 
     _renderField: function(field, $fieldEl) {
@@ -557,12 +776,20 @@
         // This is due to how View.Field#_loadTemplate currently works.
         // FIXME SC-6037: Will remove this hack.
         if (!_.contains(this.editableFields, field)) {
-            field.action = 'detail';
-            // Set viewName to `detail` if it was set to `edit` (because the field is non-editable)
-            // but if it is not `edit` (hardcoded e.g. preview template), we want to keep it as it was.
-            if (field.options.viewName === 'edit') {
-                field.options.viewName = 'detail';
+            // For fieldsets, we need to also set the actions of their subfields
+            let fields = [field];
+            if (field.type === 'fieldset' && !_.isEmpty(field.fields)) {
+                fields = _.union(fields, field.fields);
             }
+
+            _.each(fields, function(fieldToSet) {
+                fieldToSet.action = 'detail';
+                // Set viewName to `detail` if it was set to `edit` (because the field is non-editable)
+                // but if it is not `edit` (hardcoded e.g. preview template), we want to keep it as it was.
+                if (fieldToSet.options.viewName === 'edit') {
+                    fieldToSet.options.viewName = 'detail';
+                }
+            }, this);
         }
 
         this._super('_renderField', [field, $fieldEl]);
@@ -715,8 +942,8 @@
 
                     if (field.readonly || this.extraNoEditFields.indexOf(field.name) !== -1 ||
                         _.every(fieldSetFields, function(f) {
-                        return !app.acl.hasAccessToModel('edit', this.model, f.name);
-                    }, this)) {
+                            return !app.acl.hasAccessToModel('edit', this.model, f.name);
+                        }, this)) {
                         this.noEditFields.push(field.name);
                     }
                 } else if (field.readonly || !app.acl.hasAccessToModel('edit', this.model, field.name) ||
@@ -733,7 +960,17 @@
      * @private
      */
     _getNonButtonFields: function() {
-        return _.filter(this.fields, _.bind(function(field) {
+        return this._filterButtonsFromFields(this.fields);
+    },
+
+    /**
+     * Removes button fields from list of passed in fields
+     * @param {Object} fields
+     * @return {Object}
+     * @private
+     */
+    _filterButtonsFromFields: function(fields) {
+        return _.filter(fields, _.bind(function(field) {
             if (field.type === this.decoratorField) {
                 return false;
             }
@@ -859,6 +1096,8 @@
         this._copyNestedCollections(this.model, prefill);
         self.model.trigger('duplicate:before', prefill);
         prefill.unset('id');
+        prefill.unset('is_escalated');
+
         app.drawer.open({
             layout: 'create',
             context: {
@@ -975,10 +1214,10 @@
      */
     editClicked: function() {
         this.setButtonStates(this.STATE.EDIT);
+        this.cancelButtonClicked = false;
         this.action = 'edit';
         this.toggleEdit(true);
         this.setRoute('edit');
-        this.focusFirstInput();
     },
 
     saveClicked: function() {
@@ -1018,7 +1257,9 @@
     },
 
     cancelClicked: function() {
+        app.alert.dismiss('cancel-dropdown-view-change');
         this.setButtonStates(this.STATE.VIEW);
+        this.cancelButtonClicked = true;
         this.action = 'detail';
         this.handleCancel();
         this.clearValidationErrors(this.editableFields);
@@ -1054,6 +1295,10 @@
             self.toggleViewButtons(isEdit);
             self.adjustHeaderpaneFields();
         });
+
+        this._getCurrentSugarLiveContact();
+        this.createSugarLiveLinkButton();
+        this.handleSugarLiveLinkButtonState(isEdit);
     },
 
     /**
@@ -1133,7 +1378,7 @@
         var hasClickableAction = this.hasClickableAction(event.target);
         var selection = window.getSelection ? window.getSelection().toString() : document.selection.createRange().text;
 
-        if (isEF && !isLink && !isEditMode && !hasClickableAction && !selection) {
+        if (!this.createMode && isEF && !isLink && !isEditMode && !hasClickableAction && !selection) {
             this.handleEdit(event);
         }
     },
@@ -1144,7 +1389,9 @@
      * @return {boolean}
      */
     hasClickableAction: function(element) {
-        return this.$(element).attr('data-action');
+        return _.some(['data-action', 'data-clipboard'], attr => {
+            return element.getAttribute(attr) || element.parentElement.getAttribute(attr);
+        });
     },
 
     /**
@@ -1178,6 +1425,8 @@
 
         // Set Editing mode to on.
         this.inlineEditMode = true;
+        this.inlineEditModeFields.push(field.name);
+        this.cancelButtonClicked = false;
 
         this.setButtonStates(this.STATE.EDIT);
 
@@ -1187,6 +1436,8 @@
             this.toggleViewButtons(true);
             this.adjustHeaderpaneFields();
         }
+
+        this.handleSugarLiveLinkButtonState(true);
     },
 
     /**
@@ -1206,6 +1457,7 @@
         if (this.disposed) {
             return;
         }
+        app.alert.dismiss('cancel-dropdown-view-change');
         this._saveModel();
         this.$('.record-save-prompt').hide();
 
@@ -1221,6 +1473,7 @@
                 this.unsetContextAction();
                 this.toggleEdit(false);
                 this.inlineEditMode = false;
+                this.inlineEditModeFields = [];
             }
         }
     },
@@ -1304,11 +1557,11 @@
                     this.saveCallback(false);
                 }
             }, this),
-            complete: function() {
+            complete: _.bind(function() {
                 if (this.editOnly) {
                     this.toggleButtons(true);
                 }
-            },
+            }, this),
             lastModified: this.model.get('date_modified'),
             viewed: true
         };
@@ -1317,11 +1570,8 @@
         // (they're not sent unless specifically requested)
         options.params = options.params || {};
         if (this.context.has('dataView') && _.isString(this.context.get('dataView'))) {
-            options.params.view = this.context.get('dataView');
-        }
-
-        if (this.context.has('fields')) {
-            options.params.fields = this.context.get('fields').join(',');
+            // Ensure the default fetch view is also used when we want fields returned in PUT requests
+            options.params.view = this.model.getOption('view') || this.context.get('dataView');
         }
 
         options = _.extend({}, options, this.getCustomSaveOptions(options));
@@ -1351,9 +1601,13 @@
 
     handleCancel: function() {
         this.inlineEditMode = false;
-        this.model.revertAttributes();
+        this.inlineEditModeFields = [];
+        this.model.revertAttributes({
+            hideDbvWarning: true
+        });
         this.toggleEdit(false);
         this._dismissAllAlerts();
+        this.trigger('record:edit:cancel');
     },
 
     /**
@@ -1560,8 +1814,8 @@
                 tabLink.tab('show');
 
                 // Put a ! next to the tab if one doesn't already exist
-                if (tabLink.find('.fa-exclamation-circle').length === 0) {
-                    tabLink.append(' <i class="fa fa-exclamation-circle tab-warning"></i>');
+                if (tabLink.find('.sicon-error').length === 0) {
+                    tabLink.append(' <i class="sicon sicon-error tab-warning"></i>');
                 }
 
                 // Make sure the new current active tab is shown
@@ -1572,7 +1826,7 @@
             if (fieldPanel && fieldPanel.is(':hidden')) {
                 fieldPanel.toggle();
                 var fieldPanelArrow = fieldPanel.prev().find('i');
-                fieldPanelArrow.toggleClass('fa-chevron-down fa-chevron-right');
+                fieldPanelArrow.toggleClass('sicon-chevron-down sicon-chevron-right');
             }
         } else if (field.$el.is(':hidden')) {
             this.$('.more[data-moreless]').trigger('click');
@@ -1633,24 +1887,177 @@
     },
 
     /**
+     * Initialize the SugarLive link button with the starting details, and listen for any changes
+     * @private
+     */
+    _initializeSugarLiveLink: function() {
+        this._getCurrentSugarLiveContact();
+        app.events.on('omniconsole:contact:changed', this.handleSugarLiveContactChange, this);
+    },
+
+    /**
+     * Directly get the current contact in SugarLive. This is used for getting the initial data on first load,
+     * and also for refreshing when switching tabs in record dashlet
+     * @private
+     */
+    _getCurrentSugarLiveContact: function() {
+        if (app.omniConsole) {
+            let ccp = app.omniConsole.getComponent('omnichannel-ccp');
+            let activeContact = ccp.getActiveContact();
+            let activeModel = ccp.getActiveModel();
+
+            if (activeContact && activeModel) {
+                this.handleSugarLiveContactChange(activeContact, activeModel);
+            }
+        }
+    },
+
+    /**
+     * Listen for changes to the current SugarLive contact
+     * @param contact
+     * @param contactModel
+     */
+    handleSugarLiveContactChange: function(contact, contactModel) {
+        this.sugarLiveContact = contact;
+        this.sugarLiveContactModel = contactModel;
+        this.showSugarLiveLinkButton = this.sugarLiveContact !== null;
+
+        if (this.disposed || !this.sugarLiveLinkButton) {
+            return;
+        }
+
+        this.handleSugarLiveLinkButtonState(this.action === 'edit' || this.inlineEditMode);
+    },
+
+    /**
+     * Handle the link button state depending on if we're in edit mode or not
+     * @param isEdit
+     */
+    handleSugarLiveLinkButtonState: function(isEdit) {
+        if (this.sugarLiveLinkButton && this.sugarLiveContact) {
+            let contactModule = this.sugarLiveContact.getType() === 'voice' ? 'Calls' : 'Messages';
+
+            // Determine the correct tooltip based on the state of the link
+            let tooltip;
+            if (this._isLinkedToActiveContact()) {
+                tooltip = app.lang.get('LBL_OMNICHANNEL_LINKED', this.module);
+            } else {
+                tooltip = app.lang.get('LBL_OMNICHANNEL_LINK_RECORD', this.module, {
+                    module: new Handlebars.SafeString(app.lang.get('LBL_MODULE_NAME_SINGULAR', contactModule))
+                });
+            }
+
+            this.sugarLiveLinkButton.setOptions({
+                tooltip: tooltip,
+                className: this._isLinkedToActiveContact() ? 'linked' : 'unlinked'
+            });
+            this.sugarLiveLinkButton.render();
+        }
+
+        this._toggleSugarLiveButtonVisibility(isEdit);
+    },
+
+    /**
+     * Check if this record is already linked in some way to the current active contact
+     * @return {boolean}
+     * @private
+     */
+    _isLinkedToActiveContact: function() {
+        let detail = app.omniConsole.getComponent('omnichannel-detail');
+        if (!detail || !this.sugarLiveContactModel) {
+            return false;
+        }
+
+        let isLinkedAsGuest = false;
+        // Check this model against current linked models from omnichannel detail
+        // panel to see if this model is linked to the active record
+        _.each(['Contacts', 'Leads'], function(module) {
+            let model = detail.getModel(null, module);
+            if (model && model.get('id') === this.model.get('id')) {
+                isLinkedAsGuest = true;
+            }
+        }, this);
+
+        let isLinkedAsParent = this.module === this.sugarLiveContactModel.get('parent_type') &&
+            this.model.get('id') === this.sugarLiveContactModel.get('parent_id');
+
+        return isLinkedAsGuest || isLinkedAsParent;
+    },
+
+    /**
+     * Hide or show the link button
+     * @param isEdit
+     */
+    _toggleSugarLiveButtonVisibility: function(isEdit) {
+        if (this.showSugarLiveLinkButton && !isEdit && this._isValidLinkableModule()) {
+            this.$('.headerpane .omni-record-link').removeClass('hide');
+        } else {
+            this.$('.headerpane .omni-record-link').addClass('hide');
+        }
+    },
+
+    /**
+     * Inserts the link button
+     * @param linkButton
+     * @private
+     */
+    _insertSugarLiveButton: function(linkButton) {
+        if (this.$('.headerpane .omni-record-link').length) {
+            this.$('.headerpane .omni-record-link').remove();
+        }
+
+        let actionButtons = this.$('.headerpane .btn-toolbar .fieldset.actions').first();
+        actionButtons.before(linkButton.$el);
+    },
+
+    /**
+     * Checks if the current record is allowed to be linked to the SugarLive contact
+     * @return {boolean}
+     * @private
+     */
+    _isValidLinkableModule: function() {
+        let contactModule = this.sugarLiveContact.getType() === 'voice' ? 'Calls' : 'Messages';
+        let contactModuleMetadata = app.metadata.getModule(contactModule, 'fields');
+        let linkableModules = app.lang.getAppListKeys(contactModuleMetadata.parent_name.options);
+        return linkableModules.includes(this.module);
+    },
+
+    /**
+     * Creates the SugarLive record link button
+     * @private
+     */
+    createSugarLiveLinkButton: function() {
+        if (this.sugarLiveLinkButton) {
+            this._destroySugarLiveLinkButton();
+        }
+
+        let linkButton = app.view.createView({
+            type: 'omnichannel-record-link',
+            model: this.model
+        });
+        linkButton.render();
+        this._insertSugarLiveButton(linkButton);
+
+        this.sugarLiveLinkButton = linkButton;
+
+        this.handleSugarLiveLinkButtonState(this.action === 'edit' || this.inlineEditMode);
+    },
+
+    /**
+     * Cleans up the SugarLive record link button
+     * @private
+     */
+    _destroySugarLiveLinkButton: function() {
+        this.sugarLiveLinkButton.dispose();
+        this.sugarLiveLinkButton = null;
+    },
+
+    /**
      * Detach the event handlers for warning delete
      */
     unbindBeforeRouteDelete: function() {
         app.routing.offBefore('route', this.beforeRouteDelete, this);
         $(window).off('beforeunload.delete' + this.cid);
-    },
-
-    _dispose: function() {
-        this.unbindBeforeRouteDelete();
-        _.each(this.editableFields, function(field) {
-            field.nextField = null;
-            field.prevField = null;
-        });
-        this.buttons = null;
-        this.editableFields = null;
-        this.off('editable:keydown', this.handleKeyDown, this);
-        $(window).off('resize.' + this.cid);
-        app.view.View.prototype._dispose.call(this);
     },
 
     _buildGridsFromPanelsMetadata: function(panels) {
@@ -1680,8 +2087,8 @@
                     if ((field.readonly && this.checkReadonlyFormula(field.name)) ||
                         _.contains(this.extraNoEditFields, field.name) ||
                         _.every(field.fields, function(field) {
-                        return !app.acl.hasAccessToModel('edit', this.model, field.name);
-                    }, this)) {
+                            return !app.acl.hasAccessToModel('edit', this.model, field.name);
+                        }, this)) {
                         this.noEditFields.push(field.name);
                     }
                 } else if ((field.readonly && this.checkReadonlyFormula(field.name)) ||
@@ -1810,7 +2217,7 @@
      * next in detail mode.
      */
     unsetContextAction: function() {
-            this.context.unset('action');
+        this.context.unset('action');
     },
 
     /**
@@ -1939,7 +2346,7 @@
 
             if ($cell.is($ellipsisCell)) {
                 width -= (parseInt($ellipsisCell.css('padding-left'), 10) +
-                         parseInt($ellipsisCell.css('padding-right'), 10));
+                    parseInt($ellipsisCell.css('padding-right'), 10));
             } else if ($cell.is(':visible')) {
                 $cell.css({'width': 'auto'});
                 width -= $cell.outerWidth();
@@ -2022,7 +2429,7 @@
         }
         if ($panelHeader && $panelHeader.find('i')) {
             var $panelArrow = $panelHeader.find('i');
-            $panelArrow.toggleClass('fa-chevron-down fa-chevron-right');
+            $panelArrow.toggleClass('sicon-chevron-down sicon-chevron-right');
         }
         var panelName = this.$(e.currentTarget).parent().data('panelname');
         var state = 'collapsed';
@@ -2188,7 +2595,7 @@
             component: this,
             description: 'LBL_SHORTCUT_FAVORITE_RECORD',
             handler: function() {
-                this.$('.headerpane .fa-favorite:visible').click();
+                this.$('.headerpane .sicon-star-outline:visible').click();
             }
         });
 
@@ -2243,22 +2650,28 @@
     },
 
     /**
-     * Focus the first text input in the topmost active drawer (or content element)
-     * when the DOM is ready
+     * Focus the first text input available when toggling to edit mode
      */
-    focusFirstInput: function() {
-        var self = this;
-        $(function() {
-            var $element = (app.drawer && (app.drawer.count() > 0)) ?
-                app.drawer._components[app.drawer.count() - 1].$el
-                : app.$contentEl;
-            var $firstInput = $element.find('input[type=text]').first();
+    focusFirstInput: function(fields, viewName) {
+        if (viewName === 'edit') {
+            var $firstInput;
+            _.find(fields, function(field) {
+                var $input = field.$('input[type="text"]');
+                if ($input.length > 0) {
+                    $firstInput = $input;
+                    return true;
+                }
+                return false;
+            });
 
-            if (($firstInput.length > 0) && $firstInput.is(':visible')) {
-                $firstInput.focus();
-                self.setCaretToEnd($firstInput);
+            if ($firstInput) {
+                var $el = $firstInput.first();
+                if ($el.is(':visible')) {
+                    $el.focus();
+                    this.setCaretToEnd($el);
+                }
             }
-        });
+        }
     },
 
     /**
@@ -2271,5 +2684,27 @@
             var elementVal = $element.val();
             $element.val('').val(elementVal);
         }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        if (this.sugarLiveLinkButton) {
+            this._destroySugarLiveLinkButton();
+        }
+
+        this.unbindBeforeRouteDelete();
+        _.each(this.editableFields, function(field) {
+            field.nextField = null;
+            field.prevField = null;
+        });
+        this.buttons = null;
+        this.editableFields = null;
+        this.inlineEditModeFields = [];
+        this.stopListening(this.model);
+        this.off('editable:keydown', this.handleKeyDown, this);
+        $(window).off('resize.' + this.cid);
+        app.view.View.prototype._dispose.call(this);
     }
 })

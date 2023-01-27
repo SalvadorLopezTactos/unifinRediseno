@@ -13,16 +13,13 @@
 
 <script language="javascript">
 {if $edit_shared}
-	{literal}
 	SUGAR.util.doWhen(function(){
 		return typeof cal_loaded != 'undefined' && cal_loaded == true && typeof dom_loaded != 'undefined' && dom_loaded == true;	
 	},function(){
 		CAL.toggle_shared_edit();
 	});
-	{/literal}
 {/if}
 
-{literal}
 			function up(name){
 				var td = document.getElementById(name+'_td');
 				var obj = td.getElementsByTagName('select')[0];
@@ -71,7 +68,6 @@
 					}
 				}
 			}
-{/literal}
 </script>
 
 <div id="shared_cal_edit" style="display: none; width: 400px;">

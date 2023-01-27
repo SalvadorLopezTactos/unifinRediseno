@@ -22,7 +22,7 @@
 require_once 'include/utils.php';
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 use Sugarcrm\Sugarcrm\Audit\EventRepository;
 use Sugarcrm\Sugarcrm\Audit\FieldChangeList;
@@ -1261,6 +1261,11 @@ class SugarBean
                         else
                             $this->$field = $value['default'];
                         break;
+                    case 'iframe':
+                        // If Default Value (URL) is set, we want to use the original default value
+                        // without html encoded.
+                        $this->$field = !empty($value['default']) ? $value['default'] : '';
+                        break;
                     case 'bool':
                     	if(isset($this->$field)){
                     		break;
@@ -1408,6 +1413,13 @@ class SugarBean
             $GLOBALS['log']->error("SugarBean.load_relationships, Null link name passed.");
             return false;
         }
+
+        if (!empty($this->$link_name) &&
+            method_exists($this->$link_name, "loadedSuccesfully") &&
+            $this->$link_name->loadedSuccesfully()) {
+            return true;
+        }
+
         $fieldDefs = $this->getFieldDefinitions();
 
         //find all definitions of type link.
@@ -1552,6 +1564,9 @@ class SugarBean
 
         if (!empty($fieldDefs)) {
             foreach ($fieldDefs as $key=>$value_array) {
+                if (!empty($value_array['denorm_from_module'])) {
+                    continue;
+                }
                 if ( (isset($value_array['importable'])
                         && (is_string($value_array['importable']) && $value_array['importable'] == 'false'
                             || is_bool($value_array['importable']) && $value_array['importable'] == false))
@@ -1762,7 +1777,7 @@ class SugarBean
             }
 
             if (in_array($def['type'], $this->getHtmlFieldTypes())) {
-                $this->$key = SugarCleaner::cleanHtml($this->$key, true);
+                $this->$key = $this->cleanContent($this->$key, true);
             } elseif ((strpos($type, 'char') !== false || strpos($type, 'text') !== false || $type == 'enum')
                 && !empty($this->$key)
                 && strpos($type, 'json') === false
@@ -1770,10 +1785,23 @@ class SugarBean
                 if (!isFromApi()) {
                     // for API, text fields are not cleaned, only HTML fields are
                     // since text fields supposed to be encoded by HBS templates when displaying
-                    $this->$key = SugarCleaner::cleanHtml($this->$key);
+                    $this->$key = $this->cleanContent($this->$key);
                 }
             }
         }
+    }
+
+    /**
+     * Clean string from potential XSS problems.
+     *
+     * @see SugarCleaner::cleanHtml()
+     * @param string $content
+     * @param bool $encoded
+     * @return string
+     */
+    public function cleanContent($content, $encoded = false)
+    {
+        return SugarCleaner::cleanHtml($content, $encoded);
     }
 
     /**
@@ -1829,7 +1857,7 @@ class SugarBean
         // If the update date modified by flag is set then carry out this directive
         if ($this->update_modified_by) {
             // Default the modified user id to the default
-            $this->modified_user_id = 1;
+            $this->modified_user_id = '1';
 
             // If a user was not presented, default to the current user
             if (empty($user)) {
@@ -2166,6 +2194,7 @@ class SugarBean
         $this->stateChanges = $this->getStateChanges();
 
         $this->_sendNotifications($check_notify);
+        $this->sendPushNotificationOnAssignment($check_notify, $this->stateChanges);
 
         if ($isUpdate) {
             $this->db->update($this);
@@ -2447,8 +2476,8 @@ class SugarBean
         return [
             DependencyManager::getCalculatedFieldDependencies($this->field_defs, false, true),
             DependencyManager::getDependentFieldDependencies($this->field_defs, 'save'),
-            DependencyManager::getRequiredFieldDependencies($this->field_defs, 'save'),
-            DependencyManager::getReadOnlyFieldDependencies($this->field_defs, 'save'),
+            DependencyManager::getRequiredFieldDependencies($this->field_defs),
+            DependencyManager::getReadOnlyFieldDependencies($this->field_defs),
             DependencyManager::getModuleDependenciesForAction($this->module_dir, "save"),
         ];
     }
@@ -3139,6 +3168,17 @@ class SugarBean
         return $modified_relationships;
     }
 
+    /**
+     * Checks if its the right parent relationship
+     * @param string $typeField The parent field type
+     * @param SugarRelationship $rel The parent relationship
+     * @return bool
+     */
+    protected function checkParentRelationship(string $typeField, SugarRelationship $rel): bool
+    {
+        $relColumns = $rel->getRelationshipRoleColumns();
+        return isset($relColumns[$typeField]);
+    }
 
     /**
      * Updates relationships based on changes to fields of type 'parent' which
@@ -3183,8 +3223,7 @@ class SugarBean
                         if (!empty($ldef['type']) && $ldef['type'] == "link" && !empty($ldef['relationship']))
                         {
                             $rel = SugarRelationshipFactory::getInstance()->getRelationship($ldef['relationship']);
-                            $relColumns = $rel->getRelationshipRoleColumns();
-                            if (isset($relColumns[$typeField])) {
+                            if ($this->checkParentRelationship($typeField, $rel)) {
                                 $parentLinks[$rel->getLHSModule()] = $ldef;
                             }
                         }
@@ -3604,37 +3643,12 @@ class SugarBean
             return null;
         }
 
-        // TODO: When BWC is removed, replace from here
-        $query = new \SugarQuery();
-        $query->from($this, [
-            'add_deleted' => $deleted,
-            'team_security' => !$this->disable_row_level_security,
-            'erased_fields' => $this->retrieve_erased_fields,
-            'action' => 'view',
-            'bean_id' => $id !== -1 ? $id : null,
-        ]);
-
-        $query->select('*');
-
-        $query->where()->equals("$this->table_name.id", $id);
-
-        if (!empty($this->field_defs['team_link'])) {
-            $query->join('team_link', ['joinType' => 'LEFT', 'alias' => 'teams_tn']);
-            $query->select([['teams_tn.name', 'tn_name'], ['teams_tn.name_2', 'tn_name_2']]);
-        }
-
-        if (!empty($this->module_name) && !empty($GLOBALS['current_user'])) {
-            if ($this->isFavoritesEnabled()) {
-                $query->select(['my_favorite']);
-            }
-            if ($this->isActivityEnabled()) {
-                $query->select(['following']);
-            }
-        }
-        $query->limit(1);
-
         $GLOBALS['log']->debug("Retrieve $this->object_name");
-        $results = $query->execute();
+        try {
+            $results = $this->executeRetrieveQuery($id, $deleted, false);
+        } catch (Doctrine\DBAL\Exception $e) {
+            $results = $this->executeRetrieveQuery($id, $deleted, true);
+        }
         if (empty($results)) {
             return null;
         }
@@ -3719,6 +3733,46 @@ class SugarBean
     }
 
     /**
+     * @param $id
+     * @param bool $deleted
+     * @param bool $verifyDBfields
+     * @return array
+     * @throws SugarQueryException
+     */
+    private function executeRetrieveQuery($id, bool $deleted, bool $verifyDBfields): array
+    {
+        $query = new \SugarQuery();
+        $query->verifyDBfields = $verifyDBfields;
+        $query->from($this, [
+            'add_deleted' => $deleted,
+            'team_security' => !$this->disable_row_level_security,
+            'erased_fields' => $this->retrieve_erased_fields,
+            'action' => 'view',
+            'bean_id' => $id !== -1 ? $id : null,
+        ]);
+
+        $query->select('*');
+
+        $query->where()->equals($this->table_name . '.id', $id);
+
+        if (!empty($this->field_defs['team_link'])) {
+            $query->join('team_link', ['joinType' => 'LEFT', 'alias' => 'teams_tn']);
+            $query->select([['teams_tn.name', 'tn_name'], ['teams_tn.name_2', 'tn_name_2']]);
+        }
+
+        if (!empty($this->module_name) && !empty($GLOBALS['current_user'])) {
+            if ($this->isFavoritesEnabled()) {
+                $query->select(['my_favorite']);
+            }
+            if ($this->isActivityEnabled()) {
+                $query->select(['following']);
+            }
+        }
+        $query->limit(1);
+        return $query->execute();
+    }
+
+    /**
      * Destructively loads a bean with only the specified fields
      *
      * @param string - $id The id of the bean you wish to load, for multiple beans use ->fetchFromQuery
@@ -3781,7 +3835,7 @@ class SugarBean
 
         $rawRows = array();
         foreach ($rows as $row) {
-            if (isset($options['beanList'][$row['id']])) {
+            if (isset($row['id'], $options['beanList'][$row['id']])) {
                 $bean = $options['beanList'][$row['id']];
             } else {
                 $bean = $this->getCleanCopy();
@@ -4656,16 +4710,16 @@ class SugarBean
      * @deprecated Use SugarQuery & $this->fetchFromQuery() instead
      */
     public static function get_union_related_list(
-        $parentbean,
-        $order_by = "",
-        $sort_order = '',
-        $where = "",
-        $row_offset = 0,
-        $limit = -1,
-        $max = -1,
-        $show_deleted = 0,
-        $subpanel_def
-    ) {
+        SugarBean $parentbean,
+        string $order_by,
+        string $sort_order,
+        ?string $where,
+        ?int $row_offset,
+        int $limit,
+        int $max,
+        string $show_deleted,
+        aSubPanel $subpanel_def
+    ): array {
         $secondary_queries = array();
         global $layout_edit_mode, $beanFiles, $beanList;
 
@@ -5284,22 +5338,29 @@ class SugarBean
                     // To fix SOAP stuff where we are trying to retrieve all the accounts data where accounts.id = ..
                     // and this code changes accounts to jt4 as there is a self join with the accounts table.
                     //Martin fix #27494
-                    if(isset($data['db_concat_fields'])){
-                    	$buildWhere = false;
-                        if(in_array('first_name', $data['db_concat_fields']) && in_array('last_name', $data['db_concat_fields']))
-                    	{
-                     	   $exp = '/\(\s*?'.$data['name'].'.*?\%\'\s*?\)/';
-                    	   if(preg_match($exp, $where, $matches))
-                    	   {
-                    	   	  $search_expression = $matches[0];
-                    	   	  //Create three search conditions - first + last, first, last
-                    	   	  $first_name_search = str_replace($data['name'], $params['join_table_alias'] . '.first_name', $search_expression);
-                    	   	  $last_name_search = str_replace($data['name'], $params['join_table_alias'] . '.last_name', $search_expression);
-							  $full_name_search = str_replace($data['name'], $this->db->concat($params['join_table_alias'], $data['db_concat_fields']), $search_expression);
-							  $buildWhere = true;
-							  $where = str_replace($search_expression, '(' . $full_name_search . ' OR ' . $first_name_search . ' OR ' . $last_name_search . ')', $where);
-                    	   }
-                    	}
+                    if (isset($data['db_concat_fields'])) {
+                        $buildWhere = false;
+                        if (in_array('first_name', $data['db_concat_fields']) && in_array('last_name', $data['db_concat_fields'])) {
+                            $exp = '/\(\s*?'.$data['name'].'.*?\%\'\s*?\)/';
+                            if (preg_match($exp, $where, $matches)) {
+                                $search_expression = $matches[0];
+                                //Create three search conditions - first + last, first, last
+                                $first_name_search = str_replace($data['name'], $params['join_table_alias'] . '.first_name', $search_expression);
+                                $last_name_search = str_replace($data['name'], $params['join_table_alias'] . '.last_name', $search_expression);
+                                $full_name_search = str_replace($data['name'], $this->db->concat($params['join_table_alias'], $data['db_concat_fields']), $search_expression);
+                                // check name format
+                                global $current_user;
+                                if (!empty($current_user) && $current_user->showLastNameFirst()) {
+                                    $reversedFields = [];
+                                    for ($i = count($data['db_concat_fields']) - 1; $i >= 0; $i--) {
+                                        $reversedFields[] = $data['db_concat_fields'][$i] ?? '';
+                                    }
+                                    $full_name_search = str_replace($data['name'], $this->db->concat($params['join_table_alias'], $reversedFields), $search_expression);
+                                }
+                                $buildWhere = true;
+                                $where = str_replace($search_expression, '(' . $full_name_search . ' OR ' . $first_name_search . ' OR ' . $last_name_search . ')', $where);
+                            }
+                        }
 
                     	if(!$buildWhere)
                     	{
@@ -5729,19 +5790,27 @@ class SugarBean
      * Internal function, do not override.
      * @param object $parent_bean
      * @param string $query query to be processed.
-     * @param int $row_offset
+     * @param int|string $row_offset
      * @param int $limit optional, default -1
      * @param int $max_per_page Optional, default -1
      * @param string $where Custom where clause.
-     * @param array $subpanel_def definition of sub-panel to be processed
+     * @param aSubPanel $subpanel_def definition of sub-panel to be processed
      * @param string $query_row_count
      * @param array $seconday_queries
      * @return array Fetched data.
      * @deprecated Use SugarQuery & $this->fetchFromQuery() instead
      */
-    function process_union_list_query($parent_bean, $query,
-    $row_offset, $limit= -1, $max_per_page = -1, $where = '', $subpanel_def, $query_row_count='', $secondary_queries = array())
-
+    public function process_union_list_query(
+        object $parent_bean,
+        string $query,
+        $row_offset,
+        int $limit,
+        int $max_per_page,
+        string $where,
+        aSubPanel $subpanel_def,
+        string $query_row_count = '',
+        array $secondary_queries = []
+    ): array
     {
         $db = DBManagerFactory::getInstance('listviews');
         /**
@@ -6286,12 +6355,22 @@ class SugarBean
             $this->fill_in_link_field($id_name, $definition);
         }
 
-        if (empty($this->$id_name) || ($module == $this->module_name && $this->$id_name == $this->id)) {
+        $name = $definition['name'];
+        $rName = $definition['rname'] ?? 'name';
+
+        if (empty($this->$id_name)) {
+            return;
+        }
+
+        // For self-referencing relate fields, try to get the data from the fetched bean
+        if ($module == $this->module_name && $this->$id_name == $this->id) {
+            if (!empty($this->$rName)) {
+                $this->$name = $this->$rName;
+            }
             return;
         }
 
         $relatedBean = BeanFactory::newBean($module);
-        $rName = $definition['rname'] ?? 'name';
 
         $query = new SugarQuery();
         $query->from($relatedBean, [
@@ -6317,8 +6396,6 @@ class SugarBean
         if (!$relatedBean) {
             return;
         }
-
-        $name = $definition['name'];
 
         $this->$name = $relatedBean->$rName;
 
@@ -6451,7 +6528,7 @@ class SugarBean
             if (!empty($current_user)) {
                 $this->modified_user_id = $current_user->id;
             } else {
-                $this->modified_user_id = 1;
+                $this->modified_user_id = '1';
             }
             $this->db->updateParams(
                 $this->table_name,
@@ -6947,7 +7024,7 @@ class SugarBean
             $qb->leftJoin($table, $table . '_cstm', $table . '_cstm', 'id = id_c');
         }
         $stmt = $qb->execute();
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
         if($return_array){
             return $row;
         }
@@ -7109,7 +7186,7 @@ class SugarBean
                 $builder->andWhere($expr->eq($name, $builder->createPositionalParameter($value)));
             }
             $builder->andWhere($expr->eq('deleted', 0));
-            $row = $builder->execute()->fetch();
+            $row = $builder->execute()->fetchAssociative();
         }
 
         if(!$check_duplicates || empty($row) )
@@ -7860,15 +7937,149 @@ class SugarBean
         }
     }
 
+
+    /**
+     * Checks if we should send an assignment push notification on save. Send a push under these conditions:
+     * 1. The module is not blocked from sending assignment notifications
+     * 2. The assigned_user_id for the record is changing
+     * 3. The new assigned_user_id is not empty
+     * 4. The new assigned_user_id is not the same as the user that edited the record
+     * 5. The assigned user exists
+     * 6. The User has push notifications enabled, and specifically push notifications enabled for
+     *    record assignments
+     * @param $stateChanges
+     * @return bool
+     */
+    public function shouldSendAssignmentPushNotification($stateChanges)
+    {
+        $moduleDenyList = ['PushNotifications'];
+        if (in_array($this->module_name, $moduleDenyList)) {
+            return false;
+        }
+
+        if (empty($stateChanges['assigned_user_id']) || empty($stateChanges['assigned_user_id']['after'])) {
+            return false;
+        }
+
+        if ($stateChanges['assigned_user_id']['after'] === $this->getCurrentUser()->id) {
+            return false;
+        }
+
+        $receivingUser = $this->getUserBean($stateChanges['assigned_user_id']['after']);
+        if (empty($receivingUser)) {
+            return false;
+        }
+
+        return $receivingUser->canReceivePushNotifications('mobile_notification_on_assignment');
+    }
+
+    /**
+     * Helper to create a new push notification
+     * @return SugarBean|null
+     */
+    public function createPushNotification()
+    {
+        return BeanFactory::newBean('PushNotifications');
+    }
+
+    /**
+     * Builds the text that is sent with the push notification
+     * @param $currentUser
+     * @param $receivingUser
+     * @return array
+     */
+    public function getAssignmentPushNotificationText($currentUser, $receivingUser)
+    {
+        $userLanguage = $receivingUser->getUserLanguageWithFallback();
+        $modStrings = return_module_language($userLanguage, 'PushNotifications');
+        $appListStrings = return_app_list_strings_language($userLanguage);
+        $singularModuleName = $appListStrings['moduleListSingular'][$this->module_name];
+
+        $msg = $modStrings['LBL_USER_ASSIGNED'];
+        $msg = str_replace('{{assigned_by_user}}', $currentUser->full_name, $msg);
+        $msg = str_replace('{{module_name_singular}}', $singularModuleName, $msg);
+        $msg = str_replace('{{record_name}}', $this->name, $msg);
+
+        $title = $modStrings['LBL_USER_ASSIGNED_TITLE'];
+        $title = str_replace('{{module_name_singular}}', $singularModuleName, $title);
+
+        return [
+            'title' => $title,
+            'description' => $msg,
+        ];
+    }
+
+    /**
+     * Sends a push notification when the record has been assigned to a user
+     * @param $check_notify
+     * @param $stateChanges
+     * @return SugarBean|null
+     */
+    public function sendPushNotificationOnAssignment($check_notify, $stateChanges)
+    {
+        if ($check_notify || (isset($this->notify_inworkflow) && $this->notify_inworkflow == true)) {
+            if (!$this->shouldSendAssignmentPushNotification($stateChanges)) {
+                return null;
+            }
+
+            $currentUser = $this->getCurrentUser();
+            $receivingUser = $this->getUserBean($stateChanges['assigned_user_id']['after']);
+            $pushText = $this->getAssignmentPushNotificationText($currentUser, $receivingUser);
+
+            $push = $this->createPushNotification();
+            $push->notification_type = 'record_assigned';
+            $push->assigned_user_id = $receivingUser->id;
+            $push->parent_type = $this->module_name;
+            $push->parent_id = $this->id;
+            $push->name = $pushText['title'];
+            $push->description = $pushText['description'];
+            $push->extra_data = json_encode([
+                'data' => [
+                    'assigned_by_id' => $currentUser->id,
+                    'assigned_by_name' => $currentUser->full_name,
+                    'record_name' => $this->name,
+                ],
+            ]);
+            $push->is_sent = $push->send();
+
+            $push->save();
+            return $push;
+        }
+
+        return null;
+    }
+
+
+    /**
+     * Helper to get a user by id
+     * @param $userId
+     * @return SugarBean|null
+     */
+    public function getUserBean($userId)
+    {
+        return BeanFactory::retrieveBean('Users', $userId);
+    }
+
+    /**
+     * Helper to get the current user
+     * @return SugarBean|null
+     */
+    public function getCurrentUser()
+    {
+        global $current_user;
+        return $current_user;
+    }
+
     /**
     * Send assignment notifications and invites for meetings and calls
      * @param bool $check_notify
     */
     protected function _sendNotifications($check_notify)
     {
-        if($check_notify || (isset($this->notify_inworkflow) && $this->notify_inworkflow == true) // cn: bug 5795 - no invites sent to Contacts, and also bug 25995, in workflow, it will set the notify_on_save=true.
-           && !$this->isOwner($this->created_by) )  // cn: bug 42727 no need to send email to owner (within workflow)
-        {
+        if ($check_notify || (isset($this->notify_inworkflow) && $this->notify_inworkflow == true) && // cn: bug 5795 - no invites sent to Contacts, and also bug 25995, in workflow, it will set the notify_on_save=true.
+            !$this->isOwner($this->created_by) && // cn: bug 42727 no need to send email to owner (within workflow)
+            $this->module_name !== 'PushNotifications'
+        ) {
             $admin = Administration::getSettings();
             $sendNotifications = false;
 
@@ -8001,6 +8212,11 @@ class SugarBean
                 continue;
             }
 
+            // do not include the denormalized fields
+            if (!empty($data['denorm_from_module'])) {
+                continue;
+            }
+
             //skip assigned_user_name, and email1 fields as they are handled seperately after the loop
             if ($field == 'assigned_user_name'
                 || $field == 'email1'
@@ -8098,7 +8314,6 @@ class SugarBean
             '',
             true,
             $this,
-            true,
             true,
             true
         );
@@ -8949,10 +9164,14 @@ class SugarBean
     final public function isLicensedForSell() : bool
     {
         $ret = false;
-        $subs = SubscriptionManager::instance()->getSystemSubscriptionKeys();
-        if (array_key_exists(Subscription::SUGAR_SELL_KEY, $subs)) {
-            $ret = true;
+        $subs = SubscriptionManager::instance()->getAllSystemSubscriptionKeys();
+        $sellKeys = SubscriptionManager::instance()->getSubscriptionKeysContains(Subscription::SUGAR_SELL_KEY);
+        foreach ($sellKeys as $key) {
+            if (array_key_exists($key, $subs)) {
+                return true;
+            }
         }
+        return false;
         return $ret;
     }
 
@@ -8963,11 +9182,19 @@ class SugarBean
     final public function isLicensedForServe() : bool
     {
         $ret = false;
-        $subs = SubscriptionManager::instance()->getSystemSubscriptionKeys();
-        if (array_key_exists(Subscription::SUGAR_SERVE_KEY, $subs)) {
-            $ret = true;
-        }
+        $subs = SubscriptionManager::instance()->getAllSystemSubscriptionKeys();
+        return array_key_exists(Subscription::SUGAR_SERVE_KEY, $subs);
         return $ret;
+    }
+
+    /**
+     * Checks to see if this instance is licensed for HINT
+     * @return boolean
+     */
+    final public function isLicensedForHint() : bool
+    {
+        $subs = SubscriptionManager::instance()->getAllSystemSubscriptionKeys();
+        return array_key_exists(Subscription::SUGAR_HINT_KEY, $subs);
     }
 
     /**

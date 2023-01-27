@@ -118,6 +118,9 @@ class TemplateField{
         'required_formula' => 'required_formula',
         'readonly' => 'readonly',
         'readonly_formula' => 'readonly_formula',
+        'calculation_visible' => 'calculation_visible',
+        'convertToBase' => 'convertToBase',
+        'showTransactionalAmount' => 'showTransactionalAmount',
 	);
 
     /**
@@ -423,6 +426,10 @@ class TemplateField{
             $array['options'] = $this->options;
         }
 
+        if (isset($this->calculation_visible)) {
+            $array['calculation_visible'] = $this->convertBooleanValue($this->calculation_visible);
+        }
+
         $this->get_dup_merge_def($array);
 
         return $array;
@@ -709,5 +716,17 @@ class TemplateField{
         }
 
         return $table;
+    }
+
+    /**
+     * Field defs of which this field consists: list with single item (field itself) for simple fields, list of
+     * components for composite. Used for database change verification.
+     * @see DynamicFieldVerification
+     * @param DynamicField $dynamicField needed to check field existence in some ancestors
+     * @return array
+     */
+    public function getContainedDefs(DynamicField $dynamicField): array
+    {
+        return [$this->get_field_def()];
     }
 }

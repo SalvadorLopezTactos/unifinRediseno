@@ -6,4 +6,4 @@ $dictionary['Account']['fields']['tipo_proveedor_compras_c']['required_formula']
 $dictionary['Account']['fields']['tipo_proveedor_compras_c']['readonly_formula']='';
 $dictionary['Account']['fields']['tipo_proveedor_compras_c']['visibility_grid']='';
 
- ?> 
+ ?>

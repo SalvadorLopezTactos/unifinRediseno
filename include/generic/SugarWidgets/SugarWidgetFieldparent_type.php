@@ -18,7 +18,31 @@ class SugarWidgetFieldparent_type extends SugarWidgetFieldEnum
         parent::__construct($layout_manager);
         $this->reporter = $this->layout_manager->getAttribute('reporter');  
     }
-   
+
+    /**
+     * Create a partial SQL query to do an equal query in a WHERE clause.
+     *
+     * @param $layout_def
+     * @return string
+     */
+    public function queryFilterEquals($layout_def)
+    {
+        // 'equals' and 'is' are not always the same, but they are the same for parent_type
+        // so we can re-use queryFilteris
+        return $this->queryFilteris($layout_def);
+    }
+
+    /**
+     * Create a partial SQL query to do a not equal query in a WHERE clause.
+     *
+     * @param $layout_def
+     * @return string
+     */
+    public function queryFilterNot_Equals(&$layout_def)
+    {
+        return $this->queryFilteris_not($layout_def);
+    }
+
     function displayListPlain($layout_def) {
         $value= $this->_get_list_value($layout_def);
         if (isset($layout_def['widget_type']) && $layout_def['widget_type'] =='checkbox') {

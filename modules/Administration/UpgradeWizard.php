@@ -78,7 +78,7 @@ $csrfToken = smarty_function_sugar_csrf_form_token(array(), $smarty);
 
 // upload link
 if (!empty($GLOBALS['sugar_config']['use_common_ml_dir'])) {
-    $form = '<br>' . $mod_strings['LBL_MODULE_UPLOAD_DISABLE_HELP_TEXT'] . '</br>';
+    $form = '<p>' . $mod_strings['LBL_MODULE_UPLOAD_DISABLE_HELP_TEXT'] . '</p>';
 }else{
     $form =<<<eoq
 <form name="the_form" enctype="multipart/form-data" action="{$form_action}" method="post"  >
@@ -101,16 +101,10 @@ if (!empty($GLOBALS['sugar_config']['use_common_ml_dir'])) {
 eoq;
 }
 
-$hidden_fields = "<input type=hidden name=\"run\" value=\"upload\" />";
-$hidden_fields .= "<input type=hidden name=\"mode\"/>";
+$hidden_fields = '<input type="hidden" name="run" value="upload" />';
+$hidden_fields .= '<input type="hidden" name="mode" />';
 
-$form2 = PackageManagerDisplay::buildPackageDisplay($form, $hidden_fields, $form_action, array('module'));
-$form3 =<<<eoq3
-
-
-eoq3;
-
-echo $form2.$form3;
+echo PackageManagerDisplay::buildPackageDisplay($form, $hidden_fields, $form_action, array('module'));
 
 if (!empty($reloadMetadata)) {
     echo "

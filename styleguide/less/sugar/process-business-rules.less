@@ -1,12 +1,12 @@
-
-@br-table-row-hover: #dfeafa;
-@br-table-row-selected-hover: #d1e2fa;
-@br-table-cell: #e7e7e7;
-@br-table-btn: #bfbfbf;
-@br-table-btn-hover: @grayLight;
-@br-table-container: #f1f1f1;
+// Fix when completing overhaul for BPM
+@br-table-row-hover: @primaryContentHover;
+@br-table-row-selected-hover: @primaryContentActive;
+@br-table-cell: @primaryContentBackground;
+@br-table-btn: @gray50;
+@br-table-btn-hover: @gray70;
+@br-table-container: @borderColor;
 @br-table-active-cell-border: @br-table-container;
-@br-table-dummy-highlight: #babfc7;
+@br-table-dummy-highlight: @gray50;
 
 #content {
   overflow: auto;
@@ -21,12 +21,12 @@
 }
 
 #businessruledesigner {
-  background: @br-table-container;
+  background: @contentBackground;
   padding-bottom: 28px;
   display: inline-block;
 
   .decision-table .table-split {
-    border-right: 14px solid @br-table-container;
+    border-right: 14px solid @borderColor;
   }
 }
 
@@ -100,20 +100,35 @@
     }
 
     .btn {
-      margin: 0;
-      border-radius: 0;
-      border: 1px solid transparent;
+      &.decision-table-add-button,
+      &.decision-table-close-element,
+      &.decision-table-add-row {
+        margin: 0;
+        border-radius: 0;
+        border: 1px solid transparent;
+        padding: 7px;
+        line-height: 12px;
 
-      &:not(.btn-primary) {
-        background: @br-table-btn;
-      }
+        &:not(.btn-primary) {
+          background: @br-table-btn;
+        }
 
-      &:hover {
-        background: @br-table-btn-hover;
-      }
+        &:hover {
+          background: @br-table-btn-hover;
 
-      .fa {
-        color: @white;
+          > .sicon {
+            color: @sicon-hover-color;
+          }
+        }
+
+        .sicon,
+        .fa {
+          color: @sicon-hover-color;
+        }
+
+        .sicon {
+          vertical-align: middle;
+        }
       }
     }
 
@@ -134,12 +149,12 @@
     .decision-table-row:not(:hover) .decision-table-condition-column,
     .decision-table-conclusion-column,
     .decision-table-row:not(:hover) .checkbox-td {
-      background: @white;
+      background: @primaryContentBackground;
     }
 
     .decision-table-conditions-header,
     .decision-table-conclusions-header {
-      background: @white;
+      background: @primaryContentBackground;
       width: calc(~"100% - 28px");
     }
 
@@ -155,6 +170,21 @@
 
       td:first-child {
         border-color: transparent;
+      }
+
+      #trash-button {
+        margin-left: 0;
+        vertical-align: middle;
+
+        .sicon {
+          color: @white;
+        }
+
+        &:hover {
+          .sicon {
+            color: @white;
+          }
+        }
       }
     }
 

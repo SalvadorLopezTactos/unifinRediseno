@@ -391,7 +391,7 @@
 
         if (quoteModel && rowModel.module === 'Products') {
             // when a new row is added if it does not have quote_id already, set it
-            if (_.isUndefined(quoteId)) {
+            if (_.isEmpty(quoteId)) {
                 quoteId = quoteModel.get('id');
 
                 app.api.relationships('create', 'Products', {
@@ -406,7 +406,7 @@
                 });
             }
             // when a new row is added if it does not have account_id already, set it
-            if (_.isUndefined(accountId)) {
+            if (_.isEmpty(accountId)) {
                 accountId = quoteModel.get('billing_account_id');
 
                 if (accountId) {
@@ -1022,7 +1022,7 @@
                 label: '',
                 tooltip: 'LBL_CANCEL_BUTTON_LABEL',
                 name: 'inline-cancel',
-                icon: 'fa-close',
+                icon: 'sicon-close',
                 css_class: 'btn-invisible inline-cancel ellipsis_inline'
             }]
         });
@@ -1034,7 +1034,7 @@
                 label: '',
                 tooltip: 'LBL_SAVE_BUTTON_LABEL',
                 name: 'inline-save',
-                icon: 'fa-check-circle',
+                icon: 'sicon-check-circle',
                 css_class: 'btn-invisible inline-save ellipsis_inline'
             });
         }

@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'El nom de camp ja existeix',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'El nom del camp ha de contindre únicament els següents caràcters: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'No hi ha Mòdul inclòs, no es pot guardar.',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'El nom del desplegable ja existeix',
     'LBL_BTN_ADD' => 'Afegir',
     'LBL_BTN_EDIT' => 'Editar',
     'LBL_GENERATE_URL' => 'Generar URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Afegint columna {0} a',
     'LBL_DONE' => 'Fet',
     'LBL_EXE_NON_SIM_MODE' => 'Executar mode no simulat',
+    'LBL_CALCULATION_VISIBLE' => 'Fes-ho visible per als càlculs',
 );
-
-
-?>

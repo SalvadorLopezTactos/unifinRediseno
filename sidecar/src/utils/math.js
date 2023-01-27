@@ -37,7 +37,7 @@ module.exports = {
      */
     _math: function(operator, n1, n2, decimals, fixed) {
         decimals = (_.isFinite(decimals) && decimals >= 0) ? parseInt(decimals) : 6;
-        Big.E_NEG = -1 * (decimals + 1);
+        Big.NE = -1 * (decimals + 1);
         fixed = fixed || false;
         var result;
 
@@ -69,14 +69,14 @@ module.exports = {
                     return n1;
             }
         } catch (error) {
-            if (error.name == 'BigError') {
+            if (error.message.startsWith('[big.js]')) {
                 return n1;
             }
         }
 
-        if (fixed && !_.isString(result)) {
+        if (fixed && _.isFinite(result)) {
             return result.toFixed(decimals);
-        } else if (!_.isString(result)) {
+        } else if (_.isFinite(result)) {
             return result.toString();
         } else {
             return result;

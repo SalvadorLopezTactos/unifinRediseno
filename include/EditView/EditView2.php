@@ -18,6 +18,7 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
  */
 class EditView
 {
+    /** @var TemplateHandler */
     public $th;
     public $tpl;
     public $notes;
@@ -742,11 +743,11 @@ class EditView
 
         $seps = get_number_seperators();
 
-        if (!isset($this->th->ss->_tpl_vars['NUM_GRP_SEP'])) {
+        if ($this->th->ss->getTemplateVars('NUM_GRP_SEP') === null) {
             $this->th->ss->assign('NUM_GRP_SEP', $seps[0]);
         }
 
-        if (!isset($this->th->ss->_tpl_vars['DEC_SEP'])) {
+        if ($this->th->ss->getTemplateVars('DEC_SEP') === null) {
             $this->th->ss->assign('DEC_SEP', $seps[1]);
         }
 
@@ -775,8 +776,6 @@ class EditView
 
         $str = $this->showTitle($showTitle);
 
-        //Use the output filter to trim the whitespace
-        $this->th->ss->load_filter('output', 'trimwhitespace');
         $str .= $this->th->displayTemplate($this->module, $form_name, $this->tpl, $ajaxSave, $this->defs);
 
         return $str;
@@ -987,7 +986,9 @@ class EditView
     {
         $idmModeDisabledFields = $this->idpConfig->getIDMModeDisabledFields();
         $this->fieldDefs = array_map(function ($field) use ($idmModeDisabledFields) {
-            $field['disabled'] = isset($field['name']) && array_key_exists($field['name'], $idmModeDisabledFields);
+            $field['disabled'] = isset($field['name']) &&
+                $field['name'] != 'license_type'
+                && array_key_exists($field['name'], $idmModeDisabledFields);
             return $field;
         }, $this->fieldDefs);
     }

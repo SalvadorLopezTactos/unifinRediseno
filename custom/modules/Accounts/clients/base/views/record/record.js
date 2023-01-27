@@ -334,6 +334,8 @@
         //Oculta Menú Solicitar CIEC
         this.model.on('sync', this.ocultaSolicitarCIEC, this);
 
+        //Parche utilizado para ocultar las filas que siguen mostrándose aunque ningún campo se encuentren en ellas
+        this.model.on('sync', this.hideRowsNoHideByDependency, this);
     },
 
     /** Asignacion modal */
@@ -8635,6 +8637,22 @@ validaReqUniclickInfo: function () {
                 }
             });
         }
+    },
+
+    /*
+    Función utilizada como parche (en la actualización a la version 12 de sugar) para poder ocultar las filas que siguen mostrándose en la vista
+    aunque los campos que están dentro de dicha fila se encuentren ocultos a través de la dependencia de visibilidad
+    El no aplicar esta función hacía que en la vista de registro se mostraran algunas filas en blanco
+    */
+    hideRowsNoHideByDependency:function(){
+        //La clase vis_action_hidden se agrega cuando un campo se oculta a través de una fórmula en studio o una dependencia
+        var hidden_rows=$('.LBL_RECORDVIEW_PANEL16 > .vis_action_hidden');
+        hidden_rows.each(function(i, obj) {
+            //Se oculta la fila cuando se detecta que el campo está oculto y además el campo que está junto a el es el campo custom "blank_space" o es una celda "relleno" habilitada desde studio
+            if($(obj).siblings('[data-name="blank_space"]').length > 0 || $(obj).siblings('.filler-cell').length > 0){
+                $(obj).parent().addClass('hide');
+            }
+        });
     },
 
     solicitar_ciec_function:function(){

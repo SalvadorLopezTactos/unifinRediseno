@@ -113,6 +113,17 @@ class SugarFieldHandler
 			$vardef['type'] = 'varchar';
 		}
 
+        /* if $displayParams['htmlescape'] is not defined and field is related and
+           has non-html type set $displayParams['htmlescape'] = true
+           Related fields are already escaped in SugarBean::retrieve function */
+        if (!isset($displayParams['htmlescape'])) {
+            if ($vardef['type'] === 'relate') {
+                if (self::getOriginalFieldType($vardef) !== 'html') {
+                    $displayParams['htmlescape'] = true;
+                }
+            }
+        }
+
 		$field = self::getSugarField($vardef['type']);
 		if ( !empty($vardef['function']) ) {
 			$string = $field->displayFromFunc($displayType, $parentFieldArray, $vardef, $displayParams, $tabindex);
@@ -121,5 +132,27 @@ class SugarFieldHandler
 		}
 
         return $string;
+    }
+
+
+    /**
+     * Return type of field.
+     * If field is related, find type of linked field
+     *
+     * @param array $vardef vardef field defintions
+     * @return string
+     *
+     */
+    private static function getOriginalFieldType($vardef)
+    {
+        $type = isset($vardef['type']) ? $vardef['type'] : 'varchar';
+        if ($type === 'relate') {
+            if (!empty($vardef['module'] && !empty($vardef['rname']))) {
+                $module = BeanFactory::getObjectName($vardef['module']);
+                $field_name = $vardef['rname'];
+                $type = $GLOBALS['dictionary'][$module]['fields'][$field_name]['type'] ?? 'varchar';
+            }
+        }
+        return $type;
     }
 }

@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Pogledaj šablone',
     'LNK_LIST_KBCATEGORIES' => 'Pogledaj kategorije',
     'LBL_TEMPLATES' => 'Šabloni',
+    'LBL_TEMPLATE' => 'Šablon',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Šablon će biti prepisan preko svih sadržaja.' .
         ' Da  li ste sigurni da želite da upotrebite ovaj šablon?',
     'LNK_IMPORT_KBCONTENTS' => 'Uvezi artikle',

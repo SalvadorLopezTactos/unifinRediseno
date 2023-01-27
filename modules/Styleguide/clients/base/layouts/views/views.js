@@ -10,5 +10,5 @@
  */
 ({
     plugins: ['Prettify'],
-    extendsFrom: 'StyleguideDocsLayout'
+    extendsFrom: 'StyleguideDocsLayout',
 })

@@ -187,20 +187,6 @@
         this.currentURL = Backbone.history.getFragment();
     },
 
-    _dispose: function() {
-        if (!_.isUndefined(this.context.parent) && !_.isNull(this.context.parent)) {
-            this.context.parent.off(null, null, this);
-            if (this.context.parent.has('collection')) {
-                this.context.parent.get('collection').off(null, null, this);
-            }
-        }
-        // make sure this alert is hidden if the the view is disposed
-        app.alert.dismiss('workshet_loading');
-        app.routing.offBefore('route', this.beforeRouteHandler, this);
-        $(window).off('beforeunload.' + this.worksheetType);
-        this._super('_dispose');
-    },
-
     bindDataChange: function() {
         // these are handlers that we only want to run when the parent module is forecasts
         if (!_.isUndefined(this.context.parent) && !_.isUndefined(this.context.parent.get('model'))) {
@@ -305,6 +291,19 @@
                         this.saveWorksheet(false);
                     }
                 }, this);
+
+                // On cancel click, revert any unsaved changes to Opps/RLIs and reset the filtered collection
+                this.listenTo(this.context.parent, 'button:cancel_button:click', () => {
+                    if (this.layout.isVisible()) {
+                        this.collection.models.forEach(model => model.revertAttributes());
+                        this.cleanUpDirtyModels();
+                        this.setNavigationMessage(false, '', '');
+                        this.filterCollection();
+                        if (!this.disposed) {
+                            this.render();
+                        }
+                    }
+                });
 
                 this.context.parent.on('change:currentForecastCommitDate', function(context, changed) {
                     if (this.layout.isVisible()) {
@@ -436,9 +435,17 @@
             return true;
         }, this);
 
-        this.collection.on('reset change', function() {
+        // When the collection resets, recalculate the list totals and notify
+        // the context that the totals are being initialized
+        this.listenTo(this.collection, 'reset', function() {
+            this.calculateTotals(true);
+            this.context.parent.trigger('forecasts:worksheet:totals:initialized', this.totals);
+        });
+
+        // When a value in the collection changes, recalculate the list totals
+        this.listenTo(this.collection, 'change', function() {
             this.calculateTotals();
-        }, this);
+        });
 
         if (!_.isUndefined(this.dirtyModels)) {
             this.dirtyModels.on('add', function() {
@@ -823,10 +830,12 @@
 
     /**
      * Calculate the totals for the visible fields
+     *
+     * @param {boolean} reset true when being called on a reset
      */
-    calculateTotals: function() {
+    calculateTotals: function(reset = false) {
         // fire an event on the parent context
-        if (this.layout.isVisible()) {
+        if (this.layout.isVisible() || reset) {
             this.totals = this.getCommitTotals();
             var calcFields = ['worst_case', 'best_case', 'likely_case'],
                 fields = _.filter(this._fields.visible, function(field) {
@@ -1086,5 +1095,23 @@
             this.previewVisible = false;
             this.previewModel = undefined;
         }, this);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        if (!_.isUndefined(this.context.parent) && !_.isNull(this.context.parent)) {
+            this.context.parent.off(null, null, this);
+            if (this.context.parent.has('collection')) {
+                this.context.parent.get('collection').off(null, null, this);
+            }
+        }
+        // make sure this alert is hidden if the the view is disposed
+        app.alert.dismiss('workshet_loading');
+        app.routing.offBefore('route', this.beforeRouteHandler, this);
+        $(window).off('beforeunload.' + this.worksheetType);
+        this.stopListening();
+        this._super('_dispose');
     }
 })

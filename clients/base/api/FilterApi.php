@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Doctrine\DBAL\FetchMode;
 use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 use Sugarcrm\Sugarcrm\Denormalization\Relate\FieldConfig;
+use Sugarcrm\Sugarcrm\Maps\FilterUtils as MapsFilterUtils;
 
 class FilterApi extends SugarApi
 {
@@ -690,7 +690,7 @@ class FilterApi extends SugarApi
             $ids = $options['id_query']
                 ->compile()
                 ->execute()
-                ->fetchAll(FetchMode::COLUMN);
+                ->fetchFirstColumn();
 
             if (count($ids) < 1) {
                 return [
@@ -973,6 +973,8 @@ class FilterApi extends SugarApi
             static::addTrackerFilter($q, $where, $filter);
         } elseif ($field == '$following') {
             static::addFollowFilter($q, $where, $filter);
+        } elseif ($field == '$distance') {
+            static::addMapsDistanceFilter($q, $where, $filter);
         } else {
             static::addFieldFilter($q, $where, $filter, $field);
         }
@@ -1214,6 +1216,261 @@ class FilterApi extends SugarApi
                 $where->addRaw("$alias.id IS NOT NULL");
             }
         }
+    }
+
+
+    /**
+     * Add a Maps Distance Filter
+     *
+     * @param SugarQuery $q
+     * @param SugarQuery_Builder_Where $where
+     * @param $filter
+     */
+    protected static function addMapsDistanceFilter(SugarQuery $q, SugarQuery_Builder_Where $where, $filter)
+    {
+        if (array_key_exists('$in_radius_from_zip', $filter)) {
+            self::applyMapsDistanceZipFilter($q, $where, $filter);
+        }
+    }
+
+    /**
+     * Add a Maps Distance Filter by ZipCode
+     *
+     * @param SugarQuery $q
+     * @param SugarQuery_Builder_Where $where
+     * @param $filter
+     */
+    protected static function applyMapsDistanceZipFilter(SugarQuery $q, SugarQuery_Builder_Where $where, $filter)
+    {
+        if (!hasMapsLicense()) {
+            return;
+        }
+
+        $filterData = $filter['$in_radius_from_zip'];
+
+        $radius = $filterData['radius'];
+        $country = $filterData['countries'];
+        $zipCode = $filterData['zipCode'];
+        $unitType = $filterData['unitType'];
+
+        if (!$radius || !$zipCode) {
+            return;
+        }
+
+        $coords = MapsFilterUtils::getCoordsFromZip($zipCode, $country);
+
+        if ($coords === false) {
+            $q->whereRaw('1 = 0');
+            return;
+        }
+
+        $admin = BeanFactory::getBean('Administration');
+        $mapsConfig = $admin->retrieveSettings('maps', true)->settings;
+
+        if (!$mapsConfig['maps_modulesData']) {
+            $q->select->fieldRaw('0', 'maps_distance');
+            $q->whereRaw('1 = 0');
+
+            return;
+        }
+
+        $targetModule = $q->getFromBean()->getModuleName();
+        $recordTable = $q->getFromBean()->getTableName();
+        $mapsModuleData = $mapsConfig['maps_modulesData'][$targetModule];
+
+        if ($mapsModuleData && $mapsModuleData['mappingType'] === 'relateRecord') {
+            $recordTable = self::addMapsRelatedJoins($q, $mapsModuleData, []);
+        }
+
+        $geocodeTable = MapsFilterUtils::getCoordsTableName();
+
+        $join = $q->joinTable($geocodeTable, [
+            'joinType' => 'LEFT',
+        ]);
+
+        $join->on()->queryAnd()
+            ->equalsField("{$geocodeTable}.parent_id", "{$recordTable}.id");
+
+        if (strtolower($unitType) === 'miles') {
+            //convert miles to km
+            $radius = $radius * 1.60934;
+        }
+
+        $earthRadiusKm = 6371;
+        $pi = pi();
+        $latitude = $coords['latitude'];
+        $longitude = $coords['longitude'];
+
+        // SQRT in SQL is part of the standard ANSI SQL-92 so is safety to use it in RAW SQL
+        // COS is in the base functions of supported database by SUGARCRM: MySQL, DB2, Oracle and SQL Server
+        // so, it's safe to use them as a raw query.
+        // ASIN is present in all of the supported database by SUGARCRM: MySQL, DB2, Oracle and SQL Server
+        // Discover the available locations in the given radius
+        $q->whereRaw(
+            "((
+                2 * (
+                    ASIN(
+                        SQRT(
+                            POWER(
+                                SIN(
+                                    (($geocodeTable.latitude * $pi / 180) - ($latitude * $pi / 180)) / 2
+                                )
+                                ,2
+                            )
+                            +
+                            COS($latitude * $pi / 180)
+                            *
+                            COS($geocodeTable.latitude * $pi / 180)
+                            *
+                            POWER(
+                                SIN(
+                                    (($geocodeTable.longitude * $pi / 180) - ($longitude * $pi / 180)) / 2
+                                )
+                                ,2
+                            )
+                        )
+                    )
+                )
+            ) * $earthRadiusKm) < $radius"
+        );
+    }
+
+    /**
+     * Make extra joins when we use related records mapping
+     *
+     * @param SugarQuery $q
+     * @param mixed $mapsModuleData
+     * @param mixed $fields
+     */
+    protected static function addMapsRelatedJoins(SugarQuery $q, $mapsModuleData, $fields)
+    {
+        $mappingRecord = $mapsModuleData['mappingRecord'];
+        $relatedKey = array_keys($mappingRecord)[0];
+        $relateLinkName = $mappingRecord[$relatedKey]['rel'];
+        $relatedModule = $mappingRecord[$relatedKey]['module'];
+
+        $hasCustomFields = self::hasMapsCustomFields($relatedModule, $fields);
+
+        $relDef = SugarRelationshipFactory::getInstance()->getRelationship($relateLinkName)->def;
+
+        $joinKeyRhs = $relDef['join_key_rhs'];
+        $joinKeyLhs = $relDef['join_key_lhs'];
+
+        $rhsTableName = $relDef['rhs_table'];
+        $lhsTableName = $relDef['lhs_table'];
+        $joinTableName = $relDef['join_table'];
+
+        $lhsTableNameAlias = $q->getFromAlias();
+        $rhsTableNameAlias = 'rhs_alias_maps';
+
+        if (empty($joinTableName)) {
+            $joinKeyRhs = $relDef['rhs_key'];
+            $joinKeyLhs = $relDef['lhs_key'];
+            $rhsTableNameAlias = $q->getFromAlias();
+            $lhsTableNameAlias = 'lhs_alias_maps';
+
+            $join = $q->joinTable($lhsTableName, [
+                'alias' => $lhsTableNameAlias,
+                'joinType' => 'INNER',
+            ]);
+
+            $join->on()->equalsField("{$lhsTableNameAlias}.{$joinKeyLhs}", "{$rhsTableNameAlias}.{$joinKeyRhs}");
+        } else {
+            $join = $q->joinTable($joinTableName, [
+                'alias' => $rhsTableNameAlias,
+                'joinType' => 'INNER',
+            ]);
+
+            $join->on()->equalsField("{$rhsTableNameAlias}.{$relDef['join_key_rhs']}", "{$lhsTableNameAlias}.id");
+
+            $lhsTableNameAlias = 'lhs_table_alias_maps';
+
+            $join = $q->joinTable($lhsTableName, [
+                'alias' => $lhsTableNameAlias,
+                'joinType' => 'INNER',
+            ]);
+
+            $join->on()->equalsField("{$rhsTableNameAlias}.{$relDef['join_key_lhs']}", "{$lhsTableNameAlias}.id");
+        }
+
+        if ($hasCustomFields) {
+            $customLhsTableName = "{$lhsTableName}_cstm";
+            $customLhsTableNameAlias = "{$lhsTableNameAlias}_cstm";
+            $join = $q->joinTable($customLhsTableName, [
+                'alias' => $customLhsTableNameAlias,
+                'joinType' => 'LEFT',
+            ]);
+
+            $join->on()->equalsField("{$lhsTableNameAlias}.id", "{$customLhsTableNameAlias}.id_c");
+        }
+
+        return $lhsTableNameAlias;
+    }
+
+    /**
+     * Check if a module has maps custom fields.
+     *
+     * @param string $relatedModule
+     * @param array $fields
+     * @return bool
+     */
+    protected static function hasMapsCustomFields(string $relatedModule, array $fields): bool
+    {
+        $seed = BeanFactory::newBean($relatedModule);
+
+        $fieldsMapping = self::getMapsFieldsMapping($fields, $relatedModule);
+
+        foreach ($fieldsMapping as $moduleFieldName) {
+            if ($moduleFieldName) {
+                $def = $seed->field_defs[$moduleFieldName];
+
+                if (!empty($def['source']) && $def['source'] === 'custom_fields') {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Return real module fields name
+     *
+     * @param array $fields
+     * @param string $module
+     *
+     * @return array
+     */
+    protected static function getMapsFieldsMapping(array $fields, string $module): array
+    {
+        $fieldsMapping = [];
+
+        $admin = BeanFactory::getBean('Administration');
+        $mapsConfig =  $admin->retrieveSettings('maps', true)->settings;
+
+        if (!array_key_exists('maps_modulesData', $mapsConfig)) {
+            return $fieldsMapping;
+        }
+
+        if (!array_key_exists($module, $mapsConfig['maps_modulesData'])) {
+            return $fieldsMapping;
+        }
+
+        if (!array_key_exists('mappings', $mapsConfig['maps_modulesData'][$module])) {
+            return $fieldsMapping;
+        }
+
+        $moduleMappings = $mapsConfig['maps_modulesData'][$module]['mappings'];
+
+        foreach ($fields as $field) {
+            $realFieldName =  str_replace('maps_', '', $field);
+
+            if ($realFieldName !== $field) {
+                $fieldsMapping[$field] = $moduleMappings[$realFieldName];
+            }
+        }
+
+        return $fieldsMapping;
     }
 
     /**
@@ -1513,7 +1770,7 @@ class FilterApi extends SugarApi
 
         $stmt = $q->compile()->execute();
 
-        return (int) $stmt->fetchColumn();
+        return (int) $stmt->fetchOne();
     }
 
     /**

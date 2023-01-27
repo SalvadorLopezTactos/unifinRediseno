@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Veldnaam bestaat reeds',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Het veld &#39;naam&#39; mag alleen de volgende karakters bevatten: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Geen module toegevoegd. Kon niet opslaan.',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Naam vervolgkeuze bestaat reeds',
     'LBL_BTN_ADD' => 'Toevoegen',
     'LBL_BTN_EDIT' => 'Wijzigen',
     'LBL_GENERATE_URL' => 'Genereer URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Toevoegen van kolom {0} bij',
     'LBL_DONE' => 'Gereed',
     'LBL_EXE_NON_SIM_MODE' => 'Voer niet-simulatie modus uit',
+    'LBL_CALCULATION_VISIBLE' => 'Zichtbaar maken voor berekeningen',
 );
-
-
-?>

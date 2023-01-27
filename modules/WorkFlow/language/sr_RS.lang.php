@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'RadniTok'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Tip',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Napomena:</strong> Funkcionalnosti Sugar tok posla i Upravljanje tokom je u režimu održavanja. Korisnici izdanja Sugar Enterprise treba da koriste funkcionalnost koju omogućava SugarBPM <sup class="trademark">TM</sup>.',
 );
 

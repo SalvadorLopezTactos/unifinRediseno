@@ -21,14 +21,16 @@
                     <input type="hidden" name="{{../name}}" class="select2 inherit-width" value="{{name}}" data-id="{{id}}" data-index="{{@index}}">
                     <button type="button"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}}
                             class="btn {{../fitButtonClass}} {{#if primary}}active{{/if}}" name="primary" data-index="{{@index}}"
-                            rel="tooltip" title="{{str 'LBL_TEAM_PRIMARY'}}"><i class="fa fa-star"></i>
+                            rel="tooltip" title="{{str 'LBL_TEAM_PRIMARY'}}"
+                    >
+                        <i class="sicon sicon-star-fill"></i>
                     </button>
                     {{partial 'button-selected' ../this this index=@index}}
                     {{#if remove_button}}
-                        <button type="button" class="btn second" name="remove" data-index="{{@index}}" rel="tooltip" title="{{str 'LBL_TEAM_REMOVE'}}"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn second" name="remove" data-index="{{@index}}" rel="tooltip" title="{{str 'LBL_TEAM_REMOVE'}}"><i class="sicon sicon-minus"></i></button>
                     {{/if}}
                     {{#if add_button}}
-                        <button type="button" class="btn first" name="add" data-index="{{@index}}" rel="tooltip" title="{{str 'LBL_TEAM_ADD'}}"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn first" name="add" data-index="{{@index}}" rel="tooltip" title="{{str 'LBL_TEAM_ADD'}}"><i class="sicon sicon-plus"></i></button>
                     {{/if}}
                 </div>
             </div>

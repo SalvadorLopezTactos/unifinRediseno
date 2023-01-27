@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Данный план отчетов',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Информационная панель записей о планах отчетов',
+    'LBL_FILE_TYPE' => 'Тип(-ы) файла',
 );

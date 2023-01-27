@@ -41,7 +41,14 @@
     render: function() {
         this._super('render');
         this.$('#tabs').tabs({
-            active: this.context.get('activeTabIndex')
+            active: this.context.get('activeTabIndex'),
+            classes: {
+                'ui-tabs-active': 'active',
+            },
+
+            activate: function(event, ui) {
+                self.$('#tabs').tabs('option', 'ui-tabs-active');
+            }
         });
 
         //event used in tile preview

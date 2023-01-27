@@ -13,14 +13,14 @@
 {{#if collection.dataFetched}}
     {{#notEq collection.next_offset "-1"}}
         <div class="block-footer">
-            <button data-action="show-more" class="btn btn-link btn-invisible more padded">{{showMoreLabel}}</button>
+            <button data-action="show-more" class="btn btn-link btn-invisible more p-3">{{showMoreLabel}}</button>
         </div>
     {{/notEq}}
 {{else}}
     {{#unless hideLoading}}
         <div class="block-footer">
             {{#if moduleIsAvailable}}
-                <div class="more padded">
+                <div class="more p-3">
                     {{loading 'LBL_ALERT_TITLE_LOADING'}}
                 </div>
             {{/if}}

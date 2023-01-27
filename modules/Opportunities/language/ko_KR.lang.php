@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => '워크시트',
     'LBL_PURCHASED_LINE_ITEMS' => '구매한 라인아이템',
 
+    'LBL_FORECASTED_LIKELY' => '예측된 예상 수치',
     'LBL_RENEWAL' => '갱신',
     'LBL_RENEWAL_OPPORTUNITIES' => '갱신 기회',
     'LBL_RENEWAL_PARENT' => '상위 영업기회',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '매출 라인 아이템 수량',
     'LBL_CLOSED_RLIS' => '수주 완료된 매출 라인아이템 수량',
+    'LBL_CLOSED_WON_RLIS' => '계약 성공 매출 라인 항목의 수량',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# 오픈 서비스 기간 수익 라인 항목 수',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => '완료된 매출 라인아이템을 가지고 있는 영업기회는 삭제할수 없습니다.',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => '하나 또는 그 이상의 레코드가 완료된 매출 라인아이템을 포함하고 있으며 삭제될수 없습니다.',
     'LBL_INCLUDED_RLIS' => '포함된 수익 라인 항목 중 #',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => '업데이트 열기',
+    'LBL_CASCADE_RLI_EDIT' => '열린 수익 라인 항목 업데이트',
+    'LBL_CASCADE_RLI_CREATE' => '교차 수익 라인 항목 설정',
     'LBL_SERVICE_START_DATE_INVALID' => '서비스 시작 일자는 여하한 열려 있는 애드온 매출 라인아이템의 서비스 종료 일자 이후로 설정할 수 없습니다.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '견적 목록',
@@ -207,19 +211,19 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '이 변화를 시작한 후에, 영업선 항목 기록이기존의 각  {{module_name}}을 위해 백그라운드에 생성됩니다. 영업선 항목이 완전하고 사용할 수있는 경우, 알림이 사용자 프로필의 이메일 주소로 전송됩니다. 알림이 전송되도록하려면 관리자>이메일 설정을 통해  이메일을 보내도록 인스턴스가 설정되어야 함을 주의하십시오.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 모듈을 통해 개별 판매를 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 레코드는 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 레코드와 관련된 것을 포함합니다. {{module_name}}은 "판매 성공" 또는 "판매 실패"로 표시될 때까지 전형적인 몇 가지 판매 단계로 진행됩니다. Sugar의{{forecasts_singular_module}} 예측 모듈을 사용하면 판매 추세를 이해 및 예측하고 판매 할당량의 달성에 업무를 집중하는 데 {{plural_module_name}}을 더욱 유용하게 활용할 수 있습니다.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 모듈을 통해 개별 판매를 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 기록는 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 기록와 관련된 것을 포함합니다. {{module_name}}은 "판매 성공" 또는 "판매 실패"로 표시될 때까지 전형적인 몇 가지 판매 단계로 진행됩니다. Sugar의{{forecasts_singular_module}} 예측 모듈을 사용하면 판매 추세를 이해 및 예측하고 판매 할당량의 달성에 업무를 집중하는 데 {{plural_module_name}}을 더욱 유용하게 활용할 수 있습니다.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 레코드는 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 레코드와 관련된 것을 포함합니다. 
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 기록는 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 기록와 관련된 것을 포함합니다. 
 
-- 개별 필드 또는 편집 버튼을 클릭하여 이 레코드의 필드를 편집합니다.
+- 개별 필드 또는 편집 버튼을 클릭하여 이 기록의 필드를 편집합니다.
 - 아래 왼쪽 창을 "데이터 보기"로 토글하여 하위패널 내의 다른 기록으로의 링크를 보거나 수정합니다.
-- 아래 왼쪽 창을 "활동 흐름"으로 토글하여 {{activitystream_singular_module}} 내의 사용자 의견 및 레코드 변경 이력을 작성하고 봅니다.
-- 레코드 이름 오른쪽의 아이콘을 사용하여 이 레코드를 추적하거나 즐겨찾기로 찾아봅니다.
+- 아래 왼쪽 창을 "활동 흐름"으로 토글하여 {{activitystream_singular_module}} 내의 사용자 의견 및 기록 변경 이력을 작성하고 봅니다.
+- 기록 이름 오른쪽의 아이콘을 사용하여 이 기록를 추적하거나 즐겨찾기로 찾아봅니다.
 - 편집 버튼 오른쪽의 드롭다운 작업 메뉴에서 추가 작업이 가능합니다.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 레코드는 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 레코드와 관련된 것을 포함합니다.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 기록는 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 기록와 관련된 것을 포함합니다.
 
 {{module_name}}을 생성하려면:
 1. 원하는 필드 값을 제공합니다.
@@ -239,7 +243,10 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "우리 팀의 기회",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => '이 {{moduleSingular}}에 열린 라인 항목이 없어 {{fieldName}} 변경 불가.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '기회 상호작용',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '기회 타임라인',
+
+    'LBL_CASCADE_SERVICE_WARNING' => '해당 수익 항목은 서비스가 아니므로 교차 설정할 수 없습니다. 생성을 계속하시겠습니까?',
+    'LBL_CASCADE_DURATION_WARNING' => '해당 수익 항목은 기간이 잠겨 있어 교차 설정할 수 없습니다. 생성을 계속하시겠습니까?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => '영업기회 종료 예측',

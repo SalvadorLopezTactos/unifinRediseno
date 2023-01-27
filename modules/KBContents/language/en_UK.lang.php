@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'View Templates',
     'LNK_LIST_KBCATEGORIES' => 'View Categories',
     'LBL_TEMPLATES' => 'Templates',
+    'LBL_TEMPLATE' => 'Template',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'The template will overwrite all contents.' .
         ' Are you sure you want to use this template?',
     'LNK_IMPORT_KBCONTENTS' => 'Import Articles',

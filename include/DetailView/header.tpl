@@ -16,11 +16,9 @@
 {{/if}}
 <script type="text/javascript" src="{sugar_getjspath file='include/EditView/Panels.js'}"></script>
 <script language="javascript">
-{literal}
 SUGAR.util.doWhen(function(){
     return $("#contentTable").length == 0 && YAHOO.util.Event.DOMReady;
 }, SUGAR.themes.actionMenu);
-{/literal}
 </script>
 
 
@@ -37,13 +35,13 @@ SUGAR.util.doWhen(function(){
     {{foreach from=$form.buttons key=val item=button}}
         {{if !is_array($button) && in_array($button, $built_in_buttons)}}
         {{counter print=false}}
-        {{sugar_button module="$module" id="$button" fields="$fields" view="EditView" form_id="formDetailView" appendTo="detail_header_buttons"}}
+        {{sugar_button module="$module" id=$button fields=$fields view="EditView" form_id="formDetailView" appendTo="detail_header_buttons"}}
         {{/if}}
     {{/foreach}}
     {{if count($form.buttons) > $num_buttons}}
         {{foreach from=$form.buttons key=val item=button}}
             {{if is_array($button) && $button.customCode}}
-                {{sugar_button module="$module" id="$button" view="EditView" form_id="formDetailView" appendTo="detail_header_buttons"}}
+                {{sugar_button module="$module" id=$button view="EditView" form_id="formDetailView" appendTo="detail_header_buttons"}}
             {{/if}}
         {{/foreach}}
     {{/if}}

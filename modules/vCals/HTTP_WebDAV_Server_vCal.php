@@ -83,14 +83,6 @@ class HTTP_WebDAV_Server_vCal extends HTTP_WebDAV_Server
                 $this->base = $_SERVER['DOCUMENT_ROOT'];
             }
 
-        // check authentication before process query
-        // Not authorized user can not enumerate users
-        if (!$this->_check_auth()) {
-            $this->http_status('401 Unauthorized');
-            header('WWW-Authenticate: Basic realm="'.($this->http_auth_realm).'"');
-            return;
-        }
-
             $query_arr =  array();
              // set path
             if ( empty($_SERVER["PATH_INFO"]))
@@ -162,17 +154,16 @@ class HTTP_WebDAV_Server_vCal extends HTTP_WebDAV_Server
                 $this->user_focus->retrieve($query_arr['user_id']);
             }
 
-            // if we haven't found a user, then return 401
-            if ( empty($this->user_focus->id) || $this->user_focus->id == -1)
-            {
-                //set http status
-                $this->http_status('401 Unauthorized');
-                //send authenticate header only if this is not a freebusy request
-                if (empty($_REQUEST['type']) || $_REQUEST['type'] != 'vfb'){
-                    header('WWW-Authenticate: Basic realm="'.($this->http_auth_realm).'"');
-                }
-                return;
+        // check auth
+        if (!$this->_check_auth()) {
+            //set http status
+            $this->http_status('401 Unauthorized');
+            //send authenticate header only if this is not a freebusy request
+            if (empty($_REQUEST['type']) || $_REQUEST['type'] != 'vfb') {
+                header('WWW-Authenticate: Basic realm="'.($this->http_auth_realm).'"');
             }
+            return;
+        }
 
 //            if(empty($this->user_focus->user_preferences))
 //            {

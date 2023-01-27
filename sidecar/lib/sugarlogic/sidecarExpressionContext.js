@@ -65,7 +65,8 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
     initialize: function (depsMeta, isCreate) {
         var relatedFields = [];
         var isCreate = isCreate || false;
-        var scContext = this.view.context;
+        let scContext = this.view.context;
+        let isCreateSubpanel = scContext.get('isCreateSubpanel');
 
         this.dependencies = [];
 
@@ -75,7 +76,7 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
          */
         var updateCollection = _.bind(function(models, trigger) {
             _.each(models, function(model) {
-                if (trigger.dependency.testOnLoad || model.isNew()) {
+                if (trigger.dependency.testOnLoad || model.isNew() || isCreateSubpanel) {
                     trigger.context.isOnLoad = true;
                     trigger.context.inCollection = true;
                     SUGAR.forms.Trigger.fire.apply(trigger, [model]);
@@ -541,13 +542,17 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
                     }
                     var id = relModel.id ? relModel.id : relModel.cid;
                     var value = relModel.get(field);
-                    if (isCurrency && relModel.has(field) && relModel.has('currency_id')) {
+                    if (isCurrency && relModel.has(field) && relModel.has('currency_id') && !_.isUndefined(value)) {
                         value = App.currency.convertToBase(
                             value,
                             relModel.get('currency_id')
                         );
                     }
-                    current[id] = value;
+
+                    if (!_.isUndefined(value)) {
+                        current[id] = value;
+                    }
+
                 }
                 linkValues[fType] = linkValues[fType] || {};
                 linkValues[fType][fieldVal] = current;
@@ -1178,13 +1183,16 @@ SUGAR.forms.Dependency.prototype.fire = function(undo)
                 // as it's possible the context's model will change before this
                 // event triggers
                 if (this.testOnLoad && action.afterRender) {
-					this.context.view.on('render', action.exec, action);
-                    /*this.context.view.on('render', function() {
-                        var prevModel = action.context.model;
-                        action.context.setModel(model);
-                        action.exec();
-                        action.context.setModel(prevModel);
-                    }, this);*/
+                    if (this.context.view.action === 'list') {
+                        this.context.view.on('render', function() {
+                            /*
+                            var prevModel = action.context.model;
+                            action.context.setModel(model);
+                            action.exec();
+                            action.context.setModel(prevModel);
+                            */
+                        }, this);
+                    }
                 }
             }
         }
@@ -1254,7 +1262,8 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
             return false;
         }
 
-        if (context.isOnLoad && !context.model.isNew()) {
+        let isCreateSubpanel = context.view && context.view.context && context.view.context.get('isCreateSubpanel');
+        if (context.isOnLoad && !context.model.isNew() && !isCreateSubpanel) {
             return false;
         }
 
@@ -1531,16 +1540,21 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
 
         SUGAR.forms.flashInProgress[key] = true;
 
+        let $field = $(field);
+        if (!$field.length) {
+            return;
+        }
+
         to_color = to_color || '#FF8F8F';
-        // store the original background color but default to white
-        var original = field.style && field.style.backgroundColor ? field.style.backgroundColor : '#FFFFFF' ;
+        // store the original background color
+        let original = window.getComputedStyle($field[0], null).getPropertyValue('background-color');
 
-        $(field).css("backgroundColor", original);
+        $field.css('backgroundColor', original);
 
-        $(field).animate({
+        $field.animate({
             backgroundColor : to_color
         }, 200, function(){
-            $(field).animate({
+            $field.animate({
                 backgroundColor : original
             }, 200, function(){
                 delete SUGAR.forms.flashInProgress[key];

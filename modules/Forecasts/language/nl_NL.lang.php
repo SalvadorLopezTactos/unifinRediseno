@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Beschrijving',
     'LBL_OW_TYPE'=>'Type',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Teamvoorspelling voor <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Rapporteerder',
     'LBL_FDR_OPPORTUNITIES'=>'Opportunities in forecast:',
     'LBL_FDR_WEIGH'=>'Gewogen bedrag van opportunities:',
     'LBL_FDR_COMMIT'=>'Committed bedrag',
     'LBL_FDR_DATE_COMMIT'=>'Commit datum',
+    'LBL_FDR_FORECAST_HEADER' => 'Verkopervoorspelling voor <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Forecasts: werkblad',
     'LBL_DV_MY_FORECASTS' => 'Mijn forecasts',
-    'LBL_DV_MY_TEAM' => "Mijn team&#39;s forecasts" ,
+    'LBL_DV_MY_TEAM' => "Mijn team&#39;s forecasts",
     'LBL_DV_TIMEPERIODS' => 'Perioden:',
     'LBL_DV_FORECAST_PERIOD' => 'Forecastperiode',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Forecast opportunities',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Basiskoers',
 
     'LBL_QUOTA' => 'Quota',
-    'LBL_QUOTA_ADJUSTED' => 'Quota (aangepast)',
+    'LBL_QUOTA_ADJUSTED' => 'Gewijzigde quota',
 
     'LBL_FORECAST_FOR'=>'Forecastwerkblad voor:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Rollup)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Quota versus Comitted versus Actueel',
 
     'LBL_FORECAST' => 'Forecast',
+    'LBL_COMMITMENT' => 'Commitment',
+    'LBL_TEAM_COMMITMENT' => 'Teamcommitment',
+    'LBL_FORECASTED' => 'Voorspeld',
+    'LBL_ADJUSTED_TOTAL' => 'Gewijzigd totaal',
     'LBL_COMMIT_STAGE' => 'Commitment stadium',
     'LBL_SALES_STAGE' => 'Stadium',
     'LBL_AMOUNT' => 'Bedrag',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, en {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'meest waarschijnlijk {{{direction}}} {{{from}}} naar {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'beste {{{direction}}} {{{from}}} naar {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'slechtste {{{direction}}} {{{from}}} naar {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'meest waarschijnlijk is gelijk gebleven',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'beste is gelijk gebleven',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'slechtste is gelijk gebleven',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Bevestigd (Waarschijnlijk) {{{direction}}} {{{from}}} tot {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Bevestigd (Beste) {{{direction}}} {{{from}}} tot {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Bevestigd (Slechtste) {{{direction}}} {{{from}}} tot {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Bevestigd (Waarschijnlijk) hetzelfde gebleven',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Bevestigde (Beste) is hetzelfde gebleven',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Bevestigde (Slechtste) is hetzelfde gebleven',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Deze maand op {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Getoond totaal',
     'LBL_TOTAL' => 'Totaal',
     'LBL_OVERALL_TOTAL' => 'Eindtotaal',
-    'LBL_EDITABLE_INVALID' => 'Ongeldige waarde voor {0}',
+    'LBL_EDITABLE_INVALID' => 'Ongeldige waarde voor {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Waarde moet liggen tussen {0} en {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'U heeft wijzigingen doorgevoerd in uw werkblad die nog niet zijn opgeslagen',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Let op: alleen opgeslagen of gecommitteerde data kan geëxporteerd worden. Klik op akkoord om door te gaan met exporteren of klik op annuleren om terug te gaan naar de werkmap.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Inclusief',
     'LBL_CHART_NOT_INCLUDED' => 'Exclusief',
     'LBL_CHART_ADJUSTED' => '(Bijgesteld)',
-    'LBL_SAVE_DRAFT' => 'Concept opslaan',
+    'LBL_SAVE_DRAFT' => 'Opslaan',
     'LBL_CHANGES_BY' => 'Wijzigingen door {0}',
     'LBL_FORECAST_SETTINGS' => 'Instellingen',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Begindatum van fiscaal jaar:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configureer de periode die gebruikt zal worden in de forecast module.<br><br>Let op dat de gekozen instellingen voor de perioden niet gewijzigd kunnen worden.<br><br>Begin door de begindatum van uw fiscale jaar te kiezen. Kies vervolgens de periode voor de forecast. Het bereik van de perioden zal automatisch berekend worden op basis van uw selecties. De onderliggende periode is de basis voor het forecastwerkblad.<br><br>De zichtbare toekomstige en historische perioden zullen het aantal van zichtbare onderliggende perioden bepalen in de forecast module. Gebruikers zijn in staat om de waarden te tonen en aan te passen in de zichtbare onderliggende perioden.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configureer hoe u {{forecastByModule}} wilt classificeren. <br><br>Houd er rekening mee dat de Bereikinstellingen niet kunnen worden gewijzigd na de eerste bevestiging. Voor bijgewerkte exemplaren is de Bereikinstelling vergrendeld in de bestaande Voorspellingsgegevens.<br><br>U kunt twee of meer categorieën selecteren op basis van het waarschijnlijkheidsbereik of u kunt categorieën aanmaken die niet zijn gebaseerd op waarschijnlijkheid. <br><br>Er bevinden zich selectievakjes links van uw aangepaste categorieën; gebruik deze om te kiezen welk bereik wordt opgenomen in de opgegeven Voorspelling en aan managers wordt gerapporteerd. <br><br>Een gebruiker kan de status insluiten/uitsluiten en de categorie {{forecastByModule}} handmatig wijzigen vanuit het werkblad.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configureer hoe u {{forecastByModule}} wilt categoriseren. <br><br>Houd er rekening mee dat de Bereikinstellingen na de eerste bevestiging niet meer kunnen worden gewijzigd. Voor bijgewerkte exemplaren is de Bereikinstelling vergrendeld in de bestaande Voorspellingsgegevens.<br><br>U kunt twee of meer categorieën selecteren op basis van waarschijnlijkheidsbereik of u kunt categorieën aanmaken die niet zijn gebaseerd op waarschijnlijkheid. <br><br>Er zijn selectievakjes links van uw aangepaste categorieën. Gebruik deze om aan te geven welk bereik wordt opgenomen in het bevestigde Voorspelde aantal en aan managers wordt gerapporteerd. <br><br>Een gebruiker kan de status insluiten/uitsluiten en de categorie {{forecastByModule}} handmatig gebruiken vanuit het werkblad.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Kies de kolommen die de gebruiker in moet vullen voor elke forecast van elke bij het voorspellen van {{forecastByModuleSingular}}. Let hierbij op dat de "Meest waarschijnlijke" waarde gekoppeld is aan de getoonde waarde bij {{forecastByModule}}; Vandaar dat de "Meest waarschijnlijke" kolom niet verborgen kan worden.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Kies de kolommen die u wil zien in de forecast module. Het werkblad zal samengesteld worden uit de lijst met velden, waarbij de gebruiker kan kiezen hoe deze getoond wordt.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ik ben een placeholder voor "Hoe werkt &#39;Forecast door&#39;!"',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Overschreden met',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Geen gegevens',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Quota bereikt',
+    'LBL_OPEN_LIKELY' => 'Open waarschijnlijk',
+    'LBL_OPEN_BEST' => 'Open Beste',
+    'LBL_OPEN_WORST' => 'Open Slechtste',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Quota toewijzen',
     'LBL_ASSIGNING_QUOTA' => 'Toewijzen van quota',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Forecast van mijn team",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'U staat op het punt om het record te verlaten zonder de wijzigingen op te slaan. Weet u zeker dat u dit wil?',
+
+    'LBL_SAVE_TOOLTIP' => 'Wijzigingen opslaan die zijn gedaan in werkbladrijen',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Wijzigingen van records opslaan en voorspelling naar manager sturen',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Voorspelling naar manager sturen en quota toewijzen',
+
+    'LBL_SAVE_LABEL_REP' => 'Opslaan ',
+    'LBL_SAVE_LABEL_MGR' => 'Gewijzigde waardes opslaan',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'De {{plural_module_name}} module bestaat uit {{opportunities_singular_module}} records om {{module_name}} ing {{worksheet_module}} s op te zetten en sales te voorspellen. Gebruikers kunnen toewerken naar sales targets op individueel, team en organisatie niveau. Voordat gebruikers toegang krijgen tot de {{plural_module_name}} module, moet een gebruiker met de beheerdersrol de {{plural_module_name}} module configureren voor de gewenste Tijdsperiodes, Ranges en Scenario&#39;s. Accountmanagers gebruiken de {{plural_module_name}} module om gedurende de actuele tijdsperiode met hun toegewezen {{opportunities_module}} te werken. Deze gebruikers zullen de totale voorspellingen committeren gebaseerd op hun individuele sales van de {{opportunities_module}} die ze verwachten te sluiten. Sales managers werken met hun eigen {{opportunities_singular_module}} records vergelijkbaar met de accountmanagers. Bovendien verzamelen zij de gecommitteerde {{module_name}} targets van hun teamleden om hun eigen team sales totaal te voorspellen en toe te werken naar het team target voor elke periode. Additionele inzichten worden aangeboden door onderdelen van het Intelligence Pane, inclusief analyse voor een individuele {{opportunities_module}} worksheet en voor een managers&#39; team worksheets.'

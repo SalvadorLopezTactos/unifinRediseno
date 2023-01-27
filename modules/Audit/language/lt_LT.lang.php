@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Šiame modulyje sekami laukai:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Šiame modulyje nėra sekamų laukų',
     'LBL_CHANGE_LOG' => 'Audito žurnalas',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'When audited currency fields are saved in a non-system-default currency, the change log will display the old and new values in the converted, system-defined default currency.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'When audited currency fields are saved in a non-system-default currency, the change log will display the old and new values in the converted, system-defined default currency.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Atnaujinti į',
+    'LBL_BLANK' => '-tuščia-',
 );

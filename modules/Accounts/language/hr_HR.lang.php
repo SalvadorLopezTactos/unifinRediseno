@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Naziv računa / industrija',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Lokacija',
     'LBL_PURCHASES' => 'Kupovine',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcije s računom',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija računa',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafikoni',

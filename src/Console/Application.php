@@ -16,7 +16,6 @@ use Sugarcrm\Sugarcrm\Console\Command\Elasticsearch\ExplainCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Elasticsearch\SilentReindexMultiProcessCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Password\PasswordConfigCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Password\PasswordResetCommand;
-use Sugarcrm\Sugarcrm\Console\Command\Password\WeakHashesCommand;
 use Sugarcrm\Sugarcrm\Console\CommandRegistry\CommandRegistry;
 use Sugarcrm\Sugarcrm\Console\Command\Api\ElasticsearchIndicesCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Api\ElasticsearchQueueCommand;
@@ -34,12 +33,18 @@ use Sugarcrm\Sugarcrm\Console\Command\Elasticsearch\ModuleCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Elasticsearch\SilentReindexCommand;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Console\RebuildCommand;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Console\StatusCommand;
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Console\TeamSetPruneBackupCommand;
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Console\TeamSetPrunePruneCommand;
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Console\TeamSetPruneRestoreFromBackupCommand;
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Console\TeamSetPruneScanCommand;
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Console\TeamSetPruneSqlCommand;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Sugarcrm\Sugarcrm\Console\Command\Api\IdmModeManageCommand;
+use Sugarcrm\Sugarcrm\ACL\Console\DumpACLCacheCommand;
 
 /**
  *
@@ -108,7 +113,6 @@ class Application extends BaseApplication
             new SearchStatusCommand(),
 
             // Password management
-            new WeakHashesCommand(),
             new PasswordConfigCommand(),
             new PasswordResetCommand(),
 
@@ -116,8 +120,18 @@ class Application extends BaseApplication
             new RebuildCommand(),
             new StatusCommand(),
 
+            // TeamSet Prune
+            new TeamSetPrunePruneCommand(),
+            new TeamSetPruneScanCommand(),
+            new TeamSetPruneBackupCommand(),
+            new TeamSetPruneRestoreFromBackupCommand(),
+            new TeamSetPruneSqlCommand(),
+
             // Idm mode management
             new IdmModeManageCommand(),
+
+            // ACL Cache dumper
+            new DumpACLCacheCommand(),
         ));
 
         $app = new Application();
@@ -201,7 +215,7 @@ class Application extends BaseApplication
             if (empty($sugar_version) ||
                 empty($sugar_flavor)  ||
                 empty($sugar_build)   ||
-                strpos($sugar_version, '11.0.2') === 0
+                strpos($sugar_version, '12.0.1') === 0
             ) {
                 return $default;
             }

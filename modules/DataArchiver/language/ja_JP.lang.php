@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'アーカイブ',
     'LBL_PROCESS_TYPE_DELETE' => '物理削除',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'アーカイブ実行回数',
+    'LBL_ARCHIVER_WARNING_TITLE' => '警告',
+    'LBL_ARCHIVER_WARNING' => 'このアクションは、使用量が少ない時間や時間外に実行することをお勧めします '
+        . 'システムのパフォーマンスに影響を及ぼす可能性があります。今すぐこのアクションを実行しますか？',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => '{{moduleName}}モジュールのアーカイブ者は {{fieldName}} をフィルターとして設定する必要があります',
 );

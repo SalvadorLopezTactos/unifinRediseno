@@ -21,8 +21,8 @@ class TeamsViewTBA extends SugarView
         global $mod_strings;
 
         return array(
-            "<a href='index.php?module=Administration&action=index'>".$mod_strings['LBL_MODULE_NAME']."</a>",
-            $mod_strings['LBL_TBA_CONFIGURATION']
+            "<a href='#Administration'>".$mod_strings['LBL_MODULE_NAME']."</a>",
+            $mod_strings['LBL_TBA_CONFIGURATION'],
         );
     }
 

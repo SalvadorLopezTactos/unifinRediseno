@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Typ elementu nadrzędnego',
     'LBL_PARENT_ID' => 'Identyfikator elementu nadrzędnego',
     'LBL_EXTRA_DATA' => 'Dodatkowe dane',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM - wspomniane w {{module_name_singular}}',
+    'LBL_USER_MENTIONED' => 'Użytkownik {{mentioning_user}} wspomniał Cię w {{module_name_singular}} {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM - przydzielone {{module_name_singular}}',
+    'LBL_USER_ASSIGNED' => 'Użytkownik {{assigned_by_user}} przydzielił Tobie {{module_name_singular}} {{record_name}}.',
 ];

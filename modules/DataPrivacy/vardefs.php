@@ -189,7 +189,6 @@ $dictionary['DataPrivacy'] = array(
             ),
     ),
     'indices' => array(
-        array('name' =>'idx_dataprivacy_name', 'type' =>'index', 'fields'=>array('name')),
     ),
     'acls' => array('SugarACLDataPrivacy' => true, 'SugarACLStatic' => true),
 );

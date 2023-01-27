@@ -13,14 +13,16 @@
 <!-- Tables
 ================================================== -->
 <section id="tables">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <div class="row-fluid">
     <div class="span3 columns">
       <h3>About data tables</h3>
-      <p>Sugar7 uses custom code to create dynamic data tables.</p>
+      <p>SugarCRM uses custom code to create dynamic data tables.</p>
       <p>The LESS file for styling data tables can be found at:<br>
         /sugarcrm/styleguide/less/sugar/datatables.less.</p>
     </div>

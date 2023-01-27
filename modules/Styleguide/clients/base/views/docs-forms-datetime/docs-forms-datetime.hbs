@@ -11,9 +11,11 @@
  */
 --}}
 <section id="datepicker">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <div class="row-fluid">
     <div class="span3 columns">
@@ -33,12 +35,12 @@
         </ul>
       </ul>
       <p>The bootstrap-datepicker.js [<a href="http://www.eyecon.ro/bootstrap-datepicker/" target="_blank" rel="nofollow noopener noreferrer">
-           <i class="fa fa-book"></i> Datepicker Docs</a>] and jquery.timepicker.js
-           [<a href="http://jonthornton.github.com/jquery-timepicker/" target="_blank" rel="nofollow noopener noreferrer"><i class="fa fa-book"></i> Timepicker Docs</a>] plugins are included in the default build of SugarCRM.</p>
+           <i class="sicon sicon-document"></i> Datepicker Docs</a>] and jquery.timepicker.js
+           [<a href="http://jonthornton.github.com/jquery-timepicker/" target="_blank" rel="nofollow noopener noreferrer"><i class="sicon sicon-document"></i> Timepicker Docs</a>] plugins are included in the default build of SugarCRM.</p>
     </div>
 
     <div class="span9 columns">
-      <h2>Sugar7 Examples</h2>
+      <h2>SugarCRM Examples</h2>
 
       <p>Date field rendered with default values in edit mode.</p>
       <div class="well" id="sugar7_date">
@@ -79,13 +81,13 @@ $('#tp2').timepicker({timeFormat:'H.i.s'});</pre>
       <div class="well">
         <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy" rel="datepicker">
           <input class="span2" size="16" type="text" value="" placeholder="mm-dd-yyyy">
-          <span class="add-on"><i class="fa fa-calendar"></i></span>
+          <span class="add-on"><i class="sicon sicon-calendar"></i></span>
         </div>
       </div>
       <pre class="prettyprint">
 &lt;div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy" rel="datepicker"&gt;
   &lt;input class="span2" size="16" type="text" value="" placeholder="mm-dd-yyyy"&gt;
-  &lt;span class="add-on"&gt;&lt;i class="fa fa-calendar">&lt;/i&gt;&lt;/span&gt;
+  &lt;span class="add-on"&gt;&lt;i class="sicon sicon-calendar">&lt;/i&gt;&lt;/span&gt;
 &lt;/div&gt;
 
 $('#dp3').datepicker();</pre>
@@ -203,7 +205,7 @@ $('#tp7').timepicker({ 'step': 5 });</pre>
       <pre class="prettyprint linenums">
 &lt;div class=&quot;input-append date&quot; id=&quot;dp3&quot; data-date=&quot;12-02-2012&quot; data-date-format=&quot;dd-mm-yyyy&quot; rel=&quot; datepicker&quot;&gt;
 &lt;input class=&quot;span2&quot; size=&quot;16&quot; type=&quot;text&quot; value=&quot;12-02-2012&quot;&gt;
-&lt;span class=&quot;add-on&quot;&gt;&lt;i class=&quot;fa fa-th&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;span class=&quot;add-on&quot;&gt;&lt;i class=&quot;sicon-dashboard&quot;&gt;&lt;/i&gt;&lt;/span&gt;
 &lt;/div&gt;</pre>
     </div>
     <div class="span6">

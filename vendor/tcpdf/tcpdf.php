@@ -2454,10 +2454,12 @@ if (!class_exists('TCPDF', false)) {
 				$barcode_width = round(($this->getPageWidth() - $ormargins['left'] - $ormargins['right'])/3);
 				$this->write1DBarcode($barcode, 'C128B', $this->GetX(), $cur_y + $line_width, $barcode_width, (($this->getFooterMargin() / 3) - $line_width), 0.3, '', '');
 			}
+
+			$wPage = $this->l['w_page'] ?? '';
 			if (empty($this->pagegroups)) {
-				$pagenumtxt = $this->l['w_page'].' '.$this->getAliasNumPage().' / '.$this->getAliasNbPages();
+				$pagenumtxt = $wPage . ' ' . $this->getAliasNumPage() . ' / ' . $this->getAliasNbPages();
 			} else {
-				$pagenumtxt = $this->l['w_page'].' '.$this->getPageNumGroupAlias().' / '.$this->getPageGroupAlias();
+				$pagenumtxt = $wPage . ' ' . $this->getPageNumGroupAlias(). ' / ' . $this->getPageGroupAlias();
 			}
 			$this->SetY($cur_y);
 			//Print page number
@@ -3375,7 +3377,7 @@ if (!class_exists('TCPDF', false)) {
 			if ($this->empty_string($y)) {
 				$y = $this->y;
 			}
-			if ((($y + $h) > $this->PageBreakTrigger) AND (!$this->InFooter) AND ($this->AcceptPageBreak())) {
+            if ((int)$y + (int)$h > (int)$this->PageBreakTrigger && !$this->InFooter && $this->AcceptPageBreak()) {
 				//Automatic page break
 				$x = $this->x;
 				$this->AddPage($this->CurOrientation);
@@ -4522,8 +4524,6 @@ if (!class_exists('TCPDF', false)) {
 				if ($type == 'jpg') {
 					$type = 'jpeg';
 				}
-				$mqr = get_magic_quotes_runtime();
-				//set_magic_quotes_runtime(0);
 				// Specific image handlers
 				$mtd = '_parse'.$type;
 				// GD image handler function
@@ -4559,7 +4559,6 @@ if (!class_exists('TCPDF', false)) {
 					//If false, we cannot process image
 					return;
 				}
-				//set_magic_quotes_runtime($mqr);
 				if ($ismask) {
 					// force grayscale
 					$info['cs'] = 'DeviceGray';
@@ -4666,7 +4665,7 @@ if (!class_exists('TCPDF', false)) {
 		* @access protected
 		*/
 		protected function _toJPEG($image) {
-			$tempname = tempnam(K_PATH_CACHE, 'jpg_');
+			$tempname = @tempnam(K_PATH_CACHE, 'jpg_');
 			imagejpeg($image, $tempname, $this->jpeg_quality);
 			imagedestroy($image);
 			$retvars = $this->_parsejpeg($tempname);
@@ -4855,20 +4854,24 @@ if (!class_exists('TCPDF', false)) {
 			// extract alpha channel
 			for ($xpx = 0; $xpx < $wpx; ++$xpx) {
 				for ($ypx = 0; $ypx < $hpx; ++$ypx) {
-					$colorindex = imagecolorat($img, $xpx, $ypx);
-					$col = imagecolorsforindex($img, $colorindex);
-					imagesetpixel($imgalpha, $xpx, $ypx, $this->getGDgamma((127 - $col['alpha']) * 255 / 127));
+                    if (is_resource($img)) {
+                        $colorindex = imagecolorat($img, $xpx, $ypx);
+                        $col = imagecolorsforindex($img, $colorindex);
+                        imagesetpixel($imgalpha, $xpx, $ypx, $this->getGDgamma((127 - $col['alpha']) * 255 / 127));
+                    } else {
+                        imagesetpixel($imgalpha, $xpx, $ypx, $this->getGDgamma(255));
+                    }
 				}
 			}
 			// create temp alpha file
-			$tempfile_alpha = tempnam(K_PATH_CACHE, 'mska_');
+			$tempfile_alpha = @tempnam(K_PATH_CACHE, 'mska_');
 			imagepng($imgalpha, $tempfile_alpha);
 			imagedestroy($imgalpha);
 			// extract image without alpha channel
 			$imgplain = imagecreatetruecolor($wpx, $hpx);
 			imagecopy($imgplain, $img, 0, 0, 0, 0, $wpx, $hpx);
 			// create temp image file
-			$tempfile_plain = tempnam(K_PATH_CACHE, 'mskp_');
+			$tempfile_plain = @tempnam(K_PATH_CACHE, 'mskp_');
 			imagepng($imgplain, $tempfile_plain);
 			imagedestroy($imgplain);
 			// embed mask image
@@ -5086,7 +5089,7 @@ if (!class_exists('TCPDF', false)) {
 				$byterange = sprintf('/ByteRange[0 %010u %010u %010u]', $byte_range[1], $byte_range[2], $byte_range[3]);
 				$pdfdoc = str_replace('/ByteRange[0 ********** ********** **********]', $byterange, $pdfdoc);
 				// write the document to a temporary folder
-				$tempdoc = tempnam(K_PATH_CACHE, 'tmppdf_');
+				$tempdoc = @tempnam(K_PATH_CACHE, 'tmppdf_');
 				$f = fopen($tempdoc, 'wb');
 				if (!$f) {
 					$this->Error('Unable to create temporary file: '.$tempdoc);
@@ -5096,7 +5099,7 @@ if (!class_exists('TCPDF', false)) {
 				fclose($f);
 				// get digital signature.
 				// IS THE FOLLOWING PROCEDURE CORRECT? THE SIGNED DOCUMENTS ARE NOT VALID!
-				$tempsign = tempnam(K_PATH_CACHE, 'tmpsig_');
+				$tempsign = @tempnam(K_PATH_CACHE, 'tmpsig_');
 				if (empty($this->signature_data['extracerts'])) {
 					openssl_pkcs7_sign($tempdoc, $tempsign, $this->signature_data['signcert'], array($this->signature_data['privkey'], $this->signature_data['password']), array(), PKCS7_BINARY | PKCS7_DETACHED);
 				} else {
@@ -5764,8 +5767,6 @@ if (!class_exists('TCPDF', false)) {
 				$this->_out('<</Type /Encoding /BaseEncoding /WinAnsiEncoding /Differences ['.$diff.']>>');
 				$this->_out('endobj');
 			}
-			$mqr = get_magic_quotes_runtime();
-			//set_magic_quotes_runtime(0);
 			foreach ($this->FontFiles as $file => $info) {
 				// search and get font file to embedd
 				$fontdir = $info['fontdir'];
@@ -5808,7 +5809,6 @@ if (!class_exists('TCPDF', false)) {
 					$this->_out('endobj');
 				}
 			}
-			//set_magic_quotes_runtime($mqr);
 			foreach ($this->fontkeys as $k) {
 				//Font objects
 				$this->setFontSubBuffer($k, 'n', $this->n + 1);
@@ -9163,7 +9163,7 @@ if (!class_exists('TCPDF', false)) {
 			$k = $this->k;
 			$this->javascript .= sprintf("f".$name."=this.addField('%s','%s',%d,[%.2F,%.2F,%.2F,%.2F]);", $name, $type, $this->PageNo()-1, $x*$k, ($this->h-$y)*$k+1, ($x+$w)*$k, ($this->h-$y-$h)*$k+1)."\n";
 			$this->javascript .= 'f'.$name.'.textSize='.$this->FontSizePt.";\n";
-			while (list($key, $val) = each($prop)) {
+            foreach ($prop as $key => $val) {
 				if (strcmp(substr($key, -5), 'Color') == 0) {
 					$val = $this->_JScolor($val);
 				} else {
@@ -11057,7 +11057,7 @@ if (!class_exists('TCPDF', false)) {
 						// get attributes
 						preg_match_all('/([^=\s]*)=["]?([^"]*)["]?/', $element, $attr_array, PREG_PATTERN_ORDER);
 						$dom[$key]['attribute'] = array(); // reset attribute array
-						while (list($id, $name) = each($attr_array[1])) {
+                        foreach ($attr_array[1] as $id => $name) {
 							$dom[$key]['attribute'][strtolower($name)] = $attr_array[2][$id];
 						}
 						// split style attributes
@@ -11065,7 +11065,7 @@ if (!class_exists('TCPDF', false)) {
 							// get style attributes
 							preg_match_all('/([^;:\s]*):([^;]*)/', $dom[$key]['attribute']['style'], $style_array, PREG_PATTERN_ORDER);
 							$dom[$key]['style'] = array(); // reset style attribute array
-							while (list($id, $name) = each($style_array[1])) {
+                            foreach ($style_array[1] as $id => $name) {
 								$dom[$key]['style'][strtolower($name)] = trim($style_array[2][$id]);
 							}
 							// --- get some style attributes ---
@@ -11647,9 +11647,12 @@ if (!class_exists('TCPDF', false)) {
 												}
 												// justify block
 												$pmid = preg_replace_callback('/([0-9\.\+\-]*)[\s]('.$strpiece[1][0].')[\s]('.$strpiece[2][0].')([\s]*)/x',
-													create_function('$matches', 'global $spacew;
-													$newx = sprintf("%.2F",(floatval($matches[1]) + $spacew));
-													return "".$newx." ".$matches[2]." x*#!#*x".$matches[3].$matches[4];'), $pmid, 1);
+                                                    function ($matches) {
+                                                        global $spacew;
+                                                        $newx = sprintf('%.2F', ((float)$matches[1] + $spacew));
+                                                        return $newx . ' ' . $matches[2] . ' x*#!#*x' . $matches[3] . $matches[4];
+                                                    },
+                                                    $pmid, 1);
 												break;
 											}
 											case 're': {
@@ -11658,9 +11661,12 @@ if (!class_exists('TCPDF', false)) {
 												$currentxpos = $xmatches[1];
 												// justify block
 												$pmid = preg_replace_callback('/([0-9\.\+\-]*)[\s]([0-9\.\+\-]*)[\s]([0-9\.\+\-]*)[\s]('.$strpiece[1][0].')[\s]('.$strpiece[2][0].')([\s]*)/x',
-													create_function('$matches', 'global $spacew;
-													$newx = sprintf("%.2F",(floatval($matches[1]) + $spacew));
-													return "".$newx." ".$matches[2]." ".$matches[3]." ".$matches[4]." x*#!#*x".$matches[5].$matches[6];'), $pmid, 1);
+                                                    function ($matches) {
+                                                        global $spacew;
+                                                        $newx = sprintf('%.2F', ((float)$matches[1] + $spacew));
+                                                        return $newx . ' ' . $matches[2] . ' ' . $matches[3] . ' ' . $matches[4] . ' x*#!#*x' . $matches[5] . $matches[6];
+                                                    },
+                                                    $pmid, 1);
 												break;
 											}
 											case 'c': {
@@ -11669,11 +11675,14 @@ if (!class_exists('TCPDF', false)) {
 												$currentxpos = $xmatches[1];
 												// justify block
 												$pmid = preg_replace_callback('/([0-9\.\+\-]*)[\s]([0-9\.\+\-]*)[\s]([0-9\.\+\-]*)[\s]([0-9\.\+\-]*)[\s]([0-9\.\+\-]*)[\s]('.$strpiece[1][0].')[\s]('.$strpiece[2][0].')([\s]*)/x',
-													create_function('$matches', 'global $spacew;
-													$newx1 = sprintf("%.3F",(floatval($matches[1]) + $spacew));
-													$newx2 = sprintf("%.3F",(floatval($matches[3]) + $spacew));
-													$newx3 = sprintf("%.3F",(floatval($matches[5]) + $spacew));
-													return "".$newx1." ".$matches[2]." ".$newx2." ".$matches[4]." ".$newx3." ".$matches[6]." x*#!#*x".$matches[7].$matches[8];'), $pmid, 1);
+                                                    function ($matches) {
+                                                        global $spacew;
+                                                        $newx1 = sprintf('%.3F', ((float)$matches[1] + $spacew));
+                                                        $newx2 = sprintf('%.3F', ((float)$matches[3] + $spacew));
+                                                        $newx3 = sprintf('%.3F', ((float)$matches[5] + $spacew));
+                                                        return $newx1 . ' ' . $matches[2] . ' ' . $newx2 . ' ' . $matches[4] . ' ' . $newx3 . ' ' . $matches[6] . ' x*#!#*x' . $matches[7] . $matches[8];
+                                                    },
+                                                    $pmid, 1);
 												break;
 											}
 										}
@@ -11698,10 +11707,13 @@ if (!class_exists('TCPDF', false)) {
 										$pmidtemp = preg_replace('/[\\\][\(]/x', '\\#!#OP#!#', $pmidtemp);
 										$pmidtemp = preg_replace('/[\\\][\)]/x', '\\#!#CP#!#', $pmidtemp);
 										$pmid = preg_replace_callback("/\[\(([^\)]*)\)\]/x",
-													create_function('$matches', 'global $spacew;
-													$matches[1] = str_replace("#!#OP#!#", "(", $matches[1]);
-													$matches[1] = str_replace("#!#CP#!#", ")", $matches[1]);
-													return "[(".str_replace(chr(0).chr(32), ") ".(-2830 * $spacew)." (", $matches[1]).")]";'), $pmidtemp);
+                                            function ($matches) {
+                                                global $spacew;
+                                                $matches[1] = str_replace('#!#OP#!#', '(', $matches[1]);
+                                                $matches[1] = str_replace('#!#CP#!#', ')', $matches[1]);
+                                                return '[(' . str_replace(chr(0) . chr(32), ') ' . (-2830 * $spacew) . ' (', $matches[1]) . ')]';
+                                            },
+                                            $pmidtemp);
 										$this->setPageBuffer($startlinepage, $pstart."\n".$pmid."\n".$pend);
 										$endlinepos = strlen($pstart."\n".$pmid."\n");
 									} else {
@@ -12201,7 +12213,7 @@ if (!class_exists('TCPDF', false)) {
 						// get style attributes
 						preg_match_all('/([^;:\s]*):([^;]*)/', $tag['attribute']['style'], $style_array, PREG_PATTERN_ORDER);
 						$astyle = array();
-						while (list($id, $name) = each($style_array[1])) {
+                        foreach ($style_array[1] as $id => $name) {
 							$name = strtolower($name);
 							$astyle[$name] = trim($style_array[2][$id]);
 						}
@@ -13291,7 +13303,7 @@ if (!class_exists('TCPDF', false)) {
 		* @since 4.5.000 (2008-12-31)
 		*/
 		protected function getObjFilename($name) {
-			return tempnam(K_PATH_CACHE, $name.'_');
+			return @tempnam(K_PATH_CACHE, $name.'_');
 		}
 
         /**
@@ -13649,17 +13661,20 @@ if (!class_exists('TCPDF', false)) {
 			$jfrompage = $frompage;
 			$jtopage = $topage;
 			$this->javascript = preg_replace_callback('/this\.addField\(\'([^\']*)\',\'([^\']*)\',([0-9]+)/',
-				create_function('$matches', 'global $jfrompage, $jtopage;
-				$pagenum = intval($matches[3]) + 1;
-				if (($pagenum >= $jtopage) AND ($pagenum < $jfrompage)) {
-					$newpage = ($pagenum + 1);
-				} elseif ($pagenum == $jfrompage) {
-					$newpage = $jtopage;
-				} else {
-					$newpage = $pagenum;
-				}
-				--$newpage;
-				return "this.addField(\'".$matches[1]."\',\'".$matches[2]."\',".$newpage."";'), $tmpjavascript);
+                function ($matches) {
+                    global $jfrompage, $jtopage;
+                    $pagenum = (int)$matches[3] + 1;
+                    if (($pagenum >= $jtopage) && ($pagenum < $jfrompage)) {
+                        $newpage = ($pagenum + 1);
+                    } elseif ($pagenum == $jfrompage) {
+                        $newpage = $jtopage;
+                    } else {
+                        $newpage = $pagenum;
+                    }
+                    --$newpage;
+                    return "this.addField(\'" . $matches[1] . "\',\'" . $matches[2] . "\'," . $newpage;
+                },
+                $tmpjavascript);
 			// return to last page
 			$this->lastPage(true);
 			return true;
@@ -13786,17 +13801,20 @@ if (!class_exists('TCPDF', false)) {
 			global $jpage;
 			$jpage = $page;
 			$this->javascript = preg_replace_callback('/this\.addField\(\'([^\']*)\',\'([^\']*)\',([0-9]+)/',
-				create_function('$matches', 'global $jpage;
-				$pagenum = intval($matches[3]) + 1;
-				if ($pagenum >= $jpage) {
-					$newpage = ($pagenum - 1);
-				} elseif ($pagenum == $jpage) {
-					$newpage = 1;
-				} else {
-					$newpage = $pagenum;
-				}
-				--$newpage;
-				return "this.addField(\'".$matches[1]."\',\'".$matches[2]."\',".$newpage."";'), $tmpjavascript);
+                function ($matches) {
+                    global $jpage;
+                    $pagenum = (int)$matches[3] + 1;
+                    if ($pagenum >= $jpage) {
+                        $newpage = ($pagenum - 1);
+                    } elseif ($pagenum == $jpage) {
+                        $newpage = 1;
+                    } else {
+                        $newpage = $pagenum;
+                    }
+                    --$newpage;
+                    return "this.addField(\'" . $matches[1] . "\',\'" . $matches[2] . "\'," . $newpage;
+                },
+                $tmpjavascript);
 			// return to last page
 			$this->lastPage(true);
 			return true;

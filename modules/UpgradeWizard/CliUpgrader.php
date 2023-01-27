@@ -423,7 +423,7 @@ eoq2;
         $class = get_class($this);
         $upgrader = new $class();
         $upgrader->parseArgs($argv);
-        $upgrader->verifyArguments($argv);
+        $upgrader->verifyArguments();
         $upgrader->init();
         list($version, $build) = self::getVersion();
         $upgrader->log("CliUpgrader v.$version (build $build) starting");

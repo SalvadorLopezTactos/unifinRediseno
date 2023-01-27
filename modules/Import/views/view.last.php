@@ -114,8 +114,14 @@ class ImportViewLast extends ImportView
         }
 
         $this->ss->assign("RESULTS_TABLE", $resultsTable);
-        $this->ss->assign("ERROR_TABLE", $this->getListViewTableFromFile(ImportCacheFiles::getErrorRecordsFileName(), 'errors') );
-        $this->ss->assign("DUP_TABLE", $this->getListViewTableFromFile(ImportCacheFiles::getDuplicateFileDisplayName(), 'dup'));
+        $errorTable = $errorCount > 0
+            ? $this->getListViewTableFromFile(ImportCacheFiles::getErrorRecordsFileName(), 'errors')
+            : '';
+        $this->ss->assign("ERROR_TABLE", $errorTable);
+        $dupTable = $dupeCount > 0
+            ? $this->getListViewTableFromFile(ImportCacheFiles::getDuplicateFileDisplayName(), 'dup')
+            : '';
+        $this->ss->assign("DUP_TABLE", $dupTable);
         $content = $this->ss->fetch('modules/Import/tpls/last.tpl');
         $this->ss->assign("CONTENT",$content);
         $this->ss->display('modules/Import/tpls/wizardWrapper.tpl');

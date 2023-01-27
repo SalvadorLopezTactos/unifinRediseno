@@ -43,6 +43,14 @@ interface Service
     public function delete(string $platform, string $deviceId) : bool;
 
     /**
+     * Activates/deactivates a user (makes possible/impossible to receive push notifications on user's devices)
+     * Important: This must not block user login/logout processes:
+     * - use short timeouts
+     * - do not throw errors or exceptions
+     */
+    public function setActive(string $userId, bool $flag): bool;
+
+    /**
      * Sends a message to users.
      *
      * @param array $userIds The user ids.

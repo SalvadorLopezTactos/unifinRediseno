@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '견적 설정',
 
     'LBL_RENEWAL' => '갱신',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '견적 상호작용',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '견적 타임라인',
 );

@@ -69,7 +69,8 @@ class check_duplicateAccounts extends SugarApi
                     $puesto_asesor = $usuario_asesor->puestousuario_c;
                     $limitePersonal = ($usuario_asesor->limite_asignacion_lm_c > 0) ? $usuario_asesor->limite_asignacion_lm_c : 0;
                     $args = array('id_user' => $idAsesor);
-                    $objRegistrosAsignados = GetRegistrosAsignadosForProtocolo::getRecordsAssign("", $args);
+                    $classProtocolo = new GetRegistrosAsignadosForProtocolo();
+                    $objRegistrosAsignados = $classProtocolo->getRecordsAssign("", $args);
                     $total_asignados = $objRegistrosAsignados['total_asignados'];
 
                     $GLOBALS['log']->fatal("Total de asignados: " . $total_asignados . " Usuario: " . $usuario_asesor->user_name . " Puesto: " . $puesto_asesor);

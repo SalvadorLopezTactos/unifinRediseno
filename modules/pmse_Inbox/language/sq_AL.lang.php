@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Paneli i regjistrimit të proceseve',
 
     'LBL_CAS_ID' => 'Proceso ID',
+    'LBL_CAS_STATUS' => 'Statusi i procesit',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "E panjohur (sipas UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "detyra u",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "detyra ishte",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "Procesi u caktua #%s %s në regjistër %s nga %s veprimi %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "në",
     'LBL_PMSE_HISTORY_LOG_AND'  => "dhe",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'vendosja ose heqja e lidhjes së një regjistrimi me',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Aprovo',
     'LBL_PMSE_LABEL_REJECT' => 'Refuzo',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Procesi ne progres',
     'LBL_STATUS_CANCELLED' => 'Procesi u anulua',
     'LBL_STATUS_ERROR' => 'Gabim procesesh',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Përfunduar',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Ndërprerë',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Në progres',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Anuluar',
+    'LBL_STATUS_ERROR_ENUM' => 'Gabim',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Proceso listën',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Procese të pambajtura',

@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,47 +18,17 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class RoleAssignment extends Entity
 {
     /**
-    * Gets the displayName
-    * The display or friendly name of the role Assignment.
-    *
-    * @return string The displayName
-    */
-    public function getDisplayName()
-    {
-        if (array_key_exists("displayName", $this->_propDict)) {
-            return $this->_propDict["displayName"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the displayName
-    * The display or friendly name of the role Assignment.
-    *
-    * @param string $val The displayName
-    *
-    * @return RoleAssignment
-    */
-    public function setDisplayName($val)
-    {
-        $this->_propDict["displayName"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the description
     * Description of the Role Assignment.
     *
-    * @return string The description
+    * @return string|null The description
     */
     public function getDescription()
     {
@@ -85,10 +54,39 @@ class RoleAssignment extends Entity
     }
     
     /**
+    * Gets the displayName
+    * The display or friendly name of the role Assignment.
+    *
+    * @return string|null The displayName
+    */
+    public function getDisplayName()
+    {
+        if (array_key_exists("displayName", $this->_propDict)) {
+            return $this->_propDict["displayName"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the displayName
+    * The display or friendly name of the role Assignment.
+    *
+    * @param string $val The displayName
+    *
+    * @return RoleAssignment
+    */
+    public function setDisplayName($val)
+    {
+        $this->_propDict["displayName"] = $val;
+        return $this;
+    }
+    
+    /**
     * Gets the resourceScopes
     * List of ids of role scope member security groups.  These are IDs from Azure Active Directory.
     *
-    * @return string The resourceScopes
+    * @return string|null The resourceScopes
     */
     public function getResourceScopes()
     {
@@ -117,12 +115,12 @@ class RoleAssignment extends Entity
     * Gets the roleDefinition
     * Role definition this assignment is part of.
     *
-    * @return RoleDefinition The roleDefinition
+    * @return RoleDefinition|null The roleDefinition
     */
     public function getRoleDefinition()
     {
         if (array_key_exists("roleDefinition", $this->_propDict)) {
-            if (is_a($this->_propDict["roleDefinition"], "Microsoft\Graph\Model\RoleDefinition")) {
+            if (is_a($this->_propDict["roleDefinition"], "\Microsoft\Graph\Model\RoleDefinition") || is_null($this->_propDict["roleDefinition"])) {
                 return $this->_propDict["roleDefinition"];
             } else {
                 $this->_propDict["roleDefinition"] = new RoleDefinition($this->_propDict["roleDefinition"]);

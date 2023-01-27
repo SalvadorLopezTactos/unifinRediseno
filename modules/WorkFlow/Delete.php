@@ -30,6 +30,8 @@ if(!isset($_REQUEST['record']))
     $focus->mark_deleted($_REQUEST['record']);
 	//Re-write workflow
 	$focus->write_workflow();
-
-header("Location: index.php?module=".$_REQUEST['return_module']."&action=".$_REQUEST['return_action']."&record=".$_REQUEST['return_id']);
-?>
+header('Location: index.php?' . http_build_query([
+        'module' => $_REQUEST['return_module'],
+        'action' => $_REQUEST['return_action'],
+        'record' => $_REQUEST['return_id'],
+    ]));

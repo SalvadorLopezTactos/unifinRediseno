@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Förnyelse av intäktspost-ID',
     'LBL_PARENT_RLIS' => 'Huvudintäktsposter',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Huvudintäktsposter',
+    'LBL_FORECASTED_LIKELY' => 'Prognostiserad som sannolik',
     'LBL_EXPERT_ID' => 'Produkt expert',
     'LBL_FORECAST' => 'Inkludera i prognos',
     'LBL_SUBTOTAL' => 'Delsumma',

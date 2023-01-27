@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Wyświetl szablony',
     'LNK_LIST_KBCATEGORIES' => 'Wyświetl kategorie',
     'LBL_TEMPLATES' => 'Szablony',
+    'LBL_TEMPLATE' => 'Szablon',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Szablonu spowoduje zastąpienie wszystkich treści.' .
         ' Czy na pewno chcesz użyć tego szablonu?',
     'LNK_IMPORT_KBCONTENTS' => 'Importuj artykuły',

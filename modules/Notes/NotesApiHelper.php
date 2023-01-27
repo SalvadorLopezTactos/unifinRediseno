@@ -12,7 +12,7 @@
 
 use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
 
-class NotesApiHelper extends AttachmentsApiHelper
+class NotesApiHelper extends SugarBeanApiHelper
 {
     /**
      * This function sets the team & assigned user and sets up the contact & account relationship
@@ -30,13 +30,12 @@ class NotesApiHelper extends AttachmentsApiHelper
             unset($submittedData['file_mime_type']);
         }
 
-        if (isset($submittedData['attachment_list'])) {
-            $submittedData['attachment_list'] = array_filter($submittedData['attachment_list'], function($attachment) use ($bean) {
-                return $attachment['id'] !== $bean->id;
-            });
-        }
-
         $data = parent::populateFromApi($bean, $submittedData, $options);
+
+        // delete legacy attachment if filename is blank
+        if ($bean->id && !empty($bean->fetched_row['filename']) && empty($submittedData['filename'])) {
+            $bean->deleteAttachment("false", false);
+        }
 
         //Only needed for Portal sessions
         $portalSession = PortalFactory::getInstance('Session');

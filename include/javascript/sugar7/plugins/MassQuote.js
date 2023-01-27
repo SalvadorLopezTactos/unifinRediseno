@@ -18,7 +18,7 @@
             /**
              * Fields to remove off the RLI model before converting to QLI
              */
-            blacklistRLIFields: ['_acl', '_module', 'id'],
+            blacklistRLIFields: ['_acl', '_module', 'id', 'quote_id'],
 
             /**
              * Attach code for when the plugin is registered on a view

@@ -49,8 +49,11 @@
      * @param {Event} e
      */
     setLanguage: function(e) {
-        var $li = this.$(e.currentTarget),
-            langKey = $li.data("lang-key");
+        var $li = this.$(e.currentTarget);
+        var langKey = $li.data('lang-key');
+        var currentLanguageForDom = _.first(langKey.split('_'));
+        // Use the simple language code as per HTML qualifications
+        document.documentElement.lang = currentLanguageForDom;
         app.alert.show('language', {level: 'warning', title: app.lang.get('LBL_LOADING_LANGUAGE'), autoclose: false});
         app.user.setPreference('language', langKey);
         app.lang.setLanguage(langKey, function() {

@@ -1577,7 +1577,19 @@
             return;
         }
         
-        if (this.model.get('email')[0].email_address == "" || this.model.get('email')[0].email_address == undefined) {
+        if(!_.isEmpty(this.model.get('email'))){
+            if (this.model.get('email')[0].email_address == "" || this.model.get('email')[0].email_address == undefined) {
+                app.alert.show('No_Envio', {
+                    level: 'error',
+                    messages: 'El Lead no contiene un correo electrónico.',
+                    autoClose: false
+                });
+                return;
+            }
+
+        }
+
+        if(_.isEmpty(this.model.get('email'))){
             app.alert.show('No_Envio', {
                 level: 'error',
                 messages: 'El Lead no contiene un correo electrónico.',
@@ -1585,6 +1597,7 @@
             });
             return;
         }
+        
         App.alert.show('eventoEnvioMailCliente', {
             level: 'process',
             title: 'Cargando, por favor espere.',

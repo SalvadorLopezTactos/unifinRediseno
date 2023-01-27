@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Описание',
     'LBL_OW_TYPE'=>'Тип',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Прогноз команды для <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Полный отчет',
     'LBL_FDR_OPPORTUNITIES'=>'Прогноз по продажам',
     'LBL_FDR_WEIGH'=>'Взвешенная сумма продаж',
     'LBL_FDR_COMMIT'=>'Совершенные продажи',
     'LBL_FDR_DATE_COMMIT'=>'Дата совершения продажи',
+    'LBL_FDR_FORECAST_HEADER' => 'Прогноз продавца для <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Прогнозы: лист',
     'LBL_DV_MY_FORECASTS' => 'Мои прогнозы',
-    'LBL_DV_MY_TEAM' => "Прогнозы моей команды" ,
+    'LBL_DV_MY_TEAM' => "Прогнозы моей команды",
     'LBL_DV_TIMEPERIODS' => 'Периоды отчета:',
     'LBL_DV_FORECAST_PERIOD' => 'Период прогноза',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Сделки по прогнозу',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Базовая процентная ставка',
 
     'LBL_QUOTA' => 'Плановый объем продаж',
-    'LBL_QUOTA_ADJUSTED' => 'Установленный объем продаж',
+    'LBL_QUOTA_ADJUSTED' => 'Скорректированный объем продаж',
 
     'LBL_FORECAST_FOR'=>'Лист прогноза для:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Увеличенный)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Объемы продаж Запланированные Фактические',
 
     'LBL_FORECAST' => 'Прогноз',
+    'LBL_COMMITMENT' => 'Подтверждение',
+    'LBL_TEAM_COMMITMENT' => 'Подтверждение команды',
+    'LBL_FORECASTED' => 'Спрогнозировано',
+    'LBL_ADJUSTED_TOTAL' => 'Скорректированный общий',
     'LBL_COMMIT_STAGE' => 'Стадия совершения продажи',
     'LBL_SALES_STAGE' => 'Стадия',
     'LBL_AMOUNT' => 'Сумма',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, и {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'вероятный {{{direction}}} {{{from}}} до {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'оптимистичный {{{direction}}} {{{from}}} до {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'пессимистичный {{{direction}}} {{{from}}} до {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Вероятно останется прежним',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Останется прежним при оптимистичных прогнозах',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Останется прежним при пессимистичным прогнозам',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Подтвержденный (вероятный) {{{direction}}} с {{{from}}} до {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Подтвержденный (оптимистичный) {{{direction}}} с {{{from}}} до {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Подтвержденный (пессимистичный) {{{direction}}} с {{{from}}} до {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Подтвержденный (вероятный) остался прежним',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Подтвержденный (оптимистичный) остался прежним',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Подтвержденный (пессимистичный) остался прежним',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'В этом месяце на {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Отображена общая сумма',
     'LBL_TOTAL' => 'Итого',
     'LBL_OVERALL_TOTAL' => 'Всего',
-    'LBL_EDITABLE_INVALID' => 'Неправильное значение для {0}',
+    'LBL_EDITABLE_INVALID' => 'Неправильное значение для {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Значение должно быть между {0} и {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'вы не сохранили изменения в Вашем листе прогнозов',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Заметьте, что только сохраненные и применимые данные могут быть экспортированы. Нажмите Ок, чтобы продолжить экпортирование, или нажмите Отклонить, чтобы вернуться к листу',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Включено',
     'LBL_CHART_NOT_INCLUDED' => 'Не включено',
     'LBL_CHART_ADJUSTED' => 'Установлено',
-    'LBL_SAVE_DRAFT' => 'Сохранить черновик',
+    'LBL_SAVE_DRAFT' => 'Сохранить',
     'LBL_CHANGES_BY' => 'изменяется на {0}',
     'LBL_FORECAST_SETTINGS' => 'Настройки',
 
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Превышение',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Нет данных',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Достичь объемов продаж',
+    'LBL_OPEN_LIKELY' => 'Открыть вероятный',
+    'LBL_OPEN_BEST' => 'Открыть оптимистичный',
+    'LBL_OPEN_WORST' => 'Открыть пессимистичный',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Установить объем продаж',
     'LBL_ASSIGNING_QUOTA' => 'Принять установленный объем продаж',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Прогнозы моей команды",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'У Вас есть не сохраненные изменения. Вы точно хотите произвести сортировку рабочего листа и отменить внесенные изменения?',
+
+    'LBL_SAVE_TOOLTIP' => 'Сохранить изменения строк листа',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Сохранить изменения в записях и отправить прогноз руководителю',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Отправить прогноз руководителю и назначить объем продаж',
+
+    'LBL_SAVE_LABEL_REP' => 'Сохранить ',
+    'LBL_SAVE_LABEL_MGR' => 'Сохранить скорректированные значения',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} включает записи {{forecastby_singular_module}} для построения {{forecastworksheets_module}} и прогнозирования продаж. Пользователи могут работать в направлении достижения {{quotas_module}} продажи на индивидуальном, командном и организационном уровнях продаж. Для получения доступа к модулю {{plural_module_name}}, пользователь с правами администратора должен выбрать требуемые организацей периоды времени, диапазоны и сценарии. 

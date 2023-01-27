@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Users',
     'LBL_EMAILS_PRODUCTS_REL' => 'Quoted Line Items',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Revenue Line Items',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Escalations',
     'LBL_EMAILS_MESSAGES_REL' => 'Messages',
     'LBL_EMAILS_PURCHASES_REL' => 'Purchases',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Purchased Line Items',
@@ -473,4 +474,5 @@ You may apply a predefined template using the Template button or include one of 
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Send email',
     'LBL_MAILBOX' => 'Inbound Account',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Please configure an outbound email account via <a href="#OutboundEmail">Email Settings</a> in order to send emails.',
 );

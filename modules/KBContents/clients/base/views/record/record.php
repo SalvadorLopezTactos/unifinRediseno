@@ -170,37 +170,21 @@ $viewdefs['KBContents']['base']['view']['record'] = array(
             'columns' => 2,
             'placeholders' => true,
             'fields' => array(
-                array(
-                    'name' => 'kbdocument_body_set',
-                    'type' => 'fieldset',
-                    'label' => 'LBL_TEXT_BODY',
+                [
+                    'name' => 'kbdocument_body',
+                    'type' => 'htmleditable_tinymce',
+                    'dismiss_label' => false,
                     'span' => 12,
-                    'fields' => array(
-                        array(
-                            'name' => 'template',
-                            'type' => 'template-button',
-                            'icon' => 'fa-file-o',
-                            'css_class' => 'pull-right load-template',
-                            'label' => 'LBL_TEMPLATES',
-                        ),
-                        array(
-                            'name' => 'kbdocument_body',
-                            'type' => 'htmleditable_tinymce',
-                            'dismiss_label' => false,
-                            'fieldSelector' => 'kbdocument_body',
-                        ),
-                    ),
-                ),
-                array(
-                    'name' => 'attachment_list',
-                    'label' => 'LBL_ATTACHMENTS',
-                    'type' => 'multi-attachments',
-                    'link' => 'attachments',
-                    'module' => 'Notes',
-                    'modulefield' => 'filename',
-                    'bLabel' => 'LBL_ADD_ATTACHMENT',
-                    'span' => 12,
-                ),
+                    'fieldSelector' => 'kbdocument_body',
+                    'tinyConfig' => [
+                        'toolbar' => 'code | bold italic underline strikethrough | alignleft aligncenter alignright ' .
+                            'alignjustify | forecolor backcolor |  styleselect formatselect fontselect ' .
+                            'fontsizeselect | cut copy paste pastetext | search searchreplace | bullist numlist | ' .
+                            'outdent indent | ltr rtl | undo redo | link unlink anchor image | subscript ' .
+                            'superscript | charmap | table | hr removeformat | insertdatetime | ' .
+                            'kbtemplate',
+                    ],
+                ],
                 array(
                     'name' => 'tag',
                     'span' => 12,
@@ -214,6 +198,30 @@ $viewdefs['KBContents']['base']['view']['record'] = array(
             'columns' => 2,
             'placeholders' => true,
             'fields' => array(
+                [
+                    'name' => 'attachment_list',
+                    'label' => 'LBL_ATTACHMENTS',
+                    'type' => 'multi-attachments',
+                    'link' => 'attachments',
+                    'module' => 'Notes',
+                    'modulefield' => 'filename',
+                    'bLabel' => 'LBL_ADD_ATTACHMENT',
+                    'span' => 12,
+                    'max_num' => -1,
+                    'related_fields' => [
+                        'filename',
+                        'file_mime_type',
+                    ],
+                    'fields' => [
+                        'name',
+                        'filename',
+                        'file_size',
+                        'file_source',
+                        'file_mime_type',
+                        'file_ext',
+                        'upload_id',
+                    ],
+                ],
                 'language' => array(
                     'name' => 'language',
                     'type' => 'enum-config',

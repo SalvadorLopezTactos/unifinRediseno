@@ -41,17 +41,15 @@
 
 <script type="text/javascript">
 enableQS(false);
-{literal}
-function cal_isValidDuration(){ 
+function cal_isValidDuration(){
 	form = document.getElementById('CalendarEditView');
 	if(typeof form.duration_hours == "undefined" || typeof form.duration_minutes == "undefined")
 		return true;
 	if(form.duration_hours.value + form.duration_minutes.value <= 0){
-		alert('{/literal}{$MOD.NOTICE_DURATION_TIME|escape:'javascript':'UTF-8'}{literal}');
+		alert('{$MOD.NOTICE_DURATION_TIME|escape:'javascript':'UTF-8'}');
 		return false; 
 	} 
 	return true;
 }
-{/literal}
 </script>
 <script type="text/javascript" src="{sugar_getjspath file='include/SugarFields/Fields/Datetimecombo/Datetimecombo.js'}"></script>

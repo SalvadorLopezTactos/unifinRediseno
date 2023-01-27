@@ -323,7 +323,7 @@ WHERE TABLE_SCHEMA = ?
                     $this->connectOptions['db_name'],
                     $tableName,
                     'BASE TABLE',
-                ))->fetchColumn();
+                ))->fetchOne();
 
             return !empty($result);
         }
@@ -816,7 +816,7 @@ FROM information_schema.statistics';
         $stmt = $conn->executeQuery($query, $params);
 
         $data = array();
-        while (($row = $stmt->fetch())) {
+        while (($row = $stmt->fetchAssociative())) {
             if (!$filterByTable) {
                 $table_name = $row['table_name'];
             }
@@ -1247,7 +1247,7 @@ EOQ;
 
         $set_password_query = <<<EOQ
             SET PASSWORD FOR
-            $user_string_quoted = PASSWORD($password_quoted)
+            $user_string_quoted = $password_quoted
 EOQ;
 
         $this->query($set_password_query, true);
@@ -1275,6 +1275,14 @@ EOQ;
 	{
 		return $this->query("DROP DATABASE IF EXISTS `$dbname`", true);
 	}
+
+    public function optimizeTable(string $table): void
+    {
+        if (!SugarConfig::getInstance()->get('disable_optimize_table', false)) {
+            $sql = "OPTIMIZE LOCAL TABLE {$table}";
+            $this->query($sql, false, "OPTIMIZE problem");
+        }
+    }
 
 	/**
 	 * Check DB version

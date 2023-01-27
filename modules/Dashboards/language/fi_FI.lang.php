@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Kaikki moduulin {{module}} työpöydät',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Kaikki moduulin {{module}} näkymän {{view}} työpöydät',
     'LBL_COPY_OF' => 'Kopio {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Tietolaatikko-koontinäyttöjä ei voi poistaa.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Luo työpöytä',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Haluatko varmasti palauttaa koontinäytön ulkoasun oletusasetukset?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Haluatko varmasti palauttaa koontinäytön ulkoasun oletusasetukset?',
+    'LBL_FILTER_UTILS_SELECT' => 'Allokoitu',
 );

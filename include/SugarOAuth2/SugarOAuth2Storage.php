@@ -143,9 +143,9 @@ class SugarOAuth2Storage implements IOAuth2GrantUser, IOAuth2RefreshTokens, Suga
      * @param string $username The name of the user you want to load
      * @return SugarBean The user from the name
      */
-    public function loadUserFromName($username)
+    public function loadUserFromName($username, bool $allowInactive = false)
     {
-        return $this->getPlatformStore()->loadUserFromName($username);
+        return $this->getPlatformStore()->loadUserFromName($username, $allowInactive);
     }
 
     // END METHOD FROM SugarOAuth2StorageInterface
@@ -336,7 +336,7 @@ class SugarOAuth2Storage implements IOAuth2GrantUser, IOAuth2RefreshTokens, Suga
                         "SELECT NULL FROM oauth_tokens WHERE id = ?",
                         [$_SESSION['oauth2']['refresh_token']]
                     )
-                    ->fetchColumn();
+                    ->fetchOne();
                 if ($result === false) {
                     // the refresh token is invalid
                     return null;

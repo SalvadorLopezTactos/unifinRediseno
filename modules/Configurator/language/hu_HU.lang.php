@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Alapértelmezett időformátum',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Szerver válaszidő kijelzése',
+    'FREEZE_FIRST_COLUMN' => 'Oszlopfagyasztás engedélyezése',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Engedélyezze ezt a beállítást, ha lehetővé szeretné tenni a felhasználók számára, hogy a különböző ' .
+        'listanézetek első oszlopának fagyasztását, beleértve a nézeteket, alpaneleket, dashleteket és konzolokat.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Lassú lekérdezések naplózása',
     'LOCK_HOMEPAGE_HELP'=>'Ez a beállítás megakadályozza<br />1) az új honlapok és dashletek hozzáadását a Kezdőlap modulhoz,<br />2) a dashletek elrendezésének áthúzással történő megváltoztatását.',
     'CURRENT_LOGO'=>'Jelenlegi logo:',
+    'CURRENT_LOGO_DARK' => 'A jelenlegi sötét üzemmód logója:',
     'CURRENT_LOGO_HELP'=>'Ez a logó jelenik meg a Sugar alkalmazás láblécének bal sarkában.',
+    'CURRENT_LOGO_DARK_HELP' => "Ez a logó jelenik meg az élőláb bal sarkában, amikor a Sugar alkalmazás sötét üzemmódban van a felhasználó Kinézet beállításai szerint.",
     'NEW_LOGO'=>'Válassza ki a logót:',
     'NEW_LOGO_HELP' => 'A kép formátuma .png vagy .jpg lehet. A maximális megengedett magasság 24 pixel, a szélesség pedig 180 pixel. Minden ennél nagyobb feltöltött kép erre a méretre lesz lekicsinyítve.',
+    'NEW_LOGO_DARK' => 'A sötét üzemmód logójának kiválasztása:',
     'NEW_LOGO_HELP_NO_SPACE' => 'A kép fájlformátuma kizárólag .png vagy .jpg lehet. A maximális megengedett magasság 24 pixel, míg a szélesség 450 pixel. Az ennél nagyobb képeket a rendszer erre a méretre fogja kicsinyíteni. A kép neve nem tartalmazhat szünetet.',
     'NEW_QUOTE_LOGO'=>'Új árajánlat logófeltöltés',
     'NEW_QUOTE_LOGO_HELP'=>'A szükséges képfájl formátum .jpg.<br />Az ajánlott méret 867x74 pixel.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Tovább',
     'LBL_WIZARD_FINISH_TAB' => 'Befejezés',
     'LBL_WIZARD_FINISH_TITLE' => 'Az alapvető rendszerbeállítások megtörténtek.',
-    'LBL_WIZARD_FINISH' => 'Kattintson a Tovább gombra a felhasználói beállítások megadásához!<br /><br />A rendszerbeállítások módosításához, kérem, kattintson ide!',
+    'LBL_WIZARD_FINISH' => 'Kattintson a <b>Tovább gombra</b> a felhasználói beállítások megadásához!<br /><br />
+A további beállítások módosításához, kérem, kattintson <a href="#Administration" target="_blank">ide</a>!',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Arculattervezés',
     'LBL_WIZARD_SYSTEM_DESC' => 'Adja meg cégének nevét és logóját a Sugar testreszabásához!',
     'LBL_WIZARD_LOCALE_DESC' => 'Állítsa be az adatok megjelenítését a Sugarban a földrajzi elhelyezkedésének megfelelően. Ezek lesznek az alapértelmezett beállítások, de a felhasználók meg tudják adni a saját beállításaikat.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Betöltés...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Törlés' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Üdvözöljük' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logó' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logó' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Sötét üzemmód logó',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* A Jelentések modul csak a Sugar Mobile kliensek számára elérhető.',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* A Jelentések modul nem érhető el telefonos böngészőkön keresztül.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

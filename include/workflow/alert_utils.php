@@ -478,6 +478,7 @@ function setup_mail_object(&$mail_object, &$admin) {
 
 function create_email_body(&$focus, &$mail_object, &$admin, $alert_msg, $alert_shell_array, $notify_user_id = "", $alert_user_array = array()) {
     global $current_language;
+    $alert_msg = stripslashes($alert_msg);
     $modStrings = return_module_language($current_language, 'WorkFlow');
 
     if ($alert_shell_array['source_type'] == "Custom Template") {

@@ -321,17 +321,19 @@ $count = count($projectTasks);
 $id_map = array(); // $id_map[<old_task_id>] = <new_task_id>
 
 // first loop, construct the id_map and assign new project_task_id
-for ($i = 0; $i < $count; $i++) {
-    $id_map[$projectTasks[$i]->project_task_id] = $i + 1;
-    $projectTasks[$i]->project_task_id = $i + 1;
+$i = 1;
+foreach ($projectTasks as $taskValue) {
+    $id_map[$taskValue->project_task_id] = $i;
+    $taskValue->project_task_id = $i;
+    $i++;
 }
 
 // second loop, modify parent_project_id based on id_map
-for ($i = 0; $i < $count; $i++) {
-    if (!empty($projectTasks[$i]->parent_task_id) && isset($id_map[$projectTasks[$i]->parent_task_id])) {
-        $projectTasks[$i]->parent_task_id = $id_map[$projectTasks[$i]->parent_task_id];
+foreach ($projectTasks as $taskValue) {
+    if (!empty($taskValue->parent_task_id) && isset($id_map[$taskValue->parent_task_id])) {
+        $taskValue->parent_task_id = $id_map[$taskValue->parent_task_id];
     } else {
-        $projectTasks[$i]->parent_task_id = '';
+        $taskValue->parent_task_id = '';
     }
 }
 // end Bug 47490
@@ -363,19 +365,7 @@ $sugar_smarty->assign('NAME_LENGTH', $projectTaskBean->field_defs['name']['len']
 //todo: also add the owner's managers
 
 global $current_user;
-if(is_admin($current_user)
-	&& $_REQUEST['module'] != 'DynamicLayout'
-	&& !empty($_SESSION['editinplace']))
-{
-    $record = $request->getValidInputRequest('record', 'Assert\Guid');
-    $action = $request->getValidInputRequest('action');
-    $module = $request->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
 
-	$sugar_smarty->assign("ADMIN_EDIT","<a href='index.php?action=index&module=DynamicLayout&from_action="
-        . $action . '&from_module=' . $module
-		."&record=" .$record. "'>"
-		.SugarThemeRegistry::current()->getImage("EditLayout","border='0' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDITLAYOUT'])."</a>");
-}
 $sugar_smarty->assign("DATE_FORMAT", $current_user->getPreference('datef'));
 $sugar_smarty->assign("CURRENT_USER", $current_user->id);
 $sugar_smarty->assign("CANEDIT",$current_user->id == $focus->assigned_user_id || $current_user->is_admin);

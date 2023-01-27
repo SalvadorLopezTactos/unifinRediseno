@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'Prognoser',
     'ForecastWorksheets' => 'Prognosark',
     'ForecastManagerWorksheets' => 'Prognoschef arbetsark',
-    'MergeRecords'=>'Förena poster',
       'VisualPipeline'=>'Visuell pipeline',
       'ConsoleConfiguration' => 'Konsolkonfiguration',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'Roller',
     'Notifications'=>'Meddelanden',
     'Sync'=>'Synka',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
     'ReportMaker' => 'Enterprise rapporter',
     'DataSets' => 'Datumformat',
     'CustomQueries' => 'Special frågor',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'Köpta poster',
     'MobileDevices' => 'Mobila enheter',
     'PushNotifications' => 'Pushaviseringar',
+    'Escalations' => 'Eskaleringar',
+    'DocumentTemplates' => 'Dokumentmallar',
+    'DocumentMerges' => 'Dokumentkopplingar',
     'WorkFlow' => 'Arbetsflöden definitioner:',
     'EAPM' => 'Externa Konton',
     'Worksheet' => 'Arbetsark',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'Semester',
     'ChangeTimers' => 'Ändra timers',
     'Messages' => 'Meddelanden',
+    'Audit' => 'Granskning',
+    'RevenueLineItems' => 'Intäktsposter',
+    'DocuSignEnvelopes' => 'DocuSign-kuvert',
+    'Geocode' => 'Geokod',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Uppgift',
         'Dashboards' => 'Paneler',
         'DataPrivacy' => 'DP',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'BC',
         'PurchasedLineItems' => 'PL',
+        'DocumentTemplates' => 'DT',
+        'DocumentMerges' => 'DM',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Prognosark',
     'ForecastManagerWorksheets' => 'Prognoschef arbetsark',
     'Quotas' => 'Budget',
-    'MergeRecords'=>'Sammanfoga post',
     'Teams' => 'Lag',
     'TeamNotices' => 'Team notis',
     'Activities' => 'Aktivitet',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'Köp',
     'PurchasedLineItems' => 'Köpt post',
     'PushNotifications' => 'Pushavisering',
+    'Escalations' => 'Eskalering',
+    'DocumentTemplates' => 'Dokumentmall',
+    'DocumentMerges' => 'Dokumentsammanslagning',
     'WorkFlow' => 'Arbetsflöde',
     'EAPM' => 'Externt Konto',
     'Worksheet' => 'Arbetsark',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'Semester',
     'ChangeTimers' => 'Ändra timer',
     'Messages' => 'Meddelande',
+    'Audit' => 'Granskning',
+    'DocuSignEnvelopes' => 'DocuSignEnvelope',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
+    'Geocode' => 'Geokod',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'Verktyg',
     'Other' => 'Annan',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF och CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'Pågår',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'Kunskapsbas',
       'PurchasedLineItems' => 'Köpt post',
       'Purchases' => 'Köp',
+      'Escalations' => 'Eskalering',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Konto',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'Anteckning',
     'PurchasedLineItems' => 'Köpt post',
     'Purchases' => 'Köp',
+    'Escalations' => 'Eskalering',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'Beställd',
       'Ship' => 'Levererad',
   ),
+    'active_status_dom' => [
+        'Active' => 'Aktiv',
+        'Inactive' => 'Inaktiv',
+        'Retired' => 'Kasserad',
+    ],
+    'appearance_options' => [
+        'system_default' => 'Använd systeminställning',
+        'light' => 'Ljus',
+        'dark' => 'Mörk',
+    ],
 
 
   'pricing_formula_default_key' => 'Fast',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'TV',
         'NewsLetter' => 'Nyhetsbrev',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GET',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,12 +2049,14 @@ $app_list_strings = array (
         'print'       => 'Skriv ut',
         'pieWedgeName'      => 'sektioner',
     ),
-    'd3_chart_types' => array (
+    'chart_types' => array (
         'pie chart' => 'Pajdiagram',
-        'bar chart' => 'Lodrätt stapeldiagram',
-        'group by chart' => 'Lodrätt grupperat stapeldiagram',
-        'horizontal bar chart' => 'Horisontell bar graf',
-        'horizontal group by chart' => 'Vågrätt grupperat stapeldiagram',
+        'donut chart' => 'Ringdiagram',
+        'treemap chart' => 'Treemap-diagram',
+        'bar chart' => 'Vertikalt stapeldiagram',
+        'group by chart' => 'Grupperat vertikalt stapeldiagram',
+        'horizontal bar chart' => 'Horisontellt stapeldiagram',
+        'horizontal group by chart' => 'Grupperat horisontellt stapeldiagram',
         'line chart' => 'Linjediagram',
         'funnel chart' => 'Trattdiagram',
     ),
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'Pris (Högsta totalbelopp)',
             'total_revenue:asc' => 'Pris (Lägsta totalbelopp)',
         ],
+        'calendar_type_list' => [
+          'main' => 'Kalendercenter',
+        ],
+        'calendar_views_options' => [
+          'day' => 'Dag',
+          'week' => 'Vecka',
+          'workWeek' => 'Arbetsvecka',
+          'expandedMonth' => 'Månad',
+          'agenda' => 'Agenda',
+          'timeline' => 'Tidslinje',
+          'monthSchedule' => 'Schemaläggare',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'Skapad',
+          'completed' => 'Genomförd',
+          'declined' => 'Avböjd',
+          'delivered' => 'Levererad',
+          'sent' => 'Skickad',
+          'signed' => 'Signerad',
+          'voided' => 'Annullerad',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'Standard',
+            'color' => 'Färg',
+            'image' => 'Bild',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'Ny',
+            'In Progress' => 'Pågår',
+            'Closed' => 'Stängd',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'Inaktivitet',
+            'Lack of Progress' => 'Bristande framsteg',
+            'Customer-Imposed Deadline' => 'Deadline fastställd av kund',
+            'Account at Risk' => 'Konto i riskzonen',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'Begärd av kund',
+            'Internally Requested' => 'Begärd internt',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'Ärende',
+            'Bugs' => 'Bugg',
+            'Accounts' => 'Konto',
+            'Opportunities' => 'Möjlighet',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'Positiv',
+            'Negative' => 'Negativ',
+            'Neutral' => 'Neutral',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'Inte sannolikt',
+            '02_less_likely' => 'Mindre sannolikt',
+            '03_neutral' => 'Neutralt',
+            '04_more_likely' => 'Mer sannolikt',
+            '05_very_likely' => 'Mycket sannolikt',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'Matchar inte kunder',
+            '02_no_match' => '',
+            '01_matches_customers' => 'Matchar kunder',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Följ Länk',
   'LBL_TOGGLE_VISIBILITY' => 'Växla Synlighet', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivitetsström',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar och 3-D-kuben är registrerade varumärken för SugarCRM Inc. '.
         'Alla andra företags- och produktnamn som används eller förekommer i denna produkt kan vara varumärken tillhörande '.
         'SugarCRM ®, Sugar Enterprise™ och Sugar™ är varumärken tillhörande SugarCRM Inc.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'Lägg till' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Företagslogotyp' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalender' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'Ett rullgardinsvärde som du valt ändrade layouten för din postvy. ' .
+        'Värdena rensas för de fält som döljs i den här nya layouten. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'huvudsaklig modulnavigering',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'Stäng',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} markerade som {{status}}.',
 
+    'LBL_FOCUS' => 'Fokus',
+
     'LBL_QUERY_VALID'=>'Giltig',
     'LBL_QUERY_ERROR'=>'Fel!',
     'LBL_QUERY_CHILD'=>'Giltig underfråga',
@@ -3068,6 +3185,10 @@ $app_strings = array (
     'LBL_CASES'=>'Ärenden',
     'LBL_MESSAGE'=>'Meddelande',
     'LBL_MESSAGES'=>'Meddelanden',
+    'LBL_ESCALATIONS' => 'Eskaleringar',
+    'LBL_ESCALATION' => 'Eskalering',
+    'LBL_DOCUSIGN_ENVELOPES' => 'DocuSign-kuvert',
+    'LBL_DOCUSIGN_ENVELOPE' => 'DocuSign-kuvert',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Ändra lösenord',
     'LBL_CHANGE_BUTTON_LABEL' => 'Ändra',
@@ -3093,6 +3214,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'Öppna Objekt:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Skriv email',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'E-post',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Skriv email',
     'LBL_SEARCH_DROPDOWN_YES'=>'Ja',
     'LBL_SEARCH_DROPDOWN_NO'=>'Nej',
@@ -3118,6 +3240,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Dokument',
     'LBL_DATE_ENTERED' => 'Skapat datum',
     'LBL_DATE_MODIFIED' => 'Senast redigerad:',
+    'LBL_ACTIVITY_MODIFIED' => 'Ändrades',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Redigera översiktsflik',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'Redigera modulflikar',
     'LBL_EDIT_BUTTON' => 'Redigera',
@@ -3140,6 +3263,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Välj fält...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Välj operatör...',
     'LBL_FILTER_CREATE_NEW' => 'Skapa',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'Bygg filter (osparade)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(Osparade)',
     'LBL_FILTER_CREATE_FILTER' => 'Skapa nytt filter',
     'LBL_FILTER_CLOSE_FILTER' => 'Stäng filtret',
     'LBL_FILTER_EDIT_FILTER' => 'Redigera filter',
@@ -3202,6 +3327,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => 'Mer {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Aktiviteter idag',
     'LBL_LEADS'=>'Leads',
+    'LBL_LEAD'=>'Möjlig kund',
+    'LBL_QUOTES_BILL_TO' => 'Offerter (fakturera till)',
     'LBL_LESS' => 'mindre',
     'LBL_CAMPAIGN' => 'Kampanj:',
     'LBL_CAMPAIGNS' => 'Kampanjer',
@@ -3229,19 +3356,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'Vänligen välj minst två poster för att fortsätta.',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'Vänligen merkera mindre än 10 poster för att fortsätta.',
     'LBL_LISTVIEW_ALL' => 'Alla',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'Frys kolumn 1',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'Alla dubbletter',
     'LBL_LISTVIEW_NONE' => 'Ingen',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'Den här sidan',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Alla poster',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Valda poster',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Vald: ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Rensa markeringar.',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Rensa alla markeringar.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'Välj alla poster',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'Det finns fler än {{num}} poster i resultatet. Du har valt den första {{num}} poster.',
     'TPL_LISTVIEW_SELECTED' => 'Du har valt {{num}} poster ur resultatet.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'Du har markerat 1 post i resultatuppsättningen.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'Du har valt alla {{num}} poster i resultatet.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'Du har valt alla {{num}} poster i resultatet. {{link}} i datamängden.',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Uppdaterar {{num}} av {{totalt}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Uppdaterar {{num}} av {{total}}',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(om {{time}} {{unit}} kvar)',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Massuppdatering misslyckades. Initiera nytt försök ({{num}} av {{totalt}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Massuppdatering ofullständig. {{num}} post(er) är oförändrade.',
@@ -3249,7 +3378,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} post(er) ignorerades på grund av behörigheter eller fel.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} post(er) har uppdaterats.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} Massuppdatering',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Radera {{num}} av {{total}}.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Raderar {{num}} av {{total}}',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(om {{time}} {{unit}} kvar)',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => 'Massradera misslyckades. Initiera nytt försök ({{num}} av {{total}}).',
     'TPL_MASSDELETE_WARNING_CLOSE' => 'Massradera ofullständig. {{num}} post(er) kvar.',
@@ -3274,10 +3403,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Välj',
     'LBL_LISTVIEW_ACTIONS' => 'Händelser',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'Markera alla poster på denna sida',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'Avmarkera alla poster på denna sida',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} av {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '{{num}} av läses in...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Klicka för total',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'av',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'Hämta antal sidor',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'John',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Doe',
@@ -3285,10 +3421,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Kodapa av högsta rang',
     'LBL_LOGIN_TO_ACCESS' => 'Vänligen logga in för att få tillträde till detta område.',
     'LBL_LOGOUT' => 'Logga ut',
+    'LBL_FINISH_IMPERSONATING' => 'Avsluta imitation',
+    'LBL_RESET_MFA' => 'Återställ multifaktorautentisering',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, du imiterar för närvarande {{user}}.',
     'LBL_PROFILE' => 'Profil',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'Sammanfoga email',
     'LBL_MASS_UPDATE' => 'Massuppdatering',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'Välj alla poster för massuppdatering',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'Inkludera post i massuppdatering',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Lägg till fält',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Ta bort fält',
     'LBL_GENERATE_QUOTE' => 'Generera offert',
@@ -3343,6 +3484,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'Mer information',
     'LBL_PANEL_BODY' => 'Översikt',
     'LBL_PARENT_TYPE' => 'Föräldertyp',
+    'LBL_RELATED_TYPE' => 'Relaterad typ',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'Fas',
     'LBL_PICTURE_FILE' => 'Bild',
@@ -3416,7 +3558,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'Relaterad',
     'LBL_RELATED_INFORMATION' => 'Relaterad information',
-    'LBL_RELATED_RECORDS' => 'Relaterade poster',
+    'LBL_RELATED_RECORDS' => 'Relaterad {{module}}',
     'LBL_REPORTS_TO' => 'Rapporterar till',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'Indikerar obligatoriskt fält',
@@ -3535,7 +3677,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Med ensamrätt.<br />SugarCRM, Sugar och 3-D-kuben är registrerade varumärken för SugarCRM Inc. '.
         'Alla andra företags- och produktnamn som används eller förekommer i denna produkt kan vara varumärken tillhörande '.
         'respektive företag de associeras med.',
@@ -3598,6 +3740,7 @@ $app_strings = array (
     'LBL_UNDELETE' => 'Ångra radera',
     'LBL_UNSYNC' => 'Ångra synkronisering',
     'LBL_UPDATE' => 'Uppdatera',
+    'LBL_UPDATES' => 'Uppdateringar',
     'LBL_USER_LIST' => 'Användarlista',
     'LBL_USER_MENU' => 'Användarmeny',
     'LBL_USERS_SYNC'=>'Synkronisering av användare',
@@ -3664,6 +3807,8 @@ $app_strings = array (
     'NTC_DELETE_SUCCESS' => 'Du tog bort {0}.',
     'NTC_UNLINK_CONFIRMATION' => 'Är du säker på att du vill ta bort länken för denna post?',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'Är du säker på att du vill ta bort länken till {0}?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'Är du säker på att du vill ta bort länken till {0}? Detta tar även bort dem från ärendets primära kontaktfält.',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => '{0} kan inte avlänkas eftersom de är den primära kontakten i det här ärende. Uppdatera fältet primär kontakt innan du tar bort länken till denna post.',
     'NTC_UNLINK_SUCCESS' => 'Du tar bort länken till {0}.',
     'NTC_LOGIN_MESSAGE' => 'Var god fyll i ditt användarnamn och lösenord:',
     'NTC_NO_ITEMS_DISPLAY' => 'inga',
@@ -3695,6 +3840,9 @@ $app_strings = array (
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'När du uppdaterar webbläsaren stängs alla SugarLive-samtals- eller chatt-sessioner som du har öppnat automatiskt och alla sparade ändringar kommer att försvinna. Vill du fortsätta?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Du har ändringar som inte sparats. Är du säker på att du vill lämna sidan och ignorera ändringarna?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'Vill du verkligen återställa din <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">multifaktorsautentisering</a>?
+Om du genomför denna åtgärd kommer du att loggas ut omedelbart och du kommer behöva autentisera dig med hjälp av autentiseringsappen nästa gång du loggar in.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'Bekräfta och logga ut',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'En eller flera dashlets har osparade ändringar. Är du säker på att du vill stänga lådan?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Du flyttar till modulen Rapporter. Dina ändringar av dashlet sparas inte. Fortsätta?',
     'ERROR_NO_RECORD' => 'Fel vid hämtande av post. Posten är raderad eller så har du inte behörighet att visa den.',
@@ -3790,6 +3938,11 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Du har inga <item1> poster sparade. <item2> en nu.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Du kan skala från en .list",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'Positiv',
+    'LBL_SENTIMENT_NEUTRAL' => 'Neutral',
+    'LBL_SENTIMENT_NEGATIVE' => 'Negativ',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Klicka här",
     // contextMenu strings
@@ -3799,11 +3952,16 @@ $app_strings = array (
     'LBL_CREATE_NOTE' => 'Skapa anteckning',
     'LBL_CREATE_OPPORTUNITY' => 'Skapa affärsmöjlighet',
     'LBL_SCHEDULE_CALL' => 'Schemalägg telefonsamtal',
+    'LBL_SCHEDULE_CALL2' => 'Samtal',
     'LBL_SCHEDULE_MEETING' => 'Schemalägg möte',
+    'LBL_SCHEDULE_MEETING2' => 'Möte',
     'LBL_CREATE_MESSAGE' => 'Skapa meddelande',
+    'LBL_CREATE_MESSAGE2' => 'Meddelande',
     'LBL_CREATE_TASK' => 'Skapa uppgift',
+    'LBL_CREATE_TASK2' => 'Uppgift',
     'LBL_REMOVE_FROM_FAVORITES' => 'Ta bort från mina favoiriter',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'Anteckning',
     'LBL_DOWNLOAD_ALL' => 'Ladda ner alla',
     'LBL_DOWNLOAD_ONE' => 'Ladda ner',
     'LBL_ATTACHMENTS' => 'Bilagor',
@@ -3843,13 +4001,14 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Visa rader',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Relatera till aktuell post',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Kopplat fält',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'Frys första kolumnen',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Är du säker på att du vill radera Sugardashleten?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Är du säker på att du vill ta bort raden?',
     'LBL_MAXIMUM_OF' => 'Maximalt av',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'kolumner kan visas.',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'Instrumentpanel',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Min Dashboard',
     'LBL_COLLAPSE_ALL' => 'Dra ihop alla',
@@ -3866,12 +4025,15 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE' => 'Konfigurera',
     'LBL_DASHLET_TOGGLE' => 'Öppna/Stäng',
     'LBL_SIDEPANE_TOGGLE' => 'Öppna/stäng sidopanelen',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'Återställ standardlayout',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'Ingen instrumentpanel är konfigurerad',
+    'LBL_CREATE_DASHBOARD_LINK' => 'Skapa instrumentpanel',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'Hjälp',
     'LBL_HELPLET_TOGGLE' => 'Öppna/Stäng',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'Moduler',
     'LBL_FACET_MODIFIED_BY_ME' => 'Modifierad av mig',
     'LBL_FACET_CREATED_BY_ME' => 'Skapad av mig',
@@ -3888,6 +4050,7 @@ $app_strings = array (
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Postvy',
+    'LBL_RELATED_RECORDS' => 'Relaterad {{module}}',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Visar en post och (valfritt) relaterade poster i flikar.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Basposttyp',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Denna {{moduleSingular}}',
@@ -3937,7 +4100,7 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Inga poster hittades vid denna tidpunkt.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Case sammandrag',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'Interaktioner',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'Tidslinje',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Noter & Bilagor',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Noter & Bilagor hör till posten',
     'LBL_DASHLET_PIPLINE_NAME' => 'Pipeline',
@@ -4208,6 +4371,8 @@ $app_strings = array (
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Uppladdat Från Din Dator',
     'LBL_SEARCH_EXTERNAL_API' => 'Fil från Extern Källa',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'Ladda upp till extern källa',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'Länk från extern källa',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'Säkerhet',
     'LBL_SHARE_PRIVATE' => 'Privat',
     'LBL_SHARE_COMPANY' => 'Företag',
@@ -4316,6 +4481,9 @@ $app_strings = array (
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Kortkommandon',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>Form Funktionalitet - Alt+</strong><br/> I = red<b>I</b>gera (detaljvy)<br/> U = d<b>U</b>plicate (detaljvy)<br/> R = <b>R</b>adera (detaljvy)<br/> L = De<b>L</b>a (detaljvy)<br/> A = sp<b>A</b>ra (editview)<br/> L = annul<b>L</b>era (editview) <br/><br/></p><p><strong>Sök och Navigation  - Alt+</strong><br/> 7 = första ingång på Edit formulär<br/> 8 = Avancerad sök länk<br/> 9 = Första Sökformulär ingång<br/> 0 = Unified sök ingång<br></p>' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'Eskalera',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'Dela',
     'TPL_RECORD_SHARE_SUBJECT' => 'Delad {{module}} {{name}} från {{appId}}',
@@ -4388,7 +4556,7 @@ $app_strings = array (
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'Alla ändringar kommer att kasseras när du växlar till en ny primär post. Är du säker på att du vill byta?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'Slå ihop Relaterade poster',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Sammanslagen: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Sammanslagen: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'Slå ihop relaterad {{objectName}} misslyckades. Initiera nytt försök ({{num}} av {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4442,14 +4610,14 @@ $app_strings = array (
     'LBL_LANGUAGE' => 'Språk',
     'LBL_LOADING_LANGUAGE' => 'Laddar språkpaket',
     'LBL_UPLOADING' => 'Laddar Upp',
+    'LBL_UPLOADING_DOTS' => 'Laddar upp ...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Är du säker på att du vill ta bort den här bilden?',
     'LBL_FILE_DELETE_CONFIRM' => "Är du säker på att du vill radera denna fil? Detta går inte att ångra.",
     'LBL_FILE_DELETED' => 'Fil har tagits bort',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'Tema Portal',
-    'LBL_COFIGURE_PORTAL_THEME' => 'Konfigurera Portal tema',
-    'LBL_THEME_PREVIEW' => 'Tema Förhandsvisning',
+    'LBL_THEME_PREVIEW' => 'Förhandsgranskning av portaltema',
     'LBL_LOADING_PREVIEW' => 'Laddar Förhandsvisning',
     'LBL_RESET' => 'Återställ',
     'LBL_COLORS' => 'Färger',
@@ -4600,10 +4768,18 @@ $app_strings = array (
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Möten',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Uppgifter',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Telefonsamtal',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Konton',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontakter',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Email',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'Skift',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produkter',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Skiftundantag',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokument',
+    'LBL_ESCALATIONS' => 'Eskaleringar',
+    'LBL_ESCALATED' => 'Har eskalerats',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'Eskaleringar',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'Andra relaterade eskaleringar',
+    'LBL_ESCALATIONS' => 'Eskaleringar',
     'LNK_SETTINGS' => 'Inställningar',
     'LBL_MOBILE_SUPPORT' => 'Support',
     'LBL_MOBILE_SHOW_MORE' => 'Visa fler ...',
@@ -4811,6 +4987,55 @@ $app_strings = array (
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'Det gick inte att få servertid',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'Kunde inte aktivera offline-läge. Det går inte att nå servern.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'Utseende',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'Använd systeminställning',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'Ljus',
+    'LBL_MOBILE_APP_THEME_DARK' => 'Mörk',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'Nytt filnamn',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'Byt namn på fil',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'Skapad av mig',
+    'LBL_OPERATOR_CONTAINS' => 'är en av',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'är inte en av',
+    'LBL_OPERATOR_EMPTY' => 'är tom',
+    'LBL_OPERATOR_NOT_EMPTY' => 'är inte tom',
+    'LBL_OPERATOR_MATCHES' => 'matchar exakt',
+    'LBL_OPERATOR_STARTS_WITH' => 'börjar med',
+    'LBL_OPERATOR_EQUALS' => 'är lika med',
+    'LBL_OPERATOR_NOT_EQUALS' => 'är inte lika med',
+    'LBL_OPERATOR_GREATER_THAN' => 'är större än',
+    'LBL_OPERATOR_LESS_THAN' => 'är mindre än',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'är större än eller lika med',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'är mindre än eller lika med',
+    'LBL_OPERATOR_BETWEEN' => 'är mellan',
+    'LBL_OPERATOR_BEFORE' => 'före',
+    'LBL_OPERATOR_AFTER' => 'efter',
+    'LBL_OPERATOR_YESTERDAY' => 'igår',
+    'LBL_OPERATOR_TODAY' => 'idag',
+    'LBL_OPERATOR_TOMORROW' => 'imorgon',
+    'LBL_OPERATOR_LAST_7_DAYS' => 'senaste 7 dagarna',
+    'LBL_OPERATOR_NEXT_7_DAYS' => 'närmaste 7 dagarna',
+    'LBL_OPERATOR_LAST_30_DAYS' => 'senaste 30 dagarna',
+    'LBL_OPERATOR_NEXT_30_DAYS' => 'närmaste 30 dagarna',
+    'LBL_OPERATOR_LAST_MONTH' => 'senaste månaden',
+    'LBL_OPERATOR_THIS_MONTH' => 'denna månad',
+    'LBL_OPERATOR_NEXT_MONTH' => 'nästa månad',
+    'LBL_OPERATOR_LAST_YEAR' => 'senaste året',
+    'LBL_OPERATOR_THIS_YEAR' => 'detta år',
+    'LBL_OPERATOR_NEXT_YEAR' => 'nästa år',
+    'LBL_OPERATOR_IS' => 'är',
+    'LBL_OPERATOR_IS_NOT' => 'är inte',
+    'LBL_ERROR_FILTER_EMPTY' => 'Lägg till filterkriterier.',
+    'LBL_ADD_FILTER' => 'Lägg till kriterier',
+    'LBL_FILTER_NAME' => 'Filternamn',
+    'LBL_FILTER_FIELD' => 'Fält',
+    'LBL_FILTER_OPERATOR' => 'Operator',
+    'LBL_FILTER_VALUE' => 'Värde',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Spara till skrivbordsapp',
+    'LBL_FILTER_LOCAL' => 'Lokalt filter',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'Välkommen till{{{brandName}}}.<br/><br/> Låt oss lyfta fram en del nya funktioner...',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'Huvudmeny navigation.',
@@ -4856,6 +5081,7 @@ $app_strings = array (
     'LBL_COMMENT_ADD' => 'Lägg till en kommentar',
     'LBL_REQUIRED' => 'Obligatorisk',
     'LBL_MORE_BUTTON' => 'Mer',
+    'LBL_NO_OPTIONS' => 'Inga alternativ tillgängliga',
     'LBL_TRY_AGAIN' => 'Försök igen',
     'LBL_NEW_RECORDS' => 'Nyligen skapad',
     'LBL_ASSIGNED_TO_ME' => 'Min {{{module}}}',
@@ -5081,11 +5307,15 @@ $app_strings = array (
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Är du säker på att du vill stänga chatten?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'Skapa anteckning eller bifoga bilaga',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'Lägg till en anteckning',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Din inloggning lyckades inte. Var god och försök igen.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Fel Inloggningsuppgifter',
-    'LBL_PORTAL_INVALID_GRANT' => 'Din token är ogiltig eller har gått ut. Vänligen logga in igen',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Token har gått ut',
+    'LBL_PORTAL_INVALID_GRANT' => 'Din session har gått ut. Logga in igen.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Sessionen har gått ut',
     'LBL_PORTAL_AUTH_FAILED' => 'Klient autentiseringen misslyckades',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'Felaktig Klient',
     'LBL_PORTAL_INVALID_REQUEST' => 'Begäran som gjordes är ogiltig eller felutformad. Vänligen kontakta teknisk support.',
@@ -5119,6 +5349,8 @@ $app_strings = array (
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'Återställ standardpanelen',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'Konsol för förnyelse',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Översikt',
@@ -5138,6 +5370,7 @@ $app_strings = array (
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Sammanfattning av meddelande',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Sammanfattning av samtal',
     'LBL_OMNICHANNEL_LINK_TO' => 'Länk {{fromModule}} till {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'Länk till {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'Länkad',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Din webbläsare har inte stöd för chatt. Vänligen använd Google Chrome eller Mozilla Firefox.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Vänligen kontakta din Sugaradministratör för att få hjälp.',
@@ -5145,6 +5378,8 @@ $app_strings = array (
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Slutför konfigureringen av SugarLive innan du ringer ett utgående samtal.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Slutför konfigurationen av SugarLive-layouten innan du öppnar SugarLive.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Ställ dig själv på "Offline" i SugarLive innan du konfigurerar SugarLive-layouten.',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'Kompakt vy',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'Full vy',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'Återställ tab till standard',
@@ -5556,9 +5791,12 @@ $app_strings = array (
     'LBL_BEST' => 'Bästa',
     'LBL_WORST' => 'Värsta',
     'LBL_LIKELY' => 'Sannolikt',
-    'LBL_BEST_ADJUSTED' => 'Bästa (justerad)',
-    'LBL_WORST_ADJUSTED' => 'Värsta (justerad)',
-    'LBL_LIKELY_ADJUSTED' => 'Sannolikt (Justerad)',
+    'LBL_BEST_FORECAST' => 'Förpliktelse (bäst)',
+    'LBL_WORST_FORECAST' => 'Förpliktelse (sämst)',
+    'LBL_LIKELY_FORECAST' => 'Förpliktelse (sannolik)',
+    'LBL_BEST_ADJUSTED' => 'Justerad förpliktelse (bäst)',
+    'LBL_WORST_ADJUSTED' => 'Justerad förpliktelse (sämst)',
+    'LBL_LIKELY_ADJUSTED' => 'Justerad förpliktelse (sannolik)',
     'LBL_AMOUNT_USDOLLAR' => 'Konverterad belopp',
     'LBL_OVERDUE' => 'Försenade',
 
@@ -5579,6 +5817,8 @@ $app_strings = array (
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'För mer information, se {{{more_info_url}}} dokumentation för {{plural_module_name}}{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'Inga data tillgängliga',
+    'LBL_NEED_HELP' => 'Behöver du hjälp med något nytt?',
+    'LBL_NEW_CASE' => 'Nytt ärende',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'Hjälp dashlet ger specifik information avseende modulen du för närvarande visar tillsammans med en länk till motsvarande dokumentation (t.ex. Leads dokumentation) i programguiden för mer information.',
@@ -5714,9 +5954,19 @@ $app_strings = array (
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'Inget svar',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Schema otillgängligt',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'Tillgängliga vyer',
+    'LBL_CALENDAR_DASHLET_NAME' => 'Schemaläggare för kalender',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'Standardvy',
+    'LBL_CALENDAR_MY_CALENDARS' => 'Mina kalendrar',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'Användar- och gruppkalendrar',
+    'LBL_CALENDAR' => 'Kalender',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'Fel uppstod vid hämtande av schema.',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'Spara och Skicka Inbjudan',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'Acceptera status',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Processer',
@@ -5833,15 +6083,21 @@ $app_strings = array (
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopiera bekräftelselänk',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Interaktioner',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} Interaktioner',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje',
+    'LBL_NO_ACTIVITY' => 'Ingen aktivitet',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} Tidslinje',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'Mer',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'Mindre',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Tidslinje visar samtal, e-post, ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Visa fler ...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Visa Mindre...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Inga data tillgängliga',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'Modulen är inte licensierad.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktiva prenumerationer',
@@ -5890,8 +6146,10 @@ $app_strings = array (
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'Stäng fokuslåda',
     'LBL_EXTERNAL_GUESTS' => 'Externa gäster',
     'LBL_MY_FAVORITE_TASKS' => 'Mina favorituppgifter',
+
     'LBL_MY_TASKS' => 'Mina uppgifter',
 
     // Sugar Integrate
@@ -5908,7 +6166,365 @@ $app_strings = array (
     'LBL_TIME_AWARE_TYPE' => 'Typ',
     'LBL_TIME_AWARE_BEAN_ID' => 'Bean-ID',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'Visa etikett',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'Öppna postvy',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'Lägg till',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'Hjälp är inte tillgänglig',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'Funktioner',
+    'LBL_ACTIONBUTTON_FIELDS' => 'Fält',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'Välj fält...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Sammanställ',
+    'LBL_ACTIONBUTTON_RELATED' => 'Relaterad',
+    'LBL_ACTIONBUTTON_SAVE' => 'Spara',
+    'LBL_ACTIONBUTTON_CANCEL' => 'Avbryt',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'Relaterad modul',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'Relaterade fält',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'Sammanställningsmodul',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'Sammanställningsfält',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'Sammanställningsfunktion',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'Min',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'Max',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'Medel',
+    'LBL_ACTIONBUTTON_SUM' => 'Summa',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'Tilldela post',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'Skriv e-postmeddelande',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'Skapa post',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Doc Merge',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'Öppna Url',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'Kör rapport',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'Uppdatera post',
+    'LBL_ACTIONBUTTON_ACTION' => 'Åtgärd',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'Tilldela till',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'E-post till',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'Använd PMSE',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'Mall',
+    'LBL_ACTIONBUTTON_MODULE' => 'Modul',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'Visuella inställningar',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'Typ',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'Rullgardinsmeny',
+    'LBL_ACTIONBUTTON_BUTTON' => 'Knapp',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'Knappgrupp',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'Visa namn på post',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'Visa i rubriken',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'Dölj vid redigering',
+    'LBL_ACTIONBUTTON_SIZE' => 'Storlek',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'Standard',
+    'LBL_ACTIONBUTTON_SMALL' => 'Liten',
+    'LBL_ACTIONBUTTON_LARGE' => 'Stor',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'Beräknad',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'Konvertera till PDF',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Doc Merge',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'Förhandsgranska',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'Egenskaper',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'Etikett',
+    'LBL_ACTIONBUTTON_DESC' => 'Verktygstips',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'Visa etikett',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'Visa ikon',
+    'LBL_ACTIONBUTTON_SCHEME' => 'Färgschema',
+    'LBL_ACTIONBUTTON_ICON' => 'Ikon',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'Beroende',
+    'LBL_ACTIONBUTTON_DESIGN' => 'Layoutkonfiguration',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'Stoppa vid fel',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'Spara automatiskt',
+    'LBL_ACTIONBUTTON_CONFIG' => 'Konfigurera',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'Konfigurera åtgärdsknappen innan du sparar.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'Konfigurera knappar',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'Skapa automatiskt',
+    'LBL_ACTIONBUTTON_LINK' => 'Länk',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'Kopiera överordnade värden',
+    'LBL_ACTIONBUTTON_PRESET' => 'Förinställning',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'Förinställning från överordnad',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'Välj...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'Från överordnat fält ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'Är du säker på att du vill ta bort denna knapp?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'Är du säker på att du vill ta bort denna åtgärd?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'Ogiltig data för åtgärdsknapp',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'Välj en modul innan du sparar.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'Välj en länk innan du sparar. Om det inte finns någon länk avmarkerar du länkalternativet.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'Välj en post innan du sparar.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'Välj en mall innan du sparar.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'Primär',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'Sekundär',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HighViz',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'Hav',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'Rosa',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'Armé',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'Kricka',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'Stilla',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'Grön',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'Gul',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'Orange',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'Röd',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'Korall',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'Lila',
+    'LBL_ACTIONBUTTON_FORMULA' => 'Formel',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'Åtgärder',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'Fel vid validering av knappdata.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'Knappar måste ha minst en etikett eller en ikonuppsättning.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'Ange en giltig knappetikett.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'Det gick inte att skapa posten då nödvändiga värden saknas. Kontakta administratör.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'Du måste ha minst två aktiva knappar för denna knapptyp.',
+    'LBL_ACTIONBUTTON_RECORD' => 'Postvyer',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'Åtgärdsmenyer',
+    'LBL_ACTIONBUTTON_ORDER' => 'Ordning',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'Listvy',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'Postvy',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'Instrumentpanelskomponent för postvy',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'Underpaneler',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'Motorn som utför uppgiftssekvenser misslyckades med att utföra följande åtgärder: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'Lägg till en åtgärd',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'Ta bort denna åtgärd',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'Doc Merge',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'Doc Merge till PDF',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'Företagsstorlek',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'Industri',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'Industritaggar',
+    'LBL_HINT_COMPANY_LOCATION' => 'Företagets plats',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'Företagsbeskrivning',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'Grundat år',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Företagets Facebook',
+    'LBL_HINT_COMPANY_TWITTER' => 'Företagets Twitter',
+    'LBL_HINT_COMPANY_PIC' => 'Företagets logotyp',
+    'LBL_HINT_CONTACT_PIC' => 'Kontaktbild',
+    'LBL_HINT_COMPANY_WEBSITE' => 'Företagets hemsida',
+    'LBL_HINT_PHOTO' => 'Fotolänk',
+    'LBL_HINT_JOB_2' => 'Föregående jobb',
+    'LBL_HINT_EDUCATION' => 'Utbildning',
+    'LBL_HINT_EDUCATION_2' => 'Ytterligare utbildning',
+    'LBL_HINT_TWITTER' => 'Twitter-länk',
+    'LBL_HINT_FACEBOOK' => 'Facebook-länk',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'NAICS-kod',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'SIC-kod',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'Räkenskapsårets slut',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'Årsintäkt',
+    'LBL_HINT_PHONE_1' => 'Telefon 1',
+    'LBL_HINT_PHONE_2' => 'Telefon 2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'Sammanfoga tabell',
+    'LBL_HINT_FULL_NAME' => 'Fullständigt namn',
+    'LBL_HINT_JOB_TITLE' => 'Befattning',
+    'LBL_HINT_OFFICE_PHONE' => 'Kontorstelefon',
+    'LBL_HINT_MOBILE_PHONE' => 'Mobil',
+    'LBL_HINT_OTHER_PHONE' => 'Annan telefon',
+    'LBL_HINT_WEBSITE' => 'Webbplats',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'Vill du skriva över befintlig data för denna post med ny data som hittades i Hint?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'Vill du skriva över befintlig {{fieldName}} för den här posten med ny {{fieldName}} som hittades i Hint?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'Alla kontorelaterade data kommer att tas bort. Vill du fortsätta?',
+    'LBL_HINT_COMPANY_LOGO' => 'Logotyp',
+    'LBL_HINT_CONTACTS_AVATAR' => 'Foto',
+    'LBL_HINT_ACCOUNTSETS' => 'Taggar Hint-kontouppsättningar',
+
+    'LBL_HINT_LOADING' => 'Laddar ...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'Avinstallerar Hint, vänta',
+    'LBL_HINT_VALUE_ERASED' => ' Värdet raderat ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'Den här informationen raderades via datasekretessbegäran',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'Välj en av alternativen för avinstallering nedan:',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Avinstallera enbart Hint-paketet',
+    'LBL_HINT_UNINSTALL_FULL' => 'Avinstallera Hint helt',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'Detta alternativ kommer att ta bort Hint MLP och avaktivera alla aktiva prenumerationer till Hint Insights.
+    Om Hint återinstalleras kommer prenumerationerna att återaktiveras automatiskt.',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'Med detta alternativ avinstalleras Hint helt och hållet, inklusive borttagning av MLP och radering av all konfigurations- och prenumerationsinformation.',
+    'LBL_HINT_UNINSTALL' => 'Avinstallera',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Avinstallera Hint',
+    'LBL_HINT_CANCEL' => 'Avbryt',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'VARNING: Använd bara detta alternativ om du inte avser att använda Hint igen i framtiden.    Innan du avinstallerar ska du göra en fullständig säkerhetskopia av din Sugar-databas och sätta Sugar i underhållsläge. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'Se ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Hint-administrationsguiden ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'för mer information om avinstalleringen.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Vill du verkligen avinstallera endast Hint-paketet?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Vill du verkligen avinstallera Hint helt?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(OBS: DENNA ÅTGÄRD KAN INTE ÅNGRAS)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Hintfält',
+    'LBL_HINT_NO_RESULTS_MSG' => 'Inga resultat hittades.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'Baslayout för Hint-panel',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'Konton',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'Kontakter',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'Leads',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'Utvidgad layout för Hint-panel',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'Ordna om fälten genom att dra och släppa dem i Hint-panelens layout ovan.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'För detaljerade anvisningar och en lista över standardfält, se ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' för att återställa standardinställningar för ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'modulen.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'Vill du verkligen återställa {{module}}-modulen till standardinställningarna?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'Klicka här',
+    'LBL_HINT_CONFIG_NAME' => 'Hint-administrationsguide.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'Fält',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'Berikade fält',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'I detta avsnitt finns alla Hint-fält och Sugar-fält som berikas med Hint. Hint-fält har markerats med en asterisk (*) och kan endast visas i Hint-panelen om de har berikats.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'Fältnamn',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'Berikat fält',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Visa i Hint',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Visa i Hint-panel',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'Ytterligare Sugar-fält',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'I detta avsnitt finns alla Sugar-fält som inte berikas av Hint.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'Varning',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'Varning: Du håller på att synkronisera med Hint Insights-tjänsten. E-postsammanfattningar som ligger och väntar kommer att försvinna och befintliga nyheter kommer att tas bort från Insights-dashlet. Alla typer av aviseringar kommer att återupptas efter att synkroniseringen är klar.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'Föreslagna företag baserat på din {{_moduleSingular}} visas nedan. Välj den företagsdata som ska visas.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'Inget konto valt',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'Flera e-postmeddelanden hittades, välj vilka e-postmeddelanden som ska importeras: ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'Med den data som angetts har Hint inte kunnat hitta någon matchning i systemet.',
+    'LBL_HINT_HELP_MESSAGE2' => 'De bästa resultaten i Hint får du med en persons namn och e-postadress.',
+    'LBL_HINT_HELP_MESSAGE3' => 'De bästa resultaten i Hint får du med företagets webbadress.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "Ange ditt {{_moduleSingular}}s företagsnamn eller webbplats, så kommer Hint att söka efter ytterligare data.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "Ange din {{currentModule}}s e-postadress, så kommer Hint att söka efter ytterligare data.",
+
+    'LBL_HINT_HISTORY_NONE' => 'Inga data tillgängliga för historikvy',
+    'LBL_HINT_HISTORY_TITLE' => 'Aktivitetshistorik',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'Berika data',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'Din licens för SugarCRM Hint-tjänsten har utgått. Kontakta din SugarCRM-admin för att förnya din licens.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'Vill du se vad SugarCRM Hint kan göra för dig och ditt företag? Kontakta din SugarCRM-admin för att lägga till Hint.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'Kontoinformationen hittades inte',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'Berikad data hittades – klicka för att spara all berikad data till din post.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'Klicka för att spara berikad data till din post.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'Relaterade kontakter',
+    'LBL_HINT_CONTACTS_NONE' => 'Inga relaterade kontakter',
+
+    'LBL_HINT_NEWS' => 'Nyheter',
+    'LBL_HINT_GENERAL' => 'Allmänt',
+    'LBL_HINT_ALL_NEWS' => 'Alla nyheter',
+    'LBL_HINT_FILTER_NEWS' => 'Filtrera nyheter',
+    'LBL_HINT_FINANCIAL_NEWS' => 'Ekonomi',
+    'LBL_HINT_PERSONNEL_NEWS' => 'Personal',
+    'LBL_HINT_PRESS_RELEASES' => 'Pressreleaser',
+    'LBL_HINT_OTHER_NEWS' => 'Övrigt',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'Sök efter nyhetsartiklar',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => 'Inga nyheter tillgängliga',
+    'LBL_NEW_NOTIFICATIONS' => 'Nya meddelanden',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'Du måste ha en Hint-licens för att se Hint Insights-dashlet.    Ta upp frågan om att skaffa en Hint-licens med din administratör.',
+
+    'LBL_HINT_FOR' => 'För',
+    'LBL_HINT_WITH' => 'med',
+    'LBL_HINT_SHOW_ME' => 'Visa: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'Meddela mig genom: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Inställningscentrum för Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'Preferensalternativsnyckel',
+    'LBL_HINT_PREFERENCES' => 'Inställningar',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'Radera avaktiverat, minst en preferensförklaring krävs',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'Lägga till avaktiverat, du har nått maximalt antal tillåtna preferensförklaringar',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Inkludera i Hint Insights-dashlet',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'Popup som skrivbordsavisering',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'Aviseringar måste vara aktiverade på alla webbläsare och alla datorer för att aviseringarna ska komma fram.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Vissa webbläsare, som Internet Explorer, stöder inte aviseringar. Aviseringar kan inte aktiveras när man använder en webbläsare som inte stöder aviseringar.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'Skicka ett omedelbart e-postmeddelande för varje avisering',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'Skicka en e-postsammanfattning per dag',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'Skicka en e-postsammanfattning per vecka',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'Inställningarna kan inte sparas. Kontrollera systemanslutningen och försök igen.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'Vissa obligatoriska fält saknar ett värde. Kontrollera dina inställningar och se till att alla obligatoriska fält är ifyllda.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'Du håller på att aktivera webbläsaraviseringar för Hint Insights. Klicka på Bekräfta för att fortsätta. Din webbläsare frågar sedan efter ditt tillstånd att skicka aviseringar.',
+    'LBL_HINT_PUSH_ERROR' => 'Ett plugin-programm för push-aviseringar har registrerats för {{options.type}} utan dess beroenden. Plugin-programmet kommer inte fungera som avsett. Se till att du anger en sökväg till arbetsfilen och en metod för att spara prenumerationen på servern.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'Sätt PÅ Hint-aviseringar för alla användare',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'Stäng AV Hint-aviseringar för alla användare',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'VARNING: Det gick inte att avaktivera aviseringarna under avinstallationen av Sugar Hint. För att avaktivera aviseringar, installera Hint 5.4.0 eller högre och avinstallera helt med Hint Uninstaller som finns i administrationsdelen av Sugar.',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'Konfiguration av kartor',
+    'LBL_MAP_MAP' => 'Karta',
+    'LBL_MAP_MAPS' => 'Kartor',
+    'LBL_MAP_GEOCODING_RECORD' => 'Geokod',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'Posten har geokodats utan problem.',
+    'LBL_MAP_LATITUDE' => 'Latitud',
+    'LBL_MAP_LONGITUDE' => 'Longitud',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'Sök efter adress...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'Den aktuella posten har redan geokodats. Vill du verkligen skriva över geokodningen för den här posten?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'Manuell geokodning',
+    'LBL_MAP_POINT_COORDINATES' => 'Koordinater för kartpunkter',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'Beräknar bästa resväg...',
+    'LBL_MAP_DIRECTIONS' => 'Vägbeskrivning',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'Vägbeskrivning som startar från aktuell användare',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'Vägbeskrivning som startar från denna post',
+    'LBL_MAPS_RADIUS_INPUT' => 'Radie (0–250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'i en radie från postnumret',
+    'LBL_MAPS_DISTANCE' => 'Distans',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'Postnummer',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'Ogiltig konfiguration: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => '<strong>{{module}}</strong>-fältkartläggningar är ogiltiga.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'Karttyp',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'Zoomnivå',
+    'LBL_MAPS_DASHLET' => 'Kartor',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'Visar geokodad(e) post(er) på kartan.',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'Kartor är inte tillgängligt för denna modul. Aktivera Kartor i admin-konsolen.',
+    'LBL_MAP_MODULES' => 'Modul',
+    'LBL_MAP_FILTER_BY' => 'Filtrera efter',
+    'LBL_MAP_UNIT_TYPE' => 'Enhetstyp',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'Engelska mil',
+    'LBL_MAP_UNIT_TYPE_KM' => 'Kilometer',
+    'LBL_MAP_ADDRESS' => 'Adress',
+    'LBL_MAP_NO_STARTING_POINT' => 'Startpunkten har inte geokodats.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'Startpunktsposten har inte geokodats.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'Vissa av de poster som valt är inte geokodade och kommer inte att visas på kartan.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'Post(er) har inte geokodats.',
+    'LBL_MAPS_MODULE_FIELDS' => 'Modulfält',
+    'LBL_MAPS_SELECT_FIELD' => 'Välj fält',
+    'LBL_MAPS_RELATE_RECORD' => 'Relaterad post',
+    'LBL_MAPS_MAPPING_TYPE' => 'Kartläggningstyp',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'Inga geokodade poster',
+    'LBL_MAPS_ADDRESS' => 'Adress',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'Tilldelad användare',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'Gatuvy är inte tillgängligt för den angivna punkten',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong>-poster gäller inte för kartläggning. Ta bort modulen från listan.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'Stäng',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'Expandera',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'Spara som PDF',
+    'LBL_MAPS_EMAIL_LINK' => 'E-postlänk',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'Du måste ha minst en geokodad post.',
+    'LBL_MAPS_GENERATING' => 'Genererar karta...',
+    'LBL_MAPS_POINTS' => 'Kartpunkter',
+    'LBL_MAPS_POINT' => 'Punkt',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'Reseinformation',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'Total distans',
+    'LBL_MAPS_TOTAL_DURATION' => 'Total tid',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'Total tid utan trafik',
+    'LBL_MAPS_ITINERARY' => 'Resplan',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'Reseavstånd',
+    'LBL_MAPS_TRAVEL_DURATION' => 'Restid',
+    'LBL_MAPS_TRAVEL_STEPS' => 'Steg',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'Varningar',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Bing Maps stöder max. 10 nålmarkeringar på en delad karta. Se över dina val.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'Maps-licens krävs',
+
+    'LBL_INVALID_FORMULA' => 'Ogiltig Formel',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'Funktionens returtyp matchar inte',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'Förutsägelse',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'Ideal kundprofil',
+
+    // User last state
+    'LBL_LAST_STATE' => 'Senaste tillstånd',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'Skicka till DocuSign',
+
+    // Base sales stages
+    'LBL_OPEN' => 'Öppen',
+    'LBL_CLOSED_WON' => 'Stängd Vunnen',
+    'LBL_CLOSED_LOST' => 'Stängd förlorad',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6745,8 +7361,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Google Kontakter',
@@ -7086,6 +7702,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Inbäddad fil';
     'YER' => 'Rials',
     'ZWD' => 'Zimbabwe Dollars',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'Mycket hög',
+        '4' => 'Hög',
+        '3' => 'Neutral',
+        '2' => 'Låg',
+        '1' => 'Mycket låg',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'Ingen',
         'future' => 'Aktuellt värde',
@@ -7095,3 +7719,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Inbäddad fil';
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'Enkel träff',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'Bearbetar',
+        'error' => 'Fel',
+        'success' => 'Klart',
+        'canceled' => 'Har avbrutits',
+        'document_load' => 'Laddar mall',
+        'tags_extract' => 'Extrahera taggar',
+        'tags_validate' => 'Validerar taggar',
+        'data_retrieving' => 'Hämtar data',
+        'serialize_document' => 'Sätta ihop dokumentet igen',
+        'send_document' => 'Dokumentet skickas till dig',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'Slå ihop',
+        'convert' => 'PDF-sammanslagning',
+        'multimerge' => 'Multisammanslagning',
+        'multimerge_convert' => 'Multisammanslagning av PDF',
+        'labelsgenerate' => 'Generera etiketter',
+        'labelsgenerate_convert' => 'Genererar etiketter PDF',
+        'excel' => 'Excel-sammanslagning',
+        'excel_convert' => 'Exel-sammanslagningskonvertering',
+        'presentation' => 'PowerPoint-sammanslagning',
+        'presentation_convert' => 'PowerPoint-sammanslagning PDF',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'Mina konton',
+      'favorites' => 'Favoritkonton',
+      'tags' => 'Taggade konton',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'Alla nyheter',
+      'General' => 'Allmänt',
+      'Finance' => 'Ekonomi',
+      'People' => 'Personal',
+      'Press Releases' => 'Pressreleaser',
+      'Other' => 'Övrigt',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'Ägare';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Molnlagring';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'Dashlet för molnlagringsintegrering';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'Kopiera länk';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'Ladda ner';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Skapa Sugar-dokument';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Synka till Google Drive';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'Synka alla till Google Drive';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'Det gick inte att ladda ner den här filen';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'Cloud-dashlet finns inte';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Sugar-dokument skapat';
+
+    $app_string['LBL_MY_FILES'] = 'Mina filer';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Delade med mig';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'Molnleverantör';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google Drive',
+      'onedrive' => 'Microsoft Onedrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Delade med mig';
+    $app_strings['LBL_MY_FILES'] = 'Mina filer';
+    $app_strings['LBL_UPLOAD_FILE'] = 'Ladda upp fil';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'Mappen hittades inte';
+    $app_strings['LBL_CREATE_FOLDER'] = 'Skapa mapp';
+    $app_strings['LBL_LOAD_MORE'] = 'Läs in mer...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'Ingen anslutning till Google hittades...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'Ingen anslutning till Microsoft hittades...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-tom-',
+      'Exact' => 'Exakt',
+      'Null_address_components' => 'En eller flera adresskomponenter är tomma',
+      'Invalid_address' => 'Ogiltig adress, servern svarade med Falaktigt',
+      'Invalid_server_response_not_XML' => 'Ogiltig serverrespons, inte XML',
+      'Invalid_address_no_location' => 'Ogiltig adress, ingen plats kunde hämtas från servern',
+      'Ambiguous_address' => 'Tvetydig adress, flera matchningar',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'Gatuvy',
+      'a' => 'Satellitvy',
+      'be' => 'Fågelperspektivsvy',
+      'rd' => 'Mörk gatuvy',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

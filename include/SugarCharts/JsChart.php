@@ -39,6 +39,8 @@ class JsChart extends SugarChart {
 			"line chart",
             "horizontal grouped bar chart",
             "vertical grouped bar chart",
+            'donut chart',
+            'treemap chart',
 		);
 
 		if(in_array($chartType,$charts)) {
@@ -170,10 +172,28 @@ class JsChart extends SugarChart {
 		$chartType = $xml->properties->type;
 		if($chartType == "pie chart") {
 			return array ("pieType" => "basic","tip" => "name","chartType" => "pieChart");
+        } elseif ($chartType == 'donut chart') {
+            return [
+                'pieType' => 'basic',
+                'tip' => 'name',
+                'chartType' => 'donutChart',
+            ];
+        } elseif ($chartType == 'treemap chart') {
+            return [
+                'treemapType' => 'basic',
+                'tip' => 'name',
+                'chartType' => 'treemapChart',
+            ];
 		} elseif($chartType == "line chart") {
             return array ("lineType" => "grouped","tip" => "name","chartType" => "lineChart");
 		} elseif($chartType == "funnel chart 3D") {
-			return array ("funnelType" => "basic","tip" => "name","chartType" => "funnelChart");
+            return [
+                'funnelType' => 'basic',
+                'tip' => 'name',
+                'chartType' => 'funnelChart',
+                'maintainAspectRatio' => true,
+                'aspectRatio' => 1,
+            ];
 		} elseif($chartType == "gauge chart") {
 			return array ("gaugeType" => "basic","tip" => "name","chartType" => "gaugeChart");
 		} elseif($chartType == "stacked group by chart") {
@@ -188,14 +208,16 @@ class JsChart extends SugarChart {
 			return array("orientation" => "horizontal", "barType" => "stacked", "tip" => "name","chartType" => "barChart");
         } elseif ($chartType == "horizontal grouped bar chart") {
             return array("orientation" => "horizontal", "barType" => "grouped", "tip" => "name", "chartType" => "barChart");
-		} elseif ($chartType == "horizontal bar chart" || "horizontal") {
+        } elseif (in_array($chartType, ['horizontal bar chart', 'horizontal'])) {
 			return array("orientation" => "horizontal","barType" => "basic","tip" => "label","chartType" => "barChart");
 		} else {
 			return array("orientation" => "vertical","barType" => "stacked","tip" => "name","chartType" => "barChart");
 		}
 	}
 	function getChartDimensions($xmlStr) {
-		if($this->getNumNodes($xmlStr) > 9 && $this->chartType != "pie chart") {
+        if ($this->getNumNodes($xmlStr) > 9 &&
+            !in_array($this->chartType, ['pie chart', 'donut chart', 'treemap chart'])
+        ) {
             if ($this->chartType == "horizontal group by chart" || $this->chartType == "horizontal bar chart" ||
                 $this->chartType == "horizontal grouped bar chart") {
 				$height = ($this->getNumNodes($xmlStr) * 40);
@@ -520,7 +542,7 @@ class JsChart extends SugarChart {
 
 		if($this->checkData($xmlstr) || $ignore_datacheck === true) {
 			$content = "{\n";
-			if ($this->chartType == "pie chart" || $this->chartType == "funnel chart 3D") {
+            if (in_array($this->chartType, ['pie chart', 'funnel chart 3D', 'donut chart', 'treemap chart'])) {
 				$content .= $this->buildProperties($xmlstr);
 				$content .= $this->buildLabelsPieChart($xmlstr);
 				$content .= $this->buildChartColors();

@@ -26,7 +26,7 @@
                        class="button primary" onclick="SUGAR.saveApiPlatforms();" type="button" name="button"
                        value="{$APP.LBL_SAVE_BUTTON_LABEL}">
                 <input title="{$APP.LBL_CANCEL_BUTTON_LABEL}" accessKey="{$APP.LBL_CANCEL_BUTTON_LABEL}" class="button"
-                       onclick="document.apiplatforms.action.value='';" type="submit" name="button"
+                       onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button"
                        value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
             </td>
         </tr>
@@ -53,7 +53,7 @@
                 <input title="{$APP.LBL_SAVE_BUTTON_LABEL}" class="button primary" onclick="SUGAR.saveApiPlatforms();"
                        type="button" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">
                 <input title="{$APP.LBL_CANCEL_BUTTON_LABEL}" class="button"
-                       onclick="document.apiplatforms.action.value='';" type="submit" name="button"
+                       onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button"
                        value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
             </td>
         </tr>
@@ -73,7 +73,6 @@
         var lbl_api_platforms = '{sugar_translate label="LBL_API_PLATFORMS"}';
         var lbl_enable_notifications = '{sugar_translate label="LBL_ENABLE_NOTIFICATIONS"}'
         var deleteImage = '{$deleteImage}';
-        {literal}
         deleteRow = function(el) {
             if(confirm(SUGAR.language.get('Administration', 'LBL_REMOVE_PLATFORM'))) {
                 SUGAR.apiPlatformsTable.deleteRow(el);
@@ -81,6 +80,7 @@
         };
 
         $('head').append(
+            {literal}
             "<style type='text/css'>" +
                 ".yui-dt > div { margin-right: -15px; }" +
                 ".yui-dt-liner  { font-style: italic; }" +
@@ -90,12 +90,13 @@
                     "display: inline-block;" +
                 "}" +
             "</style>"
+            {/literal}
         );
 
         SUGAR.apiPlatformsTable = new YAHOO.widget.ScrollingDataTable(
             "api_platforms",
             [
-                {key: "name", label: lbl_api_platforms, width: 200, sortable: false, formatter: function (cell, rec, col, data) {
+                { key: "name", label: lbl_api_platforms, width: 200, sortable: false, formatter: function (cell, rec, col, data) {
                     if (rec.getData('custom')) {
                         cell.innerHTML ='<a style="float: right;" href="javascript:void()" ' +
                             'onclick="deleteRow(this);">' + deleteImage + '</a>';
@@ -127,7 +128,9 @@
                 }
             ],
             new YAHOO.util.LocalDataSource(api_platforms, {
-                responseSchema: {fields: ['name', 'custom', 'enable_notifications']}
+                responseSchema: {
+                    fields: ['name', 'custom', 'enable_notifications']
+                }
             }),
             {
                 height: "300px"
@@ -172,14 +175,15 @@
             Connect.asyncRequest(
                 Connect.method,
                 Connect.url,
-                {success: function(){
-                    ajaxStatus.flashStatus(SUGAR.language.get('Administration', 'LBL_DONE'), 1000)
-                }},
+                {
+                    success: function () {
+                        ajaxStatus.flashStatus(SUGAR.language.get('Administration', 'LBL_DONE'), 1000)
+                    }
+                },
                 SUGAR.util.paramsToUrl(urlParams) + "to_pdf=1"
             );
 
             return true;
         }
     })();
-    {/literal}
 </script>

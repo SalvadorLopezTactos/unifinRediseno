@@ -118,7 +118,7 @@ class PMSEEvent extends PMSEShape
             ->executeQuery(
                 'SELECT * FROM pmse_bpm_thread WHERE cas_id=? and cas_flow_index=?',
                 [$cas_id, $flow->cas_previous]
-            )->fetch();
+            )->fetchAssociative();
         $cas_thread_index = $rowThread['cas_thread_index'];
         $cas_thread_parent = $rowThread['cas_thread_parent'];
 

@@ -226,12 +226,18 @@
                ),
                getSubgroupForTarget('bootstrap', 'include/javascript/sugar_sidecar.min.js'),
                array(
+                   'include/javascript/chartjs/chart.min.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/chartjs/chartjs-chart-treemap.min.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/chartjs/chartjs-plugin-datalabels.min.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/SugarCharts/chartjs/js/sugarCharts.js' => 'include/javascript/sugar_sidecar.min.js',
+                   // load a 2x version of chartjs to support older plugins that don't work with 3x
+                   'include/javascript/chartjs/Chart_2_9_4.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/chartjs/chartjs-plugin-datalabels-v1.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/chartjs/chart.funnel.js' => 'include/javascript/sugar_sidecar.min.js',
                    // D3 (version 4.x) library custom bundle
                    // with only modules for main sugar chart types
                    'include/javascript/d3-sugar/d3-sugar.min.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/sucrose/sucrose.min.js' => 'include/javascript/sugar_sidecar.min.js',
-                   'include/SugarCharts/sucrose/js/sugarCharts.js' => 'include/javascript/sugar_sidecar.min.js',
-                   // D3 (version 3.x) entire library
                    'include/javascript/sugar7/error.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/sugar7/touch.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/select2/select2.js' => 'include/javascript/sugar_sidecar.min.js',
@@ -257,6 +263,32 @@
                    'sidecar/lib/sugarlogic/expressions.js'              => 'include/javascript/sugar_sidecar.min.js',
                    'sidecar/lib/sugarlogic/sidecarExpressionContext.js' => 'include/javascript/sugar_sidecar.min.js',
 
+                    //actionbutton
+                   'include/javascript/sugar7/actions/AssignRecordAction.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/actions/ComposeEmailAction.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/actions/CreateRecordAction.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/actions/DocumentMergeAction.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/actions/OpenUrlAction.js'      => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/actions/RunReportAction.js'    => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/actions/UpdateRecordAction.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/plugins/ActionRunner.js'       => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/plugins/ActionButton.js'       => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/actions/Factory.js'            => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/actions/Runner.js'             => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/actions/ActionsRegister.js'    => 'include/javascript/sugar_sidecar.min.js',
+
+                   //document merging
+                   'include/javascript/sugar7/plugins/DocumentMerge.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/plugins/DocumentMergeActions.js' => 'include/javascript/sugar_sidecar.min.js',
+
+                   //cloud drive
+                   'include/javascript/sugar7/plugins/CloudDrive.js' => 'include/javascript/sugar_sidecar.min.js',
+
+                    //Maps
+                    'include/javascript/bingMaps/bingMaps.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/MappableList.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/MappableRecord.js' => 'include/javascript/sugar_sidecar.min.js',
+
                     // Plugins for Sugar 7.
                     'include/javascript/sugar7/plugins/FieldErrorCollection.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/Dashlet.js'  => 'include/javascript/sugar_sidecar.min.js',
@@ -277,6 +309,7 @@
                     'include/javascript/sugar7/plugins/ResizableColumns.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ToggleMoreLess.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'modules/Contacts/clients/base/plugins/ContactsPortalMetadataFilter.js'  => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/ConfigDrivenList.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'modules/pmse_Inbox/clients/base/plugins/ProcessActions.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'modules/Opportunities/clients/base/plugins/Cascade.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'modules/PurchasedLineItems/clients/base/plugins/PurchaseAndServiceChangeHandler.js' => 'include/javascript/sugar_sidecar.min.js',
@@ -340,6 +373,8 @@
                     'include/javascript/sugar7/plugins/DashletSearchControls.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/dom-purify/purify.min.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/userAgent.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/Previewable.js'  => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/Attachments.js'  => 'include/javascript/sugar_sidecar.min.js',
                )
            ),
 
@@ -350,6 +385,7 @@
                 'include/javascript/sugar7/utils.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/utils-filters.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/utils-search.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/utils-charts.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/field.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/hacks.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/alert.js' => 'include/javascript/sugar_grp7.min.js',
@@ -367,6 +403,15 @@
                 'include/javascript/sugar7/accessibility/click.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/accessibility/label.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/clipboard.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/expressions.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/calendar/utils.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/plugins/Stage2CssLoader.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/plugins/PushNotifications.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/hint/hint-preview.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/hint/hint-routes.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/hint/hint.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/hint/stage2-handlebar-helpers.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/notification-preferences.js' => 'include/javascript/sugar_grp7.min.js',
             ),
 
             $sugar_grp_portal2 = array(
@@ -508,6 +553,15 @@
             $sugar_grp_tba = array(
                 'modules/Teams/javascript/TBAConfiguration.js' => 'include/javascript/sugar_grp_tba.js',
             ),
+
+            //Grouping for Calendar
+            $sugar_grp_calendar = [
+                'include/javascript/kendo/kendo.min.js' => 'include/javascript/sugar_grp_calendar.js',
+                'include/javascript/kendo/expandedMonth.js' => 'include/javascript/sugar_grp_calendar.js',
+                'include/javascript/kendo/monthSchedule.js' => 'include/javascript/sugar_grp_calendar.js',
+                'include/javascript/kendo/kendo.culture.en-US.js' => 'include/javascript/sugar_grp_calendar.js',
+                'include/javascript/calendar/resourcesLoader.js' => 'include/javascript/sugar_grp_calendar.js',
+            ],
         );
 
         if (!spl_autoload_functions()) {

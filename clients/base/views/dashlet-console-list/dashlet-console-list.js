@@ -43,7 +43,8 @@
      */
     plugins: [
         'Dashlet',
-        'Pagination'
+        'Pagination',
+        'ConfigDrivenList'
     ],
 
     /**
@@ -58,6 +59,7 @@
      */
     _defaultSettings: {
         module: 'Cases',
+        freeze_first_column: true,
         limit: 5,
         filter_id: 'all_records'
     },
@@ -96,6 +98,11 @@
     moduleIsAvailable: true,
 
     /**
+     * Flag to keep track the ACL access of the module
+     */
+    moduleACLAccess: true,
+
+    /**
      * Truthy when filter dropdown is enabled.  Updated whenever the filter module changes.
      */
     filterDropdownEnabled: true,
@@ -129,6 +136,11 @@
     customFilterModuleList: ['Cases'],
 
     /**
+     * Defines the scroll container jQuery element
+     */
+    scrollContainer: null,
+
+    /**
      * @inheritdoc
      */
     'events': {
@@ -136,7 +148,7 @@
         'click [class*="orderBy"]': 'setOrderBy',
 
         // filter quick search events
-        'click .add-on.fa-times': 'clearQuickSearch',
+        'click .add-on.sicon-close': 'clearQuickSearch',
         'keyup .search-name': 'search',
         'paste .search-name': 'search',
 
@@ -145,7 +157,7 @@
         'keydown .choice-filter-close': 'handleClearFilter',
 
         //dashlet action
-        'click .fa-refresh': 'refreshClicked',
+        'click .sicon-refresh': 'refreshClicked',
     },
 
     /**
@@ -187,6 +199,8 @@
                 this.checkFooterVisibility();
             }, this);
         }
+
+        this.context.set('isUsingListPagination', true);
     },
 
     /**
@@ -339,7 +353,7 @@
         if (!_.isEmpty(choiceElem)) {
             _.each(data, function(value, key) {
                 if (value.id === this.currentFilterId[this.module]) {
-                    choiceElem[0].innerHTML = data[key].text;
+                    choiceElem[0].textContent = data[key].text;
                 }
             }, this);
         }
@@ -350,7 +364,7 @@
      */
     fixDropdownCss: function() {
         var arrowElem = this.$('.select2-arrow') || [];
-        var caratElem = this.$('.fa.fa-caret-down') || [];
+        var caratElem = this.$('.sicon.sicon-chevron-down') || [];
         var filterElem = this.$('.select2-chosen') || [];
 
         if (arrowElem.length !== 0) {
@@ -358,7 +372,7 @@
         }
 
         if (caratElem.length === 0  && filterElem.length !== 0) {
-            filterElem.append('<i class="fa fa-caret-down"></i>');
+            filterElem.append('<i class="sicon sicon-chevron-down"></i>');
         }
     },
 
@@ -406,7 +420,7 @@
      * */
     formatResult: function(option) {
         if (option.id === this.currentFilterId[this.module]) {
-            option.icon = 'fa-check';
+            option.icon = 'sicon-check';
         } else {
             option.icon = undefined;
         }
@@ -503,10 +517,10 @@
      * @param {boolean} addIt TRUE if you want to add it, FALSE to remove
      */
     toggleClearQuickSearchIcon: function(addIt) {
-        if (addIt && !this.$('.fa-times.add-on')[0]) {
-            this.$('.filter-view.search').append('<i class="fa fa-times add-on"></i>');
+        if (addIt && !this.$('.sicon-remove.add-on')[0]) {
+            this.$('.filter-view.search').append('<i class="sicon sicon-close add-on"></i>');
         } else if (!addIt) {
-            this.$('.fa-times.add-on').remove();
+            this.$('.sicon-remove.add-on').remove();
         }
     },
 
@@ -633,6 +647,7 @@
         }
         this._initializeSettings();
         this.metaFields = this._getColumnsForDisplay();
+        this.moduleACLAccess = app.acl.hasAccess('view', this.settings.get('module'));
 
         this.before('render', function() {
             if (!this.moduleIsAvailable || !this.filterIsAccessible) {
@@ -652,7 +667,7 @@
             }, this);
         } else if (this.moduleIsAvailable) {
             var filterId = this.settings.get('filter_id');
-            if (!filterId || this.meta.preview) {
+            if (!filterId || this.meta.preview || !this.moduleACLAccess) {
                 this._displayDashlet();
                 return;
             }
@@ -731,8 +746,8 @@
         if (dashboard !== null) {
             var dashboardComp = !_.isUndefined(dashboard) && !_.isUndefined(dashboard.getComponent('dashboard')) ?
                 dashboard.getComponent('dashboard') : null;
-            var activeTab = !_.isUndefined(dashboardComp) && dashboardComp.getComponent('tabbed-dashboard') ?
-                dashboardComp.getComponent('tabbed-dashboard').activeTab : 0;
+            var activeTab = !_.isUndefined(dashboardComp) && dashboardComp.getComponent('omnichannel-dashboard') ?
+                dashboardComp.getComponent('omnichannel-dashboard').activeTab : 0;
 
             // if Contacts tab is active and it is Cases Console List view dashlet
             if (!_.isUndefined(dashboard.moduleTabIndex) &&
@@ -867,6 +882,9 @@
         if (!this.settings.get('filter_id')) {
             this.settings.set('filter_id', this._defaultSettings.filter_id);
         }
+        if (_.isUndefined(this.settings.get('freeze_first_column'))) {
+            this.settings.set('freeze_first_column', this._defaultSettings.freeze_first_column);
+        }
         this._setDefaultModule();
         if (!this.settings.get('label')) {
             this.settings.set('label', 'LBL_MODULE_NAME');
@@ -936,6 +954,9 @@
                     break;
             }
         });
+
+        // From ConfigDrivenList Plugin
+        this.filterConfigFieldsForDashlet();
     },
 
     /**
@@ -1151,10 +1172,12 @@
     _render: function() {
         this.currentSearch = this.$('input.search-name').val();
         if (!this.meta || !this.meta.config) {
-            return this._super('_render');
+            this._super('_render');
+            this.scrollContainer = this.$el.find('.console-list-view-table');
+        } else {
+            this.action = 'list';
+            this._super('_render');
         }
-        this.action = 'list';
-        return this._super('_render');
     },
 
     /**

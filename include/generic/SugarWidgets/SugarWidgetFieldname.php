@@ -50,20 +50,6 @@ class SugarWidgetFieldName extends SugarWidgetFieldVarchar
 		$str .= $this->displayListPlain($layout_def);
 		$str .= "</a>";
 
-
-        global $sugar_config;
-        if (isset ($sugar_config['enable_inline_reports_edit']) && $sugar_config['enable_inline_reports_edit'] && !empty($record)) {
-            $div_id = "$module&$record&$name";
-            $str = "<div id='$div_id'><a target='_blank' href=\"index.php?action=DetailView&module=$module&record=$record\">";
-            $value = $this->displayListPlain($layout_def);
-            $str .= $value;
-            $field_name = $layout_def['name'];
-            $field_type = $field_def['type'];
-            $str .= "</a>";
-            if ($field_name == 'name')
-                $str .= "&nbsp;" .SugarThemeRegistry::current()->getImage("edit_inline","border='0' alt='Edit Layout' align='bottom' onClick='SUGAR.reportsInlineEdit.inlineEdit(\"$div_id\",\"$value\",\"$module\",\"$record\",\"$field_name\",\"$field_type\");'");
-            $str .= "</div>";
-        }
 		return $str;
 	}
 
@@ -115,7 +101,7 @@ class SugarWidgetFieldName extends SugarWidgetFieldVarchar
 		}
 
 		if ( ! empty($layout_def['table_alias'])) {
-		    $comps = preg_split("/([fl])/", $localeNameFormat, null, PREG_SPLIT_DELIM_CAPTURE);
+            $comps = preg_split("/([fl])/", $localeNameFormat, 0, PREG_SPLIT_DELIM_CAPTURE);
 		    $name = array();
 		    foreach($comps as $val) {
 		        if($val == 'f') {
@@ -165,8 +151,8 @@ class SugarWidgetFieldName extends SugarWidgetFieldVarchar
 			$input_name0 = $current_user->id;
 		}
 
-        return SugarWidgetFieldId::_get_column_select($layout_def)."<>"
-			.$this->reporter->db->quoted($input_name0)."\n";
+        return parent::_get_column_select($layout_def) . "<>"
+            . $this->reporter->db->quoted($input_name0) . "\n";
 	}
 
     // $rename_columns, if true then you're coming from reports
@@ -189,9 +175,10 @@ class SugarWidgetFieldName extends SugarWidgetFieldVarchar
 				array_push($arr,$this->reporter->db->quoted($value));
 		}
 
-		$str = implode(",",$arr);
+        $str = implode(",", $arr);
 
-        return SugarWidgetFieldId::_get_column_select($layout_def)." IN (".$str.")\n";
+        $sugarWidgetFieldId = new SugarWidgetFieldId($this->layout_manager);
+        return $sugarWidgetFieldId->_get_column_select($layout_def)." IN (".$str.")\n";
 	}
     // $rename_columns, if true then you're coming from reports
 	function queryFilternot_one_of($layout_def, $rename_columns = true)
@@ -215,7 +202,7 @@ class SugarWidgetFieldName extends SugarWidgetFieldVarchar
 
 		$str = implode(",",$arr);
 
-        return SugarWidgetFieldId::_get_column_select($layout_def)." NOT IN (".$str.")\n";
+        return parent::_get_column_select($layout_def)." NOT IN (".$str.")\n";
 	}
 
     /**
@@ -237,7 +224,7 @@ class SugarWidgetFieldName extends SugarWidgetFieldVarchar
             $input_name0 = $current_user->id;
         }
 
-        return SugarWidgetFieldId::_get_column_select($layout_def)
+        return parent::_get_column_select($layout_def)
             . " IN (SELECT id FROM users WHERE reports_to_id = "
             . $this->reporter->db->quoted($input_name0)
             . " AND status = 'Active' AND deleted = 0)\n";
@@ -249,7 +236,7 @@ class SugarWidgetFieldName extends SugarWidgetFieldVarchar
              $layout_def['name'] = 'id';
              $layout_def['type'] = 'id';
 
-             $group_by =  SugarWidgetFieldId::_get_column_select($layout_def)."\n";
+             $group_by =  parent::_get_column_select($layout_def)."\n";
         } else {
             // group by clause for user name passes through here.
              $group_by = $this->_get_column_select($layout_def)."\n";

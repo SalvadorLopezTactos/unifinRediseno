@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,47 +18,17 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class IosVppEBook extends ManagedEBook
 {
     /**
-    * Gets the vppTokenId
-    * The Vpp token ID.
-    *
-    * @return string The vppTokenId
-    */
-    public function getVppTokenId()
-    {
-        if (array_key_exists("vppTokenId", $this->_propDict)) {
-            return $this->_propDict["vppTokenId"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the vppTokenId
-    * The Vpp token ID.
-    *
-    * @param string $val The vppTokenId
-    *
-    * @return IosVppEBook
-    */
-    public function setVppTokenId($val)
-    {
-        $this->_propDict["vppTokenId"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the appleId
     * The Apple ID associated with Vpp token.
     *
-    * @return string The appleId
+    * @return string|null The appleId
     */
     public function getAppleId()
     {
@@ -85,39 +54,10 @@ class IosVppEBook extends ManagedEBook
     }
     
     /**
-    * Gets the vppOrganizationName
-    * The Vpp token's organization name.
-    *
-    * @return string The vppOrganizationName
-    */
-    public function getVppOrganizationName()
-    {
-        if (array_key_exists("vppOrganizationName", $this->_propDict)) {
-            return $this->_propDict["vppOrganizationName"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the vppOrganizationName
-    * The Vpp token's organization name.
-    *
-    * @param string $val The vppOrganizationName
-    *
-    * @return IosVppEBook
-    */
-    public function setVppOrganizationName($val)
-    {
-        $this->_propDict["vppOrganizationName"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the genres
     * Genres.
     *
-    * @return string The genres
+    * @return string|null The genres
     */
     public function getGenres()
     {
@@ -146,7 +86,7 @@ class IosVppEBook extends ManagedEBook
     * Gets the language
     * Language.
     *
-    * @return string The language
+    * @return string|null The language
     */
     public function getLanguage()
     {
@@ -175,7 +115,7 @@ class IosVppEBook extends ManagedEBook
     * Gets the seller
     * Seller.
     *
-    * @return string The seller
+    * @return string|null The seller
     */
     public function getSeller()
     {
@@ -204,7 +144,7 @@ class IosVppEBook extends ManagedEBook
     * Gets the totalLicenseCount
     * Total license count.
     *
-    * @return int The totalLicenseCount
+    * @return int|null The totalLicenseCount
     */
     public function getTotalLicenseCount()
     {
@@ -233,7 +173,7 @@ class IosVppEBook extends ManagedEBook
     * Gets the usedLicenseCount
     * Used license count.
     *
-    * @return int The usedLicenseCount
+    * @return int|null The usedLicenseCount
     */
     public function getUsedLicenseCount()
     {
@@ -255,6 +195,64 @@ class IosVppEBook extends ManagedEBook
     public function setUsedLicenseCount($val)
     {
         $this->_propDict["usedLicenseCount"] = intval($val);
+        return $this;
+    }
+    
+    /**
+    * Gets the vppOrganizationName
+    * The Vpp token's organization name.
+    *
+    * @return string|null The vppOrganizationName
+    */
+    public function getVppOrganizationName()
+    {
+        if (array_key_exists("vppOrganizationName", $this->_propDict)) {
+            return $this->_propDict["vppOrganizationName"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the vppOrganizationName
+    * The Vpp token's organization name.
+    *
+    * @param string $val The vppOrganizationName
+    *
+    * @return IosVppEBook
+    */
+    public function setVppOrganizationName($val)
+    {
+        $this->_propDict["vppOrganizationName"] = $val;
+        return $this;
+    }
+    
+    /**
+    * Gets the vppTokenId
+    * The Vpp token ID.
+    *
+    * @return string|null The vppTokenId
+    */
+    public function getVppTokenId()
+    {
+        if (array_key_exists("vppTokenId", $this->_propDict)) {
+            return $this->_propDict["vppTokenId"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the vppTokenId
+    * The Vpp token ID.
+    *
+    * @param string $val The vppTokenId
+    *
+    * @return IosVppEBook
+    */
+    public function setVppTokenId($val)
+    {
+        $this->_propDict["vppTokenId"] = $val;
         return $this;
     }
     

@@ -42,7 +42,7 @@
                     if(data.success){
                         app.alert.dismiss('upload');
 //                        app.router.goBack();
-                        app.router.navigate("bwc/index.php?module=Administration&action=index",{trigger:true});
+                        app.router.navigate('#Administration',{trigger: true});
                     }
                 }
             });

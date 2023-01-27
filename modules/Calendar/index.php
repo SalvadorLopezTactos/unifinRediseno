@@ -23,7 +23,7 @@ if(empty($_REQUEST['view'])){
 	$_REQUEST['view'] = SugarConfig::getInstance()->get('calendar.default_view','week');
 }
 
-$cal = new Calendar($_REQUEST['view']);
+$cal = new CalendarBWC($_REQUEST['view']);
 
 if(in_array($cal->view,array('day','week','month'))){
 	$cal->add_activities($GLOBALS['current_user']);	

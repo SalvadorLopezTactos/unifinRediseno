@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Všetky informačné panely pre modul {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Všetky informačné panely pre zobrazenie modulu {{module}} {{view}}',
     'LBL_COPY_OF' => 'Kópia {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Informačné panely zásuvky zamerania nemožno odstrániť.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Vytvoriť informačný panel',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Naozaj chcete obnoviť predvolené rozloženie tohto informačného panela?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Naozaj chcete obnoviť predvolené rozloženie informačného panela?',
+    'LBL_FILTER_UTILS_SELECT' => 'Priradené',
 );

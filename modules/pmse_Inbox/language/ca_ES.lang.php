@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Quadre de comandament del registre de processos',
 
     'LBL_CAS_ID' => 'Nombre de procès',
+    'LBL_CAS_STATUS' => 'Estat del procés',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Desconegut (segons l&#39;Id d&#39;usuari:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "la tasca s'ha",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "la taska va ser",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "ha estat assignada al procés #%s %s el registre %s pe l'acció %s %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "en",
     'LBL_PMSE_HISTORY_LOG_AND'  => "i",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'heu vinculat o desvinculat un registre de',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Aprova',
     'LBL_PMSE_LABEL_REJECT' => 'Rebutja',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Processos en curs',
     'LBL_STATUS_CANCELLED' => 'Processos cancel·lats',
     'LBL_STATUS_ERROR' => 'Error de processos',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Completat',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Finalitzat',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'En curs',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Cancel·lat',
+    'LBL_STATUS_ERROR_ENUM' => 'Error',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Gestió de processos',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Processos desatesos',

@@ -253,7 +253,8 @@
                         '</span>';
 
                     if (this._placeholders.get(choice.cid)) {
-                        $selection += '<span class="ellipsis-extra"><i class="fa fa-refresh fa-spin"></i></span>';
+                        $selection +=
+                            '<span class="ellipsis-extra"><i class="sicon sicon-refresh sicon-is-spinning"></i></span>';
                     } else {
                         $selection += '<span class="ellipsis-extra">(' + choice.file_size + ')</span>';
                     }
@@ -407,7 +408,7 @@
     },
 
     /**
-     * Uploads the file selected from the file picker as a temporary file.
+     * Uploads the files selected from the file picker as a temporary file.
      *
      * A placeholder attachment is added to the Select2 field while the file is
      * being uploaded.
@@ -422,7 +423,7 @@
             deleteIfFails: true,
             htmlJsonFormat: true
         };
-        var note;
+        var note = app.data.createBean('Notes');
         var placeholder;
         var val = $file.val();
 
@@ -430,17 +431,41 @@
             return;
         }
 
-        placeholder = this._addPlaceholderAttachment(val.split('\\').pop());
-        note = app.data.createBean('Notes');
-        this._requests[placeholder.cid] = note.uploadFile('filename', $file, {
-            success: _.bind(this._handleFileUploadSuccess, this),
-            error: _.bind(this._handleFileUploadError, this),
-            complete: _.bind(function() {
-                // Clear the file input field.
-                $file.val(null);
-                this._removePlaceholderAttachment(placeholder);
-            }, this)
-        }, ajaxParams);
+        if (!_.isEmpty($file[0].files)) {
+            _.each($file[0].files, _.bind(function(file, i) {
+                var dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+
+                var $domInput = $('<input/>').attr('type', 'file');
+                $domInput[0].files = dataTransfer.files;
+
+                var cid = this._addPlaceholderAttachment(file.name).cid;
+                this._requests[cid] = note.uploadFile('filename', $domInput, {
+                    success: _.bind(this._handleFileUploadSuccess, this),
+                    error: _.bind(this._handleFileUploadError, this),
+                    complete: _.bind(function() {
+                        $file.val(null);
+                        for (var k in this._placeholders.models) {
+                            var phModel = this._placeholders.models[k];
+                            var cid = phModel.cid;
+                            if (!_.isEmpty(this._requests[cid].status)) {
+                                this._removePlaceholderAttachment(phModel);
+                            }
+                        }
+                    }, this)
+                }, ajaxParams);
+            }, this));
+        } else {
+            placeholder = this._addPlaceholderAttachment(val.split('\\').pop());
+            this._requests[placeholder.cid] = note.uploadFile('filename', $file, {
+                success: _.bind(this._handleFileUploadSuccess, this),
+                error: _.bind(this._handleFileUploadError, this),
+                complete: _.bind(function() {
+                    $file.val(null);
+                    this._removePlaceholderAttachment(placeholder);
+                }, this)
+            }, ajaxParams);
+        }
     },
 
     /**

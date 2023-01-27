@@ -59,13 +59,6 @@ $dictionary['acl_role_sets_acl_roles'] = array(
                 'acl_role_id',
             ),
         ),
-        array(
-            'name' => 'idx_rsr_acl_role_set_id',
-            'type' => 'index',
-            'fields' => array(
-                'acl_role_set_id',
-            ),
-        ),
     ),
     'relationships' => array(
         'acl_role_sets_acl_roles' => array(

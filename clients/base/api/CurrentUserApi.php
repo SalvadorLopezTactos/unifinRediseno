@@ -11,8 +11,16 @@
  */
 
 require_once('modules/Users/password_utils.php');
+
 use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+use GuzzleHttp\Client;
+use Psr\Container\ContainerInterface;
+use Sugarcrm\IdentityProvider\Srn;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
+use Sugarcrm\Sugarcrm\SugarCloud\Discovery;
+use Sugarcrm\Sugarcrm\SugarCloud\UserApi;
 
 class CurrentUserApi extends SugarApi
 {
@@ -41,6 +49,9 @@ class CurrentUserApi extends SugarApi
         'email_reminder_time' => 'email_reminder_time',
         'field_name_placement' => 'field_name_placement',
         'send_email_on_mention' => 'send_email_on_mention',
+        'mobile_notification_on_assignment' => 'mobile_notification_on_assignment',
+        'mobile_notification_on_mention' => 'mobile_notification_on_mention',
+        'appearance' => 'appearance',
     );
 
     const TYPE_ADMIN = "admin";
@@ -156,6 +167,35 @@ class CurrentUserApi extends SugarApi
                 'longHelp' => 'include/api/help/me_getfollowed_help.html',
                 'ignoreSystemStatusError' => true,
             ),
+            'mfaReset' => [
+                'reqType' => 'PUT',
+                'path' => ['mfa', 'reset'],
+                'pathVars' => ['', ''],
+                'method' => 'mfaReset',
+                'shortHelp' => 'Reset multi-factor authentication for user',
+                'longHelp' => 'include/api/help/mfa_reset_help.html',
+                'minVersion' => '11.13',
+                'ignoreSystemStatusError' => true,
+            ],
+            'retrieveLastStates' => [
+                'reqType' => 'GET',
+                'path' => ['me', 'last_states'],
+                'pathVars' => ['', ''],
+                'method' => 'retrieveLastStates',
+                'ignoreMetaHash' => true,
+                'shortHelp' => 'Retrieve the set of last state data for the current user',
+                'longHelp' => 'include/api/help/me_last_states_get_help.html',
+                'ignoreSystemStatusError' => true,
+            ],
+            'updateLastStates' => [
+                'reqType' => 'PUT',
+                'path' => ['me', 'last_states'],
+                'pathVars' => ['', ''],
+                'method' => 'updateLastStates',
+                'shortHelp' => 'Perform an update to the set of last state data for the current user',
+                'longHelp' => 'include/api/help/me_last_states_put_help.html',
+                'ignoreSystemStatusError' => true,
+            ],
         );
     }
 
@@ -617,12 +657,13 @@ class CurrentUserApi extends SugarApi
         }
         $user_data['site_user_id'] = $current_user->site_user_id;
 
-        // licenses
-        $licenses = SubscriptionManager::instance()->getUserSubscriptions($current_user);
+        // licenses return all license types, including bundled products
+        $sm = SubscriptionManager::instance();
+        $licenses = $sm->getAllImpliedSubscriptions($sm->getAllUserSubscriptions($current_user));
         $user_data['licenses'] = $licenses;
 
         // Products
-        $user_data['products'] = getReadableProductNames($licenses);
+        $user_data['products'] = $current_user->getProductsData();
 
         // Email addresses
         $fieldDef = $current_user->getFieldDefinition('email');
@@ -667,10 +708,37 @@ class CurrentUserApi extends SugarApi
         $user_data['site_user_id'] = $current_user->site_user_id;
         $user_data['cookie_consent'] = !empty($current_user->cookie_consent);
 
+        // Send the appearance preference so we can listen for when it changes
+        $user_data['appearance'] = $this->getUserPrefAppearance($current_user, 'global')['appearance'];
+
+        // Send fields that can be used for sugar logic expressions
+        $user_data = array_merge($user_data, $this->getSugarLogicFields($api, $options, $current_user));
+
         // Send back a hash of this data for use by the client
         $user_data['_hash'] = $current_user->getUserMDHash();
 
         return array('current_user' => $user_data);
+    }
+
+    /**
+     * Gets the subset of User fields that are allowed to be used in sugar logic expressions
+     * @param $api
+     * @param $options
+     * @param $current_user
+     * @return array
+     */
+    protected function getSugarLogicFields($api, $options, $current_user)
+    {
+        $options['args'] = $options['args'] ?? [];
+        $validFields = FormulaHelper::getValidUserFields($current_user->getFieldDefinitions());
+        return [
+            'sugar_logic_fielddefs' => $validFields,
+            'sugar_logic_fields' => ApiHelper::getHelper($api, $current_user)->formatForApi(
+                $current_user,
+                array_column($validFields, 'name'),
+                $options,
+            ),
+        ];
     }
 
     /**
@@ -702,6 +770,53 @@ class CurrentUserApi extends SugarApi
         return [
             'send_email_on_mention' =>
             $user->getPreference('send_email_on_mention', $category) ?? 'send_email_on_mention',
+        ];
+    }
+
+    /**
+     * Utility function to get the users preference for Mobile notifications on record assignment
+     * Default is false
+     *
+     * @param User $user Current User object
+     * @param string $category The category for the preference
+     * @return array
+     */
+    protected function getUserPrefMobile_notification_on_assignment(User $user, $category = 'global')
+    {
+        return [
+            'mobile_notification_on_assignment' =>
+                $user->getPreference('mobile_notification_on_assignment', $category) ?? false,
+        ];
+    }
+
+    /**
+     * Utility function to get the users preference for Mobile notifications on comment log mentions
+     * Default is false
+     *
+     * @param User $user Current User object
+     * @param string $category The category for the preference
+     * @return array
+     */
+    protected function getUserPrefMobile_notification_on_mention(User $user, $category = 'global')
+    {
+        return [
+            'mobile_notification_on_mention' =>
+                $user->getPreference('mobile_notification_on_mention', $category) ?? false,
+        ];
+    }
+
+    /**
+     * Utility function to get the user's appearance preference
+     * Default is 'system_default'
+     *
+     * @param User $user Current User object
+     * @param string $category The category for the preference
+     * @return array
+     */
+    protected function getUserPrefAppearance(User $user, $category = 'global')
+    {
+        return [
+            'appearance' => $user->getPreference('appearance', $category) ?? 'system_default',
         ];
     }
 
@@ -1016,5 +1131,96 @@ class CurrentUserApi extends SugarApi
 
         $data['records'] = $this->formatBeans($api, $args, $beans);
         return $data;
+    }
+
+    /**
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     * @throws SugarApiException
+     */
+    public function mfaReset(ServiceBase $api, array $args): array
+    {
+        $idmConfig = $this->getIdmConfig();
+        $idmModeConfig = $idmConfig->getIDMModeConfig();
+        if (!$idmConfig->isIDMModeEnabled()) {
+            throw new SugarApiExceptionNoMethod("This method works only in IDM mode");
+        }
+
+        if (!$idmConfig->isMultiFactorAuthenticationEnabled()) {
+            throw new SugarApiExceptionNoMethod("This method works only if MFA enabled");
+        }
+
+        $user = $this->getCurrentUser();
+        $tenantSrn = Srn\Converter::fromString($idmModeConfig['tid']);
+        $srnManager = new Srn\Manager([
+            'partition' => $tenantSrn->getPartition(),
+            'region' => $tenantSrn->getRegion(),
+        ]);
+        $userSrn = Srn\Converter::toString($srnManager->createUserSrn($tenantSrn->getTenantId(), $user->id));
+
+        $container = $this->getDIContainer();
+        $httpClient = new Client();
+        $discovery = new Discovery($idmModeConfig, $container, $httpClient);
+        $userApi = new UserApi($httpClient, $discovery, $container);
+
+        if (!$userApi->resetMfa($userSrn, $api->grabToken())) {
+            throw new SugarApiExceptionServiceUnavailable(
+                sprintf("Can not reset MFA for user %s", $userSrn)
+            );
+        }
+
+        return [];
+    }
+
+    /**
+     * Retrieves the last state data for the current user
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     */
+    public function retrieveLastStates(ServiceBase $api, array $args)
+    {
+        global $current_user;
+        $lastStates = $current_user->retrieveLastStates($api->platform);
+        return !empty($lastStates) ? $lastStates : [];
+    }
+
+    /**
+     * Updates the last state data for the current user
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     */
+    public function updateLastStates(ServiceBase $api, array $args)
+    {
+        $this->requireArgs($args, ['values']);
+
+        global $current_user;
+        return $current_user->updateLastStates($args['values'], $api->platform);
+    }
+
+    /**
+     * @return Config
+     */
+    protected function getIdmConfig(): Config
+    {
+        return new Config(\SugarConfig::getInstance());
+    }
+
+    /**
+     * @return ContainerInterface
+     */
+    protected function getDIContainer(): ContainerInterface
+    {
+        return Container::getInstance();
+    }
+
+    /**
+     * @return \User
+     */
+    protected function getCurrentUser(): \User
+    {
+        return $GLOBALS['current_user'];
     }
 }

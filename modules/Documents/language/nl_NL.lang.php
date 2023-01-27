@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Opportunityregels',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Aankopen',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Aangeschafte regelitems',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Dashboard documentrecord',
+    'LBL_MY_DOCUMENTS' => 'Mijn Documenten',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Stuur naar DocuSign',
 );

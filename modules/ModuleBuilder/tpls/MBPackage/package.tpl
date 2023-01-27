@@ -18,7 +18,7 @@
 <input type='hidden' name='to_pdf' value='1'>
 <input type='hidden' name='original_name' value='{$package->name}'>
 
-<h2>{$package->title}</h2>
+<h2>{$package->name|default:""}</h2>
 <table class='mbTable' >
 	<tr><td></td><td><input style="padding-bottom:0px;" type='button' name='savebtn' value='{$mod_strings.LBL_BTN_SAVE}' class='button' onclick="document.CreatePackage.action.value='SavePackage';ModuleBuilder.handleSave('CreatePackage');">&nbsp;
 		{if !empty($package->name)}
@@ -120,29 +120,29 @@
 	</tr>
 </table>
 </form>
-{literal}
+
 <script>
 addForm('CreatePackage');
-addToValidate('CreatePackage', 'name', 'DBName', true, '{/literal}{$mod_strings.LBL_JS_VALIDATE_NAME}{literal}');
-addToValidateIsInArray('CreatePackage', 'name', 'in_array', false, '{/literal}{$mod_strings.LBL_JS_VALIDATE_PACKAGE_NAME}','{$package_labels}'{literal}, 'u==');
-addToValidate('CreatePackage', 'key', 'DBNameRaw', true, '{/literal}{$mod_strings.LBL_JS_VALIDATE_KEY}{literal}');
-addToValidateIsInArray('CreatePackage', 'key', 'in_array', false, '{/literal}{$mod_strings.LBL_JS_VALIDATE_PACKAGE_KEY}','{$key_labels}{literal}', 'u==');
+addToValidate('CreatePackage', 'name', 'DBName', true, '{$mod_strings.LBL_JS_VALIDATE_NAME}');
+addToValidateIsInArray('CreatePackage', 'name', 'in_array', false, '{$mod_strings.LBL_JS_VALIDATE_PACKAGE_NAME}','{$package_labels}', 'u==');
+addToValidate('CreatePackage', 'key', 'DBNameRaw', true, '{$mod_strings.LBL_JS_VALIDATE_KEY}');
+addToValidateIsInArray('CreatePackage', 'key', 'in_array', false, '{$mod_strings.LBL_JS_VALIDATE_PACKAGE_KEY}','{$key_labels}', 'u==');
 
 ModuleBuilder.helpRegister('CreatePackage');
 ModuleBuilder.helpRegisterByID('CreatePackage','td');
 if(document.getElementById('package_modules'))
 	ModuleBuilder.helpRegisterByID('package_modules', 'table');
-ModuleBuilder.helpSetup({/literal}'{$package->help.group}','{$package->help.default}'{literal});
+ModuleBuilder.helpSetup('{$package->help.group}','{$package->help.default}');
 function toggleEl(){
 		var display = document.getElementById('readmefield').style.display;
 		if(display=='table-row' || display=='inline-block'){
-			document.getElementById('options').src = "{/literal}{sugar_getimagepath file='advanced_search.gif'}{literal}";
+			document.getElementById('options').src = "{sugar_getimagepath file='advanced_search.gif'}";
 			document.getElementById('readmefield').style.display ='none';
 		}else if (display=='none'){
-			document.getElementById('options').src = "{/literal}{sugar_getimagepath file='basic_search.gif'}{literal}";
+			document.getElementById('options').src = "{sugar_getimagepath file='basic_search.gif'}";
 			document.getElementById('readmefield').style.display = (navigator.appName=="Microsoft Internet Explorer")? 'inline-block' : 'table-row';
 		}
 	}
 </script>
-{/literal}
+
 {include file='modules/ModuleBuilder/tpls/assistantJavascript.tpl'}

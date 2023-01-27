@@ -46,13 +46,6 @@ $dictionary['projects_revenuelineitems'] = array(
             ),
         ),
         array(
-            'name' => 'idx_proj_rli_project',
-            'type' => 'index',
-            'fields' => array(
-                'project_id',
-            ),
-        ),
-        array(
             'name' => 'idx_proj_rli_product',
             'type' => 'index',
             'fields' => array(

@@ -544,8 +544,12 @@
         var field = this.getField('paretoChart'),
             serverData = field.getServerData();
 
+        if (!serverData || !serverData.data) {
+            return;
+        }
+
         _.find(serverData.data, function(record, i, list) {
-            if (model.get('id') == record.record_id) {
+            if (model.get('id') === record.record_id) {
                 list.splice(i, 1);
                 return true;
             }

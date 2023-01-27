@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Përdoruesit',
     'LBL_EMAILS_PRODUCTS_REL' => 'Artikujt e rreshtave të kuotuar',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Artikujt e rreshtave të të ardhurave',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Përshkallëzimet',
     'LBL_EMAILS_MESSAGES_REL' => 'Mesazhet',
     'LBL_EMAILS_PURCHASES_REL' => 'Blerjet',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Artikujt e blerë të linjës',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Dërgo email',
     'LBL_MAILBOX' => 'Llogari e drejtuar nga brenda',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Konfiguro një llogari email-i dalëse nëpërmjet <a href="#OutboundEmail">Cilësimeve të email-it</a> për të dërguar email-e.',
 );

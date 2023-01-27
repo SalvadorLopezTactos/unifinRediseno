@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'Předpovědi',
     'ForecastWorksheets' => 'Listy předpovědí',
     'ForecastManagerWorksheets' => 'Správce předpovědí',
-    'MergeRecords'=>'Spojit záznamy',
       'VisualPipeline'=>'Vizuální zásobník příležitostí',
       'ConsoleConfiguration' => 'Konfigurace konzoly',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'Role',
     'Notifications'=>'Upozornění',
     'Sync'=>'Synchronizace',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
     'ReportMaker' => 'Firemní reporty',
     'DataSets' => 'Formáty dat',
     'CustomQueries' => 'Uživatelské dotazy',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'Zakoupené řádkové položky',
     'MobileDevices' => 'Mobilní zařízení',
     'PushNotifications' => 'Nabízená oznámení',
+    'Escalations' => 'Eskalace',
+    'DocumentTemplates' => 'Šablony dokumentů',
+    'DocumentMerges' => 'Slučování dokumentů',
     'WorkFlow' => 'Definice Workflow',
     'EAPM' => 'Externí účty',
     'Worksheet' => 'List',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'Svátky',
     'ChangeTimers' => 'Změňte časovače',
     'Messages' => 'Zprávy',
+    'Audit' => 'Audit',
+    'RevenueLineItems' => 'Řádkové položky výnosů',
+    'DocuSignEnvelopes' => 'Obálky DocuSign',
+    'Geocode' => 'Geokód',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Úkoly',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'OOÚ',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'OC',
         'PurchasedLineItems' => 'ZP',
+        'DocumentTemplates' => 'DT',
+        'DocumentMerges' => 'DM',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Pracovní list odhadu',
     'ForecastManagerWorksheets' => 'Správce předpovědí',
     'Quotas' => 'Kvóta',
-    'MergeRecords'=>'Sloučení záznamů',
     'Teams' => 'Tým',
     'TeamNotices' => 'Týmové zprávy',
     'Activities' => 'Aktivity',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'Nákup',
     'PurchasedLineItems' => 'Zakoupená řádková položka',
     'PushNotifications' => 'Nabízené oznámení',
+    'Escalations' => 'Eskalace',
+    'DocumentTemplates' => 'Šablona dokumentu',
+    'DocumentMerges' => 'Sloučení dokumentu',
     'WorkFlow' => 'Pracovní postup',
     'EAPM' => 'Externí účet',
     'Worksheet' => 'List',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'Svátek',
     'ChangeTimers' => 'Změňte časovač',
     'Messages' => 'Zpráva',
+    'Audit' => 'Audit',
+    'DocuSignEnvelopes' => 'DocuSignEnvelope',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
+    'Geocode' => 'Geokód',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'Utility',
     'Other' => 'Jiné',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF a CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'Probíhá zpracování',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'Znalostní báze',
       'PurchasedLineItems' => 'Zakoupená řádková položka',
       'Purchases' => 'Nákup',
+      'Escalations' => 'Eskalace',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Společnost',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'Poznámka',
     'PurchasedLineItems' => 'Zakoupená řádková položka',
     'Purchases' => 'Nákup',
+    'Escalations' => 'Eskalace',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'Objednaný',
       'Ship' => 'Odeslaný',
   ),
+    'active_status_dom' => [
+        'Active' => 'Aktivní',
+        'Inactive' => 'Neaktivní',
+        'Retired' => 'Vyřazeno',
+    ],
+    'appearance_options' => [
+        'system_default' => 'Použít nastavení systému',
+        'light' => 'Světlé',
+        'dark' => 'Tmavé',
+    ],
 
 
   'pricing_formula_default_key' => 'Pevná',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'Televize',
         'NewsLetter' => 'Zpravodaj',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GET',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,13 +2049,15 @@ $app_list_strings = array (
         'print'       => 'Tisk',
         'pieWedgeName'      => 'sekce',
     ),
-    'd3_chart_types' => array (
-        'pie chart' => 'Koláčový graf',
-        'bar chart' => 'Vertikální tabulkový graf',
-        'group by chart' => 'Vertikální tabulkový graf',
-        'horizontal bar chart' => 'Horizontální tabulkový graf',
-        'horizontal group by chart' => 'Horizontální skupinový tabulkový graf',
-        'line chart' => 'Řádkový graf',
+    'chart_types' => array (
+        'pie chart' => 'Výsečový graf',
+        'donut chart' => 'Prstencový graf',
+        'treemap chart' => 'Graf stromové mapy',
+        'bar chart' => 'Svislý pruhový graf',
+        'group by chart' => 'Svislý seskupený pruhový graf',
+        'horizontal bar chart' => 'Vodorovný pruhový graf',
+        'horizontal group by chart' => 'Vodorovný seskupený pruhový graf',
+        'line chart' => 'Spojnicový graf',
         'funnel chart' => 'Trychtýřový graf',
     ),
     'd3_value_placement' => array (
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'Cena (nejvyšší celková)',
             'total_revenue:asc' => 'Cena (nejnižší celková)',
         ],
+        'calendar_type_list' => [
+          'main' => 'Centrum kalendáře',
+        ],
+        'calendar_views_options' => [
+          'day' => 'Den',
+          'week' => 'Týden',
+          'workWeek' => 'Pracovní týden',
+          'expandedMonth' => 'Měsíc',
+          'agenda' => 'Program',
+          'timeline' => 'Časová osa',
+          'monthSchedule' => 'Plánovač',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'Vytvořeno',
+          'completed' => 'Dokončeno',
+          'declined' => 'Odmítnuto',
+          'delivered' => 'Doručeno',
+          'sent' => 'Odesláno',
+          'signed' => 'Podepsáno',
+          'voided' => 'Anulováno',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'Výchozí',
+            'color' => 'Barva',
+            'image' => 'Obrázek',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'Nový',
+            'In Progress' => 'Probíhá zpracování',
+            'Closed' => 'Uzavřeno',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'Nečinnost',
+            'Lack of Progress' => 'Nedostatečné zpracování',
+            'Customer-Imposed Deadline' => 'Konečný termín stanovený zákazníkem',
+            'Account at Risk' => 'Zákazník v ohrožení',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'Požadováno zákazníkem',
+            'Internally Requested' => 'Požadováno interně',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'Případ',
+            'Bugs' => 'Chyba',
+            'Accounts' => 'Zákazník',
+            'Opportunities' => 'Příležitost',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'Pozitivní',
+            'Negative' => 'Negativní',
+            'Neutral' => 'Neutrální',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'Nepravděpodobné',
+            '02_less_likely' => 'Málo pravděpodobné',
+            '03_neutral' => 'Neutrální',
+            '04_more_likely' => 'Více pravděpodobné',
+            '05_very_likely' => 'Velmi pravděpodobné',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'Neshoduje se se zákazníky',
+            '02_no_match' => '',
+            '01_matches_customers' => 'Shoduje se se zákazníky',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Přejít na odkaz',
   'LBL_TOGGLE_VISIBILITY' => 'Přepnout viditelnost', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivity',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar a 3-D Krychle jsou registrované ochranné známky společnosti SugarCRM Inc. '.
         'Všechny ostatní názvy produktů a společností používané nebo zobrazené v tomto produktu mohou být ochrannými známkami '.
         'SugarCRM ®, Sugar Enterprise™ a Sugar™ jsou ochranné známky SugarCRM Inc.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'Vlož [Alt+C]' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Logo firmy' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalendář' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'Hodnota rozevíracího seznamu, kterou jste vybrali, změnila rozložení zobrazení záznamu. ' .
+        'Pole skrytá v tomto novém rozložení mají své hodnoty vymazány. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'navigace v hlavním modulu',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'Zavřít',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} označen jako {{status}}.',
 
+    'LBL_FOCUS' => 'Zaměření',
+
     'LBL_QUERY_VALID'=>'Platný',
     'LBL_QUERY_ERROR'=>'Chyba!',
     'LBL_QUERY_CHILD'=>'Platný sub-dotaz',
@@ -3068,6 +3185,10 @@ $app_strings = array (
     'LBL_CASES'=>'Případy',
     'LBL_MESSAGE'=>'Zpráva',
     'LBL_MESSAGES'=>'Zprávy',
+    'LBL_ESCALATIONS' => 'Eskalace',
+    'LBL_ESCALATION' => 'Eskalace',
+    'LBL_DOCUSIGN_ENVELOPES' => 'Obálky DocuSign',
+    'LBL_DOCUSIGN_ENVELOPE' => 'Obálka DocuSign',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Změnit heslo',
     'LBL_CHANGE_BUTTON_LABEL' => 'Změnit',
@@ -3093,6 +3214,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'Otevřené položky:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Nová zpráva',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'E-mail',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Nová zpráva',
     'LBL_SEARCH_DROPDOWN_YES'=>'Ano',
     'LBL_SEARCH_DROPDOWN_NO'=>'Ne',
@@ -3118,6 +3240,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Dokumenty',
     'LBL_DATE_ENTERED' => 'Datum zadání:',
     'LBL_DATE_MODIFIED' => 'Datum změny:',
+    'LBL_ACTIVITY_MODIFIED' => 'Změněno',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Upravit kartu přehledu',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'Upravit karty modulu',
     'LBL_EDIT_BUTTON' => 'Editace',
@@ -3140,6 +3263,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Vyberte pole...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Vyberte logický operátor',
     'LBL_FILTER_CREATE_NEW' => 'Přidat',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'Filtr sestavení (neuložený)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(neuložený)',
     'LBL_FILTER_CREATE_FILTER' => 'Vytvořit nový filtr',
     'LBL_FILTER_CLOSE_FILTER' => 'Zavřít filtr',
     'LBL_FILTER_EDIT_FILTER' => 'Upravit filtr',
@@ -3202,6 +3327,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => 'Více {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Dnešní aktivity',
     'LBL_LEADS'=>'Zájemci',
+    'LBL_LEAD'=>'Zájemce',
+    'LBL_QUOTES_BILL_TO' => 'Nabídky (příjemce faktury)',
     'LBL_LESS' => 'méně',
     'LBL_CAMPAIGN' => 'Kampaň:',
     'LBL_CAMPAIGNS' => 'Kampaně',
@@ -3229,19 +3356,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'Prosím, vyberte alespoň 2 záznamy.',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'Prosím, vyberte alespoň 10 záznamů.',
     'LBL_LISTVIEW_ALL' => 'Všechno',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'Ukotvit sloupec 1',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'Všechny duplikáty',
     'LBL_LISTVIEW_NONE' => 'Odoznačit všechno',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'Označit tuto stránku',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Označit vše',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Vybrané záznamy',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Vybráno: ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Zrušit označení.',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Vymazat všechny výběry.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'Vybrat všechny záznamy',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'Ve výsledku je více než {{num}} záznamů.Vybrali jste prvních {{num}} záznamů.',
     'TPL_LISTVIEW_SELECTED' => 'You have selected {{num}} records in the result set.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'V sadě výsledků jste vybrali 1 záznam.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'Označili jste všech {{num}} záznamů výsledku.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'Označili jste všech {{num}} záznamů v tomto pohledu. {{link}} ve výsledku.',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Aktualizuji položku {{num}} z {{total}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Aktualizuji položku {{num}} z {{total}}',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(zbývá přibližně {{time}} {{unit}})',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Hromadná aktualizace selhala. Spouštím nový pokus ({{num}} z {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Hromadná aktualizace není kompletní. {{num}} záznamů nebylo změněno.',
@@ -3249,7 +3378,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} záznamů bylo ignorováno kvůli oprávněním nebo chybám.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} záznamů bylo úspěšně upraveno.',
     'TPL_MASSUPDATE_TITLE' => 'Hromadná aktualizace: {{module}}',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Mažu {{num}} z {{total}}.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Odstraňuji položku {{num}} z {{total}}',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(zbývá přibližně {{time}} {{unit}})',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => 'Hromadné mazání se nezdařilo. Spouštím nový pokus ({{num}} z {{total}}).',
     'TPL_MASSDELETE_WARNING_CLOSE' => 'Hromadné mazání není kompletní. {{num}} záznamů zůstalo.',
@@ -3274,10 +3403,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Označit',
     'LBL_LISTVIEW_ACTIONS' => 'Akce',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'Vybrat všechny záznamy na této stránce',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'Zrušit výběr všech záznamů na této stránce',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} z {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '{{num}} načítání...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Klepněte pro celkový počet',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'z',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'Získat počet stránek',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'Jan',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Novák',
@@ -3285,10 +3421,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Code Monkey Extraordinaire',
     'LBL_LOGIN_TO_ACCESS' => 'Prosím přihlašte se pro přístup.',
     'LBL_LOGOUT' => 'Odhlásit se',
+    'LBL_FINISH_IMPERSONATING' => 'Dokončit zosobnění',
+    'LBL_RESET_MFA' => 'Resetovat vícefaktorové ověřování',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, právě provádíte zosobnění {{user}}.',
     'LBL_PROFILE' => 'Profil',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'Spojování mailů',
     'LBL_MASS_UPDATE' => 'Hromadná aktualizace',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'Vyberte všechny záznamy pro hromadnou aktualizaci',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'Zahrnout záznam do hromadné aktualizace',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Přidat pole',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Odeber pole',
     'LBL_GENERATE_QUOTE' => 'Vygenerovat nabídku',
@@ -3343,6 +3484,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'Více informací',
     'LBL_PANEL_BODY' => 'Přehled úkolu',
     'LBL_PARENT_TYPE' => 'Typ zdroje',
+    'LBL_RELATED_TYPE' => 'Související typ',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'Rozpětí:',
     'LBL_PICTURE_FILE' => 'Obrázek',
@@ -3416,7 +3558,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'Související',
     'LBL_RELATED_INFORMATION' => 'Související informace',
-    'LBL_RELATED_RECORDS' => 'Související záznamy',
+    'LBL_RELATED_RECORDS' => 'Související {{module}}',
     'LBL_REPORTS_TO' => 'Nadřízený',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'Označuje povinné pole',
@@ -3535,7 +3677,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Všechna práva vyhrazena.<br />SugarCRM, Sugar a 3-D Krychle jsou registrované ochranné známky společnosti SugarCRM Inc. '.
         'Všechny ostatní názvy produktů a společností používané nebo zobrazené v tomto produktu mohou být ochrannými známkami '.
         'příslušných společností, s nimiž jsou spojeny.',
@@ -3598,6 +3740,7 @@ $app_strings = array (
     'LBL_UNDELETE' => 'Obnovit',
     'LBL_UNSYNC' => 'Nesynchronizovat',
     'LBL_UPDATE' => 'Aktualizovat',
+    'LBL_UPDATES' => 'Aktualizace',
     'LBL_USER_LIST' => 'Seznam uživatelů',
     'LBL_USER_MENU' => 'Uživatelské Menu',
     'LBL_USERS_SYNC'=>'Synchornizace uživatelů',
@@ -3664,6 +3807,8 @@ $app_strings = array (
     'NTC_DELETE_SUCCESS' => 'Smazal jste',
     'NTC_UNLINK_CONFIRMATION' => 'Opravdu si přejete odpojit záznam',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'Opravdu chcete odpojit {0}?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'Opravdu chcete zrušit propojení {0}? Tím je také odeberete z pole Primární kontakt případu.',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => 'Nelze zrušit propojení {0}, protože v tomto případě jsou primárním kontaktem. Před zrušením propojení tohoto záznamu aktualizujte pole Primární kontakt.',
     'NTC_UNLINK_SUCCESS' => 'Odpojil jste',
     'NTC_LOGIN_MESSAGE' => 'Prosím, zadejte své uživatelské jméno a heslo:',
     'NTC_NO_ITEMS_DISPLAY' => 'Žádný',
@@ -3695,6 +3840,9 @@ $app_strings = array (
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Obnovením prohlížeče automaticky zavřete všechny otevřené relace volání nebo chatu SugarLive, které máte otevřené, a všechny neuložené změny budou ztraceny. Přejete si pokračovat?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Máte neuložené změny. Opravdu chcete opustit stránku a zrušit změny?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'Opravdu chcete resetovat své <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">vícefaktorové ověřování</a>?
+Provedení této akce vás okamžitě odhlásí a při příštím přihlášení budete muset znovu provést ověřování pomocí ověřovací aplikace.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'Potvrdit a odhlásit se',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Jeden nebo více dashletů má neuložené změny. Opravdu chcete zásuvku zavřít?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Přesouváte se do modulu Reporty. Vaše změny v nástěnce nebudou uloženy. Chcete pokračovat?',
     'ERROR_NO_RECORD' => 'Chyba při načítání záznamu. Tento je zrušen nebo nemáte práva pro jeho zobrazení.',
@@ -3790,6 +3938,11 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Nejsou k dispozici žádné <item1>uložené dokumenty. <item2> jeden nyní.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Můžete vytvořit z . list.",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'Pozitivní',
+    'LBL_SENTIMENT_NEUTRAL' => 'Neutrální',
+    'LBL_SENTIMENT_NEGATIVE' => 'Negativní',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Klikněte zde",
     // contextMenu strings
@@ -3799,11 +3952,16 @@ $app_strings = array (
     'LBL_CREATE_NOTE' => 'Přidat poznámku nebo přílohu',
     'LBL_CREATE_OPPORTUNITY' => 'Vytvořit obchod',
     'LBL_SCHEDULE_CALL' => 'Zaznamenat hovor',
+    'LBL_SCHEDULE_CALL2' => 'Hovor',
     'LBL_SCHEDULE_MEETING' => 'Naplánovat schůzku',
+    'LBL_SCHEDULE_MEETING2' => 'Schůzka',
     'LBL_CREATE_MESSAGE' => 'Vytvořit zprávu',
+    'LBL_CREATE_MESSAGE2' => 'Zpráva',
     'LBL_CREATE_TASK' => 'Přidat úkol',
+    'LBL_CREATE_TASK2' => 'Úkol',
     'LBL_REMOVE_FROM_FAVORITES' => 'Odstranit z mých oblíbených',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'Poznámka',
     'LBL_DOWNLOAD_ALL' => 'Stáhnout vše',
     'LBL_DOWNLOAD_ONE' => 'Stáhnout',
     'LBL_ATTACHMENTS' => 'Přílohy',
@@ -3843,13 +4001,14 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Počet řádků',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Navázat na aktuální záznam',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Propojené pole',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'Ukotvit první sloupec',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Jste si jist, že chcete budík odstranit ?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Přejete si skutečně odebrat řádek?',
     'LBL_MAXIMUM_OF' => 'Maximum z',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'Sloupce mohou být zobrazeny',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'Řídicí panel',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Moje nástěnka',
     'LBL_COLLAPSE_ALL' => 'Sbalit všechny záznamy',
@@ -3866,12 +4025,15 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE' => 'Nastavit',
     'LBL_DASHLET_TOGGLE' => 'Přepnout viditelnost nástěnky',
     'LBL_SIDEPANE_TOGGLE' => 'Otevřít/uzavřít boční podokno',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'Obnovit výchozí dashlety',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'Není nakonfigurován žádný řídicí panel',
+    'LBL_CREATE_DASHBOARD_LINK' => 'Vytvořit řídicí panel',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'Nápověda',
     'LBL_HELPLET_TOGGLE' => 'Otevřít/uzavřít',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'Moduly',
     'LBL_FACET_MODIFIED_BY_ME' => 'Upraveno mnou',
     'LBL_FACET_CREATED_BY_ME' => 'Vytvořeno mnou',
@@ -3888,6 +4050,7 @@ $app_strings = array (
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Zobrazení záznamu',
+    'LBL_RELATED_RECORDS' => 'Související {{module}}',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Zobrazí záznam a volitelně související záznamy v záložkách.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Základní typ záznamu',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Tento {{moduleSingular}}',
@@ -3937,7 +4100,7 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Aktuálně nebyly nalezeny žádé záznamy',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Shrnutí případů',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'Interakce',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'Časová osa',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Přílohy',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Poznámky a přílohy související se záznamem',
     'LBL_DASHLET_PIPLINE_NAME' => 'Zásobník',
@@ -4208,6 +4371,8 @@ $app_strings = array (
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Nahrajte soubor z Vašeho počítače.',
     'LBL_SEARCH_EXTERNAL_API' => 'Soubor z externího zdroje',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'Nahrát do externího zdroje',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'Odkaz z externího zdroje',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'Bezpečnost',
     'LBL_SHARE_PRIVATE' => 'Soukromý',
     'LBL_SHARE_COMPANY' => 'Společnost',
@@ -4316,6 +4481,9 @@ $app_strings = array (
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Klavesové zkratky',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>Funkcionalita formulářů - Alt+</strong><br/> I = upravit (detailview)<br/> U = duplikovat (detailview)<br/> D = vymazat (detailview)<br/> A = uložit (editview)<br/> L = storno (editview) <br/><br/></p><p><strong>Hledání a navigace  - Alt+</strong><br/> 7 = first input on Edit form<br/> 8 =odkaz na pokročilé vyhledávání<br/> 9 = First Search Form input<br/> 0 = Unified search input<br></p>' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'Eskalovat',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'Sdílet',
     'TPL_RECORD_SHARE_SUBJECT' => 'Sdílené {{module}} {{name}} z {{appId}}',
@@ -4388,7 +4556,7 @@ $app_strings = array (
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'Chystáte se změnit primární záznam bez uložení provedených změn. Všechny úpravy budou ztraceny. Přejete si pokračovat?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'Sloučit související záznamy.',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Sloučeno: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Sloučeno: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'Sloučení záznamů souvisejících s {{objectName}} se nezdařilo. Zahajuji pokus ({{num}} z {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4442,14 +4610,14 @@ $app_strings = array (
     'LBL_LANGUAGE' => 'Jazyk:',
     'LBL_LOADING_LANGUAGE' => 'Nahrávám jazykové prostředí',
     'LBL_UPLOADING' => 'Nahrávám',
+    'LBL_UPLOADING_DOTS' => 'Nahrávám...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Jste si jistý, že chcete smazat tento obrázek?',
     'LBL_FILE_DELETE_CONFIRM' => "Jste si jistý, že chcete smazat tento soubor? Tato operace nemůže být vrácena.",
     'LBL_FILE_DELETED' => 'Soubor byl úspěšně smazán.',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'Motiv portálu',
-    'LBL_COFIGURE_PORTAL_THEME' => 'Nastavit motiv portálu',
-    'LBL_THEME_PREVIEW' => 'Náhled motivu',
+    'LBL_THEME_PREVIEW' => 'Náhled motivu portálu',
     'LBL_LOADING_PREVIEW' => 'Nahrávám náhled',
     'LBL_RESET' => 'Resetovat',
     'LBL_COLORS' => 'Barvy',
@@ -4600,10 +4768,18 @@ $app_strings = array (
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Schůzky',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Úkoly',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Hovory',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Zákazníci',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontakty',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'E-maily',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'Směny',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Položky nabídky',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Výjimky směn',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
+    'LBL_ESCALATIONS' => 'Eskalace',
+    'LBL_ESCALATED' => 'Eskalováno',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'Eskalace',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'Další související eskalace',
+    'LBL_ESCALATIONS' => 'Eskalace',
     'LNK_SETTINGS' => 'Nastavení',
     'LBL_MOBILE_SUPPORT' => 'Podpora',
     'LBL_MOBILE_SHOW_MORE' => 'Zobrazit více...',
@@ -4811,6 +4987,55 @@ $app_strings = array (
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'Nepodařilo se získat serverový čas',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'Nelze povolit offline režim. Nelze se připojit k serveru.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'Vzhled',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'Použít nastavení systému',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'Světlé',
+    'LBL_MOBILE_APP_THEME_DARK' => 'Tmavé',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'Nový název souboru',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'Přejmenovat soubor',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'Vytvořeno mnou',
+    'LBL_OPERATOR_CONTAINS' => 'je některý z',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'není žádný z',
+    'LBL_OPERATOR_EMPTY' => 'je prázdný',
+    'LBL_OPERATOR_NOT_EMPTY' => 'není prázdný',
+    'LBL_OPERATOR_MATCHES' => 'přesně odpovídá',
+    'LBL_OPERATOR_STARTS_WITH' => 'začíná',
+    'LBL_OPERATOR_EQUALS' => 'rovná se',
+    'LBL_OPERATOR_NOT_EQUALS' => 'nerovná se',
+    'LBL_OPERATOR_GREATER_THAN' => 'je větší než',
+    'LBL_OPERATOR_LESS_THAN' => 'je menší než',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'je větší nebo roven',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'je menší nebo roven',
+    'LBL_OPERATOR_BETWEEN' => 'je mezi',
+    'LBL_OPERATOR_BEFORE' => 'před',
+    'LBL_OPERATOR_AFTER' => 'po',
+    'LBL_OPERATOR_YESTERDAY' => 'včera',
+    'LBL_OPERATOR_TODAY' => 'dnes',
+    'LBL_OPERATOR_TOMORROW' => 'zítra',
+    'LBL_OPERATOR_LAST_7_DAYS' => 'posledních 7 dní',
+    'LBL_OPERATOR_NEXT_7_DAYS' => 'příštích 7 dní',
+    'LBL_OPERATOR_LAST_30_DAYS' => 'posledních 30 dní',
+    'LBL_OPERATOR_NEXT_30_DAYS' => 'příštích 30 dní',
+    'LBL_OPERATOR_LAST_MONTH' => 'minulý měsíc',
+    'LBL_OPERATOR_THIS_MONTH' => 'tento měsíc',
+    'LBL_OPERATOR_NEXT_MONTH' => 'příští měsíc',
+    'LBL_OPERATOR_LAST_YEAR' => 'minulý rok',
+    'LBL_OPERATOR_THIS_YEAR' => 'tento rok',
+    'LBL_OPERATOR_NEXT_YEAR' => 'příští rok',
+    'LBL_OPERATOR_IS' => 'je',
+    'LBL_OPERATOR_IS_NOT' => 'není',
+    'LBL_ERROR_FILTER_EMPTY' => 'Přidejte kritéria filtru.',
+    'LBL_ADD_FILTER' => 'Přidat kritéria',
+    'LBL_FILTER_NAME' => 'Název filtru',
+    'LBL_FILTER_FIELD' => 'Pole',
+    'LBL_FILTER_OPERATOR' => 'Operátor',
+    'LBL_FILTER_VALUE' => 'Hodnota',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Uložit do aplikace počítače',
+    'LBL_FILTER_LOCAL' => 'Místní filtr',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'Vítejte v {{{brandName}}}.<br/><br/> Dovolte nám zdůraznit některé nové funkce...',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'Navigace hlavním menu',
@@ -4856,6 +5081,7 @@ $app_strings = array (
     'LBL_COMMENT_ADD' => 'Přidat komentář',
     'LBL_REQUIRED' => 'Povinné',
     'LBL_MORE_BUTTON' => 'Více',
+    'LBL_NO_OPTIONS' => 'Nejsou dostupné žádné možnosti',
     'LBL_TRY_AGAIN' => 'Zkusit znovu',
     'LBL_NEW_RECORDS' => 'Naposledy vytvořeno',
     'LBL_ASSIGNED_TO_ME' => 'Můj {{{module}}}',
@@ -5081,11 +5307,15 @@ $app_strings = array (
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Opravdu chcete chat zavřít?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'Vytvořit poznámku nebo přidat přílohu',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'Přidat poznámku',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Vaše přihlášení nebylo úspěšné. Zkuste to prosím znovu.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Neplatné údaje.',
-    'LBL_PORTAL_INVALID_GRANT' => 'Vaše přihlášení je neplatné, nebo vypršela jeho platnost. Prosím přihlašte se znovu.',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Vypršela platnost přihlášení.',
+    'LBL_PORTAL_INVALID_GRANT' => 'Vaše relace vypršela. Přihlaste se prosím znovu.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Relace vypršela',
     'LBL_PORTAL_AUTH_FAILED' => 'Autentifikace klienta se nezdařila.',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'Neplatní klient.',
     'LBL_PORTAL_INVALID_REQUEST' => 'Váš požadavek je neplatný, nebo se nezdařil. Prosím kontaktujte technickou podporu.',
@@ -5119,6 +5349,8 @@ $app_strings = array (
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'Obnovit výchozí řídicí panel',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'Konzola obnovení',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Přehled',
@@ -5138,6 +5370,7 @@ $app_strings = array (
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Shrnutí zprávy',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Shrnutí hovoru',
     'LBL_OMNICHANNEL_LINK_TO' => 'Propojit {{fromModule}} s {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'Odkaz na {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'Propojeno',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Váš prohlížeč nepodporuje chat. Použijte prosím Google Chrome nebo Mozilla Firefox.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Obraťte se s žádostí o pomoc na správce aplikace Sugar.',
@@ -5145,6 +5378,8 @@ $app_strings = array (
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Před uskutečněním odchozího hovoru dokončete konfiguraci SugarLive.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Před otevřením SugarLive dokončete konfiguraci rozložení SugarLive.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Před konfigurací rozložení SugarLive se nastavte na „Offline“.',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'Kompaktní zobrazení',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'Úplné zobrazení',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'Obnovit záložku na výchozí nastavení',
@@ -5557,9 +5792,12 @@ $app_strings = array (
     'LBL_BEST' => 'Nejlépe',
     'LBL_WORST' => 'Nejhůře',
     'LBL_LIKELY' => 'Pravděpodobně',
-    'LBL_BEST_ADJUSTED' => 'Nejlepší (upravený)',
-    'LBL_WORST_ADJUSTED' => 'Nejhorší (upravený)',
-    'LBL_LIKELY_ADJUSTED' => 'Pravděpodobný (upravený)',
+    'LBL_BEST_FORECAST' => 'Závazek (nejlepší)',
+    'LBL_WORST_FORECAST' => 'Závazek (nejhorší)',
+    'LBL_LIKELY_FORECAST' => 'Závazek (pravděpodobný)',
+    'LBL_BEST_ADJUSTED' => 'Upravený závazek (nejlepší)',
+    'LBL_WORST_ADJUSTED' => 'Upravený závazek (nejhorší)',
+    'LBL_LIKELY_ADJUSTED' => 'Upravený závazek (pravděpodobný)',
     'LBL_AMOUNT_USDOLLAR' => 'Celková hodnota',
     'LBL_OVERDUE' => 'Po termínu',
 
@@ -5580,6 +5818,8 @@ $app_strings = array (
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'Pro více informací se obraťte na dokumentaci {{{more_info_url_close}}}v sekci{{{more_info_url}}} {{plural_module_name}}',
     'LBL_HELP_NO_HELP' => 'Žádná data nejsou k dispozici',
+    'LBL_NEED_HELP' => 'Potřebujete pomoci s něčím novým?',
+    'LBL_NEW_CASE' => 'Nový případ',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'Prvek nástěnky obsahuje informace k modulu, který máte aktuálně otevřený spolu s odkazem na příslušnou dokumentaci (př: lead dokumentace) v Aplikačním návodu pro více informací.',
@@ -5719,9 +5959,19 @@ $app_strings = array (
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'Bez odpovědi',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Rozvrh není k dispozici',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'Dostupná zobrazení',
+    'LBL_CALENDAR_DASHLET_NAME' => 'Plánovač kalendáře',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'Výchozí zobrazení',
+    'LBL_CALENDAR_MY_CALENDARS' => 'Moje kalendáře',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'Uživatelské a týmové kalendáře',
+    'LBL_CALENDAR' => 'Kalendář',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'Chyba se objevila při načítání rozvrhu.',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'Uložit a poslat pozvánky',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'Přijmout stav',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Proces',
@@ -5838,15 +6088,21 @@ $app_strings = array (
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Zkopírovat odkaz pro potvrzení',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Interakce',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakce {{moduleSingular}}',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa',
+    'LBL_NO_ACTIVITY' => 'Žádná aktivita',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa {{moduleSingular}}',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'Více',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'Méně',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Časová osa zobrazuje hovory, e-maily, ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Zobrazit více...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Zobrazit méně...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'K dispozici nejsou žádná data',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'Modul nemá licenci.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktivní předplatné',
@@ -5895,8 +6151,10 @@ $app_strings = array (
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'Zásuvka zaměření na uzavření',
     'LBL_EXTERNAL_GUESTS' => 'Externí hosté',
     'LBL_MY_FAVORITE_TASKS' => 'Moje oblíbené úkoly',
+
     'LBL_MY_TASKS' => 'Moje úkoly',
 
     // Sugar Integrate
@@ -5913,7 +6171,367 @@ $app_strings = array (
     'LBL_TIME_AWARE_TYPE' => 'Typ',
     'LBL_TIME_AWARE_BEAN_ID' => 'Bean ID',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'Zobrazit popisek',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'Otevřít zobrazení záznamu',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'Přidat',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'Nápověda není k dispozici',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'Funkce',
+    'LBL_ACTIONBUTTON_FIELDS' => 'Pole',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'Vyberte pole...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Souhrn',
+    'LBL_ACTIONBUTTON_RELATED' => 'Související',
+    'LBL_ACTIONBUTTON_SAVE' => 'Uložit',
+    'LBL_ACTIONBUTTON_CANCEL' => 'Zrušit',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'Související modul',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'Související pole',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'Souhrnný modul',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'Souhrnná pole',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'Souhrnná funkce',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'Min.',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'Max.',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'Průměr',
+    'LBL_ACTIONBUTTON_SUM' => 'Součet',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'Přiřadit záznam',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'Napsat e-mail',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'Vytvořit záznam',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Sloučit dokumenty',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'Otevřít adresu URL',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'Spustit sestavu',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'Aktualizovat záznam',
+    'LBL_ACTIONBUTTON_ACTION' => 'Akce',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'Přiřadit',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'E-mail pro',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'Použít PMSE',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'Šablona',
+    'LBL_ACTIONBUTTON_MODULE' => 'Modul',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'Nastavení zobrazení',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'Typ',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'Rozevírací',
+    'LBL_ACTIONBUTTON_BUTTON' => 'Tlačítko',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'Skupina tlačítek',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'Zobrazit štítek na záznamu',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'Zobrazit v záhlaví',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'Skrýt na Upravit',
+    'LBL_ACTIONBUTTON_SIZE' => 'Velikost',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'Výchozí',
+    'LBL_ACTIONBUTTON_SMALL' => 'Malá',
+    'LBL_ACTIONBUTTON_LARGE' => 'Velká',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'Vypočteno',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'Převést na PDF',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Sloučit dokumenty',
+    'LBL_ACTIONBUTTON_URL' => 'Adresa URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'Náhled',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'Vlastnosti',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'Popisek',
+    'LBL_ACTIONBUTTON_DESC' => 'Bublinová nápověda',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'Zobrazit popisek',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'Zobrazit ikonu',
+    'LBL_ACTIONBUTTON_SCHEME' => 'Barevné schéma',
+    'LBL_ACTIONBUTTON_ICON' => 'Ikona',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'Závislé',
+    'LBL_ACTIONBUTTON_DESIGN' => 'Konfigurace rozložení',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'Zastavit při chybě',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'Automatické ukládání',
+    'LBL_ACTIONBUTTON_CONFIG' => 'Konfigurace',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'Před uložením nakonfigurujte své tlačítko akce.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'Konfigurace tlačítek',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'Automatické vytvoření',
+    'LBL_ACTIONBUTTON_LINK' => 'Odkaz',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'Kopírovat nadřazené hodnoty',
+    'LBL_ACTIONBUTTON_PRESET' => 'Předvolba',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'Předvolba z nadřazené',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'Vyberte...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'Z nadřazeného pole ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'Opravdu chcete odstranit toto tlačítko?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'Opravdu chcete odstranit tuto akci?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'Neplatná data tlačítka akce',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'Před uložením vyberte modul.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'Před uložením vyberte odkaz. Pokud není k dispozici žádný odkaz, zrušte zaškrtnutí možnosti odkazu.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'Před uložením vyberte záznam.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'Před uložením vyberte šablonu.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'Primární',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'Sekundární',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HighViz',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'Oceán',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'Růžová',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'Armádní',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'Modrozelená',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'Pacifik',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'Zelená',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'Žlutá',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'Oranžová',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'Červená',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'Korál',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'Fialová',
+    'LBL_ACTIONBUTTON_FORMULA' => 'Vzorec',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'Akce',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'Chyba při ověřování dat tlačítka.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'Tlačítka musí mít alespoň popisek nebo sadu ikon.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'Zadejte platný popisek tlačítka.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'Záznam nebylo možné vytvořit kvůli chybějícím požadovaným hodnotám. Kontaktujte prosím svého správce.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'Pro tento typ tlačítka musíte mít alespoň dvě aktivní tlačítka.',
+    'LBL_ACTIONBUTTON_RECORD' => 'Zobrazení záznamů',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'Nabídky akcí',
+    'LBL_ACTIONBUTTON_ORDER' => 'Pořadí',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'Zobrazení seznamu',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'Zobrazení záznamu',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'Dashlet Zobrazení záznamu',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'Podpanely',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'Modul spuštění sekvence úkolů selhal při provádění následujících akcí: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'Přidat akci',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'Odebrat tuto akci',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'Sloučit dokumenty',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'Sloučit dokumenty do PDF',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'Velikost společnosti',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'Odvětví',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'Značky odvětví',
+    'LBL_HINT_COMPANY_LOCATION' => 'Poloha společnosti',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'Popis společnosti',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'Rok vzniku',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Facebook společnosti',
+    'LBL_HINT_COMPANY_TWITTER' => 'Twitter společnosti',
+    'LBL_HINT_COMPANY_PIC' => 'Logo společnosti',
+    'LBL_HINT_CONTACT_PIC' => 'Kontaktní fotografie',
+    'LBL_HINT_COMPANY_WEBSITE' => 'Web společnosti',
+    'LBL_HINT_PHOTO' => 'Odkaz na fotografii',
+    'LBL_HINT_JOB_2' => 'Předchozí úlohy',
+    'LBL_HINT_EDUCATION' => 'Vzdělání',
+    'LBL_HINT_EDUCATION_2' => 'Další vzdělání',
+    'LBL_HINT_TWITTER' => 'Odkaz na Twitter',
+    'LBL_HINT_FACEBOOK' => 'Odkaz na Facebook',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'Kód NAICS',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'Kód SIC',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'Konec fiskálního roku',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'Roční výnosy',
+    'LBL_HINT_PHONE_1' => 'Telefon 1',
+    'LBL_HINT_PHONE_2' => 'Telefon 2',
+    'LBL_HINT_PANEL' => 'Nápověda',
+    'LBL_HINT_JOIN_TABLE' => 'Tabulka spojení',
+    'LBL_HINT_FULL_NAME' => 'Celé jméno',
+    'LBL_HINT_JOB_TITLE' => 'Pracovní pozice',
+    'LBL_HINT_OFFICE_PHONE' => 'Telefon do zaměstnání',
+    'LBL_HINT_MOBILE_PHONE' => 'Mobil',
+    'LBL_HINT_OTHER_PHONE' => 'Další telefon',
+    'LBL_HINT_WEBSITE' => 'Web',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'Chcete přepsat všechna stávající data tohoto záznamu novými daty nalezenými v nápovědě?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'Chcete přepsat stávající {{fieldName}} pro tento záznam novým {{fieldName}} nalezeným v nápovědě?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'Všechna data související se společností budou odstraněna, jste si jisti, že chcete pokračovat?',
+    'LBL_HINT_COMPANY_LOGO' => 'Logo',
+    'LBL_HINT_CONTACTS_AVATAR' => 'Fotografie',
+    'LBL_HINT_ACCOUNTSETS' => 'Nápověda pro značky accountset',
+
+    'LBL_HINT_LOADING' => 'Nahrávání ...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'Peobíhá odinstalování nápovědy, počkejte prosím',
+    'LBL_HINT_VALUE_ERASED' => ' Hodnota vymazána ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'Tato informace byla vymazána z důvodu žádosti o ochranu osobních údajů',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'Vyberte jednu z níže uvedených možností odinstalace:',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Odinstalovat pouze balíček nápovědy',
+    'LBL_HINT_UNINSTALL_FULL' => 'Úplně odinstalovat nápovědu',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'Tato možnost odstraní Hint MLP a zakáže všechna aktivní předplatné Hint Insights.
+    Předplatné se automaticky znovu aktivují přeinstalováním nápovědy.',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'Tato možnost provede úplnou odinstalaci nápovědy, včetně odstranění MLP a odstranění všech informací o konfiguraci a předplatném.',
+    'LBL_HINT_UNINSTALL' => 'Odinstalovat',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Odinstalovat nápovědu',
+    'LBL_HINT_CANCEL' => 'Zrušit',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'UPOZORNĚNÍ: Tuto možnost zvolte pouze v případě, že v budoucnu již nehodláte nápovědu používat.
+    Před odinstalací proveďte úplnou zálohu databáze Sugar a přepněte Sugar do režimu údržby. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'V ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Průvodci správou nápovědy ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'naleznete podrobnosti o procesu odinstalace.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Jste si jisti, že chcete odinstalovat pouze balíček nápovědy?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Jste si jisti, že chcete nápovědu úplně odinstalovat?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(POZNÁMKA: TUTO AKCI NELZE VRÁTIT ZPĚT)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Pole nápovědy',
+    'LBL_HINT_NO_RESULTS_MSG' => 'Nebyly nalezeny žádné výsledky.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'Základní rozložení panelu nápovědy',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'Společnosti',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'Kontakty',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'Zájemci',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'Rozšířené rozložení panelu nápovědy',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'Změňte rozložení polí přetažením v rámci výše uvedených oddílů rozložení panelu nápovědy.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'Podrobné pokyny a seznam výchozích polí naleznete v ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' abyste obnovili výchozí nastavení pro ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'modul.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'Jste si jisti, že chcete obnovit výchozí nastavení modulu {{module}}?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'Klikněte zde',
+    'LBL_HINT_CONFIG_NAME' => 'Průvodce správou nápovědy.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'Pole',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'Obohacená pole',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'V této části jsou uvedena všechna pole nápovědy a pole systému Sugar, která jsou obohacena o nápovědu. Pole nápovědy jsou označena hvězdičkou (*) a na panelu nápovědy je lze zobrazit pouze v případě, pokud jsou obohacena.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'Název pole',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'Obohatit pole',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Zobrazit v nápovědě',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Zobrazit v panelu nápovědy',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'Další pole systému Sugar',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'V této části jsou uvedena všechna pole systému Sugar, která nejsou obohacena nápovědou.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'Varování',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'Upozornění: Chystáte se synchronizovat se službou Hint Insights. Veškeré čekající e-mailové zprávy budou ztraceny a stávající zprávy budou vymazány z dashletu Insights. Po dokončení synchronizace se obnoví všechny typy oznámení.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'Navrhované společnosti související s vaším {{_moduleSingular}} jsou uvedeny níže. Vyberte údaje o společnosti, které se mají zobrazit.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'Není vybrán žádný účet',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'Nalezeno více e-mailů, vyberte e-maily, které chcete importovat: ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'Na základě zadaných údajů se nápovědě nepodařilo najít v systému shodu.',
+    'LBL_HINT_HELP_MESSAGE2' => 'Nejlepší výsledky v nápovědě lze nalézt pomocí jména a e-mailové adresy osoby.',
+    'LBL_HINT_HELP_MESSAGE3' => 'Nejlepší výsledky v nápovědě lze nalézt pomocí url adresy webu společnosti.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "Zadejte název společnosti nebo webu svého {{_moduleSingular}} a nápověda vyhledá další údaje.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "Zadejte e-mailovou adresu svého {{currentModule}} a nápověda vyhledá další údaje.",
+
+    'LBL_HINT_HISTORY_NONE' => 'Pro historický pohled nejsou k dispozici žádné údaje',
+    'LBL_HINT_HISTORY_TITLE' => 'Historie aktivit',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'Obohacení dat',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'Platnost licence pro vaši aplikaci nápovědy SugarCRM Hint vypršela. Chcete-li obnovit licenci, obraťte se na správce systému SugarCRM.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'Chcete zjistit, co může aplikace nápovědy SugarCRM Hint udělat pro vás a vaši společnost? Chcete-li přidat aplikaci nápovědy licenci, obraťte se na správce systému SugarCRM.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'Informace o společnosti nenalezeny',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'Nalezená obohacená data – kliknutím uložíte všechna obohacená data do záznamu.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'Kliknutím uložíte obohacená data do záznamu.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'Související kontakty',
+    'LBL_HINT_CONTACTS_NONE' => 'Nesouvisející kontakty',
+
+    'LBL_HINT_NEWS' => 'Novinky',
+    'LBL_HINT_GENERAL' => 'Obecné',
+    'LBL_HINT_ALL_NEWS' => 'Všechny novinky',
+    'LBL_HINT_FILTER_NEWS' => 'Filtrovat novinky',
+    'LBL_HINT_FINANCIAL_NEWS' => 'Finanční',
+    'LBL_HINT_PERSONNEL_NEWS' => 'Personál',
+    'LBL_HINT_PRESS_RELEASES' => 'Tiskové zprávy',
+    'LBL_HINT_OTHER_NEWS' => 'Jiné',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'Hledat články novinek',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => 'Nejsou k dispozici žádné novinky',
+    'LBL_NEW_NOTIFICATIONS' => 'Nová oznámení',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'Chcete-li zobrazit dashlet Hint Insights, musíte mít licenci aplikace nápovědy Hint.
+    Požádejte správce o získání licence aplikace nápovědy Hint.',
+
+    'LBL_HINT_FOR' => 'Pro',
+    'LBL_HINT_WITH' => 's',
+    'LBL_HINT_SHOW_ME' => 'Ukaž mi: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'Upozorni mě na: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Centrum předvoleb Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'Tlačítko možnosti předvoleb',
+    'LBL_HINT_PREFERENCES' => 'Předvolby',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'Odstranění zakázáno, je vyžadována minimálně jedna předvolba',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'Přidání zakázáno, dosáhli jste maximálního počtu předvoleb',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Zahrnout do dashletu Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'Překryvné okno jako oznámení na ploše',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'Chcete-li trvale dostávat oznámení, musí být oznámení povolena ve všech prohlížečích a na všech stolních počítačích.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Některé prohlížeče, například Internet Explorer, nepodporují oznámení.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'Odeslat okamžité e-mailové upozornění na každé oznámení',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'Odeslat denní e-mailový přehled',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'Odeslat týdenní e-mailový přehled',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'Předvolby se nepodařilo uložit. Zkontrolujte připojení k systému a zkuste to znovu.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'V některých povinných polích chybí hodnota. Zkontrolujte prosím své předvolby a ujistěte se, že jsou vyplněna všechna povinná pole.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'Chystáte se povolit oznámení v prohlížeči pro Hint Insights. Pokračujte kliknutím na Potvrdit. Váš prohlížeč vás poté požádá o povolení povolit přijímání událostí oznámení.',
+    'LBL_HINT_PUSH_ERROR' => 'Plugin Nabízená oznámení byl zaregistrován pro {{options.type}} bez jeho závislostí. Plugin nebude fungovat tak, jak bylo zamýšleno, ujistěte se, že jste zadali cestu k pracovnímu souboru a metodu pro uložení předplatného na server.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'Zapnutí oznámení nápovědy pro všechny uživatele',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'Vypnutí oznámení nápovědy pro všechny uživatele',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'VAROVÁNÍ: Nepodařilo se zakázat oznámení při odinstalaci nápovědy systému Sugar. Chcete-li oznámení zakázat, nainstalujte nápovědu Hint 5.4.0 nebo vyšší a proveďte úplnou odinstalaci pomocí nástroje pro odinstalaci nápovědy, který najdete v části Správa systému Sugar.',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'Konfigurace map',
+    'LBL_MAP_MAP' => 'Mapa',
+    'LBL_MAP_MAPS' => 'Mapy',
+    'LBL_MAP_GEOCODING_RECORD' => 'Geokód',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'Záznam byl úspěšně geokódován.',
+    'LBL_MAP_LATITUDE' => 'Zeměpisná šířka',
+    'LBL_MAP_LONGITUDE' => 'Zeměpisná délka',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'Hledat podle adresy...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'Aktuální záznam je již geokódován. Opravdu chcete přepsat geokódování tohoto záznamu?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'Ruční geokódování',
+    'LBL_MAP_POINT_COORDINATES' => 'Souřadnice bodu na mapě',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'Výpočet optimální trasy...',
+    'LBL_MAP_DIRECTIONS' => 'Pokyny',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'Pokyny začínající od aktuálního uživatele',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'Pokyny začínající od tohoto záznamu',
+    'LBL_MAPS_RADIUS_INPUT' => 'Poloměr (0–250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'v poloměru od PSČ',
+    'LBL_MAPS_DISTANCE' => 'Vzdálenost',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'PSČ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'Neplatná konfigurace: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => 'Mapování polí <strong>{{module}}</strong> je neplatné.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'Typ mapy',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'Úroveň přiblížení',
+    'LBL_MAPS_DASHLET' => 'Mapy',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'Zobrazuje na mapě geokódované záznamy.',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'Mapy pro tento modul nejsou k dispozici. Povolte je v konzoli správce.',
+    'LBL_MAP_MODULES' => 'Modul',
+    'LBL_MAP_FILTER_BY' => 'Filtrovat podle',
+    'LBL_MAP_UNIT_TYPE' => 'Typ jednotky',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'Míle',
+    'LBL_MAP_UNIT_TYPE_KM' => 'Kilometry',
+    'LBL_MAP_ADDRESS' => 'Adresa',
+    'LBL_MAP_NO_STARTING_POINT' => 'Výchozí bod není geokódován.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'Záznam výchozího bodu není geokódován.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'Některé z vybraných záznamů nejsou geokódovány a nebudou zobrazeny na mapě.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'Záznamy nejsou geokódovány.',
+    'LBL_MAPS_MODULE_FIELDS' => 'Pole modulu',
+    'LBL_MAPS_SELECT_FIELD' => 'Vyberte pole',
+    'LBL_MAPS_RELATE_RECORD' => 'Související záznam',
+    'LBL_MAPS_MAPPING_TYPE' => 'Typ mapování',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'Žádné geokódované záznamy',
+    'LBL_MAPS_ADDRESS' => 'Adresa',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'Přiřazený uživatel',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'Pohled na ulici není pro daný bod k dispozici',
+    'LBL_MAPS_INVALID_MODULE' => 'Záznamy <strong>{0}</strong> nejsou platné pro mapování. Odeberte modul ze seznamu.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'Zavřít',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'Rozšířit',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'Uložit jako PDF',
+    'LBL_MAPS_EMAIL_LINK' => 'Odeslat odkaz e-mailem',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'Musíte mít alespoň jeden geokódovaný záznam.',
+    'LBL_MAPS_GENERATING' => 'Generování mapy...',
+    'LBL_MAPS_POINTS' => 'Body na mapě',
+    'LBL_MAPS_POINT' => 'Bod',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'Podrobnosti o cestování',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'Celková vzdálenost',
+    'LBL_MAPS_TOTAL_DURATION' => 'Celková doba trvání',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'Celková doba trvání bez dopravního provozu',
+    'LBL_MAPS_ITINERARY' => 'Itinerář',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'Cestovní vzdálenost',
+    'LBL_MAPS_TRAVEL_DURATION' => 'Doba trvání cesty',
+    'LBL_MAPS_TRAVEL_STEPS' => 'Kroky',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'Varování',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Mapy Bing podporují maximálně 10 bodů na sdílené mapě. Zkontrolujte svůj výběr.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'Je vyžadována licence map',
+
+    'LBL_INVALID_FORMULA' => 'Neplatný vzorec',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'Návratový typ funkce se neshoduje',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'Predikce',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'Ideální profil zákazníka',
+
+    // User last state
+    'LBL_LAST_STATE' => 'Poslední stav',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'Odeslat do DocuSign',
+
+    // Base sales stages
+    'LBL_OPEN' => 'Otevřít',
+    'LBL_CLOSED_WON' => 'Uzavřeno úspěšně',
+    'LBL_CLOSED_LOST' => 'Uzavřeno neúspěšně',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6750,8 +7368,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Kontakty Google',
@@ -7091,6 +7709,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Vložený soubor';
     'YER' => 'Riály',
     'ZWD' => 'Zimbabwské dolary',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'Velmi vysoká',
+        '4' => 'Vysoká',
+        '3' => 'Neutrální',
+        '2' => 'Nízká',
+        '1' => 'Velmi nízká',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'Žádné',
         'future' => 'Aktuální hodnota',
@@ -7100,3 +7726,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Vložený soubor';
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'Jedna shoda',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'Zpracovává se',
+        'error' => 'Chyba',
+        'success' => 'Úspěch',
+        'canceled' => 'Zrušeno',
+        'document_load' => 'Načítání šablony',
+        'tags_extract' => 'Extrahování značek',
+        'tags_validate' => 'Ověřování značek',
+        'data_retrieving' => 'Načítání dat',
+        'serialize_document' => 'Složení dokumentu dohromady',
+        'send_document' => 'Odeslání dokumentu vám',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'Sloučit',
+        'convert' => 'Sloučit PDF',
+        'multimerge' => 'Vícenásobné sloučení',
+        'multimerge_convert' => 'Vícenásobné sloučení PDF',
+        'labelsgenerate' => 'Generovat štítky',
+        'labelsgenerate_convert' => 'Generovat štítky PDF',
+        'excel' => 'Sloučit Excel',
+        'excel_convert' => 'Převést sloučený Excel',
+        'presentation' => 'Sloučit PowerPoint',
+        'presentation_convert' => 'Sloučit PowerPoint PDF',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'Moje společnosti',
+      'favorites' => 'Oblíbené společnosti',
+      'tags' => 'Označené společnosti',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'Všechny novinky',
+      'General' => 'Obecné',
+      'Finance' => 'Finanční',
+      'People' => 'Personál',
+      'Press Releases' => 'Tiskové zprávy',
+      'Other' => 'Jiné',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'Vlastníci';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Cloudový disk';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'Dashlet pro integraci cloudového disku';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'Kopírovat odkaz';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'Stáhnout';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Vytvořit dokument Sugar';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Synchronizovat na Disk Google';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'Synchronizovat vše na Disk Google';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'Tento soubor nelze stáhnout';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'Cloudový dashlet není k dispozici';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Dokument Sugar vytvořen';
+
+    $app_string['LBL_MY_FILES'] = 'Mé soubory';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Sdíleno se mnou';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'Poskytovatel cloudu';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Disk Google',
+      'onedrive' => 'Microsoft OneDrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Sdíleno se mnou';
+    $app_strings['LBL_MY_FILES'] = 'Mé soubory';
+    $app_strings['LBL_UPLOAD_FILE'] = 'Nahrát soubor';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'Složka nenalezena';
+    $app_strings['LBL_CREATE_FOLDER'] = 'Vytvořit složku';
+    $app_strings['LBL_LOAD_MORE'] = 'Načíst další...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'Spojení s Google nenalezeno...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'Spojení s Microsoft nenalezeno...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-prázdné-',
+      'Exact' => 'Přesný',
+      'Null_address_components' => 'Jedna nebo více součástí adresy je prázdných',
+      'Invalid_address' => 'Neplatná adresa, server vrátil hodnotu False',
+      'Invalid_server_response_not_XML' => 'Neplatná odpověď serveru, nikoli XML',
+      'Invalid_address_no_location' => 'Neplatná adresa, server nevrátil žádné umístění',
+      'Ambiguous_address' => 'Nejednoznačná adresa, více shod',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'Silniční',
+      'a' => 'Letecký',
+      'be' => 'Ptačí perspektiva',
+      'rd' => 'Silniční tmavé',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

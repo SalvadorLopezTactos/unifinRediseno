@@ -11,18 +11,36 @@
  */
 
 $viewdefs['Home']['base']['view']['dashboard-fab'] = [
-    'icon' => 'fab-icon',
+    'icon' => 'sicon-hamburger-lg',
     'buttons' => [
         [
             'name' => 'add_button',
             'type' => 'rowaction',
-            'icon' => 'new-dashboard-icon',
+            'icon' => 'sicon-dashboard-lg',
             'label' => 'LBL_DASHBOARD_CREATE',
             'showOn' => 'view',
-        ], [
+        ],
+        [
+            'name' => 'restore_dashboard_button',
+            'type' => 'rowaction',
+            'icon' => 'sicon-reset-lg',
+            'label' => 'LBL_RESTORE_DASHBOARD_DEFAULT',
+            'showOn' => 'view',
+            'allowed_layouts' => [
+                [
+                    'name' => 'dashboard', // Service console
+                    'id' => 'c108bb4a-775a-11e9-b570-f218983a1c3e',
+                ],
+                [
+                    'name' => 'dashboard', // Renewals console
+                    'type' => 'renewals_console',
+                ],
+            ],
+        ],
+        [
             'name' => 'edit_module_tabs_button',
             'type' => 'rowaction',
-            'icon' => 'edit-icon',
+            'icon' => 'sicon-edit-lg',
             'label' => 'LBL_EDIT_MODULE_TABS_BUTTON',
             'acl_action' => 'edit',
             'showOn' => 'view',
@@ -35,10 +53,11 @@ $viewdefs['Home']['base']['view']['dashboard-fab'] = [
                     'type' => 'renewals_console',
                 ],
             ],
-        ], [
+        ],
+        [
             'name' => 'duplicate_button',
             'type' => 'rowaction',
-            'icon' => 'duplicate-dashboard-icon',
+            'icon' => 'sicon-copy-lg',
             'label' => 'LBL_DASHBOARD_DUPLICATE',
             'acl_module' => 'Dashboards',
             'acl_action' => 'create',
@@ -52,10 +71,11 @@ $viewdefs['Home']['base']['view']['dashboard-fab'] = [
                     'type' => 'renewals_console',
                 ],
             ],
-        ], [
+        ],
+        [
             'name' => 'delete_button',
             'type' => 'rowaction',
-            'icon' => 'delete-dashboard',
+            'icon' => 'sicon-trash-lg',
             'label' => 'LBL_DASHBOARD_DELETE',
             'acl_action' => 'delete',
             'showOn' => 'view',
@@ -68,10 +88,11 @@ $viewdefs['Home']['base']['view']['dashboard-fab'] = [
                     'type' => 'renewals_console',
                 ],
             ],
-        ], [
+        ],
+        [
             'name' => 'add_dashlet_button',
             'type' => 'rowaction',
-            'icon' => 'add-dashlet-icon',
+            'icon' => 'sicon-add-dashlet-lg',
             'label' => 'LBL_ADD_DASHLET_BUTTON',
             'events' => [
                 'click' => 'button:add_dashlet_button:click',

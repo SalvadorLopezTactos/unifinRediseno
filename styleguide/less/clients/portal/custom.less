@@ -43,13 +43,8 @@ ul.nav.nav-tabs li.activity {
   top: 0;
 
   .thumbnail {
-    padding: 0 0 1px;
-    border: 0;
-    box-shadow: 0 2px 1px fade(@black, 10%), 0 0 1px fade(@black, 40%), -1px -1px 2px fade(@black, 10%), 1px 1px 2px fade(@black, 10%);
     position: relative;
-    margin: 20px !important;
     background: @white;
-    transition: 0;
 
     .headerpane {
       height: auto;
@@ -62,7 +57,7 @@ ul.nav.nav-tabs li.activity {
         color: @tableHeader;
         line-height: @baseLineHeight;
         border-radius: 3px 3px 0 0;
-        #gradient > .vertical(@grayLighter, darken(@grayLighter, 2%));
+        #gradient > .vertical(@gray20, @gray30);
 
         border-bottom: @borderWidgetLight;
         margin: 0;
@@ -73,7 +68,7 @@ ul.nav.nav-tabs li.activity {
         display: table-cell;
 
         a {
-          color: lighten(@gray, 20%);
+          color: @gray60;
         }
       }
 
@@ -81,7 +76,7 @@ ul.nav.nav-tabs li.activity {
         height: 32px;
         padding: 5px 5px 0 0;
         margin: 0;
-        #gradient > .vertical(@grayLighter, darken(@grayLighter, 2%));
+        #gradient > .vertical(@gray20, @gray30);
 
         border-bottom: @borderWidgetLight;
         border-radius: 0 4px 0 0;
@@ -113,6 +108,7 @@ ul.nav.nav-tabs li.activity {
 }
 
 .span8 .headerpane {
+  background: @headerpaneBackground;
   width: calc(~"65.957446802% - 1px");
   left: 0;
 }
@@ -148,13 +144,13 @@ ul.nav.nav-tabs li.activity {
 .dataTables_filter {
   position: relative;
   padding: 5px;
-  background: @grayLighter;
+  background: @gray20;
   border-top: @borderWidgetLight;
   border-bottom: @borderWidgetLight;
   z-index: 1000;
   margin: 0;
   text-align: center;
-  #gradient > .vertical(darken(@grayLighter, 4%), @grayLighter);
+  #gradient > .vertical(@gray30, @gray20);
 
   box-shadow: none;
 
@@ -189,17 +185,21 @@ ul.nav.nav-tabs li.activity {
 .dashboard-pane {
   top: 0;
 
-  .portal-home-dashboard > li:first-child {
-    padding-top: 0;
-    padding-right: 0;
-    padding-left: 0;
+  .portal-home-dashboard {
+    padding: 20px 0;
 
-    .list-view {
-      .dataTable {
-        overflow: auto;
+    > li:first-child {
+      padding-top: 0;
+      padding-right: 0;
+      padding-left: 0;
 
-        th {
-          min-width: 10px;
+      .list-view {
+        .dataTable {
+          overflow: auto;
+
+          th {
+            min-width: 10px;
+          }
         }
       }
     }
@@ -207,5 +207,5 @@ ul.nav.nav-tabs li.activity {
 }
 
 .side.sidebar-content {
-  background-color: @grayLighter;
+  background-color: @gray20;
 }

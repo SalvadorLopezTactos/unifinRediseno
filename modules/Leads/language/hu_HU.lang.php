@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Hivatkozva',
     'LBL_LIST_STATUS' => 'Állapot',
     'LBL_LIST_TITLE' => 'Beosztás',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Piacérdeklődés előrejelzése',
+    'LBL_MARKET_SCORE' => 'Piacpontszám',
     'LBL_MOBILE_PHONE' => 'Mobil:',
     'LBL_MODULE_NAME' => 'Ajánlások',
     'LBL_MODULE_NAME_SINGULAR' => 'Ajánlás',
@@ -318,4 +320,9 @@ $mod_strings = array (
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Ajánlás konverziójának előrejelzése',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Az adott ajánlás előrejelzésével kapcsolatos részletek megtekintése',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Bevételi tételsorok engedélyezése',
+    'LBL_REQUIRE_RLIS' => 'Új Lehetőség létrehozása esetén bevételi tételsorok szükségesek',
+    'LBL_COPY_DATA_RLIS' => 'Új Lehetőség létrehozása esetén másolja az ajánlások adatait',
 );

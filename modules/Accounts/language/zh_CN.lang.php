@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => '账户名称/行业',
     'LBL_RENEWALS_CONSOLE_LOCATION' => '地点',
     'LBL_PURCHASES' => '购买',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '账户互动',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '帐户时间线',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => '图表',

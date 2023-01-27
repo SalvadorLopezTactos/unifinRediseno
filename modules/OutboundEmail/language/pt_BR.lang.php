@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID do endereço de e-mail do destinatário da resposta',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Endereço de e-mail do destinatário da resposta',
     'LBL_PRIMARY_TEAM' => 'Equipe principal',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Conta de envio preferida',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em configuração de e-mails',
 );

@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Osnovna Stopa',
 
     'LBL_QUOTA' => 'Kvota',
-    'LBL_QUOTA_ADJUSTED' => 'Kvota (Prilagođeno)',
+    'LBL_QUOTA_ADJUSTED' => 'Prilagođena kvota',
 
     'LBL_FORECAST' => 'Prognoza',
     'LBL_COMMIT_STAGE' => 'Faza Izvršenja',

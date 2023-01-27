@@ -97,6 +97,7 @@
         if (app.utils.isTruthy(this.model.get(this.discountFieldName))) {
             this._super('_loadTemplate');
         } else {
+            this._super('_loadTemplate');
             this.template = app.template.getField(
                 'currency',
                 this.action || this.view.action,

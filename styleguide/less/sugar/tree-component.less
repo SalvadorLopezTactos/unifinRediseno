@@ -1,6 +1,6 @@
 @smallTreeFont: 12px;
 @smallTreeHeight: 14px;
-@folderTreeColor: @grayDarkish;
+@folderTreeColor: @textColor;
 //mixin
 .smallTreeLi {
   margin-left: 18px;
@@ -47,7 +47,7 @@
     li > a {
       padding: 0;
       display: inline-table;
-      color: @folderTreeColor !important;
+      color: @folderTreeColor;
     }
 
     ins {
@@ -56,7 +56,7 @@
       }
 
       &.jstree-icon {
-        color: @folderTreeColor !important;
+        color: @folderTreeColor;
       }
     }
 
@@ -90,7 +90,7 @@
 
     a {
       &.jstree-clicked {
-        color: @night !important;
+        color: @night;
       }
 
       &.btn {
@@ -112,7 +112,7 @@
 
   li {
     a {
-      color: @folderTreeColor !important;
+      color: @folderTreeColor;
 
       ul {
         background: @white;
@@ -122,7 +122,7 @@
 
     &.jstree-contextmenu-disabled {
       a {
-        color: @grayLightish !important;
+        color: @gray60;
       }
     }
   }
@@ -170,7 +170,8 @@
   box-sizing: border-box;
   font-size: 12px;
   line-height: 22px;
-  background-color: @white;
+  background-color: @contentBackground;
+  border: @borderWidget;
   border-radius: 3px;
 
   &.error {
@@ -185,8 +186,6 @@
     }
   }
 
-  border: 1px solid @btnBorder;
-
   .divinput {
     display: block;
     width: 100%;
@@ -196,10 +195,11 @@
     position: relative;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: @gray;
+    color: @textColor;
     line-height: 26px;
     border-radius: 4px;
-    background-color: @grayLighter;
+    background-color: @select2Background;
+    border: @borderWidget;
     cursor: pointer;
     box-sizing: border-box;
 
@@ -237,7 +237,7 @@
       padding: 6px;
       clear: both;
       font-weight: normal;
-      color: @gray;
+      color: @gray80;
       white-space: nowrap;
 
       &.tree {
@@ -322,7 +322,7 @@
 
     li[disabled=disabled] {
       a {
-        color: @grayLightish !important;
+        color: @gray60 !important;
       }
     }
   }
@@ -347,7 +347,7 @@
     box-sizing: border-box;
 
     .fa {
-      color: @gray;
+      color: @gray80;
       font-size: @smallTreeFont;
       cursor: pointer;
     }
@@ -366,7 +366,7 @@
       > ul {
         background: url("@{baseUrl}/img/bg.jpg") left top repeat;
         padding: 0 10px;
-        border-bottom: 1px solid @tableBorderColor;
+        border-bottom: @borderWidget;
       }
 
       ul {
@@ -420,19 +420,19 @@
           > a {
             .smallTreeA;
 
-            color: @blue !important;
+            color: @blue;
           }
 
           &.jstree-open {
             > ins {
               &::before {
-                color: @textColor !important;
+                color: @textColor;
               }
             }
 
             > a {
               font-weight: bold;
-              color: @textColor !important;
+              color: @textColor;
             }
           }
 
@@ -543,7 +543,6 @@ tr.tr-inline-edit [data-type="nestedset"] {
 
   .product-catalog-search {
     text-align: center;
-    padding: 10px 8px 0;
 
     .product-catalog-search-term {
       width: 90%;
@@ -589,7 +588,7 @@ tr.tr-inline-edit [data-type="nestedset"] {
       li[rel=category] {
         > ins,
         > a {
-          color: @gray;
+          color: @gray80;
           cursor: progress;
         }
       }
@@ -597,7 +596,7 @@ tr.tr-inline-edit [data-type="nestedset"] {
       li[rel=product] {
         ins,
         a {
-          color: @gray;
+          color: @gray80;
           cursor: progress;
         }
       }

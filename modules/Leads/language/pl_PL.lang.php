@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Polecony przez',
     'LBL_LIST_STATUS' => 'Status',
     'LBL_LIST_TITLE' => 'Stanowisko',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Prognoza rynkowej stopy procentowej',
+    'LBL_MARKET_SCORE' => 'Wynik rynkowy',
     'LBL_MOBILE_PHONE' => 'Telefon komórkowy:',
     'LBL_MODULE_NAME' => 'Namiary',
     'LBL_MODULE_NAME_SINGULAR' => 'Namiar',
@@ -330,4 +332,9 @@ Po potwierdzeniu wprowadzonych zmian w modułach kliknij przycisk Zapisz i przek
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Prognoza przekształcenia potencjalnych klientów',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Wyświetl szczegóły prognozy dla konkretnego potencjalnego klienta',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Włącz pozycje przychodu',
+    'LBL_REQUIRE_RLIS' => 'Wymagaj pozycji przychodu podczas tworzenia nowej możliwości',
+    'LBL_COPY_DATA_RLIS' => 'Skopuj dane namiaru do pozycji przychodu podczas tworzenia nowej możliwości',
 );

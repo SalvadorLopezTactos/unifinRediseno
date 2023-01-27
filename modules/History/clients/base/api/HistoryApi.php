@@ -194,48 +194,58 @@ class HistoryApi extends RelateApi
             }
 
             /** @var SugarQuery $q */
-            list($args, $q, $options) = $this->filterRelatedSetup($api, $args);
-            $q->select()->selectReset();
-            $q->orderByReset(); // ORACLE doesn't allow order by in UNION queries
-            if (!empty($args['placeholder_fields'][$module])) {
-                $newFields = array_merge($args['placeholder_fields'][$module], $fields);
-            } else {
-                $newFields = $fields;
-            }
-            if (!empty($args['alias_fields'])) {
-                $newFields = array_merge(array_keys($args['alias_fields']), $newFields);
-            }
-            sort($newFields);
-            foreach ($newFields as $field) {
-                if ($field == 'module') {
-                    continue;
-                }
-                // special case for description on emails
-                if($module == 'Emails' && $field == 'description') {
-                    // ORACLE requires EMPTY_CLOB() for union queries if CLOB fields were used before
-                    $q->select()->fieldRaw(DBManagerFactory::getInstance()->emptyValue('text') . " email_description");
+            try {
+                list($args, $q, $options) = $this->filterRelatedSetup($api, $args);
+                $q->select()->selectReset();
+                $q->orderByReset(); // ORACLE doesn't allow order by in UNION queries
+                if (!empty($args['placeholder_fields'][$module])) {
+                    $newFields = array_merge($args['placeholder_fields'][$module], $fields);
                 } else {
-                    if (isset($args['placeholder_fields'][$module][$field])) {
-                        $q->select()->fieldRaw("'' {$args['placeholder_fields'][$module][$field]}");
-                    } elseif (isset($args['alias_fields'][$field])) {
-                        if (isset($args['alias_fields'][$field][$module])) {
-                            $q->select()->field([[$args['alias_fields'][$field][$module], $field]]);
-                        } else {
-                            $q->select()->fieldRaw("'' $field");
-                        }
+                    $newFields = $fields;
+                }
+                if (!empty($args['alias_fields'])) {
+                    $newFields = array_merge(array_keys($args['alias_fields']), $newFields);
+                }
+                sort($newFields);
+                foreach ($newFields as $field) {
+                    if ($field == 'module') {
+                        continue;
+                    }
+                    // special case for description on emails
+                    if ($module == 'Emails' && $field == 'description') {
+                        // ORACLE requires EMPTY_CLOB() for union queries if CLOB fields were used before
+                        $q->select()->fieldRaw(DBManagerFactory::getInstance()->emptyValue('text') . " email_description");
                     } else {
-                        $q->select()->field($field);
+                        if (isset($args['placeholder_fields'][$module][$field])) {
+                            if ($module === 'Audit' && $field === 'assigned_user_name') {
+                                $q->select()->fieldRaw("'' rel_assigned_user_name_first_name");
+                                $q->select()->fieldRaw("'' rel_assigned_user_name_last_name");
+                                $q->select()->fieldRaw("'' assigned_user_name_owner");
+                            } else {
+                                $q->select()->fieldRaw("'' {$args['placeholder_fields'][$module][$field]}");
+                            }
+                        } elseif (isset($args['alias_fields'][$field])) {
+                            if (isset($args['alias_fields'][$field][$module])) {
+                                $q->select()->field([[$args['alias_fields'][$field][$module], $field]]);
+                            } else {
+                                $q->select()->fieldRaw("'' $field");
+                            }
+                        } else {
+                            $q->select()->field($field);
+                        }
                     }
                 }
+    
+                $q->select()->field('id');
+                $q->select()->field('assigned_user_id');
+                $q->limit = $q->offset = null;
+                $q->select()->fieldRaw("'{$module}'", 'module');
+                $query->union($q);
+                $query->limit($options['limit'] + 1);
+                $query->offset($options['offset']);
+            } catch (Exception $e) {
+                $GLOBALS['log']->error('History API error: ' . $e->getMessage());
             }
-
-            $q->select()->field('id');
-            $q->select()->field('assigned_user_id');
-            $q->limit = $q->offset = null;
-            $q->select()->fieldRaw("'{$module}'", 'module');
-            $query->union($q);
-            $query->limit($options['limit'] + 1);
-            $query->offset($options['offset']);
             $args['fields'] = $savedFields;
         }
 
@@ -305,6 +315,9 @@ class HistoryApi extends RelateApi
 
         foreach ($fields as $key => $field) {
             if (!array_key_exists($field, $fieldWhiteList)) {
+                if (!empty($args['ignore_field_presence']) && in_array($field, $args['ignore_field_presence'])) {
+                    continue;
+                }
                 throw new SugarApiExceptionInvalidParameter(sprintf('no one module has select field: %s', $field));
             }
             foreach ($this->moduleList as $module_name) {

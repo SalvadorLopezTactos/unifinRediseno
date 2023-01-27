@@ -49,7 +49,7 @@ include "metadata/project_resourcesMetaData.php";
 include("metadata/projects_accountsMetaData.php");
 include("metadata/projects_contactsMetaData.php");
 include("metadata/projects_opportunitiesMetaData.php");
-
+include "metadata/calendar_ical_configsMetaData.php";
 
 include("metadata/report_cache.php");
 include("metadata/saved_reportsMetaData.php");
@@ -64,6 +64,7 @@ include("metadata/quotes_contactsMetaData.php");
 include("metadata/quotes_opportunitiesMetaData.php");
 include("metadata/products_categoryTreeMetaData.php");
 include("metadata/fts_queueMetaData.php");
+include "metadata/geocode_queueMetaData.php";
 include("metadata/workflow_schedulesMetaData.php");
 include("metadata/schedulers_timesMetaData.php");
 include("metadata/contracts_opportunitiesMetaData.php");
@@ -140,6 +141,25 @@ include 'metadata/product_definitionMetaData.php';
 
 // Time-Aware Schedules table
 include 'metadata/time_aware_schedulesMetaData.php';
+
+// Messages guest relationships
+include 'metadata/messages_contactsMetaData.php';
+include 'metadata/messages_leadsMetaData.php';
+include 'metadata/messages_usersMetaData.php';
+
+// Escalations relationships
+include 'metadata/accounts_escalationsMetaData.php';
+include 'metadata/contacts_escalationsMetaData.php';
+include 'metadata/documents_escalationsMetaData.php';
+
+//hint metadata
+include 'metadata/hint-packageMetaData.php';
+
+// User last state
+include 'metadata/users_last_statesMetaData.php';
+
+// System process lock
+include 'metadata/system_process_lockMetaData.php';
 
 $defs = SugarAutoLoader::loadExtension('tabledictionary');
 if($defs) {

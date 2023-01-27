@@ -36,16 +36,14 @@ class LdapUserProvider implements UserProviderInterface
     private $passwordAttribute;
 
     /**
-     * @param LdapInterface $ldap
-     * @param string        $baseDn
-     * @param string        $searchDn
-     * @param string        $searchPassword
-     * @param array         $defaultRoles
-     * @param string        $uidKey
-     * @param string        $filter
-     * @param string        $passwordAttribute
+     * @param string $baseDn
+     * @param string $searchDn
+     * @param string $searchPassword
+     * @param string $uidKey
+     * @param string $filter
+     * @param string $passwordAttribute
      */
-    public function __construct(LdapInterface $ldap, $baseDn, $searchDn = null, $searchPassword = null, array $defaultRoles = array(), $uidKey = 'sAMAccountName', $filter = '({uid_key}={username})', $passwordAttribute = null)
+    public function __construct(LdapInterface $ldap, $baseDn, $searchDn = null, $searchPassword = null, array $defaultRoles = [], $uidKey = 'sAMAccountName', $filter = '({uid_key}={username})', $passwordAttribute = null)
     {
         if (null === $uidKey) {
             $uidKey = 'sAMAccountName';
@@ -83,7 +81,7 @@ class LdapUserProvider implements UserProviderInterface
         }
 
         if ($count > 1) {
-            throw new UsernameNotFoundException('More than one user found');
+            throw new UsernameNotFoundException('More than one user found.');
         }
 
         $entry = $entries[0];
@@ -122,7 +120,6 @@ class LdapUserProvider implements UserProviderInterface
      * Loads a user from an LDAP entry.
      *
      * @param string $username
-     * @param Entry  $entry
      *
      * @return User
      */
@@ -140,7 +137,7 @@ class LdapUserProvider implements UserProviderInterface
     /**
      * Fetches a required unique attribute value from an LDAP entry.
      *
-     * @param null|Entry $entry
+     * @param Entry|null $entry
      * @param string     $attribute
      */
     private function getAttributeValue(Entry $entry, $attribute)

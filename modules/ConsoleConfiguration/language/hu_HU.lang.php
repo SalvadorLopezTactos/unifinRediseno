@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'Szűrő',
     'LBL_CONSOLE_FILTER_RULES' => 'Szűrési szabályok',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'Első oszlop fagyasztása',
+
     'LBL_CONSOLE_COLUMNS' => 'Oszlopok',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'Többmezős oszlop',
     'LBL_CONSOLE_PRIMARY_SORT' => 'Elsődleges rendezés',

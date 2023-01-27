@@ -64,27 +64,37 @@ class ReportCache {
 
 	/**
 	 * Saves report_cache
+     * @param false $saveAll
 	 * @return bool
 	 */
-	public function save() {
+    public function save($saveAll = false)
+    {
 
 		global $current_user, $timedate;
         global $dictionary;
 
+        $queryArray = ['id' => $this->id, 'deleted' => 0];
+        $now = $timedate->nowDb();
+
         if ($this->new_with_id) {
+            $queryArray = array_merge(
+                $queryArray,
+                [
+                    'assigned_user_id' => $current_user->id,
+                    'contents' => $this->contents,
+                    'date_entered' => $now,
+                    'date_modified' => $now,
+                ]
+            );
             $this->db->insertParams(
                 'report_cache',
                 $dictionary['report_cache']['fields'],
-                array(
-                    'id' => $this->id,
-                    'assigned_user_id' => $current_user->id,
-                    'contents' => $this->contents,
-                    'date_entered' => $timedate->nowDb(),
-                    'date_modified' => $timedate->nowDb(),
-                    'deleted' => 0,
-                )
+                $queryArray
             );
         } else {
+            if (!$saveAll) {
+                $queryArray['assigned_user_id'] = $current_user->id;
+            }
             $this->db->updateParams(
                 'report_cache',
                 $dictionary['report_cache']['fields'],
@@ -92,10 +102,7 @@ class ReportCache {
                     'contents' => $this->contents,
                     'date_modified' => $timedate->nowDb(),
                 ),
-                array(
-                    'id' => $this->id,
-                    'assigned_user_id' => $this->assigned_user_id,
-                )
+                $queryArray
             );
         }
 

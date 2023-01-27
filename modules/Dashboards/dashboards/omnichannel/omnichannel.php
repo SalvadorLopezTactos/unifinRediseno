@@ -23,48 +23,24 @@ return [
             ],
         ],
         'tabs' => [
-            // TAB 1
+            // TAB 1 Search
             [
                 'icon' => [
-                    'image' => '<i class="fa fa-search"></i>',
+                    'image' => '<i class="sicon sicon-search"></i>',
                 ],
                 'name' => 'LBL_SEARCH',
-                'dashlets' => [
+                'components' => [
                     [
-                        'view' => [
-                            'type' => 'dashlet-console-list',
-                            'module' => 'Contacts',
-                        ],
-                        'context' => [
-                            'module' => 'Contacts',
-                        ],
-                        'width' => 12,
-                        'height' => 8,
-                        'x' => 0,
-                        'y' => 0,
-                        'autoPosition' => false,
-                    ],
-                    [
-                        'view' => [
-                            'type' => 'dashlet-console-list',
-                            'module' => 'Cases',
-                        ],
-                        'context' => [
-                            'module' => 'Cases',
-                        ],
-                        'width' => 12,
-                        'height' => 8,
-                        'x' => 0,
-                        'y' => 8,
-                        'autoPosition' => false,
+                        'layout' => 'omnichannel-search',
                     ],
                 ],
             ],
-            // TAB 2
+            // TAB 2 Contacts
             [
                 'icon' => [
                     'module' => 'Contacts',
                 ],
+                'module' => 'Contacts',
                 'name' => 'LBL_CONTACT',
                 'dashlets' => [
                     [
@@ -84,10 +60,45 @@ return [
                                     'link' => 'accounts',
                                     'module' => 'Accounts',
                                 ],
+                                [
+                                    'active' => false,
+                                    'link' => 'opportunities',
+                                    'module' => 'Opportunities',
+                                    'order_by' => [
+                                        'field' => 'date_closed',
+                                        'direction' => 'desc',
+                                    ],
+                                    'limit' => 5,
+                                    'fields' => [
+                                        'name',
+                                        'sales_status',
+                                        'amount',
+                                        'date_closed',
+                                    ],
+                                ],
+                                [
+                                    'active' => false,
+                                    'link' => 'billing_quotes',
+                                    'module' => 'Quotes',
+                                    'label' => 'LBL_QUOTES_BILL_TO',
+                                    'order_by' => [
+                                        'field' => 'date_quote_expected_closed',
+                                        'direction' => 'desc',
+                                    ],
+                                    'limit' => 5,
+                                    'fields' => [
+                                        'name',
+                                        'quote_stage',
+                                        'date_quote_expected_closed',
+                                        'total',
+                                    ],
+                                ],
                             ],
                             'tab_list' => [
                                 'Contacts',
                                 'accounts',
+                                'opportunities',
+                                'billing_quotes',
                             ],
                         ],
                         'context' => [
@@ -144,7 +155,7 @@ return [
                                     [
                                         'type' => 'actiondropdown',
                                         'no_default_action' => true,
-                                        'icon' => 'fa-plus',
+                                        'icon' => 'sicon-plus',
                                         'buttons' => [
                                             [
                                                 'type' => 'dashletaction',
@@ -153,8 +164,7 @@ return [
                                                     'link' => 'emails',
                                                     'module' => 'Emails',
                                                 ],
-                                                'label' => 'LBL_COMPOSE_EMAIL_BUTTON_LABEL',
-                                                'icon' => 'fa-plus',
+                                                'label' => 'LBL_COMPOSE_EMAIL_BUTTON_LABEL2',
                                                 'acl_action' => 'create',
                                                 'acl_module' => 'Emails',
                                             ],
@@ -165,8 +175,7 @@ return [
                                                     'link' => 'calls',
                                                     'module' => 'Calls',
                                                 ],
-                                                'label' => 'LBL_SCHEDULE_CALL',
-                                                'icon' => 'fa-phone',
+                                                'label' => 'LBL_SCHEDULE_CALL2',
                                                 'acl_action' => 'create',
                                                 'acl_module' => 'Calls',
                                             ],
@@ -177,8 +186,7 @@ return [
                                                     'link' => 'meetings',
                                                     'module' => 'Meetings',
                                                 ],
-                                                'label' => 'LBL_SCHEDULE_MEETING',
-                                                'icon' => 'fa-calendar',
+                                                'label' => 'LBL_SCHEDULE_MEETING2',
                                                 'acl_action' => 'create',
                                                 'acl_module' => 'Meetings',
                                             ],
@@ -189,17 +197,27 @@ return [
                                                     'link' => 'notes',
                                                     'module' => 'Notes',
                                                 ],
-                                                'label' => 'LBL_CREATE_NOTE_OR_ATTACHMENT',
-                                                'icon' => 'fa-plus',
+                                                'label' => 'LBL_CREATE_NOTE_OR_ATTACHMENT2',
                                                 'acl_action' => 'create',
                                                 'acl_module' => 'Notes',
+                                            ],
+                                            [
+                                                'type' => 'dashletaction',
+                                                'action' => 'createRecord',
+                                                'params' => [
+                                                    'link' => 'tasks',
+                                                    'module' => 'Tasks',
+                                                ],
+                                                'label' => 'LBL_CREATE_TASK2',
+                                                'acl_action' => 'create',
+                                                'acl_module' => 'Tasks',
                                             ],
                                         ],
                                     ],
                                     [
                                         'type' => 'dashletaction',
                                         'css_class' => 'btn btn-invisible dashlet-toggle minify',
-                                        'icon' => 'fa-chevron-up',
+                                        'icon' => 'sicon-chevron-up',
                                         'action' => 'toggleMinify',
                                         'tooltip' => 'LBL_DASHLET_TOGGLE',
                                         'disallowed_layouts' => [
@@ -245,13 +263,257 @@ return [
                         'y' => 8,
                         'autoPosition' => false,
                     ],
+                    [
+                        'view' => [
+                            'type' => 'purchase-history',
+                            'label' => 'LBL_PURCHASE_HISTORY_DASHLET',
+                            'linked_account_field' => 'account_id',
+                        ],
+                        'width' => 6,
+                        'height' => 8,
+                        'x' => 0,
+                        'y' => 16,
+                    ],
+                    [
+                        'view' => [
+                            'type' => 'active-subscriptions',
+                            'label' => 'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET',
+                            'linked_subscriptions_account_field' => 'account_id',
+                        ],
+                        'width' => 6,
+                        'height' => 8,
+                        'x' => 6,
+                        'y' => 16,
+                    ],
                 ],
             ],
-            // TAB 3
+            // Tab 3 Account
+            [
+                'icon' => [
+                    'module' => 'Accounts',
+                ],
+                'module' => 'Accounts',
+                'name' => 'LBL_ACCOUNT',
+                'dashlets' => [
+                    [
+                        'view' => [
+                            'type' => 'dashablerecord',
+                            'module' => 'Accounts',
+                            'tabs' => [
+                                [
+                                    'active' => true,
+                                    'label' => 'LBL_MODULE_NAME_SINGULAR',
+                                    'link' => '',
+                                    'module' => 'Accounts',
+                                ],
+                                [
+                                    'active' => false,
+                                    'link' => 'contacts',
+                                    'module' => 'Contacts',
+                                    'order_by' => [
+                                        'field' => 'name',
+                                        'direction' => 'desc',
+                                    ],
+                                    'limit' => 5,
+                                    'fields' => [
+                                        'name',
+                                        'title',
+                                        'email',
+                                        'phone_work',
+                                    ],
+                                ],
+                                [
+                                    'active' => false,
+                                    'link' => 'opportunities',
+                                    'module' => 'Opportunities',
+                                    'order_by' => [
+                                        'field' => 'date_closed',
+                                        'direction' => 'desc',
+                                    ],
+                                    'limit' => 5,
+                                    'fields' => [
+                                        'name',
+                                        'sales_status',
+                                        'amount',
+                                        'date_closed',
+                                    ],
+                                ],
+                                [
+                                    'active' => false,
+                                    'link' => 'quotes',
+                                    'module' => 'Quotes',
+                                    'order_by' => [
+                                        'field' => 'date_quote_expected_closed',
+                                        'direction' => 'desc',
+                                    ],
+                                    'limit' => 5,
+                                    'fields' => [
+                                        'name',
+                                        'quote_stage',
+                                        'date_quote_expected_closed',
+                                        'total',
+                                    ],
+                                ],
+                            ],
+                            'tab_list' => [
+                                'Accounts',
+                                'contacts',
+                                'opportunities',
+                                'quotes',
+                            ],
+                        ],
+                        'context' => [
+                            'module' => 'Accounts',
+                        ],
+                        'width' => 6,
+                        'height' => 8,
+                        'x' => 0,
+                        'y' => 0,
+                        'autoPosition' => false,
+                    ],
+                    [
+                        'view' => [
+                            'module' => 'Accounts',
+                            'type' => 'activity-timeline',
+                            'label' => 'LBL_ACTIVITY_TIMELINE_DASHLET',
+                        ],
+                        'context' => [
+                            'module' => 'Accounts',
+                        ],
+                        'width' => 6,
+                        'height' => 8,
+                        'x' => 6,
+                        'y' => 0,
+                        'autoPosition' => false,
+                    ],
+                    [
+                        'view' => [
+                            'type' => 'commentlog-dashlet',
+                            'label' => 'LBL_DASHLET_COMMENTLOG_NAME',
+                        ],
+                        'context' => [
+                            'module' => 'Accounts',
+                        ],
+                        'width' => 6,
+                        'height' => 8,
+                        'x' => 0,
+                        'y' => 8,
+                    ],
+                    [
+                        'view' => [
+                            'type' => 'dashlet-console-list',
+                            'module' => 'Cases',
+                        ],
+                        'context' => [
+                            'module' => 'Cases',
+                        ],
+                        'width' => 6,
+                        'height' => 8,
+                        'x' => 6,
+                        'y' => 8,
+                        'autoPosition' => false,
+                    ],
+                    [
+                        'view' => [
+                            'type' => 'purchase-history',
+                            'label' => 'LBL_PURCHASE_HISTORY_DASHLET',
+                            'linked_account_field' => 'id',
+                        ],
+                        'width' => 6,
+                        'height' => 8,
+                        'x' => 0,
+                        'y' => 16,
+                    ],
+                    [
+                        'view' => [
+                            'type' => 'active-subscriptions',
+                            'label' => 'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET',
+                            'linked_subscriptions_account_field' => 'id',
+                        ],
+                        'width' => 6,
+                        'height' => 8,
+                        'x' => 6,
+                        'y' => 16,
+                    ],
+                ],
+            ],
+            // Tab 4 Lead
+            [
+                'icon' => [
+                    'module' => 'Leads',
+                ],
+                'module' => 'Leads',
+                'name' => 'LBL_LEAD',
+                'dashlets' => [
+                    [
+                        'view' => [
+                            'type' => 'dashablerecord',
+                            'module' => 'Leads',
+                            'tabs' => [
+                                [
+                                    'active' => true,
+                                    'label' => 'LBL_MODULE_NAME_SINGULAR',
+                                    'link' => '',
+                                    'module' => 'Leads',
+                                ],
+                            ],
+                        ],
+                        'context' => [
+                            'module' => 'Leads',
+                        ],
+                        'width' => 6,
+                        'height' => 8,
+                        'x' => 0,
+                        'y' => 0,
+                        'autoPosition' => false,
+                    ],
+                    [
+                        'view' => [
+                            'module' => 'Leads',
+                            'type' => 'activity-timeline',
+                            'label' => 'LBL_ACTIVITY_TIMELINE_DASHLET',
+                        ],
+                        'context' => [
+                            'module' => 'Leads',
+                        ],
+                        'width' => 6,
+                        'height' => 8,
+                        'x' => 6,
+                        'y' => 0,
+                        'autoPosition' => false,
+                    ],
+                    [
+                        'view' => [
+                            'type' => 'commentlog-dashlet',
+                            'label' => 'LBL_DASHLET_COMMENTLOG_NAME',
+                        ],
+                        'context' => [
+                            'module' => 'Leads',
+                        ],
+                        'width' => 6,
+                        'height' => 8,
+                        'x' => 0,
+                        'y' => 8,
+                    ],
+                    [
+                        'view' => [
+                            'name' => 'active-tasks',
+                            'label' => 'LBL_ACTIVE_TASKS_DASHLET',
+                        ],
+                        'width' => 6,
+                        'height' => 8,
+                        'x' => 6,
+                        'y' => 8,
+                        'autoPosition' => false,
+                    ],
+                ],
+            ],
+            // TAB 5 Cases
             [
                 'icon' => [
                     'module' => 'Cases',
                 ],
+                'module' => 'Cases',
                 'name' => 'LBL_CASE',
                 'dashlets' => [
                     [
@@ -394,7 +656,7 @@ return [
                                     [
                                         'type' => 'actiondropdown',
                                         'no_default_action' => true,
-                                        'icon' => 'fa-plus',
+                                        'icon' => 'sicon-plus',
                                         'buttons' => [
                                             [
                                                 'type' => 'dashletaction',
@@ -403,8 +665,7 @@ return [
                                                     'link' => 'emails',
                                                     'module' => 'Emails',
                                                 ],
-                                                'label' => 'LBL_COMPOSE_EMAIL_BUTTON_LABEL',
-                                                'icon' => 'fa-plus',
+                                                'label' => 'LBL_COMPOSE_EMAIL_BUTTON_LABEL2',
                                                 'acl_action' => 'create',
                                                 'acl_module' => 'Emails',
                                             ],
@@ -415,8 +676,7 @@ return [
                                                     'link' => 'calls',
                                                     'module' => 'Calls',
                                                 ],
-                                                'label' => 'LBL_SCHEDULE_CALL',
-                                                'icon' => 'fa-phone',
+                                                'label' => 'LBL_SCHEDULE_CALL2',
                                                 'acl_action' => 'create',
                                                 'acl_module' => 'Calls',
                                             ],
@@ -427,8 +687,7 @@ return [
                                                     'link' => 'meetings',
                                                     'module' => 'Meetings',
                                                 ],
-                                                'label' => 'LBL_SCHEDULE_MEETING',
-                                                'icon' => 'fa-calendar',
+                                                'label' => 'LBL_SCHEDULE_MEETING2',
                                                 'acl_action' => 'create',
                                                 'acl_module' => 'Meetings',
                                             ],
@@ -439,24 +698,40 @@ return [
                                                     'link' => 'notes',
                                                     'module' => 'Notes',
                                                 ],
-                                                'label' => 'LBL_CREATE_NOTE_OR_ATTACHMENT',
-                                                'icon' => 'fa-plus',
+                                                'label' => 'LBL_CREATE_NOTE_OR_ATTACHMENT2',
                                                 'acl_action' => 'create',
                                                 'acl_module' => 'Notes',
+                                            ],
+                                            [
+                                                'type' => 'dashletaction',
+                                                'action' => 'createRecord',
+                                                'params' => [
+                                                    'link' => 'messages',
+                                                    'module' => 'Messages',
+                                                ],
+                                                'label' => 'LBL_CREATE_MESSAGE2',
+                                                'acl_action' => 'create',
+                                                'acl_module' => 'Messages',
+                                            ],
+                                            [
+                                                'type' => 'dashletaction',
+                                                'action' => 'createRecord',
+                                                'params' => [
+                                                    'link' => 'tasks',
+                                                    'module' => 'Tasks',
+                                                ],
+                                                'label' => 'LBL_CREATE_TASK2',
+                                                'acl_action' => 'create',
+                                                'acl_module' => 'Tasks',
                                             ],
                                         ],
                                     ],
                                     [
                                         'type' => 'dashletaction',
-                                        'css_class' => 'btn btn-invisible dashlet-toggle minify',
-                                        'icon' => 'fa-chevron-up',
+                                        'css_class' => 'dashlet-toggle btn btn-invisible minify',
+                                        'icon' => 'sicon-chevron-up',
                                         'action' => 'toggleMinify',
-                                        'tooltip' => 'LBL_DASHLET_TOGGLE',
-                                        'disallowed_layouts' => [
-                                            [
-                                                'name' => 'omnichannel-dashboard',
-                                            ],
-                                        ],
+                                        'tooltip' => 'LBL_DASHLET_MINIMIZE',
                                     ],
                                     [
                                         'dropdown_buttons' => [
@@ -475,11 +750,6 @@ return [
                                                 'action' => 'removeClicked',
                                                 'label' => 'LBL_DASHLET_REMOVE_LABEL',
                                                 'name' => 'remove_button',
-                                                'disallowed_layouts' => [
-                                                    [
-                                                        'name' => 'omnichannel-dashboard',
-                                                    ],
-                                                ],
                                             ],
                                         ],
                                     ],

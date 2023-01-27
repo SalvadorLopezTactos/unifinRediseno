@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => '支援名稱：',
   'LBL_SUPPORT_TERM' => '支援期限：',
   'LBL_TAX_CLASS' => '稅種：',
+  'LBL_ACTIVE_STATUS' => '狀態',
   'LBL_TYPE_NAME'=>'類型名稱',
   'LBL_TYPE' => '類型',
   'LBL_PRODUCT_TYPE' => '產品類型',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => '產品目錄列表儀表板',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => '產品目錄紀錄儀表板',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '產品目錄焦點抽屜',
+    'LBL_FILTER_ACTIVE_STATUS' => '狀態為活動',
 );

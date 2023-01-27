@@ -46,24 +46,9 @@ $dictionary['reportschedules_users'] = array(
             ),
         ),
         array(
-            'name' => 'idx_usr_rs_rs',
-            'type' => 'index',
-            'fields' => array(
-                'reportschedule_id',
-            ),
-        ),
-        array(
             'name' => 'idx_usr_rs_usr',
             'type' => 'index',
             'fields' => array(
-                'user_id',
-            ),
-        ),
-        array(
-            'name' => 'idx_rs_users',
-            'type' => 'alternate_key',
-            'fields' => array(
-                'reportschedule_id',
                 'user_id',
             ),
         ),

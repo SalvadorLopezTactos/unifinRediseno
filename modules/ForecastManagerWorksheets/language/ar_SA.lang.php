@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'سعر الأساس',
 
     'LBL_QUOTA' => 'الحصة النسبية',
-    'LBL_QUOTA_ADJUSTED' => 'الحصة النسبية (معدلة)',
+    'LBL_QUOTA_ADJUSTED' => 'الحصة المعدلة',
 
     'LBL_FORECAST' => 'التوقع',
     'LBL_COMMIT_STAGE' => 'تأكيد المرحلة',

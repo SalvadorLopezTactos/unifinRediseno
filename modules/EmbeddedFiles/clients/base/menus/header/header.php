@@ -17,13 +17,13 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'label' => 'LNK_NEW_EMBEDDED_FILE',
         'acl_action' => 'create',
         'acl_module' => $module_name,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
     ),
     array(
         'route' => '#'.$module_name,
         'label' => 'LNK_LIST_EMBEDDED_FILE',
         'acl_action' => 'list',
         'acl_module' => $module_name,
-        'icon' => 'fa-reorder',
+        'icon' => 'sicon-list-view',
     ),
 );

@@ -87,6 +87,8 @@
         this.limit = this.context.has('limit') ? this.context.get('limit') : null;
         this.metaFields = this.meta.panels ? _.first(this.meta.panels).fields : [];
 
+        this.context.set('isUsingListPagination', this.hasListPagination());
+
         this.registerShortcuts();
     },
 
@@ -175,7 +177,7 @@
                 }
 
                 // The width field in Studio is defined as a percentage which is
-                // deprecated for Sugar7 modules. Check to see if module list
+                // deprecated for SugarCRM modules. Check to see if module list
                 // view metadata has been defined as percentage and if so,
                 // ignore.
                 if (!_.isUndefined(field.width)) {
@@ -213,12 +215,75 @@
             _.each(this.layoutEventsMap, function(callback, event) {
                 this.layout.on(event, this[callback], this);
             }, this);
+
+            this.layout.off('list:paginate:previous list:paginate:next list:paginate:input', null);
+            this.layout.on('list:paginate:previous list:paginate:next list:paginate:input', function(callback) {
+                let isUnchanged = true;
+
+                if (_.isFunction(this.beforeContainerChange) && _.isFunction(this.handleListPaginationEvents)) {
+                    isUnchanged = this.beforeContainerChange({
+                        callback: _.bind(this.handleListPaginationEvents, this, callback),
+                        message: 'LBL_WARN_UNSAVED_CHANGES'
+                    });
+                }
+
+                if (isUnchanged) {
+                    callback();
+                }
+            }, this);
         }
 
         if (this.context) {
             _.each(this.contextEventsMap, function(callback, event) {
                 this.context.on(event, this[callback], this);
             }, this);
+        }
+
+        this.context.on('focusRow', this.focusRow, this);
+        this.context.on('unfocusRow', this.unhighlightRows, this);
+    },
+
+    /**
+     * Focus a row in the list
+     * @param {string} id The id of the record to focus on
+     */
+    focusRow: function(id) {
+        var $row = this.getRowDomForModelId(id);
+
+        if ($row.length) {
+            this.makeRowVisible($row);
+        }
+        this.highlightRow($row);
+    },
+
+    /**
+     * Get the DOM for the row that represents a model. Override this for different row HTML
+     * @param {string} id The model id
+     * @return {jQuery}
+     */
+    getRowDomForModelId: function(id) {
+        return this.$(`tr[name="${this.module}_${id}"]`);
+    },
+
+    /**
+     * Highlights a row by making the row blue. Also removes the highlight from
+     * any other row.
+     * @param {jQuery} $el The element for the row to highlight
+     */
+    highlightRow: function($el) {
+        this.unhighlightRows();
+        if ($el.length) {
+            $el.addClass('highlight-row');
+        }
+    },
+
+    /**
+     * Un-highlight all currently selected rows.
+     */
+    unhighlightRows: function() {
+        let highlightedRows = this.$('tr.highlight-row');
+        if (highlightedRows.length) {
+            highlightedRows.removeClass('highlight-row');
         }
     },
 
@@ -262,6 +327,7 @@
         if ($(event.currentTarget).find('ui-draggable-dragging').length) {
             return;
         }
+
         var collection, options, eventTarget, orderBy;
         var self = this;
 
@@ -337,6 +403,16 @@
         if (collection.offset) {
             options.limit = collection.offset;
             options.offset = 0;
+        }
+
+        let isUsingListPagination = this.context.get('isUsingListPagination') || this.hasListPagination();
+
+        // if we are using list pagination then set the limit to maximum allowed records
+        if (isUsingListPagination && !options.limit) {
+            options.limit = !_.isUndefined(this.context.get('limit')) ?
+                this.context.get('limit') : app.config.maxQueryResult;
+        } else {
+            options.limit = options.limit || collection.length;
         }
 
         return options;
@@ -448,6 +524,22 @@
 
             $scrollableDiv.scrollLeft(nextScrollPosition);
         }
+    },
+
+    /**
+     * Determine if this layout is using the list-pagination component
+     *
+     * @return {boolean}
+     */
+    hasListPagination: function() {
+        if (!this.layout || !this.layout.meta || !this.layout.meta.components) {
+            return false;
+        }
+
+        return !_.isUndefined(_.find(this.layout.meta.components, component =>
+            component.view &&
+            (component.view === 'list-pagination' || component.view.name === 'list-pagination')
+        ));
     },
 
     /**

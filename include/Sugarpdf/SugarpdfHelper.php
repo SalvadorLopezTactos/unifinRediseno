@@ -72,6 +72,7 @@
         static $override_currency_id = null;
         static $currency;
 
+        $amount = (float)$amount;
         $seps = get_number_seperators();
         $num_grp_sep = $seps[0];
         $dec_sep = $seps[1];

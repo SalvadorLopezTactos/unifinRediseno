@@ -29,11 +29,13 @@ class lead_direcciones_class
                 $direccion->name = $direccion_row['calle'];
                 //parse array to string for multiselects
                 $tipo_string = "";
-                if (count($direccion_row['tipodedireccion']) > 0) {
-                    $tipo_string .= '^' . $direccion_row['tipodedireccion'][0] . '^';
+                if (!empty($direccion_row['tipodedireccion'] != "")) {
+                    $tipo_string .= '^' . $direccion_row['tipodedireccion'] . '^';
+                    /*
                     for ($i = 1; $i < count($direccion_row['tipodedireccion']); $i++) {
                         $tipo_string .= ',^' . $direccion_row['tipodedireccion'][$i] . '^';
                     }
+                    */
                 }
                 $direccion->tipodedireccion = $tipo_string;
                 $direccion->calle = $direccion_row['calle'];

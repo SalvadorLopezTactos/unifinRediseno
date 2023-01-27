@@ -136,6 +136,12 @@
 
   _render: function () {
     this._super("_render");
+
+    if($('[data-fieldname="lead_telefonos"] > span').length >0){
+      $('[data-fieldname="lead_telefonos"] > span').show();
+    }
+    //Parche para ocultar espacios en blanco de los campos de Origen en creación de Leads
+    this.hideRowsNoHideByDependencyLeads();
     if(window.cancel) {
       this.phone_work = this.model.get('phone_work');
       this.phone_home = this.model.get('phone_home');
@@ -147,6 +153,18 @@
       this.render();
     }
   },
+
+  hideRowsNoHideByDependencyLeads:function(){
+    //La clase vis_action_hidden se agrega cuando un campo se oculta a través de una fórmula en studio o una dependencia
+    var hidden_rows=$('.vis_action_hidden');
+    hidden_rows.each(function(i, obj) {
+        //Se oculta la fila cuando se detecta que el campo está oculto y además el campo que está junto a el es el campo custom "blank_space" o es una celda "relleno" habilitada desde studio
+        if($(obj).siblings('[data-name="blank_space"]').length > 0 || $(obj).siblings('.filler-cell').length > 0){
+            $(obj).parent().addClass('hide');
+        }
+    });
+},
+
 
   keyDownNewExtension: function (evt) {
     if (!evt) return;

@@ -17,7 +17,7 @@
 
 
 
-$local_log =& LoggerManager::getLogger('index');
+$local_log = LoggerManager::getLogger();
 
 $focus = BeanFactory::newBean('WorkFlow');
 $controller = new Controller();
@@ -42,7 +42,8 @@ else $return_module = "Workflow";
 if(isset($_REQUEST['return_action']) && $_REQUEST['return_action'] != "") $return_action = $_REQUEST['return_action'];
 else $return_action = "ProcessListView";
 
-//echo "index.php?action=$return_action&module=$return_module&record=$return_id";
-
-header("Location: index.php?action=$return_action&module=$return_module&base_module=".$_REQUEST['base_module']."");
-?>
+header('Location: index.php?' . http_build_query([
+        'action' => $return_action,
+        'module' => $return_module,
+        'base_module' => $_REQUEST['base_module'],
+    ]));

@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'El. paštas:',
     'LBL_EMAIL_ATTACHMENT' => 'Prisegtukas',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'El. pašto priedas, skirtas',
+    'LBL_NOTE_ATTACHMENT' => 'Atkreipkite dėmesį į priedus',
+    'LBL_KB_ATTACHMENT' => 'KBDokumentų priedai',
+    'LBL_CASE_ATTACHMENT' => 'Bylos priedai',
     'LBL_FILE_MIME_TYPE' => 'Mime tipas',
     'LBL_FILE_EXTENSION' => 'Failo prievardis',
     'LBL_FILE_SOURCE' => 'Failo kilmė',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Pastabos šaltinis',
     'LBL_SOURCE_EXTERNAL' => 'Išorinis',
     'LBL_SOURCE_INTERNAL' => 'Vidinis',
+    'LBL_PORTAL' => 'Portalas',
 
     // Help Text
     // List View Help Text

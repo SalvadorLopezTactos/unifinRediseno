@@ -46,7 +46,7 @@ class ImportViewStep3 extends ImportView
 
         if ( !empty( $_REQUEST['source_id']))
         {
-            $GLOBALS['log']->fatal("Loading import map properties.");
+            $GLOBALS['log']->info("Loading import map properties.");
             $mapping_file = BeanFactory::getBean('Import_1',  $_REQUEST['source_id'],array("encode" => false));
             $_REQUEST['source'] = $mapping_file->source;
             $has_header = $mapping_file->has_header;
@@ -139,14 +139,7 @@ class ImportViewStep3 extends ImportView
 
         if ($this->isLimitedForModuleInIdmMode($import_module)) {
 
-            $licenses = [Subscription::SUGAR_BASIC_KEY];
-            try {
-                $lt = $current_user->getLicenseTypes();
-                if (is_array($lt) && !empty($lt)) {
-                    $licenses = $lt;
-                }
-            } catch (SugarApiException $e) {
-            }
+            $productCodes = $current_user->getProductCodes();
 
             $instruction = $this->instruction = string_format(
                 $mod_strings['LBL_IDM_SELECT_MAPPING_INSTRUCTION'] . '<br/><br/>' .
@@ -161,7 +154,7 @@ class ImportViewStep3 extends ImportView
                         '',
                         '',
                         '',
-                        implode(',', getReadableProductNames($licenses))
+                        implode(',', $productCodes)
                     ),
                 ]
             );
@@ -393,11 +386,13 @@ class ImportViewStep3 extends ImportView
             }
         }
 
+        $idpConfig = $this->getIdpConfig();
         if ($this->isLimitedForModuleInIdmMode($import_module)) {
             foreach ($columns as $key => $value) {
                 $fields = $this->bean->get_importable_fields();
                 foreach ($fields as $field => $properties) {
-                    if (empty($properties['idm_mode_disabled'])) {
+                    if (empty($properties['idm_mode_disabled']) ||
+                        ($properties['name'] === 'license_type' && !$idpConfig->getUserLicenseTypeIdmModeLock())) {
                         continue;
                     }
                     if (isset($value['defaultFieldName']) && $properties['name'] === $value['defaultFieldName']) {
@@ -608,7 +603,7 @@ EOCSS;
         }
         return true;
     }
-   
+
     if (document.getElementById('importnow')) {
         document.getElementById('importnow').onclick = function(){
             var form = document.getElementById('importstep3');
@@ -616,33 +611,33 @@ EOCSS;
             document.getElementById('importstep3').action.value = 'Step4';
             ProcessImport.begin();
         }
-    
+
         ProcessImport = new function()
         {
             /*
              * number of file to process processed
              */
             this.fileCount         = 0;
-        
+
             /*
              * total files to processs
              */
             this.fileTotal         = {$count};
-        
+
             /*
              * total records to process
              */
             this.recordCount       = {$recCount};
-        
+
             /*
              * maximum number of records per file
              */
             this.recordThreshold   = {$sugar_config['import_max_records_per_file']};
-            
+
             this.type = {$typeJs};
-        
+
             this.importModule = {$importModuleJs};
-            
+
             /*
              * submits the form
              */
@@ -662,7 +657,7 @@ EOCSS;
                                 import_module: ProcessImport.importModule,
                                 has_header: document.getElementById("importstep3").has_header.value
                              });
-                                
+
                                 if ( ProcessImport.fileCount >= ProcessImport.fileTotal ) {
                                     YAHOO.SUGAR.MessageBox.updateProgress(1,'{$mod_strings['LBL_IMPORT_COMPLETED']}');
                                     SUGAR.util.hrefURL(locationStr);
@@ -692,7 +687,7 @@ EOCSS;
                                 + " {$mod_strings['LBL_IMPORT_RECORDS_TO']} " + Math.min(((this.fileCount+1) * this.recordThreshold),this.recordCount)
                                 + " {$mod_strings['LBL_IMPORT_RECORDS_OF']} " + this.recordCount );
             }
-        
+
             /*
              * begins the form submission process
              */
@@ -766,7 +761,7 @@ ImportView = {
 if( document.getElementById('gonext') )
 {
     document.getElementById('gonext').onclick = function(){
-    
+
         if( ImportView.validateMappings() )
         {
             // Move on to next step
@@ -871,7 +866,7 @@ function toggleDefaultColumnVisibility(hide)
     if(currentStyle == 'none')
     {
         var newStyle = '';
-        var bgColor = '#eeeeee';
+        var bgColor = 'var(--primary-content-active)';
         YAHOO.util.Dom.addClass('hide_default_link', 'collapse');
         YAHOO.util.Dom.removeClass('hide_default_link', 'expand');
         var col2Rowspan = "1";
@@ -879,7 +874,7 @@ function toggleDefaultColumnVisibility(hide)
     else
     {
         var newStyle = 'none';
-        var bgColor = '#dddddd';
+        var bgColor = 'var(--primary-content-background)';
         YAHOO.util.Dom.addClass('hide_default_link', 'expand');
         YAHOO.util.Dom.removeClass('hide_default_link', 'collapse');
         var col2Rowspan = "2";

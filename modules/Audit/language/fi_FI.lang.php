@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Tässä moduulissa tarkastetut kentät:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Tässä moduulissa ei ole laisinkaan tarkastettuja kenttiä',
     'LBL_CHANGE_LOG' => 'Tarkistusloki',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Kun tarkastetut valuuttakentät tallennetaan muussa kuin järjestelmän oletusvaluutassa, muutosloki näyttää sekä vanhan että uuden arvon muunnetussa järjestelmän oletusvaluutassa.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Kun tarkastetut valuuttakentät tallennetaan muussa kuin järjestelmän oletusvaluutassa, muutosloki näyttää sekä vanhan että uuden arvon muunnetussa järjestelmän oletusvaluutassa.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Päivitä',
+    'LBL_BLANK' => '-tyhjä-',
 );

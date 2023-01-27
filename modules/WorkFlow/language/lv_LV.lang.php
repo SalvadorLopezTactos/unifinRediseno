@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Darbplūsma'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Tips',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Piezīme:</strong> Sugar darbplūsmas un Darbplūsmu pārvaldības funkcijas ir apkopes režīmā. Klientiem, kas izmanto Sugar Enterprise versiju, ir jāizmanto funkcija, ko nodrošina SugarBPM<sup class="trademark">TM</sup>.',
 );
 

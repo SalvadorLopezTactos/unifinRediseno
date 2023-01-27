@@ -70,7 +70,9 @@ function send_back(module, id)
 	var associated_row_data = associated_javascript_data[id];
 
 	// cn: bug 12274 - stripping false-positive security envelope
-	eval("var temp_request_data = " + window.document.forms['popup_query_form'].request_data.value);
+    // jscs:disable
+    var temp_request_data = JSON.parse(window.document.forms['popup_query_form'].request_data.value);
+    // jscs:enable
 	if(temp_request_data.jsonObject) {
 		var request_data = temp_request_data.jsonObject;
 	} else {
@@ -85,8 +87,10 @@ function send_back(module, id)
 	}
 	var form_name = request_data.form_name;
 	var field_to_name_array = request_data.field_to_name_array;
-	
-	var call_back_function = eval("window.opener." + request_data.call_back_function);
+
+    // jscs:disable
+    var call_back_function = window.opener[request_data.call_back_function];
+    // jscs:enable
 	var array_contents = Array();
 
 	// constructs the array of values associated to the bean that the user clicked
@@ -120,9 +124,9 @@ function send_back(module, id)
 	}
 
 	var popupConfirm = confirmDialog(array_contents, form_name);
-	
-	eval("var name_to_value_array = {" + array_contents.join(",") + "}");
-	
+    // jscs:disable
+    var name_to_value_array = JSON.parse("{" + array_contents.join(",") + "}");
+    // jscs:enable
 	closePopup();
 
 	var result_data = {"form_name":form_name,"name_to_value_array":name_to_value_array,"passthru_data":passthru_data,"popupConfirm":popupConfirm};
@@ -176,8 +180,9 @@ function send_back_teams(module, form, field, error_message, request_data, form_
 	var field_name = request_data.field_name;
 
 	closePopup();
-	
-	var call_back_function = eval("window.opener." + request_data.call_back_function);
+    // jscs:disable
+    var call_back_function = window.opener[request_data.call_back_function];
+    // jscs:enable
 	var result_data={"form_name":form_name,"field_name":field_name,"teams":array_teams,"passthru_data":passthru_data};
 	call_back_function(result_data);
 
@@ -200,12 +205,12 @@ function send_back_selected(module, form, field, error_message, request_data)
 		window.alert(error_message);	
 		return;
 	}
-	
-	eval("var selection_list_array = {" + array_contents.join(",") + "}");
+    // jscs:disable
+    var selection_list_array = JSON.parse("{" + array_contents.join(",") + "}");
 	
 	// cn: bug 12274 - stripping false-positive security envelope
-	eval("var temp_request_data = " + window.document.forms['popup_query_form'].request_data.value);
-
+    var temp_request_data = JSON.parse(window.document.forms['popup_query_form'].request_data.value);
+    // jscs:enable
 	if(temp_request_data.jsonObject) {
 		var request_data = temp_request_data.jsonObject;
 	} else {
@@ -223,8 +228,9 @@ function send_back_selected(module, form, field, error_message, request_data)
 	var field_to_name_array = request_data.field_to_name_array;
 	
 	closePopup();
-	
-	var call_back_function = eval("window.opener." + request_data.call_back_function);
+    // jscs:disable
+    var call_back_function = window.opener[request_data.call_back_function];
+    // jscs:enable
 	var result_data={"form_name":form_name,"selection_list":selection_list_array ,"passthru_data":passthru_data,"select_entire_list":form.select_entire_list.value,"current_query_by_page":form.current_query_by_page.value};
 	call_back_function(result_data);
 }

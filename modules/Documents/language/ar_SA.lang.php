@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'بنود العائدات',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'المشتريات',
     'LBL_PLIS_SUBPANEL_TITLE' => 'البنود المشتراة',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل المستندات',
+    'LBL_MY_DOCUMENTS' => 'مستنداتي',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'إرسال إلى DocuSign',
 );

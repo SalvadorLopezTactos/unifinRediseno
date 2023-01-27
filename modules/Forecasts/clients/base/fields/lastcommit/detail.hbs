@@ -11,10 +11,10 @@
  */
 --}}
 <div class='row-fluid last-commit'>
-    <div class="span8 datapoints">
+    <div class="span8 datapoints ml-2">
         <div class="pull-right">
             {{#each this.data_points}}
-                <div class="datapoint pull-left">
+                <div class="datapoint flex items-center justify-end p-2 border-l border-light text-xs">
                     {{#if this.value}}
                         {{formatCurrency this.value}}
                     {{else}}
@@ -28,8 +28,8 @@
     <div class="span4 commit-date">
         {{#if this.commit_date}}
             <span class="relativetime">
-                {{str 'LBL_LAST_COMMIT'}}{{relativeTime commit_date class='date'}}
-                &nbsp;<i id="show_hide_history_log" class="fa fa-caret-down fa-sm"></i>
+                {{str 'LBL_LAST_COMMIT'}}{{relativeTime commit_date class='date darkRed-text font-bold'}}
+                &nbsp;<span id="show_hide_history_log" class="sicon sicon-sm sicon-chevron-down"></span>
             </span>
         {{/if}}
     </div>

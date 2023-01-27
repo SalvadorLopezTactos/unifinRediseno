@@ -56,7 +56,7 @@
     initialize: function(options) {
         this._super('initialize', [options]);
 
-        this.currentModule = this.context.get('module');
+        this.currentModule = this._currentModule();
         this.module = 'Purchases';
         this.moduleName = {'module_name': app.lang.getModuleName(this.module, {'plural': true})};
         this.baseModule = 'Accounts';
@@ -90,9 +90,9 @@
         var language = app.lang.getLanguage();
         var module = 'activesubscriptionsdashlet';
         var route = app.controller.context.get('layout');
-        var products = app.user.get('products') ?
-            app.user.get('products').join(',') :
-            '';
+
+        let products = app.user.getProductCodes();
+        products = products ? products.join(',') : '';
 
         var params = {
             edition: serverInfo.flavor,
@@ -175,6 +175,31 @@
     },
 
     /**
+     * When the SugarLive is open we want to consider the context of the activeTab of the dashboard
+     * rather than what is open behind the SugarLive
+     *
+     * @return {string}
+     * @private
+     */
+    _currentModule: function() {
+        if (app.omniConsoleConfig && app.omniConsoleConfig.isConfigPaneExpanded) {
+            var configDashboard = app.omniConsoleConfig.getComponent('omnichannel-dashboard-config');
+            var activeTab = configDashboard.tabModels[configDashboard.activeTab];
+            return activeTab.module;
+        } else if (app.omniConsole && app.omniConsole.isExpanded()) {
+            var activeContact = app.omniConsole.getComponent('omnichannel-ccp').getActiveContact();
+            if (activeContact) {
+                var dashboard = app.omniConsole.getComponent('omnichannel-dashboard-switch')
+                    .getDashboard(activeContact.contactId).getComponent('dashboard');
+                var tabs = dashboard.context.get('tabs');
+                var activeTab = tabs[dashboard.context.get('activeTab')];
+                return activeTab.module;
+            }
+        }
+        return this.context.get('module');
+    },
+
+    /**
      * Create the dynamic dropdown options for the dashlet config page.
      *
      * @private
@@ -215,6 +240,7 @@
 
         // Grab the view metadata that has all of the available fields
         var currentModuleFields = app.metadata.getModule(this.currentModule, 'fields');
+
         // Grab all the 1:* Account relationship (link) and Account relate fields on the current module
         _.each(currentModuleFields, _.bind(function(f) {
             // Relationship logic
@@ -264,7 +290,7 @@
      * Gets the account ID from the model
      *
      * @param settingsAccountField
-     * @return {null|string}
+     * @return {string}
      * @private
      */
     _getAccountId: function(settingsAccountField) {
@@ -274,11 +300,12 @@
         }
 
         // Normally, we get the field from the context's model. On focus drawer or
-        // console dashboards, we need to get the field from the parent context's rowModel
-        var rowModelLayouts = ['focus', 'multi-line'];
-        return _.contains(rowModelLayouts, this.context.get('layout')) ?
+        // console dashboards or from SugarLive, we need to get the field from the parent context's rowModel
+        var rowModelLayouts = ['focus', 'multi-line', 'omnichannel'];
+        var linkField = _.contains(rowModelLayouts, this.context.get('layout')) ?
             this.context.parent.get('rowModel').get(linkedAccountField) :
             this.context.get('model').get(linkedAccountField);
+        return linkField || '';
     },
 
     /**
@@ -451,7 +478,7 @@
             if (element) {
                 var startDate = app.date(record.contents.service_start_date);
                 var endDate = app.date(record.contents.service_end_date);
-                var today = app.date();
+                var today = app.date().startOf('day');
                 if (startDate <= today && endDate >= today) {
                     currentSubscription++;
                     quantity += record.contents.quantity;

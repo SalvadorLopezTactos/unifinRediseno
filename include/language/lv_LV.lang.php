@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'Prognozes',
     'ForecastWorksheets' => 'Prognožu darblapas',
     'ForecastManagerWorksheets' => 'Prognožu menedžera darblapas',
-    'MergeRecords'=>'Sapludināt ierakstus',
       'VisualPipeline'=>'Vizuālā piltuve',
       'ConsoleConfiguration' => 'Konsoles konfigurācija',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'Lomas',
     'Notifications'=>'Paziņojumi',
     'Sync'=>'Sinhronizācija',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
     'ReportMaker' => 'Izvērstās atskaites',
     'DataSets' => 'Datu formāts',
     'CustomQueries' => 'Pielāgotie vaicājumi',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'Iegādātie produkti',
     'MobileDevices' => 'Mobilās ierīces',
     'PushNotifications' => 'Pašpiegādes paziņojumi',
+    'Escalations' => 'Eskalācijas',
+    'DocumentTemplates' => 'Dokumenta veidnes',
+    'DocumentMerges' => 'Dokumentu sapludināšanas',
     'WorkFlow' => 'Darbplūsmu definīcijas',
     'EAPM' => 'Ārējais konts',
     'Worksheet' => 'Darblapa',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'Brīvdienas',
     'ChangeTimers' => 'Mainīt taimerus',
     'Messages' => 'Ziņojumi',
+    'Audit' => 'Audits',
+    'RevenueLineItems' => 'Ieņēmumu posteņi',
+    'DocuSignEnvelopes' => 'DocuSign aploksnes',
+    'Geocode' => 'Ģeokods',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Uz',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'BC',
         'PurchasedLineItems' => 'PL',
+        'DocumentTemplates' => 'DT',
+        'DocumentMerges' => 'DM',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Prognozes darblapa',
     'ForecastManagerWorksheets' => 'Prognožu menedžera darblapa',
     'Quotas' => 'Kvota',
-    'MergeRecords'=>'Sapludināt ierakstu',
     'Teams' => 'Darba grupa',
     'TeamNotices' => 'Darba grupas ziņojums',
     'Activities' => 'Darbības',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'Pirkums',
     'PurchasedLineItems' => 'Iegādātais produkts',
     'PushNotifications' => 'Pašpiegādes paziņojums',
+    'Escalations' => 'Eskalācija',
+    'DocumentTemplates' => 'Dokumenta veidne',
+    'DocumentMerges' => 'Dokumentu sapludināšana',
     'WorkFlow' => 'Darbplūsma',
     'EAPM' => 'Ārējais konts',
     'Worksheet' => 'Darblapa',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'Brīvdiena',
     'ChangeTimers' => 'Mainīt taimeri',
     'Messages' => 'Ziņojums',
+    'Audit' => 'Audits',
+    'DocuSignEnvelopes' => 'DocuSignEnvelope',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
+    'Geocode' => 'Ģeokods',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'Komunālie pakalpojumi',
     'Other' => 'Cits',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF un CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'Procesā',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'Zināšanu bāze',
       'PurchasedLineItems' => 'Iegādātais produkts',
       'Purchases' => 'Pirkums',
+      'Escalations' => 'Eskalācija',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Klients',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'Piezīme',
     'PurchasedLineItems' => 'Iegādātais produkts',
     'Purchases' => 'Pirkums',
+    'Escalations' => 'Eskalācija',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'Pasūtīts',
       'Ship' => 'Piegādāts',
   ),
+    'active_status_dom' => [
+        'Active' => 'Aktīvs',
+        'Inactive' => 'Neaktīvs',
+        'Retired' => 'Devies pensijā',
+    ],
+    'appearance_options' => [
+        'system_default' => 'Izmantot sistēmas iestatījumus',
+        'light' => 'Gaišs',
+        'dark' => 'Tumšs',
+    ],
 
 
   'pricing_formula_default_key' => 'Fiksēts',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'Televīzija',
         'NewsLetter' => 'Biļetens',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'SAŅEMT',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,12 +2049,14 @@ $app_list_strings = array (
         'print'       => 'Drukāt',
         'pieWedgeName'      => 'sekcijas',
     ),
-    'd3_chart_types' => array (
+    'chart_types' => array (
         'pie chart' => 'Sektoru diagramma',
-        'bar chart' => 'Vertikālu joslu diagramma',
-        'group by chart' => 'Vertikālu joslu grupēta diagramma',
+        'donut chart' => 'Gredzenveida diagramma',
+        'treemap chart' => 'Kokveida kartes diagramma',
+        'bar chart' => 'Vertikālo stabiņu diagramma',
+        'group by chart' => 'Vertikālo stabiņu grupēta diagramma',
         'horizontal bar chart' => 'Horizontāla joslu diagramma',
-        'horizontal group by chart' => 'Horizontāla joslu grupēta diagramma',
+        'horizontal group by chart' => 'Horizontālo joslu grupēta diagramma',
         'line chart' => 'Līniju diagramma',
         'funnel chart' => 'Piltuves diagramma',
     ),
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'Cena (Visaugstākā, kopējā)',
             'total_revenue:asc' => 'Cena (Viszemākā, kopējā)',
         ],
+        'calendar_type_list' => [
+          'main' => 'Kalendāra centrs',
+        ],
+        'calendar_views_options' => [
+          'day' => 'Diena',
+          'week' => 'Nedēļa',
+          'workWeek' => 'Darba nedēļa',
+          'expandedMonth' => 'Mēnesis',
+          'agenda' => 'Darba kārtība',
+          'timeline' => 'Laika josla',
+          'monthSchedule' => 'Plānotājs',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'Izveidots',
+          'completed' => 'Pabeigts',
+          'declined' => 'Noraidīts',
+          'delivered' => 'Piegādāts',
+          'sent' => 'Nosūtīts',
+          'signed' => 'Parakstīts',
+          'voided' => 'Anulēts',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'Noklusētais',
+            'color' => 'Krāsa',
+            'image' => 'Attēls',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'Jauns',
+            'In Progress' => 'Procesā',
+            'Closed' => 'Slēgts',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'Neaktivitāte',
+            'Lack of Progress' => 'Nav progresa',
+            'Customer-Imposed Deadline' => 'Klienta noteikts termiņš',
+            'Account at Risk' => 'Uzņēmums ir apdraudēts',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'Klienta pieprasīts',
+            'Internally Requested' => 'Iekšēji pieprasīts',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'Pieteikums',
+            'Bugs' => 'Kļūda',
+            'Accounts' => 'Uzņēmums',
+            'Opportunities' => 'Darījums',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'Pozitīvs',
+            'Negative' => 'Negatīvs',
+            'Neutral' => 'Neitrāls',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'Nav ticams',
+            '02_less_likely' => 'Mazāk ticams',
+            '03_neutral' => 'Neitrāls',
+            '04_more_likely' => 'Vairāk ticams',
+            '05_very_likely' => 'Ļoti ticams',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'Nesakrīt ar klientiem',
+            '02_no_match' => '',
+            '01_matches_customers' => 'Sakrīt ar klientiem',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Sekot saitei',
   'LBL_TOGGLE_VISIBILITY' => 'Pārslēgt redzamību', // Record view header panel element
   'LBL_ACTIVITIES' => 'Darbības',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar un 3-D kubs ir SugarCRM Inc. reģistrētas preču zīmes. '.
         'Visi citi uzņēmumu un produktu nosaukumi, kas tiek izmantoti vai parādās šajā produktā, var būt preču zīmes, '.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ ir SugarCRM Inc preču zīmes.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'Pievienot' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Uzņēmuma logo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalendārs' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'Jūsu atlasītā nolaižamā vērtība mainīja jūsu ieraksta skata izkārtojumu. ' .
+        'Šajā jaunajā izkārtojumā paslēpto lauku vērtības ir notīrītas. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'galvenā moduļa navigācija',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'Aizvērt',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} atzīmēts ar {{status}}.',
 
+    'LBL_FOCUS' => 'Fokuss',
+
     'LBL_QUERY_VALID'=>'Derīgs',
     'LBL_QUERY_ERROR'=>'Kļūda!',
     'LBL_QUERY_CHILD'=>'Pareizs apakšvaicājums',
@@ -3068,6 +3185,10 @@ $app_strings = array (
     'LBL_CASES'=>'Pieteikumi',
     'LBL_MESSAGE'=>'Ziņojums',
     'LBL_MESSAGES'=>'Ziņojumi',
+    'LBL_ESCALATIONS' => 'Eskalācijas',
+    'LBL_ESCALATION' => 'Eskalācija',
+    'LBL_DOCUSIGN_ENVELOPES' => 'DocuSign aploksnes',
+    'LBL_DOCUSIGN_ENVELOPE' => 'DocuSign aploksne',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Mainīt paroli',
     'LBL_CHANGE_BUTTON_LABEL' => 'Mainīt',
@@ -3093,6 +3214,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'Atvērtie ieraksti:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Rakstīt e-pastu',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'E-pasts',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Rakstīt e-pastu',
     'LBL_SEARCH_DROPDOWN_YES'=>'Jā',
     'LBL_SEARCH_DROPDOWN_NO'=>'Nē',
@@ -3118,6 +3240,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Dokumenti',
     'LBL_DATE_ENTERED' => 'Izveides datums:',
     'LBL_DATE_MODIFIED' => 'Modificēšanas datums:',
+    'LBL_ACTIVITY_MODIFIED' => 'Modificēts',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Redigēt apskata cilni',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'Rediģēt moduļa cilnes',
     'LBL_EDIT_BUTTON' => 'Rediģēt',
@@ -3140,6 +3263,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Atlasīt lauku...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Atlasiet operatoru...',
     'LBL_FILTER_CREATE_NEW' => 'Izveidot jaunu',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'Izveidot filtru (nav saglabāts)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(Nav saglabāts)',
     'LBL_FILTER_CREATE_FILTER' => 'Izveidot jaunu filtru',
     'LBL_FILTER_CLOSE_FILTER' => 'Aizvērt filtru',
     'LBL_FILTER_EDIT_FILTER' => 'Rediģēt filtru',
@@ -3202,6 +3327,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => 'Vairāk {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Šodienas darbības',
     'LBL_LEADS'=>'Interesenti',
+    'LBL_LEAD'=>'Interesents',
+    'LBL_QUOTES_BILL_TO' => 'Piedāvājumi (norēķinu adrese)',
     'LBL_LESS' => 'mazāk',
     'LBL_CAMPAIGN' => 'Kampaņa:',
     'LBL_CAMPAIGNS' => 'Kampaņas',
@@ -3229,19 +3356,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'Lūdzu, izvēlieties vismaz divus ierakstus, ko apstrādāt.',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'Lūdzu izvēlieties mazāk par 10 ierakstiem, ko apstrādāt.',
     'LBL_LISTVIEW_ALL' => 'Visi',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'Iesaldēt 1. kolonnu',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'Visi diplikāti',
     'LBL_LISTVIEW_NONE' => 'Neatzīmēt visu',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'Atzīmēt šo lapu',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Atzīmēt visu',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Atzīmētie ieraksti',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Atlasīti: ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Notīrīt atzīmēto.',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Notīrīt visu atzīmēto.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'Atzīmēt visus ierakstus',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'Te ir vairāk kā {{num}} ierakstu. Jūs atzīmējāt pirmos {{num}} ierakstus.',
     'TPL_LISTVIEW_SELECTED' => 'You have selected {{num}} records in the result set.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'Jūs atzīmējāt 1 ierakstu rezultātu kopā.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'Jūs atzīmējāt visus {{num}} ierakstus.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'Jūs atzīmējāt visus {{num}} ierakstus šajā skatā. {{link}} ierakstos.',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Atjaunina {{num}} no {{total}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Atjaunina {{num}} no {{total}}',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(palika aptuveni {{time}} {{unit}})',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Masveida atjaunināšana neveiksmīga. Veiciet jaunu mēģinājumu ({{num}} no {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Masveida atjaunināšana nepabeigta. {{num}} ieraksti palika neizmainīti.',
@@ -3249,7 +3378,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} ieraksts(-i) tika ignorēts(-i) tiesību vai kļūdu dēļ.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} ieraksti tika atjaunināti veiksmīgi.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} Masveida atkjaunināšana',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Dzēš {{num}} no {{total}}.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Dzēš {{num}} no {{total}}',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(palika aptuveni {{time}} {{unit}})',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => 'Masveida dzēšana neveiksmīga. Veiciet jaunu mēģinājumu ({{num}} no {{total}}).',
     'TPL_MASSDELETE_WARNING_CLOSE' => 'Masveida dzēšana nepabeigta. {{num}} ieraksti nav izdzēsti.',
@@ -3274,10 +3403,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Atlasīt un rediģēt',
     'LBL_LISTVIEW_ACTIONS' => 'Darbības',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'Atlasīt visus ierakstus šajā lapā',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'Dzēst visus ierakstus šajā lapā',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} no {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => 'Ielādes {{num}}...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Noklikšķiniet, lai atvērtu visu',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'no',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'Saņemt lapu skaitu',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'Jānis',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Bērziņš',
@@ -3285,10 +3421,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Kods Monkey Extraordinaire',
     'LBL_LOGIN_TO_ACCESS' => 'Lūdzu ieejiet sistēmā, lai piekļūtu šim apgabalam.',
     'LBL_LOGOUT' => 'Iziet',
+    'LBL_FINISH_IMPERSONATING' => 'Pabeigt impersonalizāciju',
+    'LBL_RESET_MFA' => 'Atiestatīt vairāku faktoru autentifikāciju',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, jūs šobrīd impersonalizējat {{user}}.',
     'LBL_PROFILE' => 'Profils',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'Pasta sapludināšana',
     'LBL_MASS_UPDATE' => 'Masveida izmaiņas',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'Atlasīt visus ierakstus masveida atjaunināšanai',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'Iekļaut ierakstu masveida atjaunināšanā',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Pievienot lauku',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Noņemt lauku',
     'LBL_GENERATE_QUOTE' => 'Ģenerēt Piedāvājumu',
@@ -3343,6 +3484,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'Vairāk informācijas',
     'LBL_PANEL_BODY' => 'Pārskats',
     'LBL_PARENT_TYPE' => 'Priekšteča tips',
+    'LBL_RELATED_TYPE' => 'Saistītais tips',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'Diapazons:',
     'LBL_PICTURE_FILE' => 'Attēls',
@@ -3416,7 +3558,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'Saistīts',
     'LBL_RELATED_INFORMATION' => 'Saistītā informācija',
-    'LBL_RELATED_RECORDS' => 'Saistītie ieraksti',
+    'LBL_RELATED_RECORDS' => 'Saistītais {{module}}',
     'LBL_REPORTS_TO' => 'Ziņo',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'Norāda obligāti aizpildāmu lauku',
@@ -3535,7 +3677,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Visas tiesības aizsargātas.<br />SugarCRM, Sugar un 3-D kubs ir SugarCRM Inc. reģistrētas preču zīmes. '.
         'Visi citi uzņēmumu un produktu nosaukumi, kas tiek izmantoti vai parādās šajā produktā, var būt preču zīmes, '.
         'kas pieder atbilstošiem uzņēmumiem, ar kuriem tie ir saistīti.',
@@ -3598,6 +3740,7 @@ $app_strings = array (
     'LBL_UNDELETE' => 'Reversēt dzēšanu',
     'LBL_UNSYNC' => 'Atcelt sinhronizēšanu',
     'LBL_UPDATE' => 'Atjaunināt',
+    'LBL_UPDATES' => 'Atjauninājumi',
     'LBL_USER_LIST' => 'Lietotāju saraksts',
     'LBL_USER_MENU' => 'Lietotāja izvēlne',
     'LBL_USERS_SYNC'=>'Lietotāju sinhronizēšana',
@@ -3664,6 +3807,8 @@ $app_strings = array (
     'NTC_DELETE_SUCCESS' => 'Jūs izdzēsāt',
     'NTC_UNLINK_CONFIRMATION' => 'Vai tiešām vēlaties atvienot šo ierakstu?',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'Vai tiešām vēlies noņemt {0}?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'Vai tiešām vēlaties atvienot {0}? Tas tos noņems arī no pieteikuma lauka Primārā kontaktpersona.',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => '{0} nevar atvienot, jo tie ir primārās kontaktpersonas šajā pieteikumā. Pirms šī ieraksta atvienošanas atjauniniet lauku Primārā kontaktpersona.',
     'NTC_UNLINK_SUCCESS' => 'Jūs atvienojāt',
     'NTC_LOGIN_MESSAGE' => 'Lūdzu ievadiet lietotāja vārdu un paroli.',
     'NTC_NO_ITEMS_DISPLAY' => 'neviens',
@@ -3695,6 +3840,9 @@ $app_strings = array (
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Pārlūkprogrammas atsvaidzināšana automātiski aizvērs visas atvērtās SugarLive zvana vai tērzēšanas sesijas, un visas nesaglabātās izmaiņas tiks zaudētas. Vai vēlaties turpināt?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Jums ir nesaglabātas izmaiņas. Vai tiešām vēlaties pamest lapu nesaglabājot izmaiņas?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'Vai tiešām vēlaties atiestatīt <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">vairāku faktoru autentifikāciju</a>? 
+Veicot šo darbību, jūs nekavējoties iziesiet, un nākamajā reizē jums būs jāveic autentifikācija, izmantojot autentifikācijas lietotni.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'Apstiprināt un iziet',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Vienam vai vairākiem dašletiem ir nesaglabātas izmaiņas. Vai tiešām vēlaties aizvērt dokumentu sastādītāju?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Jūs pārslēdzaties uz atskaišu moduli. Jūsu veiktās izmaiņas netiks saglabātas. Vai turpināt?',
     'ERROR_NO_RECORD' => 'Kļūda atgriežot ierakstu. Šis ieraksts ir vai nu jau dzēsts vai arī jums nav piekļuves tiesību.',
@@ -3790,6 +3938,11 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Jums pašlaik nav saglabāts neviens ieraksts.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Jūs variet izveidot <item1> no <item2>. <item3> <item2> saraksta.",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'Pozitīvs',
+    'LBL_SENTIMENT_NEUTRAL' => 'Neitrāls',
+    'LBL_SENTIMENT_NEGATIVE' => 'Negatīvs',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Klikšķināt šeit",
     // contextMenu strings
@@ -3799,11 +3952,16 @@ $app_strings = array (
     'LBL_CREATE_NOTE' => 'Izveidot piezīmi',
     'LBL_CREATE_OPPORTUNITY' => 'Izveidot iespēju',
     'LBL_SCHEDULE_CALL' => 'Ieplānot zvanu',
+    'LBL_SCHEDULE_CALL2' => 'Zvans',
     'LBL_SCHEDULE_MEETING' => 'Ieplānot tikšanos',
+    'LBL_SCHEDULE_MEETING2' => 'Tikšanās',
     'LBL_CREATE_MESSAGE' => 'Izveidot ziņojumu',
+    'LBL_CREATE_MESSAGE2' => 'Ziņojums',
     'LBL_CREATE_TASK' => 'Izveidot uzdevumu',
+    'LBL_CREATE_TASK2' => 'Uzdevums',
     'LBL_REMOVE_FROM_FAVORITES' => 'Izņemt no Maniem favorītiem',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'Piezīme',
     'LBL_DOWNLOAD_ALL' => 'Lejupielādēt visu',
     'LBL_DOWNLOAD_ONE' => 'Lejupielādēt',
     'LBL_ATTACHMENTS' => 'Pielikumi',
@@ -3843,13 +4001,14 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Rādīt ierakstus',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Piesaistīt dotajam ierakstam',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Saistītais lauks',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'Iesaldēt pirmo kolonnu',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Vai tiešām vēlaties noņemt dašletu?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Vai tiešām vēlaties noņemt rindu?',
     'LBL_MAXIMUM_OF' => 'Maksimums no',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'kolonna var parādīt.',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'Instrumentu panelis',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Mans instrumentu panelis',
     'LBL_COLLAPSE_ALL' => 'Savērst visus',
@@ -3866,12 +4025,15 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE' => 'Konfigurēt',
     'LBL_DASHLET_TOGGLE' => 'Pārslēgt instrumentu paneļa redzamību',
     'LBL_SIDEPANE_TOGGLE' => 'Atvērt/aizvērt sānu paneli',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'Atjaunot noklusējuma informācijas laukus',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'Neviens instrumentu panelis nav konfigurēts',
+    'LBL_CREATE_DASHBOARD_LINK' => 'Izveidot informācijas paneli',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'Palīdzība',
     'LBL_HELPLET_TOGGLE' => 'Atvērt/aizvērt',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'Moduļi',
     'LBL_FACET_MODIFIED_BY_ME' => 'Pārveidoju es',
     'LBL_FACET_CREATED_BY_ME' => 'Izveidoju es',
@@ -3888,6 +4050,7 @@ $app_strings = array (
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Ieraksta skats',
+    'LBL_RELATED_RECORDS' => 'Saistītais {{module}}',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Parāda ierakstu un pēc izvēles saistītos ierakstus cilnēs.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Ieraksta pamattips',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Šis {{moduleSingular}}',
@@ -3937,7 +4100,7 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Tagad netika atrasts  neviens ieraksts.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Pieteikumu kopsavilkums',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'Mijiedarbības',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'Laika josla',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Piezīmes un pielikumi',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Piezīmes & Pielikumi pieder ierakstam',
     'LBL_DASHLET_PIPLINE_NAME' => 'Piltuve',
@@ -4208,6 +4371,8 @@ $app_strings = array (
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Augšuplādēt no sava datora',
     'LBL_SEARCH_EXTERNAL_API' => 'Fails no ārējā avota',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'Augšupielādēt uz ārējo avotu',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'Pievienot no ārējā avota',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'Drošība',
     'LBL_SHARE_PRIVATE' => 'Privāts',
     'LBL_SHARE_COMPANY' => 'Uzņēmums:',
@@ -4317,6 +4482,9 @@ $app_strings = array (
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Īsinājumtaustiņi',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>Formas funkcionalitāte - Alt+</strong><br/> I = red<b>i<b>ģēt (detalizēts skatījums)<br/> U = d<b>u<b>blēt (detalizēts skatījums)<br/> D = <b>D<b>zēst (detalizēts skatījums)<br/> R = Kop<3>l<3>ietot (detalizēts skatījums)<br/> A = s<3>a<3>glabāt (rediģēšanas skatījums)<br/> L = atcel<3>t<3> (rediģēšanas skatījums) <br/><br/></p><p><strong>Meklēšana un navigācija  - Alt+</strong><br/> 7 = Pirmā ievade rediģēšanas formā<br/> 8 = Uzlabotās meklēšanas saite<br/> 9 = Pirmā meklēšanas formas ievade<br/> 0 = Vienotās meklēšanas ievade<br></p>' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'Eskalēt',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'Koplietot',
     'TPL_RECORD_SHARE_SUBJECT' => 'Koplietotais {{module}} {{name}} no {{appId}}',
@@ -4389,7 +4557,7 @@ $app_strings = array (
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'Jūs izmainījāt primāro ierakstu nesaglabājot veiktās izmaiņas. visas veiktās izmaiņas pazudīs. Vai vēlaties turpināt?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'Sapludināt pakārtotos ierakstus',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Sapludināts: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Sapludināts: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'Pakārtoto {{objectName}} sapludināšana neizdevās. Sāk mēģinājumu ({{num}} no {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4443,14 +4611,14 @@ $app_strings = array (
     'LBL_LANGUAGE' => 'Valoda',
     'LBL_LOADING_LANGUAGE' => 'Ielādē valodas paku',
     'LBL_UPLOADING' => 'Augšupielādē',
+    'LBL_UPLOADING_DOTS' => 'Augšupielādē...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Vai tiešām vēlaties dzēst šo attēlu?',
     'LBL_FILE_DELETE_CONFIRM' => "Vai tiešām vēlaties dzēst šo failu. Šo darbību nevarēs atcelt.",
     'LBL_FILE_DELETED' => 'Fails veiksmīgi dzēsts',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'Portāla tēma',
-    'LBL_COFIGURE_PORTAL_THEME' => 'Konfigurēt portāla tēmu',
-    'LBL_THEME_PREVIEW' => 'Tēmas Priekšskatījums',
+    'LBL_THEME_PREVIEW' => 'Portāla tēmas priekšskatījums',
     'LBL_LOADING_PREVIEW' => 'Ielādē Priekšskatījumu',
     'LBL_RESET' => 'Atiestatīt',
     'LBL_COLORS' => 'Krāsas',
@@ -4601,10 +4769,18 @@ $app_strings = array (
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Tikšanās',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Uzdevumi',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Zvani',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Uzņēmumi',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontakti',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'E-pasti',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'Maiņas',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Piedāvājuma rindas',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Maiņas izņēmumi',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenti',
+    'LBL_ESCALATIONS' => 'Eskalācijas',
+    'LBL_ESCALATED' => 'Eskalēts',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'Eskalācijas',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'Citas saistītās eskalācijas',
+    'LBL_ESCALATIONS' => 'Eskalācijas',
     'LNK_SETTINGS' => 'Uzstādījumi',
     'LBL_MOBILE_SUPPORT' => 'Atbalsts',
     'LBL_MOBILE_SHOW_MORE' => 'Rādīt vairāk...',
@@ -4812,6 +4988,55 @@ $app_strings = array (
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'Neizdevās iegūt servera laiku',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'Neizdevās iespējot bezsaistes režīmu. Nevar sasniegt serveri.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'Izskats',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'Izmantot sistēmas iestatījumus',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'Gaišs',
+    'LBL_MOBILE_APP_THEME_DARK' => 'Tumšs',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'Jauns faila nosaukums',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'Pārdēvēt failu',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'Izveidoju es',
+    'LBL_OPERATOR_CONTAINS' => 'ir viens no',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'nav viens no',
+    'LBL_OPERATOR_EMPTY' => 'ir tukšs',
+    'LBL_OPERATOR_NOT_EMPTY' => 'nav tukšs',
+    'LBL_OPERATOR_MATCHES' => 'tieši sakrīt',
+    'LBL_OPERATOR_STARTS_WITH' => 'sākas ar',
+    'LBL_OPERATOR_EQUALS' => 'ir vienāds ar',
+    'LBL_OPERATOR_NOT_EQUALS' => 'nav vienāds ar',
+    'LBL_OPERATOR_GREATER_THAN' => 'ir lielāks par',
+    'LBL_OPERATOR_LESS_THAN' => 'ir mazāk par',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'ir lielāks vai vienāds ar',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'ir mazāks vai vienāds ar',
+    'LBL_OPERATOR_BETWEEN' => 'ir starp',
+    'LBL_OPERATOR_BEFORE' => 'pirms',
+    'LBL_OPERATOR_AFTER' => 'pēc',
+    'LBL_OPERATOR_YESTERDAY' => 'vakar',
+    'LBL_OPERATOR_TODAY' => 'šodien',
+    'LBL_OPERATOR_TOMORROW' => 'rīt',
+    'LBL_OPERATOR_LAST_7_DAYS' => 'pēdējās 7 dienas',
+    'LBL_OPERATOR_NEXT_7_DAYS' => 'nākamās 7 dienas',
+    'LBL_OPERATOR_LAST_30_DAYS' => 'pēdējās 30 dienas',
+    'LBL_OPERATOR_NEXT_30_DAYS' => 'nākamās 30 dienas',
+    'LBL_OPERATOR_LAST_MONTH' => 'pagājušais mēnesis',
+    'LBL_OPERATOR_THIS_MONTH' => 'šomēnes',
+    'LBL_OPERATOR_NEXT_MONTH' => 'nākamajā mēnesī',
+    'LBL_OPERATOR_LAST_YEAR' => 'pagājušais gads',
+    'LBL_OPERATOR_THIS_YEAR' => 'šis gads',
+    'LBL_OPERATOR_NEXT_YEAR' => 'nākamais gads',
+    'LBL_OPERATOR_IS' => 'ir',
+    'LBL_OPERATOR_IS_NOT' => 'nav',
+    'LBL_ERROR_FILTER_EMPTY' => 'Pievienojiet filtra kritērijus.',
+    'LBL_ADD_FILTER' => 'Pievienot kritēriju',
+    'LBL_FILTER_NAME' => 'Filtra nosaukums',
+    'LBL_FILTER_FIELD' => 'Lauks',
+    'LBL_FILTER_OPERATOR' => 'Operators',
+    'LBL_FILTER_VALUE' => 'Vērtība',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Saglabāt darbvirsmas lietotnē',
+    'LBL_FILTER_LOCAL' => 'Lokālais filtrs',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'Sveicam SugarCRM.<br/><br/> Ļaujiet parādīt dažas jaunas iespējas ...',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'Galvenās izvēlnes navigācija.',
@@ -4857,6 +5082,7 @@ $app_strings = array (
     'LBL_COMMENT_ADD' => 'Pievienot komentāru',
     'LBL_REQUIRED' => 'Obligāts',
     'LBL_MORE_BUTTON' => 'Vairāk',
+    'LBL_NO_OPTIONS' => 'Opcijas nav pieejamas',
     'LBL_TRY_AGAIN' => 'Mēģināt vēlreiz',
     'LBL_NEW_RECORDS' => 'Nesen izveidots',
     'LBL_ASSIGNED_TO_ME' => 'Mans {{{module}}}',
@@ -5082,11 +5308,15 @@ $app_strings = array (
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Vai tiešām vēlaties aizvērt tērzēšanu?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'Izveidot piezīmi vai pievienot pielikumu',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'Pievienot piezīmi',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Jūsu pieteikšanās nebija veiksmīga. Mēģiniet vēlreiz.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Nederīgi pieslēgšanās dati',
-    'LBL_PORTAL_INVALID_GRANT' => 'Jūsu atslēga nav derīgs vai beidzies tād derīguma termiņš. Lūdzu piesakieties vēlreiz.',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Atslēgai ir beidzies derīguma termiņš',
+    'LBL_PORTAL_INVALID_GRANT' => 'Jūsu sesijai ir beidzies derīguma termiņš. Lūdzu piesakieties vēlreiz.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Sesijai beidzies derīguma termiņš',
     'LBL_PORTAL_AUTH_FAILED' => 'Lietotāja autentifikācija neizdevās',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'Nederīgs klients',
     'LBL_PORTAL_INVALID_REQUEST' => 'Veiktais pieprasījums ir nederīga vai sabojāts. Lūdzu, sazinieties ar tehnisko atbalstu.',
@@ -5120,6 +5350,8 @@ $app_strings = array (
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'Atjaunot noklusējuma informācijas paneli',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'Atjaunojumu konsole',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Apskats',
@@ -5139,6 +5371,7 @@ $app_strings = array (
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Ziņojumu kopsavilkums',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Zvana kopsavilkums',
     'LBL_OMNICHANNEL_LINK_TO' => 'Saite {{fromModule}} uz {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'Saite uz {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'Piesaistīts',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Jūsu pārlūks nav atbalstīts tērzēšanai. Izmantojiet Google Chrome vai Mozilla Firefox.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Lai saņemtu palīdzību, sazinieties ar Sugar administratoru.',
@@ -5146,6 +5379,8 @@ $app_strings = array (
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Pirms izejošā zvana veikšanas pabeidziet SugarLive konfigurēšanu.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Pirms SugarLive atvēršanas pabeidziet SugarLive izkārtojuma konfigurēšanu.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Pirms SugarLive SugarLive izkārtojuma konfigurēšanas iestatiet sev SugarLive stāvokli "Bezsaistē".',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'Kompakts skats',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'Pilns skats',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'Atjaunot cilni pēc noklusējuma',
@@ -5558,9 +5793,12 @@ $app_strings = array (
     'LBL_BEST' => 'Labākā',
     'LBL_WORST' => 'Sliktākā',
     'LBL_LIKELY' => 'Ticamākā',
-    'LBL_BEST_ADJUSTED' => 'Labākā (Koriģētā)',
-    'LBL_WORST_ADJUSTED' => 'Sliktākā (Koriģētā)',
-    'LBL_LIKELY_ADJUSTED' => 'Ticamākā (Koriģētā)',
+    'LBL_BEST_FORECAST' => 'Iesniegšana (labākā)',
+    'LBL_WORST_FORECAST' => 'Iesniegšana (sliktākā)',
+    'LBL_LIKELY_FORECAST' => 'Iesniegšana (ticamākā)',
+    'LBL_BEST_ADJUSTED' => 'Koriģēta iesniegšana (labākā)',
+    'LBL_WORST_ADJUSTED' => 'Koriģēta iesniegšana (sliktākā)',
+    'LBL_LIKELY_ADJUSTED' => 'Koriģēta iesniegšana (ticamākā)',
     'LBL_AMOUNT_USDOLLAR' => 'Summa',
     'LBL_OVERDUE' => 'Nokavēts',
 
@@ -5581,6 +5819,8 @@ $app_strings = array (
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'Lai uzzinātu vairāk, skat. moduļa „{{{more_info_url}}}{{plural_module_name}}” dokumentāciju.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'Dati nav pieejami',
+    'LBL_NEED_HELP' => 'Nepieciešama palīdzība ar kaut ko jaunu?',
+    'LBL_NEW_CASE' => 'Jauns pieteikums',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'Palīdzības informatīvais lauciņš sniedz konkrētu informāciju, kas attiecas uz moduli, kuru pašlaik apskatāt, kopā ar saiti uz atbilstošo dokumentāciju (piemēram, potenciālo klientu dokumentācija) programmas rokasgrāmatā kā papildinformāciju.',
@@ -5728,9 +5968,19 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'Nav atbildes',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Kalendārs nav pieejams',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'Pieejamie skatījumi',
+    'LBL_CALENDAR_DASHLET_NAME' => 'Kalendāra plānotājs',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'Noklusējuma skatījums',
+    'LBL_CALENDAR_MY_CALENDARS' => 'Mani kalendāri',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'Lietotāja un darba grupas kalendāri',
+    'LBL_CALENDAR' => 'Kalendārs',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'Kļūda saņemot kalendāru.',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'Saglabāt un sūtīt ielūgumus',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'Apstiprināt statusu',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Procesi',
@@ -5847,15 +6097,21 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopēt apstiprinājuma saiti',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Mijiedarbības',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} Mijiedarbības',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Laika josla',
+    'LBL_NO_ACTIVITY' => 'Nav darbības',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} laika josla',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'Vairāk',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'Mazāk',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Laika joslā tiek parādīti zvani, e-pasti, ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Rādīt vairāk...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Rādīt mazāk...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Dati nav pieejami',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'Modulis nav licencēts.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktīvie abonementi',
@@ -5904,8 +6160,10 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'Fokusa panelis',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'Aizvērt fokusa paneli',
     'LBL_EXTERNAL_GUESTS' => 'Ārējie viesi',
     'LBL_MY_FAVORITE_TASKS' => 'Mani izvēlētie uzdevumi',
+
     'LBL_MY_TASKS' => 'Mani uzdevumi',
 
     // Sugar Integrate
@@ -5922,7 +6180,367 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
     'LBL_TIME_AWARE_TYPE' => 'Veids',
     'LBL_TIME_AWARE_BEAN_ID' => 'Bean ID',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'Attēlošanas etiķete',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'Atvērt ieraksta skatu',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'Pievienot',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'Palīdzība nav pieejama',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'Funkcijas',
+    'LBL_ACTIONBUTTON_FIELDS' => 'Lauki',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'Atlasīt lauku...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Apkopojums',
+    'LBL_ACTIONBUTTON_RELATED' => 'Saistīts',
+    'LBL_ACTIONBUTTON_SAVE' => 'Saglabāt',
+    'LBL_ACTIONBUTTON_CANCEL' => 'Atcelt',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'Saistītais modulis',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'Saistītie lauki',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'Apkopojuma modulis',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'Apkopojuma lauki',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'Apkopojuma funkcija',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'Min.',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'Maks.',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'Vidējs',
+    'LBL_ACTIONBUTTON_SUM' => 'Summa',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'Piešķirt ierakstu',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'Rakstīt e-pastu',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'Izveidot ierakstu',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Dokumentu sapludināšana',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'Atvērt Url',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'Izpildīt atskaiti',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'Atjaunināt ierakstu',
+    'LBL_ACTIONBUTTON_ACTION' => 'Darbība',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'Piešķirt',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'E-pasts kam',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'Izmantot PMSE',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'Veidne',
+    'LBL_ACTIONBUTTON_MODULE' => 'Modulis',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'Displeja iestatījumi',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'Veids',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'Nolaižamā',
+    'LBL_ACTIONBUTTON_BUTTON' => 'Poga',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'Pogu grupa',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'Parādīt etiķeti uz ieraksta',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'Attēlot galvenē',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'Slēpt rediģēšanas laikā',
+    'LBL_ACTIONBUTTON_SIZE' => 'Izmērs',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'Noklusējuma',
+    'LBL_ACTIONBUTTON_SMALL' => 'Mazs',
+    'LBL_ACTIONBUTTON_LARGE' => 'Liels',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'Aprēķināts',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'Konvertēt uz PDF',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Dokumentu sapludināšana',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'Priekšskatījums',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'Īpašības',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'Etiķete',
+    'LBL_ACTIONBUTTON_DESC' => 'Padoms',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'Parādīt etiķeti',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'Parādīt ikonu',
+    'LBL_ACTIONBUTTON_SCHEME' => 'Krāsu shēma',
+    'LBL_ACTIONBUTTON_ICON' => 'Ikona',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'Atkarīgs',
+    'LBL_ACTIONBUTTON_DESIGN' => 'Izkārtojuma konfigurācija',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'Apturēt kļūdas gadījumā',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'Automātiskā saglabāšana',
+    'LBL_ACTIONBUTTON_CONFIG' => 'Konfigurācija',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'Konfigurējiet ActionButton pirms saglabāšanas.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'Konfigurēt pogas',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'Automātiski izveidot',
+    'LBL_ACTIONBUTTON_LINK' => 'Saite',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'Kopēt vecākvērtības',
+    'LBL_ACTIONBUTTON_PRESET' => 'Priekšiestatījums',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'Priekšiestatīt no vecākvērtības',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'Atlasīt...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'No vecāklauka ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'Vai tiešām vēlaties dzēst šo pogu?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'Vai tiešām vēlaties dzēst šo darbību?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'Darbības pogas nederīgi dati',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'Atlasiet moduli pirms saglabāšanas.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'Atlasiet saiti pirms saglabāšanas. Ja saite nav pieejama, noņemiet atzīmi no saites opcijas.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'Atlasiet ierakstu pirms saglabāšanas.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'Atlasiet veidni pirms saglabāšanas.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'Primārs',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'Sekundārs',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HighViz',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'Okeāns',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'Rozā',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'Armija',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'Zilganzaļš',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'Klusā okeāna',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'Zaļš',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'Dzeltens',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'Oranžs',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'Sarkans',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'Koraļkrāsas',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'Purpura',
+    'LBL_ACTIONBUTTON_FORMULA' => 'Formula',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'Darbības',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'Pogas datu validēšanas kļūda.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'Pogām ir jābūt iestatītai vismaz etiķetei vai ikonai.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'Ievadiet derīgu pogas etiķeti.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'Ierakstu nevarēja izveidot, jo nav nepieciešamo vērtību. Sazinieties ar administratoru.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'Jums ir jābūt vismaz divām aktīvām šāda veida pogām.',
+    'LBL_ACTIONBUTTON_RECORD' => 'Ieraksta skati',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'Darbību izvēlnes',
+    'LBL_ACTIONBUTTON_ORDER' => 'Secība',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'Saraksta skats',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'Ieraksta skats',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'Ieraksta skata informācijas lauks',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'Apakšpaneļi',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'Uzdevumu secības izpildes dzinējam neizdevās izpildīt šādas darbības: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'Pievienot darbību',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'Noņemt šo darbību',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'Dokumentu sapludināšana',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'Dokumentu sapludināšana uz PDF',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'Uzņēmuma izmērs',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'Nozare',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'Nozares birkas',
+    'LBL_HINT_COMPANY_LOCATION' => 'Uzņēmuma atrašanās vieta',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'Uzņēmuma apraksts',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'Dibināšanas gads',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Uzņēmums Facebook',
+    'LBL_HINT_COMPANY_TWITTER' => 'Uzņēmums Twitter',
+    'LBL_HINT_COMPANY_PIC' => 'Uzņēmuma logo',
+    'LBL_HINT_CONTACT_PIC' => 'Kontaktpersonas fotoattēls',
+    'LBL_HINT_COMPANY_WEBSITE' => 'Uzņēmuma tīmekļa vietne',
+    'LBL_HINT_PHOTO' => 'Fotoattēla saite',
+    'LBL_HINT_JOB_2' => 'Iepriekšējie darbi',
+    'LBL_HINT_EDUCATION' => 'Izglītība',
+    'LBL_HINT_EDUCATION_2' => 'Papildu izglītība',
+    'LBL_HINT_TWITTER' => 'Twitter saite',
+    'LBL_HINT_FACEBOOK' => 'Facebook saite',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'NAICS kods',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'SIC kods',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'FG beigas',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'Gada ienākumi',
+    'LBL_HINT_PHONE_1' => 'Tālrunis 1',
+    'LBL_HINT_PHONE_2' => 'Tālrunis 2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'Pievienot tabulu',
+    'LBL_HINT_FULL_NAME' => 'Pilns vārds',
+    'LBL_HINT_JOB_TITLE' => 'Amata nosaukums',
+    'LBL_HINT_OFFICE_PHONE' => 'Darba tālrunis',
+    'LBL_HINT_MOBILE_PHONE' => 'Mobilais tālrunis',
+    'LBL_HINT_OTHER_PHONE' => 'Cits tālrunis',
+    'LBL_HINT_WEBSITE' => 'Vietne',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'Vai vēlaties pārrakstīt visus šī ieraksta esošos datus ar jaunajiem datiem, kas atrodami Hint?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'Vai vēlaties pārrakstīt esošo {{fieldName}} šim ierakstam ar jaunu {{fieldName}}, kas atrodams Hint?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'Visi ar uzņēmumu saistītie dati tiks noņemti. Vai tiešām vēlaties turpināt?',
+    'LBL_HINT_COMPANY_LOGO' => 'Logotips',
+    'LBL_HINT_CONTACTS_AVATAR' => 'Foto',
+    'LBL_HINT_ACCOUNTSETS' => 'Hint Accountsets birkas',
+
+    'LBL_HINT_LOADING' => 'Ielāde ...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'Atinstalē Hint, lūdzu, uzgaidiet',
+    'LBL_HINT_VALUE_ERASED' => ' Vērtība izdzēsta ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'Šī informācija tika izdzēsta, izmantojot datu privātuma pieprasījumu',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'Lūdzu, atlasiet vienu no tālāk norādītajām atinstalēšanas opcijām:',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Atinstalēt tikai Hint pakotnes',
+    'LBL_HINT_UNINSTALL_FULL' => 'Atinstalēt Hint pilnībā',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'Šī opcija noņems Hint MLP un atspējos visus aktīvos Hint Insights abonementus.
+    Pārinstalējot Hint, abonementi tiks automātiski atkārtoti aktivizēti.',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'Šī opcija veikts Hint pilnu atinstalēšanu, tostarp MLP noņemšanu un visas konfigurācijas un abonēšanas informācijas dzēšanu.',
+    'LBL_HINT_UNINSTALL' => 'Atinstalēt',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Atinstalēt Hint',
+    'LBL_HINT_CANCEL' => 'Atcelt',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'BRĪDINĀJUMS: izvēlieties šo opciju tikai tad, ja turpmāk vairs neplānojat izmantot Hint.
+    Pirms atinstalēšanas pabeidziet pilnu Sugar datu bāzes dublējumu un iestatiet Sugar uzturēšanas režīmā. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'Skatiet ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Hint administratora rokasgrāmatā ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'informāciju par atinstalēšanas procesu.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Vai tiešām vēlaties atinstalēt tikai Hint pakotni?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Vai tiešām vēlaties pilnībā atinstalēt Hint?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(PIEZĪME: ŠO DARBĪBU NEVARAT ATSAUKT)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Hint lauki',
+    'LBL_HINT_NO_RESULTS_MSG' => 'Rezultāti nav atrasti.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'Hint paneļa pamata izkārtojums',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'Uzņēmumi',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'Kontaktpersonas',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'Interesenti',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'Hint paneļa paplašināts izkārtojums',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'Pārkārtojiet laukus, velkot un nometot iepriekš norādītajās Hint paneļa izkārtojuma sadaļās.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'Detalizētus norādījumus un noklusējuma lauku sarakstu skatiet ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' lai atjaunotu noklusējuma iestatījumus priekš ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'moduļa.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'Vai tiešām vēlaties atjaunot moduļa {{module}} noklusējuma iestatījumus?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'Spiediet šeit',
+    'LBL_HINT_CONFIG_NAME' => 'Hint administratora rokasgrāmata.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'Lauki',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'Bagātināti lauki',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'Šajā sadaļā ir uzskaitīti visi Hint lauki un Sugar lauki, kurus bagātina Hint. Hint lauki ir atzīmēti ar zvaigznīti (*), un tos var parādīt Hint panelī tikai tad, ja tie ir bagātināti.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'Lauka nosaukums',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'Bagātināts lauks',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Parādīt Hint',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Parādīt Hint panelī',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'Papildu Sugar lauki',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'Šajā sadaļā ir uzskaitīti visi Sugar lauki, kas nav bagātināti ar Hint.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'Brīdinājums',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'Uzmanību: Jūs grasāties sinhronizēt ar pakalpojumu Hint Insights. Visi neapstiprinātie e-pasta īssavilkuma stāsti tiks zaudēti, un esošās ziņas tiks notīrītas no Insights informācijas lauka. Visu veidu paziņojumi tiks atsākti pēc sinhronizācijas pabeigšanas.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'Tālāk ir norādīti ieteiktie uzņēmumi, kas ir saistīti ar jūsu {{_moduleSingular}}. Atlasiet uzņēmuma datus, ko parādīt.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'Nav atlasīts uzņēmums',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'Atrasti vairāki e-pasti, atlasiet importējamos e-pastus: ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'Pamatojoties uz ievadītajiem datiem, Hint nevarēja atrast atbilstību sistēmā.',
+    'LBL_HINT_HELP_MESSAGE2' => 'Labākos rezultātus Hint var atrast, izmantojot personas vārdu un e-pasta adresi.',
+    'LBL_HINT_HELP_MESSAGE3' => 'Labākos rezultātus Hint var atrast ar uzņēmuma tīmekļa vietnes url.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "Ievadiet {{_moduleSingular}} uzņēmuma nosaukumu vai tīmekļa vietni, un Hint atradīs papildu datus.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "Ievadiet {{currentModule}} e-pasta adresi, un Hint atradīs papildu datus.",
+
+    'LBL_HINT_HISTORY_NONE' => 'Vēsturiskajam skatam nav pieejami dati',
+    'LBL_HINT_HISTORY_TITLE' => 'Darbību vēsture',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'Datu bagātināšana',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'Jūsu SugarCRM Hint pakalpojuma licencei ir beidzies termiņš. Sazinieties ar savu SugarCRM administratoru, lai atjaunotu licenci.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'Vai vēlaties uzzināt, ko SugarCRM Hint var darīt jūsu un jūsu uzņēmuma labā? Sazinieties ar savu SugarCRM administratoru, lai pievienotu Hint.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'Uzņēmuma informācija nav atrasta',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'Atrasti bagātinātie dati — uzklikšķiniet, lai saglabātu visus bagātinātos datus savā ierakstā.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'Uzklikšķiniet, lai saglabātu bagātinātos datus savā ierakstā.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'Saistītās kontaktpersonas',
+    'LBL_HINT_CONTACTS_NONE' => 'Nav saistīto kontaktpersonu',
+
+    'LBL_HINT_NEWS' => 'Ziņas',
+    'LBL_HINT_GENERAL' => 'Vispārīgi',
+    'LBL_HINT_ALL_NEWS' => 'Visas ziņas',
+    'LBL_HINT_FILTER_NEWS' => 'Filtrēt ziņas',
+    'LBL_HINT_FINANCIAL_NEWS' => 'Finanšu',
+    'LBL_HINT_PERSONNEL_NEWS' => 'Personāla',
+    'LBL_HINT_PRESS_RELEASES' => 'Preses relīzes',
+    'LBL_HINT_OTHER_NEWS' => 'Cits',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'Meklēt ziņu rakstus',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => 'Ziņas nav pieejamas',
+    'LBL_NEW_NOTIFICATIONS' => 'Jauni paziņojumi',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'Lai varētu skatīt Hint Insights informācijas lauku, jums ir jābūt Hint licencei.
+    Jautājiet savam administratoram par Hint licences iegūšanu.',
+
+    'LBL_HINT_FOR' => 'Priekš',
+    'LBL_HINT_WITH' => 'ar',
+    'LBL_HINT_SHOW_ME' => 'Rādīt man: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'Informēt mani pa: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Hint Insights preferenču centrs',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'Preferenču opciju taustiņš',
+    'LBL_HINT_PREFERENCES' => 'Preferences',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'Dzēšana ir atspējota, ir nepieciešams vismaz viens preferenču paziņojums',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'Pievienošana ir atspējota, jūs sasniedzāt maksimālo preferenču paziņojumu skaitu',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Iekļaut Hint Insights informācijas laukā',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'Uznirstošais logs kā darbvirsmas paziņojums',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'Lai pastāvīgi saņemtu paziņojumus, paziņojumi ir jāiespējo visās pārlūkprogrammās un visās darbvirsmās.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Dažas pārlūkprogrammas, piemēram, Internet Explorer, neatbalsta paziņojumus. Paziņojumus nevar iespējot, ja izmantojat pārlūkprogrammu, kas neatbalsta paziņojumus.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'Nosūtīt tūlītēju e-pasta brīdinājumu par katru paziņojumu',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'Sūtīt ikdienas e-pasta īssavilkumu',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'Sūtīt nedēļas e-pasta īssavilkumu',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'Preferences nevarēja saglabāt. Pārbaudiet sistēmas savienojumu un mēģiniet vēlreiz.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'Dažos obligātajos laukos nav vērtības. Lūdzu, pārbaudiet savas preferences un pārliecinieties, ka ir aizpildīti visi obligātie lauki.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'Jūs grasāties iespējot pārlūkprogrammas paziņojumus pakalpojumam Hint Insights. Uzklikšķiniet uz Apstiprināt, lai turpinātu. Pēc tam jūsu pārlūkprogramma lūgs jums atļauju paziņojumu notikumu saņemšanai.',
+    'LBL_HINT_PUSH_ERROR' => 'Pašpiegādes paziņojumu spraudnis ir reģistrēts priekš {{options.type}} bez tā atkarīgajiem laukiem. Spraudnis nedarbosies kā paredzēts. Obligāti norādiet ceļu uz darbinieka failu un abonementa saglabāšanas metodi serverī.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'IZSLĒGT Hint paziņojumus visiem lietotājiem',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'IESLĒGT Hint paziņojumus visiem lietotājiem',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'BRĪDINĀJUMS: Sugar Hint atinstalēšanas laikā neizdevās atspējot paziņojumus. Lai atspējotu paziņojumus, instalējiet Hint 5.4.0 vai jaunāku versiju un veiciet pilnīgu atinstalēšanu, izmantojot Hint atinstalētāju, kas atrodas Sugar sadaļā Administrēšana.',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'Karšu konfigurācija',
+    'LBL_MAP_MAP' => 'Karte',
+    'LBL_MAP_MAPS' => 'Kartes',
+    'LBL_MAP_GEOCODING_RECORD' => 'Ģeokods',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'Ieraksts ir veiksmīgi ģeokodēts.',
+    'LBL_MAP_LATITUDE' => 'Platums',
+    'LBL_MAP_LONGITUDE' => 'Garums',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'Meklēt pēc adreses...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'Pašreizējais ieraksts jau ir ģeokodēts. Vai tiešām vēlaties pārrakstīt šī ieraksta ģeokodējumu?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'Manuālā ģeokodēšana',
+    'LBL_MAP_POINT_COORDINATES' => 'Kartes punkta koordinātas',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'Notiek optimālā maršruta aprēķināšana...',
+    'LBL_MAP_DIRECTIONS' => 'Norādījumi',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'Norādījumi, sākot no pašreizējā lietotāja',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'Norādījumi, sākot no šā ieraksta',
+    'LBL_MAPS_RADIUS_INPUT' => 'Rādiuss (0-250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'rādiusā no pasta indeksa',
+    'LBL_MAPS_DISTANCE' => 'Attālums',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'Pasta indekss',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'Nederīga konfigurācija: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => '<strong>{{module}}</strong> lauka kartēšana ir nederīga.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'Kartes tips',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'Tālummaiņas līmenis',
+    'LBL_MAPS_DASHLET' => 'Kartes',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'Parāda ģeokodēto ierakstu(s) kartē.',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'Kartes šim modulim nav pieejamas. Lūdzu, iespējojiet to administratora konsolē.',
+    'LBL_MAP_MODULES' => 'Modulis',
+    'LBL_MAP_FILTER_BY' => 'Filtrēt pēc',
+    'LBL_MAP_UNIT_TYPE' => 'Mērvienības veids',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'Jūdzes',
+    'LBL_MAP_UNIT_TYPE_KM' => 'Kilometri',
+    'LBL_MAP_ADDRESS' => 'Adrese',
+    'LBL_MAP_NO_STARTING_POINT' => 'Sākuma punkts nav ģeokodēts.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'Sākuma punkta ieraksts nav ģeokodēts.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'Daži no atlasītajiem ierakstiem nav ģeokodēti un netiks parādīti kartē.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'Ieraksts(i) nav ģeokodēts.',
+    'LBL_MAPS_MODULE_FIELDS' => 'Moduļu lauki',
+    'LBL_MAPS_SELECT_FIELD' => 'Atlasīt lauku',
+    'LBL_MAPS_RELATE_RECORD' => 'Saistītais ieraksts',
+    'LBL_MAPS_MAPPING_TYPE' => 'Kartēšanas tips',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'Nav ģeokodētu ierakstu',
+    'LBL_MAPS_ADDRESS' => 'Adrese',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'Piešķirtais lietotājs',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'Ielas sānu skats dotajam punktam nav pieejams',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> ieraksti nav derīgi kartēšanai. Lūdzu, izņemiet moduli no saraksta.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'Aizvērt',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'Izvērst',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'Saglabāt kā PDF',
+    'LBL_MAPS_EMAIL_LINK' => 'E-pasta saite',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'Jums ir jābūt vismaz vienam ģeokodētam ierakstam.',
+    'LBL_MAPS_GENERATING' => 'Ģenerē karti...',
+    'LBL_MAPS_POINTS' => 'Kartes punkti',
+    'LBL_MAPS_POINT' => 'Punkts',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'Informācija par braucienu',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'Kopējais attālums',
+    'LBL_MAPS_TOTAL_DURATION' => 'Kopējais ilgums',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'Kopējas ilgums bez trafika',
+    'LBL_MAPS_ITINERARY' => 'Maršruts',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'Brauciena attālums',
+    'LBL_MAPS_TRAVEL_DURATION' => 'Brauciena ilgums',
+    'LBL_MAPS_TRAVEL_STEPS' => 'Soļi',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'Brīdinājumi',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Bing kartes atbalsta ne vairāk kā 10 punktus koplietotā kartē. Lūdzu, pārskatiet savu izvēli.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'Nepieciešama kartes licence',
+
+    'LBL_INVALID_FORMULA' => 'Nederīga formula',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'Funkcijas atgriešanas veids neatbilst',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'Prognoze',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'Ideāls klienta profils',
+
+    // User last state
+    'LBL_LAST_STATE' => 'Pēdējais stāvoklis',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'Nosūtīt uz DocuSign',
+
+    // Base sales stages
+    'LBL_OPEN' => 'Atvērt',
+    'LBL_CLOSED_WON' => 'Aizvērts-noslēgts',
+    'LBL_CLOSED_LOST' => 'Aizvērts-zaudēts',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6759,8 +7377,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Google kontakti',
@@ -7100,6 +7718,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Iegultais fails';
     'YER' => 'Riāli',
     'ZWD' => 'Zimbabves dolāri',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'Ļoti augsts',
+        '4' => 'Augsts',
+        '3' => 'Neitrāls',
+        '2' => 'Zems',
+        '1' => 'Ļoti zems',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'Nav',
         'future' => 'Pašreizējā vērtība',
@@ -7109,3 +7735,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Iegultais fails';
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'Viena soļa',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'Apstrāde',
+        'error' => 'Kļūda',
+        'success' => 'Veiksmīgi',
+        'canceled' => 'Atcelts',
+        'document_load' => 'Veidnes ielāde',
+        'tags_extract' => 'Birku izgūšana',
+        'tags_validate' => 'Birku validācija',
+        'data_retrieving' => 'Datu izguve',
+        'serialize_document' => 'Dokumenta salikšana',
+        'send_document' => 'Dokumenta nosūtīšana jums',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'Sapludināt',
+        'convert' => 'PDF sapludināšana',
+        'multimerge' => 'Vairāku sapludināšana',
+        'multimerge_convert' => 'Sapludināt vairākus PDF',
+        'labelsgenerate' => 'Ģenerēt etiķetes',
+        'labelsgenerate_convert' => 'Ģenerēt etiķetes PDF',
+        'excel' => 'Excel sapludināšana',
+        'excel_convert' => 'Excel sapludināšanas konvertēšana',
+        'presentation' => 'PowerPoint sapludināšana',
+        'presentation_convert' => 'PowerPoint sapludināšana PDF',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'Mani uzņēmumi',
+      'favorites' => 'Izlases uzņēmumi',
+      'tags' => 'Uzņēmumi ar birku',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'Visas ziņas',
+      'General' => 'Vispārīgi',
+      'Finance' => 'Finanšu',
+      'People' => 'Personāla',
+      'Press Releases' => 'Preses relīzes',
+      'Other' => 'Cits',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'Īpašnieki';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Mākoņa disks';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'Mākoņa diska integrācijas informācijas lauks';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'Kopēt saiti';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'Lejupielādēt';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Izveidot Sugar dokumentu';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Sinhronizēt ar Google Drive';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'Sinhronizēt visu ar Google Drive';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'Šo failu nevar lejupielādēt';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'Nav mākoņa informācijas lauka';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Sugar dokuments izveidots';
+
+    $app_string['LBL_MY_FILES'] = 'Mani faili';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Koplietots ar mani';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'Mākoņa pakalpojumu sniedzējs';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google Drive',
+      'onedrive' => 'Microsoft Onedrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Koplietots ar mani';
+    $app_strings['LBL_MY_FILES'] = 'Mani faili';
+    $app_strings['LBL_UPLOAD_FILE'] = 'Augšupielādēt failu';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'Mape nav atrasta';
+    $app_strings['LBL_CREATE_FOLDER'] = 'Izveidot mapi';
+    $app_strings['LBL_LOAD_MORE'] = 'Ielādēt vairāk...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'Savienojums ar Google nav atrasts...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'Savienojums ar Microsoft nav atrasts...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-tukšs-',
+      'Exact' => 'Tieši',
+      'Null_address_components' => 'Viens vai vairāki adreses komponenti ir tukši',
+      'Invalid_address' => 'Nederīga adrese, serveris atgrieza vērtību Nepatiess',
+      'Invalid_server_response_not_XML' => 'Nederīga servera atbilde, nav XML',
+      'Invalid_address_no_location' => 'Nederīga adrese, serveris neatgrieza atrašanās vietu',
+      'Ambiguous_address' => 'Neskaidra adrese, vairākas atbilstības',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'Ceļš',
+      'a' => 'Gaisa',
+      'be' => 'No putna lidojuma',
+      'rd' => 'Tumšs ceļš',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

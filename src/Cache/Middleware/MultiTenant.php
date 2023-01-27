@@ -14,6 +14,7 @@ namespace Sugarcrm\Sugarcrm\Cache\Middleware;
 
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
+use Psr\SimpleCache\InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 use RuntimeException;
 use Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant\KeyStorage;
@@ -219,7 +220,7 @@ final class MultiTenant implements CacheInterface
      */
     private function encrypt($value) : string
     {
-        return $this->crypto->encrypt(serialize($value));
+        return $this->crypto->encrypt(gzcompress(serialize($value), 9));
     }
 
     /**
@@ -237,13 +238,22 @@ final class MultiTenant implements CacheInterface
         }
 
         try {
-            return unserialize($this->crypto->decrypt($value), [
-                'allowed_classes' => false,
-            ]);
-        } catch (RuntimeException $e) {
-            $this->logger->warning(sprintf('Failed to decrypt key "%s": %s', $key, $e->getMessage()));
-
-            return $default;
+            try {
+                $uncompressed = gzuncompress($this->crypto->decrypt($value));
+                if ($uncompressed === false) {
+                    $this->logger->critical(sprintf('Failed to decrypt key "%s"', $key));
+                    // delete the key
+                    $this->delete($key);
+                    return $default;
+                }
+                return unserialize($uncompressed, ['allowed_classes' => false]);
+            } catch (RuntimeException $e) {
+                $this->logger->warning(sprintf('Failed to decrypt key "%s": %s', $key, $e->getMessage()));
+                $this->delete($key);
+            }
+        } catch (InvalidArgumentException $invEx) {
+            $this->logger->warning(sprintf('Failed to decrypt key (invalid argument) "%s": %s', $key, $invEx->getMessage()));
         }
+        return $default;
     }
 }

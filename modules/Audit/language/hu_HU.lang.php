@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Mezők ellenőrizve lettek ebben a modulban:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'A mezők nem ellenőrzöttek ebben a modulban',
     'LBL_CHANGE_LOG' => 'Auditnapló',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Amikor az auditált pénznemeket elmenti egy, a rendszer által nem alapértelmezett pénznembe, a változási napló megjeleníti a régi és új értékeket a konvertált, a rendszer által meghatározott alapértelmezett pénznemben.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Amikor az auditált pénznemeket elmenti egy, a rendszer által nem alapértelmezett pénznembe, a változási napló megjeleníti a régi és új értékeket a konvertált, a rendszer által meghatározott alapértelmezett pénznemben.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Frissítés a következőre:',
+    'LBL_BLANK' => '-üres-',
 );

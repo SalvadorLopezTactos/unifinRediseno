@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Mesaj Raporlarını Göster',
     'LNK_IMPORT_MESSAGES' => 'Mesajları İçe Aktar',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'Potasiyel ID',
+    'LBL_LEAD_NAME' => 'Potansiyel',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Müşteri tarafı sohbet',
+    'LBL_ACTIVITY_CUSTOMER' => 'Müşteri',
+    'LBL_ACTIVITY_FINISHED' => 'bitti',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'devam ediyor',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Mesajlar Odak Bölmesi',
 ];

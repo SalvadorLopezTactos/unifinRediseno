@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Toe nimi:',
   'LBL_SUPPORT_TERM' => 'Toe tingimused:',
   'LBL_TAX_CLASS' => 'Maksuklass:',
+  'LBL_ACTIVE_STATUS' => 'Olek',
   'LBL_TYPE_NAME'=>'Tüübi nimi',
   'LBL_TYPE' => 'Tüüp',
   'LBL_PRODUCT_TYPE' => 'Toote tüüp',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Tootekataloogide loendi juhtpaneel',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Tootekataloogi kirje juhtpaneel',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Tootekataloogi fookuse sahtel',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Olek on aktiivne',
 );

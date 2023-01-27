@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => '比如，可使用此功能尋找之前已提交的問題。',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => '如果您有需要提交的新支援「實例」，可按一下此處以提交新「實例」。',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => '按一下此處可隨時回到此檢視表。',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '客戶回饋互動',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '實例時間軸',
 
     'LBL_NOTES_SUBPANEL_TITLE' => '附註',
 

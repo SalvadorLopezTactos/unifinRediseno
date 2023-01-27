@@ -16,13 +16,13 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'label' =>'LNK_NEW_EMAIL_TEMPLATE',
         'acl_action'=>'create',
         'acl_module'=>'EmailTemplates',
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
     ),
     array(
         'route'=>'#' . $module_name,
         'label' =>'LNK_EMAIL_TEMPLATE_LIST',
         'acl_action'=>'list',
         'acl_module'=>'EmailTemplates',
-        'icon' => 'fa-bars',
+        'icon' => 'sicon-list-view',
     ),
 );

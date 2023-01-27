@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Βασικό Επιτόκιο',
 
     'LBL_QUOTA' => 'Ποσόστωση',
-    'LBL_QUOTA_ADJUSTED' => 'Ποσόστωση (Αποτιμημένο)',
+    'LBL_QUOTA_ADJUSTED' => 'Προσαρμοσμένη ποσόστωση',
 
     'LBL_FORECAST' => 'Πρόβλεψη',
     'LBL_COMMIT_STAGE' => 'Στάδιο Δέσμευσης',

@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Arxiva',
     'LBL_PROCESS_TYPE_DELETE' => 'Esborra permanentment',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Execucions d&#39;arxiu',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Advertiment',
+    'LBL_ARCHIVER_WARNING' => 'Es recomanable fer aquesta acció fora de l&#39;horari o en moments de poc ús '
+        . 'ja que pot afectar el rendiment del sistema. Segur que voleu executar aquesta acció ara?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'L&#39;arxivador del mòdul {{moduleName}} ha de tenir {{fieldName}} establert com a filtre',
 );

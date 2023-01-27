@@ -163,8 +163,8 @@ class ParserLabel extends ModuleBuilderParser
         if ($changed) {
             $write  = "<?php\n// WARNING: The contents of this file are auto-generated.\n";
             foreach ($mod_strings as $k => $v) {
-                $ek = var_export($k, 1);
-                $write .= "\$mod_strings[$ek] = " . var_export($v, 1) . ";\n";
+                $ek = var_export($k, true);
+                $write .= "\$mod_strings[$ek] = " . var_export($v, true) . ";\n";
             }
             
             if (file_put_contents($filename, $write) == false) {
@@ -243,8 +243,8 @@ class ParserLabel extends ModuleBuilderParser
             // We can't use normal array writing here since multiple files can be
             // structured differently. This is dirty, yes, but necessary.
             foreach ($mod_strings as $k => $v) {
-                $ek = var_export($k, 1);
-                $write .= "\$mod_strings[$ek] = " . var_export($v, 1) . ";\n";
+                $ek = var_export($k, true);
+                $write .= "\$mod_strings[$ek] = " . var_export($v, true) . ";\n";
             }
 
             if (file_put_contents($filename, $write) === false) {

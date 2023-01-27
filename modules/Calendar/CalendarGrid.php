@@ -26,9 +26,10 @@ class CalendarGrid {
 
 	/**
 	 * constructor
-	 * @param Calendar $cal
+     * @param CalendarBWC $cal
 	 */
-	public function __construct(Calendar $cal){
+    public function __construct(CalendarBWC $cal)
+    {
 		global $current_user;
 		$this->cal = $cal;
 		$today = $GLOBALS['timedate']->getNow(true)->get_day_begin();

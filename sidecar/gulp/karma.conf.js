@@ -61,7 +61,11 @@ module.exports = function(config) {
             },
             docker_chrome: {
                 base: 'Chrome',
-                flags: ['--no-sandbox'],
+                flags: [
+                    '--no-sandbox',
+                    '--disable-gpu',
+                    '--disable-dev-shm-usage'
+                ],
             },
             sl_safari: {
                 base: 'SauceLabs',

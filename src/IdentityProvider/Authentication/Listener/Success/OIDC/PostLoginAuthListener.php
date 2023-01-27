@@ -43,6 +43,8 @@ class PostLoginAuthListener extends BasePostLoginAuthListener
         parent::execute($event);
         if ($this->session->get('oidc_login_action')) {
             $this->session->remove('oidc_login_action');
+            $currentUser = $event->getAuthenticationToken()->getUser()->getSugarUser();
+            $currentUser->call_custom_logic('after_login');
         }
     }
 }

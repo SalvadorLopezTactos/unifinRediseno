@@ -46,6 +46,13 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                     'label' => 'LBL_EDIT_BUTTON_LABEL',
                     'acl_action' => 'edit',
                 ),
+                [
+                    'type' => 'escalate-action',
+                    'event' => 'button:escalate_button:click',
+                    'name' => 'escalate_button',
+                    'label' => 'LBL_ESCALATE_BUTTON_LABEL',
+                    'acl_action' => 'create',
+                ],
                 array(
                     'type' => 'shareaction',
                     'name' => 'share',
@@ -122,14 +129,27 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
             'header' => true,
             'fields' => array(
                 array(
-                    'name'          => 'picture',
-                    'type'          => 'avatar',
-                    'size'          => 'large',
+                    'name' => 'picture',
+                    'type' => 'avatar',
+                    'size' => 'large',
                     'dismiss_label' => true,
-                    'readonly'      => true,
+                    'readonly' => true,
+                    'white_list' => true,
+                    'licenseDependency' => [
+                        'HINT' => [
+                            'name' => 'hint_account_pic',
+                            'type' => 'hint-accounts-logo',
+                        ],
+                    ],
                 ),
                 array(
                     'name' => 'name',
+                    'type' => 'name',
+                    'licenseDependency' => [
+                        'HINT' => [
+                            'type' => 'hint-accounts-search-dropdown',
+                        ],
+                    ],
                 ),
                 array(
                     'name' => 'favorite',
@@ -144,6 +164,13 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                     'readonly' => true,
                     'dismiss_label' => true,
                 ),
+                [
+                    'name' => 'is_escalated',
+                    'type' => 'badge',
+                    'badge_label' => 'LBL_ESCALATED',
+                    'warning_level' => 'important',
+                    'dismiss_label' => true,
+                ],
             )
         ),
         array(
@@ -315,5 +342,35 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                 ),
             ),
         ),
+        [
+            'name' => 'panel_hint',
+            'label' => 'LBL_HINT_PANEL',
+            'columns' => 2,
+            'labels' => true,
+            'labelsOnTop' => true,
+            'placeholders' => true,
+            'fields' => [
+                'hint_account_size',
+                'hint_account_industry',
+                'hint_account_location',
+                'hint_account_founded_year',
+                'hint_account_industry_tags',
+                'hint_account_naics_code_lbl',
+                'hint_account_fiscal_year_end',
+                [
+                    'name' => 'hint_account_facebook_handle',
+                    'type' => 'stage2_url',
+                ],
+                [
+                    'name' => 'hint_account_logo',
+                    'type' => 'stage2_image',
+                    'readonly' => true,
+                    'dismiss_label' => true,
+                    'white_list' => true,
+                    'fields' => ['hint_account_pic'],
+                ],
+            ],
+            'licenseFilter' => ['HINT'],
+        ],
     ),
 );

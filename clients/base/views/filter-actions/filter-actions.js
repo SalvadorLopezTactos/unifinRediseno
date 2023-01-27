@@ -24,7 +24,8 @@
         'click [data-action=filter-reset]': 'triggerReset',
         'click [data-action=filter-close]': 'triggerClose',
         'click [data-action=filter-delete]:not(.hide)': 'triggerDelete',
-        'click [data-action=filter-save]:not(.disabled)': 'triggerSave'
+        'click [data-action=filter-save]:not(.disabled)': 'triggerSave',
+        'click [data-action=filter-collapse]': 'triggerCollapse'
     },
 
     className: 'filter-header',
@@ -252,5 +253,25 @@
      */
     triggerDelete: function() {
         this.layout.trigger('filter:create:delete');
+    },
+
+    /**
+     * Trigger `filter:collapse` to collapse the filter panel, but maintain filters
+     */
+    triggerCollapse: function() {
+        const filter = this.context.editingFilter;
+        const changed = !!(filter.changedAttributes() || filter.changedAttributes(filter.getSynced()));
+
+        // Changes have been made on a saved filter
+        if (changed && filter.get('id')) {
+            this.layout.trigger('filter:collapse');
+        // Changes were made in a previous collapse and are retained
+        } else if (!filter.get('id') &&
+            (filter.get('filter_definition').length > 0 || filter.get('filter_template').length)) {
+            this.layout.trigger('filter:collapse');
+        // No changes made, trigger regular close
+        } else {
+            this.triggerClose();
+        }
     }
 })

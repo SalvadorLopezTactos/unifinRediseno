@@ -109,10 +109,17 @@
         var filterDef = ctxModel.get('filter_def') || {};
         filterDef[consoleId] = !_.isEmpty(filterDef[consoleId]) ? filterDef[consoleId] : {};
 
+        let freezeFirstColumn = ctxModel.get('freeze_first_column') || {};
+        freezeFirstColumn[consoleId] = !_.isEmpty(freezeFirstColumn[consoleId]) ? freezeFirstColumn[consoleId] : {};
+
         // Update the variables holding the field values for the given console ID
         _.each(this.collection.models, function(model) {
             var moduleName = model.get('enabled_module');
+            let isFreezeColumn = model.get('freeze_first_column');
+            // model.get returns a string value so we convert it to boolean first
+            isFreezeColumn = _.isString(isFreezeColumn) ? JSON.parse(isFreezeColumn) : isFreezeColumn;
             filterDef[consoleId][moduleName] = model.get('filter_def');
+            freezeFirstColumn[consoleId][moduleName] = isFreezeColumn;
         }, this);
 
         // to build the definitions of selected fields and labels
@@ -123,7 +130,8 @@
             enabled_modules: enabledModules,
             labels: this.labelList,
             viewdefs: this.selectedFieldList,
-            filter_def: filterDef
+            filter_def: filterDef,
+            freeze_first_column: freezeFirstColumn
         }, {silent: true});
         return this._super('_beforeSaveConfig');
     },

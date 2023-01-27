@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Kontrollerte felt i denne modulen:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Ingen kontrollerte felt i denne modulen',
     'LBL_CHANGE_LOG' => 'Revisjonslogg',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Når reviderte valutafelt er lagret i en valuta som ikke er system-standard, viser endringsloggen gamle og nye verdier i den konverterte, systemdefinerte standardvalutaen.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Når reviderte valutafelt er lagret i en valuta som ikke er system-standard, viser endringsloggen gamle og nye verdier i den konverterte, systemdefinerte standardvalutaen.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Oppdater til',
+    'LBL_BLANK' => '-tom-',
 );

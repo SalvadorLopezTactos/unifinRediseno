@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Aangemaakt door Gebruiker',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Laatst gewijzigd door gebruiker',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'E-mailadres systeem',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Documentsjabloon',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Doc samenvoegen',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Selecteer...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Doc samenvoegen naar pdf',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Doc samenvoegen',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Zakelijke regel',
     'LBL_PMSE_LABEL_RULE' => 'Regel',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Alleen bijgewerkte records (alle updates - zie hulptekst)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nieuwe records of eerste update',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nieuwe records en alle updates',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Relatiewijziging',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Selecteer wanneer het proces gaat starten.<br><br>Nieuw: Proce suitvoeren als nieuwe record wordt aangemaakt.<br><br>Eerste update: Proces wordt alleen uitgevoerd als voor de eerste keer aan criteria wordt voldaan voor een bestaande record.<br><br>Alle updates: Proces wordt telkens uitgevoerd als aan de criteria wordt voldaan voor een bestaande record.<br><br>Nieuwe records of eerste update: Proces wordt alleen uitgevoerd als voor de eerste keer aan de criteria wordt voldaan voor een record, tijdens het aanmaken van een record of het bijwerken ervan.<br><br>Nieuwe records en alle updates: Proces wordt telkens uitgevoerd voor alle nieuwe en bestaande records.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Selecteer wanneer het proces gaat starten.<br><br>Nieuw: Proce suitvoeren als nieuwe record wordt aangemaakt.<br><br>Eerste update: Proces wordt alleen uitgevoerd als voor de eerste keer aan criteria wordt voldaan voor een bestaande record.<br><br>Alle updates: Proces wordt telkens uitgevoerd als aan de criteria wordt voldaan voor een bestaande record.<br><br>Nieuwe records of eerste update: Proces wordt alleen uitgevoerd als voor de eerste keer aan de criteria wordt voldaan voor een record, tijdens het aanmaken van een record of het bijwerken ervan.<br><br>Nieuwe records en alle updates: Proces wordt telkens uitgevoerd voor alle nieuwe en bestaande records.<br><br>Relatiewijzigingen: Proces wordt telkens uitgevoerd voor relatiewijzigingen.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Selecteer de SugarCRM module die u op de gebeurtenistrigger wilt toepassen',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Vaste datum',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Error',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Evaluatie relatiewijziging',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Velden',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Evaluatie moduleveld',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Module',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Alle gerelateerd records',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Alle gerelateerd records',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Toegevoegd',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Verwijderd',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Toegevoegd of verwijderd',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Elke relatie',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Looptijd',
 

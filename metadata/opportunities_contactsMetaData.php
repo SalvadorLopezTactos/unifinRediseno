@@ -58,13 +58,6 @@ $dictionary['opportunities_contacts'] = array(
             ),
         ),
         array(
-            'name' => 'idx_con_opp_opp',
-            'type' => 'index',
-            'fields' => array(
-                'opportunity_id',
-            ),
-        ),
-        array(
             'name' => 'idx_opportunities_contacts',
             'type' => 'alternate_key',
             'fields' => array(

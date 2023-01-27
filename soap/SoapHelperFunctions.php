@@ -228,9 +228,8 @@ function new_get_field_list($value, $translate=true) {
 } // fn
 
 function setFaultObject($errorObject) {
-	global $soap_server_object;
-	$soap_server_object->fault($errorObject->getFaultCode(), $errorObject->getName(), '', $errorObject->getDescription());
-} // fn
+    new SoapFault($errorObject->getFaultCode(), $errorObject->getName(), '', $errorObject->getDescription());
+}
 
 function checkSessionAndModuleAccess($session, $login_error_key, $module_name, $access_level, $module_access_level_error_key, $errorObject) {
 	if(!validate_authenticated($session)){
@@ -790,7 +789,6 @@ function get_report_value($seed){
 		}
 		$output_list[$index] = $row_list;
 		$index++;
-		$output_list[] = $row;
 	}
 	$result['output_list'] = $output_list;
 	$result['field_list'] = $field_list;
@@ -836,7 +834,7 @@ function get_return_module_fields($value, $module, $error, $translate=true){
 	$module_name = $module;
 	return Array('module_name'=>$module,
 				'module_fields'=> get_field_list($value, $translate),
-				'error'=>get_name_value_list($value)
+                'error' => $error,
 				);
 }
 
@@ -982,6 +980,10 @@ function add_create_account($seed)
     }
 }
 
+/**
+ * @param SugarBean $seed
+ * @return mixed|null
+ */
 function check_for_duplicate_contacts($seed){
 
 	if(isset($seed->id)){
@@ -1029,7 +1031,7 @@ LEFT OUTER JOIN email_addr_bean_rel eabr ON eabr.bean_id = c.id
 WHERE c.first_name = ? AND c.last_name = ? AND c.deleted = 0 AND eabr.id IS NULL
 SQL;
 
-        $id = $seed->db->getConnection()->executeQuery($query, [$trimmed_first, $trimmed_last])->fetchColumn();
+        $id = $seed->db->getConnection()->executeQuery($query, [$trimmed_first, $trimmed_last])->fetchOne();
         // fetchColumn returns FALSE for empty result but NULL is expected
         return $id ?: null;
     }

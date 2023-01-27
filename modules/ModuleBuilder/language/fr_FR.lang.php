@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Supprimer' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Powered By SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Rôle',
+    'LBL_BASE_LAYOUT' => 'Mise en page de base',
+    'LBL_FIELD_NAME' => 'Nom du champ',
+    'LBL_FIELD_VALUE' => 'Valeur',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Mise en page déterminée par :',
+    'layoutDeterminedBy' => [
+        'std' => 'Mise en page standard',
+        'role' => 'Rôle',
+        'dropdown' => 'Champ déroulant',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Toutes les mises en page personnalisées seront supprimées. Êtes-vous sûr de vouloir modifier les définitions de votre mise en page actuelle ?',
 'help'=>array(
     'package'=>array(
             'create'=>'Fournir un <b>Nom</b> pour le paquet. Le nom doit commencer par une lettre et peut se composer uniquement de lettres, de chiffres et de caractères de soulignement. Les espaces ou d&#39;autres caractères spéciaux peuvent être utilisés. (Exemple : HR_Management) <br/><br/>Vous pouvez entrer le <b>Nom</b> et la <b>Description</b> du package. <br/><br/>Cliquez sur<b> Enregistrer</b> pour créer le package.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Editeur d&#39;affichage',
 'LBL_ROLLUP' => 'Formule de consolidation',
 'LBL_RELATED_FIELD' => 'Champ relatif',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL pour personnaliser l&#39;image du logomark. Les dimensions recommandées du logomark sont 22 x 22 pixels. Toutes images ayant une résolution supérieure à ces valeurs sera redimensionnée.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL pour personnaliser l&#39;image du logo. La largeur recommandée du logo est de 200 pixels. Toutes images ayant une résolution supérieure à ces valeurs sera redimensionnée. Ce logo sera utilisé sur l&#39;écran de connexion. Si aucune image n&#39;est téléchargée, le logomark sera utilisé.',
 'LBL_PORTAL_ROLE_DESC' => 'Ne supprimez pas ce rôle. Le rôle Customer Self-Service Portal / Portail client est un rôle générée par le système et créé pendant le processus d&#39;activation du portail Sugar. Utilisez les contrôles d&#39;accès dans ce rôle à activer et / ou désactiver les modules Bugs, Tickets ou Base de connaissances sur le portail Sugar. Ne modifiez pas les autres contrôles d&#39;accès pour ce rôle afin d&#39;éviter le comportement du système inconnu et imprévisible. En cas de suppression accidentelle de ce rôle, vous pouvez le recréer en désactivant puis en réactivant le portail Sugar.',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Ajouter une relation',
 'LBL_BTN_RENAME_MODULE' => 'Changer le nom du module',
 'LBL_BTN_INSERT'=>'Insérer',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Rétablir la mise en page par défaut',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'Une erreur s&#39;est produite',
 'ERROR_REQUIRED_FIELDS' => 'Êtes-vous sûr de vouloir continuer? Les champs obligatoires suivants sont absents de la mise en page :',
 'ERROR_ARE_YOU_SURE' => 'Êtes-vous sûr de vouloir continuer?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Le champ ne peut pas être créé. Vous avez atteint la limite de taille de ligne de cette table dans votre base de données. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">En savoir plus</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Les champs suivants ont calculé des valeurs qui ne seront pas recalculées en temps réel dans la vue Édition Mobile SugarCRM :',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Les champs suivants ont calculé des valeurs qui ne seront pas recalculées en temps réel dans la vue Édition Portail SugarCRM :',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Si vous souhaitez activez ces modules dans le portail Sugar, vous pouvez les activez <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">ici</a>',
     'LBL_PORTAL_CONFIGURE' => 'Configuration du portail',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Activer le portail',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Activer la recherche avant d&#39;ouvrir un dossier',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Activer les notes sur le module de la base de connaissances',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Permettre aux utilisateurs du portail de clore le ticket',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Permettre aux nouveaux utilisateurs de s&#39;inscrire',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Permissions des utilisateurs',
     'LBL_PORTAL_THEME' => 'Thème du portail',
     'LBL_PORTAL_ENABLE' => 'Activer',
     'LBL_PORTAL_SITE_URL' => 'Votre portail Sugar est disponibleà l&#39;URL :',
     'LBL_PORTAL_APP_NAME' => 'Nom de l&#39;application',
-    'LBL_PORTAL_LOGOMARK_URL' => 'URL du logomark',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Aperçu du logomark',
-    'LBL_PORTAL_LOGO_URL' => 'Url du logo',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Aperçu du logo',
     'LBL_PORTAL_CONTACT_PHONE' => 'Téléphone',
     'LBL_PORTAL_CONTACT_EMAIL' => 'Email',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Nécessite une adresse email valide',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Glissez et déposez les noms des modules du portail pour les afficher ou les masquer dans la barre de navigation supérieure du portail. Pour contrôler l&#39;accès des utilisateurs du portail aux modules, utilisez <a href="?module=ACLRoles&action=index">Role Management.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Modules affichés',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Modules masqués',
+    'LBL_CONFIG_VISIBILITY' => 'Visibilité',
+    'LBL_CASE_VISIBILITY_HELP' => 'Définissez les utilisateurs du portail qui peuvent voir un ticket.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Définissez les utilisateurs du portail qui peuvent voir les e-mails liés à un ticket. Les contacts participants sont ceux qui figurent dans les champs À, De, CC et Cci.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Définissez les utilisateurs du portail qui peuvent voir les messages liés à un ticket. Les contacts participants sont ceux qui figurent dans le champ Invités.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Tous les contacts liés au compte',
+        'related_contacts' => 'Seulement le contact principal et les contacts liés au ticket',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Uniquement les contacts participants',
+        'all' => 'Tous les contacts qui peuvent voir le ticket',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Uniquement les contacts participants',
+        'all' => 'Tous les contacts qui peuvent voir le ticket',
+    ],
+
 
 'LBL_PORTAL'=>'Portail',
 'LBL_PORTAL_LAYOUTS'=>'Mise en page Portail',
@@ -789,9 +814,9 @@ $mod_strings = array(
     . "Ils ne suivront pas la formule du portail libre-service Sugar.",
 'LBL_POPHELP_READONLY'=>"Créez une formule pour déterminer si ce champ est en lecture seule dans les mises en page.<br/>"
         . "Les champs en lecture seule suivront la formule de l'affichage mobile du navigateur, <br/>"
-        . "mais ne suivront pas la formule dans les applications natives, comme Sugar Mobile pour iPhone. <br/>"
+        . "mais ne suivra pas la formule dans les applications natives, comme Sugar Mobile pour iPhone. <br/>"
         . "Ils ne suivront pas la formule du portail libre-service Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Choisissez d&#39;utiliser ce champ lorsque vous recherchez des enregistrements à l&#39;aide de la Recherche globale de ce module.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Cochez cette case pour utiliser ce champ lorsque vous recherchez des enregistrements à l&#39;aide de la recherche globale de ce module.',
 //Revert Module labels
 'LBL_RESET' => 'Réinitialiser',
 'LBL_RESET_MODULE' => 'Réinitialiser Module',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Date/heure',
                 'decimal'=>'Décimal',
                 'autoincrement' => 'Incrément automatique',
+                'actionbutton' => 'Bouton Action',
 ),
 'labelTypes' => array(
     "" => "Libellés fréquemment utilisés",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (ID lié {1} )',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copie depuis la mise en page',
 'LBL_RELATIONSHIP_TYPE' => 'Relation',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Langue de comparaison',
+'LBL_LABEL_NOT_TRANSLATED' => 'Ce libellé peut ne pas être traduit',
 );

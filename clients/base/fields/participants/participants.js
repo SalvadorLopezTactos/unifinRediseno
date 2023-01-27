@@ -123,7 +123,11 @@
             this.clearFreeBusyInformationCache();
             this.renderTimelineInfo();
         }, this);
-        this.model.on('change:date_end', this.adjustStartAndEnd, this);
+        this.model.on('change:date_end', function() {
+            this.adjustStartAndEnd();
+            this.clearFreeBusyInformationCache();
+            this.renderTimelineInfo();
+        }, this);
         this.model.on('sync:' + this.name, this.hideShowMoreButton, this);
 
         // Fetch free/busy information again on save to get the latest.

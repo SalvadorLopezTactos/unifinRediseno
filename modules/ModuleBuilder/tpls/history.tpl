@@ -22,10 +22,10 @@
             {$snapshot.label}
         </a>
     </td>
-	<td width="1%"><input type='button' value="{sugar_translate label='LBL_MB_PREVIEW' module='ModuleBuilder'}" onclick="ModuleBuilder.history.preview('{$view_module}', '{$view}', '{$id}', '{$subpanel}');"/></td>
+	<td width="1%"><input type='button' value="{sugar_translate label='LBL_MB_PREVIEW' module='ModuleBuilder'}" onclick="ModuleBuilder.history.preview('{$view_module}', '{$view}', '{$id}', '{$subpanel|escape:javascript}');"/></td>
     <td width="1%">
         <input type='button' value="{sugar_translate label='LBL_MB_RESTORE' module='ModuleBuilder'}"
-            onclick="ModuleBuilder.history.revert('{$view_module}', '{$view}', '{$id}', '{$subpanel}', {$snapshot.isDefault|json});"/>
+            onclick="ModuleBuilder.history.revert('{$view_module}', '{$view}', '{$id}', '{$subpanel|escape:javascript}', {$snapshot.isDefault|json});"/>
     </td>
 </tr>
 {/foreach}

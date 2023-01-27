@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Δημιουργήθηκε Από Χρήστη',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Τελευταία Τροποποίηση από Χρήστη',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Email συστήματος',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Πρότυπο Εγγράφου',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Συγχώνευση εγγράφου',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Επιλέξτε...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Συγχώνευση εγγράφου σε PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Συγχώνευση εγγράφου',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Επιχειρησιακοί Κανόνες',
     'LBL_PMSE_LABEL_RULE' => 'Κανόνας',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Ενημερωμένα Αρχεία μόνο (όλες οι ενημερώσεις - βλέπε κείμενο βοήθειας)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Νέες εγγραφές ή πρώτη ενημέρωση',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Νέες εγγραφές και όλες οι ενημερώσεις',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Αλλαγή σχέσης',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Επιλέξτε πότε θα ξεκινήσει η διαδικασία.<br><br>Νέο: Εκτελέστε τη διαδικασία όταν δημιουργείται νέα εγγραφή.<br><br> Πρώτη ενημέρωση: Η διαδικασία εκτελείται μόνο την πρώτη φορά που πληρούνται τα κριτήρια για μια υπάρχουσα εγγραφή.<br><br> Όλες οι ενημερώσεις: Η διαδικασία εκτελείται κάθε φορά που πληρούνται τα κριτήρια για μια υπάρχουσα εγγραφή.<br><br>Νέες εγγραφές ή πρώτη ενημέρωση: Η διαδικασία εκτελείται μόνο την πρώτη φορά που πληρούνται τα κριτήρια για μια εγγραφή, κατά τη δημιουργία ή την ενημέρωση εγγραφής.<br><br>Νέες εγγραφές και όλες οι ενημερώσεις: Η διαδικασία εκτελείται κάθε φορά για όλες τις νέες και υπάρχουσες εγγραφές.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Επιλέξτε πότε θα ξεκινήσει η διαδικασία. <br> <br> Νέο: Εκτελέστε τη διαδικασία κατά τη δημιουργία νέας εγγραφής. <br> <br> Πρώτη ενημέρωση: Η διαδικασία εκτελείται μόνο τα κριτήρια της πρώτης φορά που πληρούνται για μια υπάρχουσα εγγραφή.<br><br>Όλες οι ενημερώσεις: Η διαδικασία εκτελείται κάθε φορά που πληρούνται τα κριτήρια για μια υπάρχουσα εγγραφή. <br> <br> Νέες εγγραφές ή πρώτη ενημέρωση: Η διαδικασία εκτελείται μόνο τα κριτήρια της πρώτης φορά που πληρούνται για μια εγγραφή, κατά τη διάρκεια της δημιουργίας εγγραφής ή της ενημέρωσης εγγραφής. <br> <br> Νέες εγγραφές και όλες οι ενημερώσεις: Η διαδικασία εκτελείται κάθε φορά για όλες τις νέες και υπάρχουσες εγγραφές. <br> <br> Αλλαγές σχέσης: Η διαδικασία εκτελείται κάθε φορά που υπάρχει αλλαγή σχέσης.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Επιλέξτε την ενότητα SugarCRM να εφαρμόσει το έναυσμα (trigger) εκδήλωσης',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Σταθερή Ημερομηνία',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Σφάλμα',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Αξιολόγηση αλλαγής σχέσης',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Πεδία',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Πεδίο Αξιολόγησης Ενότητας',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Ενότητα',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Όλες οι σχετικές εγγραφές',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Τυχόν σχετικές εγγραφές',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Προστέθηκε',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Αφαιρέθηκε',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Προστέθηκε ή καταργήθηκε',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Οποιαδήποτε σχέση',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Χρόνος εκτέλεσης',
 

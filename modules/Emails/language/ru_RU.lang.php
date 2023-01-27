@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Пользователи',
     'LBL_EMAILS_PRODUCTS_REL' => 'Продукты коммерческого предложения',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Доход по продуктам',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Эскалации',
     'LBL_EMAILS_MESSAGES_REL' => 'Сообщения',
     'LBL_EMAILS_PURCHASES_REL' => 'Покупки',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Приобретенные продукты',
@@ -473,4 +474,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Отправить сообщение электронной почты',
     'LBL_MAILBOX' => 'Учетная запись входящей почты',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Чтобы отправлять электронные письма, настройте учетную запись исходящей электронной почты в разделе <a href="#OutboundEmail">Настройки электронной почты</a>.',
 );

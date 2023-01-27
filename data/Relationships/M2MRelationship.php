@@ -112,9 +112,13 @@ class M2MRelationship extends SugarRelationship
      */
     public function add($lhs, $rhs, $additionalFields = array())
     {
-
         $lhsLinkName = $this->lhsLink;
         $rhsLinkName = $this->rhsLink;
+
+        if (empty($lhsLinkName) || empty($rhsLinkName)) {
+            // no need to continue as we missed one of the link names
+            return false;
+        }
 
         if (empty($lhs->$lhsLinkName) && !$lhs->load_relationship($lhsLinkName)) {
             $lhsClass = get_class($lhs);
@@ -281,6 +285,11 @@ class M2MRelationship extends SugarRelationship
         $lhsLinkName = $this->lhsLink;
         $rhsLinkName = $this->rhsLink;
 
+        if (empty($lhsLinkName) || empty($rhsLinkName)) {
+            // no need to continue as we missed one of the link names
+            return false;
+        }
+
         if (!($lhs instanceof SugarBean)) {
             $GLOBALS['log']->fatal("LHS is not a SugarBean object");
             return false;
@@ -380,7 +389,7 @@ class M2MRelationship extends SugarRelationship
         foreach ($rowData as $field => $value) {
             $query->andWhere($expr->eq($field, $query->createPositionalParameter($value)));
         }
-        $oldRow = $query->execute()->fetch();
+        $oldRow = $query->execute()->fetchAssociative();
 
         if (!empty($oldRow)) {
             $joinColumnName = $this->def['join_key_' . $this->def['primary_flag_side']];
@@ -397,7 +406,7 @@ class M2MRelationship extends SugarRelationship
                     $joinColumnName
                 ),
                 [$rowData[$joinColumnName]]
-            )->fetchColumn();
+            )->fetchOne();
 
             if ($id) {
                 $conn->update($this->getRelationshipTable(), [$this->def['primary_flag_column'] => 1], ['id' => $id]);
@@ -428,7 +437,7 @@ class M2MRelationship extends SugarRelationship
     }
 
     /**
-     * @deprecated Use M2MRelationship::load() instead
+     * @inheritdoc
      */
     public function getQuery($link, $params = array())
     {
@@ -501,8 +510,10 @@ class M2MRelationship extends SugarRelationship
         }
 
         $select = "$targetKey id";
-        foreach($this->getAdditionalFields() as $field=>$def){
-            $select .= ", $rel_table.$field";
+        if (!($params['skipAdditionalFields'] ?? false)) {
+            foreach ($this->getAdditionalFields() as $field => $def) {
+                $select .= ", $rel_table.$field";
+            }
         }
 
         if (empty($params['return_as_array'])) {
@@ -880,9 +891,9 @@ class M2MRelationship extends SugarRelationship
         $query->andWhere($expr->eq('deleted', 0));
 
         if ($returnRow) {
-            $result = $query->select('*')->execute()->fetch();
+            $result = $query->select('*')->execute()->fetchAssociative();
         } else {
-            $result = $query->select('id')->execute()->fetchColumn();
+            $result = $query->select('id')->execute()->fetchOne();
         }
         return $result;
     }
@@ -946,7 +957,7 @@ class M2MRelationship extends SugarRelationship
 
         return $fields;
     }
-    
+
     protected function getAdditionalFields()
     {
         return array_diff_key($this->getFields(), $this->getStandardFields());

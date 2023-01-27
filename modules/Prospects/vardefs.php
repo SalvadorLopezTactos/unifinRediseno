@@ -187,7 +187,6 @@ $dictionary['Prospect'] = array(
         'archived_emails' => array(
             'name' => 'archived_emails',
             'type' => 'link',
-            'link_file' => 'modules/Emails/ArchivedEmailsLink.php',
             'link_class' => 'ArchivedEmailsLink',
             'source' => 'non-db',
             'vname' => 'LBL_EMAILS',
@@ -232,7 +231,6 @@ $dictionary['Prospect'] = array(
                 'deleted'
             )
         ),
-        array('name' => 'idx_prospects_assigned', 'type' => 'index', 'fields' => array('assigned_user_id')),
         array('name' => 'idx_prospect_title', 'type' => 'index', 'fields' => array('title')),
     ),
     'relationships' => array(

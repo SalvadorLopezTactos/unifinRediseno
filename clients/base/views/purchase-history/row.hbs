@@ -14,14 +14,14 @@
     <li>
         <div class="purchase-entry" data-id="{{attributes.id}}">
             <div class="content-row" data-id="{{attributes.id}}">
-                <div class="row-cell ellipsis_inline">
-                    <a class="row-cell secondary" data-placement="bottom" rel="tooltip"
-                       title="{{fieldValue this "name"}}"
-                       href="#{{buildRoute model=this}}">{{fieldValue this "name"}}</a>
-                </div>
+                {{#with collection.fieldsMeta.name}}
+                    <div class="row-cell ellipsis_inline purchase-name" data-fieldname="name">
+                        {{field ../collection.component model=../this template="list"}}
+                    </div>
+                {{/with}}
                 <div class="row-cell pli-count toggle-pli-list">
                     <span class="pli-count-label">{{attributes.pli_count}}</span>
-                    <i class="fa {{#if chevronIcon}}{{chevronIcon}}{{else}}fa-chevron-down{{/if}} toggle-list"
+                    <i class="{{#if chevronIcon}}{{buildIcon chevronIcon}}{{else}}sicon sicon-chevron-down{{/if}} toggle-list"
                         data-id="{{attributes.id}}" rel="tooltip" data-placement="bottom"
                         title="{{str "LBL_DASHLET_TOGGLE"}}">
                     </i>
@@ -33,21 +33,11 @@
                         {{#each pliCollection.models}}
                             <div class="content-row pli-entry" data-id="{{attributes.id}}">
                                 <div class="row-cell purchase-details purchase-details-date">
-                                    <span class="ellipsis_inline purchase-dates">
-                                        <a class="row-cell secondary" data-placement="bottom" rel="tooltip"
-                                           title="{{fieldValue this 'name'}}"
-                                           href="#{{buildRoute model=this}}">
-                                            {{#notEq attributes.service_start_date attributes.service_end_date}}
-                                                {{#with ../../pliCollection.fieldsMeta.service_start_date}}
-                                                    {{field ../../../pliCollection.component model=../../this}}
-                                                {{/with}}
-                                                -
-                                            {{/notEq}}
-                                            {{#with ../pliCollection.fieldsMeta.service_end_date}}
-                                                {{field ../../pliCollection.component model=../this}}
-                                            {{/with}}
-                                        </a>
-                                    </span>
+                                    {{#with ../pliCollection.fieldsMeta.name}}
+                                        <span class="ellipsis_inline pli-name" data-fieldname="name">
+                                            {{field ../../pliCollection.component model=../this template="detail"}}
+                                        </span>
+                                    {{/with}}
                                 </div>
                                 <div class="row-cell purchase-details purchase-details-quantity ellipsis_inline">
                                     {{#with ../pliCollection.fieldsMeta.quantity}}

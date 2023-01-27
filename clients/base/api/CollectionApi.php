@@ -220,7 +220,8 @@ abstract class CollectionApi extends SugarApi
 
         $args = $this->mapSourceArguments($definition, $source, $args);
 
-        if (count($args['fields']) > 0 && count($sortFields) > 0) {
+        if (isset($args['fields']) && is_countable($args['fields']) && count($args['fields']) > 0
+            && is_countable($sortFields) && count($sortFields) > 0) {
             $args['fields'] = array_merge($args['fields'], $sortFields);
         }
 

@@ -40,6 +40,11 @@ $dictionary['audit_events'] = array(
             'dbType' => 'text',
             'required' => false,
         ),
+        'impersonated_by' => [
+            'name' =>'impersonated_by',
+            'type' => 'id',
+            'required' => false,
+        ],
         'date_created' => array(
             'name' => 'date_created',
             'type' => 'datetime',

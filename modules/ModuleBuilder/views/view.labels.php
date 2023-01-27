@@ -29,48 +29,147 @@ class ViewLabels extends ViewModulefields
 
      //STUDIO LABELS ONLY//
      //TODO Bundle Studio and ModuleBuilder label handling to increase maintainability.
-     function display()
-     {
-         global $locale;
+    public function display()
+    {
+        global $mod_strings;
 
-         $editModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+        // Check if the user has access to the module
+        $editModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
         if (!AccessControlManager::instance()->allowModuleAccess($editModule)) {
             throw new SugarApiExceptionModuleDisabled();
         }
-         $labels = $this->request->getValidInputRequest('labels');
-         $allLabels = ($labels == 'all');
 
-         if (!isset($_REQUEST['MB'])) {
-             global $app_list_strings;
-             $moduleNames = array_change_key_case($app_list_strings['moduleList']);
-             $translatedEditModule = $moduleNames[strtolower($editModule)];
-         }
-         $selected_lang = $this->request->getValidInputRequest(
-             'selected_lang',
-             'Assert\Language',
-             $locale->getAuthenticatedUserLanguage()
-         );
+        // Check if we are requesting all labels
+        $labels = $this->request->getValidInputRequest('labels');
+        $allLabels = $labels === 'all';
 
+        // Prepare the Smarty template
         $smarty = new Sugar_Smarty();
-        global $mod_strings;
+        $this->setupLanguageVariables($editModule, $allLabels, $smarty);
         $smarty->assign('mod_strings', $mod_strings);
+        $smarty->assign('view_module', $editModule);
+        $smarty->assign('APP', $GLOBALS['app_strings']);
+        $smarty->assign('defaultHelp', 'labelsBtn');
+        $smarty->assign('assistant', array('key'=>'labels', 'group'=>'module'));
+        $smarty->assign('labels_choice', $mod_strings['labelTypes']);
+        $smarty->assign('labels_current', $allLabels ? 'all' : '');
+
+        // Prepare the Ajax object
+        $ajax = new AjaxCompose();
+        $ajax->addCrumb($mod_strings['LBL_STUDIO'], 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard")');
+        if (!isset($_REQUEST['MB'])) {
+            global $app_list_strings;
+            $moduleNames = array_change_key_case($app_list_strings['moduleList']);
+            $translatedEditModule = $moduleNames[strtolower($editModule)];
+        }
+        $ajax->addCrumb($translatedEditModule, 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard&view_module='.$editModule.'")');
+        $ajax->addCrumb($mod_strings['LBL_LABELS'], '');
+
+        // Output the template result
+        $html = $smarty->fetch('modules/ModuleBuilder/tpls/labels.tpl');
+        $ajax->addSection('center', $GLOBALS['mod_strings']['LBL_SECTION_EDLABELS'], $html);
+        echo $ajax->getJavascript();
+    }
+
+    /**
+     * Prepares variable data for the Smarty template regarding the selected
+     * language and comparison language
+     *
+     * @param string $module the module name to setup language settings for
+     * @param bool $allLabels determines whether all labels should be prepared,
+     *                        whether they are used or not
+     * @param Sugar_Smarty $smarty the Smarty template to prepare data for
+     */
+    private function setupLanguageVariables(string $module, bool $allLabels, Sugar_Smarty $smarty)
+    {
+        global $locale;
+        global $sugar_config;
+        global $mod_strings;
+
+        // Get the vnames for the module (the list of all module labels that
+        // are actually used)
+        $vnames = $this->getVnames($module);
+
+        // Setup the options for the "Language" selector
         $smarty->assign('available_languages',get_languages());
 
-        $objectName = BeanFactory::getObjectName($editModule);
-        VardefManager::loadVardef($editModule, $objectName);
+        // Setup the key/value label pairs for the selected language
+        $selectedLang = $this->request->getValidInputRequest(
+            'selected_lang',
+            'Assert\Language',
+            $locale->getAuthenticatedUserLanguage()
+        );
+        $selectedLangStrings = $this->getModStrings($module, $selectedLang, $allLabels, $vnames);
+        ksort($selectedLangStrings);
+        $smarty->assign('selected_lang', $selectedLang);
+        $smarty->assign('MOD', $selectedLangStrings);
+
+        // If the selected language is not the default language, and there are
+        // other languages available to compare it to, setup the
+        // "Compare Language" selector
+        $systemDefaultLanguage = $sugar_config['default_language'];
+        $availableCompareLanguages = array_diff_key(get_languages(), [
+            $selectedLang => '',
+        ]);
+        if ($systemDefaultLanguage !== $selectedLang && !empty($availableCompareLanguages)) {
+            $smarty->assign('showCompareLanguage', true);
+            $smarty->assign('availableCompareLanguages', $availableCompareLanguages);
+
+            // Setup the key/value label pairs for the selected comparison language
+            $comparisonLang = $this->request->getValidInputRequest(
+                'comparison_lang',
+                'Assert\Language',
+                $locale->getAuthenticatedUserLanguage()
+            );
+            if (empty($availableCompareLanguages[$comparisonLang])) {
+                $comparisonLang = $systemDefaultLanguage;
+            }
+            $comparisonLangStrings = $this->getModStrings($module, $comparisonLang, $allLabels, $vnames);
+            ksort($comparisonLangStrings);
+            $smarty->assign('comparisonLang', $comparisonLang);
+            $smarty->assign('comparisonLangStrings', $comparisonLangStrings);
+
+            // Setup the list of labels where the selected language label is
+            // identical to the selected comparison language label. Also setup
+            // the HTML for the info icon to be shown next to these labels
+            $matchingLabels = [];
+            foreach ($selectedLangStrings as $key => $label) {
+                if (isset($comparisonLangStrings[$key]) && $label === $comparisonLangStrings[$key]) {
+                    $matchingLabels[$key] = true;
+                }
+            }
+            $smarty->assign('matchingLabels', $matchingLabels);
+            $smarty->assign('matchingLabelHelp', generateBwcHelpIcon($mod_strings['LBL_LABEL_NOT_TRANSLATED']));
+        } else {
+            // Cannot use Compare Language functionality
+            $smarty->assign('showCompareLanguage', false);
+        }
+    }
+
+    /**
+     * Gets the list of label keys that are used in the given module as
+     * 'vname's or 'label's
+     *
+     * @param string $module the name of the module
+     * @return array the list of label keys
+     */
+    private function getVnames($module)
+    {
         global $dictionary;
-        $vnames = array();
-        //jchi 24557 . We should list all the lables in viewdefs(list,detail,edit,quickcreate) that the user can edit them.
-        $parser = ParserFactory::getParser(MB_LISTVIEW, $editModule);
+        $vnames = [];
+        $objectName = BeanFactory::getObjectName($module);
+        VardefManager::loadVardef($module, $objectName);
+
+        // Get view/layout labels
+        $parser = ParserFactory::getParser(MB_LISTVIEW, $module);
         foreach ($parser->getLayout() as $key => $def) {
-            if(isset($def['label'])) {
-               $vnames[$def['label']] = $def['label'];
+            if (isset($def['label'])) {
+                $vnames[$def['label']] = $def['label'];
             }
         }
-
-        $variableMap = $this->getVariableMap($editModule);
+        $variableMap = $this->getVariableMap($module);
         foreach ($variableMap as $key => $value) {
-            $gridLayoutMetaDataParserTemp = ParserFactory::getParser($key, $editModule);
+            $gridLayoutMetaDataParserTemp = ParserFactory::getParser($key, $module);
             foreach ($gridLayoutMetaDataParserTemp->getLayout() as $panel) {
                 foreach ($panel as $row) {
                     foreach ($row as $fieldArray) { // fieldArray is an array('name'=>name,'label'=>label)
@@ -81,70 +180,71 @@ class ViewLabels extends ViewModulefields
                 }
             }
         }
-        //end
 
-        //Get Subpanel Labels:
-        $subList =  SubPanel::getModuleSubpanels ( $editModule );
+        // Get subpanel labels
+        $subList = SubPanel::getModuleSubpanels($module);
         foreach ($subList as $subpanel => $titleLabel) {
             $vnames[$titleLabel] = $titleLabel;
         }
 
+        // Get field labels
         foreach ($dictionary[$objectName]['fields'] as $name=>$def) {
             if (isset($def['vname'])) {
-               $vnames[$def['vname']] = $def['vname'];
+                $vnames[$def['vname']] = $def['vname'];
             }
         }
-        $formatted_mod_strings = array();
 
-         // we shouldn't set the $refresh=true here, or will lost template language
-         // mod_strings.
-         // return_module_language($selected_lang, $editModule,false) :
-         // the mod_strings will be included from cache files here.
-        foreach (return_module_language($selected_lang, $editModule,false) as $name=>$label) {
+        return $vnames;
+    }
+
+    /**
+     * Returns the key/value pairs of the formatted labels for the given module in the given language
+     *
+     * @param string $module the module to retrieve labels for
+     * @param string $language the language to retrieve labels for
+     * @param bool $allLabels return all labels, whether they are used or not
+     * @param array $vnames the list of vnames used in the module
+     * @return array the key/value language strings for the module/language, with values formatted
+     */
+    private function getModStrings($module, $language, $allLabels, $vnames)
+    {
+        global $mod_strings;
+        $formattedModStrings = [];
+        $modStringsBackup = $mod_strings;
+
+        // We shouldn't set the $refresh = true here, or we will lose template
+        // language mod_strings.
+        // return_module_language($selected_lang, $module, false) :
+        // the mod_strings will be included from cache files here.
+        foreach (return_module_language($language, $module, false) as $name => $label) {
             //#25294
             if($allLabels || isset($vnames[$name]) || preg_match( '/lbl_city|lbl_country|lbl_billing_address|lbl_alt_address|lbl_shipping_address|lbl_postal_code|lbl_state$/si' , $name)) {
                 // Bug 58174 - Escaped labels are sent to the client escaped
                 // even in the label editor in studio
-                $formatted_mod_strings[$name] = html_entity_decode($label, null, 'UTF-8');
+                $formattedModStrings[$name] = html_entity_decode($label, null, 'UTF-8');
             }
         }
+
         //Grab everything from the custom files
-        $mod_bak = $mod_strings;
         $files = array(
-            "custom/modules/$editModule/language/$selected_lang.lang.php",
-            "custom/modules/$editModule/Ext/Language/$selected_lang.lang.ext.php"
+            "custom/modules/$module/language/$language.lang.php",
+            "custom/modules/$module/Ext/Language/$language.lang.ext.php",
         );
         foreach ($files as $langfile) {
             $mod_strings = array();
             if (is_file($langfile)) {
-               include($langfile);
-               foreach ($mod_strings as $key => $label) {
-                   // Bug 58174 - Escaped labels are sent to the client escaped
-                   // even in the label editor in studio
-                   $formatted_mod_strings[$key] = html_entity_decode($label, null, 'UTF-8');
-               }
+                include $langfile;
+                foreach ($mod_strings as $key => $label) {
+                    // Bug 58174 - Escaped labels are sent to the client escaped
+                    // even in the label editor in studio
+                    $formattedModStrings[$key] = html_entity_decode($label, null, 'UTF-8');
+                }
             }
         }
-        $mod_strings = $mod_bak;
-        ksort($formatted_mod_strings);
-        $smarty->assign('MOD', $formatted_mod_strings);
-        $smarty->assign('view_module', $editModule);
-        $smarty->assign('APP', $GLOBALS['app_strings']);
-        $smarty->assign('selected_lang', $selected_lang);
-        $smarty->assign('defaultHelp', 'labelsBtn');
-        $smarty->assign('assistant', array('key'=>'labels', 'group'=>'module'));
-        $smarty->assign('labels_choice', $mod_strings['labelTypes']);
-        $smarty->assign('labels_current', $allLabels?"all":"");
 
-        $ajax = new AjaxCompose();
-        $ajax->addCrumb($mod_strings['LBL_STUDIO'], 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard")');
-        $ajax->addCrumb($translatedEditModule, 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard&view_module='.$editModule.'")');
-        $ajax->addCrumb($mod_strings['LBL_LABELS'], '');
-
-        $html = $smarty->fetch('modules/ModuleBuilder/tpls/labels.tpl');
-        $ajax->addSection('center', $GLOBALS['mod_strings']['LBL_SECTION_EDLABELS'], $html);
-        echo $ajax->getJavascript();
-     }
+        $mod_strings = $modStringsBackup;
+        return $formattedModStrings;
+    }
 
     // fixing bug #39749: Quick Create in Studio
     public function getVariableMap($module)

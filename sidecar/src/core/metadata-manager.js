@@ -215,6 +215,18 @@ module.exports = {
             }
         }, this);
 
+        _.each(module.dropdownViews, function(view) {
+            _.each(view, function(field) {
+                _.each(field, function(value) {
+                    if (value.meta) {
+                        _.each(value.meta.panels, function(panel) {
+                            panel.fields = this._patchFields(moduleName, module, panel.fields);
+                        }, this);
+                    }
+                }, this);
+            }, this);
+        }, this);
+
         module._patched = true;
         return module;
     },
@@ -242,6 +254,10 @@ module.exports = {
 
                 // Flatten out the viewdef, i.e. put 'displayParams' onto the viewdef
                 // TODO: This should be done on the server-side on my opinion
+
+                if (_.isObject(fieldDef.displayParams)) {
+                    _.extend(field, fieldDef.displayParams);
+                }
 
                 if (_.isObject(field.displayParams)) {
                     _.extend(field, field.displayParams);
@@ -572,6 +588,34 @@ module.exports = {
         return meta ? this.copy(meta, { module: module, view: view }) : meta;
     },
 
+
+    /**
+     * Get the dropdown based views metadata if defined
+     *
+     * @param module module name
+     * @param view type of view (Record views to begin with, others will be added later)
+     * @return {*|null} returns the metadata for any dropdown based views available for a specific module.
+     * Returned meta object would be of the pattern dropdownViews[view][dropdownField][dropdownValue]
+     */
+    getDropdownViews: function (module, view) {
+
+        if (!module && !view) {
+            return null;
+        }
+
+        var meta = this.getModule(module, 'dropdownViews');
+
+        if (view) {
+            if (meta && meta[view]) {
+                meta = meta[view];
+            } else {
+                meta = null;
+            }
+        }
+
+        return meta ? this.copy(meta, { module: module, dropdownViews: view }) : meta;
+    },
+
     /**
      * Gets a layout metadata or all layouts metadata.
      *
@@ -769,10 +813,11 @@ module.exports = {
     /**
      * Gets the company logo url.
      *
+     * @param {boolean} isDarkMode True if we need to return the dark mode logo url
      * @return {string} The logo url
      */
-    getLogoUrl: function() {
-        return _metadata.logo_url;
+    getLogoUrl: function(isDarkMode) {
+        return isDarkMode ? _metadata.logo_url_dark : _metadata.logo_url;
     },
 
     /**
@@ -782,6 +827,116 @@ module.exports = {
      */
     getServerInfo: function() {
         return _metadata.server_info || {};
+    },
+
+    /**
+     * Checks if the server has one or more licenses.
+     * @param {string|Array} licenseType one or more licenses to check
+     * @param {boolean} hasAll if true, the server must have all the provided licenses
+     * @return {boolean} true if the server's licenses match the criteria, false otherwise
+     */
+    hasLicense: function(licenseType, hasAll = false) {
+        let licenses = this.getServerInfo().licenses;
+        if (!_.isArray(licenses)) {
+            return false;
+        }
+
+        if (_.isString(licenseType)) {
+            licenseType = [licenseType];
+        }
+
+        let licenseMatcher = license => licenses.includes(license);
+        return hasAll ? licenseType.every(licenseMatcher) : licenseType.some(licenseMatcher);
+    },
+
+    /**
+     * Checks if the server has a Sell license.
+     * @return {boolean}
+     */
+    hasSellLicense: function() {
+        return this.hasLicense('SUGAR_SELL');
+    },
+
+    /**
+     * Checks if the server has a Serve license.
+     * @return {boolean}
+     */
+    hasServeLicense: function() {
+        return this.hasLicense('SUGAR_SERVE');
+    },
+
+    /**
+     * Checks if the server has a Sell/Serve license. If hasBoth is true, then the server must
+     * have both licenses. If hasBoth is false (default), then having at least one license is enough.
+     * @param {boolean} hasBoth
+     * @return {boolean}
+     */
+    hasSellServeLicense: function(hasBoth = false) {
+        return this.hasLicense(['SUGAR_SELL', 'SUGAR_SERVE'], hasBoth);
+    },
+
+    /**
+     * Checks if the server has a Connect license.
+     * @return {boolean}
+     */
+    hasConnectLicense: function() {
+        return this.hasLicense('CONNECT');
+    },
+
+    /**
+     * Checks if the server has a Discover license.
+     * @return {boolean}
+     */
+    hasDiscoverLicense: function() {
+        return this.hasLicense('DISCOVER');
+    },
+
+    /**
+     * Checks if the server has a Hint license.
+     * @return {boolean}
+     */
+    hasHintLicense: function() {
+        return this.hasLicense('HINT');
+    },
+
+    /**
+     * Checks if the server has a Maps license.
+     * @return {boolean}
+     */
+    hasMapsLicense: function() {
+        return this.hasLicense('MAPS');
+    },
+
+    /**
+     * Checks if the server has an Advanced Forecasting license.
+     * @return {boolean}
+     */
+    hasAdvancedForecastingLicense: function() {
+        return this.hasLicense('ADVANCEDFORECAST');
+    },
+
+    /**
+     * Checks if the server has a Predict Advanced or Predict Premier license.
+     * @return {boolean}
+     */
+    hasPredictLicense: function() {
+        return this.hasPredictAdvancedLicense() || this.hasPredictPremierLicense();
+    },
+
+    /**
+     * Checks if the server has a Predict Advanced license.
+     * @return {boolean}
+     */
+    hasPredictAdvancedLicense: function() {
+        return this.hasLicense('PREDICT_ADVANCED');
+    },
+
+    /**
+     * Checks if the server has a Predict Premier license.
+     * @return {boolean}
+     */
+    hasPredictPremierLicense: function() {
+        return this.hasLicense('PREDICT_PREMIER');
     },
 
     /**

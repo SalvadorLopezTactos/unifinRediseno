@@ -22,7 +22,7 @@ class SugarPlugins
     private const SUGAR_PLUGIN_SERVER = 'https://www.sugarcrm.com/crm/plugin_service.php';
 
     /**
-     * @var nusoap_client
+     * @var SoapClient
      */
     private $client;
 
@@ -33,9 +33,13 @@ class SugarPlugins
      */
     public function __construct()
     {
-        $client = new nusoap_client(self::SUGAR_PLUGIN_SERVER . '?wsdl', true);
+        $params = array(
+            'soap_version' => SOAP_1_1,
+            'exceptions' => 0,
+        );
+        $client = new \SoapClient(self::SUGAR_PLUGIN_SERVER . '?wsdl', $params);
 
-        if ($client->getError()) {
+        if (is_soap_fault($client)) {
             return;
         }
 
@@ -53,10 +57,11 @@ class SugarPlugins
             return [];
         }
 
-        $result = $this->client->call('get_plugin_list', [
-            'subscription' => $GLOBALS['license']->settings['license_key'],
-            'sugar_version' => $GLOBALS['sugar_version'],
-        ]);
+        $result = $this->client->get_plugin_list(
+            $GLOBALS['license']->settings['license_key'],
+            $GLOBALS['sugar_version']
+        );
+        $result = object_to_array_deep($result);
 
         if (empty($result[0]['item'])) {
             return [];
@@ -77,13 +82,13 @@ class SugarPlugins
             return '';
         }
 
-        $result = $this->client->call('get_plugin_token', [
-            'subscription' => $GLOBALS['license']->settings['license_key'],
-            'user_id' => $GLOBALS['current_user']->id,
-            'raw_name' => $plugin_id,
-        ]);
+        $result = $this->client->get_plugin_token(
+            $GLOBALS['license']->settings['license_key'],
+            $GLOBALS['current_user']->id,
+            $plugin_id
+        );
 
-        return $result['token'];
+        return $result->token;
     }
 
     /**

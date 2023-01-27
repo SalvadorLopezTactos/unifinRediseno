@@ -17,10 +17,21 @@
                 <thead>
                     <tr>
                         {{#each fields}}
-                            <th class="{{#isSortable ../module this}}sorting sorting_{{#eq ../../../collection.orderBy.field name}}{{../../../../collection.orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
+                            <th class="{{#isSortable ../module this}}sorting{{#eq ../../../collection.orderBy.field name}}_{{../../../../collection.orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
                             {{#if styles}} style="{{styles}}"{{/if}}
                             {{#if name}} data-fieldname="{{name}}"{{/if}} data-orderby="{{orderBy}}">
-                                <span>{{str label ../module}}</span>
+                                <div class="sortable-row-header-container">
+                                    <span class="sortable-row-header-column-name">
+                                         {{#if icon}}
+                                             <i class="{{buildIcon icon.type}}" rel="tooltip"  title="{{str icon.tooltip ../../module}} "></i>
+                                         {{/if}}
+                                        {{str label ../module}}
+                                    </span>
+                                    <span class="sortable-row-header-arrows">
+                                        <i class="sicon sicon-arrow-up"></i>
+                                        <i class="sicon sicon-arrow-down"></i>
+                                    </span>
+                                </div>
                             </th>
                         {{/each}}
                     </tr>
@@ -29,7 +40,13 @@
                     {{#each ../collection.models}}
                         <tr class="single"{{#if id}} data-id="{{id}}"{{/if}}>
                             {{#each ../fields}}
-                                <td{{#if align}} class="{{align}}"{{/if}}{{#if name}} data-fieldname="{{name}}"{{/if}}>{{field ../../../this model=../this template='list'}}</td>
+                                <td
+                                    class="{{#if align}}{{align}}{{/if}}"
+                                    {{#if name}} data-fieldname="{{name}}"{{/if}}
+                                    {{#if type}} data-type="{{type}}"{{/if}}
+                                >
+                                    {{field ../../../this model=../this template='list'}}
+                                </td>
                             {{/each}}
                         </tr>
                     {{/each}}

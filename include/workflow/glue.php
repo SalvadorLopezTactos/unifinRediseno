@@ -15,7 +15,7 @@ require_once('include/workflow/workflow_utils.php');
 
 
 class WorkFlowGlue {
-
+    /** @var DBManager */
 	var $db;
 
 	var $shell_object;
@@ -806,7 +806,7 @@ SQL;
 
         $row = $this->db->getConnection()
             ->executeQuery($query, [$triggershell_id])
-            ->fetch();
+            ->fetchAssociative();
 
 			$base_array['lhs_field'] = $row['lhs_field'];
 			$base_array['lhs_type'] = $row['lhs_type'];

@@ -8,15 +8,15 @@
 }
 
 .noUiSlider {
-  #gradient > .vertical(@grayLight,@gray);
+  #gradient > .vertical(@gray70, @gray80);
 
-  border-color: @gray;
+  border-color: @gray80;
   width: 300px;
   border-width: 1px 0;
 
   .ticks {
     width: 0;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid @gray40;
     position: absolute;
     display: inline-block;
     height: 10px;
@@ -38,9 +38,9 @@
   position: absolute;
   font-weight: bold;
   line-height: 8px;
-  border: 1px solid @gray;
+  border: 1px solid @gray80;
   border-left: 0;
-  #gradient > .vertical(@grayLight,@gray);
+  #gradient > .vertical(@gray70, @gray80);
 }
 
 .noUiSliderEnds::before {
@@ -64,18 +64,18 @@
 .noUi-midBar {
   #gradient > .vertical(lighten(@PrimaryButton, 40%),lighten(@PrimaryButton, 10%));
 
-  border-color: @gray;
+  border-color: @gray80;
 }
 
 .noUi-handle > div {
   display: block;
   position: absolute;
   width: 10px;
-  #gradient > .vertical(@grayLighter,@white);
+  #gradient > .vertical(@gray30, @white);
 
   border-radius: 3px;
-  border: 1px solid #aaa;
-  box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3) inset, 1px 1px 1px rgba(0, 0, 0, 0.5);
+  border: 1px solid @gray60;
+  box-shadow: 0 -1px 1px @gray40 inset, 1px 1px 1px @gray50;
   color: @white;
   margin-left: 2px;
   cursor: pointer;
@@ -95,8 +95,8 @@
   -webkit-transform: rotateZ(45deg) skewY(-10deg) skewX(-10deg);
   transform: rotateZ(45deg) skewY(-10deg) skewX(-10deg);
   border-radius: 0 9px;
-  border: 1px solid #aaa;
-  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
+  border: 1px solid @gray60;
+  box-shadow: inset 0 0 1px @gray50;
 }
 
 .noUi-handle > div::after {
@@ -113,8 +113,8 @@
   display: block;
   width: 8px;
   top: 4px;
-  border-left: 1px solid darken(@grayLighter, 10%);
-  border-right: 1px solid darken(@grayLighter, 10%);
+  border-left: @borderWidget;
+  border-right: @borderWidget;
 }
 
 .noUi-handle > div,
@@ -132,5 +132,5 @@
 .noUi-handle > div:hover,
 .noUi-activeHandle {
   background: @white !important;
-  border-color: #ccc !important;
+  border-color: @gray40;
 }

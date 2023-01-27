@@ -40,6 +40,13 @@ $dictionary['ConsoleConfiguration'] = array(
             'vname' => 'LBL_CONSOLE_FILTER',
             'type' => 'text',
         ),
+        'freeze_first_column' => [
+            'name' => 'freeze_first_column',
+            'vname' => 'LBL_FREEZE_FIRST_COLUMN',
+            'type' => 'bool',
+            'default' => true,
+            'comment' => 'Decides if the first column should be frozen',
+        ],
     ),
 );
 

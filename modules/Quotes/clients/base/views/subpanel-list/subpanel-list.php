@@ -67,13 +67,13 @@ $viewdefs['Quotes']['base']['view']['subpanel-list'] = array(
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
-                'icon' => 'fa-eye',
+                'icon' => 'sicon-preview',
                 'acl_action' => 'view',
             ],
             array(
                 'type' => 'rowaction',
                 'name' => 'edit_button',
-                'icon' => 'fa-pencil',
+                'icon' => 'sicon-edit',
                 'label' => 'LBL_EDIT_BUTTON',
                 'acl_action' => 'edit',
                 'event' => 'list:editrow:fire',
@@ -88,7 +88,7 @@ $viewdefs['Quotes']['base']['view']['subpanel-list'] = array(
             array(
                 'type' => 'unlink-action',
                 'name' => 'unlink_button',
-                'icon' => 'fa-trash-o',
+                'icon' => 'sicon-trash',
                 'label' => 'LBL_UNLINK_BUTTON',
             ),
         )

@@ -11,7 +11,8 @@
  */
 $_SESSION['setup_license_accept'] = true;
 
-function runCheck($install_script = false, $mod_strings){
+function runCheck(bool $install_script, array $mod_strings)
+{
 installLog("Begin System Check Process *************");
 
 if( !isset( $install_script ) || !$install_script ){
@@ -417,7 +418,7 @@ if($error_found){
     <tr>
       <th width="400">{$mod_strings['LBL_CHECKSYS_TITLE']}</th>
       <th width="200" height="30" style="text-align: right;"><a href="http://www.sugarcrm.com" target=
-      "_blank"><IMG src="include/images/sugarcrm_login.png" alt="SugarCRM" border="0"></a>
+      "_blank"><img src="{$loginImage}" alt="SugarCRM" border="0" class="sugarcrm-logo"></a>
        <br><a href="{$help_url}" target='_blank'>{$mod_strings['LBL_HELP']} </a>
        </th>
     </tr>

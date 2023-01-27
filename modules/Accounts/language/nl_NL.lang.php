@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Accountnaam/industrie',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Locatie',
     'LBL_PURCHASES' => 'Aankopen',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Accountinteractie',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn account',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafieken',

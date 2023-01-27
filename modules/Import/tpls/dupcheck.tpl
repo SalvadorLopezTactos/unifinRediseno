@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-{literal}
 <style>
 <!--
 
@@ -28,7 +27,6 @@
 
 -->
 </style>
-{/literal}
 
 {$INSTRUCTION}
 <form enctype="multipart/form-data" real_id="importstepdup" id="importstepdup" name="importstepdup" method="POST" action="index.php">

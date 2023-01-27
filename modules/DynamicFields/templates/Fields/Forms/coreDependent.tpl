@@ -33,7 +33,7 @@
 	<td class='mbLBL'>{sugar_translate module="DynamicFields" label="LBL_FORMULA"}:</td>
     <td>
         <input id="formula" type="hidden" name="formula" value="{$vardef.formula}" onchange="document.getElementById('formula_display').value = this.value"/>
-        <input id="formula_display" type="text" name="formula_display" value="{$vardef.formula}" readonly="1" style="background-color:#eee"/>
+        <input id="formula_display" type="text" name="formula_display" value="{$vardef.formula}" readonly="1"/>
 	    <input type="button" class="button"  name="editFormula" style="margin-top: -2px"
 		      value="{sugar_translate label="LBL_BTN_EDIT_FORMULA"}"
             onclick="ModuleBuilder.moduleLoadFormula(YAHOO.util.Dom.get('formula').value, 'formula', '{$calcFieldType}')"/>
@@ -51,7 +51,7 @@
     <tr id='visFormulaRow' {if empty($vardef.dependency)}style="display:none"{/if}><td class='mbLBL'>{sugar_translate module="DynamicFields" label="LBL_VISIBLE_IF"}:</td>
         <td>
             <input id="dependency" type="hidden" name="dependency" value="{$vardef.dependency|escape:'html'}" onchange="document.getElementById('dependency_display').value = this.value"/>
-            <input id="dependency_display" type="text" name="dependency_display" value="{$vardef.dependency|escape:'html'}" readonly="1" style="background-color:#eee"/>
+            <input id="dependency_display" type="text" name="dependency_display" value="{$vardef.dependency|escape:'html'}" readonly="1"/>
               <input class="button" type=button name="editFormula" value="{sugar_translate label="LBL_BTN_EDIT_FORMULA"}"
                 onclick="ModuleBuilder.moduleLoadFormula(YAHOO.util.Dom.get('dependency').value, 'dependency', 'boolean')"/>
         </td>
@@ -76,7 +76,7 @@
                    onchange="document.getElementById('required_formula_display').value = this.value"/>
             <input id="required_formula_display" type="text" name="required_formula_display"
                    value="{$vardef.required_formula|escape:'html'}"
-                   readonly="1" style="background-color:#eee"/>
+                   readonly="1"/>
             <input class="button" type=button name="editFormula" value="{sugar_translate label="LBL_BTN_EDIT_FORMULA"}"
                    onclick="ModuleBuilder.moduleLoadFormula(YAHOO.util.Dom.get('required_formula').value, 'required_formula', 'boolean')"/>
         </td>
@@ -100,7 +100,7 @@
                    onchange="document.getElementById('readonly_formula_display').value = this.value"/>
             <input id="readonly_formula_display" type="text" name="readonly_formula_display"
                    value="{$vardef.readonly_formula|escape:'html'}"
-                   readonly="1" style="background-color:#eee"/>
+                   readonly="1"/>
             <input class="button" type=button name="editFormula" value="{sugar_translate label="LBL_BTN_EDIT_FORMULA"}"
                    onclick="ModuleBuilder.moduleLoadFormula(YAHOO.util.Dom.get('readonly_formula').value, 'readonly_formula', 'boolean')"/>
         </td>

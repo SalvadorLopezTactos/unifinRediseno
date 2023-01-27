@@ -797,6 +797,28 @@ Studio2 = {
 		}
 	},
 
+    /**
+     * Pop up warning for the user to confirm the changes
+     *
+     * @param {bool} warn show warning when TRUE for ENT flavor
+     */
+    handleSaveWarn: function(warn) {
+        if (warn) {
+            app.alert.show('delete_confirmation', {
+                level: 'confirmation',
+                messages: SUGAR.language.get('ModuleBuilder', 'LBL_DELETE_CUSTOM_LAYOUTS'),
+                onConfirm: _.bind(function() {
+                    this.handleSave();
+                }, this)
+            });
+        } else {
+            this.handleSave();
+        }
+    },
+
+    /**
+     * Handle studio save
+     */
 	handleSave: function() {
         // do not save role specific view which is synchronized with the based one without deployment
         if (ModuleBuilder.state.isReset) {
@@ -817,17 +839,39 @@ Studio2 = {
 		ajaxStatus.flashStatus('Save complete',5000);
 	},
 
+    /**
+     * Pop up warning for the user to confirm the changes
+     *
+     * @param {bool} warn show warning when TRUE for ENT flavor
+     */
+    handlePublishWarn: function(warn) {
+        if (warn) {
+            app.alert.show('delete_confirmation', {
+                level: 'confirmation',
+                messages: SUGAR.language.get('ModuleBuilder', 'LBL_DELETE_CUSTOM_LAYOUTS'),
+                onConfirm: _.bind(function() {
+                    this.handlePublish();
+                }, this)
+            });
+        } else {
+            this.handlePublish();
+        }
+    },
+
+    /**
+     * Handle studio Save & Deploy
+     */
 	handlePublish: function() {
-		ajaxStatus.showStatus(SUGAR.language.get('app_strings', 'LBL_SAVING'));
+        ajaxStatus.showStatus(SUGAR.language.get('app_strings', 'LBL_SAVING'));
         ModuleBuilder.state.markAsClean();
-		this.prepareForSave();
-		// set <input type='hidden' name='action' value='saveAndPublishLayout'>
-		var saveForm = document.forms['prepareForSave'];
-		var inputField = document.createElement('input');
-		inputField.setAttribute('type','hidden');
-		inputField.setAttribute('name','action');
-		inputField.setAttribute('value','saveAndPublishLayout');
-		saveForm.appendChild(inputField);
+        this.prepareForSave();
+        // set <input type='hidden' name='action' value='saveAndPublishLayout'>
+        var saveForm = document.forms.prepareForSave;
+        var inputField = document.createElement('input');
+        inputField.setAttribute('type','hidden');
+        inputField.setAttribute('name','action');
+        inputField.setAttribute('value','saveAndPublishLayout');
+        saveForm.appendChild(inputField);
 
         var isReset = document.createElement('input');
         isReset.setAttribute('type', 'hidden');
@@ -835,8 +879,8 @@ Studio2 = {
         isReset.setAttribute('value', ModuleBuilder.state.isReset ? 1 : 0);
         saveForm.appendChild(isReset);
 
-		ModuleBuilder.submitForm('prepareForSave');
-		ajaxStatus.flashStatus(SUGAR.language.get('ModuleBuilder','LBL_DEPLOYE_COMPLETE'),5000);
+        ModuleBuilder.submitForm('prepareForSave');
+        ajaxStatus.flashStatus(SUGAR.language.get('ModuleBuilder','LBL_DEPLOYE_COMPLETE'),5000);
 	},
 	
 	checkGridLayout : function(view)

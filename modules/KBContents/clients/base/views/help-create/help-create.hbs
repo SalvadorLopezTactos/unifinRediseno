@@ -27,21 +27,23 @@
         <ul class="dashlets row-fluid">
             <li class="span12">
                 <ul class="dashlet-cell rows row-fluid">
-                    <li class="dashlet-container span12 ui-droppable">
+                    <li
+                        class="dashlet-container span12 ui-droppable h-full rounded-md mx-2 my-1 p-0 shadow hover:shadow-lg transition-shadow bg-dashlet-background hover:bg-dashlet-background-hover"
+                    >
                         <div>
-                            <div class="thumbnail dashlet ui-draggable" data-type="dashlet" data-action="droppable">
+                            <div class="thumbnail dashlet h-full flex flex-column ui-draggable" data-type="dashlet" data-action="droppable">
                                 <div data-dashlet="toolbar">
                                     <div class="dashlet-header">
                                         <div class="btn-toolbar pull-right">
                                         </div>
-                                        <h4 data-toggle="dashlet" class="dashlet-title">{{title}}</h4>
+                                        <h4 data-toggle="dashlet" class="dashlet-title text-initial">{{title}}</h4>
                                     </div>
                                 </div>
-                                <div data-dashlet="dashlet" class="dashlet-content">
+                                <div data-dashlet="dashlet" class="dashlet-content flex-grow">
                                     <div>
-                                        <div class="help-dashlet-content">
+                                        <div class="help-dashlet-content px-2 py-1">
                                             <div class="help-more">{{{more_help}}}</div>
-                                            <div class="help-body">{{nl2br body}}</div>
+                                            <div class="help-body pt-3">{{nl2br body}}</div>
                                         </div>
                                     </div>
                                 </div>

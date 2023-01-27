@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Fletë pune',
     'LBL_PURCHASED_LINE_ITEMS' => 'Artikujt e blerë të rreshtit',
 
+    'LBL_FORECASTED_LIKELY' => 'Parashikuar si të mundshme',
     'LBL_RENEWAL' => 'Rinovimi',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Mundësitë e rinovimit',
     'LBL_RENEWAL_PARENT' => 'Mundësia kryesore',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# të artikujve total të rreshtave të të ardhurave',
     'LBL_CLOSED_RLIS' => '# të artikujve të mbyllur të rreshtave të të ardhurave',
+    'LBL_CLOSED_WON_RLIS' => 'Nr. i elementeve të linjës me të ardhura të mbyllura',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Nr. i artikujve të rreshtit të të ardhurave me kohëzgjatje fleksible të shërbimit të hapur',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Ju nuk mund të fshini mundësitë të cilat përmbajnë artikuj të mbyllur të rreshtave të të ardhurave',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Një ose më shumë nga të dhënat e selektuara përmbajnë artikuj të mbyllur të rreshtave të të ardhurave dhe nuk mund të fshihen',
     'LBL_INCLUDED_RLIS' => '# i artikujve të linjës së të ardhurave të përfshira',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Përditësim i hapur',
+    'LBL_CASCADE_RLI_EDIT' => 'Përditëso artikujt në rresht të të ardhurave të hapura',
+    'LBL_CASCADE_RLI_CREATE' => 'Cakto artikujt në rresht përtej të ardhurave',
     'LBL_SERVICE_START_DATE_INVALID' => 'Data e fillimit të shërbimit nuk mund të caktohet pas datës së mbarimit të shërbimit për çdo artikull të hapur shtesë të linjës së të ardhurave.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Kuotat',
@@ -207,25 +211,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Pas fillimit të ndryshimit, raportet e artikujve të linjës të së ardhurave do të krijohen për çdo modul {{module_name}} ekzistues në sfond. Kur artikujt e linjës të së ardhurave të plotësohen dhe të disponohen, në adresën e emailit në profilin e përdoruesit do të dërgohet një njoftim. Ki parasysh se shembulli yt duhet të konfigurohet për të dërguar email nëpërmjet "Admin > Cilësimet e emailit" në mënyrë që të dërgohet njoftimi.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} ju lejon të gjurmoni shitjet individuale nga fillimi deri në fund. Çdo regjistrim i {{module_name}} përfaqëson një shitje të ardhshme, përfshin të dhënat përkatëse të shitjes dhe lidhet me regjistrime të tjera të rëndësishme, si {{quotes_module}}, {{contacts_module}} etj. Normalisht, {{module_name}} do të përpunohet në faza të ndryshme të shitjeve derisa të shënohet si "Fitim i mbyllur" apo "Humbje e mbyllur".{{plural_module_name}} mund të shfrytëzohen edhe më tej duke përdorur modulin {{forecasts_singular_module}} të Sugar për të kuptuar dhe parashikuar tendencat e shitjeve, si dhe për ta fokusuar punën në përmbushjen e kuotave të shitjeve.',
+    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale nga fillimi në fund. Secili regjistrim në {{module_name}} përfaqëson një shitje prospektive dhe përfshin të dhëna që lidhen me shitjen, si dhe regjistrime të tjera të rëndësishme, si p.sh. {{quotes_module}}, {{contacts_module}} etj. Një {{module_name}} do të kalojë zakonisht në disa faza shitjesh, derisa të shënohet si "Fitim i mbyllur" ose "Humbje e mbyllur". {{plural_module_name}} mund të shfrytëzohet edhe më tej duke përdorur modulin {{forecasts_singular_module}} të Sugar për të kuptuar dhe për të parashikuar tendencat e shitjeve, si dhe për të fokusuar punën në arritjen e kuotave të shitjeve.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} ju lejon të gjurmoni shitjet individuale dhe artikujt e linjës që u përkasin këtyre shitjeve nga fillimi deri në fund. Çdo regjistrim i {{module_name}} përfaqëson një shitje të ardhshme, përfshin të dhënat përkatëse të shitjes dhe lidhet me regjistrime të tjerë të rëndësishme, si {{quotes_module}}, {{contacts_module}} etj.
+    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale dhe artikujt e linjës që i përkasin atyre shitjeve nga fillimi në fund. Secili regjistrim në {{module_name}} përfaqëson një shitje prospektive dhe përfshin të dhëna që lidhen me shitjen, si dhe regjistrime të tjera të rëndësishme, si p.sh. {{quotes_module}}, {{contacts_module}} etj.
 
-- Modifikoni fushat e regjistrimit duke klikuar një fushë individuale ose në butonin "Modifiko"
-- Shikoni ose modifikoni lidhjet me regjistrimet e tjera në nënpanele duke kaluar nga paneli majtas poshtë te "Shikimi i të dhënave".
-- Bëni dhe shikoni komentet e përdoruesve dhe regjistroni historikun e ndryshimeve në {{activitystream_singular_module}} duke kaluar nga paneli majtas poshtë tek "Transmetimi i aktivitetit".
-- Ndiqni ose shënoni si të preferuar regjistrimin duke përdorur ikonat në të djathtë të emrit të regjistrimit.
-- Veprime të tjera shtesë disponohen në menynë zbritëse "Veprimet" që shfaqet në të djathtë të butonit "Modifiko".',
+- Modifiko fushat e regjistrimit duke klikuar një fushë individuale ose butonin "Modifiko".
+- Shiko ose modifiko lidhjet në regjistrime të tjera në nënpanele duke ndryshuar panelin poshtë majtas në "Pamja e të dhënave".
+- Bëj komente dhe shiko komentet e përdoruesve, si dhe regjistro historikun e ndryshimeve në {{activitystream_singular_module}} duke ndryshuar butonin poshtë majtas në "Rrjedha e aktivitetit".
+- Ndiq ose bëj të preferuar këtë regjistrim duke përdorur ikonën në të djathtë të emrit të regjistrimit.
+- Veprimet e tjera ofrohen në menynë me lëshim poshtë "Veprimet", në të djathtë të butonit "Modifiko".',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} ju lejon të gjurmoni shitjet individuale dhe artikujt e linjës që u përkasin këtyre shitjeve nga fillimi deri në fund. Çdo regjistrim i {{module_name}} përfaqëson një shitje të ardhshme, përfshin të dhënat përkatëse të shitjes dhe lidhet me regjistrime të tjera të rëndësishme, si {{quotes_module}}, {{contacts_module}} etj.
+    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale dhe artikujt e linjës që i përkasin atyre shitjeve nga fillimi në fund. Secili regjistrim në {{module_name}} përfaqëson një shitje prospektive dhe përfshin të dhëna që lidhen me shitjen, si dhe regjistrime të tjera të rëndësishme, si p.sh. {{quotes_module}}, {{contacts_module}} etj.
 
 Për të krijuar një {{module_name}}:
-1. Jepni vlerat për fushat sipas dëshirës.
- - Fushat e shënuara me "Patjetër" duhet të plotësohen para se të ruhen.
- - Klikoni "Shfaq më shumë" për të paraqitur fusha shtesë sipas nevojës.
-2. Klikoni "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
+1. Jep vlerat për fushat sipas dëshirës.
+ - Fushat e shënuara me "E domosdoshme" duhet të plotësohen përpara ruajtjes.
+ - Kliko "Shfaq më shumë" për të shfaqur fusha të tjera nëse është e nevojshme.
+2. Kliko "Ruaj" për të përfunduar një regjistrim të ri dhe rikthehu te faqja e mëparshme.',
 
 // END ENT/ULT
 
@@ -239,7 +243,10 @@ Për të krijuar një {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Rrjeshti i të ardhurave të ekipit tim",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'E pamundur të ndryshohet {{fieldName}}, pasi ky {{moduleSingular}} nuk ka artikuj të hapur në linjë.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ndërveprimet e mundësisë',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e mundësisë',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' nuk mund të caktohet te asnjë prej artikujve në rresht të të ardhurave sepse ato nuk janë shërbime. Dëshiron të vazhdosh me krijimin?',
+    'LBL_CASCADE_DURATION_WARNING' => ' nuk mund të caktohet te asnjë prej artikujve në rresht të të ardhurave sepse kohëzgjatjet e tyre janë të kyçura. Dëshiron të vazhdosh me krijimin?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Parashikimi i mbylljes së mundësisë',

@@ -12,7 +12,6 @@
 
 use League\OAuth2\Client\Provider\GenericProvider;
 use League\OAuth2\Client\Token\AccessToken;
-use Microsoft\Graph\Graph;
 use Microsoft\Graph\Model;
 
 /**
@@ -57,9 +56,9 @@ class ExtAPIMicrosoftEmail extends ExternalAPIBase
     /**
      * Returns the Microsoft client used to query the Microsoft Graph API
      *
-     * @return Graph
+     * @return GraphProxy
      */
-    public function getClient()
+    public function getClient() : GraphProxy
     {
         $graph = new GraphProxy();
         $graph->setAuthURL($this->getAuthURL());
@@ -72,7 +71,7 @@ class ExtAPIMicrosoftEmail extends ExternalAPIBase
      *
      * @return string
      */
-    public function getAuthURL()
+    public function getAuthURL() : string
     {
         $config = $this->getMicrosoftOauth2Config();
         $params = array(

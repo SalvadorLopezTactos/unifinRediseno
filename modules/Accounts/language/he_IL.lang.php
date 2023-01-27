@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'שם חשבון/ענף',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'מיקום',
     'LBL_PURCHASES' => 'רכישות',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'עסקאות חשבון',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן בחשבון',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'טבלאות',

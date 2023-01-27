@@ -13,7 +13,8 @@
 use Sugarcrm\Sugarcrm\Audit\EventRepository;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
-use Sugarcrm\Sugarcrm\Security\Subject\Formatter;
+use Sugarcrm\Sugarcrm\Audit\Formatter\Subject;
+use Sugarcrm\Sugarcrm\Security\Subject\Formatter as SubjectFormatter;
 
 class ModuleApi extends SugarApi {
 
@@ -159,7 +160,7 @@ class ModuleApi extends SugarApi {
                 $bean,
                 $piiFields
             )
-        );
+        ) ?? [];
 
         $fields = [];
 
@@ -221,7 +222,7 @@ class ModuleApi extends SugarApi {
             ]];
         }
 
-        $emailEvents = array_filter($events, function ($v) {
+        $emailEvents = array_filter($events ?? [], function ($v) {
             return $v['field_name'] === 'email';
         });
         $emailEventsById = array_combine(array_column($emailEvents, 'after_value_string'), $emailEvents);
@@ -246,28 +247,7 @@ class ModuleApi extends SugarApi {
 
     private function formatSourceSubject($rows)
     {
-        $subjects = array();
-        // gather all subjects
-        foreach ($rows as $k => $v) {
-            if (!empty($v['source']['subject'])) {
-                $subjects[$k] = $v['source']['subject'];
-            }
-        }
-
-        $formatter = $this->getFormatter();
-        $formattedSubjects = $formatter->formatBatch($subjects);
-
-        // merge formatted subjects into rows
-        foreach ($formattedSubjects as $k => $v) {
-            $rows[$k]['source']['subject'] = $v;
-        }
-
-        return $rows;
-    }
-
-    protected function getFormatter()
-    {
-        return Container::getInstance()->get(Formatter::class);
+        return (new Subject(Container::getInstance()->get(SubjectFormatter::class)))->formatRows($rows);
     }
 
     /**
@@ -589,7 +569,6 @@ class ModuleApi extends SugarApi {
         $sfh = new SugarFieldHandler();
         // FIXME This path should be changed with BR-1955.
         $basepath = UploadStream::path('upload://tmp/');
-        $configDir = SugarConfig::getInstance()->get('upload_dir', 'upload');
 
         foreach ($fileFields as $fieldName => $def) {
             if (empty($args[$fieldName . '_guid'])) {
@@ -630,7 +609,6 @@ class ModuleApi extends SugarApi {
                 $bean->file_ext = $extension;
             }
 
-            $destination = rtrim($configDir, '/\\') . '/' . $filename;
             // FIXME BR-1956 will address having multiple files
             // associated with a record.
             $from = UploadStream::STREAM_NAME . "://tmp/" . $args[$fieldName . '_guid'];

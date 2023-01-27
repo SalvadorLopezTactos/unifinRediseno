@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Emri i llogarisë/industria',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Vendndodhja',
     'LBL_PURCHASES' => 'Blerjet',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ndërveprimet në llogari',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e llogarisë',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafiket',

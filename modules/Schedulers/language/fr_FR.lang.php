@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Planifications des processus en fonction des délais',
 'LBL_OOTB_DATA_ARCHIVER' => 'Exécuter les archives/suppressions de données actives',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Géocodeur d&#39;enregistrements',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Résolveur de géocodeur',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Fréquence',
 'LBL_LIST_LIST_ORDER' => 'Actions planifiées :',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Pour configurer la Crontab',
 'LBL_CRON_LINUX_DESC' => 'Note : Afin d&#39;exécuter les Tâches planifiées SugarCRM, ajouter cette ligne dans votre crontab :',
 'LBL_CRON_WINDOWS_DESC' => 'Note : Afin d&#39;exécuter les Tâches planifiées SugarCRM, créer un fichier batch avec les commandes suivantes :',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'url_site' .'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Executions',
 'LBL_EXECUTE_TIME'			=> 'Date d&#39;execution',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Supprimer les fichiers temporaires',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Reconstruire les données de sécurité par équipe dénormalisées',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Mise à jour de la définition du produit',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Maps géocodeur',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Résolveur de géocodeur',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Lancer le process nocturne d&#39;envoi des Campagnes d&#39;emailing',
 'LBL_ASYNCMASSUPDATE' => 'Réaliser les mises à jour globales de manière asynchrone',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Supprime les ancients enregistrements',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Purgeur de flux d&#39;activité',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Planifications des processus en fonction des délais',
+'LBL_SUGARJOBDATAARCHIVER' => 'Exécuter les archives/suppressions de données actives',
 'LBL_PMSEENGINECRON' => 'Planificateur SugarBPM',
 );
 

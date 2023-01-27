@@ -42,14 +42,14 @@
                         });
                     }, fields);
                 }
-                _.defer(function() {
+                _.defer(() => {
                     if (this.disposed) {
                         return;
                     }
                     this.$('.error').removeClass('error');
                     this.$('.error-tooltip').remove();
-                    this.$('[data-toggle="tab"] .fa-exclamation-circle').remove();
-                }, this);
+                    this.$('[data-toggle="tab"] .sicon-warning-circle').remove();
+                });
             }
         });
     });

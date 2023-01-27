@@ -12,7 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Command;
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener\Recorder;

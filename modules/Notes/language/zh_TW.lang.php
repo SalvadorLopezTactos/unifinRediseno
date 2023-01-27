@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => '電子郵件地址：',
     'LBL_EMAIL_ATTACHMENT' => '電子郵件附件',
     'LBL_EMAIL_ATTACHMENT_FOR' => '電子郵件附件用於',
+    'LBL_NOTE_ATTACHMENT' => '附註附件',
+    'LBL_KB_ATTACHMENT' => 'KB 文檔附件',
+    'LBL_CASE_ATTACHMENT' => '案例附件',
     'LBL_FILE_MIME_TYPE' => 'Mime 類型',
     'LBL_FILE_EXTENSION' => '副檔名',
     'LBL_FILE_SOURCE' => '檔案來源',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => '備註來源',
     'LBL_SOURCE_EXTERNAL' => '外部',
     'LBL_SOURCE_INTERNAL' => '內部',
+    'LBL_PORTAL' => '入口網站',
 
     // Help Text
     // List View Help Text

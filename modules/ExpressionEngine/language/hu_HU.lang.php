@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Kifejezés motor',
-  'LBL_MODULE_NAME_SINGULAR' => 'Kifejezés motor',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Előző' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Következő' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Kibővít' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Kifejezés motor',
+    'LBL_MODULE_NAME_SINGULAR' => 'Kifejezés motor',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Előző' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Következő' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Kibővít' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Ismeretlen mező',
+];

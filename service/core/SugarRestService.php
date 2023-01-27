@@ -69,14 +69,6 @@ class SugarRestService extends SugarWebService{
 		$GLOBALS['log']->info('End: SugarRestService->__construct');
 	} // ctor
 
-	/**
-	 * Its a no op method
-	 *
-	 * @access public
-	 */
-	public function registerType($name, $typeClass, $phpType, $compositor, $restrictionBase, $elements, $attrs, $arrayType){
-  	} // fn
-
   	/**
   	 * This method registers all the functions you want to expose as services with REST
   	 *

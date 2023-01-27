@@ -83,6 +83,8 @@ class RevenueLineItem extends SugarBean
     public $service;
     public $renewal;
 
+    public $forecasted_likely;
+
     /**
      * @public String      The Current Sales Stage
      */
@@ -251,7 +253,6 @@ class RevenueLineItem extends SugarBean
 
         $this->setDurationFields();
         $this->setServiceEndDate();
-        $this->verifyPurchaseGeneration();
 
         $id = parent::save($check_notify);
         // this only happens when ent is built out
@@ -263,28 +264,6 @@ class RevenueLineItem extends SugarBean
         return $id;
     }
 
-    /**
-     * Sets the generate purchase flag to empty for non Sell instances
-     */
-    protected function verifyPurchaseGeneration() : void
-    {
-        if (!$this->isLicensedForSell()) {
-            $this->generate_purchase = '';
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getFieldDefinitions(?string $property = null, array $filter = array()) : array
-    {
-        // Since this field doesn't exist outside of Sell, but still exists in vardef
-        $defs = parent::getFieldDefinitions($property, $filter);
-        if (!$this->isLicensedForSell()) {
-            unset($defs['generate_purchase']['default']);
-        }
-        return $defs;
-    }
 
     /**
      * Calculate service_end_date for service RLI.
@@ -801,7 +780,7 @@ class RevenueLineItem extends SugarBean
         global $current_user;
 
         $ret = [];
-        if (Opportunity::usingRevenueLineItems() && $current_user->hasLicense(Subscription::SUGAR_SELL_KEY)) {
+        if (Opportunity::usingRevenueLineItems()) {
             $jobGroup = md5(microtime());
             $jq = new SugarJobQueue();
 

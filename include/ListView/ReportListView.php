@@ -43,8 +43,8 @@ class ReportListView  extends ListView {
 	//related to reporting
 	var $export_type = "Normal";
 
-	function setup($seed_object, $data_object=null, $x_block, $html_var, $interlock=false){
-	
+    public function setup(SugarBean $seed_object, ?SugarBean $data_object, string $x_block, string $html_var, bool $interlock = false)
+    {
 		$this->seed_object = $seed_object;
 		$this->x_block = $x_block;
 		$this->html_var = $html_var;	

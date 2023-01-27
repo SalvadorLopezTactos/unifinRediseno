@@ -16,13 +16,11 @@
 	{$SAVED_SEARCHES_OPTIONS}
 </select>
 <script>
-{literal}
 	//if the function exists, call the function that will populate the searchform
 	//labels based on the value of the saved search dropdown
 	if(typeof(fillInLabels)=='function'){
 		fillInLabels();
 	}
-{/literal}	
 </script>
 {/if}
 

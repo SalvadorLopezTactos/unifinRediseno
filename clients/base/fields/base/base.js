@@ -19,6 +19,11 @@
     plugins: ['MetadataEventDriven'],
 
     /**
+     * Should we initialize the default field value?
+     */
+    shouldInitDefaultValue: false,
+
+    /**
      * @inheritdoc
      *
      * Some plugins use events which prevents {@link View.Field#delegateEvents}
@@ -47,6 +52,10 @@
 
         if (app.tooltip) {
             this.on('render', app.tooltip.clear);
+        }
+
+        if (this.shouldInitDefaultValue) {
+            this._initDefaultValue();
         }
     },
 
@@ -88,5 +97,29 @@
      */
     unformat: function(value) {
         return _.isString(value) ? value.trim() : value;
+    },
+
+    /**
+     * Set the default field value from metadata for a new model
+     *  [
+     *      ...
+     *      'default' => '...',
+     *      ...
+     *  ]
+     *
+     * This function makes 2 assumptions:
+     *      1. the default key is named 'default'
+     *      2. the default value requires no parsing
+     *
+     * @private
+     */
+    _initDefaultValue: function() {
+        if (!this.model.isNew() || this.model.get(this.name) || !this.def.default) {
+            return;
+        }
+
+        if (_.isFunction(this.model.setDefault)) {
+            this.model.setDefault(this.name, this.def.default);
+        }
     }
 })

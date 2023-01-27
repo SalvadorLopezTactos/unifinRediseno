@@ -89,7 +89,7 @@ class SugarFieldCollection extends SugarFieldBase {
                     if(is_numeric($num)){
                         settype($num, 'int');
                         if(strpos($name, $field . "_collection_extra_") !== false){
-                            $extra_field = substr($name, $field . "_collection_extra_" . $num);
+                            $extra_field = null;
                             $link_field[$num]['extra_field'][$extra_field]=$value;
                         }else if ($name == $field . "_collection_" . $num){
                             $link_field[$num]['name']=$value;
@@ -356,6 +356,7 @@ class SugarFieldCollection extends SugarFieldBase {
                 'module' => $bean->module_name,
                 'record' => $bean->id,
                 'collection_name' => $field['name'],
+                'filter' => $field['filter'] ?? [],
             )
         );
 

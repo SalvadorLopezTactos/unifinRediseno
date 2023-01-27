@@ -59,13 +59,6 @@ $dictionary['product_bundle_product'] = array(
             ),
         ),
         array(
-            'name' => 'idx_pbp_quote',
-            'type' => 'index',
-            'fields' => array(
-                'product_id',
-            ),
-        ),
-        array(
             'name' => 'idx_pbp_bq',
             'type' => 'alternate_key',
             'fields' => array(

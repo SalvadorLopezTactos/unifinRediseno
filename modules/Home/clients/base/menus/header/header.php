@@ -16,12 +16,12 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'label' => 'LBL_CREATE_DASHBOARD_MENU',
         'acl_action' => 'edit',
         'acl_module' => $module_name,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
     ),
     array(
         'route' => '#activities',
         'label' => 'LBL_ACTIVITIES',
-        'icon' => 'fa-clock-o',
+        'icon' => 'sicon-clock',
     ),
     array(
         'type' => 'divider',
@@ -31,7 +31,7 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'label' => 'LBL_MANAGE_DASHBOARDS',
         'acl_action' => 'read',
         'acl_module' => 'Dashboards',
-        'icon' => 'fa-bars',
+        'icon' => 'sicon-reports',
         'label_module' => 'Dashboards',
     ),
 );

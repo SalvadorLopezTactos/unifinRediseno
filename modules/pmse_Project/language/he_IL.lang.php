@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'נוצר על ידי משתמש',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'שונה לאחרונה על ידי משתמש',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'דוא"ל מערכת',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'תבנית מסמך',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'מיזוג מסמכים',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'בחר...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'מיזוג מסמכים ל-PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'מיזוג מסמכים',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'כלל עסקי',
     'LBL_PMSE_LABEL_RULE' => 'כלל',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'עדכון של רשומות בלבד (כל העדכונים - ראו טקסט עזרה)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'רשומות חדשות או עדכון ראשון',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'רשומות חדשות וכל העדכונים',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'שינוי קשר הגומלין',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'בחר מתי התהליך יתחיל.<br><br>חדש: הפעלת תהליך בעת יצירת רשומה חדשה.<br><br>עדכון ראשון: התהליך מופעל רק בפעם הראשונה שבה רשומה קיימת עומדת בקריטריונים.<br><br>כל העדכונים: התהליך מופעל בכל פעם שבה רשומה קיימת עומדת בקריטריונים.<br><br>רשומות חדשות או עדכון ראשון: התהליך מופעל רק בפעם הראשונה שבה רשומה עומדת בקריטריונים – במהלך יצירת הרשומה או במהלך עדכון שלה.<br><br>רשומות חדשות וכל העדכונים: התהליך מופעל בכל פעם עבור כל הרשומות החדשות והקיימות.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'בחר מתי התהליך יתחיל.<br><br>חדש: הפעלת תהליך בעת יצירת רשומה חדשה.<br><br>עדכון ראשון: התהליך מופעל רק בפעם הראשונה שבה רשומה קיימת עומדת בקריטריונים.<br><br>כל העדכונים: התהליך מופעל בכל פעם שבה רשומה קיימת עומדת בקריטריונים.<br><br>רשומות חדשות או עדכון ראשון: התהליך מופעל רק בפעם הראשונה שבה רשומה עומדת בקריטריונים – במהלך יצירת הרשומה או במהלך עדכון שלה.<br><br>רשומות חדשות וכל העדכונים: התהליך מופעל בכל פעם עבור כל הרשומות החדשות והקיימות.<br><br>שינויים בקשרי גומלין: התהליך מופעל בכל פעם שיש שינוי בקשר גומלין.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'בחר במודול שוגר להפעלת הטריגר',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'תאריך קבוע',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'שגיאה',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'הערכת שינוי בקשר גומלין',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'שדות',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'מודול הערכת שדה',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'מודול',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'כל הרשומות הקשורות',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'כל רשומה קשורה שהיא',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'נוסף',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'הוסר',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'נוסף או הוסר',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'כל קשר גומלין',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'זמן ריצה',
 

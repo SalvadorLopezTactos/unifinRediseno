@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID d&#39;adreça electrònica de Contesta-a',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Adreça electrònica de Contesta-a',
     'LBL_PRIMARY_TEAM' => 'Equip principal',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Compte d&#39;enviament preferit',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a la configuració dels correus electrònics',
 );

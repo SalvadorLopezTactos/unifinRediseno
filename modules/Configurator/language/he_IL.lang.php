@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'תבנית זמן ברירת מחדל',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'הצג זמני תגובת שרת',
+    'FREEZE_FIRST_COLUMN' => 'אפשר הקפאת עמודות',
+    'FREEZE_FIRST_COLUMN_HELP' => 'הפעל הגדרה זו כדי לאפשר למשתמשים להקפיא את העמודה הראשונה במגוון של ' .
+        'תצוגות רשימה, כולל תצוגות רשימה של מודולים, פאנלי-משנה, חלוניות ומסופים.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'התחבר לשאילתות אטיות',
     'LOCK_HOMEPAGE_HELP'=>'הגדרה זו נועדה למנוע את<BR> 1) ההוספה של דפי בית וחלונות חדשים במודול הבית, <BR>2) התאמה אישית של השמת חלונית בדפי הבית על ידי גרירה ושחרור.',
     'CURRENT_LOGO'=>'לוגו נוכחי:',
+    'CURRENT_LOGO_DARK' => 'לוגו מצב כהה נוכחי:',
     'CURRENT_LOGO_HELP'=>'This logo is displayed at the top left-hand corner of the Sugar application.',
+    'CURRENT_LOGO_DARK_HELP' => "הלוגו הזה מוצג בפינה הימנית של הכותרת התחתונה כשהאפליקציה של Sugar במצב כהה, בהתאם להעדפת המראה של המשתמש.",
     'NEW_LOGO'=>'בחר לוגו:',
     'NEW_LOGO_HELP' => 'The image file format can be either .png or .jpg.<BR>The recommended size is 212x40 px.',
+    'NEW_LOGO_DARK' => 'בחר לוגו מצב כהה:',
     'NEW_LOGO_HELP_NO_SPACE' => 'סוג קובץ התמונה יכול להיות .png או .jpg. הגובה המרבי הוא 24px והרוחב המרבי הוא 450px. כל תמונה שהועלתה והגודל שלה גדול יותר בכל כיוון תשתנה לממדים מרביים אלה. שם קובץ התמונה לא יכיל תו רווח.',
     'NEW_QUOTE_LOGO'=>'העלה לוגו מחירים חדש',
     'NEW_QUOTE_LOGO_HELP'=>'סוג קובץ התמונה הנדרש הוא .jpg.<BR>הגודל המומלץ הוא 867x74 px.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'המשך',
     'LBL_WIZARD_FINISH_TAB' => 'סיום',
     'LBL_WIZARD_FINISH_TITLE' => 'תצורת מערכת בסיסית הסתיימה',
-    'LBL_WIZARD_FINISH' => 'Click <b>Continue</b> to configure your user settings.<br/><br /><br />To configure additional system settings, click <a href="index.php?module=Administration&action=index" target="_blank">here</a>.',
+    'LBL_WIZARD_FINISH' => 'לחץ על <b>המשך</b> כדי לקבוע את הגדרות המשתמש.<br/><br />
+לקביעת הגדרות נוספות של המערכת, לחץ <a href="#Administration" target="_blank">כאן</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'מיתוג',
     'LBL_WIZARD_SYSTEM_DESC' => 'Provide your organization&#39;s name and logo in order to brand your Sugar.',
     'LBL_WIZARD_LOCALE_DESC' => 'ציין כיצד תרצה שיופיעו נתונים ב-Sugar. לפי המיקום הגיאוגרפי שלך. ההגדרות שתזין כאן ייהפכו להגדרות ברירת מחדל. משתמשים יוכלו להגדיר את ההעדפות שלהם.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'טוען...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'מחק' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'ברוך הבא' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'לוגו' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'לוגו' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'לוגו מצב כהה',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* The Reports module is only available for the Sugar Mobile native clients',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* מודול דוחות אינו זמין לתצוגת דפדפן במובייל',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

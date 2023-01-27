@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,23 +18,142 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class DeviceManagementExchangeConnector extends Entity
 {
     /**
+    * Gets the connectorServerName
+    * The name of the server hosting the Exchange Connector.
+    *
+    * @return string|null The connectorServerName
+    */
+    public function getConnectorServerName()
+    {
+        if (array_key_exists("connectorServerName", $this->_propDict)) {
+            return $this->_propDict["connectorServerName"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the connectorServerName
+    * The name of the server hosting the Exchange Connector.
+    *
+    * @param string $val The connectorServerName
+    *
+    * @return DeviceManagementExchangeConnector
+    */
+    public function setConnectorServerName($val)
+    {
+        $this->_propDict["connectorServerName"] = $val;
+        return $this;
+    }
+    
+    /**
+    * Gets the exchangeAlias
+    * An alias assigned to the Exchange server
+    *
+    * @return string|null The exchangeAlias
+    */
+    public function getExchangeAlias()
+    {
+        if (array_key_exists("exchangeAlias", $this->_propDict)) {
+            return $this->_propDict["exchangeAlias"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the exchangeAlias
+    * An alias assigned to the Exchange server
+    *
+    * @param string $val The exchangeAlias
+    *
+    * @return DeviceManagementExchangeConnector
+    */
+    public function setExchangeAlias($val)
+    {
+        $this->_propDict["exchangeAlias"] = $val;
+        return $this;
+    }
+    
+    /**
+    * Gets the exchangeConnectorType
+    * The type of Exchange Connector Configured. Possible values are: onPremises, hosted, serviceToService, dedicated.
+    *
+    * @return DeviceManagementExchangeConnectorType|null The exchangeConnectorType
+    */
+    public function getExchangeConnectorType()
+    {
+        if (array_key_exists("exchangeConnectorType", $this->_propDict)) {
+            if (is_a($this->_propDict["exchangeConnectorType"], "\Microsoft\Graph\Model\DeviceManagementExchangeConnectorType") || is_null($this->_propDict["exchangeConnectorType"])) {
+                return $this->_propDict["exchangeConnectorType"];
+            } else {
+                $this->_propDict["exchangeConnectorType"] = new DeviceManagementExchangeConnectorType($this->_propDict["exchangeConnectorType"]);
+                return $this->_propDict["exchangeConnectorType"];
+            }
+        }
+        return null;
+    }
+    
+    /**
+    * Sets the exchangeConnectorType
+    * The type of Exchange Connector Configured. Possible values are: onPremises, hosted, serviceToService, dedicated.
+    *
+    * @param DeviceManagementExchangeConnectorType $val The exchangeConnectorType
+    *
+    * @return DeviceManagementExchangeConnector
+    */
+    public function setExchangeConnectorType($val)
+    {
+        $this->_propDict["exchangeConnectorType"] = $val;
+        return $this;
+    }
+    
+    /**
+    * Gets the exchangeOrganization
+    * Exchange Organization to the Exchange server
+    *
+    * @return string|null The exchangeOrganization
+    */
+    public function getExchangeOrganization()
+    {
+        if (array_key_exists("exchangeOrganization", $this->_propDict)) {
+            return $this->_propDict["exchangeOrganization"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the exchangeOrganization
+    * Exchange Organization to the Exchange server
+    *
+    * @param string $val The exchangeOrganization
+    *
+    * @return DeviceManagementExchangeConnector
+    */
+    public function setExchangeOrganization($val)
+    {
+        $this->_propDict["exchangeOrganization"] = $val;
+        return $this;
+    }
+    
+    /**
     * Gets the lastSyncDateTime
     * Last sync time for the Exchange Connector
     *
-    * @return \DateTime The lastSyncDateTime
+    * @return \DateTime|null The lastSyncDateTime
     */
     public function getLastSyncDateTime()
     {
         if (array_key_exists("lastSyncDateTime", $this->_propDict)) {
-            if (is_a($this->_propDict["lastSyncDateTime"], "\DateTime")) {
+            if (is_a($this->_propDict["lastSyncDateTime"], "\DateTime") || is_null($this->_propDict["lastSyncDateTime"])) {
                 return $this->_propDict["lastSyncDateTime"];
             } else {
                 $this->_propDict["lastSyncDateTime"] = new \DateTime($this->_propDict["lastSyncDateTime"]);
@@ -60,43 +178,10 @@ class DeviceManagementExchangeConnector extends Entity
     }
     
     /**
-    * Gets the status
-    * Exchange Connector Status. Possible values are: none, connectionPending, connected, disconnected.
-    *
-    * @return DeviceManagementExchangeConnectorStatus The status
-    */
-    public function getStatus()
-    {
-        if (array_key_exists("status", $this->_propDict)) {
-            if (is_a($this->_propDict["status"], "Microsoft\Graph\Model\DeviceManagementExchangeConnectorStatus")) {
-                return $this->_propDict["status"];
-            } else {
-                $this->_propDict["status"] = new DeviceManagementExchangeConnectorStatus($this->_propDict["status"]);
-                return $this->_propDict["status"];
-            }
-        }
-        return null;
-    }
-    
-    /**
-    * Sets the status
-    * Exchange Connector Status. Possible values are: none, connectionPending, connected, disconnected.
-    *
-    * @param DeviceManagementExchangeConnectorStatus $val The status
-    *
-    * @return DeviceManagementExchangeConnector
-    */
-    public function setStatus($val)
-    {
-        $this->_propDict["status"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the primarySmtpAddress
     * Email address used to configure the Service To Service Exchange Connector.
     *
-    * @return string The primarySmtpAddress
+    * @return string|null The primarySmtpAddress
     */
     public function getPrimarySmtpAddress()
     {
@@ -125,7 +210,7 @@ class DeviceManagementExchangeConnector extends Entity
     * Gets the serverName
     * The name of the Exchange server.
     *
-    * @return string The serverName
+    * @return string|null The serverName
     */
     public function getServerName()
     {
@@ -151,64 +236,35 @@ class DeviceManagementExchangeConnector extends Entity
     }
     
     /**
-    * Gets the connectorServerName
-    * The name of the server hosting the Exchange Connector.
+    * Gets the status
+    * Exchange Connector Status. Possible values are: none, connectionPending, connected, disconnected.
     *
-    * @return string The connectorServerName
+    * @return DeviceManagementExchangeConnectorStatus|null The status
     */
-    public function getConnectorServerName()
+    public function getStatus()
     {
-        if (array_key_exists("connectorServerName", $this->_propDict)) {
-            return $this->_propDict["connectorServerName"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the connectorServerName
-    * The name of the server hosting the Exchange Connector.
-    *
-    * @param string $val The connectorServerName
-    *
-    * @return DeviceManagementExchangeConnector
-    */
-    public function setConnectorServerName($val)
-    {
-        $this->_propDict["connectorServerName"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the exchangeConnectorType
-    * The type of Exchange Connector Configured. Possible values are: onPremises, hosted, serviceToService, dedicated.
-    *
-    * @return DeviceManagementExchangeConnectorType The exchangeConnectorType
-    */
-    public function getExchangeConnectorType()
-    {
-        if (array_key_exists("exchangeConnectorType", $this->_propDict)) {
-            if (is_a($this->_propDict["exchangeConnectorType"], "Microsoft\Graph\Model\DeviceManagementExchangeConnectorType")) {
-                return $this->_propDict["exchangeConnectorType"];
+        if (array_key_exists("status", $this->_propDict)) {
+            if (is_a($this->_propDict["status"], "\Microsoft\Graph\Model\DeviceManagementExchangeConnectorStatus") || is_null($this->_propDict["status"])) {
+                return $this->_propDict["status"];
             } else {
-                $this->_propDict["exchangeConnectorType"] = new DeviceManagementExchangeConnectorType($this->_propDict["exchangeConnectorType"]);
-                return $this->_propDict["exchangeConnectorType"];
+                $this->_propDict["status"] = new DeviceManagementExchangeConnectorStatus($this->_propDict["status"]);
+                return $this->_propDict["status"];
             }
         }
         return null;
     }
     
     /**
-    * Sets the exchangeConnectorType
-    * The type of Exchange Connector Configured. Possible values are: onPremises, hosted, serviceToService, dedicated.
+    * Sets the status
+    * Exchange Connector Status. Possible values are: none, connectionPending, connected, disconnected.
     *
-    * @param DeviceManagementExchangeConnectorType $val The exchangeConnectorType
+    * @param DeviceManagementExchangeConnectorStatus $val The status
     *
     * @return DeviceManagementExchangeConnector
     */
-    public function setExchangeConnectorType($val)
+    public function setStatus($val)
     {
-        $this->_propDict["exchangeConnectorType"] = $val;
+        $this->_propDict["status"] = $val;
         return $this;
     }
     
@@ -216,7 +272,7 @@ class DeviceManagementExchangeConnector extends Entity
     * Gets the version
     * The version of the ExchangeConnectorAgent
     *
-    * @return string The version
+    * @return string|null The version
     */
     public function getVersion()
     {
@@ -238,64 +294,6 @@ class DeviceManagementExchangeConnector extends Entity
     public function setVersion($val)
     {
         $this->_propDict["version"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the exchangeAlias
-    * An alias assigned to the Exchange server
-    *
-    * @return string The exchangeAlias
-    */
-    public function getExchangeAlias()
-    {
-        if (array_key_exists("exchangeAlias", $this->_propDict)) {
-            return $this->_propDict["exchangeAlias"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the exchangeAlias
-    * An alias assigned to the Exchange server
-    *
-    * @param string $val The exchangeAlias
-    *
-    * @return DeviceManagementExchangeConnector
-    */
-    public function setExchangeAlias($val)
-    {
-        $this->_propDict["exchangeAlias"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the exchangeOrganization
-    * Exchange Organization to the Exchange server
-    *
-    * @return string The exchangeOrganization
-    */
-    public function getExchangeOrganization()
-    {
-        if (array_key_exists("exchangeOrganization", $this->_propDict)) {
-            return $this->_propDict["exchangeOrganization"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the exchangeOrganization
-    * Exchange Organization to the Exchange server
-    *
-    * @param string $val The exchangeOrganization
-    *
-    * @return DeviceManagementExchangeConnector
-    */
-    public function setExchangeOrganization($val)
-    {
-        $this->_propDict["exchangeOrganization"] = $val;
         return $this;
     }
     

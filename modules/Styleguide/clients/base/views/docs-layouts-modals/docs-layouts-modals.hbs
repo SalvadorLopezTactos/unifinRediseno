@@ -13,9 +13,11 @@
 <!-- Modal
 ================================================== -->
 <section id="modals">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <div class="row-fluid">
     <div class="span3 columns">
@@ -138,7 +140,7 @@
         <div>
           <div class="modal-header header">
             <div class="buttons pull-right">
-                <a href="javascript:void(0);" class="close" data-dismiss="modal" data-original-title="Close"><i class="fa fa-times fa-sm"></i></a>
+                <a href="javascript:void(0);" class="close" data-dismiss="modal" data-original-title="Close"><i class="sicon sicon-close"></i></a>
             </div>
             <h3 class="title">
                 Mass Update
@@ -167,7 +169,7 @@
                 <h4>Datepicker on span in a modal</h4>
                 <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy" rel="datepicker">
                   <input class="span2" size="16" type="text" value="" placeholder="mm-dd-yyyy">
-                  <span class="add-on"><i class="fa fa-calendar"></i></span>
+                  <span class="add-on"><i class="sicon sicon-calendar"></i></span>
                 </div>
 
                 <h4>Datepicker and Timepicker on input in a modal</h4>

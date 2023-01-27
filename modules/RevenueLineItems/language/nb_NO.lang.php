@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Fornyelse omsetningspost-ID',
     'LBL_PARENT_RLIS' => 'Overordnede omsetningsvarelinjer',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Overordnede omsetningsvarelinjer',
+    'LBL_FORECASTED_LIKELY' => 'Sannsynlig prognose',
     'LBL_EXPERT_ID' => 'Produkt ekspert',
     'LBL_FORECAST' => 'Inkluder i prognose',
     'LBL_SUBTOTAL' => 'Delsum',

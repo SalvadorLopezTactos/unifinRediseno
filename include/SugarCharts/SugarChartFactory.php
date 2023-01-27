@@ -27,7 +27,7 @@ class SugarChartFactory
     public static function getInstance($chartEngine = '', $module = '')
     {
         global $sugar_config;
-        $defaultEngine = "sucrose";
+        $defaultEngine = "chartjs";
         //fall back to the default Js Engine if config is not defined
         if (empty($sugar_config['chartEngine'])) {
             $sugar_config['chartEngine'] = $defaultEngine;

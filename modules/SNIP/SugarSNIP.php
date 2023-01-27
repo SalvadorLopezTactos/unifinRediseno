@@ -232,13 +232,12 @@ class SugarSNIP
         if ($connectionfailed)
             return false;
         else {
-            if ($this->last_result->result == 'ok') {
+            if ($response) {
                 $this->setSnipEmail('');
 
                 // change snip user's password for security purposes
                 $user = $this->getSnipUser();
-                $token = $this->deleteSnipTokens($user);
-                $user->user_hash = strtolower(md5(time().mt_rand()));
+                $this->deleteSnipTokens($user);
                 $user->save();
             }
 

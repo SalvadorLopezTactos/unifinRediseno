@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Nënvizimi i Sugar është shtuar',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Panelet do të ri-organizohen, jeni të sigurt që dëshironi të ndryshoni planin e kolonës?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'A jeni të sigurt që dëshironi të largoni nënvizimin e Sugar?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Asnjë panel nuk është konfiguruar',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Asnjë nënvizim nuk është konfiguruar',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Krijo panel',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Web faqe',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Web faqe',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Kodi i burimit',
   'LBL_SOURCE_SUGAR' => 'Sugar - Në botë më i njohur për shitje të fuqisë së informacioneve automatike aplikacioni është i krijuar nga SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - Një model makinë për PHP krijuar nga Barnabës Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - Një grup i klasave PHP që lejojnë zhvilluesve të krijojnë dhe të konsumojnë shërbimet e internetit të krijuara nga NuSphere Corporation dhe dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Një kalendar për hyrjen në datat e krijuara nga Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Biblioteka për krijimin e dokumenteve PDF të krijuar nga Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - ImplWebDAV Server në PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Ndihma tregon informacione përkatëse për modulin e shfaqur, ofron hapa të detajuar për kryerjen e disa veprimeve në modul dhe të ridrejton në informacionin dhe mbështetjen e mëtejshme.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtri',
+
+    'LBL_ABOUT_VERSION' => 'Ti po përdor versionin {{version}} me licencën(at) e mëposhtme:',
 );

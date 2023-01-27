@@ -14,7 +14,7 @@ namespace Sugarcrm\Sugarcrm\Dbal;
 
 use Doctrine\DBAL\Cache\QueryCacheProfile;
 use Doctrine\DBAL\Portability\Connection as BaseConnection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Sugarcrm\Sugarcrm\Dbal\Query\QueryBuilder;
 
 /**
@@ -51,7 +51,7 @@ class Connection extends BaseConnection
     public function executeUpdate($query, array $params = array(), array $types = array())
     {
         try {
-            return parent::executeUpdate($query, $params, $types);
+            return parent::executeStatement($query, $params, $types);
         } catch (DBALException $e) {
             $this->logException($e);
             throw $e;

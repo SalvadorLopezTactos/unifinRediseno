@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Panelis pridėtas',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Dashlets will be re-arranged, are you sure you want to change the column layout?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Ar tikrai norite išimti šį panelį?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Nėra sukonfigūruotos ataskaitų srities',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Nėra sukonfigūruoto skydelio',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Sukurti ataskaitų sritį',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Tinklalapis',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Tinklalapis',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Kodo šaltinis',
   'LBL_SOURCE_SUGAR' => 'Sugar - populiariausia pasaulyje atviro kodo klientų valdymo sistema',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - PHP šablonų variklis PHP, kurį sukūrė Barnabás Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - PHP klasių rinkinys, kurį sukūrė NuSphere Corporation ir Dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS kalendorius - Kalendorius datoms įvesti, kurį sukūrė Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - PDF dokumentų generavimo biblioteka, kurią sukūrė Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - WebDAV serverio įgyvendinimas PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Žinyne nurodoma tam tikra informacija apie šiuo metu peržiūrimą modulį, pateikiamas išsamus aprašymas, kaip atlikti kai kuriuos modulio veiksmus ir nukreipiama, kur ieškoti išsamesnės informacijos ir pagalbos.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtruoti',
+
+    'LBL_ABOUT_VERSION' => 'Naudojate {{version}} versiją su šia (-omis) licencija (-omis):',
 );

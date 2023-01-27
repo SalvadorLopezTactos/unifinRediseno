@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'アカウント名/業種',
     'LBL_RENEWALS_CONSOLE_LOCATION' => '場所',
     'LBL_PURCHASES' => '購入',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'アカウント通信',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'アカウントのタイムライン',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'チャート',

@@ -92,7 +92,15 @@ class TemplateHTML extends TemplateField{
 		$def['dbType'] = isset($this->ext3) ? $this->ext3 : 'text' ;
         return array_merge($def, $this->get_additional_defs());
     }
-    
+
+    /**
+     * @param DynamicField $dynamicField
+     * @return array
+     */
+    public function getContainedDefs(DynamicField $dynamicField): array
+    {
+        return [];
+    }
     
 }
 

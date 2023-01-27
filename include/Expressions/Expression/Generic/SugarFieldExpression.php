@@ -109,31 +109,22 @@ class SugarFieldExpression extends GenericExpression
         }
     }
 
-    protected function getLinkField($fieldName)
+    /**
+     * Fetches the beans related through the given link name
+     *
+     * @param string $linkName the name of the link field to fetch related beans through
+     * @return array the list of beans related through the given link
+     * @throws Exception
+     */
+    protected function getLinkField($linkName)
     {
-        if ((empty($this->context->$fieldName) || !is_a($this->context->$fieldName, "Link2"))
-            && !$this->context->load_relationship($fieldName)
+        if ((empty($this->context->$linkName) || !is_a($this->context->$linkName, "Link2"))
+            && !$this->context->load_relationship($linkName)
         ) {
-            throw new Exception("Unable to load relationship $fieldName");
+            throw new Exception("Unable to load relationship $linkName");
         }
 
-
-        if (empty($this->context->$fieldName)) {
-            throw new Exception("Relationship $fieldName was not set");
-        }
-
-        if (SugarBean::inOperation('delete')) {
-            // if we are in a delete operation, always re-fetch the relationships beans
-            // as one of the could have changed and we want the freshest set from the db
-            $this->context->$fieldName->beans = null;
-            $this->context->$fieldName->resetLoaded();
-        } elseif (isset($this->context->$fieldName->beans)) {
-            return $this->context->$fieldName->beans;
-        }
-
-        $beans = $this->context->$fieldName->getBeans();
-
-        return $beans;
+        return $this->context->$linkName->getBeansForSugarLogic();
     }
 
 

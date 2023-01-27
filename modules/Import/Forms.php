@@ -141,7 +141,7 @@ function getControl(
     if ( !isset($focus) || !($focus instanceof SugarBean) )
         $focus = BeanFactory::newBean($module);
     // create the dropdowns for the parent type fields
-    if ( $vardef['type'] == 'parent_type' ) {
+    if (!empty($vardef['type']) && $vardef['type'] == 'parent_type') {
         $focus->field_defs[$vardef['name']]['options'] = $focus->field_defs[$vardef['group']]['options'];
     }
     $vardefFields = $focus->getFieldDefinitions();

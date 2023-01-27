@@ -105,6 +105,17 @@
     multiSourceFields: ['call_recording_url', 'contact_id'],
 
     /**
+     * A list of modules that will be searched for matching records when a
+     * contact starts
+     */
+    searchModules: ['Contacts', 'Accounts', 'Leads', 'Cases'],
+
+    /**
+     * Stores contextual information about AWS contacts by AWS contact ID
+     */
+    recordMatchContexts: {},
+
+    /**
      * @inheritdoc
      */
     bindDataChange: function() {
@@ -114,7 +125,10 @@
             this.loadCCP();
             this.resize();
         }, this);
-        this.layout.on('omniconsole:toggle', this.resize, this);
+
+        // Event listener for when the mode of the console changes
+        this.layout.on('omniconsole:mode:set', this.resize, this);
+
         // Event listener for manual refreshes
         $(window).on('beforeunload', _.bind(this._warnOnRefresh, this));
 
@@ -138,13 +152,10 @@
      * @private
      */
     _determineTop: function() {
+        // Start by getting the top of the detail panel
         var detailPanel = this.layout.getComponent('omnichannel-detail');
-        var top = parseInt(detailPanel.$el.css('top'), 10);
-        // add the height of detail panel if its visible
-        if (this.layout.isExpanded()) {
-            top += parseInt(detailPanel.$el.css('height'), 10) + 1;
-        }
-        return top;
+
+        return parseInt(detailPanel.$el.css('top'), 10) + parseInt(detailPanel.$el.css('height'), 10) + 1;
     },
 
     /**
@@ -164,7 +175,7 @@
         try {
             var self = this;
             // Load the connect-streams library and initialize the CCP
-            $.getScript('include/javascript/amazon-connect/amazon-connect-1.4.9-1-gf9242a0.js', function() {
+            $.getScript('include/javascript/amazon-connect/amazon-connect-streams-1.6.9.js', function() {
                 // Load chat library here, must be loaded after connect-streams
                 $.getScript('include/javascript/amazon-connect/amazon-connect-chat.js', function() {
                     self.libraryLoaded = true;
@@ -278,6 +289,14 @@
     },
 
     /**
+     * Gets the model for the current active contact
+     * @return {Object} active model
+     */
+    getActiveModel: function() {
+        return this.activeContact ? this.connectionRecords[this.activeContact.getContactId()] : null;
+    },
+
+    /**
      * Load contact event listeners.
      */
     loadContactEventListeners: function() {
@@ -286,6 +305,12 @@
         connect.core.onViewContact(function(event) {
             if (self.connectedContacts[event.contactId]) {
                 self._setActiveContact(event.contactId);
+
+                app.events.trigger(
+                    'omniconsole:contact:changed',
+                    this.activeContact || null,
+                    this.activeContact ? this.connectionRecords[this.activeContact.getContactId()] : null
+                );
             }
         });
 
@@ -295,7 +320,9 @@
                 self.loadChatListeners(connection);
             }
 
-            contact.onConnecting(function() {
+            // Listener for when a connection is attempted (i.e. when the CCP
+            // starts ringing)
+            contact.onConnecting(function(contact) {
                 if (app.omniConsole.isConfigPaneExpanded) {
                     connection.destroy();
                     app.alert.show('finish_configuring', {
@@ -303,10 +330,15 @@
                         messages: app.lang.get('LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL'),
                     });
                 } else {
+                    // Create context information about the contact
+                    self._createRecordMatchContext(contact);
+
                     self.layout.open();
                 }
             });
 
+            // Listener for when a connection is made (i.e. the call/chat is
+            // answered)
             contact.onConnected(function(contact) {
                 self.styleFooterButton('active-session');
                 self.addContactToContactsList(contact);
@@ -320,7 +352,396 @@
                     // if the call/chat has ended but the contact is not closed
                     self._handleConnectionEnd(contact);
                 }
+
+                // Clear any context information created for the contact
+                self._deleteRecordMatchContext(contact);
             });
+        });
+    },
+
+    /**
+     * Creates and stores an object that contains contextual information about
+     * record matching on an AWS contact
+     *
+     * @param {Object} contact connect-streams Contact object
+     * @private
+     */
+    _createRecordMatchContext: function(contact) {
+        var context = {};
+        var contactAttrs = contact.getAttributes();
+
+        if (this.isChat(contact)) {
+            // The Case number from Portal chat
+            if (contactAttrs.sugarCaseNumber && contactAttrs.sugarCaseNumber.value) {
+                context.sugarCaseNumber = parseInt(contactAttrs.sugarCaseNumber.value);
+            }
+
+            // The Contact ID from Portal chat
+            if (contactAttrs.sugarContactId && contactAttrs.sugarContactId.value) {
+                context.sugarContactId = contactAttrs.sugarContactId.value;
+            }
+
+            // The Contact email from inbound chat
+            if (contactAttrs.sugarContactEmail && contactAttrs.sugarContactEmail.value) {
+                context.sugarContactEmail = contactAttrs.sugarContactEmail.value;
+            }
+
+            // The Contact name from inbound chat
+            if (contactAttrs.sugarContactName && contactAttrs.sugarContactName.value) {
+                context.sugarContactName = contactAttrs.sugarContactName.value;
+            }
+        } else if (this.isCall(contact)) {
+            if (!contact.isInbound()) {
+                // The record the user clicked a phone number on
+                context.dialedRecord = this._determineDialedRecord();
+
+                // The record the user was focusing on when the call was initiated
+                context.focusedRecord = this._determineFocusedRecord();
+            }
+
+            // The phone number of the contact
+            context.phoneNumber = this._determineGlobalSearchPhoneNumber(contact);
+        }
+
+        this.recordMatchContexts[contact.getContactId()] = context;
+    },
+
+    /**
+     * Removes any stored contextual information about an AWS contact
+     *
+     * @param {Object} contact connect-streams Contact object
+     * @private
+     */
+    _deleteRecordMatchContext: function(contact) {
+        delete this.recordMatchContexts[contact.getContactId()];
+    },
+
+    /**
+     * Retrieves any stored contextual information about an AWS contact
+     *
+     * @param {Object} contact connect-streams Contact object
+     * @return {Object|null} the context info if it exists; null otherwise
+     * @private
+     */
+    _getRecordMatchContext: function(contact) {
+        return this.recordMatchContexts[contact.getContactId()] || null;
+    },
+
+    /**
+     * Determines what phone number to use for global search record matching by
+     * phone number
+     *
+     * @param {Object} contact connect-streams Contact object
+     * @return {Object} the global search term and module list array
+     * @private
+     */
+    _determineGlobalSearchPhoneNumber: function(contact) {
+        // Get the endpoint for the contact
+        var connection = contact.getInitialConnection();
+        var endpoint = connection.getEndpoint();
+
+        // Get the phone number of the connection. Amazon converts all phone
+        // numbers to E164 format, which can cause phone number matches to miss
+        // if the numbers aren't stored that way in Sugar. Remove the first 4
+        // characters of the number (the '+', and 3 digits for the maximum
+        // length of the country code). This isn't perfect, but it will have to
+        // do unless we can add a new phone number parsing rule to ElasticSearch
+        return !_.isEmpty(endpoint.phoneNumber) ? endpoint.phoneNumber.substring(4) : '';
+    },
+
+    /**
+     * Determines what record the user dialed by clicking a phone number field
+     *
+     * @return {Bean|null} the dialed record if it exists; null otherwise
+     * @private
+     */
+    _determineDialedRecord: function() {
+        var dialedRecord;
+
+        if (!_.isEmpty(this.layout.context.get('lastDialedRecord'))) {
+            dialedRecord = this.layout.context.get('lastDialedRecord');
+            this.layout.context.unset('lastDialedRecord');
+        }
+
+        return dialedRecord || null;
+    },
+
+    /**
+     * Determines what record the user is currently focusing on
+     *
+     * @return {Bean|null} the focused record if it exists; null otherwise
+     * @private
+     */
+    _determineFocusedRecord: function() {
+        var focusedRecord;
+
+        if (app.sideDrawer && app.sideDrawer.isOpen()) {
+            // The focused model the user is looking at in the side drawer
+            var rowModelDataLayout = app.sideDrawer.getComponent('row-model-data');
+            focusedRecord = rowModelDataLayout && rowModelDataLayout.getRowModel();
+        } else if (app.controller.context && app.controller.context.get('layout') === 'record') {
+            // The model of the record view the user is looking at
+            focusedRecord = app.controller.context.get('model');
+        }
+
+        return focusedRecord || null;
+    },
+
+    /**
+     * Attempts to find Sugar records associated with the given contact
+     *
+     * @param {Object} contact connect-streams Contact object
+     * @private
+     */
+    _matchRecords: function(contact) {
+        // Combine all record fetches/searches into one API call to improve
+        // performance. When the search is complete, notify the layout with the
+        // list of matched models for the contact
+        var url = app.api.buildURL(null, 'bulk');
+        var params = {
+            requests: this._buildBulkRecordMatchingRequests(contact)
+        };
+        var callbacks = {
+            success: _.bind(function(results) {
+                // Notify the layout of the records that were matched, and the
+                // context in which they were matched
+                var models = this._formatRecordMatchResults(results);
+                var context = this._getRecordMatchContext(contact);
+                this.layout.trigger('contact:records:matched', contact, models, context);
+            }, this)
+        };
+
+        // Initiate the bulk API call
+        app.api.call('create', url, params, callbacks);
+    },
+
+    /**
+     * Combines results of multiple searches returned from the bulk API to
+     * produce a list of records to associate with a contact
+     *
+     * @param {Array} results the array of responses from the bulk API
+     * @return {Array} the list of
+     * @private
+     */
+    _formatRecordMatchResults: function(results) {
+        // The bulk API returns returns as an array of response data. Iterate
+        // through each response and process it individually
+        var models = [];
+        _.each(results, function(result) {
+            models = _.union(models, this._formatRecordMatchResult(result));
+        }, this);
+
+        // Remove duplicate records from the results, in case multiple searches
+        // find the same record
+        models = _.uniq(models, function(model) {
+            return model.id || model.get('id');
+        });
+
+        // Since we are combining results of multiple searches, and matching at
+        // most one record per module, we need to remove duplicate modules from
+        // the results. This will discard the lower-priority results in favor
+        // of keeping the higher-priority ones
+        return _.uniq(models, function(model) {
+            return model.module || model.get('_module');
+        });
+    },
+
+    /**
+     * Parses the result of a single record search to extract any records that
+     * are identified as lone matches for their module
+     *
+     * @param result
+     * @private
+     */
+    _formatRecordMatchResult: function(result) {
+        var models = [];
+
+        // Iterate through the results. For any result such that it is the only
+        // record found for its module, create a bean of it and add it to the
+        // models to return
+        if (result.contents && result.contents.records) {
+            var records = result.contents.records;
+            _.each(this._getSearchModules(), function(module) {
+                var moduleResults = _.filter(records, function(record) {
+                    return record._module === module;
+                });
+
+                if (moduleResults.length === 1) {
+                    var model = app.data.createBean(module, moduleResults[0]);
+                    models.push(model);
+                }
+            }, this);
+        }
+
+        return models;
+    },
+
+    /**
+     * Builds a list of requests to pass in to the bulk API based on the type of
+     * contact
+     *
+     * @param {Object} contact connect-streams Contact object
+     * @return {Array} the list of requests, in order of search priority
+     * @private
+     */
+    _buildBulkRecordMatchingRequests: function(contact) {
+        // Build the list of requests specific to the direction of the call
+        var requests;
+        if (contact.isInbound()) {
+            requests = this._buildInboundRecordMatchingRequests(contact);
+        } else {
+            requests = this._buildOutboundRecordMatchingRequests(contact);
+        }
+
+        // For calls, include the results of searching by phone number
+        if (this.isCall(contact)) {
+            var context = this._getRecordMatchContext(contact);
+            requests.push(this._buildGlobalSearchBulkRequest(context.phoneNumber));
+        }
+
+        return requests;
+    },
+
+    /**
+     * Builds a list of requests to pass in to the bulk API that are specific
+     * to inbound contacts
+     *
+     * @param {Object} contact connect-streams Contact object
+     * @return {Array} the list of requests, in order of search priority
+     * @private
+     */
+    _buildInboundRecordMatchingRequests: function(contact) {
+        var requests = [];
+        var context = this._getRecordMatchContext(contact);
+
+        if (!context) {
+            return requests;
+        }
+
+        // If we have a Sugar Case Number, find its matching Case record
+        if (context.sugarCaseNumber) {
+            requests.push(this._buildRecordFetchBulkRequest('Cases', {
+                case_number: context.sugarCaseNumber
+            }));
+        }
+
+        // If we have a Sugar Contact ID, find its matching Contact record
+        if (context.sugarContactId) {
+            requests.push(this._buildRecordFetchBulkRequest('Contacts', {
+                id: context.sugarContactId
+            }));
+        }
+
+        // If we have an email address for the contact, search the Contacts module for the record with that email
+        if (context.sugarContactEmail) {
+            requests.push(this._buildRecordFetchBulkRequest('Contacts', {
+                email: context.sugarContactEmail
+            }));
+        }
+
+        // If we have a name for the contact, search the Contacts module for the record with that name
+        if (context.sugarContactName) {
+            const nameComponents = context.sugarContactName.split(' ');
+            if (nameComponents.length >= 2) {
+                // We don't know the format of the name as it comes from Amazon.
+                // Assuming the first string is first name and the last string is last name.
+                requests.push(this._buildRecordFetchBulkRequest('Contacts', {
+                    first_name: nameComponents[0],
+                    last_name: nameComponents[nameComponents.length - 1]
+                }));
+            }
+        }
+
+        return requests;
+    },
+
+    /**
+     * Builds a list of requests to pass in to the bulk API that are specific
+     * to outbound contacts
+     *
+     * @param {Object} contact connect-streams Contact object
+     * @return {Array} the list of requests, in order of search priority
+     * @private
+     */
+    _buildOutboundRecordMatchingRequests: function(contact) {
+        var requests = [];
+        var context = this._getRecordMatchContext(contact);
+
+        // If we dialed out from a specific model, fetch the latest version of it
+        if (context.dialedRecord) {
+            var module = context.dialedRecord.module || context.dialedRecord.get('_module');
+            requests.push(this._buildRecordFetchBulkRequest(module, {
+                id: context.dialedRecord.get('id')
+            }));
+        }
+        return requests;
+    },
+
+    /**
+     * Given a module and filters, builds filter API request data to pass in to
+     * the bulk API
+     *
+     * @param {string} module the module to filter
+     * @param {Object} fieldFilters a mapping of {field name} => {value}, used
+     *                 for exact matching on field values
+     * @return {Object} the filter API request parameters to pass in to the bulk
+     *                  API
+     * @private
+     */
+    _buildRecordFetchBulkRequest(module, fieldFilters) {
+        var filter = [];
+
+        // If we have field filters defined, build them now
+        _.each(fieldFilters, function(fieldValue, fieldName) {
+            var fieldFilter = {};
+            fieldFilter[fieldName] = {
+                $equals: fieldValue
+            };
+            filter.push(fieldFilter);
+        }, this);
+
+        // Construct and return the parameters for a call to the filter API
+        var url = app.api.buildURL(module + '/filter');
+        return {
+            url: url.substr(4),
+            method: 'GET',
+            data: {
+                filter: filter
+            }
+        };
+    },
+
+    /**
+     * Given a search term, builds data for a global search request data across the
+     * SugarLive modules to pass into the bulk API
+     *
+     * @param {string} term the term to search
+     * @private
+     */
+    _buildGlobalSearchBulkRequest: function(term) {
+        // Construct and return the parameters for a call to the global search
+        // API
+        var url = app.api.buildURL('globalsearch');
+        var data = {
+            q: term || '',
+            module_list: this._getSearchModules().join(',')
+        };
+        return {
+            url: url.substr(4),
+            method: 'GET',
+            data: data
+        };
+    },
+
+    /**
+     * Gets the list of modules to perform record matching across
+     *
+     * @return {Array} the list of modules, excluding any modules without access
+     * @private
+     */
+    _getSearchModules: function() {
+        return _.filter(this.searchModules, function(module) {
+            return !_.isEmpty(app.metadata.getModule(module)) && app.acl.hasAccess('view', module);
         });
     },
 
@@ -414,17 +835,6 @@
     },
 
     /**
-     * @inheritdoc
-     */
-    _dispose: function() {
-        this.layout.off('omniconsole:open', null, this);
-        this.layout.off('omniconsole:toggle', this.resize, this);
-        $(window).off('beforeunload', this._warnOnRefresh(), this);
-        $(window).off('resize.' + this.cid);
-        this._super('_dispose');
-    },
-
-    /**
      * Warn users if their admin hasn't added Amazon Connect settings
      * @private
      */
@@ -493,8 +903,7 @@
      */
     _unsetActiveContact: function() {
         this.activeContact = null;
-        this.context.unset('quickcreateModelData');
-        this.context.unset('quickcreateCreatedModel');
+        app.events.trigger('omniconsole:contact:changed', null, null);
     },
 
     /**
@@ -722,9 +1131,9 @@
 
         this.connectionRecords[contactId] = model;
         this.layout.trigger('contact:model:loaded', this.activeContact);
+        this._matchRecords(contact);
 
-        this._searchContact(contact);
-        this._searchCase(contact);
+        app.events.trigger('omniconsole:contact:changed', contact, model);
     },
 
     /**
@@ -749,317 +1158,8 @@
             return;
         }
 
-        var detailPanel = this.layout.getComponent('omnichannel-detail');
-        var data = {
-            contact: detailPanel.getContactModel(contact),
-            case: detailPanel.getCaseModel(contact)
-        };
-
-        this._updateConnectionRecord(contact, data);
-    },
-
-    /**
-     * Based on the search parameters used for the search call it will create a filter
-     * for the contact search dashlet.
-     *
-     * @param {Object} searchParams The input parameters for the search that has been made.
-     * @return {Object} A filter definition used for filtering the contact search dashlet.
-     * @private
-     */
-    _createContactFilterDef: function(searchParams) {
-        var filter;
-        var filterDef = [{
-            '$or': []
-        }];
-
-        _.each(searchParams.fields.split(','), function(field, index) {
-            filter = {};
-            // if the query is an array then the filter fields and query text should be in their corresponding orders
-            // for the filterdefs. This is needed to generate filterdefs for first and last names.
-            filter[field] = {
-                '$equals': _.isArray(searchParams.q) ? searchParams.q[index] : searchParams.q
-            };
-            filterDef[0].$or.push(filter);
-        });
-
-        return filterDef;
-    },
-
-    /**
-     * Handles a successful search for contacts. In case there is only 1 contact, the
-     * contact being found will be opened in the details tab. In case there are multiple
-     * contact results the contact search dashlet will be populated.
-     *
-     * @param {Object} searchParams The input parameters for the search that has been made.
-     * @param {Object} contact Connect-streams Contact object.
-     * @param {Array} data The list of contact records.
-     * @private
-     */
-    _handleContactResults: function(searchParams, contact, data) {
-        if (_.isArray(data.records)) {
-            if (data.records.length === 1) {
-                var contactModel = app.data.createBean('Contacts', _.first(data.records));
-                contactModel.set('name', app.utils.formatNameModel('Contacts', contactModel.attributes));
-                delete this.dialedNumber;
-                this._setContactModel(contact, contactModel);
-                this._updateConnectionRecord(contact, {contact: contactModel});
-            } else if (data.records.length > 1) {
-                this._displayContactSearchDashlet(contact, searchParams);
-            }
-        }
-    },
-
-    /**
-     * Handles creating filterdef based on search params and display the search tab in SugarLive.
-     * Shows the Console list view dashlet for Contacts module in search tab with results based
-     * on the filterdef created.
-     *
-     * @param {Object} contact Connect-streams Contact object.
-     * @param {Object} searchParams The input parameters for the search that has been made.
-     * @private
-     */
-    _displayContactSearchDashlet: function(contact, searchParams) {
-        var switchDashboard = this.layout.getComponent('omnichannel-dashboard-switch');
-        var activeDashboard = switchDashboard.getDashboard(contact.contactId);
-        if (!activeDashboard) {
-            return;
-        }
-
-        var contactSearchDashlet = activeDashboard.getComponent('dashboard')
-            .getComponent('dashlet-main').getComponent('dashboard-grid')
-            .getComponent('dashlet-grid-wrapper').getComponent('dashlet-console-list');
-
-        if (!contactSearchDashlet) {
-            return;
-        } else {
-            var filterDef = this._createContactFilterDef(searchParams);
-            // update the contact dashlet search bar with the search term such as contact phone number
-            if (searchParams.q) {
-                contactSearchDashlet.$('input.search-name').val(searchParams.q);
-            }
-            contactSearchDashlet._displayDashlet(filterDef);
-        }
-    },
-
-    /**
-     * Gets the maximum number of search query results to be fetched from the app config or sets it to a default value
-     * @return {number} Number of results to be fetched from search query
-     * @private
-     */
-    _getMaxQueryResults: function() {
-        return app.config && app.config.maxSearchQueryResult ? app.config.maxSearchQueryResult :
-            this.maxQueryResultsDefault;
-    },
-
-    /**
-     * Search for contact by phone number.
-     *
-     * @param {Object} contact connect-streams Contact object
-     * @private
-     */
-    _searchContact: function(contact) {
-        if (this.isCall(contact)) {
-            var maxNum = this._getMaxQueryResults();
-            var connection = contact.getInitialConnection();
-            var endpoint = connection.getEndpoint();
-            var searchParams = {
-                q: this.dialedNumber || endpoint.phoneNumber,
-                fields: 'phone_home,phone_mobile,phone_work,phone_other,assistant_phone' +
-                    ',salutation,first_name,last_name,account_name,account_id',
-                module_list: 'Contacts',
-                max_num: maxNum
-            };
-            var successCallback = _.bind(this._handleContactResults, this, searchParams, contact);
-            app.api.search(searchParams, {success: successCallback});
-        } else {
-            this._searchContactById(contact);
-        }
-    },
-
-    /**
-     * Search for contact by sugar contact Id
-     *
-     * @param contact
-     * @private
-     */
-    _searchContactById: function(contact) {
-        var attr = contact.getAttributes();
-        if (this._contactIdSet(attr)) {
-            var contactBean = app.data.createBean('Contacts', {id: attr.sugarContactId.value});
-            contactBean.fetch({
-                success: _.bind(function(data) {
-                    // We only want to load the contact tab if we do not have a
-                    // case details
-                    var silentLoadContact = this._caseNumberSet(attr);
-                    this._setContactModel(contact, contactBean, silentLoadContact);
-                }, this)
-            });
-        }
-    },
-
-    /**
-     * Search for contact by email.
-     *
-     * @param {Object} contact connect-streams Contact object
-     * @private
-     */
-    _searchContactByEmail: function(contact) {
-        var attr = contact.getAttributes();
-        if (this._contactIdSet(attr)) {
-            return;
-        }
-        if (attr && attr.sugarContactEmail && attr.sugarContactEmail.value) {
-            var maxNum = this._getMaxQueryResults();
-            var searchParams = {
-                q: attr.sugarContactEmail.value,
-                fields: 'email',
-                module_list: 'Contacts',
-                max_num: maxNum
-            };
-            var url = app.api.serverUrl + '/Contacts?filter[0][email][$equals]=' + attr.sugarContactEmail.value;
-            app.api.call('read', url, null, {
-                success: _.bind(function(data) {
-                    if (_.isArray(data.records) && data.records.length === 1) {
-                        var contactModel = app.data.createBean('Contacts', _.first(data.records));
-                        this._setContactModel(contact, contactModel);
-                        this._updateConnectionRecord(contact, {contact: contactModel});
-                    } else if (_.isArray(data.records) && data.records.length > 1) {
-                        // in case of multiple matches show the matched results in search tab
-                        this._displayContactSearchDashlet(contact, searchParams);
-                    } else {
-                        this._searchContactByName(contact);
-                    }
-                }, this)
-            });
-        } else {
-            this._searchContactByName(contact);
-        }
-    },
-
-    /**
-     * Search for contact by name.
-     *
-     * @param {Object} contact connect-streams Contact object
-     * @private
-     */
-    _searchContactByName: function(contact) {
-        var attr = contact.getAttributes();
-        if (this._contactIdSet(attr)) {
-            return;
-        }
-        if (attr && attr.sugarContactName && attr.sugarContactName.value) {
-            var maxNum = this._getMaxQueryResults();
-            var nameArray = attr.sugarContactName.value.split(' ');
-            if (nameArray.length >= 2) {
-                // We don't know the format of the name as it comes from Amazon.
-                // Assuming the first string is first name and the last string is last name.
-                var url = app.api.serverUrl + '/Contacts?filter[0][first_name][$equals]=' + nameArray[0];
-                url += '&filter[1][last_name][$equals]=' + nameArray[nameArray.length - 1];
-
-                // here we want to query name separately for the first_name and last_name fields.
-                // In order to perform search in this case we need to make sure that the order of query text correspond
-                // correctly with the query param fields. For example: To search for John Doe if the query is
-                // an array like ['John', 'Doe'] where John is the first name and Doe is the last name
-                // then the query fields should be 'first_name,last_name'
-                var searchParams = {
-                    q: [nameArray[0], nameArray[nameArray.length - 1]],
-                    fields: 'first_name,last_name',
-                    module_list: 'Contacts',
-                    max_num: maxNum
-                };
-                app.api.call('read', url, null, {
-                    success: _.bind(function(data) {
-                        if (_.isArray(data.records) && data.records.length === 1) {
-                            var contactModel = app.data.createBean('Contacts', _.first(data.records));
-                            this._setContactModel(contact, contactModel);
-                            this._updateConnectionRecord(contact, {contact: contactModel});
-                        } else if (_.isArray(data.records) && data.records.length > 1) {
-                            // in case of multiple matches show the matched results in search tab
-                            this._displayContactSearchDashlet(contact, searchParams);
-                        }
-                    }, this)
-                });
-            }
-        }
-    },
-
-    /**
-     * Util to check if sugarContactId is set in aws contact attributes
-     *
-     * @param attr {Object} aws contact attributes
-     * @return {boolean} true if sugarContactId is set
-     * @private
-     */
-    _contactIdSet: function(attr) {
-        return !!(attr && attr.sugarContactId && attr.sugarContactId.value);
-    },
-
-    /**
-     * Util to check if sugarCaseNumber is set in aws contact attributes
-     *
-     * @param attr aws contact attributes
-     * @return {boolean} true if sugarCaseNumber is set
-     * @private
-     */
-    _caseNumberSet: function(attr) {
-        return !!(attr && attr.sugarCaseNumber && attr.sugarCaseNumber.value);
-    },
-
-    /**
-     * Search for case by case number.
-     *
-     * @param {Object} contact connect-streams Contact object
-     * @private
-     */
-    _searchCase: function(contact) {
-        var attr = contact.getAttributes();
-        if (this._caseNumberSet(attr)) {
-            var url = app.api.serverUrl + '/Cases?filter[0][case_number][$equals]=' + attr.sugarCaseNumber.value;
-            app.api.call('read', url, null, {
-                success: _.bind(function(data) {
-                    if (_.isArray(data.records) && data.records.length === 1) {
-                        var caseModel = app.data.createBean('Cases', _.first(data.records));
-                        this._setCaseModel(contact, caseModel);
-                        this._updateConnectionRecord(contact, {case: caseModel});
-                    } else {
-                        this._searchContactByEmail(contact);
-                    }
-                }, this)
-            });
-        } else {
-            this._searchContactByEmail(contact);
-        }
-    },
-
-    /**
-     * Sets contact model. This function is
-     * the success callback used in the search API on calls.
-     *
-     * @param {Object} contact - connect-streams Contact object
-     * @param {Bean} contactModel
-     * @param {boolean} silent
-     * @private
-     */
-    _setContactModel: function(contact, contactModel, silent) {
-        var detailPanel = this.layout.getComponent('omnichannel-detail');
-        detailPanel.setContactModel(contact, contactModel);
-        var dashboardSwitch = this.layout.getComponent('omnichannel-dashboard-switch');
-        dashboardSwitch.setContactModel(contact.contactId, contactModel, silent);
-    },
-
-    /**
-     * Sets case model. This function is
-     * the success callback used in the search API on calls.
-     *
-     * @param {Object} contact - connect-streams Contact object
-     * @param {Bean} caseModel
-     * @private
-     */
-    _setCaseModel: function(contact, caseModel) {
-        var detailPanel = this.layout.getComponent('omnichannel-detail');
-        detailPanel.setCaseModel(contact, caseModel);
-        var dashboardSwitch = this.layout.getComponent('omnichannel-dashboard-switch');
-        dashboardSwitch.setCaseModel(contact.contactId, caseModel);
+        // Save the call or chat record data for the contact
+        this._updateConnectionRecord(contact, {},  true);
     },
 
     /**
@@ -1075,18 +1175,21 @@
      * Success handler for saving a model from the CCP.
      *
      * @param {Bean} model The model to be saved.
+     * @param {boolean} contactClosed True if coming from the _closeConnectionRecord chain.
      */
-    saveModelSuccess: function(model) {
+    saveModelSuccess: function(model, contactClosed = false) {
         var context = _.extend({
             module: model.module,
             moduleSingularLower: app.lang.getModuleName(model.module).toLowerCase()
         }, model.attributes);
 
-        app.alert.show('save_success', {
-            level: 'success',
-            autoClose: true,
-            messages: app.lang.get('LBL_OMNICHANNEL_RECORD_CREATED', model.module, context)
-        });
+        if (contactClosed) {
+            app.alert.show('save_success', {
+                level: 'success',
+                autoClose: true,
+                messages: app.lang.get('LBL_OMNICHANNEL_RECORD_CREATED', model.module, context)
+            });
+        }
     },
 
     /**
@@ -1094,8 +1197,14 @@
      *
      * @param {Bean} model The model to be saved.
      * @param {Object} contact Connect-streams Contact object.
+     * @param {boolean} contactClosed True if coming from the _closeConnectionRecord chain.
      */
-    saveModel: function(model, contact) {
+    saveModel: function(model, contact, contactClosed = false) {
+        // if there's no model id, don't save the model
+        if (!model.id) {
+            return;
+        }
+
         var options = {
             silent: true,
             showAlerts: false,
@@ -1103,7 +1212,7 @@
         };
 
         if (_.contains(['Held', 'Completed'], model.get('status'))) {
-            options.success = _.bind(this.saveModelSuccess, this, model);
+            options.success = _.bind(this.saveModelSuccess, this, model, contactClosed);
         }
 
         model.save(null, options);
@@ -1131,6 +1240,7 @@
      * @param {Bean} model The model kept on the view (and thus might be outdated).
      * @param {Bean} dbModel The same model the one kept on the view, but holding the most recent data.
      * @param {Bean} contactModel The contact module record related to the current call model.
+     * @deprecated Since 11.1, this is now handled in omnichannel-detail
      */
     updateContactIdField: function(model, dbModel, contactModel) {
         var contacts = {};
@@ -1162,15 +1272,16 @@
      * @param {Object} contact Connect-streams Contact object.
      * @param {*} value A value to be applied on the model.
      * @param {string} key Field name or related model module name.
+     * @deprecated Since 11.1, this is now handled in omnichannel-detail
      */
     applyChangesToModel: function(model, dbModel, contact, value, key) {
-        if (key === 'contact') {
+        if (key === 'Contacts') {
             if (this.isCall(contact)) {
                 this.updateContactIdField(model, dbModel, value);
             } else if (value) {
                 model.set('contact_id', value.get('id'));
             }
-        } else if (key === 'case' && value) {
+        } else if (key === 'Cases' && value) {
             model.set('parent_type', 'Cases');
             model.set('parent_id', value.get('id'));
         } else {
@@ -1184,12 +1295,13 @@
      * @param {Bean} viewModel The model tied to the active contact.
      * @param {Object} clientData A set of details to be saved on the model.
      * @param {Object} contact Connect-streams Contact object.
+     * @param {boolean} contactClosed True if coming from the _closeConnectionRecord chain.
      * @param {Bean} dbModel The viewModel with the most up to date field values.
      */
-    _updateFetchedRecord: function(viewModel, clientData, contact, dbModel) {
-        _.each(clientData, _.bind(this.applyChangesToModel, this, viewModel, dbModel, contact));
+    _updateFetchedRecord: function(viewModel, clientData, contact, contactClosed = false, dbModel) {
+        viewModel.set(clientData);
         this.preserveDBFieldValues(viewModel, dbModel);
-        this.saveModel(viewModel, contact);
+        this.saveModel(viewModel, contact, contactClosed);
     },
 
     /**
@@ -1200,8 +1312,14 @@
      *
      * @param {Object} contact Connect-streams Contact object.
      * @param {Object} data A set of details to be saved on the model.
+     * @param {boolean} contactClosed True if coming from the _closeConnectionRecord chain.
      */
-    _updateConnectionRecord: function(contact, data) {
+    _updateConnectionRecord: function(contact, data, contactClosed = false) {
+        // if there's no contact, dont update the record
+        if (!contact) {
+            return;
+        }
+
         var model = this.connectionRecords[contact.getContactId()];
         if (model) {
             var baseModel = app.data.createBean(model.module, {id: model.get('id')});
@@ -1210,7 +1328,7 @@
                 silent: true,
                 showAlerts: false,
                 fields: this.multiSourceFields,
-                success: _.bind(this._updateFetchedRecord, this, model, data, contact)
+                success: _.bind(this._updateFetchedRecord, this, model, data, contact, contactClosed)
             });
         }
     },
@@ -1254,7 +1372,8 @@
             date_start: data.startTime.formatServer(),
             status: 'In Progress',
             assigned_user_id: app.user.id,
-            aws_contact_id: data.aws_contact_id || ''
+            aws_contact_id: data.aws_contact_id || '',
+            invitees: [],
         });
 
         return model;
@@ -1395,5 +1514,16 @@
 
     isCall: function(contact) {
         return contact.getType() === connect.ContactType.VOICE;
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this.layout.off('omniconsole:open', null, this);
+        this.layout.off('omniconsole:mode:set', this.resize, this);
+        $(window).off('beforeunload', this._warnOnRefresh(), this);
+        $(window).off('resize.' + this.cid);
+        this._super('_dispose');
     }
 })

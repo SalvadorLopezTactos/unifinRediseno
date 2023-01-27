@@ -1300,7 +1300,7 @@ abstract class UpgradeDriver
         if (empty($GLOBALS['current_language'])) {
             $GLOBALS['current_language'] = 'en_us';
         }
-        $GLOBALS['log'] = LoggerManager::getLogger('SugarCRM');
+        $GLOBALS['log'] = LoggerManager::getLogger();
         $this->db = $GLOBALS['db'] = DBManagerFactory::getInstance();
         //Once we have a DB, we can do a full cache clear
         if ($this->current_stage == 'post') {
@@ -1593,9 +1593,9 @@ abstract class UpgradeDriver
      * @param string $errline
      * @param array $errcontext
      */
-    public function scriptErrorHandler($errno, $errstr, $errfile, $errline, $errcontext)
+    public function scriptErrorHandler($errno, $errstr, $errfile, $errline, $errcontext = [])
     {
-        if (error_reporting() == 0) {
+        if (!(error_reporting() & $errno)) {
             // do not log muted errors
             return;
         }
@@ -1833,13 +1833,13 @@ abstract class UpgradeDriver
      */
     public function run($stage)
     {
-        ini_set('memory_limit', -1);
+        ini_set('memory_limit', '-1');
         $flags = E_ALL & ~E_STRICT;
         if (defined('E_DEPRECATED')) {
             $flags = $flags & ~E_DEPRECATED;
         }
-        ini_set('error_reporting', $flags);
-        ini_set('max_execution_time', 0);
+        ini_set('error_reporting', strval($flags));
+        ini_set('max_execution_time', '0');
         $this->log("Stage $stage starting");
         try {
             $this->current_stage = $stage;

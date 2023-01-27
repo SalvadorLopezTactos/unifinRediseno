@@ -12,7 +12,10 @@
 
 //Used in rebuildExtensions
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
+use Sugarcrm\Sugarcrm\Session\SessionStorage;
+use Sugarcrm\Sugarcrm\SystemProcessLock\SystemProcessLock;
 
 SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
 
@@ -35,10 +38,13 @@ class RepairAndClear
     public $show_output;
     protected $actions;
     public $execute;
+    public $saveLogToSession = false;
     protected $module_list_from_cache;
+
+    private const QRR_SESSION_LOG = 'qrr_log';
     /**
      * Stack of called methods that should not be repeated
-     * 
+     *
      * @var array
      */
     protected $called = array();
@@ -52,11 +58,18 @@ class RepairAndClear
      * make sure mod_string contains 'LBL_ALL_MODULES'
      * RepairAndClear constructor.
      *
+     * @param bool $saveLogToSession if true, any output is disabled and everything goes to the session log
+     *
      */
-    public function __construct()
+    public function __construct(bool $saveLogToSession = false)
     {
         global $mod_strings;
         $mod_strings['LBL_ALL_MODULES'] = 'all_modules';
+        $this->saveLogToSession = $saveLogToSession;
+        if ($this->saveLogToSession) {
+            SessionStorage::getInstance()[self::QRR_SESSION_LOG] = [];
+            ob_start([$this, 'log'], 1);
+        }
     }
 
     /**
@@ -69,8 +82,74 @@ class RepairAndClear
         $this->statementObserver = $statementObserver;
     }
 
-    public function repairAndClearAll($selected_actions, $modules, $autoexecute=false, $show_output=true, $metadata_sections=false)
-    {
+    /**
+     * Repair and Rebuild with race condition protection
+     *
+     * @param $selected_actions
+     * @param $modules
+     * @param bool $autoexecute
+     * @param bool $show_output
+     * @param bool $metadata_sections
+     */
+    public function repairAndClearAll(
+        $selected_actions,
+        $modules,
+        $autoexecute = false,
+        $show_output = true,
+        $metadata_sections = false
+    ) {
+        $systemProcessLock = new SystemProcessLock(__METHOD__);
+
+        $checkCondition = function () {
+            // always run rebuild function
+            return true;
+        };
+
+        $longRunningFunction = function (int $attempt) use (
+            $selected_actions,
+            $modules,
+            $autoexecute,
+            $show_output,
+            $metadata_sections
+        ) {
+            // if the lock was acquired immediately or if the current user is admin
+            if ($attempt ==1
+                || $GLOBALS['current_user']->isAdmin() || AccessControlManager::instance()->getAdminWork()) {
+                $this->repairAndClearAllUnsafe(
+                    $selected_actions,
+                    $modules,
+                    $autoexecute,
+                    $show_output,
+                    $metadata_sections
+                );
+            } else {
+                // otherwise ignore regular user QRR requests
+                return;
+            }
+        };
+
+        $refuseFunction = $longRunningFunction;
+
+        // the following is designed to prevent process race conditions in a long running process
+        $systemProcessLock->isolatedCall($checkCondition, $longRunningFunction, $refuseFunction);
+    }
+
+    /**
+     * Repair and Rebuild with race condition risk
+     *
+     * @param $selected_actions
+     * @param $modules
+     * @param bool $autoexecute
+     * @param bool $show_output
+     * @param bool $metadata_sections
+     */
+    public function repairAndClearAllUnsafe(
+        $selected_actions,
+        $modules,
+        $autoexecute = false,
+        $show_output = true,
+        $metadata_sections = false
+    ): void {
         // allow admin to access everything,
         // don't remove $adminWork until you don’t need the privilege anymore
         $adminWork = new AdminWork();
@@ -182,7 +261,7 @@ class RepairAndClear
         // Reset this so that things work properly after this is over
         $this->called = array();
 
-        // Run the metadata cache refresh queue. This will turn queueing off 
+        // Run the metadata cache refresh queue. This will turn queueing off
         // after it is run
         MetaDataManager::runCacheRefreshQueue();
     }
@@ -197,7 +276,7 @@ class RepairAndClear
         $adminWork = new AdminWork();
         $adminWork->startAdminWork();
 
-        // Repair database may have already been called and doesn't really need 
+        // Repair database may have already been called and doesn't really need
         // to be called a second time
         if (isset($this->called['repairDatabase'])) {
             return;
@@ -499,7 +578,7 @@ class RepairAndClear
         if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEARSEARCH']}</h3>";
         // clear sugar_cache backend for SugarSearchEngine
         SugarSearchEngineMetadataHelper::clearCache();
-        
+
         // Clear the cache file AFTER the cache clear, as it will be rebuilt by
         // clearCache otherwise
         UnifiedSearchAdvanced::unlinkUnifiedSearchModulesFile();
@@ -508,14 +587,14 @@ class RepairAndClear
 	{
         global $mod_strings, $sugar_config;
         if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEAR_EXT_API']}</h3>";
-        
+
         ExternalAPIFactory::clearCache();
     }
     public function clearPDFFontCache()
 	{
         global $mod_strings, $sugar_config;
         if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEARPDFFONT']}</h3>";
-        
+
         $fontManager = new FontManager();
         $fontManager->clearCachedFile();
     }
@@ -528,22 +607,22 @@ class RepairAndClear
         global $mod_strings, $sugar_config;
 		if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEAR_ADD_CACHE']}</h3>";
         // clear out the API Cache
-        
+
         $sd = new ServiceDictionary();
         $sd->clearCache();
-        
+
         //Remove cached js component files
         $this->_clearCache(sugar_cached('include/javascript/'), '.js');
     }
 
     /**
-     * Clears out the metadata file cache and memory caches. 
-     * 
+     * Clears out the metadata file cache and memory caches.
+     *
      * NOTE: While this is here as part of the collection of methods to be used
      * for clearing caches, it really should only be used in the most extreme
      * cases as it will result in long wait times the next time client apps are
      * called since rebuilding the metadata cache will be done then.
-     * 
+     *
      * Bug 55141 - Clear the metadata API cache
      */
     public function clearMetadataAPICache() {
@@ -572,7 +651,7 @@ class RepairAndClear
         if (is_array($this->module_list) && !empty($this->module_list) && !in_array(translate('LBL_ALL_MODULES'), $this->module_list)) {
             MetaDataFiles::clearModuleClientCache($this->module_list);
             MetaDataManager::refreshModulesCache($this->module_list);
-        } 
+        }
 
         // If there is a section named (like 'fields') refresh that section
         if (!empty($section)) {
@@ -711,5 +790,31 @@ class RepairAndClear
     {
         $jsFiles = array("sugar_grp1.js", "sugar_grp1_yui.js", "sugar_grp1_jquery.js");
         ensureJSCacheFilesExist($jsFiles);
+    }
+
+    public function log($message): void
+    {
+        $session = SessionStorage::getInstance();
+        if ($this->saveLogToSession) {
+            if ($session->isClosed()) {
+                session_start();
+            }
+            $_SESSION[self::QRR_SESSION_LOG][] = $message;
+            $session->unlock();
+        }
+    }
+
+    public function sessionLogPop(): array
+    {
+        $session = SessionStorage::getInstance();
+        $sessionData = $session[self::QRR_SESSION_LOG] ?? null;
+        if ($sessionData) {
+            $data = $sessionData->getArrayCopy();
+            session_start();
+            $_SESSION[self::QRR_SESSION_LOG] = [];
+            $session->unlock();
+            return $data;
+        }
+        return [];
     }
 }

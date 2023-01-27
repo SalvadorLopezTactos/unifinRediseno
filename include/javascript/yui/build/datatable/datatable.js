@@ -16087,10 +16087,10 @@ initAttributes : function(oConfigs) {
     * @attribute COLOR_COLUMNFILLER
     * @description CSS color value assigned to header filler on scrollable tables.  
     * @type String
-    * @default "#F2F2F2"
+    * @default "--content-background" variable from light/dark theme
     */
     this.setAttributeConfig("COLOR_COLUMNFILLER", {
-        value: "#F2F2F2",
+        value: "var(--content-background)",
         validator: lang.isString,
         method: function(oParam) {
             if(this._elHdContainer) {

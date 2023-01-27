@@ -13,15 +13,15 @@
 
 
 class SugarFieldEnum extends SugarFieldBase {
-   
-	function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-		if(!empty($vardef['function']['returns']) && $vardef['function']['returns']== 'html')
-		{
-    		  $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
-        	  return "<span id='{$vardef['name']}'>" . $this->fetch($this->findTemplate('DetailViewFunction')) . "</span>";
-    	} else {
-    		  return parent::getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
-    	}
+
+    public function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        if (!empty($vardef['function']['returns']) && $vardef['function']['returns'] === 'html') {
+            $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
+            return '<span id="' . htmlspecialchars($vardef['name']) . '">' . $this->fetch($this->findTemplate('DetailViewFunction')) . '</span>';
+        } else {
+            return parent::getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
+        }
     }
     
     function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
@@ -172,7 +172,7 @@ class SugarFieldEnum extends SugarFieldBase {
         if(!empty($vardef['function'])) {
             // figure out the bean we should be using
             $bean = (isset($vardef['function_bean']) && !empty($vardef['function_bean'])) ? $vardef['function_bean'] : null;
-            return getFunctionValue($bean, $vardef['function'], $args = array('selectID' => $inputField));
+            return getFunctionValue($bean, $vardef['function'], [$inputField]);
         }
         
         // call format field to return value

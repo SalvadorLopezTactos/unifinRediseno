@@ -129,7 +129,7 @@ class Tag extends Basic
      * @param $focus
      * @param $ids string|string[] $records Record ID or array of records IDs
      * @return array
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     public function getRelatedModuleRecords($focus, $ids): array
     {
@@ -174,7 +174,7 @@ SQL;
                 AND bean_module = ?
                 AND deleted = 0';
         $stmt = $this->db->getConnection()->executeQuery($query, [$beanId, $beanModule]);
-        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+        return $stmt->fetchFirstColumn();
     }
 
     /**

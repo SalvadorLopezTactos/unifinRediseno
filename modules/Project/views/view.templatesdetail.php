@@ -63,7 +63,7 @@ class ProjectViewTemplatesDetail extends ViewDetail
     protected function _displaySubPanels()
     {
    	 	$subpanel = new SubPanelTiles( $this->bean, 'ProjectTemplates' );
-    	echo $subpanel->display( true, true );
+        echo $subpanel->display(true);
     }
 
 }

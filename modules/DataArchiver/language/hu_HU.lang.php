@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Archívum',
     'LBL_PROCESS_TYPE_DELETE' => 'Teljes törlés',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Az archívum fut',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Figyelmeztetés',
+    'LBL_ARCHIVER_WARNING' => 'Ezt a tevékenységet az alacsony forgalmú vagy munkaidőn kívüli órákban érdemes végrehajtani '
+        . 'mivel ez hatással lehet a rendszer teljesítményére. Szeretné most végrehajtani ezt a tevékenységet?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'A(z) {{moduleName}} archiválójának {{fieldName}} beállított szűrővel kell rendelkeznie',
 );

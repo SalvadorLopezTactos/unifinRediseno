@@ -67,6 +67,12 @@ abstract class CurrencyRateUpdateAbstract
     protected $usDollarColumnDefinitions = array();
 
     /**
+     * ID of the currency that is being modified
+     * @var null|string
+     */
+    protected $currencyId = null;
+
+    /**
      * constructor
      *
      * @access public
@@ -84,7 +90,9 @@ abstract class CurrencyRateUpdateAbstract
      */
     public function run($currencyId)
     {
-        if(empty($currencyId)) {
+        $this->currencyId = $currencyId;
+
+        if (empty($currencyId)) {
             return false;
         }
         if($this->exclude) {
@@ -205,7 +213,7 @@ abstract class CurrencyRateUpdateAbstract
             ->executeQuery(
                 'SELECT conversion_rate FROM currencies WHERE id = ?',
                 [$currencyId]
-            )->fetchColumn();
+            )->fetchOne();
 
         if (false === $rate) {
             $GLOBALS['log']->error(

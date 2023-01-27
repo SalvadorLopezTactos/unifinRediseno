@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => '篩選器',
     'LBL_CONSOLE_FILTER_RULES' => '篩選規則',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => '凍結第一列',
+
     'LBL_CONSOLE_COLUMNS' => '欄',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => '複數欄的列',
     'LBL_CONSOLE_PRIMARY_SORT' => '主要分類',

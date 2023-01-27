@@ -137,9 +137,8 @@
             url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' + serverInfo.flavor +
                 '&version=' + serverInfo.version + '&lang=' + lang + '&module=' + module + '&route=' + layoutName;
 
-            url += app.user.get('products') ?
-                '&products=' + encodeURIComponent(app.user.get('products').join(',')) :
-                '';
+            let products = app.user.getProductCodes();
+            url += products ? '&products=' + encodeURIComponent(products.join(',')) : '';
 
             if (layoutName == 'bwc') {
                 var action = window.location.hash.match(/#bwc.*action=(\w*)/i);
@@ -161,7 +160,10 @@
             var serverInfo = app.metadata.getServerInfo();
             var language = app.lang.getLanguage();
             var module = moduleName || app.controller.context.get('module');
-            var products = app.user.get('products') ? app.user.get('products').join(',') : '';
+
+            let products = app.user.getProductCodes();
+            products = products ? products.join(',') : '';
+
             var params = {
                 edition: serverInfo.flavor,
                 version: serverInfo.version,

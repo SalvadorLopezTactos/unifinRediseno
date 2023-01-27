@@ -134,38 +134,7 @@ class SugarWidgetFieldEnum extends SugarWidgetReportField
 
     function displayList($layout_def)
     {
-        if(!empty($layout_def['column_key'])){
-            $field_def = $this->reporter->all_fields[$layout_def['column_key']];
-        }else if(!empty($layout_def['fields'])){
-            $field_def = $layout_def['fields'];
-        }
-        $cell = $this->displayListPlain($layout_def);
-        $str = $cell;
-        global $sugar_config;
-        if (isset ($sugar_config['enable_inline_reports_edit']) && $sugar_config['enable_inline_reports_edit']) {
-            $module = $this->reporter->all_fields[$layout_def['column_key']]['module'];
-            $name = $layout_def['name'];
-            $layout_def['name'] = 'id';
-            $key = $this->_get_column_alias($layout_def);
-            $key = strtoupper($key);
-
-            //If the key isn't in the layout fields, skip it
-            if (!empty($layout_def['fields'][$key]))
-            {
-                $record = $layout_def['fields'][$key];
-                $field_name = $field_def['name'];
-                $field_type = $field_def['type'];
-                $div_id = $field_def['module'] ."&$record&$field_name";
-                $str = "<div id='$div_id'>" . $cell . "&nbsp;"
-                     . SugarThemeRegistry::current()->getImage(
-                        "edit_inline",
-                        "border='0' alt='Edit Layout' align='bottom' onClick='SUGAR.reportsInlineEdit.inlineEdit(" .
-                        "\"$div_id\",\"$cell\",\"$module\",\"$record\",\"$field_name\",\"$field_type\");'"
-                       )
-                     . "</div>";
-            }
-        }
-        return $str;
+        return $this->displayListPlain($layout_def);
     }
     public function displayListPlain($layout_def)
     {

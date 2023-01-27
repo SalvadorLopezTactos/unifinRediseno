@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'Filter',
     'LBL_CONSOLE_FILTER_RULES' => 'Filter Rules',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'Freeze First Column',
+
     'LBL_CONSOLE_COLUMNS' => 'Columns',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'Multi-Field Column',
     'LBL_CONSOLE_PRIMARY_SORT' => 'Primary Sort',

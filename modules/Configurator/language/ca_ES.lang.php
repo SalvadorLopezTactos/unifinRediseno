@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Format d´hora predeterminat',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Mostrar els temps de resposta del servidor',
+    'FREEZE_FIRST_COLUMN' => 'Permet congelar columnes',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Habiliteu aquesta configuració per permetre que els usuaris congelin la primera columna en diverses ' .
+        'visualitzacions de llista, incloent-hi les visualitzacions de llista de mòduls, subpanells, dashlets i consoles.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Registra consultes lentes',
     'LOCK_HOMEPAGE_HELP'=>'Aquesta opció serveix per <BR> 1) la creació de noves pàgines d´inici en el mòdul Inici, i <BR>2) la personalització de la ubicació del dashlet en les pàgines d´inici usant arrosegar i soltar.',
     'CURRENT_LOGO'=>'Logo actual',
+    'CURRENT_LOGO_DARK' => 'Logotip actual del mode fosc:',
     'CURRENT_LOGO_HELP'=>'Aquest logo es mostra a la cantonada superior esquerra de l&#39;aplicació Sugar.',
+    'CURRENT_LOGO_DARK_HELP' => "Aquest logotip es visualitza a l'extrem esquerre del peu de pàgina quan l'aplicació Sugar està en mode fosc, d'acord amb les preferències d'aparença de l'usuari.",
     'NEW_LOGO'=>'Pujar nou logo',
     'NEW_LOGO_HELP' => 'El format d´arxiu de l´imatge pot ser .png o .jpg.<BR>El tamany recomanat es de 212x40 punts.',
+    'NEW_LOGO_DARK' => 'Seleccioneu el logotip del mode fosc:',
     'NEW_LOGO_HELP_NO_SPACE' => 'El format d&#39;arxiu d&#39;imatge pot ser qualsevol .png o .jpg. L&#39;alçada màxima és de 17px, i l&#39;amplada màxima és de 450px. Qualsevol imatge carregada que és més gran en qualsevol direcció serà modificada perquè aquestes dimensions siguin les màximes. El nom del fitxer d&#39;imatge no ha de contenir un caràcter d&#39;espai.',
     'NEW_QUOTE_LOGO'=>'Pujar nou logo per Pressuposts',
     'NEW_QUOTE_LOGO_HELP'=>'El format d´arxiu de l´imatge necessari es .jpg.<BR>El tamany recomanat es de 867x74 punts.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Continuar',
     'LBL_WIZARD_FINISH_TAB' => 'Finalitzar',
     'LBL_WIZARD_FINISH_TITLE' => 'La configuració bàsica del sistema ha estat completada',
-    'LBL_WIZARD_FINISH' => 'Faci clic en <b>Continuar</b> per a configurar les seves opcions d&#39;usuari. <br/><br />Per a configurar opcions adicionals del sistema, feu clic <a href="index.php?module=Administration&amp;action=index" target="_blank">aquí</a>.',
+    'LBL_WIZARD_FINISH' => 'Feu clic a <b>Continua</b> per configurar les seves opcions d&#39;usuari.<br/><br />
+Per configurar opcions adicionals del sistema, feu clic <a href="#Administration" target="_blank">aquí</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Imatge de marca',
     'LBL_WIZARD_SYSTEM_DESC' => 'Proporcioni el nom i el logo de la seva organització per a establir la imatge de la seva marca a Sugar.',
     'LBL_WIZARD_LOCALE_DESC' => 'Especifiqui com desitja que les dades siguin mostrades a Sugar, basant-se a la seva ubicació geogràfica. La configuració que proporcioni aquí serà utilitzada per defecte. Els usuaris podran establir les seves propies preferències.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Carregant ...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Eliminar' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Benvingut' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logotip del mode fosc',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* El mòdul d&#39;informes només està disponible per als clients mòbils de Sugar nadius',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* El mòdul d&#39;informes no està disponible per a la vista mòbil basada en navegador.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

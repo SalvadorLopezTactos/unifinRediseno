@@ -39,6 +39,25 @@ $viewdefs['Accounts']['base']['view']['activity-timeline'] = [
                 'date_entered_by',
                 'date_modified_by',
                 'assigned_user_name',
+                'sentiment_score_customer',
+            ],
+            'card_menu' => [
+                [
+                    'type' => 'focuscab',
+                    'css_class' => 'dashboard-icon',
+                    'icon' => 'sicon-focus-drawer',
+                    'tooltip' => 'LBL_FOCUS_DRAWER_DASHBOARD',
+                ],
+                [
+                    'type' => 'cab_actiondropdown',
+                    'buttons' => [
+                        [
+                            'type' => 'unlinkcab',
+                            'icon' => 'sicon-unlink',
+                            'label' => 'LBL_UNLINK_BUTTON',
+                        ],
+                    ],
+                ],
             ],
         ],
         [
@@ -47,6 +66,7 @@ $viewdefs['Accounts']['base']['view']['activity-timeline'] = [
             'fields' => [
                 'name',
                 'date_sent',
+                'date_entered_by',
                 'from_collection',
                 'to_collection',
                 'cc_collection',
@@ -54,6 +74,36 @@ $viewdefs['Accounts']['base']['view']['activity-timeline'] = [
                 'description_html',
                 'attachments_collection',
                 'assigned_user_name',
+                'state',
+            ],
+            'card_menu' => [
+                [
+                    'name' => 'reply_icon',
+                    'type' => 'reply-action',
+                    'tplName' => 'activity-card-emailaction',
+                    'icon' => 'sicon-arrow-left',
+                    'tooltip' => 'LBL_EMAIL_REPLY',
+                ],
+                [
+                    'name' => 'reply_all_icon',
+                    'type' => 'reply-all-action',
+                    'tplName' => 'activity-card-emailaction',
+                    'icon' => 'sicon-reply-all',
+                    'tooltip' => 'LBL_EMAIL_REPLY_ALL',
+                ],
+                [
+                    'name' => 'forward_icon',
+                    'type' => 'forward-action',
+                    'tplName' => 'activity-card-emailaction',
+                    'icon' => 'sicon-arrow-right',
+                    'tooltip' => 'LBL_EMAIL_FORWARD',
+                ],
+                [
+                    'type' => 'focuscab',
+                    'css_class' => 'dashboard-icon',
+                    'icon' => 'sicon-focus-drawer',
+                    'tooltip' => 'LBL_FOCUS',
+                ],
             ],
         ],
         [
@@ -70,6 +120,24 @@ $viewdefs['Accounts']['base']['view']['activity-timeline'] = [
                 'date_modified_by',
                 'assigned_user_name',
             ],
+            'card_menu' => [
+                [
+                    'type' => 'focuscab',
+                    'css_class' => 'dashboard-icon',
+                    'icon' => 'sicon-focus-drawer',
+                    'tooltip' => 'LBL_FOCUS_DRAWER_DASHBOARD',
+                ],
+                [
+                    'type' => 'cab_actiondropdown',
+                    'buttons' => [
+                        [
+                            'type' => 'unlinkcab',
+                            'icon' => 'sicon-unlink',
+                            'label' => 'LBL_UNLINK_BUTTON',
+                        ],
+                    ],
+                ],
+            ],
         ],
         [
             'module' => 'Notes',
@@ -82,6 +150,66 @@ $viewdefs['Accounts']['base']['view']['activity-timeline'] = [
                 'date_entered_by',
                 'date_modified_by',
                 'assigned_user_name',
+                'modified_by_name',
+                'attachment_list',
+                'portal_flag',
+            ],
+            'card_menu' => [
+                [
+                    'type' => 'focuscab',
+                    'css_class' => 'dashboard-icon',
+                    'icon' => 'sicon-focus-drawer',
+                    'tooltip' => 'LBL_FOCUS_DRAWER_DASHBOARD',
+                ],
+                [
+                    'type' => 'cab_actiondropdown',
+                    'buttons' => [
+                        [
+                            'type' => 'unlinkcab',
+                            'icon' => 'sicon-unlink',
+                            'label' => 'LBL_UNLINK_BUTTON',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        [
+            'module' => 'Tasks',
+            'record_date' => 'date_due',
+            'fields' => [
+                'name',
+                'description',
+                'date_due',
+                'date_entered_by',
+                'created_by_name',
+                'assigned_user_name',
+                'status',
+                'priority',
+            ],
+            'card_menu' => [
+                [
+                    'type' => 'focuscab',
+                    'css_class' => 'dashboard-icon',
+                    'icon' => 'sicon-focus-drawer',
+                    'tooltip' => 'LBL_FOCUS_DRAWER_DASHBOARD',
+                ],
+                [
+                    'type' => 'cab_actiondropdown',
+                    'buttons' => [
+                        [
+                            'type' => 'unlinkcab',
+                            'icon' => 'sicon-unlink',
+                            'label' => 'LBL_UNLINK_BUTTON',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        [
+            'module' => 'Audit',
+            'record_date' => 'date_created',
+            'fields' => [
+                'assigned_user_id',
             ],
         ],
     ],
@@ -90,7 +218,7 @@ $viewdefs['Accounts']['base']['view']['activity-timeline'] = [
             [
                 'type' => 'actiondropdown',
                 'no_default_action' => true,
-                'icon' => 'fa-plus',
+                'icon' => 'sicon-plus',
                 'buttons' => [
                     [
                         'type' => 'dashletaction',
@@ -99,8 +227,7 @@ $viewdefs['Accounts']['base']['view']['activity-timeline'] = [
                             'link' => 'emails',
                             'module' => 'Emails',
                         ],
-                        'label' => 'LBL_COMPOSE_EMAIL_BUTTON_LABEL',
-                        'icon' => 'fa-plus',
+                        'label' => 'LBL_COMPOSE_EMAIL_BUTTON_LABEL2',
                         'acl_action' => 'create',
                         'acl_module' => 'Emails',
                     ],
@@ -111,8 +238,7 @@ $viewdefs['Accounts']['base']['view']['activity-timeline'] = [
                             'link' => 'calls',
                             'module' => 'Calls',
                         ],
-                        'label' => 'LBL_SCHEDULE_CALL',
-                        'icon' => 'fa-phone',
+                        'label' => 'LBL_SCHEDULE_CALL2',
                         'acl_action' => 'create',
                         'acl_module' => 'Calls',
                     ],
@@ -123,8 +249,7 @@ $viewdefs['Accounts']['base']['view']['activity-timeline'] = [
                             'link' => 'meetings',
                             'module' => 'Meetings',
                         ],
-                        'label' => 'LBL_SCHEDULE_MEETING',
-                        'icon' => 'fa-calendar',
+                        'label' => 'LBL_SCHEDULE_MEETING2',
                         'acl_action' => 'create',
                         'acl_module' => 'Meetings',
                     ],
@@ -135,17 +260,27 @@ $viewdefs['Accounts']['base']['view']['activity-timeline'] = [
                             'link' => 'notes',
                             'module' => 'Notes',
                         ],
-                        'label' => 'LBL_CREATE_NOTE_OR_ATTACHMENT',
-                        'icon' => 'fa-plus',
+                        'label' => 'LBL_CREATE_NOTE_OR_ATTACHMENT2',
                         'acl_action' => 'create',
                         'acl_module' => 'Notes',
+                    ],
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'createRecord',
+                        'params' => [
+                            'link' => 'tasks',
+                            'module' => 'Tasks',
+                        ],
+                        'label' => 'LBL_CREATE_TASK2',
+                        'acl_action' => 'create',
+                        'acl_module' => 'Tasks',
                     ],
                 ],
             ],
             [
                 'type' => 'dashletaction',
                 'css_class' => 'dashlet-toggle btn btn-invisible minify',
-                'icon' => 'fa-chevron-up',
+                'icon' => 'sicon-chevron-up',
                 'action' => 'toggleMinify',
                 'tooltip' => 'LBL_DASHLET_MINIMIZE',
             ],

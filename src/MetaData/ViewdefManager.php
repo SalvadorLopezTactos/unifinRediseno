@@ -24,11 +24,14 @@ class ViewdefManager
      * @param string $module
      * @param string $view
      * @param bool $loadBase flag to load the base config instead of the custom one.
+     * @param bool $isLayout flag to load a layout instead of a view.
      * @return array viewdefs
      */
-    public function loadViewdef($platform, $module, $view, $loadBase = false)
+    public function loadViewdef($platform, $module, $view, $loadBase = false, $isLayout = false)
     {
-        $paths = $this->getClientFiles([$platform], 'view', $module);
+        $type = $isLayout ? 'layout' : 'view';
+
+        $paths = $this->getClientFiles([$platform], $type, $module);
         $path = $this->findModuleViewdef($paths, $module, $view, $loadBase);
 
         if ($path === null) {
@@ -39,8 +42,8 @@ class ViewdefManager
         $viewdef = $this->loadDef($path['path']);
 
         //make sure the path we want exists in the loaded file
-        if (isset($viewdef[$module][$platform]['view'][$view])) {
-            return $viewdef[$module][$platform]['view'][$view];
+        if (isset($viewdef[$module][$platform][$type][$view])) {
+            return $viewdef[$module][$platform][$type][$view];
         }
 
         return [];
@@ -53,11 +56,14 @@ class ViewdefManager
      * @param string $module
      * @param string $platform
      * @param string $view
+     * @param bool $isLayout flag to load a layout instead of a view.
      */
-    public function saveViewdef($viewdef, $module, $platform, $view)
+    public function saveViewdef($viewdef, $module, $platform, $view, $isLayout = false)
     {
-        $path = "custom/modules/{$module}/clients/{$platform}/views/{$view}/{$view}.php";
-        $varname = "viewdefs['{$module}']['{$platform}']['view']['{$view}']";
+        $type = $isLayout ? 'layout' : 'view';
+
+        $path = "custom/modules/{$module}/clients/{$platform}/{$type}s/{$view}/{$view}.php";
+        $varname = "viewdefs['{$module}']['{$platform}']['{$type}']['{$view}']";
 
         if (!file_exists($path)) {
             sugar_touch($path);

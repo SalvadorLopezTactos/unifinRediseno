@@ -20,6 +20,7 @@
      * @inheritdoc
      */
     initialize: function(options) {
+        this._beforeInit(options);
         this._super('initialize', [options]);
 
         this.context.set('search', true);
@@ -66,6 +67,29 @@
         this.context.on('facets:reset', this.search, this);
 
         this.collection.setOption('params', {xmod_aggs: true});
+    },
+
+    /**
+     * Initialization of properties needed before calling the sidecar/backbone initialize method
+     *
+     * @param {Object} options
+     *
+     */
+    _beforeInit: function(options) {
+        var previewPane = {
+            layout: 'preview',
+            label: 'Hint-Tab'
+        };
+
+        if (app.hint && app.user.hasLicense('HINT')) {
+            _.each(options.meta.components, function(def) {
+                _.each(def.layout.components, function(comp) {
+                    if (comp.layout.name === 'preview-pane') {
+                        comp.layout.components.push(previewPane);
+                    }
+                });
+            });
+        }
     },
 
     /**

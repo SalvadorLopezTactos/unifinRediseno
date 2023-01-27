@@ -52,7 +52,7 @@ $out = <<<EOQ
 		{$mod_strings['LBL_INSTALL_TYPE_TITLE']}</th>
 
     <th width="200" height="30" style="text-align: right;"><a href="http://www.sugarcrm.com" target=
-  "_blank"><IMG src="$loginImage" alt="SugarCRM" border="0"></a>
+  "_blank"><img src="{$loginImage}" alt="SugarCRM" border="0" class="sugarcrm-logo"></a>
         </th>
     </tr>
 

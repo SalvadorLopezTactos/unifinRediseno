@@ -81,6 +81,28 @@ class RelateApi extends FilterApi {
         );
     }
 
+    /**
+     * Gets a new relate bean for a link.
+     * @param SugarBean $record
+     * @param string $linkName
+     * @throws SugarApiExceptionNotFound
+     * @throws SugarApiExceptionNotAuthorized
+     * @return SugarBean
+     */
+    protected function getLinkBean(SugarBean $record, string $linkName): SugarBean
+    {
+        if (!$record->load_relationship($linkName)) {
+            // The relationship did not load.
+            throw new SugarApiExceptionNotFound('Could not find a relationship named: ' . $linkName);
+        }
+        $linkModuleName = $record->$linkName->getRelatedModuleName();
+        $linkSeed = BeanFactory::newBean($linkModuleName);
+        if (!$linkSeed->ACLAccess('list')) {
+            throw new SugarApiExceptionNotAuthorized('No access to list records for module: ' . $linkModuleName);
+        }
+        return $linkSeed;
+    }
+
     public function filterRelatedSetup(ServiceBase $api, array $args)
     {
         // Load the parent bean.
@@ -98,17 +120,19 @@ class RelateApi extends FilterApi {
 
         // Load the relationship.
         $linkName = $args['link_name'];
-        if (!$record->load_relationship($linkName)) {
-            // The relationship did not load.
-            throw new SugarApiExceptionNotFound('Could not find a relationship named: ' . $args['link_name']);
-        }
-        $linkModuleName = $record->$linkName->getRelatedModuleName();
-        $linkSeed = BeanFactory::newBean($linkModuleName);
-        if (!$linkSeed->ACLAccess('list')) {
-            throw new SugarApiExceptionNotAuthorized('No access to list records for module: ' . $linkModuleName);
-        }
+        $linkSeed = $this->getLinkBean($record, $linkName);
 
         $options = $this->parseArguments($api, $args, $linkSeed);
+
+        // don't include any attachments when retrieving related notes
+        if ($linkSeed->getModuleName() === 'Notes' && $linkName !== 'attachments') {
+            $args['filter'] = $args['filter'] ?? [];
+            $args['filter'][] = [
+                'attachment_flag' => [
+                    '$equals' => 0,
+                ],
+            ];
+        }
 
         // If they don't have fields selected we need to include any link fields
         // for this relationship
@@ -193,7 +217,7 @@ class RelateApi extends FilterApi {
         $q->orderByReset();
 
         $stmt = $q->compile()->execute();
-        $count = (int) $stmt->fetchColumn();
+        $count = (int) $stmt->fetchOne();
 
         return array(
             'record_count' => $count,
@@ -225,7 +249,7 @@ class RelateApi extends FilterApi {
         list(, $q) = $this->filterRelatedSetup($api, $args);
         $q->orderByReset();
         $stmt = $q->compile()->execute();
-        $count = count($stmt->fetchAll());
+        $count = count($stmt->fetchFirstColumn());
 
         return array(
             'record_count' => $count > $args['max_num'] ? $args['max_num'] : $count,

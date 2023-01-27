@@ -41,4 +41,13 @@
             this.href = undefined;
         }
     },
+
+    /**
+     * @inheritdoc
+     */
+    _render() {
+        if (this.view.name !== 'create') {
+            this._super('_render');
+        }
+    }
 })

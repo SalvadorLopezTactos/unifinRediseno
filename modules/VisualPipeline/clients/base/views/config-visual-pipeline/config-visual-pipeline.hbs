@@ -13,7 +13,7 @@
 <div class="accordion-heading active">
         <span class="pull-left step-circle pipeline-step-circle">
             <span>2</span>
-            <i class="fa fa-check-circle"></i>
+            <i class="sicon sicon-lg sicon-check-circle-lg"></i>
         </span>
     <h4>{{str "LBL_PIPELINE_MODULE_SETTINGS" this.module}}</h4>
 </div>
@@ -23,9 +23,10 @@
         {{#if collection.length}}
             <ul class="ul nav nav-tabs">
                 {{#each collection.models}}
-                    <li class="tab"><a
-                            href="#{{attributes.enabled_module}}">{{getModuleName attributes.enabled_module
-                                                                                  plural=true}}</a>
+                    <li class="tab tab-badgeable">
+                        <a href="#{{attributes.enabled_module}}">
+                            <span class="tab-title font-semibold">{{getModuleName attributes.enabled_module plural=true}}</span>
+                        </a>
                     </li>
                 {{/each}}
             </ul>

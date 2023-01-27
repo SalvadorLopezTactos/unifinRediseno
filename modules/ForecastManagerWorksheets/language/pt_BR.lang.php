@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Taxa básica',
 
     'LBL_QUOTA' => 'Cota',
-    'LBL_QUOTA_ADJUSTED' => 'Cota (ajustada)',
+    'LBL_QUOTA_ADJUSTED' => 'Quota ajustada',
 
     'LBL_FORECAST' => 'Previsão',
     'LBL_COMMIT_STAGE' => 'Fase de comprometimento',

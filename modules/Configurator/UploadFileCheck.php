@@ -19,11 +19,23 @@ global $sugar_config;
 $json = getJSONobj();
 
 $returnArray = [];
-$upload_path = Configurator::COMPANY_LOGO_UPLOAD_PATH;
 
 $upload_ok = false;
+$hasFile = false;
+$isDarkModeLogo = false;
+
 if (isset($_FILES['file_1'])) {
+    $upload_path = Configurator::COMPANY_LOGO_UPLOAD_PATH;
     $upload = new UploadFile('file_1');
+    $hasFile = true;
+} elseif (isset($_FILES['file_dark'])) {
+    $isDarkModeLogo = true;
+    $upload_path = Configurator::COMPANY_LOGO_UPLOAD_PATH_DARK;
+    $upload = new UploadFile('file_dark');
+    $hasFile = true;
+}
+
+if ($hasFile) {
     if ($upload->confirm_upload()) {
         $upload_dir = dirname($upload_path);
         UploadStream::ensureDir($upload_dir);
@@ -32,13 +44,15 @@ if (isset($_FILES['file_1'])) {
         }
     }
 }
+
 if (!$upload_ok) {
     $returnArray['data'] = 'not_recognize';
     echo $json->encode($returnArray);
     sugar_cleanup(true);
 }
 if (file_exists($upload_path) && is_file($upload_path)) {
-    $returnArray['url'] = 'cache/images/logo.png?nocache=' . time();
+    $logoFileName = $isDarkModeLogo ? 'logo_dark.png' : 'logo.png';
+    $returnArray['url'] = "cache/images/{$logoFileName}?nocache=" . time();
     if (!verify_uploaded_image($upload_path)) {
         $returnArray['data'] = 'other';
     } else {
@@ -49,7 +63,7 @@ if (file_exists($upload_path) && is_file($upload_path)) {
             $returnArray['data'] = 'size';
         }
         sugar_mkdir(sugar_cached('images'));
-        copy($upload_path, sugar_cached('images/logo.png'));
+        copy($upload_path, sugar_cached("images/{$logoFileName}"));
     }
     if (!empty($returnArray['data'])) {
         echo $json->encode($returnArray);

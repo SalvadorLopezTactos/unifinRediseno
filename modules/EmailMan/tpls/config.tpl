@@ -32,7 +32,7 @@ var authInfo = {/literal}{$js_authinfo}{literal}
 </script>
 {/literal}
 {$ROLLOVER}
-<form name="ConfigureSettings" id="EditView" method="POST" action="index.php">
+<form name="ConfigureSettings" id="EditView" method="POST" action="index.php" data-disablebwchaschanged="true">
     {sugar_csrf_form_token}
 	<input type="hidden" name="module" value="EmailMan">
 	<input type="hidden" name="action">
@@ -48,7 +48,7 @@ var authInfo = {/literal}{$js_authinfo}{literal}
 
 		<td>
 			<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{$APP.LBL_SAVE_BUTTON_KEY}" class="button primary" onclick="this.form.action.value='Save';return save_data(this);" type="submit" name="button" id="btn_save" value=" {$APP.LBL_SAVE_BUTTON_LABEL} ">
-			<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="this.form.action.value='{$RETURN_ACTION}'; this.form.module.value='{$RETURN_MODULE}';" type="submit" name="button" value=" {$APP.LBL_CANCEL_BUTTON_LABEL} ">
+			<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button" value=" {$APP.LBL_CANCEL_BUTTON_LABEL} ">
 		</td>
 		<td align="right" nowrap>
 			<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span> {$APP.NTC_REQUIRED}
@@ -136,7 +136,7 @@ var authInfo = {/literal}{$js_authinfo}{literal}
         </tr>
         <tr id="auth_block" style="display:none">
             <td colspan="4">
-                <div id="auth_warning" style="background-color:rgba(255,212,208,0.4);color:#BA0F1B;font-weight:bold;padding:5px;margin:2px">
+                <div id="auth_warning">
                 Placeholder
                 </div>
                 <button type="button" id="auth_button" name="auth_button" style="padding:5px;margin:10px 2px" onclick="authorize();">{$APP.LBL_EMAIL_AUTHORIZE}</button>
@@ -447,7 +447,7 @@ var authInfo = {/literal}{$js_authinfo}{literal}
 
 <div style="padding-top:2px;">
 			<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" class="button primary" onclick="this.form.action.value='Save';return save_data(this);" type="submit" name="button" value=" {$APP.LBL_SAVE_BUTTON_LABEL} ">
-			<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" class="button" onclick="this.form.action.value='{$RETURN_ACTION}'; this.form.module.value='{$RETURN_MODULE}';" type="submit" name="button" value=" {$APP.LBL_CANCEL_BUTTON_LABEL} ">
+			<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" class="button" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button" value=" {$APP.LBL_CANCEL_BUTTON_LABEL} ">
 </div>
 
 	</form>

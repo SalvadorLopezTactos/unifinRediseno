@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Peržiūrėti žinučių ataskaitas',
     'LNK_IMPORT_MESSAGES' => 'Importuoti žinutes',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'Potencialaus kontakto ID',
+    'LBL_LEAD_NAME' => 'Potencialus kontaktas',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Pokalbis iš kliento pusės',
+    'LBL_ACTIVITY_CUSTOMER' => 'Klientas',
+    'LBL_ACTIVITY_FINISHED' => 'baigėsi',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'vykdoma',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Pranešimų „Focus“ stalčius',
 ];

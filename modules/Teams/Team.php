@@ -624,7 +624,7 @@ AND deleted = 0';
 
         $count = $this->db->getConnection()
             ->executeQuery($query, array($user_id))
-            ->fetchColumn();
+            ->fetchOne();
 
         return $count > 0;
 	}
@@ -642,7 +642,7 @@ AND team_memberships.deleted = 0';
 
         $count = $this->db->getConnection()
             ->executeQuery($query, array($user_id, $this->id))
-            ->fetchColumn();
+            ->fetchOne();
 
         return $count > 0;
     }
@@ -701,7 +701,7 @@ AND team_id = ?';
 
             foreach ($this->my_memberships as $team_id=>$before_row) {
                 $stmt = $conn->executeQuery($query, array($user_id, $team_id));
-                $after_row = $stmt->fetch();
+                $after_row = $stmt->fetchAssociative();
 
                 if ($after_row['explicit_assign'] != $before_row['explicit_assign']
                     || $after_row['implicit_assign'] != $before_row['implicit_assign']) {
@@ -757,7 +757,7 @@ AND team_id = ?';
 
         $id = $this->db->getConnection()
             ->executeQuery($query, $params)
-            ->fetchColumn();
+            ->fetchOne();
 
         return $id;
 	}
@@ -792,7 +792,7 @@ AND team_id = ?';
 
         $count = $this->db->getConnection()
             ->executeQuery($query, array($this->id))
-            ->fetchColumn();
+            ->fetchOne();
 
         return $count > 0;
 	}
@@ -931,7 +931,7 @@ ORDER BY t.private, t.name';
         if ($add_blank)
             $team_array[""] = "";
 
-        while (($row = $stmt->fetch())) {
+        while (($row = $stmt->fetchAssociative())) {
             if($user->showLastNameFirst())
                 $team_array[$row['id']] = trim($row['name_2'] . ' ' . $row['name']);
             else

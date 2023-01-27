@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Arkusz',
     'LBL_PURCHASED_LINE_ITEMS' => 'Zakupione pozycje',
 
+    'LBL_FORECASTED_LIKELY' => 'Prognozy prawdopodobne',
     'LBL_RENEWAL' => 'Odnowienie',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Szanse odnowienia',
     'LBL_RENEWAL_PARENT' => 'Nadrzędne szanse',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => 'Liczba łącznych pozycji szans',
     'LBL_CLOSED_RLIS' => 'Liczba zamkniętych pozycji szans',
+    'LBL_CLOSED_WON_RLIS' => 'Liczba pozycji przychodu zakończonych sukcesem',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Liczba otwartych pozycji przychodów o elastycznym czasie trwania',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Nie możesz usunąć szans, które zawierają zamknięte Pozycje szansy',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Co najmniej jeden wybrany rekord zawiera zamknięte Pozycje szansy i nie może zostać usunięty.',
     'LBL_INCLUDED_RLIS' => 'Liczba uwzględnionych pozycji szans',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Aktualizuj otwarte',
+    'LBL_CASCADE_RLI_EDIT' => 'Aktualizuj otwarte pozycje przychodów',
+    'LBL_CASCADE_RLI_CREATE' => 'Ustaw we wszystkich pozycjach przychodów',
     'LBL_SERVICE_START_DATE_INVALID' => 'Data początkowa usługi nie może być późniejsza niż data końcowa usługi w żadnej z otwartych, dodatkowych pozycji przychodów.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Oferty',
@@ -207,7 +211,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Po zainicjowaniu tej zmiany rekordy Pozycji szans zostaną utworzone dla każdej istniejącej {{module_name}} w tle. Kiedy Pozycje szansy będą ukończone i dostępne, na Twój adres e-mail użytkownika zostanie wysłane powiadomienie. Zwróć uwagę, że Twoja instancja musi zostać skonfigurowana w panelu Administrator > Ustawienia poczty e-mail, aby powiadomienie zostało wysłane.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduł {{plural_module_name}} pozwala na śledzenie poszczególnych sprzedaży od początku do końca. Każdy rekord {{module_name}} reprezentuje potencjalną sprzedaż i obejmuje istotne dane sprzedaży, jak również dane odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. {{module_name}} będzie zazwyczaj występował w kilku Etapach sprzedaży, dopóki nie zostanie oznaczony jako „Zamknięty wygrany” lub „Zamknięty przegrany”. {{plural_module_name}} mogą posłużyć jeszcze w aplikacji Sugar w module {{forecasts_singular_module}} jako pomoc w zrozumieniu i przewidywaniu trendów sprzedaży oraz koncentrowaniu prac na osiąganiu norm sprzedaży.',
+    'LBL_HELP_RECORDS' => 'Moduł {{plural_module_name}} pozwala na śledzenie poszczególnych sprzedaży od początku do końca. Każdy rekord {{module_name}} reprezentuje potencjalną sprzedaż i obejmuje istotne dane sprzedaży, jak również dane odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. {{module_name}} będzie zazwyczaj występował w kilku Etapach sprzedaży, dopóki nie zostanie oznaczony jako „Zakończone sukcesem” lub „Zakończone porażką”. {{plural_module_name}} mogą posłużyć jeszcze w aplikacji Sugar w module {{forecasts_singular_module}} jako pomoc w zrozumieniu i przewidywaniu trendów sprzedaży oraz koncentrowaniu prac na osiąganiu norm sprzedaży.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Moduł {{plural_module_name}} umożliwia śledzenie indywidualnej sprzedaży i powiązanych z nią pozycji od początku do końca. Każdy rekord {{module_name}} zawiera potencjalną sprzedaż i obejmuje odpowiadające dane sprzedaży, a także odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. 
@@ -239,7 +243,10 @@ Aby utworzyć rekord {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Szanse mojego zespołu",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Nie można zmienić statusu {{fieldName}}, ponieważ ten {{moduleSingular}} nie ma już otwartych pozycji.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcje szansy',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu szansy',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' nie mogą być ustawione we wszystkich pozycjach przychodów, ponieważ nie są usługami. Czy kontynuować tworzenie?',
+    'LBL_CASCADE_DURATION_WARNING' => ' nie mogą być ustawione we wszystkich pozycjach przychodów, ponieważ ich czasy trwania są zablokowane. Czy kontynuować tworzenie?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Prognoza realizacji możliwości',

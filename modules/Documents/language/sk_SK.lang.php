@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Položky riadku príjmov',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Nákupy',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Zakúpené riadkové položky',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Informačný panel so záznamom dokumentov',
+    'LBL_MY_DOCUMENTS' => 'Moje dokumenty',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Odoslať do DocuSign',
 );

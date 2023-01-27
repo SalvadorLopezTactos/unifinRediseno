@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,18 +18,17 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class WorkbookCommentReply extends Entity
 {
     /**
     * Gets the content
-    * The content of a comment reply.
+    * The content of replied comment.
     *
-    * @return string The content
+    * @return string|null The content
     */
     public function getContent()
     {
@@ -43,7 +41,7 @@ class WorkbookCommentReply extends Entity
     
     /**
     * Sets the content
-    * The content of a comment reply.
+    * The content of replied comment.
     *
     * @param string $val The content
     *
@@ -57,9 +55,9 @@ class WorkbookCommentReply extends Entity
     
     /**
     * Gets the contentType
-    * Indicates the type for the comment reply.
+    * Indicates the type for the replied comment.
     *
-    * @return string The contentType
+    * @return string|null The contentType
     */
     public function getContentType()
     {
@@ -72,7 +70,7 @@ class WorkbookCommentReply extends Entity
     
     /**
     * Sets the contentType
-    * Indicates the type for the comment reply.
+    * Indicates the type for the replied comment.
     *
     * @param string $val The contentType
     *

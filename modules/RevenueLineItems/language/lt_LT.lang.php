@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Atnaujintų pajamų eilutės prekės ID',
     'LBL_PARENT_RLIS' => 'Pagrindinių pajamų eilutės prekės',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Pagrindinių pajamų eilutės prekės',
+    'LBL_FORECASTED_LIKELY' => 'Prognozuojama panašiai',
     'LBL_EXPERT_ID' => 'Product Expert',
     'LBL_FORECAST' => 'Include in Forecast',
     'LBL_SUBTOTAL' => 'Tarpinė suma',

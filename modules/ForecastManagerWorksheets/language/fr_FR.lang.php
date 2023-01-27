@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Taux par défaut',
 
     'LBL_QUOTA' => 'Objectif',
-    'LBL_QUOTA_ADJUSTED' => 'Quota (ajusté)',
+    'LBL_QUOTA_ADJUSTED' => 'Quota ajusté',
 
     'LBL_FORECAST' => 'Prévision',
     'LBL_COMMIT_STAGE' => 'Étape de soumission',

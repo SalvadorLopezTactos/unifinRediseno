@@ -122,6 +122,17 @@
     /**
      * @inheritdoc
      *
+     * Patches metadata for use in Preview when a dropdown-based view changes
+     * the metadata panels
+     */
+    _setDbvMeta: function(dbvKey) {
+        this._super('_setDbvMeta', [dbvKey]);
+        this.meta = this._previewifyMetadata(this.meta);
+    },
+
+    /**
+     * @inheritdoc
+     *
      * @override Overriding to get preview specific buttons
      */
     toggleButtons: function(enable) {
@@ -143,11 +154,13 @@
         if (this.disposed) {
             return;
         }
+        app.alert.dismiss('cancel-dropdown-view-change');
         this._saveModel();
         this.layout.trigger('preview:edit:complete');
         this.unsetContextAction();
         this.toggleFields(this.editableFields, false);
         this.toggleLocks(false);
+        this.action = 'detail';
         this.setButtonStates(this.STATE.VIEW);
     },
 
@@ -158,7 +171,11 @@
      * @override Overriding in order to trigger 'preview:edit:complete'
      */
     cancelClicked: function() {
-        this.model.revertAttributes();
+        app.alert.dismiss('cancel-dropdown-view-change');
+        this.model.revertAttributes({
+            hideDbvWarning: true
+        });
+        this.action = 'detail';
         this.toggleFields(this.editableFields, false);
         this.toggleLocks(false);
         this._dismissAllAlerts();
@@ -333,6 +350,8 @@
             this.startSugarLogic();
         }
 
+        this._initDropdownBasedViewsForModel();
+
         // Close preview when model destroyed by deleting the record
         this.listenTo(this.model, 'destroy', function() {
             // Remove the decoration of the highlighted row
@@ -471,6 +490,7 @@
         // Since the layout calls loadData, the fields will rerender when the data comes back
         // from the sever.
         this.context.on('change:model', function(ctx, model) {
+            this.cancelClicked();
             this.switchModel(model);
             this.render();
         }, this);
@@ -484,8 +504,19 @@
         this.setEditableFields();
         this.toggleFields(this.editableFields, true);
         this.toggleButtons(true);
+        this.action = 'edit';
         this.setButtonStates(this.STATE.EDIT);
         this.toggleLocks(true);
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Tells the layout to update the state of the buttons in the preview header
+     */
+    setButtonStates: function(state) {
+        this._super('setButtonStates', [state]);
+        this.layout.trigger('preview:header:edit', state === this.STATE.EDIT);
     },
 
     /**

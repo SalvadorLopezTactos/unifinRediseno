@@ -11,7 +11,6 @@
  */
 
 $action_view_map['retrievesource']= 'retrievesource';
-$action_view_map['step1']= 'step1';
 $action_view_map['step2']= 'step2';
 
 //Admin main page
@@ -27,7 +26,6 @@ $action_view_map['displayproperties'] = 'displayproperties';
 
 //Admin pages to modify search field mapping for connectors
 $action_view_map['modifysearch'] = 'modifysearch';
-$action_view_map['searchproperties'] = 'searchproperties';
 
 //Admin pages to modify field mapping for the connectors
 $action_view_map['modifymapping'] = 'modifymapping';

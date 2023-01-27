@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Näytä viestiraportit',
     'LNK_IMPORT_MESSAGES' => 'Tuo viestit',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'Liidin tunnus',
+    'LBL_LEAD_NAME' => 'Liidi',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Asiakaschat',
+    'LBL_ACTIVITY_CUSTOMER' => 'Asiakas',
+    'LBL_ACTIVITY_FINISHED' => 'lopetettu',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'käynnissä',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Viestit-tietolaatikko',
 ];

@@ -25,6 +25,23 @@ button, .button {
 	font-weight: bold;
 	white-space:nowrap;
 }
+
+.mbLBL .labels-cell {
+    padding: 0 1em 0 0;
+}
+
+.mbLBL .labels-cell .inlineHelpTip {
+    margin: 0;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-left {
+    text-align: left;
+}
+
 .mbLBLL{
 	vertical-align:top;
 	text-align:left;
@@ -48,7 +65,7 @@ padding: 4px 8px 4px 8px;
 }
 
 .relform .edit tr td[scope="row"] {
-    text-align:right;	
+    text-align:right;
 }
 
 .wizardButton TD{
@@ -98,18 +115,18 @@ img.right_icon {
 }
 
 #mbfooter div.yui-layout-hd h2 {
-    padding-top: 0;	
+    padding-top: 0;
 }
 
 #mbhelp {
     padding-left: 5px;
 }
 
-#yui-history-iframe { 
-    position:absolute; 
-    top:0; left:0; 
-    width:1px; height:1px; 
-    visibility:hidden; 
+#yui-history-iframe {
+    position:absolute;
+    top:0; left:0;
+    width:1px; height:1px;
+    visibility:hidden;
 }
 
 #mblayout .yui-content {
@@ -125,6 +142,7 @@ img.right_icon {
     position: static;
 }
 
-input[disabled], select[disabled]{
-    background-color: #EEE;
+input[disabled], select[disabled], input[readonly] {
+    background-color: var(--input-disabled-background);
+    cursor: no-drop;
 }

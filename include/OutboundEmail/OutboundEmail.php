@@ -328,7 +328,7 @@ class OutboundEmail extends SugarBean
 			}
 		}
 
-        while ($a = $stmt->fetch()) {
+        while ($a = $stmt->fetchAssociative()) {
 			$oe = array();
 			if($a['mail_sendtype'] != 'SMTP')
 				continue;
@@ -364,7 +364,7 @@ class OutboundEmail extends SugarBean
             $criteria['id'] = $mailer_id;
         } elseif (!empty($ieId)) {
             $stmt = $conn->executeQuery("SELECT stored_options FROM inbound_email WHERE id = ?", array($ieId));
-            $options = $stmt->fetchColumn();
+            $options = $stmt->fetchOne();
 
             if ($options) {
                 $options = unserialize(base64_decode($options), ['allowed_classes' => false]);
@@ -393,7 +393,7 @@ class OutboundEmail extends SugarBean
         );
 
         $results = array();
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $opts = unserialize(base64_decode($row['stored_options']), ['allowed_classes' => false]);
             if( isset($opts['outbound_email']) && $opts['outbound_email'] == $this->id)
             {
@@ -421,7 +421,7 @@ class OutboundEmail extends SugarBean
                 'SELECT stored_options FROM inbound_email WHERE id = ?',
                 array($ieId)
             );
-            $options = $stmt->fetchColumn();
+            $options = $stmt->fetchOne();
             // its possible that its an system account
             $emailId = $ieId;
             if (!empty($options)) {
@@ -581,7 +581,7 @@ class OutboundEmail extends SugarBean
      * Retrieve data from DB by criteria
      * @param array $criteria
      * @param array $order
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      * @return array|null
      */
     protected function getDataByCriteria(array $criteria, array $order = [])
@@ -591,10 +591,11 @@ class OutboundEmail extends SugarBean
             ->from($this->table_name);
 
         if (!empty($criteria)) {
-            $where = $builder->expr()->andX();
+            $parts = [];
             foreach ($criteria as $name => $value) {
-                $where->add($builder->expr()->eq($name, $builder->createPositionalParameter($value)));
+                $parts[] = $builder->expr()->eq($name, $builder->createPositionalParameter($value));
             }
+            $where = $builder->expr()->and(...$parts);
             $query->where($where);
         }
 
@@ -602,13 +603,13 @@ class OutboundEmail extends SugarBean
             $query->addOrderBy($field, $direction);
         }
 
-        return $query->execute()->fetch();
+        return $query->execute()->fetchAssociative();
     }
 
     /**
      * return system type data from DB
      * @return array
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     protected function getSystemMailData()
     {

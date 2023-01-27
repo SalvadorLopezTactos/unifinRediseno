@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Programe bazate pe timp de proces',
 'LBL_OOTB_DATA_ARCHIVER' => 'Rulare arhivări/ștergeri date active',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geocodificator înregistrări',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Rezolvitor geocodificator',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'interval',
 'LBL_LIST_LIST_ORDER' => 'Programatori',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Pt a seta Crontab',
 'LBL_CRON_LINUX_DESC' => 'Notă: Pentru a rula Sugar Programatoare, adăugaţi următoarea linie în fişierul crontab',
 'LBL_CRON_WINDOWS_DESC' => 'Notă: Pentru a rula Programatoare Sugar, a crea un fişier batch pentru a rula folosind Windows Scheduled Tasks. Fişier batch ar trebui să includă următoarele comenzi:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Jurnal',
 'LBL_EXECUTE_TIME'			=> 'Executa Timpul',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Eliminare fişiere temporare',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Reconstruire date de securitate echipă denormalizate',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Actualizare definire produs',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Hărți geocodificator',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Rezolvitor geocodificator',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Derulati campania Nightly Mass',
 'LBL_ASYNCMASSUPDATE' => 'Realizare actualizări în masă asincrone',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Curăţare liste înregistrări vechi',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Golire flux de activități',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Programe bazate pe timp de proces',
+'LBL_SUGARJOBDATAARCHIVER' => 'Rulare arhivări/ștergeri date active',
 'LBL_PMSEENGINECRON' => 'Programator SugarBPM',
 );
 

@@ -257,7 +257,7 @@ document.getElementById('progress_div').innerHTML = '{sugar_getimage name="bar_l
 			<tr>
 				<td scope="row">{$MOD.LBL_USE_COLUMN_FOR}:{$chart_data_help}</td>
 				<td align=left>
-					<select name='numerical_chart_column'>
+					<select name='numerical_chart_column' onchange='SUGAR.reports.setNumericalChartColumnType()'>
 					</select>
 					<input type='hidden' name='numerical_chart_column_type'>
 				</td>
@@ -360,7 +360,7 @@ document.getElementById('progress_div').innerHTML = '{sugar_getimage name="bar_l
 <script type="text/javascript">
 
 //Disable the Enter Key
-{literal}
+
 function stopEnterKey(evt) {
   var evt = (evt) ? evt : ((event) ? event : null);
   var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
@@ -368,15 +368,15 @@ function stopEnterKey(evt) {
        SUGAR.reports.checkEnterKey();
   }
 }
-{/literal}
+
 
 var users_array = new Array();
-users_array[0]={literal}{text{/literal}:'{$MOD.LBL_CURRENT_USER}',value:'Current User'{literal}}{/literal};
+users_array[0]={ text:'{$MOD.LBL_CURRENT_USER}',value:'Current User' };
 {foreach from=$users_array key=user_id item=user_name}
-	users_array[users_array.length] = {literal}{text{/literal}:'{$user_name|escape}',value:'{$user_id}'{literal}}{/literal};
+	users_array[users_array.length] = { text:'{$user_name|escape}',value:'{$user_id}' };
 {/foreach}
 
-{literal}
+
 function loadChartForReports() {
 
 	var idObject = document.getElementById('record');
@@ -396,7 +396,7 @@ function loadChartForReports() {
 function displayGroupCount() {
 	
 }
-{/literal}
+
 
 function onLoadDoInit() {ldelim}
 	{if $report_def_str}
@@ -408,7 +408,7 @@ function onLoadDoInit() {ldelim}
 	displayGroupCount();
 {rdelim}
 
-{literal}
+
 var reportLoader = new YAHOO.util.YUILoader({
 	require : ["layout", "element"],
 	loadOptional: true,
@@ -419,14 +419,14 @@ var reportLoader = new YAHOO.util.YUILoader({
 reportLoader.addModule({ 
     name: "sugarwidgets",
     type: "js", 
-{/literal}
+
     fullpath: "{sugar_getjspath file='include/javascript/sugarwidgets/SugarYUIWidgets.js'}",
-{literal}
+
     varName: "YAHOO.SUGAR",
     requires: ["datatable", "dragdrop", "treeview", "tabview", "button", "autocomplete", "container"]
 });
 reportLoader.insert();
-{/literal}
+
 
 enableQS(true);
 document.getElementById('progress_div').style.display="none";

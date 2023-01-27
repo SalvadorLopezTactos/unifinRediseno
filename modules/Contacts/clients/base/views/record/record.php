@@ -138,9 +138,11 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
             'fields' => array(
                 array(
                     'name' => 'picture',
-                    'type' => 'avatar',
+                    'type' => 'hint-contacts-photo',
                     'size' => 'large',
                     'dismiss_label' => true,
+                    'white_list' => true,
+                    'related_fields' => array('hint_contact_pic'),
                 ),
                 array(
                     'name' => 'name',
@@ -176,7 +178,15 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
                 'do_not_call',
                 'account_name',
                 'business_center_name',
-                'email',
+                'market_score',
+                array(
+                    'name' => 'email',
+                    'licenseDependency' => [
+                        'HINT' => [
+                            'type' => 'hint-email',
+                        ],
+                    ],
+                ),
                 array(
                     'name' => 'tag',
                     'span' => 12,
@@ -339,5 +349,70 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
                 ),
             ),
         ),
+        [
+            'name' => 'panel_hint',
+            'label' => 'LBL_HINT_PANEL',
+            'columns' => 2,
+            'labels' => true,
+            'labelsOnTop' => true,
+            'placeholders' => true,
+            'fields' => [
+                [
+                    'name' => 'hint_account_website',
+                    'type' => 'stage2_url',
+                    'white_list' => true,
+                ],
+                'hint_education',
+                [
+                    'name' => 'hint_education_2',
+                    'parent_key' => 'hint_education',
+                ],
+                'hint_job_2',
+                'hint_account_size',
+                'hint_account_industry',
+                'hint_account_location',
+                [
+                    'name' => 'hint_account_description',
+                    'account_key' => 'description',
+                ],
+                'hint_account_founded_year',
+                [
+                    'name' => 'hint_industry_tags',
+                    'account_key' => 'hint_account_industry_tags',
+                ],
+                'hint_account_naics_code_lbl',
+                [
+                    'name' => 'hint_account_sic_code_label',
+                    'account_key' => 'sic_code',
+                ],
+                'hint_account_fiscal_year_end',
+                [
+                    'name' => 'hint_account_annual_revenue',
+                    'account_key' => 'annual_revenue',
+                ],
+                [
+                    'name' => 'hint_facebook',
+                    'type' => 'stage2_url',
+                ],
+                [
+                    'name' => 'hint_twitter',
+                    'type' => 'stage2_url',
+                ],
+                [
+                    'name' => 'hint_account_facebook_handle',
+                    'type' => 'stage2_url',
+                ],
+                [
+                    'name' => 'hint_account_twitter_handle',
+                    'type' => 'stage2_url',
+                    'account_key' => 'twitter',
+                ],
+                [
+                    'name' => 'phone_other',
+                    'type' => 'phone',
+                ],
+            ],
+            'licenseFilter' => ['HINT'],
+        ],
     ),
 );

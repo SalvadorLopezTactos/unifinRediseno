@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Apstrādes laiks - grafiki',
 'LBL_OOTB_DATA_ARCHIVER' => 'Ieslēgt aktīvos datu arhīvus/izdzēšanas',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Ierakstu ģeokodētājs',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Ģeokodētāja atrisinātājs',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervāls:',
 'LBL_LIST_LIST_ORDER' => 'Plānotāji:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Lai uzstādītu Crontab',
 'LBL_CRON_LINUX_DESC' => 'Piezīme:  Sugar plānotāju darbināšanai, pievienojiet sekojošu rindu crontab failam:',
 'LBL_CRON_WINDOWS_DESC' => 'Piezīme: Sugar plānotāju darbināšanai, izveidojiet batch failu darbināšanai, izmantojot Windows uzdevumu plānotāju. Batch failam jāsatur sekojošas komandas:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>priekš curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Uzdevumu žurnāls',
 'LBL_EXECUTE_TIME'			=> 'Izpildes laiks',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Noņemt pagaidu failus',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Atjaunot denormalizētos komandas drošības datus',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Atjaunināt produkta definīciju',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Ģeokodētāja kartes',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Ģeokodētāja atrisinātājs',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Masveida e-pasta kampaņas izpildīt pa nakti',
 'LBL_ASYNCMASSUPDATE' => 'Notiek asinhronas masveida izmaiņas (Mass Update)',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Iztīrīt vecos ierakstus',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Darbību plūsmas attīrīšana',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Apstrādes laiks - grafiki',
+'LBL_SUGARJOBDATAARCHIVER' => 'Ieslēgt aktīvos datu arhīvus/izdzēšanas',
 'LBL_PMSEENGINECRON' => 'SugarBPM Plānotājs',
 );
 

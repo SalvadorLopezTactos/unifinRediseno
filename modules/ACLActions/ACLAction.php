@@ -51,14 +51,14 @@ class ACLAction  extends SugarBean
                     ->executeQuery(
                         "SELECT id FROM {$action->table_name} WHERE name=? AND category=? AND acltype=? and deleted=0",
                         [$action_name, $category, $type]
-                    )->fetchColumn();
+                    )->fetchOne();
                 //only add if an action with that name and category don't exist
                 if (false === $id) {
                     $action->name = $action_name;
                     $action->category = $category;
                     $action->aclaccess = $action_def['default'];
                     $action->acltype = $type;
-                    $action->modified_user_id = 1;
+                    $action->modified_user_id = '1';
                     $action->created_by = 1;
                     $action->save();
                 }
@@ -87,7 +87,7 @@ class ACLAction  extends SugarBean
                     ->executeQuery(
                         "SELECT id FROM {$action->table_name} WHERE name=? AND category=? AND acltype=? and deleted=0",
                         [$action_name, $category, $type]
-                    )->fetchColumn();
+                    )->fetchOne();
                 if (false !== $id) {
                     $action->mark_deleted($id);
                 }
@@ -211,82 +211,105 @@ class ACLAction  extends SugarBean
     }
 
     /**
-    * static getUserActions($user_id,$refresh=false, $category='', $action='')
-    * returns a list of user actions
-    * @param string $user_id
-    * @param BOOLEAN $refresh
-    * @param STRING $category
-    * @param STRING $action
-    * @return ARRAY of ACLActionsArray
-    */
-    static function getUserActions($user_id,$refresh=false, $category='',$type='', $action='')
+     * static getUserActions($user_id,$refresh=false, $category='', $action='')
+     * returns a list of user actions
+     * @param string $user_id
+     * @param BOOLEAN $refresh
+     * @param string|null $category @deprecated
+     * @param string|null $type @deprecated
+     * @param string|null $action @deprecated
+     * @return ARRAY of ACLActionsArray
+     */
+    public static function getUserActions(
+        ?string $user_id,
+        ?bool $refresh = false,
+        ?string $category = null /* @deprecated */,
+        ?string $type = null /* @deprecated */,
+        ?string $action = null /* @deprecated */
+    ) : array
     {
         if(empty($user_id)) {
-            return array();
+            return [];
         }
-        //check in the cache if we already have it loaded
-        if (!$refresh && empty(self::$acls[$user_id])) {
-            self::$acls[$user_id] = self::loadFromCache($user_id, 'acls');
-        }
-        if (!$refresh && !empty(self::$acls[$user_id])){
-            if(empty($category) && empty($action)){
-                return self::$acls[$user_id];
-            }else{
-                if(!empty($category) && isset(self::$acls[$user_id][$category])){
-                    if(empty($action)){
-                        if(empty($type)){
-                            return self::$acls[$user_id][$category];
-                        }
-                        if(isset(self::$acls[$user_id][$category][$type])) {
-                            return self::$acls[$user_id][$category][$type];
-                        }
-                    }else if(!empty($type) && isset(self::$acls[$user_id][$category][$type][$action])){
-                        return self::$acls[$user_id][$category][$type][$action];
-                    }
+        if (!$refresh) {
+            if (empty(self::$acls[$user_id])) {
+                self::$acls[$user_id] = self::loadFromCache($user_id, 'acls');
+            }
+            if (!empty(self::$acls[$user_id])) {
+                if ($category === null && $action === null) {
+                    return self::$acls[$user_id];
+                } elseif ($category !== null && isset(self::$acls[$user_id][$category])) {
+                    LoggerManager::getLogger()->fatal(
+                        __CLASS__ . '::' . __METHOD__
+                        . ' call with more than 2 parameters is deprecated.'
+                        . ' Please get all actions and specify in the caller which part is needed.'
+                    );
+                    return self::returnLegacyArray($user_id, $category, $type, $action);
                 }
             }
         }
         //if we don't have it loaded then lets check against the db
         $overridden_actions = self::getOverriddenActions($user_id);
+        $selected_actions = self::getAllActionsWithOverride($overridden_actions, '', '', '');
+        if (!isset(self::$acls)) {
+            self::$acls = [];
+        }
+        self::$acls[$user_id] = $selected_actions;
+        self::fillEmptyLevels($selected_actions, $user_id, $category, $type, $action);
 
-        $selected_actions = self::getAllActionsWithOverride($overridden_actions, $category, $type, $action);
+        self::storeToCache($user_id, 'acls', self::$acls[$user_id]);
+        // Sort by translated categories
+        uksort(self::$acls[$user_id], "ACLAction::langCompare");
+        return self::$acls[$user_id];
+    }
 
-        //only set the session variable if it was a full list;
-        if(empty($category) && empty($action)){
-            if(!isset(self::$acls)){
-                self::$acls = array();
+    /**
+     * @param string $user_id
+     * @param string $category
+     * @param string|null $type
+     * @param string|null $action
+     * @return array
+     */
+    private static function returnLegacyArray(string $user_id, string $category, ?string $type, ?string $action): array
+    {
+        if (!isset($action, $type)) {
+            return self::$acls[$user_id][$category];
+        }
+        if (!isset($action)) {
+            return self::$acls[$user_id][$category][$type] ?? [];
+        }
+        if (isset($type)) {
+            return self::$acls[$user_id][$category][$type][$action] ?? [];
+        }
+        return [];
+    }
+
+    /**
+     * @param array $selected_actions
+     * @param string $user_id
+     * @param string|null $category
+     * @param string|null $type
+     * @param STRING|null $action
+     */
+    private static function fillEmptyLevels(array $selected_actions, string $user_id, ?string $category, ?string $type, ?string $action): void
+    {
+        if ($category === null) {
+            return;
+        } else {
+            if (!isset($selected_actions[$category])) {
+                self::$acls[$user_id][$category] = [];
             }
-            self::$acls[$user_id] = $selected_actions;
-        }else{
-            if(empty($action) && !empty($category)){
-                if(!empty($type)){
-                    if(isset($selected_actions[$category][$type])) {
-                        self::$acls[$user_id][$category][$type] = $selected_actions[$category][$type];
-                    } else {
-                        self::$acls[$user_id][$category][$type] = array();
-                    }
+            if ($type !== null) {
+                if (!isset($selected_actions[$category][$type])) {
+                    self::$acls[$user_id][$category][$type] = [];
                 }
-                if(isset($selected_actions[$category])) {
-                    self::$acls[$user_id][$category] = $selected_actions[$category];
-                } else {
-                    self::$acls[$user_id][$category] = array();
-                }
-            }else{
-                if(!empty($action) && !empty($category) && !empty($type)){
-                    if(isset($selected_actions[$category][$action])) {
-                        self::$acls[$user_id][$category][$type][$action] = $selected_actions[$category][$action];
-                    } else {
-                        self::$acls[$user_id][$category][$type][$action] = array();
+                if ($action !== null) {
+                    if (!isset($selected_actions[$category][$action])) {
+                        self::$acls[$user_id][$category][$type][$action] = [];
                     }
-
                 }
             }
         }
-
-        // Sort by translated categories
-        uksort($selected_actions, "ACLAction::langCompare");
-        self::storeToCache($user_id, 'acls', self::$acls[$user_id]);
-        return $selected_actions;
     }
 
     private static function langCompare($a, $b)
@@ -301,28 +324,21 @@ class ACLAction  extends SugarBean
     }
 
     /**
-    * (static/ non-static)function hasAccess($is_owner= false , $access = 0)
-    * checks if a user has access to this acl if the user is an owner it will check if owners have access
+    * Checks if a user has access to this acl if the user is an owner it will check if owners have access
     *
-    * This function may either be used statically or not. If used staticlly a user must pass in an access level not equal to zero
-    * @param boolean $is_owner
+    * @param bool $is_owner
     * @param int $access
-    * @return true or false
+    * @return bool
     */
-    static function hasAccess($is_owner=false, $access = 0){
+    public static function hasAccess(bool $is_owner = false, int $access = 0): bool
+    {
         $tbaConfigurator = new TeamBasedACLConfigurator();
         if ($tbaConfigurator->isEnabledGlobally() && $tbaConfigurator->isValidAccess($access)) {
             // Handled by SugarACLTeamBased.
             return true;
         }
 
-        if($access != 0 && $access == ACL_ALLOW_ALL || ($is_owner && $access == ACL_ALLOW_OWNER))return true;
-       //if this exists, then this function is not static, so check the aclaccess parameter
-        if(isset($this) && isset($this->aclaccess)){
-            if($this->aclaccess == ACL_ALLOW_ALL || ($is_owner && $this->aclaccess == ACL_ALLOW_OWNER))
-            return true;
-        }
-        return false;
+        return (($access !== 0 && $access === ACL_ALLOW_ALL) || ($is_owner && $access === ACL_ALLOW_OWNER));
     }
 
     /**
@@ -497,7 +513,7 @@ SQL;
         return self::keepMostRestrictiveActions($actions);
     }
 
-    private static function getAllActionsWithOverride(array $overridden_actions, string $category, string $type, string $action): array
+    private static function getAllActionsWithOverride(array $overridden_actions): array
     {
         $conn = DBManagerFactory::getInstance()->getConnection();
         $qb = $conn->createQueryBuilder();
@@ -511,19 +527,10 @@ SQL;
             ->from('acl_actions')
             ->andWhere($qb->expr()->eq('acl_actions.deleted', 0));
 
-        if (!empty($category)) {
-            $qb->andWhere($qb->expr()->eq('acl_actions.category', $qb->createPositionalParameter($category)));
-        }
-        if (!empty($action)) {
-            $qb->andWhere($qb->expr()->eq('acl_actions.name', $qb->createPositionalParameter($action)));
-        }
-        if (!empty($type)) {
-            $qb->andWhere($qb->expr()->eq('acl_actions.acltype', $qb->createPositionalParameter($type)));
-        }
         $stmt = $qb->execute();
 
         $selected_actions = array();
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $isOverride = !empty($overridden_actions[$row['id']]['access_override']);
             if ($isOverride) {
                 $row['aclaccess'] = $overridden_actions[$row['id']]['access_override'];

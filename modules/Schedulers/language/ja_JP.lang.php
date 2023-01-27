@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'プロセスTime-Awareスケジュール',
 'LBL_OOTB_DATA_ARCHIVER' => 'アクティブなデータアーカイブの実行/削除',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'レコードジオコーダー',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'ジオコーダーレゾルバ',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => '間隔:',
 'LBL_LIST_LIST_ORDER' => 'スケジューラー:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Crontab設定方法',
 'LBL_CRON_LINUX_DESC' => '以下を参考にcron.phpを実行する行をcrontabに追加:',
 'LBL_CRON_WINDOWS_DESC' => '以下の例を参考にcron.phpを実行するバッチファイルを作成してください:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'アクティブなジョブ',
 'LBL_EXECUTE_TIME'			=> '実行時間',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => '一時ファイルを削除',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => '非正規チームのセキュリティ データを再構築',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => '製品の定義を更新',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'ジオコーダーマップ',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'ジオコーダーレゾルバ',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '夜間にキャンペーンの一括Eメール送信を実行',
 'LBL_ASYNCMASSUPDATE' => '非同期一括アップデートを実行',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => '古いレコードリストをクリーンアップする',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'アクティビティストリームパージャー',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'プロセスTime-Awareスケジュール',
+'LBL_SUGARJOBDATAARCHIVER' => 'アクティブなデータアーカイブの実行/削除',
 'LBL_PMSEENGINECRON' => 'SugarBPM スケジューラー',
 );
 

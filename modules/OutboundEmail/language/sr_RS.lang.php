@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID email adrese primaoca',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Email adresa primaoca',
     'LBL_PRIMARY_TEAM' => 'Osnovni tim',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Željeni nalog pošiljaoca',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za podešavanje e-pošte',
 );

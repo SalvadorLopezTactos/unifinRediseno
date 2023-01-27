@@ -167,7 +167,7 @@
                 _.defer(_.bind(function() {
                     // We use `has(':focus')` instead of `is(':focus')` to check
                     // if the focused element is or is inside `this.$el`.
-                    if (this.$el.has(':focus').length === 0) {
+                    if (this.$el && this.$el.has(':focus').length === 0) {
                         this.trigger('quicksearch:close', this.context.get('search'));
                     }
                 }, this));

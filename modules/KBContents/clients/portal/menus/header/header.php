@@ -15,6 +15,6 @@ $viewdefs['KBContents']['portal']['menu']['header'] = array(
         'label' => 'LNK_LIST_ARTICLES',
         'acl_action' => 'list',
         'acl_module' => 'KBContents',
-        'icon' => 'fa-reorder',
+        'icon' => 'sicon-list-view',
     ),
 );

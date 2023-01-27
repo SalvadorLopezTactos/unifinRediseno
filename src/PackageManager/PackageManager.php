@@ -12,20 +12,22 @@
 
 namespace Sugarcrm\Sugarcrm\PackageManager;
 
+use ErrorException;
+use LoggerManager;
 use Sugarcrm\Sugarcrm\PackageManager\Entity\PackageManifest;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\PackageExistsException;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\PackageManagerException;
 use Sugarcrm\Sugarcrm\PackageManager\Factory\UpgradeHistoryFactory;
 use Sugarcrm\Sugarcrm\PackageManager\File\PackageZipFile;
 
-use UploadStream;
+use Throwable;
 use ModuleScanner;
 use SugarConfig;
 use UpgradeHistory;
 use SugarQueryException;
 use SugarAutoLoader;
 use ModuleInstaller;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use SugarException;
 
 class PackageManager
@@ -264,12 +266,12 @@ class PackageManager
         );
 
         $nameMatch = $history->checkForExisting($history);
-        if ($nameMatch && version_compare($nameMatch->version, $manifest->getPackageVersion(), '>=')) {
-            throw new Exception\PackageExistsException();
+        if ($nameMatch && VersionComparator::greaterThanOrEqualTo($nameMatch->version, $manifest->getPackageVersion())) {
+            throw new Exception\PackageNewerExistsException(null, [$nameMatch->version]);
         }
 
         $baseUpgradeTypeDir = $this->getUpgradeTypeDir($manifest->getPackageType());
-        $baseFileName = pathinfo($zipFile->getRelativeZipFilePath(), PATHINFO_BASENAME);
+        $baseFileName = $this->getUniquePackageFileName($history);
         $destinationFile = $baseUpgradeTypeDir . DIRECTORY_SEPARATOR . $baseFileName;
         $destinationManifestPath = $baseUpgradeTypeDir . DIRECTORY_SEPARATOR
             . pathinfo($baseFileName, PATHINFO_FILENAME) . '-manifest.php';
@@ -278,11 +280,11 @@ class PackageManager
         $zipFile->copyManifestFileTo($destinationManifestPath);
 
         $history->filename = $destinationFile;
-        $history->save();
         // restore old upgrade history
         if (!empty($history->deleted)) {
             $history->mark_undeleted($history->id);
         }
+        $history->save();
 
         return $history;
     }
@@ -517,12 +519,17 @@ class PackageManager
         if ($history->status !== UpgradeHistory::STATUS_STAGED) {
             throw new PackageManagerException('ERR_UW_PACKAGE_ALREADY_INSTALLED');
         }
+        $history->updateProcessStatus([]);
 
         $manifest = $history->getPackageManifest();
         $this->validateManifest($manifest, $manifest->getPackageType());
 
         $requiredDependencies = $history->getListNotInstalledDependencies();
         if (!empty($requiredDependencies)) {
+            $moduleInstaller = $this->getModuleInstaller();
+            $moduleInstaller->setUpgradeHistory($history);
+            $errorMessage = translate('ERR_UW_NO_DEPENDENCY', 'Administration') . ' ' . implode(', ', $requiredDependencies);
+            $moduleInstaller->setInstallationError($errorMessage);
             throw (new PackageManagerException('ERR_UW_NO_DEPENDENCY'))->setErrorDescription($requiredDependencies);
         }
 
@@ -534,28 +541,62 @@ class PackageManager
             PackageManifest::PACKAGE_TYPE_PATCH,
         ], true);
 
-        if ($isPackageModuleOrPatch) {
-            $zipFile->runPackageScript(PackageZipFile::PRE_INSTALL_FILE, $this->silent);
-        }
+        register_shutdown_function(function ($history) {
+            $err = error_get_last();
+            if (in_array($err['type'], [E_ERROR, E_COMPILE_ERROR])) {
+                LoggerManager::getLogger()->fatal(
+                    'Package Install process was not finished successfully'
+                );
+                LoggerManager::getLogger()->fatal(sprintf(
+                    "Error: %s in %s at line: %s",
+                    $err['message'],
+                    $err['file'],
+                    $err['line']
+                ));
+            } else {
+                return;
+            }
 
-        $previousInstalled = $history->getPreviousInstalledVersion();
-        $moduleInstaller = $this->getModuleInstaller();
-        $moduleInstaller->setPatch($history->getPackagePatch());
-        $moduleInstaller->setUpgradeHistory($history);
-        if ($previousInstalled && $manifest->getManifestValue('uninstall_before_upgrade', false)) {
-            $this->backupSilentValue()->setSilent(true);
-            $this->uninstallPackage(
-                $previousInstalled,
-                $previousInstalled->getPackageManifest()->shouldTablesBeRemoved()
+            $moduleInstaller = $this->getModuleInstaller();
+            $moduleInstaller->setUpgradeHistory($history);
+            $moduleInstaller->setInstallationDone();
+
+            $this->forceUninstall($history, true);
+            throw new PackageManagerException('ERR_UW_PACKAGE_NOT_INSTALLED');
+        }, $history);
+
+        try {
+            if ($isPackageModuleOrPatch) {
+                $zipFile->runPackageScript(PackageZipFile::PRE_INSTALL_FILE, $this->silent);
+            }
+
+            $previousInstalled = $history->getPreviousInstalledVersion();
+            $moduleInstaller = $this->getModuleInstaller();
+            $moduleInstaller->setPatch($history->getPackagePatch());
+            $moduleInstaller->setUpgradeHistory($history);
+            if ($previousInstalled && $manifest->getManifestValue('uninstall_before_upgrade', false)) {
+                $this->backupSilentValue()->setSilent(true);
+                $this->uninstallPackage(
+                    $previousInstalled,
+                    $previousInstalled->getPackageManifest()->shouldTablesBeRemoved()
+                );
+                $this->restoreSilentValue();
+                $moduleInstaller->install($zipFile->getPackageDir(), true, $previousInstalled->version);
+            } else {
+                $moduleInstaller->install($zipFile->getPackageDir());
+            }
+
+            if ($isPackageModuleOrPatch) {
+                $zipFile->runPackageScript(PackageZipFile::POST_INSTALL_FILE, $this->silent);
+            }
+        } catch (Throwable $e) {
+            LoggerManager::getLogger()->fatal(
+                'Package Install process was not finished successfully, uninstalling'
             );
-            $this->restoreSilentValue();
-            $moduleInstaller->install($zipFile->getPackageDir(), true, $previousInstalled->version);
-        } else {
-            $moduleInstaller->install($zipFile->getPackageDir());
-        }
+            LoggerManager::getLogger()->fatal($e);
 
-        if ($isPackageModuleOrPatch) {
-            $zipFile->runPackageScript(PackageZipFile::POST_INSTALL_FILE, $this->silent);
+            $this->forceUninstall($history);
+            throw new PackageManagerException('ERR_UW_PACKAGE_NOT_INSTALLED');
         }
 
         if ($previousInstalled) {
@@ -701,6 +742,45 @@ class PackageManager
     }
 
     /**
+     * Emergency uninstall just installed package in case if a fatal error caught
+     */
+    public function handleApplicationFatalError(ErrorException $err): void
+    {
+        $justInstalled = null;
+
+        $justInstalled = (new UpgradeHistory())->getJustInstalled();
+        if (!$justInstalled) {
+            return;
+        }
+        $status = $justInstalled->getProcessStatus();
+        $isDone = $status['is_done'] ?? false;
+        if (!$isDone) {
+            return;
+        }
+        LoggerManager::getLogger()->fatal(sprintf(
+            "Uninstalling a package %s because of the fatal error",
+            $justInstalled->name
+        ));
+        LoggerManager::getLogger()->fatal($err);
+
+        try {
+            $this->forceUninstall($justInstalled, true);
+        } catch (\Throwable $e) {
+            LoggerManager::getLogger()->fatal($e);
+        }
+    }
+
+    protected function getUniquePackageFileName(UpgradeHistory $history): string
+    {
+        return sprintf(
+            "%s_%s_%s.zip",
+            $history->id_name,
+            $history->version,
+            time(),
+        );
+    }
+
+    /**
      * enable or disable package
      * @param UpgradeHistory $history
      * @param callable $callable
@@ -721,5 +801,47 @@ class PackageManager
         $moduleInstaller = $this->getModuleInstaller();
         $moduleInstaller->setPatch($history->getPackagePatch());
         $callable($moduleInstaller, $zipFile->getPackageDir());
+    }
+
+    /**
+     * force uninstall a package in case of exception, fatal or deferred (after caches rebuilt) fatal error
+     *
+     * @param UpgradeHistory $history
+     * @param bool $emergency Do not call any package scripts, just remove everything
+     */
+    private function forceUninstall(UpgradeHistory $history, bool $emergency = false): void
+    {
+        try {
+            $moduleInstaller = $this->getModuleInstaller();
+            $moduleInstaller->setUpgradeHistory($history);
+            $moduleInstaller->setInstallationError(translate('LBL_ML_INSTALLATION_FATAL', 'Administration'));
+
+            LoggerManager::getLogger()->fatal('Executing emergency package uninstall: ' . $history->name);
+
+            $zipFile = $this->createPackageZipFile($history->getFileName(), $this->getBaseTempDir());
+            $zipFile->extractPackage();
+
+            $manifest = $history->getPackageManifest();
+            $isPackageModuleOrPatch = in_array($manifest->getPackageType(), [
+                PackageManifest::PACKAGE_TYPE_MODULE,
+                PackageManifest::PACKAGE_TYPE_PATCH,
+            ], true);
+
+            $history->updateStatus(UpgradeHistory::STATUS_STAGED);
+
+            if ($isPackageModuleOrPatch) {
+                $zipFile->runPackageScript(PackageZipFile::PRE_UNINSTALL_FILE, $this->silent);
+            }
+            $moduleInstaller->setPatch($history->getPackagePatch());
+            $moduleInstaller->setUpgradeHistory($history);
+            $enableHookExecution = !$emergency;
+            $moduleInstaller->forceUninstall($zipFile->getPackageDir(), $enableHookExecution);
+
+            if ($manifest->getPackageType() === PackageManifest::PACKAGE_TYPE_PATCH) {
+                $zipFile->runPackageScript(PackageZipFile::POST_UNINSTALL_FILE, $this->silent);
+            }
+        } catch (Throwable $e) {
+            LoggerManager::getLogger()->fatal($e);
+        }
     }
 }

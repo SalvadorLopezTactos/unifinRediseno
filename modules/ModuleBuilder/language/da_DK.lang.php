@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Slet' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Powered By SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Rolle:',
+    'LBL_BASE_LAYOUT' => 'Basislayout',
+    'LBL_FIELD_NAME' => 'Feltnavn',
+    'LBL_FIELD_VALUE' => 'Værdi',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Layout bestemt af:',
+    'layoutDeterminedBy' => [
+        'std' => 'Standardlayout',
+        'role' => 'Rolle',
+        'dropdown' => 'Rullelistefelt',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Alle tilpassede layouts fjernes. Vil du ændre dine aktuelle layoutdefinitioner?',
 'help'=>array(
     'package'=>array(
             'create'=>'Giv et <b>navn</b> til pakken. Det navn, du indtaster, skal være alfanumerisk og må ikke indeholde mellemrum. (Eksempel: HR_Management)<br /><br />Du kan angive <b>forfatter</b> og <b>beskrivelsesinformation</b> for pakken.<br /><br />Klik på <b>Gem</b> for at oprette pakken.',
@@ -457,8 +467,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Visibilitets editor',
 'LBL_ROLLUP' => 'Opløft',
 'LBL_RELATED_FIELD' => 'Relateret felt',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL to custom logomark image. The recommended logomark dimensions are 22 x 22 pixels. Any image uploaded that is larger in either direction will be scaled to these max dimensions.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL to custom logo image. The recommended logo width is 200 pixels. Any image uploaded that is larger in either direction will be scaled to these max dimensions. This logo will be used on the login screen. If no image is uploaded, the logomark will be used.',
 'LBL_PORTAL_ROLE_DESC' => 'Slet ikke denne rolle. Customer Self-Service Portal Role er et system-genereret rolle, der oprettes under Sugar Portal aktiveringsprocessen. Brug Adgangskontrollen i denne rolle for at aktivere og / eller deaktivere Bugs, sager eller Knowledge Base-moduler i Sugar Portal. Du må ikke ændre andre adgangskontroller for denne rolle for at undgå ukendt og uforudsigelig systemadfærd. I tilfælde af utilsigtet sletning af denne rolle, genskabes den ved at deaktivere og aktivere Sugar Portal.',
 
 //RELATIONSHIPS
@@ -581,6 +589,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Tilføj relation',
 'LBL_BTN_RENAME_MODULE' => 'Skift modulnavn',
 'LBL_BTN_INSERT'=>'Indsæt',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Gendan basislayout',
 //TABS
 
 //ERRORS
@@ -591,6 +600,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'En fejl er opstået',
 'ERROR_REQUIRED_FIELDS' => 'Er du sikker på at du vil forsætte? Følgende påkrævende felter mangler i layoutet:',
 'ERROR_ARE_YOU_SURE' => 'Er du sikker på at du vil forsætte?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Felt kan ikke oprettes. Du har nået rækkestørrelsesgrænsen for denne tabel i din database. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank"> Få flere oplysninger </a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'De(t) følgende felt(er) har beregnede værdier, som ikke vil blive genberegnet i realtid i SugarCRM Mobil redigeringsvisning:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'De(t) følgende felt(er) har beregnede værdier, som ikke vil blive genberegnet i realtid i SugarCRM Portal redigeringsvisning:',
@@ -600,16 +610,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Hvis du ønsker at sætte dem i portalen bedes du aktivere dem her.<a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">her</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Konfigurer portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Enable portal',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Enable search before opening a case',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Aktivér noter på Knowledge Base-modulet',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Tillad portalbrugere at lukke case',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Tillad nye brugere at tilmelde sig',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Brugertilladelser',
     'LBL_PORTAL_THEME' => 'Tema portal',
     'LBL_PORTAL_ENABLE' => 'Aktivér',
     'LBL_PORTAL_SITE_URL' => 'Din portal er tilgængelig på:',
     'LBL_PORTAL_APP_NAME' => 'Applikationsnavn',
-    'LBL_PORTAL_LOGOMARK_URL' => 'Logomark URL',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Logomark Preview',
-    'LBL_PORTAL_LOGO_URL' => 'Logo URL',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Logo Preview',
     'LBL_PORTAL_CONTACT_PHONE' => 'Phone',
     'LBL_PORTAL_CONTACT_EMAIL' => 'Email',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Must enter a valid email address',
@@ -625,6 +633,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Drag and drop the names of the Portal modules to set them to be displayed or hidden in the Portal&#39;s top navigation bar. To control Portal user access to modules, use <a href="?module=ACLRoles&action=index">Role Management.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Displayed Modules',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Hidden Modules',
+    'LBL_CONFIG_VISIBILITY' => 'Synlighed',
+    'LBL_CASE_VISIBILITY_HELP' => 'Definer, hvilke portalbrugere der kan se en sag.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Definer, hvilke portalbrugere der kan se e-mails relateret til en sag. Deltagende kontakter er dem i felterne Til, Fra, CC og BCC.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Definer, hvilke portalbrugere der kan se beskeder, der er relateret til en sag. Deltagende kontakter er dem i feltet Gæster.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Alle kontakter relateret til kontoen',
+        'related_contacts' => 'Kun primær kontakt og kontakter relateret til sagen',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Kun deltagende kontakter',
+        'all' => 'Alle kontakter, der kan se sagen',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Kun deltagende kontakter',
+        'all' => 'Alle kontakter, der kan se sagen',
+    ],
+
 
 'LBL_PORTAL'=>'Portal',
 'LBL_PORTAL_LAYOUTS'=>'Portal layouts',
@@ -797,11 +822,11 @@ $mod_strings = array(
     . "Påkrævede felter vil følge formlen i den browser-baserede mobilvisning, <br/>"
     . "men vil ikke følge formlen i de indfødte programmer, som Sugar Mobile til iPhone.<br/>"
     . "De vil ikke følge formlen i Sugar Self-Service-portalen.",
-'LBL_POPHELP_READONLY'=>"Opret en formel til at bestemme, om dette felt er read only i layouts.<br/>"
-        . "Read only-felter vil følge formlen i den browser-baserede mobilvisning, <br/>"
-        . "men vil ikke følge formlen i de indfødte programmer, som Sugar Mobile til iPhone.<br/>"
-        . "De vil ikke følge formlen i Sugar Self-Service-portalen.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Vælg for at bruge dette felt, når du søger efter poster ved hjælp af Global Search på dette modul.',
+'LBL_POPHELP_READONLY'=>"Opret en formel til at bestemme, om dette felt er skrivebeskyttet i layouts.<br/>"
+        . "Skrivebeskyttede felter følger formlen i den browserbaserede mobilvisning, <br/>"
+        . "men følger ikke formlen i de indfødte apps, f.eks. Sugar Mobile til iPhone. <br/>"
+        . "De følger ikke formlen i Sugar Self-Service-portalen.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Vælg dette for at bruge dette felt, når du søger efter poster ved hjælp af Global søgning i dette modul.',
 //Revert Module labels
 'LBL_RESET' => 'Nulstil',
 'LBL_RESET_MODULE' => 'Nulstil modul',
@@ -837,6 +862,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Dato/klokkeslæt',
                 'decimal'=>'Decimal',
                 'autoincrement' => 'auto-increment',
+                'actionbutton' => 'Handlingsknap',
 ),
 'labelTypes' => array(
     "" => "Ofte brugte etiketter",
@@ -855,4 +881,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (relateret {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copiér fra layout',
 'LBL_RELATIONSHIP_TYPE' => 'Forhold',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Sammenligningssprog',
+'LBL_LABEL_NOT_TRANSLATED' => 'Denne etiket må ikke oversættes',
 );

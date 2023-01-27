@@ -68,6 +68,23 @@
         },
 
         /**
+         * Logs out from BWC module
+         *
+         * @param  {Function} callback A function to call after logging out
+         * @return {Void}
+         */
+        logout: function(callback) {
+            let url = app.api.buildURL('oauth2', 'bwc/logout');
+            return app.api.call('create', url, {}, {
+                success: function(data) {
+                    if (callback) {
+                        callback(data);
+                    }
+                }
+            });
+        },
+
+        /**
          * Translates an action to a BWC action.
          *
          * If the action wasn't found to be translated, the given action is

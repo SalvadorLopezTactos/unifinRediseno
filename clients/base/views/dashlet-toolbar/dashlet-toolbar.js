@@ -14,9 +14,9 @@
  * @extends View.View
  */
 ({
-    className: 'dashlet-header',
-    cssIconDefault: 'fa-cog',
-    cssIconRefresh: 'fa-refresh fa-spin',
+    className: 'dashlet-header flex flex-row items-center m-0.75',
+    cssIconDefault: 'sicon sicon-settings',
+    cssIconRefresh: 'sicon sicon-refresh sicon-is-spinning',
     defaultActions: {
         'dashlet:edit:clicked' : 'editClicked',
         'dashlet:viewReport:clicked': 'viewReportClicked',
@@ -105,7 +105,7 @@
             // Calculate title width by subtracting the record-cell and btn-group width from parent headerPane width.
             var titleWidth = headerPaneWidth - btnGroupWidth - recordCellsWidth;
 
-            this.$('.ellipsis_inline').css({'max-width': titleWidth + 'px'});
+            this.$('.dashlet-open-container').css({'max-width': titleWidth + 'px'});
         }
     },
 
@@ -129,7 +129,7 @@
      * @private
      */
     _handleRecordState: function(action) {
-        if (action === 'edit') {
+        if (action === 'edit' && _.isFunction(this.toggleEdit)) {
             this.setButtonStates(this._STATE.EDIT);
             this.toggleEdit(true);
         } else {
@@ -260,7 +260,7 @@
      */
     toggleMinify: function(evt) {
         var $el = this.$('.dashlet-toggle > i');
-        var collapsed = $el.is('.fa-chevron-up');
+        var collapsed = $el.is('.sicon-chevron-up');
         this.layout.collapse(collapsed);
         //firing an event to notify dashlet expand / collapse
         this.layout.trigger('dashlet:collapse', collapsed);

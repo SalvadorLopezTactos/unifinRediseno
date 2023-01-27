@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'ตัวกรอง',
     'LBL_CONSOLE_FILTER_RULES' => 'กฎตัวกรอง',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'ตรึงแนวคอลัมน์แรก',
+
     'LBL_CONSOLE_COLUMNS' => 'คอลัมน์',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'คอลัมน์ฟิลด์หลายรายการ',
     'LBL_CONSOLE_PRIMARY_SORT' => 'การจัดเรียงหลัก',

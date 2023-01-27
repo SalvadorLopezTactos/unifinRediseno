@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Описание',
     'LBL_OW_TYPE'=>'Тип',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Прогноза на екип за <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Потребител',
     'LBL_FDR_OPPORTUNITIES'=>'Прогнозирани възможности:',
     'LBL_FDR_WEIGH'=>'Претеглена стойност на възможностите:',
     'LBL_FDR_COMMIT'=>'Прогнозирана сума',
     'LBL_FDR_DATE_COMMIT'=>'Дата',
+    'LBL_FDR_FORECAST_HEADER' => 'Прогноза на продавач за <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Планиране',
     'LBL_DV_MY_FORECASTS' => 'Моите прогнози',
-    'LBL_DV_MY_TEAM' => "Прогнози на моят екип" ,
+    'LBL_DV_MY_TEAM' => "Прогнози на моят екип",
     'LBL_DV_TIMEPERIODS' => 'Периоди:',
     'LBL_DV_FORECAST_PERIOD' => 'Период',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Прогнозирани възможности',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Base Rate',
 
     'LBL_QUOTA' => 'Квота',
-    'LBL_QUOTA_ADJUSTED' => 'Квота (Коригирана)',
+    'LBL_QUOTA_ADJUSTED' => 'Коригирана квота',
 
     'LBL_FORECAST_FOR'=>'Прогнозен план за:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(С натрупване)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Квота / Прогноза / Реално',
 
     'LBL_FORECAST' => 'Прогноза',
+    'LBL_COMMITMENT' => 'Ангажимент',
+    'LBL_TEAM_COMMITMENT' => 'Ангажимент на екип',
+    'LBL_FORECASTED' => 'Прогнозиран',
+    'LBL_ADJUSTED_TOTAL' => 'Коригирана обща',
     'LBL_COMMIT_STAGE' => 'Commit Stage',
     'LBL_SALES_STAGE' => 'Етап',
     'LBL_AMOUNT' => 'Сума',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, и {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'вероятно {{{direction}}} {{{from}}} до {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'най-добър сценарий {{{direction}}} {{{from}}} до {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'най-лош сценарий {{{direction}}} {{{from}}} до {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'вероятно ще остане същата',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'в най-добрия случай ще остане същата',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'в най-лошия случай ще остане същата',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Ангажирани (Вероятно) {{{direction}}} {{{from}}} до {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Ангажирани (Най-добре) {{{direction}}} {{{from}}} до {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Ангажирани (Най-лошо) {{{direction}}} {{{from}}} до {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Ангажирани (Вероятно) остана същото',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Ангажирани (Най-добре) остана същото',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Ангажирани (Най-лошо) остана същото',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Този месец на {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Визуализирана обща сума',
     'LBL_TOTAL' => 'Общо',
     'LBL_OVERALL_TOTAL' => 'Всичко общо',
-    'LBL_EDITABLE_INVALID' => 'Невалидна стойност за {0}',
+    'LBL_EDITABLE_INVALID' => 'Невалидна стойност за {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Стойността трябва да бъде между {0} и {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Имате промени в плана, които не са запазени.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Please note that only saved or committed data can be exported. Click OK to continue exporting, or click Cancel to return to the worksheet.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Включени',
     'LBL_CHART_NOT_INCLUDED' => 'Изключени',
     'LBL_CHART_ADJUSTED' => '(Коригирано)',
-    'LBL_SAVE_DRAFT' => 'Запис като чернова',
+    'LBL_SAVE_DRAFT' => 'Съхрани',
     'LBL_CHANGES_BY' => 'Промени от {0}',
     'LBL_FORECAST_SETTINGS' => 'Настройки',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Начална дата на финансовата година:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Конфигуриране на периодите, които ще се използват при изготвяне на прогнози в модула. <br><br>Моля, отбележете, че настройките на периодите не могат да бъдат променяни след първоначалната настройка. <br><br>Първо въведете начална дата на финансовата година за вашата организация. След това изберете времевия период, за който искате да имате прогнози за продажбите. Началните и крайни дати на периодите ще бъдат изчислени автоматично на база на въведените данни. Времевите периоди са базата за изготвяне на прогнозни планове.<br><br>Имате възможност в модула да бъдат визуализирани и дефиниран от вас брой на бъдещи и минали периоди. Потребителите имат възможност да променят стойностите на прогнозите за всеки от визуализираните периоди.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Конфигурирайте начина, по който желаете да категоризирате {{forecastByModule}}. <br><br>Моля, обърнете внимание, че настройките „Обхват“ не могат да са променят след първото изпълнение. За актуализирани екземпляри настройката „Обхват“ е блокирана в съществуващите данни „Прогноза“.<br><br>Вие може да изберете две или повече категории според обхватите на вероятност или да създадете категории, които не са основани на вероятност. <br><br>Има полета за отметки отляво на вашите персонализирани категории; използвайте ги, за да решите кои обхвати ще бъдат включени в подаденото и докладвано на мениджърите прогнозно количество. <br><br>Потребителят може да промени статуса включване/изключване и категорията на {{forecastByModule}} ръчно от своята електронна таблица.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Конфигурирайте начина, по който желаете да категоризирате {{forecastByModule}}. <br><br>Моля, обърнете внимание, че настройките „Обхват" не могат да се променят след първото изпълнение. За актуализирани екземпляри настройката „Обхват" е блокирана в съществуващите данни „Прогноза".<br><br>Можете да изберете две или повече категории въз основа на обхватите на вероятност или да създадете категории, които не са основани на вероятност. <br><br>Има полета за отметки вляво от вашите персонализирани категории; използвайте ги, за да решите кои обхвати ще бъдат включени в подаденото и докладвано на мениджърите прогнозно количество. <br><br>Потребителят може да промени статуса включване/изключване и категорията на {{forecastByModule}} ръчно от своята електронна таблица.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Select the columns you would like the user to ﬁll out for their forecasts of each {{forecastByModuleSingular}}. Please note the Likely amount is tied to the amount shown in {{forecastByModule}}; for this reason the Likely column cannot be hidden.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Маркирайте колоните, които бихте искали да виждате в модул Прогнози. Списъкът с полета ще състави плана и ще позволи на потребителите да изберат как да конфигурират изгледа за себе си.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Аз съм указател за мястото за Прогноза от how-to text!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Квотата е надхвърлена с',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Няма въведени данни',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Изпълнение на квотата',
+    'LBL_OPEN_LIKELY' => 'Отворени вероятно',
+    'LBL_OPEN_BEST' => 'Отворени най-добре',
+    'LBL_OPEN_WORST' => 'Отворени най-лошо',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Поставяне на квота',
     'LBL_ASSIGNING_QUOTA' => 'Поставяне на квота',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Прогнозата на моя екип",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Имате промени, които не са запазени. Сигурни ли сте, че желаете да сортирате работната страница и да загубите направените промени.',
+
+    'LBL_SAVE_TOOLTIP' => 'Запази промените, направени в редовете на таблицата',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Запазете промените в записи и подайте прогнозата на мениджър',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Подайте прогнозата на мениджър и възложете квото',
+
+    'LBL_SAVE_LABEL_REP' => 'Съхрани ',
+    'LBL_SAVE_LABEL_MGR' => 'Съхрани коригираните стойности',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Модулът {{plural_module_name}} включва записи на {{opportunities_singular_module}}и, чрез които се създават {{module_name}}и се планират продажбите. Потребителите могат да работят за постигане на поставени индивидуални или екипни квоти, както и по отношение на квоти валидни за цялата организация. Преди потребителите да получат достъп до модул {{plural_module_name}} и да започнат да създават {{module_name}}и е необходимо администратор на системата да конфигурира Времеви периоди, Отклонения и Сценарии, валидни за организацията. Търговските представители използват модула {{plural_module_name}} в процеса на управление на техните {{opportunities_module}} за всеки от дефинираните Времеви периоди. Търговските представители предоставят очаквания за техните персонални продажби на база на {{opportunities_module}}те, които очакват да затворят успешно в рамките на периода. Търговските мениджъри управляват своите  {{opportunities_singular_module}}и аналогично на търговските представители. В допълнение те сумират собствените си прогнози с тези на останалите представители в екипа и работят за постигането на поставените екипни квоти за съответния Времеви период. Електронното табло предоставя допълнителни опции за анализ на индивидуалните {{opportunities_module}} на потребителите както и анализ на представянето на екипите.'

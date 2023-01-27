@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Назва поля вже існує',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Назва поля повинно містити тільки такі символи: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Неактивний модуль не  буде збережений',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Ім’я поля випадного списку вже існує',
     'LBL_BTN_ADD' => 'Додати',
     'LBL_BTN_EDIT' => 'Редагувати',
     'LBL_GENERATE_URL' => 'Генерація URL-адреси',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Додати стовпець {0} до',
     'LBL_DONE' => 'Виконано',
     'LBL_EXE_NON_SIM_MODE' => 'Запустити несимуляційний режим',
+    'LBL_CALCULATION_VISIBLE' => 'Зробити видимими для обчислень',
 );
-
-
-?>

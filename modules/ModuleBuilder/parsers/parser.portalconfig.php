@@ -36,6 +36,22 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
             }
         }
 
+        if (isset($settings['showKBNotes'])) {
+            if ($settings['showKBNotes'] === 'true') {
+                $settings['showKBNotes'] = 'enabled';
+            } else {
+                $settings['showKBNotes'] = 'disabled';
+            }
+        }
+
+        if (isset($settings['enableSelfSignUp'])) {
+            if ($settings['enableSelfSignUp'] === 'true') {
+                $settings['enableSelfSignUp'] = 'enabled';
+            } else {
+                $settings['enableSelfSignUp'] = 'disabled';
+            }
+        }
+
         if (isset($settings['allowCloseCase'])) {
             if ($settings['allowCloseCase'] === 'true') {
                 $settings['allowCloseCase'] = 'allow';
@@ -46,6 +62,7 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
 
         $portalFields = [
             'caseDeflection',
+            'showKBNotes',
             'defaultUser',
             'appName',
             'logoURL',
@@ -56,6 +73,10 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
             'maxSearchQueryResult',
             'portalModules',
             'contactInfo',
+            'caseVisibility',
+            'emailVisibility',
+            'messageVisibility',
+            'enableSelfSignUp',
         ];
 
         $portalConfig = $this->getDefaultPortalSettings();
@@ -98,6 +119,8 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
         $portalConfig = array(
             'appStatus' => 'offLine',
             'caseDeflection' => 'enabled',
+            'showKBNotes' => 'enabled',
+            'enableSelfSignUp' => 'disabled',
             'on' => 0
         );
         $this->savePortalSettings($portalConfig);
@@ -122,11 +145,15 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
             'defaultModule' => 'Cases',
             'allowCloseCase' => PortalFactory::getInstance('Settings')->isServe() ? 'allow' : 'disallow',
             'caseDeflection' => PortalFactory::getInstance('Settings')->isServe() ? 'enabled' : 'disabled',
+            'showKBNotes' => 'enabled',
             'contactInfo' => [
                 'contactPhone' => '',
                 'contactEmail' => '',
                 'contactURL' => '',
             ],
+            'caseVisibility' => 'all',
+            'emailVisibility' => 'related_contacts',
+            'messageVisibility' => 'related_contacts',
             'orderByDefaults' => array(
                 'Cases' => array(
                     'field' => 'case_number',
@@ -144,7 +171,8 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
                     'field' => 'date_modified',
                     'direction' => 'desc'
                 )
-            )
+            ),
+            'enableSelfSignUp' => 'disabled',
         );
         if (inDeveloperMode()) {
             $portalConfig['logLevel'] = 'DEBUG';
@@ -316,7 +344,7 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
     public function getPortalACLRole()
     {
         global $mod_strings;
-        $allowedModules = array('Bugs', 'Cases', 'Notes', 'KBContents', 'Contacts');
+        $allowedModules = array('Bugs', 'Cases', 'Notes', 'KBContents', 'Contacts', 'Messages', 'Emails');
         $allowedActions = array('edit', 'admin', 'access', 'list', 'view');
         $role = BeanFactory::newBean('ACLRoles');
         $role->retrieve_by_string_fields(array('name' => 'Customer Self-Service Portal Role'));

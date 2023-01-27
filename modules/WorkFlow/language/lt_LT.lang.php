@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Darbo sekos'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipas',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Pastaba.</strong> „Sugar“ darbo eigos ir darbo eigos valdymo funkcijos veikia techninės priežiūros režimu. „Sugar Enterprise“ leidimą naudojantys klientai turėtų naudoti funkcijas, teikiamas „SugarBPM<sup class="trademark">TM</sup>“.',
 );
 

@@ -46,6 +46,14 @@ $viewdefs['Opportunities']['base']['view']['recorddashlet'] = [
                     'primary' => true,
                     'acl_action' => 'edit',
                 ],
+                [
+                    'type' => 'escalate-action',
+                    'event' => 'button:escalate_button:click',
+                    'name' => 'escalate_button',
+                    'label' => 'LBL_ESCALATE_BUTTON_LABEL',
+                    'acl_action' => 'create',
+                    'module' => 'Opportunities',
+                ],
             ],
         ],
     ],
@@ -71,6 +79,14 @@ $viewdefs['Opportunities']['base']['view']['recorddashlet'] = [
             'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => [
+                [
+                    'name' => 'is_escalated',
+                    'type' => 'badge',
+                    'badge_label' => 'LBL_ESCALATED',
+                    'warning_level' => 'important',
+                    'dismiss_label' => true,
+                    'span' => 12,
+                ],
                 [
                     'name' => 'account_name',
                     'related_fields' => [

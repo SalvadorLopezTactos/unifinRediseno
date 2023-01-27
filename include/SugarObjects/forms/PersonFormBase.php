@@ -229,7 +229,7 @@ SQL;
                             $query2,
                             [$row['id']]
                         )
-                        ->fetch();
+                        ->fetchAssociative();
                     if (false !== $r) {
                         $rows[] = $r;
                     }

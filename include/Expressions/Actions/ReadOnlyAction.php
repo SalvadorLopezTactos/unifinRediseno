@@ -90,7 +90,8 @@ class ReadOnlyAction extends AbstractAction
                 el[property] = set;
                 if (set)
                 {
-                    D.setStyle(el, 'background-color', '#EEE');
+                    var bgColor = _.contains(document.body.classList, 'sugar-dark-theme') ? '#19191D' : '#EEEEEE';
+                    D.setStyle(el, 'background-color', bgColor);
                     if (!SUGAR.isIE)
                        D.setStyle(el, 'color', '#22');
                 } else

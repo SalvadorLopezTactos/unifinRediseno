@@ -275,7 +275,7 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
      */
     protected function getClient()
     {
-        $client = $this->getOauth($this)->getClient();
+        $client = $this->getOauth()->getClient();
         return $client;
     }
 

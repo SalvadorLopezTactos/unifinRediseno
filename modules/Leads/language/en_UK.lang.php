@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Referred By',
     'LBL_LIST_STATUS' => 'Status',
     'LBL_LIST_TITLE' => 'Title',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Market Interest Prediction',
+    'LBL_MARKET_SCORE' => 'Market Score',
     'LBL_MOBILE_PHONE' => 'Mobile:',
     'LBL_MODULE_NAME' => 'Leads',
     'LBL_MODULE_NAME_SINGULAR' => 'Lead',
@@ -330,4 +332,9 @@ After confirming each required and desired module, click the Save and Convert bu
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Leads Conversion Prediction',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'View prediction details for a specific Lead',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Enable Revenue Line Items',
+    'LBL_REQUIRE_RLIS' => 'Require Revenue Line Items when creating new Opportunity',
+    'LBL_COPY_DATA_RLIS' => 'Copy Lead&#39;s data to the Revenue Line Items when creating new Opportunity',
 );

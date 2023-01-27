@@ -16,9 +16,7 @@
         <span class="ellipsis_inline">
             <a href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}">{{value}}</a>
         </span>
-        <span class="focus-icon-container hide">
-            <span class="focus-icon"></span>
-        </span>
+        {{partial 'focus-icon' this this}}
     {{else}}
         {{value}}
     {{/if}}

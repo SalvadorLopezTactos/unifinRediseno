@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'Luo dokumentti',
 	'LNK_DOCUMENT_LIST'=> 'Näytä dokumentit',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'Liittyvän asiakirjan versiot',
+
+    'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}}<a href="#{{buildRoute model=this}}">{{revision}}</a> luotiin onnistuneesti.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'Versionumero',
 	'LBL_FILENAME' => 'Tiedosto:',
 	'LBL_MIME' => 'Mime-tyyppi',

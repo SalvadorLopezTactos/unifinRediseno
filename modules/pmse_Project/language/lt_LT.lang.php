@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Sukūręs vartotojas',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Paskutinis modifikavęs vartotojas',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Sistemos el. laiškas',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Dokumento šablonas',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Dokumentų sujungimas',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Pasirinkti...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Dokumentų sujungimas į PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Dokumentų sujungimas',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Business Rule',
     'LBL_PMSE_LABEL_RULE' => 'Rule',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Updated Records Only (All Updates - See Help Text)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nauji įrašai arba pirmasis atnaujinimas',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nauji įrašai ir visi atnaujinimai',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Ryšio pakeitimas',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Pasirinkite, kada procesas prasidės.<br><br>Naujas: paleiskite procesą, kai sukuriamas naujas įrašas.<br><br>Pirmasis atnaujinimas: procesas vykdomas tik tada, kai esamo įrašo kriterijai įvykdomi pirmą kartą.<br><br>Visi atnaujinimai: procesas vykdomas kiekvieną kartą, kai įvykdomi esamo įrašo kriterijai.<br><br>Nauji įrašai arba pirmasis atnaujinimas: procesas vykdomas tik tada, kai įrašas yra įvykdomas pirmą kartą, kuriant įrašą arba atnaujinant įrašą.<br><br>Nauji įrašai ir visi atnaujinimai: procesas vyksta kiekvieną kartą visiems naujiems ir esamiems įrašams.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Pasirinkite, kada prasidės procesas.<br><br>Nauja: procesas vykdomas, kai sukuriamas naujas įrašas.<br><br>Pirmasis atnaujinimas: procesas vykdomas tik tada, kai esamo įrašo kriterijai įvykdomi pirmą kartą.<br><br>Visi atnaujinimai: procesas vykdomas kiekvieną kartą, kai įvykdomi esamo įrašo kriterijai.<br><br>Nauji įrašai arba pirmasis atnaujinimas: procesas vykdomas tik tada, kai įrašo kriterijai įvykdomi pirmą kartą, kuriant arba atnaujinant įrašą.<br><br>Nauji įrašai ir visi atnaujinimai: procesas vykdomas kiekvieną kartą visiems naujiems ir esamiems įrašams.<br><br>Ryšių pakeitimai: procesas vykdomas kiekvieną kartą, kai pasikeičia ryšiai.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Select the SugarCRM module to apply the event trigger',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fixed Date',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => ' Error',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Ryšio pakeitimo įvertinimas',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Laukai',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Module Field Evaluation',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modulis',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Visi susiję įrašai',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Bet kurie susiję įrašai',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Pridėta',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Pašalinta',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Pridėta arba pašalinta',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Bet koks ryšys',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Vykdymo laikas',
 

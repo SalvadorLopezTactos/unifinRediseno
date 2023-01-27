@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'ארכיב',
     'LBL_PROCESS_TYPE_DELETE' => 'מחיקה לצמיתות',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'הפעלות ארכיון',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'אזהרה',
+    'LBL_ARCHIVER_WARNING' => 'מומלץ לבצע פעולה זו בשעות שבהן אין פעילות או שיש בהן פעילות מעטה '
+        . 'מאחר שהיא עלולה להשפיע על ביצועי המערכת. בטוח שברצונך לבצע פעולה זו כעת?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'המאחסן בארכיון עבור המודול {{moduleName}} חייב לכלול את {{fieldName}} כמסנן',
 );

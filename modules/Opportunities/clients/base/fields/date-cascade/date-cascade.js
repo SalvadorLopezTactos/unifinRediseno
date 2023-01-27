@@ -27,9 +27,6 @@
     initialize: function(options) {
         this.plugins = _.union(this.plugins || [], ['Cascade']);
         this._super('initialize', [options]);
-        this.def.lblString = app.lang.get('LBL_UPDATE_OPPORTUNITIES_RLIS', 'Opportunities') +
-            ' ' +
-            app.lang.getModuleName('RevenueLineItems', {plural: true});
 
         var config = app.metadata.getModule('Opportunities', 'config');
         if (this.name === 'service_start_date' && config.opps_view_by === 'RevenueLineItems') {
@@ -122,7 +119,9 @@
         var $currentComponent = this.$el;
 
         // this algorithm does not work on list view
-        if (this.view && (this.view.type === 'recordlist' || this.view.type === 'subpanel-list')) {
+        if (!$currentComponent ||
+            (this.view && (this.view.type === 'recordlist' || this.view.type === 'subpanel-list'))
+        ) {
             return this._super('_getAppendToTarget');
         }
 

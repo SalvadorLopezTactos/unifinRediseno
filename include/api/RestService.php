@@ -56,7 +56,7 @@ class RestService extends ServiceBase
      * The maximum version accepted
      * @var string
      */
-    protected $max_version = '11.12';
+    protected $max_version = '11.16';
 
     /**
      * An array of api settings
@@ -161,7 +161,7 @@ class RestService extends ServiceBase
 
             $context = Container::getInstance()->get(Context::class);
             $subject = new RestApiClient();
-
+            $identityAwareDataSource = null;
             // Figure out the platform
             if ($isLoggedIn) {
                 if ( isset($_SESSION['platform']) ) {
@@ -174,6 +174,7 @@ class RestService extends ServiceBase
                         $authenticateUser['serviceAccount'],
                         $subject
                     );
+                    $identityAwareDataSource = $authenticateUser['serviceAccount']->getDataSourceName();
                 } else {
                     $subject = new User($GLOBALS['current_user'], $subject);
                 }
@@ -188,6 +189,9 @@ class RestService extends ServiceBase
 
             $context->activateSubject($subject);
             $context->setAttribute('platform', $this->platform);
+            if ($identityAwareDataSource) {
+                $context->setAttribute('identityAwareDataSource', $identityAwareDataSource);
+            }
 
             $this->validatePlatform($this->platform);
             $this->request->setPlatform($this->platform);
@@ -675,7 +679,7 @@ class RestService extends ServiceBase
             $GLOBALS['logic_hook']->call_custom_logic('', 'after_load_user');
         }
 
-        if ($GLOBALS['current_user']->status == 'Inactive'
+        if (($GLOBALS['current_user']->status == 'Inactive' && empty($_SESSION['sudo_for']))
             || $GLOBALS['current_user']->deleted == true) {
             $valid = false;
         }

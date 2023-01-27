@@ -56,7 +56,7 @@ if (empty($mode)) {
 
 $installType = $historyManifest->getPackageType();
 $csrfFieldName = CsrfAuthenticator::FORM_TOKEN_FIELD;
-$csrfToken = CsrfAuthenticator::getInstance()->getFormToken();
+$csrfToken = htmlspecialchars(CsrfAuthenticator::getInstance()->getFormToken(), ENT_QUOTES, 'UTF-8');
 
 $license = $readme = '';
 $licenseFile = $packageZipFile->getPackageDir() . DIRECTORY_SEPARATOR . 'LICENSE.txt';
@@ -74,7 +74,7 @@ if ($isPackageTypeModule && ($mode === 'Install' || $mode === 'Enable') && file_
 <div id="uw-license-block" style="text-align:left; width: 50%; margin-top: 15px;">
     <h2>$moduleLicenseLabel</h2>
     <h3>$moduleReadLicenseLabel</h3>
-    <p style="display: block; margin: 15px;">$licenseContent</p>
+    <textarea style="display: block; margin: 15px; height: 500px; width: 700px;" readonly>$licenseContent</textarea>
     <div id="module-license-error" style="display: none; color: red;">$moduleLicenseError</div>
     <div style="display: block">
         <div style="display: inline-block; width: 25%">
@@ -219,7 +219,7 @@ echo <<<HTML
     (function() {
         let form = document.getElementById('uw-prepare-form');
         let readmeDiv = document.getElementById('uw-readme-block');
-            
+        
         form.onsubmit = function() {
             let licenseDiv = document.getElementById('uw-license-block');
             if (typeof(licenseDiv) !== 'undefined' && licenseDiv !== null) {
@@ -231,6 +231,12 @@ echo <<<HTML
                     return false;
                 }
             }
+            
+            if (form.elements.mode.value === 'Install') {
+                asyncInstallationStart(form.elements.package_id.value);
+                return false;
+            }
+            
             form.submit();
             return false;
         }
@@ -253,6 +259,189 @@ echo <<<HTML
         }
         
         document.getElementById('uw-prepare-form-submit-button').disabled = false;
+        
+        // async installation UI
+        let packageId;
+        let installationProcessDone;
+        let progressMessageEl = null;
+        let progressMessageLogStat = {error: 0, message: 0, is_staging: false};
+        let progressMessage = function(flag) {
+            if (flag) {
+                let template = app.template.getView('module-loader.process', 'Administration');
+                progressMessageEl = $('<div></div>');
+                progressMessageEl.html(template({id: 'package-install-progress-bar'}));
+                app.\$rootEl.find('.alert-top').append(progressMessageEl);
+            } else if (progressMessageEl) {
+                progressMessageEl.remove();
+            }
+        }
+        
+        let navigateToInitialPage = function() {
+            if (window.top) {
+                window.top.location.href = '#bwc/index.php?module=Administration&action=UpgradeWizard&view=module&reloadMetadata=true';
+            }
+        }
+        
+        let errorMessage = function(title, messages) {
+            progressMessage(false);
+            app.alert.show('module_loader_error', {
+                level: 'error',
+                title: title || app.lang.get('ERR_INTERNAL_ERR_MSG'),
+                messages: messages || ['ERR_HTTP_500_TEXT_LINE1', 'ERR_HTTP_500_TEXT_LINE2']
+            });
+        }
+        
+        let installedSuccessfully = function() {
+            progressMessageEl.find('#ml-installing-lbl').toggle();
+            progressMessageEl.find('#ml-installing-success-lbl').toggle();
+            progressMessageEl.find('.alert-info').removeClass('alert-info').addClass('alert-success');
+            progressMessageEl.find('button').toggle();
+        }
+
+        let isInstallationFailed = false;
+        let installationError = function(error) {
+            if (isInstallationFailed) {
+                return;
+            }
+            isInstallationFailed = true;
+
+            progressMessageEl.find('pre').append("\\n" + '<b style="color: red">' + error + '</b>')
+                .scrollTop(function() { return this.scrollHeight; });
+            progressMessageEl.find('#ml-installing-lbl').toggle();
+            progressMessageEl.find('#ml-installing-error-lbl').toggle();
+            progressMessageEl.find('.alert-info').removeClass('alert-info').addClass('alert-danger');
+            progressMessageEl.find('button').toggle();
+            progressMessageEl.find('.fa-angle-down').parent().find('a').click();
+        }
+        
+        let checkInstallationProgress = function() {
+            let attributes = {
+                id: packageId
+            };
+            let url = app.api.buildURL('Administration/packages', 'installation-status', attributes);
+            let errorCounter = 0;
+            let dotRendered = false;
+            app.api.call('read', url, null, {
+                success: function(progress) {
+                    let ml = progressMessageEl.find('pre');
+                    
+                    if (progress.message) {
+                        for (let ts in progress.message) {
+                            ts = parseInt(ts, 10);
+                            if (ts > progressMessageLogStat.message) {
+                                progressMessageLogStat.message = ts;
+                                if (dotRendered) {
+                                    ml.append("\\n");
+                                }
+                                ml.append(progress.message[ts] + "\\n")
+                                    .scrollTop(function() { return this.scrollHeight; })
+                            }
+                        }
+                    }
+                    if (progress.error) {
+                        installationError(progress.error);
+                        navigateToInitialPage();
+                        return;
+                    }
+                    
+                    if (progress.error_page) {
+                        setTimeout(function() {
+                            progressMessage(false);
+                            if (installationProcessDone) {
+                                document.write(installationProcessDone);
+                            } else {
+                                errorMessage();
+                                navigateToInitialPage();
+                            }
+                        }, 500);
+                        return;
+                    }
+                    
+                    if (!progress.is_staged && progress.is_done) {
+                        installedSuccessfully();
+                        navigateToInitialPage();
+                        return;
+                    } else if (progress.is_done) {
+                        if (!progressMessageLogStat.is_staging) {
+                            progressMessageLogStat.is_staging = true;
+                            ml.append("checking the package ...");
+                        } else {
+                            dotRendered = true;
+                            ml.append(".");
+                        }
+                    } else {
+                        let c = parseInt(progress.current_step, 10);
+                        let t = parseInt(progress.total_steps, 10);
+                        let p = Math.floor((c / t) * 100);
+                        if (!isNaN(p) && t > 0) {
+                            progressMessageEl.find('.progress .bar').css('width', p + '%');
+                            progressMessageEl.find('h5').html(p + '%');
+                        }
+                    }
+                    
+                    if (installationProgressTimer) {
+                        setInstallationProgressCheck(true);
+                        if (installationProcessDone) {
+                            installationProgressTimer = null;
+                        }
+                    } else if (installationProcessDone) {
+                        installationError(app.lang.get('LBL_ML_INSTALLATION_FATAL', 'Administration'));
+                        navigateToInitialPage();
+                    }
+                },
+                error: function() {
+                    errorCounter++;
+                    if (errorCounter < 10 && installationProgressTimer) {
+                        setInstallationProgressCheck(true);
+                    } else {
+                        errorMessage();
+                        navigateToInitialPage();
+                    }
+                }
+            }, {cache: false});
+        }
+        let installationProgressTimer;
+        let setInstallationProgressCheck = function(flag) {
+            if (flag) {
+                setInstallationProgressCheck(false);
+                installationProgressTimer = setTimeout(checkInstallationProgress.bind(this), 1000);
+            } else if (installationProgressTimer) {
+                clearTimeout(installationProgressTimer);
+            }
+        }
+        
+        let asyncInstallationStart = function(pkgId) {
+            packageId = pkgId;
+            installationProcessDone = false;
+            progressMessage(true);
+            
+            let url = [
+                '?module=Administration',
+                'view=module',
+                'action=UpgradeWizard_commit'
+            ].join('&');
+            
+            let data = {};
+            $(form).serializeArray().map(function(x) {data[x.name] = x.value;});
+            
+            app.api.call('create', url, null, {
+                success: function(html) {
+                    installationProcessDone = html;
+                },
+                error: function(response) {
+                    setInstallationProgressCheck(false);
+                    installationProgressTimer = null;
+                    checkInstallationProgress();
+                }
+            }, {
+                dataType: 'text',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                processData: true,
+                data: data
+            });
+            
+            setInstallationProgressCheck(true);
+        }
     })();
 </script>
 HTML;

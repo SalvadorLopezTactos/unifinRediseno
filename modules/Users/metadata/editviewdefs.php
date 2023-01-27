@@ -43,7 +43,7 @@ $viewdefs['Users']['EditView'] = array(
                     'name' => 'license_type',
                     'displayParams' => array('required'=>true),
                     'customCode' =>
-                        '{if $IS_ADMIN}{$LICENSE_TYPE_DROPDOWN}{else}{$LICENSE_TYPE_READONLY}{/if}',
+                        '{if $IS_ADMIN && !$IDM_MODE_LC_LOCK}{$LICENSE_TYPE_DROPDOWN}{else}{$LICENSE_TYPE_READONLY}{/if}',
                     ),
                 ),
 

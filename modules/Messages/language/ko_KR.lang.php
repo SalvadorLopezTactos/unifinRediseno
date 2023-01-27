@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => '메세지 보고서 보기',
     'LNK_IMPORT_MESSAGES' => '메시지 가져오기',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => '관심고객 ID',
+    'LBL_LEAD_NAME' => '관심고객',
+    'LBL_ACTIVITY_STATUS_TEXT' => '고객 측 채팅',
+    'LBL_ACTIVITY_CUSTOMER' => '소비자',
+    'LBL_ACTIVITY_FINISHED' => '종료됨',
+    'LBL_ACTIVITY_IN_PROGRESS' => '진행중',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => '메시지 포커스 서랍',
 ];

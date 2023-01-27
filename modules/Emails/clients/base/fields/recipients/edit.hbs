@@ -11,5 +11,7 @@
  */
 --}}
 <input type="hidden" name="{{name}}" class="select2{{#if def.css_class}} {{def.css_class}}{{/if}}"/>
-<a class="btn" href="javascript:void(0);" data-name="{{name}}"><i class="fa {{#if def.icon}}{{def.icon}}{{else}}fa-book{{/if}}"></i></a>
+<a class="btn" href="javascript:void(0);" data-name="{{name}}">
+    <i class="{{#if def.icon}}{{buildIcon def.icon}}{{else}}sicon sicon-user-group{{/if}}"></i>
+    </a>
 {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

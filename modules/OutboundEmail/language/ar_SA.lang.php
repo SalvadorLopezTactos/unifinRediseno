@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'مُعرف عنوان "الرد على"',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'عنوان "الرد على"',
     'LBL_PRIMARY_TEAM' => 'الفريق الأساسي',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'حساب الإرسال المفضل',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم إعدادات البريد الإلكتروني',
 );

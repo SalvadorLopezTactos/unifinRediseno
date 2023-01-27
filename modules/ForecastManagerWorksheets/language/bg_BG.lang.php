@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Base Rate',
 
     'LBL_QUOTA' => 'Квота',
-    'LBL_QUOTA_ADJUSTED' => 'Квота (Коригирана)',
+    'LBL_QUOTA_ADJUSTED' => 'Коригирана квота',
 
     'LBL_FORECAST' => 'Прогноза',
     'LBL_COMMIT_STAGE' => 'Commit Stage',

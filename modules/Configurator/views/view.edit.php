@@ -33,9 +33,9 @@ class ConfiguratorViewEdit extends ViewEdit
 	    global $mod_strings;
 
     	return array(
-    	   "<a href='index.php?module=Administration&action=index'>".translate('LBL_MODULE_NAME','Administration')."</a>",
-    	   $mod_strings['LBL_SYSTEM_SETTINGS']
-    	   );
+            "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
+            $mod_strings['LBL_SYSTEM_SETTINGS'],
+        );
     }
 
 	/**
@@ -61,17 +61,21 @@ class ConfiguratorViewEdit extends ViewEdit
         $this->ss->assign('LANGUAGES', get_languages());
         $this->ss->assign("JAVASCRIPT",get_set_focus_js(). get_configsettings_js());
         $this->ss->assign('company_logo', SugarThemeRegistry::current()->getImageURL('company_logo.png', true, true));
+        $this->ss->assign('company_logo_dark', SugarThemeRegistry::current()->getImageURL('company_logo_dark.png', true, true));
         $this->ss->assign("settings", $focus->settings);
         $this->ss->assign("mail_sendtype_options", get_select_options_with_id($app_list_strings['notifymail_sendtype'], $focus->settings['mail_sendtype']));
-        if(!empty($focus->settings['proxy_on'])){
-            $this->ss->assign("PROXY_CONFIG_DISPLAY", 'inline');
-        }else{
-            $this->ss->assign("PROXY_CONFIG_DISPLAY", 'none');
-        }
-        if(!empty($focus->settings['proxy_auth'])){
-            $this->ss->assign("PROXY_AUTH_DISPLAY", 'inline');
-        }else{
-            $this->ss->assign("PROXY_AUTH_DISPLAY", 'none');
+        if (!isset($configurator->config['proxy_visible']) || $configurator->config['proxy_visible']) {
+            $this->ss->assign('proxy_visible', true);
+            if (!empty($focus->settings['proxy_on'])) {
+                $this->ss->assign("PROXY_CONFIG_DISPLAY", 'inline');
+            } else {
+                $this->ss->assign("PROXY_CONFIG_DISPLAY", 'none');
+            }
+            if (!empty($focus->settings['proxy_auth'])) {
+                $this->ss->assign("PROXY_AUTH_DISPLAY", 'inline');
+            } else {
+                $this->ss->assign("PROXY_AUTH_DISPLAY", 'none');
+            }
         }
         $ini_session_val = ini_get('session.gc_maxlifetime');
         if(!empty($focus->settings['system_session_timeout'])){
@@ -115,6 +119,7 @@ class ConfiguratorViewEdit extends ViewEdit
         $this->ss->assign('list_entries_per_subpanel_help', str_replace(
             '{{subpanelEntriesNum}}', '25', $mod_strings['TPL_LIST_ENTRIES_PER_SUBPANEL_HELP']
         ));
+        $this->ss->assign('developer_mode_visible', $configurator->config['developer_mode_visible'] ?? true);
 
         echo $this->getModuleTitle(false);
 

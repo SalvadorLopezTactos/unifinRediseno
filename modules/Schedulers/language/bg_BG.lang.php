@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Графици за време на процес',
 'LBL_OOTB_DATA_ARCHIVER' => 'Изпълнение на архиви/изтривания на активни данни',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Географско кодиране на записи',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Анализиране на географско кодиране',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Интервал на изпълнение:',
 'LBL_LIST_LIST_ORDER' => 'Планирани задачи:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'За да конфигурирате Crontab',
 'LBL_CRON_LINUX_DESC' => 'Добавете следния ред към настройките за автоматично изпълнение на задачи:',
 'LBL_CRON_WINDOWS_DESC' => 'Създаване на batch файл със следните команди:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>за curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Хронология на изпълнението',
 'LBL_EXECUTE_TIME'			=> 'Изпълнена на',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Премахване на временните файлове',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Регенерирай денормализираните защитени данни за екипа',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Актуализиране на дефиниция на продукт',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Карти на географско кодиране',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Анализиране на географско кодиране',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Изпращане на електронни писма от кампании',
 'LBL_ASYNCMASSUPDATE' => 'Изпъняване на асинхронни масови актуализации',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Изчистване на списъците със стари записи',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Изчистване на дейности',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Графици за време на процес',
+'LBL_SUGARJOBDATAARCHIVER' => 'Изпълнение на архиви/изтривания на активни данни',
 'LBL_PMSEENGINECRON' => 'Автоматизирани задачи на SugarBPM',
 );
 

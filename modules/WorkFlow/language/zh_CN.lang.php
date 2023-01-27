@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => '工作流'),
   'LBL_EMAILTEMPLATES_TYPE' => '类型',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>注意：</strong> Sugar “工作流”和“工作流管理”功能正处于维护模式。Sugar 企业版客户应使用 SugarBPM<sup class="trademark">TM</sup>提供的功能。',
 );
 

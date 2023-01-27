@@ -35,12 +35,7 @@
 
 {/foreach}
 </TR>
-{literal}
-
-	{/literal}
 {foreach from=$CATEGORIES item="TYPES" key="CATEGORY_NAME"}
-
-
 	<TR id="ACLEditView_Access_{$CATEGORY_NAME}">
 	<td nowrap width='1%' id="ACLEditView_Access_{$CATEGORY_NAME}_category"><b>
 	{if $APP_LIST.moduleList[$CATEGORY_NAME]=='Users'}
@@ -85,8 +80,6 @@
 		{/if}
 	{/foreach}
 	</TR>
-
-
 {foreachelse}
     <tr> <td colspan="2">No Actions Defined</td></tr>
 {/foreach}

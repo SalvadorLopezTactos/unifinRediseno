@@ -3,7 +3,7 @@
 $hook_array['before_save'][] = Array(
     9,
     'Consulta Servicio de C4 para Teléfonos',
-    'custom/modules/prospects/prospects_telefonos_c4.php',
+    'custom/modules/Prospects/prospects_telefonos_c4.php',
     'prospects_telefonos_c4',
     'prospects_telefonos_c4'
 );

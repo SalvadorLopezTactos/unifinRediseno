@@ -33,6 +33,9 @@
                 // and also ignore the bundles collection field since we are going to check it below manually
                 this.noEditFields = this.noEditFields.concat(this.calculatedFields, ['bundles']);
 
+                // If there are default values set for the tax rate, don't consider those to be unsaved changes
+                this.noEditFields = this.noEditFields.concat(this.noEditFields, this._getIgnoredTaxRateFields());
+
                 hasUnsavedChanges = this._super('hasUnsavedChanges');
 
                 if (hasUnsavedChanges) {
@@ -138,6 +141,21 @@
                 }, this);
 
                 return !_.isUndefined(changedBundle);
+            },
+
+            /**
+             * Gets the list of tax rate fields to ignore unsaved changes for, if a default tax rate is set.
+             * @return {Array}
+             * @private
+             */
+            _getIgnoredTaxRateFields: function() {
+                if (_.isEmpty(this.defaultTaxRateValues)) {
+                    return [];
+                }
+
+                return Object.keys(this.defaultTaxRateValues).filter(taxRateAttr => {
+                    return this.model.get(taxRateAttr) === this.defaultTaxRateValues[taxRateAttr];
+                });
             }
         });
     });

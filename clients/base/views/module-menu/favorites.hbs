@@ -11,5 +11,14 @@
  */
 --}}
 {{#each collection.models}}
-    <li><a class="ellipsis_inline" tabindex="-1" href="#{{buildRoute model=this}}" data-route="#{{buildRoute model=this}}" title="{{fieldValue this 'name'}}"><i class="fa fa-favorite active"></i>{{fieldValue this 'name'}}</a></li>
+    <li class="megamenu-dropdown-item-container">
+        <a class="megamenu-dropdown-item" tabindex="-1" href="#{{buildRoute model=this}}"
+           data-route="#{{buildRoute model=this}}" title="{{fieldValue this 'name'}}" rel="tooltip"
+        >
+            <i class="sicon sicon-star-fill active"></i>
+            <span class="ellipsis_inline">
+                {{fieldValue this 'name'}}
+            </span>
+        </a>
+    </li>
 {{/each}}

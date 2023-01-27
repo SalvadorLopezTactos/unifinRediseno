@@ -11,18 +11,20 @@
  */
 
 $viewdefs['base']['layout']['multi-selection-list-link'] = array(
+    'css_class'=> 'flex-list-layout flex flex-column h-full',
     'type' => 'multi-selection-list',
     'components' => array(
         array(
             'layout' => array(
                 'type' => 'default',
                 'name' => 'sidebar',
+                'css_class' => 'h-full',
                 'components' => array(
                     array(
                         'layout' => array(
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
+                            'css_class' => 'main-pane span8 flex flex-column',
                             'components' => array(
                                 array(
                                     'view' => 'selection-headerpane',
@@ -32,6 +34,7 @@ $viewdefs['base']['layout']['multi-selection-list-link'] = array(
                                 ),
                                 array(
                                     'layout' => array(
+                                        'css_class' => 'multi-selection-flex flex flex-column h-full',
                                         'type' => 'filterpanel',
                                         'availableToggles' => array(),
                                         'filter_options' => array(
@@ -51,12 +54,23 @@ $viewdefs['base']['layout']['multi-selection-list-link'] = array(
                                             array(
                                                 'view' => 'mass-link',
                                             ),
-                                            array(
-                                                'view' => 'multi-selection-list-link',
-                                            ),
-                                            array(
-                                                'view' => 'list-bottom',
-                                            ),
+                                            [
+                                                'layout' => [
+                                                    'css_class' => 'paginated-flex-list',
+                                                    'components' => [
+                                                        [
+                                                            'view' => 'multi-selection-list-link',
+                                                            'primary' => true,
+                                                        ],
+                                                        [
+                                                            'view' => [
+                                                                'name' => 'list-pagination',
+                                                                'css_class' => 'flex-table-pagination',
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                            ],
                                         ),
                                     ),
                                 ),

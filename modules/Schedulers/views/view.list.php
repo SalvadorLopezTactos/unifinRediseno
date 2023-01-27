@@ -32,6 +32,13 @@ class SchedulersViewList extends ViewList
         }
 
         $this->params['custom_where'] .= sprintf(" AND %s.system_job <> '1'", $this->bean->getTableName());
+        if (!hasHintLicense()) {
+            $this->params['custom_where'] .= sprintf(" AND %s.name <> 'Hint Init Job'", $this->bean->getTableName());
+            $this->params['custom_where'] .= sprintf(" AND %s.name <> 'Hint Register Config Job'", $this->bean->getTableName());
+            $this->params['custom_where'] .= sprintf(" AND %s.name <> 'Hint Seats Job'", $this->bean->getTableName());
+            $this->params['custom_where'] .= sprintf(" AND %s.name <> 'Hint User Init Job'", $this->bean->getTableName());
+            $this->params['custom_where'] .= sprintf(" AND %s.name <> 'Hint News Job'", $this->bean->getTableName());
+        }
         return parent::listViewProcess();
     }
 }

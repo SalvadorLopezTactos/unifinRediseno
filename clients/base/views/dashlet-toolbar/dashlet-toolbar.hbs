@@ -10,7 +10,29 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="btn-toolbar pull-right">
+{{#if headerFields}}
+    <h4 data-toggle="dashlet" class="dashlet-title record-toolbar flex-grow m-0 ml-1.5 pt-0.5">
+        {{#each ../headerFields}}
+            <span class="record-cell" data-type="{{type}}" data-name="{{name}}">
+                <span class="table-cell-wrapper">
+                    {{#if ../../labels}}
+                        {{#unless dismiss_label}}
+                            <span class="record-label" data-name="{{name}}">
+                                {{str label ../../dashletModel.module}}
+                            </span>
+                        {{/unless}}
+                    {{/if}}
+                    <span class="index{{index}}" data-fieldname="{{name}}" data-index="{{index}}">
+                        {{field ../this model=../dashletModel template="dashlet-header"}}
+                    </span>
+                </span>
+            </span>
+        {{/each}}
+    </h4>
+{{else}}
+    <h4 data-toggle="dashlet" class="dashlet-title flex-grow m-0 ml-1.5">{{meta.label}}</h4>
+{{/if}}
+<div class="btn-toolbar ml-4 my-0 pl-0">
 {{#each buttons}}
     {{#if type}}
         {{field ../../this model=../../this.model}}
@@ -29,7 +51,7 @@
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
-                        <i data-action="loading" class="fa fa-cog" track="click:dashletToolbarCog"></i>
+                        <i data-action="loading" class="sicon sicon-settings" track="click:dashletToolbarCog"></i>
                     </button>
 
                     <ul class="dropdown-menu left" role="menu">
@@ -45,25 +67,3 @@
     {{/if}}
 {{/each}}
 </div>
-{{#if headerFields}}
-    <h4 data-toggle="dashlet" class="dashlet-title record-toolbar">
-        {{#each ../headerFields}}
-            <span class="record-cell" data-type="{{type}}" data-name="{{name}}">
-                <span class="table-cell-wrapper">
-                    {{#if ../../labels}}
-                        {{#unless dismiss_label}}
-                            <span class="record-label" data-name="{{name}}">
-                                {{str label ../../dashletModel.module}}
-                            </span>
-                        {{/unless}}
-                    {{/if}}
-                    <span class="index{{index}}" data-fieldname="{{name}}" data-index="{{index}}">
-                        {{field ../this model=../dashletModel template="detail"}}
-                    </span>
-                </span>
-            </span>
-        {{/each}}
-    </h4>
-{{else}}
-    <h4 data-toggle="dashlet" class="dashlet-title">{{meta.label}}</h4>
-{{/if}}

@@ -14,18 +14,22 @@
 <div class="record tab-layout{{#if view.createMode}} record-create{{/if}}">
 {{#if view.meta.firstPanelIsTab}}
     <div class="content-tabs">
-        <ul class="nav nav-tabs" id="recordTab">
+        <ul class="nav nav-tabs ml-5 mb-0" id="recordTab">
             {{#each view.meta.panels}}
                 {{#unless header}}
                     {{#if newTab}}
-                        <li class="tab {{name}}">
-                            <a href="#{{name}}{{../../../view.cid}}" data-toggle="tab">{{str label ../../../view.module}}</a>
+                        <li class="tab tab-badgeable {{name}}">
+                            <a href="#{{name}}{{../../../view.cid}}" data-toggle="tab">
+                                <span class="tab-title font-semibold">{{str label ../../../view.module}}</span>
+                            </a>
                         </li>
                     {{/if}}
                 {{/unless}}
             {{/each}}
             <li class="tab dropdown more hidden">
-                <a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-chevron-down"></b></a>
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <b class="sicon sicon-chevron-down"></b>
+                </a>
                 <ul class="dropdown-menu scroll pull-right" role="menu">
                     {{#each view.meta.panels}}
                         {{#unless header}}
@@ -50,12 +54,14 @@
             <div class="tab-pane fade" id="{{name}}{{../../../view.cid}}">
         {{else}}
             <div class="row-fluid record-panel" data-panelName="{{name}}">
-                <div class="row-fluid record-panel-header {{#eq panelState "collapsed"}}panel-inactive{{/eq}}{{#notEq panelState "collapsed"}}panel-active{{/notEq}}">
-                    <span class="pull-left">
+                <div class="row-fluid record-panel-header-container {{#eq panelState "collapsed"}}panel-inactive{{/eq}}{{#notEq panelState "collapsed"}}panel-active{{/notEq}}">
+                    <span class="record-panel-header">
                         <button class="btn btn-invisible record-panel-arrow">
-                            <i class="fa fa-chevron-{{#eq panelState "collapsed"}}right{{/eq}}{{#notEq panelState "collapsed"}}down{{/notEq}}" rel="tooltip" data-container="body" data-title="Toggle Visibility"></i>
+                            <i class="sicon sicon-chevron-{{#eq panelState "collapsed"}}right{{/eq}}{{#notEq panelState "collapsed"}}down{{/notEq}}"
+                               rel="tooltip" data-container="body" data-title="Toggle Visibility"
+                            ></i>
                         </button>
-                        {{str label ../../../view.module}}
+                        <span>{{str label ../../../view.module}}</span>
                     </span>
                 </div>
             <div class="row-fluid record-panel-content {{#eq panelState "collapsed"}}hide{{/eq}}">
@@ -68,7 +74,7 @@
                             {{decoratedField  ../../../../../view.decoratorField ../../../../../view model=../../../../../view.model template=../../../../../view.action}}
                         </div>
                     {{else}}
-                        <div class="span{{cellSpan}} record-cell">
+                        <div class="span{{cellSpan}} record-cell filler-cell">
                             {{#unless ../../../labelsOnTop}}<div class="labels-on-side">{{/unless}}
                                 <div class="record-cell span{{cellSpan}}"></div>
                             {{#unless ../../../labelsOnTop}}</div>{{/unless}}

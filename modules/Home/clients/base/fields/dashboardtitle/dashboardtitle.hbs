@@ -11,18 +11,20 @@
  */
 --}}
 {{#if value}}
-    <div class="ellipsis_inline" data-placement="bottom"{{#if dir}} dir="{{dir}}"{{/if}} title="{{value}}">
+    <div class="ellipsis_inline" data-placement="bottom"{{#if dir}} dir="{{dir}}"{{/if}} title="{{value}}" rel="tooltip">
         {{value}}
     </div>
 {{/if}}
 
 {{#if hasEditAccess}}
     <span class="record-edit-link-wrapper" data-name="{{name}}" data-wrapper="edit">
-        <a class="record-edit-link btn btn-invisible" data-type="{{type}}" data-name="{{name}}"><i class="fa fa-pencil"></i></a>
+        <a class="record-edit-link btn btn-invisible" data-type="{{type}}" data-name="{{name}}">
+            <i class="sicon sicon-edit"></i>
+        </a>
     </span>
     <span class="record-lock-link-wrapper hide" data-name="{{name}}">
         <a class="record-lock-link btn btn-invisible" data-type="{{type}}" data-name="{{name}}">
-            <i class="fa fa-lock" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="right"></i>
+            <i class="sicon sicon-lock" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="right"></i>
         </a>
     </span>
 {{/if}}

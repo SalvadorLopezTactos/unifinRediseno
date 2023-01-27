@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'הצג תבניות',
     'LNK_LIST_KBCATEGORIES' => 'תצוגת קטגוריות',
     'LBL_TEMPLATES' => 'תבניות',
+    'LBL_TEMPLATE' => 'תבנית',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'תבנית זו תחליף את כל התוכן.' .
         ' האם אתה בטוח שברצונך להשתמש בתבנית זו?',
     'LNK_IMPORT_KBCONTENTS' => 'ייבא מאמרים',

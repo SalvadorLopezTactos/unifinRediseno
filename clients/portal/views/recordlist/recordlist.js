@@ -22,6 +22,15 @@
     ],
 
     /**
+     * @inheritdoc
+     */
+    initialize: function(options) {
+        this._super('initialize', [options]);
+        this.allowFreezeFirstColumn = false;
+        this.isFirstColumnFreezed = false;
+    },
+
+    /**
      * Adds the right side preview column to the recordlist view.
      * Overrides the base recordlist view to remove the left side selection column
      */

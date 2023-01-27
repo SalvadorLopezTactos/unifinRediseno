@@ -159,16 +159,13 @@ document.getElementById("{{$vardef.docType}}").disabled = true;
 <script type="text/javascript">
 
 var {{$idName}}_setFileName = function()
-{literal}
 {
     var dom = YAHOO.util.Dom;
-{/literal}    
     sourceElement = "{{$idName}}_file";
     targetElement = "{{$displayParams.onchangeSetFileNameTo}}";
 	src = new String(dom.get(sourceElement).value);
 	target = new String(dom.get(targetElement).value);
-{literal}
-	if (target.length == 0) 
+	if (target.length == 0)
 	{
 		lastindex=src.lastIndexOf("/");
 		if (lastindex == -1) {
@@ -181,7 +178,6 @@ var {{$idName}}_setFileName = function()
 		}	
 	}	
 }
-{/literal}
 
 YAHOO.util.Event.onDOMReady(function() 
 {ldelim}

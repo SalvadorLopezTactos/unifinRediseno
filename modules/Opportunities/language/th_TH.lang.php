@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'เวิร์กชีท',
     'LBL_PURCHASED_LINE_ITEMS' => 'สินค้าในไลน์ที่ซื้อมา',
 
+    'LBL_FORECASTED_LIKELY' => 'แนวโน้มการพยากรณ์',
     'LBL_RENEWAL' => 'การต่ออายุ',
     'LBL_RENEWAL_OPPORTUNITIES' => 'การต่ออายุโอกาสทางการขาย',
     'LBL_RENEWAL_PARENT' => 'โอกาสทางการขายหลัก',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => 'จำนวนรายการบรรทัดรายได้ทั้งหมด',
     'LBL_CLOSED_RLIS' => 'จำนวนรายการบรรทัดรายได้ที่ปิด',
+    'LBL_CLOSED_WON_RLIS' => '# จำนวนรายการบรรทัดรายได้ที่ปิดการขายสำเร็จ',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# ของช่วงรายได้สินค้าในไลน์ Open Service Flex',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'คุณไม่สามารถลบโอกาสทางการขายที่มีรายการบรรทัดรายได้ที่ปิด',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'ระเบียนที่เลือกไว้บางรายการมีรายการบรรทัดรายได้ที่ปิด และไม่สามารถลบได้',
     'LBL_INCLUDED_RLIS' => 'จำนวนรายการบรรทัดรายได้ที่รวม',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'เปิดการอัปเดต',
+    'LBL_CASCADE_RLI_EDIT' => 'อัปเดตสร้างรายการบรรทัดรายได้',
+    'LBL_CASCADE_RLI_CREATE' => 'ตั้งรายการบรรทัดรายได้',
     'LBL_SERVICE_START_DATE_INVALID' => 'วันที่เริ่มบริการไม่สามารถกำหนดให้อยู่เลยวันที่สิ้นสุดการบริการของรายการบรรทัดรายได้เสริม ที่เปิดอยู่ทุกรายการได้',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'การเสนอราคา',
@@ -239,7 +243,10 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "โอกาสทางการขายของทีม",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'ไม่สามารถเปลี่ยน {{fieldName}} เนื่องจาก {{moduleSingular}} ไม่มีสินค้าที่เปิดขายในไลน์',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'การปฏิสัมพันธ์ของโอกาสการขาย',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์โอกาสทางการขาย',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' ไม่สามารถตั้งค่าข้ามรายการบรรทัดรายได้ใด ๆ ได้เพราะรายการเหล่านี้ไม่ใช่บริการ คุณต้องการดำเนินการสร้างต่อไปหรือไม่',
+    'LBL_CASCADE_DURATION_WARNING' => ' ไม่สามารถตั้งค่าข้ามรายการบรรทัดรายได้ใด ๆ ได้เพราะระยะเวลาของรายการเหล่านี้ถูกล็อกเอาไว้ คุณต้องการดำเนินการสร้างต่อไปหรือไม่',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'การพยากรณ์โอกาสปิดการขาย',

@@ -18,7 +18,7 @@
 ({
     extendsFrom: 'ListView',
 
-    plugins: ['Editable', 'ErrorDecoration', 'MergeDuplicates'],
+    plugins: ['SugarLogic', 'Editable', 'ErrorDecoration', 'MergeDuplicates'],
 
     events: {
         'click [data-mode=preview]' : 'togglePreview',
@@ -389,6 +389,32 @@
     },
 
     /**
+     * Prevent required and dependent fields from stopping save merge action
+     * by setting required flag to false on fields.
+     *
+     */
+    preventRequiredFieldsValidation: function() {
+        // Get all primary record fields.
+        var allPrimaryRecordFields = _.filter(this.primaryRecord.fields, function(primaryField) {
+            // Return if selected primary field is required.
+            return primaryField.required;
+        });
+        _.each(allPrimaryRecordFields, function(primaryField) {
+            // this.rowFields[this.primaryRecord.get('id')] return the record fields from all available fields.
+            _.each(this.rowFields[this.primaryRecord.get('id')], function(field) {
+                // SugarLogic disables dependent field since dependency condition is not met.
+                if (primaryField.name === field.name && primaryField.required !== field.def.required) {
+                    // SugarLogic is not updating this.primaryRecord fields since
+                    // this is just a data representation of selected values.
+                    // Sync primaryField.required flag with the modified SugarLogic field.def.required since
+                    // required and dependent fields condition is not met.
+                    primaryField.required = field.def.required;
+                }
+            }, this);
+        }, this);
+    },
+
+    /**
      * Saves primary record and triggers `mergeduplicates:primary:saved` event on success.
      * Before saving triggers also `duplicate:unformat:field` event.
      *
@@ -404,6 +430,8 @@
         headerpaneView.getField('cancel_button').setDisabled(true);
 
         this.primaryRecord.trigger('duplicate:unformat:field');
+        // Prevent required and dependent fields from stopping save merge action.
+        this.preventRequiredFieldsValidation();
 
         this.primaryRecord.save({}, {
             fieldsToValidate: fields,

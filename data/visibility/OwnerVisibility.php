@@ -39,7 +39,7 @@ class OwnerVisibility extends SugarVisibility
     public function addVisibilityWhereQuery(SugarQuery $sugarQuery, $options = array())
     {
         $where = null;
-        $this->addVisibilityWhere($where, $options);
+        $this->addVisibilityWhere($where);
 
         if (!empty($where)) {
             $sugarQuery->where()->queryAnd()->addRaw($where);

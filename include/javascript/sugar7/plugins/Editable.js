@@ -46,9 +46,8 @@
 
                     this.before('unsavedchange', this.beforeViewChange, this);
 
-                    var sideDrawer = this.closestComponent('side-drawer');
-                    if (sideDrawer) {
-                        sideDrawer.before(
+                    if (app.sideDrawer && app.sideDrawer.before) {
+                        app.sideDrawer.before(
                             'side-drawer:close side-drawer:content-changed',
                             this.beforeContainerChange,
                             this
@@ -289,8 +288,9 @@
              *
              * @param {View.Field} field Field that needs to be toggled.
              * @param {Boolean} isEdit True if it force into edit mode.
+             * @param {boolean} noFocus True if it should not focus into the field.
              */
-            toggleField: function(field, isEdit) {
+            toggleField: function(field, isEdit, noFocus) {
                 var viewName;
 
                 if (_.isUndefined(isEdit)) {
@@ -313,7 +313,7 @@
 
                 field.setMode(viewName);
 
-                if (viewName === 'edit') {
+                if (viewName === 'edit' && !noFocus) {
                     if (_.isFunction(field.focus)) {
                         field.focus();
                     } else {
@@ -342,6 +342,8 @@
                     field.$el.closest('.record-cell')
                         .toggleClass('edit', false);
                 }
+
+                field.trigger('editable:toggle-field', viewName);
             },
 
             /**
@@ -491,6 +493,12 @@
                     targetPlaceHolder = this.$(evt.target).parents("span[sfuuid='" + field.sfId + "']"),
                     preventPlaceholder = this.$(evt.target).closest('.prevent-mousedown');
 
+                // Handle the field that does not exist on the new view when
+                // the layout is switched because of dropdown-based views
+                if (!currFieldParent) {
+                    return;
+                }
+
                 // When mouse clicks the document, it should maintain the edit mode within the following cases
                 // - Some fields (like email) may have buttons and the mousedown event will fire before the one
                 //   attached to the button is fired. As a workaround we wrap the buttons with .prevent-mousedown
@@ -530,9 +538,8 @@
                 app.routing.offBefore('route', this.beforeRouteChange, this);
                 $(window).off('beforeunload.' + this.cid);
 
-                var sideDrawer = this.closestComponent('side-drawer');
-                if (sideDrawer) {
-                    sideDrawer.offBefore(
+                if (app.sideDrawer && app.sideDrawer.offBefore) {
+                    app.sideDrawer.offBefore(
                         'side-drawer:close side-drawer:content-changed',
                         this.beforeContainerChange,
                         this

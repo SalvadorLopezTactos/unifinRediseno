@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Адрес электронной почты:',
     'LBL_EMAIL_ATTACHMENT' => 'Вложение',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Вложение электронной почты для',
+    'LBL_NOTE_ATTACHMENT' => 'Вложения с заметкой',
+    'LBL_KB_ATTACHMENT' => 'Вложения с документом базы знаний',
+    'LBL_CASE_ATTACHMENT' => 'Вложение с обращением',
     'LBL_FILE_MIME_TYPE' => 'Тип MIME',
     'LBL_FILE_EXTENSION' => 'Расширение файла',
     'LBL_FILE_SOURCE' => 'Источник файла',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Источник заметки',
     'LBL_SOURCE_EXTERNAL' => 'Внешний',
     'LBL_SOURCE_INTERNAL' => 'Внутренний',
+    'LBL_PORTAL' => 'Портал',
 
     // Help Text
     // List View Help Text

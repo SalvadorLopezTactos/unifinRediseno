@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Oprettet af bruger',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Sidst ændret af bruger',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'System-mail',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Dokumentskabelon',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Flet skabelon',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Vælg...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Flet skabelon til PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Flet skabelon',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Forretningsregel',
     'LBL_PMSE_LABEL_RULE' => 'Regel',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Kun opdaterede poster (Alle opdateringer - Se hjælpetekst)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nye registre eller første opdatering',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nye registre og alle opdateringer',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Forandringsforhold',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Vælg, når processen skal starte.<br><br>Ny: Kør processen, når der oprettes et nyt register.<br><br>Første opdatering: Processen kører kun første gang, kriterierne opfyldes for et eksisterende register.<br><br>Alle opdateringer: Processen kører hver gang, kriterierne opfyldes for et eksisterende register.<br><br>Nye registre eller første opdatering: Processen kører kun første gang, kriterierne opfyldes for et register under oprettelse eller opdatering af registeret.<br><br>Nye registre og alle opdateringer: Processen kører hver gang for alle nye og eksisterende registre.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Vælg, hvornår processen skal starte. <br><br> Ny: Kør processen, når der oprettes en ny post. <br><br> Første opdatering: Processen kører kun første gang kriterierne er opfyldt for en eksisterende post. <br><br> Alle opdateringer: Processen køres, hver gang kriterierne er opfyldt for en eksisterende post. <br><br> Nye poster eller første opdatering: Processen kører kun første gang kriterierne er opfyldt for en post under enten oprettelse af poster eller opdatering af poster. <br><br> Nye poster og alle opdateringer: Processen kører hver gang for alle nye og eksisterende poster. <br><br> Relationsændringer: Processen kører hver gang der er en forholdsændring.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Vælg SugarCRM modulet for at anvende hændelses-trigger',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fast dato',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => ' Fejl',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Evaluering af forholdsændring',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Felter',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Modulfelt evaluering',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Alle relaterede poster',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Enhver relateret post',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Tilføjet',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Fjernet',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Tilføjet eller Fjernet',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Ethvert forhold',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Runtime',
 

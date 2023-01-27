@@ -36,7 +36,7 @@ class UsersViewDetail extends ViewDetail {
 
         $errors = "";
         $msgGood = false;
-        if (isset($_SESSION['new_pwd']) && $_SESSION['new_pwd']!= 0){
+        if (isset($_SESSION['new_pwd']) && $_SESSION['new_pwd']) {
             if ($_SESSION['new_pwd']=='4'){
                 require_once('modules/Users/password_utils.php');
                 $errors.=canSendPassword();
@@ -85,7 +85,7 @@ class UsersViewDetail extends ViewDetail {
             }
         }
 
-        $buttons = array_merge($buttons, $this->ss->get_template_vars('BUTTONS_HEADER'));
+        $buttons = array_merge($buttons, $this->ss->getTemplateVars('BUTTONS_HEADER'));
 
         $this->ss->assign('EDITBUTTONS',$buttons);
 

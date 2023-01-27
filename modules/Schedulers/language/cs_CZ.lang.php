@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Zpracovat časově orientované plány',
 'LBL_OOTB_DATA_ARCHIVER' => 'Spustit archivování/vymazání aktivních dat',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geokodér záznamů',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Dekodér geokodéru',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
 'LBL_LIST_LIST_ORDER' => 'Naplánované úlohy:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Nastavení Crontabu',
 'LBL_CRON_LINUX_DESC' => 'Přidejte tuto řádku do Vašeho crontabu:',
 'LBL_CRON_WINDOWS_DESC' => 'Vytvořte dávkový soubor s následujícími příkazy:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>pro curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Log akcí',
 'LBL_EXECUTE_TIME'			=> 'Čas spuštění',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Odstranit dočasné soubory',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Znovu sestavit nenormalizovaná data zabezpečení týmu',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Aktualizujte definici produktu',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Mapy geokodéru',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Dekodér geokodéru',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Spouštět noční hromadné rozesílání e-mailových kampaní',
 'LBL_ASYNCMASSUPDATE' => 'Provést asynchroní hromadnou úpravu',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Vyčistit seznamy starých záznamů',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Nástroj pro vyprázdnění Přehledu aktivit',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Zpracovat časově orientované plány',
+'LBL_SUGARJOBDATAARCHIVER' => 'Spustit archivování/vymazání aktivních dat',
 'LBL_PMSEENGINECRON' => 'Plánovač SugarBPM',
 );
 

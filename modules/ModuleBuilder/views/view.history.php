@@ -56,6 +56,15 @@ class ViewHistory extends SugarView
         if (!empty($_REQUEST['role'])) {
             $params['role'] = $_REQUEST['role'];
         }
+        if (!empty($_REQUEST['layoutOption'])) {
+            $params['layoutOption'] = $_REQUEST['layoutOption'];
+        }
+        if (!empty($_REQUEST['dropdownField'])) {
+            $params['dropdownField'] = $_REQUEST['dropdownField'];
+        }
+        if (!empty($_REQUEST['dropdownValue'])) {
+            $params['dropdownValue'] = $_REQUEST['dropdownValue'];
+        }
         $this->parser = ParserFactory::getParser(
             $this->layout,
             $this->module,

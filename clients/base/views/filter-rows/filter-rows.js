@@ -103,6 +103,12 @@
         this.fieldList = app.data.getBeanClass('Filters').prototype.getFilterableFields(module);
         this.filterFields = {};
 
+        if (!app.user.hasMapsLicense() && _.has(this.fieldList, '$distance')) {
+            const distanceKey = '$distance';
+
+            delete this.fieldList[distanceKey];
+        }
+
         _.each(this.fieldList, function(value, key) {
             this.filterFields[key] = app.lang.get(value.vname, module);
         }, this);
@@ -177,7 +183,10 @@
                 module_name: this.moduleName
             },
             message = app.lang.get('TPL_FILTER_SAVE', this.moduleName, {name: name});
-
+        if (app.controller.context.get('layout') === 'portaltheme-config') {
+            // default is 'base'
+            obj.app = 'portal';
+        }
         this.context.editingFilter.save(obj, {
             success: function(model) {
                 self.context.trigger('filter:add', model);
@@ -507,6 +516,8 @@
                 }
                 value = {};
                 value[operator] = values;
+            } else if (key === '$distance') {
+                value = value ? value : {};
             } else if (!fieldMeta[key] && !isPredefinedFilter) {
                 return;
             }

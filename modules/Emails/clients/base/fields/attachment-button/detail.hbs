@@ -15,4 +15,4 @@ This is a <label> because IE does not allow you to upload an attachment that was
 chosen programatically as a result of a .click() call from a button, but is
 OK with clicking on a label for that file input element.
 --}}
-<label class="btn" for="{{fileInputId}}">{{#if def.icon}}<i class="fa {{def.icon}}"></i>{{/if}}{{str label}}</label>
+<label class="btn" for="{{fileInputId}}">{{#if def.icon}}<i class="{{buildIcon def.icon}}"></i>{{/if}}{{str label}}</label>

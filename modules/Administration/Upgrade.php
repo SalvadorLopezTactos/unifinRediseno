@@ -28,8 +28,18 @@ echo getClassicModuleTitle($mod_strings['LBL_MODULE_NAME'], array($mod_strings['
 <p>
 <table class="other view">
 <tr>
-	<td scope="row"><?php echo SugarThemeRegistry::current()->getImage('Repair','align="absmiddle" border="0"',null,null,'.gif',$mod_strings['LBL_QUICK_REPAIR_AND_REBUILD']); ?>&nbsp;<a href="./index.php?module=Administration&action=repair"><?php echo $mod_strings['LBL_QUICK_REPAIR_AND_REBUILD']; ?></a></td>
-	<td> <?php echo $mod_strings['LBL_QUICK_REPAIR_AND_REBUILD_DESC'] ; ?> </td>
+    <td scope="row"><?php
+        echo SugarThemeRegistry::current()->getImage(
+            'Repair',
+            'align="absmiddle" border="0"',
+            null,
+            null,
+            '.gif',
+            $mod_strings['LBL_QUICK_REPAIR_AND_REBUILD']
+        ); ?>&nbsp;<a href="./index.php?module=Administration&action=repair"
+                      onclick="new quickRepairAndRebuild(event); return false;"
+        ><?php echo $mod_strings['LBL_QUICK_REPAIR_AND_REBUILD']; ?></a></td>
+    <td> <?php echo $mod_strings['LBL_QUICK_REPAIR_AND_REBUILD_DESC'] ; ?> </td>
 </tr>
 <tr>
 	<td scope="row"><?php echo SugarThemeRegistry::current()->getImage('Upgrade','align="absmiddle" border="0"',null,null,'.gif',$mod_strings['LBL_UPGRADE_TEAM_TITLE']); ?>&nbsp;<a href="./index.php?module=Administration&action=upgradeTeams"><?php echo $mod_strings['LBL_UPGRADE_TEAM_TITLE']; ?></a></td>
@@ -86,20 +96,6 @@ if(strpos($server_software,'Microsoft-IIS') === false) {
 </tr>
 <?php } ?>
 <tr>
-    <td scope="row"><?php
-        echo SugarThemeRegistry::current()->getImage(
-            'Repair',
-            'align="absmiddle" border="0"',
-            null,
-            null,
-            '.gif',
-            $mod_strings['LBL_REPAIR_JS_FILES_TITLE']
-        ); ?>&nbsp;<a href="./index.php?module=Administration&action=RepairJSFile&type=repair"><?php
-            echo $mod_strings['LBL_REPAIR_JS_FILES_TITLE']; ?></a>
-    </td>
-    <td> <?php echo $mod_strings['LBL_REPAIR_JS_FILES_DESC_SHORT']; ?> </td>
-</tr>
-<tr>
     <td scope="row"><?php echo SugarThemeRegistry::current()->getImage('Repair','align="absmiddle" border="0"', null,null,'.gif',$mod_strings['LBL_REPAIR_FIELD_CASING_TITLE']); ?>&nbsp;<a href="./index.php?module=Administration&action=RepairFieldCasing&type=repair"><?php echo $mod_strings['LBL_REPAIR_FIELD_CASING_TITLE']; ?></a></td>
     <td> <?php echo $mod_strings['LBL_REPAIR_FIELD_CASING_DESC_SHORT'] ; ?> </td>
 </tr>
@@ -132,3 +128,128 @@ if(strpos($server_software,'Microsoft-IIS') === false) {
     <td> <?php echo $mod_strings['LBL_CLEAR_ADDITIONAL_CACHE_DESC'] ; ?> </td>
 </tr>
 </table></p>
+
+<script>
+    class quickRepairAndRebuild {
+        constructor(e) {
+            e.preventDefault();
+            this.error = false;
+            this.inProgress = false;
+            this.isDone = false;
+            this.progress = 0;
+            this.progressStep = 100;
+
+            this.prepareContentView();
+            this.progressMessage(true);
+            this.startQrr();
+            this.setInstallationProgressCheck(true);
+        }
+
+        startQrr() {
+            let url = 'index.php?module=Administration&action=repair&async=true';
+            let self = this;
+            this.inProgress = true;
+            this.isDone = false;
+            $.ajax({
+                url: url,
+                data: null,
+                success: function(content) {
+                    self.successMessage();
+                },
+                error: function(content) {
+                    self.errorMessage();
+                },
+                complete: function(xhr) {
+                    if (self.error) {
+                        self.appendContent(xhr.responseText);
+                        $("html, body").animate({scrollTop: $(document).height()}, 1000);
+                    }
+                    self.inProgress = false;
+                },
+                cache: false,
+                dataType: 'html',
+            });
+        }
+
+        prepareContentView() {
+            this.contentView = $('<td></td>');
+            $('#contentTable table:first').parent().replaceWith(this.contentView);
+        }
+
+        progressMessage(flag) {
+            if (flag) {
+                let template = app.template.getView('repair-and-rebuild.process', 'Administration');
+                this.progressMessageEl = $('<div></div>');
+                this.progressMessageEl.html(template({id: 'qrr-progress-bar'}));
+                app.$rootEl.find('.alert-top').append(this.progressMessageEl);
+            } else if (this.progressMessageEl) {
+                this.progressMessageEl.remove();
+            }
+        }
+
+        errorMessage(title, messages) {
+            this.progressMessage(false);
+            app.alert.show('qrr_error', {
+                level: 'error',
+                title: title || app.lang.get('ERR_INTERNAL_ERR_MSG'),
+                messages: messages || ['ERR_HTTP_500_TEXT_LINE1', 'ERR_HTTP_500_TEXT_LINE2']
+            });
+        }
+
+        successMessage() {
+            this.progressMessage(false);
+            app.alert.show('qrr_success', {
+                level: 'success',
+                title: app.lang.get('LBL_DONE', 'Administration'),
+                messages: app.lang.get('LBL_QUICK_REPAIR_AND_REBUILD_FINISHED', 'Administration'),
+                autoClose: true,
+            });
+        }
+
+        setInstallationProgressCheck(flag) {
+            if (flag) {
+                this.setInstallationProgressCheck(false);
+                this.installationProgressTimer = setTimeout(this.checkInstallationProgress.bind(this), 1000);
+            } else if (this.installationProgressTimer) {
+                clearTimeout(this.installationProgressTimer);
+            }
+        }
+
+        appendContent(html) {
+            this.contentView.append(html);
+        }
+
+        checkInstallationProgress() {
+            let url = 'index.php?module=Administration&action=repairstatus';
+            let self = this;
+            $.ajax({
+                url: url,
+                data: null,
+                success: function(content) {
+                    self.appendContent(content);
+                },
+                error: function() {
+                    self.error = true;
+                },
+                complete: function() {
+                    let pPart = Math.floor(self.progressStep / 4);
+                    self.progressStep -= pPart;
+                    self.progress += pPart;
+                    self.progressMessageEl.find('.progress .bar').css('width', self.progress + '%');
+                    self.progressMessageEl.find('h5').html(self.progress + '%');
+
+                    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+                    if (self.isDone) {
+                        return;
+                    }
+                    self.setInstallationProgressCheck(true);
+                    if (!self.inProgress) {
+                        self.isDone = true;
+                    }
+                },
+                cache: false,
+                dataType: 'html',
+            });
+        }
+    }
+</script>

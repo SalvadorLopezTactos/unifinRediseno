@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'E-posti aadress:',
     'LBL_EMAIL_ATTACHMENT' => 'E-kirja manus',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'E-kirja manus saajale',
+    'LBL_NOTE_ATTACHMENT' => 'Märkuste manused',
+    'LBL_KB_ATTACHMENT' => 'KBDocumendi manused',
+    'LBL_CASE_ATTACHMENT' => 'Juhtumite manused',
     'LBL_FILE_MIME_TYPE' => 'MIME tüüp',
     'LBL_FILE_EXTENSION' => 'Faililaiend',
     'LBL_FILE_SOURCE' => 'Faili allikas',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Märkuse allikas',
     'LBL_SOURCE_EXTERNAL' => 'Väline',
     'LBL_SOURCE_INTERNAL' => 'Sisemine',
+    'LBL_PORTAL' => 'Portaal',
 
     // Help Text
     // List View Help Text

@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Krijuar nga përdoruesi',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Modifikuar së fundmi nga përdoruesi',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Emaili i sistemit',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Shablloni i dokumentit',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Bashkim i dokumentit',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Zgjidh...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Bashko dokumentin në PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Bashkimi i dokumentit',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Rregulla biznesi',
     'LBL_PMSE_LABEL_RULE' => 'Rregulla',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Vetëm regjistrimet e përditësuara (të gjitha përditësimet - Shikoni tekstin e ndihmës)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Regjistrime të reja ose Përditësimi i parë',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Regjistrime të reja dhe të gjitha përditësimet',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Ndryshimi i marrëdhënies',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Zgjidhni kohën e nisjes së procesit.<br><br>I ri: Ekzekutoni procesin kur krijohet një regjistrim i ri.<br><br>Përditësimi i parë: Procesi ekzekutohet vetëm herën e parë që përmbushen kriteret për një regjistrim ekzistues.<br><br>Të gjitha përditësimet: Procesi ekzekutohet sa herë që përmbushen kriteret për një regjistrim ekzistues.<br><br>Regjistrime të reja ose përditësimi i parë: Procesi ekzekutohet vetëm herën e parë që përmbushen kriteret për një regjistrim, gjatë krijimit të regjistrimit ose gjatë përditësimit të regjistrimit.<br><br>Regjistrime të reja dhe të gjitha përditësimet: Procesi ekzekutohet çdo herë për të gjitha regjistrimet e reja dhe ekzistuese.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Zgjidh se kur do të fillojë procesi.<br><br>E re: Ekzekuto procesin kur krijohet një regjistrim i ri.<br><br>Përditësimi i parë: Procesi ekzekutohet vetëm herën e parë që përmbushen kriteret për një regjistrim ekzistues.<br><br>Të gjitha përditësimet: Procesi ekzekutohet çdo herë që përmbushen kriteret për një regjistrim ekzistues.<br><br>Regjistrime të reja ose përditësimi i parë: Procesi ekzekutohet vetëm herën e parë që përmbushen kriteret për një regjistrim, gjatë krijimit të regjistrimit ose gjatë përditësimit të regjistrimit.<br><br>Regjistrime të reja ose përditësime të reja: Procesi ekzekutohet çdo herë që përmbushen kriteret për të gjitha regjistrimet e reja dhe ekzistuese.<br><br>Ndryshimet e marrëdhënies: Procesi ekzekutohet çdo herë që ka një ndryshim në marrëdhënie.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Selekto SugarCRM modulin për të aplikuar këmbën e ngjarjes',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Datë e fiksuar',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Gabim',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Vlerësimi i ndryshimit të marrëdhënies',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Fushet',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Evaluimi i fushës së modulit',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Moduli',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Të gjitha regjistrimet e përafërta',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Çdo regjistrim i përafërt',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'U shtua',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'U hoq',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'U shtua ose u hoq',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Çfarëdo marrëdhënie',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Koha e ekzekutimit',
 

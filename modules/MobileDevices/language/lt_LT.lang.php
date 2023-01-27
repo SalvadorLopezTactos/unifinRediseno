@@ -14,5 +14,5 @@ $mod_strings = [
     'LBL_MODULE_NAME' => 'Mobilieji prietaisai',
     'LBL_MODULE_NAME_SINGULAR' => 'Mobilusis prietaisas',
     'LBL_DEVICE_ID' => 'Prietaiso ID',
-    'LBL_DEVICE_PLATFORM' => 'Platforma',
+    'LBL_DEVICE_PLATFORM' => 'Įrenginio platforma',
 ];

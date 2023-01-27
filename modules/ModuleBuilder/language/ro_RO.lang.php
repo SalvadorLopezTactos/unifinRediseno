@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Ștergere' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Creat de SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Rol',
+    'LBL_BASE_LAYOUT' => 'Aspect de bază',
+    'LBL_FIELD_NAME' => 'Nume câmp',
+    'LBL_FIELD_VALUE' => 'Valoare',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Aspect determinat de:',
+    'layoutDeterminedBy' => [
+        'std' => 'Aspect standard',
+        'role' => 'Rol',
+        'dropdown' => 'Câmp listă verticală',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Toate aspectele personalizate vor fi eliminate. Sigur doriți să modificați definițiile aspectului actual?',
 'help'=>array(
     'package'=>array(
             'create'=>'Furnizaţi un Nume pentru pachetul. Numele pe care îl introduceţi trebuie să fie alfanumeric şi nu conţina spaţii. (Exemplu: HR_Management)<br /><br />Puteţi furniza informaţii Autor şi Descriere pentru pachet.<br /><br />Faceţi clic pe Salvare pentru a crea pachet.',
@@ -456,8 +466,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Vizibilitate Editor',
 'LBL_ROLLUP' => 'Ruleaza in sus',
 'LBL_RELATED_FIELD' => 'legate de Câmp',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL-ul imaginii mărcii personalizate. Dimensiunile recomandate ale mărcii sunt 22 x 22 pixeli. Orice imagine încărcată care este mai mare în ambele direcții va fi scalată la aceste dimensiuni maxime.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL-ul imaginii logoului personalizat. Lățimea recomandată a logoului este de 200 pixeli. Orice imagine încărcată care este mai mare în ambele direcții va fi scalată la aceste dimensiuni maxime. Acest logo va fi utilizat pe ecranul de conectare. Dacă nu este încărcată nicio imagine, se va utiliza marca.',
 'LBL_PORTAL_ROLE_DESC' => 'Nu șterge acest rol. Clienți Self-Service Rolul Portal este un rol de sistem generat ,creat în timpul procesului de activare Sugar Portal. Utilizați controale de acces în acest rol, pentru a permite și / sau dezactiva Bugs, carcase sau module bazei de cunoștințe în Portal de zahăr. Să nu modifice orice alte controale de acces pentru acest rol, pentru a evita comportamentul sistemului necunoscute și imprevizibile. În caz de ștergerea accidentală a acestui rol, recreate dezactivarea și activarea Sugar Portal',
 
 //RELATIONSHIPS
@@ -580,6 +588,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Adauga Relatie',
 'LBL_BTN_RENAME_MODULE' => 'Schimba numele modulului',
 'LBL_BTN_INSERT'=>'Introdu',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Restaurare aspect de bază',
 //TABS
 
 //ERRORS
@@ -590,6 +599,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'A aparut o eroare',
 'ERROR_REQUIRED_FIELDS' => 'Sigur vreti sa continuati? Urmatoarele domenii necesare lipsesc din structura:',
 'ERROR_ARE_YOU_SURE' => 'Sunteti sigur ca doriti sa continuati?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Câmpul nu poate fi creat. Ați atins limita de dimensiune a rândului acestui tabel în baza de date. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Aflați mai multe</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Urmatoarele campuri au valori calculate care nu vor fi recalculate in timp real in cadrul Vizualizarii Sugar CRM Editare Mobila:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Urmatoarele campuri au valori calculate care nu vor fi recalculate in timp real in cadrul Vizualizarii Sugar CRM Editare Mobila:',
@@ -599,16 +609,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Dacă doriți să le activați în portal, vă rugăm să  le activați  aici.',
     'LBL_PORTAL_CONFIGURE' => 'Configurare Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Activare portal',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Activare căutare înainte de deschiderea unui caz',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Activați note pe modulul Bază de cunoștințe',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Permiteți utilizatorilor portalului să închidă cazul',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Permiteți utilizatorilor noi să se înregistreze',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Permisiuni utilizator',
     'LBL_PORTAL_THEME' => 'Tema Portal',
     'LBL_PORTAL_ENABLE' => 'Activeaza',
     'LBL_PORTAL_SITE_URL' => 'Portalul este disponibil la adresa:',
     'LBL_PORTAL_APP_NAME' => 'Nume aplicaţie',
-    'LBL_PORTAL_LOGOMARK_URL' => 'URL marcă',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Previzualizare marcă',
-    'LBL_PORTAL_LOGO_URL' => 'URL siglă',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Previzualizare logo',
     'LBL_PORTAL_CONTACT_PHONE' => 'Telefon',
     'LBL_PORTAL_CONTACT_EMAIL' => 'E-mail',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Trebuie să introduceți o adresă de e-mail validă',
@@ -624,6 +632,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Glisați și fixați numele modulelor portalului pentru a le seta să fie afișate sau să fie ascunse în bara de navigare din partea de sus a portalului. Pentru a controla accesul utilizatorului portalului la module, utilizați Managementul rolurilor <a href="?module=ACLRoles&action=index">.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Module afișate',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Module ascunse',
+    'LBL_CONFIG_VISIBILITY' => 'Vizibilitate',
+    'LBL_CASE_VISIBILITY_HELP' => 'Definiți ce utilizatori de portal pot vedea un caz.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Definiți ce utilizatori ai portalului pot vedea e-mailuri legate de un caz. Contactele participante sunt cele din câmpurile Către, De la, CC și BCC.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Definiți ce utilizatori ai portalului pot vedea mesaje legate de un caz. Contactele participante sunt cele din câmpul Invitați.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Toate contactele legate de cont',
+        'related_contacts' => 'Numai contactul principal și contactele legate de caz',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Numai contactele participante',
+        'all' => 'Toate contactele care pot vedea cazul',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Numai contactele participante',
+        'all' => 'Toate contactele care pot vedea cazul',
+    ],
+
 
 'LBL_PORTAL'=>'Portal',
 'LBL_PORTAL_LAYOUTS'=>'Intrare Aspecte',
@@ -796,11 +821,11 @@ $mod_strings = array(
     . "Câmpurile obligatorii vor respecta formula din vizualizare mobilă bazată pe browser, <br/>"
     . "însă nu vor respecta formula din aplicațiile native, precum Sugar Mobile pentru iPhone. <br/>"
     . "Acestea nu vor respecta formula din Portalul de autoservire Sugar.",
-'LBL_POPHELP_READONLY'=>"Creați o formulă pentru a determina dacă acest câmp este disponibil doar în modul citire în machete.<br/>"
-        . "Câmpurile în modul citire vor respecta formula din vizualizarea mobilă bazată pe browser, <br/>"
-        . "dar nu va respecta formula din aplicațiile native, cum ar fi Sugar Mobile pentru iPhone.<br/>"
+'LBL_POPHELP_READONLY'=>"Creați o formulă pentru a determina dacă acest câmp este numai în citire în machete.<br/>"
+        . "Câmpurile numai în citire vor respecta formula din vizualizare mobilă bazată pe browser, <br/>"
+        . "însă nu vor respecta formula din aplicațiile native, precum Sugar Mobile pentru iPhone. <br/>"
         . "Acestea nu vor respecta formula din Portalul de autoservire Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Selectați acest câmp atunci când cautați înregistrări folosind căutarea globală din acest modul.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Selectați să utilizați acest câmp atunci când căutați înregistrări folosind Căutarea globală din acest modul.',
 //Revert Module labels
 'LBL_RESET' => 'Reseteaza',
 'LBL_RESET_MODULE' => 'Reseteaza Modulul',
@@ -836,6 +861,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Datatimp',
                 'decimal'=>'Zecimal',
                 'autoincrement' => 'Autoincrementare',
+                'actionbutton' => 'Buton acțiune',
 ),
 'labelTypes' => array(
     "" => "Format Implicit e-mail",
@@ -854,4 +880,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (relaţionat {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copiere din plan general',
 'LBL_RELATIONSHIP_TYPE' => 'Relație',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Limbajul de comparație',
+'LBL_LABEL_NOT_TRANSLATED' => 'Este posibil ca această etichetă să nu fie tradusă',
 );

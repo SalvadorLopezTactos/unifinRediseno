@@ -254,26 +254,30 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
 
         //For preview/recorddashlet, if there is no preview.php/recorddashlet.php under MB_BASEMETADATALOCATION, the original defs is record view defs.
         if ($view === MB_PREVIEWVIEW || $view === MB_RECORDDASHLETVIEW) {
+            $layout = null;
             $sourceFilename = $this->getFileName($view, $moduleName, MB_BASEMETADATALOCATION, $client);
-            if (file_exists($sourceFilename)) {
-                $layout = $this->_loadFromFile($sourceFilename);
-            }
+            $layout = $this->_loadFromFile($sourceFilename);
+
             if (null === $layout) {
                 $sourceFilename = $this->getFileName(MB_RECORDVIEW, $moduleName, MB_CUSTOMMETADATALOCATION, $client);
                 $layout = $this->_loadFromFile($sourceFilename);
-                $layout = $this->getDefsFromRecord($layout, $viewName, $client);
+                if ($layout !== null) {
+                    $layout = $this->getDefsFromRecord($layout, $viewName, $client);
+                }
             }
             if (null === $layout) {
                 $sourceFilename = $this->getFileName(MB_RECORDVIEW, $moduleName, MB_BASEMETADATALOCATION, $client);
                 $layout = $this->_loadFromFile($sourceFilename);
-                $layout = $this->getDefsFromRecord($layout, $viewName, $client);
+                if ($layout !== null) {
+                    $layout = $this->getDefsFromRecord($layout, $viewName, $client);
+                }
             }
             if (null === $layout) {
                 $sourceFilename = $this->getFileName($view, $moduleName, MB_CUSTOMMETADATALOCATION, $client);
                 $layout = $this->_loadFromFile($sourceFilename);
             }
             if (null !== $layout) {
-                $this->_originalViewdefs = $layout ;
+                $this->_originalViewdefs = $layout;
             }
         }
 
@@ -460,7 +464,32 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
         }
         $filename = $this->getFileNameNoDefault($this->_view, $this->_moduleName, MB_CUSTOMMETADATALOCATION);
 		$GLOBALS['log']->debug(get_class($this) . "->deploy(): writing to " . $filename);
+
+        // Delete any unnecessary role- or dropdown-based layout files
+        $this->cleanDependentLayoutMetadataFiles($this->params);
+
 		$this->_saveToFile($filename, $defs);
+
+        if ($this->_view === 'recordview') {
+            // View(s) to be synced up with record view's metadata in the same module
+            $updateViews = [
+                'ProductTemplates' => [
+                    'copyToView' => 'product-catalog-dashlet-drawer-record',
+                    'copyFromViewDefs' => $defs,
+                ],
+            ];
+            foreach ($updateViews as $moduleName => $copy) {
+                if ($moduleName === $this->_moduleName &&
+                    !empty($copy['copyToView']) &&
+                    !empty($copy['copyFromViewDefs'])) {
+                    $this->updatePanelsFromRecordLayout(
+                        $moduleName,
+                        $copy['copyToView'],
+                        $copy['copyFromViewDefs']
+                    );
+                }
+            }
+        }
 
 		// now clear the cache so that the results are immediately visible
         MetaDataFiles::clearModuleClientCache($this->_moduleName, 'view');
@@ -469,6 +498,88 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
 		include_once ('include/TemplateHandler/TemplateHandler.php') ;
 		TemplateHandler::clearCache($this->_moduleName);
 	}
+
+    /**
+     * Based on the layout dependency type specified in parameters, deletes any
+     * unnecessary files/folders related to dependent layouts
+     *
+     * @param array $params metadata parameters
+     */
+    protected function cleanDependentLayoutMetadataFiles($params)
+    {
+        // Get the top level directory for the custom layout metadata
+        $layoutsDir = MetaDataFiles::getCustomLayoutMetadataFolderPath(
+            $this->_moduleName,
+            $this->_viewClient,
+            $this->_viewType
+        );
+        if (!is_dir($layoutsDir)) {
+            return;
+        }
+
+        // Depending on what type of dependency the layout is using,
+        // remove any unnecessary dependency layout files
+        $type = $params['layoutOption'] ?? null;
+        if ($type === 'std') {
+            // Remove both roles and dropdowns directories
+            $this->deleteFolder($layoutsDir . 'roles');
+            $this->deleteFolder($layoutsDir . 'dropdowns');
+        } elseif ($type === 'role') {
+            // Remove the dropdowns directory
+            $this->deleteFolder($layoutsDir . 'dropdowns');
+        } elseif ($type === 'dropdown') {
+            // Remove the roles directory
+            $this->deleteFolder($layoutsDir . 'roles');
+
+            // Remove any dropdown-based views that are based on
+            // any dropdown fields other than the currently selected one
+            $dropdownsFolderPath = $layoutsDir . 'dropdowns/';
+            $keepFolderPath = $dropdownsFolderPath . $params['dropdownField'];
+            $subfolders = glob($dropdownsFolderPath . '*');
+            foreach ($subfolders as $subfolder) {
+                if ($subfolder !== $keepFolderPath) {
+                    $this->deleteFolder($subfolder);
+                }
+            }
+        }
+    }
+
+    /**
+     * Safely attempts to delete a folder at the given path
+     *
+     * @param string $path the path of the folder to delete
+     */
+    private function deleteFolder($path)
+    {
+        if (is_dir($path)) {
+            rmdir_recursive($path);
+        }
+    }
+
+    /**
+     * Updates a view's layout panels with recordview's layout panels of the same module
+     *
+     * @param string $module
+     * @param string $viewToUpdate
+     * @param array $recordViewDefs
+     */
+    protected function updatePanelsFromRecordLayout(string $module, string $viewToUpdate, array $recordViewDefs)
+    {
+        $fileToUpdate = [
+            $module => 'modules/' . $module . '/clients/base/views/' . $viewToUpdate . '/' . $viewToUpdate . '.php',
+        ];
+
+        if (isset($fileToUpdate[$module]) && file_exists($fileToUpdate[$module])) {
+            $newViewDefs = $this->_loadFromFile($fileToUpdate[$module]);
+            if ($newViewDefs && !empty($newViewDefs['base']['view'][$viewToUpdate])) {
+                $newViewDefs['base']['view'][$viewToUpdate]['panels'] =
+                    $recordViewDefs['base']['view']['record']['panels'];
+                // Overrides the default view by writing to custom directory
+                $targetFilename = 'custom/' . $fileToUpdate[$module];
+                $this->_saveToFile($targetFilename, $newViewDefs);
+            }
+        }
+    }
 
     /**
      * Construct a full pathname for the requested metadata. If the file which matches additional metadata parameters

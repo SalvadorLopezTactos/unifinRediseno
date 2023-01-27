@@ -4,30 +4,25 @@
   .btn {
     background-image: none;
     background-color: transparent;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     box-shadow: none;
+    max-height: 1.875rem;
   }
 
   .omni-circle {
-    height: 11px;
-    width: 11px;
     background-color: transparent;
-    border-radius: 50%;
     border: 0;
-    display: inline-block;
     vertical-align: text-bottom;
   }
 
   .omni-label {
-    color: @black;
-    font-family: Open Sans;
-    font-size: 11px;
+    color: @textColor;
     font-weight: 600;
   }
 
   .logged-out {
     .omni-circle {
-      border: 1px solid @slate;
+      border: @borderWidget;
     }
   }
 
@@ -38,15 +33,16 @@
   }
 
   .active-session {
-    background-color: @rock;
-    border: 2px solid @grayMid;
+    background-color: @alertConfirmationBackground;
+    border: 2px solid @borderColor;
+    max-height: 1.875rem;
 
     .omni-circle {
       background-color: @army;
     }
 
     .omni-label {
-      color: @white;
+      color: @labelColor;
     }
 
     .bg-pulse(@bgColor, @borderColor, @animation) {
@@ -57,31 +53,31 @@
 
     @keyframes message-pulse {
       0% {
-        .bg-pulse(@rock, @grayMid, ease-in-out);
+        .bg-pulse(@gray95, @gray40, ease-in-out);
       }
 
       13% {
-        .bg-pulse(@lime, @darkGreen, ease-in-out);
+        .bg-pulse(@green, @darkGreen, ease-in-out);
       }
 
       26% {
-        .bg-pulse(@rock, @grayMid, ease-in);
+        .bg-pulse(@gray95, @gray40, ease-in);
       }
 
       35% {
-        .bg-pulse(@lime, @darkGreen, ease-in);
+        .bg-pulse(@green, @darkGreen, ease-in);
       }
 
       44% {
-        .bg-pulse(@rock, @grayMid, ease-in);
+        .bg-pulse(@gray95, @gray40, ease-in);
       }
 
       53% {
-        .bg-pulse(@lime, @darkGreen, ease-in);
+        .bg-pulse(@green, @darkGreen, ease-in);
       }
 
       62% {
-        .bg-pulse(@rock, @grayMid, ease-in-out);
+        .bg-pulse(@gray95, @gray40, ease-in-out);
       }
     }
 
@@ -97,9 +93,9 @@
     position: relative;
     height: 26px;
 
-    .fa {
+    .sicon {
       display: none;
-      color: @gray70;
+      color: @sicon-color;
       cursor: pointer;
       width: 15px;
       text-align: center;
@@ -107,27 +103,27 @@
       outline: none;
 
       &:hover {
-        color: @gray90;
+        color: @sicon-hover-color;
       }
     }
 
     .option-layout-open {
       display: none;
-      background: white;
-      border: 1px solid @blue;
+      background: @dropdownBackground;
+      border: @borderWidget;
       border-radius: 3px;
-      box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
-      color: @grayLight;
+      box-shadow: @shadowWidget;
+      color: @textColor;
       font-size: 12px;
       line-height: 33px;
       padding: 0 17px;
       position: relative;
-      left: -6px;
+      left: 6px;
       top: -64px;
 
       &:hover {
-        background: @blue;
-        color: white;
+        background: @dropdownLinkBackgroundHover;
+        color: @textColorHover;
         cursor: pointer;
       }
     }
@@ -135,7 +131,7 @@
     .option-layout-finish {
       display: none;
       background: @blue;
-      color: white;
+      color: @textColor;
       cursor: pointer;
       font-size: 12px;
       line-height: 33px;
@@ -148,7 +144,7 @@
 
     &[data-mode=init],
     &[data-mode=popup] {
-      .fa.toggle {
+      .sicon.toggle {
         display: block;
       }
     }
@@ -160,9 +156,9 @@
     }
 
     &[data-mode=disabled] {
-      .fa.disabled {
+      .sicon.disabled {
         display: block;
-        color: @grayLightish;
+        color: @gray60;
       }
     }
 
@@ -177,19 +173,19 @@
   width: @amazonCcpWidth;
 
   .omni-detail-wrapper {
-    border: solid 1px @grayMid;
+    border: @borderWidget;
     border-radius: 3px;
     position: relative;
   }
 
   .omni-detail-content {
     display: flex;
-    background: @white;
+    background: @primaryContentBackground;
     box-sizing: border-box;
     padding: 7px;
 
     &:not(:last-child) {
-      border-bottom: solid 1px @grayMid;
+      border-bottom: @borderWidget;
     }
 
     textarea {
@@ -203,25 +199,27 @@
     }
 
     .omni-label {
-      color: @grayLight;
+      color: @labelColor;
     }
 
     input,
     textarea {
-      border: solid 1px @grayMid;
+      border: @borderWidget;
       box-shadow: none;
       box-sizing: border-box;
       width: 100%;
       resize: none;
+      min-height: 28px;
     }
   }
 
   .omni-summary-cell {
     flex: 1;
+    min-width: 0;
   }
 
   .omni-detail-title {
-    background: @grayActive;
+    background: @secondaryContentBackground;
     border-radius: 3px 3px 0 0;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -289,8 +287,8 @@
       background: @transparent;
     }
 
-    .fa {
-      display: none !important;
+    .sicon {
+      visibility: hidden;
     }
   }
 
@@ -353,7 +351,7 @@
   }
 
   > p {
-    color: lighten(@grayLight, 10%);
+    color: @sicon-color;
   }
 }
 
@@ -373,14 +371,18 @@
 }
 
 .omni-console {
-  position: absolute;
-  background-color: @grayLighter;
+  position: fixed;
+  top: 45px;
+  bottom: 1.875rem;
+  left: -320px;
+  width: 320px;
+  background-color: @contentBackground;
   border-top-left-radius: @baseBorderRadius;
   border-top-right-radius: @baseBorderRadius;
-  border-top: 1px solid fade(@black, 10%);
-  border-right: 1px solid fade(@black, 10%);
-  margin: 2px 2px 0 3px;
+  border-top: 1px solid @borderColorFocus;
+  border-right: 1px solid @borderColorFocus;
   z-index: @zindexHeaderpane + 1;
+  transition: 0.8s ease-in-out;
 
   .omni-header {
     position: absolute;
@@ -389,8 +391,8 @@
     top: 0;
     height: 20px;
     padding: 4px 8px;
-    border-bottom: 1px solid fade(@black, 10%);
-    border-left: 1px solid fade(@black, 10%);
+    border-bottom: @borderWidget;
+    border-left: @borderWidget;
 
     h4 {
       padding: 0;
@@ -399,20 +401,23 @@
 
     .btn {
       padding: 0;
+      line-height: 12px;
+
+      .icon {
+        vertical-align: middle;
+      }
     }
   }
 
   .omni-detail {
-    display: none;
     position: absolute;
     left: 0;
-    top: 33px;
+    top: 28px;
     max-height: 40%;
     overflow-y: auto;
   }
 
   .omni-ccp {
-    border-left: solid 1px @grayMid;
     position: absolute;
     left: 0;
     top: 28px;
@@ -421,8 +426,9 @@
     margin-top: 10px;
 
     #containerDiv {
-      background-color: @gray;
-      width: 100%;
+      background-color: @gray80;
+      border: solid 1px @gray40;
+      border-radius: 3px;
       height: 100%;
 
       iframe {
@@ -449,68 +455,55 @@
   .omni-dashboard {
     position: absolute;
     left: 320px;
-    top: 28px;
+    top: 29px;
     right: 0;
     bottom: 0;
     box-sizing: border-box;
-
-    .link-to {
-      background: @blue;
-      color: @white;
-
-      .fa {
-        color: @white;
-      }
-    }
 
     .extended-fab {
       z-index: 2;
     }
 
-    .linked {
-      background: @grayLightish;
-      color: @gray;
+    .nav-tabs {
+      li.tab.tab-badgeable {
+        a .label {
+          .inline-flex();
+        }
 
-      .fab-container {
-        cursor: none;
+        &.disabled {
+          .tab-title {
+            color: @textColor;
+          }
 
-        .fa {
-          color: @gray;
+          .label {
+            border: none;
+            color: @labelColor;
+            background-color: @contentBackground;
+          }
+
+          a {
+            border-right: none;
+            border-top: none;
+
+            // Nuke hover effects
+            &:hover {
+              text-decoration: none;
+              color: @placeholderText;
+              background-color: @tabBackgroundInactive;
+              border-top-color: @tabBackgroundInactive;
+              border-bottom-color: @tabBackgroundInactive;
+            }
+
+            .label-module {
+              cursor: default;
+            }
+          }
         }
       }
     }
 
-    .nav-tabs {
-      li.tab.tab-badgeable.disabled {
-        .tab-title {
-          color: @grayMid;
-        }
-
-        .label {
-          border: none;
-          color: @grayMid;
-          background-color: @grayLighter;
-        }
-
-        a {
-          line-height: inherit;
-          border-right: none;
-          border-top: none;
-
-          // Nuke hover effects
-          &:hover {
-            text-decoration: none;
-            color: @grayMid;
-            background-color: @tabBackgroundInactive;
-            border-top-color: @tabBackgroundInactive;
-            border-bottom-color: @tabBackgroundInactive;
-          }
-
-          .label-module {
-            cursor: default;
-          }
-        }
-      }
+    .tabbable {
+      overflow: hidden;
     }
   }
 }
@@ -549,6 +542,286 @@
   .omni-detail {
     .omni-cell {
       pointer-events: none;
+    }
+  }
+
+  // fixing the freakin disabled search tab in freakin config
+  &.omni-console .omni-dashboard li.tab.tab-badgeable.disabled a {
+    line-height: 28px;
+    padding: 7px 8px 0;
+
+    .sicon {
+      color: @sicon-color;
+      margin-top: -2px;
+    }
+
+    .tab-title {
+      color: @labelColor;
+    }
+  }
+}
+
+/*
+ * Record link button
+ */
+.omni-record-link {
+  display: inline-block;
+
+  &.hide {
+    display: none;
+  }
+
+  .btn-group-sugarlive-link {
+    .btn {
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+
+      i.sicon {
+        margin: 0 auto;
+      }
+
+      &.unlinked {
+        background-color: @PrimaryButton;
+
+        i.sicon {
+          color: @white;
+        }
+
+        &:hover {
+          background-color: @btnPrimaryActiveBackground;
+        }
+      }
+
+      &.linked,
+      &.linked:hover {
+        background: @gray60;
+
+        i.sicon {
+          color: @gray70;
+        }
+      }
+    }
+  }
+
+  .dashlet-header & {
+    .btn-group-sugarlive-link {
+      .btn {
+        margin: 0 5px;
+      }
+    }
+  }
+}
+
+.omnichannel-search {
+  height: 100%;
+  width: 100%;
+
+  .omnichannel-search-backdrop {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: (@zindexFixedNavbar - 2);
+    background-color: @gray70;
+    border-top: 4px solid @gray60;
+    opacity: 0.5;
+    cursor: default;
+    .user-select(none);
+  }
+
+  .omnichannel-search-list.omnichannel-search-backdrop {
+    .omnibar-search {
+      .omnichannel-search-headerpane-wrapper {
+        .omni-headerpane {
+          background-color: @headerpaneBackground;
+        }
+      }
+    }
+  }
+
+  .omnichannel-search-list {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+
+    .omnichannel-search-filter-wrapper {
+      height: 100%;
+      width: 66%;
+      background: @contentBackground;
+      border-color: @borderColor;
+      border-top: @borderWidget;
+      border-width: 1px 0 0 1px;
+
+      .omnichannel-search-facet-list {
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        .omnichannel-search-facet-list-item {
+          margin: 10px 0 10px 28px;
+
+          .omnichannel-search-facet-label {
+            margin-left: 10px;
+          }
+        }
+      }
+
+      .divider {
+        height: 1px;
+        background: @gray70;
+        width: 90%;
+        margin: auto;
+      }
+    }
+
+    .omnibar-search {
+      background-color: @primaryContentBackground;
+      border-right: @borderWidget;
+      height: 100%;
+
+      &.loading {
+        background-color: @primaryContentActive;
+      }
+
+      .omnichannel-search-headerpane-wrapper {
+        max-width: 100%;
+
+        .omni-headerpane {
+          position: relative;
+          z-index: 999;
+          min-height: 3.125rem;
+          height: 3.125rem;
+          background-color: @contentBackground;
+          border-top: @borderWidget;
+          border-bottom: @borderWidget;
+          box-sizing: border-box;
+          padding: 0 0 0 12px;
+
+          h1 {
+            > .record-cell {
+              &:first-child {
+                width: 100%;
+                max-width: 700px;
+                font-size: 18px;
+
+                .omni-headerpane-term {
+                  display: flex;
+                  flex-direction: row;
+
+                  .omni-search-header {
+                    padding: 5px 0 0;
+                    white-space: nowrap;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .omnichannel-search-list-wrapper {
+        position: relative;
+
+        li.search-result {
+          cursor: pointer;
+          overflow-wrap: anywhere;
+
+          a.rowaction {
+            float: right;
+            position: absolute;
+            right: 14px;
+            top: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  .typeahead-wrapper {
+    .dropdown-menu {
+      top: -30px;
+      width: 600px;
+      left: 50px;
+      position: relative;
+
+      li.search-result {
+        padding: 0;
+      }
+
+      li.no-results {
+        padding: 0 0 0 10px;
+      }
+    }
+  }
+
+  .navbar-search {
+    max-width: 600px;
+    float: none;
+    margin: 30px 0 30px 50px;
+    white-space: nowrap;
+    background: @white;
+    border: @borderWidget;
+
+    .omnichannel-search-modulelist-wrapper {
+      width: 30px;
+      cursor: pointer;
+      padding: 0 0 0 10px;
+      z-index: @zindexFixedNavbar;
+      background: @primaryContentBackground;
+
+      .menu-item {
+        padding: 8px 10px;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        &:focus,
+        &:hover {
+          text-decoration: none;
+          filter: none;
+        }
+
+        .sicon.sicon-check {
+          color: @gray70;
+          visibility: hidden;
+          font-size: 15px;
+          margin-right: 10px;
+        }
+
+        &.selected {
+          font-weight: bold;
+
+          .sicon.sicon-check {
+            visibility: visible;
+          }
+        }
+      }
+    }
+
+    .omnichannel-search-bar-wrapper {
+      background: @primaryContentBackground;
+    }
+
+    .omnichannel-search-button-wrapper {
+      background: @primaryContentBackground;
+      width: 30px;
+    }
+  }
+}
+
+// Dark mode specific styles
+body.sugar-dark-theme {
+  .omni-console {
+    .omni-ccp {
+      .ccp-placeholder {
+        filter: invert(101%) saturate(0%) brightness(3) grayscale(1);
+      }
     }
   }
 }

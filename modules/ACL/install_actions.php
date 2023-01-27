@@ -75,11 +75,11 @@ $role_id = $GLOBALS['db']->fetchOne("SELECT id FROM acl_roles where name = 'Trac
     if (!empty($role_id['id'])) {
         $role_id = $role_id['id'];
         $role1->retrieve($role_id);
-        $count = $GLOBALS['db']->getConnection()
+        $count = DBManagerFactory::getConnection()
             ->executeQuery(
                 'SELECT count(role_id) as count FROM acl_roles_actions where role_id = ?',
                 [$role_id]
-            )->fetchColumn();
+            )->fetchOne();
         // If there are no corresponding entries in acl_roles_actions, then we need to add it
         if (empty($count)) {
             $missingAclRolesActions = true;

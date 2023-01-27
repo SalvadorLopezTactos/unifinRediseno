@@ -15,8 +15,11 @@
         <thead>
         <tr>
             {{#each fields}}
-                <th {{#if this.width}}width="{{this.width}}" {{/if}}class="{{#isSortable ../../module this}}sorting{{#eq ../../../orderBy.field name}}_{{{../../../../orderBy.direction}}}{{/eq}} orderBy{{name}}{{/isSortable}}"
-                    {{#if name}} data-fieldname="{{name}}"{{/if}} data-orderby="{{orderBy}}">
+                <th
+                    {{#if this.width}}width="{{this.width}}"{{/if}}
+                    class="{{#if this.widthClass}}{{this.widthClass}}{{/if}} {{#isSortable ../../module this}}sorting{{#eq ../../../orderBy.field name}}_{{{../../../../orderBy.direction}}}{{/eq}} orderBy{{name}}{{/isSortable}}"
+                    {{#if name}} data-fieldname="{{name}}"{{/if}}
+                    data-orderby="{{orderBy}}">
                     <span>
                         {{str label ../../module}}
                     </span>

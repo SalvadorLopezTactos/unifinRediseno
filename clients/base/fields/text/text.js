@@ -17,13 +17,11 @@
     /**
      * @inheritdoc
      */
-    initialize: function(options) {
-        this._super('initialize', [options]);
-        this._initDefaultValue();
-    },
+    shouldInitDefaultValue: true,
 
     /**
-     * Set default value
+     * @inheritdoc
+     * @override
      */
     _initDefaultValue: function() {
         if (!this.model.isNew() || this.model.get(this.name) || !this.def.default) {

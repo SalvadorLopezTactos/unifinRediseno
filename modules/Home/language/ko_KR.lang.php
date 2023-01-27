@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugar Dashlet  추가되었습니다.',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => '대쉬릿이 다시 배열됩니다. 레이아웃 배치를 변경하시겠습니까?',
   'LBL_REMOVE_DASHLET_CONFIRM' => '대쉬릿을 제거하시겠습니까?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => '구성된 대시보드 없음',
   'LBL_NO_DASHLETS_CONFIGURED' => '구성된 대쉬릿 없음',
-  'LBL_CREATE_DASHBOARD_LINK' => '대시보드 만들기',
 
   'LBL_DASHLET_WEBPAGE_NAME' => '웹 페이지',
   'LBL_DASHLET_WEBPAGE_DESC' => '웹 페이지',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => '소스 코드',
   'LBL_SOURCE_SUGAR' => 'Sugar-SugarCRM Inc에 의해 개발된 세계 최고의 영업자동화 어플리케이션',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - Barnabás Debreceni에 의해 개발된 PHP를 위한 템플릿 엔진',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - NuSphere Corporation 과 Dietrich Ayala에 의해 개발된 개발자가 만들고 소비하는 웹서비스를 허용하는 PHP 종류 세트',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Mihai Bazon에 의해 개발된 날짜 입력식의 달력',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Wayne Munro에 의해 개발된 PDF 문서 제조를 위한 자료실',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_서버- PHP에서의 WebDAV 서버 실행',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => '도움말을 통해 현재 보고 있는 모듈에 대한 구체적인 정보를 확인하고, 모듈의 일부 작업 수행에 필요한 자세한 단계를 볼 수 있으며, 더 포괄적인 정보와 지원을 구할 수 있습니다.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => '필터',
+
+    'LBL_ABOUT_VERSION' => '다음 라이선스로 {{version}} 버전을 사용 중:',
 );

@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Bu modülde denetlenmiş alanlar:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Bu modülde değişiklik tarihçesi alanı bulunmamaktadır',
     'LBL_CHANGE_LOG' => 'Değişiklik Tarihçesi Günlüğü',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Denetlenen para birimi alanları, bir sistem dışı varsayılan para birimi cinsinden kaydedilir ve değişiklik günlüğü eski ve yeni değerleri dönüştürülen sistem tanımlı varsayılan para birimi cinsinden görüntüler.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Denetlenen para birimi alanları, bir sistem dışı varsayılan para birimi cinsinden kaydedilir ve değişiklik günlüğü eski ve yeni değerleri dönüştürülen sistem tanımlı varsayılan para birimi cinsinden görüntüler.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Şuna güncelle:',
+    'LBL_BLANK' => '-boşluk-',
 );

@@ -113,6 +113,8 @@ $chart_types = array(
 	'pieF'=>$mod_strings['LBL_PIE'],
 	'funnelF'=>$mod_strings['LBL_FUNNEL'],
 	'lineF'=>$mod_strings['LBL_LINE'],
+    'donutF' => $mod_strings['LBL_DONUT'],
+    'treemapF' => $mod_strings['LBL_TREEMAP'],
 );
 
 //$chart_description = htmlentities($reporter->chart_description, ENT_QUOTES, 'UTF-8');
@@ -244,7 +246,7 @@ else if ($saveReport !== null && ($saveReport == 'on')) {
 	$newArray = array();
 	$newArray['filters_def'] = $args['reporter']->report_def['filters_def'];
 	$encodedFilterData = $global_json->encode($newArray);
-    saveReportFilters($args['reporter']->saved_report->id, $encodedFilterData);
+    saveReportFilters($args['reporter']->saved_report->id, $encodedFilterData, true);
 
 	$saveAndRunQuery = $request->getValidInputRequest('save_and_run_query');
 	if ($saveAndRunQuery !== null && ($saveAndRunQuery == 'on')) {

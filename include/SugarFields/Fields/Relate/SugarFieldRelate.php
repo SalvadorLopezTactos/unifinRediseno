@@ -21,11 +21,6 @@ class SugarFieldRelate extends SugarFieldBase {
         }else{
             $this->ss->assign('nolink', false);
         }
-
-        if (!isset($displayParams['htmlescape'])) {
-            $displayParams['htmlescape'] = true;
-        }
-
         $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         return $this->fetch($this->findTemplate('DetailView'));
     }
@@ -51,7 +46,9 @@ class SugarFieldRelate extends SugarFieldBase {
         if (isset($displayParams['idName']))
         {
             $rpos = strrpos($displayParams['idName'], $vardef['name']);
-            $displayParams['idNameHidden'] = substr($displayParams['idName'], 0, $rpos);
+            if ($rpos !== false) {
+                $displayParams['idNameHidden'] = substr($displayParams['idName'], 0, $rpos);
+            }
         }
         //Special Case for accounts; use the displayParams array and retrieve
         //the key and copy indexes.  'key' is the suffix of the field we are searching
@@ -74,7 +71,7 @@ class SugarFieldRelate extends SugarFieldBase {
 
             if(count($database_key) != count($form)) {
               global $app_list_strings;
-              $this->ss->trigger_error($app_list_strings['ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS']);
+                trigger_error("Smarty error: {$app_list_strings['ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS']}", E_USER_WARNING);
             } //if
 
             $copy_phone = isset($displayParams['copyPhone']) ? $displayParams['copyPhone'] : true;
@@ -173,7 +170,7 @@ class SugarFieldRelate extends SugarFieldBase {
 
             if(count($database_key) != count($form)) {
               global $app_list_strings;
-              $this->ss->trigger_error($app_list_strings['ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS']);
+                trigger_error("Smarty error: {$app_list_strings['ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS']}", E_USER_WARNING);
             } //if
 
             $copy_phone = isset($displayParams['copyPhone']) ? $displayParams['copyPhone'] : true;

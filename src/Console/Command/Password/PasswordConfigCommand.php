@@ -114,10 +114,6 @@ class PasswordConfigCommand extends Command implements InstanceModeInterface
         $rehash = $this->getProtectedValue($hash, 'rehash') ? '<info>yes</info>' : '<comment>no</comment>';
         $table->addRow(array("Rehash enabled", $rehash));
 
-        // Allow legacy (md5) hashes
-        $legacy = $this->getProtectedValue($hash, 'allowLegacy') ? '<error>yes</error>' : '<info>no</info>';
-        $table->addRow(array("Allow md5 hashes", $legacy));
-
         // Hash backend
         $backend = $this->getProtectedValue($hash, 'backend');
         $table->addRow(array("Backend class", get_class($backend)));

@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Nome account/Settore',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Luogo',
     'LBL_PURCHASES' => 'Acquisti',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Informazioni account',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tempistica Account',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafici',

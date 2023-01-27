@@ -42,7 +42,7 @@
       * {
         font-size: 11px;
         font-weight: normal;
-        color: @grayLight;
+        color: @gray70;
       }
 
       .cell {
@@ -56,7 +56,7 @@
             border-radius: 2px;
 
             &.alt {
-              background-color: @grayLighter;
+              background-color: @primaryContentHover;
             }
           }
         }
@@ -72,9 +72,7 @@
 
   .participant {
     .cell {
-      border-color: @grayLightish;
-      border-style: solid;
-      border-width: 1px 0;
+      border: @borderWidget;
     }
 
     .profile {
@@ -82,7 +80,7 @@
       border-width: 1px 0 1px 1px;
       border-radius: 3px 0 0 3px;
       padding: 0 5px;
-      background-color: @white;
+      background-color: @primaryContentBackground;
 
       .avatar {
         min-width: 20px;
@@ -124,7 +122,7 @@
       border-width: 1px 1px 1px 0;
       border-radius: 0 3px 3px 0;
       position: relative;
-      background-color: @white;
+      background-color: @contentBackground;
       width: 100%;
 
       &.unavailable,
@@ -145,7 +143,7 @@
 
         .container {
           .timeblock {
-            border-color: @grayLighter;
+            border-color: @borderColor;
           }
         }
       }
@@ -156,7 +154,7 @@
         .timeblock {
           width: 11.111%;
           height: 32px;
-          border-left: 1px solid @grayLighter;
+          border-left: @borderWidget;
 
           &:last-child {
             border-radius: 0 3px 3px 0;
@@ -167,7 +165,7 @@
             height: inherit;
             display: inline-block;
             float: left;
-            border-left: 1px solid fade(@grayLighter, 50%);
+            border-left: @borderWidget;
             box-sizing: border-box;
 
             &:first-child {
@@ -176,7 +174,7 @@
 
             &.busy {
               background-color: fade(@black, 20%);
-              border-left: 1px solid @grayLightish;
+              border-left: 1px solid @gray60;
             }
           }
         }
@@ -206,8 +204,13 @@
         white-space: nowrap;
         width: 72px;
 
-        .btn + .btn {
-          margin-left: 8px;
+        .btn {
+          line-height: 12px;
+          padding: 7px;
+
+          & + .btn {
+            margin-left: 8px;
+          }
         }
       }
     }
@@ -244,6 +247,10 @@
       .btn-group + .btn-group {
         margin-left: 8px;
       }
+
+      .btn {
+        padding: 7px;
+      }
     }
   }
 }
@@ -269,7 +276,7 @@
   }
 
   .participant {
-    border: 1px solid @grayLightish;
+    border: 1px solid @gray60;
     border-radius: 3px;
   }
 

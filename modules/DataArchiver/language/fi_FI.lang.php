@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Arkisto',
     'LBL_PROCESS_TYPE_DELETE' => 'Poista pysyvästi',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Arkistoajot',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Varoitus',
+    'LBL_ARCHIVER_WARNING' => 'Suosittelemme suorittamaan tämän toiminnon aukioloaikojen ulkopuolella tai käytön ollessa vähäistä '
+        . 'koska se voi vaikuttaa järjestelmän suorituskykyyn. Oletko varma, että haluat suorittaa toiminnon nyt?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Arkistointipalvelussa moduulille {{moduleName}} on oltava suodattimena {{fieldName}}',
 );

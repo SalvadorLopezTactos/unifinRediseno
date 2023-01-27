@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Uuenduse tulude rea üksuse ID',
     'LBL_PARENT_RLIS' => 'Ema tulude rea üksused',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Ema tulude rea üksused',
+    'LBL_FORECASTED_LIKELY' => 'Prognoosi järgi tõenäoline',
     'LBL_EXPERT_ID' => 'Toote ekspert',
     'LBL_FORECAST' => 'Kaasa prognoosi',
     'LBL_SUBTOTAL' => 'Vahesumma',

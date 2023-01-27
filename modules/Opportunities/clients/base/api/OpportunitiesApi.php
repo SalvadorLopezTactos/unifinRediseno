@@ -42,15 +42,22 @@ class OpportunitiesApi extends ModuleApi
 
         parent::updateRecord($api, $args);
 
+        // Check for any values that need to be cascaded down to related RLIs
         $settings = Opportunity::getSettings();
         if ($settings['opps_view_by'] === 'RevenueLineItems') {
             $data = array();
             $bean = $this->loadBean($api, $args, 'save');
 
-            foreach (['commit_stage', 'probability',] as $prop) {
-                if (!empty($args[$prop]) && $bean->{$prop} !== $args[$prop]) {
-                    $data[$prop] = $args[$prop];
-                }
+            if (!empty($args['commit_stage']) && $bean->commit_stage !== $args['commit_stage']) {
+                $data['commit_stage'] = $args['commit_stage'];
+            }
+
+            // probability is stored on the Opportunity bean as a float, but
+            // the value coming in from the API is a string. We need to use
+            // SugarMath rather than === to check for equality accurately
+            if (!empty($args['probability']) &&
+                SugarMath::init($args['probability'])->comp($bean->probability) !== 0) {
+                $data['probability'] = $args['probability'];
             }
 
             if (!empty($data)) {

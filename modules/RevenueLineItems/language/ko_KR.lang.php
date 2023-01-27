@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => '매출 라인아이템 갱신 ID',
     'LBL_PARENT_RLIS' => '상위 매출 라인아이템',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => '상위 매출 라인아이템',
+    'LBL_FORECASTED_LIKELY' => '예측된 예상 수치',
     'LBL_EXPERT_ID' => '상품 전문가',
     'LBL_FORECAST' => '예상에 포함',
     'LBL_SUBTOTAL' => '소계',

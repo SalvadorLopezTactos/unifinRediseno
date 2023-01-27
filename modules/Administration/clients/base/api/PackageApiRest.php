@@ -162,6 +162,20 @@ final class PackageApiRest extends FileApi
                     'SugarApiExceptionNotAuthorized',
                 ],
             ],
+            'status' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'packages', '?', 'installation-status'],
+                'pathVars' => ['', '', 'id', ''],
+                'method' => 'getStatus',
+                'shortHelp' => 'Get a package installation status',
+                'minVersion' => '11.14',
+                'longHelp' => 'include/api/help/package_installation_status_help.html',
+                'exceptions' => [
+                    'SugarApiExceptionNotAuthorized',
+                ],
+                'ignoreMetaHash' => true,
+                'ignoreSystemStatusError' => true,
+            ],
         ];
     }
 
@@ -390,6 +404,32 @@ final class PackageApiRest extends FileApi
             return $data;
         }, $packages);
         return ['packages' => $packages];
+    }
+
+    /**
+     * Returns a package installation status
+     *
+     * @param RestService $api
+     * @param array $args
+     *
+     * @return array
+     * @throws SugarApiExceptionMissingParameter
+     * @throws SugarApiExceptionNotAuthorized
+     * @throws SugarApiExceptionNotFound
+     */
+    public function getStatus(RestService $api, array $args): array
+    {
+        $this->requireArgs($args, ['id']);
+        $id = $args['id'];
+
+        $upgradeHistory = $this->getUpgradeHistoryByIdOrFail($id);
+
+        $mi = new ModuleInstaller();
+        $mi->setUpgradeHistory($upgradeHistory);
+        $progress = $mi->getInstallationProgress();
+        $progress['is_staged'] = $upgradeHistory->status === UpgradeHistory::STATUS_STAGED;
+
+        return $progress;
     }
 
     /**

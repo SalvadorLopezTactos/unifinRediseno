@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Kõik mooduli {{module}} töölauad ',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Kõik mooduli {{module}} vaate {{view}} töölauad ',
     'LBL_COPY_OF' => 'Koopia üksusest {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Fookuse sahtli juhtpaneele ei saa kustutada.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Loo töölaud',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Kas olete kindel, et soovite taastada selle töölaua vaikepaigutuse?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Kas olete kindel, et soovite taastada töölauapaneeli vaikepaigutuse?',
+    'LBL_FILTER_UTILS_SELECT' => 'Määratud',
 );

@@ -10,5 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div id="d3_{{cid}}" class="sc-chart" data-content="chart"></div>
+<div id="chart_{{cid}}_wrapper" class="h-full w-full overflow-hidden" data-content="chart">
+    <canvas dir="{{langDirection}}" id="chart_{{cid}}" class="sc-chart"></canvas>
+</div>
 <div class="block-footer hide" data-content="nodata">{{str "LBL_NO_DATA_AVAILABLE"}}</div>

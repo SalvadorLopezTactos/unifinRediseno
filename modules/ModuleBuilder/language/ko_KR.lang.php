@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => '삭제하기' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'SugarCRM 제공' /*for 508 compliance fix*/,
     'LBL_ROLE' => '역할',
+    'LBL_BASE_LAYOUT' => '기본 레이아웃',
+    'LBL_FIELD_NAME' => '필드명',
+    'LBL_FIELD_VALUE' => '값',
+    'LBL_LAYOUT_DETERMINED_BY' => '레이아웃 결정:',
+    'layoutDeterminedBy' => [
+        'std' => '표준 레이아웃',
+        'role' => '역할',
+        'dropdown' => '드롭다운 필드',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => '사용자 지정 레이아웃은 모두 삭제됩니다. 현재 레이아웃 정의를 변경하시겠습니까?',
 'help'=>array(
     'package'=>array(
             'create'=>'패키지에 대한 </ b>이름<b>을 제공합니다. 이름을 입력하면 입력한 이름은 문자와 숫자 구분없이 사용하고 공백이 없어야 합니다. (예 : HR_Management)<br/><br/> 패키지에 대한 정보<b>작성자</b> 및 <b>설명</b>를 제공할 수 있습니다. 패키지를 만드는데 <br/><br/><b>저장</b>클릭합니다.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => '가시성 편집',
 'LBL_ROLLUP' => '올리기',
 'LBL_RELATED_FIELD' => '관련 필드',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> '사용자 정의 로고마크 이미지 URL입니다. 권장 로고마크 크기는 22 x 22 픽셀입니다. 크기가 더 큰 업로드된 모든 이미지는 어느 방향에서든 이 최대 크기로 조정됩니다.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> '사용자 정의 로고 이미지 URL입니다. 권장 로고 폭은 200 픽셀입니다. 크기가 더 큰 업로드된 모든 이미지는 어느 방향에서든 이 최대 크기로 조정됩니다. 로고는 로그인 화면에 사용됩니다. 이미지를 업로드하지 않을 시, 로고마크를 사용합니다.',
 'LBL_PORTAL_ROLE_DESC' => '이 역할을 삭제하지 마십시오. 고객 셀프 서비스 포탈 역할은 Sugar 포탈 액션 진행 중 시스템에서 생성된 역할입니다. Sugar포탈 내에 결함, 사례 또는 지식기반 모듈의 작동/중지를 위해서는 역할 내 접속 조종을 사용하십시오. 알 수 없거나 예측할 수 없는 시스템 행위를 피하기 위해서 이 역할의 접속 조종을 수정하지 마십시오.',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'관계 추가하기',
 'LBL_BTN_RENAME_MODULE' => '모듈명 변경하기',
 'LBL_BTN_INSERT'=>'삽입',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => '기본 레이아웃 복구',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => '오류가 발생하였습니다.',
 'ERROR_REQUIRED_FIELDS' => '계속하시겠습니까? 지면배치에서 다음 필수항목 필드가 없습니다.',
 'ERROR_ARE_YOU_SURE' => '계속하시겠습니까?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => '필드를 만들 수 없습니다. 데이터베이스에서 이 테이블의 행 크기 제한에 도달했습니다. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">더 알아보세요</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => '다음 필드는 SugarCRM 모바일 편집보기의 실제 시간에서는 다시 계산되지 않을 이미 계산되 가치를 가지고 있습니다.',
 'ERROR_CALCULATED_PORTAL_FIELDS' => '다음 필드는 SugarCRM 포탈 편집보기의 실제 시간에서는 다시 계산되지 않을 이미 계산되 가치를 가지고 있습니다.',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => '포탈에서 작동하려면 이곳에서 작동하십시오.',
     'LBL_PORTAL_CONFIGURE' => '포탈 구성',
     'LBL_PORTAL_ENABLE_PORTAL' => '사용 가능한 포탈',
-    'LBL_PORTAL_ENABLE_SEARCH' => '사례 열기 전 검색 사용 가능',
+    'LBL_PORTAL_SHOW_KB_NOTES' => '지식 기반 모듈에 대한 노트 활성화',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => '포털 사용자가 케이스를 종료하도록 허용합니다',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => '신규 사용자 가입 허용',
+    'LBL_PORTAL_USER_PERMISSIONS' => '사용자 권한',
     'LBL_PORTAL_THEME' => '포탈 테마',
     'LBL_PORTAL_ENABLE' => '작동',
     'LBL_PORTAL_SITE_URL' => '포탈 주소는 다음과 같습니다:',
     'LBL_PORTAL_APP_NAME' => '어플리케이션 이름',
-    'LBL_PORTAL_LOGOMARK_URL' => '로고마크 URL',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => '로고마크 미리보기',
-    'LBL_PORTAL_LOGO_URL' => '로고 URL',
-    'LBL_PORTAL_LOGO_PREVIEW' => '로고 미리보기',
     'LBL_PORTAL_CONTACT_PHONE' => '전화번호',
     'LBL_PORTAL_CONTACT_EMAIL' => '이메일',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => '반드시 유효한 이메일 주소를 입력하십시오.',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => '포탈 모듈의 이름을 드래그 앤 드랍하여 포탈의 상단 탐색 바에 이를 표시 또는 숨김으로 설정합니다. 포탈 사용자가 모듈에 대한 접속을 제어하려면 <a href="?module=ACLRoles&action=index">역할 관리</a>를 이용하십시오.',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => '전시된 모듈',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => '숨겨진 모듈',
+    'LBL_CONFIG_VISIBILITY' => '가시성',
+    'LBL_CASE_VISIBILITY_HELP' => '사례를 볼 수있 는 포털 사용자를 정의하십시오.',
+    'LBL_EMAIL_VISIBILITY_HELP' => '사례 관련 이메일을 볼 수 있는 포털 사용자를 정의합니다. 참여하는 연락처는 받는 사람, 보낸 사람, 참조, 숨은 참조 필드에 있는 연락처입니다.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => '사례 관련 메세지를 볼 수 있는 포털 사용자를 정의합니다. 참여하는 연락처는 게스트 필드에 있는 연락처입니다.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => '계정과 관련된 모든 연락처',
+        'related_contacts' => '사례와 관련된 주요 연락처만',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => '참여하는 연락처만',
+        'all' => '사례를 볼 수 있는 모든 연락처',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => '참여하는 연락처만',
+        'all' => '사례를 볼 수 있는 모든 연락처',
+    ],
+
 
 'LBL_PORTAL'=>'포탈',
 'LBL_PORTAL_LAYOUTS'=>'포탈 지면배치',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'날짜시간',
                 'decimal'=>'소수',
                 'autoincrement' => '자동 증가',
+                'actionbutton' => '액션버튼',
 ),
 'labelTypes' => array(
     "" => "자주 사용되는 라벨",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (related {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => '레이아웃에 복사',
 'LBL_RELATIONSHIP_TYPE' => '관계',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => '언어 비교',
+'LBL_LABEL_NOT_TRANSLATED' => '이 라벨은 번역될 수 없습니다',
 );

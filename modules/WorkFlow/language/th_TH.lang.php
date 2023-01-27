@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'เวิร์กโฟลว์'),
   'LBL_EMAILTEMPLATES_TYPE' => 'ประเภท',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>โปรดทราบ:</strong> เวิร์กโฟลว์ Sugar และฟังก์ชันการจัดการเวิร์กโฟลว์อยูในโหมดบำรุงรักษา ลูกค้าบริษัท Sugar ควรใช้ฟังก์ชันที่ SugarBPM <sup class="trademark">TM</sup>มีให้ไว้',
 );
 

@@ -215,7 +215,7 @@ class DownloadFile {
 
                     return array(
                         'content-type' => $this->getMimeType($filepath),
-                        'content-length' => filesize($filepath),
+                        'content-length' => $this->getFileSize($filepath),
                         'name' => $name,
                         'uri' => $fileurl,
                         'path' => $filepath,
@@ -340,6 +340,20 @@ class DownloadFile {
      */
     public function getMimeType($filename) {
         return get_file_mime_type($filename);
+    }
+
+    /**
+     * Gets the size of a file
+     *
+     * @param string $filename Path to the file
+     * @return int|false The size of the file in bytes or false if the file does not exist
+     */
+    public function getFileSize($filename)
+    {
+        if (!file_exists($filename)) {
+            return false;
+        }
+        return filesize($filename);
     }
 
     /**

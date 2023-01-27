@@ -97,13 +97,19 @@ class Collection implements CollectionInterface
         return isset($this->entries[$offset]);
     }
 
+    /**
+     * @return mixed
+     */
     public function offsetGet($offset)
     {
         $this->toArray();
 
-        return isset($this->entries[$offset]) ? $this->entries[$offset] : null;
+        return $this->entries[$offset] ?? null;
     }
 
+    /**
+     * @return void
+     */
     public function offsetSet($offset, $value)
     {
         $this->toArray();
@@ -111,6 +117,9 @@ class Collection implements CollectionInterface
         $this->entries[$offset] = $value;
     }
 
+    /**
+     * @return void
+     */
     public function offsetUnset($offset)
     {
         $this->toArray();

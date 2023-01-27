@@ -22,6 +22,7 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 class TemplateHandler {
     var $cacheDir;
     var $templateDir = 'modules/';
+    /** @var Sugar_Smarty */
     var $ss;
     public function __construct()
     {
@@ -89,6 +90,7 @@ class TemplateHandler {
         $this->ss->assign('module', $module);
         $this->ss->assign('built_in_buttons', array('CANCEL', 'DELETE', 'DUPLICATE', 'EDIT', 'SHARE', 'FIND_DUPLICATES', 'SAVE', 'CONNECTOR'));
         $contents = $this->ss->fetch($tpl);
+        $processAutorDefs = false;
         if ($view == "PMSEDetailView"){
             $view = 'EditView';
             $processAutorDefs = true;
@@ -99,17 +101,17 @@ class TemplateHandler {
             $mod = BeanFactory::getObjectName($module);
             $defs = $dictionary[$mod]['fields'];
             $defs2 = array();
-            if (!empty($processAutorDefs)){
-                if(!empty($this->ss->_tpl_vars['readOnlyFields'])){
-                    foreach ($this->ss->_tpl_vars['readOnlyFields'] as $readOnlyField) {
-                        if (!empty($defs[$readOnlyField])){
+            if ($processAutorDefs) {
+                if ($this->ss->getTemplateVars('readOnlyFields')) {
+                    foreach ($this->ss->getTemplateVars('readOnlyFields') as $readOnlyField) {
+                        if (!empty($defs[$readOnlyField])) {
                             $defs[$readOnlyField]['readonly'] = true;
                         }
                     }
                 }
-                if(!empty($this->ss->_tpl_vars['requiredFields'])){
-                    foreach ($this->ss->_tpl_vars['requiredFields'] as $requiredField) {
-                        if (!empty($defs[$requiredField])){
+                if ($this->ss->getTemplateVars('requiredFields')) {
+                    foreach ($this->ss->getTemplateVars('requiredFields') as $requiredField) {
+                        if (!empty($defs[$requiredField])) {
                             $defs[$requiredField]['required'] = true;
                         }
                     }
@@ -289,8 +291,6 @@ class TemplateHandler {
             {
                 $this->loadSmarty();
             }
-            $cache_file_name = $this->ss->_get_compile_path($this->cacheDir . $this->templateDir . $module . '/' .$view . '.tpl');
-            SugarCache::cleanFile($cache_file_name);
 
             $file = FileLoader::validateFilePath($this->cacheDir . $this->templateDir . $module . '/' .$view . '.tpl');
             return unlink($file);
@@ -318,6 +318,7 @@ class TemplateHandler {
             $qsd = QuickSearchDefaults::getQuickSearchDefaults($this->getQSDLookup());
         }else
         {
+            LoggerManager::getLogger()->deprecated('Static calls to TemplateHandler::createQuickSearchCode are deprecated');
             $qsd = QuickSearchDefaults::getQuickSearchDefaults(array());
         }
         $qsd->setFormName($view);

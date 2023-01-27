@@ -68,17 +68,12 @@ class SugarWidgetFieldCurrency extends SugarWidgetFieldInt
         }
         if (!empty($record)) {
 	        $field_name = $layout_def['name'];
-	        $field_type = $field_def['type'];
 	        $module = $field_def['module'];
 
-	        $div_id = $module ."&$record&$field_name";
-	        $str = "<div id='$div_id'>".$display;
-            global $sugar_config;
-            if (isset ($sugar_config['enable_inline_reports_edit']) && $sugar_config['enable_inline_reports_edit']) {
-                $str .= "&nbsp;" .SugarThemeRegistry::current()->getImage("edit_inline","border='0' alt='Edit Layout' align='bottom' onClick='SUGAR.reportsInlineEdit.inlineEdit(\"$div_id\",\"$value\",\"$module\",\"$record\",\"$field_name\",\"$field_type\",\"$currency_id\",\"$symbol\");'");
-            }
-	        $str .= "</div>";
-	        return $str;
+            $div_id = htmlspecialchars($module . "&$record&$field_name");
+            return <<<HTML
+<div id="{$div_id}">{$display}</div>
+HTML;
         }
         else
             return $display;
@@ -164,39 +159,63 @@ class SugarWidgetFieldCurrency extends SugarWidgetFieldInt
     return $this->_get_column_select($layout_def)." \n";
  }
 
- function getCurrencyIdTable($layout_def)
- {
-     $db = DBManagerFactory::getInstance();
+    /**
+     * Returns table alias for currency id if id exists in stock table
+     * @param array $layout_def layout definition
+     * @return string|false table alias for currency id
+     */
+    public function getCurrencyIdTable($layoutDef)
+    {
+        $db = DBManagerFactory::getInstance();
 
-    // We need to fetch the currency id as well
-    if ( !$this->isSystemCurrency($layout_def) && empty($layout_def['group_function'])) {
+        // We need to fetch the currency id as well
+        if (!$this->isSystemCurrency($layoutDef) && empty($layoutDef['group_function'])) {
+            if (!empty($layoutDef['table_alias'])) {
+                $tableAlias = $layoutDef['table_alias'];
+            } else {
+                $tableAlias = '';
+            }
 
-        if ( !empty($layout_def['table_alias']) ) {
-            $table = $layout_def['table_alias'];
-        } else {
-            $table = '';
+            $realTable = '';
+            if (!empty($this->reporter->all_fields[$layoutDef['column_key']]['real_table'])) {
+                $realTable = $this->reporter->all_fields[$layoutDef['column_key']]['real_table'];
+            }
+
+            if (!empty($tableAlias)) {
+                $tableColumns = $db->get_columns($realTable);
+                $cstmTableColumns = [];
+                if (preg_match('/.*?_cstm$/i', $realTable)) {
+                    $cstmTableColumns = $tableColumns;
+                    $realTable = str_replace('_cstm', '', $realTable);
+                    $tableColumns = $db->get_columns($realTable);
+                }
+                return $this->getCurrencyIdTableAlias(
+                    $tableAlias,
+                    $tableColumns,
+                    $cstmTableColumns
+                );
+            }
         }
+        return false;
+    }
 
-        $real_table = '';
-        if (!empty($this->reporter->all_fields[$layout_def['column_key']]['real_table']))
-            $real_table = $this->reporter->all_fields[$layout_def['column_key']]['real_table'];
-
-        if(!empty($table)) {
-            $cols = $db->get_columns($real_table);
-            $add_currency_id = isset($cols['currency_id']) ? true : false;
-
-            if(!$add_currency_id && preg_match('/.*?_cstm$/i', $real_table)) {
-                $table = str_replace('_cstm', '', $table);
-                $cols = $db->get_columns($table);
-                $add_currency_id = isset($cols['currency_id']) ? true : false;
-            }
-            if($add_currency_id) {
-                return $table;
-            }
+    /**
+     * Returns currency id table alias based on associated table
+     * @param string $tableAlias
+     * @param array $tableColumns
+     * @param array $cstmTableColumns
+     * @return string|false currency id table alias
+     */
+    public function getCurrencyIdTableAlias(string $tableAlias, array $tableColumns, array $cstmTableColumns)
+    {
+        if (!empty($cstmTableColumns) && isset($cstmTableColumns['currency_id'])) {
+            return $tableAlias;
+        } elseif (!empty($tableColumns) && isset($tableColumns['currency_id'])) {
+            return str_replace('_cstm', '', $tableAlias);
+        } else {
+            return false;
         }
     }
-    return false;
- }
 
     /**
      * Return currency for layout_def

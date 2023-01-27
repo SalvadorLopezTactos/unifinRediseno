@@ -34,6 +34,16 @@ class SugarOIDCUserProvider implements UserProviderInterface
     }
 
     /**
+     * Set allow inactive user
+     *
+     * @param bool $allowInactive
+     */
+    public function setAllowInactive(bool $allowInactive)
+    {
+        $this->sugarLocalUserProvider->setAllowInactive($allowInactive);
+    }
+
+    /**
      * @param string $username
      * @return User
      */

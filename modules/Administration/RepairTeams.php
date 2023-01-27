@@ -274,7 +274,7 @@ function no_global_team() {
 function process_team_access($process_global_teams=false, $process_private_teams=false,$process_implict_teams=false, $global_team_id='1', $process_team_access=false) {
     set_time_limit(3600);
     global $mod_strings;
-    $GLOBALS['log'] = LoggerManager :: getLogger('SugarCRM');
+    $GLOBALS['log'] = LoggerManager :: getLogger();
     $user = BeanFactory::newBean('Users');
 
     $do_nothing=true;
@@ -352,6 +352,7 @@ function clear_global_team_access($global_team_id=1) {
     //delete all records for membership into global team.
     $query="delete from team_memberships where team_id= ". $user->db->quoted($global_team_id);
     $user->db->query($query);
+    $user->db->optimizeTable('team_memberships');
 }
 
 function clear_implicit_access($private_teams_only, $global_team_id=1) {
@@ -373,6 +374,8 @@ function clear_implicit_access($private_teams_only, $global_team_id=1) {
 
     $query="delete from team_memberships where implicit_assign=0 and explicit_assign=0". ' and ' .$tf;
     $user->db->query($query);
+
+    $user->db->optimizeTable('team_memberships');
 
     //if private delete explicit access to my team.
      if ($private_teams_only) {

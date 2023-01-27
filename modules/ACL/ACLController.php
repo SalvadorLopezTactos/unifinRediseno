@@ -42,11 +42,7 @@ class ACLController
     {
 		global $current_user;
 		if(is_admin($current_user))return true;
-		//calendar is a special case since it has 3 modules in it (calls, meetings, tasks)
 
-		if($category == 'Calendar'){
-			return ACLAction::userHasAccess($current_user->id, 'Calls', $action,$type, $is_owner) || ACLAction::userHasAccess($current_user->id, 'Meetings', $action,'module', $is_owner) || ACLAction::userHasAccess($current_user->id, 'Tasks', $action,'module', $is_owner);
-		}
 		if($category == 'Activities'){
 			return ACLAction::userHasAccess($current_user->id, 'Calls', $action,$type, $is_owner) || ACLAction::userHasAccess($current_user->id, 'Meetings', $action,'module', $is_owner) || ACLAction::userHasAccess($current_user->id, 'Tasks', $action,'module', $is_owner)|| ACLAction::userHasAccess($current_user->id, 'Emails', $action,'module', $is_owner)|| ACLAction::userHasAccess($current_user->id, 'Notes', $action,'module', $is_owner);
 		}
@@ -105,23 +101,6 @@ class ACLController
 				}
 			}
 		}
-		if(isset($compList['Calendar']) &&
-			!( ACLController::checkModuleAllowed('Calls', $actions) || ACLController::checkModuleAllowed('Meetings', $actions) || ACLController::checkModuleAllowed('Tasks', $actions)))
-	    {
-			if($by_value){
-				unset($moduleList[$compList['Calendar']]);
-			}else{
-				unset($moduleList['Calendar']);
-			}
-			if(isset($compList['Activities']) && !ACLController::checkModuleAllowed('Notes', $actions)){
-				if($by_value){
-					unset($moduleList[$compList['Activities']]);
-				}else{
-					unset($moduleList['Activities']);
-				}
-			}
-		}
-
 	}
 
 	/**
@@ -175,20 +154,6 @@ class ACLController
 							$disabled[$action_name] = $action_name;
 						}
 					}
-				}
-			}
-		}
-		if(isset($compList['Calendar'])  && !( ACL_ALLOW_ENABLED == $actions['Calls']['module']['access']['aclaccess'] || ACL_ALLOW_ENABLED == $actions['Meetings']['module']['access']['aclaccess'] || ACL_ALLOW_ENABLED == $actions['Tasks']['module']['access']['aclaccess'])){
-			if($by_value){
-							$disabled[$compList['Calendar']]  = $compList['Calendar'];
-			}else{
-							$disabled['Calendar']  = 'Calendar';
-			}
-			if(isset($compList['Activities'])  &&!( ACL_ALLOW_ENABLED == $actions['Notes']['module']['access']['aclaccess'] || ACL_ALLOW_ENABLED == $actions['Notes']['module']['access']['aclaccess'] )){
-				if($by_value){
-							$disabled[$compList['Activities']]  = $compList['Activities'];
-				}else{
-							$disabled['Activities']  = 'Activities';
 				}
 			}
 		}

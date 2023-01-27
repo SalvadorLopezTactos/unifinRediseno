@@ -255,7 +255,7 @@ function reset_text(form_name){
 
 		if ( formvar.elements[i].name.indexOf("default_href",0) == 0){
 			split_array= formvar.elements[i].name.split("default_");
-			this.document.getElementById(split_array[1]).innerHTML = get_value(formvar.elements[i].name);
+			this.document.getElementById(split_array[1]).textContent = get_value(formvar.elements[i].name);
 			
 		//end if this is an href element
 		}

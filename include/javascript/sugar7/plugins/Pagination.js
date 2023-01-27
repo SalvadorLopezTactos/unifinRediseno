@@ -68,6 +68,11 @@
                             } else {
                                 this.render();
                             }
+
+                            if (_.includes(['recordlist', 'selection-list', 'multi-selection-list-link'], this.type)) {
+                                this.$('.flex-list-view-content .no-data-available')
+                                    .toggleClass('hidden', !!collection.models.length);
+                            }
                         }, this);
                     }
                 };
@@ -100,19 +105,43 @@
                 if (pageComponent) {
                     return;
                 }
-                pageComponent = app.view.createView({
-                    context: this.context,
-                    type: 'list-bottom',
-                    meta: {
-                        template: 'list-bottom.dashlet-bottom'
-                    },
-                    module: this.module,
-                    primary: false,
-                    layout: this.layout,
-                    hideFirstPaginationLoadingMessage: this.hideFirstPaginationLoadingMessage,
-                    usePaginationComponent: this.usePaginationComponent,
-                });
-                this.layout.addComponent(pageComponent);
+
+                if (this.context && this.context.get('isUsingListPagination')) {
+                    var panelTopFields = app.view.createView({
+                        context: this.context,
+                        type: 'panel-top',
+                        meta: {
+                            template: 'panel-top.fields'
+                        },
+                        primary: false,
+                        module: this.module,
+                        layout: this.layout,
+                    });
+                    this.layout.addComponent(panelTopFields);
+
+                    var listPaginationView = app.view.createView({
+                        context: this.context,
+                        type: 'list-pagination',
+                        module: this.module,
+                        layout: this.layout,
+                        className: 'list-pagination-wrapper',
+                    });
+                    this.layout.addComponent(listPaginationView);
+                } else {
+                    pageComponent = app.view.createView({
+                        context: this.context,
+                        type: 'list-bottom',
+                        meta: {
+                            template: 'list-bottom.dashlet-bottom'
+                        },
+                        module: this.module,
+                        primary: false,
+                        layout: this.layout,
+                        hideFirstPaginationLoadingMessage: this.hideFirstPaginationLoadingMessage,
+                        usePaginationComponent: this.usePaginationComponent,
+                    });
+                    this.layout.addComponent(pageComponent);
+                }
             },
 
             /**

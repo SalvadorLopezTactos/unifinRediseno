@@ -48,7 +48,7 @@ if (isset($_REQUEST['useraction']) && $_REQUEST['useraction']=='Save' ) {
 echo getClassicModuleTitle(
         "Administration", 
         array(
-            "<a href='index.php?module=Administration&action=index'>".translate('LBL_MODULE_NAME','Administration')."</a>",
+            "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
            $mod_strings['LBL_SUGAR_UPDATE_TITLE'],
            ), 
         false
@@ -76,14 +76,18 @@ if(!empty($license->settings['license_latest_versions'])){
 	include('sugar_version.php');
 	if(!empty($versions)){
 		foreach($versions as $version){
-			if(compareVersions($version['version'], $sugar_version))
-			{
-				$has_updates = true;
-				$xtpl->assign("VERSION", $version);
-				$xtpl->parse('main.updates.version');
-			}
-		}
-	}
+            if (isset($version['version']) && compareVersions($version['version'], $sugar_version)) {
+                $minorVersion = getMinorVersion($version['version']);
+                if ($minorVersion > 0 && !isOnCloud()) {
+                    // ignore minor releases for non on-demand instances
+                    continue;
+                }
+                $has_updates = true;
+                $xtpl->assign("VERSION", $version);
+                $xtpl->parse('main.updates.version');
+            }
+        }
+    }
 	if(!$has_updates){
 		$xtpl->parse('main.noupdates');
 	}else{

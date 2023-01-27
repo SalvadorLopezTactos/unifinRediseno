@@ -13,6 +13,7 @@
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
+require_once 'include/utils/layout_utils.php';
 require_once('include/SearchForm/SearchForm2.php');
 define("NUM_COLS", 2);
 class PopupSmarty extends ListViewSmarty{

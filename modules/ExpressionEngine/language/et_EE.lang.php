@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Avaldisemootor',
-  'LBL_MODULE_NAME_SINGULAR' => 'Avaldisemootor',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Eelmine' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Järgmine' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Laienda' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Avaldisemootor',
+    'LBL_MODULE_NAME_SINGULAR' => 'Avaldisemootor',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Eelmine' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Järgmine' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Laienda' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Tundmatu väli',
+];

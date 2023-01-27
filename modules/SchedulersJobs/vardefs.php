@@ -226,47 +226,6 @@ $dictionary['SchedulersJob'] = array(
                 'id'
             )
         ),
-        array(
-            'name' => 'idx_status_scheduler',
-            'type' => 'index',
-            'fields' => array(
-                'status',
-                'scheduler_id',
-            )
-        ),
-        array(
-            'name' => 'idx_status_time',
-            'type' => 'index',
-            'fields' => array(
-                'status',
-                'execute_time',
-                'date_entered',
-            )
-        ),
-        array(
-            'name' => 'idx_status_entered',
-            'type' => 'index',
-            'fields' => array(
-                'status',
-                'date_entered',
-            )
-        ),
-        array(
-            'name' => 'idx_status_modified',
-            'type' => 'index',
-            'fields' => array(
-                'status',
-                'date_modified',
-            )
-        ),
-        array(
-            'name' => 'idx_group_status',
-            'type' => 'index',
-            'fields' => array(
-                'job_group',
-                'status',
-            )
-        ),
         [
             'name' => 'idx_resolution_executetime',
             'type' => 'index',
@@ -281,6 +240,24 @@ $dictionary['SchedulersJob'] = array(
             'fields' => [
                 'target',
                 'job_group',
+                'resolution',
+            ],
+        ],
+        [
+            'name' => 'idx_status_sched_id',
+            'type' => 'index',
+            'fields' => [
+                'status',
+                'scheduler_id',
+            ],
+        ],
+        [
+            'name' => 'idx_del_time_status',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'execute_time',
+                'status',
             ],
         ],
     ),

@@ -61,16 +61,7 @@ require_once('include/entryPoint.php');
 
 require_once('soap/SoapHelperFunctions.php');
 
-
-require_once('vendor/nusoap//nusoap.php');
-
-
-
-
-
-require_once('vendor/nusoap//nusoap.php');  //must also have the nusoap code on the ClientSide.
-
-$GLOBALS['log'] =& LoggerManager::getLogger('SugarCRM');
+    $GLOBALS['log'] =& LoggerManager::getLogger();
 //ignore notices
 error_reporting(E_ALL ^ E_NOTICE);
 
@@ -85,31 +76,36 @@ if(empty($sugar_config) && isset($dbconfig['db_host_name']))
 
 $administrator = new Administration();
 $administrator->retrieveSettings();
-$soapclient = new nusoapclient($url. '?wsdl', true);  //define the SOAP Client an
+    $params = array(
+        'soap_version' => SOAP_1_1,
+        'trace' => 1,
+        'exceptions' => 1,
+    );
+    $soapclient = new \SoapClient($url . '?wsdl', $params);  //define the SOAP Client an
 
 echo '<b>Get Server info: - get_server_info test</b><BR>';
-$result = $soapclient->call('get_server_info');
+    $result = $soapClient->get_server_info();
 print_result($result);
 
 echo '<b>LOGIN: -login test</b><BR>';
-$result = $soapclient->call('login',array('user_auth'=>array('user_name'=>$user_name,'password'=>md5($user_password), 'version'=>'.01'), 'application_name'=>'SoapTest'));
+    $result = $soapClient->login(array('user_name'=>$user_name, 'password'=>md5($user_password), 'version'=>'.01'), 'SoapTest');
 print_result($result);
 $session = $result['id'];
 
 echo '<b>Get User Id: - get_user_id test</b><BR>';
-$result = $soapclient->call('get_user_id',array('session'=>$session));
+    $result = $soapClient->get_user_id($session);
 print_result($result);
 
 if(!$quick_test){
 echo '<b>Get Contact Module Fields: - get_module_fields test</b><BR>';
-$result = $soapclient->call('get_module_fields',array('session'=>$session, 'module_name'=>'Contacts'));
+        $result = $soapClient->get_module_fields($session, 'Contacts');
 print_result($result);
 }
 echo '<br><br><b>Set A Contact - set_entry test:</b><BR>';
 $time = date($GLOBALS['timedate']->get_db_date_time_format()) ;
 $date = date($GLOBALS['timedate']->dbDayFormat, time() + rand(0,360000));
 $hour = date($GLOBALS['timedate']->dbTimeFormat, time() + rand(0,360000));
-$result = $soapclient->call('set_entry',array('session'=>$session,'module_name'=>'Contacts', 'name_value_list'=>array(array('name'=>'last_name' , 'value'=>"$time Contact SINGLE"), array('name'=>'first_name' , 'value'=>'tester'))));
+    $result = $soapClient->set_entry($session, 'Contacts', array(array('name'=>'last_name', 'value'=>"$time Contact SINGLE"), array('name'=>'first_name', 'value'=>'tester')));
 print_result($result);
 if(!$quick_test){
 $name_value_lists = array();
@@ -124,14 +120,14 @@ $name_value_lists[] =  array(array('name'=>'last_name' , 'value'=>"$time Contact
 }
 
 
-$result = $soapclient->call('set_entries',array('session'=>$session,'module_name'=>'Contacts','name_value_lists'=>$name_value_lists));
+        $result = $soapClient->set_entries($session, 'Contacts', $name_value_lists);
 $diff = microtime(true) - $timestart;
 echo "<b>Time for creating $i Contacts is $diff </b> <br><br>";
 print_result($result);
 }
 echo "<br><br><b>Get list of Contacts and their email addresses: -test get_entry_list</b><BR>";
 $timestart = microtime(true);
-$result = $soapclient->call('get_entry_list',array('session'=>$session,'module_name'=>'Contacts','query'=>'', 'order_by'=>'','offset'=>0,'select_fields'=>array(),'link_name_to_fields_array' => array(array('name' =>  'email_addresses', 'value' => array('id', 'email_address', 'opt_out', 'primary_address'))), 'max_results'=>10,'deleted'=>-1));
+    $result = $soapClient->get_entry_list($session, 'Contacts', '', '', 0, [], array(array('name' =>  'email_addresses', 'value' => array('id', 'email_address', 'opt_out', 'primary_address'))), 10, -1);
 $diff = microtime(true) - $timestart;
 echo "<b>Time for retrieving 10 Contacts is $diff </b> <br><br>";
 print_result($result);
@@ -144,7 +140,7 @@ foreach($result['entry_list'] as $entry){
 if(!$quick_test){
 	echo "<br><br><b>Get a contact : -test get_entry</b><BR>";
 	$timestart = microtime(true);
-	$result = $soapclient->call('get_entry',array('session'=>$session,'module_name'=>'Contacts','id'=>$contact_ids[0],'select_fields'=>array('last_name', 'email1', 'date_modified','description'), 'link_name_to_fields_array' => array(array('name' =>  'email_addresses', 'value' => array('id', 'email_address', 'opt_out', 'primary_address')), array('name' =>  'accounts', 'value' => array('name', 'city', 'phone')))));
+        $result = $soapClient->get_entry($session, 'Contacts', $contact_ids[0], array('last_name', 'email1', 'date_modified','description'), array(array('name' =>  'email_addresses', 'value' => array('id', 'email_address', 'opt_out', 'primary_address')), array('name' =>  'accounts', 'value' => array('name', 'city', 'phone'))));
 	$diff = microtime(true) - $timestart;
 	echo "<b>Time for retrieving a Contact is $diff </b> <br><br>";
 	print_result($result);
@@ -152,7 +148,7 @@ if(!$quick_test){
 
 	echo "<br><br><b>Get a list of contacts : -test get_entries</b><BR>";
 	$timestart = microtime(true);
-	$result = $soapclient->call('get_entries',array('session'=>$session,'module_name'=>'Contacts','ids'=>$contact_ids,'select_fields'=>array(), 'link_name_to_fields_array' => array(array('name' =>  'accounts', 'value' => array('name', 'id', 'phone', '')) ,array('name' =>  'email_addresses', 'value' => array('id', 'email_address', 'opt_out', 'primary_address')))));
+        $result = $soapClient->get_entries($session, 'Contacts', $contact_ids, [], array(array('name' =>  'accounts', 'value' => array('name', 'id', 'phone', '')) ,array('name' =>  'email_addresses', 'value' => array('id', 'email_address', 'opt_out', 'primary_address'))));
 	$diff = microtime(true) - $timestart;
 	echo "<b>Time for retrieving a list of Contacts is $diff </b> <br><br>";
 	print_result($result);
@@ -163,62 +159,62 @@ echo '<br><br><b>Set A Note - set_entry test:</b><BR>';
 $time = date($GLOBALS['timedate']->get_db_date_time_format()) ;
 $date = date($GLOBALS['timedate']->dbDayFormat, time() + rand(0,360000));
 $hour = date($GLOBALS['timedate']->dbTimeFormat, time() + rand(0,360000));
-$result = $soapclient->call('set_entry',array('session'=>$session,'module_name'=>'Notes', 'name_value_list'=>array(array('name'=>'name' , 'value'=>"$time Note $i"), )));
+    $result = $soapClient->set_entry($session, 'Notes', array(array('name'=>'name', 'value'=>"$time Note $i")));
 $note_id = $result['id'];
 print_result($result);
 echo '<br><br><b>Set A Note attachment - set_note_attachment test:</b><BR>';
 $file = base64_encode('This is an attached file');
-$result = $soapclient->call('set_note_attachment',array('session'=>$session,'note'=>array('id'=>$note_id, 'filename'=>'Attach.txt','file'=>$file) ));
+    $result = $soapClient->set_note_attachment($session, array('id'=>$note_id, 'filename'=>'Attach.txt', 'file'=>$file));
 print_result($result);
 
 echo '<br><br><b>Get A Note attachment - get_note_attachment test:</b><BR>';
-$result = $soapclient->call('get_note_attachment',array('session'=>$session,'id'=>$note_id ));
+    $result = $soapClient->get_note_attachment($session, $note_id);
 echo 'File Contents: ' . base64_decode($result['note_attachment']['file']).'<br>';
 print_result($result);
 
 echo '<BR>TESTING RELATIONSHIPS<BR>';
 echo '<br><br><b>Create an Account - set_entry test:</b><BR>';
-$result = $soapclient->call('set_entry',array('session'=>$session,'module_name'=>'Accounts', 'name_value_list'=>array(array('name'=>'name' , 'value'=>"$time Account "), )));
+    $result = $soapClient->set_entry($session, 'Accounts', array(array('name'=>'name', 'value'=>"$time Account ")));
 $account_id = $result['id'];
 echo 'Account Id ' . $account_id;
 echo '<br><br><b>Create an Email - set_entry test:</b><BR>';
-$result = $soapclient->call('set_entry',array('session'=>$session,'module_name'=>'Emails', 'name_value_list'=>array(array('name'=>'name' , 'value'=>"$time Email"), )));
+    $result = $soapClient->set_entry($session, 'Emails', array(array('name'=>'name', 'value'=>"$time Email")));
 $email_id = $result['id'];
 print_result($result);
 echo '<br><br><b>Link Account to a Contact - set_relationship test:</b><BR>';
-$result = $soapclient->call('set_relationship',array('session'=>$session,'module_name' => 'Accounts', 'module_id' => $account_id, 'link_field_name' => 'contacts', 'related_ids' => array($contact_ids[0])));
+    $result = $soapClient->set_relationship($session, 'Accounts', $account_id, 'contacts', array($contact_ids[0]));
 print_result($result);
 
 echo '<br><br><b>Link Email to a Contact - set_relationship test:</b><BR>';
-$result = $soapclient->call('set_relationship',array('session'=>$session,'module_name' => 'Emails','module_id' => $email_id,'link_field_name' => 'contacts','related_ids' =>array($contact_ids[0])));
+    $result = $soapClient->set_relationship($session, 'Emails', $email_id, 'contacts', array($contact_ids[0]));
 print_result($result);
 
 echo '<br><br><b>Link Email to two Contacts - set_relationships test:</b><BR> ';
-$result = $soapclient->call('set_relationships',array('session'=>$session,'module_names' => array('Emails', 'Emails'),'module_ids' => array($email_id, $email_id),'link_field_names' => array('contacts', 'contacts'),'related_ids' => array(array($contact_ids[1]), array($contact_ids[2]))));
+    $result = $soapClient->set_relationships($session, array('Emails', 'Emails'), array($email_id, $email_id), array('contacts', 'contacts'), array(array($contact_ids[1]), array($contact_ids[2])));
 
 print_result($result);
 echo '<br><br><b>Link Account to two Contacts - set_relationships test:</b><BR>';
-$result = $soapclient->call('set_relationships',array('session'=>$session,'module_names' => array('Accounts', 'Accounts'), 'module_ids' => array($account_id, $account_id),'link_field_names' => array('contacts', 'contacts'),'related_ids' => array(array($contact_ids[1]), array($contact_ids[2]))));
+    $result = $soapClient->set_relationships($session, array('Accounts', 'Accounts'), array($account_id, $account_id), array('contacts', 'contacts'), array(array($contact_ids[1]), array($contact_ids[2])));
 print_result($result);
 
 echo '<br><br><b>Retrieve Relationships for that account - get_relationships test:</b><BR>';
-$result = $soapclient->call('get_relationships',array('session'=>$session,'module_name'=>'Accounts', 'module_id'=>$account_id, 'link_field_name'=>'contacts', 'related_module_query'=>'', 'related_fields' => array('first_name', 'last_name', 'primary_address_city'),'related_module_link_name_to_fields_array' => array(array('name' =>  'opportunities', 'value' => array('name', 'type', 'lead_source')), array('name' =>  'email_addresses', 'value' => array('id', 'email_address', 'opt_out', 'primary_address'))), 'deleted'=>1 ));
+    $result = $soapClient->get_relationships($session, 'Accounts', $account_id, 'contacts', '', array('first_name', 'last_name', 'primary_address_city'), array(array('name' =>  'opportunities', 'value' => array('name', 'type', 'lead_source')), array('name' =>  'email_addresses', 'value' => array('id', 'email_address', 'opt_out', 'primary_address'))), 1);
 print_result($result);
 
 echo '<br><br><b>Get Available Modules - get_available_modules test:</b><BR>';
-$result = $soapclient->call('get_available_modules',array('session'=>$session));
+    $result = $soapClient->get_available_modules($session);
 print_result($result);
 
 echo '<br><br><b>Get Users Team Id - get_user_team_id test:</b><BR>';
-$result = $soapclient->call('get_user_team_id',array('session'=>$session));
+    $result = $soapClient->get_user_team_id($session);
 print_result($result);
 
 echo '<br><br><b>Get Entries Count - get_entries_count test:</b><BR>';
-$result = $soapclient->call('get_entries_count',array('session'=>$session, 'module_name' => 'Accounts', 'query' => '', 'deleted' => 0));
+    $result = $soapClient->get_entries_count($session, 'Accounts', '', 0);
 print_result($result);
 
 echo '<br><br><b>LOGOUT:</b><BR>';
-$result = $soapclient->call('logout',array('session'=>$session));
+    $result = $soapClient->logout($session);
 print_result($result);
 
 }

@@ -402,7 +402,7 @@ class Dynamics365 extends SugarApi
 
         $response = curl_exec($curl);
         curl_close($curl);
-        return json_decode($response);
+        return (!empty($response)) ? json_decode($response) : "";
     }
 
 

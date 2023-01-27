@@ -7,24 +7,10 @@ a.preview-list-item:hover {
   cursor: pointer;
 }
 
-.uxs-scroll-bar {
-  overflow-y: hidden;
-  overflow-x: auto;
-  position: fixed;
-  width: 64.6%;
-  bottom: 44px;
-  left: 0;
-  height: 16px;
-  z-index: @zindexDropdown;
-
-  &.dash-collapsed {
-    width: 98.6%;
-  }
-}
-
 /* jQuery Resizable Columns v0.1.0 | http://dobtco.github.io/jquery-resizable-columns/ | Licensed MIT | Built Wed Apr 30 2014 14:24:25 */
 .rc-handle-container {
   position: relative;
+  z-index: 1;
 }
 
 .rc-handle {
@@ -43,4 +29,174 @@ table.rc-table-resizing thead,
 table.rc-table-resizing thead > th,
 table.rc-table-resizing thead > th > a {
   cursor: ew-resize;
+}
+
+// Common styling for all list layouts that implment flex styling and
+// implment sticky headers and columns
+.frozen-list-headers.flex-list-layout .main-pane {
+  height: calc(~'100% - 50px');
+  .overflow-hidden();
+
+  .multi-selection-flex {
+    height: calc(~'100% - 56px');
+  }
+
+  .search-filter .filter-options .filter-definition-container {
+    max-height: 215px;
+    .overflow-auto();
+  }
+
+  .main-content {
+    .h-full();
+    .overflow-auto();
+
+    .paginated-flex-list {
+      height: 100%;
+
+      .flex-table-pagination {
+        .absolute();
+        .flex();
+        .w-full;
+        .bg-primary-content-background();
+
+        bottom: 0;
+        z-index: 200;
+        border-top: @borderWidget;
+      }
+
+      .flex-list-view {
+        height: calc(~'100% - 37px');
+
+        .flex-list-view-container {
+          .h-full();
+
+          .flex-list-view-content {
+            .h-full();
+            .relative();
+            .overflow-auto();
+
+            .rc-handle-container {
+              position: absolute;
+              top: 0;
+              z-index: 101;
+            }
+
+            table {
+              .overflow-auto();
+
+              thead {
+                .sticky();
+
+                top: 0;
+                z-index: 100;
+
+                tr {
+                  box-shadow: inset 0 1px 0 @borderColor, inset 0 -2px 0 @borderColor;
+                }
+
+                th.sticky-column.stick-left {
+                  .sticky();
+
+                  left: 0;
+                  z-index: 100;
+                }
+
+                th.sticky-column.stick-first {
+                  z-index: 100;
+                }
+
+                th.sticky-column.stick-right {
+                  .sticky();
+
+                  right: 0;
+                  z-index: 10;
+                }
+
+                .alert {
+                  &:not(.alert-process) {
+                    &::before {
+                      all: unset;
+                    }
+
+                    .relative();
+                    .p-0();
+
+                    .alert-list-contents {
+                      .sticky();
+                      .mt-0();
+
+                      top: 0;
+                    }
+                  }
+                }
+              }
+
+              tbody td.sticky-column.stick-left {
+                .sticky();
+
+                left: 0;
+                z-index: 10;
+              }
+
+              td.sticky-column.stick-right {
+                .sticky();
+
+                right: 0;
+                z-index: 10;
+
+                &:focus-within {
+                  z-index: 11;
+                }
+              }
+            }
+
+            .no-data-available {
+              margin-top: 12px;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.sidebar-visible,
+.sidebar-visible ~ #drawers {
+  .flex-list-view {
+    table {
+      .alert {
+        .alert-list-contents {
+          width: 66vw;
+        }
+      }
+    }
+  }
+}
+
+// Omniconsole shifts all dom elements in #conent over to the right by 320px. This is to account for that
+.omniconsole-visible,
+.omniconsole-visible ~ #drawers {
+  .flex-list-view {
+    table {
+      .alert {
+        .alert-list-contents {
+          width: calc(~'100vw - 320px');
+        }
+      }
+    }
+  }
+}
+
+.omniconsole-visible.sidebar-visible,
+.omniconsole-visible.sidebar-visible ~ #drawers {
+  .flex-list-view {
+    table {
+      .alert {
+        .alert-list-contents {
+          width: calc(~'66vw - 320px');
+        }
+      }
+    }
+  }
 }

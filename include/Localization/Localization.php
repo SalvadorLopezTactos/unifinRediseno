@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 
 /**
  * Localization manager
@@ -378,20 +378,30 @@ class Localization {
                 return mb_convert_encoding($string, $toCharset, $fromCharset);
             }
         } elseif ($canUseIconv) {
-            $newFromCharset = $fromCharset;
-            if (isset($this->iconvCharsetMap[$fromCharset])) {
-                $newFromCharset = $this->iconvCharsetMap[$fromCharset];
-                $this->logger->debug("Localization: iconv using charset {$newFromCharset} instead of {$fromCharset}");
-            }
-            $newToCharset = $toCharset;
-            if (isset($this->iconvCharsetMap[$toCharset])) {
-                $newToCharset = $this->iconvCharsetMap[$toCharset];
-                $this->logger->debug("Localization: iconv using charset {$newToCharset} instead of {$toCharset}");
-            }
+            $newFromCharset = $this->prepareNewCharset($fromCharset);
+            $newToCharset = $this->prepareNewCharset($toCharset);
             return iconv($newFromCharset, $newToCharset, $string);
         } else {
             return $string;
         }
+    }
+
+    /**
+     * Prepares new charset before iconv
+     *
+     * @param string $charset the character set
+     * @return string
+     */
+    public function prepareNewCharset(string $charset) : string
+    {
+        // Checks charset mapping from original case, then uppercase
+        $newCharset = $this->iconvCharsetMap[$charset] ??
+            ($this->iconvCharsetMap[sugarStrToUpper($charset)] ?? $charset);
+
+        if ($newCharset !== $charset) {
+            $this->logger->debug("Localization: iconv using charset {$newCharset} instead of {$charset}");
+        }
+        return $newCharset;
     }
 
     /**
@@ -456,7 +466,9 @@ class Localization {
 		$previousEncoding = mb_internal_encoding();
 	    mb_internal_encoding($toCharset);
 		$result = mb_encode_mimeheader($string, $toCharset, $encoding);
-		mb_internal_encoding($previousEncoding);
+        if (is_string($previousEncoding)) {
+            mb_internal_encoding($previousEncoding);
+        }
 		return $result;
 	}
 
@@ -699,7 +711,7 @@ eoq;
             $nameSpaceParts = explode(' ', $nameCommaParts[$idx]);
 
             $salutationFormatKey = array_search('s', $formatSpaceParts);
-            $salutationNameKey = false;
+            $salutationNameKey = null;
 
             if ($salutationFormatKey !== false) {
                 foreach($nameSpaceParts as $_idx => $_part) {

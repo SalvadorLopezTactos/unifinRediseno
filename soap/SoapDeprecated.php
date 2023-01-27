@@ -11,138 +11,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// the types/methods defined in this file are deprecated -- please see SoapSugarUsers.php, SoapStudio.php, etc.
-
-$server->wsdl->addComplexType(
-    'contact_detail',
-    'complexType',
-    'struct',
-    'all',
-    '',
-    array(
-        'email_address' => array('name'=>'email_address','type'=>'xsd:string'),
-        'name1' => array('name'=>'name1','type'=>'xsd:string'),
-        'name2' => array('name'=>'name2','type'=>'xsd:string'),
-        'association' => array('name'=>'association','type'=>'xsd:string'),
-        'id' => array('name'=>'id','type'=>'xsd:string'),
-        'msi_id' => array('name'=>'id','type'=>'xsd:string'),
-        'type' => array('name'=>'type','type'=>'xsd:string'),
-    )
-);
-
-$server->wsdl->addComplexType(
-    'contact_detail_array',
-    'complexType',
-    'array',
-    '',
-    'SOAP-ENC:Array',
-    array(),
-    array(
-        array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:contact_detail[]')
-    ),
-    'tns:contact_detail'
-);
-
-$server->wsdl->addComplexType(
-    'user_detail',
-    'complexType',
-    'struct',
-    'all',
-    '',
-    array(
-        'email_address' => array('name'=>'email_address','type'=>'xsd:string'),
-        'user_name' => array('name'=>'user_name', 'type'=>'xsd:string'),
-        'first_name' => array('name'=>'first_name','type'=>'xsd:string'),
-        'last_name' => array('name'=>'last_name','type'=>'xsd:string'),
-        'department' => array('name'=>'department','type'=>'xsd:string'),
-        'id' => array('name'=>'id','type'=>'xsd:string'),
-        'title' => array('name'=>'title','type'=>'xsd:string'),
-    )
-);
-
-$server->wsdl->addComplexType(
-    'user_detail_array',
-    'complexType',
-    'array',
-    '',
-    'SOAP-ENC:Array',
-    array(),
-    array(
-        array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:user_detail[]')
-    ),
-    'tns:user_detail'
-);
-
-
-$server->register(
+$server->addFunction([
     'create_session',
-    array('user_name'=>'xsd:string','password'=>'xsd:string'),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
-
-$server->register(
     'end_session',
-    array('user_name'=>'xsd:string'),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
-
-$server->register(
     'contact_by_email',
-    array('user_name'=>'xsd:string','password'=>'xsd:string', 'email_address'=>'xsd:string'),
-    array('return'=>'tns:contact_detail_array'),
-    $NAMESPACE);
-
-$server->register(
     'get_contact_relationships',
-    array('user_name'=>'xsd:string','password'=>'xsd:string', 'id'=>'xsd:string'),
-    array('return'=>'tns:contact_detail_array'),
-    $NAMESPACE);
-
-$server->register(
     'user_list',
-    array('user_name'=>'xsd:string','password'=>'xsd:string'),
-    array('return'=>'tns:user_detail_array'),
-    $NAMESPACE);
-
-$server->register(
     'search',
-    array('user_name'=>'xsd:string','password'=>'xsd:string', 'name'=>'xsd:string'),
-    array('return'=>'tns:contact_detail_array'),
-    $NAMESPACE);
+    'track_email',
+    'create_contact',
+    'create_lead',
+    'create_account',
+    'create_case',
+]);
 
-$server->register(
-	'track_email',
-    array('user_name'=>'xsd:string','password'=>'xsd:string','parent_id'=>'xsd:string', 'contact_ids'=>'xsd:string', 'date_sent'=>'xsd:date', 'email_subject'=>'xsd:string', 'email_body'=>'xsd:string'),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
 
-$server->register(
-	'create_contact',
-    array('user_name'=>'xsd:string','password'=>'xsd:string', 'first_name'=>'xsd:string', 'last_name'=>'xsd:string', 'email_address'=>'xsd:string'),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
-$server->register(
-	'create_lead',
-    array('user_name'=>'xsd:string','password'=>'xsd:string', 'first_name'=>'xsd:string', 'last_name'=>'xsd:string', 'email_address'=>'xsd:string'),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
-$server->register(
-	'create_account',
-    array('user_name'=>'xsd:string','password'=>'xsd:string', 'name'=>'xsd:string', 'phone'=>'xsd:string', 'website'=>'xsd:string'),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
-
-$server->register(
-	'create_opportunity',
-    array('user_name'=>'xsd:string','password'=>'xsd:string', 'name'=>'xsd:string', 'amount'=>'xsd:string'),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
-
-$server->register(
-	'create_case',
-    array('user_name'=>'xsd:string','password'=>'xsd:string', 'name'=>'xsd:string'),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
 /**
  * Create a new session.  This method is required before calling any other functions.
  *
@@ -207,7 +90,6 @@ function validate_user($user_name, $password){
     }
 
     $GLOBALS['log']->fatal("SECURITY: failed attempted login for $user_name using SOAP api");
-    $server->setError("Invalid username and/or password");
     return false;
 }
 

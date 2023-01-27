@@ -29,6 +29,15 @@ class DashboardDefaultMetadataApi extends SugarApi
                 'longHelp' => 'modules/Dashboards/clients/base/api/help/dashboard_default_metadata.html',
                 'minVersion' => '11.12',
             ],
+            'restoreMetadata' => [
+                'reqType' => 'PUT',
+                'path' => ['Dashboards', '?', 'restore-metadata'],
+                'pathVars' => ['module', 'id', ''],
+                'method' => 'restoreMetadata',
+                'shortHelp' => 'This method restores a dashboard to the default metadata',
+                'longHelp' => 'modules/Dashboards/clients/base/api/help/restore_metadata.html',
+                'minVersion' => '11.13',
+            ],
         ];
     }
 
@@ -61,7 +70,32 @@ class DashboardDefaultMetadataApi extends SugarApi
 
         return $this->formatBean($api, $args, $dashboard);
     }
-
+    
+    /**
+     * Restore dashboard to the default metadata
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     * @throws SugarApiExceptionMissingParameter
+     * @throws SugarApiExceptionRequestMethodFailure
+     */
+    public function restoreMetadata(ServiceBase $api, array $args): array
+    {
+        $this->requireArgs($args, ['dashboard_module', 'dashboard']);
+        
+        $dashboard = BeanFactory::retrieveBean('Dashboards', $args['id']);
+        if (empty($dashboard)) {
+            throw new SugarApiExceptionRequestMethodFailure('Failed to retrieve dashboard bean');
+        }
+        
+        $defaultMetadata = $this->getDefaultMetadata($args);
+        $dashboard->metadata = json_encode($defaultMetadata);
+        $dashboard->save();
+        
+        return $this->formatBean($api, $args, $dashboard);
+    }
+    
     /**
      * Set the dashboard bean's metadata to the specified metadata on
      * the specified tab and save
@@ -88,7 +122,14 @@ class DashboardDefaultMetadataApi extends SugarApi
         }
 
         // set to default metadata
-        $oldTabs[$tabIndex]['dashlets'] = $newTabs[$tabIndex]['dashlets'];
+        // if metadata has dashlets defined
+        if (isset($newTabs[$tabIndex]['dashlets'])) {
+            $oldTabs[$tabIndex]['dashlets'] = $newTabs[$tabIndex]['dashlets'];
+        } else {
+            // Older console metadata has components instead dashlets
+            // so we copy complete tab metadata
+            $oldTabs[$tabIndex] = $newTabs[$tabIndex];
+        }
 
         // re-encode and save
         $dashboard->metadata = json_encode($dashboardMetadata);
@@ -120,6 +161,18 @@ class DashboardDefaultMetadataApi extends SugarApi
     }
 
     /**
+     * Helper function to get the module name for the default dashboard file
+     *
+     * @param array $args
+     * @return string the module name
+     */
+    public function getModuleForFilename(array $args) : string
+    {
+        // dashboard_module takes precedence as dashboards may not be stored in module/Dashboards
+        return $args['dashboard_module'] ?? $args['module'];
+    }
+
+    /**
      * Get the filename (with full path) to the default dashboard file
      *
      * @param array $args
@@ -127,8 +180,7 @@ class DashboardDefaultMetadataApi extends SugarApi
      */
     public function getFilename(array $args) : string
     {
-        // dashboard_module takes precedence as dashboards may not be stored in module/Dashboards
-        $module = $args['dashboard_module'] ?? $args['module'];
+        $module = $this->getModuleForFilename($args);
         $dashboard = $args['dashboard'];
         return "modules/{$module}/dashboards/{$dashboard}/{$dashboard}.php";
     }

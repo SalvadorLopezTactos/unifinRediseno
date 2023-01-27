@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'Přidat dokument',
 	'LNK_DOCUMENT_LIST'=> 'Seznam dokumentů',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'Revize souvisejícího dokumentu',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'Úspěšně jste vytvořili {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a>.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'Číslo revize',
 	'LBL_FILENAME' => 'Název souboru',
 	'LBL_MIME' => 'MIME typ',

@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Erstellt von',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Zuletzt geändert von',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'E-Mail des Systems',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Dokumentenvorlage',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Dokumente zusammenführen',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Auswählen...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Dokumente in PDF zusammenführen',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Dokumente zusammenführen',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Geschäftsregel',
     'LBL_PMSE_LABEL_RULE' => 'Regel',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Nur aktualisierte Einträge (für alle Aktualisierungen - siehe Hilfe-Text)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Neue Datensätze oder erste Aktualisierung',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Neue Datensätze oder alle Aktualisierungen',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Beziehungsänderung',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Wählen Sie, wann der Prozess ausgeführt werden soll.<br><br>Neu: Führen Sie den Prozess aus, wenn ein neuer Datensatz erstellt wird.<br><br>Erste Aktualisierung: Der Prozess wird nur ausgeführt, wenn Kriterien das erste Mal für einen vorhandenen Datensatz erfüllt sind.<br><br>Alle Aktualisierungen: Der Prozess wird jedes Mal ausgeführt, wenn Kriterien für einen vorhandenen Datensatz erfüllt sind.<br><br>Neue Datensätze oder erste Aktualisierung: Der Prozess wird nur ausgeführt, wenn Kriterien für einen Datensatz während der Datensatzerstellung oder Datensatzaktualisierung erfüllt sind.<br><br>Neue Datensätze und alle Aktualisierungen: Der Prozess wird jedes Mal für alle neuen und vorhandenen Datensätze ausgeführt.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Wählen Sie, wann der Prozess ausgeführt werden soll.<br><br>Neu: Führen Sie den Prozess aus, wenn ein neuer Datensatz erstellt wird.<br><br>Erste Aktualisierung: Der Prozess wird nur ausgeführt, wenn Kriterien das erste Mal für einen vorhandenen Datensatz erfüllt sind.<br><br>Alle Aktualisierungen: Der Prozess wird jedes Mal ausgeführt, wenn Kriterien für einen vorhandenen Datensatz erfüllt sind.<br><br>Neue Datensätze oder erste Aktualisierung: Der Prozess wird nur ausgeführt, wenn Kriterien für einen Datensatz während der Datensatzerstellung oder Datensatzaktualisierung erfüllt sind.<br><br>Neue Datensätze und alle Aktualisierungen: Der Prozess wird jedes Mal für alle neuen und vorhandenen Datensätze ausgeführt.<br><br>Beziehungsänderungen: Der Prozess wird jedes Mal ausgeführt, wenn eine Beziehungsänderung vorgenommen wird.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Wählen Sie das SugarCRM-Modul, um den Ereignisauslöser anzuwenden',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Festes Datum',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Fehler',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Beurteilung der Beziehungsänderung',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Felder',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Modulfeldbewertung',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Alle verknüpften Datensätze',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Alle verknüpften Datensätze',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Hinzugefügt',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Entfernt',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Hinzugefügt oder entfernt',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Jede Beziehung',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Laufzeit',
 

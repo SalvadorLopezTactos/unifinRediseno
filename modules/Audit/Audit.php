@@ -99,9 +99,12 @@ class Audit extends SugarBean
         if (empty($this->fieldDefs)) {
             require 'metadata/audit_templateMetaData.php';
             $this->fieldDefs = $dictionary['audit']['fields'];
+            // defined in SugarBean
+            $this->field_defs = $this->fieldDefs;
         }
         return $this->fieldDefs;
     }
+
     /**
      * This method gets the Audit log and formats it specifically for the API.
      * @param SugarBean $bean
@@ -397,7 +400,7 @@ SQL;
                         implode(',', $field_arr['select_field_name']) : $field_arr['select_field_name']
                 ),
                 [$fieldValue]
-            )->fetch();
+            )->fetchAssociative();
 
         if ($row === false) {
             return null;
@@ -427,7 +430,7 @@ SQL;
         $expr = $qb->expr();
 
         $query = $qb->select(
-            ['atab.*, ae.source', 'ae.type AS event_type', 'usr.user_name AS created_by_username']
+            ['atab.*, ae.source', 'ae.type AS event_type', 'usr.user_name AS created_by_username', 'ae.impersonated_by']
         )->from($auditTable, 'atab')
             ->leftJoin('atab', 'audit_events', 'ae', 'ae.id = atab.event_id')
             ->leftJoin('atab', 'users', 'usr', 'usr.id = atab.created_by')
@@ -442,15 +445,15 @@ SQL;
 
     /**
      * @param SugarBean $bean
-     * @param \Doctrine\DBAL\Driver\ResultStatement $stmt
+     * @param Doctrine\DBAL\Result $result
      * @return array
      */
-    private function fetchAuditLogRows(SugarBean $bean, \Doctrine\DBAL\Driver\ResultStatement $stmt): array
+    private function fetchAuditLogRows(SugarBean $bean, \Doctrine\DBAL\Result $result): array
     {
         $fieldDefs = $this->fieldDefs;
         $aclCheckContext = array('bean' => $bean);
         $rows = [];
-        while ($row = $stmt->fetch()) {
+        while ($row = $result->fetchAssociative()) {
             if (!SugarACL::checkField($bean->module_dir, $row['field_name'], 'access', $aclCheckContext)) {
                 continue;
             }

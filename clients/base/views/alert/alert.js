@@ -190,7 +190,8 @@
             title: this.getTranslatedLabels(alert.title),
             messages: this.getTranslatedLabels(options.messages),
             closeable: _.isUndefined(options.closeable) || options.closeable,
-            alert: this
+            alert: this,
+            isLoadingAlert: options.title === app.lang.get('LBL_LOADING')
         }, templateOptions);
 
         return template(seed);
@@ -209,6 +210,9 @@
      */
     _getAlertProps: function(options) {
         var title = options.title || '';
+        if (title.endsWith(':')) {
+            title = title.slice(0, -1);
+        }
         var defaultTemplateName = this.name + '.error';
 
         switch (options.level) {
@@ -227,41 +231,41 @@
                     title: title || 'LBL_ALERT_TITLE_SUCCESS',
                     templateName: defaultTemplateName,
                     cssClass: 'alert-success',
-                    icon: 'fa-check-circle'
+                    icon: 'sicon-check-circle-line-lg'
                 };
             case this.LEVEL.WARNING:
                 return {
                     title: title || 'LBL_ALERT_TITLE_WARNING',
                     templateName: defaultTemplateName,
                     cssClass: 'alert-warning',
-                    icon: 'fa-exclamation-triangle'
+                    icon: 'sicon-warning-lg'
                 };
             case this.LEVEL.INFO:
                 return {
                     title: title || 'LBL_ALERT_TITLE_NOTICE',
                     templateName: defaultTemplateName,
                     cssClass: 'alert-info',
-                    icon: 'fa-info-circle'
+                    icon: 'sicon-info-lg'
                 };
             case this.LEVEL.ERROR:
                 return {
                     title: title || 'LBL_ALERT_TITLE_ERROR',
                     templateName: defaultTemplateName,
                     cssClass: 'alert-danger',
-                    icon: 'fa-exclamation-circle'
+                    icon: 'sicon-error-lg'
                 };
             case this.LEVEL.CONFIRMATION:
                 return {
                     title: title || 'LBL_ALERT_TITLE_WARNING',
                     templateName: this.name + '.confirmation',
                     cssClass: 'alert-warning',
-                    icon: 'fa-exclamation-triangle'
+                    icon: 'sicon-warning-lg'
                 };
             default:
                 return {
                     title: title,
                     cssClass: '',
-                    icon: 'fa-info-circle'
+                    icon: 'sicon-info'
                 };
         }
     },

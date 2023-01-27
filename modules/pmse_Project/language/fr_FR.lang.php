@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Créé par l&#39;utilisateur',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Dernière modification par l&#39;utilisateur',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'E-mail de système',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Modèle de document',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Fusion de documents',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Sélection...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Fusionner des documents au format PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Fusion de documents',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Règle de gestion',
     'LBL_PMSE_LABEL_RULE' => 'Règle',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Enregistrements mis à jours (Tout mettre à jour - Afficher l&#39;aide)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nouveaux enregistrements ou première mise à jour',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nouveaux enregistrements et toutes les mises à jour',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Changement de relation',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Sélectionner le moment où le processus démarrera.<br><br>Nouveau : Exécuter le processus lors de la création d&#39;un nouvel enregistrement.<br><br>Première mise à jour : le processus ne s&#39;exécute que lorsque le critère de première mise à jour est rempli pour un enregistrement existant.<br><br>Toutes les mises à jour : Le processus s&#39;exécute chaque fois que le critère est rempli pour un enregistrement existant.<br><br>Nouveaux enregistrements ou première mise à jour : Le processus s&#39;exécute uniquement lorsque le critère est rempli pour la première fois pour un enregistrement, que ce soit lors de la création ou de la mise à jour d&#39;un enregistrement.<br><br>Nouveaux enregistrements et toutes les mises à jour : Le processus s&#39;exécute à chaque fois pour tous les nouveaux enregistrements et les enregistrements existants.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Sélectionner le moment où le processus démarrera.<br><br>Nouveau : Exécuter le processus lors de la création d&#39;un nouvel enregistrement.<br><br>Première mise à jour : le processus ne s&#39;exécute que lorsque le critère de première mise à jour est rempli pour un enregistrement existant.<br><br>Toutes les mises à jour : Le processus s&#39;exécute chaque fois que le critère est rempli pour un enregistrement existant.<br><br>Nouveaux enregistrements ou première mise à jour : Le processus s&#39;exécute uniquement lorsque le critère est rempli pour la première fois pour un enregistrement, que ce soit lors de la création ou de la mise à jour d&#39;un enregistrement.<br><br>Nouveaux enregistrements et toutes les mises à jour : Le processus s&#39;exécute à chaque fois pour tous les nouveaux enregistrements et les enregistrements existants.<br><br>Changements de relations : Le processus s&#39;exécute chaque fois qu&#39;il y a un changement de relation.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Sélectionner le module Sugar déclenchant l&#39;évènement',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Date fixe',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Erreur',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Évaluation du changement de relation',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Champs',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Évaluation de champ du module',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Module',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Tous les enregistrements liés',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Tout enregistrement lié',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Ajouté',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Supprimé',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Ajouté ou supprimé',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'N&#39;importe quelle relation',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Temps d&#39;exécution',
 

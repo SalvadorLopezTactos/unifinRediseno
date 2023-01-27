@@ -52,7 +52,7 @@ function togglefield_select(field_num, setting){
 function changehref_text(href_value, href_text, field_num){
 	//var display_text = this.document.getElementById(href_value).value;
 	var display_text = this.document.getElementById('display_text_' + field_num).value;
-	this.document.getElementById(href_text).innerHTML = '\'' + display_text + '\'';
+	this.document.getElementById(href_text).textContent = '\'' + display_text + '\'';
 //end function changehref_text
 }
 

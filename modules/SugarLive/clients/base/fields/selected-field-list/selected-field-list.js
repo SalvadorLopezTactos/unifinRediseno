@@ -14,10 +14,10 @@
  * @extends View.Fields.Base.BaseField
  */
 ({
-    removeFldIcon: '<i class="fa fa-times-circle console-field-remove"></i>',
+    removeFldIcon: '<i class="sicon sicon-remove console-field-remove"></i>',
 
     events: {
-        'click .fa.fa-times-circle.console-field-remove': 'removePill'
+        'click .sicon.sicon-remove.console-field-remove': 'removePill'
     },
 
     /**

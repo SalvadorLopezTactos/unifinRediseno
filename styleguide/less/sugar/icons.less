@@ -1,9 +1,23 @@
-/* ICONS
-  ----------------*/
+/* --------------------------------
+SugarIcons
+-------------------------------- */
+.btn.active > .sicon,
+.btn-invisible.active > .sicon {
+  color: @white;
+}
+
+.sicon {
+  color: @sicon-color;
+  vertical-align: middle;
+}
+
+/* --------------------------------
+Icons
+-------------------------------- */
 
 .fa {
   -webkit-font-smoothing: antialiased;
-  color: @grayLight;
+  color: @gray70;
 }
 
 .fa-warning {
@@ -11,7 +25,7 @@
 }
 
 a:not(.disabled):hover > .fa {
-  color: @gray;
+  color: @gray80;
 }
 
 a:not(.disabled).active > .fa,
@@ -21,7 +35,7 @@ a:not(.disabled):active > .fa {
 
 .btn.active:focus > .fa-favorite,
 .btn.active:hover > .fa-favorite {
-  color: @gray !important;
+  color: @gray80;
 }
 
 .fa-favorite::before {
@@ -51,11 +65,6 @@ span.fa-white {
 }
 
 /* NEW SKIN START */
-
-a > .fa {
-  /* override */
-  color: @black;
-}
 
 /* override */
 .fa-favorite,

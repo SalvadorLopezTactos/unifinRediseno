@@ -12,7 +12,7 @@
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 $readableProductNames =
-    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+    getReadableProductNames(SubscriptionManager::instance()->getTopLevelUserSubscriptions($GLOBALS['current_user']));
 $readableProductNames = urlencode(implode(',', $readableProductNames));
 
 $url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&versió=' .

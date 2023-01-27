@@ -83,6 +83,12 @@ $viewdefs['OutboundEmail']['base']['view']['record'] = array(
                         'type',
                     ),
                 ),
+                array(
+                    'name' => 'favorite',
+                    'label' => 'LBL_FAVORITE',
+                    'type' => 'favorite',
+                    'dismiss_label' => true,
+                ),
             ),
         ),
         array(
@@ -130,9 +136,19 @@ $viewdefs['OutboundEmail']['base']['view']['record'] = array(
                     'type' => 'email-address',
                     'link' => false,
                 ),
-                'team_name',
             ),
         ),
+        [
+            'name' => 'panel_hidden',
+            'label' => 'LBL_RECORD_SHOWMORE',
+            'hide' => true,
+            'columns' => 2,
+            'placeholders' => true,
+            'fields' => [
+                'team_name',
+                'preferred_sending_account',
+            ],
+        ],
     ),
     'dependencies' => array(
         array(

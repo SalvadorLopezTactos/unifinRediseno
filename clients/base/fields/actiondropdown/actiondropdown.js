@@ -30,7 +30,7 @@
  *          'primary' => true,
  *          'switch_on_click' => true,
  *          'no_default_action' => false,
- *          'icon' => 'fa-cog',
+ *          'icon' => 'sicon-settings',
  *          'buttons' => array(
  *              ...
  *          )
@@ -111,7 +111,7 @@
          *
          * @property {string}
          */
-        this.caretIcon = this.def.icon || 'fa-caret-down';
+        this.caretIcon = this.def.icon || 'sicon-chevron-down';
 
         this.def.css_class = this.def.css_class ?
             this.def.css_class + ' actions' : 'actions';
@@ -185,6 +185,10 @@
                 return false;
             }
             prevIsDivider = field.type === 'divider';
+            // If we have a predefined button filter function, apply it
+            if (field.def.filterForRecordDashlet && _.isFunction(field.isAllowedDropdownButton)) {
+                return field.isAllowedDropdownButton();
+            }
             return true;
         });
 

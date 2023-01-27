@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Süreç Zamanına Duyarlı Planlar',
 'LBL_OOTB_DATA_ARCHIVER' => 'Aktif Veri Arşivlerini / Silme İşlemlerini Çalıştırın',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Coğrafik Kodlamayı Kaydeder',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Coğrafik Kodlama Çözümleyicisi',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Sıklık Derecesi:',
 'LBL_LIST_LIST_ORDER' => 'Planlayıcılar:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Crontab Kurulumu için',
 'LBL_CRON_LINUX_DESC' => 'Not: Sugar Planlayıcısını çalıştırabilmek için şu satırları crontab dosyasına ekleyin:',
 'LBL_CRON_WINDOWS_DESC' => 'Not: Sugar Planlayıcısını çalıştırmak için batch dosyası oluşturup, Windows Planlanmış Görevleri kullanın. Batch dosyası şu komutları içermelidir:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>curl için: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Görev Log&#39;u',
 'LBL_EXECUTE_TIME'			=> 'Çalıştırılma Zamanı',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Geçici dosyaları sil',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Normalleştirilmemiş Takım Güvenliği Verisini Yeniden Oluştur',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Ütün tanımını güncelle',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Coğrafik Kodlama Haritaları',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Coğrafik Kodlama Çözümleyicisi',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Gecelik Çalışan Kitlesel E-Posta Kampanyaları',
 'LBL_ASYNCMASSUPDATE' => 'Asenkron Toplu Güncelleme Uygulayın',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Eski Kayıt Listesini Temizle',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Aktivite Akış Boşaltma Yeri',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Süreç Zamanına Duyarlı Planlar',
+'LBL_SUGARJOBDATAARCHIVER' => 'Aktif Veri Arşivlerini / Silme İşlemlerini Çalıştırın',
 'LBL_PMSEENGINECRON' => 'SugarBPM Planlayıcı',
 );
 

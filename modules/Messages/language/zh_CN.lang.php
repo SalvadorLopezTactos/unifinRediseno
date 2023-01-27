@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => '查看消息报告',
     'LNK_IMPORT_MESSAGES' => '导入消息',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => '潜在客户编号',
+    'LBL_LEAD_NAME' => '潜在客户',
+    'LBL_ACTIVITY_STATUS_TEXT' => '客户方的聊天',
+    'LBL_ACTIVITY_CUSTOMER' => '客户',
+    'LBL_ACTIVITY_FINISHED' => '已结束',
+    'LBL_ACTIVITY_IN_PROGRESS' => '进行中',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => '邮件焦点抽屉',
 ];

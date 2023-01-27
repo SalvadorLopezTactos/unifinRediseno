@@ -11,5 +11,5 @@
  */
 --}}
 <input type="text" name="{{name}}" value="{{value}}"{{#if def.len}} maxlength="{{def.len}}"{{/if}}{{#if def.placeholder}} placeholder="{{str def.placeholder this.model.module}}"{{/if}} class="inherit-width">
-<a class="btn" href="javascript:void(0);" data-name="{{name}}"><i class="fa {{#if def.icon}}{{def.icon}}{{else}}fa-book{{/if}}" title="Book Address"></i></a>
+<a class="btn" href="javascript:void(0);" data-name="{{name}}"><i class="{{#if def.icon}}{{buildIcon def.icon}}{{else}}sicon sicon-user-group{{/if}}" title="Book Address"></i></a>
 {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

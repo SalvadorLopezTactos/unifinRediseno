@@ -838,6 +838,72 @@ $dictionary['PurchasedLineItem'] = [
             ],
         ],
     ],
+    'indices' => [
+        [
+            'name' => 'idx_purchaseid_del',
+            'type' => 'index',
+            'fields' => [
+                'purchase_id',
+                'deleted',
+            ],
+        ],
+        [
+            'name' => 'idx_pli_purchaseid_del',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'purchase_id',
+                'id',
+            ],
+        ],
+        [
+            'name' => 'idx_pli_dclose_del',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'date_closed',
+                'id',
+            ],
+        ],
+        [
+            'name' => 'idx_pli_dent_name_del',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'date_entered',
+                'name',
+                'id',
+            ],
+        ],
+        [
+            'name' => 'idx_pli_dclose_name_del',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'date_closed',
+                'name',
+                'id',
+            ],
+        ],
+        [
+            'name' => 'idx_pli_catid_del',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'category_id',
+                'id',
+            ],
+        ],
+        [
+            'name' => 'idx_pli_manid_del',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'manufacturer_id',
+                'id',
+            ],
+        ],
+    ],
     'relationships' => [
         'purchasedlineitem_categories' => [
             'lhs_module' => 'ProductCategories',

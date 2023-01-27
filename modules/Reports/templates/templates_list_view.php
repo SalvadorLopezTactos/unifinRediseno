@@ -774,10 +774,11 @@ function getColumnDataAndFillRowsFor2By2GPBY($reporter, $header_row, &$rowsAndCo
 		for ($j = 0 ; $j < count($columnData) ; $j++) {
 			$rowsAndColumnsTotalSet = false;
 			$grandTotalColumnSet = false;
-			$cellValueArray = $rowsAndColumnsData[$i][$columnData[$j]];
-			if (!is_array($cellValueArray)) {
+            if (!isset($rowsAndColumnsData[$i][$columnData[$j]])
+                || !is_array($rowsAndColumnsData[$i][$columnData[$j]])) {
 				continue;
 			} // if
+            $cellValueArray = $rowsAndColumnsData[$i][$columnData[$j]];
 			if (!isset($grandTotal[$columnData[$j]])) {
 				$grandTotal[$columnData[$j]] = $cellValueArray;
 				$grandTotalColumnSet = true;
@@ -1223,18 +1224,19 @@ function template_end_table(&$args) {
 	return "</table></p>";
 } // fn
 
-function template_header_row(&$header_row, &$args, $isSummaryCombo=false) {
-	global $oddRow, $report_smarty;
-	$count = 0;
-	if (!empty($args['show_pagination'])) { 
-		$report_smarty->assign('pagination_data', template_pagination_row($args));
-		$report_smarty->assign('show_pagination', $args['show_pagination']);
-	} // if
-	$report_smarty->assign('isSummaryCombo', $isSummaryCombo);
-	$report_smarty->assign('header_row', $header_row);
-	$report_smarty->assign('args', $args);
-	$oddRow = true;
-} // fn
+function template_header_row(&$header_row, &$args, $isSummaryCombo = false, $smartyTpl = null)
+{
+    global $oddRow, $report_smarty;
+    $count = 0;
+    if (!empty($args['show_pagination'])) {
+        $report_smarty->assignAndCopy($smartyTpl, 'pagination_data', template_pagination_row($args));
+        $report_smarty->assignAndCopy($smartyTpl, 'show_pagination', $args['show_pagination']);
+    }
+    $report_smarty->assignAndCopy($smartyTpl, 'isSummaryCombo', $isSummaryCombo);
+    $report_smarty->assignAndCopy($smartyTpl, 'header_row', $header_row);
+    $report_smarty->assignAndCopy($smartyTpl, 'args', $args);
+    $oddRow = true;
+}
 
 
 function template_header_row1(&$header_row, &$args, $isSummaryCombo=false)
@@ -1280,64 +1282,78 @@ $oddRow = true;
 $rownum = 0;
 
 
-function template_list_row(&$column_row,$equal_width=false, $isSummaryComboHeader=false, $divId="") {
-	global $mod_strings, $report_smarty;
-	// disable export if configured to
-	global $current_user, $sugar_config, $app_strings;
-	$report_smarty->assign('mod_strings', $mod_strings);
-	$report_smarty->assign('app_strings', $app_strings);
-	global $oddRow,$rownum;	
-	
+function template_list_row(
+    &$column_row,
+    $equal_width = false,
+    $isSummaryComboHeader = false,
+    $divId = '',
+    $smartyTpl = null
+) {
+    global $mod_strings;
+    global $report_smarty;
+    // disable export if configured to
+    global $current_user, $sugar_config, $app_strings;
+    global $oddRow, $rownum;
 
-	$reporter = $report_smarty->get_template_vars('reporter');
-	$list_type = $report_smarty->get_template_vars('list_type');
-	$display_columns = array();
-	if($list_type == 'summary') {
-		$display_columns = $reporter->report_def['summary_columns'];
-	} else if($list_type == 'list' ||$list_type == 'summary_combo') {
-		$display_columns = $reporter->report_def['display_columns'];
-	}
-	$field_types = array();
-	foreach($display_columns as $display_column) {
-		$field_def = $reporter->getFieldDefFromLayoutDef($display_column);
-		array_push($field_types, $field_def['type']);
-	}
+    $reporter = $smartyTpl->getTemplateVars('reporter');
+    $list_type = $smartyTpl->getTemplateVars('list_type');
+    $display_columns = array();
+    if ($list_type == 'summary') {
+        $display_columns = $reporter->report_def['summary_columns'];
+    } else {
+        if ($list_type == 'list' || $list_type == 'summary_combo') {
+            $display_columns = $reporter->report_def['display_columns'];
+        }
+    }
+    $field_types = array();
+    foreach ($display_columns as $display_column) {
+        $field_def = $reporter->getFieldDefFromLayoutDef($display_column);
+        array_push($field_types, $field_def['type']);
+    }
 
-	foreach($field_types as $key=>$field_type) {
-	if($oddRow) {
-			$row_class[$key] = 'oddListRowS1';
-			if(strtolower($field_type) == 'currency' ||
-			   strtolower($field_type) == 'double' ||
-			   strtolower($field_type) == 'decimal' ||
-			   strtolower($field_type) == 'float' ||
-			   strtolower($field_type) == 'int')
-			   $row_class[$key] = 'oddListRowS1 number_align';
-	} else {
-			$row_class[$key] = 'evenListRowS1';
-			if(strtolower($field_type) == 'currency' ||
-			   strtolower($field_type) == 'double' ||
-			   strtolower($field_type) == 'decimal' ||
-			   strtolower($field_type) == 'float' ||
-			   strtolower($field_type) == 'int')
-			   $row_class[$key] = 'evenListRowS1 number_align';
-	} // else
-	}
-	
-	$oddRow = !$oddRow;
-	if ( $equal_width) {
-		$width = round(100/count($column_row['cells'])); 
-	} else {
-		$width = '';
-	} // else
- 	$report_smarty->assign('row_class', $row_class);
- 	$report_smarty->assign('rownum', $rownum);
- 	$report_smarty->assign('width', $width);
- 	$report_smarty->assign('divId', $divId);
+    $row_class = [];
+    foreach ($field_types as $key => $field_type) {
+        if ($oddRow) {
+            $row_class[$key] = 'oddListRowS1';
+            if (strtolower($field_type) == 'currency'
+                || strtolower($field_type) == 'double'
+                || strtolower($field_type) == 'decimal'
+                || strtolower($field_type) == 'float'
+                || strtolower($field_type) == 'int'
+            ) {
+                $row_class[$key] = 'oddListRowS1 number_align';
+            }
+        } else {
+            $row_class[$key] = 'evenListRowS1';
+            if (strtolower($field_type) == 'currency'
+                || strtolower($field_type) == 'double'
+                || strtolower($field_type) == 'decimal'
+                || strtolower($field_type) == 'float'
+                || strtolower($field_type) == 'int'
+            ) {
+                $row_class[$key] = 'evenListRowS1 number_align';
+            }
+        }
+    }
+
+    $oddRow = !$oddRow;
+    if ($equal_width) {
+        $width = round(100 / count($column_row['cells']));
+    } else {
+        $width = '';
+    } // else
+    $report_smarty->assignAndCopy($smartyTpl, 'row_class', $row_class);
+    $report_smarty->assignAndCopy($smartyTpl, 'rownum', $rownum);
+    $report_smarty->assignAndCopy($smartyTpl, 'width', $width);
+    $report_smarty->assignAndCopy($smartyTpl, 'divId', $divId);
     $count = 0;
- 	$report_smarty->assign('isSummaryComboHeader', $isSummaryComboHeader);
- 	$report_smarty->assign('column_row', $column_row);
-     		
-	$rownum++;
+    $report_smarty->assignAndCopy($smartyTpl, 'isSummaryComboHeader', $isSummaryComboHeader);
+    $report_smarty->assignAndCopy($smartyTpl, 'column_row', $column_row);
+
+    $rownum++;
+    $report_smarty->assignAndCopy($smartyTpl, 'app_strings', $app_strings);
+    $report_smarty->assignAndCopy($smartyTpl, 'mod_strings', $mod_strings);
+
 } // fn
 
 

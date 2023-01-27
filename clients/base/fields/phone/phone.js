@@ -114,8 +114,9 @@
      * @private
      */
     _callSuccess: function() {
-        ccp = app.omniConsole.getComponent('omnichannel-ccp');
-        ccp.dialedNumber = this.model.get(this.name);
+        if (app.omniConsole) {
+            app.omniConsole.context.set('lastDialedRecord', this.model);
+        }
     },
 
     /**

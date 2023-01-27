@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'คำอธิบาย',
     'LBL_OW_TYPE'=>'ประเภท',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'พยากรณ์ทีมสำหรับ <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'ผู้ใต้บังคับบัญชา',
     'LBL_FDR_OPPORTUNITIES'=>'โอกาสทางการขายในประมาณการ:',
     'LBL_FDR_WEIGH'=>'จำนวนเงินถ่วงน้ำหนักของโอกาสทางการขาย:',
     'LBL_FDR_COMMIT'=>'จำนวนเงินที่คอมมิต',
     'LBL_FDR_DATE_COMMIT'=>'วันที่คอมมิต',
+    'LBL_FDR_FORECAST_HEADER' => 'พยากรณ์ผู้ขายสำหรับ <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'ประมาณการ: เวิร์กชีท',
     'LBL_DV_MY_FORECASTS' => 'ประมาณการของฉัน',
-    'LBL_DV_MY_TEAM' => "ประมาณการของทีม" ,
+    'LBL_DV_MY_TEAM' => "ประมาณการของทีม",
     'LBL_DV_TIMEPERIODS' => 'ช่วงเวลา:',
     'LBL_DV_FORECAST_PERIOD' => 'ช่วงเวลาของประมาณการ',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'โอกาสทางการขายของประมาณการ',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'อัตราฐาน',
 
     'LBL_QUOTA' => 'โควตา',
-    'LBL_QUOTA_ADJUSTED' => 'โควตา (ปรับค่า)',
+    'LBL_QUOTA_ADJUSTED' => 'ปรับโควตาแล้ว',
 
     'LBL_FORECAST_FOR'=>'เวิร์กชีทประมาณการสำหรับ: ',
     'LBL_FMT_ROLLUP_FORECAST'=>'(ทบยอด)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'โควตาเทียบกับคอมมิตเทียบกับมูลค่าตามจริง',
 
     'LBL_FORECAST' => 'ประมาณการ',
+    'LBL_COMMITMENT' => 'การมอบหมาย',
+    'LBL_TEAM_COMMITMENT' => 'การมอบหมายของทีม',
+    'LBL_FORECASTED' => 'พยากรณ์แล้ว',
+    'LBL_ADJUSTED_TOTAL' => 'ปรับยอดรวม',
     'LBL_COMMIT_STAGE' => 'ขั้นตอนที่คอมมิต',
     'LBL_SALES_STAGE' => 'ขั้นตอน',
     'LBL_AMOUNT' => 'จำนวนเงิน',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}} และ {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'เป็นไปได้ {{{direction}}} {{{from}}} เป็น {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'ดีที่สุด {{{direction}}} {{{from}}} เป็น {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'แย่ที่สุด {{{direction}}} {{{from}}} เป็น {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'เป็นไปได้มีค่าคงเดิม',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'ดีที่สุดมีค่าคงเดิม',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'แย่ที่สุดมีค่าคงเดิม',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'มอบหมายแล้ว (เป็นไปได้มาก){{{direction}}}{{{from}}} ถึง{{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'มอบหมายแล้ว (ดีที่สุด){{{direction}}}{{{from}}} ถึง{{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'มอบหมายแล้ว (แย่ที่สุด){{{direction}}}{{{from}}} ถึง{{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'มอบหมายแล้ว (เป็นไปได้มาก) อยู่ที่เดิม',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'มอบหมายแล้ว (ดีที่สุด) อยู่ที่เดิม',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'มอบหมายแล้ว (แย่ที่สุด) อยู่ที่เดิม',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'เดือนนี้ใน {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'ผลรวมที่แสดง',
     'LBL_TOTAL' => 'รวม',
     'LBL_OVERALL_TOTAL' => 'ผลรวมทั้งหมด',
-    'LBL_EDITABLE_INVALID' => 'ค่าไม่ถูกต้องสำหรับ {0}',
+    'LBL_EDITABLE_INVALID' => 'ค่าไม่ถูกต้องสำหรับ {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'ค่าต้องอยู่ระหว่าง {0} และ {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'คุณมีการเปลี่ยนแปลงที่ยังไม่ได้บันทึกในเวิร์กชีท',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'ระบบจะส่งออกเฉพาะข้อมูลที่บันทึกหรือคอมมิต ยกเลิกเพื่อล้มเลิกขั้นตอนนี้ ยืนยันเพื่อส่งออกข้อมูลที่บันทึกไว้',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'รวม',
     'LBL_CHART_NOT_INCLUDED' => 'ไม่รวม',
     'LBL_CHART_ADJUSTED' => ' (ปรับค่า)',
-    'LBL_SAVE_DRAFT' => 'บันทึกแบบร่าง',
+    'LBL_SAVE_DRAFT' => 'บันทึก',
     'LBL_CHANGES_BY' => 'การเปลี่ยนแปลงโดย {0}',
     'LBL_FORECAST_SETTINGS' => 'การตั้งค่า',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'วันที่เริ่มต้นของปีการเงิน:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'กำหนดค่าระยะเวลาที่จะใช้ในโมดูลประมาณการ <br><br>โปรดทราบว่าการตั้งค่าระยะเวลาจะไม่สามารถเปลี่ยนแปลงได้หลังจากตั้งค่าครั้งแรก<br><br>เริ่มต้นด้วยการเลือกวันที่เริ่มต้นของปีการเงิน ช่วงวันที่สำหรับช่วงเวลาจะมีการคำนวณโดยอัตโนมัติตามการเลือกของคุณ ช่วงเวลาย่อยจะอ้างอิงเวิร์กชีทประมาณการ <br><br>อนาคตที่สามารถดูได้ และช่วงเวลาที่ผ่านไปจะเป็นตัวกำหนดจำนวนช่วงเวลาย่อยที่ปรากฏในโมดูลประมาณการ ผู้ใช้จะสามารถดูและแก้ไขตัวเลขประมาณการในช่วงเวลาย่อยที่ปรากฏ',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'ออกแบบการจัดหมวดหมู่ตามที่คุณต้องการ {{forecastByModule}} <br><br>โปรดทราบว่าการตั้งค่าช่วงจะไม่สามารถเปลี่ยนแปลงได้หลังจากที่ได้ทำการตกลงแล้ว สำหรับอินสแตนซ์ที่อัปเกรดแล้ว การตั้งค่าช่วงจะถูกล็อกไว้กับข้อมูลพยากรณ์ที่มีอยู่<br><br>คุณสามารถเลือกหมวดหมู่สองหรือมากกว่าสองหมวดหมู่ตามช่วงที่ระยะที่เป็นไปได้ หรือสร้างหมวดหมู่ที่ไม่มีในค่าที่เป็นไปได้ <br><br>มีกล่องสี่เหลี่ยมให้ทำเครื่องหมายอยู่ทางด้านซ้ายของหมวดหมู่ที่ตั้งเอง ให้ใช้มันเพื่อตัดสินว่าหมวดหมู่นั้น ๆ ควรจะอยู่ในช่วงใดภายในจำนวนพยากรณ์ที่ตกลงและรายงานไว้กับผู้จัดการ <br><br>ผู้ใช้สามารถเปลี่ยนสถานะรวม/แยก และหมวดหมู่ของ {{forecastByModule}} เองจากแผ่นงานของพวกเขา',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'กำหนดค่าการจัดหมวดหมู่{{forecastByModule}} ตามที่คุณต้องการ<br><br>โปรดทราบว่าการตั้งค่าช่วงจะไม่สามารถเปลี่ยนแปลงได้หลังจากที่ได้ทำการตกลงแล้ว สำหรับอินสแตนซ์ที่อัปเกรดแล้ว การตั้งค่าช่วงจะถูกล็อกไว้กับข้อมูลพยากรณ์ที่มีอยู่<br><br>คุณสามารถเลือกหมวดหมู่สองหรือมากกว่าสองหมวดหมู่ตามช่วงที่ระยะที่เป็นไปได้ หรือสร้างหมวดหมู่ที่ไม่มีในค่าที่เป็นไปได้<br><br>มีกล่องสี่เหลี่ยมให้ทำเครื่องหมายอยู่ทางด้านซ้ายของหมวดหมู่ที่ตั้งเอง ให้ใช้มันเพื่อตัดสินว่าหมวดหมู่นั้น ๆ ควรจะอยู่ในช่วงใดภายในจำนวนพยากรณ์ที่ตกลงและรายงานไว้กับผู้จัดการ<br><br>ผู้ใช้สามารถเปลี่ยนสถานะรวม/แยก และหมวดหมู่ของ {{forecastByModule}} เองจากแผ่นงานของพวกเขา',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'เลือกคอลัมน์ที่คุณต้องการให้ผู้ใช้กรอกข้อมูลประมาณการของตนสำหรับแต่ละ {{forecastByModuleSingular}} โปรดทราบว่าจำนวนเงินที่เป็นไปได้นั้นจะเชื่อมโยงกับจำนวนเงินที่ปรากฏใน {{forecastByModule}} ดังนั้น คอลัมน์ "เป็นไปได้" จึงไม่สามารถซ่อนได้',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'เลือกคอลัมน์ที่คุณต้องการดูในโมดูลประมาณการ รายการของฟิลด์จะรวมเวิร์กชีท และอนุญาตให้ผู้ใช้เลือกวิธีกำหนดค่ามุมมองได้',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'ตำแหน่งนี้เป็นตัวจองพื้นที่สำหรับข้อความอธิบาย "ประมาณการโดย"!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'เกินมา',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'ไม่มีข้อมูล',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'โควตาการประชุม',
+    'LBL_OPEN_LIKELY' => 'เปิดที่เป็นไปได้',
+    'LBL_OPEN_BEST' => 'เปิดที่ดีที่สุด',
+    'LBL_OPEN_WORST' => 'เปิดที่แย่ที่สุด',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'ระบุโควตา',
     'LBL_ASSIGNING_QUOTA' => 'กำลังระบุโควตา',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "ประมาณการของทีม",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'คุณมีการเปลี่ยนแปลงที่ยังไม่ได้บันทึก คุณแน่ใจหรือไม่ว่าต้องการจัดเรียงเวิร์กชีทและยกเลิกการเปลี่ยนแปลง',
+
+    'LBL_SAVE_TOOLTIP' => 'บันทึกการเปลี่ยนแปลงที่ทำขึ้นในแถวของแผ่นงาน',
+    'LBL_COMMIT_TOOLTIP_REP' => 'บันทึกการเปลี่ยนแปลงระเบียนและส่งการพยากรณ์ให้ผู้จัดการ',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'ส่งการพยากรณ์ให้ผู้จัดการและมอบหมายโควต้า',
+
+    'LBL_SAVE_LABEL_REP' => 'บันทึก ',
+    'LBL_SAVE_LABEL_MGR' => 'บันทึกค่าที่ปรับเปลี่ยน',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'โมดูล {{plural_module_name}} เป็นการรวมระเบียน {{forecastby_singular_module}} เพื่อสร้าง {{forecastworksheets_module}} และคาดการณ์การขาย ผู้ใช้สามารถทำงานตาม {{quotas_module}} ของการขายได้ในระดับบุคคล ทีม และองค์กรการขาย ก่อนที่ผู้ใช้จะสามารถเข้าถึงโมดูล {{plural_module_name}} ผู้ดูแลระบบต้องเลือกช่วงเวลา ช่วง และสถานการณ์ที่ต้องการขององค์กรก่อน

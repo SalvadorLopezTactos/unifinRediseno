@@ -38,6 +38,9 @@ class EAPMViewMicrosoftOauth2Redirect extends SugarView
             case 'email':
                 $this->api = new ExtAPIMicrosoftEmail();
                 break;
+            case 'drive':
+                $this->api = new ExtAPIMicrosoft();
+                break;
             default:
                 return false;
         }
@@ -56,6 +59,7 @@ class EAPMViewMicrosoftOauth2Redirect extends SugarView
     {
         switch ($this->context) {
             case 'email':
+            case 'drive':
                 $response = $this->buildEmailContextResponse($tokenData);
                 break;
             default:

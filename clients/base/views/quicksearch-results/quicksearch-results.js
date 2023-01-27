@@ -161,6 +161,14 @@
     },
 
     /**
+     * Returns true if this view is currently in an open state
+     * @return {bool}
+     */
+    isOpen: function() {
+        return this.$('.typeahead').is(':visible');
+    },
+
+    /**
      * Hide the quickresults dropdown
      */
     close: function() {

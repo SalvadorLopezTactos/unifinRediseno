@@ -91,5 +91,12 @@ $viewdefs['Opportunities']['mobile']['layout']['subpanels'] = array(
                 'link' => 'archived_emails',
             ),
         ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_ESCALATIONS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'escalations',
+            ],
+        ],
     ),
 );

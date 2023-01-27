@@ -26,6 +26,11 @@ $viewdefs['Home']['base']['view']['webpage'] = array(
                 'limit' => '3',
                 'module' => 'Home',
             ),
+            'filter' => [
+                'blacklist' => [
+                    'module' => 'Administration',
+                ],
+            ],
         ),
     ),
     'config' => array(

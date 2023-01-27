@@ -40,4 +40,12 @@ class Factory
         self::$instances[$className] = new $classFullName();
         return self::$instances[$className];
     }
+
+    /**
+     * Removes cached instances
+     */
+    public static function removeCache()
+    {
+        self::$instances = [];
+    }
 }

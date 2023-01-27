@@ -55,7 +55,7 @@ $out =<<<EOQ
     <link rel="stylesheet" href="install/install.css" type="text/css" />
     <script type="text/javascript" src="install/installCommon.js"></script>
     <script type="text/javascript" src="install/dbConfig.js"></script>
-    <link REL="SHORTCUT ICON" HREF="include/images/sugar_icon.ico">
+    <link REL="SHORTCUT ICON" type="image/png" HREF="include/images/sugar-favicon.png">
     <script src="cache/include/javascript/sugar_grp1_yui.js?v={$versionToken}"></script>
     <script src="cache/include/javascript/sugar_grp1_jquery.js?v={$versionToken}"></script>
     <script type="text/javascript">
@@ -84,9 +84,11 @@ $out2 =<<<EOQ2
 		</p>
 		{$mod_strings['LBL_DBCONF_TITLE']}
 	</th>
-	<th width="200" height="30" style="text-align: right;"><a href="http://www.sugarcrm.com" target="_blank">
-		<IMG src="include/images/sugarcrm_login.png" alt="SugarCRM" border="0"></a>
-        </th>
+	<th width="200" height="30" style="text-align: right;">
+        <a href="http://www.sugarcrm.com" target="_blank">
+		    <img src="{$loginImage}" alt="SugarCRM" border="0" class="sugarcrm-logo">
+        </a>
+    </th>
 </tr>
 <tr>
 	<td colspan="2">
@@ -488,7 +490,7 @@ EOQ5;
 
 $sslDD = "<select name='setup_db_ssl_is_enabled' id='setup_db_ssl_is_enabled'><option value='no' >".$mod_strings['LBL_NO']."</option><option value='yes' ".(!empty($_SESSION['setup_db_options']['ssl'])?'selected':'').">".$mod_strings['LBL_YES']."</option>";
 $sslDD .= "</select><br>&nbsp;";
- 
+
 $outSSL=<<<SSL
 <table width="100%" cellpadding="0" cellpadding="0" border="0" class="StyleDottedHr">
 <tr><td width='1%'>&nbsp;</td><td width='60%'><div id='sugarDBSSL'><b>{$mod_strings['LBL_DBCONF_SSL_ENABLED']}</b></div>&nbsp;</td><td width='35%'>$sslDD</td></tr>

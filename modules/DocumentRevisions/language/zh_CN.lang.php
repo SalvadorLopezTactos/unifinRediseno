@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => '新建文档',
 	'LNK_DOCUMENT_LIST'=> '查看文档',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => '相关文档的修订',
+
+    'LBL_RECORD_SAVED_SUCCESS' => '您已成功创建 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a>。', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => '修订编号',
 	'LBL_FILENAME' => '文件：',
 	'LBL_MIME' => 'Mime 类型',

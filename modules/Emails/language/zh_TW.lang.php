@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => '使用者',
     'LBL_EMAILS_PRODUCTS_REL' => '已報價項目',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => '營收項目',
+    'LBL_EMAILS_ESCALATIONS_REL' => '升級',
     'LBL_EMAILS_MESSAGES_REL' => '訊息',
     'LBL_EMAILS_PURCHASES_REL' => '購買',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => '購買項目',
@@ -472,4 +473,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => '傳送電子郵件',
     'LBL_MAILBOX' => '收件帳戶',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => '請通過<a href="#OutboundEmail">電子郵件設置</a>配置出站電子郵件帳戶以發送電子郵件。',
 );

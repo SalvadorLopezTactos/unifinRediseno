@@ -34,6 +34,9 @@ final class Process
     /** @var OfflineOperations */
     private $db;
 
+    /** @var string */
+    private $tmpTableName;
+
     public function __construct()
     {
         $this->db = Db::getInstance();
@@ -130,6 +133,12 @@ final class Process
         return $this->db->getTemporaryTableCount();
     }
 
+    public function setTemporaryTableName(string $name): void
+    {
+        $this->tmpTableName = $name;
+        $this->db->setTmpTableName($name);
+    }
+
     public function migrateTemporaryTableChunk(Entity $entity, int $offset, int $limit): int
     {
         return $this->db->migrateTemporaryTableChunk(
@@ -174,6 +183,7 @@ final class Process
         $link = [
             'linked_field_name' => $entity->sourceFieldName,
             'join_table' => $entity->relationship->join_table,
+            'relationship_name' => $entity->relationship->name,
         ];
         if ($entity->relationship->getLHSModule() === $entity->getTargetModuleName()) {
             $link['main_table'] = $entity->relationship->lhs_table;
@@ -197,6 +207,7 @@ final class Process
         $hookConfig->setFieldConfiguration(
             $entity->getSourceModuleName(),
             $entity->sourceFieldName,
+            $link['relationship_name'],
             [
                 'module' => $entity->getTargetModuleName(),
                 'is_main' => true,
@@ -204,6 +215,7 @@ final class Process
                 'link' => $link,
                 // if synchronization process still alive we should update TMP table too
                 'synchronization_in_progress' => $syncInProgress,
+                'tmp_table_name' => $this->db->getTmpTableName(),
             ]
         );
 
@@ -211,6 +223,7 @@ final class Process
         $hookConfig->setFieldConfiguration(
             $entity->getTargetModuleName(),
             $entity->fieldName,
+            $link['relationship_name'],
             [
                 'module' => $entity->getSourceModuleName(),
                 'is_main' => false,
@@ -220,21 +233,19 @@ final class Process
                 // if O2M or O2O relationship changes directly by assigning a new ID - the hook should
                 // update the denormalized field
                 'track_field' => $entity->relationship->type === REL_MANY_MANY ? null : $link['main_key'],
+                'tmp_table_name' => $this->db->getTmpTableName(),
             ]
         );
     }
 
     private function unsetLogicHookConfiguration(Entity $entity): void
     {
-        $administration = Administration::getSettings('denormalization');
-        $fields = $administration->settings['denormalization_fields'] ?? [];
         $moduleName = $entity->getTargetModuleName();
         $sourceModuleName = $entity->getSourceModuleName();
-
-        unset($fields[$moduleName][$entity->fieldName]);
-        unset($fields[$sourceModuleName][$entity->sourceFieldName]);
-
-        $administration->saveSetting('denormalization', 'fields', array_filter($fields), 'base');
+        $relationshipName = $entity->getRelationshipName();
+        $hookConfig = new DatabaseConfiguration();
+        $hookConfig->unsetFieldConfiguration($moduleName, $entity->fieldName, $relationshipName);
+        $hookConfig->unsetFieldConfiguration($sourceModuleName, $entity->sourceFieldName, $relationshipName);
     }
 
     private function removeFieldDefExt(Entity $entity): void
@@ -325,8 +336,13 @@ final class Process
             $joinConditionTargetField = $joinSourceField;
             $joinConditionSourceField = 'id';
         } else {
-            $joinTargetField = $relationship->rhs_key;
-            $joinSourceField = $relationship->lhs_key;
+            if ($targetTable === $relationship->rhs_table) {
+                $joinTargetField = $relationship->rhs_key;
+                $joinSourceField = $relationship->lhs_key;
+            } else {
+                $joinTargetField = $relationship->lhs_key;
+                $joinSourceField = $relationship->rhs_key;
+            }
 
             $idField = 'id';
             $fromTable = $targetTable;

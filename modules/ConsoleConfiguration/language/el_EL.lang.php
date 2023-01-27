@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'Φίλτρο',
     'LBL_CONSOLE_FILTER_RULES' => 'Κανόνες Φίλτρου',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'Πάγωμα πρώτης στήλης',
+
     'LBL_CONSOLE_COLUMNS' => 'Στήλες',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'Στήλη πολλαπλών πεδίων',
     'LBL_CONSOLE_PRIMARY_SORT' => 'Πρωτεύουσα Ταξινόμηση',

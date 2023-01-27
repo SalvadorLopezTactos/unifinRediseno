@@ -11,9 +11,6 @@
  */
 --}}
 <div>
-    {{#if enableHeaderPane}}
-        {{partial 'headerpane' ../this view=../this}}
-    {{/if}}
     {{#eq recordState 'READY'}}
         {{partial 'businesscard' this view=this}}
     {{/eq}}

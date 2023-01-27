@@ -24,7 +24,7 @@ $viewdefs['base']['view']['shortcuts-help-headerpane'] = array(
             'name' => 'configure_button',
             'type' => 'button',
             'label' => ' ',
-            'icon' => 'fa-cog',
+            'icon' => 'sicon-settings',
             'events' => array(
                 'click' => 'button:configure_button:click',
             ),

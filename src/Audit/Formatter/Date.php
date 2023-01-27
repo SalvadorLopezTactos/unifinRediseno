@@ -26,7 +26,7 @@ class Date implements Formatter
     public function formatRows(array &$rows)
     {
         array_walk($rows, function (&$row) {
-            if (in_array($row['data_type'], ['date', 'datetime'])) {
+            if (isset($row['data_type']) && in_array($row['data_type'], ['date', 'datetime'])) {
                 $row['before'] = $this->formatDateTime($row['before'], $row['data_type']);
                 $row['after'] = $this->formatDateTime($row['after'], $row['data_type']);
             }

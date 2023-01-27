@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Baza e normës',
 
     'LBL_QUOTA' => 'Kuota',
-    'LBL_QUOTA_ADJUSTED' => 'Kuota (e rregulluar)',
+    'LBL_QUOTA_ADJUSTED' => 'Kuota e rregulluar',
 
     'LBL_FORECAST' => 'Parashikim',
     'LBL_COMMIT_STAGE' => 'Faza e përkushtimit',

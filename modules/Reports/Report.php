@@ -35,6 +35,11 @@ class Report
     public $full_bean_list = array();
 
     /**
+     * @var string[]
+     */
+    private $filterTableList = array();
+
+    /**
      * @var string
      */
     public $from;
@@ -1011,7 +1016,7 @@ class Report
             $this->handleException(
                 '%s <b>%s</b> %s',
                 $mod_strings['LBL_DELETED_FIELD_IN_REPORT1'],
-                implode(array_merge($this->invalid_links, $this->invalid_fields), ","),
+                implode(",", array_merge($this->invalid_links, $this->invalid_fields)),
                 $mod_strings['LBL_DELETED_FIELD_IN_REPORT2']
             );
         }
@@ -1115,7 +1120,7 @@ class Report
 	        }
         }
 
-        $layout_def['type'] = $field_def['type'];
+        $layout_def['type'] = $field_def['type'] ?? '';
 
         if (isset($field_def['precision'])) {
             $layout_def['precision'] = $field_def['precision'];
@@ -1192,6 +1197,7 @@ class Report
                 }
                 $this->register_field_for_query($current_filter);
                 $select_piece = "(" . $this->layout_manager->widgetQuery($current_filter) . ")";
+                $this->filterTableList[$current_filter['table_key']] = $current_filter['table_key'];
                 $where_clause .= $select_piece;
             }
             if ($isSubCondition == 1) {
@@ -1519,7 +1525,12 @@ class Report
                 if (!empty($display_column['column_key']) && !empty($this->all_fields[$display_column['column_key']])
                     && $display_column['type'] == 'currency') {
                     $field_def = $this->all_fields[$display_column['column_key']];
-                    if (strpos($field_def['name'], '_usdoll') === false) {
+                    $hasBaseRate = !empty($this->full_bean_list[$display_column['table_key']]
+                        ->field_defs['base_rate']);
+                    // When base rate exists in the module, we want to use the base rate from the module
+                    // rather than using the conversion rate from currencies table. We don't need to join
+                    // currencies table in this case.
+                    if (strpos($field_def['name'], '_usdoll') === false && !$hasBaseRate) {
                         $display_column['currency_alias'] = $display_column['table_alias'] . '_currencies';
                     }
                 }
@@ -1949,7 +1960,9 @@ class Report
 
             if (!empty($key)) {
                 $fieldName = $key . ':' . $field_data[1];
-                $field_type = DBManagerFactory::getInstance()->getFieldType($this->all_fields[$fieldName]);
+                if (isset($this->all_fields[$fieldName])) {
+                    $field_type = DBManagerFactory::getInstance()->getFieldType($this->all_fields[$fieldName]);
+                }
             }
             if (empty($field_type)) {
                 // Not a field or unknown field type - don't touch it
@@ -2659,7 +2672,7 @@ class Report
             $chart_type = $this->report_def['chart_type'];
         }
 
-        $record = $this->request->getValidInputRequest('record', 'Assert\Guid', -1) ?: -1;
+        $record = $this->request->getValidInputRequest('record', 'Assert\Guid', -1) ?: null;
         $assignedUserId = $this->request->getValidInputRequest('assigned_user_id', 'Assert\Guid');
 
         require_once('include/formbase.php');
@@ -2900,6 +2913,14 @@ class Report
     {
         $recordIds = array();
         $this->create_where();
+        $full_table_list = array_keys($this->full_table_list);
+        $this->filterTableList['self'] = 'self';
+        $optionalTables = array_diff($full_table_list, $this->filterTableList);
+        foreach ($optionalTables as $table_key) {
+            if ($this->full_table_list[$table_key]['optional']) {
+                unset($this->full_table_list[$table_key]);
+            }
+        }
         $this->create_from();
         $id = $this->focus->table_name . '.id';
         $where = $this->getRecordWhere();

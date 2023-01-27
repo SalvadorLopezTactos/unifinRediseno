@@ -15,8 +15,8 @@ namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 use OneLogin\Saml2\Constants;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 use Sugarcrm\IdentityProvider\Srn;
-use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\STS\EndpointInterface;
-use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\STS\EndpointService;
+use Sugarcrm\IdentityProvider\STS\EndpointInterface;
+use Sugarcrm\IdentityProvider\STS\EndpointService;
 
 /**
  * Configuration glue for IdM
@@ -422,19 +422,22 @@ class Config
      * Toggle the catalog_enabled config property and set catalog_url if enabled
      * @param bool $toggle Set catalog_enabled to this value in config_override.php
      */
-    protected function toggleCatalog(bool $toggle)
+    public function toggleCatalog(bool $toggle)
     {
         $configurator = new \Configurator();
         if ($configurator->config['catalog_enabled'] == $toggle) {
             return;
         }
-        $configurator->config['catalog_enabled'] = $toggle;
         if ($toggle) {
             // set catalog_url only if idmMode is changed from 'disabled' to 'enabled'
             $catalogURL = $this->getCatalogURL();
-            if ($catalogURL) {
-                $configurator->config['catalog_url'] = $catalogURL;
+            if (!$catalogURL) {
+                return;
             }
+            $configurator->config['catalog_enabled'] = $toggle;
+            $configurator->config['catalog_url'] = $catalogURL;
+        } else {
+            $configurator->config['catalog_enabled'] = $toggle;
         }
         $configurator->handleOverride();
         $configurator->clearCache();
@@ -487,7 +490,11 @@ class Config
     public function getIDMModeDisabledFields()
     {
         return array_filter($this->getUserVardef(), function ($def) {
-            return !empty($def['idm_mode_disabled']);
+            return (!empty($def['idm_mode_disabled']) &&
+                ($def['name'] != 'license_type' ||
+                    ($def['name'] === 'license_type' && $this->getUserLicenseTypeIdmModeLock())
+                )
+            );
         });
     }
 
@@ -697,7 +704,26 @@ class Config
                 'keySet' => 24 * 60 * 60, // 24 hours for requesting keySet for Mango client
                 'discovery' => 24 * 60 * 60, // 24 hours for requesting Discovery data
                 'authz' => 15 * 60, // 15 minutes for requesting AuthZ data
+                'remoteIdpResponseParsed' => 60, // 1 minute for remote IDP Auth response
             ],
         ];
+    }
+
+    /**
+     * check config settings for license type locker
+     * @return bool
+     */
+    public function getUserLicenseTypeIdmModeLock(): bool
+    {
+        return !empty(\Administration::getSettings('FeatureFlags')->settings['FeatureFlags_idm_mode_licensing']);
+    }
+
+    /**
+     * check config settings Multifactor authentication
+     * @return bool
+     */
+    public function isMultiFactorAuthenticationEnabled(): bool
+    {
+        return !empty(\Administration::getSettings('FeatureFlags')->settings['FeatureFlags_idm_mode_mfa_enabled']);
     }
 }

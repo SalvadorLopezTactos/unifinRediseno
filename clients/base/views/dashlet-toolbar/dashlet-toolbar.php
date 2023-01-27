@@ -14,12 +14,14 @@ $viewdefs["base"]["view"]["dashlet-toolbar"] = array(
         array(
             "type" => "dashletaction",
             "css_class" => "btn btn-invisible dashlet-toggle minify",
-            "icon" => "fa-chevron-up",
+            "icon" => "sicon-chevron-up",
             "action" => "toggleMinify",
             "tooltip" => "LBL_DASHLET_TOGGLE",
             'disallowed_layouts' => [
                 [
                     'name' => 'omnichannel-dashboard',
+                ], [
+                    'name' => 'portal-preview',
                 ],
             ],
         ),

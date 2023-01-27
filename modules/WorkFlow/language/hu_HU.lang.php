@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Munkafolyamat'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Típus',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Megjegyzés:</strong> A Sugar munkafolyamat és munkafolyamat kezelés funkcionalitás karbantartási módban található. A Sugar Enterprise kiadás ügyfelei használhatják a SugarBPM<sup class="trademark">TM</sup> által nyújtott funkcionalitást.',
 );
 

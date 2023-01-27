@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Název pole již existuje',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Název pole by měl obsahovat pouze následující znaky: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Žádný zahrnutý modul nebylo možné uložit',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Název rozevírací nabídky již existuje',
     'LBL_BTN_ADD' => 'Vlož [Alt+C]',
     'LBL_BTN_EDIT' => 'Editace',
     'LBL_GENERATE_URL' => 'Generovat URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Přidávání sloupce {0} do',
     'LBL_DONE' => 'Dokončeno',
     'LBL_EXE_NON_SIM_MODE' => 'Vyvolat nesimulační mód',
+    'LBL_CALCULATION_VISIBLE' => 'Zviditelnit pro výpočty',
 );
-
-
-?>

@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Örneğin, daha önce paylaşılmış olan bir problemi bulmak için bunu kullanabilirsiniz.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Eğer göndermek istediğiniz yeni bir destek Talebiniz varsa, yeni bir Talep göndermek için buraya tıklayabilirsiniz.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Buraya tıkladığınızda, istediğiniz zaman bu görünüme dönebileceksiniz.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Talep Etkileşimleri',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Talep Zaman Çizelgesi',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notlar',
 

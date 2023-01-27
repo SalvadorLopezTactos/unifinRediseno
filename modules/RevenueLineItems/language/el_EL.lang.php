@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Ταυτότητα Ανανέωσης Γραμμής Εσόδων',
     'LBL_PARENT_RLIS' => 'Μητρική Γραμμή Ειδών Εσόδων',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Μητρική Γραμμή Ειδών Εσόδων',
+    'LBL_FORECASTED_LIKELY' => 'Προβλεπόμενη Πιθανή',
     'LBL_EXPERT_ID' => 'Ειδικό Προϊόν',
     'LBL_FORECAST' => 'Συμπεριλαμβάνεται στην Πρόβλεψη',
     'LBL_SUBTOTAL' => 'Υποσύνολο',

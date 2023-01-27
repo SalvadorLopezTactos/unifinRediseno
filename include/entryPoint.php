@@ -92,7 +92,7 @@ require_once 'include/utils/encryption_utils.php';
 require_once 'include/SugarCache/SugarCache.php';
 
 if (empty($GLOBALS['installing'])) {
-    $GLOBALS['log'] = LoggerManager::getLogger('SugarCRM');
+    $GLOBALS['log'] = LoggerManager::getLogger();
 }
 
 if (!empty($sugar_config['xhprof_config'])) {
@@ -154,6 +154,10 @@ SugarApplication::preLoadLanguages();
 
 $timedate = TimeDate::getInstance();
 $GLOBALS['timedate'] = $timedate;
+
+    if (!empty($sugar_config['dbal_deprecation_log'])) {
+        \Doctrine\Deprecations\Deprecation::enableWithPsrLogger(\Sugarcrm\Sugarcrm\Logger\Factory::getLogger('deprecation'));
+    }
 
 $db = DBManagerFactory::getInstance();
 $db->resetQueryCount();

@@ -21,13 +21,13 @@
                                 {{#unless @first}}/{{/unless}}
                                 {{str label ../../../model.attributes.enabled_module}}
                             {{/each}}
-                        <i class="fa fa-times-circle multi-field-column-remove"></i>
+                        <i class="sicon sicon-remove multi-field-column-remove"></i>
                         </li>
                         {{#each this}}
                             <li class="pill" fieldname="{{name}}" fieldlabel="{{label}}" rel="tooltip"
                                 data-original-title="{{str label ../../../model.attributes.enabled_module}}">
                                 {{str label ../../../model.attributes.enabled_module}}
-                                <i class="fa fa-times-circle console-field-remove"></i>
+                                <i class="sicon sicon-remove console-field-remove"></i>
                             </li>
                         {{/each}}
                     </ul>
@@ -40,7 +40,7 @@
                     rel="tooltip"
                     data-original-title="{{str this.[0].label ../../model.attributes.enabled_module}}">
                     {{str this.[0].label ../../model.attributes.enabled_module}}
-                    <i class="fa fa-times-circle console-field-remove"></i>
+                    <i class="sicon sicon-remove console-field-remove"></i>
                 </li>
             {{/eq}}
         {{/each}}

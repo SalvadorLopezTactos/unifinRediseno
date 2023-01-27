@@ -142,8 +142,7 @@ class Document extends SugarBean {
                 $this->new_with_id = true;
             }
 
-            if ( isset($_REQUEST) && isset($_REQUEST['duplicateSave']) && $_REQUEST['duplicateSave'] == true && isset($_REQUEST['filename_old_doctype']) ) {
-                $this->doc_type = $_REQUEST['filename_old_doctype'];
+            if (isset($_REQUEST) && isset($_REQUEST['filename_duplicateBeanId'])) {
                 $isDuplicate = true;
             } else {
                 $isDuplicate = false;
@@ -153,7 +152,7 @@ class Document extends SugarBean {
 
             $createRevision = false;
             //Move file saved during populatefrompost to match the revision id rather than document id
-            if (!empty($_FILES['filename_file'])) {
+            if (isset($this->filename) && file_exists("upload://{$this->id}")) {
                 rename("upload://{$this->id}", "upload://{$Revision->id}");
                 $createRevision = true;
             } else if ( $isDuplicate && ( empty($this->doc_type) || $this->doc_type == 'Sugar' ) ) {
@@ -347,7 +346,7 @@ class Document extends SugarBean {
      */
 	function mark_relationships_deleted($id)
     {
-        $this->load_relationships('revisions');
+        $this->load_relationships();
        	$revisions= $this->get_linked_beans('revisions','DocumentRevision');
 
        	if (!empty($revisions) && is_array($revisions)) {

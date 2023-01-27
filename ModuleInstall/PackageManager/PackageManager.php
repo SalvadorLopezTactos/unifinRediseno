@@ -23,7 +23,7 @@ class PackageManager
     private $upgradedPackageManager;
 
     /**
-     * Constructor: In this method we will initialize the nusoap client to point to the hearbeat server
+     * Constructor: In this method we will initialize the soap client to point to the hearbeat server
      */
     public function __construct()
     {

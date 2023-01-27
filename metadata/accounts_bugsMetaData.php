@@ -46,13 +46,6 @@ $dictionary['accounts_bugs'] = array(
             ),
         ),
         array(
-            'name' => 'idx_acc_bug_acc',
-            'type' => 'index',
-            'fields' => array(
-                'account_id',
-            ),
-        ),
-        array(
             'name' => 'idx_acc_bug_bug',
             'type' => 'index',
             'fields' => array(

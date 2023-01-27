@@ -741,6 +741,7 @@ class Email extends SugarBean {
             $mailer->setSubject($mod_strings['LBL_TEST_EMAIL_SUBJECT']);
             $mailer->addRecipientsTo(new EmailIdentity($toaddress));
             $mailer->setTextBody($mod_strings['LBL_TEST_EMAIL_BODY']);
+            $mailer->setConnectionCommandTimeDuration(5);
 
             $mailer->send();
             $return['status'] = true;
@@ -1220,7 +1221,7 @@ class Email extends SugarBean {
             throw($me);
         }
         catch (Exception $e) {
-            // eat the phpmailerException but use it's message to provide context for the failure
+            // eat the \PHPMailer\PHPMailer\Exception but use it's message to provide context for the failure
             $me = new MailerException("Email2Send Failed: " . $e->getMessage(), MailerException::FailedToSend);
             $GLOBALS["log"]->error($me->getLogMessage());
             $GLOBALS["log"]->info($me->getTraceMessage());
@@ -1491,6 +1492,9 @@ class Email extends SugarBean {
                 if (empty($this->description)) {
                     $this->description = $this->getPlainTextFromHtml($this->description_html);
                 }
+
+                // Auto-relate case if possible
+                $this->handleCaseAssignment();
             }
 
 			$this->from_addr_name = $this->cleanEmails($this->from_addr_name);
@@ -1578,19 +1582,6 @@ class Email extends SugarBean {
         if ($this->state === static::STATE_DRAFT) {
             $this->assigned_user_id = $current_user->id;
         }
-    }
-
-    /**
-     * Clean string from potential XSS problems.
-     *
-     * @see SugarCleaner::cleanHtml()
-     * @param string $content
-     * @param bool $encoded
-     * @return string
-     */
-    protected function cleanContent($content, $encoded = false)
-    {
-        return SugarCleaner::cleanHtml($content, $encoded);
     }
 
     /**
@@ -2056,7 +2047,7 @@ class Email extends SugarBean {
             'SELECT email_id FROM emails_text WHERE email_id = ?',
             array($this->id)
         );
-        $guid = $stmt->fetchColumn();
+        $guid = $stmt->fetchOne();
 
         if ($guid) {
             $this->db->update($text);
@@ -2155,7 +2146,7 @@ class Email extends SugarBean {
             'bcc' => true,
         ];
 
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $missingAddressTypes[$row['address_type']] = false;
         }
 
@@ -2211,7 +2202,7 @@ class Email extends SugarBean {
         $stmt = $conn->executeQuery($query, array($this->id, 0));
 
         $return = array();
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $return[$row['address_type']][] = $row['email_address'];
         }
 
@@ -2246,7 +2237,7 @@ class Email extends SugarBean {
             " FROM emails_text WHERE email_id = ?";
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array($this->id));
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
         if (!empty($row)) {
             $this->description = $row['description'];
             $this->description_html = $row['description_html'];
@@ -2332,7 +2323,7 @@ class Email extends SugarBean {
      *
      * @return string
      * @throws SugarException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     public function getDirection()
     {
@@ -2411,7 +2402,7 @@ class Email extends SugarBean {
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array($id));
 
-        while ($noteId = $stmt->fetchColumn()) {
+        while ($noteId = $stmt->fetchOne()) {
             if (!in_array($noteId, $exRemoved)) {
                 $note = BeanFactory::getBean('Notes', $noteId);
 
@@ -3390,11 +3381,11 @@ class Email extends SugarBean {
         $query = 'SELECT config.value FROM config WHERE name = ?';
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array('fromaddress'));
-        $fromAddress = $stmt->fetchColumn();
+        $fromAddress = $stmt->fetchOne();
         $email['email'] = !empty($fromAddress) ? $fromAddress : '';
 
         $stmt = $conn->executeQuery($query, array('fromname'));
-        $fromName = $stmt->fetchColumn();
+        $fromName = $stmt->fetchOne();
         $email['name'] = !empty($fromName) ? $fromName : '';
 
         return $email;
@@ -3496,7 +3487,7 @@ class Email extends SugarBean {
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array($this->id, 0));
 
-        $row = $stmt->fetchColumn();
+        $row = $stmt->fetchOne();
         $this->attachment_image = ($row !=null) ? SugarThemeRegistry::current()->getImage('attachment',"","","") : "";
 
 		if ($row !=null) {
@@ -3547,7 +3538,7 @@ SQL;
                 $stmt = $connection->executeQuery($query, [$this->id]);
                 break;
         }
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
 
         if ($row !== false) {
             $contact = BeanFactory::getBean('Contacts', $row['id']);
@@ -3807,7 +3798,7 @@ SQL;
             'SELECT id FROM notes where email_id = ? AND email_type = ? AND file_mime_type is not null AND deleted = ?',
             array($id, 'Emails', 0)
         );
-        $noteId = $stmt->fetchColumn();
+        $noteId = $stmt->fetchOne();
         if (!empty($noteId)) {
             $hasAttachment = true;
         }
@@ -4340,7 +4331,7 @@ SQL;
         $stmt = $conn->executeQuery($sql, [$module, $addresses], [null, Connection::PARAM_STR_ARRAY]);
 
         // Get the first bean and set parent id/name, makes little sense since it's a many-to-many relationship
-        $id = $stmt->fetchColumn();
+        $id = $stmt->fetchOne();
         if ($id !== false) {
             $parent = BeanFactory::getBean($module, $id);
             $this->parent_type = $parent->module_dir;
@@ -4404,7 +4395,7 @@ SQL;
             'SELECT id, file_mime_type FROM notes WHERE email_id = ? AND deleted = 0',
             array($this->id)
         );
-        while ($a = $stmt->fetch()) {
+        while ($a = $stmt->fetchAssociative()) {
             $this->cid2Link($a['id'], $a['file_mime_type']);
         }
     }
@@ -4743,7 +4734,7 @@ SQL;
      *
      * @return bool
      * @throws SugarException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     protected function isToEmployeesOnly()
     {
@@ -4772,55 +4763,49 @@ SQL;
      */
     public function getOutboundEmailDropdown()
     {
-        $options = [];
-        $hasConfiguredDefault = false;
-        $error = false;
+        // Get the OutboundEmail beans that the user has access to
         $seed = BeanFactory::newBean('OutboundEmail');
-
         $q = new SugarQuery();
         $q->from($seed);
-        $beans = $seed->fetchFromQuery($q, ['type', 'name', 'email_address', 'mail_smtpserver']);
+        $q->orderBy('name', 'DESC');
+        $beans = $seed->fetchFromQuery(
+            $q,
+            ['type', 'name', 'email_address', 'mail_smtpserver', 'my_favorite', 'preferred_sending_account']
+        );
 
+        // For each configured OutboundEmail bean, add it to the options. Order
+        // the options list as follows:
+        // 1. Favorited accounts
+        // 2. Non-favorited, but preferred accounts
+        // 3. Non-favorited and non-preferred accounts
+        $favoriteAccounts = [];
+        $preferredAccounts = [];
+        $normalAccounts = [];
         foreach ($beans as $bean) {
             if ($bean->isConfigured()) {
+                // Set up the option text as: Name <email address> [SMTP server]
                 $name = $bean->name;
-
                 if ($bean->type === OutboundEmail::TYPE_SYSTEM && $GLOBALS['current_user']->isAdmin()) {
                     $name = '* ' . $name;
                 }
-
                 $option = sprintf('%s <%s> [%s]', $name, $bean->email_address, $bean->mail_smtpserver);
 
-                if ($bean->type === OutboundEmail::TYPE_SYSTEM_OVERRIDE) {
-                    // Force this element to the beginning of the array.
-                    $options = [$bean->id => $option] + $options;
+                if ($bean->my_favorite) {
+                    $favoriteAccounts[$bean->id] = $option;
+                } elseif ($bean->preferred_sending_account) {
+                    $preferredAccounts[$bean->id] = $option;
                 } else {
-                    $options[$bean->id] = $option;
-                }
-
-                if (in_array($bean->type, [OutboundEmail::TYPE_SYSTEM, OutboundEmail::TYPE_SYSTEM_OVERRIDE])) {
-                    $hasConfiguredDefault = true;
-                }
-            } else {
-                // The account is not configured. Reporting that the system-override account is not configured is
-                // prioritized so that the user will attempt to configure their account on his/her own. Once the user
-                // has configured his/her system-override account, the reported error will be for the system account,
-                // which tells the user to contact the administrator because there is nothing more he/she can do.
-                if ($bean->type === OutboundEmail::TYPE_SYSTEM_OVERRIDE) {
-                    $error = 'LBL_EMAIL_INVALID_USER_CONFIGURATION';
-                } elseif ($bean->type === 'system' && empty($error)) {
-                    $error = 'LBL_EMAIL_INVALID_SYSTEM_CONFIGURATION';
+                    $normalAccounts[$bean->id] = $option;
                 }
             }
         }
+        $options = array_merge($favoriteAccounts, $preferredAccounts, $normalAccounts);
 
-        if (!$hasConfiguredDefault) {
-            // There wasn't a system or system-override account. Something must have gone really wrong.
-            $error = 'LBL_EMAIL_INVALID_SYSTEM_CONFIGURATION';
-        }
-
-        if ($error) {
-            throw new SugarApiExceptionNotAuthorized($error, null, $this->getModuleName());
+        // If there are no available OutboundEmail accounts for the user to use,
+        // throw an error
+        if (empty($options)) {
+            $errorLbl = 'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE';
+            throw new SugarApiExceptionNotAuthorized($errorLbl, null, $this->getModuleName());
         }
 
         return $options;
@@ -4885,5 +4870,104 @@ SQL;
         }
 
         return str_replace(["\r\n", "\n", "\r"], '<br />', $text);
+    }
+
+    /**
+     * Automatically assign a case to this email if it is archived, if the
+     * "Case Macro" is set in Email settings, and if we can match a single case
+     * using the case macro
+     *
+     * @return bool Whether or not a case was assigned
+     */
+    protected function handleCaseAssignment(): bool
+    {
+        // If this email does not meet criteria, return early after the
+        // lightest operation
+        if (!$this->shouldPerformCaseAssignment()) {
+            return false;
+        }
+        // If we can't match a case via parsing the email subject looking for
+        // the case macro, return early after a lightweight DB operation
+        $acase = BeanFactory::newBean('Cases');
+        $subject = $this->name ?? '';
+        if (!$caseId = $this->getCaseIdFromCaseNumber($subject, $acase)) {
+            return false;
+        }
+
+        // At this point, we know the email subject contains the case macro, and
+        // a matching case exists, so only now do we retrieve the Case.
+        $acase->retrieve($caseId);
+        $this->parent_type = 'Cases';
+        $this->parent_id = $caseId;
+
+        // If the email does not already have a user assigned (as in Inbound Emails),
+        // assign it to the user assigned to the case. If the email already has an
+        // assigned user (created via API, outbound email, etc), that user has priority
+        if (empty($this->assigned_user_id)) {
+            $this->assigned_user_id = $acase->assigned_user_id;
+        }
+        $acase->pending_processing = true;
+        $acase->save();
+        return true;
+    }
+
+    /**
+     * We only want to automatically assign a case the first time an email is saved
+     * with the state "Archived".
+     * @return bool Whether or not we should perform case assignment
+     */
+    protected function shouldPerformCaseAssignment(): bool
+    {
+        // This email was already archived. We don't assign a case.
+        if (is_array($this->fetched_row) &&
+            isset($this->fetched_row['state']) &&
+            $this->fetched_row['state'] === self::STATE_ARCHIVED) {
+            return false;
+        }
+        // Email is not being Archived. We don't assign a case.
+        if ($this->state !== self::STATE_ARCHIVED) {
+            return false;
+        }
+        // Email either new archived email, or changing to the archived state
+        return true;
+    }
+
+    /**
+     * Check email subject for case macro defined in email settings. If we can match
+     * the macro and find a case number, attempt to match
+     *
+     * @param string $emailName The subject line of the email
+     * @param aCase  $aCase     A Case object
+     *
+     * @return string|null   Case ID or null if not found
+     */
+    protected function getCaseIdFromCaseNumber(string $emailName, aCase $aCase): ?string
+    {
+        //$emailSubjectMacro
+        $exMacro = explode('%1', $aCase->getEmailSubjectMacro());
+        $open = $exMacro[0];
+        $close = $exMacro[1];
+
+        if ($sub = stristr($emailName, $open)) { // eliminate everything up to the beginning of the macro and return the rest
+            // $sub is [CASE:XX] xxxxxxxxxxxxxxxxxxxxxx
+            $sub2 = str_replace($open, '', $sub);
+            // $sub2 is XX] xxxxxxxxxxxxxx
+            $sub3 = substr($sub2, 0, strpos($sub2, $close));
+
+            // case number is supposed to be numeric
+            if (ctype_digit(ltrim($sub3))) {
+                // filter out deleted records in order to create a new case
+                // if email is related to deleted one (bug #49840)
+                $query = 'SELECT id FROM cases WHERE case_number = '
+                    . $this->db->quoted($sub3)
+                    . ' and deleted = 0';
+                $r = $this->db->query($query, true);
+                $a = $this->db->fetchByAssoc($r);
+                if (!empty($a['id'])) {
+                    return $a['id'];
+                }
+            }
+        }
+        return null;
     }
 } // end class def

@@ -30,7 +30,6 @@
 
 var customFieldsData = {$customFieldsData};
 
-{literal}
 //create sortName function to apply custom sorting for the name column which contains HTML
 var sortName = function(a, b, desc)
 {
@@ -53,16 +52,15 @@ var labelFormatter = function(elCell, oRecord, oColumn, oData)
 };
 
 var myColumnDefs = [
-    {key:"name", label:SUGAR.language.get("ModuleBuilder", "LBL_NAME"),sortable:true, resizeable:true, formatter:"editFieldFormatter", width:150, sortOptions:{sortFunction:sortName, defaultDir:YAHOO.widget.DataTable.CLASS_ASC}},
-    {key:"label", label:SUGAR.language.get("ModuleBuilder", "LBL_DROPDOWN_ITEM_LABEL"),sortable:true, resizeable:true, formatter:"labelFormatter", width:200},
-    {key:"type", label:SUGAR.language.get("ModuleBuilder", "LBL_DATA_TYPE"),sortable:true,resizeable:true, width:125}
+    { key:"name", label:SUGAR.language.get("ModuleBuilder", "LBL_NAME"),sortable:true, resizeable:true, formatter:"editFieldFormatter", width:150, sortOptions:{ sortFunction:sortName, defaultDir:YAHOO.widget.DataTable.CLASS_ASC } },
+    { key:"label", label:SUGAR.language.get("ModuleBuilder", "LBL_DROPDOWN_ITEM_LABEL"),sortable:true, resizeable:true, formatter:"labelFormatter", width:200},
+    { key:"type", label:SUGAR.language.get("ModuleBuilder", "LBL_DATA_TYPE"),sortable:true,resizeable:true, width:125 }
 ];
-{/literal}
 
 var myDataSource = new YAHOO.util.DataSource({$fieldsData});
 myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-{literal}
-myDataSource.responseSchema = {fields: ["label","name","type"]};
+
+myDataSource.responseSchema = { fields: ["label","name","type"] };
 YAHOO.widget.DataTable.Formatter.editFieldFormatter = editFieldFormatter;
 YAHOO.widget.DataTable.Formatter.labelFormatter = labelFormatter;
 
@@ -71,7 +69,7 @@ var fieldsTable = new YAHOO.widget.ScrollingDataTable("field_table", myColumnDef
 fieldsTable.doBeforeSortColumn = function(column, sortDirection)
 {
     var url = 'index.php?module=ModuleBuilder&action=savetablesort&column=' + column.getKey() + '&direction=' + sortDirection;
-    YUI({comboBase:'index.php?entryPoint=getYUIComboFile&'}).use('io', function (Y) {
+    YUI({ comboBase:'index.php?entryPoint=getYUIComboFile&'}).use('io', function (Y) {
         Y.io(url, {
             method: 'POST',
             on: {
@@ -92,7 +90,6 @@ fieldsTable.subscribe("rowClickEvent", function(args) {
 });
 
 fieldsTable.render("#field_table");
-{/literal}
 
 {if !empty($sortPreferences)}
 pref = {$sortPreferences};
@@ -111,7 +108,7 @@ ModuleBuilder.helpSetup('fieldsEditor','default');
 </script>
 
 <style>
-{literal}
+
 a.mbLBLL {
 	text-decoration:none;
 	font-weight:normal;
@@ -121,5 +118,5 @@ a.mbLBLL {
 #field_table {
     text-align:left;
 }
-{/literal}
+
 </style>

@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Felhasználó által létrehozva',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Utolsóként módosította a felhasználó',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Rendszer e-mail',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Dokumentumsablon',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Dokumentumok egyesítése',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Választ...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Dokumentumok összevonása PDF formátumba',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Dokumentumok egyesítése',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Üzleti Szabály',
     'LBL_PMSE_LABEL_RULE' => 'Szabály',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Csak frissített bejegyzések (Összes frissítés - lásd a súgó szövegét)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Új bejegyzések vagy első frissítés',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Új bejegyzések és minden frissítés',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Kapcsolat változás',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Válassza ki, amikor a folyamat elkezdődik.<br><br>Új: futtassa a folyamatot, amikor az új bejegyzés létrehozásra kerül.<br><br>Első frissítés: a folyamat csak akkor fut, ha az első időfeltétel teljesül a már létező bejegyzésen.<br><br>Minden frissítés: a folyamatok lefutnak minden alkalommal, amikor egy, a már létező bejegyzéshez rendelt feltétel teljesül.<br><br>Új bejegyzések vagy első frissítés: a folyamatok csak akkor futnak, amikor először teljesül a bejegyzés időfeltétele akár a bejegyzés létrehozása, akár a bejegyzés frissítése közben.<br><br>Új bejegyzések és minden frissítés: a folyamatok minden alkalommal lefutnak minden új és létező bejegyzésre.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Válassza ki, amikor a folyamat elkezdődik.<br><br>Új: futtassa a folyamatot, amikor az új bejegyzés létrehozásra kerül.<br><br>Első frissítés: a folyamat csak akkor fut, ha az első időfeltétel teljesül a már létező bejegyzésen.<br><br>Minden frissítés: a folyamatok lefutnak minden alkalommal, amikor egy, a már létező bejegyzéshez rendelt feltétel teljesül.<br><br>Új bejegyzések vagy első frissítés: a folyamatok csak akkor futnak, amikor először teljesül a bejegyzés időfeltétele akár a bejegyzés létrehozása, akár a bejegyzés frissítése közben.<br><br>Új bejegyzések és minden frissítés: a folyamatok minden alkalommal lefutnak minden új és létező bejegyzésre.<br><br>Kapcsolat változások: a folyamat lefut minden alkalommal, amikor kapcsolatváltozás történik.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Válassza ki a SugarCRM modult az eseményindító alkalmazásához',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Meghatározott Dátum',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Hiba',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Kapcsolatváltozás értékelése',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Mezők',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Modulmező Értékelése',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Összes kapcsolódó rekord',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Bármely kapcsolódó rekord',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Hozzáadva',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Eltávolítva',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Hozzáadva vagy Eltávolítva',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Bármely kapcsolat',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Futtatás',
 

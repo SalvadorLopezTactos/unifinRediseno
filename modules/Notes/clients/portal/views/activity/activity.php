@@ -9,6 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+/*
+ * @deprecated as of 11.2.0 and will be removed in a future release
+ * Please use View.Views.Portal.ActivityTimelineView instead
+ */
 $viewdefs['Notes']['portal']['view']['activity'] = array(
     'buttons' =>
     array(

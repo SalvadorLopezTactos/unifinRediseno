@@ -233,6 +233,7 @@ SUGAR.reports = function() {
 					}
 					document.ReportsWizardForm.chart_type.selectedIndex = selected_chart_index;
 
+                    // Set the summary column and its type
 					selected_chart_index = 0;
 					for(var i=0;i < document.ReportsWizardForm.numerical_chart_column.options.length; i++) {
 						if (document.ReportsWizardForm.numerical_chart_column.options[i].value == report_def_str.numerical_chart_column) {
@@ -241,8 +242,8 @@ SUGAR.reports = function() {
 						}
 					}
 					document.ReportsWizardForm.numerical_chart_column.selectedIndex = selected_chart_index;
+                    SUGAR.reports.setNumericalChartColumnType();
 
-								
 					SUGAR.reports.showWizardNamedStep('chart_options');
 					chart_type = report_def_str.chart_type;
 					chart_description = report_def_str.chart_description;
@@ -548,6 +549,8 @@ SUGAR.reports = function() {
                     document.ReportsWizardForm.summary_sort_dir.value = cells[3].getElementsByTagName('select')[0].value;
 				}				
 			}
+
+            // Set the summary column and its type
 			for(var i=0;i < document.ReportsWizardForm.numerical_chart_column.options.length; i++) {
 				if (document.ReportsWizardForm.numerical_chart_column.options[i].value == selectedVal) {
 					selected_chart_index = i;
@@ -555,6 +558,8 @@ SUGAR.reports = function() {
 				}
 			}
 			document.ReportsWizardForm.numerical_chart_column.selectedIndex = selected_chart_index;
+            SUGAR.reports.setNumericalChartColumnType();
+
 			if (!sortedOn) {
 				document.ReportsWizardForm.summary_sort_by.value = '';
 				document.ReportsWizardForm.summary_sort_dir.value = '';
@@ -2226,7 +2231,8 @@ SUGAR.reports = function() {
 			var filter_row = filters_arr[filters_count_map[current_filter_id]];
 			var module = filter_row.module;
 			var field = filter_row.field;
-			
+            var fieldDef = module_defs[module].field_defs[field.name];
+
 			var select_html_info = new Object();
 			var options = new Array();
 			var select_info = new Object();
@@ -2234,8 +2240,12 @@ SUGAR.reports = function() {
             select_info['title'] = 'select filter qualifier';
 			select_info['onchange'] = "SUGAR.reports.filterTypeChanged("+current_filter_id+");";
 			select_html_info['select'] = select_info;
-		
-			field_type = field.type;
+
+            if (fieldDef.displayParams && fieldDef.displayParams.reports_type) {
+                field_type = fieldDef.displayParams.reports_type;
+            } else {
+                field_type = field.type;
+            }
 
 			if ( typeof(field.custom_type) != 'undefined' && typeof(filter_defs[field.custom_type]) != 'undefined') {
                             field_type = field.custom_type;
@@ -2867,8 +2877,9 @@ SUGAR.reports = function() {
 		
 		addFilterInput: function(htmlTableCell, filter, rowId) {
 			var filter_row = filters_arr[filters_count_map[current_filter_id]];
-			var module = filter_row.module;	
-			var field = filter_row.field
+            var module = filter_row.module;
+            var field = filter_row.field;
+            var fieldDef = module_defs[module].field_defs[field.name];
 			var qualifier_name = filter_row.qualify_select.options[filter_row.qualify_select.selectedIndex].value;
 
 			if ( typeof ( qualifier_name) == 'undefined' ||  qualifier_name == '') {
@@ -2878,8 +2889,12 @@ SUGAR.reports = function() {
 			if (typeof (filter.qualifier_name) == 'undefined' ||  filter.qualifier_name == '') {
 				filter.qualifier_name = qualifier_name;
 			}
-		
-			var field_type = field.type;
+
+            if (fieldDef.displayParams && fieldDef.displayParams.type) {
+                field_type = fieldDef.displayParams.type;
+            } else {
+                field_type = field.type;
+            }
 
 			if ( typeof(field.custom_type) != 'undefined') {
 				field_type = field.custom_type;
@@ -3163,7 +3178,8 @@ SUGAR.reports = function() {
 					var link_defs = module_defs[previousModule].link_defs;
 					for ( j in link_defs) {
 						if (parentsArr[i] == link_defs[j].name) {
-							full_table_list[parentsStrSoFar].link_def = link_defs[j];
+                            //we have to use deepCopy in order to lose the reference to the object
+                            full_table_list[parentsStrSoFar].link_def = app.utils.deepCopy(link_defs[j]);
 							full_table_list[parentsStrSoFar].link_def.table_key = parentsStrSoFar;
 							full_table_list[parentsStrSoFar].dependents =[rowId];
 							var relationship = link_defs[j].relationship_name;
@@ -3584,13 +3600,13 @@ SUGAR.reports = function() {
 			var filterRow = document.getElementById(current_filters_table).insertRow(numFilterRows);
 			filterRow.setAttribute('id', current_filters_table +'_filter_row_' + totalFilterRows);
 			var filterCell = filterRow.insertCell(0);
-			filterCell.innerHTML = 
-				"<input type='hidden' id='"+current_filters_table +"_filter_row_" + totalFilterRows+"_field' value='"+
-				document.getElementById(origFilterRowId + "_field").value+"'>"+
-				"<input type='hidden' id='"+current_filters_table +"_filter_row_" + totalFilterRows+"_link' value='"+
-				document.getElementById(origFilterRowId + "_link").value+"'>"+
-				"<input type='hidden' id='"+current_filters_table +"_filter_row_" + totalFilterRows+"_module' value='"+
-				document.getElementById(origFilterRowId + "_module").value +"'>" ;
+            filterCell.innerHTML =
+                '<input type="hidden" id="' + current_filters_table + '_filter_row_' + totalFilterRows + '_field" ' +
+				'value="' + _.escape(document.getElementById(origFilterRowId + '_field').value) + '">' +
+                '<input type="hidden" id="' + current_filters_table + '_filter_row_' + totalFilterRows + '_link" ' +
+				'value="' + _.escape(document.getElementById(origFilterRowId + '_link').value) + '">' +
+                '<input type="hidden" id="' + current_filters_table + '_filter_row_' + totalFilterRows + '_module" ' +
+				'value="' + _.escape(document.getElementById(origFilterRowId + '_module').value) + '">';
 
 			var filterCell = filterRow.insertCell(1);
 			filterCell.innerHTML = origFilterRow.cells[1].innerHTML;

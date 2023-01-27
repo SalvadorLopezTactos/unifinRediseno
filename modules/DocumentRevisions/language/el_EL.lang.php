@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'Δημιουργία Εγγράφου',
 	'LNK_DOCUMENT_LIST'=> 'Έγγραφα',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'Αναθεωρήσεις για σχετικό έγγραφο',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'Δημιουργήσατε με επιτυχία το {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a>.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'Αριθμός Αναθεώρησης',
 	'LBL_FILENAME' => 'Όνομα Αρχείου:',
 	'LBL_MIME' => 'Τύπος Mime',

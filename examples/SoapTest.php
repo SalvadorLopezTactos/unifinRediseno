@@ -33,50 +33,64 @@ if(isset($_REQUEST['offset'])){
 	$offset = $_REQUEST['offset'] + 20;
 	echo $offset;
 }
-require_once('vendor/nusoap//nusoap.php');  //must also have the nusoap code on the ClientSide.
-$soapclient = new nusoapclient($GLOBALS['sugar_config']['site_url'].'/soap.php');  //define the SOAP Client an
+    $soapURL = $GLOBALS['sugar_config']['site_url'].'/soap.php';
+    $params = array(
+        'soap_version' => SOAP_1_1,
+        'exceptions' => 0,
+        'uri' => $soapURL,
+        'location' => $soapURL,
+    );
+    $soapclient = new \SoapClient(null, $params);  //define the SOAP Client an
 
 echo '<b>LOGIN:</b><BR>';
-$result = $soapclient->call('login',array('user_auth'=>array('user_name'=>$user_name,'password'=>md5($user_password), 'version'=>'.01'), 'application_name'=>'SoapTest'));
+    $result = $soapclient->login(array('user_name'=>$user_name, 'password'=>md5($user_password), 'version'=>'.01'), 'SoapTest');
 echo '<b>HERE IS ERRORS:</b><BR>';
-echo $soapclient->error_str;
+    if (is_soap_fault($result)) {
+        echo $result->__toString();
+    }
 
 echo '<BR><BR><b>HERE IS RESPONSE:</b><BR>';
-echo $soapclient->response;
+    echo $soapclient->__getLastResponse();
 
 echo '<BR><BR><b>HERE IS RESULT:</b><BR>';
 echo print_r($result);
 $session = $result['id'];
 
 echo '<br><br><b>GET Case fields:</b><BR>';
-$result = $soapclient->call('get_module_fields',array('session'=>$session , 'module_name'=>'Cases'));
+    $result = $soapclient->get_module_fields($session, 'Cases');
 echo '<b>HERE IS ERRORS:</b><BR>';
-echo $soapclient->error_str;
+    if (is_soap_fault($result)) {
+        echo $result->__toString();
+    }
 
 echo '<BR><BR><b>HERE IS RESPONSE:</b><BR>';
-echo $soapclient->response;
+    echo $soapclient->__getLastResponse();
 
 echo '<BR><BR><b>HERE IS RESULT:</b><BR>';
 echo print_r($result);
 
 echo '<br><br><b>Get list of contacts:</b><BR>';
-$result = $soapclient->call('get_entry_list',array('session'=>$session,'module_name'=>'Contacts','query'=>'','order_by'=>'contacts.last_name asc','offset'=>$offset, 'select_fields'=>array(), 'max_results'=>'5'));
+    $result = $soapclient->get_entry_list($session, 'Contacts', '', 'contacts.last_name asc', $offset, [], '5');
 echo '<b>HERE IS ERRORS:</b><BR>';
-echo $soapclient->error_str;
+    if (is_soap_fault($result)) {
+        echo $result->__toString();
+    }
 
 echo '<BR><BR><b>HERE IS RESPONSE:</b><BR>';
-echo $soapclient->response;
+    echo $soapclient->__getLastResponse();
 
 echo '<BR><BR><b>HERE IS RESULT:</b><BR>';
 echo print_r($result);
 
 echo '<br><br><b>LOGOUT:</b><BR>';
-$result = $soapclient->call('logout',array('session'=>$session));
+    $result = $soapclient->logout($session);
 echo '<b>HERE IS ERRORS:</b><BR>';
-echo $soapclient->error_str;
+    if (is_soap_fault($result)) {
+        echo $result->__toString();
+    }
 
 echo '<BR><BR><b>HERE IS RESPONSE:</b><BR>';
-echo $soapclient->response;
+    echo $soapclient->__getLastResponse();
 
 echo '<BR><BR><b>HERE IS RESULT:</b><BR>';
 echo print_r($result);

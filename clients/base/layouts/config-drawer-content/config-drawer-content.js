@@ -55,7 +55,7 @@
         this._super('_render');
 
         //This is because backbone injects a wrapper element.
-        this.$el.addClass('accordion');
+        this.$el.addClass(`accordion ${this.module}-config`);
         this.$el.attr('id', this.collapseDivId);
         $toggles = this.$('.accordion-toggle');
         // ignore the first accordion toggle

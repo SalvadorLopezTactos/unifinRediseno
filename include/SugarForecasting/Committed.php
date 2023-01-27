@@ -12,6 +12,9 @@
 
 class SugarForecasting_Committed extends SugarForecasting_AbstractForecast implements SugarForecasting_ForecastSaveInterface
 {
+    const BASE_WORKSHEET_FIELD_EXTENSION = '_case';
+    const MANAGER_WORKSHEET_FIELD_EXTENSION = '_adjusted';
+
     /**
      * No longer used but the class parent implements SugarForecasting_ForecastProcessInterface
      *
@@ -45,23 +48,25 @@ class SugarForecasting_Committed extends SugarForecasting_AbstractForecast imple
         /* @var $worksheet ForecastWorksheet */
         $worksheet = BeanFactory::newBean('ForecastWorksheets');
 
-        $field_ext = '_case';
+        $field_ext = self::BASE_WORKSHEET_FIELD_EXTENSION;
 
+        // Get the worksheet values
         if ($commit_type == "manager") {
             $worksheet_totals = $mgr_worksheet->worksheetTotals($current_user->id, $args['timeperiod_id']);
             // we don't need the *_case values so lets make them the same as the *_adjusted values
-            $field_ext = '_adjusted';
+            $field_ext = self::MANAGER_WORKSHEET_FIELD_EXTENSION;
         } else {
             $worksheet_totals = $worksheet->worksheetTotals($args['timeperiod_id'], $current_user->id);
             // set likely
             $worksheet_totals['likely_case'] = SugarMath::init($worksheet_totals['amount'], 6)
-                    ->add($worksheet_totals['includedClosedAmount'])->result();
+                ->add($worksheet_totals['includedClosedAmount'])->result();
             $worksheet_totals['best_case'] = SugarMath::init($worksheet_totals['best_case'], 6)
-                    ->add($worksheet_totals['includedClosedBest'])->result();
+                ->add($worksheet_totals['includedClosedBest'])->result();
             $worksheet_totals['worst_case'] = SugarMath::init($worksheet_totals['worst_case'], 6)
-                    ->add($worksheet_totals['includedClosedWorst'])->result();
+                ->add($worksheet_totals['includedClosedWorst'])->result();
         }
-        
+        $worksheet_totals = $this->adjustWorksheetForArguments($args, $worksheet_totals, $field_ext);
+
         /* @var $forecast Forecast */
         $forecast = BeanFactory::newBean('Forecasts');
         $forecast->user_id = $current_user->id;
@@ -122,5 +127,26 @@ class SugarForecasting_Committed extends SugarForecasting_AbstractForecast imple
         $forecast->date_modified = $this->convertDateTimeToISO($db->fromConvert($forecast->date_modified, 'datetime'));
 
         return $worksheet_totals;
+    }
+
+    /**
+     * Adjust worksheet values based on the arguments passed in with the request
+     *
+     * @param array $args the array of request arguments
+     * @param array $worksheetTotals the original worksheet totals
+     * @param string $fieldExt the field extension used on forecast fields (e.g. '_case' vs '_adjusted')
+     * @return array the updated worksheet values
+     */
+    protected function adjustWorksheetForArguments($args, $worksheetTotals, $fieldExt)
+    {
+        // Check if the likely/best/worse have been explicitly set through
+        // request arguments
+        $fieldPrefixes = ['best', 'likely', 'worst'];
+        foreach ($fieldPrefixes as $fieldPrefix) {
+            $argField = $fieldPrefix . self::BASE_WORKSHEET_FIELD_EXTENSION;
+            $worksheetTotals[$fieldPrefix . $fieldExt] = $args[$argField] ?? $worksheetTotals[$fieldPrefix . $fieldExt];
+        }
+
+        return $worksheetTotals;
     }
 }

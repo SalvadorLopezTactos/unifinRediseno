@@ -12,8 +12,9 @@
 
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Job\RebuildJob;
 use Sugarcrm\Sugarcrm\ProductDefinition\Job\UpdateProductDefinitionJob;
+use Sugarcrm\Sugarcrm\Maps\Queue\Geocode\Scheduler as GeocodeScheduler;
+use Sugarcrm\Sugarcrm\Maps\Resolver as GeocodeResolver;
 use Sugarcrm\Sugarcrm\Dbal\Connection;
-use Doctrine\DBAL\FetchMode;
 
 /**
  * Set up an array of Jobs with the appropriate metadata
@@ -62,6 +63,11 @@ $job_strings = [
     'class::' . SugarJobProcessTimeAwareSchedules::class,
     'class::SugarJobDataArchiver',
 ];
+
+if (hasMapsLicense()) {
+    $job_strings[] = 'class::' . GeocodeScheduler::class;
+    $job_strings[] = 'class::' . GeocodeResolver::class;
+}
 
 /**
  * Job 0 refreshes all job schedulers at midnight
@@ -140,9 +146,6 @@ function pollMonitoredInboxes() {
 						$GLOBALS['log']->debug('Done Getting users for teamset');
 						$users = array();
 						foreach($usersList as $userObject) {
-							if ($userObject->is_group) {
-								continue;
-							} // if
 							$users[] = $userObject->id;
 						} // foreach
 						$distributionMethod = $ieX->get_stored_options("distrib_method", "");
@@ -271,7 +274,7 @@ function runMassEmailCampaign() {
 	if (!class_exists('LoggerManager')){
 
 	}
-	$GLOBALS['log'] = LoggerManager::getLogger('emailmandelivery');
+    $GLOBALS['log'] = LoggerManager::getLogger();
 	$GLOBALS['log']->debug('Called:runMassEmailCampaign');
 
 	if (!class_exists('DBManagerFactory')){
@@ -319,7 +322,7 @@ function pruneDatabase() {
                             ->where('deleted = 1')
                             ->setMaxResults($pruneBatchSize)
                             ->execute()
-                            ->fetchAll(FetchMode::COLUMN);
+                            ->fetchFirstColumn();
                         if (!is_countable($ids) || count($ids) === 0) {
                             break;
                         }
@@ -340,11 +343,13 @@ function pruneDatabase() {
                             $conn->commit();
                         }
                     }
+                    $db->optimizeTable($table . '_cstm');
                 }
             } else {
                 $db->query('DELETE FROM ' . $table . ' WHERE deleted = 1');
                 $db->commit();
             }
+            $db->optimizeTable($table);
 		} // foreach() tables
 
 		return true;
@@ -385,6 +390,7 @@ function trimTracker()
 
 	    $GLOBALS['log']->info("----->Scheduler is about to trim the $tableName table by running the query $query");
 		$db->query($query);
+        $db->optimizeTable($tableName);
 	} //foreach
     return true;
 }
@@ -498,6 +504,7 @@ function cleanOldRecordLists() {
 
     $query = "DELETE FROM record_list WHERE date_modified < '".$db->quote($hourAgo)."'";
     $db->query($query,true);
+    $db->optimizeTable('record_list');
 
 	return true;
 }
@@ -519,6 +526,7 @@ function cleanJobQueue($job)
     }
     $hard_cutoff_date = $job->db->quoted($td->getNow()->modify("- $hard_cutoff days")->asDb());
     $job->db->query("DELETE FROM {$job->table_name} WHERE status='done' AND date_modified < ".$job->db->convert($hard_cutoff_date, 'datetime'));
+    $job->db->optimizeTable($job->table_name);
     return true;
 }
 
@@ -534,4 +542,52 @@ if($extfile) {
 $extfile = SugarAutoLoader::loadExtension('app_schedulers');
 if($extfile) {
     require $extfile;
+}
+
+/**
+ * Job Watcher for Upgrade from versions below 11.1.0. Manages denormalization jobs, makes them running one by one
+ *
+ * @param SchedulersJob $watcherJob
+ * @throws SugarApiExceptionNotFound
+ * @return bool
+ */
+function upgradeDenormalizationStateForSugar11(SchedulersJob $watcherJob)
+{
+    $data = json_decode($watcherJob->data, true);
+    $currentStatus = '';
+    foreach ($data as $id => $isDone) {
+        if ($isDone) {
+            continue;
+        }
+
+        $currentJob = BeanFactory::getBean('SchedulersJobs', $id, [], false);
+        if (empty($currentJob->id)) {
+            continue;
+        }
+        if (!empty($currentJob->deleted)) {
+            $currentJob->mark_undeleted($currentJob->id);
+            $currentStatus = 'started job ' . $currentJob->name;
+        } elseif ($currentJob->status !== SchedulersJob::JOB_STATUS_DONE) {
+            $currentStatus = 'awaiting for job ' . $currentJob->name;
+        } else {
+            // mark the job as Done
+            $data[$id] = true;
+            $watcherJob->data = json_encode($data);
+            $watcherJob->save();
+            $currentStatus = 'awaiting for next job';
+        }
+
+        break;
+    }
+    // we're done
+    if (empty($currentStatus)) {
+        $watcherJob->message = '';
+        $watcherJob->resolveJob(SchedulersJob::JOB_SUCCESS);
+    } else {
+        // postpone the job watcher
+        $watcherJob->message = '';
+        $watcherJob->postponeJob($currentStatus, 5);
+    }
+
+    return true;
 }

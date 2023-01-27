@@ -20,7 +20,7 @@
         app.plugins.register('KBContent', ['view'], {
 
             events: {
-                'click [name=template]': 'launchTemplateDrawer'
+                'click .mce-btnKBTemplate': 'launchTemplateDrawer'
             },
 
             CONTENT_LOCALIZATION: 1,

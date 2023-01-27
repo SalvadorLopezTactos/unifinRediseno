@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Descripció',
     'LBL_OW_TYPE'=>'Tipus',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Previsió de l&#39;equip per a <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Informador Directe',
     'LBL_FDR_OPPORTUNITIES'=>'Oportunitats en objectiu:',
     'LBL_FDR_WEIGH'=>'Quantitat Ponderada d´oportunitats:',
     'LBL_FDR_COMMIT'=>'Quantitat Realitzada',
     'LBL_FDR_DATE_COMMIT'=>'Data de Realització',
+    'LBL_FDR_FORECAST_HEADER' => 'Previsió del venedor per a <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Objectius: Full de càlcul',
     'LBL_DV_MY_FORECASTS' => 'Els Meus Objectius',
-    'LBL_DV_MY_TEAM' => "Objectius del meu Equip" ,
+    'LBL_DV_MY_TEAM' => "Objectius del meu Equip",
     'LBL_DV_TIMEPERIODS' => 'Períodes de Temps:',
     'LBL_DV_FORECAST_PERIOD' => 'Període de Temps del Objectiu',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Oportunitats del Objectiu',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Taxa Base',
 
     'LBL_QUOTA' => 'Quota',
-    'LBL_QUOTA_ADJUSTED' => 'Quota (Ajustat)',
+    'LBL_QUOTA_ADJUSTED' => 'Quota ajustada',
 
     'LBL_FORECAST_FOR'=>'Full d´Objectiu per a:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Dinàmica)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Pressupostat vs. Realitzat vs. Real',
 
     'LBL_FORECAST' => 'Previsió',
+    'LBL_COMMITMENT' => 'Confirmació',
+    'LBL_TEAM_COMMITMENT' => 'Confirmació de l&#39;equip',
+    'LBL_FORECASTED' => 'Previst',
+    'LBL_ADJUSTED_TOTAL' => 'Total ajustat',
     'LBL_COMMIT_STAGE' => 'Etapa compromesa',
     'LBL_SALES_STAGE' => 'Etapa',
     'LBL_AMOUNT' => 'Quantitat',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, i {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'probable {{{direction}}} {{{from}}} a {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'millor {{{direction}}} {{{from}}} a {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'pitjor {{{direction}}} {{{from}}} a {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'probablement es va mantenir igual',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'millor es va mantenir igual',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'pitjor es va mantenir igual',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Confirmat (probable) {{{direction}}} {{{from}}} a {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Confirmat (millor) {{{direction}}} {{{from}}} a {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Confirmat (pitjor) {{{direction}}} {{{from}}} a {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Confirmat (probable) és el mateix',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Confirmat (millor) és el mateix',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Confirmat (pitjor) és el mateix',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Aquest mes a {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Total mostrat',
     'LBL_TOTAL' => 'Total',
     'LBL_OVERALL_TOTAL' => 'Total general',
-    'LBL_EDITABLE_INVALID' => 'Valor incorrecte {0}',
+    'LBL_EDITABLE_INVALID' => 'Valor invàlid per {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'El valor ha d&#39;estar entre {0} i {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Tens canvis sense desar en el seu full de treball.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Recordeu que nomes les dades guardades o compromeses es poden exportar. Premeu D&#39;acord per continuar exportant, o Cancel·la per tornar al full de càlcul.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Inclòs',
     'LBL_CHART_NOT_INCLUDED' => 'No Inclòs',
     'LBL_CHART_ADJUSTED' => '(Ajustat)',
-    'LBL_SAVE_DRAFT' => 'Guardar Esborrany',
+    'LBL_SAVE_DRAFT' => 'Desa',
     'LBL_CHANGES_BY' => 'Els canvis de {0}',
     'LBL_FORECAST_SETTINGS' => 'Configuració',
 
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'S&#39;excedeix per',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'No hi ha dades',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Es compleix l&#39;oferta',
+    'LBL_OPEN_LIKELY' => 'Obert probable',
+    'LBL_OPEN_BEST' => 'Obert millor',
+    'LBL_OPEN_WORST' => 'Obert pitjor',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Assigna oferta',
     'LBL_ASSIGNING_QUOTA' => 'S&#39;està assignant l&#39;oferta',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Previsions del meu equip",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Teniu canvis que no s&#39;han desat. Esteu segur que voleu sortir del full de càlcul i descartar els canvis?',
+
+    'LBL_SAVE_TOOLTIP' => 'Desa els canvis que s&#39;han fet a les files del full de càlcul',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Desa els canvis als registres i confirma la previsió a l&#39;administrador',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Envia la previsió a l&#39;administrador i assigna la quota',
+
+    'LBL_SAVE_LABEL_REP' => 'Desa ',
+    'LBL_SAVE_LABEL_MGR' => 'Desa els valors ajustats',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'El mòdul {{plural_module_name}} inclou registres de {{forecastby_singular_module}} per construir {{forecastworksheets_module}} i predir vendes. Els usuaris poden intentar aconseguir les {{quotas_module}} de vendes a nivell individual, d&#39;equip i d&#39;organització de vendes. Abans que els usuaris puguin accedir al mòdul {{plural_module_name}}, cal que un administrador seleccioni els intervals de temps, límits i situacions desitjades de l&#39;organització.

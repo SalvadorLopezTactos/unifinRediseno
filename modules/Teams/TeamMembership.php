@@ -78,7 +78,7 @@ class TeamMembership extends SugarBean {
                 AND team_id = ?
                 AND deleted = 0';
         $stmt = $this->db->getConnection()->executeQuery($query, [$user_id, $team_id]);
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
 
         if ($row!= null) {
             $this->retrieve($row['id']);

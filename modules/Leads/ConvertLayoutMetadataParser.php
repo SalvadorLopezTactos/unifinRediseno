@@ -38,6 +38,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
         'pmse_Emails_Templates',
         'pmse_Inbox',
         'pmse_Project',
+        'RevenueLineItems',
     );
 
     //fields that should be hidden in the create layout
@@ -98,8 +99,14 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
      */
     public function updateConvertDef($data)
     {
+        $isUsingRLIsInConvertBefore = Lead::isUsingRLIsInConvert();
         $this->_convertdefs['modules'] = $this->mergeConvertDefs($data);
         $this->deploy();
+        $isUsingRLIsInConvertAfter = Lead::isUsingRLIsInConvert();
+        if ($isUsingRLIsInConvertBefore !== $isUsingRLIsInConvertAfter) {
+            $leadViews = new LeadViews();
+            $leadViews->toggleConvertDashboardProductDashlets($isUsingRLIsInConvertAfter);
+        }
     }
 
     /**
@@ -208,7 +215,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
     /**
      * Deploy the convert defs
      */
-    protected function deploy()
+    public function deploy()
     {
         // when we deploy get rid of the working file; we have the changes in the MB_CUSTOMMETADATALOCATION so no need for a redundant copy in MB_WORKINGMETADATALOCATION
         // this also simplifies manual editing of layouts. You can now switch back and forth between Studio and manual changes without having to keep these two locations in sync
@@ -258,9 +265,9 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
     /**
      * Convert metadata contains array of modules, retrieve a specific module def
      *
-     * @param $module module name
+     * @param string $module module name
      * @param null $convertDefs
-     * @return bool
+     * @return bool|array
      */
     public function getDefForModule($module, $convertDefs = null)
     {
@@ -278,6 +285,25 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
     }
 
     /**
+     * Set the convert defs for a given module
+     * @param $module
+     * @param $newDefs
+     */
+    public function setDefForModule($module, $newDefs)
+    {
+        // If the module already exists, update the existing defs
+        foreach ($this->_convertdefs['modules'] as $idx => $existingDef) {
+            if ($existingDef['module'] === $module) {
+                $this->_convertdefs['modules'][$idx] = $newDefs;
+                return;
+            }
+        }
+
+        // Otherwise, add the new module at the end
+        $this->_convertdefs['modules'][] = $newDefs;
+    }
+
+    /**
      * Retrieve the default definition for a module
      * If exists in original convert def, use that, otherwise, use the default def
      *
@@ -288,6 +314,10 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
     {
         // check if custom def exists
         $fileName = "modules/$module/clients/base/layouts/convert-main-for-leads/convert-main-for-leads.php";
+
+        if (!check_file_name($fileName)) {
+            throw new Exception('The file path is incorrect');
+        }
 
         if (file_exists("custom/$fileName")) {
             include "custom/$fileName";

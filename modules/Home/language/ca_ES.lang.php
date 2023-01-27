@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'S&#39;ha afegit Sugar Dashlet',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Els Dashlets es tornaran a ordenar, estàs segur que voleu canviar la disposició de les columnes?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Està segur que vol treure el Dashlet?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'No s&#39;ha configurat cap quadre de comandament',
   'LBL_NO_DASHLETS_CONFIGURED' => 'No s&#39;ha configurat cap dashlet',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Crea quadre de comandament',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Pàgina Web',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Pàgina Web',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Còdig Font',
   'LBL_SOURCE_SUGAR' => 'Sugar - L´aplicació més popular del món per a l´automatització de la força de vendes, creada per SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - Un motor de plantilles per a PHP creat per Barnabás Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - Un conjunt de classes PHP que permeten als desenvolupadors crear i consumir serveis web creat per NuSphere Corporation i Dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Un calendari per introduir dates creat per Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Un calendari per introduir dates creat per Mihai Bazon',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - Una Implementació de Servidor WebDAV en PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'L&#39;ajuda mostra informació concreta sobre el mòdul que esteu veient, ofereix etapes detallades per dur a terme algunes acciones del mòdul i us marca a on anar per obtenir informació més detallada i assistència técnica.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtre',
+
+    'LBL_ABOUT_VERSION' => 'Esteu utilitzant la versió {{version}} amb les llicències següents:',
 );

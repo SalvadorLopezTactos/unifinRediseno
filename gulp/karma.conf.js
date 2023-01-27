@@ -34,7 +34,11 @@ module.exports = function(config) {
     var dockerLaunchers = {
         docker_chrome: {
             base: 'Chrome',
-            flags: ['--no-sandbox']
+            flags: [
+                '--no-sandbox',
+                '--disable-gpu',
+                '--disable-dev-shm-usage'
+            ]
         }
     };
 

@@ -323,6 +323,9 @@ class ActivitiesRelationship extends OneToManyRelationship
             case 'Meetings':
                 $order = 120;
                 break;
+            case 'Messages':
+                $order = 125;
+                break;
             case 'Notes':
                 $order = 130;
                 break;

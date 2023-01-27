@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Esta agenda de relatórios',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Painel de registros de agendas de relatórios',
+    'LBL_FILE_TYPE' => 'Tipo(s) de arquivo',
 );

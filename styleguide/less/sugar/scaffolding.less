@@ -1,13 +1,8 @@
-/* twitter-bootstrap import START */
-
-//
 // Scaffolding
 // --------------------------------------------------
 
-
 // Body reset
 // -------------------------
-
 body {
   margin: 0;
   font-family: @baseFontFamily;
@@ -15,6 +10,14 @@ body {
   line-height: @baseLineHeight;
   color: @textColor;
   background-color: @bodyBackground;
+}
+
+// General override to prevent browser default styles
+// -------------------------
+*,
+::after,
+::before {
+  border: 0 solid;
 }
 
 // Links
@@ -33,23 +36,10 @@ a:hover {
 // Images
 // -------------------------
 
-// Rounded corners
-.img-rounded {
-  border-radius: 6px;
-}
-
 // Add polaroid-esque trim
 .img-polaroid {
   padding: 4px;
   background-color: @white;
-  border: 1px solid @grayLighter;
-  border: 1px solid fade(@black, 20%);
-  box-shadow: 0 1px 3px fade(@black, 10%);
+  border: @borderWidget;
+  box-shadow: 0 1px 3px @gray90;
 }
-
-// Perfect circle
-.img-circle {
-  border-radius: 500px; // crank the border-radius so it works with most reasonably sized images
-}
-
-/* twitter-bootstrap import END */

@@ -492,14 +492,6 @@ $dictionary['ForecastWorksheet'] = array(
         array('name' => 'idx_forecastworksheet_commit_stage', 'type' => 'index', 'fields' => array('commit_stage')),
         array('name' => 'idx_forecastworksheet_sales_stage', 'type' => 'index', 'fields' => array('sales_stage')),
         array(
-            'name' => 'idx_forecastworksheet_account_id_del',
-            'type' => 'index',
-            'fields' => array(
-                'account_id',
-                'deleted',
-            ),
-        ),
-        array(
             'name' => 'idx_forecastworksheet_aid_del_id',
             'type' => 'index',
             'fields' => array(

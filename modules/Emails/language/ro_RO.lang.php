@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Utilizatori',
     'LBL_EMAILS_PRODUCTS_REL' => 'Produse din ofertă',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Articole linie de venituri',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Escalări',
     'LBL_EMAILS_MESSAGES_REL' => 'Mesaje',
     'LBL_EMAILS_PURCHASES_REL' => 'Achiziții',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Articole de linie achiziționate',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Trimitere e-mail',
     'LBL_MAILBOX' => 'Cont intrare',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Configurați un cont de e-mailuri de ieșire prin intermediul <a href="#OutboundEmail">Setări e-mail</a> pentru a trimite e-mailuri.',
 );

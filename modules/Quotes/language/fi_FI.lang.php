@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Tarjousten määrittely',
 
     'LBL_RENEWAL' => 'Uusinta',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tarjouksen yhteydet',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tarjouksen aikajana',
 );

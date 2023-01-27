@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Kasutajad',
     'LBL_EMAILS_PRODUCTS_REL' => 'Pakkumuse reaüksused',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Tulude reaüksused',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Eskalatsioonid',
     'LBL_EMAILS_MESSAGES_REL' => 'Sõnumid',
     'LBL_EMAILS_PURCHASES_REL' => 'Ostud',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Ostetud reaüksused',
@@ -473,4 +474,5 @@ Võite rakendada eelmääratletud malli, kasutades nuppu Mall, või lisada ühe 
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'E-kirja saatmine',
     'LBL_MAILBOX' => 'Sissetulev konto',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Meilide saatmiseks konfigureerige väljaminevate meilide konto jaotises <a href="#OutboundEmail">Meilisätted</a>.',
 );

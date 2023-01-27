@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Viitattu',
     'LBL_LIST_STATUS' => 'Tila',
     'LBL_LIST_TITLE' => 'Titteli',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Markkinakorkoennuste',
+    'LBL_MARKET_SCORE' => 'Markkinointipisteytys',
     'LBL_MOBILE_PHONE' => 'Matkapuhelin:',
     'LBL_MODULE_NAME' => 'Liidit',
     'LBL_MODULE_NAME_SINGULAR' => 'Liidi',
@@ -336,4 +338,9 @@ Tietueiden vahvistamisen jälkeen paina ylhäällä olevaa ‘Tallenna ja muunna
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Liidin muuntoennuste',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Tarkastele tietyn liidin ennustetietoja',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Salli tuoterivit',
+    'LBL_REQUIRE_RLIS' => 'Tuoterivit pakollisia, kun luodaan uusi myyntimahdollisuus',
+    'LBL_COPY_DATA_RLIS' => 'Kopioi liidin tiedot tuoteriveille, kun luodaan uusi myyntimahdollisuus',
 );

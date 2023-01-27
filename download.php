@@ -143,11 +143,12 @@ else {
             }
             $query .= "WHERE pdfmanager.id = '" . $db->quote($_REQUEST['id']) ."'";
 		} elseif( !isset($_REQUEST['isTempFile']) && !isset($_REQUEST['tempName'] ) && isset($_REQUEST['type']) && $file_type!='temp' ){ //make sure not email temp file.
-			$query = "SELECT filename name FROM ". $file_type ." ";
+            $tableName = $db->getValidDBName($file_type, false, 'table');
+            $query = "SELECT filename name FROM ". $tableName ." ";
             if(!$focus->disable_row_level_security){
                 $focus->add_team_security_where_clause($query);
             }
-			$query .= "WHERE ". $file_type .".id= '".$db->quote($_REQUEST['id'])."'";
+            $query .= "WHERE " . $tableName . ".id= '" . $db->quote($_REQUEST['id']) . "'";
 		}elseif( $file_type == 'temp'){
 			$doQuery = false;
 		}

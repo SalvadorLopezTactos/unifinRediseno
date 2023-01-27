@@ -61,13 +61,13 @@ class SugarCache
             require_once $location;
 
             if (class_exists($class) && is_subclass_of($class, 'SugarCacheAbstract')) {
-                $GLOBALS['log']->debug("Found cache backend $class");
+                LoggerManager::getLogger()->debug("Found cache backend $class");
 
                 /** @var SugarCacheAbstract $instance */
                 $instance = new $class();
 
                 if ($instance->useBackend() && $instance->getPriority() < $lastPriority) {
-                    $GLOBALS['log']->debug(sprintf(
+                    LoggerManager::getLogger()->debug(sprintf(
                         'Using cache backend %s, since %d is less than %d',
                         $class,
                         $instance->getPriority(),
@@ -166,7 +166,7 @@ function sugar_cache_retrieve($key)
  */
 function sugar_cache_put($key, $value, $ttl = null)
 {
-    SugarCache::instance()->set($key,$value, $ttl);
+    SugarCache::instance()->set($key, $value, $ttl);
 }
 
 /**

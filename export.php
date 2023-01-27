@@ -27,6 +27,8 @@ if($sugar_config['disable_export'] 	|| (!empty($sugar_config['admin_export_only'
      ACLAction::getUserAccessLevel($current_user->id, $the_module, 'admin') == ACL_ALLOW_ADMIN_DEV))) ||
         !SugarACL::checkAccess($the_module, 'export'))) {
 	die($GLOBALS['app_strings']['ERR_EXPORT_DISABLED']);
+} elseif ($the_module === 'Employees' && !$current_user->isAdminForModule('Employees')) {
+    sugar_die($GLOBALS['app_strings']['LBL_NO_ACCESS_LOWER']);
 }
 
 //check to see if this is a request for a sample or for a regular export

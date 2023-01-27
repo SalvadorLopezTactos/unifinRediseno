@@ -22,7 +22,7 @@ trait Oauth2RedirectTrait
         global $sugar_config;
         $this->context = $this->request->getValidInputRequest(
             'state',
-            ['Assert\Choice' => ['choices' => ['email', '']]],
+            ['Assert\Choice' => ['choices' => ['email', 'drive', '',]]],
             ''
         );
 

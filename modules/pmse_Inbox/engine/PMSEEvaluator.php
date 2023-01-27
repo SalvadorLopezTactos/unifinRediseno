@@ -116,7 +116,6 @@ class PMSEEvaluator
      * @param object $evaluatedBean this is the bean object
      * @param array $params if additional parameters
      * @param bool $returnToken DEPRECATED AS OF 7.9 AND WILL BE REMOVED IN A FUTURE RELEASE
-     * @param object $request
      * @return bool
      */
     public function evaluateExpression($expression, $evaluatedBean, $params = array(), $returnToken = false)

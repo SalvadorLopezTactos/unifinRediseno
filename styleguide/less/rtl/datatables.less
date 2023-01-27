@@ -41,7 +41,7 @@ table.dataTable {
           > span {
             left: 0;
             right: auto;
-            border-right: @tableBorder;
+            border-right: @borderWidget;
             border-left: 0;
 
             &::before {
@@ -53,7 +53,6 @@ table.dataTable {
         }
 
         td:last-child > span {
-          border-right: @tableBorder;
           border-left: 0;
           left: 0;
           right: auto;
@@ -110,7 +109,7 @@ table.dataTable {
 
           > span {
             border-right: 0;
-            border-left: @tableBorder;
+            border-left: @borderWidget;
 
             &::after {
               left: -5px;
@@ -125,7 +124,6 @@ table.dataTable {
         td:first-child {
           > span {
             border-right: 0;
-            border-left: @tableBorder;
 
             &::after {
               left: -5px;
@@ -223,7 +221,7 @@ table.dataTable {
 
 .dataTable {
   th {
-    border-left: @tableBorder;
+    border-left: @borderWidget;
     border-right: 0;
   }
 
@@ -246,21 +244,6 @@ table.dataTable {
         input {
           padding-left: 26px;
         }
-      }
-    }
-
-    &[data-type="email"] {
-      .opt-out::before {
-        content: @fa-var-ban;
-        font-family: 'FontAwesome';
-        position: absolute;
-        right: 1px;
-        top: 1px;
-      }
-
-      .opt-out {
-        position: relative;
-        padding-right: 16px;
       }
     }
   }

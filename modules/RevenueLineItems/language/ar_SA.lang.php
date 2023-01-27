@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'معرف بند عائد التجديد',
     'LBL_PARENT_RLIS' => 'بنود العائد الأصلية',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'بنود العائد الأصلية',
+    'LBL_FORECASTED_LIKELY' => 'متوقعة على الأرجح',
     'LBL_EXPERT_ID' => 'خبير المنتجات',
     'LBL_FORECAST' => 'التضمين في التوقع',
     'LBL_SUBTOTAL' => 'الإجمالي الفرعي',

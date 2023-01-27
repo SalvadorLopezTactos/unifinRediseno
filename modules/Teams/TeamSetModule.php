@@ -49,7 +49,7 @@ class TeamSetModule extends SugarBean{
             FROM $this->table_name
             WHERE team_set_id = ?
                 AND module_table_name = ?";
-        $row = $this->db->getConnection()->fetchColumn(
+        $row = $this->db->getConnection()->fetchOne(
             $query,
             [$this->team_set_id, $this->module_table_name]
         );

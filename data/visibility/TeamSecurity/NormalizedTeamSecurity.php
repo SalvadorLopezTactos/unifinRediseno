@@ -163,7 +163,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
                 'tst',
                 'team_memberships',
                 $team_table_alias,
-                $subQuery->expr()->andX(
+                $subQuery->expr()->and(
                     $team_table_alias . '.team_id = tst.team_id',
                     $team_table_alias . '.user_id = ' . $subQuery->createPositionalParameter($user_id),
                     $team_table_alias . '.deleted = 0'
@@ -203,7 +203,9 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
      */
     protected function useSubqueryOptimizerHint(): bool
     {
-        if (($this->bean->db instanceof MysqlManager) && !$this->getOption('disable_subquery_optimizer_hint')) {
+        if (($this->bean->db instanceof MysqlManager)
+            && !$this->getOption('disable_subquery_optimizer_hint')
+            && !$this->getOption('prefetch_for_retrieve')) {
             return true;
         }
 

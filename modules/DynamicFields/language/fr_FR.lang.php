@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Ce nom est déjà utilisé par un autre champ',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Le nom d&#39;un champ ne peut contenir que les caractères suivants : a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Aucun module inclus, sauvegarde impossible',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Le nom de la liste déroulante existe déjà',
     'LBL_BTN_ADD' => 'Ajouter',
     'LBL_BTN_EDIT' => 'Éditer',
     'LBL_GENERATE_URL' => 'Générer l&#39;URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Ajout de la colonne {0} à',
     'LBL_DONE' => 'Terminer',
     'LBL_EXE_NON_SIM_MODE' => 'Exécution en mode non-simulation',
+    'LBL_CALCULATION_VISIBLE' => 'Rendre visible pour les calculs',
 );
-
-
-?>

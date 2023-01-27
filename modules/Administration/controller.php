@@ -61,7 +61,7 @@ class AdministrationController extends SugarController
             }
             SubPanelDefinitions::set_hidden_subpanels($disabledTabsKeyArray);
         }
-        
+
         // Only rebuild the relevent metadata sections.
         MetaDataManager::refreshSectionCache(MetaDataManager::MM_MODULESINFO, array('base'));
         MetaDataManager::refreshSectionCache(MetaDataManager::MM_HIDDENSUBPANELS, array('base'));
@@ -69,6 +69,13 @@ class AdministrationController extends SugarController
         if (!headers_sent()) {
             header("Location: index.php?module=Administration&action=ConfigureTabs");
         }
+    }
+
+    public function action_repairstatus()
+    {
+        $logRecords = (new RepairAndClear())->sessionLogPop();
+        echo implode('', $logRecords);
+        sugar_cleanup(true);
     }
 
     public function action_savelanguages()
@@ -188,6 +195,10 @@ class AdministrationController extends SugarController
      */
     public function action_checkFTSConnection()
     {
+        global $current_user, $app_strings;
+        if (!is_admin($current_user)) {
+            sugar_die($app_strings['ERR_NOT_ADMIN']);
+        }
         list($type, $config) = $this->getFtsSettingsFromRequest($_REQUEST);
         $valid = $this->verifyFtsConnectivity($type, $this->mergeFtsConfig($type, $config));
 
@@ -234,7 +245,7 @@ class AdministrationController extends SugarController
         $valid = $this->verifyFtsConnectivity($type, $this->mergeFtsConfig($type, $config));
 
         // Save configuration
-        $this->saveFtsConfig($type, $config, $valid);
+        $this->saveFtsConfig($type, $config);
 
         // Update the module vardefs to enable/disable fts
         $enabledModules = $this->getModuleList($_REQUEST['enabled_modules']);
@@ -478,6 +489,13 @@ class AdministrationController extends SugarController
 
         $repairAndClear = new RepairAndClear();
         $repairAndClear->rebuildExtensions();
+    }
+
+    public function action_upgrader()
+    {
+        $response = new RedirectResponse('UpgradeWizard.php');
+        $response->send();
+        $this->terminate();
     }
 
     /**

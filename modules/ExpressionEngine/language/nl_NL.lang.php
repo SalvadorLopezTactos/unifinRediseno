@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Expression machine',
-  'LBL_MODULE_NAME_SINGULAR' => 'Expression machine',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Vorige' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Volgende' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Uitklappen' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Expression machine',
+    'LBL_MODULE_NAME_SINGULAR' => 'Expression machine',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Vorige' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Volgende' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Uitklappen' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Onbekend veld',
+];

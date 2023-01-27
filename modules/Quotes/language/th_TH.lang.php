@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'โครงร่างใบเสนอราคา',
 
     'LBL_RENEWAL' => 'การต่ออายุ',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'การปฏิสัมพันธ์ของการเสนอราคา',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์การเสนอราคา',
 );

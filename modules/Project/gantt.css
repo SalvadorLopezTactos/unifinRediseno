@@ -11,17 +11,17 @@
  */
     #projectTable td, #projectTable th, #gantt td
     {
-        border: 1px inset #808080;
+        border: 1px inset var(--border-color);
     }
-    
-    #projectTable th, 
+
+    #projectTable th,
     #projectTable td[scope=row],
     #gantt tr[bgcolor] td,
     #gantt tr#header_row td
     {
-        background: #f6f6f6;
+        background: var(--headerpane-background);
     }
- 
+
  /* gantt styles */
 
 	table.days {
@@ -34,21 +34,21 @@
 		border-left: 0px !important;
 		border-right: 0px !important;
 	}
-	
+
 	td.sunday {
 		border-top: 1px solid #dfdfdf !important;
 		border-bottom: 1px solid #dfdfdf !important;
 		border-left: 1px solid #dfdfdf !important;
 		border-right: 0px !important;
 	}
-	
+
 	td.saturday {
 		border-top: 1px solid #dfdfdf !important;
 		border-bottom: 1px solid #dfdfdf !important;
 		border-left: 0px !important;
 		border-right: 1px solid #dfdfdf !important;
-	}		
-	
+	}
+
 	td.date {
 		width: 100%;
 		padding: 0px;
@@ -57,87 +57,87 @@
 		border-left: 0px;
 		border-right: 0px;
 		font-size: 10px;
-	}	
-	
+	}
+
 	tr.empty {
 	    height: 2px;
 	}
-	
+
 	div.completed {
 		background-color: #777777;
-		float: left; 
-		width: 100%; 
-		line-height: 10px; 
+		float: left;
+		width: 100%;
+		line-height: 10px;
 		margin-top: 4px;
-	}	
+	}
 
 	div.inprogress {
 		background-color: #002E4D;
-		float: left; 
-		width: 100%; 
-		line-height: 10px; 
+		float: left;
+		width: 100%;
+		line-height: 10px;
 		margin-top: 4px;
 	}
 
 	div.inprogress_bar {
 		background-color: #ff0000;
-		float: left; 
-		width: 100%; 
-		line-height: 10px; 
+		float: left;
+		width: 100%;
+		line-height: 10px;
 		margin-top: 4px;
 	}
 
 	div.notstarted {
 		background-color: #cccccc;
-		float: left; 
-		width: 100%; 
-		line-height: 10px; 
-		margin-top: 4px;		
-    }
-    
-    div.indent_left {
-		background-color: #000000;
-        float: left; 
-		line-height: 10px; 
+		float: left;
+		width: 100%;
+		line-height: 10px;
 		margin-top: 4px;
     }
-    
+
+    div.indent_left {
+		background-color: #000000;
+        float: left;
+		line-height: 10px;
+		margin-top: 4px;
+    }
+
     div.parent {
     	background-color: #000000;
-        float: left; 
+        float: left;
 		margin-top: 4px;
 		line-height: 4px;
     }
 
     div.indent_right {
 		background-color: #000000;
-        float: right; 
-		line-height: 10px; 
+        float: right;
+		line-height: 10px;
 		margin-top: 4px;
-	}	
-		
+	}
+
 	#horizWrapper {position:relative; margin-left:60px;width:218px;float:left;}
-	#horizBGDiv {position:relative; top:60px; background:url(horizBg.png) no-repeat; height:26px; width:218px;zindex:5 }	
-	#horizHandleDiv { 
-	    position:absolute; 
+	#horizBGDiv {position:relative; top:60px; background:url(horizBg.png) no-repeat; height:26px; width:218px;zindex:5 }
+	#horizHandleDiv {
+	    position:absolute;
 	    left: 100px; /* the default position is the center of the bg */
 	    top: 8px;  /* force the image down a bit */
 	    cursor:default;
-	    width:18px; 
-	    height:18px; 
-	}	
-	
+	    width:18px;
+	    height:18px;
+	}
+
 	/* end gantt styles */
-	
-	
+
+
 	/* Project Divs */
-	
+
 	#project_container{
 	    position:relative;
 	    width:100%;
 	    height:100%;
 	}
-	
+
 	#grid_space{
 		position:absolute;
 	    left:0px;
@@ -184,15 +184,14 @@
 	    width:3px;
 	    height:100%;
 	    background:#C0C0C0;
-	}	
-	
+	}
+
 	/* End Project Divs */
-	
+
 	.menu{
 		z-index:100;
 	}
-	
+
 	.subDmenu{
 		z-index:100;
 	}
-    

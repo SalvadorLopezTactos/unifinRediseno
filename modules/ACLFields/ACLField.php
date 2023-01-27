@@ -137,7 +137,7 @@ class ACLField extends SugarBean
 
             $stmt = $builder->execute();
 
-            while (($row = $stmt->fetch())) {
+            while (($row = $stmt->fetchAssociative())) {
                 if(!empty($fields[$row['name']]) && ($row['aclaccess'] < $fields[$row['name']]['aclaccess'] || $fields[$row['name']]['aclaccess'] == 0) ){
                     $row['key'] = $row['name'];
                     $row['label'] = $fields[$row['name']]['label'];
@@ -170,7 +170,7 @@ AND deleted = 0';
             ->executeQuery($query, array($role_id));
 
         $fields = array();
-        while (($row = $stmt->fetch())) {
+        while (($row = $stmt->fetchAssociative())) {
             $fields[$row['id']] = $row;
         }
 
@@ -229,11 +229,12 @@ AND deleted = 0';
             . 'WHERE af.deleted = 0 '
             . 'AND af.category = ?';
 
+        /** @var Doctrine\DBAL\Result $stmt */
         $stmt = $GLOBALS['db']->getConnection()->executeQuery($query, [$user_id, $module_name]);
 
         $allFields = ACLField::getAvailableFields($module_name, $object);
         self::$acl_fields[$user_id][$module_name] = array();
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             if($row['aclaccess'] != 0 && (empty(self::$acl_fields[$user_id][$module_name][$row['name']]) || self::$acl_fields[$user_id][$module_name][$row['name']] > $row['aclaccess']))
             {
                 self::$acl_fields[$user_id][$module_name][$row['name']] = $row['aclaccess'];

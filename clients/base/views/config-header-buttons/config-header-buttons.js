@@ -32,6 +32,7 @@
      * @inheritdoc
      */
     initialize: function(options) {
+        options.meta = _.extend({}, app.metadata.getView(null, 'config-header-buttons'), options.meta);
         this._super('initialize', [options]);
 
         this.moduleLangObj = {

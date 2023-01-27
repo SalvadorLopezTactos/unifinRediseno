@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugar dašlet je dodat',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Da li ste sigurni da želite da promenite izgled? Raspored može biti neorganizovan.',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Da li ste sigurni da želite da uklonite Sugar dašlet?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Nije konfigurisana nijedna kontrolna tabla',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Nije konfigurisan nijedan dašlet',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Kreiraj kontrolnu tablu',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Web stranica',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Web stranica',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Izvorni kod',
   'LBL_SOURCE_SUGAR' => 'Sugar - Svetska najpopularnija aplikacija za automatizaciju prodaje koju je kreirao SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - Alat za šablone u PHP-u , autor BarnabÃ¡s Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - Skup PHP klasa koje omogućavaju programerima da kreiraju i koriste web servise, autori NuSphere Corporation i Dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Kalenadar za unošenje datuma, autor Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Biblioteka za kreiranje PDF dokumenta, autor Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - WebDAV implementacija servera u PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'U odeljku „Pomoć“ su prikazane posebne informacije o modulu koji pregledate, navedene su informacije o obavljanju određenih radnji u modulu, kao i uputstva za pronalaženje detaljnijih informacija i podrške.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filter',
+
+    'LBL_ABOUT_VERSION' => 'Koristite verziju {{version}} sa sledećim licencama:',
 );

@@ -76,7 +76,7 @@ class SugarJobProcessTimeAwareSchedules implements RunnableSchedulerJob
             ->andWhere($qb->expr()->eq('deleted', $qb->createPositionalParameter('0')));
         $qb->setMaxResults($maxBatchSize);
         $stmt = $qb->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAllAssociative();
     }
 
     /**

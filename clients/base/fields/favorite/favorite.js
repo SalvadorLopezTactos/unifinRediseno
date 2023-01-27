@@ -57,6 +57,11 @@
             app.logger.error("Trying to use favorite field on a module that doesn't support it: '" + this.model.module + "'.");
             return null;
         }
+
+        if (this.model.isFavorite()) {
+            this.iconClass = 'star-fill';
+        }
+
         return app.view.Field.prototype._render.call(this);
     },
 
@@ -73,8 +78,9 @@
      *   change.
      */
     toggle: function(evt) {
-        var self = this,
-            star = $(evt.currentTarget);
+        var self = this;
+        var star = $(evt.currentTarget);
+        var starIcon = star.children().first();
 
         var options = {
             silent: true,
@@ -91,14 +97,15 @@
             app.logger.error("Unable to set '" + this.model.module + "' record '" + this.model.id + "' as favorite");
             return;
         }
-        if (this.model.isFavorite()) {
-            star.addClass('active')
-                .attr('aria-pressed', true);
+
+        let isFavorite = this.model.isFavorite();
+        if (isFavorite) {
+            star.addClass('active').attr('aria-pressed', true);
+            starIcon.removeClass('sicon-star-outline').addClass('sicon-star-fill');
             this.model.trigger("favorite:active");
-        }
-        else {
-            star.removeClass('active')
-                .attr('aria-pressed', false);
+        } else {
+            star.removeClass('active').attr('aria-pressed', false);
+            starIcon.removeClass('sicon-star-fill').addClass('sicon-star-outline');
         }
     },
 

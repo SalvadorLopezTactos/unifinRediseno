@@ -51,17 +51,20 @@ $viewdefs['Forecasts']['base']['view']['info'] = array(
         array(
             'name' => 'worst_case',
             'label' => 'LBL_WORST',
-            'type' => 'datapoint'
+            'type' => 'datapoint',
+            'click_to_edit' => true,
         ),
         array(
             'name' => 'likely_case',
             'label' => 'LBL_LIKELY',
-            'type' => 'datapoint'
+            'type' => 'datapoint',
+            'click_to_edit' => true,
         ),
         array(
             'name' => 'best_case',
             'label' => 'LBL_BEST',
-            'type' => 'datapoint'
+            'type' => 'datapoint',
+            'click_to_edit' => true,
         )
     ),
 );

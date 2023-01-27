@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\ValueObjects\ExternalResource;
+
 /**
  * API class for fetching the contents of an RSS feed and returning relevant, 
  * expected information from it. This class allows the application to proxy RSS
@@ -57,25 +59,35 @@ class RSSFeedApi extends SugarApi
 
     /**
      * Gets an RSS feed
-     * 
+     *
      * @param ServiceBase $api The service object
      * @param array $args The request arguments
      * @return array Feed data
      */
     public function getFeed(ServiceBase $api, array $args)
     {
+        global $sugar_config;
+
+        $privateIps = $sugar_config['security']['private_ips'] ?? [];
+
         // Simple sanity checking
         $this->requireArgs($args, array('feed_url'));
         $url = $args['feed_url'];
 
-        // Simple feed URL validation
-        $this->validateFeedUrl($url);
+        try {
+            $urlValueObject = ExternalResource::fromString($url, $privateIps);
+        } catch (\InvalidArgumentException $e) {
+            throw new SugarApiExceptionInvalidParameter('LBL_ERR_LOADING_RSS_FEED');
+        }
 
         // Get the limit of feed entries
         $limit = $this->getFeedLimit($args);
 
-        // Grab the data now if possible
-        $data = $this->getFeedContent($url);
+        $data = $this->getFeedContent($urlValueObject);
+
+        if ($data === false) {
+            throw new SugarApiExceptionInvalidParameter('LBL_ERR_LOADING_RSS_FEED');
+        }
 
         // Gets a SimpleXMLElement object
         $rss = $this->getFeedXMLObject($data);
@@ -84,6 +96,27 @@ class RSSFeedApi extends SugarApi
         $result = $this->getParsedXMLData($rss, $limit);
 
         return array('feed' => $result);
+    }
+
+    /**
+     * @param ExternalResource $urlValueObject
+     * @return false|string
+     */
+    public function getFeedContent(ExternalResource $urlValueObject)
+    {
+        $context = stream_context_create(
+            [
+                'http' => [
+                    'header'=> "Host: {$urlValueObject->getHost()}\r\n",
+                    'follow_location' => false,
+                ],
+                'ssl' => [
+                    'peer_name' => $urlValueObject->getHost(),
+                ],
+            ]
+        );
+
+        return file_get_contents($urlValueObject->getConvertedUrl(), false, $context);
     }
 
     /**
@@ -130,24 +163,6 @@ class RSSFeedApi extends SugarApi
     }
 
     /**
-     * Gets the content of a feed URL if possible.
-     * 
-     * @param string $url The URL of the RSS Feed
-     * @return string The XML of an RSS Feed URL response
-     */
-    public function getFeedContent($url)
-    {
-        // If a valid URL is used, but is not consumable, handle it. Using error
-        // suppression here to prevent warnings from making it to output.
-        $data = @file_get_contents($url);
-        if (!$data) {
-            throw new SugarApiExceptionConnectorResponse('LBL_ERR_LOADING_RSS_FEED');
-        }
-
-        return $data;
-    }
-
-    /**
      * Gets a SimpleXMLElement object created from a valid XML string
      * 
      * @param string $data An XML file content
@@ -157,7 +172,7 @@ class RSSFeedApi extends SugarApi
     {
         // Suppress XML errors
         libxml_use_internal_errors(true);
-        libxml_disable_entity_loader(true);
+        disableXmlEntityLoader();
 
         // Try to load the objectified data if possible
         $rss = simplexml_load_string($data);

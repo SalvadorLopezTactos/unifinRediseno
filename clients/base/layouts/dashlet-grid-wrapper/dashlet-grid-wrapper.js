@@ -38,6 +38,13 @@
     },
 
     /**
+     * Notify listeners that the size has changed
+     */
+    manageSizeUpdated: function() {
+        this.trigger('grid-panel:size:changed');
+    },
+
+    /**
      * @override
      *
      * If we get here by updating an existing dashlet, we need to update the

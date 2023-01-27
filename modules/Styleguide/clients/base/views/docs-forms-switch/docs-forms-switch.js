@@ -9,6 +9,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 ({
+    className: 'container-fluid',
+
     // forms switch
     _renderHtml: function () {
         this._super('_renderHtml');

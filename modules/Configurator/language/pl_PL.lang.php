@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Domyślny format czasu',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Wyświetlaj czas odpowiedzi serwera',
+    'FREEZE_FIRST_COLUMN' => 'Zezwól na blokowanie kolumny',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Włącz to ustawienie, aby umożliwić użytkownikom blokowanie pierwszej kolumny w różnych ' .
+        'widokach listy, w tym widokach listy modułów, paneli podrzędnych, pulpitów podrzędnych i konsol.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Rejestruj powolne zapytania w dzienniku',
     'LOCK_HOMEPAGE_HELP'=>'To ustawienie zapobiega:<BR> 1) dodawaniu dashletów do strony głównej, <BR>2) zmiany położenia dashletów na stronie głównej poprzez przeciąganie i upuszczanie.',
     'CURRENT_LOGO'=>'Aktualne logo:',
+    'CURRENT_LOGO_DARK' => 'Aktualne logo trybu ciemnego:',
     'CURRENT_LOGO_HELP'=>'To logo jest wyświetlane w lewym rogu stopki aplikacji Sugar.',
+    'CURRENT_LOGO_DARK_HELP' => "To logo jest wyświetlane w lewym rogu stopki, gdy aplikacja Sugar jest w trybie ciemnym, zgodnie z preferencjami użytkownika dotyczącymi wyglądu.",
     'NEW_LOGO'=>'Wybierz logo:',
     'NEW_LOGO_HELP' => 'Dopuszczalny format logo to .png lub .jpg. Maksymalna wysokość to 24 pikseli, a maksymalna szerokość to 180 pikseli. Obraz przekraczający te rozmiary zostanie zeskalowany do maksymalnych wymiarów.',
+    'NEW_LOGO_DARK' => 'Wybierz logo trybu ciemnego:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Obraz powinien być w formacie .jpg lub .png. Maksymalna wysokość to 24 piksele, a szerokość to 450 pikseli. Każdy obraz przekraczający którykolwiek z wymiarów zostanie zeskalowany do maksymalnych możliwych rozmiarów. Nazwa pliku nie może zawierać spacji.',
     'NEW_QUOTE_LOGO'=>'Załaduj nowe logo oferty',
     'NEW_QUOTE_LOGO_HELP'=>'Wymagany format pliku to .jpg.<BR>Rekomendowany rozmiar to 867x74 pikseli.',
@@ -413,7 +419,7 @@ BSOFR
     'LBL_WIZARD_FINISH_TAB' => 'Zakończ',
     'LBL_WIZARD_FINISH_TITLE' => 'Wstępna konfiguracja systemu zakończona',
     'LBL_WIZARD_FINISH' => 'Kliknij <b>Kontynuuj</b>, aby skonfigurować swoje opcje użytkownika.<br/><br />
-Aby skonfigurować opcje systemu, kliknij <a href="index.php?module=Administration&action=index" target="_blank">tutaj</a>.',
+Aby skonfigurować opcje systemu, kliknij <a href="#Administration" target="_blank">tutaj</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Branding',
     'LBL_WIZARD_SYSTEM_DESC' => 'Dodaj nazwę oraz logo firmy.',
     'LBL_WIZARD_LOCALE_DESC' => 'Określ strefę czasową wyświetlaną w systemie. Wprowadzone ustawienia będą domyślne dla całego systemu. Użytkownicy będą mogli zmienić swoje preferencje.',
@@ -424,7 +430,8 @@ Aby skonfigurować opcje systemu, kliknij <a href="index.php?module=Administrati
 	'LBL_LOADING' => 'Ładowanie...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Usuń' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Witaj' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logo trybu ciemnego',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Moduł Raporty dostępny jest jedynie dla natywnych klientów Sugar Mobile',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Moduł Raporty nie jest dostępny w mobilnym widoku przeglądarki.',
 
@@ -463,5 +470,3 @@ Aby skonfigurować opcje systemu, kliknij <a href="index.php?module=Administrati
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Kentän nimi on jo käytössä',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Kentän nimessä saa olla vain perusaakkosia ja alaviivoja: <code>a-zA-Z_</code>',
     'ERR_NO_MODULE_INCLUDED' => 'Moduulia ei sisällytetty, ei voitu tallentaa',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Pudotusvalikon nimi on jo käytössä',
     'LBL_BTN_ADD' => 'Lisää',
     'LBL_BTN_EDIT' => 'Muokkaa',
     'LBL_GENERATE_URL' => 'Generoi URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Lisätään sarake {0} ->',
     'LBL_DONE' => 'Valmis',
     'LBL_EXE_NON_SIM_MODE' => 'Suorita ei-simulaatiotilassa',
+    'LBL_CALCULATION_VISIBLE' => 'Näytä laskelmissa',
 );
-
-
-?>

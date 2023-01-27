@@ -54,6 +54,7 @@ $dictionary['prospect_lists_prospects'] = array(
             'type' => 'index',
             'fields' => array(
                 'prospect_list_id',
+                'deleted',
             ),
         ),
         array(

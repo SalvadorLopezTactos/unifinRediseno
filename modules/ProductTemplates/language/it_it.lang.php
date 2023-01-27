@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Nome Assistenza:',
   'LBL_SUPPORT_TERM' => 'Condizioni Assistenza:',
   'LBL_TAX_CLASS' => 'Classe Fiscale:',
+  'LBL_ACTIVE_STATUS' => 'Stato',
   'LBL_TYPE_NAME'=>'Nome Tipo',
   'LBL_TYPE' => 'Tipo',
   'LBL_PRODUCT_TYPE' => 'Tipo di prodotto',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Dashboard catalogo prodotti',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Dashboard record catalogo prodotti',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Catalogo prodotti Focus Drawer',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Lo Stato è Attivo',
 );

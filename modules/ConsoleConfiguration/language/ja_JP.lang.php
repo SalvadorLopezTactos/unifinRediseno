@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'フィルター',
     'LBL_CONSOLE_FILTER_RULES' => 'フィルター規則',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => '最初のカラムを固定',
+
     'LBL_CONSOLE_COLUMNS' => '列',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'マルチフィールド列',
     'LBL_CONSOLE_PRIMARY_SORT' => 'プライマリソート',

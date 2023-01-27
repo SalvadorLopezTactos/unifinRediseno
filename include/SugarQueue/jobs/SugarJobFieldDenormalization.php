@@ -30,6 +30,7 @@ final class SugarJobFieldDenormalization implements RunnableSchedulerJob, JsonSe
         'chunk_offset',
         'count',
         'status',
+        'tmp_table_name',
     ];
 
     /**
@@ -48,6 +49,9 @@ final class SugarJobFieldDenormalization implements RunnableSchedulerJob, JsonSe
 
     /** @var string */
     private $field_name;
+
+    /** @var string */
+    private $tmp_table_name;
 
     /** @var int */
     private $chunk_offset;
@@ -209,6 +213,10 @@ final class SugarJobFieldDenormalization implements RunnableSchedulerJob, JsonSe
         $bean = BeanFactory::getBean($this->module_name);
         $this->processEntity = new Entity($bean, $this->field_name);
         $this->process = new Process();
+
+        if ($this->tmp_table_name) {
+            $this->process->setTemporaryTableName($this->tmp_table_name);
+        }
 
         if (!$this->status) {
             if (!$this->process->isAltered($this->processEntity)) {
