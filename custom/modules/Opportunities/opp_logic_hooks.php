@@ -426,43 +426,45 @@ SQL;
             // $opp->date_closed = date("Y-m-t", strtotime(date("Y-m-d")));
 
             //Asigna el primer registro del control de condiciones financieras para envíar a solicitud de UNI2
-            if (count($bean->condiciones_financieras_incremento_ratificacion) > 0 and $bean->tipo_producto_c != '4') {
-                //$opp->id_activo_c = $bean->condiciones_financieras[0][''];
-                $opp->index_activo_c = $bean->condiciones_financieras_incremento_ratificacion['0']['idactivo'];
-                $plazos = explode("_", $bean->condiciones_financieras_incremento_ratificacion['0']['plazo']);
-                //$GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." CVV - Plazo que se asignara". print_r( $plazos[1], true));
-                $opp->plazo_c = $plazos[1];
-                $opp->es_multiactivo_c = 1;
-                $opp->ca_tasa_c = $bean->condiciones_financieras_incremento_ratificacion['0']['tasa_minima'];
-                $opp->deposito_garantia_c = $bean->condiciones_financieras_incremento_ratificacion['0']['deposito_en_garantia'];
-                $opp->porcentaje_ca_c = $bean->condiciones_financieras_incremento_ratificacion['0']['comision_minima'];
-                $opp->porcentaje_renta_inicial_c = $bean->condiciones_financieras_incremento_ratificacion['0']['renta_inicial_minima'];
-                //$opp->porciento_ri_c = $bean->condiciones_financieras_incremento_ratificacion['0']['renta_inicial_minima'];
-                $opp->vrc_c = $bean->condiciones_financieras_incremento_ratificacion['0']['vrc_minimo'];
-                $opp->vri_c = $bean->condiciones_financieras_incremento_ratificacion['0']['vri_minimo'];
+            if(!empty($bean->condiciones_financieras_incremento_ratificacion)){
+                if (count($bean->condiciones_financieras_incremento_ratificacion) > 0 and $bean->tipo_producto_c != '4') {
+                    //$opp->id_activo_c = $bean->condiciones_financieras[0][''];
+                    $opp->index_activo_c = $bean->condiciones_financieras_incremento_ratificacion['0']['idactivo'];
+                    $plazos = explode("_", $bean->condiciones_financieras_incremento_ratificacion['0']['plazo']);
+                    //$GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." CVV - Plazo que se asignara". print_r( $plazos[1], true));
+                    $opp->plazo_c = $plazos[1];
+                    $opp->es_multiactivo_c = 1;
+                    $opp->ca_tasa_c = $bean->condiciones_financieras_incremento_ratificacion['0']['tasa_minima'];
+                    $opp->deposito_garantia_c = $bean->condiciones_financieras_incremento_ratificacion['0']['deposito_en_garantia'];
+                    $opp->porcentaje_ca_c = $bean->condiciones_financieras_incremento_ratificacion['0']['comision_minima'];
+                    $opp->porcentaje_renta_inicial_c = $bean->condiciones_financieras_incremento_ratificacion['0']['renta_inicial_minima'];
+                    //$opp->porciento_ri_c = $bean->condiciones_financieras_incremento_ratificacion['0']['renta_inicial_minima'];
+                    $opp->vrc_c = $bean->condiciones_financieras_incremento_ratificacion['0']['vrc_minimo'];
+                    $opp->vri_c = $bean->condiciones_financieras_incremento_ratificacion['0']['vri_minimo'];
 
-                //Obtiene la lista de activo para guardar multiactivos
-                global $app_list_strings;
-                $activos = array();
-                $multiactivo_c = array();
-                if (isset($app_list_strings['idactivo_list'])) {
-                    $activos = $app_list_strings['idactivo_list'];
-                }
+                    //Obtiene la lista de activo para guardar multiactivos
+                    global $app_list_strings;
+                    $activos = array();
+                    $multiactivo_c = array();
+                    if (isset($app_list_strings['idactivo_list'])) {
+                        $activos = $app_list_strings['idactivo_list'];
+                    }
 
-                //Arma lista de activos
-                foreach ($bean->condiciones_financieras_incremento_ratificacion as $condicion) {
-                    foreach ($activos as $key => $value) {
-                        if ($key == $condicion['idactivo']) {
-                            if (!in_array($value, $multiactivo_c)) {
-                                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " CVV - Agregar item a multiactivo de R/I: " . print_r($key, true));
-                                $multiactivo_c[] = $value;
+                    //Arma lista de activos
+                    foreach ($bean->condiciones_financieras_incremento_ratificacion as $condicion) {
+                        foreach ($activos as $key => $value) {
+                            if ($key == $condicion['idactivo']) {
+                                if (!in_array($value, $multiactivo_c)) {
+                                    $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " CVV - Agregar item a multiactivo de R/I: " . print_r($key, true));
+                                    $multiactivo_c[] = $value;
+                                }
                             }
                         }
                     }
-                }
 
-                $opp->multiactivo_c = implode(",", $multiactivo_c);
-                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " CVV - Contenido de multiactivo de R/I: " . print_r($opp->multiactivo_c, true));
+                    $opp->multiactivo_c = implode(",", $multiactivo_c);
+                    $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " CVV - Contenido de multiactivo de R/I: " . print_r($opp->multiactivo_c, true));
+                }
 
             }
             if ($bean->tipo_producto_c == '4') {
@@ -508,8 +510,10 @@ SQL;
             /*Ajuste ticket 81980: Se omite que los valores de condiciones financieras de quantico se hereden en la ratificación*/
             //$opp->cf_quantico_c = $bean->cf_quantico_c;
             //$opp->cf_quantico_politica_c = $bean->cf_quantico_politica_c;
-
-            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> Condiciones en nueva solicitud : " . print_r(count($opp->condiciones_financieras), 1));
+            if(!empty($opp->condiciones_financieras)){
+                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> Condiciones en nueva solicitud : " . print_r(count($opp->condiciones_financieras), 1));
+            }
+            
             $id = $opp->save();
 
             //CVV - 02/04/2016 - Actualiza el estatus de la linea de credito para indicar que esta siendo Ratificada
