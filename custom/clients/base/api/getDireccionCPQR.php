@@ -54,7 +54,7 @@ class getDireccionCPQR extends SugarApi
         $arrin=null;
         
         $auxindex = $this->searchForId($colonia_QR, $arr_colonias,'nameColonia');
-        $auxindex = array_search($colonia_QR,$arr_colonias,false);
+        //$GLOBALS['log']->fatal('auxindex1',$auxindex);
         if( !empty($auxindex)){
             $arrin = array( $auxindex => $arr_colonias[$auxindex]);
             $aux = array( 'colonias'=> $arrin);
@@ -75,12 +75,12 @@ class getDireccionCPQR extends SugarApi
         
         //$auxindex = array_search($estado_QR,$arr_estado,false);
         $auxindex = $this->searchForId($estado_QR, $arr_estado,'nameEstado');
-        
+        //$GLOBALS['log']->fatal('searchForId',$estado_QR,$arr_estado,$auxindex);
         if( $auxindex != '-1'){
             $arrin = array( $auxindex => $arr_estado[$auxindex], );
             $aux = array( 'estados'=> $arrin);
             $arr_estado = $aux;
-            $estado_id = $auxindex;
+            $estado_id = isset($arr_estado['estados'][$auxindex]['idEstado']) ? intval(substr($arr_estado['estados'][$auxindex]['idEstado'],-3)) : 0 ;
         }
         $arr_estado['estados'][0] = $arr_estado['estados'][$auxindex];
         if($auxindex != 0) unset($arr_estado['estados'][$auxindex]);
@@ -89,12 +89,12 @@ class getDireccionCPQR extends SugarApi
         
         //$auxindex = array_search($ciudad_QR,$arr_municipio,false);
         $auxindex = $this->searchForId($ciudad_QR, $arr_municipio,'nameMunicipio');
-        
+        //$GLOBALS['log']->fatal('searchForId',$ciudad_QR,$arr_municipio,$auxindex);
         if( $auxindex != '-1' && !empty($auxindex)){
             $arrin = array( $auxindex => $arr_municipio[$auxindex], );
             $aux = array( 'municipios'=> $arrin);
             $arr_municipio = $aux;
-            $municipio_id = $auxindex;
+            $municipio_id = isset($arr_municipio['municipios'][$auxindex]['idMunicipio']) ? intval(substr($arr_municipio['municipios'][$auxindex]['idMunicipio'],-3)) : 0 ;
 
             $arr_municipio['municipios'][0] = $arr_municipio['municipios'][$auxindex];
             if($auxindex != 0) unset($arr_municipio['municipios'][$auxindex]);
@@ -102,11 +102,12 @@ class getDireccionCPQR extends SugarApi
             $resultado = array_replace($resultado, $arr_municipio);        
         }
         
-        //$GLOBALS['log']->fatal('resultado',$resultado);
+        $GLOBALS['log']->fatal('colonia_existe',$colonia_existe);
         if(!$colonia_existe)
         {
             $result=$this->insertColonia($pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
-            $resultado = $call_api->getAddressByCP($api, $args);
+            //$GLOBALS['log']->fatal('insertColonia',$pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
+            $resultado = $this->getAddressByCPQR($api, $args);
         }
 
         return $resultado;
