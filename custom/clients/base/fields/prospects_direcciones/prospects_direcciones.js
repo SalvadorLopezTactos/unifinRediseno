@@ -341,9 +341,16 @@
 
                             evt.idPais = prospect_dir.oDirecciones.direccion[index].pais;
                             //prospect_dir.populateEdoByPaisDE(evt);
+                            prospect_dir.oDirecciones.direccion[index].estado = (Object.keys(prospect_dir.oDirecciones.direccion[index].listEstado)[0] != undefined) ? Object.keys(prospect_dir.oDirecciones.direccion[index].listEstado)[0] : "";
 
                             evt.idEstado = prospect_dir.oDirecciones.direccion[index].estado;
                             //prospect_dir.populateCiudadesByEstadoDE(evt);
+
+                            prospect_dir.oDirecciones.direccion[index].municipio = (Object.keys(prospect_dir.oDirecciones.direccion[index].listMunicipio)[0] != undefined) ? Object.keys(prospect_dir.oDirecciones.direccion[index].listMunicipio)[0] : "";
+
+                            prospect_dir.oDirecciones.direccion[index].ciudad = (Object.keys(prospect_dir.oDirecciones.direccion[index].listCiudad)[0] != undefined) ? Object.keys(prospect_dir.oDirecciones.direccion[index].listCiudad)[0] : "";
+
+                            prospect_dir.oDirecciones.direccion[index].colonia = ( !_.isEmpty(prospect_dir.oDirecciones.direccion[index].listColonia[0].idColonia) ) ? prospect_dir.oDirecciones.direccion[index].listColonia[0].idColonia : "";
 
                             evt.idMunicipio = prospect_dir.oDirecciones.direccion[index].municipio;
                             //prospect_dir.populateColoniasByMunicipioDE(evt);
