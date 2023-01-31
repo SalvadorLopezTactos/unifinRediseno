@@ -82,7 +82,7 @@ function NotiFiscalDiaria_job()
 				fputcsv($file, array_keys($row), ',', '"');
 				$flag = true;
 			}
-			array_walk($row, __NAMESPACE__ );
+			//array_walk($row, __NAMESPACE__ );
 			fputcsv($file, array_values($row), ',', '"');
 		}
 		fwrite($file, '-----------');
