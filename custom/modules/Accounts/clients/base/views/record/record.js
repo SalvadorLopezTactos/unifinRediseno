@@ -3629,6 +3629,13 @@
 
         //Valida direcciones duplicadas
         if (direccion.length > 0) {
+            var direcciones=[];
+            Object.keys(direccion).forEach(key => {
+                var direccion_string= direccion[key].valCodigoPostal + direccion[key].pais + direccion[key].estado + direccion[key].municipio + direccion[key].ciudad + direccion[key].colonia + direccion[key].calle.trim().toLowerCase() + direccion[key].numint.trim().toLowerCase() + direccion[key].numext.trim().toLowerCase();
+                direcciones.push(direccion_string);
+            });
+
+            /*
             var coincidencia = 0;
             var indices = [];
             for (var i = 0; i < direccion.length; i++) {
@@ -3639,28 +3646,31 @@
                         indices.push(j);
                     }
                 }
-            }
+            }*/
             //indices=indices.unique();
-            if (coincidencia > 0) {
-                app.alert.show('error_direccion_duplicada', {
-                    level: 'error',
-                    autoClose: false,
-                    messages: 'Existen direcciones iguales, favor de corregir.'
-                });
-                //$($input).focus();
-                if (indices.length > 0) {
-                    for (var i = 0; i < indices.length; i++) {
-                        $('.calleExisting').eq(indices[i]).css('border-color', 'red');
-                        $('.numExtExisting').eq(indices[i]).css('border-color', 'red');
-                        $('.postalInputTempExisting').eq(indices[i]).css('border-color', 'red');
-                    }
-                }
-                errors['dire_direccion_duplicada'] = errors['dire_direccion_duplicada'] || {};
-                errors['dire_direccion_duplicada'].required = true;
+            if ( direcciones.length > 0) {
+                if(this.containsDuplicates(direcciones)){
+                    app.alert.show('error_direccion_duplicada', {
+                        level: 'error',
+                        autoClose: false,
+                        messages: 'Existen direcciones iguales, favor de corregir.'
+                    });
+                    errors['dire_direccion_duplicada'] = errors['dire_direccion_duplicada'] || {};
+                    errors['dire_direccion_duplicada'].required = true;
+
+                } 
+                
             }
         }
 
         callback(null, fields, errors);
+    },
+
+    containsDuplicates: function(array) {
+        if (array.length !== new Set(array).size) {
+            return true;
+        }
+        return false;
     },
 
     validatelefonos: function (fields, errors, callback) {
