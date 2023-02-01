@@ -174,10 +174,16 @@ class Solicitud_quantico extends SugarApi
                         }
                     } else {
                         if ($bean->estatus_c != 'K') {
+                            /*
                             $OppParams = new stdClass();
                             $OppParams->idSolicitud = $bean->idsolicitud_c;
                             $OppParams->usuarioAutenticado = $bean->assigned_user_name;
                             $OppParamsJSON = json_encode($OppParams);
+                            */
+                            $OppParamsJSON = [];
+                            $OppParamsJSON['data'] = [];
+                            $OppParamsJSON['data']['idSolicitud'] = $bean->idsolicitud_c;
+                            $OppParamsJSON['data']['usuarioAutenticado'] = $bean->assigned_user_name;
 
                             $callOpBPM = new cancelaOperacionBPM();
                             
