@@ -1398,14 +1398,16 @@ class CalendarApi extends FilterApi
                 $options = ['erased_fields' => true, 'use_cache' => false, 'encode' => false];
                 $result['bean'] = BeanFactory::retrieveBean($result['bean']->module_dir, $result['bean']->id, $options);
             }
-            $record = $this->formatBean($api, $args, $result['bean']);
-            $highlighted = $this->getMatchedFields($args, $record, 1);
-            $record['_search'] = array(
-                'highlighted' => $highlighted,
-            );
-            $records[] = $record;
-        }
+            if(!empty($result['bean'])){
+                $record = $this->formatBean($api, $args, $result['bean']);
+                $highlighted = $this->getMatchedFields($args, $record, 1);
+                $record['_search'] = array(
+                    'highlighted' => $highlighted,
+                );
+                $records[] = $record;
 
+            }
+        }
         return array(
             'next_offset' => -1,
             'records' => $records,
