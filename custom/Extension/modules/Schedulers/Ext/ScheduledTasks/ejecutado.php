@@ -4,20 +4,16 @@
 
     function ejecutado()
     {
-    	// Busca notificaciones sin ejecutar
-		$beanQuery = BeanFactory::newBean('TCT2_Notificaciones');
-		$sugarQueryOP = new SugarQuery();
-		$sugarQueryOP->select(array('id', 'name', 'ejecutado_c'));
-		$sugarQueryOP->from($beanQuery);
-		$sugarQueryOP->where()->equals('ejecutado_c','0');
-		$resultOP = $sugarQueryOP->execute();
-		$countOP = count($resultOP);
-		for($current=0; $current < $countOP; $current++)
-		{
-			//Obtiene valores del cliente
-			$beanNoti = BeanFactory::retrieveBean('TCT2_Notificaciones', $resultOP[$current]['id']);
-			$beanNoti->ejecutado_c = 1;
-			$beanNoti->save();
-		}
+    	$GLOBALS['log']->fatal("Inicia Job para actualizar ejecutado");
+		$beanQuery = "SELECT n.id,n.name,nc.ejecutado_c FROM tct2_notificaciones n INNER JOIN tct2_notificaciones_cstm nc ON n.id=nc.id_c WHERE nc.ejecutado_c=0 and n.deleted=0";
+
+		$resultNoti = $GLOBALS['db']->query($beanQuery);
+
+            while ($rowNoti = $GLOBALS['db']->fetchByAssoc($resultNoti)) {
+                $beanNoti = BeanFactory::retrieveBean('TCT2_Notificaciones', $rowNoti['id']);
+				$beanNoti->ejecutado_c = 1;
+				$beanNoti->save();
+            }
+
 		return true;
     }
