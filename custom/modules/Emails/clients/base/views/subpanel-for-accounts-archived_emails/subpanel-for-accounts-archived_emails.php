@@ -79,10 +79,20 @@ $viewdefs['Emails']['base']['view']['subpanel-for-accounts-archived_emails'] = a
       ),
     ),
   ),
-  'rowactions' =>
-  array (
-    'actions' =>
-    array (
+  'rowactions' => array(
+    /*
+    'actions' => array(
+        array(
+          
+            'type' => 'rowaction',
+            'css_class' => 'btn',
+            'tooltip' => 'LBL_PREVIEW',
+            'event' => 'list:preview:fire',
+            'icon' => 'sicon-preview',
+            'acl_action' => 'view',
+             'allow_bwc' => false,
+        ),
     ),
+      */
   ),
 );
