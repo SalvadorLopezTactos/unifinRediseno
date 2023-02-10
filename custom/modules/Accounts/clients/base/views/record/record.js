@@ -6957,7 +6957,6 @@
     Función para controlar la visualización de los botones para bloquear o desbloquear cuentas
     */
     bloqueo: function () {
-
         if(app.user.attributes.tct_no_contactar_chk_c=='1' || app.user.attributes.bloqueo_credito_c=='1' || app.user.attributes.bloqueo_cumple_c=='1'){
             if(app.user.attributes.tct_no_contactar_chk_c=='1') {
 				this.condicion_permiso=1;
@@ -7004,7 +7003,8 @@
                                             self.ids_responsables.push(data_members.records[j].id);
                                         }
                                         // Cuentas No Contactar
-                                        var consulta = app.api.buildURL('tct02_Resumen/' + self.model.get('id'), null, null);
+                                        var id_cuenta_resumen=this._currentUrl.split('/')[1];
+                                        var consulta = app.api.buildURL('tct02_Resumen/' + id_cuenta_resumen, null, null);
                                         app.api.call('read', consulta, {}, {
                                             success: _.bind(function (dataResumen) {
                                                 app.alert.dismiss('loadingShowHideBotonesBloqueo');
