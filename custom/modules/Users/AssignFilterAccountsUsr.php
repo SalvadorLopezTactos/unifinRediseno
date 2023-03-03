@@ -65,7 +65,7 @@ class AssignFilterAccountsUsr
             if ($this->validateExcludingRoles($bean)) {
                 /* como no hay resultado entre roles, validamos por puesto
                  Recupera el nombre del filtro que se aplicara */
-                $AplicaFiltro = $puestosListUsr[$puesto];
+                $AplicaFiltro = isset($puestosListUsr[$puesto]) ? $puestosListUsr[$puesto] : '';
             }
 
             if (!empty($AplicaFiltro) && !empty($campo)) {
@@ -268,7 +268,7 @@ and u.status = 'Active'";
     function UpdateReportToUsr($bean = null, $event = null, $args = null)
     {
         $GLOBALS['log']->fatal("Entra LH - BS");
-        $bean->pre_reports_to_id = $bean->fetched_row['reports_to_id'];
+        $bean->pre_reports_to_id = isset($bean->fetched_row['reports_to_id']) ? $bean->fetched_row['reports_to_id'] : '';
         //$bean->description = "TEST";
     }
 }

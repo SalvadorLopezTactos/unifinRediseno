@@ -12,7 +12,7 @@ class ReassignRecordsForProtocolo
         global $db;
 
         $status=$bean->status;
-        $status_anterior=$bean->fetched_row['status'];
+        $status_anterior=isset($bean->fetched_row['status']) ? $bean->fetched_row['status'] : $status;
         $puesto_usuario=$bean->puestousuario_c;
         $lista_puestos=$app_list_strings['puestos_para_reasignacion_list'];
 

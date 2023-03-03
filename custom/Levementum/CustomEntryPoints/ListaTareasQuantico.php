@@ -45,7 +45,8 @@ $url = $url_token.$objGUID;
 $GLOBALS['log']->fatal($url);
 $GLOBALS['log']->fatal("ID Active Directory: ".$objGUID);
 
-$objCall=ApiCallQuantico::callQuantico($url,"POST");
+$classQuantico = new ApiCallQuantico();
+$objCall = $classQuantico->callQuantico($url,"POST");
 
 $token=$objCall->Token;
 
@@ -99,5 +100,3 @@ $GLOBALS['log']->fatal(print_r($token,true));
 
 </body>
 </html>
-
-
