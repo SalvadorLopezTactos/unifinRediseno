@@ -30,10 +30,13 @@
      * @inheritdoc
      */
     events: {
-        'click [name=login_button]': 'login',
-        'keypress': 'handleKeypress',
+        'click [name=login_button]': 'pre_login',
+        //'keypress': 'handleKeypress',
         "click [name=external_login_button]": "external_login",
-        "click [name=login_form_button]": "login_form"
+        "click [name=login_form_button]": "login_form",
+        //'click [name=cstm_login_form_button]': 'pre_login',
+        'click [name=cstm_mfa_form_button]': 'mfa_login',
+        'click [name=mfa_new_code_button]': 'mfa_new_code'
     },
 
     /**
@@ -89,6 +92,8 @@
         }
     },
 
+    mfa_conteo: null,
+    
     /**
      * Get the fields metadata from panels and declare a Bean with the metadata
      * attached.
@@ -183,7 +188,6 @@
         app.$contentEl.show();
 
         this._super('_render');
-
         this.refreshAdditionalComponents();
 
         var config = app.metadata.getConfig(),
@@ -200,6 +204,46 @@
             });
         }
         app.alert.dismiss(this._alertKeys.offsetProblem);
+        try {
+          self=this;
+          this.$('div[name=mfaSection]').hide();
+          this.$('div[name=loginSection]').hide();
+          app.alert.show('validate_login_view', {
+              level: 'process',
+              title: app.lang.get('LBL_LOADING'),
+              autoClose: false
+          });
+          userData = localStorage['mfaCRM'] == undefined ? 'ND' : localStorage['mfaCRM'];
+          app.api.call("read", app.api.buildURL("validateLoginPage/" + userData ), null, {
+              success: _.bind(function (validationLoginPage) {
+                  app.alert.dismiss('validate_login_view');
+                  // Valida situación: 1- Inicia login  2- Muestra ventana de Código
+                  if (validationLoginPage.status=='200' && validationLoginPage.situation =='2' && validationLoginPage.valid_secs>0) {
+                      this.$('div[name=loginSection]').hide();
+                      this.$('div[name=mfaSection]').show();
+                      self.mfa_conteo = new Date(validationLoginPage.valid_secs * 1000);
+                      self.mfa_cuenta();
+                  }else{
+                      this.$('div[name=loginSection]').show();
+                      this.$('div[name=mfaSection]').hide();
+                      localStorage.removeItem('mfaCRM');
+                  }
+              }, this),
+              error: _.bind(function (error) {
+                //Muestra error
+                app.alert.dismiss('validate_login_view');
+                this.$('div[name=loginSection]').show();
+                this.$('div[name=mfaSection]').hide();
+                localStorage.removeItem('mfaCRM');
+              }, this),
+          });
+        } catch (e) {
+          app.alert.dismiss('validate_login_view');
+          this.$('div[name=loginSection]').show();
+          this.$('div[name=mfaSection]').hide();
+          localStorage.removeItem('mfaCRM');
+        }
+        
         return this;
     },
 
@@ -388,5 +432,215 @@
             layout: "login",
             create: true
         });
-    }
+    },
+    
+    pre_login: function() {
+        //Recupera información de usuario
+        this.model.set({
+            password: this.$('input[name=password]').val(),
+            username: this.$('input[name=username]').val()
+        });
+        app.alert.dismissAll();
+        //Valida usuario
+        this.model.doValidate(null,
+            _.bind(function(isValid) {
+                if (isValid) {
+                    //Valida usuario existente
+                    try {
+                      app.alert.show('validate_login_cstm', {
+                          level: 'process',
+                          title: app.lang.get('LBL_LOADING'),
+                          autoClose: false
+                      });
+                      localStorage['mfaCRM'] = btoa('{"user":"'+this.model.get('username')+'","password":"'+this.model.get('password')+'"}');
+                      app.api.call("read", app.api.buildURL("validateUserLogin/" + localStorage['mfaCRM']), null, {
+                          success: _.bind(function (validationUsers) {
+                              app.alert.dismiss('validate_login_cstm');
+                              if (validationUsers.status=='200') {
+                                  this.$('div[name=loginSection]').hide();
+                                  this.$('div[name=mfaSection]').show();
+                                  self.mfa_conteo = new Date(validationUsers.valid_secs * 1000); //validationLoginPage.valid_sec
+                                  self.mfa_cuenta();
+                                  app.alert.show('success_validation', {
+                                      level: 'info',
+                                      messages: validationUsers.message,
+                                      autoClose: false
+                                  });
+                              }else if(validationUsers.status=='201'){
+                                  localStorage.removeItem('mfaCRM');
+                                  self.login();
+                              }else{
+                                  //Muestra error
+                                  localStorage.removeItem('mfaCRM');
+                                  app.alert.show('error_login_1', {
+                                      level: 'error',
+                                      messages: validationUsers.message,
+                                      autoClose: false
+                                  });
+                              }
+                          }, this),
+                          error: _.bind(function (error) {
+                            //Muestra error
+                            app.alert.dismiss('validate_login_cstm');
+                            localStorage.removeItem('mfaCRM');
+                            app.alert.show('error_login_2', {
+                                level: 'error',
+                                messages: error.errorThrown,
+                                autoClose: false
+                            });
+                            
+                          }, this),
+                      });
+                    } catch (e) {
+                      app.alert.dismiss('validate_login_cstm');
+                      app.alert.show('error_login_3', {
+                          level: 'error',
+                          messages: e,
+                          autoClose: false
+                      });
+                    }
+                }
+            }, this)
+        );
+    },
+    
+    mfa_login: function() {
+        //Logic to validate code. If it's ok call login function
+        mfaCode = this.$('input[name=mfaCode]').val();
+        app.alert.dismissAll();
+        //Valida código
+        if(mfaCode && mfaCode.length==6){
+            //Valida código ingresado
+            try {
+              app.alert.show('validate_code_cstm', {
+                  level: 'process',
+                  title: app.lang.get('LBL_LOADING'),
+                  autoClose: false
+              });
+              self = this;
+              app.api.call("read", app.api.buildURL("validateCodeMFA/" + mfaCode +"/" + localStorage['mfaCRM']), null, {
+                  success: _.bind(function (validationUsers) {
+                      app.alert.dismiss('validate_code_cstm');
+                      if (validationUsers.status=='200') {
+                          this.$('input[name=password]').val(JSON.parse(atob(localStorage['mfaCRM'])).password);
+                          this.$('input[name=username]').val(JSON.parse(atob(localStorage['mfaCRM'])).user);
+                          localStorage.removeItem('mfaCRM');
+                          self.mfa_conteo = new Date(0);
+                          self.login();
+                      }else{
+                          //Muestra error
+                          app.alert.show('error_code_1', {
+                              level: 'error',
+                              messages: validationUsers.message,
+                              autoClose: false
+                          });
+                      }
+                  }, this),
+                  error: _.bind(function (error) {
+                    //Muestra error
+                    app.alert.dismiss('error_code_2');
+                    localStorage.removeItem('mfaCRM');
+                    self.$('input[name=mfaCode]').val('');
+                    app.alert.show('error_login_2', {
+                        level: 'error',
+                        messages: error.errorThrown,
+                        autoClose: false
+                    });
+                    
+                  }, this),
+              });
+            } catch (e) {
+              app.alert.dismiss('validate_code_cstm');
+              self.$('input[name=mfaCode]').val('');
+              app.alert.show('error_code_3', {
+                  level: 'error',
+                  messages: e,
+                  autoClose: false
+              });
+            }
+            
+        }else{
+          this.$('input[name=mfaCode]').val('');
+          app.alert.show('login_cstm', {
+              level: 'error',
+              messages: 'Formato no válido, el código debe ser de 6 caracteres. Favor de verificar',
+              autoClose: false
+          });
+        }
+    },
+    
+    mfa_cuenta: function(){
+      intervaloRegresivo = setInterval("self.mfa_regresiva()", 1000);
+    },
+   
+    mfa_regresiva: function(){
+      if(this.mfa_conteo.getTime() > 0){
+         this.mfa_conteo.setTime(this.mfa_conteo.getTime() - 1000);
+         if(this.$('[name=cstm_mfa_form_button]').is(":hidden")){
+             this.$('[name=cstm_mfa_form_button]').show();
+             this.$('[name=mfa_new_code_button]').hide();
+         }
+      }else{
+         clearInterval(intervaloRegresivo);
+         this.$('[name=cstm_mfa_form_button]').hide();
+         this.$('[name=mfa_new_code_button]').show();
+      }
+      document.getElementById('mfa_contador').childNodes[0].nodeValue = (this.mfa_conteo.getMinutes() < 10 ? '0'+this.mfa_conteo.getMinutes() : this.mfa_conteo.getMinutes()) + ":" + (this.mfa_conteo.getSeconds() < 10 ? '0'+this.mfa_conteo.getSeconds() : this.mfa_conteo.getSeconds());
+    },
+    
+    mfa_new_code: function() {
+        //Valida usuario existente
+        try {
+          app.alert.show('validate_login_cstm', {
+              level: 'process',
+              title: app.lang.get('LBL_LOADING'),
+              autoClose: false
+          });
+          app.api.call("read", app.api.buildURL("validateUserLogin/" + localStorage['mfaCRM']), null, {
+              success: _.bind(function (validationUsers) {
+                  app.alert.dismiss('validate_login_cstm');
+                  if (validationUsers.status=='200') {
+                      this.$('[name=mfa_new_code_button]').hide();
+                      this.$('[name=cstm_mfa_form_button]').show();
+                      self.mfa_conteo = new Date(validationUsers.valid_secs * 1000); //validationLoginPage.valid_sec
+                      self.mfa_cuenta();
+                      app.alert.show('success_validation', {
+                          level: 'info',
+                          messages: validationUsers.message,
+                          autoClose: false
+                      });
+                  }else{
+                      //Muestra error
+                      localStorage.removeItem('mfaCRM');
+                      app.alert.show('error_login_1', {
+                          level: 'error',
+                          messages: validationUsers.message,
+                          autoClose: false
+                      });
+                  }
+              }, this),
+              error: _.bind(function (error) {
+                //Muestra error
+                app.alert.dismiss('validate_login_cstm');
+                localStorage.removeItem('mfaCRM');
+                app.alert.show('error_login_2', {
+                    level: 'error',
+                    messages: validationUsers.message,
+                    autoClose: false
+                });
+                
+              }, this),
+          });
+        } catch (e) {
+          app.alert.dismiss('validate_login_cstm');
+          app.alert.show('error_login_3', {
+              level: 'error',
+              messages: e,
+              autoClose: false
+          });
+        }
+        
+    },
+    
+
 })

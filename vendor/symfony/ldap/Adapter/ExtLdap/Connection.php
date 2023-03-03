@@ -68,10 +68,15 @@ class Connection extends AbstractConnection
      */
     public function bind($dn = null, $password = null)
     {
-        if (!$this->connection) {
+        if(!empty($dn)){
             $this->connect();
+            $dn = $dn.'@unifin.com.mx';
         }
-
+        if (!$this->connection) {
+            $this->connection = ldap_connect($this->config['connection_string']) ;
+        }
+        $dn = !empty($dn) ? $dn : 'x';
+        $password = !empty($password) ? $password : 'x';
         if (false === @ldap_bind($this->connection, $dn, $password)) {
             $error = ldap_error($this->connection);
             switch (ldap_errno($this->connection)) {
@@ -144,11 +149,12 @@ class Connection extends AbstractConnection
 
     private function connect()
     {
+        $this->connection = ldap_connect($this->config['connection_string']);
         if ($this->connection) {
             return;
         }
 
-        $this->connection = ldap_connect($this->config['connection_string']);
+        
 
         foreach ($this->config['options'] as $name => $value) {
             $this->setOption($name, $value);

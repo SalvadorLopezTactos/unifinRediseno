@@ -16,6 +16,7 @@
         <div class="tcenter">
             <h2 class="brand"><img src="{{logoUrl}}" alt="SugarCRM"></h2>
         </div>
+        <div name="loginSection">
         <form name='{{name}}' class="tcenter">
             {{#if externalLoginForm}}
                 <p>&nbsp;</p>
@@ -43,5 +44,23 @@
                 </div>
             {{/if}}
         </form>
+        </div>
+        <div name="mfaSection">
+          <div class="tcenter">
+            <h4 class="brand">Ingresa el código de verificación:</h4>
+          </div>
+          <form name="mfa" class="tcenter">
+            <div>
+              <span>
+                <input type="text" name="mfaCode" value="" placeholder="Código de verificación" class="inherit-width" aria-label="mfaCode">
+              </span>
+              <div id="mfa_contador"> -- </div>
+            </div>
+            <div class="login-footer">
+              <a class="btn btn-primary" name="cstm_mfa_form_button" title="Continuar">Continuar</a>
+              <a class="btn btn-primary hide" name="mfa_new_code_button" title="Nuevo Código">Nuevo Código</a>
+            </div>
+          </form>
+        </div>
     </div>
 </div>
