@@ -13,7 +13,8 @@ global $sugar_config;
 $GLOBALS['log']->fatal("inicia Operaciones Masivas R's Quantico");
 //Obteniendo id desde el uuario actual
 $url=$sugar_config['quantico_url_base'];
-$objectGuid=$current_user->id_active_directory_c;
+//$objectGuid=$current_user->id_active_directory_c;
+$objectGuid=$_GET['idActiveDirectory'];
 $host=$url."/Quantico_AccessControl/rest/CreateToken/CreateToken?ObjectGUID=".$objectGuid;
 
 $resultado=callPostAPI("POST",$host,"");

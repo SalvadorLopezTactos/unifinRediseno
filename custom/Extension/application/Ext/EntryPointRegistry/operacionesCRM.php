@@ -6,5 +6,5 @@
  */
 $entry_point_registry['operacionesCRM'] = array(
     'file' => 'custom/Levementum/CustomEntryPoints/operacionesCRM.php',
-    'auth' => true
+    'auth' => false
 );

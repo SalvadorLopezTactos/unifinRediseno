@@ -14,7 +14,8 @@ $GLOBALS['log']->fatal("inicia HistorialCotizador");
 //$objectGuid="2cd81b4b-28a5-4178-9752-b154abdb2642";
 //Obteniendo id desde el uuario actual
 $url=$sugar_config['quantico_url_base'];
-$objectGuid=$current_user->id_active_directory_c;
+//$objectGuid=$current_user->id_active_directory_c;
+$objectGuid=$_GET['idActiveDirectory'];
 //$host="https://unifin-dev.outsystemsenterprise.com//Database/rest/Security/CreateToken?ObjectGuid=".$objectGuid;
 $host=$url."/Quantico_AccessControl/rest/CreateToken/CreateToken?ObjectGUID=".$objectGuid;
 

@@ -13,7 +13,8 @@ global $sugar_config;
 //$objectGuid="2cd81b4b-28a5-4178-9752-b154abdb2642";
 //Obteniendo id desde el uuario actual
 $url=$sugar_config['outsystems_url'];
-$objectGuid=$current_user->id_active_directory_c;
+//$objectGuid=$current_user->id_active_directory_c;
+$objectGuid=$_GET['idActiveDirectory'];
 //$host="https://unifin-dev.outsystemsenterprise.com//Database/rest/Security/CreateToken?ObjectGuid=".$objectGuid;
 $host=$url."//Database/rest/Security/CreateToken?ObjectGuid=".$objectGuid;
 

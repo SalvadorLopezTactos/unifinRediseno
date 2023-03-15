@@ -5,6 +5,6 @@
 
 $entry_point_registry['OpMasivasRsQuantico'] = array(
 'file' => 'custom/Levementum/CustomEntryPoints/OpMasivasRsQuantico.php',
-'auth' => true
+'auth' => false
 
 );
