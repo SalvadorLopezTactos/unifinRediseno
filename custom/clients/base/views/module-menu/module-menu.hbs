@@ -57,7 +57,7 @@
         <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle" track="click:{{name}}-dropdown" aria-label="{{str 'LBL_MODULE_NAME' module}} - {{str 'LBL_LINK_MORE' module}}"><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-menu scroll">
             <ul role="menu">
-            <li> <a class="ellipsis_inline"  tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=ListaTareasQuantico" track="click:{{module}}"><i class="fa fa-bars"></i>Lista de tareas</a></li>
+            <li> <a class="ellipsis_inline"  tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=ListaTareasQuantico&idActiveDirectory={{activeDirectory}}" track="click:{{module}}"><i class="fa fa-bars"></i>Lista de tareas</a></li>
 
             <li> <a class="ellipsis_inline"  tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=operacionesCRM" track="click:{{module}}"><i class="fa fa-table"></i>Gestión de firmas</a></li>
             <li> <a class="ellipsis_inline"  tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=CotizadorQuantico" track="click:{{module}}"><i class="fa fa-table"></i>Cotizador Quantico</a></li>

@@ -5,6 +5,7 @@
 
     initialize: function(options) {
         this._super('initialize', [options]);
+        this.activeDirectory=App.user.attributes.id_active_directory_c;
 
         //this.customPopulateMenu();
         var puesto_usuario=App.user.attributes.puestousuario_c;
