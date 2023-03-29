@@ -210,7 +210,7 @@ class CustomFilterApi extends FilterApi
 
         global $db;
         $opciones = "";
-        foreach($filter[0][unifin_team] as $key => $values){
+        foreach($filter[0]['unifin_team'] as $key => $values){
             foreach($values as $index => $value){
                 if($index == 0){
                     $opciones = "equipos_c LIKE " . "'%^".$value."^%'";

@@ -214,7 +214,10 @@
               autoClose: false
           });
           userData = localStorage['mfaCRM'] == undefined ? 'ND' : localStorage['mfaCRM'];
-          app.api.call("read", app.api.buildURL("validateLoginPage/" + userData ), null, {
+          bodyRequest = {
+              userData: userData
+          }
+          app.api.call("create", app.api.buildURL("validateLoginPage"), bodyRequest, {
               success: _.bind(function (validationLoginPage) {
                   app.alert.dismiss('validate_login_view');
                   // Valida situación: 1- Inicia login  2- Muestra ventana de Código
@@ -453,7 +456,10 @@
                           autoClose: false
                       });
                       localStorage['mfaCRM'] = btoa('{"user":"'+this.model.get('username')+'","password":"'+this.model.get('password')+'"}');
-                      app.api.call("read", app.api.buildURL("validateUserLogin/" + localStorage['mfaCRM']), null, {
+                      bodyRequest = {
+                          userData: localStorage['mfaCRM']
+                      }
+                      app.api.call("create", app.api.buildURL("validateUserLogin"), bodyRequest, {
                           success: _.bind(function (validationUsers) {
                               app.alert.dismiss('validate_login_cstm');
                               if (validationUsers.status=='200') {
@@ -518,7 +524,11 @@
                   autoClose: false
               });
               self = this;
-              app.api.call("read", app.api.buildURL("validateCodeMFA/" + mfaCode +"/" + localStorage['mfaCRM']), null, {
+              bodyRequest = {
+                  userData: localStorage['mfaCRM'],
+                  code:mfaCode
+              }
+              app.api.call("create", app.api.buildURL("validateCodeMFA"), bodyRequest, {
                   success: _.bind(function (validationUsers) {
                       app.alert.dismiss('validate_code_cstm');
                       if (validationUsers.status=='200') {
@@ -596,7 +606,10 @@
               title: app.lang.get('LBL_LOADING'),
               autoClose: false
           });
-          app.api.call("read", app.api.buildURL("validateUserLogin/" + localStorage['mfaCRM']), null, {
+          bodyRequest = {
+              userData: localStorage['mfaCRM']
+          }
+          app.api.call("create", app.api.buildURL("validateUserLogin"), bodyRequest, {
               success: _.bind(function (validationUsers) {
                   app.alert.dismiss('validate_login_cstm');
                   if (validationUsers.status=='200') {

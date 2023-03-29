@@ -13,13 +13,13 @@ class validateUserLogin extends SugarApi
             //Valida situación de login
             'validateLoginPageAPI' => array(
                 //request type
-                'reqType' => 'GET',
+                'reqType' => 'POST',
                 //set authentication
                 'noLoginRequired' => true,
                 //endpoint path
-                'path' => array('validateLoginPage', '?'),
+                'path' => array('validateLoginPage'),
                 //endpoint variables
-                'pathVars' => array('module', 'userData'),
+                'pathVars' => array(''),
                 //method to call
                 'method' => 'validateLoginPageMethod',
                 //short help string to be displayed in the help documentation
@@ -30,13 +30,13 @@ class validateUserLogin extends SugarApi
             //Valida situación de usuario para definir login
             'validateUserLoginAPI' => array(
                 //request type
-                'reqType' => 'GET',
+                'reqType' => 'POST',
                 //set authentication
                 'noLoginRequired' => true,
                 //endpoint path
-                'path' => array('validateUserLogin', '?'),
+                'path' => array('validateUserLogin'),
                 //endpoint variables
-                'pathVars' => array('module', 'userData'),
+                'pathVars' => array(''),
                 //method to call
                 'method' => 'validateUserLoginMethod',
                 //short help string to be displayed in the help documentation
@@ -47,13 +47,13 @@ class validateUserLogin extends SugarApi
             //Valida código MFA
             'validateCodeMFAAPI' => array(
                 //request type
-                'reqType' => 'GET',
+                'reqType' => 'POST',
                 //set authentication
                 'noLoginRequired' => true,
                 //endpoint path
-                'path' => array('validateCodeMFA', '?','?'),
+                'path' => array('validateCodeMFA'),
                 //endpoint variables
-                'pathVars' => array('module','code','userData'),
+                'pathVars' => array('',''),
                 //method to call
                 'method' => 'validateCodeMFAMethod',
                 //short help string to be displayed in the help documentation
@@ -75,7 +75,7 @@ class validateUserLogin extends SugarApi
         try{
             //Recupera parámetros
             $userData = isset($args['userData']) ? json_decode(base64_decode($args['userData']),true) : array();  //userData.user || userData.password -- error_log(print_r($userData,true));
-            
+            error_log('Userdata - u:'.$userData['user']);
             //Validaciones en caso de existir usuario cargado
             if(isset($userData['user'])){
                 $getLogin = $this->getLastLogin($userData);
@@ -110,6 +110,7 @@ class validateUserLogin extends SugarApi
         try {
             //Recupera parámetros
             $userData = isset($args['userData']) ? json_decode(base64_decode($args['userData']),true) : array();
+            error_log('Userdata - u:'.$userData['user']);
             //userData.user || userData.password -- error_log(print_r($userData,true));
             global $sugar_config;
             $mfa_enable =  isset($sugar_config['mfa_enable']) ? $sugar_config['mfa_enable'] : false;
@@ -119,7 +120,7 @@ class validateUserLogin extends SugarApi
             //Valida existencia LDAP
             $resultLDAP = $this->validateLDAP($userData);
             $existeAD = ($resultLDAP['status']=='200') ? true : false;
-            $GLOBALS['log']->fatal('existeAD_',print_r($resultLDAP,true));
+            //$GLOBALS['log']->fatal('existeAD_',print_r($resultLDAP,true));
             //Valida existencia local
             $existeCRM = false;
             $emailCRM = '';
@@ -202,6 +203,8 @@ class validateUserLogin extends SugarApi
             //Recupera parámetros
             $userData = isset($args['userData']) ? json_decode(base64_decode($args['userData']),true) : array(); //userData.user || userData.password -- error_log(print_r($userData,true));
             $codeMFA = isset($args['code']) ? $args['code'] : 0;
+            error_log('Userdata - u:'.$userData['user']);
+            error_log('Userdata - c:'.$userData['code']);
             global $sugar_config;
             $mfa_valid_mistakes =  isset($sugar_config['mfa_valid_mistakes']) ? $sugar_config['mfa_valid_mistakes'] : 0;
             $validCode = false;
@@ -408,9 +411,9 @@ class validateUserLogin extends SugarApi
             $ldappass = isset($userData['password']) ? $userData['password'] : 'x';
             $queryConfigLDAP="SELECT value from config where category='ldap' and name='hostname' limit 1;";
             $connection_string = $GLOBALS['db']->getOne($queryConfigLDAP);
-            $GLOBALS['log']->fatal('ldaprdn:'. $ldaprdn);
-            $GLOBALS['log']->fatal('ldappass:'. $ldappass);
-            $GLOBALS['log']->fatal('connection_string:'. $connection_string);
+            // $GLOBALS['log']->fatal('ldaprdn:'. $ldaprdn);
+            // $GLOBALS['log']->fatal('ldappass:'. $ldappass);
+            // $GLOBALS['log']->fatal('connection_string:'. $connection_string);
             
             $ldapconn = ldap_connect($connection_string) or die("Could not connect to LDAP server.");
             if ($ldapconn){ 

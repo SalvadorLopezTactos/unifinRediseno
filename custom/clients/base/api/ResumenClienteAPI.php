@@ -1259,21 +1259,23 @@ class ResumenClienteAPI extends SugarApi
           $relatedSeguros = $beanPersona->s_seguros_accounts->getBeans();
           if($relatedSeguros) {
             $arr_principal['seguros']['total'] = count($relatedSeguros);
+            $prima =0;
+            $ingreso = 0;
             foreach($relatedSeguros as $seguro) {
               if($seguro->etapa == 9) {
                 $ganadas = $ganadas + 1;
-                $prima += $seguro->prima_neta_ganada_c;
-                $ingreso += $seguro->prima_neta;
+                $prima += floatval($seguro->prima_neta_ganada_c);
+                $ingreso += floatval($seguro->prima_neta);
                 $arr_principal['seguros']['tiene_ganada'] = true;
               }
               else {
                 if($seguro->etapa != 10) $proceso = $proceso + 1;
               }
-              $arr_principal['seguros']['op_ganadas'] = ($seguro->etapa == '9') ? $arr_principal['seguros']['op_ganadas']+1 : $arr_principal['seguros']['op_ganadas'];
-              $arr_principal['seguros']['op_presentacion'] = ($seguro->etapa == '6') ? $arr_principal['seguros']['op_presentacion']+1 : $arr_principal['seguros']['op_presentacion'];
-              $arr_principal['seguros']['op_cotizando'] = ($seguro->etapa == '2') ? $arr_principal['seguros']['op_cotizando']+1 : $arr_principal['seguros']['op_cotizando'];
-              $arr_principal['seguros']['op_no_cotizado'] = ($seguro->etapa == '5') ? $arr_principal['seguros']['op_no_cotizado']+1 : $arr_principal['seguros']['op_no_cotizado'];
-              $arr_principal['seguros']['op_no_ganada'] = ($seguro->etapa == '10') ? $arr_principal['seguros']['op_no_ganada']+1 : $arr_principal['seguros']['op_no_ganada'];
+              $arr_principal['seguros']['op_ganadas'] = ($seguro->etapa == '9') ? intval($arr_principal['seguros']['op_ganadas'])+1 : $arr_principal['seguros']['op_ganadas'];
+              $arr_principal['seguros']['op_presentacion'] = ($seguro->etapa == '6') ? intval($arr_principal['seguros']['op_presentacion'])+1 : $arr_principal['seguros']['op_presentacion'];
+              $arr_principal['seguros']['op_cotizando'] = ($seguro->etapa == '2') ? intval($arr_principal['seguros']['op_cotizando'])+1 : $arr_principal['seguros']['op_cotizando'];
+              $arr_principal['seguros']['op_no_cotizado'] = ($seguro->etapa == '5') ? intval($arr_principal['seguros']['op_no_cotizado'])+1 : $arr_principal['seguros']['op_no_cotizado'];
+              $arr_principal['seguros']['op_no_ganada'] = ($seguro->etapa == '10') ? intval($arr_principal['seguros']['op_no_ganada'])+1 : $arr_principal['seguros']['op_no_ganada'];
               $arr_principal['seguros']['kam_asignado'] = $seguro->ejecutivo_c;
             }
             $arr_principal['seguros']['ganadas'] = $ganadas;

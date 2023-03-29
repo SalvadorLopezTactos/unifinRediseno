@@ -90,7 +90,7 @@ class AnexosVentaCruzada extends SugarApi
                         foreach ($relatedBeans as $ref) {
                             if($ref->estatus==1 && $ref->producto_referenciado==$idProducto){
                                 $anexosActuales=$ref->numero_anexos;
-                                $nuevosAnexos=$anexosActuales+1;
+                                $nuevosAnexos=intval($anexosActuales)+1;
                                 $ref->numero_anexos=$nuevosAnexos;
 
                                 if($ref->primer_fecha_anexo ==""){

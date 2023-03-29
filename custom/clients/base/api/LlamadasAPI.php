@@ -78,7 +78,7 @@ class LlamadasAPI extends SugarApi
           $callURL = $sugar_config['viciDial_trigger_path'].'?exten=SIP/'.$ext_usuario.'&number='.$numero_cliente.'&leadid='.$bean_call->id;
         }else{
           //Issabel $sugar_config['site_url'].
-          $callURL = 'http://localhost/unifin/custom/Levementum/call_unifin.php?numero='.$numero_cliente.'&userexten='.$ext_usuario.'&id_call='.$bean_call->id;
+          $callURL = 'https://192.168.11.254/call_unifin.php?numero='.$numero_cliente.'&userexten='.$ext_usuario.'&id_call='.$bean_call->id;
         }
 
         //Invoca ejecución de llamada

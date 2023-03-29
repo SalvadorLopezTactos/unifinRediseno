@@ -34,10 +34,12 @@ class BancosAPI extends SugarApi
 			{
 				//$list = $app_list_strings['Institucion_list'];
                 foreach ($app_list_strings['Institucion_list'] as $key=>$value) {
-                    $list[$i]->idBanco = $key;
-                    $list[$i]->sNombre = $value;
+                    if(isset($key) && !empty($key)){
+                      $list[$i]['idBanco'] = $key;
+                      $list[$i]['sNombre'] = $value;
 
-                    $i++;
+                      $i++;
+                    }
                 }
 			}
             return $list;
@@ -50,5 +52,3 @@ class BancosAPI extends SugarApi
     }
 
 }
-
-

@@ -65,7 +65,7 @@ SQL;
         $concatenado=$args['data']['concatenado'];
 		$negocio_c=$args['data']['negocio_c'];
 		$producto_financiero_c=$args['data']['producto_financiero_c'];
-        $GLOBALS['log']->fatal("id oportunidad " . $idOportunidad + "  c " .$concatenado);
+        $GLOBALS['log']->fatal("id oportunidad " . $idOportunidad . "  c " .$concatenado);
 
         $query = "SELECT * from accounts_opportunities rel
   INNER JOIN opportunities op

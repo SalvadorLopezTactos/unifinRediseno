@@ -207,7 +207,7 @@ AND dm.dire_direccion_dire_municipiodire_direccion_idb='{$id_direccion}' and m.d
 
         //Recorrer indicadores y regresar identificador
 
-        if (count($indicadores_request > 0)) {
+        if (count($indicadores_request) > 0) {
 
             $indicadores_map = array();
             $indicadores_map_return = array();

@@ -16,33 +16,17 @@ class DirEliminada_Class
     //Inicia proceso
     $GLOBALS['log']->fatal ('BuscaDirEliminadas: Inicia');
     //Ejecuta consulta
-    $query = "select d.id as idDireccion from dire_direccion d
-    where 
-    d.deleted=1
-    and d.id in (
-      select accounts_dire_direccion_1dire_direccion_idb as idDireccion
-      from accounts_dire_direccion_1_c
-      where accounts_dire_direccion_1accounts_ida='{$bean->id}'
-    );";
+    $query = "update accounts_dire_direccion_1_c ad
+  	  inner join dire_direccion d on d.id = ad.accounts_dire_direccion_1dire_direccion_idb
+      set ad.deleted=1
+      where 
+      d.deleted=1
+      and ad.deleted=0
+      and ad.accounts_dire_direccion_1accounts_ida = '{$bean->id}';";
 
     //Ejecuta consultaa
     $resultQ = $GLOBALS['db']->query($query);
-    $GLOBALS['log']->fatal ('BuscaDirEliminadas: Ejecuta consulta');
-
-    //Procesa registros recuperados
-    while ($row = $GLOBALS['db']->fetchByAssoc($resultQ)) {
-      $GLOBALS['log']->fatal ('BuscaDirEliminadas: Registro recuperado - '. $row['idDireccion']);
-
-      //Actualiza tabla de relación: accounts_dire_direccion_1_c
-      $query = "update accounts_dire_direccion_1_c
-      set deleted = 1
-      where accounts_dire_direccion_1dire_direccion_idb='{$row['idDireccion']}'
-      ;";
-      //Ejecuta consultaa
-      $GLOBALS['log']->fatal ('BuscaDirEliminadas: Ejecuta update');
-      $resultQ = $GLOBALS['db']->query($query);
-    
-    }
+    $GLOBALS['log']->fatal ('BuscaDirEliminadas: Ejecuta update para depurar direcciones eliminadas');
 
     //Concluye proceso
     $GLOBALS['log']->fatal ('BuscaDirEliminadas: Concluye');

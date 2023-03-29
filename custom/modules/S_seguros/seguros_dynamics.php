@@ -268,9 +268,10 @@ class Seguros_dynamics
                     "Content-type: application/json"));
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-                $response = curl_exec($curl);
+                $json_response = curl_exec($curl);
                 curl_close($curl);
-            $GLOBALS['log']->fatal('Informacion de Cotizando enviada: ' .$response);
+            $GLOBALS['log']->fatal('Informacion de Cotizando enviada: ' .$json_response);
+            $response = json_decode($json_response, true);
             if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
           else
@@ -300,9 +301,10 @@ class Seguros_dynamics
                     "Content-type: application/json"));
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-                $response = curl_exec($curl);
-            $GLOBALS['log']->fatal('Informacion de Cotizado enviada: ' .$response);
+                $json_response = curl_exec($curl);
+            $GLOBALS['log']->fatal('Informacion de Cotizado enviada: ' .$json_response);
                 curl_close($curl);
+                $response = json_decode($json_response, true);
             if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
           else
@@ -339,9 +341,10 @@ class Seguros_dynamics
                     "Content-type: application/json"));
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-                $response = curl_exec($curl);
-            $GLOBALS['log']->fatal('Informacion de No Cotizado enviada: ' .$response);
+                $json_response = curl_exec($curl);
+            $GLOBALS['log']->fatal('Informacion de No Cotizado enviada: ' .$json_response);
                 curl_close($curl);
+                $response = json_decode($json_response, true);
             if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
           else
@@ -380,9 +383,10 @@ class Seguros_dynamics
                     "Content-type: application/json"));
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-                $response = curl_exec($curl);
-            $GLOBALS['log']->fatal('Informacion de Presentación enviada: ' .$response);
+                $json_response = curl_exec($curl);
+            $GLOBALS['log']->fatal('Informacion de Presentación enviada: ' .$json_response);
                 curl_close($curl);
+                $response = json_decode($json_response, true);
             if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
           else
@@ -413,9 +417,10 @@ class Seguros_dynamics
                     "Content-type: application/json"));
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-                $response = curl_exec($curl);
-            $GLOBALS['log']->fatal('Informacion de Re-negociacon enviada: ' .$response);
+                $json_response = curl_exec($curl);
+            $GLOBALS['log']->fatal('Informacion de Re-negociacon enviada: ' .$json_response);
             curl_close($curl);
+            $response = json_decode($json_response, true);
             if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
           else
@@ -481,9 +486,10 @@ class Seguros_dynamics
                 "Content-type: application/json"));
               curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
               curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-              $response = curl_exec($curl);
-              $GLOBALS['log']->fatal('Informacion de Ganada enviada: ' .$response);
+              $json_response = curl_exec($curl);
+              $GLOBALS['log']->fatal('Informacion de Ganada enviada: ' .$json_response);
               curl_close($curl);
+              $response = json_decode($json_response, true);
               if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
             }
             else
@@ -522,9 +528,10 @@ class Seguros_dynamics
                     "Content-type: application/json"));
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-                $response = curl_exec($curl);
-            $GLOBALS['log']->fatal('Informacion de No Ganada enviada: ' .$response);
+                $json_response = curl_exec($curl);
+            $GLOBALS['log']->fatal('Informacion de No Ganada enviada: ' .$json_response);
             curl_close($curl);
+            $response = json_decode($json_response, true);
             if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
           else
