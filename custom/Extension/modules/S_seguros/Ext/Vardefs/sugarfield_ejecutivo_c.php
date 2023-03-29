@@ -1,19 +1,22 @@
 <?php
- // created: 2021-04-14 13:46:09
+ // created: 2023-03-29 18:07:57
 $dictionary['S_seguros']['fields']['ejecutivo_c']['labelValue']='Ejecutivo Asignado o KAM';
 $dictionary['S_seguros']['fields']['ejecutivo_c']['dependency']='';
+$dictionary['S_seguros']['fields']['ejecutivo_c']['required_formula']='';
+$dictionary['S_seguros']['fields']['ejecutivo_c']['readonly_formula']='';
 $dictionary['S_seguros']['fields']['ejecutivo_c']['visibility_grid']=array (
   'trigger' => 'tipo_registro_sf_c',
-  'values' =>
+  'values' => 
   array (
-    1 =>
+    1 => 
     array (
       0 => '',
       1 => '4',
       2 => '5',
       3 => '3',
+      4 => '1',
     ),
-    2 =>
+    2 => 
     array (
       0 => '',
       1 => '4',

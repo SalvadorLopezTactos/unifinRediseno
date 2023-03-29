@@ -340,6 +340,9 @@ array (
               ),
               26 => 
               array (
+                'readonly' => false,
+                'name' => 'asesor_vta_cruzada_c',
+                'label' => 'LBL_ASESOR_VTA_CRUZADA',
               ),
               27 => 
               array (
