@@ -143,7 +143,7 @@ class analizate_hooks  {
                     <p>
                       <br>Para UNIFIN FINANCIERA SAB DE CV es importante llevar a cabo el proceso de alta como proveedor con total seguridad y transparencia, por lo cual solicitamos proporcionar tus datos en el siguiente link:
                       <br><a id="downloadErrors" href="'. $urlFinanciera.'&UUID='. base64_encode($idCuenta). '&RFC_CIEC=' .base64_encode($rfc). '&MAIL=' .base64_encode($correo).'">Da Click Aquí</a>
-                      <br><br>Por favor para cualquier comentario dirígete al comprador que te contacto.
+                      <br><br>Por favor para cualquier comentario dirígete al comprador que te contacto o bien al correo: compras1@unifin.com.mx
                     </p>
                     <br>Atentamente
                   </font>
@@ -211,7 +211,7 @@ class analizate_hooks  {
                     <p>
                       <br>Se ha detectado un problema al realizar el resgistro con el portal Analízate. Le solicitamos ingrese de nuevo a través del siguiente enlace para llevar a cabo el registro nuevamente.
                       <br><a id="downloadErrors" href="'. $urlFinanciera.'&UUID='. base64_encode($idCuenta). '&RFC_CIEC=' .base64_encode($rfc). '&MAIL=' .base64_encode($correo).'">Da Click Aquí</a>
-                      <br><br>Por favor para cualquier comentario dirígete al comprador que te contacto.
+                      <br><br>Por favor para cualquier comentario dirígete al comprador que te contacto o bien al correo: compras1@unifin.com.mx
                     </p>
                     <br>Atentamente
                   </font>
