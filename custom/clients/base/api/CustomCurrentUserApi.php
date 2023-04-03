@@ -73,7 +73,8 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['llamada_genesys_c'] = $current_user->llamada_genesys_c;
         $userArray['current_user']['equipos_c'] = $current_user->equipos_c;
 		$userArray['current_user']['lenia_c'] = $current_user->lenia_c;
-		$userArray['current_user']['habilita_envio_tc_c'] = $current_user->habilita_envio_tc_c;
+        $userArray['current_user']['habilita_envio_tc_c'] = $current_user->habilita_envio_tc_c;
+        $userArray['current_user']['admin_seguros_c'] = $current_user->admin_seguros_c;
         return $userArray;
     }
 }

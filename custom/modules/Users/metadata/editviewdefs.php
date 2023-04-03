@@ -26,7 +26,7 @@ array (
       ),
       'includes' => 
       array (
-        0 => 
+        0 =>
         array (
           'file' => 'custom/modules/Users/js/customValidation.js',
         ),
@@ -514,6 +514,16 @@ array (
             'name' => 'mfa_enable_c',
             'label' => 'LBL_MFA_ENABLE',
           ),
+        ),
+        18 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'admin_seguros_c',
+            'label' => 'LBL_ADMIN_SEGUROS',
+          ),
+          1 => '',
         ),
       ),
       'lbl_editview_panel5' => 
