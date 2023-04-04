@@ -26,3 +26,10 @@ $hook_array['before_save'][] = Array(
     'Seguros_platform_user',
     'set_audit_user_platform'
 );
+$hook_array['before_save'][] = Array(
+    5,
+    'Envía notificación por correo electrónico al detectar cambios sobre registros en etapa Ganada',
+    'custom/modules/S_seguros/Seguros_LH.php',
+    'Seguros_LH',
+    'send_notification_ganada'
+);

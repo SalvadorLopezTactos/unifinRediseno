@@ -426,6 +426,16 @@ array (
           ),
           1 => '',
         ),
+        18 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'admin_seguros_c',
+            'label' => 'LBL_ADMIN_SEGUROS',
+          ),
+          1 => '',
+        ),
       ),
       'lbl_detailview_panel4' => 
       array (

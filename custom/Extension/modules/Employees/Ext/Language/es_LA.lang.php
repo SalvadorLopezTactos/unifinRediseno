@@ -66,3 +66,4 @@ $mod_strings['LBL_VACACIONES_INICIO'] = 'Inicio';
 $mod_strings['LBL_VACACIONES_FIN'] = 'Fin';
 $mod_strings['LBL_VACACIONES_DETALLE'] = 'Descripción';
 $mod_strings['LBL_MFA_ENABLE'] = 'MFA enable';
+$mod_strings['LBL_ADMIN_SEGUROS'] = 'Administración Seguros';
