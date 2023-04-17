@@ -30,9 +30,10 @@ class Seguros_LH{
                 $text_cambios .= '<li><b>Referenciador</b>, contenía el valor <b>'. $nombre_anterior .'</b> y se actualizó por <b>'.$nombre_actual.'</b></li>';
             }
 
-            if( $bean->fetched_row['comision_c'] !== $bean->comision_c ){
+            if( $bean->fetched_row['comision_c'] !== number_format((float)$bean->comision_c, 2, '.', '') ){
                 $send_email = true;
-                $text_cambios .= '<li><b>Comisión</b>, contenía el valor <b>'. $bean->fetched_row['comision_c'] .'</b> y se actualizó por <b>'.$bean->comision_c.'</b></li>';
+                $comision_round= number_format((float)$bean->comision_c, 2, '.', '');
+                $text_cambios .= '<li><b>Comisión</b>, contenía el valor <b>'. $bean->fetched_row['comision_c'] .'</b> y se actualizó por <b>'.$comision_round.'</b></li>';
             }
             $text_cambios .= '</ul>';
 
