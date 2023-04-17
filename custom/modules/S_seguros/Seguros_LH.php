@@ -23,9 +23,11 @@ class Seguros_LH{
                 $text_cambios .= '<li><b>Tipo Referenciador</b>, contenía el valor <b>'.$app_list_strings['tipo_referenciador_list'][$bean->fetched_row['tipo_referenciador']] .'</b> y se actualizó por <b>'.$app_list_strings['tipo_referenciador_list'][$bean->tipo_referenciador].'</b></li>';
             }
 
-            if( $bean->fetched_row['empleados_c'] !== $bean->empleados_c ){
+            if( $bean->fetched_row['user_id1_c'] !== $bean->user_id1_c ){
                 $send_email = true;
-                $text_cambios .= '<li><b>Referenciador</b>, contenía el valor <b>'. $bean->fetched_row['empleados_c'] .'</b> y se actualizó por <b>'.$bean->empleados_c.'</b></li>';
+                $nombre_anterior = $this->getNameReferenciador( $bean->fetched_row['user_id1_c'] );
+                $nombre_actual = $this->getNameReferenciador( $bean->user_id1_c );
+                $text_cambios .= '<li><b>Referenciador</b>, contenía el valor <b>'. $nombre_anterior .'</b> y se actualizó por <b>'.$nombre_actual.'</b></li>';
             }
 
             if( $bean->fetched_row['comision_c'] !== $bean->comision_c ){
@@ -42,6 +44,14 @@ class Seguros_LH{
         }
         
     }
+
+    public function getNameReferenciador( $idUsuario ){
+
+        $beanUser = BeanFactory::getBean('Users', $idUsuario);
+
+        return $beanUser->full_name;
+
+    } 
 
     public function buildBodyEmail($id_dynamics,$text_cambios){
 
