@@ -84,4 +84,22 @@ $dependencies['Accounts']['CodigoVendor_Visibility'] = array(
             ),
         ),
     ),
-); 
+);
+
+//Dependencia para mantener siempre oculto el panel que contiene los campos de control para conocer los cambios de razón social y dirección fiscal
+$dependencies['Accounts']['panel_cambio_razon_social']=array(
+    'hooks' => array("edit","view"),
+    'trigger' => 'true',
+    'triggerFields' => array('id'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetPanelVisibility',
+            'params' => array(
+                'target' => 'LBL_RECORDVIEW_PANEL26',
+                'value' => 'equal(0,1)',
+            ),
+        ),
+    ),
+   	'notActions' => array(),
+);

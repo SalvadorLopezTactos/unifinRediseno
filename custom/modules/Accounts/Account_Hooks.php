@@ -1970,4 +1970,255 @@ where rfc_c = '{$bean->rfc_c}' and
         }
     }
 
+    public function cambioRazonSocial($bean = null, $event = null, $args = null){
+        //Entra funcionalidad solo en caso de que el rfc sea el mismo y se detecte algún cambio en los campos:
+        // Razón social / Nombre, Apellidos
+        // Dirección fiscal
+        //razonsocial_c,
+        $send_notification = false;
+        $cambio_nombre =  false;
+        $cambio_dirFiscal =  false;
+        $GLOBALS['log']->fatal("############ VALIDA CAMBIO DE NOMBRE ############");
+        $GLOBALS['log']->fatal("ANTES: ". $bean->fetched_row['name']. " DESPUÉS: ".$bean->name );
+        //$GLOBALS['log']->fatal(print_r($bean->account_direcciones,true));
+        $text_cambios = '';
+        if( $bean->valid_cambio_razon_social_c == 1 ){
+            //Se envía excepción en caso de que el registro se encuentre en proceso de validación
+            require_once 'include/api/SugarApiException.php';
+            $GLOBALS['log']->fatal("No es posible generar cambios al registro ya que se encuentra en un proceso de revisión");
+            throw new SugarApiExceptionInvalidParameter("No es posible generar cambios al registro ya que se encuentra en un proceso de revisión");
+
+        }else{
+            if( !empty($bean->rfc_c) ){
+                if( $bean->fetched_row['rfc_c'] == $bean->rfc_c ){
+                    $text_cambios .= '<ul>';
+                    if( $bean->fetched_row['name'] !== $bean->name ){
+                        $GLOBALS['log']->fatal("El nombre cambió, se envía notificación");
+                        $send_notification = true;
+                        $cambio_nombre = true;
+                        $text_cambios .= '<li><b>Razón social / Nombre</b>: tenía el valor <b>'. $bean->fetched_row['name'] .'</b> y cambió a <b>'.$bean->name.'</b></li>';
+                    }
+    
+                    //Detectar cambio dirección fiscal
+                    $direccion_anterior = $this->getDireccionFiscalBD($bean);
+                    if( !empty( $direccion_anterior ) ){
+
+                        $id_direccion_buscar = $direccion_anterior[0];
+                        $direccion_anterior_completa = $direccion_anterior[1];
+                        $GLOBALS['log']->fatal("********** Direccion anterior **********");
+                        $GLOBALS['log']->fatal(print_r($direccion_anterior,true));
+
+                        $direccion_nueva_completa = $this->getDireccionFiscalActual($bean->account_direcciones,$id_direccion_buscar);
+                        $GLOBALS['log']->fatal("********** Direccion nueva **********");
+                        $GLOBALS['log']->fatal($direccion_nueva_completa);
+
+                        if( strtoupper($direccion_anterior_completa) !== strtoupper($direccion_nueva_completa) ){
+                            $GLOBALS['log']->fatal("La dirección cambió, se envía notificación");
+                            $send_notification = true;
+                            $cambio_dirFiscal = true;
+                            $text_cambios .= '<li><b>Dirección fiscal</b>: tenía el valor <b>'. strtoupper($direccion_anterior_completa) .'</b> y cambió a <b>'.strtoupper($direccion_nueva_completa).'</b></li>';
+                            $this->insertCambiosDireFiscalAudit( $bean->id, strtoupper($direccion_anterior_completa), strtoupper($direccion_nueva_completa) );
+                        }
+                    }
+                    $text_cambios .= '</ul>';
+                }
+
+            }
+        }
+
+        if( $send_notification ){
+            global $app_list_strings;
+            $emails_responsables_cambios_list = $app_list_strings['emails_responsables_cambios_list'];
+
+            $body_correo = $this->buildBodyCambioRazon( $bean->rfc_c, $text_cambios, $bean->id, $bean->name );
+            $this->sendEmailCambioRazonSocial( $emails_responsables_cambios_list, $body_correo );
+
+            //Habilita bandera para indicar que el registro se encuentra en proceso de validación
+            $bean->valid_cambio_razon_social_c = 1;
+
+            if( $cambio_nombre ){
+                $bean->cambio_nombre_c = 1;
+            }
+
+            if( $cambio_dirFiscal ){
+                $bean->cambio_dirfiscal_c = 1;
+            }
+        
+            $this->creaCaso( $bean->id );
+        }
+    }
+
+    /**
+     * @param $direccion_anterior, string de la dirección anterior, antes de ser cambiada
+     * @param $direccion_nueva, string de la dirección nueva, contiene el valor de la dirección actualizada
+     */
+    public function insertCambiosDireFiscalAudit( $id_record, $direccion_anterior, $direccion_nueva){
+        global $current_user;
+        $id_user = $current_user->id;
+        $parent_id = $id_record;
+        $id_audit = create_guid();
+        $date = TimeDate::getInstance()->nowDb();
+        $event_id = create_guid();
+
+        $insertQuery ="INSERT INTO `accounts_audit` (`id`,`parent_id`,`date_created`,`created_by`,`field_name`,`data_type`,`before_value_string`,`after_value_string`,`before_value_text`,`after_value_text`,`event_id`,`date_updated`) VALUES ('{$id_audit}','{$parent_id}','{$date}','{$id_user}','dire_Direccion','varchar','{$direccion_anterior}','{$direccion_nueva}',NULL,NULL,'{$event_id}',NULL)";
+        $GLOBALS['log']->fatal("QUERY INSERT ACCOUNTS");
+        $GLOBALS['log']->fatal($insertQuery);
+        $GLOBALS['db']->query($insertQuery);
+    }
+
+    /**
+     * @param $bean - Bean de la cuenta
+     * @return $return_array - Primera posicion: id de la dirección fiscal, segunda posición: string de la dirección completa
+     */
+    public function getDireccionFiscalBD($bean){
+        $direccion_completa = '';
+        $return_array = array();
+        $indicador_direcciones_fiscales = array(2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63);
+        if ($bean->load_relationship('accounts_dire_direccion_1')) {
+            $relatedBeans = $bean->accounts_dire_direccion_1->getBeans();
+            
+            if (!empty($relatedBeans)) {
+                
+                foreach ($relatedBeans as $direccion) {
+                    
+                    //Valida si tiene dirección fiscal
+                    $indicador = $direccion->indicador;
+                    if( in_array($indicador,$indicador_direcciones_fiscales) ){
+                        $GLOBALS['log']->fatal( "ES FISCAL");
+                        $id = $direccion->id;
+                        $cp = $direccion->dire_direccion_dire_codigopostal_name;
+                        $calle = $direccion->calle;
+                        $pais = $direccion->dire_direccion_dire_pais_name;
+                        $estado = $direccion->dire_direccion_dire_estado_name; 
+                        $municipio = $direccion->dire_direccion_dire_municipio_name;
+                        $ciudad = $direccion->dire_direccion_dire_ciudad_name;
+                        $colonia = $direccion->dire_direccion_dire_colonia_name;
+                        $numext = $direccion->numext;
+                        $numint = $direccion->numint;
+
+                        $direccion_completa .= "Calle: ". $calle .", CP: ". $cp .", País: ". $pais .", Estado: ". $estado .", Municipio: ". $municipio .", Ciudad: ". $ciudad .", Colonia: ". $colonia .", Número exterior: ". $numext .", Número interior: ".$numint;
+
+                        array_push( $return_array, $id, $direccion_completa);
+
+                        break;
+                    }
+                    
+                }
+            }
+        }
+
+        return $return_array;
+
+    }
+
+    public function getDireccionFiscalActual($direcciones,$idDireccion){
+        $direccion_completa = "";
+        if( count($direcciones) > 0 ){
+            $posicion_direccion_fiscal = "";
+            for ($i=0; $i < count($direcciones); $i++) { 
+                if( $direcciones[$i]['id'] == $idDireccion ){
+                    $posicion_direccion_fiscal = $i;
+                    //El indice se establece con count para cortar el ciclo for y salir de el
+                    $i = count($direcciones);
+                }
+            }
+
+            $elementoDirFiscalActual = $direcciones[$posicion_direccion_fiscal];
+            
+            $cp = $elementoDirFiscalActual['valCodigoPostal'];
+            $calle = $elementoDirFiscalActual['calle'];
+            $pais = $elementoDirFiscalActual['valPais'];
+            $estado = $elementoDirFiscalActual['valEstado']; 
+            $municipio = $elementoDirFiscalActual['valMunicipio'];
+            $ciudad = $elementoDirFiscalActual['valCiudad'];
+            $colonia = $elementoDirFiscalActual['valColonia'];
+            $numext = $elementoDirFiscalActual['numext'];
+            $numint = $elementoDirFiscalActual['numint'];
+
+            $direccion_completa .= "Calle: ". $calle .", CP: ". $cp .", País: ". $pais .", Estado: ". $estado .", Municipio: ". $municipio .", Ciudad: ". $ciudad .", Colonia: ". $colonia .", Número exterior: ". $numext .", Número interior: ".$numint;
+        }
+
+        return $direccion_completa;
+
+    }
+
+    public function buildBodyCambioRazon( $rfc, $text_cambios, $idCuenta, $nombreCuenta ){
+        global $sugar_config;
+        $url = $sugar_config['site_url'];
+
+        $linkCuenta = '<a href="'.$url.'/#Accounts/'. $idCuenta .'">'.$nombreCuenta.'</a>';
+
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">
+            Se han detectado cambios sobre la cuenta con RFC: <b>'.$rfc.'</b>.<br>
+            <br>A continuación se muestra las modificaciones generadas:<br>'.
+            $text_cambios.'<br>
+            Se solicita la revisión de esta cuenta ' .$linkCuenta. ' para autorizar o rechazar los cambios correspondientes.
+            <br><br>Atentamente Unifin</font></p>
+            <br><br><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png">
+            <br><span style="font-size:8.5pt;color:#757b80">____________________________________________</span>
+            <p class="MsoNormal" style="text-align: justify;">
+              <span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+                Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+                Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+                No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+                Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro <a href="https://www.unifin.com.mx/aviso-de-privacidad" target="_blank">Aviso de Privacidad</a>  publicado en <a href="http://www.unifin.com.mx/" target="_blank">www.unifin.com.mx</a>
+              </span>
+            </p>';
+
+        return $mailHTML;
+
+    }
+
+    public function sendEmailCambioRazonSocial( $emails_address,$body_correo ){
+
+        try{
+            global $app_list_strings;
+            $mailer = MailerFactory::getSystemDefaultMailer();
+            $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+            $mailer->setSubject('UNIFIN CRM - Cambio de valores en cuenta con mismo RFC');
+            $body = trim($body_correo);
+            $mailer->setHtmlBody($body);
+            $mailer->clearRecipients();
+            for ($i=0; $i < count($emails_address); $i++) {
+                $GLOBALS['log']->fatal("AGREGANDO CORREOS DESTINATARIOS: ".$emails_address[$i]);
+                $mailer->addRecipientsTo(new EmailIdentity($emails_address[$i], $emails_address[$i]));
+            }
+            $result = $mailer->send();
+
+        } catch (Exception $e){
+            $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ");
+            $GLOBALS['log']->fatal(print_r($e,true));
+
+        }
+
+    }
+
+    public function creaCaso($idCuenta){
+        $GLOBALS['log']->fatal('GENERA CASO RELACIONADO');
+        $plataforma = $_SESSION['platform'];
+        $idKarla = 'd51dd49e-b1e6-572f-d6de-5654bfeb8b3e';
+        $idSamuel = '0e5a7202-ec2f-11ec-970e-00155d010c00'; //Cambiar por el id verdadero
+        $asunto = 'Cambio de información con mismo RFC';
+        // 8 - Crédito Uniclick, 1 - Arrendamiento
+        $producto = ( $plataforma == 'uniclick' ) ?  '8' : '1';
+        $tipo = '8'; // Modificación de datos
+        $subtipo = '48'; // Actualización de datos de contacto
+        $prioridad = 'P4'; // Urgente
+        $status = '1'; // No iniciado
+        $asignado = ( $plataforma == 'uniclick' ) ? $idSamuel : $idKarla;
+        $area_interna = ( $plataforma == 'uniclick' ) ?  '': 'Credito'; // Agregar id de uniclick
+
+        $caso = BeanFactory::newBean('Cases');
+        $caso->name = $asunto;
+        $caso->producto_c = $producto;
+        $caso->type = $tipo;
+        $caso->subtipo_c = $subtipo;
+        $caso->priority = $prioridad;
+        $caso->status = $status;
+        $caso->assigned_user_id = $asignado;
+        $caso->account_id = $idCuenta;
+
+        $caso->save();
+    }
+
 }

@@ -2116,6 +2116,7 @@
         this.context.on('button:convierte_lead:click', this.validalead, this);
         this.context.on('button:dynamics_button:click', this.requestDynamics, this);
 
+        this.context.on('button:verificar_cambios:click', this.verificarCambiosRazonSocial, this);
 
     },
 
@@ -2921,6 +2922,61 @@
 
     },
 
+    verificarCambiosRazonSocial:function(){
+
+        var lista_verificadores = App.lang.getAppListStrings('verificadores_ids_list');
+        var current_user_id = App.user.id;
+        var arr_permiso = [];
+        Object.keys(lista_verificadores).forEach(function (key) {
+            if ( lista_verificadores[key]==current_user_id ) {
+                arr_permiso.push(1);
+            }
+        });
+
+        if( arr_permiso.includes(1)){
+
+            if( this.model.get('valid_cambio_razon_social_c') ){
+
+                this.showModalVerificar();
+
+            }else{
+                app.alert.show("validar_error", {
+                    level: "error",
+                    title: 'Error',
+                    messages: 'El registro no está en proceso de validación',
+                    autoClose: false
+                });
+            }
+            
+        }else{
+            app.alert.show("validar_error", {
+                level: "error",
+                title: 'Error',
+                messages: 'No tienes permiso para ejecutar esta acción',
+                autoClose: false
+            });
+        }
+
+
+    },
+
+    showModalVerificar: function(){
+        var selfModal = this;
+        app.drawer.open({
+            layout: 'layout-verificaCambios',
+            context: {
+                context: this.context,
+                model: this.model,
+            },
+        },function(context, model,update) {
+            console.log("CIERRA DRAWER");
+            if( update == 'update' ){
+                //Refresca el modelo para mostrar los valores reestablecidos
+                App.controller.context.attributes.model.fetch();
+            }
+            
+        });
+    },
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono RECORD*/
     _doValidateEmailTelefono: function (fields, errors, callback) {

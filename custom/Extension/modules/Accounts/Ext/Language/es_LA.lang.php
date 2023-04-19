@@ -372,3 +372,7 @@ $mod_strings['LBL_RECORDVIEW_PANEL24'] = 'Analízate Clientes';
 $mod_strings['LBL_VENDOR'] = 'Vendor';
 $mod_strings['LBL_INT_ID_DYNAMICS'] = 'int id dynamics';
 $mod_strings['LBL_RECORDVIEW_PANEL25'] = 'Disposiciones en proceso';
+$mod_strings['LBL_VALID_CAMBIO_RAZON_SOCIAL'] = 'Validación cambio razón social';
+$mod_strings['LBL_CAMBIO_NOMBRE'] = '¿Cambió nombre?';
+$mod_strings['LBL_CAMBIO_DIRFISCAL'] = '¿Cambió dirección fiscal?';
+$mod_strings['LBL_RECORDVIEW_PANEL26'] = 'Panel Control Cambio Razón Social';

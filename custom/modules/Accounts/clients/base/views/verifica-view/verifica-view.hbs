@@ -1,0 +1,94 @@
+<style>
+    .modal {
+        position: fixed; /* Stay in place */
+        padding-top: 100px; /* Location of the box */
+        padding-bottom: 100px;
+        top: 0;
+        left:0;
+        /* width: 100%; /* Full width */
+        /*height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 1;
+        border: 1px solid #888;
+        width: 98%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+    }
+
+    .modal-header {
+        padding: .5px 0px;
+        background-color: #21618C;
+        color: white;
+        text-align: center;
+    }
+
+    .modal-body {
+        padding: .5px 0px;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .modal-footer {
+        padding: 2px 16px;
+        bottom: auto;
+        background-color: #fefefe;
+        color: #ffffff;
+        font-size: 12px;
+        text-align: center;
+    }
+</style>
+
+<div id="myModalVerificaCambios" class="row-fluid">
+    <!-- Modal content -->
+  <div class="modal span12 " style="width:100%;height:100%">
+      <div class="modal-content" style="margin:auto; width:50%">
+          <div class="modal-header">
+              <span class="close closeModalVerificaCambios" tabindex="-1">×</span>
+              <h3><b>Cambios detectados</b></h3>
+          </div>
+          <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">&nbsp;</th>
+                            <th scope="col">Razón Social / Nombre</th>
+                            <th scope="col">Dirección Fiscal</th>
+                            <th scope="col">Fecha cambio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="col">Valor previo</td>
+                            <td scope="col">{{nombrePrevio}}</td>
+                            <td scope="col">{{direccionPrevia}}</td>
+                            <td scope="col">{{fechacambioPrevia}}</td>
+                        </tr>
+                        <tr>
+                            <td scope="col">Nuevo Valor</td>
+                            <td scope="col">{{nombreNuevo}}</td>
+                            <td scope="col">{{direccionNueva}}</td>
+                            <td scope="col">{{fechacambioNueva}}</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+          </div>
+          <div class="modal-footer">
+              <button class="span6 btn btn-danger" id="btn-rechazar-cambios">Rechazar cambios</button>
+              <button class="span6 btn btn-success" id="btn-aprobar-cambios">Aprobar cambios</button>
+          </div>
+      </div>
+  </div>
+</div>
