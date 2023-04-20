@@ -90,7 +90,7 @@ class GetCambiosRazonDireFiscal extends SugarApi
 
     public function rechazarCambios($api, $args){
         $id_registro = $args['id_registro'];
-
+        $resultado = array();
         $beanCuenta = BeanFactory::getBean('Accounts', $id_registro , array('disable_row_level_security' => true));
         $campos_obtener = array();
         if( !empty($beanCuenta) ){
@@ -101,11 +101,11 @@ class GetCambiosRazonDireFiscal extends SugarApi
             if( $cambio_nombre ){
                 if( $regimen_fiscal !== 'Persona Moral' ){
 
-                    array_push($campos_obtener, 'primernombre_c','apellidopaterno_c','apellidomaterno_c');
+                    array_push($campos_obtener, 'primernombre_c','apellidopaterno_c','apellidomaterno_c','name');
 
                 }else{
                     //Es Persona Moral
-                    array_push($campos_obtener,'razonsocial_c','nombre_comercial_c');
+                    array_push($campos_obtener,'razonsocial_c','nombre_comercial_c','name');
                 }
 
                 $querySelectAuditNombre = "SELECT 
@@ -123,41 +123,85 @@ class GetCambiosRazonDireFiscal extends SugarApi
 
                 $results = $GLOBALS['db']->query($querySelectAuditNombre);
                 
-                $stringUpdateAccountCstm = "UPDATE accounts_cstm SET ";
-                $stringUpdateAccount = "UPDATE accounts SET ";
-                //UPDATE accounts_cstm SET apellidopaterno_c = '',apellido_materno_c = '' WHERE id_c= 'id';
+                //$stringUpdateAccountCstm = "UPDATE accounts_cstm SET ";
+                //$stringUpdateAccount = "UPDATE accounts SET ";
                 while($row = $GLOBALS['db']->fetchByAssoc($results)){
                     $campo = $row['field_name'];
-
                     if( in_array($campo,$campos_obtener) ){
-                        $stringUpdateAccountCstm .= $campo . "= '{$row['before_value_string']}' ,";
-                    }else{
-                        if( $campo == 'name' ){
-                            $stringUpdateAccount .= $campo . "= '{$row['before_value_string']}' ";
-                        }
+                        //$stringUpdateAccountCstm .= $campo . "= '{$row['before_value_string']}' ,";
+                        $beanCuenta->{$campo} = $row['before_value_string'];
                     }
                 }
-                $stringUpdateAccountCstm = substr($stringUpdateAccountCstm, 0, -1);
-                $stringUpdateAccountCstm .= "where id_c =" ."'{$id_registro}'";
+                //$stringUpdateAccountCstm = substr($stringUpdateAccountCstm, 0, -1);
+                //$stringUpdateAccountCstm .= "where id_c =" ."'{$id_registro}'";
 
-                $stringUpdateAccount .= "where id =" ."'{$id_registro}'";
+                //$stringUpdateAccount .= "where id =" ."'{$id_registro}'";
 
-                $GLOBALS['db']->query($stringUpdateAccount);
-                $GLOBALS['db']->query($stringUpdateAccountCstm);
+                //$GLOBALS['db']->query($stringUpdateAccount);
+                //$GLOBALS['db']->query($stringUpdateAccountCstm);
 
+                $beanCuenta->valid_cambio_razon_social_c='0';
+                $beanCuenta->cambio_nombre_c='0';
+                $beanCuenta->cambio_dirfiscal_c='0';
+
+                $id_return = $beanCuenta->save();
+
+                if( !empty($id_return) ){
+                    array_push($resultado, "Valores de Razón Social / Nombre se han reestablecido correctamente");
+                }
                 //Reestablece banderas
-                $GLOBALS['db']->query("UPDATE accounts_cstm SET valid_cambio_razon_social_c = '0', cambio_nombre_c = '0', cambio_dirfiscal_c = '0' WHERE id_c = '{$id_registro}'");
+                //$GLOBALS['db']->query("UPDATE accounts_cstm SET valid_cambio_razon_social_c = '0', cambio_nombre_c = '0', cambio_dirfiscal_c = '0' WHERE id_c = '{$id_registro}'");
                 
             }
 
             if( $cambio_dirFiscal ){
                 //ToDo, obtener valores anteriores de dirección fiscal
+                $querySelectAuditDireccion = "SELECT 
+                t1.*
+                FROM
+                    accounts_audit t1
+                WHERE
+                    t1.date_created = (SELECT 
+                        MAX(t2.date_created)
+                        FROM
+                            accounts_audit t2
+                        WHERE
+                            t2.field_name = t1.field_name)
+                            AND t1.parent_id='{$id_registro}'
+                            AND t1.field_name='dire_Direccion'";
+
+                $results = $GLOBALS['db']->query($querySelectAuditDireccion);
+                                
+                $id_direccion = '';
+                while($row = $GLOBALS['db']->fetchByAssoc($results)){
+                    $id_direccion = $row['event_id'];
+                    $GLOBALS['log']->fatal("#####ID DIRECCION#####");
+                    $GLOBALS['log']->fatal($id_direccion);
+                }
+
+                if( $id_direccion !== ''){
+                    // Obtener valores de la tabla audit de direcciones, para establecer valores anteriores
+                    $queryAuditDireccion = "SELECT 
+                        t1.*
+                    FROM
+                        dire_direccion_audit t1
+                    WHERE
+                        t1.date_created = (SELECT 
+                                MAX(t2.date_created)
+                            FROM
+                                dire_direccion_audit t2
+                            WHERE
+                                t2.field_name = t1.field_name)
+                            AND t1.parent_id = '{$id_direccion}'";
+
+                }
+
 
 
             }
 
         }
         
-        return array($stringUpdateAccount,$stringUpdateAccountCstm);
+        return $resultado;
     }
 }

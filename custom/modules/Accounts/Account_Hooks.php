@@ -1990,9 +1990,15 @@ where rfc_c = '{$bean->rfc_c}' and
 
         }else{
             if( !empty($bean->rfc_c) ){
+
                 if( $bean->fetched_row['rfc_c'] == $bean->rfc_c ){
                     $text_cambios .= '<ul>';
-                    if( $bean->fetched_row['name'] !== $bean->name ){
+                    $source = $_REQUEST['__sugar_url'];
+                    $endpoint = 'revierteCambiosRazonSocialDireFiscal';
+
+                    $pos = strpos($source,$endpoint);
+                    $GLOBALS['log']->fatal("SE LANZA DESDE ENDPOINT: ".$pos);
+                    if( $bean->fetched_row['name'] !== $bean->name && $pos==false){
                         $GLOBALS['log']->fatal("El nombre cambió, se envía notificación");
                         $send_notification = true;
                         $cambio_nombre = true;
@@ -2012,12 +2018,12 @@ where rfc_c = '{$bean->rfc_c}' and
                         $GLOBALS['log']->fatal("********** Direccion nueva **********");
                         $GLOBALS['log']->fatal($direccion_nueva_completa);
 
-                        if( strtoupper($direccion_anterior_completa) !== strtoupper($direccion_nueva_completa) ){
+                        if( strtoupper($direccion_anterior_completa) !== strtoupper($direccion_nueva_completa) && $pos==false ){
                             $GLOBALS['log']->fatal("La dirección cambió, se envía notificación");
                             $send_notification = true;
                             $cambio_dirFiscal = true;
                             $text_cambios .= '<li><b>Dirección fiscal</b>: tenía el valor <b>'. strtoupper($direccion_anterior_completa) .'</b> y cambió a <b>'.strtoupper($direccion_nueva_completa).'</b></li>';
-                            $this->insertCambiosDireFiscalAudit( $bean->id, strtoupper($direccion_anterior_completa), strtoupper($direccion_nueva_completa) );
+                            $this->insertCambiosDireFiscalAudit( $bean->id, strtoupper($direccion_anterior_completa), strtoupper($direccion_nueva_completa), $id_direccion_buscar );
                         }
                     }
                     $text_cambios .= '</ul>';
@@ -2052,13 +2058,15 @@ where rfc_c = '{$bean->rfc_c}' and
      * @param $direccion_anterior, string de la dirección anterior, antes de ser cambiada
      * @param $direccion_nueva, string de la dirección nueva, contiene el valor de la dirección actualizada
      */
-    public function insertCambiosDireFiscalAudit( $id_record, $direccion_anterior, $direccion_nueva){
+    public function insertCambiosDireFiscalAudit( $id_record, $direccion_anterior, $direccion_nueva, $id_direccion){
         global $current_user;
         $id_user = $current_user->id;
         $parent_id = $id_record;
         $id_audit = create_guid();
         $date = TimeDate::getInstance()->nowDb();
-        $event_id = create_guid();
+
+        //$event_id - Guardará el id de la dirección fiscal a nivel de la tabla dire_Direccion
+        $event_id = $id_direccion;
 
         $insertQuery ="INSERT INTO `accounts_audit` (`id`,`parent_id`,`date_created`,`created_by`,`field_name`,`data_type`,`before_value_string`,`after_value_string`,`before_value_text`,`after_value_text`,`event_id`,`date_updated`) VALUES ('{$id_audit}','{$parent_id}','{$date}','{$id_user}','dire_Direccion','varchar','{$direccion_anterior}','{$direccion_nueva}',NULL,NULL,'{$event_id}',NULL)";
         $GLOBALS['log']->fatal("QUERY INSERT ACCOUNTS");
