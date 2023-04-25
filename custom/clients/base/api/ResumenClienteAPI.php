@@ -645,8 +645,8 @@ class ResumenClienteAPI extends SugarApi
                     //Control para leasing
                   if ($opps->tipo_producto_c == 1 /*&& $opps->negocio_c == 5 && ($opps->producto_financiero_c == 0 || $opps->producto_financiero_c == "")*/) {
                         $arr_principal['leasing']['tiene_linea_autorizada'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['leasing']['tiene_linea_autorizada'];
-                        $linea_aut_leasing += $opps->monto_c;
-                        $linea_disp_leasing += $opps->amount;
+                        $linea_aut_leasing += floatval($opps->monto_c);
+                        $linea_disp_leasing += floatval($opps->amount);
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
                         /*********************************/
 
@@ -676,8 +676,8 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['factoring']['tiene_linea_autorizada'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['factoring']['tiene_linea_autorizada'];
                         $arr_principal['factoring']['tipo_linea'] = $opps->f_tipo_linea_c;
 
-                        $linea_aut_factoring += $opps->monto_c;
-                        $linea_disp_factoring += $opps->amount;
+                        $linea_aut_factoring += floatval($opps->monto_c);
+                        $linea_disp_factoring += floatval($opps->amount);
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
                         /*********************************/
 
@@ -705,8 +705,8 @@ class ResumenClienteAPI extends SugarApi
                     $fecha_val = date("Y-m-d");
                     if ($opps->tipo_producto_c == 3) {
                         $arr_principal['credito_auto']['tiene_linea_autorizada'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['credito_auto']['tiene_linea_autorizada'];
-                        $linea_aut_credito_aut += $opps->monto_c;
-                        $linea_disp_credito_aut += $opps->amount;
+                        $linea_aut_credito_aut += floatval($opps->monto_c);
+                        $linea_disp_credito_aut += floatval($opps->amount);
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
                         /*********************************/
 
@@ -735,8 +735,8 @@ class ResumenClienteAPI extends SugarApi
 
                     // Control para crédito sos
                     if ($opps->producto_financiero_c == 40) {
-                        $linea_aut_sos += $opps->monto_c;
-                        $linea_disp_sos += $opps->amount;
+                        $linea_aut_sos += floatval($opps->monto_c);
+                        $linea_disp_sos += floatval($opps->amount);
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
                         /*********************************/
 
@@ -762,8 +762,8 @@ class ResumenClienteAPI extends SugarApi
                     //control para Uniclick
                     if ($opps->negocio_c == 10 && $opps->estatus_c != 'K') {
                         $arr_principal['uniclick']['muestra_producto'] = true;
-                        $linea_aprox_uniclick += $opps->monto_c;
-                        $linea_disp_sos += $opps->amount;
+                        $linea_aprox_uniclick += floatval($opps->monto_c);
+                        $linea_disp_sos += floatval($opps->amount);
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
                         /*********************************/
 
@@ -786,8 +786,8 @@ class ResumenClienteAPI extends SugarApi
                     //control para Unifactor
                     if ($opps->producto_financiero_c == 50 && $opps->estatus_c != 'K') {
                         $arr_principal['unifactor']['muestra_producto'] = true;
-                        $linea_aprox_unifactor += $opps->monto_c;
-                        $linea_disp_factor += $opps->amount;
+                        $linea_aprox_unifactor += floatval($opps->monto_c);
+                        $linea_disp_factor += floatval($opps->amount);
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
                         /*********************************/
                         if (!empty($opps->vigencialinea_c)) {
@@ -808,8 +808,8 @@ class ResumenClienteAPI extends SugarApi
                     if ($opps->tipo_producto_c == 2 && $opps->estatus_c != 'K' && $opps->negocio_c != 10 ) {
                         $arr_principal['credito_simple']['tiene_linea_autorizada'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['credito_simple']['tiene_linea_autorizada'];
                         $arr_principal['credito_simple']['muestra_producto'] = true;
-                        $linea_aprox_cs += $opps->monto_c;
-                        $linea_disp_cs += $opps->amount;
+                        $linea_aprox_cs += floatval($opps->monto_c);
+                        $linea_disp_cs += floatval($opps->amount);
 
                         //Establece fecha de vencimiento
             						$dateVCS = $opps->vigencialinea_c;
@@ -828,8 +828,8 @@ class ResumenClienteAPI extends SugarApi
 
                     //Control para Unilease
                     if ($opps->producto_financiero_c == 41 && $opps->estatus_c != 'K') {
-                        $linea_aprox_unilease += $opps->monto_c;
-                        $linea_disp_sos += $opps->amount;
+                        $linea_aprox_unilease += floatval($opps->monto_c);
+                        $linea_disp_sos += floatval($opps->amount);
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
                         /*********************************/
 
@@ -852,8 +852,8 @@ class ResumenClienteAPI extends SugarApi
                     //control para Tarjeta de Crédito
                     if ($opps->tipo_producto_c == 14) {
                         $arr_principal['tarjeta_credito']['muestra_producto'] = true;
-                        $linea_aprox_tc += $opps->monto_c;
-                        $linea_disp_tc += $opps->amount;
+                        $linea_aprox_tc += floatval($opps->monto_c);
+                        $linea_disp_tc += floatval($opps->amount);
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
                         /*********************************/
                         if (!empty($opps->vigencialinea_c)) {
@@ -875,8 +875,8 @@ class ResumenClienteAPI extends SugarApi
                 }
                 // Control para fleet
                 if ($opps->tipo_producto_c == 6 && $opps->estatus_c != 'K') {
-                    $linea_aprox_fleet += $opps->monto_c;
-                    $numero_vehiculos_fleet += $opps->tct_numero_vehiculos_c;
+                    $linea_aprox_fleet += floatval($opps->monto_c);
+                    $numero_vehiculos_fleet += floatval($opps->tct_numero_vehiculos_c);
 
                     $arr_principal['fleet']['linea_aproximada'] = $linea_aprox_fleet;
                     $arr_principal['fleet']['numero_vehiculos'] = $numero_vehiculos_fleet;

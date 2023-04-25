@@ -128,7 +128,7 @@ class Solicitud_quantico extends SugarApi
             $estatus = "";
             
             if($cancelar ){
-                if ($bean->tct_etapa_ddw_c == "SI" && $bean->tipo_de_operacion_c != "RATIFICACION_INCREMENTO") {
+                if ($bean->tct_etapa_ddw_c == "SI" && $bean->tipo_de_operacion_c == "RATIFICACION_INCREMENTO") {
                     
                     $mensaje = "";
                     $estatus = "Success";
@@ -140,18 +140,18 @@ class Solicitud_quantico extends SugarApi
                     
                     $GLOBALS['log']->fatal('id_process_c : '.$bean->id_process_c);
                     if (trim($bean->id_process_c , "") == "") {
-                        $parametros = new stdClass();
-                        $parametros->id_linea_padre = $bean->id_linea_credito_c;
-                        $parametros->id = $bean->id;
-                        $parametros->conProceso = 0;
-                        $parametros->tipo_de_operacion_c = $bean->tipo_de_operacion_c;
-                        $parametros->tipo_operacion_c = $bean->tipo_operacion_c;
-                        
-                        $parametrosJSON = json_encode($parametros);
+                        //$parametros = new stdClass();
+                        $parametros=array('data'=>array());
+                        $parametros['data']['id_linea_padre'] = $bean->id_linea_credito_c;
+                        $parametros['data']['id'] = $bean->id;
+                        $parametros['data']['conProceso'] = 0;
+                        $parametros['data']['tipo_de_operacion_c'] = $bean->tipo_de_operacion_c;
+                        $parametros['data']['tipo_operacion_c'] = $bean->tipo_operacion_c;
+                        //$parametrosJSON = json_encode($parametros);
 
                         $callRatificacion = new CancelaRatificacion();
-                        $GLOBALS['log']->fatal('parametrosJSON-ratificaicon : '.$parametrosJSON);
-                        $resultado = $callRatificacion->cancelRatificacion($api, $parametrosJSON);
+                        $GLOBALS['log']->fatal('parametrosJSON-ratificaicon : '.print_r($parametros,true));
+                        $resultado = $callRatificacion->cancelRatificacion($api, $parametros);
                         $GLOBALS['log']->fatal('resultado_ratificacion: '.$resultado);
                         if ($resultado != null) {
                             $GLOBALS['log']->fatal('Se cancelo padre');
@@ -207,18 +207,19 @@ class Solicitud_quantico extends SugarApi
                                     */
                                 }
                                 // mandamos llamar el servicio para cancelar localmente:                            
-                                $parametros = new stdClass();
-                                $parametros->id_linea_padre = $bean->id_linea_credito_c;
-                                $parametros->id = $bean->id;
-                                $parametros->conProceso = 1;
-                                $parametros->tipo_de_operacion_c = $bean->tipo_de_operacion_c;
-                                $parametros->tipo_operacion_c = $bean->tipo_operacion_c;
+                                //$parametros = new stdClass();
+                                $parametros=array('data'=>array());
+                                $parametros['data']['id_linea_padre'] = $bean->id_linea_credito_c;
+                                $parametros['data']['id'] = $bean->id;
+                                $parametros['data']['conProceso'] = 1;
+                                $parametros['data']['tipo_de_operacion_c'] = $bean->tipo_de_operacion_c;
+                                $parametros['data']['tipo_operacion_c'] = $bean->tipo_operacion_c;
                             
                                 $parametrosJSON = json_encode($parametros);
 
                                 $callRatificacion = new CancelaRatificacion();
                                 //$GLOBALS['log']->fatal('args',$args);
-                                $resultado = $callRatificacion->cancelRatificacion($api, $parametrosJSON);
+                                $resultado = $callRatificacion->cancelRatificacion($api, $parametros);
                                 if ($resultado != null) {
                                     //$bean->estatus_c = 'K';
                                     //$bean->save();
