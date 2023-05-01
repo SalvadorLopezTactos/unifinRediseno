@@ -53,3 +53,11 @@ $hook_array['before_delete'][] = Array(
     'Dir_Direcciones_Hooks',
     'eliminaDireccionenUNICS'
 );
+
+$hook_array['before_save'][] = Array(
+    6,
+    'Establece campo json para generar estructura de valores que se quieren actualizar y además establece banderas para mandar notificación de cambio',
+    'custom/modules/dire_Direccion/Dir_Direcciones_Hooks.php',
+    'Dir_Direcciones_Hooks',
+    'setValoresPorActualizar'
+);

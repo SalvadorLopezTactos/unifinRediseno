@@ -145,4 +145,207 @@ SQL;
         $bean->name=$direccion_completa;
 
     }
+
+    public function setValoresPorActualizar($bean = null, $event = null, $args = null){
+        $indicador = $bean->indicador;
+        $send_notification = false;
+        $cambio_dirFiscal =  false;
+
+        $indicador_direcciones_fiscales = array(2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63);
+        if( in_array($indicador,$indicador_direcciones_fiscales) ){
+            
+            if( $bean->valid_cambio_razon_social_c == 1 ){
+                //Se envía excepción en caso de que el registro se encuentre en proceso de validación
+                require_once 'include/api/SugarApiException.php';
+                $GLOBALS['log']->fatal("No es posible generar cambios en la dirección fiscal ya que se encuentra en un proceso de revisión");
+                throw new SugarApiExceptionInvalidParameter("No es posible generar cambios en la dirección fiscal ya que se encuentra en un proceso de revisión");
+            }else{
+                $GLOBALS['log']->fatal("FEETCHED");
+                $GLOBALS['log']->fatal(print_r($bean->fetched_row,true));
+
+                $GLOBALS['log']->fatal("FEETCHED RELATED");
+                $GLOBALS['log']->fatal(print_r($bean->rel_fields_before_value,true));
+
+                $GLOBALS['log']->fatal("ARGS DATACHANGED");
+                $GLOBALS['log']->fatal(print_r($args,true));
+
+                $cp_actual = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_codigopostaldire_codigopostal_ida');
+                $cp_por_actualizar = $bean->dire_direccion_dire_codigopostaldire_codigopostal_ida;
+                $pais_actual = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_paisdire_pais_ida');
+                $pais_por_actualizar = $bean->dire_direccion_dire_paisdire_pais_ida;
+                $estado_actual = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_estadodire_estado_ida');
+                $estado_por_actualizar = $bean->dire_direccion_dire_estadodire_estado_ida;
+                $municipio_actual = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_municipiodire_municipio_ida');
+                $municipio_por_actualizar = $bean->dire_direccion_dire_municipiodire_municipio_ida ;
+                $ciudad_actual = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_ciudaddire_ciudad_ida');
+                $ciudad_por_actualizar = $bean->dire_direccion_dire_ciudaddire_ciudad_ida;
+                $colonia_actual = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_coloniadire_colonia_ida');
+                $colonia_por_actualizar = $bean->dire_direccion_dire_coloniadire_colonia_ida;
+                $calle_actual = $bean->fetched_row['calle'];
+                $calle_por_actualizar = $bean->calle;
+                $numext_actual = $bean->fetched_row['numext'];
+                $numext_por_actualizar = $bean->numext;
+                $numint_actual = $bean->fetched_row['numint'];
+                $numint_por_actualizar = $bean->numint;
+                $fecha_cambio = "";
+
+                if( $cp_actual !== $cp_por_actualizar ){
+                    $GLOBALS['log']->fatal("Código Postal ID cambió");
+                    $send_notification = true;
+                    $cambio_dirFiscal = true;
+                    $cp_por_actualizar = $bean->dire_direccion_dire_codigopostaldire_codigopostal_ida;
+                }
+
+                if( $pais_actual !== $pais_por_actualizar ){
+                    $GLOBALS['log']->fatal("País cambió");
+                    $send_notification = true;
+                    $cambio_dirFiscal = true;
+                    $pais_por_actualizar = $bean->dire_direccion_dire_paisdire_pais_ida;
+                }
+
+                if( $estado_actual !== $estado_por_actualizar ){
+                    $GLOBALS['log']->fatal("Estado cambió");
+                    $send_notification = true;
+                    $cambio_dirFiscal = true;
+                    $estado_por_actualizar = $bean->dire_direccion_dire_estadodire_estado_ida;
+                }
+
+                if( $municipio_actual !== $municipio_por_actualizar ){
+                    $GLOBALS['log']->fatal("Municipio cambió");
+                    $send_notification = true;
+                    $cambio_dirFiscal = true;
+                    $municipio_por_actualizar = $bean->dire_direccion_dire_municipiodire_municipio_ida;
+                }
+
+                if( $ciudad_actual !== $ciudad_por_actualizar ){
+                    $GLOBALS['log']->fatal("Ciudad cambió");
+                    $send_notification = true;
+                    $cambio_dirFiscal = true;
+                    $ciudad_por_actualizar = $bean->dire_direccion_dire_ciudaddire_ciudad_ida;
+                }
+
+                if( $colonia_actual !== $colonia_por_actualizar ){
+                    $GLOBALS['log']->fatal("Colonia cambió");
+                    $send_notification = true;
+                    $cambio_dirFiscal = true;
+                    $colonia_por_actualizar = $bean->dire_direccion_dire_coloniadire_colonia_ida;
+                }
+
+                if( $bean->fetched_row['calle'] !== $bean->calle ){
+                    $GLOBALS['log']->fatal("Calle cambió");
+                    $send_notification = true;
+                    $cambio_dirFiscal = true;
+                    $calle_por_actualizar = $bean->calle;
+                }
+
+                if( $bean->fetched_row['numext'] !== $bean->numext ){
+                    $GLOBALS['log']->fatal("Num Ext cambió");
+                    $send_notification = true;
+                    $cambio_dirFiscal = true;
+                    $numext_por_actualizar = $bean->numext;
+                }
+
+                if( $bean->fetched_row['numint'] !== $bean->numint ){
+                    $GLOBALS['log']->fatal("Num Int cambió");
+                    $send_notification = true;
+                    $cambio_dirFiscal = true;
+                    $numint_por_actualizar = $bean->numint;
+                }
+
+                if( $send_notification ){
+                    
+                    $plataforma = $_SESSION['platform'];
+                    $fecha_cambio = TimeDate::getInstance()->nowDb();
+                    
+                    //Habilita bandera para indicar que el registro se encuentra en proceso de validación
+                    $bean->valid_cambio_razon_social_c = 1;
+                    $bean->cambio_direccion_c = 1;
+
+                    $json_audit = $this->buildJsonAudit($cp_actual,$cp_por_actualizar,$pais_actual,$pais_por_actualizar,$estado_actual,$estado_por_actualizar,$municipio_actual,$municipio_por_actualizar,$ciudad_actual,$ciudad_por_actualizar,$colonia_actual,$colonia_por_actualizar,$calle_actual,$calle_por_actualizar,$numext_actual,$numext_por_actualizar,$numint_actual,$numint_por_actualizar,$fecha_cambio,$plataforma);
+
+                    $GLOBALS['log']->fatal("json audit direccion");
+                    $GLOBALS['log']->fatal(print_r($json_audit,true));
+                    $bean->json_audit_c = $json_audit;
+
+
+                    $this->revierteValores($bean,$cp_actual,$pais_actual,$estado_actual,$municipio_actual,$ciudad_actual,$colonia_actual);
+
+                    //Actualiza bandera de la cuenta relacionada
+                    $this->setCheckEnvioMsjCuenta( $bean->accounts_dire_direccion_1accounts_ida );
+
+                }
+            }
+        }
+    }
+
+    public function fetched_row_related( $arreglo_cambios, $nombre_campo){
+
+        return $arreglo_cambios[$nombre_campo];
+    }
+
+    public function buildJsonAudit( $cp_actual,$cp_por_actualizar,$pais_actual,$pais_por_actualizar,$estado_actual,$estado_por_actualizar,$municipio_actual,$municipio_por_actualizar,$ciudad_actual,$ciudad_por_actualizar,$colonia_actual,$colonia_por_actualizar,$calle_actual,$calle_por_actualizar,$numext_actual,$numext_por_actualizar,$numint_actual,$numint_por_actualizar,$fecha_cambio,$plataforma ){
+
+        $json_audit_direccion='{
+            "cp_actual":"'. $cp_actual . '",
+            "cp_por_actualizar":"'. $cp_por_actualizar . '",
+            "pais_actual":"'. $pais_actual . '",
+            "pais_por_actualizar":"'. $pais_por_actualizar . '",
+            "estado_actual":"'. $estado_actual . '",
+            "estado_por_actualizar":"'. $estado_por_actualizar . '",
+            "municipio_actual":"'. $municipio_actual . '",
+            "municipio_por_actualizar":"'. $municipio_por_actualizar . '",
+            "ciudad_actual":"'. $ciudad_actual . '",
+            "ciudad_por_actualizar":"'. $ciudad_por_actualizar . '",
+            "colonia_actual":"'. $colonia_actual . '",
+            "colonia_por_actualizar":"'. $colonia_por_actualizar . '",
+            "calle_actual":"'. $calle_actual . '",
+            "calle_por_actualizar":"'. $calle_por_actualizar . '",
+            "numext_actual":"'. $numext_actual . '",
+            "numext_por_actualizar":"'. $numext_por_actualizar . '",
+            "numint_actual":"'. $numint_actual . '",
+            "numint_por_actualizar":"'. $numint_por_actualizar . '",
+            "fecha_cambio":"'. $fecha_cambio .'",
+            "plataforma":"'. $plataforma .'"
+        }';
+
+        return $json_audit_direccion;
+
+    }
+
+    public function revierteValores( $bean,$cp_actual,$pais_actual,$estado_actual,$municipio_actual,$ciudad_actual,$colonia_actual ){
+
+        $bean->name = $bean->fetched_row['name'];
+        $bean->dire_direccion_dire_codigopostaldire_codigopostal_ida = $bean->fetched_rel_row['dire_direccion_dire_codigopostaldire_codigopostal_ida'];
+        //$bean->dire_direccion_dire_codigopostal_name = $bean->rel_fields_before_value['dire_direccion_dire_codigopostal_name'];
+        
+        $bean->dire_direccion_dire_paisdire_pais_ida = $pais_actual;
+        $bean->dire_direccion_dire_pais_name = $bean->rel_fields_before_value['dire_direccion_dire_pais_name'];
+        
+        $bean->dire_direccion_dire_estadodire_estado_ida = $estado_actual;
+        $bean->dire_direccion_dire_estado_name = $bean->rel_fields_before_value['dire_direccion_dire_estado_name'];
+        
+        $bean->dire_direccion_dire_municipiodire_municipio_ida = $municipio_actual;
+        $bean->dire_direccion_dire_municipio_name = $bean->rel_fields_before_value['dire_direccion_dire_municipio_name'];
+        
+        $bean->dire_direccion_dire_ciudaddire_ciudad_ida = $ciudad_actual;
+        $bean->dire_direccion_dire_ciudad_name = $bean->rel_fields_before_value['dire_direccion_dire_ciudad_name'];
+        
+        $bean->dire_direccion_dire_coloniadire_colonia_ida = $colonia_actual;
+        $bean->dire_direccion_dire_colonia_name = $bean->rel_fields_before_value['dire_direccion_dire_colonia_name'];
+
+        $bean->calle = $bean->fetched_row['calle'];
+        $bean->numext = $bean->fetched_row['numext'];
+        $bean->numint = $bean->fetched_row['numint'];
+
+    }
+
+    public function setCheckEnvioMsjCuenta( $idCuenta ){
+
+        if( $idCuenta !== "" && $idCuenta !== null ){
+            $GLOBALS['log']->fatal('Actualiza bandera de la cuenta relacionada');
+            $queryUpdate = "UPDATE accounts_cstm SET enviar_mensaje_c = '1' WHERE id_c = '{$idCuenta}'";
+            $GLOBALS['db']->query($queryUpdate);
+        }
+        
+    }
 }
