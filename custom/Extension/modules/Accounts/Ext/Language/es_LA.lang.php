@@ -376,3 +376,5 @@ $mod_strings['LBL_VALID_CAMBIO_RAZON_SOCIAL'] = 'Validación cambio razón socia
 $mod_strings['LBL_CAMBIO_NOMBRE'] = '¿Cambió nombre?';
 $mod_strings['LBL_CAMBIO_DIRFISCAL'] = '¿Cambió dirección fiscal?';
 $mod_strings['LBL_RECORDVIEW_PANEL26'] = 'Panel Control Cambio Razón Social';
+$mod_strings['LBL_JSON_AUDIT'] = 'JSON Audit';
+$mod_strings['LBL_ENVIAR_MENSAJE'] = 'Enviar mensaje';
