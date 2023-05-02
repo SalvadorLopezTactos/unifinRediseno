@@ -176,7 +176,7 @@ SQL;
                 $estado_actual = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_estadodire_estado_ida');
                 $estado_por_actualizar = $bean->dire_direccion_dire_estadodire_estado_ida;
                 $municipio_actual = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_municipiodire_municipio_ida');
-                $municipio_por_actualizar = $bean->dire_direccion_dire_municipiodire_municipio_ida ;
+                $municipio_por_actualizar = $bean->dire_direccion_dire_municipiodire_municipio_ida;
                 $ciudad_actual = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_ciudaddire_ciudad_ida');
                 $ciudad_por_actualizar = $bean->dire_direccion_dire_ciudaddire_ciudad_ida;
                 $colonia_actual = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_coloniadire_colonia_ida');
@@ -188,6 +188,24 @@ SQL;
                 $numint_actual = $bean->fetched_row['numint'];
                 $numint_por_actualizar = $bean->numint;
                 $fecha_cambio = "";
+
+                //Armando direccion completa actual
+                $current_cp = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_codigopostal_name');
+                $current_pais = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_pais_name');
+                $current_estado = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_estado_name');
+                $current_municipio = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_municipio_name');
+                $current_ciudad = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_ciudad_name');
+                $current_colonia = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_colonia_name');
+                $full_direccion_actual = "Calle: ". $calle_actual .", CP: ". $current_cp .", País: ". $current_pais .", Estado: ". $current_estado .", Municipio: ". $current_municipio .", Ciudad: ". $current_ciudad .", Colonia: ". $current_colonia .", Número exterior: ". $numext_actual .", Número interior: ".$numint_actual;
+
+                //Armando direccion completa por actualizar
+                $cp_act = $bean->dire_direccion_dire_codigopostal_name;
+                $pais_act = $bean->dire_direccion_dire_pais_name;
+                $estado_act = $bean->dire_direccion_dire_estado_name;
+                $municipio_act = $bean->dire_direccion_dire_municipio_name;
+                $ciudad_act = $bean->dire_direccion_dire_ciudad_name;
+                $colonia_act = $bean->dire_direccion_dire_colonia_name;
+                $full_direccion_por_actualizar = "Calle: ". $calle_por_actualizar .", CP: ". $cp_act .", País: ". $pais_act .", Estado: ". $estado_act .", Municipio: ". $municipio_act .", Ciudad: ". $ciudad_act .", Colonia: ". $colonia_act .", Número exterior: ". $numext_por_actualizar .", Número interior: ".$numint_por_actualizar;
 
                 if( $cp_actual !== $cp_por_actualizar ){
                     $GLOBALS['log']->fatal("Código Postal ID cambió");
@@ -261,7 +279,7 @@ SQL;
                     $bean->valid_cambio_razon_social_c = 1;
                     $bean->cambio_direccion_c = 1;
 
-                    $json_audit = $this->buildJsonAudit($cp_actual,$cp_por_actualizar,$pais_actual,$pais_por_actualizar,$estado_actual,$estado_por_actualizar,$municipio_actual,$municipio_por_actualizar,$ciudad_actual,$ciudad_por_actualizar,$colonia_actual,$colonia_por_actualizar,$calle_actual,$calle_por_actualizar,$numext_actual,$numext_por_actualizar,$numint_actual,$numint_por_actualizar,$fecha_cambio,$plataforma);
+                    $json_audit = $this->buildJsonAudit($cp_actual,$cp_por_actualizar,$pais_actual,$pais_por_actualizar,$estado_actual,$estado_por_actualizar,$municipio_actual,$municipio_por_actualizar,$ciudad_actual,$ciudad_por_actualizar,$colonia_actual,$colonia_por_actualizar,$calle_actual,$calle_por_actualizar,$numext_actual,$numext_por_actualizar,$numint_actual,$numint_por_actualizar,$full_direccion_actual,$full_direccion_por_actualizar,$fecha_cambio,$plataforma);
 
                     $GLOBALS['log']->fatal("json audit direccion");
                     $GLOBALS['log']->fatal(print_r($json_audit,true));
@@ -283,7 +301,7 @@ SQL;
         return $arreglo_cambios[$nombre_campo];
     }
 
-    public function buildJsonAudit( $cp_actual,$cp_por_actualizar,$pais_actual,$pais_por_actualizar,$estado_actual,$estado_por_actualizar,$municipio_actual,$municipio_por_actualizar,$ciudad_actual,$ciudad_por_actualizar,$colonia_actual,$colonia_por_actualizar,$calle_actual,$calle_por_actualizar,$numext_actual,$numext_por_actualizar,$numint_actual,$numint_por_actualizar,$fecha_cambio,$plataforma ){
+    public function buildJsonAudit( $cp_actual,$cp_por_actualizar,$pais_actual,$pais_por_actualizar,$estado_actual,$estado_por_actualizar,$municipio_actual,$municipio_por_actualizar,$ciudad_actual,$ciudad_por_actualizar,$colonia_actual,$colonia_por_actualizar,$calle_actual,$calle_por_actualizar,$numext_actual,$numext_por_actualizar,$numint_actual,$numint_por_actualizar,$full_direccion_actual,$full_direccion_por_actualizar,$fecha_cambio,$plataforma ){
 
         $json_audit_direccion='{
             "cp_actual":"'. $cp_actual . '",
@@ -304,6 +322,8 @@ SQL;
             "numext_por_actualizar":"'. $numext_por_actualizar . '",
             "numint_actual":"'. $numint_actual . '",
             "numint_por_actualizar":"'. $numint_por_actualizar . '",
+            "direccion_completa_actual":"'. $full_direccion_actual . '",
+            "direccion_completa_por_actualizar":"'. $full_direccion_por_actualizar . '",
             "fecha_cambio":"'. $fecha_cambio .'",
             "plataforma":"'. $plataforma .'"
         }';

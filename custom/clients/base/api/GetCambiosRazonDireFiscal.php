@@ -36,56 +36,25 @@ class GetCambiosRazonDireFiscal extends SugarApi
     public function getCambiosAudit($api, $args){
 
         $id_registro = $args['id_registro'];
-        $resultado = [];
-        $previos = [];
-        $nuevos = [];
-        $direccionIDAudit= '';
-        $nombreIDAudit = '';
+        $array_json_audit = array();
 
-        $queryAudit = "(SELECT id,before_value_string, after_value_string, date_created, field_name
-        FROM accounts_audit
-        WHERE parent_id = '{$id_registro}'
-        AND field_name = 'name'
-        ORDER BY date_created DESC
-        LIMIT 1)
-        UNION
-        (SELECT id,before_value_string, after_value_string, date_created, field_name
-        FROM accounts_audit
-        WHERE parent_id = '{$id_registro}'
-        AND field_name = 'dire_Direccion'
-        ORDER BY date_created DESC
-        LIMIT 1);";
+        $queryAudit = "SELECT d.id idDireccion, dc.json_audit_c FROM accounts a
+        INNER JOIN accounts_dire_direccion_1_c ad ON a.id = ad.accounts_dire_direccion_1accounts_ida
+        INNER JOIN dire_direccion d ON ad.accounts_dire_direccion_1dire_direccion_idb = d.id
+        INNER JOIN dire_direccion_cstm dc ON d.id = dc.id_c
+        WHERE a.id= '{$id_registro}'
+        AND d.indicador IN (2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63);";
 
         $results = $GLOBALS['db']->query($queryAudit);
-        
-        while($row = $GLOBALS['db']->fetchByAssoc($results)) {
+        if( $results->num_rows > 0 ){
+            while($row = $GLOBALS['db']->fetchByAssoc($results)) {
 
-            $campo = $row['field_name'];
-            $fecha = $row['date_created'];
-            
-            if( $campo == 'name' ){
-                $nombreIDAudit = $row['id'];
-                $previos['nombre'] = $row['before_value_string'];
-                $nuevos['nombre'] = $row['after_value_string'];
-                $previos['fecha'] = $row['date_created'];
+                $array_json_audit[] = $row['json_audit_c'];
+                
             }
-            
-            if( $campo == 'dire_Direccion' ){
-                $direccionIDAudit = $row['id'];
-                $previos['direccion'] = $row['before_value_string'];
-                $nuevos['direccion'] = $row['after_value_string'];
-                $nuevos['fecha'] = $row['date_created'];
-            }
-            
         }
 
-        $resultado['previos'] = $previos; 
-        $resultado['nuevos'] = $nuevos;
-        $resultado['idDireccionAudit'] = $direccionIDAudit;
-        $resultado['idNombreAudit'] = $nombreIDAudit;
-
-        return $resultado;
-
+        return $array_json_audit;
     }
 
     public function rechazarCambios($api, $args){

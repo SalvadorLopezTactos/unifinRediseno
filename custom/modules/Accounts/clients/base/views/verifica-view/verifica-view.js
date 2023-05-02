@@ -17,13 +17,14 @@
     initialize: function (options) {
         this._super("initialize", [options]);
         var idCuenta = options.context.get('model').id;
+        var json_audit_cuenta = options.context.get('model').attributes.json_audit_c;
         if( idCuenta !== undefined ){
-            this.getCambiosDetectados(idCuenta);
+            this.getCambiosDetectados(idCuenta,json_audit_cuenta);
         }
     },
     
-    getCambiosDetectados: function(idCuenta){
-
+    getCambiosDetectados: function(idCuenta,json_audit_cuenta){
+        this.json_audit_cuenta = json_audit_cuenta;
         contextCambios = this;
 
         app.alert.show('getCambios', {
@@ -36,14 +37,28 @@
                 success: function (data) {
                     
                     app.alert.dismiss('getCambios');
+                    contextCambios.nombrePrevio = "";
+                    contextCambios.direccionPrevia = "";
+                    contextCambios.fechacambioPrevia = "";
 
-                   (data.previos.nombre !== undefined) ? contextCambios.nombrePrevio = data.previos.nombre : contextCambios.nombrePrevio = '';
-                   (data.previos.direccion !== undefined) ? contextCambios.direccionPrevia = data.previos.direccion : contextCambios.direccionPrevia = '';
-                   (data.previos.fecha !== undefined) ? contextCambios.fechacambioPrevia = data.previos.fecha : contextCambios.fechacambioPrevia = '';
+                    contextCambios.nombreNuevo = "";
+                    contextCambios.direccionNueva = "";
+                    contextCambios.fechacambioNueva = "";
+                    if( contextCambios.json_audit_cuenta !== undefined ){
+                        var json_cuenta = JSON.parse(contextCambios.json_audit_cuenta);
+                        contextCambios.nombrePrevio = json_cuenta.nombre_actual;
+                        contextCambios.nombreNuevo = json_cuenta.nombre_por_actualizar;
+                        contextCambios.fechacambioNueva = json_cuenta.fecha_cambio;
+                        contextCambios.fechacambioPrevia = json_cuenta.fecha_cambio;
+                    }
 
-                   (data.nuevos.nombre !== undefined) ? contextCambios.nombreNuevo = data.nuevos.nombre : contextCambios.nombreNuevo = '';
-                   (data.nuevos.direccion !== undefined) ? contextCambios.direccionNueva = data.nuevos.direccion : contextCambios.direccionNueva = '';
-                   (data.nuevos.fecha !== undefined) ? contextCambios.fechacambioNueva = data.nuevos.fecha : contextCambios.fechacambioNueva = '';
+                    if( !_.isEmpty(data) ){
+                        var json_direccion = JSON.parse(data[0]);
+                        contextCambios.direccionPrevia = json_direccion.direccion_completa_actual;
+                        contextCambios.direccionNueva = json_direccion.direccion_completa_por_actualizar;
+                        contextCambios.fechacambioNueva = json_direccion.fecha_cambio;
+                        contextCambios.fechacambioPrevia = json_direccion.fecha_cambio;
+                    }
 
                    contextCambios.render();
                 }

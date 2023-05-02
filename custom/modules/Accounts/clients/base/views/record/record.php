@@ -308,15 +308,21 @@ array (
                 'name' => 'valid_cambio_razon_social_c',
                 'label' => '',
                 'css_class' => 'hidden',
-                'span' => 12,
               ),
               1 => 
+              array (
+                'readonly' => false,
+                'name' => 'json_audit_c',
+                'studio' => 'visible',
+                'label' => 'LBL_JSON_AUDIT',
+              ),
+              2 => 
               array (
                 'readonly' => false,
                 'name' => 'cambio_nombre_c',
                 'label' => 'LBL_CAMBIO_NOMBRE',
               ),
-              2 => 
+              3 => 
               array (
                 'readonly' => false,
                 'name' => 'cambio_dirfiscal_c',

@@ -2030,6 +2030,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
             //Habilita bandera para indicar que el registro se encuentra en proceso de validación
             $bean->valid_cambio_razon_social_c = 1;
+            $bean->enviar_mensaje_c = 1;
             $plataforma = $_SESSION['platform'];
             $fecha_cambio = TimeDate::getInstance()->nowDb();
 
@@ -2039,12 +2040,17 @@ where rfc_c = '{$bean->rfc_c}' and
                 if($bean->tipodepersona_c == 'Persona Moral'){
                     $razon_social_actual = $bean->fetched_row['razonsocial_c'];
                     $razon_social_por_actualizar = $bean->razonsocial_c;
-                    $json_audit = '{"tipo":"'.$bean->tipodepersona_c.'","razon_social_actual":"'.$razon_social_actual.'","razon_social_por_actualizar":"'.$razon_social_por_actualizar.'","primer_nombre_actual":" ","primer_nombre_por_actualizar":" ","paterno_actual":" ","paterno_por_actualizar":" ","materno_actual":" ","materno_por_actualizar":" ","fecha_cambio":"'.$fecha_cambio.'","plataforma":"'.$plataforma.'"}';
+                    $nombre_actual = $bean->fetched_row['name'];
+                    $nombre_por_actualizar = $bean->name;
+                    $json_audit = '{"tipo":"'.$bean->tipodepersona_c.'","razon_social_actual":"'.$razon_social_actual.'","razon_social_por_actualizar":"'.$razon_social_por_actualizar.'","primer_nombre_actual":" ","primer_nombre_por_actualizar":" ","paterno_actual":" ","paterno_por_actualizar":" ","materno_actual":" ","materno_por_actualizar":" ","nombre_actual":"'.$nombre_actual.'","nombre_por_actualizar":"'.$nombre_por_actualizar.'","fecha_cambio":"'.$fecha_cambio.'","plataforma":"'.$plataforma.'"}';
 
                     //Revierte cambios
                     $bean->razonsocial_c = $bean->fetched_row['razonsocial_c'];
                     $bean->nombre_comercial_c = $bean->fetched_row['nombre_comercial_c'];
                 }else{
+
+                    $nombre_actual = $bean->fetched_row['name'];
+                    $nombre_por_actualizar = $bean->name;
 
                     $primer_nombre_actual = $bean->fetched_row['primernombre_c'];
                     $primer_nombre_por_actualizar = $bean->primernombre_c;
@@ -2055,8 +2061,7 @@ where rfc_c = '{$bean->rfc_c}' and
                     $materno_actual = $bean->fetched_row['apellidomaterno_c'];
                     $materno_por_actualizar = $bean->apellidomaterno_c;
 
-                    $json_audit = '{"tipo":"'.$bean->tipodepersona_c.'","razon_social_actual":" ","razon_social_por_actualizar":" ","primer_nombre_actual":"'.$primer_nombre_actual.'","primer_nombre_por_actualizar":"'.$primer_nombre_por_actualizar.'","paterno_actual":"'.$paterno_actual.'","paterno_por_actualizar":"'.$paterno_por_actualizar.'","materno_actual":"'.$materno_actual.'","materno_por_actualizar":"'.$materno_por_actualizar.'","fecha_cambio":"'.$fecha_cambio.'","plataforma":"'.$plataforma.'"}';
-
+                    $json_audit = '{"tipo":"'.$bean->tipodepersona_c.'","razon_social_actual":" ","razon_social_por_actualizar":" ","primer_nombre_actual":"'.$primer_nombre_actual.'","primer_nombre_por_actualizar":"'.$primer_nombre_por_actualizar.'","paterno_actual":"'.$paterno_actual.'","paterno_por_actualizar":"'.$paterno_por_actualizar.'","materno_actual":"'.$materno_actual.'","materno_por_actualizar":"'.$materno_por_actualizar.'","nombre_actual":"'.$nombre_actual.'","nombre_por_actualizar":"'.$nombre_por_actualizar.'","fecha_cambio":"'.$fecha_cambio.'","plataforma":"'.$plataforma.'"}';
 
                     //Revierte cambios
                     $bean->primernombre_c = $bean->fetched_row['primernombre_c'];
@@ -2072,6 +2077,31 @@ where rfc_c = '{$bean->rfc_c}' and
 
             if( $cambio_dirFiscal ){
                 $bean->cambio_dirfiscal_c = 1;
+
+                //Valores actuales (names) para armar la dirección completa
+                $current_calle = $elemento_actual_direccion->calle;
+                $current_numext = $elemento_actual_direccion->numext;
+                $current_numint = $elemento_actual_direccion->numint;
+                $current_cp = $elemento_actual_direccion->dire_direccion_dire_codigopostal_name;
+                $current_pais = $elemento_actual_direccion->dire_direccion_dire_pais_name;
+                $current_estado = $elemento_actual_direccion->dire_direccion_dire_estado_name;
+                $current_municipio = $elemento_actual_direccion->dire_direccion_dire_municipio_name;
+                $current_ciudad = $elemento_actual_direccion->dire_direccion_dire_ciudad_name;
+                $current_colonia = $elemento_actual_direccion->dire_direccion_dire_colonia_name;
+                $full_direccion_actual = "Calle: ". $current_calle .", CP: ". $current_cp .", País: ". $current_pais .", Estado: ". $current_estado .", Municipio: ". $current_municipio .", Ciudad: ". $current_ciudad .", Colonia: ". $current_colonia .", Número exterior: ". $current_numext .", Número interior: ".$current_numint;
+
+
+                //Valores por actualizar (names) para armar la dirección completa
+                $calle_act = $elemento_por_actualizar_direccion['calle'];
+                $numext_act = $elemento_por_actualizar_direccion['numext'];
+                $numint_act = $elemento_por_actualizar_direccion['numint'];
+                $cp_act = $elemento_por_actualizar_direccion['valCodigoPostal'];
+                $pais_act = $elemento_por_actualizar_direccion['valPais'];
+                $estado_act = $elemento_por_actualizar_direccion['valEstado'];
+                $municipio_act = $elemento_por_actualizar_direccion['valMunicipio'];
+                $ciudad_act = $elemento_por_actualizar_direccion['valCiudad'];
+                $colonia_act = $elemento_por_actualizar_direccion['valColonia'];
+                $full_direccion_por_actualizar = "Calle: ". $calle_act .", CP: ". $cp_act .", País: ". $pais_act .", Estado: ". $estado_act .", Municipio: ". $municipio_act .", Ciudad: ". $ciudad_act .", Colonia: ". $colonia_act .", Número exterior: ". $numext_act .", Número interior: ".$numint_act;
 
                 $cp_actual = $elemento_actual_direccion->dire_direccion_dire_codigopostaldire_codigopostal_ida;
                 //Obtener el id, ya que al actualizar la dirección no se está obteniendo el atributo 'postal'
@@ -2120,6 +2150,8 @@ where rfc_c = '{$bean->rfc_c}' and
                     "numext_por_actualizar":"'. $numext_por_actualizar . '",
                     "numint_actual":"'. $numint_actual . '",
                     "numint_por_actualizar":"'. $numint_por_actualizar . '",
+                    "direccion_completa_actual":"'. $full_direccion_actual . '",
+                    "direccion_completa_por_actualizar":"'. $full_direccion_por_actualizar . '",
                     "fecha_cambio":"'. $fecha_cambio .'",
                     "plataforma":"'. $plataforma .'"
                 }';
