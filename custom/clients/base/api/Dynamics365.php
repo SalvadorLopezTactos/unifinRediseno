@@ -76,6 +76,7 @@ class Dynamics365 extends SugarApi
         $beanCuenta = BeanFactory::getBean('Accounts', $idCuenta);
 
         $tipo_cuenta=$beanCuenta->tipo_registro_cuenta_c;
+        $es_proveedor = $beanCuenta->esproveedor_c;
         $records_list=array();
         $url_endpoint="";
 
@@ -184,12 +185,16 @@ class Dynamics365 extends SugarApi
                 }
             }
 
-            //Valida total de registros en $records_list
-            if (count($records_list)==0) {
-                $records_list[]=$body_elements;
-            }
+            //Agrega registros en $records_list
+            $itemVendor = array(
+                'host' => $url_endpoint,
+                'item' => $body_elements,
+                'type' => 'Cliente'
+            );
+            $records_list[]=$itemVendor;
 
-        }else{
+        }
+        if($tipo_cuenta=='5' || $es_proveedor){
             $url_endpoint='/api/services/TT_ProveedorServicesGrp/TT_ProveedorServices/createVendor';
             //Obtener régimen fiscal
             $regimen_fiscal=$beanCuenta->tipodepersona_c;
@@ -294,10 +299,13 @@ class Dynamics365 extends SugarApi
             }else{
                 $body_elements["OnlyReplyCompany"]="";
             }
-            //Valida total de registros en $records_list
-            if (count($records_list)==0) {
-                $records_list[]=$body_elements;
-            }
+            //Agrega registros en $records_list
+            $itemVendor = array(
+                'host' => $url_endpoint,
+                'item' => $body_elements,
+                'type' => 'Proveedor'
+            );
+            $records_list[]=$itemVendor;
 
         }
 
@@ -305,20 +313,19 @@ class Dynamics365 extends SugarApi
         $responseDynamics = '';
         foreach ($records_list as $item) {
           $argsVendor = array(
-              '_contract'=>$item
+              '_contract'=>$item['item']
           );
 
           //$hostVendor=$resource."/api/services/TT_ProveedorServicesGrp/TT_ProveedorServices/createVendor";
-          $hostVendor=$resource.$url_endpoint;
+          $hostVendor=$resource.$item['host'];
           $GLOBALS['log']->fatal('Request Dynamics: Alta Proveedor/Cliente, host: '.$hostVendor);
           $GLOBALS['log']->fatal(json_encode($argsVendor));
           $responseCreate=$this->postDynamics($hostVendor,$token,$argsVendor);
           //$GLOBALS['log']->fatal('Response: '. $responseCreate);
-          $responseDynamics = ($responseCreate->Success) ? $responseDynamics . ' - ' . $responseCreate->Message : $responseDynamics . ' - ' . $responseCreate->ExceptionType;
+          $responseDynamics .= ($responseCreate->Success) ?  ' | ' .$item['type'].' Success - ' . $responseCreate->Message :  ' | '.$item['type'].' Warning - ' . $responseCreate->ExceptionType;
         }
-
+        
         $responseFull=array();
-
         array_push($responseFull, $responseDynamics);
 
         //Llamada a api para Cuentas por pagar, solo se ejecuta la primera vez
