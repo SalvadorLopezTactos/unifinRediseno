@@ -1326,15 +1326,15 @@ where rfc_c = '{$bean->rfc_c}' and
         if(($bean->subtipo_registro_cuenta_c == '18' && $bean->tipo_registro_cuenta_c == '3' && $bean->fetched_row['subtipo_registro_cuenta_c'] != '18' && !$bean->conversion_gclid_c) || ($bean->subtipo_registro_cuenta_c == '10' && $bean->fetched_row['subtipo_registro_cuenta_c'] != '10' && !$bean->conversion_gclid_c)) {
             $GLOBALS['log']->fatal('------------ENTRA CONDICIÓN CLIENTE CON LINEA VIGENTE O RECHAZADO DISPARA DESDE PROCCESS AUTHOR------------');
             $conversion_name = 'Conv CRM';
-			$email = $bean->email1;
-			if ($bean->load_relationship('accounts_tel_telefonos_1')) {
-				$tel_telefonos = $bean->accounts_tel_telefonos_1->getBeans();
+            $email = $bean->email1;
+            if ($bean->load_relationship('accounts_tel_telefonos_1')) {
+                $tel_telefonos = $bean->accounts_tel_telefonos_1->getBeans();
                 if (!empty($tel_telefonos)) {
                     foreach ($tel_telefonos as $tel) {
-						if (!empty($tel->id) && $tel->principal) $telefono = $tel->telefono;
+                        if (!empty($tel->id) && $tel->principal) $telefono = $tel->telefono;
                     }
                 }
-			}
+            }
             if ($bean->load_relationship('opportunities')) {
                 $parametros = array('limit' => 1, 'orderby' => 'date_modified DESC', 'disable_row_level_security' => true);
                 //Fetch related beans
@@ -1343,14 +1343,14 @@ where rfc_c = '{$bean->rfc_c}' and
                 if (!empty($opps_relacionadas)) {
                     foreach ($opps_relacionadas as $opp) {
                         $conversion_value = $opp->monto_c;
-						$conversion_time = date('H:i:s',strtotime($opp->date_modified));
+                        $conversion_time = date('H:i:s',strtotime($opp->date_modified));
                     }
                 }
             }
             $GLOBALS['log']->fatal('------------SE ESCRIBE EN CSV PARA SUBIR SFTP------------');
             date_default_timezone_set('America/Mexico_City');
             $ruta_archivo = "custom/plantillaCSV/leads_calidad.csv";
-			if ($bean->subtipo_registro_cuenta_c == '10') $ruta_archivo = "custom/plantillaCSV/leads_no_calidad.csv";
+            if ($bean->subtipo_registro_cuenta_c == '10') $ruta_archivo = "custom/plantillaCSV/leads_no_calidad.csv";
             if (file_exists($ruta_archivo)) {
                 $file = fopen($ruta_archivo, "a");
                 fwrite($file, $email . ',' . $telefono . ',' . $conversion_name . ',' . $conversion_time . ',' . $conversion_value . ',MXN' . PHP_EOL);
