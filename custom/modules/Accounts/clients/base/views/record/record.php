@@ -15,7 +15,6 @@ array (
             'name' => 'bloquea_cuenta',
             'label' => 'Bloquear Cuenta',
             'css_class' => 'btn-danger hidden',
-            //'showOn' => 'view',
             'events' => 
             array (
               'click' => 'button:bloquea_cuenta:click',
@@ -27,7 +26,6 @@ array (
             'name' => 'desbloquea_cuenta',
             'label' => 'Desbloquear Cuenta',
             'css_class' => 'btn-success hidden',
-            //'showOn' => 'view',
             'events' => 
             array (
               'click' => 'button:desbloquea_cuenta:click',
@@ -39,7 +37,6 @@ array (
             'name' => 'aprobar_noviable',
             'label' => 'Confirmar Bloqueo',
             'css_class' => 'btn-success hidden',
-            //'showOn' => 'view',
             'events' => 
             array (
               'click' => 'button:aprobar_noviable:click',
@@ -51,7 +48,6 @@ array (
             'name' => 'desaprobar_noviable',
             'label' => 'Rechazar Bloqueo',
             'css_class' => 'btn-danger hidden',
-            //'showOn' => 'view',
             'events' => 
             array (
               'click' => 'button:desaprobar_noviable:click',
@@ -63,7 +59,6 @@ array (
             'name' => 'reactivar_noviable',
             'label' => 'Reactivar Cuenta',
             'css_class' => 'btn-success hidden',
-            //'showOn' => 'view',
             'events' => 
             array (
               'click' => 'button:reactivar_noviable:click',
@@ -130,12 +125,20 @@ array (
               3 => 
               array (
                 'type' => 'rowaction',
+                'event' => 'button:verificar_cambios:click',
+                'name' => 'verificar_cambios',
+                'label' => 'Verificar cambios',
+                'acl_action' => 'view',
+              ),
+              4 => 
+              array (
+                'type' => 'rowaction',
                 'event' => 'button:historical_summary_button:click',
                 'name' => 'historical_summary_button',
                 'label' => 'LBL_HISTORICAL_SUMMARY',
                 'acl_action' => 'view',
               ),
-              4 => 
+              5 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:audit_button:click',
@@ -143,11 +146,11 @@ array (
                 'label' => 'LNK_VIEW_CHANGE_LOG',
                 'acl_action' => 'view',
               ),
-              5 => 
+              6 => 
               array (
                 'type' => 'divider',
               ),
-              6 => 
+              7 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:dynamics_button:click',
@@ -155,7 +158,7 @@ array (
                 'label' => 'Enviar a Dynamics 365',
                 'acl_action' => 'view',
               ),
-              7 => 
+              8 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:cotizador_button:click',
@@ -163,7 +166,7 @@ array (
                 'label' => 'Cotizador',
                 'acl_action' => 'view',
               ),
-              8 => 
+              9 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:expediente_button:click',
@@ -171,8 +174,7 @@ array (
                 'label' => 'Expediente',
                 'acl_action' => 'view',
               ),
-              
-              9 => 
+              10 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:convierte_lead:click',
@@ -181,7 +183,7 @@ array (
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
-              10 => 
+              11 => 
               array (
                 'name' => 'send_survey',
                 'type' => 'rowaction',
@@ -189,7 +191,7 @@ array (
                 'acl_action' => 'send_survey',
                 'event' => 'button:send_survey:click',
               ),
-              11 => 
+              12 => 
               array (
                 'name' => 'send_poll',
                 'type' => 'rowaction',
@@ -197,42 +199,42 @@ array (
                 'acl_action' => 'send_poll',
                 'event' => 'button:send_poll:click',
               ),
-              12 => 
+              13 => 
               array (
                 'name' => 'get_account_asesor',
                 'type' => 'rowaction',
                 'label' => 'Quiero esta Cuenta',
                 'event' => 'button:get_account_asesor:click',
               ),
-              13 => 
+              14 => 
               array (
                 'name' => 'send_account_asesor',
                 'type' => 'rowaction',
                 'label' => 'Enviar Cuenta a',
                 'event' => 'button:send_account_asesor:click',
               ),
-              14 => 
+              15 => 
               array (
                 'name' => 'negociador_quantico',
                 'type' => 'rowaction',
                 'label' => 'Negociador Quantico',
                 'event' => 'button:open_negociador_quantico:click',
               ),
-              /*15 => 
+              16 => 
               array (
                 'name' => 'portal_proveedores',
                 'type' => 'rowaction',
                 'label' => 'Enviar al portal de proveedor',
                 'event' => 'button:enviar_portal_proveedores:click',
-              ),*/
-              16 => 
+              ),
+              17 => 
               array (
                 'name' => 'proveedor_quantico',
                 'type' => 'rowaction',
                 'label' => 'Tarea IE Proveedor Quantico',
                 'event' => 'button:proveedor_quantico:click',
               ),
-              17 => 
+              18 => 
               array (
                 'name' => 'solicitar_ciec',
                 'type' => 'rowaction',
@@ -291,6 +293,44 @@ array (
             ),
           ),
           2 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL26',
+            'label' => 'LBL_RECORDVIEW_PANEL26',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'readonly' => false,
+                'name' => 'valid_cambio_razon_social_c',
+                'label' => '',
+                'css_class' => 'hidden',
+              ),
+              1 => 
+              array (
+                'readonly' => false,
+                'name' => 'json_audit_c',
+                'studio' => 'visible',
+                'label' => 'LBL_JSON_AUDIT',
+              ),
+              2 => 
+              array (
+                'readonly' => false,
+                'name' => 'cambio_nombre_c',
+                'label' => 'LBL_CAMBIO_NOMBRE',
+              ),
+              3 => 
+              array (
+                'readonly' => false,
+                'name' => 'cambio_dirfiscal_c',
+                'label' => 'LBL_CAMBIO_DIRFISCAL',
+              ),
+            ),
+          ),
+          3 => 
           array (
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
@@ -395,7 +435,7 @@ array (
               ),
             ),
           ),
-          3 => 
+          4 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -416,7 +456,7 @@ array (
               ),
             ),
           ),
-          4 => 
+          5 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -437,7 +477,7 @@ array (
               ),
             ),
           ),
-          5 => 
+          6 => 
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
@@ -452,12 +492,11 @@ array (
                 'name' => 'account_disposiciones',
                 'studio' => 'visible',
                 'dismiss_label' => true,
-                //'label' => 'LBL_ACCOUNT_DISPOSICIONES',
                 'span' => 12,
               ),
             ),
           ),
-          6 => 
+          7 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -622,7 +661,7 @@ array (
               ),
             ),
           ),
-          7 => 
+          8 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -891,7 +930,7 @@ array (
               ),
             ),
           ),
-          8 => 
+          9 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -927,7 +966,7 @@ array (
               ),
             ),
           ),
-          9 => 
+          10 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -979,7 +1018,7 @@ array (
               ),
             ),
           ),
-          10 => 
+          11 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1021,7 +1060,7 @@ array (
               ),
             ),
           ),
-          11 => 
+          12 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1127,7 +1166,7 @@ array (
               ),
             ),
           ),
-          12 => 
+          13 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1206,7 +1245,7 @@ array (
               ),
             ),
           ),
-          13 => 
+          14 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1270,7 +1309,7 @@ array (
               ),
             ),
           ),
-          14 => 
+          15 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1286,12 +1325,11 @@ array (
                 'name' => 'account_telefonos',
                 'studio' => 'visible',
                 'dismiss_label' => true,
-                //'label' => 'ACCOUNT_TELEFONOS',
                 'span' => 12,
               ),
             ),
           ),
-          15 => 
+          16 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1307,12 +1345,11 @@ array (
                 'name' => 'account_direcciones',
                 'studio' => 'visible',
                 'dismiss_label' => true,
-                //'label' => 'ACCOUNT_DIRECCIONES',
                 'span' => 12,
               ),
             ),
           ),
-          16 => 
+          17 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1332,7 +1369,7 @@ array (
               ),
             ),
           ),
-          17 => 
+          18 => 
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
@@ -1351,7 +1388,7 @@ array (
               ),
             ),
           ),
-          18 => 
+          19 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
@@ -1418,7 +1455,7 @@ array (
               ),
             ),
           ),
-          19 => 
+          20 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1461,7 +1498,7 @@ array (
               ),
             ),
           ),
-          20 => 
+          21 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1514,7 +1551,7 @@ array (
               ),
             ),
           ),
-          21 => 
+          22 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1577,7 +1614,7 @@ array (
               ),
             ),
           ),
-          22 => 
+          23 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1630,7 +1667,7 @@ array (
               ),
             ),
           ),
-          23 => 
+          24 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
