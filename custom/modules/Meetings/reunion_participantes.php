@@ -3,7 +3,7 @@
  * @author Tactos
  * Date: 06/06/202
  **/
-class reunion_participantes
+class reunion_participantes_class
 {
 	public function reunion_participantes($bean = null, $event = null, $args = null)
     {
@@ -343,7 +343,7 @@ class reunion_participantes
 								// Actualiza ID de Sala en la Reunión
 								$descripcion = "El enlace que deberás usar para poder conectarte el día de la videoconferencia es: ".$sugar_config['lenia_url'].$response['idSala']."?".$organizador;
 								$query = "UPDATE meetings a, meetings_cstm b
-								  SET a.description = concat(' ----------------------\r Acceso para la sesión \r----------------------\r' ,'{$descripcion}', '\r\r----------------------\r Detalle de reunión planificada \r----------------------\r' , a.description), b.link_lenia_c = '{$response['idSala']}'
+								  SET a.description = concat(' ----------------------\r Acceso para la sesión \r----------------------\r' ,'{$descripcion}', '\r\r----------------------\r Detalle de reunión planificada \r----------------------\r' , COALESCE(a.description,'')), b.link_lenia_c = '{$response['idSala']}'
 									-- Comentarios registrados durante la llamada
 								  WHERE a.id = b.id_c and b.id_c = '{$bean->id}'";
 								$queryResult = $db->query($query);

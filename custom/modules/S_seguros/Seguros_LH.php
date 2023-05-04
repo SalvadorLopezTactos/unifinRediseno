@@ -11,26 +11,43 @@ class Seguros_LH{
         $send_email = false;
         $id_dynamics = $bean->int_id_dynamics_c;
         $text_cambios = '';
-        if( $etapa == 9){
+        if( $bean->fetched_row['etapa'] == $bean->etapa && $etapa == 9 ){
             $text_cambios .= '<ul>';
             if( $bean->fetched_row['tipo_sf_c'] !== $bean->tipo_sf_c ){
                 $send_email = true;
                 $text_cambios .= '<li><b>Tipo</b>, contenía el valor <b>'. $app_list_strings['tipo_sf_list'][$bean->fetched_row['tipo_sf_c']] .'</b> y se actualizó por <b>'.$app_list_strings['tipo_sf_list'][$bean->tipo_sf_c].'</b></li>';
             }
-
+            
             if( $bean->fetched_row['tipo_referenciador'] !== $bean->tipo_referenciador ){
                 $send_email = true;
                 $text_cambios .= '<li><b>Tipo Referenciador</b>, contenía el valor <b>'.$app_list_strings['tipo_referenciador_list'][$bean->fetched_row['tipo_referenciador']] .'</b> y se actualizó por <b>'.$app_list_strings['tipo_referenciador_list'][$bean->tipo_referenciador].'</b></li>';
             }
-
-            if( $bean->fetched_row['empleados_c'] !== $bean->empleados_c ){
-                $send_email = true;
-                $text_cambios .= '<li><b>Referenciador</b>, contenía el valor <b>'. $bean->fetched_row['empleados_c'] .'</b> y se actualizó por <b>'.$bean->empleados_c.'</b></li>';
+            // user_id1_c - Asesor, user_id2_c - empleado
+            $id_user_anterior = '';
+            $id_user_actual = '';
+            if( $bean->tipo_referenciador == '1' ){ //Asesor
+                $id_user_anterior = $bean->fetched_row['user_id1_c'];
+                $id_user_actual = $bean->user_id1_c;
+            }
+            if( $bean->tipo_referenciador == '2' ){ //Empleado
+                $id_user_anterior = $bean->fetched_row['user_id2_c'];
+                $id_user_actual = $bean->user_id2_c;
             }
 
-            if( $bean->fetched_row['comision_c'] !== $bean->comision_c ){
+            if( !empty($id_user_anterior) && !empty($id_user_actual) ){ //Condición entra solo cuando las variables contienen  valor
+                if( $id_user_anterior !== $id_user_actual  ){
+                    $send_email = true;
+                    $nombre_anterior = $this->getNameReferenciador( $id_user_anterior );
+                    $nombre_actual = $this->getNameReferenciador( $id_user_actual );
+                    $text_cambios .= '<li><b>Referenciador</b>, contenía el valor <b>'. $nombre_anterior .'</b> y se actualizó por <b>'.$nombre_actual.'</b></li>';
+                }
+            }
+            
+
+            if( $bean->fetched_row['comision_c'] !== number_format((float)$bean->comision_c, 2, '.', '') ){
                 $send_email = true;
-                $text_cambios .= '<li><b>Comisión</b>, contenía el valor <b>'. $bean->fetched_row['comision_c'] .'</b> y se actualizó por <b>'.$bean->comision_c.'</b></li>';
+                $comision_round= number_format((float)$bean->comision_c, 2, '.', '');
+                $text_cambios .= '<li><b>Comisión</b>, contenía el valor <b>'. $bean->fetched_row['comision_c'] .'</b> y se actualizó por <b>'.$comision_round.'</b></li>';
             }
             $text_cambios .= '</ul>';
 
@@ -42,6 +59,14 @@ class Seguros_LH{
         }
         
     }
+
+    public function getNameReferenciador( $idUsuario ){
+
+        $beanUser = BeanFactory::getBean('Users', $idUsuario);
+
+        return $beanUser->full_name;
+
+    } 
 
     public function buildBodyEmail($id_dynamics,$text_cambios){
 

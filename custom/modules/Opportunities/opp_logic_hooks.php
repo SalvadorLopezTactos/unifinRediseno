@@ -161,14 +161,14 @@ SQL;
     {
 
         //BEGIN Set the name for the Activo
-        require_once("custom/Levementum/UnifinAPI.php");
+        /*require_once("custom/Levementum/UnifinAPI.php");
         $callApi = new UnifinAPI();
         $activo_list = $callApi->getActivoSubActivo();
         if (!empty($activo_list)) {
             foreach ($activo_list as $index => $activo) {
                 $bean->activo_nombre_c = $activo['index'] == $bean->activo_c ? $activo['nombre'] : $bean->activo_nombre_c;
             }
-        }
+        }*/
         // CVV - 28/03/2016 - Se asigna la fecha de cierre dependiendo del mes del Backlog
         if ($bean->tipo_producto_c == '1' && $bean->tipo_operacion_c == '1') {
             $date_Back = $bean->anio_c . "-" . $bean->mes_c . "-01";

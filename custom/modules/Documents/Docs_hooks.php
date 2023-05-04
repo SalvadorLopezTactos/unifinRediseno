@@ -18,7 +18,7 @@ class Upload_documents
         include_once 'include/utils/sugar_file_utils.php';
         global $sugar_config,$db;
 
-        //Recupera variables de documento por procesar
+        //Recupera variables de do cumento por procesar
         $file_name = $bean->filename;
         $file_id = $bean->document_revision_id;
         $doc_revision = BeanFactory::retrieveBean('DocumentRevisions',$file_id);
@@ -27,19 +27,20 @@ class Upload_documents
             //Traer los datos del seguro
             $seguros = BeanFactory::retrieveBean('S_seguros', $bean->s_seguros_documents_1s_seguros_ida);
             $GLOBALS['log']->fatal('Carga modulo relacionado (Seguros)');
+            require_once("include/upload_file.php");
             //Valida que se tenga un int_id_dynamics_c
             if (!empty($seguros->int_id_dynamics_c)) {
                 try {
                     //Proceso de generación de subida documento a Google Drive
                     $GLOBALS['log']->fatal('Inicia proceso de subida de documento a Sharepoint');
                     //ruta al archivo
-                    $file_content = sugar_file_get_contents('upload/'.$file_id, true);
+                    $GLOBALS['log']->fatal('File id :' .$file_id);
+                    $file = new UploadFile();
+                    //get the file location
+                    $file->temp_file_location = $file->get_upload_path($file_id);
+                    $file_content = $file->get_file_contents();
                     $file_encoded= base64_encode($file_content);
                     //$GLOBALS['log']->fatal('File encoded :' .$file_encoded);
-
-                    //obtenemos el mime type
-                    $file_mime = get_file_mime_type('upload/'.$file_id, true);
-                    $GLOBALS['log']->fatal('File name :' .$file_name);
 
                     //Crea request para subir documento
                     $url = $sugar_config['inter_sharepoint_url'];
@@ -110,7 +111,6 @@ class Upload_documents
                 $removeFile = 'upload/'.$file_id;
                 $GLOBALS['log']->fatal("Se elimina documento de SugarCRM");
                 if (stream_resolve_include_path($removeFile) != false) {
-                    require_once("include/upload_file.php");
                     $upload_stream = new UploadStream();
                     $removeFile= 'upload://'.$file_id;
                     if (!$upload_stream->unlink($removeFile)) {

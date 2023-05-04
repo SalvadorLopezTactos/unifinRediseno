@@ -286,7 +286,7 @@ SQL;
                 $direccion_completa = $direccion_row['calle'] . " " . $direccion_row['numext'] . " " . ($direccion_row['numint'] != "" ? "Int: " . $direccion_row['numint'] : "") . ", Colonia " . $coloniaName['name'] . ", Municipio " . $municipioName['name'];
                 
                 $direccion->name = $direccion_completa;
-
+                
                 if( $new || !isset($direccion_row['noGuardar']) ){
 
                     if ($direccion->load_relationship('dire_direccion_dire_pais')) {
@@ -334,7 +334,7 @@ SQL;
                     }
 
                 }
-
+    
                 $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : DIRECCION NOMBRE: " . $direccion_completa);
                 $current_id_list[] = $direccion->id;
                 if ($new) {
