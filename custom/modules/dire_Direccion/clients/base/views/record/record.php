@@ -92,9 +92,6 @@ array (
               ),
               9 => 
               array (
-                'readonly' => false,
-                'name' => 'estado_c',
-                'label' => 'LBL_ESTADO',
               ),
               10 => 
               array (
@@ -102,9 +99,6 @@ array (
               ),
               11 => 
               array (
-                'readonly' => false,
-                'name' => 'municipio_c',
-                'label' => 'LBL_MUNICIPIO',
               ),
               12 => 
               array (
@@ -112,9 +106,6 @@ array (
               ),
               13 => 
               array (
-                'readonly' => false,
-                'name' => 'ciudad_c',
-                'label' => 'LBL_CIUDAD',
               ),
               14 => 
               array (
@@ -122,9 +113,6 @@ array (
               ),
               15 => 
               array (
-                'readonly' => false,
-                'name' => 'codigo_postal_c',
-                'label' => 'LBL_CODIGO_POSTAL',
               ),
               16 => 
               array (
@@ -132,19 +120,13 @@ array (
               ),
               17 => 
               array (
-                'readonly' => false,
-                'name' => 'colonia_c',
-                'label' => 'LBL_COLONIA',
               ),
               18 => 
               array (
-                'name' => 'accounts_dire_direccion_1_name',
               ),
               19 => 
               array (
-                'readonly' => false,
-                'name' => 'pais_c',
-                'label' => 'LBL_PAIS',
+                'name' => 'accounts_dire_direccion_1_name',
               ),
               20 => 
               array (
@@ -155,14 +137,6 @@ array (
               array (
                 'name' => 'leads_dire_direccion_1_name',
                 'span' => 6,
-              ),
-              22 => 
-              array (
-                'name' => 'dir_sepomex_dire_direccion_name',
-                'label' => 'LBL_DIR_SEPOMEX_DIRE_DIRECCION_FROM_DIR_SEPOMEX_TITLE',
-              ),
-              23 => 
-              array (
               ),
             ),
           ),
