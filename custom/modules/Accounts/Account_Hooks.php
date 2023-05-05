@@ -2013,15 +2013,19 @@ where rfc_c = '{$bean->rfc_c}' and
                         $direccion_nueva_completa = $this->getDireccionFiscalActual($bean->account_direcciones,$id_direccion_buscar);
                         $GLOBALS['log']->fatal("********** Direccion nueva **********");
                         $GLOBALS['log']->fatal(print_r($direccion_nueva_completa,true));
+                        if( !empty($direccion_nueva_completa[0]) ){
 
-                        if( strtoupper($direccion_anterior_completa) !== strtoupper($direccion_nueva_completa[0]) && $pos==false ){
-                            $GLOBALS['log']->fatal("La dirección cambió, se envía notificación");
-                            $elemento_por_actualizar_direccion = $direccion_nueva_completa[1];
-                            $send_notification = true;
-                            $cambio_dirFiscal = true;
-                            $text_cambios .= '<li><b>Dirección fiscal</b>: tenía el valor <b>'. strtoupper($direccion_anterior_completa) .'</b> y cambió a <b>'.strtoupper($direccion_nueva_completa[0]).'</b></li>';
-                            //$this->insertCambiosDireFiscalAudit( $bean->id, strtoupper($direccion_anterior_completa), strtoupper($direccion_nueva_completa), $id_direccion_buscar );
+                            if( strtoupper($direccion_anterior_completa) !== strtoupper($direccion_nueva_completa[0]) && $pos==false ){
+                                $GLOBALS['log']->fatal("La dirección cambió, se envía notificación");
+                                $elemento_por_actualizar_direccion = $direccion_nueva_completa[1];
+                                $send_notification = true;
+                                $cambio_dirFiscal = true;
+                                $text_cambios .= '<li><b>Dirección fiscal</b>: tenía el valor <b>'. strtoupper($direccion_anterior_completa) .'</b> y cambió a <b>'.strtoupper($direccion_nueva_completa[0]).'</b></li>';
+                                //$this->insertCambiosDireFiscalAudit( $bean->id, strtoupper($direccion_anterior_completa), strtoupper($direccion_nueva_completa), $id_direccion_buscar );
+                            }
+
                         }
+                        
                     }
                     $text_cambios .= '</ul>';
                 }
@@ -2033,7 +2037,7 @@ where rfc_c = '{$bean->rfc_c}' and
             global $app_list_strings;
             $emails_responsables_cambios_list = $app_list_strings['emails_responsables_cambios_list'];
 
-            $body_correo = $this->buildBodyCambioRazon( $bean->rfc_c, $text_cambios, $bean->id, $bean->name );
+            $body_correo = $this->buildBodyCambioRazon( $bean->rfc_c, $text_cambios, $bean->id, $bean->fetched_row['name'] );
             $this->sendEmailCambioRazonSocial( $emails_responsables_cambios_list, $body_correo );
 
             //Habilita bandera para indicar que el registro se encuentra en proceso de validación
@@ -2276,30 +2280,36 @@ where rfc_c = '{$bean->rfc_c}' and
 
     public function getDireccionFiscalActual($direcciones,$idDireccion){
         $direccion_completa = "";
-        if( count($direcciones) > 0 ){
-            $posicion_direccion_fiscal = "";
-            for ($i=0; $i < count($direcciones); $i++) { 
-                if( $direcciones[$i]['id'] == $idDireccion ){
-                    $posicion_direccion_fiscal = $i;
-                    //El indice se establece con count para cortar el ciclo for y salir de el
-                    $i = count($direcciones);
+        $elementoDirFiscalActual ="";
+        if(!empty($direcciones)){
+
+            if( count($direcciones) > 0 ){
+                $posicion_direccion_fiscal = "";
+                for ($i=0; $i < count($direcciones); $i++) { 
+                    if( $direcciones[$i]['id'] == $idDireccion ){
+                        $posicion_direccion_fiscal = $i;
+                        //El indice se establece con count para cortar el ciclo for y salir de el
+                        $i = count($direcciones);
+                    }
                 }
+
+                $elementoDirFiscalActual = $direcciones[$posicion_direccion_fiscal];
+
+                $cp = $elementoDirFiscalActual['valCodigoPostal'];
+                $calle = $elementoDirFiscalActual['calle'];
+                $pais = $elementoDirFiscalActual['valPais'];
+                $estado = $elementoDirFiscalActual['valEstado']; 
+                $municipio = $elementoDirFiscalActual['valMunicipio'];
+                $ciudad = $elementoDirFiscalActual['valCiudad'];
+                $colonia = $elementoDirFiscalActual['valColonia'];
+                $numext = $elementoDirFiscalActual['numext'];
+                $numint = $elementoDirFiscalActual['numint'];
+
+                $direccion_completa .= "Calle: ". $calle .", CP: ". $cp .", País: ". $pais .", Estado: ". $estado .", Municipio: ". $municipio .", Ciudad: ". $ciudad .", Colonia: ". $colonia .", Número exterior: ". $numext .", Número interior: ".$numint;
             }
 
-            $elementoDirFiscalActual = $direcciones[$posicion_direccion_fiscal];
-
-            $cp = $elementoDirFiscalActual['valCodigoPostal'];
-            $calle = $elementoDirFiscalActual['calle'];
-            $pais = $elementoDirFiscalActual['valPais'];
-            $estado = $elementoDirFiscalActual['valEstado']; 
-            $municipio = $elementoDirFiscalActual['valMunicipio'];
-            $ciudad = $elementoDirFiscalActual['valCiudad'];
-            $colonia = $elementoDirFiscalActual['valColonia'];
-            $numext = $elementoDirFiscalActual['numext'];
-            $numint = $elementoDirFiscalActual['numint'];
-
-            $direccion_completa .= "Calle: ". $calle .", CP: ". $cp .", País: ". $pais .", Estado: ". $estado .", Municipio: ". $municipio .", Ciudad: ". $ciudad .", Colonia: ". $colonia .", Número exterior: ". $numext .", Número interior: ".$numint;
         }
+        
 
         return array($direccion_completa,$elementoDirFiscalActual);
 
