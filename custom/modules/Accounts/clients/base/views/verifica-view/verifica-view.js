@@ -49,7 +49,7 @@
                     contextCambios.nombreNuevo = "";
                     contextCambios.direccionNueva = "";
                     contextCambios.fechacambioNueva = "";
-                    if( contextCambios.json_audit_cuenta !== undefined ){
+                    if( contextCambios.json_audit_cuenta !== undefined && contextCambios.json_audit_cuenta !== "" ){
                         var json_cuenta = JSON.parse(contextCambios.json_audit_cuenta);
                         contextCambios.json_audit_cuenta = json_cuenta;
                         contextCambios.nombrePrevio = json_cuenta.nombre_actual;
