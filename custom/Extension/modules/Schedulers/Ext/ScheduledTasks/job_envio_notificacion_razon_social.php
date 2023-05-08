@@ -39,7 +39,7 @@ function job_envio_notificacion_razon_social()
                     $GLOBALS['log']->fatal(print_r($objeto_json_cuenta,true));
 
                     //Arma cuerpo correo con diferencias del nombre de la cuenta
-                    $text_cambios .= '<li><b>Razón social / Nombre</b>: tenía el valor <b>'. $objeto_json_cuenta['nombre_actual'] .'</b> y cambió a <b>'.$objeto_json_cuenta['nombre_por_actualizar'].'</b></li>';
+                    $text_cambios .= '<li><b>Razón social / Nombre</b>: <b>tenía el valor</b> '. $objeto_json_cuenta['nombre_actual'] .'<b> y cambió a </b>'.$objeto_json_cuenta['nombre_por_actualizar'].'</li>';
                 }
 
                 $beanCuenta = BeanFactory::getBean('Accounts', $idCuenta);
@@ -72,7 +72,7 @@ function job_envio_notificacion_razon_social()
                                     $direccion_actual_completa = $direcciones_completas[0];
                                     $direccion_por_actualizar_completa = $direcciones_completas[1];
 
-                                    $text_cambios .= '<li><b>Dirección fiscal</b>: tenía el valor <b>'. strtoupper($direccion_actual_completa) .'</b> y cambió a <b>'.strtoupper($direccion_por_actualizar_completa).'</b></li>';
+                                    $text_cambios .= '<li><b>Dirección fiscal</b>: <b>tenía el valor </b>'. ucwords($direccion_actual_completa) .'<b> y cambió a </b>'.ucwords($direccion_por_actualizar_completa).'</b></li>';
                                 }
 
                                 //Se aplica break para salir del ciclo al encontrar la dirección fiscal
@@ -83,9 +83,6 @@ function job_envio_notificacion_razon_social()
                     }
                 }
                 $text_cambios .= '</ul>';
-
-                $GLOBALS['log']->fatal('TEXXT CAMBIOS');
-                $GLOBALS['log']->fatal(print_r($text_cambios,true));
 
                 //ENVIAR MENSAJE
                 global $app_list_strings;
