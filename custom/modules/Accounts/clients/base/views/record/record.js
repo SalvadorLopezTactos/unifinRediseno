@@ -336,6 +336,9 @@
 
         //Parche utilizado para ocultar las filas que siguen mostrándose aunque ningún campo se encuentren en ellas
         this.model.on('sync', this.hideRowsNoHideByDependency, this);
+
+        //Se bloquean campos de nombre para los registros tipo "Cliente"
+        this.model.on('sync', this.disableNameCliente, this);
     },
 
     /** Asignacion modal */
@@ -8553,6 +8556,22 @@ validaReqUniclickInfo: function () {
                     Boton1.hide();
                 }
             });
+        }
+    },
+
+    disableNameCliente: function () {
+		if( this.model.get('tipo_registro_cuenta_c')=='3' ){
+            this.noEditFields.push('primernombre_c');
+            this.noEditFields.push('apellidopaterno_c');
+            this.noEditFields.push('apellidomaterno_c');
+            this.noEditFields.push('razonsocial_c');
+            this.noEditFields.push('nombre_comercial_c');
+
+            this.$("[data-name='primernombre_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='apellidopaterno_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='apellidomaterno_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='razonsocial_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='nombre_comercial_c']").attr('style', 'pointer-events:none;');
         }
     },
 

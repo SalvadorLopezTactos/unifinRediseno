@@ -378,3 +378,6 @@ $mod_strings['LBL_CAMBIO_DIRFISCAL'] = '¿Cambió dirección fiscal?';
 $mod_strings['LBL_RECORDVIEW_PANEL26'] = 'Panel Control Cambio Razón Social';
 $mod_strings['LBL_JSON_AUDIT'] = 'JSON Audit';
 $mod_strings['LBL_ENVIAR_MENSAJE'] = 'Enviar mensaje';
+$mod_strings['LBL_USR_APRUEBA_RECHAZA_USER_ID'] = 'Usuario que aprobó/rechazó (relacionado Usuario ID)';
+$mod_strings['LBL_USR_APRUEBA_RECHAZA'] = 'Usuario que aprobó/rechazó';
+$mod_strings['LBL_FECHA_APRUEBA_RECHAZA'] = 'Fecha de aprobación/rechazo';

@@ -279,7 +279,7 @@ SQL;
                     $bean->valid_cambio_razon_social_c = 1;
                     $bean->cambio_direccion_c = 1;
 
-                    $json_audit = $this->buildJsonAudit($cp_actual,$cp_por_actualizar,$pais_actual,$pais_por_actualizar,$estado_actual,$estado_por_actualizar,$municipio_actual,$municipio_por_actualizar,$ciudad_actual,$ciudad_por_actualizar,$colonia_actual,$colonia_por_actualizar,$calle_actual,$calle_por_actualizar,$numext_actual,$numext_por_actualizar,$numint_actual,$numint_por_actualizar,$full_direccion_actual,$full_direccion_por_actualizar,$fecha_cambio,$plataforma);
+                    $json_audit = $this->buildJsonAudit($bean->id,$cp_actual,$cp_por_actualizar,$pais_actual,$pais_por_actualizar,$estado_actual,$estado_por_actualizar,$municipio_actual,$municipio_por_actualizar,$ciudad_actual,$ciudad_por_actualizar,$colonia_actual,$colonia_por_actualizar,$calle_actual,$calle_por_actualizar,$numext_actual,$numext_por_actualizar,$numint_actual,$numint_por_actualizar,$full_direccion_actual,$full_direccion_por_actualizar,$fecha_cambio,$plataforma);
 
                     $GLOBALS['log']->fatal("json audit direccion");
                     $GLOBALS['log']->fatal(print_r($json_audit,true));
@@ -301,9 +301,10 @@ SQL;
         return $arreglo_cambios[$nombre_campo];
     }
 
-    public function buildJsonAudit( $cp_actual,$cp_por_actualizar,$pais_actual,$pais_por_actualizar,$estado_actual,$estado_por_actualizar,$municipio_actual,$municipio_por_actualizar,$ciudad_actual,$ciudad_por_actualizar,$colonia_actual,$colonia_por_actualizar,$calle_actual,$calle_por_actualizar,$numext_actual,$numext_por_actualizar,$numint_actual,$numint_por_actualizar,$full_direccion_actual,$full_direccion_por_actualizar,$fecha_cambio,$plataforma ){
+    public function buildJsonAudit( $id_direccion,$cp_actual,$cp_por_actualizar,$pais_actual,$pais_por_actualizar,$estado_actual,$estado_por_actualizar,$municipio_actual,$municipio_por_actualizar,$ciudad_actual,$ciudad_por_actualizar,$colonia_actual,$colonia_por_actualizar,$calle_actual,$calle_por_actualizar,$numext_actual,$numext_por_actualizar,$numint_actual,$numint_por_actualizar,$full_direccion_actual,$full_direccion_por_actualizar,$fecha_cambio,$plataforma ){
 
         $json_audit_direccion='{
+            "id_direccion":"'. $id_direccion . '",
             "cp_actual":"'. $cp_actual . '",
             "cp_por_actualizar":"'. $cp_por_actualizar . '",
             "pais_actual":"'. $pais_actual . '",

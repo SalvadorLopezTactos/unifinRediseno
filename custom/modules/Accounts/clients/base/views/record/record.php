@@ -328,6 +328,28 @@ array (
                 'name' => 'cambio_dirfiscal_c',
                 'label' => 'LBL_CAMBIO_DIRFISCAL',
               ),
+              4 => 
+              array (
+                'readonly' => false,
+                'name' => 'enviar_mensaje_c',
+                'label' => 'LBL_ENVIAR_MENSAJE',
+              ),
+              5 => 
+              array (
+              ),
+              6 => 
+              array (
+                'readonly' => false,
+                'name' => 'usr_aprueba_rechaza_c',
+                'studio' => 'visible',
+                'label' => 'LBL_USR_APRUEBA_RECHAZA',
+              ),
+              7 => 
+              array (
+                'readonly' => false,
+                'name' => 'fecha_aprueba_rechaza_c',
+                'label' => 'LBL_FECHA_APRUEBA_RECHAZA',
+              ),
             ),
           ),
           3 => 

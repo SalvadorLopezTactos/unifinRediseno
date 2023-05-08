@@ -84,6 +84,11 @@
                         
                     </tbody>
                 </table>
+                {{#if usr_aprobo_rechazo}}
+                    <div style="text-align:left;padding-left:5px">
+                        <h5><b>Aprobado / Rechazado por: </b>{{usr_aprobo_rechazo}} el {{fecha_aprobo_rechazo}} </h5>
+                    </div>
+                {{/if}}
           </div>
           <div class="modal-footer">
               <button class="span6 btn btn-danger" id="btn-rechazar-cambios">Rechazar cambios</button>
