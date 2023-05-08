@@ -18,21 +18,32 @@ class GetCambiosRazonDireFiscal extends SugarApi
                 'path' => array('cambiosRazonSocialDireFiscal','?'),
                 'pathVars' => array('metodo','id_registro'),
                 'method' => 'getCambiosAudit',
-                'shortHelp' => 'Obtiene valores previos y actuales de la tabla audit para llenar tabla que se muestra para aprobación de área de crédito',
+                'shortHelp' => 'Obtiene estructura del campo edit para obtener cambios en dirección fiscal de la cuenta relacionada',
                 'longHelp' => '',
             ),
-            'deshaceCambiosRazon' => array(
-                'reqType' => 'GET',
+            'apruebaCambiosRazonSocial' => array(
+                'reqType' => 'POST',
                 'noLoginRequired' => true,
-                'path' => array('revierteCambiosRazonSocialDireFiscal','?'),
-                'pathVars' => array('metodo','id_registro'),
+                'path' => array('AprobarCambiosRazonSocialDireFiscal'),
+                'pathVars' => array('metodo'),
+                'method' => 'aprobarCambios',
+                'shortHelp' => 'Obtiene elementos en body de petición para establecer los nuevos valores aprobados tanto para el cliente como para la dirección fiscal',
+                'longHelp' => '',
+            ),
+            'rechazaCambiosRazonSocial' => array(
+                'reqType' => 'POST',
+                'noLoginRequired' => true,
+                'path' => array('RechazarCambiosRazonSocialDireFiscal'),
+                'pathVars' => array('metodo'),
                 'method' => 'rechazarCambios',
-                'shortHelp' => 'Obtiene valores previos de dirección fiscal y razón social para reestablecerlos al registro pasado por parámetro',
+                'shortHelp' => 'Resetea Banderas de cuenta y direcciones inidicando que se rechazaron los cambios solicitados al actualizar nombre y/o dirección fiscal',
                 'longHelp' => '',
             ),
         );
     }
-
+    /*
+    * Obtiene dirección fiscal de cuenta que tiene valor en campo json_audit_c
+    */
     public function getCambiosAudit($api, $args){
 
         $id_registro = $args['id_registro'];
@@ -43,12 +54,13 @@ class GetCambiosRazonDireFiscal extends SugarApi
         INNER JOIN dire_direccion d ON ad.accounts_dire_direccion_1dire_direccion_idb = d.id
         INNER JOIN dire_direccion_cstm dc ON d.id = dc.id_c
         WHERE a.id= '{$id_registro}'
-        AND d.indicador IN (2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63);";
+        AND d.indicador IN (2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63)
+        AND dc.json_audit_c is not null";
 
         $results = $GLOBALS['db']->query($queryAudit);
         if( $results->num_rows > 0 ){
             while($row = $GLOBALS['db']->fetchByAssoc($results)) {
-
+                
                 $array_json_audit[] = $row['json_audit_c'];
                 
             }
@@ -57,120 +69,77 @@ class GetCambiosRazonDireFiscal extends SugarApi
         return $array_json_audit;
     }
 
+    public function aprobarCambios($api, $args){
+        global $current_user;
+        $response = array();
+        $date = TimeDate::getInstance()->nowDb();
+
+        if( !empty($args['cuenta']) ){
+            //Obtiene bean de cuenta para actualizar valores
+            $id_cuenta = $args['cuenta']['id_cuenta'];
+            $beanCuenta = BeanFactory::getBean('Accounts', $id_cuenta , array('disable_row_level_security' => true));
+
+            if( !empty($beanCuenta) ){
+                $beanCuenta->valid_cambio_razon_social_c = 0;
+                $beanCuenta->cambio_nombre_c = 0;
+                $beanCuenta->cambio_dirfiscal_c = 0;
+                $beanCuenta->json_audit_c = '';
+                $beanCuenta->enviar_mensaje_c = 0;
+
+                //Establece valor sobre el campo del usuario que aprobo/rechazó el cambio
+                $beanCuenta->user_id9_c = $current_user->id;
+                $beanCuenta->usr_aprueba_rechaza_c = $current_user->full_name;
+                $beanCuenta->fecha_aprueba_rechaza_c = $date;
+
+                if( $args['cuenta']['tipo'] !== 'Persona Moral' ){
+                    //Se establecen valores para Primer Nombre, Paterno y Materno
+                    $beanCuenta->primernombre_c = $args['cuenta']['primer_nombre_por_actualizar'];
+                    $beanCuenta->apellidopaterno_c = $args['cuenta']['paterno_por_actualizar'];
+                    $beanCuenta->apellidomaterno_c = $args['cuenta']['materno_por_actualizar'];
+                }else{//Al ser Moral, se establecen nuevos valores en Razón Social y Nombre Comercial
+                    $beanCuenta->razonsocial_c = $args['cuenta']['razon_social_por_actualizar'];
+                    $beanCuenta->nombre_comercial_c = $args['cuenta']['razon_social_por_actualizar'];
+                }
+
+                $beanCuenta->save();
+
+                array_push($response,"Cuenta actualizada correctamente");
+            }
+
+
+        }
+
+        if( !empty($args['direccion']) ){
+
+        }
+
+        return $response;
+
+    }
+
     public function rechazarCambios($api, $args){
-        $id_registro = $args['id_registro'];
-        $resultado = array();
-        $beanCuenta = BeanFactory::getBean('Accounts', $id_registro , array('disable_row_level_security' => true));
-        $campos_obtener = array();
-        if( !empty($beanCuenta) ){
-            $cambio_nombre = $beanCuenta->cambio_nombre_c;
-            $cambio_dirFiscal = $beanCuenta->cambio_dirfiscal_c;
-            $regimen_fiscal = $beanCuenta->tipodepersona_c;
+        global $current_user;
+        $response = array();
+        $date = TimeDate::getInstance()->nowDb();
+
+        if( !empty($args['cuenta']) ){
+            $id_cuenta = $args['cuenta']['id_cuenta'];
             
-            if( $cambio_nombre ){
-                if( $regimen_fiscal !== 'Persona Moral' ){
+            //Al ser rechazados los cambios, las banderas únicamente se actualizan desde bd para evitar pasar por todos los LH
+            $queryUpdateBanderasAccount = "UPDATE accounts_cstm SET valid_cambio_razon_social_c = '0', cambio_nombre_c = '0', cambio_dirfiscal_c = '0', json_audit_c = '', user_id9_c = '{$current_user->id}', fecha_aprueba_rechaza_c ='{$date}' WHERE id_c = '{$id_cuenta}'";
+            $GLOBALS['log']->fatal("UPDATE BANDERAS DE CUENTA");
+            $GLOBALS['log']->fatal($queryUpdateBanderasAccount);
 
-                    array_push($campos_obtener, 'primernombre_c','apellidopaterno_c','apellidomaterno_c','name');
+            $GLOBALS['db']->query($queryUpdateBanderasAccount);
 
-                }else{
-                    //Es Persona Moral
-                    array_push($campos_obtener,'razonsocial_c','nombre_comercial_c','name');
-                }
+            array_push($response,"Cambios de Cuenta rechazados");
+        }
 
-                $querySelectAuditNombre = "SELECT 
-                t1.*
-            FROM
-                accounts_audit t1
-            WHERE
-                t1.date_created = (SELECT 
-                        MAX(t2.date_created)
-                    FROM
-                        accounts_audit t2
-                    WHERE
-                        t2.field_name = t1.field_name)
-                        AND t1.parent_id='{$id_registro}';";
-
-                $results = $GLOBALS['db']->query($querySelectAuditNombre);
-                
-                //$stringUpdateAccountCstm = "UPDATE accounts_cstm SET ";
-                //$stringUpdateAccount = "UPDATE accounts SET ";
-                while($row = $GLOBALS['db']->fetchByAssoc($results)){
-                    $campo = $row['field_name'];
-                    if( in_array($campo,$campos_obtener) ){
-                        //$stringUpdateAccountCstm .= $campo . "= '{$row['before_value_string']}' ,";
-                        $beanCuenta->{$campo} = $row['before_value_string'];
-                    }
-                }
-                //$stringUpdateAccountCstm = substr($stringUpdateAccountCstm, 0, -1);
-                //$stringUpdateAccountCstm .= "where id_c =" ."'{$id_registro}'";
-
-                //$stringUpdateAccount .= "where id =" ."'{$id_registro}'";
-
-                //$GLOBALS['db']->query($stringUpdateAccount);
-                //$GLOBALS['db']->query($stringUpdateAccountCstm);
-
-                $beanCuenta->valid_cambio_razon_social_c='0';
-                $beanCuenta->cambio_nombre_c='0';
-                $beanCuenta->cambio_dirfiscal_c='0';
-
-                $id_return = $beanCuenta->save();
-
-                if( !empty($id_return) ){
-                    array_push($resultado, "Valores de Razón Social / Nombre se han reestablecido correctamente");
-                }
-                //Reestablece banderas
-                //$GLOBALS['db']->query("UPDATE accounts_cstm SET valid_cambio_razon_social_c = '0', cambio_nombre_c = '0', cambio_dirfiscal_c = '0' WHERE id_c = '{$id_registro}'");
-                
-            }
-
-            if( $cambio_dirFiscal ){
-                //ToDo, obtener valores anteriores de dirección fiscal
-                $querySelectAuditDireccion = "SELECT 
-                t1.*
-                FROM
-                    accounts_audit t1
-                WHERE
-                    t1.date_created = (SELECT 
-                        MAX(t2.date_created)
-                        FROM
-                            accounts_audit t2
-                        WHERE
-                            t2.field_name = t1.field_name)
-                            AND t1.parent_id='{$id_registro}'
-                            AND t1.field_name='dire_Direccion'";
-
-                $results = $GLOBALS['db']->query($querySelectAuditDireccion);
-                                
-                $id_direccion = '';
-                while($row = $GLOBALS['db']->fetchByAssoc($results)){
-                    $id_direccion = $row['event_id'];
-                    $GLOBALS['log']->fatal("#####ID DIRECCION#####");
-                    $GLOBALS['log']->fatal($id_direccion);
-                }
-
-                if( $id_direccion !== ''){
-                    // Obtener valores de la tabla audit de direcciones, para establecer valores anteriores
-                    $queryAuditDireccion = "SELECT 
-                        t1.*
-                    FROM
-                        dire_direccion_audit t1
-                    WHERE
-                        t1.date_created = (SELECT 
-                                MAX(t2.date_created)
-                            FROM
-                                dire_direccion_audit t2
-                            WHERE
-                                t2.field_name = t1.field_name)
-                            AND t1.parent_id = '{$id_direccion}'";
-
-                }
-
-
-
-            }
+        if( !empty($args['direccion']) ){
 
         }
         
-        return $resultado;
+        return $response;
     }
+
 }

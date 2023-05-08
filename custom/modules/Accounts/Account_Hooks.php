@@ -1978,26 +1978,29 @@ where rfc_c = '{$bean->rfc_c}' and
         $text_cambios = '';
         if( $bean->valid_cambio_razon_social_c == 1 ){
             //Se envía excepción en caso de que el registro se encuentre en proceso de validación
-            require_once 'include/api/SugarApiException.php';
-            $GLOBALS['log']->fatal("No es posible generar cambios al registro ya que se encuentra en un proceso de revisión");
-            throw new SugarApiExceptionInvalidParameter("No es posible generar cambios al registro ya que se encuentra en un proceso de revisión");
+            //La validación solo aplica para Cliente:3 y Proveedor:5
+            if( $bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' ){
+                require_once 'include/api/SugarApiException.php';
+                $GLOBALS['log']->fatal("No es posible generar cambios al registro ya que se encuentra en un proceso de revisión");
+                throw new SugarApiExceptionInvalidParameter("No es posible generar cambios al registro ya que se encuentra en un proceso de revisión");
+            }
 
         }else{
-            if( !empty($bean->rfc_c) ){
+            if( !empty($bean->rfc_c) && ($bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' ) ){
 
                 if( $bean->fetched_row['rfc_c'] == $bean->rfc_c ){
                     $text_cambios .= '<ul>';
 
-                    //$source = $_REQUEST['__sugar_url'];
-                    //$endpoint = 'revierteCambiosRazonSocialDireFiscal';
+                    $source = $_REQUEST['__sugar_url'];
+                    $endpoint = 'AprobarCambiosRazonSocialDireFiscal';
                     //$pos - controlar el origen desde donde se dispara el guardado del registro (desde api custom ó desde el guardado normal directo en el registro)
-                    //$pos = strpos($source,$endpoint);
+                    $pos = strpos($source,$endpoint);
 
-                    if( $bean->fetched_row['name'] !== $bean->name /*&& $pos==false*/){
+                    if( $bean->fetched_row['name'] !== $bean->name && $pos==false ){
                         $GLOBALS['log']->fatal("El nombre cambió, se envía notificación");
                         $send_notification = true;
                         $cambio_nombre = true;
-                        $text_cambios .= '<li><b>Razón social / Nombre</b>: tenía el valor <b>'. $bean->fetched_row['name'] .'</b> y cambió a <b>'.$bean->name.'</b></li>';
+                        $text_cambios .= '<li><b>Razón social / Nombre</b>: <b>tenía el valor</b> '. $bean->fetched_row['name'] .'<b> y cambió a </b>'.$bean->name.'</li>';
                     }
 
                     //Detectar cambio dirección fiscal
@@ -2007,12 +2010,12 @@ where rfc_c = '{$bean->rfc_c}' and
                         $id_direccion_buscar = $direccion_anterior[0];
                         $direccion_anterior_completa = $direccion_anterior[1];
                         $elemento_actual_direccion = $direccion_anterior[2];
-                        $GLOBALS['log']->fatal("********** Direccion anterior **********");
-                        $GLOBALS['log']->fatal(print_r($direccion_anterior,true));
+                        //$GLOBALS['log']->fatal("********** Direccion anterior **********");
+                        //$GLOBALS['log']->fatal(print_r($direccion_anterior,true));
 
                         $direccion_nueva_completa = $this->getDireccionFiscalActual($bean->account_direcciones,$id_direccion_buscar);
-                        $GLOBALS['log']->fatal("********** Direccion nueva **********");
-                        $GLOBALS['log']->fatal(print_r($direccion_nueva_completa,true));
+                        //$GLOBALS['log']->fatal("********** Direccion nueva **********");
+                        //$GLOBALS['log']->fatal(print_r($direccion_nueva_completa,true));
                         if( !empty($direccion_nueva_completa[0]) ){
 
                             if( strtoupper($direccion_anterior_completa) !== strtoupper($direccion_nueva_completa[0]) && $pos==false ){
@@ -2020,7 +2023,7 @@ where rfc_c = '{$bean->rfc_c}' and
                                 $elemento_por_actualizar_direccion = $direccion_nueva_completa[1];
                                 $send_notification = true;
                                 $cambio_dirFiscal = true;
-                                $text_cambios .= '<li><b>Dirección fiscal</b>: tenía el valor <b>'. strtoupper($direccion_anterior_completa) .'</b> y cambió a <b>'.strtoupper($direccion_nueva_completa[0]).'</b></li>';
+                                $text_cambios .= '<li><b>Dirección fiscal</b>: <b>tenía el valor</b>'. ucwords($direccion_anterior_completa) .'<b> y cambió a </b>'.ucwords($direccion_nueva_completa[0]).'</li>';
                                 //$this->insertCambiosDireFiscalAudit( $bean->id, strtoupper($direccion_anterior_completa), strtoupper($direccion_nueva_completa), $id_direccion_buscar );
                             }
 
@@ -2144,6 +2147,7 @@ where rfc_c = '{$bean->rfc_c}' and
                 $numint_por_actualizar = $elemento_por_actualizar_direccion['numint'];
 
                 $json_audit_direccion='{
+                    "id_direccion":"'. $elemento_actual_direccion->id . '",
                     "cp_actual":"'. $cp_actual . '",
                     "cp_por_actualizar":"'. $cp_por_actualizar . '",
                     "pais_actual":"'. $pais_actual . '",
