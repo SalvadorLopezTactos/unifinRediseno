@@ -2023,7 +2023,7 @@ where rfc_c = '{$bean->rfc_c}' and
                                 $elemento_por_actualizar_direccion = $direccion_nueva_completa[1];
                                 $send_notification = true;
                                 $cambio_dirFiscal = true;
-                                $text_cambios .= '<li><b>Dirección fiscal</b>: <b>tenía el valor</b>'. ucwords($direccion_anterior_completa) .'<b> y cambió a </b>'.ucwords($direccion_nueva_completa[0]).'</li>';
+                                $text_cambios .= '<li><b>Dirección fiscal</b>: <b>tenía el valor </b>'. ucwords($direccion_anterior_completa) .'<b> y cambió a </b>'.ucwords($direccion_nueva_completa[0]).'</li>';
                                 //$this->insertCambiosDireFiscalAudit( $bean->id, strtoupper($direccion_anterior_completa), strtoupper($direccion_nueva_completa), $id_direccion_buscar );
                             }
 
