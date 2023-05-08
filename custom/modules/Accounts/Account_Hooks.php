@@ -2045,7 +2045,8 @@ where rfc_c = '{$bean->rfc_c}' and
 
             //Habilita bandera para indicar que el registro se encuentra en proceso de validación
             $bean->valid_cambio_razon_social_c = 1;
-            $bean->enviar_mensaje_c = 1;
+            //Enviar mensaje se establece en 0 para evitar que se envíe nuevamente la notificación desde el JOB
+            $bean->enviar_mensaje_c = 0;
             $plataforma = $_SESSION['platform'];
             $fecha_cambio = TimeDate::getInstance()->nowDb();
 
