@@ -2112,11 +2112,11 @@ where rfc_c = '{$bean->rfc_c}' and
                 $numext_act = $elemento_por_actualizar_direccion['numext'];
                 $numint_act = $elemento_por_actualizar_direccion['numint'];
                 $cp_act = $elemento_por_actualizar_direccion['valCodigoPostal'];
-                $pais_act = $elemento_por_actualizar_direccion['valPais'];
-                $estado_act = $elemento_por_actualizar_direccion['valEstado'];
-                $municipio_act = $elemento_por_actualizar_direccion['valMunicipio'];
-                $ciudad_act = $elemento_por_actualizar_direccion['valCiudad'];
-                $colonia_act = $elemento_por_actualizar_direccion['valColonia'];
+                $pais_act = $elemento_por_actualizar_direccion['listPais'][$elemento_por_actualizar_direccion['pais']];
+                $estado_act = $elemento_por_actualizar_direccion['listEstado'][$elemento_por_actualizar_direccion['estado']];
+                $municipio_act = $elemento_por_actualizar_direccion['listMunicipio'][$elemento_por_actualizar_direccion['municipio']];
+                $ciudad_act = $elemento_por_actualizar_direccion['listCiudad'][$elemento_por_actualizar_direccion['ciudad']];
+                $colonia_act = $elemento_por_actualizar_direccion['listColonia'][$elemento_por_actualizar_direccion['colonia']];
                 $full_direccion_por_actualizar = "Calle: ". $calle_act .", CP: ". $cp_act .", País: ". $pais_act .", Estado: ". $estado_act .", Municipio: ". $municipio_act .", Ciudad: ". $ciudad_act .", Colonia: ". $colonia_act .", Número exterior: ". $numext_act .", Número interior: ".$numint_act;
 
                 $cp_actual = $elemento_actual_direccion->dire_direccion_dire_codigopostaldire_codigopostal_ida;
@@ -2302,11 +2302,11 @@ where rfc_c = '{$bean->rfc_c}' and
 
                 $cp = $elementoDirFiscalActual['valCodigoPostal'];
                 $calle = $elementoDirFiscalActual['calle'];
-                $pais = $elementoDirFiscalActual['valPais'];
-                $estado = $elementoDirFiscalActual['valEstado']; 
-                $municipio = $elementoDirFiscalActual['valMunicipio'];
-                $ciudad = $elementoDirFiscalActual['valCiudad'];
-                $colonia = $elementoDirFiscalActual['valColonia'];
+                $pais = $elementoDirFiscalActual['listPais'][$elementoDirFiscalActual['pais']];
+                $estado = $elementoDirFiscalActual['listEstado'][$elementoDirFiscalActual['estado']]; 
+                $municipio = $elementoDirFiscalActual['listMunicipio'][$elementoDirFiscalActual['municipio']]; 
+                $ciudad = $elementoDirFiscalActual['listCiudad'][$elementoDirFiscalActual['ciudad']];
+                $colonia = $elementoDirFiscalActual['listColonia'][$elementoDirFiscalActual['colonia']];
                 $numext = $elementoDirFiscalActual['numext'];
                 $numint = $elementoDirFiscalActual['numint'];
 

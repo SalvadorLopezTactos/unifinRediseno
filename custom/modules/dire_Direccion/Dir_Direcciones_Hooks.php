@@ -270,7 +270,11 @@ SQL;
                     $numint_por_actualizar = $bean->numint;
                 }
 
-                if( $send_notification ){
+                $source = $_REQUEST['__sugar_url'];
+                $endpoint = 'AprobarCambiosRazonSocialDireFiscal';
+                //$pos - controlar el origen desde donde se dispara el guardado del registro (desde api custom ó desde el guardado normal directo en el registro)
+                $pos = strpos($source,$endpoint);
+                if( $send_notification && $pos == false ){
                     
                     $plataforma = $_SESSION['platform'];
                     $fecha_cambio = TimeDate::getInstance()->nowDb();
