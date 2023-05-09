@@ -104,8 +104,13 @@ class GetCambiosRazonDireFiscal extends SugarApi
                 $id_cuenta = $this->getIdCuenta($id_direccion);
             }
 
-            // Obtener id del código postal
-            $id_codigo_postal = $this->getIdCodigoPostal( $args['direccion']['cp_por_actualizar'] );
+            //En caso de tener 5 caracteres en el string, quiere decir que es el CP y hay que obtener el id del Código Postal
+            if( strlen($args['direccion']['cp_por_actualizar']) == 5 ){
+                $id_codigo_postal = $this->getIdCodigoPostal( $args['direccion']['cp_por_actualizar'] );
+            }else{
+                $id_codigo_postal =  $args['direccion']['cp_por_actualizar'];
+            }
+           
             $beanDireccion = BeanFactory::getBean('dire_Direccion', $id_direccion , array('disable_row_level_security' => true));
             $beanDireccion->dire_direccion_dire_codigopostaldire_codigopostal_ida = $id_codigo_postal;
             $beanDireccion->dire_direccion_dire_paisdire_pais_ida = $args['direccion']['pais_por_actualizar'];
@@ -224,7 +229,7 @@ class GetCambiosRazonDireFiscal extends SugarApi
     }
 
     public function reestableceBanderasDireccion($id_direccion){
-        
+
         $queryResetDireccion = "UPDATE dire_direccion_cstm SET json_audit_c = '', cambio_direccion_c = '0', valid_cambio_razon_social_c = '0' WHERE id_c = '{$id_direccion}'";
         $GLOBALS['log']->fatal("UPDATE BANDERAS DE DIRECCION");
         $GLOBALS['log']->fatal($queryResetDireccion);

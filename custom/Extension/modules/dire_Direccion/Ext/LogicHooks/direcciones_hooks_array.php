@@ -7,7 +7,7 @@
  */
 
 $hook_array['after_save'][] = Array(
-    1,
+    2,
     'WS Inserta dirección en UNICS',
     'custom/modules/dire_Direccion/Dir_Direcciones_Hooks.php',
     'Dir_Direcciones_Hooks',
@@ -60,4 +60,13 @@ $hook_array['before_save'][] = Array(
     'custom/modules/dire_Direccion/Dir_Direcciones_Hooks.php',
     'Dir_Direcciones_Hooks',
     'setValoresPorActualizar'
+);
+
+
+$hook_array['after_save'][] = Array(
+    1,
+    'Revierte valores en caso de detectar cambios en una dirección fiscal',
+    'custom/modules/dire_Direccion/Dir_Direcciones_Hooks.php',
+    'Dir_Direcciones_Hooks',
+    'revierteCambiosFiscal'
 );
