@@ -352,13 +352,13 @@ class Seguimiento_Hook
     }
 
     function set_private_team($bean, $event, $args){
-        global $current_user;
+        global $current_user, $app_list_strings, $db;
         $usuario_logueado=$current_user->id;
         $usuario_creador=$bean->created_by;
         $usuario_asignado=$bean->assigned_user_id;
 
         if($bean->fetched_row['assigned_user_id'] != $bean->assigned_user_id){
-
+            $equiposCasos = array();
             //$usuario_creador="c57e811e-b81a-cde4-d6b4-5626c9961772";
             //Obtiene equipo privado del usuario creador y del usuario asignado
             $beanUserCreador = BeanFactory::getBean('Users', $usuario_creador, array('disable_row_level_security' => true));
@@ -372,23 +372,62 @@ class Seguimiento_Hook
             $User = new User();
             $User->retrieve($usuario_creador);
             $equipoPrivadoCreador=$User->getPrivateTeamID();
+            $equiposCasos[] = $equipoPrivadoCreador;
 
             //$GLOBALS['log']->fatal("PRIVADO CREADOR: ".$equipoPrivadoCreador);
 
             $UserAsignado = new User();
             $UserAsignado->retrieve($usuario_asignado);
             $equipoPrivadoAsignado=$UserAsignado->getPrivateTeamID();
+            $equiposCasos[] = $equipoPrivadoAsignado;
 
             //$GLOBALS['log']->fatal("PRIVADO ASIGNADO: ".$equipoPrivadoAsignado);
+            
+            //Funcionalidad para casos con tipo 15,16,17: Cambio nombre, dirección, ambos
+            if(!$args['isUpdate'] && ($bean->type=='15' || $bean->type=='16' || $bean->type=='17') ){
+                //$GLOBALS['log']->fatal("Add teams 1 ");
+                if($bean->assigned_user_id != $current_user->id){
+                  //$GLOBALS['log']->fatal("Add teams 2 ");
+                    //Recupera equipo de resposanle de seguimiento leasing
+                    $responsableLeasing =  $app_list_strings['asesor_leasing_id_list']['1'];
+                    $userSegLeasing = new User(); 
+                    $userSegLeasing->retrieve($responsableLeasing);
+                    $equipoPrivadoAsignado=$userSegLeasing->getPrivateTeamID();
+                    $equiposCasos[] = $equipoPrivadoAsignado;
+                    //$GLOBALS['log']->fatal("Add teams 3 ". $equipoPrivadoAsignado);
+                    
+                    //Agrega asesores otros productos
+                    $queryUsuarios = "select distinct up.tipo_producto, u.status, u.id user_id, concat(u.first_name,' ' ,u.last_name) user_name , ur.id reports_id, concat(ur.first_name,' ' ,ur.last_name) reports_name
+                       from uni_productos up
+                       inner join uni_productos_cstm upc on upc.id_c = up.id
+                       inner join accounts_uni_productos_1_c ap on ap.accounts_uni_productos_1uni_productos_idb = up.id
+                       inner join users u on u.id = up.assigned_user_id
+                       left join users ur on ur.id = u.reports_to_id
+                       where 
+                       ap.accounts_uni_productos_1accounts_ida='".$bean->account_id."'
+                       and up.tipo_producto in ('3','4','8')
+                       and u.status='Active'
+                       and u.is_group = false 
+                       limit 10;";
+                    $result_usr = $db->query($queryUsuarios);
+                    while ($row = $db->fetchByAssoc($result_usr)) {
+                        $userProducto = new User(); 
+                        $userProducto->retrieve($row['user_id']);
+                        $equipoPrivadoAsignado=$userProducto->getPrivateTeamID();
+                        $equiposCasos[] = $equipoPrivadoAsignado;
+                        //$GLOBALS['log']->fatal("Add teams n ");
+                    }
+                    
+                }
 
+            }
+            
+            //$GLOBALS['log']->fatal(print_r($equiposCasos,true));
             $bean->load_relationship('teams');
 
             //Add the teams
             $bean->teams->add(
-                array(
-                    $equipoPrivadoCreador,
-                    $equipoPrivadoAsignado
-                )
+                $equiposCasos
             );
 
         }

@@ -55,7 +55,7 @@ class getDireccionCPQR extends SugarApi
         
         $auxindex = $this->searchForId($colonia_QR, $arr_colonias,'nameColonia');
         //$GLOBALS['log']->fatal('auxindex1',$auxindex);
-        if( !empty($auxindex)){
+        if( $auxindex >= 0){
             $arrin = array( $auxindex => $arr_colonias[$auxindex]);
             $aux = array( 'colonias'=> $arrin);
             $arr_colonias = $aux;
@@ -90,7 +90,7 @@ class getDireccionCPQR extends SugarApi
         //$auxindex = array_search($ciudad_QR,$arr_municipio,false);
         $auxindex = $this->searchForId($ciudad_QR, $arr_municipio,'nameMunicipio');
         //$GLOBALS['log']->fatal('searchForId',$ciudad_QR,$arr_municipio,$auxindex);
-        if( $auxindex != '-1' && !empty($auxindex)){
+        if( $auxindex != '-1' && $auxindex >=0){
             $arrin = array( $auxindex => $arr_municipio[$auxindex], );
             $aux = array( 'municipios'=> $arrin);
             $arr_municipio = $aux;
@@ -119,7 +119,7 @@ class getDireccionCPQR extends SugarApi
                 return $key;
             }
         }
-        return null;
+        return -1;
     }
 
     public function insertColonia($pais,$estado,$municipio,$cp,$colonia)

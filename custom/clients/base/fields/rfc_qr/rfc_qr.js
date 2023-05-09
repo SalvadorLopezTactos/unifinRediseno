@@ -8,6 +8,10 @@
 		'click #activar_camara': 'activarCamara',
     'click #archivo_qr': 'cargarArchivo',
 		'change #btnSubir': 'SubirImagen',
+    'click .closeModalRazonSocial': 'closeModalRazonSocial',
+    'click .action1': 'modalAction1',
+    'click .action2': 'modalAction2',
+    'click .action3': 'modalAction3',
   },
 
   initialize: function(options){
@@ -16,6 +20,10 @@
     self.picturecam = false;
     this.loadView = true;
     this.context.on('button:btn_rfc:click', this.btn_rfc_qr, this);
+    cont_qr =this;
+    cambioRazonSocial = [];
+    infoUser = [];
+    this.getUserInfo();
   },
 
   render: function () {
@@ -150,6 +158,14 @@
 		var ctx = c.getContext('2d');
 		var imgn = new Image;
 		var imageData = '';
+    if(self.model.attributes.valid_cambio_razon_social_c){
+      app.alert.show('errorAlertCambio', {
+        level: 'error',
+        messages: 'Está cuenta se encuentra en validación de cambios y no puede ser modificada por QR',
+        autoClose: true
+      });
+      return;
+    }
 		if(self.picturecam == false){
 			if(file=="" || file==undefined){
 				app.alert.show('errorAlert', {
@@ -340,15 +356,28 @@
 												self.$('#btn_Cancelar').attr('style', 'margin:10px');
 											},
 											onConfirm: function() {
-												// Actualiza Datos Personales
+                        // Actualiza Datos Personales
 												self.model.set('tipodepersona_c', Regimen);
 												self.model.set('rfc_c', RFC);
 												self.model.set('path_img_qr_c', PathQR);
+                        cambioRazonSocial['cambioCuenta'] = false;
+                        cambioRazonSocial['Cuenta'] = [];
+                        cambioRazonSocial['Cuenta']['razonsocial_c'] = self.model.get('razonsocial_c') ;
+                        cambioRazonSocial['Cuenta']['primernombre_c'] = self.model.get('primernombre_c') ;
+                        cambioRazonSocial['Cuenta']['apellidopaterno_c'] = self.model.get('apellidopaterno_c') ;
+                        cambioRazonSocial['Cuenta']['apellidomaterno_c'] = self.model.get('apellidomaterno_c') ;
+                        cambioRazonSocial['Direccion'] = app.utils.deepCopy(self.prev_oDirecciones.prev_direccion);
+                        
 												if(Regimen == "Persona Moral") {
+                          //Valida cambios
+                          cambioRazonSocial['cambioCuenta'] = self.model.get('razonsocial_c') != Denominacion ? true : cambioRazonSocial['cambioCuenta'];
 													self.model.set('razonsocial_c', Denominacion);
 													self.model.set('nombre_comercial_c', Denominacion);
 													self.model.set('fechaconstitutiva_c', Constitucion);
 												}else {
+                          cambioRazonSocial['cambioCuenta'] = self.model.get('primernombre_c') != Nombre ? true : cambioRazonSocial['cambioCuenta'];
+                          cambioRazonSocial['cambioCuenta'] = self.model.get('apellidopaterno_c') != Paterno ? true : cambioRazonSocial['cambioCuenta'];
+                          cambioRazonSocial['cambioCuenta'] = self.model.get('apellidomaterno_c') != Materno ? true : cambioRazonSocial['cambioCuenta'];
 													self.model.set('primernombre_c', Nombre);
 													self.model.set('apellidopaterno_c', Paterno);
 													self.model.set('apellidomaterno_c', Materno);
@@ -378,12 +407,18 @@
 													}else{
 														arrcorreos = [{email_address: Correo, primary_address: true}];
 														contexto_cuenta.cambio_previo_mail = '1';
-														self.render();
+														
 													}
-													self.model.set('email', arrcorreos);
-													if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit == 1){
-														self.render();
-													}
+                          self.model.set('email', arrcorreos);
+                          currentValue = self.model.get('email');
+                          emailFieldHtml = cont_qr._buildEmailFieldHtml({
+                              email_address: Correo,
+                              primary_address: true,
+                              opt_out: false,
+                              invalid_email: false
+                          });
+                          //self.render();
+                          $newEmailField = self.$('.newEmail').closest('.email').before(emailFieldHtml);
 												}
 												// Valida duplicado
 												cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
@@ -403,6 +438,25 @@
 												var cDuplicado = 0;
 												var cDireccionFiscal = 0;
 												var direccion = cont_dir.oDirecciones.direccion;
+                        cambioRazonSocial['cambioDirFiscal'] = false;
+                        //Itera para validar diferencia en dirección fiscal
+                        //cambioRazonSocial['cambioCuenta'] = self.model.get('primernombre_c') != Nombre ? true : cambioRazonSocial['cambioCuenta'];
+                        Object.keys(direccion).forEach(key => {
+                            //Valida dirección fiscal
+                            if(direccion[key].indicadorSeleccionados.includes('^2^') && direccion[key].inactivo == 0){
+                              cambiaDirFiscal = 0;
+                              cambiaDirFiscal = (direccion[key].valCodigoPostal != CP) ? cambiaDirFiscal+1 : cambiaDirFiscal;
+                              cambiaDirFiscal = (direccion[key].listPais[direccion[key].pais] != Pais) ? cambiaDirFiscal+1 : cambiaDirFiscal;
+                              cambiaDirFiscal = (direccion[key].listMunicipio[direccion[key].municipio] != Municipio) ? cambiaDirFiscal+1 : cambiaDirFiscal;
+                              cambiaDirFiscal = (direccion[key].listColonia[direccion[key].colonia] != Colonia) ? cambiaDirFiscal+1 : cambiaDirFiscal;
+                              cambiaDirFiscal = (contextol._limpiezaDatos(direccion[key].calle) != contextol._limpiezaDatos(Calle)) ? cambiaDirFiscal+1 : cambiaDirFiscal;
+                              cambiaDirFiscal = (contextol._limpiezaDatos(direccion[key].numext) != contextol._limpiezaDatos(Exterior)) ? cambiaDirFiscal+1 : cambiaDirFiscal;
+                              cambiaDirFiscal = (contextol._limpiezaDatos(direccion[key].numint) != contextol._limpiezaDatos(Interior)) ? cambiaDirFiscal+1 : cambiaDirFiscal;
+                              if(cambiaDirFiscal >= 1){
+                                  cambioRazonSocial['cambioDirFiscal'] = true;
+                              }
+                            }
+                        });
 												var auxd = '';
 												var auxd1 = '';
 												Object.keys(direccion).forEach(key => {
@@ -466,7 +520,7 @@
 														if(data.idCP) {
 															var list_paises = data.paises;
 															var list_municipios = data.municipios;
-															var city_list = data.ciudades;
+															var city_list = App.metadata.getCities();
 															var list_estados = data.estados;
 															var list_colonias = data.colonias;
 															//País
@@ -494,21 +548,15 @@
 															var listColonia = {};
 															var auxColonia = '';
 															for (var i = 0; i < list_colonias.length; i++) {
-																listColonia[i]={};
-																listColonia[i]['idColonia']=list_colonias[i].idColonia;
-																listColonia[i]['nameColonia']=list_colonias[i].nameColonia;
-																listColonia[i]['idCodigoPostal']=list_colonias[i].idCodigoPostal;
-																if(list_colonias[i].nameColonia.toUpperCase().trim() == Colonia.toUpperCase().trim()) auxColonia = list_colonias[i].idColonia;
+																listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
+																if(list_colonias[i].nameColonia == Colonia) auxColonia = list_colonias[i].idColonia;
 															}
 															//Ciudad
 															var listCiudad = {};
-															for (var i = 0; i < city_list.length; i++) {
-																listCiudad[city_list[i].idCiudad] = city_list[i].nameCiudad;
-															}
+															var ciudades = Object.values(city_list);
 															var auxCiudad = '';
 															var estadociudadaux = '';
 															//nuevaDireccion.estado = (Object.keys(nuevaDireccion.listEstado)[0] != undefined) ? Object.keys(nuevaDireccion.listEstado)[0] : "";
-															/*
 															estadociudadaux = (Object.keys(listEstado)[0] != undefined) ? Object.keys(listEstado)[0] : "" ;
 															for (var [key, value] of Object.entries(listEstado)) {
 																for (var i = 0; i < ciudades.length; i++) {
@@ -518,7 +566,6 @@
 																	}
 																}
 															}
-															*/
 															if(cDireccionFiscal >= 1) {
 															  if(direccion[indice_indicador].indicador == 2) {
   																direccion[indice_indicador].valCodigoPostal = CP;
@@ -795,6 +842,44 @@
 																}
 															}
 														}
+                            
+                            //Valida tipo de registro
+                            if (self.model.get('tipo_registro_cuenta_c') =='3' || self.model.get('tipo_registro_cuenta_c') =='5') {
+                              if(cambioRazonSocial['cambioDirFiscal'] || cambioRazonSocial['cambioCuenta'] ){
+                                  //Abre modal para indicar tipo de cambio
+                                  //Restablece valores de custom fieldQR
+                                  self.$('#activar_camara').removeClass('disabled');
+																	self.$('#activar_camara').attr('style', '');
+																	self.$('#archivo_qr').removeClass('disabled');
+																	self.$('#archivo_qr').attr('style', '');
+																	self.$('#btnSubir').removeClass('disabled');
+																	self.$('#btnSubir').attr('style', 'margin:10px');
+																	self.$('#validar_QR').removeClass('disabled');
+																	self.$('#validar_QR').attr('style', 'margin:10px');
+																	self.$('#btn_Cancelar').removeClass('disabled');
+																	self.$('#btn_Cancelar').attr('style', 'margin:10px');
+																	//self.$('#rfcModal').hide();
+          											
+                                  //Muestra modal cambios
+                                  $('#cambioRazonSocial').show();
+                                  if(!cambioRazonSocial['cambioDirFiscal'] && cambioRazonSocial['cambioCuenta']){
+                                      $('.action1').show();
+                                      $('.action2').hide();
+                                      $('.action3').hide();
+                                  }
+                                  if(cambioRazonSocial['cambioDirFiscal'] && !cambioRazonSocial['cambioCuenta']){
+                                      $('.action1').hide();
+                                      $('.action2').show();
+                                      $('.action3').hide();
+                                  }
+                                  if(cambioRazonSocial['cambioDirFiscal'] && cambioRazonSocial['cambioCuenta']){
+                                      $('.action1').show();
+                                      $('.action2').show();
+                                      $('.action3').show();
+                                  }
+                              }                              
+                            }
+                            
 													})
 												});
 											},
@@ -853,5 +938,241 @@
             }
         }, this);
     },
-
+    _buildEmailFieldHtml: function (email) {
+        var editEmailFieldTemplate = app.template.getField('email', 'edit-email-field'), emails = this.model.get('email'), index = _.indexOf(emails, email);
+        return editEmailFieldTemplate({
+            max_length: this.def.len,
+            index: index === -1 ? emails.length - 1 : index,
+            email_address: email.email_address,
+            primary_address: email.primary_address,
+            opt_out: email.opt_out,
+            invalid_email: email.invalid_email
+        });
+    },
+    
+    closeModalRazonSocial:function(){
+        //Restablece valores de custom fieldQR
+        self.$('#activar_camara').removeClass('disabled');
+        self.$('#activar_camara').attr('style', '');
+        self.$('#archivo_qr').removeClass('disabled');
+        self.$('#archivo_qr').attr('style', '');
+        self.$('#btnSubir').removeClass('disabled');
+        self.$('#btnSubir').attr('style', 'margin:10px');
+        self.$('#validar_QR').removeClass('disabled');
+        self.$('#validar_QR').attr('style', 'margin:10px');
+        self.$('#btn_Cancelar').removeClass('disabled');
+        self.$('#btn_Cancelar').attr('style', 'margin:10px');
+        //Cierra modal
+        $('#cambioRazonSocial').hide();
+        //Aplica rollback
+        if(cambioRazonSocial['cambioCuenta']){
+            if(self.model.get('tipodepersona_c') == "Persona Moral") {
+              self.model.set('razonsocial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
+              self.model.set('nombre_comercial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
+            }else {
+              self.model.set('primernombre_c', cambioRazonSocial['Cuenta']['primernombre_c']);
+              self.model.set('apellidopaterno_c', cambioRazonSocial['Cuenta']['apellidopaterno_c']);
+              self.model.set('apellidomaterno_c', cambioRazonSocial['Cuenta']['apellidomaterno_c']);
+            }
+        }
+        cont_dir.oDirecciones.direccion = cambioRazonSocial['Direccion'];
+        cont_dir.render();
+        App.alert.show('closemodalRazonSocial', {
+          level: 'info',
+          messages: 'Se ha descartado la solicitud de cambios',
+          autoClose: true
+        });
+        
+    },
+    
+    modalAction1:function(){
+        //Cierra modal
+        $('#cambioRazonSocial').hide();
+        $('#rfcModal').hide();
+        cont_dir.oDirecciones.direccion = cambioRazonSocial['Direccion'];
+        cont_dir.render();
+        var model=App.data.createBean('Cases');
+        model.set('account_id', self.model.get('id'));
+        model.set('account_name', self.model.get('name'));
+        model.set('producto_c','SC6'); //Seguimiento comercial
+        model.set('type','15'); //Cambio nombre
+        model.set('area_interna_c','Credito');  //Crédito
+        if(App.user.attributes.cac_c){
+            var asignadoId = infoUser['id'] != '' ? infoUser['id'] : App.user.id;
+            var asignadoName = infoUser['name'] != '' ? infoUser['name'] :App.user.attributes.full_name;
+            model.set('assigned_user_id',asignadoId); 
+            model.set('assigned_user_name',asignadoName);
+            model.set('area_interna_c','');
+        }
+        app.drawer.open({
+            layout: 'create',
+            context: {
+                  create: true,
+                  module: 'Cases',
+                  model: model
+              },
+          },
+          function(variable){
+              if(variable.attributes.model.id == undefined){
+                  //Aplica rollback
+                  if(cambioRazonSocial['cambioCuenta']){
+                      if(contexto_cuenta.model.get('tipodepersona_c') == "Persona Moral") {
+                        contexto_cuenta.model.set('razonsocial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
+                        contexto_cuenta.model.set('nombre_comercial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
+                      }else {
+                        contexto_cuenta.model.set('primernombre_c', cambioRazonSocial['Cuenta']['primernombre_c']);
+                        contexto_cuenta.model.set('apellidopaterno_c', cambioRazonSocial['Cuenta']['apellidopaterno_c']);
+                        contexto_cuenta.model.set('apellidomaterno_c', cambioRazonSocial['Cuenta']['apellidomaterno_c']);
+                      }
+                  }
+                  App.alert.show('cancelCase1', {
+                    level: 'info',
+                    messages: 'Se ha descartado la solicitud de cambios',
+                    autoClose: true
+                  });
+              }else{
+                  App.alert.show('saveaction1', {
+                    level: 'info',
+                    messages: 'Guarde la cuenta para continuar con el proceso de solicitud de cambios',
+                    autoClose: false
+                  });
+              }         
+          }
+        );
+    },
+    
+    modalAction2:function(){
+        //Cierra modal
+        $('#cambioRazonSocial').hide();
+        $('#rfcModal').hide();
+        if(self.model.get('tipodepersona_c') == "Persona Moral") {
+          self.model.set('razonsocial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
+          self.model.set('nombre_comercial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
+        }else {
+          self.model.set('primernombre_c', cambioRazonSocial['Cuenta']['primernombre_c']);
+          self.model.set('apellidopaterno_c', cambioRazonSocial['Cuenta']['apellidopaterno_c']);
+          self.model.set('apellidomaterno_c', cambioRazonSocial['Cuenta']['apellidomaterno_c']);
+        }
+        var model=App.data.createBean('Cases');
+        model.set('account_id', self.model.get('id'));
+        model.set('account_name', self.model.get('name'));
+        model.set('producto_c','SC6'); //Seguimiento comercial
+        model.set('type','16'); //Cambio dirección
+        model.set('area_interna_c','Credito');  //Crédito
+        if(App.user.attributes.cac_c){
+            var asignadoId = infoUser['id'] != '' ? infoUser['id'] : App.user.id;
+            var asignadoName = infoUser['name'] != '' ? infoUser['name'] :App.user.attributes.full_name;
+            model.set('assigned_user_id',asignadoId); 
+            model.set('assigned_user_name',asignadoName);
+            model.set('area_interna_c','');
+        }
+        app.drawer.open({
+            layout: 'create',
+            context: {
+                  create: true,
+                  module: 'Cases',
+                  model: model
+              },
+          },
+          function(variable){
+              if(variable.attributes.model.id == undefined){
+                  //Aplica rollback
+                  if(cambioRazonSocial['cambioDirFiscal']){
+                      cont_dir.oDirecciones.direccion = cambioRazonSocial['Direccion'];
+                      cont_dir.render();
+                  }
+                  App.alert.show('cancelCase2', {
+                    level: 'info',
+                    messages: 'Se ha descartado la solicitud de cambios',
+                    autoClose: true
+                  });
+              }else{
+                  App.alert.show('saveaction2', {
+                    level: 'info',
+                    messages: 'Guarde la cuenta para continuar con el proceso de solicitud de cambios',
+                    autoClose: false
+                  });
+              }         
+          }
+        );
+    },
+    
+    modalAction3:function(){
+        //Cierra modal
+        $('#cambioRazonSocial').hide();
+        $('#rfcModal').hide();
+        var model=App.data.createBean('Cases');
+        model.set('account_id', self.model.get('id'));
+        model.set('account_name', self.model.get('name'));
+        model.set('producto_c','SC6'); //Seguimiento comercial
+        model.set('type','17'); //Cambio nombre y dirección
+        model.set('area_interna_c','Credito');  //Crédito
+        if(App.user.attributes.cac_c){
+            var asignadoId = infoUser['id'] != '' ? infoUser['id'] : App.user.id;
+            var asignadoName = infoUser['name'] != '' ? infoUser['name'] :App.user.attributes.full_name;
+            model.set('assigned_user_id',asignadoId); 
+            model.set('assigned_user_name',asignadoName);
+            model.set('area_interna_c',''); 
+        }
+        app.drawer.open({
+            layout: 'create',
+            context: {
+                  create: true,
+                  module: 'Cases',
+                  model: model
+              },
+          },
+          function(variable){
+              if(variable.attributes.model.id == undefined){
+                  //Aplica rollback
+                  if(cambioRazonSocial['cambioCuenta']){
+                      if(contexto_cuenta.model.get('tipodepersona_c') == "Persona Moral") {
+                        contexto_cuenta.model.set('razonsocial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
+                        contexto_cuenta.model.set('nombre_comercial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
+                      }else {
+                        contexto_cuenta.model.set('primernombre_c', cambioRazonSocial['Cuenta']['primernombre_c']);
+                        contexto_cuenta.model.set('apellidopaterno_c', cambioRazonSocial['Cuenta']['apellidopaterno_c']);
+                        contexto_cuenta.model.set('apellidomaterno_c', cambioRazonSocial['Cuenta']['apellidomaterno_c']);
+                      }
+                  }
+                  cont_dir.oDirecciones.direccion = cambioRazonSocial['Direccion'];
+                  cont_dir.render();
+                  App.alert.show('cancelCase3', {
+                    level: 'info',
+                    messages: 'Se ha descartado la solicitud de cambios',
+                    autoClose: true
+                  });
+              }else{
+                  App.alert.show('saveaction3', {
+                    level: 'info',
+                    messages: 'Guarde la cuenta para continuar con el proceso de solicitud de cambios',
+                    autoClose: false
+                  });
+              }         
+          }
+        );
+    },
+    
+    getUserInfo:function(){
+        if(App.user.attributes.cac_c){
+            try {
+              app.api.call("read", app.api.buildURL("getAsignadoCaso/"+ self.model.attributes.id), null, {
+                  success: _.bind(function (data) {
+                      if (data) {
+                          infoUser['id'] = data['id'];
+                          infoUser['name'] = data['name'];
+                      }
+                  }, this),
+                  error: _.bind(function (error) {
+                    //Muestra error
+                    infoUser['id'] ='';
+                    infoUser['name'] ='';
+                  }, this),
+              });
+            } catch (e) {
+              infoUser['id'] ='';
+              infoUser['name'] ='';
+            }
+        }
+    }
 })
