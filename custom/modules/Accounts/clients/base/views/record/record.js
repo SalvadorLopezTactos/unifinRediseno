@@ -2976,6 +2976,9 @@
             if( update == 'update' ){
                 //Refresca el modelo para mostrar los valores reestablecidos
                 App.controller.context.attributes.model.fetch();
+                //Manda llamar a función para volver a cargar las direcciones y de esta manera se puedan ver los cambios aprobados
+                selfModal.get_addresses();
+
             }
             
         });
