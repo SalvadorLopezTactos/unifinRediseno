@@ -2375,7 +2375,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $GLOBALS['log']->fatal('GENERA CASO RELACIONADO');
         $plataforma = $_SESSION['platform'];
         $idKarla = 'd51dd49e-b1e6-572f-d6de-5654bfeb8b3e';
-        $idSamuel = '0e5a7202-ec2f-11ec-970e-00155d010c00'; //Cambiar por el id verdadero
+        $idSamuel = '92b04f7d-e547-9d4f-c96a-5a31da014bdd';
         $asunto = 'Cambio de información con mismo RFC';
         // 8 - Crédito Uniclick, 1 - Arrendamiento
         $producto = ( $plataforma == 'uniclick' ) ?  '8' : '1';
