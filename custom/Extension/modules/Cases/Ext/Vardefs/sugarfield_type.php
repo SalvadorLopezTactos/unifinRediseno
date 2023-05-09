@@ -1,6 +1,6 @@
 <?php
- // created: 2022-11-24 11:48:02
-$dictionary['Case']['fields']['type']['default']='1';
+ // created: 2023-05-09 01:42:23
+$dictionary['Case']['fields']['type']['default']='';
 $dictionary['Case']['fields']['type']['len']=100;
 $dictionary['Case']['fields']['type']['required']=true;
 $dictionary['Case']['fields']['type']['audited']=true;
@@ -97,6 +97,9 @@ $dictionary['Case']['fields']['type']['visibility_grid']=array (
       0 => '12',
       1 => '13',
       2 => '14',
+      3 => '15',
+      4 => '16',
+      5 => '17',
     ),
   ),
 );

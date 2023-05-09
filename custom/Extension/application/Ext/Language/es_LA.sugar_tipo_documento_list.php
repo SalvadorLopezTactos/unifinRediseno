@@ -1,5 +1,5 @@
 <?php
- // created: 2022-09-27 13:53:30
+ // created: 2023-05-09 08:53:52
 
 $app_list_strings['tipo_documento_list']=array (
   '' => '',
@@ -15,4 +15,8 @@ $app_list_strings['tipo_documento_list']=array (
   11 => 'Carta de Buró de Crédito',
   12 => 'Acta de poderes',
   10 => 'Otro',
+  13 => 'CFDI',
+  14 => 'Cotejo electrónico/manual',
+  15 => 'Acta de cambio de razón social',
+  16 => 'Actualización de dictamen',
 );
