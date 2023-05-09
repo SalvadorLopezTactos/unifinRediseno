@@ -166,9 +166,6 @@ SQL;
                 $GLOBALS['log']->fatal("FEETCHED RELATED");
                 $GLOBALS['log']->fatal(print_r($bean->rel_fields_before_value,true));
 
-                $GLOBALS['log']->fatal("ARGS DATACHANGED");
-                $GLOBALS['log']->fatal(print_r($args,true));
-
                 $cp_actual = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_codigopostaldire_codigopostal_ida');
                 $cp_por_actualizar = $bean->dire_direccion_dire_codigopostaldire_codigopostal_ida;
                 $pais_actual = $this->fetched_row_related($bean->rel_fields_before_value,'dire_direccion_dire_paisdire_pais_ida');
@@ -199,13 +196,7 @@ SQL;
                 $full_direccion_actual = "Calle: ". $calle_actual .", CP: ". $current_cp .", País: ". $current_pais .", Estado: ". $current_estado .", Municipio: ". $current_municipio .", Ciudad: ". $current_ciudad .", Colonia: ". $current_colonia .", Número exterior: ". $numext_actual .", Número interior: ".$numint_actual;
 
                 //Armando direccion completa por actualizar
-                $cp_act = $bean->dire_direccion_dire_codigopostal_name;
-                $pais_act = $bean->dire_direccion_dire_pais_name;
-                $estado_act = $bean->dire_direccion_dire_estado_name;
-                $municipio_act = $bean->dire_direccion_dire_municipio_name;
-                $ciudad_act = $bean->dire_direccion_dire_ciudad_name;
-                $colonia_act = $bean->dire_direccion_dire_colonia_name;
-                $full_direccion_por_actualizar = "Calle: ". $calle_por_actualizar .", CP: ". $cp_act .", País: ". $pais_act .", Estado: ". $estado_act .", Municipio: ". $municipio_act .", Ciudad: ". $ciudad_act .", Colonia: ". $colonia_act .", Número exterior: ". $numext_por_actualizar .", Número interior: ".$numint_por_actualizar;
+                $full_direccion_por_actualizar = $this->buildNameDireccionPorActualizar($bean);
 
                 if( $cp_actual !== $cp_por_actualizar ){
                     $GLOBALS['log']->fatal("Código Postal ID cambió");
@@ -290,7 +281,10 @@ SQL;
                     $bean->json_audit_c = $json_audit;
 
 
-                    $this->revierteValores($bean,$cp_actual,$pais_actual,$estado_actual,$municipio_actual,$ciudad_actual,$colonia_actual);
+                    //$this->revierteValores($bean,$cp_actual,$pais_actual,$estado_actual,$municipio_actual,$ciudad_actual,$colonia_actual);
+                    $bean->calle = $bean->fetched_row['calle'];
+                    $bean->numext = $bean->fetched_row['numext'];
+                    $bean->numint = $bean->fetched_row['numint'];
 
                     //Actualiza bandera de la cuenta relacionada
                     $this->setCheckEnvioMsjCuenta( $bean->accounts_dire_direccion_1accounts_ida );
@@ -299,6 +293,48 @@ SQL;
             }
         }
     }
+
+    public function buildNameDireccionPorActualizar($bean){
+
+        $calle_por_actualizar = $bean->calle;
+        $cp_act = $this->obtenerNombreDireccionQuery('dire_codigopostal',$bean->dire_direccion_dire_codigopostaldire_codigopostal_ida);
+        $pais_act = $this->obtenerNombreDireccionQuery('dire_pais',$bean->dire_direccion_dire_paisdire_pais_ida);
+        $estado_act = $this->obtenerNombreDireccionQuery('dire_estado',$bean->dire_direccion_dire_estadodire_estado_ida);
+        $municipio_act = $this->obtenerNombreDireccionQuery('dire_municipio',$bean->dire_direccion_dire_municipiodire_municipio_ida);
+        $ciudad_act = $this->obtenerNombreDireccionQuery('dire_ciudad',$bean->dire_direccion_dire_ciudaddire_ciudad_ida);
+        $colonia_act = $this->obtenerNombreDireccionQuery('dire_colonia',$bean->dire_direccion_dire_coloniadire_colonia_ida);
+        $numext_por_actualizar = $bean->numext;
+        $numint_por_actualizar = $bean->numint;
+
+        $full_direccion_por_actualizar = "Calle: ". $calle_por_actualizar .", CP: ". $cp_act .", País: ". $pais_act .", Estado: ". $estado_act .", Municipio: ". $municipio_act .", Ciudad: ". $ciudad_act .", Colonia: ". $colonia_act .", Número exterior: ". $numext_por_actualizar .", Número interior: ".$numint_por_actualizar;
+
+        return $full_direccion_por_actualizar;
+
+    }
+
+    function obtenerNombreDireccionQuery($nombre_tabla,$id_registro){
+        global $db;
+        $name="";
+        $query_nombre = "Select name from ".$nombre_tabla." where id ='". $id_registro ."'";
+        $result_query = $db->query($query_nombre);
+        
+        while ($row = $db->fetchByAssoc($result_query)) {
+            $name = $row['name'];
+        }
+    
+        return $name;
+    
+    }
+
+    /*
+    $cp_act = $bean->dire_direccion_dire_codigopostal_name;
+                $pais_act = $bean->dire_direccion_dire_pais_name;
+                $estado_act = $bean->dire_direccion_dire_estado_name;
+                $municipio_act = $bean->dire_direccion_dire_municipio_name;
+                $ciudad_act = $bean->dire_direccion_dire_ciudad_name;
+                $colonia_act = $bean->dire_direccion_dire_colonia_name;
+                $full_direccion_por_actualizar = "Calle: ". $calle_por_actualizar .", CP: ". $cp_act .", País: ". $pais_act .", Estado: ". $estado_act .", Municipio: ". $municipio_act .", Ciudad: ". $ciudad_act .", Colonia: ". $colonia_act .", Número exterior: ". $numext_por_actualizar .", Número interior: ".$numint_por_actualizar;*/
+    
 
     public function fetched_row_related( $arreglo_cambios, $nombre_campo){
 
@@ -372,5 +408,93 @@ SQL;
             $GLOBALS['db']->query($queryUpdate);
         }
         
+    }
+
+    /*
+    * Se revierten cambios de campos relacionados: Estado,Ciudad, Municipio, Ciudad, Colonia y CP en caso de que se solicite un cambio de dirección fiscal
+    */
+    public function revierteCambiosFiscal($bean=null,$event=null,$args=null){
+        
+        if($args['isUpdate']){
+            $id_pais = "";
+            $id_estado = "";
+            $id_municipio = "";
+            $id_ciudad = "";
+            $id_colonia = "";
+            $id_cp = "";
+
+            if( $args['dataChanges']['valid_cambio_razon_social_c'] ){
+                //Se revierten los cambios solo si dicha actualización viene a partir de un cambio de dirección fiscal (función setValoresPorActualizar)
+                if( $args['dataChanges']['valid_cambio_razon_social_c']['before'] == 0 &&  $args['dataChanges']['valid_cambio_razon_social_c']['after'] == 1){
+
+                    if( isset($args['dataChanges']['dire_direccion_dire_paisdire_pais_ida']) ){
+                        //Cambió pais
+                        $GLOBALS['log']->fatal("Cambió país");
+                        $id_pais = $args['dataChanges']['dire_direccion_dire_paisdire_pais_ida']['before'];
+                        $this->revertirCambiosRelacionados('dire_direccion_dire_pais_c','dire_direccion_dire_paisdire_direccion_idb','dire_direccion_dire_paisdire_pais_ida',$bean->id,$id_pais);
+                    }
+
+                    if( isset($args['dataChanges']['dire_direccion_dire_estadodire_estado_ida']) ){
+                        $GLOBALS['log']->fatal("Cambió estado");
+                        $id_estado = $args['dataChanges']['dire_direccion_dire_estadodire_estado_ida']['before'];
+                        $this->revertirCambiosRelacionados('dire_direccion_dire_estado_c','dire_direccion_dire_estadodire_direccion_idb','dire_direccion_dire_estadodire_estado_ida',$bean->id,$id_estado);
+
+                    }
+
+                    if( isset($args['dataChanges']['dire_direccion_dire_municipiodire_municipio_ida']) ){
+                        $GLOBALS['log']->fatal("Cambió municipio");
+                        $id_municipio = $args['dataChanges']['dire_direccion_dire_municipiodire_municipio_ida']['before'];
+                        $this->revertirCambiosRelacionados('dire_direccion_dire_municipio_c','dire_direccion_dire_municipiodire_direccion_idb','dire_direccion_dire_municipiodire_municipio_ida',$bean->id,$id_municipio);
+
+                    }
+
+                    if( isset($args['dataChanges']['dire_direccion_dire_ciudaddire_ciudad_ida']) ){
+                        $GLOBALS['log']->fatal("Cambió ciudad");
+                        $id_ciudad = $args['dataChanges']['dire_direccion_dire_ciudaddire_ciudad_ida']['before'];
+                        $this->revertirCambiosRelacionados('dire_direccion_dire_ciudad_c','dire_direccion_dire_ciudaddire_direccion_idb','dire_direccion_dire_ciudaddire_ciudad_ida',$bean->id,$id_ciudad);
+
+                    }
+
+                    if( isset($args['dataChanges']['dire_direccion_dire_coloniadire_colonia_ida']) ){
+                        $GLOBALS['log']->fatal("Cambió colonia");
+                        $id_colonia = $args['dataChanges']['dire_direccion_dire_coloniadire_colonia_ida']['before'];
+                        $this->revertirCambiosRelacionados('dire_direccion_dire_colonia_c','dire_direccion_dire_coloniadire_direccion_idb','dire_direccion_dire_coloniadire_colonia_ida',$bean->id,$id_colonia);
+                    }
+
+                    if( isset($args['dataChanges']['dire_direccion_dire_codigopostaldire_codigopostal_ida']) ){
+                        $GLOBALS['log']->fatal("Cambió codigo postal");
+                        $id_cp = $args['dataChanges']['dire_direccion_dire_codigopostaldire_codigopostal_ida']['before'];
+                        $this->revertirCambiosRelacionados('dire_direccion_dire_codigopostal_c','dire_direccion_dire_codigopostaldire_direccion_idb','dire_direccion_dire_codigopostaldire_codigopostal_ida',$bean->id,$id_cp);
+
+                    }
+
+                }
+
+            }
+
+        }
+    
+    }
+
+    public function revertirCambiosRelacionados($tabla,$campo,$campo_actualizar, $id_direccion,$valor_por_actualizar){
+        //Elimina la última relación que no está eliminada, para que con el id, se proceda a borrar
+        $id_relacion = "";
+        $querySelect = "SELECT * from {$tabla} WHERE {$campo}='{$id_direccion}' AND deleted='0' ORDER BY date_modified DESC LIMIT 1";
+        $GLOBALS['log']->fatal($querySelect);
+
+        $queryResult = $GLOBALS['db']->query($querySelect);
+        while ($row = $GLOBALS['db']->fetchByAssoc($queryResult)) {
+            $id_relacion = $row['id'];
+        }
+        
+
+        if( $id_relacion  !== "" ){
+
+            $sqlUpdateRelated = "UPDATE {$tabla} SET {$campo_actualizar} = '{$valor_por_actualizar}' WHERE id ='{$id_relacion}'";
+            $GLOBALS['log']->fatal($sqlUpdateRelated);
+            $GLOBALS['db']->query($sqlUpdateRelated);
+        }
+
+
     }
 }
