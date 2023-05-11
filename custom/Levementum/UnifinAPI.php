@@ -2496,4 +2496,83 @@ SQL;
             $GLOBALS['log']->fatal($exception->getMessage());
         }
     }
+
+    public function postSimilarityToken($url,$user,$pwd){
+        $curl = curl_init();
+        
+        try {
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => 'grant_type=password&username='.$user.'&password='.$pwd,
+                CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/x-www-form-urlencoded'
+                    ),
+            ));
+        
+            $result = curl_exec($curl);
+            $curl_info = curl_getinfo($curl);
+            $http_status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            $response = json_decode($result, true);
+
+            return $response;
+
+        } catch (Exception $exception) {
+            $GLOBALS['log']->fatal('Error '.$url);
+            $GLOBALS['log']->fatal(print_r($exception,true));
+            
+        }
+
+    }
+
+    public function postCallSimilarity($host, $fields, $token)
+    {
+        global $current_user;
+        $agent = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)';
+
+        try {
+            // Login
+            $url = $host;
+            $fields_string = '';
+            $fields_string = json_encode($fields);
+            //print the json encode to the sugarlog
+            $GLOBALS['log']->fatal("Api Similarity");
+            $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> :JSON ENCODED  $url - " . print_r($fields_string, true));
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_USERAGENT, $agent);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+            curl_setopt($ch, CURLINFO_HEADER_OUT, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    'Authorization: Bearer ' .$token)
+            );
+            $result = curl_exec($ch);
+            $curl_info = curl_getinfo($ch);
+            $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+            curl_close($ch);
+            if ($http_status != 200) {
+                $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " STATUS " . " <" . $current_user->user_name . "> : $http_status ");
+            }
+            // Get response as an object
+            $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : result -- " . print_r($result, true));
+
+            $response = json_decode($result, true);
+
+            return $response;
+        } catch (Exception $e) {
+            $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : unifinPostCall ERROR: " . $e->getMessage());
+        }
+    }
 }
