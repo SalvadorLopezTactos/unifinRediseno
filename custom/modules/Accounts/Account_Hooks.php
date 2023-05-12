@@ -1979,14 +1979,14 @@ where rfc_c = '{$bean->rfc_c}' and
         if( $bean->valid_cambio_razon_social_c == 1 ){
             //Se envía excepción en caso de que el registro se encuentre en proceso de validación
             //La validación solo aplica para Cliente:3 y Proveedor:5
-            if( $bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' ){
+            if( ($bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5') && $bean->origen_cuenta_c !== '11' ){
                 require_once 'include/api/SugarApiException.php';
                 $GLOBALS['log']->fatal("No es posible generar cambios al registro ya que se encuentra en un proceso de revisión");
                 throw new SugarApiExceptionInvalidParameter("No es posible generar cambios al registro ya que se encuentra en un proceso de revisión");
             }
 
         }else{
-            if( !empty($bean->rfc_c) && ($bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' ) ){
+            if( !empty($bean->rfc_c) && ($bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' ) && $bean->origen_cuenta_c !== '11' ){
 
                 if( $bean->fetched_row['rfc_c'] == $bean->rfc_c ){
                     $text_cambios .= '<ul>';
@@ -2397,6 +2397,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $caso->status = $status;
         $caso->assigned_user_id = $asignado;
         $caso->account_id = $idCuenta;
+        $caso->area_interna_c = $area_interna;
 
         $caso->save();
     }
