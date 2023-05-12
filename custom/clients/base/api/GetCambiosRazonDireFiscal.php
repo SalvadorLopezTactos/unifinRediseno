@@ -55,7 +55,8 @@ class GetCambiosRazonDireFiscal extends SugarApi
         INNER JOIN dire_direccion_cstm dc ON d.id = dc.id_c
         WHERE a.id= '{$id_registro}'
         AND d.indicador IN (2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63)
-        AND dc.json_audit_c is not null";
+        AND dc.json_audit_c is not null
+        AND dc.json_audit_c != '' ";
 
         $results = $GLOBALS['db']->query($queryAudit);
         if( $results->num_rows > 0 ){

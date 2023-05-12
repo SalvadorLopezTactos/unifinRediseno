@@ -1031,6 +1031,7 @@
                     autoClose: true
                   });
               }else{
+                  contexto_cuenta.model.set('omitir_caso', 1);
                   App.alert.show('saveaction1', {
                     level: 'info',
                     messages: 'Guarde la cuenta para continuar con el proceso de solicitud de cambios',
@@ -1087,6 +1088,7 @@
                     autoClose: true
                   });
               }else{
+                  contexto_cuenta.model.set('omitir_caso', 1);
                   App.alert.show('saveaction2', {
                     level: 'info',
                     messages: 'Guarde la cuenta para continuar con el proceso de solicitud de cambios',
@@ -1143,6 +1145,7 @@
                     autoClose: true
                   });
               }else{
+                  contexto_cuenta.model.set('omitir_caso', 1);
                   App.alert.show('saveaction3', {
                     level: 'info',
                     messages: 'Guarde la cuenta para continuar con el proceso de solicitud de cambios',

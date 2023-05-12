@@ -2192,10 +2192,12 @@ where rfc_c = '{$bean->rfc_c}' and
                 }
             }
 
-            $GLOBALS['log']->fatal("*******DIRECCIONES NUEVO ATRIBUTO*******");
-            $GLOBALS['log']->fatal(print_r($bean->account_direcciones,true));
-
-            $this->creaCaso( $bean->id );
+            //$GLOBALS['log']->fatal("*******DIRECCIONES NUEVO ATRIBUTO*******");
+            //$GLOBALS['log']->fatal(print_r($bean->account_direcciones,true));
+            //$GLOBALS['log']->fatal($bean->omitir_caso);
+            if(!$bean->omitir_caso){
+              $this->creaCaso( $bean->id );
+            }
         }
 
     }

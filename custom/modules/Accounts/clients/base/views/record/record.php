@@ -336,6 +336,11 @@ array (
               ),
               5 => 
               array (
+                'readonly' => false,
+                'name' => 'omitir_caso',
+                'label' => 'LBL_OMITIR_CASO',
+                'studio' => 'visible',
+                'dismiss_label' => true,
               ),
               6 => 
               array (
