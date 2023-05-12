@@ -273,6 +273,7 @@ function creaCaso($idCuenta){
     $caso->status = $status;
     $caso->assigned_user_id = $asignado;
     $caso->account_id = $idCuenta;
+    $caso->area_interna_c = $area_interna;
 
     $caso->save();
 }
