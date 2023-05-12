@@ -26,8 +26,10 @@ class validaDuplicadoPO extends SugarApi
 
     public function validaRegistroDuplicado($api, $args)
     {
+
         if (!$bean->excluye_campana_c){
                 try {
+                    $GLOBALS['log']->fatal(print_r($args,true));
                     //Recupera argumentos de petición: input
                     $nombre = isset($args['nombre']) ? $args['nombre'] : '';
                     //Estructura resultado: output
@@ -192,75 +194,87 @@ class validaDuplicadoPO extends SugarApi
             global $sugar_config;
             require_once("custom/Levementum/UnifinAPI.php");
             //Define petición
-            //$servicioURI= 'http://192.168.150.231:5481/similarity/CRM';
-            $ambiente=$sugar_config['similarity_env'];
-            $servicioURI = $sugar_config['similarity_api'].'/similarity/';
-            $peticion = array(
-              "business_name" => $nombre,
-              "show_items" => "10",
-              "cnn_name"=>$ambiente
-            );
-
-            //Ejecuta petición de servicio
+            $urlSimilarityToken = $sugar_config['similarity_api'].'/auth/login/token';
+            $userToken = $sugar_config['similarity_user'];
+            $pwdToken = $sugar_config['similarity_pwd'];
             $instanciaAPI = new UnifinAPI();
-            $respuestaSimilitud = $instanciaAPI->unifinPostCall($servicioURI,$peticion);
-            //Interpreta resultado
-            if (!empty($respuestaSimilitud)) {
-                //greater_similarity
-                foreach ($respuestaSimilitud['greater_similarity'] as $nodo => $elemento ) {
-                    //Itera resultado y agrega a lista de registros
-                    if ($elemento['similarity']>.80) {
-                        //$item = [];
-                        $similitud = (!empty($elemento['similarity'])) ? number_format($elemento['similarity']*100) : "0";
-                        $items[$elemento['id_bd']]['nivelMatch'].=(empty($items[$elemento['id_bd']]['nivelMatch'])) ? '3 - '.$similitud.'%' : ', 3 - '.$similitud.'%';
-                        $items[$elemento['id_bd']]['modulo']=($elemento['source']=='accounts') ? 'Cuenta' : 'Lead';
-                        $items[$elemento['id_bd']]['moduloLink']=($elemento['source']=='accounts') ? 'Accounts' : 'Leads';
-                        $items[$elemento['id_bd']]['nombre']=$elemento['business_name'];
-                        $items[$elemento['id_bd']]['id']=$elemento['id_bd'];
-                        $items[$elemento['id_bd']]['rfc']= (!empty($items[$elemento['id_bd']]['rfc'])) ? $items[$elemento['id_bd']]['rfc']: '';
-                        $items[$elemento['id_bd']]['descripcion'].=(empty($items[$elemento['id_bd']]['descripcion'])) ? 'Nivel de match encontrado a través de similitud por nombre ' : '';
-                        //="Nivel de match encontrado a través del nombre";
+            $responseToken = $instanciaAPI->postSimilarityToken( $urlSimilarityToken, $userToken, $pwdToken  );
 
-                        if(empty($items[$elemento['id_bd']]['rfc'])){
-                            //Obtener bean del modulo
-                            $beanModulo=BeanFactory::retrieveBean($items[$elemento['id_bd']]['moduloLink'], $items[$elemento['id_bd']]['id'], array('disable_row_level_security' => true));
-                            if (!empty($beanModulo) && $beanModulo != null) {
-                                $items[$elemento['id_bd']]['rfc']=$beanModulo->rfc_c;
+            if( !empty($responseToken) ){
+                                
+                $token = $responseToken['access_token'];
+                
+                $ambiente=$sugar_config['similarity_env'];
+                $servicioURI = $sugar_config['similarity_api'].'/similarity/';
+                $peticion = array(
+                    "business_name" => $nombre,
+                    "show_items" => "10",
+                    "cnn_name"=>$ambiente,
+                    "get_by"=> "ByItems"
+                );
+
+                //Ejecuta petición de servicio
+                $respuestaSimilitud = $instanciaAPI->postCallSimilarity($servicioURI,$peticion,$token);
+                //Interpreta resultado
+                if (!empty($respuestaSimilitud)) {
+                    //greater_similarity
+                    foreach ($respuestaSimilitud['greater_similarity'] as $nodo => $elemento ) {
+                        //Itera resultado y agrega a lista de registros
+                        if ($elemento['similarity']>.80) {
+                            //$item = [];
+                            $similitud = (!empty($elemento['similarity'])) ? number_format($elemento['similarity']*100) : "0";
+                            $items[$elemento['id_bd']]['nivelMatch'].=(empty($items[$elemento['id_bd']]['nivelMatch'])) ? '3 - '.$similitud.'%' : ', 3 - '.$similitud.'%';
+                            $items[$elemento['id_bd']]['modulo']=($elemento['source']=='accounts') ? 'Cuenta' : 'Lead';
+                            $items[$elemento['id_bd']]['moduloLink']=($elemento['source']=='accounts') ? 'Accounts' : 'Leads';
+                            $items[$elemento['id_bd']]['nombre']=$elemento['business_name'];
+                            $items[$elemento['id_bd']]['id']=$elemento['id_bd'];
+                            $items[$elemento['id_bd']]['rfc']= (!empty($items[$elemento['id_bd']]['rfc'])) ? $items[$elemento['id_bd']]['rfc']: '';
+                            $items[$elemento['id_bd']]['descripcion'].=(empty($items[$elemento['id_bd']]['descripcion'])) ? 'Nivel de match encontrado a través de similitud por nombre ' : '';
+                            //="Nivel de match encontrado a través del nombre";
+
+                            if(empty($items[$elemento['id_bd']]['rfc'])){
+                                //Obtener bean del modulo
+                                $beanModulo=BeanFactory::retrieveBean($items[$elemento['id_bd']]['moduloLink'], $items[$elemento['id_bd']]['id'], array('disable_row_level_security' => true));
+                                if (!empty($beanModulo) && $beanModulo != null) {
+                                    $items[$elemento['id_bd']]['rfc']=$beanModulo->rfc_c;
+                                }
                             }
-                        }
 
-                        $items[$elemento['id_bd']]['coincidencia']=$similitud;
-                        //$items[$elemento['id_bd']]=$item;
+                            $items[$elemento['id_bd']]['coincidencia']=$similitud;
+                            //$items[$elemento['id_bd']]=$item;
+                        }
+                    }
+                    //others_similar
+                    foreach ($respuestaSimilitud['others_similar'] as $nodo => $elemento ) {
+                        //Itera resultado y agrega a lista de registros
+                        if ($elemento['similarity']>.80) {
+                            //$item = [];
+                            $similitud = (!empty($elemento['similarity'])) ? number_format($elemento['similarity']*100) : "0";
+                            $items[$elemento['id_bd']]['nivelMatch'].=(empty($items[$elemento['id_bd']]['nivelMatch'])) ? '3 - '.$similitud.'%' : ', 3 - '.$similitud.'%';
+                            $items[$elemento['id_bd']]['modulo']=($elemento['source']=='accounts') ? 'Cuenta' : 'Lead';
+                            $items[$elemento['id_bd']]['moduloLink']=($elemento['source']=='accounts') ? 'Accounts' : 'Leads';
+                            $items[$elemento['id_bd']]['nombre']=$elemento['business_name'];
+                            $items[$elemento['id_bd']]['id']=$elemento['id_bd'];
+                            $items[$elemento['id_bd']]['rfc']= (!empty($items[$elemento['id_bd']]['rfc'])) ? $items[$elemento['id_bd']]['rfc']: '';
+    //                        $items[$elemento['id_bd']]['descripcion']="Nivel de match encontrado a través del nombre";
+                            $items[$elemento['id_bd']]['descripcion'].=(empty($items[$elemento['id_bd']]['descripcion'])) ? 'Nivel de match encontrado a través de similitud por nombre ' : '';
+
+                            if(empty($items[$elemento['id_bd']]['rfc'])){
+                                //Obtener bean del modulo
+                                $beanModulo=BeanFactory::retrieveBean($items[$elemento['id_bd']]['moduloLink'], $items[$elemento['id_bd']]['id'], array('disable_row_level_security' => true));
+                                if (!empty($beanModulo) && $beanModulo != null) {
+                                    $items[$elemento['id_bd']]['rfc']=$beanModulo->rfc_c;
+                                }
+                            }
+
+                            $items[$elemento['id_bd']]['coincidencia']=$similitud;
+                            //$items[$elemento['id_bd']]=$item;
+                        }
                     }
                 }
-                //others_similar
-                foreach ($respuestaSimilitud['others_similar'] as $nodo => $elemento ) {
-                    //Itera resultado y agrega a lista de registros
-                    if ($elemento['similarity']>.80) {
-                        //$item = [];
-                        $similitud = (!empty($elemento['similarity'])) ? number_format($elemento['similarity']*100) : "0";
-                        $items[$elemento['id_bd']]['nivelMatch'].=(empty($items[$elemento['id_bd']]['nivelMatch'])) ? '3 - '.$similitud.'%' : ', 3 - '.$similitud.'%';
-                        $items[$elemento['id_bd']]['modulo']=($elemento['source']=='accounts') ? 'Cuenta' : 'Lead';
-                        $items[$elemento['id_bd']]['moduloLink']=($elemento['source']=='accounts') ? 'Accounts' : 'Leads';
-                        $items[$elemento['id_bd']]['nombre']=$elemento['business_name'];
-                        $items[$elemento['id_bd']]['id']=$elemento['id_bd'];
-                        $items[$elemento['id_bd']]['rfc']= (!empty($items[$elemento['id_bd']]['rfc'])) ? $items[$elemento['id_bd']]['rfc']: '';
-//                        $items[$elemento['id_bd']]['descripcion']="Nivel de match encontrado a través del nombre";
-                        $items[$elemento['id_bd']]['descripcion'].=(empty($items[$elemento['id_bd']]['descripcion'])) ? 'Nivel de match encontrado a través de similitud por nombre ' : '';
 
-                        if(empty($items[$elemento['id_bd']]['rfc'])){
-                            //Obtener bean del modulo
-                            $beanModulo=BeanFactory::retrieveBean($items[$elemento['id_bd']]['moduloLink'], $items[$elemento['id_bd']]['id'], array('disable_row_level_security' => true));
-                            if (!empty($beanModulo) && $beanModulo != null) {
-                                $items[$elemento['id_bd']]['rfc']=$beanModulo->rfc_c;
-                            }
-                        }
-
-                        $items[$elemento['id_bd']]['coincidencia']=$similitud;
-                        //$items[$elemento['id_bd']]=$item;
-                    }
-                }
             }
+            
         }
 
         return $items;
