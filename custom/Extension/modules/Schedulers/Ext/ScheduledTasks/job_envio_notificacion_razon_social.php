@@ -94,6 +94,9 @@ function job_envio_notificacion_razon_social()
                 //Una vez enviado el correo, se procede a resetear bandera para que no se vuelva a enviar la notificación
                 reestableceBanderas($idCuenta,$idDireccion);
 
+                //Se crea caso
+                creaCaso($idCuenta);
+
             }
 
         }else{
@@ -244,4 +247,32 @@ function reestableceBanderas($idCuenta,$idDireccion){
         $updateDirQuery ="UPDATE dire_direccion_cstm SET valid_cambio_razon_social_c = '1' WHERE id_c = '{$idDireccion}'";
         $db->query($updateDirQuery);
     }
+}
+
+function creaCaso($idCuenta){
+    $GLOBALS['log']->fatal('GENERA CASO RELACIONADO DESDE PLANIFICADOR');
+    $plataforma = $_SESSION['platform'];
+    $idKarla = 'd51dd49e-b1e6-572f-d6de-5654bfeb8b3e';
+    $idSamuel = '92b04f7d-e547-9d4f-c96a-5a31da014bdd';
+    $asunto = 'Cambio de información con mismo RFC';
+    // 8 - Crédito Uniclick, 1 - Arrendamiento
+    $producto = ( $plataforma == 'uniclick' ) ?  '8' : '1';
+    $tipo = '8'; // Modificación de datos
+    $subtipo = '48'; // Actualización de datos de contacto
+    $prioridad = 'P4'; // Urgente
+    $status = '1'; // No iniciado
+    $asignado = ( $plataforma == 'uniclick' ) ? $idSamuel : $idKarla;
+    $area_interna = ( $plataforma == 'uniclick' ) ?  '': 'Credito'; // Agregar id de uniclick
+
+    $caso = BeanFactory::newBean('Cases');
+    $caso->name = $asunto;
+    $caso->producto_c = $producto;
+    $caso->type = $tipo;
+    $caso->subtipo_c = $subtipo;
+    $caso->priority = $prioridad;
+    $caso->status = $status;
+    $caso->assigned_user_id = $asignado;
+    $caso->account_id = $idCuenta;
+
+    $caso->save();
 }
