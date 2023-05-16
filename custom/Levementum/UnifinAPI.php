@@ -377,7 +377,7 @@ class UnifinAPI
                         $queryResult = $db->query($query);
                     }
 
-                    $this->usuarioProveedores($objecto);
+                    //$this->usuarioProveedores($objecto);
 
 
                     //Valida y crea relaciones
@@ -471,7 +471,7 @@ class UnifinAPI
                     $query = " UPDATE accounts_cstm SET idcliente_c = '{$objecto->idcliente_c}', /*tipo_registro_cuenta_c = '$tipo_registro', */sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
                     $queryResult = $db->query($query);
 
-                    $this->usuarioProveedores($objecto);
+                    //$this->usuarioProveedores($objecto);
                 }
             }
         } catch (Exception $e) {
@@ -1127,7 +1127,7 @@ SQL;
             $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
         }
 
-        $this->usuarioProveedores($object);
+        //$this->usuarioProveedores($object);
     }
 
     public function insertaComunicación($object, $estado)
