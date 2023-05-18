@@ -3555,7 +3555,8 @@
      * */
     setPhoneOffice: function () {
 
-        if (!_.isEmpty(this.oTelefonos) && !_.isEmpty(this.oTelefonos.telefono)) {
+        if (this.oTelefonos != undefined){
+          if(this.oTelefonos.telefono != undefined) {
             var telefono = this.oTelefonos.telefono;
             for (var i = 0; i < telefono.length; i++) {
                 if (telefono[i].principal) {
@@ -3566,6 +3567,7 @@
                     //}
                 }
             }
+          }
         }
     },
 
