@@ -4902,6 +4902,7 @@
         if (!_.isEmpty(idCuenta) && idCuenta != "") {
             app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_dire_direccion_1'), null, {
                 success: function (data) {
+                    contexto_cuenta.length_direcciones = data.records.length;
                     //Itera y agrega direcciones
                     for (var i = 0; i < data.records.length; i++) {
                         //Asignando valores de los campos
@@ -5040,7 +5041,7 @@
 
                                     //Construye JSON para controlar cambio de dirección fiscal
                                     var json_direccion = {};
-                                    if( contexto_cuenta.model.get('json_direccion_audit_c') == "" ){
+                                    if( Number(data['indice']) + 1 == contexto_cuenta.length_direcciones ){
                                         json_direccion['json_dire_actual'] = contexto_cuenta.prev_oDirecciones.prev_direccion;
                                         json_direccion['json_dire_actualizar'] = cont_dir.oDirecciones.direccion;
                                         contexto_cuenta.model.set('json_direccion_audit_c',JSON.stringify(json_direccion));
