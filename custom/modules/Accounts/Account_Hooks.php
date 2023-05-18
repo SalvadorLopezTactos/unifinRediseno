@@ -2315,7 +2315,7 @@ where rfc_c = '{$bean->rfc_c}' and
                 $posicion_direccion_fiscal = "";
                 for ($i=0; $i < count($direcciones); $i++) { 
                     //Se busca la fiscal sobre las direcciones por actualizar
-                    if( in_array($direcciones[$i]['indicador'],$indicador_direcciones_fiscales) && $direcciones[$i]['inactivo'] == 0){
+                    if( in_array($direcciones[$i]['indicador'],$indicador_direcciones_fiscales) && empty( $direcciones[$i]['inactivo'] )){
                         
                         $posicion_direccion_fiscal = $i;
                         //El indice se establece con count para cortar el ciclo for y salir de el
