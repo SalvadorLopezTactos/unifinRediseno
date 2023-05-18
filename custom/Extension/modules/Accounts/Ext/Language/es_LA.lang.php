@@ -381,3 +381,7 @@ $mod_strings['LBL_ENVIAR_MENSAJE'] = 'Enviar mensaje';
 $mod_strings['LBL_USR_APRUEBA_RECHAZA_USER_ID'] = 'Usuario que aprobó/rechazó (relacionado Usuario ID)';
 $mod_strings['LBL_USR_APRUEBA_RECHAZA'] = 'Usuario que aprobó/rechazó';
 $mod_strings['LBL_FECHA_APRUEBA_RECHAZA'] = 'Fecha de aprobación/rechazo';
+$mod_strings['LBL_JSON_DIRECCION_AUDIT'] = 'JSON Direcciones';
+$mod_strings['LBL_GUARDAR_DIRECCIONES'] = 'Guardar direcciones';
+$mod_strings['LBL_OMITIR_GUARDADO_DIRECCIONES'] = 'Omitir guardado de direcciones';
+$mod_strings['LBL_ACCION_CAMBIO_FISCAL'] = 'Acción cambio fiscal';

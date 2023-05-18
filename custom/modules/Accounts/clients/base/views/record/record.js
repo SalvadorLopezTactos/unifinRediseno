@@ -5038,6 +5038,14 @@
                                     contexto_cuenta.prev_oDirecciones.prev_direccion = app.utils.deepCopy(contexto_cuenta.oDirecciones.direccion);
                                     cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
 
+                                    //Construye JSON para controlar cambio de dirección fiscal
+                                    var json_direccion = {};
+                                    if( contexto_cuenta.model.get('json_direccion_audit_c') == "" ){
+                                        json_direccion['json_dire_actual'] = contexto_cuenta.prev_oDirecciones.prev_direccion;
+                                        json_direccion['json_dire_actualizar'] = cont_dir.oDirecciones.direccion;
+                                        contexto_cuenta.model.set('json_direccion_audit_c',JSON.stringify(json_direccion));
+                                    }
+                                    
                                     //Aplica render a campo custom
                                     cont_dir.render();
 
@@ -5062,6 +5070,20 @@
 
             //Direcciones
             this.prev_oDirecciones.prev_direccion = app.utils.deepCopy(this.oDirecciones.direccion);
+            
+            //Actualiza campo que guarda json de direcciones
+            var json_direcciones_campo = this.model.get('json_direccion_audit_c');
+            
+            if( json_direcciones_campo != "" ){
+                var json_direcciones = JSON.parse(json_direcciones_campo);
+
+                json_direcciones['json_dire_actualizar'] = this.oDirecciones.direccion;
+                var d = new Date();
+                var fecha_actual = d.toLocaleString();
+                json_direcciones['fecha_cambio'] = fecha_actual;
+                this.model.set('json_direccion_audit_c', JSON.stringify(json_direcciones));
+            }
+            
             this.model.set('account_direcciones', this.oDirecciones.direccion);
         }
         //Callback a validation task

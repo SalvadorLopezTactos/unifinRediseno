@@ -233,7 +233,7 @@ SQL;
         // populate relationships from dropdowns
 
         //Nuevo account_direcciones_n
-        if ($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI') {
+        if ($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI' && $bean->omitir_guardado_direcciones_c == 0) {
             //$GLOBALS['log']->fatal("DIRECCIONES:*********************");
             //$GLOBALS['log']->fatal(print_r($bean->account_direcciones,true));
             foreach ($bean->account_direcciones as $direccion_row) {
@@ -287,7 +287,7 @@ SQL;
                 
                 $direccion->name = $direccion_completa;
                 
-                if( $new || !isset($direccion_row['noGuardar']) ){
+                if( $new ){
 
                     if ($direccion->load_relationship('dire_direccion_dire_pais')) {
                         if ($direccion_row['pais'] !== $direccion->dire_direccion_dire_paisdire_pais_ida) {
@@ -349,19 +349,18 @@ SQL;
 
                     try {
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Update *784 " . $query);
-                        if( !isset($direccion_row['noGuardar']) ){
-                            $resultado = $db->query($query);
-                            $callApi = new UnifinAPI();
+                        
+                        $resultado = $db->query($query);
+                        $callApi = new UnifinAPI();
 
-                            if ($direccion->sincronizado_unics_c == '0') {
-                                $direccion = $callApi->insertaDireccion($direccion);
-                            } else {
-                                $direccion = $callApi->actualizaDireccion($direccion);
-                            }
-                            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : resultado " . $db->getAffectedRowCount($resultado));
-
+                        if ($direccion->sincronizado_unics_c == '0') {
+                            $direccion = $callApi->insertaDireccion($direccion);
+                            
+                        } else {
+                            $direccion = $callApi->actualizaDireccion($direccion);
                         }
-
+                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : resultado " . $db->getAffectedRowCount($resultado));
+                        
                     } catch (Exception $e) {
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
                     }
@@ -1974,6 +1973,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $elemento_por_actualizar_direccion = null;
         $GLOBALS['log']->fatal("############ VALIDA CAMBIO DE NOMBRE ############");
         $GLOBALS['log']->fatal("ANTES: ". $bean->fetched_row['name']. " DESPUÉS: ".$bean->name );
+        $GLOBALS['log']->fatal( print_r( json_decode($bean->json_direccion_audit_c,true),true ) );
 
         $text_cambios = '';
         if( $bean->valid_cambio_razon_social_c == 1 ){
@@ -2013,11 +2013,12 @@ where rfc_c = '{$bean->rfc_c}' and
                         //$GLOBALS['log']->fatal("********** Direccion anterior **********");
                         //$GLOBALS['log']->fatal(print_r($direccion_anterior,true));
 
-                        $direccion_nueva_completa = $this->getDireccionFiscalActual($bean->account_direcciones,$id_direccion_buscar);
+                        $direccion_nueva_completa = $this->getDireccionFiscalActual($bean->account_direcciones);
                         //$GLOBALS['log']->fatal("********** Direccion nueva **********");
                         //$GLOBALS['log']->fatal(print_r($direccion_nueva_completa,true));
                         if( !empty($direccion_nueva_completa[0]) ){
-
+                            $GLOBALS['log']->fatal("#####Direccion actual: ". strtoupper($direccion_anterior_completa));
+                            $GLOBALS['log']->fatal("#####Direccion por actualizar: ". strtoupper($direccion_nueva_completa[0]));
                             if( strtoupper($direccion_anterior_completa) !== strtoupper($direccion_nueva_completa[0]) && $pos==false ){
                                 $GLOBALS['log']->fatal("La dirección cambió, se envía notificación");
                                 $elemento_por_actualizar_direccion = $direccion_nueva_completa[1];
@@ -2093,6 +2094,8 @@ where rfc_c = '{$bean->rfc_c}' and
 
             if( $cambio_dirFiscal ){
                 $bean->cambio_dirfiscal_c = 1;
+                //Se habilita bandera para evitar guarar las direcciones
+                $bean->omitir_guardado_direcciones_c = 1;
 
                 //Valores actuales (names) para armar la dirección completa
                 $current_calle = $elemento_actual_direccion->calle;
@@ -2118,6 +2121,7 @@ where rfc_c = '{$bean->rfc_c}' and
                 $ciudad_act = $elemento_por_actualizar_direccion['listCiudad'][$elemento_por_actualizar_direccion['ciudad']];
                 $colonia_act = $elemento_por_actualizar_direccion['listColonia'][$elemento_por_actualizar_direccion['colonia']];
                 $full_direccion_por_actualizar = "Calle: ". $calle_act .", CP: ". $cp_act .", País: ". $pais_act .", Estado: ". $estado_act .", Municipio: ". $municipio_act .", Ciudad: ". $ciudad_act .", Colonia: ". $colonia_act .", Número exterior: ". $numext_act .", Número interior: ".$numint_act;
+
 
                 $cp_actual = $elemento_actual_direccion->dire_direccion_dire_codigopostaldire_codigopostal_ida;
                 //Obtener el id, ya que al actualizar la dirección no se está obteniendo el atributo 'postal'
@@ -2149,6 +2153,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
                 $json_audit_direccion='{
                     "id_direccion":"'. $elemento_actual_direccion->id . '",
+                    "indicador":"'. $elemento_por_actualizar_direccion['indicador'] . '",
                     "cp_actual":"'. $cp_actual . '",
                     "cp_por_actualizar":"'. $cp_por_actualizar . '",
                     "pais_actual":"'. $pais_actual . '",
@@ -2177,19 +2182,33 @@ where rfc_c = '{$bean->rfc_c}' and
                 $GLOBALS['log']->fatal($json_audit_direccion);
 
                 //Revierte cambios en direccion, para esto, se establece un nuevo atributo al objeto account_direcciones para que sirva de switch y se tenga el privilegio de actualización
-                if( $id_direccion_buscar !== "" ){
-                    $indice_direccion = $this->buscarFiscalParaModificar($bean->account_direcciones, $id_direccion_buscar);
-                    if( $indice_direccion !=="" ){
-                        $bean->account_direcciones[$indice_direccion]['noGuardar'] = '1';
+                //Cuando se detecta cambio en dirección fiscal, ésta no se debe de guardar sino hasta que se aprueben cambios
+                //if( $id_direccion_buscar !== "" ){
+                /*
+                $indice_direccion = $this->buscarFiscalParaModificar($bean->account_direcciones);
+                if( $indice_direccion !=="" ){
+                    $bean->account_direcciones[$indice_direccion]['noGuardar'] = '1';
 
+                    //Si la dirección fiscal que se eligió como "nueva" ya era existente, se toma el id para actualizar el json que se toma en cuenta al aprobar los cambios
+                    if( !empty($bean->account_direcciones[$indice_direccion]['id']) ){
+                        $id_direccion_buscar = $bean->account_direcciones[$indice_direccion]['id'];
+                        $date_now = TimeDate::getInstance()->nowDb();
                         //Actualiza el campo json de la dirección directamente a la bd
                         $queryUpdateJSON = "UPDATE dire_direccion_cstm SET json_audit_c = '{$json_audit_direccion}' WHERE id_c ='{$id_direccion_buscar}'";
+                        $queryUpdateDireccionModified = "UPDATE dire_direccion SET date_modified = '{$date_now}' WHERE id = '{$id_direccion_buscar}'";
                         $GLOBALS['log']->fatal("UPDATE JSON DE DIRECCION");
                         $GLOBALS['log']->fatal($queryUpdateJSON);
 
                         $GLOBALS['db']->query($queryUpdateJSON);
+                        $GLOBALS['db']->query($queryUpdateDireccionModified);
+                        
+                    }else{
+                        //ToDo: ¿Como obtener id de una dirección que no existía (es nueva) y se necesita que viaje con json_audit para una futura actualización de datos al Aprobar?
                     }
+
                 }
+                */
+                //}
             }
 
             //$GLOBALS['log']->fatal("*******DIRECCIONES NUEVO ATRIBUTO*******");
@@ -2202,12 +2221,13 @@ where rfc_c = '{$bean->rfc_c}' and
 
     }
 
-    public function buscarFiscalParaModificar( $direcciones, $idBuscar ){
+    public function buscarFiscalParaModificar( $direcciones ){
         $indice="";
+        $indicador_direcciones_fiscales = array(2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63);
         if( count($direcciones) > 0 ){
             for ($i=0; $i < count($direcciones); $i++) { 
 
-                if( $direcciones[$i]['id'] == $idBuscar ){
+                if( in_array($direcciones[$i]['indicador'],$indicador_direcciones_fiscales) ){
                     $indice = $i;
 
                     //$i se establece con el count para salir del ciclo for
@@ -2285,21 +2305,25 @@ where rfc_c = '{$bean->rfc_c}' and
 
     }
 
-    public function getDireccionFiscalActual($direcciones,$idDireccion){
+    public function getDireccionFiscalActual($direcciones){
         $direccion_completa = "";
         $elementoDirFiscalActual ="";
+        $indicador_direcciones_fiscales = array(2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63);
         if(!empty($direcciones)){
 
             if( count($direcciones) > 0 ){
                 $posicion_direccion_fiscal = "";
                 for ($i=0; $i < count($direcciones); $i++) { 
-                    if( $direcciones[$i]['id'] == $idDireccion ){
+                    //Se busca la fiscal sobre las direcciones por actualizar
+                    if( in_array($direcciones[$i]['indicador'],$indicador_direcciones_fiscales) ){
+                        
                         $posicion_direccion_fiscal = $i;
                         //El indice se establece con count para cortar el ciclo for y salir de el
                         $i = count($direcciones);
                     }
                 }
-
+                //$GLOBALS['log']->fatal("******OBJETO DIRECCIONES*****");
+                //$GLOBALS['log']->fatal(print_r($direcciones,true));
                 $elementoDirFiscalActual = $direcciones[$posicion_direccion_fiscal];
 
                 $cp = $elementoDirFiscalActual['valCodigoPostal'];
@@ -2317,9 +2341,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
         }
         
-
         return array($direccion_completa,$elementoDirFiscalActual);
-
     }
 
     public function buildBodyCambioRazon( $rfc, $text_cambios, $idCuenta, $nombreCuenta ){

@@ -54,9 +54,10 @@ class GetCambiosRazonDireFiscal extends SugarApi
         INNER JOIN dire_direccion d ON ad.accounts_dire_direccion_1dire_direccion_idb = d.id
         INNER JOIN dire_direccion_cstm dc ON d.id = dc.id_c
         WHERE a.id= '{$id_registro}'
-        AND d.indicador IN (2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63)
+        -- AND d.indicador IN (2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63)
         AND dc.json_audit_c is not null
-        AND dc.json_audit_c != '' ";
+        AND dc.json_audit_c != ''
+        ORDER BY d.date_modified DESC";
 
         $results = $GLOBALS['db']->query($queryAudit);
         if( $results->num_rows > 0 ){
@@ -74,8 +75,8 @@ class GetCambiosRazonDireFiscal extends SugarApi
         global $current_user;
         $response = array();
         $date = TimeDate::getInstance()->nowDb();
-        $id_cuenta = "";
-        $beanCuenta = "";
+        $id_cuenta = $args['idCuenta'];
+        $beanCuenta = "";   
         if( !empty($args['cuenta']) ){
             //Obtiene bean de cuenta para actualizar valores
             $id_cuenta = $args['cuenta']['id_cuenta'];
@@ -99,6 +100,7 @@ class GetCambiosRazonDireFiscal extends SugarApi
             }
         }
 
+        /*
         if( !empty($args['direccion']) ){
             $id_direccion = $args['direccion']['id_direccion'];
             if( $id_cuenta == "" ){
@@ -113,6 +115,9 @@ class GetCambiosRazonDireFiscal extends SugarApi
             }
            
             $beanDireccion = BeanFactory::getBean('dire_Direccion', $id_direccion , array('disable_row_level_security' => true));
+            if( isset($args['direccion']['indicador']) && $args['direccion']['indicador'] !== "" ){
+                $beanDireccion->indicador = $args['direccion']['indicador'];
+            }
             $beanDireccion->dire_direccion_dire_codigopostaldire_codigopostal_ida = $id_codigo_postal;
             $beanDireccion->dire_direccion_dire_paisdire_pais_ida = $args['direccion']['pais_por_actualizar'];
             $beanDireccion->dire_direccion_dire_estadodire_estado_ida = $args['direccion']['estado_por_actualizar'];
@@ -134,6 +139,48 @@ class GetCambiosRazonDireFiscal extends SugarApi
             array_push($response,"Direccion " .$beanDireccion->id. " actualizada correctamente");
 
         }
+        */
+
+        if( !empty($args['direcciones']) ){
+            
+            $direcciones = $args['direcciones']['json_dire_actualizar'];
+
+            if( count($direcciones) > 0 ){
+                for ($i=0; $i < count($direcciones); $i++) {
+                    $id_direccion = $direcciones[$i]['id'];
+
+                    if( $id_direccion != "" ){
+                        $bean_direccion = BeanFactory::getBean('dire_Direccion', $id_direccion , array('disable_row_level_security' => true));
+
+                    }else{
+                        $bean_direccion = BeanFactory::newBean('dire_Direccion');
+                        $bean_direccion->accounts_dire_direccion_1accounts_ida = $id_cuenta;
+                    }
+
+                    $bean_direccion->indicador = $direcciones[$i]['indicador'];
+                    $tipo_string = "";
+                    if ( !empty($direcciones[$i]['tipodedireccion'] !== "") ) {
+                        $tipo_string .= '^' . $direcciones[$i]['tipodedireccion'][0] . '^';
+                    }
+                    $bean_direccion->tipodedireccion = $tipo_string;
+
+                    $bean_direccion->dire_direccion_dire_codigopostaldire_codigopostal_ida = $direcciones[$i]['postal'];
+                    $bean_direccion->dire_direccion_dire_paisdire_pais_ida = $direcciones[$i]['pais'];
+                    $bean_direccion->dire_direccion_dire_estadodire_estado_ida = $direcciones[$i]['estado'];
+                    $bean_direccion->dire_direccion_dire_municipiodire_municipio_ida = $direcciones[$i]['municipio'];
+                    $bean_direccion->dire_direccion_dire_ciudaddire_ciudad_ida = $direcciones[$i]['ciudad'];
+                    $bean_direccion->dire_direccion_dire_coloniadire_colonia_ida = $direcciones[$i]['colonia'];
+                    $bean_direccion->calle = $direcciones[$i]['calle'];
+                    $bean_direccion->numext = $direcciones[$i]['numext'];
+                    $bean_direccion->numint = $direcciones[$i]['numint'];
+
+                    $bean_direccion->save();
+
+                    array_push($response,"Direccion " .$bean_direccion->id. " actualizada correctamente");
+                }
+            }
+
+        }
 
         if( $beanCuenta == "" || empty($beanCuenta) ){
             $beanCuenta = BeanFactory::getBean('Accounts', $id_cuenta , array('disable_row_level_security' => true));
@@ -143,12 +190,14 @@ class GetCambiosRazonDireFiscal extends SugarApi
         $beanCuenta->cambio_nombre_c = 0;
         $beanCuenta->cambio_dirfiscal_c = 0;
         $beanCuenta->json_audit_c = '';
-        $beanCuenta->enviar_mensaje_c = 0;
+        $beanCuenta->json_direccion_audit_c = '';
+        $beanCuenta->omitir_guardado_direcciones_c = 0;
 
         //Establece valor sobre el campo del usuario que aprobo/rechazó el cambio
         $beanCuenta->user_id9_c = $current_user->id;
         $beanCuenta->usr_aprueba_rechaza_c = $current_user->full_name;
         $beanCuenta->fecha_aprueba_rechaza_c = $date;
+        $beanCuenta->accion_cambio_fiscal_c = "Aprobó";
 
         $beanCuenta->save();
 
@@ -167,6 +216,7 @@ class GetCambiosRazonDireFiscal extends SugarApi
             
             //Al ser rechazados los cambios, las banderas únicamente se actualizan desde bd para evitar pasar por todos los LH
             $this->reestableceBanderasCuenta($id_cuenta);
+            $this->insertAuditAccion($id_cuenta);
 
             array_push($response,"Cambios de Cuenta rechazados");
         }
@@ -182,6 +232,17 @@ class GetCambiosRazonDireFiscal extends SugarApi
             $this->reestableceBanderasDireccion($id_direccion);
 
             array_push($response,"Cambios de Dirección rechazados");
+
+        }
+
+        if( !empty($args['direcciones']) ){
+            $id_cuenta = $args['idCuenta'];
+
+            $this->insertAuditAccion($id_cuenta);
+            $this->insertAuditJSONDirecciones($id_cuenta);
+            $this->reestableceBanderasCuenta($id_cuenta);
+
+            array_push($response,"Cambios de Direcciones rechazados");
 
         }
         
@@ -222,11 +283,43 @@ class GetCambiosRazonDireFiscal extends SugarApi
         global $current_user;
         $date = TimeDate::getInstance()->nowDb();
         
-        $queryUpdateBanderasAccount = "UPDATE accounts_cstm SET valid_cambio_razon_social_c = '0', cambio_nombre_c = '0', cambio_dirfiscal_c = '0', json_audit_c = '', user_id9_c = '{$current_user->id}', fecha_aprueba_rechaza_c ='{$date}' WHERE id_c = '{$id_cuenta}'";
+        $queryUpdateBanderasAccount = "UPDATE accounts_cstm SET valid_cambio_razon_social_c = '0', cambio_nombre_c = '0', cambio_dirfiscal_c = '0', json_audit_c = '', user_id9_c = '{$current_user->id}', fecha_aprueba_rechaza_c ='{$date}', json_direccion_audit_c = '', omitir_guardado_direcciones_c = '0', accion_cambio_fiscal_c = 'Rechazó' WHERE id_c = '{$id_cuenta}'";
         $GLOBALS['log']->fatal("UPDATE BANDERAS DE CUENTA");
         $GLOBALS['log']->fatal($queryUpdateBanderasAccount);
 
         $GLOBALS['db']->query($queryUpdateBanderasAccount);
+    }
+
+    public function insertAuditAccion($id_cuenta){
+
+        global $current_user;
+        $id_user = $current_user->id;
+        $parent_id = $id_cuenta;
+        $id_audit = create_guid();
+        $date = TimeDate::getInstance()->nowDb();
+
+        $insertQueryAudit ="INSERT INTO `accounts_audit` (`id`,`parent_id`,`date_created`,`created_by`,`field_name`,`data_type`,`before_value_string`,`after_value_string`,`before_value_text`,`after_value_text`,`event_id`,`date_updated`) VALUES ('{$id_audit}','{$parent_id}','{$date}','{$id_user}','accion_cambio_fiscal_c','varchar','','Rechazó',NULL,NULL,'',NULL)";
+        
+        $GLOBALS['db']->query($insertQueryAudit);
+
+    }
+
+    public function insertAuditJSONDirecciones($id_cuenta){
+
+        global $current_user;
+        $id_user = $current_user->id;
+        $parent_id = $id_cuenta;
+        $id_audit = create_guid();
+        $date = TimeDate::getInstance()->nowDb();
+
+        $beanCuenta = BeanFactory::getBean('Accounts', $id_cuenta , array('disable_row_level_security' => true));
+
+        $json_direcciones = $beanCuenta->json_direccion_audit_c;
+
+        $insertQueryAudit ="INSERT INTO `accounts_audit` (`id`,`parent_id`,`date_created`,`created_by`,`field_name`,`data_type`,`before_value_string`,`after_value_string`,`before_value_text`,`after_value_text`,`event_id`,`date_updated`) VALUES ('{$id_audit}','{$parent_id}','{$date}','{$id_user}','json_direccion_audit_c','text',NULL,NULL,'{$json_direcciones}','','',NULL)";
+        
+        $GLOBALS['db']->query($insertQueryAudit);
+
     }
 
     public function reestableceBanderasDireccion($id_direccion){
