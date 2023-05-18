@@ -355,6 +355,16 @@ array (
                 'name' => 'fecha_aprueba_rechaza_c',
                 'label' => 'LBL_FECHA_APRUEBA_RECHAZA',
               ),
+              8 => 
+              array (
+                'readonly' => false,
+                'name' => 'json_direccion_audit_c',
+                'studio' => 'visible',
+                'label' => 'LBL_JSON_DIRECCION_AUDIT',
+              ),
+              9 => 
+              array (
+              ),
             ),
           ),
           3 => 
