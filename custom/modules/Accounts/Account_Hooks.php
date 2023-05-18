@@ -2277,7 +2277,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
                     //Valida si tiene dirección fiscal
                     $indicador = $direccion->indicador;
-                    if( in_array($indicador,$indicador_direcciones_fiscales) ){
+                    if( in_array($indicador,$indicador_direcciones_fiscales) && $direccion->inactivo == 0 ){
                         $GLOBALS['log']->fatal( "ES FISCAL");
                         $id = $direccion->id;
                         $cp = $direccion->dire_direccion_dire_codigopostal_name;
@@ -2315,7 +2315,7 @@ where rfc_c = '{$bean->rfc_c}' and
                 $posicion_direccion_fiscal = "";
                 for ($i=0; $i < count($direcciones); $i++) { 
                     //Se busca la fiscal sobre las direcciones por actualizar
-                    if( in_array($direcciones[$i]['indicador'],$indicador_direcciones_fiscales) ){
+                    if( in_array($direcciones[$i]['indicador'],$indicador_direcciones_fiscales) && $direcciones[$i]['inactivo'] == 0){
                         
                         $posicion_direccion_fiscal = $i;
                         //El indice se establece con count para cortar el ciclo for y salir de el
