@@ -162,7 +162,7 @@ SQL;
                 if( ($beanCuenta->tipo_registro_cuenta_c == '3' || $beanCuenta->tipo_registro_cuenta_c == '5') && $beanCuenta->origen_cuenta_c !== '11' && $beanCuenta->subtipo_registro_cuenta_c != '11' ){
     
                     $indicador_direcciones_fiscales = array(2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63);
-                    if( in_array($indicador,$indicador_direcciones_fiscales) ){
+                    if( in_array($indicador,$indicador_direcciones_fiscales) && !$bean->inactivo ){
                         
                         if( $bean->valid_cambio_razon_social_c == 1 ){
                             //Se envía excepción en caso de que el registro se encuentre en proceso de validación
@@ -420,7 +420,7 @@ SQL;
 
         if( $idCuenta !== "" && $idCuenta !== null ){
             $GLOBALS['log']->fatal('Actualiza bandera de la cuenta relacionada');
-            $queryUpdate = "UPDATE accounts_cstm SET enviar_mensaje_c = '1' WHERE id_c = '{$idCuenta}'";
+            $queryUpdate = "UPDATE accounts_cstm SET enviar_mensaje_c = '1', direccion_actualizada_api_c = '1' WHERE id_c = '{$idCuenta}'";
             $GLOBALS['db']->query($queryUpdate);
         }
         
