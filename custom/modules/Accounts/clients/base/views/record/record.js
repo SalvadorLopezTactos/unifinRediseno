@@ -4897,7 +4897,7 @@
         var listMapIndicador = App.lang.getAppListStrings('dir_indicador_map_list');
         var listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
         var idCuenta = this.model.get('id');
-
+        var json_direccion = {};
         //Recupera información
         if (!_.isEmpty(idCuenta) && idCuenta != "") {
             app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_dire_direccion_1'), null, {
@@ -5040,10 +5040,15 @@
                                     cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
 
                                     //Construye JSON para controlar cambio de dirección fiscal
-                                    var json_direccion = {};
+                                    //var json_direccion = {};
                                     if( Number(data['indice']) + 1 == contexto_cuenta.length_direcciones ){
+                                        try {
+                                            json_direccion = JSON.parse(contexto_cuenta.model.get('json_direccion_audit_c'));
+                                        } catch (error) {
+                                            json_direccion = {};
+                                        }
                                         json_direccion['json_dire_actual'] = contexto_cuenta.prev_oDirecciones.prev_direccion;
-                                        json_direccion['json_dire_actualizar'] = cont_dir.oDirecciones.direccion;
+                                        //json_direccion['json_dire_actualizar'] = cont_dir.oDirecciones.direccion;
                                         contexto_cuenta.model.set('json_direccion_audit_c',JSON.stringify(json_direccion));
                                     }
                                     
