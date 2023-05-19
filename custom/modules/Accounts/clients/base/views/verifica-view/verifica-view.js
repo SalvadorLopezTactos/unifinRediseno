@@ -23,27 +23,28 @@
         this._super("initialize", [options]);
         var idCuenta = options.context.get('model').id;
         var json_audit_cuenta = options.context.get('model').attributes.json_audit_c;
-        var json_direcciones = options.context.get('model').attributes.json_direccion_audit_c;
+        var json_direcciones = ( options.context.get('model').attributes.cambio_dirfiscal_c ) ? options.context.get('model').attributes.json_direccion_audit_c : "";
         if( idCuenta !== undefined ){
-            this.getCambiosDetectados(idCuenta,json_audit_cuenta,json_direcciones);
+            this.getCambiosDetectados( idCuenta, json_audit_cuenta, json_direcciones, options.context.get('model').attributes.cambio_dirfiscal_c );
         }
     },
     
-    getCambiosDetectados: function(idCuenta,json_audit_cuenta,json_direcciones_string){
+    getCambiosDetectados: function(idCuenta,json_audit_cuenta,json_direcciones_string, cambioFiscal){
         this.json_audit_cuenta = json_audit_cuenta;
         contextCambios = this;
 
-        if( json_direcciones_string !== "" ){
+        if( this.json_audit_cuenta !== undefined && this.json_audit_cuenta !== "" ){
             //Armando objeto de Cuentas
-            if( this.json_audit_cuenta !== undefined && this.json_audit_cuenta !== "" ){
-                var json_cuenta = JSON.parse(this.json_audit_cuenta);
-                this.json_audit_cuenta = json_cuenta;
-                this.nombrePrevio = json_cuenta.nombre_actual;
-                this.nombreNuevo = json_cuenta.nombre_por_actualizar;
-                this.fechacambioNueva = json_cuenta.fecha_cambio;
-                this.fechacambioPrevia = json_cuenta.fecha_cambio;
-            }
+            var json_cuenta = JSON.parse(this.json_audit_cuenta);
+            this.json_audit_cuenta = json_cuenta;
+            this.nombrePrevio = json_cuenta.nombre_actual;
+            this.nombreNuevo = json_cuenta.nombre_por_actualizar;
+            this.fechacambioNueva = json_cuenta.fecha_cambio;
+            this.fechacambioPrevia = json_cuenta.fecha_cambio;
+        }
 
+        if( json_direcciones_string !== "" && cambioFiscal == 1){
+        
             var json_direcciones = JSON.parse(json_direcciones_string);
             var fiscal_actual = this.getDireFiscal(json_direcciones['json_dire_actual']);
             var nombre_direccion_actual = this.buildFullNameDireccion(fiscal_actual);
@@ -56,13 +57,15 @@
             this.fechacambioNueva = json_direcciones['fecha_cambio'];
             this.fechacambioPrevia =json_direcciones['fecha_cambio'];
 
-            this.usr_aprobo_rechazo = this.model.get('usr_aprueba_rechaza_c');
-            this.id_usr_aprobo_rechazo = this.model.get('user_id9_c');
-            this.fecha_aprobo_rechazo = this.model.get('fecha_aprueba_rechaza_c');
+        }
 
-            this.render();
+        this.usr_aprobo_rechazo = this.model.get('usr_aprueba_rechaza_c');
+        this.id_usr_aprobo_rechazo = this.model.get('user_id9_c');
+        this.fecha_aprobo_rechazo = this.model.get('fecha_aprueba_rechaza_c');
 
-        }else{
+        this.render();
+        /*
+        else{
             //Entra else cuando el cambio de dirección se realice via API
             app.alert.show('getCambios', {
                 level: 'process',
@@ -107,6 +110,7 @@
                     }
                 });
         }
+        */
         
     },
 
