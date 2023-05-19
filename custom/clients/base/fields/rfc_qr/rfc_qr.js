@@ -41,7 +41,7 @@
 	},
 
 	SubirImagen:function () {
-		var input = this.$('input[type=file]');
+		var input = contexto_cuenta.$('input[type=file]');
 		var file = input[0].files[0];
 		var filePath = input[0].value;
 		var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
@@ -51,23 +51,23 @@
 				messages: 'Favor de elegir un archivo',
 				autoClose: true
 			});
-      this.$('#img').src = '';
+      contexto_cuenta.$('#img').src = '';
 		}else if(!allowedExtensions.exec(filePath)){
   		app.alert.show('errorAlert', {
 				level: 'error',
 				messages: 'Tipo de Archivo no compatible',
 				autoClose: true
 			});
-      this.$('#img').src = '';
+      contexto_cuenta.$('#img').src = '';
 		}else{
 			var FR = new FileReader();
 			FR.addEventListener("load", function(e) {
         window.result = e.target.result;
 			});
       setTimeout(function(){
-        self.$('#img').src = window.result;
-        self.$('#img').attr("src",window.result);
-        self.$('#img').show();
+        contexto_cuenta.$('#img').src = window.result;
+        contexto_cuenta.$('#img').attr("src",window.result);
+        contexto_cuenta.$('#img').show();
       }, 100);
 			FR.readAsDataURL(input[0].files[0]);
 		}
@@ -274,9 +274,9 @@
 						var Pais = "MEXICO";
 						if(RFC != undefined){
 							if(RFC.length == 12) Regimen = "Persona Moral";
+              if(Regimen == "Régimen de las Personas Físicas con Actividades Empresariales y Profesionales") Regimen = "Persona Fisica con Actividad Empresarial";
 							if(Regimen != "Persona Fisica con Actividad Empresarial" && RFC.length == 13) Regimen = "Persona Fisica";
 						}
-						if(Regimen == "Régimen de las Personas Físicas con Actividades Empresariales y Profesionales") Regimen = "Persona Fisica con Actividad Empresarial";
 						if(Estado == "MEXICO") Estado = "ESTADO DE MEXICO";
 						if(Regimen == "Persona Moral") {
 							var Denominacion = data[0]["Denominación o Razón Social"]+" "+data[0]["Régimen de capital"];
