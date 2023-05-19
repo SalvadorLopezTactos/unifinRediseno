@@ -843,8 +843,8 @@
 															}
 														}
                             
-                            //Valida tipo de registro
-                            if ( (self.model.get('tipo_registro_cuenta_c') =='3' || self.model.get('tipo_registro_cuenta_c') =='5') && self.model.get('origen_cuenta_c') != '11' ) {
+                            //Valida tipo de registro; (Cliente || Proveedor) && Origen!=Seguros && Subtipo != Venta activo
+                            if ( (self.model.get('tipo_registro_cuenta_c') =='3' || self.model.get('tipo_registro_cuenta_c') =='5') && self.model.get('origen_cuenta_c') != '11' && self.model.get('subtipo_registro_cuenta_c') != '11' ) {
                               if(cambioRazonSocial['cambioDirFiscal'] || cambioRazonSocial['cambioCuenta'] ){
                                   //Abre modal para indicar tipo de cambio
                                   //Restablece valores de custom fieldQR
