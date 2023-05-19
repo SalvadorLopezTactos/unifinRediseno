@@ -152,13 +152,13 @@ SQL;
         $cambio_dirFiscal =  false;
 
         //LH solo se dispara cuando el cambio viene a través de api
-        if( $_SESSION['platform'] !== 'base' ){
+        if( $args['isUpdate'] && $_SESSION['platform'] !== 'base' ){
             $idCuenta = $bean->accounts_dire_direccion_1accounts_ida;
 
             if( $idCuenta != "" ){
                 $beanCuenta = BeanFactory::retrieveBean('Accounts', $idCuenta, array('disable_row_level_security' => true));
     
-                //Notificación solo entra cuando la cuenta es Cliente, Proveedor y No viene de origen Seguros
+                //Notificación solo entra cuando la cuenta es Cliente, Proveedor y No viene de origen Seguros ni venta activo
                 if( ($beanCuenta->tipo_registro_cuenta_c == '3' || $beanCuenta->tipo_registro_cuenta_c == '5') && $beanCuenta->origen_cuenta_c !== '11' && $beanCuenta->subtipo_registro_cuenta_c != '11' ){
     
                     $indicador_direcciones_fiscales = array(2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63);
