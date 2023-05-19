@@ -111,7 +111,7 @@
         "wikimedia/less.php": "^1.8.2",
         "parsecsv/php-parsecsv": "^1.2",
         "php": "^7.3",
-        "phpmailer/phpmailer" : "v5.2.22",
+        "phpmailer/phpmailer" : "v6.5.0",
         "psr/log": "1.1.0",
         "psr/simple-cache": "^1.0",
         "ramsey/uuid": "3.8.0",
