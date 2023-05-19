@@ -1986,7 +1986,7 @@ where rfc_c = '{$bean->rfc_c}' and
             }
 
         }else{
-            if( !empty($bean->rfc_c) && ($bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' ) && $bean->origen_cuenta_c !== '11' ){
+            if( !empty($bean->rfc_c) && ($bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' ) && $bean->origen_cuenta_c !== '11' && $bean->subtipo_registro_cuenta_c != '11' ){
 
                 if( $bean->fetched_row['rfc_c'] == $bean->rfc_c ){
                     $text_cambios .= '<ul>';
