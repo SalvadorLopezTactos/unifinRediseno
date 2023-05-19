@@ -121,7 +121,7 @@
             var indicadores_fiscales = [2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63];
             for (let index = 0; index < json_direcciones.length; index++) {
                 
-                if( indicadores_fiscales.includes( Number(json_direcciones[index]['indicador']) ) ){
+                if( indicadores_fiscales.includes( Number(json_direcciones[index]['indicador']) ) && json_direcciones[index]['inactivo'] == 0 ){
                     
                     dire_fiscal = json_direcciones[index];
                     //Index se establece con el indice para salir del ciclo
