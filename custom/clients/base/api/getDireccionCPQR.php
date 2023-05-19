@@ -81,11 +81,11 @@ class getDireccionCPQR extends SugarApi
             $aux = array( 'estados'=> $arrin);
             $arr_estado = $aux;
             $estado_id = isset($arr_estado['estados'][$auxindex]['idEstado']) ? intval(substr($arr_estado['estados'][$auxindex]['idEstado'],-3)) : 0 ;
+            $arr_estado['estados'][0] = $arr_estado['estados'][$auxindex];
+            if($auxindex != 0) unset($arr_estado['estados'][$auxindex]);
+            unset($resultado['estados']);
+            $resultado = array_replace($resultado, $arr_estado);        
         }
-        $arr_estado['estados'][0] = $arr_estado['estados'][$auxindex];
-        if($auxindex != 0) unset($arr_estado['estados'][$auxindex]);
-        unset($resultado['estados']);
-        $resultado = array_replace($resultado, $arr_estado);        
         
         //$auxindex = array_search($ciudad_QR,$arr_municipio,false);
         $auxindex = $this->searchForId($ciudad_QR, $arr_municipio,'nameMunicipio');
