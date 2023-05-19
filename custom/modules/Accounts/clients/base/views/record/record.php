@@ -364,6 +364,9 @@ array (
               ),
               9 => 
               array (
+                'readonly' => false,
+                'name' => 'direccion_actualizada_api_c',
+                'label' => 'LBL_DIRECCION_ACTUALIZADA_API',
               ),
             ),
           ),
