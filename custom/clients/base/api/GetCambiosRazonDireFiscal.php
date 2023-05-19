@@ -76,12 +76,10 @@ class GetCambiosRazonDireFiscal extends SugarApi
         $response = array();
         $date = TimeDate::getInstance()->nowDb();
         $id_cuenta = $args['idCuenta'];
-        $beanCuenta = "";   
+        $beanCuenta = BeanFactory::getBean('Accounts', $id_cuenta , array('disable_row_level_security' => true));
+        
         if( !empty($args['cuenta']) ){
-            //Obtiene bean de cuenta para actualizar valores
-            $id_cuenta = $args['cuenta']['id_cuenta'];
-            $beanCuenta = BeanFactory::getBean('Accounts', $id_cuenta , array('disable_row_level_security' => true));
-
+        
             if( !empty($beanCuenta) ){
 
                 if( $args['cuenta']['tipo'] !== 'Persona Moral' ){
@@ -100,7 +98,7 @@ class GetCambiosRazonDireFiscal extends SugarApi
             }
         }
 
-        /*
+        
         if( !empty($args['direccion']) ){
             $id_direccion = $args['direccion']['id_direccion'];
             if( $id_cuenta == "" ){
@@ -139,9 +137,8 @@ class GetCambiosRazonDireFiscal extends SugarApi
             array_push($response,"Direccion " .$beanDireccion->id. " actualizada correctamente");
 
         }
-        */
 
-        if( !empty($args['direcciones']) ){
+        if( !empty($args['direcciones']) && $beanCuenta->cambio_dirfiscal_c == 1 ){
             
             $direcciones = $args['direcciones']['json_dire_actualizar'];
 
@@ -192,6 +189,7 @@ class GetCambiosRazonDireFiscal extends SugarApi
         $beanCuenta->json_audit_c = '';
         $beanCuenta->json_direccion_audit_c = '';
         $beanCuenta->omitir_guardado_direcciones_c = 0;
+        $beanCuenta->direccion_actualizada_api_c = 0;
 
         //Establece valor sobre el campo del usuario que aprobo/rechazó el cambio
         $beanCuenta->user_id9_c = $current_user->id;
@@ -283,7 +281,7 @@ class GetCambiosRazonDireFiscal extends SugarApi
         global $current_user;
         $date = TimeDate::getInstance()->nowDb();
         
-        $queryUpdateBanderasAccount = "UPDATE accounts_cstm SET valid_cambio_razon_social_c = '0', cambio_nombre_c = '0', cambio_dirfiscal_c = '0', json_audit_c = '', user_id9_c = '{$current_user->id}', fecha_aprueba_rechaza_c ='{$date}', json_direccion_audit_c = '', omitir_guardado_direcciones_c = '0', accion_cambio_fiscal_c = 'Rechazó' WHERE id_c = '{$id_cuenta}'";
+        $queryUpdateBanderasAccount = "UPDATE accounts_cstm SET valid_cambio_razon_social_c = '0', cambio_nombre_c = '0', cambio_dirfiscal_c = '0', json_audit_c = '', user_id9_c = '{$current_user->id}', fecha_aprueba_rechaza_c ='{$date}', json_direccion_audit_c = '', omitir_guardado_direcciones_c = '0', accion_cambio_fiscal_c = 'Rechazó', direccion_actualizada_api_c = '0' WHERE id_c = '{$id_cuenta}'";
         $GLOBALS['log']->fatal("UPDATE BANDERAS DE CUENTA");
         $GLOBALS['log']->fatal($queryUpdateBanderasAccount);
 

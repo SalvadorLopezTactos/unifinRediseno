@@ -55,7 +55,7 @@ function job_envio_notificacion_razon_social()
                             
                             //Valida si tiene dirección fiscal
                             $indicador = $direccion->indicador;
-                            if( in_array($indicador,$indicador_direcciones_fiscales) ){
+                            if( in_array($indicador,$indicador_direcciones_fiscales) && !$direccion->inactivo ){
                                 $GLOBALS['log']->fatal("La dirección fiscal encontrada es: ".$direccion->id);   
                                 
                                 $idDireccion = $direccion->id;
