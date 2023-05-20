@@ -152,13 +152,13 @@
 
 	validarServicioQR:function () {
 		var contextol = this;
-		var input = this.$('input[type=file]');
+		var input = contexto_cuenta.$('input[type=file]');
 		var file = input[0].files[0];
 		var c = document.createElement("canvas");
 		var ctx = c.getContext('2d');
 		var imgn = new Image;
 		var imageData = '';
-    if(self.model.attributes.valid_cambio_razon_social_c){
+    if(contexto_cuenta.model.attributes.valid_cambio_razon_social_c){
       app.alert.show('errorAlertCambio', {
         level: 'error',
         messages: 'Está cuenta se encuentra en validación de cambios y no puede ser modificada por QR',
@@ -166,7 +166,7 @@
       });
       return;
     }
-		if(self.picturecam == false){
+		if(contexto_cuenta.picturecam == false){
 			if(file=="" || file==undefined){
 				app.alert.show('errorAlert', {
 					level: 'error',
@@ -176,7 +176,7 @@
 			}else{
 				var FR= new FileReader();
 				FR.readAsDataURL( input[0].files[0] );
-				imgn.src = URL.createObjectURL(this.$('#btnSubir')[0].files[0]);
+				imgn.src = URL.createObjectURL(contexto_cuenta.$('#btnSubir')[0].files[0]);
 			}
 		}else{
 			var elemento = this.$('#canvas')[0];
@@ -188,17 +188,17 @@
 			level: 'process',
 			title: 'Cargando...'
 			});
-			self.$('#activar_camara').addClass('disabled');
-			self.$('#activar_camara').attr('style', 'pointer-events:none;');
-			self.$('#archivo_qr').addClass('disabled');
-			self.$('#archivo_qr').attr('style', 'pointer-events:none;');
-			self.$('#btnSubir').addClass('disabled');
-			self.$('#btnSubir').attr('style', 'pointer-events:none;margin:10px');
-			self.$('#validar_QR').addClass('disabled');
-			self.$('#validar_QR').attr('style', 'pointer-events:none;margin:10px');
-			self.$('#btn_Cancelar').addClass('disabled');
-			self.$('#btn_Cancelar').attr('style', 'pointer-events:none;margin:10px');
-			var vid = self.$('#video');
+			contexto_cuenta.$('#activar_camara').addClass('disabled');
+			contexto_cuenta.$('#activar_camara').attr('style', 'pointer-events:none;');
+			contexto_cuenta.$('#archivo_qr').addClass('disabled');
+			contexto_cuenta.$('#archivo_qr').attr('style', 'pointer-events:none;');
+			contexto_cuenta.$('#btnSubir').addClass('disabled');
+			contexto_cuenta.$('#btnSubir').attr('style', 'pointer-events:none;margin:10px');
+			contexto_cuenta.$('#validar_QR').addClass('disabled');
+			contexto_cuenta.$('#validar_QR').attr('style', 'pointer-events:none;margin:10px');
+			contexto_cuenta.$('#btn_Cancelar').addClass('disabled');
+			contexto_cuenta.$('#btn_Cancelar').attr('style', 'pointer-events:none;margin:10px');
+			var vid = contexto_cuenta.$('#video');
 			c.width = imgn.width;
 			c.height = imgn.height;
 			ctx.drawImage(imgn,0,0)
@@ -223,16 +223,16 @@
 							level: 'error',
 							messages: Error,
 						});
-						self.$('#activar_camara').removeClass('disabled');
-						self.$('#activar_camara').attr('style', '');
-						self.$('#archivo_qr').removeClass('disabled');
-						self.$('#archivo_qr').attr('style', '');
-						self.$('#btnSubir').removeClass('disabled');
-						self.$('#btnSubir').attr('style', 'margin:10px');
-						self.$('#validar_QR').removeClass('disabled');
-						self.$('#validar_QR').attr('style', 'margin:10px');
-						self.$('#btn_Cancelar').removeClass('disabled');
-						self.$('#btn_Cancelar').attr('style', 'margin:10px');
+						contexto_cuenta.$('#activar_camara').removeClass('disabled');
+						contexto_cuenta.$('#activar_camara').attr('style', '');
+						contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+						contexto_cuenta.$('#archivo_qr').attr('style', '');
+						contexto_cuenta.$('#btnSubir').removeClass('disabled');
+						contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+						contexto_cuenta.$('#validar_QR').removeClass('disabled');
+						contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+						contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+						contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
 					}else {
 						var indice_indicador = 0;
 						var Completo = '';
@@ -305,20 +305,20 @@
 										level: 'error',
 										messages: "Ya existe la cuenta "+data.records[0].name,
 									});
-									self.$('#activar_camara').removeClass('disabled');
-									self.$('#activar_camara').attr('style', '');
-									self.$('#archivo_qr').removeClass('disabled');
-									self.$('#archivo_qr').attr('style', '');
-									self.$('#btnSubir').removeClass('disabled');
-									self.$('#btnSubir').attr('style', 'margin:10px');
-									self.$('#validar_QR').removeClass('disabled');
-									self.$('#validar_QR').attr('style', 'margin:10px');
-									self.$('#btn_Cancelar').removeClass('disabled');
-									self.$('#btn_Cancelar').attr('style', 'margin:10px');
+									contexto_cuenta.$('#activar_camara').removeClass('disabled');
+									contexto_cuenta.$('#activar_camara').attr('style', '');
+									contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+									contexto_cuenta.$('#archivo_qr').attr('style', '');
+									contexto_cuenta.$('#btnSubir').removeClass('disabled');
+									contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+									contexto_cuenta.$('#validar_QR').removeClass('disabled');
+									contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+									contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+									contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
 								}else {
 									// Valida Regimen
 									var verdad = false;
-									if(Regimen != self.model.get('tipodepersona_c') && self.model.get('id')) {
+									if(Regimen != contexto_cuenta.model.get('tipodepersona_c') && contexto_cuenta.model.get('id')) {
 										if(!Regimen.includes("Persona Fisica") || !self.model.get('tipodepersona_c').includes("Persona Fisica")) verdad = true;
 									}
 									if(verdad) {
@@ -327,16 +327,16 @@
 											level: 'error',
 											messages: "El Regimen encontrado con el QR es diferente al de la cuenta",
 										});
-										self.$('#activar_camara').removeClass('disabled');
-										self.$('#activar_camara').attr('style', '');
-										self.$('#archivo_qr').removeClass('disabled');
-										self.$('#archivo_qr').attr('style', '');
-										self.$('#btnSubir').removeClass('disabled');
-										self.$('#btnSubir').attr('style', 'margin:10px');
-										self.$('#validar_QR').removeClass('disabled');
-										self.$('#validar_QR').attr('style', 'margin:10px');
-										self.$('#btn_Cancelar').removeClass('disabled');
-										self.$('#btn_Cancelar').attr('style', 'margin:10px');
+										contexto_cuenta.$('#activar_camara').removeClass('disabled');
+										contexto_cuenta.$('#activar_camara').attr('style', '');
+										contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+										contexto_cuenta.$('#archivo_qr').attr('style', '');
+										contexto_cuenta.$('#btnSubir').removeClass('disabled');
+										contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+										contexto_cuenta.$('#validar_QR').removeClass('disabled');
+										contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+										contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+										contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
 									}else {
 										app.alert.show('errorAlert2', {
 											level:
@@ -344,45 +344,45 @@
 											messages: "La información recuperada con el QR proporcionado corresponde a: "+Completo+" ¿Desea proceder con estos datos?",
 											autoClose: false,
 											onCancel: function(){
-												self.$('#activar_camara').removeClass('disabled');
-												self.$('#activar_camara').attr('style', '');
-												self.$('#archivo_qr').removeClass('disabled');
-												self.$('#archivo_qr').attr('style', '');
-												self.$('#btnSubir').removeClass('disabled');
-												self.$('#btnSubir').attr('style', 'margin:10px');
-												self.$('#validar_QR').removeClass('disabled');
-												self.$('#validar_QR').attr('style', 'margin:10px');
-												self.$('#btn_Cancelar').removeClass('disabled');
-												self.$('#btn_Cancelar').attr('style', 'margin:10px');
+												contexto_cuenta.$('#activar_camara').removeClass('disabled');
+												contexto_cuenta.$('#activar_camara').attr('style', '');
+												contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+												contexto_cuenta.$('#archivo_qr').attr('style', '');
+												contexto_cuenta.$('#btnSubir').removeClass('disabled');
+												contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+												contexto_cuenta.$('#validar_QR').removeClass('disabled');
+												contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+												contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+												contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
 											},
 											onConfirm: function() {
                         // Actualiza Datos Personales
-												self.model.set('tipodepersona_c', Regimen);
-												self.model.set('rfc_c', RFC);
-												self.model.set('path_img_qr_c', PathQR);
+												contexto_cuenta.model.set('tipodepersona_c', Regimen);
+												contexto_cuenta.model.set('rfc_c', RFC);
+												contexto_cuenta.model.set('path_img_qr_c', PathQR);
                         cambioRazonSocial['cambioCuenta'] = false;
                         cambioRazonSocial['Cuenta'] = [];
-                        cambioRazonSocial['Cuenta']['razonsocial_c'] = self.model.get('razonsocial_c') ;
-                        cambioRazonSocial['Cuenta']['primernombre_c'] = self.model.get('primernombre_c') ;
-                        cambioRazonSocial['Cuenta']['apellidopaterno_c'] = self.model.get('apellidopaterno_c') ;
-                        cambioRazonSocial['Cuenta']['apellidomaterno_c'] = self.model.get('apellidomaterno_c') ;
-                        cambioRazonSocial['Direccion'] = app.utils.deepCopy(self.prev_oDirecciones.prev_direccion);
+                        cambioRazonSocial['Cuenta']['razonsocial_c'] = contexto_cuenta.model.get('razonsocial_c') ;
+                        cambioRazonSocial['Cuenta']['primernombre_c'] = contexto_cuenta.model.get('primernombre_c') ;
+                        cambioRazonSocial['Cuenta']['apellidopaterno_c'] = contexto_cuenta.model.get('apellidopaterno_c') ;
+                        cambioRazonSocial['Cuenta']['apellidomaterno_c'] = contexto_cuenta.model.get('apellidomaterno_c') ;
+                        cambioRazonSocial['Direccion'] = app.utils.deepCopy(contexto_cuenta.prev_oDirecciones.prev_direccion);
                         
 												if(Regimen == "Persona Moral") {
                           //Valida cambios
                           cambioRazonSocial['cambioCuenta'] = self.model.get('razonsocial_c') != Denominacion ? true : cambioRazonSocial['cambioCuenta'];
-													self.model.set('razonsocial_c', Denominacion);
-													self.model.set('nombre_comercial_c', Denominacion);
-													self.model.set('fechaconstitutiva_c', Constitucion);
+													contexto_cuenta.model.set('razonsocial_c', Denominacion);
+													contexto_cuenta.model.set('nombre_comercial_c', Denominacion);
+													contexto_cuenta.model.set('fechaconstitutiva_c', Constitucion);
 												}else {
                           cambioRazonSocial['cambioCuenta'] = self.model.get('primernombre_c') != Nombre ? true : cambioRazonSocial['cambioCuenta'];
                           cambioRazonSocial['cambioCuenta'] = self.model.get('apellidopaterno_c') != Paterno ? true : cambioRazonSocial['cambioCuenta'];
                           cambioRazonSocial['cambioCuenta'] = self.model.get('apellidomaterno_c') != Materno ? true : cambioRazonSocial['cambioCuenta'];
-													self.model.set('primernombre_c', Nombre);
-													self.model.set('apellidopaterno_c', Paterno);
-													self.model.set('apellidomaterno_c', Materno);
-													self.model.set('fechadenacimiento_c', Nacimiento);
-													self.model.set('curp_c', CURP);
+													contexto_cuenta.model.set('primernombre_c', Nombre);
+													contexto_cuenta.model.set('apellidopaterno_c', Paterno);
+													contexto_cuenta.model.set('apellidomaterno_c', Materno);
+													contexto_cuenta.model.set('fechadenacimiento_c', Nacimiento);
+													contexto_cuenta.model.set('curp_c', CURP);
 												}
 												//self.model.set('email1', Correo);
 												var arrcorreos = [];
@@ -499,17 +499,17 @@
 														cont_dir.oDirecciones.direccion = direccion;
 														cont_dir.render();
 														cDuplicado++;
-														self.$('#activar_camara').removeClass('disabled');
-														self.$('#activar_camara').attr('style', '');
-														self.$('#archivo_qr').removeClass('disabled');
-														self.$('#archivo_qr').attr('style', '');
-														self.$('#btnSubir').removeClass('disabled');
-														self.$('#btnSubir').attr('style', 'margin:10px');
-														self.$('#validar_QR').removeClass('disabled');
-														self.$('#validar_QR').attr('style', 'margin:10px');
-														self.$('#btn_Cancelar').removeClass('disabled');
-														self.$('#btn_Cancelar').attr('style', 'margin:10px');
-														self.$('#rfcModal').hide();
+														contexto_cuenta.$('#activar_camara').removeClass('disabled');
+														contexto_cuenta.$('#activar_camara').attr('style', '');
+														contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+														contexto_cuenta.$('#archivo_qr').attr('style', '');
+														contexto_cuenta.$('#btnSubir').removeClass('disabled');
+														contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+														contexto_cuenta.$('#validar_QR').removeClass('disabled');
+														contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+														contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+														contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
+														contexto_cuenta.$('#rfcModal').hide();
 														cont_dir.render();
 													}
 												});
@@ -699,17 +699,17 @@
   																level: 'info',
   																messages: 'Se han actualizado los datos de dirección fiscal'
   															  });
-  															  self.$('#activar_camara').removeClass('disabled');
-  															  self.$('#activar_camara').attr('style', '');
-  															  self.$('#archivo_qr').removeClass('disabled');
-  															  self.$('#archivo_qr').attr('style', '');
-  															  self.$('#btnSubir').removeClass('disabled');
-  															  self.$('#btnSubir').attr('style', 'margin:10px');
-  															  self.$('#validar_QR').removeClass('disabled');
-  															  self.$('#validar_QR').attr('style', 'margin:10px');
-  															  self.$('#btn_Cancelar').removeClass('disabled');
-  															  self.$('#btn_Cancelar').attr('style', 'margin:10px');
-  															  self.$('#rfcModal').hide();
+  															  contexto_cuenta.$('#activar_camara').removeClass('disabled');
+  															  contexto_cuenta.$('#activar_camara').attr('style', '');
+  															  contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+  															  contexto_cuenta.$('#archivo_qr').attr('style', '');
+  															  contexto_cuenta.$('#btnSubir').removeClass('disabled');
+  															  contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+  															  contexto_cuenta.$('#validar_QR').removeClass('disabled');
+  															  contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+  															  contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+  															  contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
+  															  contexto_cuenta.$('#rfcModal').hide();
   															  if(contexto_cuenta.cambio_previo_mail == '1'){
 																contexto_cuenta.cambio_previo_mail = '1';
   															  }else{
@@ -807,19 +807,19 @@
 																	cont_dir.oDirecciones.direccion.push(nuevaDireccion);
 																	cont_dir.render();
 																	app.alert.dismiss('procesando');
-																	self.$('#activar_camara').removeClass('disabled');
-																	self.$('#activar_camara').attr('style', '');
-																	self.$('#archivo_qr').removeClass('disabled');
-																	self.$('#archivo_qr').attr('style', '');
-																	self.$('#btnSubir').removeClass('disabled');
-																	self.$('#btnSubir').attr('style', 'margin:10px');
-																	self.$('#validar_QR').removeClass('disabled');
-																	self.$('#validar_QR').attr('style', 'margin:10px');
-																	self.$('#btn_Cancelar').removeClass('disabled');
-																	self.$('#btn_Cancelar').attr('style', 'margin:10px');
-																	self.$('#rfcModal').hide();
+																	contexto_cuenta.$('#activar_camara').removeClass('disabled');
+																	contexto_cuenta.$('#activar_camara').attr('style', '');
+																	contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+																	contexto_cuenta.$('#archivo_qr').attr('style', '');
+																	contexto_cuenta.$('#btnSubir').removeClass('disabled');
+																	contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+																	contexto_cuenta.$('#validar_QR').removeClass('disabled');
+																	contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+																	contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+																	contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
+																	contexto_cuenta.$('#rfcModal').hide();
 																	contexto_cuenta.cambio_previo_mail = '5';
-																	//self.render();
+																	//contexto_cuenta.render();
 																} else {
 																	cont_dir.render();
 																	//app.alert.dismiss('procesando');
@@ -827,38 +827,38 @@
 																		level: 'info',
 																		messages: 'Se agrego tipo fiscal a una dirección existente'
 																	});
-																	self.$('#activar_camara').removeClass('disabled');
-																	self.$('#activar_camara').attr('style', '');
-																	self.$('#archivo_qr').removeClass('disabled');
-																	self.$('#archivo_qr').attr('style', '');
-																	self.$('#btnSubir').removeClass('disabled');
-																	self.$('#btnSubir').attr('style', 'margin:10px');
-																	self.$('#validar_QR').removeClass('disabled');
-																	self.$('#validar_QR').attr('style', 'margin:10px');
-																	self.$('#btn_Cancelar').removeClass('disabled');
-																	self.$('#btn_Cancelar').attr('style', 'margin:10px');
-																	self.$('#rfcModal').hide();
-																	//self.render();
+																	contexto_cuenta.$('#activar_camara').removeClass('disabled');
+																	contexto_cuenta.$('#activar_camara').attr('style', '');
+																	contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+																	contexto_cuenta.$('#archivo_qr').attr('style', '');
+																	contexto_cuenta.$('#btnSubir').removeClass('disabled');
+																	contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+																	contexto_cuenta.$('#validar_QR').removeClass('disabled');
+																	contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+																	contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+																	contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
+																	contexto_cuenta.$('#rfcModal').hide();
+																	//contexto_cuenta.render();
 																}
 															}
 														}
                             
                             //Valida tipo de registro; (Cliente || Proveedor) && Origen!=Seguros && Subtipo != Venta activo
-                            if ( (self.model.get('tipo_registro_cuenta_c') =='3' || self.model.get('tipo_registro_cuenta_c') =='5') && self.model.get('origen_cuenta_c') != '11' && self.model.get('subtipo_registro_cuenta_c') != '11' ) {
+                            if ( (contexto_cuenta.model.get('tipo_registro_cuenta_c') =='3' || contexto_cuenta.model.get('tipo_registro_cuenta_c') =='5') && contexto_cuenta.model.get('origen_cuenta_c') != '11' && contexto_cuenta.model.get('subtipo_registro_cuenta_c') != '11' ) {
                               if(cambioRazonSocial['cambioDirFiscal'] || cambioRazonSocial['cambioCuenta'] ){
                                   //Abre modal para indicar tipo de cambio
                                   //Restablece valores de custom fieldQR
-                                  self.$('#activar_camara').removeClass('disabled');
-																	self.$('#activar_camara').attr('style', '');
-																	self.$('#archivo_qr').removeClass('disabled');
-																	self.$('#archivo_qr').attr('style', '');
-																	self.$('#btnSubir').removeClass('disabled');
-																	self.$('#btnSubir').attr('style', 'margin:10px');
-																	self.$('#validar_QR').removeClass('disabled');
-																	self.$('#validar_QR').attr('style', 'margin:10px');
-																	self.$('#btn_Cancelar').removeClass('disabled');
-																	self.$('#btn_Cancelar').attr('style', 'margin:10px');
-																	//self.$('#rfcModal').hide();
+                                  contexto_cuenta.$('#activar_camara').removeClass('disabled');
+																	contexto_cuenta.$('#activar_camara').attr('style', '');
+																	contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+																	contexto_cuenta.$('#archivo_qr').attr('style', '');
+																	contexto_cuenta.$('#btnSubir').removeClass('disabled');
+																	contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+																	contexto_cuenta.$('#validar_QR').removeClass('disabled');
+																	contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+																	contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+																	contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
+																	//contexto_cuenta.$('#rfcModal').hide();
           											
                                   //Muestra modal cambios
                                   $('#cambioRazonSocial').show();
@@ -895,19 +895,19 @@
 	},
 
   cargarArchivo: function() {
-    this.$('#carga').show();
-    this.$('#div_video').hide();
-    self.picturecam = false;
+    contexto_cuenta.$('#carga').show();
+    contexto_cuenta.$('#div_video').hide();
+    contexto_cuenta.picturecam = false;
   },
 
   btn_rfc_qr: function() {
-    this.$('#rfcModal').show();
+    contexto_cuenta.$('#rfcModal').show();
   },
 
   cancelar: function() {
-    this.$('#rfcModal').hide();
-	  self.picturecam = false;
-	  self.$('#rfcModal').hide();
+    contexto_cuenta.$('#rfcModal').hide();
+	  contexto_cuenta.picturecam = false;
+	  contexto_cuenta.$('#rfcModal').hide();
   },
 
   _limpiezaDatos: function(cadena){
@@ -952,27 +952,27 @@
     
     closeModalRazonSocial:function(){
         //Restablece valores de custom fieldQR
-        self.$('#activar_camara').removeClass('disabled');
-        self.$('#activar_camara').attr('style', '');
-        self.$('#archivo_qr').removeClass('disabled');
-        self.$('#archivo_qr').attr('style', '');
-        self.$('#btnSubir').removeClass('disabled');
-        self.$('#btnSubir').attr('style', 'margin:10px');
-        self.$('#validar_QR').removeClass('disabled');
-        self.$('#validar_QR').attr('style', 'margin:10px');
-        self.$('#btn_Cancelar').removeClass('disabled');
-        self.$('#btn_Cancelar').attr('style', 'margin:10px');
+        contexto_cuenta.$('#activar_camara').removeClass('disabled');
+        contexto_cuenta.$('#activar_camara').attr('style', '');
+        contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+        contexto_cuenta.$('#archivo_qr').attr('style', '');
+        contexto_cuenta.$('#btnSubir').removeClass('disabled');
+        contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+        contexto_cuenta.$('#validar_QR').removeClass('disabled');
+        contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+        contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+        contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
         //Cierra modal
         $('#cambioRazonSocial').hide();
         //Aplica rollback
         if(cambioRazonSocial['cambioCuenta']){
-            if(self.model.get('tipodepersona_c') == "Persona Moral") {
-              self.model.set('razonsocial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
-              self.model.set('nombre_comercial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
+            if(contexto_cuenta.model.get('tipodepersona_c') == "Persona Moral") {
+              contexto_cuenta.model.set('razonsocial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
+              contexto_cuenta.model.set('nombre_comercial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
             }else {
-              self.model.set('primernombre_c', cambioRazonSocial['Cuenta']['primernombre_c']);
-              self.model.set('apellidopaterno_c', cambioRazonSocial['Cuenta']['apellidopaterno_c']);
-              self.model.set('apellidomaterno_c', cambioRazonSocial['Cuenta']['apellidomaterno_c']);
+              contexto_cuenta.model.set('primernombre_c', cambioRazonSocial['Cuenta']['primernombre_c']);
+              contexto_cuenta.model.set('apellidopaterno_c', cambioRazonSocial['Cuenta']['apellidopaterno_c']);
+              contexto_cuenta.model.set('apellidomaterno_c', cambioRazonSocial['Cuenta']['apellidomaterno_c']);
             }
         }
         cont_dir.oDirecciones.direccion = cambioRazonSocial['Direccion'];
@@ -1046,13 +1046,13 @@
         //Cierra modal
         $('#cambioRazonSocial').hide();
         $('#rfcModal').hide();
-        if(self.model.get('tipodepersona_c') == "Persona Moral") {
-          self.model.set('razonsocial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
-          self.model.set('nombre_comercial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
+        if(contexto_cuenta.model.get('tipodepersona_c') == "Persona Moral") {
+          contexto_cuenta.model.set('razonsocial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
+          contexto_cuenta.model.set('nombre_comercial_c', cambioRazonSocial['Cuenta']['razonsocial_c']);
         }else {
-          self.model.set('primernombre_c', cambioRazonSocial['Cuenta']['primernombre_c']);
-          self.model.set('apellidopaterno_c', cambioRazonSocial['Cuenta']['apellidopaterno_c']);
-          self.model.set('apellidomaterno_c', cambioRazonSocial['Cuenta']['apellidomaterno_c']);
+          contexto_cuenta.model.set('primernombre_c', cambioRazonSocial['Cuenta']['primernombre_c']);
+          contexto_cuenta.model.set('apellidopaterno_c', cambioRazonSocial['Cuenta']['apellidopaterno_c']);
+          contexto_cuenta.model.set('apellidomaterno_c', cambioRazonSocial['Cuenta']['apellidomaterno_c']);
         }
         var model=App.data.createBean('Cases');
         model.set('account_id', self.model.get('id'));
@@ -1159,7 +1159,7 @@
     getUserInfo:function(){
         if(App.user.attributes.cac_c){
             try {
-              app.api.call("read", app.api.buildURL("getAsignadoCaso/"+ self.model.attributes.id), null, {
+              app.api.call("read", app.api.buildURL("getAsignadoCaso/"+ contexto_cuenta.model.attributes.id), null, {
                   success: _.bind(function (data) {
                       if (data) {
                           infoUser['id'] = data['id'];
