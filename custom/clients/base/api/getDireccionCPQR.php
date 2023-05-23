@@ -106,8 +106,13 @@ class getDireccionCPQR extends SugarApi
         if(!$colonia_existe)
         {
             $result=$this->insertColonia($pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
-            //$GLOBALS['log']->fatal('insertColonia',$pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
-            $resultado = $this->getAddressByCPQR($api, $args);
+
+            if( $result['resultCode'] == 0 ){
+
+                //$GLOBALS['log']->fatal('insertColonia',$pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
+                $resultado = $this->getAddressByCPQR($api, $args);
+
+            }
         }
 
         return $resultado;
@@ -158,7 +163,8 @@ class getDireccionCPQR extends SugarApi
         curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
 
         try {
-            $response = curl_exec($curl);
+            $result = curl_exec($curl);
+            $response = json_decode($result, true);
             $GLOBALS['log']->fatal("respuesta servicio colonia\n" . $response);
             curl_close($curl);
         } catch (Exception $ex) {
