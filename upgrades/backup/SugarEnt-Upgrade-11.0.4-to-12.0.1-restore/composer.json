@@ -118,7 +118,7 @@
         "ruflin/elastica" : "^7.0.0",
         "aws/aws-sdk-php": "3.55.3",
         "sugarcrm/identity-provider": "2.0.0",
-        "guzzlehttp/guzzle": "6.3.3",
+        "guzzlehttp/guzzle": "6.5.8",
         "symfony/cache": "v3.4.16",
         "symfony/console": "v3.4.16",
         "symfony/framework-bundle": "v3.4.16",
