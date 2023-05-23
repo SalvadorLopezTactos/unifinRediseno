@@ -7,7 +7,7 @@
 		var moduleList = app.metadata.getModuleNames({filter: 'display_tab', access: 'read'});
 		
 		
-        moduleList.push('Expediente');
+        //moduleList.push('Expediente');
         moduleList.push('ExpedienteUniclick');
         moduleList.splice(8, 0, 'Quantico');
         moduleList.push('CotizadorProspectos');
