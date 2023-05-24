@@ -3664,6 +3664,13 @@
             } else {
                 this.$('.postalInputTempExisting').eq(iDireccion).css('border-color', '');
             }
+            //Colonia
+            if (direccion[iDireccion].colonia == "") {
+                cont++;
+                this.$('.coloniaExisting .select2-choice').eq(iDireccion).css('border-color', 'red');
+            } else {
+                this.$('.coloniaExisting .select2-choice').eq(iDireccion).css('border-color', '');
+            }
             //Calle
             if (direccion[iDireccion].calle.trim() == "") {
                 cont++;

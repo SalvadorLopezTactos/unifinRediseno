@@ -60,6 +60,11 @@ class getDireccionCPQR extends SugarApi
             $aux = array( 'colonias'=> $arrin);
             $arr_colonias = $aux;
             $colonia_existe = true;
+
+            unset($resultado['colonias']);
+            $arr_colonias['colonias'][0] = $arr_colonias['colonias'][$auxindex];
+            if($auxindex != 0) unset($arr_colonias['colonias'][$auxindex]);
+            $resultado = array_replace($resultado, $arr_colonias);
         }
         /*else{
             foreach ($arr_colonias as $colonia) {
@@ -67,11 +72,7 @@ class getDireccionCPQR extends SugarApi
                     $colonia_existe = true;
                 }
             }  
-        } */       
-        unset($resultado['colonias']);
-        $arr_colonias['colonias'][0] = $arr_colonias['colonias'][$auxindex];
-        if($auxindex != 0) unset($arr_colonias['colonias'][$auxindex]);
-        $resultado = array_replace($resultado, $arr_colonias);
+        } */
         
         //$auxindex = array_search($estado_QR,$arr_estado,false);
         $auxindex = $this->searchForId($estado_QR, $arr_estado,'nameEstado');
@@ -109,8 +110,15 @@ class getDireccionCPQR extends SugarApi
 
             if( $result['resultCode'] == 0 ){
 
-                //$GLOBALS['log']->fatal('insertColonia',$pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
-                $resultado = $this->getAddressByCPQR($api, $args);
+                $queryColonia = "Select * from dire_colonia where codigo_postal='{$cod_postal}' AND name = '{$colonia_QR}'";
+                $resultQ = $GLOBALS['db']->query($queryColonia);
+
+                if( $resultQ->num_rows > 0 ){
+
+                    //$GLOBALS['log']->fatal('insertColonia',$pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
+                    $resultado = $this->getAddressByCPQR($api, $args);
+
+                }
 
             }
         }
@@ -165,7 +173,8 @@ class getDireccionCPQR extends SugarApi
         try {
             $result = curl_exec($curl);
             $response = json_decode($result, true);
-            $GLOBALS['log']->fatal("respuesta servicio colonia\n" . $response);
+            $GLOBALS['log']->fatal("respuesta servicio colonia\n");
+            $GLOBALS['log']->fatal(print_r($response,true));
             curl_close($curl);
         } catch (Exception $ex) {
             $GLOBALS['log']->fatal("Error al ejecutar Insert de colonia" . $ex);

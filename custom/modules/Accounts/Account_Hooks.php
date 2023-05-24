@@ -239,7 +239,7 @@ SQL;
             foreach ($bean->account_direcciones as $direccion_row) {
                 /** @var dire_Direccion $direccion */
                 $direccion = BeanFactory::getBean('dire_Direccion', $direccion_row['id']);
-                $id_sepomex_anterior=$direccion->dir_sepomex_dire_direcciondir_sepomex_ida;
+                //$id_sepomex_anterior=$direccion->dir_sepomex_dire_direcciondir_sepomex_ida;
 
                 if (empty($direccion_row['id'])) {
                     //generar el guid
@@ -287,54 +287,50 @@ SQL;
                 
                 $direccion->name = $direccion_completa;
                 
-                if( $new ){
-
-                    if ($direccion->load_relationship('dire_direccion_dire_pais')) {
-                        if ($direccion_row['pais'] !== $direccion->dire_direccion_dire_paisdire_pais_ida) {
-                            $direccion->dire_direccion_dire_pais->delete($direccion->id);
-                            $direccion->dire_direccion_dire_pais->add($direccion_row['pais']);
-                        }
+                if ($direccion->load_relationship('dire_direccion_dire_pais')) {
+                    if ($direccion_row['pais'] !== $direccion->dire_direccion_dire_paisdire_pais_ida) {
+                        $direccion->dire_direccion_dire_pais->delete($direccion->id);
+                        $direccion->dire_direccion_dire_pais->add($direccion_row['pais']);
                     }
-                    if ($direccion->load_relationship('dire_direccion_dire_estado')) {
-                        if ($direccion_row['estado'] !== $direccion->dire_direccion_dire_estadodire_estado_ida) {
-                            $direccion->dire_direccion_dire_estado->delete($direccion->id);
-                            $direccion->dire_direccion_dire_estado->add($direccion_row['estado']);
-                        }
-                    }
-                    if ($direccion->load_relationship('dire_direccion_dire_municipio')) {
-                        if ($direccion_row['municipio'] !== $direccion->dire_direccion_dire_municipiodire_municipio_ida) {
-                            $direccion->dire_direccion_dire_municipio->delete($direccion->id);
-                            $direccion->dire_direccion_dire_municipio->add($direccion_row['municipio']);
-                        }
-                    }
-                    if ($direccion->load_relationship('dire_direccion_dire_ciudad')) {
-                        if ($direccion_row['ciudad'] !== $direccion->dire_direccion_dire_ciudaddire_ciudad_ida) {
-                            $direccion->dire_direccion_dire_ciudad->delete($direccion->id);
-                            $direccion->dire_direccion_dire_ciudad->add($direccion_row['ciudad']);
-                        }
-                    }
-    
-                    if ($direccion->load_relationship('dire_direccion_dire_codigopostal')) {
-                        try {
-                            //if (!empty($direccion_row['postal'])) {
-                            if ($direccion_row['postal'] !== $direccion->dire_direccion_dire_codigopostal) {
-                                $direccion->dire_direccion_dire_codigopostal->delete($direccion->id);
-                                $direccion->dire_direccion_dire_codigopostal->add($direccion_row['postal']);
-                            }
-                        } catch (Exception $e) {
-                            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
-                        }
-                    }
-    
-                    if ($direccion->load_relationship('dire_direccion_dire_colonia')) {
-                        if ($direccion_row['colonia'] !== $direccion->dire_direccion_dire_coloniadire_colonia_ida) {
-                            $direccion->dire_direccion_dire_colonia->delete($direccion->id);
-                            $direccion->dire_direccion_dire_colonia->add($direccion_row['colonia']);
-                        }
-                    }
-
                 }
-    
+                if ($direccion->load_relationship('dire_direccion_dire_estado')) {
+                    if ($direccion_row['estado'] !== $direccion->dire_direccion_dire_estadodire_estado_ida) {
+                        $direccion->dire_direccion_dire_estado->delete($direccion->id);
+                        $direccion->dire_direccion_dire_estado->add($direccion_row['estado']);
+                    }
+                }
+                if ($direccion->load_relationship('dire_direccion_dire_municipio')) {
+                    if ($direccion_row['municipio'] !== $direccion->dire_direccion_dire_municipiodire_municipio_ida) {
+                        $direccion->dire_direccion_dire_municipio->delete($direccion->id);
+                        $direccion->dire_direccion_dire_municipio->add($direccion_row['municipio']);
+                    }
+                }
+                if ($direccion->load_relationship('dire_direccion_dire_ciudad')) {
+                    if ($direccion_row['ciudad'] !== $direccion->dire_direccion_dire_ciudaddire_ciudad_ida) {
+                        $direccion->dire_direccion_dire_ciudad->delete($direccion->id);
+                        $direccion->dire_direccion_dire_ciudad->add($direccion_row['ciudad']);
+                    }
+                }
+
+                if ($direccion->load_relationship('dire_direccion_dire_codigopostal')) {
+                    try {
+                        //if (!empty($direccion_row['postal'])) {
+                        if ($direccion_row['postal'] !== $direccion->dire_direccion_dire_codigopostal) {
+                            $direccion->dire_direccion_dire_codigopostal->delete($direccion->id);
+                            $direccion->dire_direccion_dire_codigopostal->add($direccion_row['postal']);
+                        }
+                    } catch (Exception $e) {
+                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
+                    }
+                }
+
+                if ($direccion->load_relationship('dire_direccion_dire_colonia')) {
+                    if ($direccion_row['colonia'] !== $direccion->dire_direccion_dire_coloniadire_colonia_ida) {
+                        $direccion->dire_direccion_dire_colonia->delete($direccion->id);
+                        $direccion->dire_direccion_dire_colonia->add($direccion_row['colonia']);
+                    }
+                }
+
                 $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : DIRECCION NOMBRE: " . $direccion_completa);
                 $current_id_list[] = $direccion->id;
                 if ($new) {
@@ -1971,9 +1967,9 @@ where rfc_c = '{$bean->rfc_c}' and
         $id_direccion_buscar = "";
         $elemento_actual_direccion = null;
         $elemento_por_actualizar_direccion = null;
-        $GLOBALS['log']->fatal("############ VALIDA CAMBIO DE NOMBRE ############");
-        $GLOBALS['log']->fatal("ANTES: ". $bean->fetched_row['name']. " DESPUÉS: ".$bean->name );
-        $GLOBALS['log']->fatal( print_r( json_decode($bean->json_direccion_audit_c,true),true ) );
+        //$GLOBALS['log']->fatal("############ VALIDA CAMBIO DE NOMBRE ############");
+        //$GLOBALS['log']->fatal("ANTES: ". $bean->fetched_row['name']. " DESPUÉS: ".$bean->name );
+        //$GLOBALS['log']->fatal( print_r( json_decode($bean->json_direccion_audit_c,true),true ) );
 
         $text_cambios = '';
         if( $bean->valid_cambio_razon_social_c == 1 ){

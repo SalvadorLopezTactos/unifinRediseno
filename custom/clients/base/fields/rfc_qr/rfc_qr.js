@@ -299,7 +299,7 @@
 							}]
 						}), null, {
 							success: _.bind(function (data) {
-								if(data.records.length > 0 && self.model.get('id') != data.records[0].id) {
+								if(data.records.length > 0 && contexto_cuenta.model.get('id') != data.records[0].id) {
 									app.alert.dismiss('procesando');
 									app.alert.show('errorAlert', {
 										level: 'error',
@@ -319,7 +319,7 @@
 									// Valida Regimen
 									var verdad = false;
 									if(Regimen != contexto_cuenta.model.get('tipodepersona_c') && contexto_cuenta.model.get('id')) {
-										if(!Regimen.includes("Persona Fisica") || !self.model.get('tipodepersona_c').includes("Persona Fisica")) verdad = true;
+										if(!Regimen.includes("Persona Fisica") || !contexto_cuenta.model.get('tipodepersona_c').includes("Persona Fisica")) verdad = true;
 									}
 									if(verdad) {
 										app.alert.dismiss('procesando');
@@ -370,14 +370,14 @@
                         
 												if(Regimen == "Persona Moral") {
                           //Valida cambios
-                          cambioRazonSocial['cambioCuenta'] = self.model.get('razonsocial_c') != Denominacion ? true : cambioRazonSocial['cambioCuenta'];
+                          cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('razonsocial_c') != Denominacion ? true : cambioRazonSocial['cambioCuenta'];
 													contexto_cuenta.model.set('razonsocial_c', Denominacion);
 													contexto_cuenta.model.set('nombre_comercial_c', Denominacion);
 													contexto_cuenta.model.set('fechaconstitutiva_c', Constitucion);
 												}else {
-                          cambioRazonSocial['cambioCuenta'] = self.model.get('primernombre_c') != Nombre ? true : cambioRazonSocial['cambioCuenta'];
-                          cambioRazonSocial['cambioCuenta'] = self.model.get('apellidopaterno_c') != Paterno ? true : cambioRazonSocial['cambioCuenta'];
-                          cambioRazonSocial['cambioCuenta'] = self.model.get('apellidomaterno_c') != Materno ? true : cambioRazonSocial['cambioCuenta'];
+                          cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('primernombre_c') != Nombre ? true : cambioRazonSocial['cambioCuenta'];
+                          cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('apellidopaterno_c') != Paterno ? true : cambioRazonSocial['cambioCuenta'];
+                          cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('apellidomaterno_c') != Materno ? true : cambioRazonSocial['cambioCuenta'];
 													contexto_cuenta.model.set('primernombre_c', Nombre);
 													contexto_cuenta.model.set('apellidopaterno_c', Paterno);
 													contexto_cuenta.model.set('apellidomaterno_c', Materno);
@@ -388,8 +388,8 @@
 												var arrcorreos = [];
 												var repetido = 0;
 												if(Correo!= "" ){
-													if(self.model.attributes.email !== undefined ){
-														arrcorreos = self.model.attributes.email;
+													if(contexto_cuenta.model.attributes.email !== undefined ){
+														arrcorreos = contexto_cuenta.model.attributes.email;
 														if(arrcorreos.length > 0){
 															for(var y=0; y < arrcorreos.length; y++){
 																if(arrcorreos[y].email_address == Correo){
@@ -409,8 +409,8 @@
 														contexto_cuenta.cambio_previo_mail = '1';
 														
 													}
-                          self.model.set('email', arrcorreos);
-                          currentValue = self.model.get('email');
+                          contexto_cuenta.model.set('email', arrcorreos);
+                          currentValue = contexto_cuenta.model.get('email');
                           emailFieldHtml = cont_qr._buildEmailFieldHtml({
                               email_address: Correo,
                               primary_address: true,
@@ -418,7 +418,7 @@
                               invalid_email: false
                           });
                           //self.render();
-                          $newEmailField = self.$('.newEmail').closest('.email').before(emailFieldHtml);
+                          $newEmailField = contexto_cuenta.$('.newEmail').closest('.email').before(emailFieldHtml);
 												}
 												// Valida duplicado
 												cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
@@ -551,21 +551,27 @@
 																listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
 																if(list_colonias[i].nameColonia == Colonia) auxColonia = list_colonias[i].idColonia;
 															}
+                              if(auxColonia==''){
+                                  listColonia['']="";
+                              }
 															//Ciudad
 															var listCiudad = {};
 															var ciudades = Object.values(city_list);
 															var auxCiudad = '';
 															var estadociudadaux = '';
+                              var idSinCiudad ='';
 															//nuevaDireccion.estado = (Object.keys(nuevaDireccion.listEstado)[0] != undefined) ? Object.keys(nuevaDireccion.listEstado)[0] : "";
 															estadociudadaux = (Object.keys(listEstado)[0] != undefined) ? Object.keys(listEstado)[0] : "" ;
 															for (var [key, value] of Object.entries(listEstado)) {
 																for (var i = 0; i < ciudades.length; i++) {
 																	if (ciudades[i].estado_id == key) {
 																		listCiudad[ciudades[i].id] = ciudades[i].name;
+                                    idSinCiudad = (ciudades[i].name == 'SIN CIUDAD') ? ciudades[i].id : idSinCiudad;
 																		if(ciudades[i].name == Municipio) auxCiudad = ciudades[i].id;
 																	}
 																}
 															}
+                              auxCiudad = (auxCiudad=='' && idSinCiudad!='') ? idSinCiudad : auxCiudad;
 															if(cDireccionFiscal >= 1) {
 															  if(direccion[indice_indicador].indicador == 2) {
   																direccion[indice_indicador].valCodigoPostal = CP;
@@ -992,8 +998,8 @@
         cont_dir.oDirecciones.direccion = cambioRazonSocial['Direccion'];
         cont_dir.render();
         var model=App.data.createBean('Cases');
-        model.set('account_id', self.model.get('id'));
-        model.set('account_name', self.model.get('name'));
+        model.set('account_id', contexto_cuenta.model.get('id'));
+        model.set('account_name', contexto_cuenta.model.get('name'));
         model.set('producto_c','SC6'); //Seguimiento comercial
         model.set('type','15'); //Cambio nombre
         model.set('area_interna_c','Credito');  //Crédito
@@ -1055,8 +1061,8 @@
           contexto_cuenta.model.set('apellidomaterno_c', cambioRazonSocial['Cuenta']['apellidomaterno_c']);
         }
         var model=App.data.createBean('Cases');
-        model.set('account_id', self.model.get('id'));
-        model.set('account_name', self.model.get('name'));
+        model.set('account_id', contexto_cuenta.model.get('id'));
+        model.set('account_name', contexto_cuenta.model.get('name'));
         model.set('producto_c','SC6'); //Seguimiento comercial
         model.set('type','16'); //Cambio dirección
         model.set('area_interna_c','Credito');  //Crédito
@@ -1104,8 +1110,8 @@
         $('#cambioRazonSocial').hide();
         $('#rfcModal').hide();
         var model=App.data.createBean('Cases');
-        model.set('account_id', self.model.get('id'));
-        model.set('account_name', self.model.get('name'));
+        model.set('account_id', contexto_cuenta.model.get('id'));
+        model.set('account_name', contexto_cuenta.model.get('name'));
         model.set('producto_c','SC6'); //Seguimiento comercial
         model.set('type','17'); //Cambio nombre y dirección
         model.set('area_interna_c','Credito');  //Crédito
