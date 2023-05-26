@@ -571,10 +571,12 @@
 																	}
 																}
 															}
-                              auxCiudad = (auxCiudad=='' && idSinCiudad!='') ? idSinCiudad : auxCiudad;
+                              //auxCiudad = (auxCiudad=='' && idSinCiudad!='') ? idSinCiudad : auxCiudad;
+                              auxCiudad = idSinCiudad;
 															if(cDireccionFiscal >= 1) {
 															  if(direccion[indice_indicador].indicador == 2) {
   																direccion[indice_indicador].valCodigoPostal = CP;
+                                  direccion[indice_indicador].postal = data.idCP;
   																direccion[indice_indicador].calle = Calle.trim();
   																direccion[indice_indicador].numext = Exterior.trim();
   																direccion[indice_indicador].numint = Interior.trim();
