@@ -5030,15 +5030,19 @@
                                     contexto_cuenta.oDirecciones.direccion[data.indice].listColoniaFull = listColonia;
                                     //Ciudad
                                     listCiudad = {}
+                                    idSinCiudad='';
                                     ciudades = Object.values(city_list);
                                     for (var [key, value] of Object.entries(contexto_cuenta.oDirecciones.direccion[data.indice].listEstado)) {
                                         for (var i = 0; i < ciudades.length; i++) {
                                             if (ciudades[i].estado_id == key) {
                                                 listCiudad[ciudades[i].id] = ciudades[i].name;
+                                                idSinCiudad = (ciudades[i].name == 'SIN CIUDAD') ? ciudades[i].id : idSinCiudad;
                                             }
                                         }
                                     }
                                     
+                                    contexto_cuenta.oDirecciones.direccion[data.indice].ciudad = (contexto_cuenta.oDirecciones.direccion[data.indice].ciudad=='') ? idSinCiudad : contexto_cuenta.oDirecciones.direccion[data.indice].ciudad;
+                                    contexto_cuenta.oDirecciones.direccion[data.indice].valCiudad = (contexto_cuenta.oDirecciones.direccion[data.indice].valCiudad =='') ? 'SIN CIUDAD' : contexto_cuenta.oDirecciones.direccion[data.indice].valCiudad;
                                     contexto_cuenta.oDirecciones.direccion[data.indice].listCiudad = listCiudad;
                                     contexto_cuenta.oDirecciones.direccion[data.indice].listCiudadFull = listCiudad;
 
