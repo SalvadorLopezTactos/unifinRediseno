@@ -63,6 +63,16 @@
         //Valida perfil de usuario para ocultar dirección fiscal
         this.accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
         if (this.accesoFiscal > 0) this.bloqueado = 0;
+        
+        //Recupera lista de usuarios que pueden editar ciudad
+        var edicionCiudadList = App.lang.getAppListStrings('edicion_ciudad_list');
+        this.editaCiudad = false;
+        for (const [key, value] of Object.entries(edicionCiudadList)) {
+            //console.log('value:'+value);
+            if(App.user.id == value){
+                this.editaCiudad = true;
+            } 
+        }
         //Declaración de validation Tasks
         this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionIndicador, this));
         //Declaración de modelo para nueva dirección
@@ -91,6 +101,9 @@
                 for (var indexDir = 0; indexDir < this.oDirecciones.direccion.length; indexDir++) {
                   if(this.oDirecciones.direccion[indexDir].indicadorSeleccionados.includes('^2^')){
                     this.oDirecciones.direccion[indexDir].bloqueado=1;
+                    if(cont_dir.editaCiudad){
+                        this.oDirecciones.direccion[indexDir].editaCiudad=1;
+                    }
                   }
                 }
               }
@@ -1336,7 +1349,8 @@
             "secuencia":"",
             "id":"",
             "direccionCompleta":"",
-                  "bloqueado":""
+            "bloqueado":"",
+            "editaCiudad":0
         };
         return nuevaDireccion;
 
@@ -1417,11 +1431,44 @@
         var indicadorSeleccionados = input.val().toString();
         //Limpia borde
         this.$('.multi1_n_existing ul.select2-choices').eq(index).css('border-color', '');
+        var indicadorSeleccionadosArray = indicadorSeleccionados.split(',').sort();
+        
+        /*
+        # Valida bloqueo de indicador fiscal
+        # Aplica para:
+         - Tipo registro = Cliente
+         - Subtipo registro != Venta activo
+         - Origen != Seguros
+        */
+        var tipoRegistro = contexto_cuenta.model.get('tipo_registro_cuenta_c'),
+            subtipoRegistro = contexto_cuenta.model.get('subtipo_registro_cuenta_c'),
+            origen = contexto_cuenta.model.get('origen_cuenta_c');            
+        if(tipoRegistro == '3' && subtipoRegistro != '11' && origen != '11' ){
+            var bloqueaFiscal = false;
+            if(contexto_cuenta.prev_oDirecciones.prev_direccion[index] !== undefined){
+                bloqueaFiscal = (contexto_cuenta.prev_oDirecciones.prev_direccion[index].indicadorSeleccionados.includes('^2^') && contexto_cuenta.oDirecciones.direccion[index].indicadorSeleccionados.includes('^2^')) ? true : false;
+            }
+            if(bloqueaFiscal){
+                //Valida permanencia de indicador fiscal
+                indicadorSeleccionados = (indicadorSeleccionadosArray.includes('2')) ? indicadorSeleccionados : indicadorSeleccionados+',2';
+                indicadorSeleccionadosArray = indicadorSeleccionados.split(',').sort();
+            }
+            this.oDirecciones.direccion[index].editaCiudad = this.editaCiudad;
+        }
+        
+        
         //Parsea valor con mapeo
         this.oDirecciones.direccion[index].indicador = "";
         for (var [key, value] of Object.entries(this.def.listMapIndicador)) {
-            if (value == indicadorSeleccionados) {
-              this.oDirecciones.direccion[index].indicador = key;
+            var arrayMap = value.split(',').sort();
+            if(indicadorSeleccionadosArray.length == arrayMap.length){
+                var matchIndicador = true;
+                for (var i = 0; i < indicadorSeleccionadosArray.length; i++) {
+                    if (indicadorSeleccionadosArray[i] !== arrayMap[i]) {
+                        matchIndicador = false;
+                    }
+                }
+                this.oDirecciones.direccion[index].indicador = (matchIndicador) ? key : this.oDirecciones.direccion[index].indicador;  
             }
         }
 
@@ -1430,7 +1477,12 @@
             this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
             var res = indicadorSeleccionados.split(",");
             var bloqueado = (res.indexOf('2')!=-1) ? 1 : 0;
-        bloqueado = (this.accesoFiscal > 0 || this.model.get('tipo_registro_cuenta_c')==4 || this.model.get('tipo_registro_cuenta_c')==5 ) ? 0 : bloqueado;
+            bloqueado = (this.accesoFiscal > 0 || this.model.get('tipo_registro_cuenta_c')==4 || this.model.get('tipo_registro_cuenta_c')==5 ) ? 0 : bloqueado;
+            if(tipoRegistro == '3' && subtipoRegistro != '11' && origen != '11' && contexto_cuenta.prev_oDirecciones.prev_direccion[index] ){
+                if(contexto_cuenta.prev_oDirecciones.prev_direccion[index].indicadorSeleccionados.includes('^2^')){
+                    bloqueado = 1;
+                }
+            }
             this.oDirecciones.direccion[index].bloqueado = bloqueado;
             this.render();
             document.getElementsByClassName("multi1_n_existing")[index].focus();
@@ -1494,10 +1546,12 @@
           var inputs = this.$('.inactivo'),
               input = this.$(evt.currentTarget),
               index = inputs.index(input);
-          if (this.oDirecciones.direccion[index].inactivo == 0) {
-              this.oDirecciones.direccion[index].inactivo = 1;
-          }else{
-              this.oDirecciones.direccion[index].inactivo = 0;
+          if(!contexto_cuenta.oDirecciones.direccion[index].bloqueado){
+            if (this.oDirecciones.direccion[index].inactivo == 0) {
+                this.oDirecciones.direccion[index].inactivo = 1;
+            }else{
+                this.oDirecciones.direccion[index].inactivo = 0;
+            }
           }
           this.render();
     },
