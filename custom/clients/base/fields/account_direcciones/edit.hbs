@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="span4">
                                     <label class="record-label">Ciudad</label>
-                                    <select class="row-fluid ciudadExisting select2" {{#if bloqueado}} disabled {{/if}} data-field="ciudadExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                    <select class="row-fluid ciudadExisting select2" {{#if bloqueado}} {{#if editaCiudad}} {{else}}disabled {{/if}} {{/if}} data-field="ciudadExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
                                         {{#each listCiudad}}
                                             <option value="{{@key}}" {{ifSelected @key ../ciudad}}>{{this}}</option>
                                         {{/each}}
