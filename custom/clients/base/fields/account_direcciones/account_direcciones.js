@@ -1477,11 +1477,13 @@
             this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
             var res = indicadorSeleccionados.split(",");
             var bloqueado = (res.indexOf('2')!=-1) ? 1 : 0;
-            bloqueado = (this.accesoFiscal > 0 || this.model.get('tipo_registro_cuenta_c')==4 || this.model.get('tipo_registro_cuenta_c')==5 ) ? 0 : bloqueado;
+            bloqueado = (this.model.get('tipo_registro_cuenta_c')==4 || this.model.get('tipo_registro_cuenta_c')==5 ) ? 0 : bloqueado;
             if(tipoRegistro == '3' && subtipoRegistro != '11' && origen != '11' && contexto_cuenta.prev_oDirecciones.prev_direccion[index] ){
                 if(contexto_cuenta.prev_oDirecciones.prev_direccion[index].indicadorSeleccionados.includes('^2^')){
                     bloqueado = 1;
                 }
+            }else{
+                bloqueado = (this.accesoFiscal > 0 ) ? 0 : bloqueado;
             }
             this.oDirecciones.direccion[index].bloqueado = bloqueado;
             this.render();

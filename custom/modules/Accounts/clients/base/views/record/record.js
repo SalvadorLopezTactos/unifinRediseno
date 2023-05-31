@@ -4907,23 +4907,14 @@
         var json_direccion = {};
         /*
         # Valida bloqueo de indicador fiscal
-        # Aplica para:
-         - Tipo registro = Cliente
-         - Subtipo registro != Venta activo
-         - Origen != Seguros
         */
-        var tipoRegistro = this.model.get('tipo_registro_cuenta_c'),
-            subtipoRegistro = this.model.get('subtipo_registro_cuenta_c'),
-            origen = this.model.get('origen_cuenta_c');            
-        if(tipoRegistro == '3' && subtipoRegistro != '11' && origen != '11' ){
-            var edicionCiudadList = App.lang.getAppListStrings('edicion_ciudad_list');
-            this.editaCiudad = false;
-            for (const [key, value] of Object.entries(edicionCiudadList)) {
-                //console.log('value:'+value);
-                if(App.user.id == value){
-                    this.editaCiudad = true;
-                } 
-            }
+        var edicionCiudadList = App.lang.getAppListStrings('edicion_ciudad_list');
+        this.editaCiudad = false;
+        for (const [key, value] of Object.entries(edicionCiudadList)) {
+            //console.log('value:'+value);
+            if(App.user.id == value){
+                this.editaCiudad = true;
+            } 
         }
         
         //Recupera información
@@ -4961,9 +4952,9 @@
                         var direccionCompleta = data.records[i].name;
 						            var bloqueado = (indicadorSeleccionados.indexOf('2') != -1) ? 1 : 0;
                         var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
-                        bloqueado = (accesoFiscal > 0 || self.model.get('tipo_registro_cuenta_c') == 4 || self.model.get('tipo_registro_cuenta_c') == 5 )? 0: bloqueado;
+                        bloqueado = (self.model.get('tipo_registro_cuenta_c') == 4 || self.model.get('tipo_registro_cuenta_c') == 5 )? 0: bloqueado;
                         var editaCiudad = contexto_cuenta.editaCiudad;
-                        if(tipoRegistro == '3' && subtipoRegistro != '11' && origen != '11' && indicadorSeleccionados.includes('^2^') ){
+                        if(self.model.get('tipo_registro_cuenta_c') == '3' && self.model.get('subtipo_registro_cuenta_c') != '11' && self.model.get('origen_cuenta_c') != '11' && indicadorSeleccionados.includes('^2^') ){
                             bloqueado = 1;
                         }
 
