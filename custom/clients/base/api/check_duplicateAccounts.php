@@ -370,6 +370,10 @@ SITE;
 
                         $procede['data']['RM'] = $meeting->assigned_user_id;
                     }
+                    if ($productos == '10') {
+
+                        $procede['data']['SEGUROS'] = $meeting->assigned_user_id;
+                    }
 
                     $procede['vacio'] = empty($procede['data']) ? true : false;
 
@@ -431,6 +435,10 @@ SITE;
                     if ($productos == '11') {
 
                         $procede['data']['RM'] = $meeting->assigned_user_id;
+                    }
+                    if ($productos == '10') {
+
+                        $procede['data']['SEGUROS'] = $meeting->assigned_user_id;
                     }
 
                     $procede['vacio'] = empty($procede['data']) ? true : false;
