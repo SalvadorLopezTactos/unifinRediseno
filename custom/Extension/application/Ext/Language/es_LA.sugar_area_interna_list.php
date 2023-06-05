@@ -1,5 +1,5 @@
 <?php
- // created: 2022-09-09 11:25:32
+ // created: 2023-06-05 00:26:40
 
 $app_list_strings['area_interna_list']=array (
   '' => '',
@@ -20,4 +20,5 @@ $app_list_strings['area_interna_list']=array (
   'Compras' => 'Compras',
   'Contraloria' => 'Contraloría',
   'Help Desk' => 'Help Desk',
+  'Uniclick' => 'Uniclick',
 );
