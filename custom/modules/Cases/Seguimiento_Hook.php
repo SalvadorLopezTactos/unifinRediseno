@@ -447,7 +447,17 @@ class Seguimiento_Hook
                 $area_interna="='".$bean->area_interna_c."'";
                 $equipo_soporte="='".$bean->equipo_soporte_c."'";
                 $esCAC = isset($current_user->cac_c) ? $current_user->cac_c : false;
-                //$GLOBALS['log']->fatal("Es CAC: ".$esCAC);
+                
+                if( !empty( $bean->account_id ) ){
+                    $GLOBALS['log']->fatal('Entra validación para establecer área interna');
+                    $area_interna_por_cambio_razon_social = $this->getAreaInternaParaCambioRazonSocial( $bean->account_id );
+                    if( $area_interna_por_cambio_razon_social !== "" ){
+                        $GLOBALS['log']->fatal('Se establece área interna por cambio de razón social: '.$area_interna_por_cambio_razon_social);
+                        $bean->area_interna_c = $area_interna_por_cambio_razon_social;
+                        $area_interna="='".$area_interna_por_cambio_razon_social."'";
+                    }
+                }
+                
                 if($bean->area_interna_c==''){
                     $area_interna='IS NULL';
                 }
@@ -607,7 +617,14 @@ class Seguimiento_Hook
                     }
                 }
 
-                $bean->assigned_user_id=$asignado;
+                //En caso de que el área interna sea de Uniclick, el usuario asignado, autmáticamente se asigna con Samuel Álvarez,
+                //esto, se establece con base a lo requerido para el proceso de seguimiento al cambio de razón social y direcciones
+                $idSamuel = "92b04f7d-e547-9d4f-c96a-5a31da014bdd";
+                if( $bean->area_interna_c == 'Uniclick' ){
+                    $bean->assigned_user_id=$idSamuel;
+                }else{
+                    $bean->assigned_user_id=$asignado;
+                }
                 $bean->user_id_c=$responsable;
 
                 //ENVIANDO NOTIFICACIÓN
@@ -623,6 +640,89 @@ class Seguimiento_Hook
 
             }
         }
+
+    }
+
+    /*
+    * Con base a los productos relacionados a la Cuenta, se establece el Área interna para el proceso que crea casos en el cambio de razón social y direcciones
+    * Si el producto Uniclick en tipo_cuenta es Cliente ('3') y no es Cliente en ningún otro Producto, el área interna para asignar será Uniclick
+    * Si en cualquier producto en tipo_cuenta es Cliente ('3'), se considera como multiproducto, por lo tanto, se asigna el área de Crédito
+    */
+    function getAreaInternaParaCambioRazonSocial( $idCuentaRelacionada ){
+
+        $area_interna = "";
+        $beanPersona = BeanFactory::getBean("Accounts", $idCuentaRelacionada, array('disable_row_level_security' => true));
+
+        if( !empty( $beanPersona ) ){
+            if ($beanPersona->load_relationship('accounts_uni_productos_1')) {
+                //Recupera Productos para conocer el tipo de cuenta por cada uno
+                $relateProduct = $beanPersona->accounts_uni_productos_1->getBeans($beanPersona->id,array('disable_row_level_security' => true));
+                $array_tipo_cuenta_producto = array();
+                foreach ($relateProduct as $product) {
+                    //Recupera valores por producto
+                    $tipoCuenta = $product->tipo_cuenta;
+                    $tipoProducto = $product->tipo_producto;
+
+                    switch ($tipoProducto) {
+                        case '1': //Leasing
+                            $array_tipo_cuenta_producto['leasing'] = $tipoCuenta;
+                            break;
+                        case '2': //Crédito Simple
+                            $array_tipo_cuenta_producto['cs'] = $tipoCuenta;
+                            break;
+                        case '3': //Credito-Automotriz
+                            $array_tipo_cuenta_producto['ca'] = $tipoCuenta;
+                            break;
+                        case '4': //Factoraje
+                            $array_tipo_cuenta_producto['factoraje'] = $tipoCuenta;
+                            break;
+                        case '6': //Fleet
+                            $array_tipo_cuenta_producto['fleet'] = $tipoCuenta;
+                            break;
+                        case '8': //Uniclick
+                            $array_tipo_cuenta_producto['uniclick'] = $tipoCuenta;
+                            break;
+                        case '14': //Tarjeta Crédito
+                            $array_tipo_cuenta_producto['tc'] = $tipoCuenta;
+                            break;
+                        
+                    }
+                }
+
+                //Recorre arreglo generado para conocer si es multiproducto y el caso se debe asignar a Area Interna Crédito o Uniclick
+                $contador_cliente = 0;
+                $contador_cliente_uniclick = 0;
+                foreach ( $array_tipo_cuenta_producto as $key => $value ){
+                    if( $value == '3' ){
+                        if( $key == 'uniclick' ){
+                            $contador_cliente_uniclick += 1; 
+                        }else{
+                            $contador_cliente += 1;
+                        }
+                    }
+                }
+                if( $contador_cliente_uniclick > 0 && $contador_cliente == 0 ){
+                    //ES CLIENTE UNICLICK, SE ESTABLECE ÁREA INTERNA UNICLICK
+                    $GLOBALS['log']->fatal("ES CLIENTE UNICLICK, SE ESTABLECE ÁREA INTERNA UNICLICK");
+                    $area_interna = 'Uniclick';
+                
+                }
+                if( $contador_cliente > 0 ){
+                    //ES MULTIPRODUCTO, SE ESTABLECE ÁREA INTERNA CRÉDITO
+                    $GLOBALS['log']->fatal("ES MULTIPRODUCTO, SE ESTABLECE ÁREA INTERNA CRÉDITO");
+                    $area_interna = 'Credito';
+                }
+                
+                if( $contador_cliente == 0 && $contador_cliente_uniclick == 0){
+                    //NO ES CLIENTE EN NINGÚN PRODUCTO
+                    $GLOBALS['log']->fatal("NO ES CLIENTE EN NINGÚN PRODUCTO");
+                    $area_interna = '';
+                }
+
+            }
+        }
+
+        return $area_interna;
 
     }
 

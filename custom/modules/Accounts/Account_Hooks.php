@@ -2035,8 +2035,11 @@ where rfc_c = '{$bean->rfc_c}' and
 
         if( $send_notification ){
             global $app_list_strings;
-            $emails_responsables_cambios_list = $app_list_strings['emails_responsables_cambios_list'];
 
+            $producto_envio = $this->getMultiproductoParaEnvioNotificacion( $bean );
+
+            $emails_responsables_cambios_list = ( $producto_envio == 'Uniclick' ) ? $app_list_strings['emails_uniclick_list'] : $app_list_strings['emails_multiproducto_list'];
+            
             $body_correo = $this->buildBodyCambioRazon( $bean->rfc_c, $text_cambios, $bean->id, $bean->fetched_row['name'] );
             $this->sendEmailCambioRazonSocial( $emails_responsables_cambios_list, $body_correo );
 
@@ -2214,6 +2217,87 @@ where rfc_c = '{$bean->rfc_c}' and
               $this->creaCaso( $bean->id );
             }
         }
+
+    }
+
+    /*
+    * Obtiene productos relacionados de la cuenta para saber a cual grupo de correos electrónicos de Email se envia
+    * Si es Cliente en cualquier producto, se envía a un grupo
+    * Si UNICAMENTE es Cliente en producto Uniclick, se envía a otro grupo diferente
+    */
+    function getMultiproductoParaEnvioNotificacion ( $beanPersona ){
+
+        $area_interna = "";
+
+        if ($beanPersona->load_relationship('accounts_uni_productos_1')) {
+            //Recupera Productos para conocer el tipo de cuenta por cada uno
+            $relateProduct = $beanPersona->accounts_uni_productos_1->getBeans($beanPersona->id,array('disable_row_level_security' => true));
+            $array_tipo_cuenta_producto = array();
+            foreach ($relateProduct as $product) {
+                    //Recupera valores por producto
+                    $tipoCuenta = $product->tipo_cuenta;
+                    $tipoProducto = $product->tipo_producto;
+
+                    switch ($tipoProducto) {
+                        case '1': //Leasing
+                            $array_tipo_cuenta_producto['leasing'] = $tipoCuenta;
+                            break;
+                        case '2': //Crédito Simple
+                            $array_tipo_cuenta_producto['cs'] = $tipoCuenta;
+                            break;
+                        case '3': //Credito-Automotriz
+                            $array_tipo_cuenta_producto['ca'] = $tipoCuenta;
+                            break;
+                        case '4': //Factoraje
+                            $array_tipo_cuenta_producto['factoraje'] = $tipoCuenta;
+                            break;
+                        case '6': //Fleet
+                            $array_tipo_cuenta_producto['fleet'] = $tipoCuenta;
+                            break;
+                        case '8': //Uniclick
+                            $array_tipo_cuenta_producto['uniclick'] = $tipoCuenta;
+                            break;
+                        case '14': //Tarjeta Crédito
+                            $array_tipo_cuenta_producto['tc'] = $tipoCuenta;
+                            break;
+                        
+                    }
+            }
+
+            //Recorre arreglo generado para conocer si es multiproducto y el caso se debe asignar a Area Interna Crédito o Uniclick
+            $contador_cliente = 0;
+            $contador_cliente_uniclick = 0;
+            foreach ( $array_tipo_cuenta_producto as $key => $value ){
+                if( $value == '3' ){
+                        if( $key == 'uniclick' ){
+                            $contador_cliente_uniclick += 1; 
+                        }else{
+                            $contador_cliente += 1;
+                        }
+                    }
+                }
+                if( $contador_cliente_uniclick > 0 && $contador_cliente == 0 ){
+                    //ES CLIENTE UNICLICK, SE ESTABLECE ÁREA INTERNA UNICLICK
+                    $GLOBALS['log']->fatal("ES CLIENTE UNICLICK, SE ESTABLECE ÁREA INTERNA UNICLICK");
+                    $area_interna = 'Uniclick';
+                
+                }
+                if( $contador_cliente > 0 ){
+                    //ES MULTIPRODUCTO, SE ESTABLECE ÁREA INTERNA CRÉDITO
+                    $GLOBALS['log']->fatal("ES MULTIPRODUCTO, SE ESTABLECE ÁREA INTERNA CRÉDITO");
+                    $area_interna = 'Credito';
+                }
+                
+                if( $contador_cliente == 0 && $contador_cliente_uniclick == 0){
+                    //NO ES CLIENTE EN NINGÚN PRODUCTO
+                    $GLOBALS['log']->fatal("NO ES CLIENTE EN NINGÚN PRODUCTO");
+                    $area_interna = '';
+                }
+
+        }
+        
+
+        return $area_interna;
 
     }
 
