@@ -2482,13 +2482,13 @@ where rfc_c = '{$bean->rfc_c}' and
         $idSamuel = '92b04f7d-e547-9d4f-c96a-5a31da014bdd';
         $asunto = 'Cambio de información con mismo RFC';
         // 8 - Crédito Uniclick, 1 - Arrendamiento
-        $producto = ( $plataforma == 'uniclick' ) ?  '8' : '1';
+        $producto = ( $plataforma == 'cvimUniclick' || $plataforma == 'UNICLICK' ) ?  '8' : '1';
         $tipo = '8'; // Modificación de datos
         $subtipo = '48'; // Actualización de datos de contacto
         $prioridad = 'P4'; // Urgente
         $status = '1'; // No iniciado
-        $asignado = ( $plataforma == 'uniclick' ) ? $idSamuel : $idKarla;
-        $area_interna = ( $plataforma == 'uniclick' ) ?  '': 'Credito'; // Agregar id de uniclick
+        $asignado = ( $plataforma == 'cvimUniclick' || $plataforma == 'UNICLICK' ) ? $idSamuel : $idKarla;
+        $area_interna = ( $plataforma == 'cvimUniclick' || $plataforma == 'UNICLICK' ) ?  '': 'Credito'; // Agregar id de uniclick
 
         $caso = BeanFactory::newBean('Cases');
         $caso->name = $asunto;
