@@ -43,8 +43,9 @@ function job_envio_notificacion_razon_social()
                 }
 
                 $beanCuenta = BeanFactory::getBean('Accounts', $idCuenta);
-                //Obtiene las direcciones relacionadas para detectar la Fiscal y poder armar el cuerpo de la notificación
+                $plataforma_json = "";
 
+                //Obtiene las direcciones relacionadas para detectar la Fiscal y poder armar el cuerpo de la notificación
                 $indicador_direcciones_fiscales = array(2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63);
                 if ($beanCuenta->load_relationship('accounts_dire_direccion_1')) {
                     $relatedDirecciones = $beanCuenta->accounts_dire_direccion_1->getBeans();
@@ -67,6 +68,8 @@ function job_envio_notificacion_razon_social()
 
                                     $objeto_json_direccion = json_decode($json_audit_direccion,true);
                                     $GLOBALS['log']->fatal(print_r($objeto_json_direccion,true));
+
+                                    $plataforma_json = $objeto_json_direccion["plataforma"];
 
                                     $direcciones_completas = buildNamesDireccionesCompletas($objeto_json_direccion);
                                     $direccion_actual_completa = $direcciones_completas[0];
@@ -98,7 +101,7 @@ function job_envio_notificacion_razon_social()
                 reestableceBanderas($idCuenta,$idDireccion);
 
                 //Se crea caso
-                creaCaso($idCuenta);
+                creaCaso($idCuenta,$plataforma_json);
 
             }
 
@@ -333,9 +336,9 @@ function reestableceBanderas($idCuenta,$idDireccion){
     }
 }
 
-function creaCaso($idCuenta){
+function creaCaso($idCuenta,$plataforma_json){
     $GLOBALS['log']->fatal('GENERA CASO RELACIONADO DESDE PLANIFICADOR');
-    $plataforma = $_SESSION['platform'];
+    $plataforma = $plataforma_json;
     $idKarla = 'd51dd49e-b1e6-572f-d6de-5654bfeb8b3e';
     $idSamuel = '92b04f7d-e547-9d4f-c96a-5a31da014bdd';
     $asunto = 'Cambio de información con mismo RFC';
@@ -346,7 +349,7 @@ function creaCaso($idCuenta){
     $prioridad = 'P4'; // Urgente
     $status = '1'; // No iniciado
     $asignado = ( $plataforma == 'cvimUniclick' || $plataforma == 'UNICLICK' ) ? $idSamuel : $idKarla;
-    $area_interna = ( $plataforma == 'cvimUniclick' || $plataforma == 'UNICLICK' ) ?  '': 'Credito'; // Agregar id de uniclick
+    $area_interna = ( $plataforma == 'cvimUniclick' || $plataforma == 'UNICLICK' ) ?  'Uniclick': 'Credito'; // Agregar id de uniclick
 
     $caso = BeanFactory::newBean('Cases');
     $caso->name = $asunto;
