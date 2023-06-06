@@ -2927,39 +2927,127 @@
 
     verificarCambiosRazonSocial:function(){
 
-        var lista_verificadores = App.lang.getAppListStrings('verificadores_ids_list');
-        var current_user_id = App.user.id;
-        var arr_permiso = [];
-        Object.keys(lista_verificadores).forEach(function (key) {
-            if ( lista_verificadores[key]==current_user_id ) {
-                arr_permiso.push(1);
-            }
-        });
+        if( this.model.get('valid_cambio_razon_social_c') ){
+            //Carga productos para saber si es multiproducto o uniclick
+            // Si es uniclick, únicamente Samuel Álvarez tiene permiso de ver los cambios
+            //Si es multiproducto, únicamente el equipo de Crédito tiene permiso de ver los cambios
+            App.alert.show('showModalCambios', {
+                level: 'process',
+            });
+            App.api.call("read", app.api.buildURL("Accounts/" + this.model.get('id') + "/link/accounts_uni_productos_1", null, null, {}), null, {
+                success: _.bind(function (data) {
+                    app.alert.dismiss('showModalCambios');
+                    if (data.records.length > 0) {
+                        var array_tipo_cuenta_producto = {};
+                        var current_user_id = App.user.id;
+                        for (var index = 0; index < data.records.length; index++) {
 
-        if( arr_permiso.includes(1)){
+                            var tipoCuenta = data.records[index].tipo_cuenta;
+                            var tipoProducto = data.records[index].tipo_producto;
 
-            if( this.model.get('valid_cambio_razon_social_c') ){
+                            switch (tipoProducto) {
+                                case '1': //Leasing
+                                    array_tipo_cuenta_producto['leasing'] = tipoCuenta;
+                                    break;
+                                case '2': //Crédito Simple
+                                    array_tipo_cuenta_producto['cs'] = tipoCuenta;
+                                    break;
+                                case '3': //Credito-Automotriz
+                                    array_tipo_cuenta_producto['ca'] = tipoCuenta;
+                                    break;
+                                case '4': //Factoraje
+                                    array_tipo_cuenta_producto['factoraje'] = tipoCuenta;
+                                    break;
+                                case '6': //Fleet
+                                    array_tipo_cuenta_producto['fleet'] = tipoCuenta;
+                                    break;
+                                case '8': //Uniclick
+                                    array_tipo_cuenta_producto['uniclick'] = tipoCuenta;
+                                    break;
+                                case '14': //Tarjeta Crédito
+                                    array_tipo_cuenta_producto['tc'] = tipoCuenta;
+                                    break;
+                                
+                            }
+                            
+                        }
 
-                this.showModalVerificar();
+                        var contador_cliente = 0;
+                        var contador_cliente_uniclick = 0;
+                        for( var key in array_tipo_cuenta_producto ){
+                            if( array_tipo_cuenta_producto[key] == '3' ){
+                            if( key == 'uniclick' ){
+                                contador_cliente_uniclick += 1;
+                            }else{
+                                contador_cliente += 1;
+                            }
+                            }
+                        }
+                        var id_verificador_uniclick = App.lang.getAppListStrings('verificadores_ids_uniclick_list')[0];
+                        if( contador_cliente_uniclick > 0 && contador_cliente == 0 ){
+                            //ES CLIENTE UNICLICK, SE ESTABLECE ÁREA INTERNA UNICLICK
+                            //Establecer como Visor y aprobador a Samuel Álvarez
+                            if( current_user_id == id_verificador_uniclick ){
+                                self.showModalVerificar();
+                            }else{
+                                app.alert.show("validar_error", {
+                                    level: "error",
+                                    title: 'Error',
+                                    messages: 'No tienes permiso para ejecutar esta acción',
+                                    autoClose: false
+                                });
 
-            }else{
-                app.alert.show("validar_error", {
-                    level: "error",
-                    title: 'Error',
-                    messages: 'El registro no está en proceso de validación',
-                    autoClose: false
-                });
-            }
-            
+                            }
+                        
+                        }
+                        if( contador_cliente > 0 ){
+                            //ES MULTIPRODUCTO, SE ESTABLECE ÁREA INTERNA CRÉDITO
+                            //ESTABLECER COMO VISORES A EQUIPO DE CREDITO
+                            var lista_verificadores = App.lang.getAppListStrings('verificadores_ids_list');
+                            var arr_permiso = [];
+                            Object.keys(lista_verificadores).forEach(function (key) {
+                                if ( lista_verificadores[key]==current_user_id ) {
+                                    arr_permiso.push(1);
+                                }
+                            });
+                    
+                            if( arr_permiso.includes(1)){
+                                self.showModalVerificar();
+                            }else{
+                                app.alert.show("validar_error", {
+                                    level: "error",
+                                    title: 'Error',
+                                    messages: 'No tienes permiso para ejecutar esta acción',
+                                    autoClose: false
+                                });
+                            }                    
+                            
+                        }
+                        
+                        if( contador_cliente == 0 && contador_cliente_uniclick == 0){
+                            //NO ES CLIENTE EN NINGÚN PRODUCTO
+                            console.log('NO ES CLIENTE EN NINGÚN PRODUCTO');
+                            app.alert.show("validar_error", {
+                                level: "error",
+                                title: 'Error',
+                                messages: 'No tienes permiso para ejecutar esta acción',
+                                autoClose: false
+                            });
+
+                        }
+
+                    }
+                
+                }, this)
+            });
         }else{
             app.alert.show("validar_error", {
                 level: "error",
                 title: 'Error',
-                messages: 'No tienes permiso para ejecutar esta acción',
+                messages: 'El registro no está en proceso de validación',
                 autoClose: false
             });
         }
-
 
     },
 
