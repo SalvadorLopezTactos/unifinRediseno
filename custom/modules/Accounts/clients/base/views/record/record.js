@@ -2983,11 +2983,19 @@
                             }
                             }
                         }
-                        var id_verificador_uniclick = App.lang.getAppListStrings('verificadores_ids_uniclick_list')[0];
+                        
                         if( contador_cliente_uniclick > 0 && contador_cliente == 0 ){
+
+                            var lista_verificadores_uniclick = App.lang.getAppListStrings('verificadores_ids_uniclick_list');
+                            var arr_permiso_uniclick = [];
+                            Object.keys(lista_verificadores_uniclick).forEach(function (key) {
+                                if ( lista_verificadores_uniclick[key] == current_user_id ) {
+                                    arr_permiso_uniclick.push(1);
+                                }
+                            })
                             //ES CLIENTE UNICLICK, SE ESTABLECE ÁREA INTERNA UNICLICK
                             //Establecer como Visor y aprobador a Samuel Álvarez
-                            if( current_user_id == id_verificador_uniclick ){
+                            if( arr_permiso_uniclick.includes(1)){
                                 self.showModalVerificar();
                             }else{
                                 app.alert.show("validar_error", {
