@@ -2996,7 +2996,7 @@
                             //ES CLIENTE UNICLICK, SE ESTABLECE ÁREA INTERNA UNICLICK
                             //Establecer como Visor y aprobador a Samuel Álvarez
                             if( arr_permiso_uniclick.includes(1)){
-                                self.showModalVerificar();
+                                this.showModalVerificar();
                             }else{
                                 app.alert.show("validar_error", {
                                     level: "error",
@@ -3020,7 +3020,7 @@
                             });
                     
                             if( arr_permiso.includes(1)){
-                                self.showModalVerificar();
+                                this.showModalVerificar();
                             }else{
                                 app.alert.show("validar_error", {
                                     level: "error",
