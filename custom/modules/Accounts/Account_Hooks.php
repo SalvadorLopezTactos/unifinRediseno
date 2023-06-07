@@ -2488,7 +2488,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $prioridad = 'P4'; // Urgente
         $status = '1'; // No iniciado
         $asignado = ( $plataforma == 'cvimUniclick' || $plataforma == 'UNICLICK' ) ? $idSamuel : $idKarla;
-        $area_interna = ( $plataforma == 'cvimUniclick' || $plataforma == 'UNICLICK' ) ?  '': 'Credito'; // Agregar id de uniclick
+        $area_interna = ( $plataforma == 'cvimUniclick' || $plataforma == 'UNICLICK' ) ?  'Uniclick': 'Credito'; // Agregar id de uniclick
 
         $caso = BeanFactory::newBean('Cases');
         $caso->name = $asunto;
