@@ -267,7 +267,7 @@
 						var Calle = data[0]["Nombre de la vialidad"].toUpperCase();
 						var Exterior = data[0]["Número exterior"].toUpperCase();
 						var Interior = data[0]["Número interior"].toUpperCase();
-						var Colonia = data[0]["Colonia"];
+						var Colonia = (data[0]["Colonia"] != undefined && data[0]["Colonia"] !='') ? data[0]["Colonia"] : ' ' ;
 						var Municipio = data[0]["Municipio o delegación"];
 						var Estado = data[0]["Entidad Federativa"];
 						var Regimen = data[0]["Régimen"];
@@ -514,9 +514,11 @@
 													}
 												});
 												// Agrega Dirección
+                        Colonia = (Colonia == ' ') ? '_' : Colonia;
 												var strUrl = 'DireccionesQR/' + CP + '/0/' + Colonia +'/'+Municipio+'/'+Estado;
 												app.api.call('GET', app.api.buildURL(strUrl), null, {
 													success: _.bind(function (data) {
+                            Colonia = (Colonia == '_') ? ' ' : Colonia;
 														if(data.idCP) {
 															var list_paises = data.paises;
 															var list_municipios = data.municipios;

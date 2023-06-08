@@ -33,7 +33,7 @@ class getDireccionCPQR extends SugarApi
 
     public function getAddressByCPQR($api, $args)
     {
-        $colonia_QR = $args['colonia_rfc'];
+        $colonia_QR = ($args['colonia_rfc']=='_') ? ' ' : $args['colonia_rfc'];
         $cod_postal=$args['cp'];
         $ciudad_QR = $args['ciudad_rfc'];
         $estado_QR = $args['entidad_rfc'];

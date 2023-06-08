@@ -10,5 +10,6 @@ $dictionary['Account']['fields']['json_direccion_audit_c']['enforced']='';
 $dictionary['Account']['fields']['json_direccion_audit_c']['dependency']='';
 $dictionary['Account']['fields']['json_direccion_audit_c']['required_formula']='';
 $dictionary['Account']['fields']['json_direccion_audit_c']['readonly_formula']='';
+$dictionary['Account']['fields']['json_direccion_audit_c']['dbType'] = 'mediumtext';
 
  ?>
