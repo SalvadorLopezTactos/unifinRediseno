@@ -447,7 +447,7 @@ class Seguimiento_Hook
                 $area_interna="='".$bean->area_interna_c."'";
                 $equipo_soporte="='".$bean->equipo_soporte_c."'";
                 $esCAC = isset($current_user->cac_c) ? $current_user->cac_c : false;
-                
+
                 if( !empty( $bean->account_id ) ){
                     $GLOBALS['log']->fatal('Entra validación para establecer área interna');
                     $area_interna_por_cambio_razon_social = $this->getAreaInternaParaCambioRazonSocial( $bean->account_id );
@@ -662,31 +662,35 @@ class Seguimiento_Hook
                     //Recupera valores por producto
                     $tipoCuenta = $product->tipo_cuenta;
                     $tipoProducto = $product->tipo_producto;
+                    $subtipo = $product->subtipo_cuenta; // 11 - Venta Activo
+                    if( $subtipo != "11" ){
+                        switch ($tipoProducto) {
+                            case '1': //Leasing
+                                $array_tipo_cuenta_producto['leasing'] = $tipoCuenta;
+                                break;
+                            case '2': //Crédito Simple
+                                $array_tipo_cuenta_producto['cs'] = $tipoCuenta;
+                                break;
+                            case '3': //Credito-Automotriz
+                                $array_tipo_cuenta_producto['ca'] = $tipoCuenta;
+                                break;
+                            case '4': //Factoraje
+                                $array_tipo_cuenta_producto['factoraje'] = $tipoCuenta;
+                                break;
+                            case '6': //Fleet
+                                $array_tipo_cuenta_producto['fleet'] = $tipoCuenta;
+                                break;
+                            case '8': //Uniclick
+                                $array_tipo_cuenta_producto['uniclick'] = $tipoCuenta;
+                                break;
+                            case '14': //Tarjeta Crédito
+                                $array_tipo_cuenta_producto['tc'] = $tipoCuenta;
+                                break;
+                            
+                        }
 
-                    switch ($tipoProducto) {
-                        case '1': //Leasing
-                            $array_tipo_cuenta_producto['leasing'] = $tipoCuenta;
-                            break;
-                        case '2': //Crédito Simple
-                            $array_tipo_cuenta_producto['cs'] = $tipoCuenta;
-                            break;
-                        case '3': //Credito-Automotriz
-                            $array_tipo_cuenta_producto['ca'] = $tipoCuenta;
-                            break;
-                        case '4': //Factoraje
-                            $array_tipo_cuenta_producto['factoraje'] = $tipoCuenta;
-                            break;
-                        case '6': //Fleet
-                            $array_tipo_cuenta_producto['fleet'] = $tipoCuenta;
-                            break;
-                        case '8': //Uniclick
-                            $array_tipo_cuenta_producto['uniclick'] = $tipoCuenta;
-                            break;
-                        case '14': //Tarjeta Crédito
-                            $array_tipo_cuenta_producto['tc'] = $tipoCuenta;
-                            break;
-                        
                     }
+                    
                 }
 
                 //Recorre arreglo generado para conocer si es multiproducto y el caso se debe asignar a Area Interna Crédito o Uniclick
