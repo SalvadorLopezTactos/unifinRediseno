@@ -53,13 +53,9 @@ class check_duplicateAccounts extends SugarApi
         $count = count($result);
         if ($bean->subtipo_registro_c != "4" && $bean->subtipo_registro_c != "3") { //SUBTIPO DE LEAD ES DIFERENTE DE 4-CONVERTIDO Y DE 3-CANCELADO
             if ($count == 0) {
-
-
                 $responsMeeting = $this->getMeetingsUser($bean);
                 $requeridos = $this->validaRequeridos($bean);
-
-                if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos == "") {
-
+                if ($responsMeeting['status'] != "stop" && $requeridos == "") {
                     /** Creamos la Cuenta */
                     //Obtener el puesto del usuario
                     $idAsesor = $responsMeeting['data']['LEASING'];
@@ -319,6 +315,7 @@ SITE;
 
     public function getMeetingsUser($beanL)
     {
+		global $current_user;
         $procede = array("status" => "stop", "data" => array());
         //Recupera reuniones
         if ($beanL->load_relationship('meetings')) {
@@ -380,10 +377,11 @@ SITE;
                     //}
                 }
             } else {
-                $procede['status'] = "stop";
-                $procede['data'] = array();
-                // $GLOBALS['log']->fatal("No tiene Reuniones no puede continuar aqui rompe  " . print_r($procede, true));
-
+				if(!in_array("Seguros - Creditaria", ACLRole::getUserRoleNames($current_user->id))) {
+					$procede['status'] = "stop";
+					$procede['data'] = array();
+					// $GLOBALS['log']->fatal("No tiene Reuniones no puede continuar aqui rompe  " . print_r($procede, true));
+				} else $procede['status'] = "continue";
             }
         }
         //Recupera llamadas
@@ -447,7 +445,6 @@ SITE;
                 }
             }
         }
-
 
         return $procede;
     }

@@ -325,8 +325,16 @@
 
         if (btnConvert) {
             btnConvert.listenTo(btnConvert, "render", function () {
-
-                if (this.model.get('subtipo_registro_c') == '2') {
+				var roles = app.user.attributes.roles;
+				var creditaria = 0;
+				for(var i=0;i<roles.length;i++)
+				{
+					if(roles[i]==="Seguros - Creditaria")
+					{
+						creditaria = 1;
+					}
+				}
+                if (this.model.get('subtipo_registro_c') == '2' || creditaria) {
                     btnConvert.show();
                 } else {
                     btnConvert.hide();

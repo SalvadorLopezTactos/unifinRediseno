@@ -15,6 +15,19 @@
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
         this.model.addValidationTask('Notifica', _.bind(this.notifica, this));
 		this.model.addValidationTask('puesto', _.bind(this.validaPuesto, this));
+		var roles = app.user.attributes.roles;
+		for(var i=0;i<roles.length;i++)
+		{
+			if(roles[i] === "Seguros - Creditaria")
+			{
+				this.model.set("creditaria_c","Creditaria");
+				this.model.set("user_id1_c",app.user.id);
+				this.model.set("referenciador",app.user.attributes.full_name);
+				this.model.set("requiere_ayuda_c",1);
+				this.addRegion();
+				this.model.set("asesor_vta_cruzada_c",2);
+			}
+		}
     },
 
     _render: function() {
