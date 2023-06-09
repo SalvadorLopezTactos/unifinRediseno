@@ -88,3 +88,4 @@ $mod_strings['LBL_TIPO_POLIZA'] = 'Tipo Póliza';
 $mod_strings['LBL_COT_COTIZACIONES_S_SEGUROS_FROM_COT_COTIZACIONES_TITLE'] = 'Cotizaciones';
 $mod_strings['LBL_COT_COTIZACIONES_S_SEGUROS_FROM_S_SEGUROS_TITLE'] = 'Cotizaciones';
 $mod_strings['LBL_ASESOR_VTA_CRUZADA'] = 'Asesor Seguros Venta Cruzada';
+$mod_strings['LBL_CREDITARIA'] = 'Creditaria';

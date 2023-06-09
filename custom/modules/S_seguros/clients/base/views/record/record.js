@@ -59,20 +59,39 @@
     },
 
     roFunction: function() {
-
-    	if(app.user.get('puestousuario_c') == 59 || app.user.get('puestousuario_c') == 60 || this.model.get('etapa') == 2 || this.model.get('etapa') == 5 || this.model.get('etapa') == 9 || this.model.get('etapa') == 10 || this.model.get('registro_no_valido_c') || (app.user.get('puestousuario_c') != 56 && app.user.get('puestousuario_c') != 58 && this.model.get('etapa') != 1)){
-        if( app.user.get('puestousuario_c') != 56 || app.user.get('puestousuario_c') != 58 && this.model.get('etapa') != 9 ) $('[name="edit_button"]').hide();
-    		_.each(this.model.fields, function(field){
-          if(app.user.get('puestousuario_c') != 56 || app.user.get('puestousuario_c') != 58 && field.name != 'no_poliza_emitida_c' && field.name != 'inicio_vigencia_emitida_c' && field.name != 'fin_vigencia_emitida_c' && field.name != 'prima_neta_emitida_c' && field.name != 'cambio_pn_emitida_c' && field.name != 'prima_total_emitida_c' && field.name != 'cambio_pt_emitida_c' && field.name != 'forma_pago_emitida_c' && field.name != 'aseguradora_emitida_c' && field.name != 'fecha_pago_c' && field.name != 'fecha_aplicacion_c' && field.name != 'razon_cancel_ganada_c' && field.name != 'comentarios_ganada_c' && field.name != 'subetapa_c') {
-            this.noEditFields.push(field.name);
-					  $('.record-edit-link-wrapper[data-name='+field.name+']').remove();
-				  }
-        },this);
-     		this.noEditFields.push('prima_objetivo');
-			  this.$("[data-name='prima_objetivo']").attr('style', 'pointer-events:none;');
-      }
-
-      this.setFieldsEditAdminSeguros();
+		var creditaria = 0;
+		var roles = app.user.attributes.roles;
+		for(var i=0;i<roles.length;i++)
+		{
+			if(roles[i] === "Seguros - Creditaria")
+			{
+				creditaria = 1;
+			}
+		}
+		if(creditaria) {
+			$('[name="edit_button"]').hide();
+			_.each(this.model.fields, function(field){
+				this.noEditFields.push(field.name);
+				this.$('.record-edit-link-wrapper[data-name='+field.name+']').remove();
+				this.$("[data-name='"+field.name+"']").attr('style', 'pointer-events:none;');
+			},this);
+			this.noEditFields.push('prima_objetivo');
+			this.$("[data-name='prima_objetivo']").attr('style', 'pointer-events:none;');
+		}
+		else {
+			if(app.user.get('puestousuario_c') == 59 || app.user.get('puestousuario_c') == 60 || this.model.get('etapa') == 2 || this.model.get('etapa') == 5 || this.model.get('etapa') == 9 || this.model.get('etapa') == 10 || this.model.get('registro_no_valido_c') || (app.user.get('puestousuario_c') != 56 && app.user.get('puestousuario_c') != 58 && this.model.get('etapa') != 1)) {
+				if(app.user.get('puestousuario_c') != 56 || app.user.get('puestousuario_c') != 58 && this.model.get('etapa') != 9 ) $('[name="edit_button"]').hide();
+				_.each(this.model.fields, function(field){
+					if(app.user.get('puestousuario_c') != 56 || app.user.get('puestousuario_c') != 58 && field.name != 'no_poliza_emitida_c' && field.name != 'inicio_vigencia_emitida_c' && field.name != 'fin_vigencia_emitida_c' && field.name != 'prima_neta_emitida_c' && field.name != 'cambio_pn_emitida_c' && field.name != 'prima_total_emitida_c' && field.name != 'cambio_pt_emitida_c' && field.name != 'forma_pago_emitida_c' && field.name != 'aseguradora_emitida_c' && field.name != 'fecha_pago_c' && field.name != 'fecha_aplicacion_c' && field.name != 'razon_cancel_ganada_c' && field.name != 'comentarios_ganada_c' && field.name != 'subetapa_c') {
+						this.noEditFields.push(field.name);
+						$('.record-edit-link-wrapper[data-name='+field.name+']').remove();
+					}
+				},this);
+				this.noEditFields.push('prima_objetivo');
+				this.$("[data-name='prima_objetivo']").attr('style', 'pointer-events:none;');
+			}
+		}
+		this.setFieldsEditAdminSeguros();
     },
 
     setFieldsEditAdminSeguros: function(){
