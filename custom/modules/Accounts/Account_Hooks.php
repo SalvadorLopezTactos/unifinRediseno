@@ -2037,8 +2037,20 @@ where rfc_c = '{$bean->rfc_c}' and
             global $app_list_strings;
 
             $producto_envio = $this->getMultiproductoParaEnvioNotificacion( $bean );
+            if( $producto_envio == 'Uniclick' ){
+                $emails_responsables_cambios_list = $app_list_strings['emails_uniclick_list'];
+            }
 
-            $emails_responsables_cambios_list = ( $producto_envio == 'Uniclick' ) ? $app_list_strings['emails_uniclick_list'] : $app_list_strings['emails_multiproducto_list'];
+            if( $producto_envio == 'Credito' ){
+                $emails_responsables_cambios_list = $app_list_strings['emails_multiproducto_list'];
+            }
+
+            if( $producto_envio == 'Credito-Uniclick' ){
+                $emails_responsables_cambios_list = array_merge( $app_list_strings['emails_uniclick_list'], $app_list_strings['emails_multiproducto_list'] );
+            }
+
+        
+            //$emails_responsables_cambios_list = ( $producto_envio == 'Uniclick' ) ? $app_list_strings['emails_uniclick_list'] : $app_list_strings['emails_multiproducto_list'];
             
             $body_correo = $this->buildBodyCambioRazon( $bean->rfc_c, $text_cambios, $bean->id, $bean->fetched_row['name'] );
             $this->sendEmailCambioRazonSocial( $emails_responsables_cambios_list, $body_correo );
@@ -2237,30 +2249,33 @@ where rfc_c = '{$bean->rfc_c}' and
                     //Recupera valores por producto
                     $tipoCuenta = $product->tipo_cuenta;
                     $tipoProducto = $product->tipo_producto;
+                    $subtipo = $product->subtipo_cuenta; // 11 - Venta Activo
+                    if( $subtipo != "11" ){
 
-                    switch ($tipoProducto) {
-                        case '1': //Leasing
-                            $array_tipo_cuenta_producto['leasing'] = $tipoCuenta;
-                            break;
-                        case '2': //Crédito Simple
-                            $array_tipo_cuenta_producto['cs'] = $tipoCuenta;
-                            break;
-                        case '3': //Credito-Automotriz
-                            $array_tipo_cuenta_producto['ca'] = $tipoCuenta;
-                            break;
-                        case '4': //Factoraje
-                            $array_tipo_cuenta_producto['factoraje'] = $tipoCuenta;
-                            break;
-                        case '6': //Fleet
-                            $array_tipo_cuenta_producto['fleet'] = $tipoCuenta;
-                            break;
-                        case '8': //Uniclick
-                            $array_tipo_cuenta_producto['uniclick'] = $tipoCuenta;
-                            break;
-                        case '14': //Tarjeta Crédito
-                            $array_tipo_cuenta_producto['tc'] = $tipoCuenta;
-                            break;
-                        
+                        switch ($tipoProducto) {
+                            case '1': //Leasing
+                                $array_tipo_cuenta_producto['leasing'] = $tipoCuenta;
+                                break;
+                            case '2': //Crédito Simple
+                                $array_tipo_cuenta_producto['cs'] = $tipoCuenta;
+                                break;
+                            case '3': //Credito-Automotriz
+                                $array_tipo_cuenta_producto['ca'] = $tipoCuenta;
+                                break;
+                            case '4': //Factoraje
+                                $array_tipo_cuenta_producto['factoraje'] = $tipoCuenta;
+                                break;
+                            case '6': //Fleet
+                                $array_tipo_cuenta_producto['fleet'] = $tipoCuenta;
+                                break;
+                            case '8': //Uniclick
+                                $array_tipo_cuenta_producto['uniclick'] = $tipoCuenta;
+                                break;
+                            case '14': //Tarjeta Crédito
+                                $array_tipo_cuenta_producto['tc'] = $tipoCuenta;
+                                break;
+                            
+                        }
                     }
             }
 
@@ -2282,7 +2297,13 @@ where rfc_c = '{$bean->rfc_c}' and
                     $area_interna = 'Uniclick';
                 
                 }
-                if( $contador_cliente > 0 ){
+                if( $contador_cliente > 0 && $contador_cliente_uniclick > 0 ){
+                    //ES MULTIPRODUCTO, SE ESTABLECE ÁREA INTERNA CRÉDITO
+                    $GLOBALS['log']->fatal("ES MULTIPRODUCTO Y CLIENTE UNICLICK");
+                    $area_interna = 'Credito-Uniclick';
+                }
+
+                if( $contador_cliente > 0 && $contador_cliente_uniclick == 0 ){
                     //ES MULTIPRODUCTO, SE ESTABLECE ÁREA INTERNA CRÉDITO
                     $GLOBALS['log']->fatal("ES MULTIPRODUCTO, SE ESTABLECE ÁREA INTERNA CRÉDITO");
                     $area_interna = 'Credito';
@@ -2291,7 +2312,7 @@ where rfc_c = '{$bean->rfc_c}' and
                 if( $contador_cliente == 0 && $contador_cliente_uniclick == 0){
                     //NO ES CLIENTE EN NINGÚN PRODUCTO
                     $GLOBALS['log']->fatal("NO ES CLIENTE EN NINGÚN PRODUCTO");
-                    $area_interna = '';
+                    $area_interna = 'Credito';
                 }
 
         }
