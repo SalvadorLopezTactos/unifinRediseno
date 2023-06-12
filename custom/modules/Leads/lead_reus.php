@@ -6,15 +6,15 @@ class class_lead_reus
     public function func_lead_reus($bean = null, $event = null, $args = null)
     {
         //Ejecuta validación
-        $errorcorreo = $this->func_valida_correos($bean);
-        $errortel = $this->func_valida_telefonos($bean);
+        //$errorcorreo = $this->func_valida_correos($bean);
+        //$errortel = $this->func_valida_telefonos($bean);
         //Interpreta resultado
-        if(!$errorcorreo || !$errortel){
-            $bean->pendiente_reus_c = 1;
-        }else{
-            $bean->pendiente_reus_c = 0;
-        }
-        $GLOBALS['log']->fatal('Validación REUS - Correos: '.$errorcorreo.' , Teléfonos: '. $errortel . ' , Pendiente REUS: '.$bean->pendiente_reus_c);
+        //if(!$errorcorreo || !$errortel){
+        //    $bean->pendiente_reus_c = 1;
+        //}else{
+        //    $bean->pendiente_reus_c = 0;
+        //}
+        //$GLOBALS['log']->fatal('Validación REUS - Correos: '.$errorcorreo.' , Teléfonos: '. $errortel . ' , Pendiente REUS: '.$bean->pendiente_reus_c);
     }
 
     public function func_valida_correos($bean = null)
