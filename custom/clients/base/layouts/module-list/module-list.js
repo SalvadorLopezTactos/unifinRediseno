@@ -5,11 +5,18 @@
 	
 	_addDefaultMenus: function() {
 		var moduleList = app.metadata.getModuleNames({filter: 'display_tab', access: 'read'});
-		
-		
         //moduleList.push('Expediente');
         moduleList.push('ExpedienteUniclick');
-        moduleList.splice(8, 0, 'Quantico');
+		var creditaria = 0;
+		var roles = app.user.attributes.roles;
+		for(var i=0;i<roles.length;i++)
+		{
+			if(roles[i] != "Seguros - Creditaria")
+			{
+				creditaria = 1;
+			}
+		}
+		if(!creditaria) moduleList.splice(8, 0, 'Quantico');
         moduleList.push('CotizadorProspectos');
         //moduleList.push('Quantico');
         _.each(moduleList, function(module) {
