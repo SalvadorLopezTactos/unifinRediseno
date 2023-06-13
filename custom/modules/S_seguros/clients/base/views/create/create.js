@@ -26,6 +26,7 @@
 				this.model.set("requiere_ayuda_c",1);
 				this.addRegion();
 				this.model.set("asesor_vta_cruzada_c",2);
+				this.model.set("ejecutivo_c","6");
 				this.model.set("tipo_venta_c",9);
 			}
 		}
