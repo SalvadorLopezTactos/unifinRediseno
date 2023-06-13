@@ -20,7 +20,7 @@
         moduleList.push('CotizadorProspectos');
         //moduleList.push('Quantico');
         _.each(moduleList, function(module) {
-			if(module != "OutboundEmail") this._addMenu(module, true);
+			this._addMenu(module, true);
         }, this);
 	},
 
