@@ -24,17 +24,17 @@
 
     _render: function() {
         this._super("_render");
-        //Desabilita accion sobre pipeline
-        $('[data-name="seguro_pipeline"]').attr('style', 'pointer-events:none');
-        //Oculta etiqueta del campo custom pipeline_opp
-        $("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
-        //Desabilita edicion campo pipeline
-        this.noEditFields.push('seguro_pipeline');
         //Oculta campo UNI2
         this.$('[data-name=seguro_uni2_c]').hide();
         //Oculta espacio en blanco
         this.$(".record-cell[data-name='blank_space']").hide();
         this._disableActionsSubpanel();
+        //Desabilita accion sobre pipeline
+        this.$('[data-name="seguro_pipeline"]').attr('style', 'pointer-events:none');
+        //Oculta etiqueta del campo custom pipeline_opp
+        this.$("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
+        //Desabilita edicion campo pipeline
+        this.noEditFields.push('seguro_pipeline');
     },
 
     setTipo: function() {
@@ -324,6 +324,7 @@
     },
 
     _disableActionsSubpanel: function () {
+	  this.$("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
       if (this.model.get('tipo_registro_sf_c')=='2' &&  (this.model.get('requiere_ayuda_c')=='1' || this.model.get('requiere_ayuda_c')=='')){
         $('[data-subpanel-link="cot_cotizaciones_s_seguros"]').find(".subpanel-controls").hide();
       }

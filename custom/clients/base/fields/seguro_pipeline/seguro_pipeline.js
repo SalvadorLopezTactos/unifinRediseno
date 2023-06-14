@@ -10,6 +10,7 @@
 
     _render: function () {
         this._super("_render");
+		this.$("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
     },
 
     pipelineseguro: function (){
