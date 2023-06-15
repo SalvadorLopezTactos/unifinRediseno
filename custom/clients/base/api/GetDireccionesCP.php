@@ -33,6 +33,21 @@ class GetDireccionesCP extends SugarApi
                 //long help to be displayed in the help documentation
                 'longHelp' => '',
             ),
+            'getInfoSepomex' => array(
+              //request type
+              'reqType' => 'GET',
+              'noLoginRequired' => true,
+              //endpoint path
+              'path' => array('InfoSepomex', '?','?'),
+              //endpoint variables
+              'pathVars' => array('module', 'idSepomex','indice'),
+              //method to call
+              'method' => 'getInfoSepomex',
+              //short help string to be displayed in the help documentation
+              'shortHelp' => 'Obtiene información de registro específico de Sepomex para obtener toda la información de campos relacionados',
+              //long help to be displayed in the help documentation
+              'longHelp' => '',
+            ),
 
 
         );
@@ -59,6 +74,7 @@ class GetDireccionesCP extends SugarApi
         }
         //$indice= (strval($args['indice'])=="")? "0" : $args['indice'];
 
+        /*
         $query = "SELECT
   cp.id                                                   AS idCP,
   cp.name                                                 AS nameCP,
@@ -93,17 +109,36 @@ FROM dire_codigopostal cp
   -- on co.codigo_postal = cp.name
     ON co.id LIKE concat(cp_m.dire_codigopostal_dire_municipiodire_municipio_ida, cp.name, '%') and co.deleted=0
 WHERE cp.name = '{$cp}'";
+*/
 
-        //LOG Plataforma:
-        $GLOBALS['log']->fatal("Consulta GetDireccionesCP - CP: " .$cp . ' - Usuario: ' . $GLOBALS['current_user']->user_name. ' - Plataforma: ' . $GLOBALS['service']->platform);
+        $query="SELECT
+        id as idCP,
+        codigo_postal as nameCP,
+        id_municipio as idMunicipio,
+        municipio as nameMunicipio,
+        id_estado as idEstado,
+        estado as nameEstado,
+        id_pais as idPais,
+        pais as namePais,
+        id_ciudad as idCiudad,
+        ciudad as nameCiudad,
+        id_colonia as idColonia,
+        colonia as nameColonia
+        FROM dir_sepomex
+        WHERE codigo_postal='{$cp}'
+        AND deleted=0";
+
         $result = $GLOBALS['db']->query($query);
 
         $arrPadre= array('paises'=>array(),'municipios'=>array(),'estados'=>array(),'colonias'=>array(),'ciudades'=>array());
 
-
         $pos=0;
-
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+
+            if($pos==0){
+              $idCP=$row['idCP'];
+              $codigoPostal=$row['nameCP'];
+            }
 
             $idPais=$row['idPais'];
             $namePais = $row['namePais'];
@@ -123,8 +158,11 @@ WHERE cp.name = '{$cp}'";
             $arrPais=array('idPais'=>$idPais,'namePais'=>$namePais);
             $arrMunicipio=array('idMunicipio'=>$idMunicipio,'nameMunicipio'=>$nameMunicipio);
             $arrEstado=array('idEstado'=>$idEstado,'nameEstado'=>$nameEstado);
-            $arrColonia=array('idColonia'=>$idColonia,'nameColonia'=>$nameColonia);
+            $arrColonia=array('idColonia'=>$idColonia,'nameColonia'=>$nameColonia,'idCodigoPostal'=>$row['idCP']);
             $arrCiudad=array('idCiudad'=>$idCiudad,'nameCiudad'=>$nameCiudad);
+
+            $arrPadre['idCP']=$idCP;
+            $arrPadre['nameCP']=$codigoPostal;
 
             $arrPadre['paises'][$pos]=$arrPais;
             $arrPadre['municipios'][$pos]=$arrMunicipio;
@@ -153,19 +191,45 @@ WHERE cp.name = '{$cp}'";
         $arrPadre['colonias']=$arrNewColonias;
         $arrPadre['ciudades']=$arrNewCiudades;
 
+        /*
         $queryIdCP="SELECT id FROM dire_codigopostal WHERE name='{$cp}' LIMIT 1;";
         $resultID = $GLOBALS['db']->query($queryIdCP);
         while ($row = $GLOBALS['db']->fetchByAssoc($resultID)) {
             $idCP=$row['id'];
         }
+        */
 
-        $arrPadre['idCP']=$idCP;
+        //$arrPadre['idCP']=$idCP;
         $arrPadre['indice']=$indice;
 
         return $arrPadre;
 
     }
 
+
+    public function getInfoSepomex($api, $args)
+    {
+        $response = array();
+        $idSepomex=$args['idSepomex'];
+        $indice = "0";
+        if (!empty($args['indice'])) {
+          $indice = $args['indice'];
+        }
+
+        $query="SELECT * FROM dir_sepomex WHERE id = '{$idSepomex}';";
+
+        $resultSepomex = $GLOBALS['db']->query($query);
+
+        while ($row = $GLOBALS['db']->fetchByAssoc($resultSepomex)) {
+
+          $response = $row;
+          $response['indice'] = $indice;
+          
+        }
+
+        return $response;
+
+    }
 
 }
 
