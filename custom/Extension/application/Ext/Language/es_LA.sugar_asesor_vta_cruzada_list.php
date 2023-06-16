@@ -1,5 +1,5 @@
 <?php
- // created: 2023-03-29 17:45:53
+ // created: 2023-06-15 12:40:20
 
 $app_list_strings['asesor_vta_cruzada_list']=array (
   '' => '',
@@ -7,4 +7,5 @@ $app_list_strings['asesor_vta_cruzada_list']=array (
   2 => 'Paola Jímenez',
   3 => 'Claudia Cardos',
   4 => 'Humberto Ruiz',
+  5 => 'Veronica Gutierrez',
 );

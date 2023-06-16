@@ -11,7 +11,7 @@
 		var roles = app.user.attributes.roles;
 		for(var i=0;i<roles.length;i++)
 		{
-			if(roles[i] != "Seguros - Creditaria")
+			if(roles[i] == "Seguros - Creditaria")
 			{
 				creditaria = 1;
 			}
@@ -20,7 +20,7 @@
         moduleList.push('CotizadorProspectos');
         //moduleList.push('Quantico');
         _.each(moduleList, function(module) {
-            this._addMenu(module, true);
+			this._addMenu(module, true);
         }, this);
 	},
 

@@ -24,17 +24,17 @@
 
     _render: function() {
         this._super("_render");
-        //Desabilita accion sobre pipeline
-        $('[data-name="seguro_pipeline"]').attr('style', 'pointer-events:none');
-        //Oculta etiqueta del campo custom pipeline_opp
-        $("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
-        //Desabilita edicion campo pipeline
-        this.noEditFields.push('seguro_pipeline');
         //Oculta campo UNI2
         this.$('[data-name=seguro_uni2_c]').hide();
         //Oculta espacio en blanco
         this.$(".record-cell[data-name='blank_space']").hide();
         this._disableActionsSubpanel();
+        //Desabilita accion sobre pipeline
+        this.$('[data-name="seguro_pipeline"]').attr('style', 'pointer-events:none');
+        //Oculta etiqueta del campo custom pipeline_opp
+        this.$("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
+        //Desabilita edicion campo pipeline
+        this.noEditFields.push('seguro_pipeline');
     },
 
     setTipo: function() {
@@ -77,6 +77,11 @@
 			},this);
 			this.noEditFields.push('prima_objetivo');
 			this.$("[data-name='prima_objetivo']").attr('style', 'pointer-events:none;');
+			this.$('[data-name=comision_tec_c]').hide();
+			this.$('[data-name=comision_c]').hide();
+			this.$('[data-name=prima_neta]').hide();
+			this.$('[data-name=incentivo]').hide();
+			this.$('[data-name=ingreso_ref]').hide();
 		}
 		else {
 			if(app.user.get('puestousuario_c') == 59 || app.user.get('puestousuario_c') == 60 || this.model.get('etapa') == 2 || this.model.get('etapa') == 5 || this.model.get('etapa') == 9 || this.model.get('etapa') == 10 || this.model.get('registro_no_valido_c') || (app.user.get('puestousuario_c') != 56 && app.user.get('puestousuario_c') != 58 && this.model.get('etapa') != 1)) {
@@ -324,6 +329,7 @@
     },
 
     _disableActionsSubpanel: function () {
+	  this.$("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
       if (this.model.get('tipo_registro_sf_c')=='2' &&  (this.model.get('requiere_ayuda_c')=='1' || this.model.get('requiere_ayuda_c')=='')){
         $('[data-subpanel-link="cot_cotizaciones_s_seguros"]').find(".subpanel-controls").hide();
       }
