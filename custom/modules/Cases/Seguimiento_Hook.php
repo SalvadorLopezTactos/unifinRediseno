@@ -448,7 +448,7 @@ class Seguimiento_Hook
                 $equipo_soporte="='".$bean->equipo_soporte_c."'";
                 $esCAC = isset($current_user->cac_c) ? $current_user->cac_c : false;
 
-                if( !empty( $bean->account_id ) ){
+                if( !empty( $bean->account_id ) && $bean->valida_cambio_fiscal_c == 1 ){
                     $GLOBALS['log']->fatal('Entra validación para establecer área interna');
                     $area_interna_por_cambio_razon_social = $this->getAreaInternaParaCambioRazonSocial( $bean->account_id );
                     if( $area_interna_por_cambio_razon_social !== "" ){

@@ -1006,7 +1006,9 @@
         model.set('account_name', contexto_cuenta.model.get('name'));
         model.set('producto_c','SC6'); //Seguimiento comercial
         model.set('type','15'); //Cambio nombre
-        model.set('area_interna_c','Credito');  //Crédito
+		model.set('area_interna_c','Credito');  //Crédito
+		//Fix: Establece bandera para que asignación de casos únicamente se aplique cuando hay un cambio de dirección fiscal o razón social
+		model.set('valida_cambio_fiscal_c',1);
         if(App.user.attributes.cac_c){
             var asignadoId = infoUser['id'] != '' ? infoUser['id'] : App.user.id;
             var asignadoName = infoUser['name'] != '' ? infoUser['name'] :App.user.attributes.full_name;
@@ -1069,7 +1071,9 @@
         model.set('account_name', contexto_cuenta.model.get('name'));
         model.set('producto_c','SC6'); //Seguimiento comercial
         model.set('type','16'); //Cambio dirección
-        model.set('area_interna_c','Credito');  //Crédito
+		model.set('area_interna_c','Credito');  //Crédito
+		//Fix: Establece bandera para que asignación de casos únicamente se aplique cuando hay un cambio de dirección fiscal o razón social
+		model.set('valida_cambio_fiscal_c',1);
         if(App.user.attributes.cac_c){
             var asignadoId = infoUser['id'] != '' ? infoUser['id'] : App.user.id;
             var asignadoName = infoUser['name'] != '' ? infoUser['name'] :App.user.attributes.full_name;
@@ -1118,7 +1122,9 @@
         model.set('account_name', contexto_cuenta.model.get('name'));
         model.set('producto_c','SC6'); //Seguimiento comercial
         model.set('type','17'); //Cambio nombre y dirección
-        model.set('area_interna_c','Credito');  //Crédito
+		model.set('area_interna_c','Credito');  //Crédito
+		//Fix: Establece bandera para que asignación de casos únicamente se aplique cuando hay un cambio de dirección fiscal o razón social
+		model.set('valida_cambio_fiscal_c',1);
         if(App.user.attributes.cac_c){
             var asignadoId = infoUser['id'] != '' ? infoUser['id'] : App.user.id;
             var asignadoName = infoUser['name'] != '' ? infoUser['name'] :App.user.attributes.full_name;
