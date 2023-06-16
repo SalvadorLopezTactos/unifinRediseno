@@ -1,5 +1,5 @@
 <?php
-// created: 2023-06-16 15:02:33
+// created: 2023-06-16 16:46:28
 $searchFields['Cot_Cotizaciones'] = array (
   'name' => 
   array (
