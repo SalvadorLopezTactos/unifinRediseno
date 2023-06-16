@@ -19,3 +19,5 @@ $mod_strings['LBL_COT_COTIZACIONES_S_SEGUROS_FROM_S_SEGUROS_TITLE'] = 'Oportunid
 $mod_strings['LBL_ASEGURADORA'] = 'Aseguradora';
 $mod_strings['LBL_CURRENCY_0'] = 'LBL_CURRENCY';
 $mod_strings['LBL_CURRENCY_1'] = 'LBL_CURRENCY';
+$mod_strings['LBL_CURRENCY_2'] = 'LBL_CURRENCY';
+$mod_strings['LBL_CURRENCY_3'] = 'LBL_CURRENCY';
