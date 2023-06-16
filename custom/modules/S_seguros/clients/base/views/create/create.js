@@ -49,6 +49,7 @@
 		if(this.creditaria) {
 			this.$('[data-name=comision_tec_c]').hide();
 			this.$('[data-name="tipo_venta_c"]').attr('style', 'pointer-events:none');
+			this.$('[data-name="asesor_vta_cruzada_c"]').attr('style', 'pointer-events:none');
 		}
     },
 
