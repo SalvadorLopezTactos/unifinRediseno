@@ -71,9 +71,13 @@ function job_envio_notificacion_razon_social()
 
                                     $plataforma_json = $objeto_json_direccion["plataforma"];
 
+                                    /*
                                     $direcciones_completas = buildNamesDireccionesCompletas($objeto_json_direccion);
                                     $direccion_actual_completa = $direcciones_completas[0];
                                     $direccion_por_actualizar_completa = $direcciones_completas[1];
+                                    */
+                                    $direccion_actual_completa = $objeto_json_direccion['direccion_completa_actual'];
+                                    $direccion_por_actualizar_completa = $objeto_json_direccion['direccion_completa_por_actualizar'];
 
                                     $text_cambios .= '<li><b>Dirección fiscal</b>: <b>tenía el valor </b>'. ucwords($direccion_actual_completa) .'<b> y cambió a </b>'.ucwords($direccion_por_actualizar_completa).'</b></li>';
                                 }
@@ -132,7 +136,7 @@ function job_envio_notificacion_razon_social()
 
 function buildNamesDireccionesCompletas( $jsonDirecciones ){
     global $db;
-    $GLOBALS['log']->fatal("ENTRÓ OTRA FUNCIÓN DESDE JOB");
+    //$GLOBALS['log']->fatal("ENTRÓ OTRA FUNCIÓN DESDE JOB");
     
     $direccion_completa_actual = "";
     $direccion_completa_por_actualizar = "";

@@ -145,12 +145,26 @@
         var estado = obj_direccion['listEstado'][obj_direccion['estado']];
         var municipio = obj_direccion['listMunicipio'][obj_direccion['municipio']];
         var ciudad = obj_direccion['listCiudad'][obj_direccion['ciudad']];
-        var colonia = obj_direccion['listColonia'][obj_direccion['colonia']];
+        var colonia = this.searchNameColonia( obj_direccion['colonia'], obj_direccion['listColonia'] );
         var exterior = obj_direccion['numext'];
         var interior = obj_direccion['numint'];
 
         return "Calle: "+ calle + ", CP: "+ cp + ", País: " + pais +", Estado: "+ estado +", Municipio: "+ municipio +", Ciudad: "+ ciudad +", Colonia: "+ colonia +", Número exterior: "+ exterior +", Número interior: "+ interior;
     },
+
+    searchNameColonia: function ( idColonia, listaColonias ){
+        var nombreColonia = "";
+
+        for (let index = 0; index < Object.keys(listaColonias).length; index++) {
+            if( listaColonias[index].idColonia == idColonia ){
+                nombreColonia = listaColonias[index].nameColonia;
+
+                index = Object.keys(listaColonias).length;
+            }
+        }
+
+        return nombreColonia;
+    }, 
 
     rechazarCambios: function(e) {
 

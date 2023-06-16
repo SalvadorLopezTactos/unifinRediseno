@@ -106,26 +106,32 @@ class GetCambiosRazonDireFiscal extends SugarApi
             }
 
             //En caso de tener 5 caracteres en el string, quiere decir que es el CP y hay que obtener el id del Código Postal
+            /*
             if( strlen($args['direccion']['cp_por_actualizar']) == 5 ){
                 $id_codigo_postal = $this->getIdCodigoPostal( $args['direccion']['cp_por_actualizar'] );
             }else{
                 $id_codigo_postal =  $args['direccion']['cp_por_actualizar'];
             }
+            */
            
             $beanDireccion = BeanFactory::getBean('dire_Direccion', $id_direccion , array('disable_row_level_security' => true));
             if( isset($args['direccion']['indicador']) && $args['direccion']['indicador'] !== "" ){
                 $beanDireccion->indicador = $args['direccion']['indicador'];
             }
-            $beanDireccion->dire_direccion_dire_codigopostaldire_codigopostal_ida = $id_codigo_postal;
+            
+            //Se establece relación entre la dirección y sepomex, para que al ejecutar el save(), los campos calculados de disparen
+            $beanDireccion->dir_sepomex_dire_direcciondir_sepomex_ida = $args['direccion']['id_sepomex_por_actualizar'];
+            /*
             $beanDireccion->dire_direccion_dire_paisdire_pais_ida = $args['direccion']['pais_por_actualizar'];
             $beanDireccion->dire_direccion_dire_estadodire_estado_ida = $args['direccion']['estado_por_actualizar'];
             $beanDireccion->dire_direccion_dire_municipiodire_municipio_ida = $args['direccion']['municipio_por_actualizar'];
             $beanDireccion->dire_direccion_dire_ciudaddire_ciudad_ida = $args['direccion']['ciudad_por_actualizar'];
             $beanDireccion->dire_direccion_dire_coloniadire_colonia_ida = $args['direccion']['colonia_por_actualizar'];
+            */
             $beanDireccion->calle =$args['direccion']['calle_por_actualizar'];
             $beanDireccion->numext =$args['direccion']['numext_por_actualizar'];
             $beanDireccion->numint =$args['direccion']['numint_por_actualizar'];
-            $direccion_completa = $args['direccion']['calle_por_actualizar'] . " " . $args['direccion']['numext_por_actualizar'] . " " . ($args['direccion']['numint_por_actualizar'] != "" ? "Int: " . $args['direccion']['numint_por_actualizar'] : "") . ", Colonia " . $beanDireccion->dire_direccion_dire_colonia_name . ", Municipio " . $beanDireccion->dire_direccion_dire_municipio_name;
+            $direccion_completa = $args['direccion']['calle_por_actualizar'] . " " . $args['direccion']['numext_por_actualizar'] . " " . ($args['direccion']['numint_por_actualizar'] != "" ? "Int: " . $args['direccion']['numint_por_actualizar'] : "") . ", Colonia " . $args['direccion']['colonia_por_actualizar'] . ", Municipio " . $args['direccion']['municipio_por_actualizar'];
 
             $beanDireccion->name = $direccion_completa;
             $beanDireccion->cambio_direccion_c = 0;
@@ -145,7 +151,7 @@ class GetCambiosRazonDireFiscal extends SugarApi
             if( count($direcciones) > 0 ){
                 for ($i=0; $i < count($direcciones); $i++) {
                     $id_direccion = $direcciones[$i]['id'];
-
+                    
                     if( $id_direccion != "" ){
                         $bean_direccion = BeanFactory::getBean('dire_Direccion', $id_direccion , array('disable_row_level_security' => true));
 
@@ -160,17 +166,20 @@ class GetCambiosRazonDireFiscal extends SugarApi
                         $tipo_string .= '^' . $direcciones[$i]['tipodedireccion'][0] . '^';
                     }
                     $bean_direccion->tipodedireccion = $tipo_string;
-
-                    $bean_direccion->dire_direccion_dire_codigopostaldire_codigopostal_ida = $direcciones[$i]['postal'];
-                    $bean_direccion->dire_direccion_dire_paisdire_pais_ida = $direcciones[$i]['pais'];
-                    $bean_direccion->dire_direccion_dire_estadodire_estado_ida = $direcciones[$i]['estado'];
-                    $bean_direccion->dire_direccion_dire_municipiodire_municipio_ida = $direcciones[$i]['municipio'];
-                    $bean_direccion->dire_direccion_dire_ciudaddire_ciudad_ida = $direcciones[$i]['ciudad'];
-                    $bean_direccion->dire_direccion_dire_coloniadire_colonia_ida = $direcciones[$i]['colonia'];
+                    //Se establece relación entre la dirección y registro sepomex, al tener campos calculados, 
+                    //al ejecutar save(), se dispara la actualización de los campos calculados y no es necesario actualizar uno por uno
+                    $bean_direccion->dir_sepomex_dire_direcciondir_sepomex_ida = $direcciones[$i]['postal'];
                     $bean_direccion->calle = $direcciones[$i]['calle'];
                     $bean_direccion->numext = $direcciones[$i]['numext'];
                     $bean_direccion->numint = $direcciones[$i]['numint'];
 
+                    //$bean_direccion->dire_direccion_dire_codigopostaldire_codigopostal_ida = $direcciones[$i]['postal'];
+                    //$bean_direccion->dire_direccion_dire_paisdire_pais_ida = $direcciones[$i]['pais'];
+                    //$bean_direccion->dire_direccion_dire_estadodire_estado_ida = $direcciones[$i]['estado'];
+                    //$bean_direccion->dire_direccion_dire_municipiodire_municipio_ida = $direcciones[$i]['municipio'];
+                    //$bean_direccion->dire_direccion_dire_ciudaddire_ciudad_ida = $direcciones[$i]['ciudad'];
+                    //$bean_direccion->dire_direccion_dire_coloniadire_colonia_ida = $direcciones[$i]['colonia'];
+                    
                     $bean_direccion->save();
 
                     array_push($response,"Direccion " .$bean_direccion->id. " actualizada correctamente");

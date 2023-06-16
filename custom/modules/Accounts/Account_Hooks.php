@@ -2463,24 +2463,25 @@ where rfc_c = '{$bean->rfc_c}' and
                         $i = count($direcciones);
                     }
                 }
-                $GLOBALS['log']->fatal("******OBJETO DIRECCIONES*****");
-                $GLOBALS['log']->fatal(print_r($direcciones,true));
+                //$GLOBALS['log']->fatal("******OBJETO DIRECCIONES*****");
+                //$GLOBALS['log']->fatal(print_r($direcciones,true));
                 $elementoDirFiscalActual = $direcciones[$posicion_direccion_fiscal];
 
                 $cp = $elementoDirFiscalActual['valCodigoPostal'];
                 $calle = $elementoDirFiscalActual['calle'];
-                /*
+                
                 $pais = $elementoDirFiscalActual['listPais'][$elementoDirFiscalActual['pais']];
                 $estado = $elementoDirFiscalActual['listEstado'][$elementoDirFiscalActual['estado']]; 
                 $municipio = $elementoDirFiscalActual['listMunicipio'][$elementoDirFiscalActual['municipio']]; 
                 $ciudad = $elementoDirFiscalActual['listCiudad'][$elementoDirFiscalActual['ciudad']];
-                $colonia = $elementoDirFiscalActual['listColonia'][$elementoDirFiscalActual['colonia']];
-                */
-                $pais = $elementoDirFiscalActual['valPais'];
+                $colonia = $this->searchNameColonia( $elementoDirFiscalActual['colonia'], $elementoDirFiscalActual['listColonia'] );
+                /*
+                $pais = $elementoDirFiscalActual['listPais'][$elementoDirFiscalActual['pais']];
                 $estado = $elementoDirFiscalActual['valEstado']; 
                 $municipio = $elementoDirFiscalActual['valMunicipio']; 
                 $ciudad = $elementoDirFiscalActual['valCiudad'];
                 $colonia = $elementoDirFiscalActual['valColonia'];
+                */
                 $numext = $elementoDirFiscalActual['numext'];
                 $numint = $elementoDirFiscalActual['numint'];
 
@@ -2490,6 +2491,20 @@ where rfc_c = '{$bean->rfc_c}' and
         }
         
         return array($direccion_completa,$elementoDirFiscalActual);
+    }
+
+    public function searchNameColonia( $idColonia, $listaColonias ){
+        $nombreColonia = "";
+        for ($i=0; $i < count( $listaColonias ) ; $i++) { 
+            if( $listaColonias[$i]['idColonia'] == $idColonia ){
+                $nombreColonia = $listaColonias[$i]['nameColonia'];
+
+                //Rompe ciclo
+                $i = count( $listaColonias );
+            }
+        }
+
+        return $nombreColonia;
     }
 
     public function buildBodyCambioRazon( $rfc, $text_cambios, $idCuenta, $nombreCuenta ){
