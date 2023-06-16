@@ -77,6 +77,11 @@
 			},this);
 			this.noEditFields.push('prima_objetivo');
 			this.$("[data-name='prima_objetivo']").attr('style', 'pointer-events:none;');
+			this.$('[data-name=comision_tec_c]').hide();
+			this.$('[data-name=comision_c]').hide();
+			this.$('[data-name=prima_neta]').hide();
+			this.$('[data-name=incentivo]').hide();
+			this.$('[data-name=ingreso_ref]').hide();
 		}
 		else {
 			if(app.user.get('puestousuario_c') == 59 || app.user.get('puestousuario_c') == 60 || this.model.get('etapa') == 2 || this.model.get('etapa') == 5 || this.model.get('etapa') == 9 || this.model.get('etapa') == 10 || this.model.get('registro_no_valido_c') || (app.user.get('puestousuario_c') != 56 && app.user.get('puestousuario_c') != 58 && this.model.get('etapa') != 1)) {

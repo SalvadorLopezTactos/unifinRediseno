@@ -319,7 +319,7 @@
         this.$(".record-cell[data-name='blank_space']").hide();
 		var seguros = 0;
         for (var i = 0; i < app.user.attributes.roles.length; i++) {
-            if (app.user.attributes.roles[i] == "Seguros") seguros = 1;
+            if (app.user.attributes.roles[i] == "Seguros" || app.user.attributes.roles[i] == "Seguros - Creditaria") seguros = 1;
         }
         var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c + seguros;
         if (accesoFiscal == 0) {
@@ -2450,7 +2450,7 @@
     valida_requeridos: function (fields, errors, callback) {
 		var seguros = 0;
         for (var i = 0; i < app.user.attributes.roles.length; i++) {
-            if (app.user.attributes.roles[i] == "Seguros") seguros = 1;
+            if (app.user.attributes.roles[i] == "Seguros" || app.user.attributes.roles[i] == "Seguros - Creditaria") seguros = 1;
         }
 		if(!seguros) {
 			var campos = "";
@@ -3388,7 +3388,7 @@
     requeridosUniclickCanal: function (fields, errors, callback) {
 		var seguros = 0;
         for (var i = 0; i < app.user.attributes.roles.length; i++) {
-            if (app.user.attributes.roles[i] == "Seguros") seguros = 1;
+            if (app.user.attributes.roles[i] == "Seguros" || app.user.attributes.roles[i] == "Seguros - Creditaria") seguros = 1;
         }
 		if(!seguros) {
 			var faltantesUniclickCanal = 0;

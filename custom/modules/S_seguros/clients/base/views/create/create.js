@@ -3,12 +3,14 @@
 
     initialize: function (options) {
         self = this;
+		this.creditaria = 0;
         this._super("initialize", [options]);
 		this.model.on("change:tipo_sf_c",this.perIncentivo, this);
 		this.model.on("change:tipo_venta_c",this.perIncentivo, this);
         this.model.on("change:referenciador",this.addRegion, this);
         this.model.on("change:empleados_c",this.adDepartment, this);
         this.model.on("change:tipo_cuenta_c",this.setTipo, this);
+		this.model.on("change:oficina_c",this.setASVC, this);
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));
         this.model.addValidationTask('fecha_cierre_c', _.bind(this.fechaCierre, this));
         this.model.addValidationTask('referenciador', _.bind(this.validauser, this));
@@ -28,6 +30,7 @@
 				this.model.set("asesor_vta_cruzada_c",2);
 				this.model.set("ejecutivo_c","6");
 				this.model.set("tipo_venta_c",9);
+				this.creditaria = 1;
 			}
 		}
     },
@@ -42,6 +45,11 @@
         this.$('[data-name=notifica_kam_c]').hide();
         //Oculta campos UNI2
         this.$('[data-name=seguro_uni2_c]').hide();
+		//Oculta campos para Creditaria
+		if(this.creditaria) {
+			this.$('[data-name=comision_tec_c]').hide();
+			this.$('[data-name="tipo_venta_c"]').attr('style', 'pointer-events:none');
+		}
     },
 
     setTipo: function() {
@@ -221,5 +229,12 @@
             });
         }
         callback(null, fields, errors);
+    },
+
+    setASVC: function() {
+		if(this.creditaria) {
+			if(this.model.get('oficina_c') == 5 || this.model.get('oficina_c') == 9) this.model.set('asesor_vta_cruzada_c', 5);
+			else this.model.set('asesor_vta_cruzada_c', 2);
+		}
     },
 })
