@@ -435,6 +435,15 @@ array (
                 'studio' => 'visible',
                 'label' => 'LBL_CONTACTO_PRINCIPAL',
               ),
+              4 => 
+              array (
+                'readonly' => false,
+                'name' => 'valida_cambio_fiscal_c',
+                'label' => 'LBL_VALIDA_CAMBIO_FISCAL',
+              ),
+              5 => 
+              array (
+              ),
             ),
           ),
         ),

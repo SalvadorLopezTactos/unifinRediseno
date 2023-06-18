@@ -388,5 +388,8 @@ function creaCaso($idCuenta,$plataforma_json){
     $caso->account_id = $idCuenta;
     $caso->area_interna_c = $area_interna;
 
+    //Fix: Añade bandera para que al crear caso, la validación de asignación únicamente se aplique en cambio de razón social o direccion fiscal
+    $caso->valida_cambio_fiscal_c = 1;
+
     $caso->save();
 }
