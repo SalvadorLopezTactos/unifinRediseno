@@ -545,7 +545,8 @@
 															var auxMunicipio = '';
 															for (var i = 0; i < list_municipios.length; i++) {
 																listMunicipio[list_municipios[i].idMunicipio] = list_municipios[i].nameMunicipio;
-																if(list_municipios[i].nameMunicipio == Municipio) auxMunicipio = list_municipios[i].idMunicipio;
+																//if(list_municipios[i].nameMunicipio == Municipio) auxMunicipio = list_municipios[i].idMunicipio;
+																if(list_municipios[i].nameMunicipio.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase() == Municipio.toUpperCase()) auxMunicipio = list_municipios[i].idMunicipio;
 															}
 															//Colonia
 															var listColonia = {};
@@ -590,8 +591,8 @@
                             	}
 															
 
-                              //auxCiudad = (auxCiudad=='' && idSinCiudad!='') ? idSinCiudad : auxCiudad;
-                              auxCiudad = idSinCiudad;
+                              auxCiudad = (auxCiudad=='' && idSinCiudad!='') ? idSinCiudad : auxCiudad;
+                              //auxCiudad = idSinCiudad;
 															if(cDireccionFiscal >= 1) {
 															  if(direccion[indice_indicador].indicador == 2) {
   																direccion[indice_indicador].valCodigoPostal = CP;
