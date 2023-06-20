@@ -522,7 +522,8 @@
 														if(data.idCP) {
 															var list_paises = data.paises;
 															var list_municipios = data.municipios;
-															var city_list = App.metadata.getCities();
+															//var city_list = App.metadata.getCities();
+															var city_list = data.ciudades;
 															var list_estados = data.estados;
 															var list_colonias = data.colonias;
 															//País
@@ -550,20 +551,28 @@
 															var listColonia = {};
 															var auxColonia = '';
 															for (var i = 0; i < list_colonias.length; i++) {
-																listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
-																if(list_colonias[i].nameColonia == Colonia) auxColonia = list_colonias[i].idColonia;
+																listColonia[i]={};
+                                listColonia[i]['idColonia']=list_colonias[i].idColonia;
+                                listColonia[i]['nameColonia']=list_colonias[i].nameColonia;
+                                listColonia[i]['idCodigoPostal']=list_colonias[i].idCodigoPostal;
+																//str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+																//if(list_colonias[i].nameColonia == Colonia) auxColonia = list_colonias[i].idColonia;
+																if(list_colonias[i].nameColonia.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase() == Colonia.toUpperCase()) auxColonia = list_colonias[i].idColonia;
 															}
                               if(auxColonia==''){
                                   listColonia['']="";
                               }
 															//Ciudad
 															var listCiudad = {};
-															var ciudades = Object.values(city_list);
+															//var ciudades = Object.values(city_list);
+															//var ciudades = data.ciudades;
 															var auxCiudad = '';
 															var estadociudadaux = '';
                               var idSinCiudad ='';
 															//nuevaDireccion.estado = (Object.keys(nuevaDireccion.listEstado)[0] != undefined) ? Object.keys(nuevaDireccion.listEstado)[0] : "";
+															
 															estadociudadaux = (Object.keys(listEstado)[0] != undefined) ? Object.keys(listEstado)[0] : "" ;
+															/*
 															for (var [key, value] of Object.entries(listEstado)) {
 																for (var i = 0; i < ciudades.length; i++) {
 																	if (ciudades[i].estado_id == key) {
@@ -573,6 +582,14 @@
 																	}
 																}
 															}
+															*/
+															for (var i = 0; i < city_list.length; i++) {
+                                listCiudad[city_list[i].idCiudad] = city_list[i].nameCiudad;
+                                idSinCiudad = (city_list[i].nameCiudad == 'SIN CIUDAD') ? city_list[i].idCiudad : idSinCiudad;
+                                if(city_list[i].nameCiudad.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase() == Municipio.toUpperCase()) auxCiudad = city_list[i].idCiudad;
+                            	}
+															
+
                               //auxCiudad = (auxCiudad=='' && idSinCiudad!='') ? idSinCiudad : auxCiudad;
                               auxCiudad = idSinCiudad;
 															if(cDireccionFiscal >= 1) {

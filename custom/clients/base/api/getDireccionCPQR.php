@@ -40,11 +40,14 @@ class getDireccionCPQR extends SugarApi
         $call_api = new GetDireccionesCP();
         //$GLOBALS['log']->fatal('args',$args);
         $resultado = $call_api->getAddressByCP($api, $args);
-        //$GLOBALS['log']->fatal('resultado',$resultado);
         $arr_colonias = $resultado['colonias'];
         $pais_id = intval(substr($resultado['idCP'], 0, 3));
         $estado_id = intval(substr($resultado['idCP'], 3, 3));
         $municipio_id = intval(substr($resultado['idCP'], 6, 3));
+
+        //$GLOBALS['log']->fatal('***PAIS_ID: '.$pais_id);
+        //$GLOBALS['log']->fatal('***ESTADO_ID: '.$pais_id);
+        //$GLOBALS['log']->fatal('***MUNICIPIO_IC: '.$municipio_id);
 
         $arr_estado = $resultado['estados'];
         $arr_municipio = $resultado['municipios'];
@@ -127,12 +130,20 @@ class getDireccionCPQR extends SugarApi
     }
 
     public function searchForId($id, $array , $busqueda) {
+        
         foreach ($array as $key => $val) {
-            if ($val[$busqueda] === $id) {
+            //$GLOBALS['log']->fatal( "COMPARANDO: ".strtoupper($val[$busqueda]). " VS ".strtoupper($id) );
+            if (strtoupper( $this->removerAcentos($val[$busqueda]) ) === strtoupper($id)) {
                 return $key;
             }
         }
         return -1;
+    }
+
+    public function removerAcentos( $str ){
+        $search = explode(",","ç,æ,œ,á,é,í,ó,ú,à,è,ì,ò,ù,ä,ë,ï,ö,ü,ÿ,â,ê,î,ô,û,å,e,i,ø,u");
+        $replace = explode(",","c,ae,oe,a,e,i,o,u,a,e,i,o,u,a,e,i,o,u,y,a,e,i,o,u,a,e,i,o,u");
+        return str_replace($search, $replace, $str);
     }
 
     public function insertColonia($pais,$estado,$municipio,$cp,$colonia)
