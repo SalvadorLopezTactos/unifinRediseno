@@ -144,6 +144,7 @@
 
     _render: function () {
         this._super("_render");
+		if($('[data-fieldname="lead_clasf_sectorial"] > span').length >0) $('[data-fieldname="lead_clasf_sectorial"] > span').show();
 		//Carga Lista de Actividad Economica
 		clasf_sectorial.actividad_list = app.lang.getAppListStrings('actividad_list');
 		//Oculta campos
