@@ -1,0 +1,31 @@
+    <div class="row-fluid">
+        <div class="span3">
+            <label class="" style="margin-left:0px">Régimen Fiscal SAT</label>
+        </div>
+        <div class="span3">
+            <label class="" style="margin-left:0px">Denominación</label>
+        </div>
+        <div class="span3">
+            <label class="" style="margin-left:0px">Fecha de Inicio</label>
+        </div>
+        <div class="span3">
+            <label class="" style="margin-left:0px">Fecha de Fin</label>
+        </div>
+    </div>
+
+    {{#each regimenes_list}}
+        <div class="row-fluid">
+            <div class="span3">
+                <label class="normal " type="text" style="margin-left:0px" >{{name}}</label>
+            </div>
+            <div class="span3">
+                <label class="normal " type="text" style="margin-left:0px" >{{name}}</label>
+            </div>
+            <div class="span3">
+                <label class="normal " type="text" style="margin-left:0px" >{{startDate}}</label>
+            </div>
+            <div class="span3">
+                <label class="normal " type="text" style="margin-left:0px" >{{endDate}}</label>
+            </div>
+        </div>
+    {{/each}}
