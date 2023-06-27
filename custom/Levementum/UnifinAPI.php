@@ -2575,4 +2575,31 @@ SQL;
             $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : unifinPostCall ERROR: " . $e->getMessage());
         }
     }
+
+    public function getInfoRegimenesSAT($host,$token)
+    {
+        try {
+            $url = $host;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_ENCODING, '');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    'Authorization: Bearer ' . $token)
+            );
+
+            $result = curl_exec($ch);
+            $curl_info = curl_getinfo($ch);
+            $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $response = json_decode($result, true);
+
+            return $response;
+        } catch (Exception $exception) {
+            $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : unifinPostCall ERROR: " . $e->getMessage());
+        }
+
+    }
 }

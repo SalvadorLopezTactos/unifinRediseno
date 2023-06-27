@@ -386,3 +386,4 @@ $mod_strings['LBL_GUARDAR_DIRECCIONES'] = 'Guardar direcciones';
 $mod_strings['LBL_OMITIR_GUARDADO_DIRECCIONES'] = 'Omitir guardado de direcciones';
 $mod_strings['LBL_ACCION_CAMBIO_FISCAL'] = 'Acción cambio fiscal';
 $mod_strings['LBL_DIRECCION_ACTUALIZADA_API'] = 'Dirección fiscal actualizada desde API';
+$mod_strings['LBL_REGIMENES_FISCAL_SAT'] = 'Regimenes Fiscales';
