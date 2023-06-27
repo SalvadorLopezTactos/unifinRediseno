@@ -76,7 +76,7 @@ array (
           array (
             'type' => 'button',
             'name' => 'rfc_qr_button',
-            'label' => 'ESCANEAR QR',
+            'label' => 'Leer CSF',
             'css_class' => 'btn_rfc_qr btn btn-primary',
             'showOn' => 'edit',
             'events' => 
