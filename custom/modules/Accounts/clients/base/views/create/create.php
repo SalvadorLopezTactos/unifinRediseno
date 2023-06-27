@@ -34,7 +34,7 @@ $viewdefs['Accounts']['base']['view']['create'] = array(
         array (
             'type' => 'button',
             'name' => 'rfc_qr_button',
-            'label' => 'ESCANEAR QR',
+            'label' => 'Leer CSF',
             'primary' => true,
             'css_class' => 'btn_rfc_qr btn btn-primary',
             'showOn' => 'create',

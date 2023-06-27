@@ -76,7 +76,7 @@ array (
           array (
             'type' => 'button',
             'name' => 'rfc_qr_button',
-            'label' => 'ESCANEAR QR',
+            'label' => 'Leer CSF',
             'css_class' => 'btn_rfc_qr btn btn-primary',
             'showOn' => 'edit',
             'events' => 
@@ -367,6 +367,16 @@ array (
                 'readonly' => false,
                 'name' => 'direccion_actualizada_api_c',
                 'label' => 'LBL_DIRECCION_ACTUALIZADA_API',
+              ),
+              10 => 
+              array (
+                'readonly' => false,
+                'name' => 'regimenes_fiscal_sat_c',
+                'studio' => 'visible',
+                'label' => 'LBL_REGIMENES_FISCAL_SAT',
+              ),
+              11 => 
+              array (
               ),
             ),
           ),
@@ -745,24 +755,27 @@ array (
               ),
               6 => 
               array (
-                'name' => 'regimen_fiscal_sat_c',
-                'label' => 'LBL_REGIMEN_FISCAL_SAT',
-              ),
-              7 => 
-              array (
                 'name' => 'denominacion_c',
                 'label' => 'LBL_DENOMINACION',
+                'span' => 12,
               ),
-              8 => 
+              7 => 
               array (
                 'name' => 'razonsocial_c',
                 'label' => 'LBL_RAZONSOCIAL',
                 'span' => 12,
               ),
-              9 => 
+              8 => 
               array (
                 'name' => 'nombre_comercial_c',
                 'label' => 'LBL_NOMBRE_COMERCIAL',
+                'span' => 12,
+              ),
+              9 => 
+              array (
+                'name' => 'account_regimenes_fiscal',
+                'studio' => 'visible',
+                'dismiss_label' => true,
                 'span' => 12,
               ),
               10 => 

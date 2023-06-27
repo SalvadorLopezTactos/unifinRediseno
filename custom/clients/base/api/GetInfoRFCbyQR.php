@@ -34,6 +34,22 @@ class GetInfoRFCbyQR extends SugarApi
                 'longHelp' => '',
             ),
 
+            'getInfoCSF' => array(
+                //request type
+                'reqType' => 'POST',
+                'noLoginRequired' => true,
+                //endpoint path
+                'path' => array('GetInfoRFCbyCSF'),
+                //endpoint variables
+                'pathVars' => array('method'),
+                //method to call
+                'method' => 'getInfoByCSF',
+                //short help string to be displayed in the help documentation
+                'shortHelp' => 'Método que realiza petición a servicio externo que obtiene información de RFC a través de Constancia de Situación Fiscal',
+                //long help to be displayed in the help documentation
+                'longHelp' => '',
+            ),
+
 
         );
 
@@ -75,6 +91,33 @@ class GetInfoRFCbyQR extends SugarApi
 
     }
 
+
+    public function getInfoByCSF( $api, $args ){
+
+        require_once("custom/Levementum/UnifinAPI.php");
+        $GLOBALS['log']->fatal("SERVICIO CSF");
+
+        $base64_pdf=$args['file'];
+        $url_csf=$sugar_config['regimenes_sat_url'].'/tax-status/upload/';
+        $url_token = $sugar_config['regimenes_sat_url'].'/auth/login/token';
+        $user = $sugar_config['regimenes_sat_user'];
+        $password = $sugar_config['regimenes_sat_password'];
+
+        $file_pdf=$this->generateFilePDF($base64_pdf);
+
+        $instanciaAPI = new UnifinAPI();
+        $responseToken = $instanciaAPI->postSimilarityToken( $url_token, $user, $password  );
+
+        if( !empty($responseToken) ){
+            $token = $responseToken['access_token'];
+            $response=$this->callValidateCSF($url_csf, $token , $file_pdf);
+
+        }
+
+        return $response;
+
+    }
+
     /*
      * Función que toma una imagen codificada en base64 y la convierte en una imagen real dentro de una ruta temporal
      * @param String $img, Imagen codificada en base64
@@ -97,6 +140,24 @@ class GetInfoRFCbyQR extends SugarApi
         file_put_contents($file, $image_base64);
 
         return $file;
+
+    }
+
+    public function generateFilePDF( $base64 ){
+        $folderPath = "custom/csf/";
+        
+        //Se realiza explode ya que la cadena viene como: data:application/pdf;base64,JVBER...
+        $pdf_base64 = explode(";base64,", $base64);
+
+        $str_base64 = base64_decode($pdf_base64[1]);
+
+        //Se genera el archivo pdf con el string obtenido
+        $archivo = $folderPath .'CSFC_'. uniqid() . '.pdf';
+
+        file_put_contents($archivo, $str_base64);
+
+        return $archivo;
+
 
     }
 
@@ -138,6 +199,30 @@ class GetInfoRFCbyQR extends SugarApi
 
         return json_decode($result, true);
 
+    }
+
+    public function callValidateCSF( $url, $token, $file ){
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array('file'=> new CURLFILE($file)),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer '.$token
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        return json_decode($response, true);
     }
 
     /*
