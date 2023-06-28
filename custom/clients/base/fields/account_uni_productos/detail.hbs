@@ -856,5 +856,38 @@
                 </table>
             </td>
         </tr>
+        <tr>
+            <td width="100%">
+                <table class="campoSeguros" width="100%" valign="top" style="border: 3px solid lightblue; padding: 8px;">
+                    <tr>
+                        <td colspan="3" width="100%">
+							<div class="row-fluid" >  <!--Fila 0 -->
+							<div><strong>Seguros</strong></div>
+							</div>  <!--Cierre Fila1 -->
+							<div class="row-fluid" style="background-color:#cfcfcf; height:5px;" > </div>  <!--Div -->
+						</td>
+					</tr>
+					<tr>  <!--Fila 1 -->
+						<td  width="33%" >
+						<div class="mpad">
+                            <label class="record-label mpad" style="margin-left:0px">Estatus</label>
+                            {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.seguros.estatus_atencion}}
+                        </div>
+                        </td>
+						<td  width="33%" >
+						<div class="mpad">
+                            <label class="record-label mpad" style="margin-left:0px">{{ResumenProductos.seguros.dias_atraso_c}} días</label>
+                        </div>
+                        </td>
+						<td  width="33%" >
+						<div class="u_estatus_lm mpad ">
+                            <label class="record-label mpad" style="margin-left:0px">Estatus del Producto</label>
+                            {{getUnifinListValue 'status_management_list' ResumenProductos.seguros.status_management_c}}
+                        </div>
+						</td>
+                    </tr>  <!--Cierre Fila1 -->
+                </table>
+            </td>
+        </tr>
     </table>
 </div>

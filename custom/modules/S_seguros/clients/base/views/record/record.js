@@ -10,6 +10,8 @@
         this.model.on("change:referenciador",this.addRegion, this);
         this.model.on("change:empleados_c",this.adDepartment, this);
         this.model.on("change:tipo_cuenta_c",this.setTipo, this);
+		this.context.on('button:unifin:click', this.unifin, this);
+		this.context.on('button:creditaria:click', this.creditaria, this);
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));
         this.model.addValidationTask('referenciado', _.bind(this.validauser, this));
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
@@ -19,6 +21,7 @@
         this.model.addValidationTask('Notifica', _.bind(this.notifica, this));
         this.model.addValidationTask('fecha_aplicacion_c', _.bind(this.validAplica, this));
         this.model.on('sync', this._disableActionsSubpanel, this);
+		this.model.on('sync', this.seguimiento, this);
         this._disableActionsSubpanel();
     },
 
@@ -333,5 +336,40 @@
       if (this.model.get('tipo_registro_sf_c')=='2' &&  (this.model.get('requiere_ayuda_c')=='1' || this.model.get('requiere_ayuda_c')=='')){
         $('[data-subpanel-link="cot_cotizaciones_s_seguros"]').find(".subpanel-controls").hide();
       }
+    },
+
+    unifin: function () {
+		this.model.set("revision_c",0);
+		this.model.set("seguimiento_c",1);
+        this.model.save();
+		this.render();
+    },
+
+    creditaria: function () {
+		this.model.set("revision_c",0);
+        this.model.set("seguimiento_c",2);
+        this.model.save();
+		this.render();
+    },
+
+    seguimiento: function () {
+        var unifin = this.getField("unifin");
+		var creditaria = this.getField("creditaria");
+		this.$('[data-name="revision_c"]').hide();
+        if(app.user.get('seguimiento_seguros_c') && this.model.get('revision_c')) {
+            unifin.listenTo(unifin, "render", function () {
+                unifin.show();
+            });
+			creditaria.listenTo(creditaria, "render", function () {
+                creditaria.show();
+            });
+        }else{
+            unifin.listenTo(unifin, "render", function () {
+                unifin.hide();
+            });
+            creditaria.listenTo(creditaria, "render", function () {
+                creditaria.hide();
+            });
+        }
     }
 })
