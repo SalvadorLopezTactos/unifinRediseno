@@ -98,7 +98,7 @@ WHERE cp.name = '{$cp}'";
         $GLOBALS['log']->fatal("Consulta GetDireccionesCP - CP: " .$cp . ' - Usuario: ' . $GLOBALS['current_user']->user_name. ' - Plataforma: ' . $GLOBALS['service']->platform);
         $result = $GLOBALS['db']->query($query);
 
-        $arrPadre= array('paises'=>array(),'municipios'=>array(),'estados'=>array(),'colonias'=>array(),'ciudades'=>array());
+        $arrPadre= array('paises'=>array(),'municipios'=>array(),'estados'=>array(),'colonias'=>array(),'ciudades'=>array(),'ciudades_metadata'=>array());
 
 
         $pos=0;
@@ -125,12 +125,14 @@ WHERE cp.name = '{$cp}'";
             $arrEstado=array('idEstado'=>$idEstado,'nameEstado'=>$nameEstado);
             $arrColonia=array('idColonia'=>$idColonia,'nameColonia'=>$nameColonia);
             $arrCiudad=array('idCiudad'=>$idCiudad,'nameCiudad'=>$nameCiudad);
+            $arrCiudadMetadata=array('estado_id'=>$idEstado,'id'=>$idCiudad,'name'=>$nameCiudad,'pais_id'=>$idPais);
 
             $arrPadre['paises'][$pos]=$arrPais;
             $arrPadre['municipios'][$pos]=$arrMunicipio;
             $arrPadre['estados'][$pos]=$arrEstado;
             $arrPadre['colonias'][$pos]=$arrColonia;
             $arrPadre['ciudades'][$pos]=$arrCiudad;
+            $arrPadre['ciudades_metadata'][$idCiudad]=$arrCiudadMetadata;
 
             $pos++;
         }
