@@ -5,9 +5,9 @@
  * Date: 21/06/2023
 */
 
-class creditaria
+class creditaria_clas
 {
-    public function creditaria($bean = null, $event = null, $args = null)
+    public function creditaria_func($bean = null, $event = null, $args = null)
     {
 		global $db;
         global $current_user;
