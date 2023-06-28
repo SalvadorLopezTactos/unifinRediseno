@@ -265,10 +265,10 @@
 									var Paterno = data["person"]["middleName"];
 									var Materno = data["person"]["lastName"];
 									var CURP = data["person"]["curp"];
-									var Nacimiento = data["startedOperationsAt"];
+									var Nacimiento = '';//Atributo para fecha de nacimiento, no viene en la CSF
 									Completo = Nombre + " " + Paterno + " " + Materno;
 									//Nacimiento = Nacimiento.substring(6, 10) + "-" + Nacimiento.substring(3, 5) + "-" + Nacimiento.substring(0, 2);
-									Nacimiento = Nacimiento.split('T')[0];
+									//Nacimiento = Nacimiento.split('T')[0];
 								}
 								app.api.call("read", app.api.buildURL("Accounts/", null, null, {
 									max_num: 5,
@@ -360,7 +360,9 @@
 															contexto_cuenta.model.set('primernombre_c', Nombre);
 															contexto_cuenta.model.set('apellidopaterno_c', Paterno);
 															contexto_cuenta.model.set('apellidomaterno_c', Materno);
-															contexto_cuenta.model.set('fechadenacimiento_c', Nacimiento);
+															if( contexto_cuenta.model.get('fechadenacimiento_c') == ""){
+																contexto_cuenta.model.set('fechadenacimiento_c', Nacimiento);
+															}
 															contexto_cuenta.model.set('curp_c', CURP);
 														}
 														//self.model.set('email1', Correo);
