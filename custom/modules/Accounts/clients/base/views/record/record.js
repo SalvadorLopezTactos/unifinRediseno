@@ -5055,6 +5055,10 @@
                         if(self.model.get('tipo_registro_cuenta_c') == '3' && self.model.get('subtipo_registro_cuenta_c') != '11' && self.model.get('origen_cuenta_c') != '11' && indicadorSeleccionados.includes('^2^') ){
                             bloqueado = 1;
                         }
+                        var validaDireccion = data.records[i].cambio_direccion_c;
+                        if(!validaDireccion){
+                            validaDireccion = (contexto_cuenta.model.get('cambio_dirfiscal_c') != undefined && indicadorSeleccionados.includes('^2^') ) ? contexto_cuenta.model.get('cambio_dirfiscal_c') : validaDireccion; 
+                        }
 
                         //Parsea a objeto direccion
                         var direccion = {
@@ -5095,7 +5099,8 @@
                             "id": idDireccion,
                             "direccionCompleta": direccionCompleta,
 							              "bloqueado": bloqueado,
-                            "editaCiudad": editaCiudad
+                            "editaCiudad": editaCiudad,
+                            "validaDireccion":validaDireccion
                         };
 
                         //Agregar dirección
@@ -5110,7 +5115,8 @@
                                     //recupera info
                                     var list_paises = data.paises;
                                     var list_municipios = data.municipios;
-                                    var city_list = App.metadata.getCities();
+                                    //var city_list = App.metadata.getCities();
+                                    var city_list = data.ciudades_metadata;
                                     var list_estados = data.estados;
                                     var list_colonias = data.colonias;
                                     //Poarsea valores para listas
