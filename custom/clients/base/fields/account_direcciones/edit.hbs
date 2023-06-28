@@ -55,14 +55,20 @@
                                         {{/each}}
                                     </select>
                             </div>
-                             <div class="span4">
+                            <div class="span4">
                                     <label class="record-label">Tipo de direcci&oacute;n</label>
                                     <select class="row-fluid select2 multi1_n_existing" style="width: 100%" multiple="multiple" size="3" id="multiIndicador" data-field="multi1_n_existing">
                                         {{#each listIndicador}}
                                         <option value="{{@key}}" {{ifMSelected @key ../indicadorSeleccionados}}>{{this}}</option>
                                         {{/each}}
                                     </select>
-                              </div>
+                            </div>
+                            {{#if validaDireccion}}
+                                <div class="span4" align="center">
+                                      <span class="btn btn-danger">Dirección en validación</span>
+                                    
+                                </div>
+                            {{/if}} 
                         </div>  <!--Cierre Fila1 -->
                         <div class="row-fluid" style="margin-top: 10px;">  <!--- Fila 2-->
                                         <div class="span4">

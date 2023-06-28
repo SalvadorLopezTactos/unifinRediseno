@@ -26,7 +26,7 @@ array (
       ),
       'includes' => 
       array (
-        0 =>
+        0 => 
         array (
           'file' => 'custom/modules/Users/js/customValidation.js',
         ),
@@ -523,7 +523,12 @@ array (
             'name' => 'admin_seguros_c',
             'label' => 'LBL_ADMIN_SEGUROS',
           ),
-          1 => '',
+          1 => 
+          array (
+            'readonly' => false,
+            'name' => 'seguimiento_seguros_c',
+            'label' => 'LBL_SEGUIMIENTO_SEGUROS',
+          ),
         ),
       ),
       'lbl_editview_panel5' => 

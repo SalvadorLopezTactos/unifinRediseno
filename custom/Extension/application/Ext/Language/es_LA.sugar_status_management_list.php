@@ -1,5 +1,5 @@
 <?php
- // created: 2021-05-26 17:49:47
+ // created: 2023-06-22 13:07:48
 
 $app_list_strings['status_management_list']=array (
   '' => '',
@@ -8,4 +8,5 @@ $app_list_strings['status_management_list']=array (
   3 => 'Cancelado',
   4 => 'Sin Oportunidad',
   5 => 'No interesado',
+  6 => 'Inactivo',
 );
