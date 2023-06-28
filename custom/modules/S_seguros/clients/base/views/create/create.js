@@ -46,6 +46,7 @@
         //Oculta campos UNI2
         this.$('[data-name=seguro_uni2_c]').hide();
 		//Oculta campos para Creditaria
+		this.$('[data-name=revision_c]').hide();
 		if(this.creditaria) {
 			this.$('[data-name=comision_tec_c]').hide();
 			this.$('[data-name="tipo_venta_c"]').attr('style', 'pointer-events:none');
@@ -216,7 +217,36 @@
                 autoClose: false
             });
         }
-        callback(null, fields, errors);
+		if(this.creditaria) {
+			app.api.call("read", app.api.buildURL("creditaria_api/" + this.model.get('s_seguros_accountsaccounts_ida'), null, null, {}), null, {
+				success: _.bind(function (data) {
+					if(data.status_management_c) {
+						this.model.set('revision_c',1);
+						if(data.estatus_atencion) {
+							app.alert.show("atendido", {
+								level: "info",
+								messages: "Esta oportunidad pasará por proceso de revisión UNIFIN ya que el cliente actualmente es atendido por UNIFIN",
+								autoClose: false
+							});
+							this.model.set('atendido_c',1);
+						}
+						else {
+							app.alert.show("desatendido", {
+								level: "info",
+								messages: "Esta oportunidad pasará por proceso de revisión UNIFIN se te notificará la decisión en máximo 24hrs hábiles",
+								autoClose: false
+							});
+							this.model.set('atendido_c',0);
+						}
+					}
+					callback(null, fields, errors);
+				}, this),
+				error: function (e) {
+					throw e;
+				}
+			});
+		}
+		else callback(null, fields, errors);
     },
 
     validaPuesto: function (fields, errors, callback) {

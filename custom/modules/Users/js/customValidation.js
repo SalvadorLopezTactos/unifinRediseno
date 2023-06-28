@@ -219,6 +219,7 @@ $(window).load(function(){
 	$('#excluye_valida_c').attr('disabled','disabled');
 	$('#lenia_c').attr('disabled','disabled');
 	$('#habilita_envio_tc_c').attr('disabled','disabled');
+	$('#seguimiento_seguros_c').attr('disabled','disabled');
    }
   }catch(error){
       console.log(error.message);
@@ -268,6 +269,7 @@ $(window).load(function(){
 	  $('#excluye_valida_c').attr('disabled','disabled');
 	  $('#lenia_c').attr('disabled','disabled');
 	  $('#habilita_envio_tc_c').attr('disabled','disabled');
+	  $('#seguimiento_seguros_c').attr('disabled','disabled');
     }
   }
   catch(error){
