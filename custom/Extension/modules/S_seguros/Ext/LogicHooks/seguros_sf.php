@@ -16,8 +16,8 @@ $hook_array['before_save'][] = Array(
     1,
     'Creditaria',
     'custom/modules/S_seguros/creditaria.php',
-    'creditaria',
-    'creditaria'
+    'creditaria_clas',
+    'creditaria_func'
 );
 
 $hook_array['before_save'][] = Array(
