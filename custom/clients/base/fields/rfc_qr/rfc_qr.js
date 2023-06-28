@@ -245,6 +245,8 @@
 								var Regimen = data["taxRegimes"][0]["name"];
 								var Pais = "MEXICO";
 								var Regimenes = data["taxRegimes"];
+								var LugarEmision = data["info"]["place_issued"];
+								var FechaEmision = data["info"]["date_issued"];
 
 								if(RFC != undefined){
 									if(RFC.length == 12) Regimen = "Persona Moral";
@@ -338,6 +340,10 @@
 														contexto_cuenta.model.set('tipodepersona_c', Regimen);
 														contexto_cuenta.model.set('rfc_c', RFC);
 														contexto_cuenta.model.set( "regimenes_fiscal_sat_c", JSON.stringify(Regimenes) );
+														var fechaEmisionFormat = contextol.formatDate( FechaEmision );
+														var lugarFechaEmision = LugarEmision + ' a ' + fechaEmisionFormat; 
+														contexto_cuenta.model.set('emision_csf_c', lugarFechaEmision);
+
 														//contexto_cuenta.model.set('path_img_qr_c', PathQR);
 														cambioRazonSocial['cambioCuenta'] = false;
 														cambioRazonSocial['Cuenta'] = [];
@@ -366,6 +372,7 @@
 															contexto_cuenta.model.set('curp_c', CURP);
 														}
 														//self.model.set('email1', Correo);
+														
 														var arrcorreos = [];
 														var repetido = 0;
 														if(Correo!= "" ){
@@ -897,6 +904,21 @@
 
 		//imgn.onload
 	},
+
+	formatDate: function( fecha ){
+
+        var fecha_formateada = "";
+
+        if( fecha !== null ){
+            var fecha_parts = fecha.split('T');
+            var fecha_unformat = fecha_parts[0].split('-');
+
+            fecha_formateada = fecha_unformat[2] + "/" + fecha_unformat[1] + "/" + fecha_unformat[0];
+        }
+
+        return fecha_formateada;
+        
+    },
 
   cargarArchivo: function() {
     contexto_cuenta.$('#carga').show();
