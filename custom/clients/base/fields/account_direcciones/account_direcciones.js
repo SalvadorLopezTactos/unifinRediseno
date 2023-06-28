@@ -86,6 +86,22 @@
         if($('[data-fieldname="account_direcciones"] > span').length >0){
             $('[data-fieldname="account_direcciones"] > span').show();
         }
+        
+        if(this.model.get('cambio_dirfiscal_c') != undefined && this.model.get('cambio_dirfiscal_c')){
+            try {
+                if (this.oDirecciones != undefined) {
+                  if (this.oDirecciones.direccion != undefined) {
+                    for (var indexDir = 0; indexDir < this.oDirecciones.direccion.length; indexDir++) {
+                      if(this.oDirecciones.direccion[indexDir].indicadorSeleccionados.includes('^2^')){
+                        this.oDirecciones.direccion[indexDir].validaDireccion=true;
+                      }
+                    }
+                  }
+                }
+            } catch (e) {
+                console.log(e);
+            }    
+        }
 
         if (this.accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != 4 && this.cont_render == 0) {
           var auxindicador = new Object();
@@ -1350,7 +1366,8 @@
             "id":"",
             "direccionCompleta":"",
             "bloqueado":"",
-            "editaCiudad":0
+            "editaCiudad":0,
+            "validaDireccion":false
         };
         return nuevaDireccion;
 
