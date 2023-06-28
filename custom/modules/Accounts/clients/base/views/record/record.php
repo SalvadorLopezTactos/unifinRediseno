@@ -1434,6 +1434,13 @@ array (
             array (
               0 => 
               array (
+                'readonly' => false,
+                'name' => 'emision_csf_c',
+                'label' => 'LBL_EMISION_CSF',
+                'span' => 12,
+              ),
+              1 => 
+              array (
                 'name' => 'accounts_analizate_clientes',
                 'studio' => 'visible',
                 'label' => 'LBL_ACCOUNTS_ANALIZATE_CLIENTES',
