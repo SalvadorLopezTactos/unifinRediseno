@@ -210,9 +210,8 @@
 					*/
 					app.api.call('create', app.api.buildURL("GetInfoRFCbyCSF"), body , {
 						success: _.bind(function (data) {
-							var Error = '';
-							if(data) {
-								app.alert.dismiss('procesando');
+							app.alert.dismiss('procesando');
+							if( data.detail == undefined) {
 								var indice_indicador = 0;
 								var Completo = '';
 								/*
@@ -897,6 +896,24 @@
 										}
 									})
 								});
+							}else{
+								app.alert.show('errorCSF', {
+									level: 'error',
+									messages: data.detail[0].msg,
+									autoClose: true
+								});
+
+								contexto_cuenta.$('#activar_camara').removeClass('disabled');
+								contexto_cuenta.$('#activar_camara').attr('style', '');
+								contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+								contexto_cuenta.$('#archivo_qr').attr('style', '');
+								contexto_cuenta.$('#btnSubir').removeClass('disabled');
+								contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+								contexto_cuenta.$('#validar_QR').removeClass('disabled');
+								contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+								contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+								contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
+
 							}
 						})
 					});
