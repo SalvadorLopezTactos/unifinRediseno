@@ -225,7 +225,7 @@
 						if(data.estatus_atencion) {
 							app.alert.show("atendido", {
 								level: "info",
-								messages: "Esta oportunidad pasará por proceso de revisión UNIFIN ya que el cliente actualmente es atendido por UNIFIN",
+								messages: "Esta Oportunidad pasará por proceso de revisión debido a que se ha detectado duplicidad de oportunidades, se te notificará la decisión en máximo 24 horas hábiles",
 								autoClose: false
 							});
 							this.model.set('atendido_c',1);
@@ -233,7 +233,7 @@
 						else {
 							app.alert.show("desatendido", {
 								level: "info",
-								messages: "Esta oportunidad pasará por proceso de revisión UNIFIN se te notificará la decisión en máximo 24hrs hábiles",
+								messages: "Esta Oportunidad pasará por proceso de revisión debido a que se ha detectado duplicidad de oportunidades, se te notificará la decisión en máximo 24 horas hábiles",
 								autoClose: false
 							});
 							this.model.set('atendido_c',0);
