@@ -40,16 +40,25 @@
 		return (navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia).apply(navigator, arguments);
 	},
 
-	SubirImagen:function () {
+	SubirImagen:function (e) {
 		var input = contexto_cuenta.$('input[type=file]');
 		var file = input[0].files[0];
 		var filePath = input[0].value;
+		var ext = $(e.currentTarget).val().split('.').pop();
 		if(file=="" || file==undefined){
 			app.alert.show('errorAlert', {
 				level: 'error',
 				messages: 'Favor de elegir un archivo',
 				autoClose: true
 			});
+		}else if( ext !== 'pdf' ){
+			app.alert.show('invalidExt', {
+				level: 'error',
+				messages: 'Tipo de archivo no compatible, favor de elegir únicamente documentos PDF',
+				autoClose: true
+			});
+			$(e.currentTarget).val('');
+
 		}else{
 			var FR = new FileReader();
 			FR.addEventListener("load", function(e) {
