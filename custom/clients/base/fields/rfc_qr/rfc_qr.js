@@ -40,16 +40,25 @@
 		return (navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia).apply(navigator, arguments);
 	},
 
-	SubirImagen:function () {
+	SubirImagen:function (e) {
 		var input = contexto_cuenta.$('input[type=file]');
 		var file = input[0].files[0];
 		var filePath = input[0].value;
+		var ext = $(e.currentTarget).val().split('.').pop();
 		if(file=="" || file==undefined){
 			app.alert.show('errorAlert', {
 				level: 'error',
 				messages: 'Favor de elegir un archivo',
 				autoClose: true
 			});
+		}else if( ext !== 'pdf' ){
+			app.alert.show('invalidExt', {
+				level: 'error',
+				messages: 'Tipo de archivo no compatible, favor de elegir únicamente documentos PDF',
+				autoClose: true
+			});
+			$(e.currentTarget).val('');
+
 		}else{
 			var FR = new FileReader();
 			FR.addEventListener("load", function(e) {
@@ -201,9 +210,8 @@
 					*/
 					app.api.call('create', app.api.buildURL("GetInfoRFCbyCSF"), body , {
 						success: _.bind(function (data) {
-							var Error = '';
-							if(data) {
-								app.alert.dismiss('procesando');
+							app.alert.dismiss('procesando');
+							if( data.detail == undefined) {
 								var indice_indicador = 0;
 								var Completo = '';
 								/*
@@ -888,6 +896,24 @@
 										}
 									})
 								});
+							}else{
+								app.alert.show('errorCSF', {
+									level: 'error',
+									messages: data.detail[0].msg,
+									autoClose: true
+								});
+
+								contexto_cuenta.$('#activar_camara').removeClass('disabled');
+								contexto_cuenta.$('#activar_camara').attr('style', '');
+								contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+								contexto_cuenta.$('#archivo_qr').attr('style', '');
+								contexto_cuenta.$('#btnSubir').removeClass('disabled');
+								contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+								contexto_cuenta.$('#validar_QR').removeClass('disabled');
+								contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+								contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+								contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
+
 							}
 						})
 					});
