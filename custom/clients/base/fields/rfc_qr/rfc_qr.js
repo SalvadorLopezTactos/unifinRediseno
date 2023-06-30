@@ -899,7 +899,7 @@
 							}else{
 								app.alert.show('errorCSF', {
 									level: 'error',
-									messages: data.detail[0].msg,
+									messages: 'No se pudo identificar una estructura válida para el documento y/o no cumple con la estructura oficial del SAT.\nPor lo tanto, no se pueden validar los datos del contribuyente con los del SAT',
 									autoClose: true
 								});
 
