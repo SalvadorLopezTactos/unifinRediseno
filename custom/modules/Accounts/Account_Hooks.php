@@ -2528,4 +2528,28 @@ where rfc_c = '{$bean->rfc_c}' and
         $caso->save();
     }
 
+    public function estableceRegimenesFiscalesSAT($bean = null, $event = null, $args = null){
+
+        //Cuando se detecta cambio en el campo que guarda el json con la estructura de los diferentes regimenes fiscales,
+        //automáticamente se actualizan los valores en el campo regimen_fiscal_sat_c para mantener sincronizados los valores con el campo custom (account_regimenes_fiscal)
+        if( $bean->fetched_row['regimenes_fiscal_sat_c'] !== $bean->regimenes_fiscal_sat_c &&  $bean->regimenes_fiscal_sat_c !== ""){
+            $GLOBALS['log']->fatal("Regimen Fiscal Cambia, Procede a establecer valor en regimen_fiscal_sat_c");
+            $regimenes = json_decode( $bean->regimenes_fiscal_sat_c , true );
+            $string_regimenes = '';
+            if( count($regimenes) > 0 ){
+                for ($i=0; $i < count($regimenes); $i++) {
+
+                    $string_regimenes .= "^" . $regimenes[$i]['code']."^,";
+                }
+
+                //Elimina la última coma (,) de la cadena
+                $string_regimenes_clean = substr($string_regimenes, 0, -1);
+
+                $bean->regimen_fiscal_sat_c = $string_regimenes_clean;
+
+            }
+        }
+
+    }
+
 }
