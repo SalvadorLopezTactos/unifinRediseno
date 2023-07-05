@@ -54,6 +54,7 @@ $hook_array['before_delete'][] = Array(
     'eliminaDireccionenUNICS'
 );
 
+/*
 $hook_array['before_save'][] = Array(
     6,
     'Establece campo json para generar estructura de valores que se quieren actualizar y además establece banderas para mandar notificación de cambio',
@@ -61,8 +62,9 @@ $hook_array['before_save'][] = Array(
     'Dir_Direcciones_Hooks',
     'setValoresPorActualizar'
 );
+*/
 
-
+/*
 $hook_array['after_save'][] = Array(
     1,
     'Revierte valores en caso de detectar cambios en una dirección fiscal',
@@ -70,3 +72,4 @@ $hook_array['after_save'][] = Array(
     'Dir_Direcciones_Hooks',
     'revierteCambiosFiscal'
 );
+*/

@@ -5180,7 +5180,7 @@
                                         }
                                         json_direccion['json_dire_actual'] = contexto_cuenta.prev_oDirecciones.prev_direccion;
                                         //json_direccion['json_dire_actualizar'] = cont_dir.oDirecciones.direccion;
-                                        contexto_cuenta.model.set('json_direccion_audit_c',JSON.stringify(json_direccion));
+                                        //contexto_cuenta.model.set('json_direccion_audit_c',JSON.stringify(json_direccion));
                                     }
                                     
                                     //Aplica render a campo custom
