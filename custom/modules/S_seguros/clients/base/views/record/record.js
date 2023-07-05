@@ -339,6 +339,11 @@
     },
 
     unifin: function () {
+		app.alert.show("unifin", {
+			level: "info",
+			messages: "Éxito se ha mandado la oportunidad al seguimiento: UNIFIN",
+			autoClose: false
+		});
 		this.model.set("revision_c",0);
 		this.model.set("seguimiento_c",1);
         this.model.save();
@@ -346,6 +351,11 @@
     },
 
     creditaria: function () {
+		app.alert.show("creditaria", {
+			level: "info",
+			messages: "Éxito se ha mandado la oportunidad al seguimiento: CREDITARIA",
+			autoClose: false
+		});
 		this.model.set("revision_c",0);
         this.model.set("seguimiento_c",2);
         this.model.save();
