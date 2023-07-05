@@ -23,7 +23,8 @@
         this._super("initialize", [options]);
         var idCuenta = options.context.get('model').id;
         var json_audit_cuenta = options.context.get('model').attributes.json_audit_c;
-        var json_direcciones = ( options.context.get('model').attributes.cambio_dirfiscal_c ) ? options.context.get('model').attributes.json_direccion_audit_c : "";
+        //var json_direcciones = ( options.context.get('model').attributes.cambio_dirfiscal_c ) ? options.context.get('model').attributes.json_direccion_audit_c : "";
+        var json_direcciones = "";
         var cambioDirFiscal =  options.context.get('model').attributes.cambio_dirfiscal_c;
         var cambioDirApi = options.context.get('model').attributes.direccion_actualizada_api_c;
         if( idCuenta !== undefined ){
@@ -241,6 +242,7 @@
                     contextCambios.json_audit_cuenta['id_cuenta']= model.attributes.id;
                     elementos['cuenta']= contextCambios.json_audit_cuenta;
                 }
+                /*
                 if( contextCambios.json_audit_direccion !== null ){
                     elementos['direccion']= contextCambios.json_audit_direccion;
                 }
@@ -248,6 +250,7 @@
                 if( model.get('json_direccion_audit_c') !== "" && !model.get('direccion_actualizada_api_c') ){
                     elementos['direcciones']= JSON.parse( model.get('json_direccion_audit_c') );
                 }
+                */
 
                 app.alert.show('loadingAprobar', {
                     level: 'process',

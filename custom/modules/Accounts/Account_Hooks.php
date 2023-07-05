@@ -1999,6 +1999,7 @@ where rfc_c = '{$bean->rfc_c}' and
                         $text_cambios .= '<li><b>Razón social / Nombre</b>: <b>tenía el valor</b> '. $bean->fetched_row['name'] .'<b> y cambió a </b>'.$bean->name.'</li>';
                     }
 
+                    /*
                     //Detectar cambio dirección fiscal
                     $direccion_anterior = $this->getDireccionFiscalBD($bean);
                     if( !empty( $direccion_anterior ) ){
@@ -2027,6 +2028,7 @@ where rfc_c = '{$bean->rfc_c}' and
                         }
                         
                     }
+                    */
                     $text_cambios .= '</ul>';
                 }
 
