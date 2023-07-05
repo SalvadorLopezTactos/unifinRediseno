@@ -1315,6 +1315,8 @@ where rfc_c = '{$bean->rfc_c}' and
                         break;
                     case '10': //Seguros
                         $beanprod->assigned_user_id = '1';
+                        $beanprod->estatus_atencion = '2';
+                        $beanprod->status_management_c = '6';
                         break;
                     case '2': //Credito Simple
                         $beanprod->assigned_user_id = $bean->user_id_c;
