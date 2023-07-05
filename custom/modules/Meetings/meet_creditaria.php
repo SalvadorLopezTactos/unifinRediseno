@@ -10,7 +10,7 @@ class meet_creditaria_clas
 			$beanAccount = BeanFactory::getBean('Accounts', $bean->parent_id);
 			if($beanAccount->user_id_c == $bean->assigned_user_id) {
 				global $db;
-				$update = "update uni_productos set estatus_atencion = 1 where id = (select accounts_uni_productos_1uni_productos_idb producto from accounts_uni_productos_1_c where deleted = 0 and accounts_uni_productos_1accounts_ida = '{$bean->parent_id}' and accounts_uni_productos_1uni_productos_idb in (select id from uni_productos where deleted = 0 and tipo_producto = 10))";
+				$update = "update uni_productos p inner join accounts_uni_productos_1_c ap on ap.accounts_uni_productos_1uni_productos_idb = p.id set p.estatus_atencion = 1 where ap.accounts_uni_productos_1accounts_ida = '{$bean->parent_id}' and ap.deleted = 0 and p.tipo_producto = 10 and p.deleted = 0";
 				$result = $db->query($update);
 			}
 		}

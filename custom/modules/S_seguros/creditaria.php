@@ -11,8 +11,8 @@ class creditaria_clas
     {
 		global $db;
 		$hoy = date("Y-m-d");
-		if($bean->inicio_vigencia_emitida_c <= $hoy && $bean->fin_vigencia_emitida_c >= $hoy) $update = "update uni_productos a, uni_productos_cstm b set a.estatus_atencion = 1, b.status_management_c = 1 where a.id = b.id_c and b.id_c = (select accounts_uni_productos_1uni_productos_idb producto from accounts_uni_productos_1_c where deleted = 0 and accounts_uni_productos_1accounts_ida = '{$bean->s_seguros_accountsaccounts_ida}' and accounts_uni_productos_1uni_productos_idb in (select id from uni_productos where deleted = 0 and tipo_producto = 10))";
-		else $update = "update uni_productos set estatus_atencion = 1 where id = (select accounts_uni_productos_1uni_productos_idb producto from accounts_uni_productos_1_c where deleted = 0 and accounts_uni_productos_1accounts_ida = '{$bean->s_seguros_accountsaccounts_ida}' and accounts_uni_productos_1uni_productos_idb in (select id from uni_productos where deleted = 0 and tipo_producto = 10))";
+		if($bean->inicio_vigencia_emitida_c <= $hoy && $bean->fin_vigencia_emitida_c >= $hoy) $update = "update uni_productos p inner join uni_productos_cstm pc on pc.id_c = p.id inner join accounts_uni_productos_1_c ap on ap.accounts_uni_productos_1uni_productos_idb = p.id set p.estatus_atencion = 1, pc.status_management_c = 1 where ap.accounts_uni_productos_1accounts_ida = '{$bean->parent_id}' and ap.deleted = 0 and p.tipo_producto = 10 and p.deleted = 0";
+		else $update = "update uni_productos p inner join accounts_uni_productos_1_c ap on ap.accounts_uni_productos_1uni_productos_idb = p.id set p.estatus_atencion = 1 where ap.accounts_uni_productos_1accounts_ida = '{$bean->s_seguros_accountsaccounts_ida}' and ap.deleted = 0 and p.tipo_producto = 10 and p.deleted = 0";
 		$result = $db->query($update);
     }
 }
