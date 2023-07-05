@@ -263,9 +263,6 @@
     },
 
     setASVC: function() {
-		if(this.creditaria) {
-			if(this.model.get('oficina_c') == 5 || this.model.get('oficina_c') == 9) this.model.set('asesor_vta_cruzada_c', 5);
-			else this.model.set('asesor_vta_cruzada_c', 2);
-		}
+		if(this.creditaria) this.model.set('asesor_vta_cruzada_c', 2);
     },
 })

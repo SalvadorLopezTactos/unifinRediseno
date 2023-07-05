@@ -1,5 +1,5 @@
 <?php
- // created: 2023-06-15 12:41:25
+ // created: 2023-07-05 14:13:25
 $dictionary['S_seguros']['fields']['asesor_vta_cruzada_c']['labelValue']='Asesor Seguros Venta Cruzada';
 $dictionary['S_seguros']['fields']['asesor_vta_cruzada_c']['dependency']='';
 $dictionary['S_seguros']['fields']['asesor_vta_cruzada_c']['required_formula']='';
@@ -11,7 +11,6 @@ $dictionary['S_seguros']['fields']['asesor_vta_cruzada_c']['visibility_grid']=ar
     'Creditaria' => 
     array (
       0 => '2',
-      1 => '5',
     ),
     'Seguros' => 
     array (
