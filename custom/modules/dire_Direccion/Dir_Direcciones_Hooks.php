@@ -281,7 +281,7 @@ SQL;
                                 $fecha_cambio = TimeDate::getInstance()->nowDb();
                                 
                                 //Habilita bandera para indicar que el registro se encuentra en proceso de validación
-                                $bean->valid_cambio_razon_social_c = 1;
+                                //$bean->valid_cambio_razon_social_c = 1;
                                 $bean->cambio_direccion_c = 1;
     
                                 $json_audit = $this->buildJsonAudit($bean->id,$cp_actual,$cp_por_actualizar,$pais_actual,$pais_por_actualizar,$estado_actual,$estado_por_actualizar,$municipio_actual,$municipio_por_actualizar,$ciudad_actual,$ciudad_por_actualizar,$colonia_actual,$colonia_por_actualizar,$calle_actual,$calle_por_actualizar,$numext_actual,$numext_por_actualizar,$numint_actual,$numint_por_actualizar,$full_direccion_actual,$full_direccion_por_actualizar,$fecha_cambio,$plataforma);
@@ -292,9 +292,9 @@ SQL;
     
     
                                 //$this->revierteValores($bean,$cp_actual,$pais_actual,$estado_actual,$municipio_actual,$ciudad_actual,$colonia_actual);
-                                $bean->calle = $bean->fetched_row['calle'];
-                                $bean->numext = $bean->fetched_row['numext'];
-                                $bean->numint = $bean->fetched_row['numint'];
+                                //$bean->calle = $bean->fetched_row['calle'];
+                                //$bean->numext = $bean->fetched_row['numext'];
+                                //$bean->numint = $bean->fetched_row['numint'];
     
                                 //Actualiza bandera de la cuenta relacionada
                                 $this->setCheckEnvioMsjCuenta( $bean->accounts_dire_direccion_1accounts_ida );

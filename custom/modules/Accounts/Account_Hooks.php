@@ -2001,7 +2001,7 @@ where rfc_c = '{$bean->rfc_c}' and
                         $text_cambios .= '<li><b>Razón social / Nombre</b>: <b>tenía el valor</b> '. $bean->fetched_row['name'] .'<b> y cambió a </b>'.$bean->name.'</li>';
                     }
 
-                    /*
+                    
                     //Detectar cambio dirección fiscal
                     $direccion_anterior = $this->getDireccionFiscalBD($bean);
                     if( !empty( $direccion_anterior ) ){
@@ -2030,7 +2030,7 @@ where rfc_c = '{$bean->rfc_c}' and
                         }
                         
                     }
-                    */
+                    
                     $text_cambios .= '</ul>';
                 }
 
@@ -2060,7 +2060,7 @@ where rfc_c = '{$bean->rfc_c}' and
             $this->sendEmailCambioRazonSocial( $emails_responsables_cambios_list, $body_correo );
 
             //Habilita bandera para indicar que el registro se encuentra en proceso de validación
-            $bean->valid_cambio_razon_social_c = 1;
+            //$bean->valid_cambio_razon_social_c = 1;
             //Enviar mensaje se establece en 0 para evitar que se envíe nuevamente la notificación desde el JOB
             $bean->enviar_mensaje_c = 0;
             $plataforma = $_SESSION['platform'];
@@ -2068,6 +2068,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
             if( $cambio_nombre ){
                 $bean->cambio_nombre_c = 1;
+                $bean->valid_cambio_razon_social_c = 1;
                 //Establece json con cambios y revierte valores
                 if($bean->tipodepersona_c == 'Persona Moral'){
                     $razon_social_actual = $bean->fetched_row['razonsocial_c'];
@@ -2108,9 +2109,10 @@ where rfc_c = '{$bean->rfc_c}' and
             }
 
             if( $cambio_dirFiscal ){
-                $bean->cambio_dirfiscal_c = 1;
+                //$bean->cambio_dirfiscal_c = 1;
                 //Se habilita bandera para evitar guarar las direcciones
-                $bean->omitir_guardado_direcciones_c = 1;
+                //$bean->omitir_guardado_direcciones_c = 1;
+                $bean->omitir_caso= 1;
 
                 //Valores actuales (names) para armar la dirección completa
                 $current_calle = $elemento_actual_direccion->calle;

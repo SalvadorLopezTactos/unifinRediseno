@@ -110,10 +110,13 @@ function job_envio_notificacion_razon_social()
                 sendEmailCambioRazonSocial( $emails_responsables_cambios_list, $body_correo );
 
                 //Una vez enviado el correo, se procede a resetear bandera para que no se vuelva a enviar la notificación
-                reestableceBanderas($idCuenta,$idDireccion);
+                $idDireccion = "";
+                reestableceBanderas($idCuenta,$idDireccion,$cambio_nombre_cuenta);
 
-                //Se crea caso
-                creaCaso($idCuenta,$plataforma_json);
+                //Se crea caso solo si el cambio es de nombre
+                if( $cambio_nombre_cuenta ){
+                    creaCaso($idCuenta,$plataforma_json);
+                }
 
             }
 
@@ -344,11 +347,17 @@ function sendEmailCambioRazonSocial( $emails_address,$body_correo ){
 
 }
 
-function reestableceBanderas($idCuenta,$idDireccion){
+function reestableceBanderas($idCuenta,$idDireccion,$cambio_nombre_cuenta){
     global $db;
     
     if( $idCuenta !== "" ){
-        $updateQuery ="UPDATE accounts_cstm SET valid_cambio_razon_social_c = '1', enviar_mensaje_c = '0' WHERE id_c = '{$idCuenta}'";
+        if($cambio_nombre_cuenta){
+            $updateQuery ="UPDATE accounts_cstm SET valid_cambio_razon_social_c = '1', enviar_mensaje_c = '0' WHERE id_c = '{$idCuenta}'";
+
+        }else{
+            $updateQuery ="UPDATE accounts_cstm SET enviar_mensaje_c = '0' WHERE id_c = '{$idCuenta}'";
+        }
+        
         $db->query($updateQuery);
     }
 
