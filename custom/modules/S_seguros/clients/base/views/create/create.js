@@ -220,9 +220,9 @@
 		if(this.creditaria) {
 			app.api.call("read", app.api.buildURL("creditaria_api/" + this.model.get('s_seguros_accountsaccounts_ida'), null, null, {}), null, {
 				success: _.bind(function (data) {
-					if(data.status_management_c) {
+					if(data.status_management_c == 1) {
 						this.model.set('revision_c',1);
-						if(data.estatus_atencion) {
+						if(data.estatus_atencion == 1) {
 							app.alert.show("atendido", {
 								level: "info",
 								messages: "Esta Oportunidad pasará por proceso de revisión debido a que se ha detectado duplicidad de oportunidades, se te notificará la decisión en máximo 24 horas hábiles",
