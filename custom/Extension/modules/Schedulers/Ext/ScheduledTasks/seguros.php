@@ -23,7 +23,7 @@
 			else {
 				$dias = 0;
 				$atendido = 0;
-				$query2 = "select a.id, a.date_modified from s_seguros a, s_seguros_cstm b where a.id = b.id_c and a.deleted = 0 and a.etapa <> 10 and a.id in (select s_seguros_accountss_seguros_idb from s_seguros_accounts_c where deleted = 0 and s_seguros_accountsaccounts_ida = '$cuenta') order by a.date_modified desc";
+				$query2 = "select a.id, a.date_modified from s_seguros a, s_seguros_cstm b where a.id = b.id_c and a.deleted = 0 and a.etapa <> 9 and a.etapa <> 10 and a.id in (select s_seguros_accountss_seguros_idb from s_seguros_accounts_c where deleted = 0 and s_seguros_accountsaccounts_ida = '$cuenta') order by a.date_modified desc";
 				$resultado2 = $db->query($query2);
 				$encontrado2 = $db->fetchByAssoc($resultado2);
 				if($encontrado2) {
