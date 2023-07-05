@@ -19,3 +19,11 @@ $hook_array['before_save'][] = Array(
     'Seguros_dynamics',
     'getAccount'
 );
+
+$hook_array['after_save'][] = Array(
+    1,
+    'creditaria',
+    'custom/modules/S_seguros/creditaria.php',
+    'creditaria_clas',
+    'creditaria_func'
+);
