@@ -13,6 +13,8 @@
 			$query1 = "select a.id, a.date_modified from s_seguros a, s_seguros_cstm b where a.id = b.id_c and a.deleted = 0 and a.etapa <> 10 and b.inicio_vigencia_emitida_c <= CURDATE() and b.fin_vigencia_emitida_c >= CURDATE() and a.id in (select s_seguros_accountss_seguros_idb from s_seguros_accounts_c where deleted = 0 and s_seguros_accountsaccounts_ida = '$cuenta') order by a.date_modified desc";
 			$resultado1 = $db->query($query1);
 			$encontrado1 = $db->fetchByAssoc($resultado1);
+			$dias = 0;
+			$atendido = 0;
 			if($encontrado1) {
 				$hoy = time();
 				$mod = strtotime($encontrado1['date_modified']);
@@ -23,8 +25,6 @@
 				else $update = "update uni_productos a, uni_productos_cstm b set a.estatus_atencion = 2, b.status_management_c = 1, b.dias_atraso_c = $dias where a.id = b.id_c and b.id_c = '$producto'";
 			}
 			else {
-				$dias = 0;
-				$atendido = 0;
 				$query2 = "select a.id, a.date_modified from s_seguros a, s_seguros_cstm b where a.id = b.id_c and a.deleted = 0 and a.etapa <> 9 and a.etapa <> 10 and a.id in (select s_seguros_accountss_seguros_idb from s_seguros_accounts_c where deleted = 0 and s_seguros_accountsaccounts_ida = '$cuenta') order by a.date_modified desc";
 				$resultado2 = $db->query($query2);
 				$encontrado2 = $db->fetchByAssoc($resultado2);
