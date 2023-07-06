@@ -18,7 +18,9 @@
 				$mod = strtotime($encontrado1['date_modified']);
 				$dias = $hoy - $mod;
 				$dias = round($dias/(60*60*24));
-				$update = "update uni_productos a, uni_productos_cstm b set a.estatus_atencion = 1, b.status_management_c = 1, b.dias_atraso_c = $dias where a.id = b.id_c and b.id_c = '$producto'";
+				if($dias < 90) $atendido = 1;
+				if($atendido) $update = "update uni_productos a, uni_productos_cstm b set a.estatus_atencion = 1, b.status_management_c = 1, b.dias_atraso_c = $dias where a.id = b.id_c and b.id_c = '$producto'";
+				else $update = "update uni_productos a, uni_productos_cstm b set a.estatus_atencion = 2, b.status_management_c = 1, b.dias_atraso_c = $dias where a.id = b.id_c and b.id_c = '$producto'";
 			}
 			else {
 				$dias = 0;
