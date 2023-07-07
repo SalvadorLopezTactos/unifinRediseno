@@ -224,7 +224,7 @@
 						this.model.set('revision_c',1);
 						if(data.estatus_atencion == 1) {
 							app.alert.show("atendido", {
-								level: "info",
+								level: "warning",
 								messages: "Esta Oportunidad pasará por proceso de revisión debido a que se ha detectado duplicidad de oportunidades, se te notificará la decisión en máximo 24 horas hábiles",
 								autoClose: false
 							});
@@ -232,7 +232,7 @@
 						}
 						else {
 							app.alert.show("desatendido", {
-								level: "info",
+								level: "warning",
 								messages: "Esta Oportunidad pasará por proceso de revisión debido a que se ha detectado duplicidad de oportunidades, se te notificará la decisión en máximo 24 horas hábiles",
 								autoClose: false
 							});
