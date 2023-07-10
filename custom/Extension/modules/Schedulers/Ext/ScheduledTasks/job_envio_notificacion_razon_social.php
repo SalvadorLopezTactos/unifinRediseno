@@ -27,7 +27,8 @@ function job_envio_notificacion_razon_social()
                 $idCuenta = $row['id_c'];
                 $nombreCuenta = $row['name'];
                 $rfc = $row['rfc_c'];
-                $cambio_nombre_cuenta = $row['cambio_nombre_c'];
+                //$cambio_nombre_cuenta = $row['cambio_nombre_c'];
+                $cambio_nombre_cuenta = false;
                 $json_audit_cuenta = $row['json_audit_c'];
 
                 $idDireccion="";
