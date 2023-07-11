@@ -3032,7 +3032,7 @@
                             
                         }
                         
-                        if( contador_cliente == 0 && contador_cliente_uniclick == 0){
+                        /*if( contador_cliente == 0 && contador_cliente_uniclick == 0){
                             //NO ES CLIENTE EN NINGÚN PRODUCTO
                             console.log('NO ES CLIENTE EN NINGÚN PRODUCTO');
                             app.alert.show("validar_error", {
@@ -3042,7 +3042,7 @@
                                 autoClose: false
                             });
 
-                        }
+                        }*/
 
                     }
                 
