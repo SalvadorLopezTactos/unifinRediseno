@@ -3008,7 +3008,7 @@
                             }
                         
                         }
-                        if( contador_cliente > 0 ){
+                        if( contador_cliente >= 0 ){
                             //ES MULTIPRODUCTO, SE ESTABLECE ÁREA INTERNA CRÉDITO
                             //ESTABLECER COMO VISORES A EQUIPO DE CREDITO
                             var lista_verificadores = App.lang.getAppListStrings('verificadores_ids_list');
