@@ -60,7 +60,7 @@ class Relaciones extends SugarApi
             INNER JOIN accounts_cstm acstm2 on acstm2.id_c = rc.account_id1_c
             WHERE ({$queryProductos})
             AND ra.rel_relaciones_accounts_1accounts_ida='{$id}'
-            AND rc.relaciones_producto_c LIKE '%{$producto}%'";
+            AND rc.relaciones_producto_c LIKE '%^{$producto}^%'";
             // $GLOBALS['log']->fatal("query ".$query);
             $result = $GLOBALS['db']->query($query);
 
