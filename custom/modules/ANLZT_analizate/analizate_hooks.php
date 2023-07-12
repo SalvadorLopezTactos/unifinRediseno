@@ -13,7 +13,7 @@ class analizate_hooks  {
         //Notificaciones
         if($bean->tipo_registro_cuenta_c == '2'|| $bean->tipo_registro_cuenta_c == '3'|| $bean->tipo_registro_cuenta_c == '4'){
             //Notificación Cliente
-            if ($bean->estado==1) {
+            if (!$args['isUpdate'] && $bean->estado==1) {
                 global $app_list_strings;
                 //Valor de la lista en posicion 3 corresponde a Cliente
                 $urlFinanciera = $app_list_strings['analizate_url_list'][3];
@@ -122,7 +122,7 @@ class analizate_hooks  {
             }
         }else{
             //Notificaciones Proveedor
-            if ($bean->estado==1) {
+            if (!$args['isUpdate'] && $bean->estado==1) {
                 global $app_list_strings;
                 //Valor de la lista en posicion 1 corresponde a Financiera, 2 a Credit
                 $urlFinanciera = $app_list_strings['analizate_url_list'][$bean->empresa];
