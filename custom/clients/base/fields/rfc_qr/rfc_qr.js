@@ -447,7 +447,7 @@
 															duplicado = (contextol._limpiezaDatos(direccion[key].numext) == contextol._limpiezaDatos(Exterior)) ? duplicado+1 : duplicado;
 															duplicado = (contextol._limpiezaDatos(direccion[key].numint) == contextol._limpiezaDatos(Interior)) ? duplicado+1 : duplicado;
 															duplicado = (direccion[key].inactivo == 0) ? duplicado+1 : duplicado;
-															if(direccion[key].indicadorSeleccionados.includes('2') && direccion[key].inactivo == 0){
+															if(direccion[key].indicadorSeleccionados.includes('^2^') && direccion[key].inactivo == 0){
 																cDireccionFiscal = cDireccionFiscal + 1;
 																indice_indicador = key;
 															}
