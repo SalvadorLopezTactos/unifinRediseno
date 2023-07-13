@@ -152,7 +152,7 @@
   },
 
 
-	validarServicioQR:function () {
+	validarServicioQR:function (  ) {
 		var contextol = this;
 		var input = contexto_cuenta.$('input[type=file]');
 		var file = input[0].files[0];
@@ -214,31 +214,6 @@
 							if( data.detail == undefined) {
 								var indice_indicador = 0;
 								var Completo = '';
-								/*
-								data = [];
-								data.push({
-								  "AL": "CIUDAD DE MEXICO 1",
-								  "CP": "05129",
-								  "Colonia": "LOMAS DEL CHAMIZAL",
-								  "Correo electrónico": "albertotame@gmail.com",
-								  "Denominación o Razón Social": "DEPORTE MOTOR BTL",
-								  "Entidad Federativa": "CIUDAD DE MEXICO",
-								  "Fecha de Inicio de operaciones": "12-01-2011",
-								  "Fecha de alta": "12-01-2011",
-								  "Fecha de constitución": "12-01-2011",
-								  "Fecha del último cambio de situación": "12-01-2011",
-								  "Municipio o delegación": "CUAJIMALPA DE MORELOS",
-								  "Nombre de la vialidad": "RETORNO ADIM",
-								  "Número exterior": "6",
-								  "Número interior": "DEPTO. 101",
-								  "RFC": "DMB1101126Q3",
-								  "Régimen": "Régimen General de Ley Personas Morales",
-								  "Régimen de capital": "SA DE CV",
-								  "Situación del contribuyente": "ACTIVO",
-								  "Tipo de vialidad": "CERRADA (CDA) O PRIVADA (PRIV)",
-								  "id": "custom_qr_QR_RFC_5fe10d78040f3",
-								  "path_img_qr": "custom/qr/QR_RFC_5fe10d78040f3.png"
-								});*/
 								var RFC = data["rfc"].toUpperCase();
 								//var PathQR=data[0]["path_img_qr"];
 								var Correo = data["email"];
@@ -344,6 +319,8 @@
 														contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
 													},
 													onConfirm: function() {
+														//Comienza integraciones con Alfresco, Quantico y Robina
+														contextol.integraCSF( contexto_cuenta.model.get('id'), RFC, window.result, FechaEmision );
 														// Actualiza Datos Personales
 														contexto_cuenta.model.set('tipodepersona_c', Regimen);
 														contexto_cuenta.model.set('rfc_c', RFC);
@@ -929,6 +906,36 @@
 		*/
 
 		//imgn.onload
+	},
+
+	integraCSF: function( idRegistro, RFC, base64 , fechaEmision ){
+		app.alert.show('sendCSF', {
+			level: 'process',
+			title: 'Enviando Constancia de Situación Fiscal...',
+		});
+		
+		var b64 = base64.split(";base64,");
+		var params = {
+			"idCliente": idRegistro,
+			//"idCliente": '88cfd57e-2277-11ea-98a4-00155d96730d',
+			"rfc": RFC,
+			"base64": b64[1],
+			"vigencia": fechaEmision.split('T')[0]
+		};
+
+		var url = app.api.buildURL('IntegracionesCSF', null, null,);
+		app.api.call('create', url, params, {
+			success: function (response) {
+				app.alert.dismiss('sendCSF');
+				app.alert.show('info_csf', {
+                    level: 'info',
+                    autoClose: false,
+                    messages: '<br>-' + response.robina + '<br><br>-' + response.quantico_csf + '<br><br>-' + response.quantico_validator + '<br><br>-' + response.alfresco
+                });
+				
+			}
+		});
+
 	},
 
 	formatDate: function( fecha ){
