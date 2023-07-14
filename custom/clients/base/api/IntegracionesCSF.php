@@ -45,7 +45,8 @@ class IntegracionesCSF extends SugarApi
         $idCliente = $args['idCliente'];
         $rfc = $args['rfc'];
         $base64_CSF = $args['base64'];
-        $vigencia = $args['vigencia'];
+        //$vigencia = $args['vigencia'];
+        $vigencia = gmdate("Y-m-d");
 
         $url_token_robina = $sugar_config['regimenes_sat_url'].'/auth/login/token';
         $user = $sugar_config['regimenes_sat_user'];
@@ -172,7 +173,7 @@ class IntegracionesCSF extends SugarApi
             "ClientGUID"=> $idCliente,
             "DocumentReference"=> $doc,
             "FileBase64"=> $base64,
-            "FechaVigencia"=> $vigencia
+            "FechaCreacion"=> $vigencia
         );
     }
 
