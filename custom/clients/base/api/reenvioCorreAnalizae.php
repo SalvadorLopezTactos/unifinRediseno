@@ -135,12 +135,12 @@ class reenvioCorreAnalizae extends SugarApi
                         
                     }else{
                         //Se ha realizado envío previo en menos de 2 horas
-                        $result['status']='400';
+                        $result['status']='402';
                         $result['message']='La cuenta con Id: '. $idCuenta .' ha recibido correos en las últimas 2 horas.';
                     }
                 }else{
                     //No recupera cuenta con Id proporcionado
-                    $result['status']='400';
+                    $result['status']='401';
                     $result['message']='Error de datos: La cuenta con Id: '. $idCuenta .' no existe en CRM';
                 }
             }else{
@@ -151,7 +151,7 @@ class reenvioCorreAnalizae extends SugarApi
         }catch(Exception $e) {
             //Error en proceso interno
             $result['status']='500';
-            $result['message']='Erro de sistema: '. $e;
+            $result['message']='Error de sistema: '. $e;
         }
         
         //Regresa respuesta de validación
