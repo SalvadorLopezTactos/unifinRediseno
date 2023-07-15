@@ -353,7 +353,7 @@
 															contexto_cuenta.model.set('primernombre_c', Nombre);
 															contexto_cuenta.model.set('apellidopaterno_c', Paterno);
 															contexto_cuenta.model.set('apellidomaterno_c', Materno);
-															contexto_cuenta.model.set('fechadenacimiento_c', Nacimiento);
+															//contexto_cuenta.model.set('fechadenacimiento_c', Nacimiento);
 															contexto_cuenta.model.set('curp_c', CURP);
 														}
 														//self.model.set('email1', Correo);
