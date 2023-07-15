@@ -90,6 +90,7 @@ class IntegracionesCSF extends SugarApi
                 $url_expediente = $sugar_config['quantico_expediente_url'].'/Expedient_CS/rest/QuanticoDocuments/QuanticoUploadDocument';
                 //$vigencia = "2023-06-22"; 
 
+                /*
                 $body_request_quantico = $this->createBodyRequest( $idCliente, "CSF", $base64_CSF, $vigencia );
 
                 $response_upload_csf = $this->callUploadDocument( $url_expediente, $body_request_quantico );
@@ -98,6 +99,7 @@ class IntegracionesCSF extends SugarApi
                 $GLOBALS['log']->fatal( print_r($response_upload_csf,true) );
 
                 $response['quantico_csf']= $response_upload_csf['Message'];
+                */
 
                 //Envía Validación Digital hacia Quantico
                 $b64Val = chunk_split(base64_encode(file_get_contents('custom/csf/validator.pdf')));
