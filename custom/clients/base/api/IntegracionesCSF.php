@@ -45,7 +45,7 @@ class IntegracionesCSF extends SugarApi
         $idCliente = $args['idCliente'];
         $rfc = $args['rfc'];
         $base64_CSF = $args['base64'];
-        //$vigencia = $args['vigencia'];
+        $date_issued = $args['vigencia'];
         $vigencia = gmdate("Y-m-d");
 
         $url_token_robina = $sugar_config['regimenes_sat_url'].'/auth/login/token';
@@ -64,7 +64,7 @@ class IntegracionesCSF extends SugarApi
         $responseToken = $instanciaAPI->postSimilarityToken( $url_token_robina, $user, $password  );
 
         //Envia petición hacia alfresco
-        $body_request_alfresco = $this->createBodyRequestAlfresco( $idCliente, $base64_CSF, $rfc.'.pdf' );
+        $body_request_alfresco = $this->createBodyRequestAlfresco( $idCliente, $base64_CSF, $rfc.'.pdf', $date_issued );
         $response_upload_alfresco = $this->callUploadDocument( $url_alfresco, $body_request_alfresco );
 
         $GLOBALS['log']->fatal( "Respuesta upload Alfresco:" );
@@ -179,7 +179,7 @@ class IntegracionesCSF extends SugarApi
         );
     }
 
-    public function createBodyRequestAlfresco( $idCliente, $base64 , $nombreDoc){
+    public function createBodyRequestAlfresco( $idCliente, $base64 , $nombreDoc, $date_issued){
 
         return array(
             "typeDocument" => "CEDULA_FISCAL",
@@ -187,7 +187,8 @@ class IntegracionesCSF extends SugarApi
             "platform" => "clarivia",
             "company" => "Financiera",
             "content" => $base64,
-            "cliente" => $idCliente
+            "cliente" => $idCliente,
+            "date_issued" => $date_issued
         );
     }
 

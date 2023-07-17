@@ -916,7 +916,7 @@
 			//"idCliente": '88cfd57e-2277-11ea-98a4-00155d96730d',
 			"rfc": RFC,
 			"base64": b64[1],
-			"vigencia": fechaEmision.split('T')[0]
+			"vigencia": fechaEmision
 		};
 
 		var url = app.api.buildURL('IntegracionesCSF', null, null,);
