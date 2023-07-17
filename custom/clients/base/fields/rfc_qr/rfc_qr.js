@@ -152,7 +152,7 @@
   },
 
 
-	validarServicioQR:function () {
+	validarServicioQR:function (  ) {
 		var contextol = this;
 		var input = contexto_cuenta.$('input[type=file]');
 		var file = input[0].files[0];
@@ -214,31 +214,6 @@
 							if( data.detail == undefined) {
 								var indice_indicador = 0;
 								var Completo = '';
-								/*
-								data = [];
-								data.push({
-								  "AL": "CIUDAD DE MEXICO 1",
-								  "CP": "05129",
-								  "Colonia": "LOMAS DEL CHAMIZAL",
-								  "Correo electrónico": "albertotame@gmail.com",
-								  "Denominación o Razón Social": "DEPORTE MOTOR BTL",
-								  "Entidad Federativa": "CIUDAD DE MEXICO",
-								  "Fecha de Inicio de operaciones": "12-01-2011",
-								  "Fecha de alta": "12-01-2011",
-								  "Fecha de constitución": "12-01-2011",
-								  "Fecha del último cambio de situación": "12-01-2011",
-								  "Municipio o delegación": "CUAJIMALPA DE MORELOS",
-								  "Nombre de la vialidad": "RETORNO ADIM",
-								  "Número exterior": "6",
-								  "Número interior": "DEPTO. 101",
-								  "RFC": "DMB1101126Q3",
-								  "Régimen": "Régimen General de Ley Personas Morales",
-								  "Régimen de capital": "SA DE CV",
-								  "Situación del contribuyente": "ACTIVO",
-								  "Tipo de vialidad": "CERRADA (CDA) O PRIVADA (PRIV)",
-								  "id": "custom_qr_QR_RFC_5fe10d78040f3",
-								  "path_img_qr": "custom/qr/QR_RFC_5fe10d78040f3.png"
-								});*/
 								var RFC = data["rfc"].toUpperCase();
 								//var PathQR=data[0]["path_img_qr"];
 								var Correo = data["email"];
@@ -247,6 +222,7 @@
 								var Exterior = data["address"]["streetNumber"].toUpperCase();
 								var Interior = data["address"]["buildingNumber"].toUpperCase();
 								//var Colonia = (data[0]["Colonia"] != undefined && data[0]["Colonia"] !='') ? data[0]["Colonia"] : ' ' ;
+								var Ciudad = data["address"]["riched_d_ciudad"].toUpperCase();
 								var Colonia = data["address"]["neighborhood"].toUpperCase();
 								var Municipio = data["address"]["municipality"].toUpperCase();
 								var Estado = data["address"]["state"].toUpperCase();
@@ -329,7 +305,7 @@
 												app.alert.show('errorAlert2', {
 													level:
 													'confirmation',
-													messages: "La información recuperada con la CSF proporcionado corresponde a: "+Completo+" ¿Desea proceder con estos datos?",
+													messages: "La información recuperada con la CSF proporcionada corresponde a: "+Completo+" ¿Desea proceder con estos datos?",
 													autoClose: false,
 													onCancel: function(){
 														contexto_cuenta.$('#activar_camara').removeClass('disabled');
@@ -344,6 +320,8 @@
 														contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
 													},
 													onConfirm: function() {
+														//Comienza integraciones con Alfresco, Quantico y Robina
+														contextol.integraCSF( contexto_cuenta.model.get('id'), RFC, window.result, FechaEmision );
 														// Actualiza Datos Personales
 														contexto_cuenta.model.set('tipodepersona_c', Regimen);
 														contexto_cuenta.model.set('rfc_c', RFC);
@@ -362,21 +340,20 @@
 														cambioRazonSocial['Direccion'] = app.utils.deepCopy(contexto_cuenta.prev_oDirecciones.prev_direccion);
 								
 														if(Regimen == "Persona Moral") {
-								  							//Valida cambios
-								  							cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('razonsocial_c') != Denominacion ? true : cambioRazonSocial['cambioCuenta'];
+															//Valida cambios
+															cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('razonsocial_c') != Denominacion ? true : cambioRazonSocial['cambioCuenta'];
 															contexto_cuenta.model.set('razonsocial_c', Denominacion);
 															contexto_cuenta.model.set('nombre_comercial_c', Denominacion);
 															contexto_cuenta.model.set('fechaconstitutiva_c', Constitucion);
 														}else {
+
 															cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('primernombre_c') != Nombre ? true : cambioRazonSocial['cambioCuenta'];
 															cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('apellidopaterno_c') != Paterno ? true : cambioRazonSocial['cambioCuenta'];
 															cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('apellidomaterno_c') != Materno ? true : cambioRazonSocial['cambioCuenta'];
 															contexto_cuenta.model.set('primernombre_c', Nombre);
 															contexto_cuenta.model.set('apellidopaterno_c', Paterno);
 															contexto_cuenta.model.set('apellidomaterno_c', Materno);
-															if( contexto_cuenta.model.get('fechadenacimiento_c') == ""){
-																contexto_cuenta.model.set('fechadenacimiento_c', Nacimiento);
-															}
+															//contexto_cuenta.model.set('fechadenacimiento_c', Nacimiento);
 															contexto_cuenta.model.set('curp_c', CURP);
 														}
 														//self.model.set('email1', Correo);
@@ -470,7 +447,7 @@
 															duplicado = (contextol._limpiezaDatos(direccion[key].numext) == contextol._limpiezaDatos(Exterior)) ? duplicado+1 : duplicado;
 															duplicado = (contextol._limpiezaDatos(direccion[key].numint) == contextol._limpiezaDatos(Interior)) ? duplicado+1 : duplicado;
 															duplicado = (direccion[key].inactivo == 0) ? duplicado+1 : duplicado;
-															if(direccion[key].indicadorSeleccionados.includes('2') && direccion[key].inactivo == 0){
+															if(direccion[key].indicadorSeleccionados.includes('^2^') && direccion[key].inactivo == 0){
 																cDireccionFiscal = cDireccionFiscal + 1;
 																indice_indicador = key;
 															}
@@ -512,15 +489,16 @@
 															}
 														});
 														// Agrega Dirección
-								Colonia = (Colonia == ' ') ? '_' : Colonia;
+														Colonia = (Colonia == ' ' || Colonia == '') ? '_' : Colonia;
 														var strUrl = 'DireccionesQR/' + CP + '/0/' + Colonia +'/'+Municipio+'/'+Estado;
 														app.api.call('GET', app.api.buildURL(strUrl), null, {
 															success: _.bind(function (data) {
-									Colonia = (Colonia == '_') ? ' ' : Colonia;
+																Colonia = (Colonia == '_') ? ' ' : Colonia;
 																if(data.idCP) {
 																	var list_paises = data.paises;
 																	var list_municipios = data.municipios;
-																	var city_list = App.metadata.getCities();
+																	//var city_list = App.metadata.getCities();
+																	var list_ciudades = data.ciudades;
 																	var list_estados = data.estados;
 																	var list_colonias = data.colonias;
 																	//País
@@ -551,32 +529,23 @@
 																		listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
 																		if(list_colonias[i].nameColonia == Colonia) auxColonia = list_colonias[i].idColonia;
 																	}
-									  if(auxColonia==''){
-										  listColonia['']="";
-									  }
+																	if(auxColonia==''){
+																		listColonia['']="";
+																	}
 																	//Ciudad
 																	var listCiudad = {};
-																	var ciudades = Object.values(city_list);
 																	var auxCiudad = '';
-																	var estadociudadaux = '';
-									  var idSinCiudad ='';
-																	//nuevaDireccion.estado = (Object.keys(nuevaDireccion.listEstado)[0] != undefined) ? Object.keys(nuevaDireccion.listEstado)[0] : "";
-																	estadociudadaux = (Object.keys(listEstado)[0] != undefined) ? Object.keys(listEstado)[0] : "" ;
-																	for (var [key, value] of Object.entries(listEstado)) {
-																		for (var i = 0; i < ciudades.length; i++) {
-																			if (ciudades[i].estado_id == key) {
-																				listCiudad[ciudades[i].id] = ciudades[i].name;
-											idSinCiudad = (ciudades[i].name == 'SIN CIUDAD') ? ciudades[i].id : idSinCiudad;
-																				if(ciudades[i].name == Municipio) auxCiudad = ciudades[i].id;
-																			}
-																		}
+																	var idSinCiudad ='';
+																	for (var i = 0; i < list_ciudades.length; i++) {
+																		listCiudad[list_ciudades[i].idCiudad] = list_ciudades[i].nameCiudad;
+																		if(list_ciudades[i].nameCiudad.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase() == Ciudad.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase()) auxCiudad = list_ciudades[i].idCiudad;
+																		idSinCiudad = (list_ciudades[i].nameCiudad == 'SIN CIUDAD') ? list_ciudades[i].idCiudad : idSinCiudad;
 																	}
-									  //auxCiudad = (auxCiudad=='' && idSinCiudad!='') ? idSinCiudad : auxCiudad;
-									  auxCiudad = idSinCiudad;
+																	
 																	if(cDireccionFiscal >= 1) {
 																	  if(direccion[indice_indicador].indicador == 2) {
 																		  direccion[indice_indicador].valCodigoPostal = CP;
-										  direccion[indice_indicador].postal = data.idCP;
+										  								  direccion[indice_indicador].postal = data.idCP;
 																		  direccion[indice_indicador].calle = Calle.trim();
 																		  direccion[indice_indicador].numext = Exterior.trim();
 																		  direccion[indice_indicador].numint = Interior.trim();
@@ -851,41 +820,45 @@
 																	}
 																}
 									
-									//Valida tipo de registro; (Cliente || Proveedor) && Origen!=Seguros && Subtipo != Venta activo
+									//Valida tipo de registro; (Cliente || Proveedor) && Origen != Seguros && Subtipo != Venta activo
 									if ( (contexto_cuenta.model.get('tipo_registro_cuenta_c') =='3' || contexto_cuenta.model.get('tipo_registro_cuenta_c') =='5') && contexto_cuenta.model.get('origen_cuenta_c') != '11' && contexto_cuenta.model.get('subtipo_registro_cuenta_c') != '11' ) {
-									  if(cambioRazonSocial['cambioDirFiscal'] || cambioRazonSocial['cambioCuenta'] ){
-										  //Abre modal para indicar tipo de cambio
-										  //Restablece valores de custom fieldQR
-										  contexto_cuenta.$('#activar_camara').removeClass('disabled');
-																			contexto_cuenta.$('#activar_camara').attr('style', '');
-																			contexto_cuenta.$('#archivo_qr').removeClass('disabled');
-																			contexto_cuenta.$('#archivo_qr').attr('style', '');
-																			contexto_cuenta.$('#btnSubir').removeClass('disabled');
-																			contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
-																			contexto_cuenta.$('#validar_QR').removeClass('disabled');
-																			contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
-																			contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
-																			contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
-																			//contexto_cuenta.$('#rfcModal').hide();
-															  
-										  //Muestra modal cambios
-										  $('#cambioRazonSocial').show();
-										  if(!cambioRazonSocial['cambioDirFiscal'] && cambioRazonSocial['cambioCuenta']){
-											  $('.action1').show();
-											  $('.action2').hide();
-											  $('.action3').hide();
-										  }
-										  if(cambioRazonSocial['cambioDirFiscal'] && !cambioRazonSocial['cambioCuenta']){
-											  $('.action1').hide();
-											  $('.action2').show();
-											  $('.action3').hide();
-										  }
-										  if(cambioRazonSocial['cambioDirFiscal'] && cambioRazonSocial['cambioCuenta']){
-											  $('.action1').show();
-											  $('.action2').show();
-											  $('.action3').show();
-										  }
-									  }                              
+										if(cambioRazonSocial['cambioDirFiscal'] || cambioRazonSocial['cambioCuenta'] ){
+											//Abre modal para indicar tipo de cambio
+											//Restablece valores de custom fieldQR
+											contexto_cuenta.$('#activar_camara').removeClass('disabled');
+											contexto_cuenta.$('#activar_camara').attr('style', '');
+											contexto_cuenta.$('#archivo_qr').removeClass('disabled');
+											contexto_cuenta.$('#archivo_qr').attr('style', '');
+											contexto_cuenta.$('#btnSubir').removeClass('disabled');
+											contexto_cuenta.$('#btnSubir').attr('style', 'margin:10px');
+											contexto_cuenta.$('#validar_QR').removeClass('disabled');
+											contexto_cuenta.$('#validar_QR').attr('style', 'margin:10px');
+											contexto_cuenta.$('#btn_Cancelar').removeClass('disabled');
+											contexto_cuenta.$('#btn_Cancelar').attr('style', 'margin:10px');
+											//contexto_cuenta.$('#rfcModal').hide();
+		  
+											//Solo se muestra modal cuando detecta cambios en Razón Social
+											if( cambioRazonSocial['cambioCuenta'] ){
+												//Muestra modal cambios
+												$('#cambioRazonSocial').show();
+												if(!cambioRazonSocial['cambioDirFiscal'] && cambioRazonSocial['cambioCuenta']){
+												$('.action1').show();
+												$('.action2').hide();
+												$('.action3').hide();
+												}
+												if(cambioRazonSocial['cambioDirFiscal'] && !cambioRazonSocial['cambioCuenta']){
+													$('.action1').hide();
+													$('.action2').show();
+													$('.action3').hide();
+												}
+												if(cambioRazonSocial['cambioDirFiscal'] && cambioRazonSocial['cambioCuenta']){
+													$('.action1').show();
+													$('.action2').show();
+													$('.action3').show();
+												}
+											}
+											
+										}                              
 									}
 									
 															})
@@ -929,6 +902,36 @@
 		*/
 
 		//imgn.onload
+	},
+
+	integraCSF: function( idRegistro, RFC, base64 , fechaEmision ){
+		app.alert.show('sendCSF', {
+			level: 'process',
+			title: 'Enviando Constancia de Situación Fiscal...',
+		});
+		
+		var b64 = base64.split(";base64,");
+		var params = {
+			"idCliente": idRegistro,
+			//"idCliente": '88cfd57e-2277-11ea-98a4-00155d96730d',
+			"rfc": RFC,
+			"base64": b64[1],
+			"vigencia": fechaEmision
+		};
+
+		var url = app.api.buildURL('IntegracionesCSF', null, null,);
+		app.api.call('create', url, params, {
+			success: function (response) {
+				app.alert.dismiss('sendCSF');
+				app.alert.show('info_csf', {
+                    level: 'info',
+                    autoClose: false,
+                    messages: '<br>-' + response.robina + '<br><br>-' + response.quantico_validator + '<br><br>-' + response.alfresco
+                });
+				
+			}
+		});
+
 	},
 
 	formatDate: function( fecha ){
@@ -1041,8 +1044,8 @@
         //Cierra modal
         $('#cambioRazonSocial').hide();
         $('#rfcModal').hide();
-        cont_dir.oDirecciones.direccion = cambioRazonSocial['Direccion'];
-        cont_dir.render();
+        //cont_dir.oDirecciones.direccion = cambioRazonSocial['Direccion'];
+        //cont_dir.render();
         var model=App.data.createBean('Cases');
         model.set('account_id', contexto_cuenta.model.get('id'));
         model.set('account_name', contexto_cuenta.model.get('name'));
@@ -1077,7 +1080,9 @@
                         contexto_cuenta.model.set('primernombre_c', cambioRazonSocial['Cuenta']['primernombre_c']);
                         contexto_cuenta.model.set('apellidopaterno_c', cambioRazonSocial['Cuenta']['apellidopaterno_c']);
                         contexto_cuenta.model.set('apellidomaterno_c', cambioRazonSocial['Cuenta']['apellidomaterno_c']);
-                      }
+					  }
+					  cont_dir.oDirecciones.direccion = cambioRazonSocial['Direccion'];
+					  cont_dir.render();
                   }
                   App.alert.show('cancelCase1', {
                     level: 'info',

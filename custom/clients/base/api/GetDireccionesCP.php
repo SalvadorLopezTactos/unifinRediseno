@@ -33,7 +33,22 @@ class GetDireccionesCP extends SugarApi
                 //long help to be displayed in the help documentation
                 'longHelp' => '',
             ),
-
+            //GET - Copia de DireccionesCP, pero con un atributo adicional - Municipio - Creado para no afectar sistemas que hoy consumen servicio actual
+            'retrieve_cpm' => array(
+                //request type
+                'reqType' => 'GET',
+                'noLoginRequired' => true,
+                //endpoint path
+                'path' => array('DireccionesCPM', '?','?','?'),
+                //endpoint variables
+                'pathVars' => array('module', 'cp','indice','municipio'),
+                //method to call
+                'method' => 'getAddressByCP',
+                //short help string to be displayed in the help documentation
+                'shortHelp' => 'Método GET para obtener información relacionada al Código Postal y Municipio',
+                //long help to be displayed in the help documentation
+                'longHelp' => '',
+            ),
 
         );
 
@@ -53,6 +68,7 @@ class GetDireccionesCP extends SugarApi
     {
 
         $cp=$args['cp'];
+        $municipio = isset($args['municipio']) ? $args['municipio'] : '';
         $indice = "0";
         if (!empty($args['indice'])) {
           $indice = $args['indice'];
@@ -93,6 +109,11 @@ FROM dire_codigopostal cp
   -- on co.codigo_postal = cp.name
     ON co.id LIKE concat(cp_m.dire_codigopostal_dire_municipiodire_municipio_ida, cp.name, '%') and co.deleted=0
 WHERE cp.name = '{$cp}'";
+  
+        //Valida existencia de municipio
+        if(!empty($municipio)){
+            $query .= " and m.name='{$municipio}'";
+        }
 
         //LOG Plataforma:
         $GLOBALS['log']->fatal("Consulta GetDireccionesCP - CP: " .$cp . ' - Usuario: ' . $GLOBALS['current_user']->user_name. ' - Plataforma: ' . $GLOBALS['service']->platform);
