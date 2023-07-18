@@ -222,7 +222,9 @@
 								var Exterior = data["address"]["streetNumber"].toUpperCase();
 								var Interior = data["address"]["buildingNumber"].toUpperCase();
 								//var Colonia = (data[0]["Colonia"] != undefined && data[0]["Colonia"] !='') ? data[0]["Colonia"] : ' ' ;
-								var Ciudad = data["address"]["riched_d_ciudad"].toUpperCase();
+								//Se aplica normalize para reemplazar caracteres especiales
+								var Ciudad = data["address"]["riched_d_ciudad"].toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");;
+								var IdCiudad = data["address"]["riched_id_ciudad"];
 								var Colonia = data["address"]["neighborhood"].toUpperCase();
 								var Municipio = data["address"]["municipality"].toUpperCase();
 								var Estado = data["address"]["state"].toUpperCase();
@@ -490,7 +492,9 @@
 														});
 														// Agrega Dirección
 														Colonia = (Colonia == ' ' || Colonia == '') ? '_' : Colonia;
-														var strUrl = 'DireccionesQR/' + CP + '/0/' + Colonia +'/'+Municipio+'/'+Estado;
+														Ciudad = ( Ciudad == '' ) ? '_' : Ciudad;
+
+														var strUrl = 'DireccionesQR/' + CP + '/0/' + Colonia +'/'+Municipio+'/'+Estado+'/'+Ciudad;
 														app.api.call('GET', app.api.buildURL(strUrl), null, {
 															success: _.bind(function (data) {
 																Colonia = (Colonia == '_') ? ' ' : Colonia;
@@ -916,7 +920,7 @@
 			//"idCliente": '88cfd57e-2277-11ea-98a4-00155d96730d',
 			"rfc": RFC,
 			"base64": b64[1],
-			"vigencia": fechaEmision
+			"vigencia": fechaEmision.split('T')[0]
 		};
 
 		var url = app.api.buildURL('IntegracionesCSF', null, null,);
