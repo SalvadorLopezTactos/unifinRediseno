@@ -25,14 +25,24 @@ class segurosUnifin extends SugarApi
 
     public function getSegurosUnifin($api, $args)
     {
-		$response = array();
-		$response['statusCode']='200';
-		$response['message']='Registro procesado de forma correcta';
-		$response['id']='';
+		try {
+			global $db;
+			$response = array();
+			$id = $args['id'];
+			$query = "select * from s_seguros a, s_seguros_cstm b where a.id = b.id_c and a.deleted = 0 and a.id = '{$id}'";
+			$queryResult = $db->query($query);
+			$Seguro = $db->fetchByAssoc($queryResult);
+			$response = $Seguro;
+			$query = "select * from cot_cotizaciones a, cot_cotizaciones_cstm b where a.id = b.id_c and a.deleted = 0 and a.id in (select cot_cotizaciones_s_seguroscot_cotizaciones_idb from cot_cotizaciones_s_seguros_c where cot_cotizaciones_s_seguross_seguros_ida = '{$id}')";
+			$queryResult = $db->query($query);
+			$Cotizaciones = $db->fetchByAssoc($queryResult);			
+			$response['cotizaciones'] = $Cotizaciones;
+		} catch (Exception $e) {
+            $response['statusCode']='400';
+            $response['message']=$e->getMessage();
+        }
 		return $response;
     }
-
-
 }
 
 ?>
