@@ -109,9 +109,9 @@ class IntegracionesCSF extends SugarApi
                 $response_upload_valDig = $this->callUploadDocument( $url_expediente, $body_request_quantico_validator );
 
                 $GLOBALS['log']->fatal( "Respuesta upload Validación Digital:" );
-                $GLOBALS['log']->fatal($url_expediente);
-                $GLOBALS['log']->fatal( print_r($body_request_quantico_validator,true) );
-                $GLOBALS['log']->fatal( print_r($response_upload_valDig,true) );
+                //$GLOBALS['log']->fatal($url_expediente);
+                //$GLOBALS['log']->fatal( print_r($body_request_quantico_validator,true) );
+                //$GLOBALS['log']->fatal( print_r($response_upload_valDig,true) );
                 
                 $response['quantico_validator']= $response_upload_valDig['Message'];
 
