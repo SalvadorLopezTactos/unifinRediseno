@@ -33,7 +33,7 @@
 
         var fecha_formateada = "";
 
-        if( fecha !== null ){
+        if( fecha !== null && fecha !== "" ){
             var fecha_parts = fecha.split('T');
             var fecha_unformat = fecha_parts[0].split('-');
 
