@@ -20,8 +20,8 @@ class getDireccionCPQR extends SugarApi
             'retrieve' => array(
                 'reqType' => 'GET',
                 'noLoginRequired' => true,
-                'path' => array('DireccionesQR', '?', '?', '?', '?','?'),
-                'pathVars' => array('module', 'cp', 'indice', 'colonia_rfc', 'ciudad_rfc','entidad_rfc'),
+                'path' => array('DireccionesQR', '?', '?', '?', '?','?','?'),
+                'pathVars' => array('module', 'cp', 'indice', 'colonia_rfc', 'ciudad_rfc','entidad_rfc','ciudad_csf'),
                 'method' => 'getAddressByCPQR',
                 'shortHelp' => 'Método GET para obtener información relacionada al Código Postal.',
                 'longHelp' => 'y compara que la colonia y cuidad exista. En caso contrario la agrega como nueva',
@@ -33,14 +33,18 @@ class getDireccionCPQR extends SugarApi
 
     public function getAddressByCPQR($api, $args)
     {
+        //$GLOBALS['log']->fatal("*****DIRECCIONES QR*****");
+        //$GLOBALS['log']->fatal(print_r($args,true));
         $colonia_QR = ($args['colonia_rfc']=='_') ? ' ' : $args['colonia_rfc'];
         $cod_postal=$args['cp'];
         $ciudad_QR = $args['ciudad_rfc'];
         $estado_QR = $args['entidad_rfc'];
+        
+        //Se obtiene ciudad a través de CSF
+        $ciudad_csf = ($args['ciudad_csf']=='_') ? ' ' : $args['ciudad_csf'];
         $call_api = new GetDireccionesCP();
-        //$GLOBALS['log']->fatal('args',$args);
         $resultado = $call_api->getAddressByCP($api, $args);
-        //$GLOBALS['log']->fatal('resultado',$resultado);
+        //$GLOBALS['log']->fatal( print_r($resultado,true) );
         $arr_colonias = $resultado['colonias'];
         $pais_id = intval(substr($resultado['idCP'], 0, 3));
         $estado_id = intval(substr($resultado['idCP'], 3, 3));
@@ -48,31 +52,33 @@ class getDireccionCPQR extends SugarApi
 
         $arr_estado = $resultado['estados'];
         $arr_municipio = $resultado['municipios'];
+        $arr_ciudades = $resultado['ciudades'];
         
         $colonia_existe = false;
+        $ciudad_existe = false;
+        $municipio_existe = false;
+
+        $existe_dato = false;
+        
         $aux = null;
         $arrin=null;
+        
         
         $auxindex = $this->searchForId($colonia_QR, $arr_colonias,'nameColonia');
         //$GLOBALS['log']->fatal('auxindex1',$auxindex);
         if( $auxindex >= 0){
+
+            $colonia_existe = true;
+
             $arrin = array( $auxindex => $arr_colonias[$auxindex]);
             $aux = array( 'colonias'=> $arrin);
             $arr_colonias = $aux;
-            $colonia_existe = true;
 
             unset($resultado['colonias']);
             $arr_colonias['colonias'][0] = $arr_colonias['colonias'][$auxindex];
             if($auxindex != 0) unset($arr_colonias['colonias'][$auxindex]);
             $resultado = array_replace($resultado, $arr_colonias);
         }
-        /*else{
-            foreach ($arr_colonias as $colonia) {
-                if ($colonia['nameColonia'] == $colonia_QR) {
-                    $colonia_existe = true;
-                }
-            }  
-        } */
         
         //$auxindex = array_search($estado_QR,$arr_estado,false);
         $auxindex = $this->searchForId($estado_QR, $arr_estado,'nameEstado');
@@ -92,6 +98,9 @@ class getDireccionCPQR extends SugarApi
         $auxindex = $this->searchForId($ciudad_QR, $arr_municipio,'nameMunicipio');
         //$GLOBALS['log']->fatal('searchForId',$ciudad_QR,$arr_municipio,$auxindex);
         if( $auxindex != '-1' && $auxindex >=0){
+
+            $municipio_existe = true;
+            
             $arrin = array( $auxindex => $arr_municipio[$auxindex], );
             $aux = array( 'municipios'=> $arrin);
             $arr_municipio = $aux;
@@ -102,25 +111,91 @@ class getDireccionCPQR extends SugarApi
             unset($resultado['municipios']); 
             $resultado = array_replace($resultado, $arr_municipio);        
         }
+
+        $auxindex = $this->searchForId($ciudad_csf, $arr_ciudades,'nameCiudad');
+        //$GLOBALS['log']->fatal('auxindex1',$auxindex);
+        if( $auxindex >= 0){
+
+            $ciudad_existe = true;
+
+            $arrin = array( $auxindex => $arr_ciudades[$auxindex]);
+            $aux = array( 'ciudades'=> $arrin);
+            $arr_ciudades = $aux;
+
+            unset($resultado['ciudades']);
+            $arr_ciudades['ciudades'][0] = $arr_ciudades['ciudades'][$auxindex];
+            if($auxindex != 0) unset($arr_ciudades['ciudades'][$auxindex]);
+            $resultado = array_replace($resultado, $arr_ciudades);
+        }
         
-        $GLOBALS['log']->fatal('colonia_existe',$colonia_existe);
         if(!$colonia_existe)
         {
-            $result=$this->insertColonia($pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
+            $GLOBALS['log']->fatal("Colonia no existe, se procede a insertar");
+            $data = $this->buildBodyRequest( 'colonia', $pais_id , $estado_id, $municipio_id, $colonia_QR, $cod_postal, '', '');
+            //$result=$this->insertColonia($pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
+            $result = $this->insertDataDireccion( '/direccion/insertColonia', $data );
 
-            if( $result['resultCode'] == 0 ){
+            if( !empty($result['name']) ){
 
                 $queryColonia = "Select * from dire_colonia where codigo_postal='{$cod_postal}' AND name = '{$colonia_QR}'";
                 $resultQ = $GLOBALS['db']->query($queryColonia);
 
                 if( $resultQ->num_rows > 0 ){
 
-                    //$GLOBALS['log']->fatal('insertColonia',$pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
-                    $resultado = $this->getAddressByCPQR($api, $args);
+                    $existe_dato = true;
 
                 }
 
             }
+        }
+
+        if(!$ciudad_existe)
+        {
+            $GLOBALS['log']->fatal('NO EXISTE CIUDAD, SE PROCEDE A INSERTAR');
+            $data = $this->buildBodyRequest( 'ciudad', $pais_id , $estado_id, $municipio_id, $colonia_QR, $cod_postal, $ciudad_csf, $municipio);
+            
+            $result = $this->insertDataDireccion( '/direccion/insertCiudad', $data );
+
+            if( !empty($result['name']) ){
+
+                $queryCiudad = "Select * from dire_ciudad where name = '{$ciudad_csf}'";
+                $resultC = $GLOBALS['db']->query($queryCiudad);
+
+                if( $resultC->num_rows > 0 ){
+
+                    $existe_dato = true;
+
+                }
+
+            }
+            
+        }
+
+        if(!$municipio_existe)
+        {
+            $GLOBALS['log']->fatal('NO EXISTE MUNICIPIO, SE PROCEDE A INSERTAR');
+            //$result=$this->insertMunicipio($pais_id,$estado_id, $ciudad_QR);
+            $data = $this->buildBodyRequest( 'municipio', $pais_id , $estado_id, $municipio_id, $colonia_QR, $cod_postal, $ciudad_csf, $municipio);
+            
+            $result = $this->insertDataDireccion( '/direccion/insertMunicipio', $data );
+
+            if( !empty($result['name']) ){
+
+                $queryMunicipio = "Select * from dire_municipio where name = '{$ciudad_QR}'";
+                $resultM = $GLOBALS['db']->query($queryMunicipio);
+
+                if( $resultM->num_rows > 0 ){
+                    $existe_dato = true;
+                }
+
+            }
+            
+        }
+
+        if( $existe_dato ){
+
+            $GLOBALS['log']->fatal( "Se insertó dato, se vuelven a cargar datos" );
+            $resultado = $this->getAddressByCPQR($api, $args);
         }
 
         return $resultado;
@@ -135,74 +210,59 @@ class getDireccionCPQR extends SugarApi
         return -1;
     }
 
-    public function insertColonia($pais,$estado,$municipio,$cp,$colonia)
-    {
-        global $sugar_config;
-        $host = $sugar_config['url_uniclick_direcciones'];
-        $url = $host . '/rest/uniclick/direccion/insertColonia';
-        $timeout = 500;
-        $error_report = FALSE;
+    public function buildBodyRequest( $dato, $pais, $estado, $idMunicipio, $colonia, $cp, $ciudad, $municipio ){
+        $data = null;
+        switch( $dato ){
+            case 'colonia':
+                $data = json_encode(
+                    array(
+                        "idPais" => $pais,
+                        "idEstado" => $estado,
+                        "idMunicipio" => $idMunicipio,
+                        "colonia" => $colonia,
+                        "cp" => $cp
+                    )
+                );
+            break;
 
-        $headers = array(
-            'Content-Type:application/json',
-        );
-        $data = json_encode(
-            array(
-                "idPais" => $pais,
-                "idEstado" => $estado,
-                "idMunicipio" => $municipio,
-                "colonia" => $colonia,
-                "cp" => $cp
-            )
-        );
+            case 'ciudad':
+                $data = json_encode(
+                    array(
+                        "idPais" => $pais,
+                        "idEstado" => $estado,
+                        "ciudad" => $ciudad,
+                    )
+                );
+            break;
 
-        $GLOBALS['log']->fatal("jsonas " . $data);
-
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HEADER, FALSE);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($curl, CURLOPT_POST, TRUE);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 0);
-        curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_FORBID_REUSE, true);
-        curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
-
-        try {
-            $result = curl_exec($curl);
-            $response = json_decode($result, true);
-            $GLOBALS['log']->fatal("respuesta servicio colonia\n");
-            $GLOBALS['log']->fatal(print_r($response,true));
-            curl_close($curl);
-        } catch (Exception $ex) {
-            $GLOBALS['log']->fatal("Error al ejecutar Insert de colonia" . $ex);
+            case 'municipio':
+                $data = json_encode(
+                    array(
+                        "idPais" => $pais,
+                        "idEstado" => $estado,
+                        "municipio" => $municipio,
+                    )
+                );
+            break;
 
         }
 
-
-        return $response;
+        return $data;
     }
 
-    public function insertCiudad()
-    {
-        $host = '';
-        $url = $host . '/rest/uniclick/direccion/insertCiudad';
+    public function insertDataDireccion( $endpoint, $data){
+        global $sugar_config;
+        $host = $sugar_config['url_uniclick_direcciones'];
+        $url = $host . $endpoint;
         $timeout = 500;
         $error_report = FALSE;
 
         $headers = array(
             'Content-Type:application/json',
         );
-        $data = json_encode(
-            array(
-                "idPais" => 2,
-                "idEstado" => 5,
-                "ciudad" => "texto",
-            )
-        );
-
+        
+        $GLOBALS['log']->fatal("BODY REQUEST");
+        $GLOBALS['log']->fatal( print_r($data,true) );
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HEADER, FALSE);
@@ -217,10 +277,12 @@ class getDireccionCPQR extends SugarApi
 
         try {
             $response = curl_exec($curl);
-            $GLOBALS['log']->fatal("respuesta servicio colonia\n" . $response);
+            $GLOBALS['log']->fatal("respuesta servicio \n" . $response);
+            $GLOBALS['log']->fatal( json_decode($response, true) );
             curl_close($curl);
         } catch (Exception $ex) {
-            $GLOBALS['log']->fatal("Error al ejecutar Insert de colonia" . $ex);
+            $GLOBALS['log']->fatal("Error al ejecutar servicio ". $url . $ex);
         }
+
     }
 }

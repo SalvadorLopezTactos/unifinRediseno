@@ -47,7 +47,7 @@ class IntegracionesCSF extends SugarApi
         $base64_CSF = $args['base64'];
         $date_issued = $args['vigencia'];
         $vigencia = gmdate("Y-m-d");
-
+        
         $url_token_robina = $sugar_config['regimenes_sat_url'].'/auth/login/token';
         $user = $sugar_config['regimenes_sat_user'];
         $password = $sugar_config['regimenes_sat_password'];
@@ -66,7 +66,7 @@ class IntegracionesCSF extends SugarApi
         //Envia petición hacia alfresco
         $body_request_alfresco = $this->createBodyRequestAlfresco( $idCliente, $base64_CSF, $rfc.'.pdf', $date_issued );
         $response_upload_alfresco = $this->callUploadDocument( $url_alfresco, $body_request_alfresco );
-
+        
         $GLOBALS['log']->fatal( "Respuesta upload Alfresco:" );
         $GLOBALS['log']->fatal( print_r($response_upload_alfresco,true) );
         $response['alfresco'] = $response_upload_alfresco['resultDescription'];
@@ -93,6 +93,8 @@ class IntegracionesCSF extends SugarApi
                 /*
                 $body_request_quantico = $this->createBodyRequest( $idCliente, "CSF", $base64_CSF, $vigencia );
 
+                $GLOBALS['log']->fatal("Petición quantico: ".$url_expediente);
+                $GLOBALS['log']->fatal("ID Cliente: ".$idCliente);
                 $response_upload_csf = $this->callUploadDocument( $url_expediente, $body_request_quantico );
 
                 $GLOBALS['log']->fatal( "Respuesta upload CSF:" );
@@ -107,8 +109,10 @@ class IntegracionesCSF extends SugarApi
                 $response_upload_valDig = $this->callUploadDocument( $url_expediente, $body_request_quantico_validator );
 
                 $GLOBALS['log']->fatal( "Respuesta upload Validación Digital:" );
-                $GLOBALS['log']->fatal( print_r($response_upload_valDig,true) );
-
+                //$GLOBALS['log']->fatal($url_expediente);
+                //$GLOBALS['log']->fatal( print_r($body_request_quantico_validator,true) );
+                //$GLOBALS['log']->fatal( print_r($response_upload_valDig,true) );
+                
                 $response['quantico_validator']= $response_upload_valDig['Message'];
 
             }
@@ -180,7 +184,22 @@ class IntegracionesCSF extends SugarApi
     }
 
     public function createBodyRequestAlfresco( $idCliente, $base64 , $nombreDoc, $date_issued){
-
+        $tipoPersona = 'Cliente';
+        if($idCliente){
+            $account = BeanFactory::retrieveBean('Accounts', $idCliente, array('disable_row_level_security' => true));
+            switch ($account->tipo_registro_cuenta_c) {
+                case "5":
+                    $tipoPersona = 'Proveedor';
+                    break;
+                case "3":
+                    $tipoPersona = 'Cliente';
+                    break;
+                case "2":
+                    $tipoPersona = 'Prospecto';
+                    break;
+            }
+        }
+        
         return array(
             "typeDocument" => "CEDULA_FISCAL",
             "fileName" => $nombreDoc,
@@ -188,7 +207,8 @@ class IntegracionesCSF extends SugarApi
             "company" => "Financiera",
             "content" => $base64,
             "cliente" => $idCliente,
-            "date_issued" => $date_issued
+            "date_issued" => $date_issued,
+            "tipoCuenta" => $tipoPersona
         );
     }
 
