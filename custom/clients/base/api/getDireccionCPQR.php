@@ -130,7 +130,7 @@ class getDireccionCPQR extends SugarApi
         
         if(!$colonia_existe)
         {
-            $GLOBALS['log']->fatal("Colonia no existe, se procede a insertar");
+            $GLOBALS['log']->fatal("NO EXISTE COLONIA, SE PROCEDE A INSERTAR");
             $data = $this->buildBodyRequest( 'colonia', $pais_id , $estado_id, $municipio_id, $colonia_QR, $cod_postal, '', '');
             //$result=$this->insertColonia($pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
             $result = $this->insertDataDireccion( '/direccion/insertColonia', $data );
@@ -280,6 +280,8 @@ class getDireccionCPQR extends SugarApi
             $GLOBALS['log']->fatal("respuesta servicio \n" . $response);
             $GLOBALS['log']->fatal( json_decode($response, true) );
             curl_close($curl);
+
+            return json_decode($response, true);
         } catch (Exception $ex) {
             $GLOBALS['log']->fatal("Error al ejecutar servicio ". $url . $ex);
         }
