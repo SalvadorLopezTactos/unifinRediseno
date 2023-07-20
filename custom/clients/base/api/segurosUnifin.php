@@ -31,12 +31,14 @@ class segurosUnifin extends SugarApi
 			$id = $args['id'];
 			$query = "select * from s_seguros a, s_seguros_cstm b where a.id = b.id_c and a.deleted = 0 and a.id = '{$id}'";
 			$queryResult = $db->query($query);
-			$Seguro = $db->fetchByAssoc($queryResult);
-			$response = $Seguro;
+			$response = $db->fetchByAssoc($queryResult);
 			$query = "select * from cot_cotizaciones a, cot_cotizaciones_cstm b where a.id = b.id_c and a.deleted = 0 and a.id in (select cot_cotizaciones_s_seguroscot_cotizaciones_idb from cot_cotizaciones_s_seguros_c where cot_cotizaciones_s_seguross_seguros_ida = '{$id}')";
 			$queryResult = $db->query($query);
-			$Cotizaciones = $db->fetchByAssoc($queryResult);			
-			$response['cotizaciones'] = $Cotizaciones;
+			$pos=0;
+			while ($row = $db->fetchByAssoc($queryResult)) {
+				$response['cotizaciones'][$pos] = $row;
+				$pos++;
+			}
 		} catch (Exception $e) {
             $response['statusCode']='400';
             $response['message']=$e->getMessage();

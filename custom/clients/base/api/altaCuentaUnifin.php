@@ -90,6 +90,10 @@ class altaCuentaUnifin extends SugarApi
 					$beanLead = BeanFactory::newBean('Leads');
 					$beanLead->regimen_fiscal_c = $regimen_fiscal_c;
 				}
+				if($args['usuario']) {
+					$beanLead->created_by = $args['usuario'];
+					$beanLead->assigned_user_id = $args['usuario'];
+				}
 				if($args['nombre_empresa_c']) $beanLead->nombre_empresa_c = $args['nombre_empresa_c'];
 				if($args['nombre_c']) $beanLead->nombre_c = $args['nombre_c'];
 				if($args['apellido_paterno_c']) $beanLead->apellido_paterno_c = $args['apellido_paterno_c'];
