@@ -773,219 +773,212 @@ array (
               ),
               9 => 
               array (
-                'readonly' => false,
-                'name' => 'regimen_fiscal_sat_c',
-                'label' => 'LBL_REGIMEN_FISCAL_SAT',
-                'span' => 12,
-              ),
-              10 => 
-              array (
                 'name' => 'account_regimenes_fiscal',
                 'studio' => 'visible',
                 'dismiss_label' => true,
                 'span' => 12,
               ),
-              11 => 
+              10 => 
               array (
                 'name' => 'fechadenacimiento_c',
                 'label' => 'LBL_FECHADENACIMIENTO',
               ),
-              12 => 
+              11 => 
               array (
                 'name' => 'genero_c',
                 'studio' => 'visible',
                 'label' => 'LBL_GENERO',
               ),
-              13 => 
+              12 => 
               array (
                 'name' => 'parent_name',
               ),
-              14 => 
+              13 => 
               array (
                 'name' => 'fechaconstitutiva_c',
                 'label' => 'LBL_FECHACONSTITUTIVA',
               ),
-              15 => 
+              14 => 
               array (
                 'readonly' => false,
                 'name' => 'situacion_gpo_empresarial_c',
                 'label' => 'LBL_SITUACION_GPO_EMPRESARIAL',
               ),
-              16 => 
+              15 => 
               array (
                 'readonly' => false,
                 'name' => 'situacion_gpo_empresa_txt_c',
                 'studio' => 'visible',
                 'label' => 'LBL_SITUACION_GPO_EMPRESA_TXT_C',
               ),
+              16 => 
+              array (
+              ),
               17 => 
               array (
               ),
               18 => 
               array (
-              ),
-              19 => 
-              array (
                 'name' => 'rfc_c',
                 'label' => 'LBL_RFC',
               ),
-              20 => 
+              19 => 
               array (
                 'type' => 'button',
                 'name' => 'generar_rfc_c',
                 'label' => 'LBL_GENERAR_RFC',
               ),
-              21 => 
+              20 => 
               array (
                 'name' => 'nacionalidad_c',
                 'label' => 'LBL_NACIONALIDAD',
               ),
-              22 => 
+              21 => 
               array (
                 'name' => 'tct_pais_expide_rfc_c',
                 'label' => 'LBL_TCT_PAIS_EXPIDE_RFC',
               ),
-              23 => 
+              22 => 
               array (
                 'name' => 'pais_nacimiento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PAIS_NACIMIENTO',
               ),
-              24 => 
+              23 => 
               array (
                 'name' => 'estado_nacimiento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTADO_NACIMIENTO',
               ),
-              25 => 
+              24 => 
               array (
                 'name' => 'zonageografica_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ZONAGEOGRAFICA',
               ),
-              26 => 
+              25 => 
               array (
                 'name' => 'ifepasaporte_c',
                 'label' => 'LBL_IFEPASAPORTE',
               ),
-              27 => 
+              26 => 
               array (
                 'name' => 'curp_c',
                 'label' => 'LBL_CURP',
               ),
-              28 => 
+              27 => 
               array (
                 'type' => 'button',
                 'name' => 'generar_curp_c',
                 'label' => 'LBL_GENERAR_CURP',
               ),
-              29 => 
+              28 => 
               array (
                 'name' => 'estadocivil_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTADOCIVIL',
               ),
-              30 => 
+              29 => 
               array (
                 'name' => 'regimenpatrimonial_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REGIMENPATRIMONIAL',
               ),
-              31 => 
+              30 => 
               array (
                 'name' => 'profesion_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROFESION',
               ),
-              32 => 
+              31 => 
               array (
                 'name' => 'puesto_cuenta_c',
                 'label' => 'LBL_PUESTO_CUENTA_C',
               ),
-              33 => 
+              32 => 
               array (
                 'name' => 'email',
               ),
-              34 => 
+              33 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              35 => 
+              34 => 
               array (
                 'name' => 'referenciabancaria_c',
                 'label' => 'LBL_REFERENCIABANCARIA',
               ),
-              36 => 
+              35 => 
               array (
               ),
-              37 => 
+              36 => 
               array (
                 'name' => 'tipo_relacion_c',
                 'label' => 'LBL_TIPO_RELACION',
               ),
-              38 => 
+              37 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              39 => 
+              38 => 
               array (
                 'name' => 'reus_c',
                 'label' => 'LBL_REUS',
               ),
-              40 => 
+              39 => 
               array (
                 'name' => 'referencia_bancaria_c',
                 'label' => 'LBL_REFERENCIA_BANCARIA_C',
               ),
-              41 => 
+              40 => 
               array (
                 'name' => 'tct_prospecto_contactado_chk_c',
                 'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
               ),
-              42 => 
+              41 => 
               array (
                 'name' => 'show_panel_c',
                 'label' => 'LBL_SHOW_PANEL',
               ),
-              43 => 
+              42 => 
               array (
                 'name' => 'apoderado_nombre_c',
                 'label' => 'LBL_APODERADO_NOMBRE_C',
               ),
-              44 => 
+              43 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              45 => 
+              44 => 
               array (
                 'name' => 'apoderado_apaterno_c',
                 'label' => 'LBL_APODERADO_APATERNO_C',
               ),
-              46 => 
+              45 => 
               array (
                 'name' => 'apoderado_amaterno_c',
                 'label' => 'LBL_APODERADO_AMATERNO_C',
               ),
-              47 => 
+              46 => 
               array (
                 'name' => 'cuenta_especial_c',
                 'label' => 'LBL_CUENTA_ESPECIAL',
               ),
-              48 => 
+              47 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              49 => 
+              48 => 
               array (
                 'name' => 'alta_portal_proveedor_chk_c',
                 'label' => 'LBL_ALTA_PORTAL_PROVEEDOR_CHK',
                 'css_class' => 'hidden',
               ),
-              50 => 
+              49 => 
               array (
               ),
             ),
