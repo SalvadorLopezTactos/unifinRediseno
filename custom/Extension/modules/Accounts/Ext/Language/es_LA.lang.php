@@ -388,3 +388,4 @@ $mod_strings['LBL_ACCION_CAMBIO_FISCAL'] = 'Acción cambio fiscal';
 $mod_strings['LBL_DIRECCION_ACTUALIZADA_API'] = 'Dirección fiscal actualizada desde API';
 $mod_strings['LBL_REGIMENES_FISCAL_SAT'] = 'Regimenes Fiscales';
 $mod_strings['LBL_EMISION_CSF'] = 'Lugar y fecha de emisión CSF';
+$mod_strings['LBL_ERROR_DYNAMICS365'] = ' Error en integración Dynamics365';

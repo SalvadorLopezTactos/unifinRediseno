@@ -377,6 +377,10 @@ array (
               ),
               11 => 
               array (
+                'readonly' => false,
+                'name' => 'error_dynamics365_c',
+                'studio' => 'visible',
+                'label' => 'LBL_ERROR_DYNAMICS365',
               ),
             ),
           ),

@@ -317,28 +317,25 @@
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
         this.model.addValidationTask('validaReqPLDPropReal_CS', _.bind(this.validaPropRealCR, this));
+		this.model.addValidationTask('requestDynamics', _.bind(this.requestDynamics1, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 	      //Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
         //this.model.on('sync',this.validaReqUniclickInfo,this);
-
         //Se omite llamada a funcion para deshabilitar ya que se opta por habilitar bloqueo via dependencia
         this.model.on('sync', this.deshabilitaOrigenCuenta, this);
-
-
-
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigen();
         //Clic solicitar CIEC
         this.context.on('button:solicitar_ciec:click', this.solicitar_ciec_function, this);
         //Oculta Menú Solicitar CIEC
         this.model.on('sync', this.ocultaSolicitarCIEC, this);
-
         //Parche utilizado para ocultar las filas que siguen mostrándose aunque ningún campo se encuentren en ellas
         this.model.on('sync', this.hideRowsNoHideByDependency, this);
-
         //Se bloquean campos de nombre para los registros tipo "Cliente"
         this.model.on('sync', this.disableNameCliente, this);
+        //Muestra mensaje Dynamics265
+        this.model.on('sync', this.dynamics365, this);
     },
 
     /** Asignacion modal */
@@ -1324,6 +1321,7 @@
 
         //Oculta campos de Dynamics
         $('[data-name="control_dynamics_365_c"]').hide();
+		$('[data-name="error_dynamics365_c"]').hide();
         $('[data-name="id_cpp_365_chk_c"]').hide();
 
         //Oculta fecha de bloqueo para saber si el Origen se habilita
@@ -1332,8 +1330,7 @@
         //Oculta etiquetas 360
         this.$('.record-edit-link-wrapper[data-name="account_vista360"]').remove();
         this.$('div[data-name=account_vista360]').find('div.record-label').addClass('hide');
-
-    },
+	},
 
     editClicked: function () {
         this._super("editClicked");
@@ -2900,12 +2897,22 @@
             app.api.call('create', app.api.buildURL("Dynamics365"), body, {
                 success: _.bind(function (data) {
                     app.alert.dismiss('infoDynamics');
-                    if(data !=null){
+                    if(data!=null){
                         self.model.set('control_dynamics_365_c',data[0]);
                         self.model.set('id_cpp_365_chk_c',data[1]);
                     }
+					else {
+						self.model.set('error_dynamics365_c','Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).');
+						app.alert.dismiss('infoDynamics');
+						app.alert.show('error_otp', {
+							level: 'warning',
+							messages: 'Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).',
+							autoClose: true
+						});
+					}
                 }, this),
                 error: _.bind(function (response) {
+					self.model.set('error_dynamics365_c',response.textStatus+'\n"Error al enviar información hacia Dynamics 365"');
                     app.alert.dismiss('infoDynamics');
                     app.alert.show('error_otp', {
                         level: 'error',
@@ -2923,6 +2930,58 @@
             });
         }
 
+    },
+
+    requestDynamics1:function (fields, errors, callback) {
+        //Valida que sea proveedor
+        var tipo_cuenta=this.model.get('tipo_registro_cuenta_c');
+        var proveedor=this.model.get('esproveedor_c');
+        var cedente=this.model.get('cedente_factor_c');
+        var deudor=this.model.get('deudor_factor_c');
+        if ((tipo_cuenta =='5' || tipo_cuenta=='3' || proveedor || cedente || deudor) && this.model.get('error_dynamics365_c')) {
+            var body={
+                "accion":this.model.get('id')
+            }
+            app.alert.show('infoDynamics', {
+                level: 'process',
+                closeable: false,
+                messages: app.lang.get('LBL_LOADING'),
+            });
+            //Consumir servicio de OTP
+            app.api.call('create', app.api.buildURL("Dynamics365"), body, {
+                success: _.bind(function (data) {
+                    app.alert.dismiss('infoDynamics');
+                    if(data!=null){
+						this.model.set("error_dynamics365_c","");
+                        this.model.set('control_dynamics_365_c',data[0]);
+                        this.model.set('id_cpp_365_chk_c',data[1]);
+                    }
+					else {
+						this.model.set('error_dynamics365_c','Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).');
+						app.alert.dismiss('infoDynamics');
+						app.alert.show('error_otp', {
+							level: 'warning',
+							messages: 'Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).',
+							autoClose: true
+						});
+					}
+					callback(null, fields, errors);
+                }, this),
+                error: _.bind(function (response) {
+					this.model.set('error_dynamics365_c',response.textStatus+'\n"Error al enviar información hacia Dynamics 365"');
+                    app.alert.dismiss('infoDynamics');
+                    app.alert.show('error_otp', {
+                        level: 'warning',
+                        messages: response.textStatus+'\n"Error al enviar información hacia Dynamics 365"',
+                        autoClose: true
+                    });
+					callback(null, fields, errors);
+                },this)
+            });
+        }
+		else {
+			callback(null, fields, errors);
+		}
     },
 
     verificarCambiosRazonSocial:function(){
@@ -8917,4 +8976,15 @@ validaReqUniclickInfo: function () {
             }
         });
     },
+
+	dynamics365:function(){
+		//Muestra mensaje de Dynamics365
+		if(this.model.get('error_dynamics365_c')) {
+			app.alert.show('error_otp', {
+                level: 'warning',
+                messages: "Se ha identificado un problema con la sincronización a Dynamics 365. Para mayor detalle consulta con el equipo de TI",
+                autoClose: false
+            });
+		}
+	},
 })
