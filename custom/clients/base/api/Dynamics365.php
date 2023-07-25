@@ -150,6 +150,8 @@ class Dynamics365 extends SugarApi
                     //$GLOBALS['log']->fatal('Itera cuenta bancaria');
                     if (strlen($ctaBancaria->clabe)>=8 ) {
                         //$GLOBALS['log']->fatal('Entra cuenta bancaria: '. $ctaBancaria->name);
+                        $divisa_id = $ctaBancaria->divisa_c;
+                        $divisa_code = $this->getDivisaCode($divisa_id);
                         //Arma petición para enviar cuenta bancaria
                         global $app_list_strings;
                         $mapeoBancos = $app_list_strings['dynamics365_mapeo_bancos_list'];
@@ -161,7 +163,7 @@ class Dynamics365 extends SugarApi
                         $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
                         $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
                         $body_elements["BANKACCOUNTNAME"]=$nombreBanco[$ctaBancaria->banco];
-                        $body_elements["CURRENCYCODEACCOUNT"]="MXN";
+                        $body_elements["CURRENCYCODEACCOUNT"]=$divisa_code;
                         $records_list[]=$body_elements;
                     }
                 }
@@ -169,6 +171,8 @@ class Dynamics365 extends SugarApi
                 // Acción ejecutada desde cuenta bancaria
                 $ctaBancaria = BeanFactory::retrieveBean('cta_cuentas_bancarias', $idCuentaBancaria, array('disable_row_level_security' => true));
                 if (strlen($ctaBancaria->clabe)>=8 ) {
+                    $divisa_id = $ctaBancaria->divisa_c;
+                    $divisa_code = $this->getDivisaCode($divisa_id);
                     //Arma petición para enviar cuenta bancaria
                     global $app_list_strings;
                     $mapeoBancos = $app_list_strings['dynamics365_mapeo_bancos_list'];
@@ -180,7 +184,7 @@ class Dynamics365 extends SugarApi
                     $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
                     $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
                     $body_elements["BANKACCOUNTNAME"]=$nombreBanco[$ctaBancaria->banco];
-                    $body_elements["CURRENCYCODEACCOUNT"]="MXN";
+                    $body_elements["CURRENCYCODEACCOUNT"]=$divisa_code;
                     $records_list[]=$body_elements;
                 }
             }
@@ -258,6 +262,8 @@ class Dynamics365 extends SugarApi
                     //$GLOBALS['log']->fatal('Itera cuenta bancaria');
                     if (strlen($ctaBancaria->clabe)>=8 ) {
                         $GLOBALS['log']->fatal('Entra cuenta bancaria: '. $ctaBancaria->name);
+                        $divisa_id = $ctaBancaria->divisa_c;
+                        $divisa_code = $this->getDivisaCode($divisa_id);
                         //Arma petición para enviar cuenta bancaria
                         global $app_list_strings;
                         $mapeoBancos = $app_list_strings['dynamics365_mapeo_bancos_list'];
@@ -269,7 +275,7 @@ class Dynamics365 extends SugarApi
                         $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
                         $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
                         $body_elements["BANKACCOUNTNAME"]=$nombreBanco[$ctaBancaria->banco];
-                        $body_elements["CURRENCYCODEACCOUNT"]="MXN";
+                        $body_elements["CURRENCYCODEACCOUNT"]=$divisa_code;
                         $records_list[]=$body_elements;
                     }
                 }
@@ -277,6 +283,8 @@ class Dynamics365 extends SugarApi
                 // Acción ejecutada desde cuenta bancaria
                 $ctaBancaria = BeanFactory::retrieveBean('cta_cuentas_bancarias', $idCuentaBancaria, array('disable_row_level_security' => true));
                 if (strlen($ctaBancaria->clabe)>=8 ) {
+                    $divisa_id = $ctaBancaria->divisa_c;
+                    $divisa_code = $this->getDivisaCode($divisa_id);
                     //Arma petición para enviar cuenta bancaria
                     global $app_list_strings;
                     $mapeoBancos = $app_list_strings['dynamics365_mapeo_bancos_list'];
@@ -288,7 +296,7 @@ class Dynamics365 extends SugarApi
                     $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
                     $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
                     $body_elements["BANKACCOUNTNAME"]=$nombreBanco[$ctaBancaria->banco];
-                    $body_elements["CURRENCYCODEACCOUNT"]="MXN";
+                    $body_elements["CURRENCYCODEACCOUNT"]=$divisa_code;
                     $records_list[]=$body_elements;
                 }
             }
@@ -364,6 +372,28 @@ class Dynamics365 extends SugarApi
         $GLOBALS['log']->fatal(print_r($responseFull,true));
 
         return $responseFull;
+
+    }
+
+    public function getDivisaCode($idDivisa){
+        $divisa_code = "";
+        switch ($idDivisa) {
+            case '1':
+                $divisa_code = 'MXN';
+                break;
+            case '2':
+                $divisa_code = 'USD';
+                break;
+            case '3':
+                $divisa_code = 'EUR';
+                break;
+            
+            default:
+                $divisa_code = 'MXN';
+                break;
+        }
+
+        return $divisa_code;
 
     }
 
