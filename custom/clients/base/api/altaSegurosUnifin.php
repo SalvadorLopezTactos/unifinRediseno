@@ -34,9 +34,9 @@ class altaSegurosUnifin extends SugarApi
 			require_once("custom/clients/base/api/creditaria_api.php");
 			$apiCreditaria = new creditaria_api();
 			$body = array('id_cuenta'=>$args['s_seguros_accounts_name']);
-			$respuesta = $apiCreditaria->atendido(null,$body);			
-			if($respuesta['status_management_c']) $beanSeguro->revision_c = 1;
-			if($respuesta['estatus_atencion']) $beanSeguro->atendido_c = 1;
+			$respuesta = $apiCreditaria->atendido(null,$body);
+			if($respuesta['status_management_c'] == 1) $beanSeguro->revision_c = 1;
+			if($respuesta['estatus_atencion'] == 1) $beanSeguro->atendido_c = 1;
 			if($args['s_seguros_accounts_name']) $beanSeguro->s_seguros_accountsaccounts_ida = $args['s_seguros_accounts_name'];
 			if($args['tipo']) $beanSeguro->tipo = $args['tipo'];
 			if($args['subramos_c']) $beanSeguro->subramos_c = $args['subramos_c'];
