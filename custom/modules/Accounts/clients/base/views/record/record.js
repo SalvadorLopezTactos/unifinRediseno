@@ -1321,7 +1321,6 @@
 
         //Oculta campos de Dynamics
         $('[data-name="control_dynamics_365_c"]').hide();
-		$('[data-name="error_dynamics365_c"]').hide();
         $('[data-name="id_cpp_365_chk_c"]').hide();
 
         //Oculta fecha de bloqueo para saber si el Origen se habilita
@@ -2902,7 +2901,6 @@
                         self.model.set('id_cpp_365_chk_c',data[1]);
                     }
 					else {
-						self.model.set('error_dynamics365_c','Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).');
 						app.alert.dismiss('infoDynamics');
 						app.alert.show('error_otp', {
 							level: 'warning',
@@ -2912,7 +2910,6 @@
 					}
                 }, this),
                 error: _.bind(function (response) {
-					self.model.set('error_dynamics365_c',response.textStatus+'\n"Error al enviar información hacia Dynamics 365"');
                     app.alert.dismiss('infoDynamics');
                     app.alert.show('error_otp', {
                         level: 'error',
@@ -2938,50 +2935,67 @@
         var proveedor=this.model.get('esproveedor_c');
         var cedente=this.model.get('cedente_factor_c');
         var deudor=this.model.get('deudor_factor_c');
-        if ((tipo_cuenta =='5' || tipo_cuenta=='3' || proveedor || cedente || deudor) && this.model.get('error_dynamics365_c')) {
-            var body={
-                "accion":this.model.get('id')
-            }
-            app.alert.show('infoDynamics', {
-                level: 'process',
-                closeable: false,
-                messages: app.lang.get('LBL_LOADING'),
-            });
-            //Consumir servicio de OTP
-            app.api.call('create', app.api.buildURL("Dynamics365"), body, {
-                success: _.bind(function (data) {
-                    app.alert.dismiss('infoDynamics');
-                    if(data!=null){
-						this.model.set("error_dynamics365_c","");
-                        this.model.set('control_dynamics_365_c',data[0]);
-                        this.model.set('id_cpp_365_chk_c',data[1]);
-                    }
-					else {
-						this.model.set('error_dynamics365_c','Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).');
-						app.alert.dismiss('infoDynamics');
-						app.alert.show('error_otp', {
-							level: 'warning',
-							messages: 'Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).',
-							autoClose: true
-						});
+		var url = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+		app.api.call('read', url, {}, {
+			success: _.bind(function (resumen) {		
+				if ((tipo_cuenta =='5' || tipo_cuenta=='3' || proveedor || cedente || deudor) && resumen.error_dynamics365_c) {
+					var body={
+						"accion":this.model.get('id')
 					}
+					app.alert.show('infoDynamics', {
+						level: 'process',
+						closeable: false,
+						messages: app.lang.get('LBL_LOADING'),
+					});
+					//Consumir servicio de OTP
+					app.api.call('create', app.api.buildURL("Dynamics365"), body, {
+						success: _.bind(function (data) {
+							var params = {};
+							app.alert.dismiss('infoDynamics');
+							if(data!=null){
+								this.model.set('control_dynamics_365_c',data[0]);
+								this.model.set('id_cpp_365_chk_c',data[1]);
+								params["error_dynamics365_c"] = "";
+							}
+							else {
+								params["error_dynamics365_c"] = 'Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).';
+								app.alert.dismiss('infoDynamics');
+								app.alert.show('error_otp', {
+									level: 'warning',
+									messages: 'Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).',
+									autoClose: true
+								});
+							}
+							var url1 = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+							app.api.call('update', url1, params, {
+								success: _.bind(function (data1) {
+									callback(null, fields, errors);
+								}, this)
+							});
+						}, this),
+						error: _.bind(function (response) {
+							var params = {};
+							params["error_dynamics365_c"] = response.textStatus+'\n"Error al enviar información hacia Dynamics 365"';
+							app.alert.dismiss('infoDynamics');
+							app.alert.show('error_otp', {
+								level: 'warning',
+								messages: response.textStatus+'\n"Error al enviar información hacia Dynamics 365"',
+								autoClose: true
+							});
+							var url1 = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+							app.api.call('update', url1, params, {
+								success: _.bind(function (data1) {
+									callback(null, fields, errors);
+								}, this)
+							});
+						},this)
+					});
+				}
+				else {
 					callback(null, fields, errors);
-                }, this),
-                error: _.bind(function (response) {
-					this.model.set('error_dynamics365_c',response.textStatus+'\n"Error al enviar información hacia Dynamics 365"');
-                    app.alert.dismiss('infoDynamics');
-                    app.alert.show('error_otp', {
-                        level: 'warning',
-                        messages: response.textStatus+'\n"Error al enviar información hacia Dynamics 365"',
-                        autoClose: true
-                    });
-					callback(null, fields, errors);
-                },this)
-            });
-        }
-		else {
-			callback(null, fields, errors);
-		}
+				}
+			}, this)
+		});
     },
 
     verificarCambiosRazonSocial:function(){
@@ -8979,12 +8993,17 @@ validaReqUniclickInfo: function () {
 
 	dynamics365:function(){
 		//Muestra mensaje de Dynamics365
-		if(this.model.get('error_dynamics365_c')) {
-			app.alert.show('error_otp', {
-                level: 'warning',
-                messages: "Se ha identificado un problema con la sincronización a Dynamics 365. Para mayor detalle consulta con el equipo de TI",
-                autoClose: false
-            });
-		}
+		var url = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+		app.api.call('read', url, {}, {
+			success: _.bind(function (resumen) {
+				if(resumen.error_dynamics365_c) {
+					app.alert.show('error_otp', {
+						level: 'warning',
+						messages: "Se ha identificado un problema con la sincronización a Dynamics 365. Para mayor detalle consulta con el equipo de TI",
+						autoClose: false
+					});
+				}
+			}, this)
+		});
 	},
 })

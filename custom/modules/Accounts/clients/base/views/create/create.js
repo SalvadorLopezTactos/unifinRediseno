@@ -341,7 +341,6 @@
 
         //Oculta campos de Dynamics
         $('[data-name="control_dynamics_365_c"]').hide();
-		$('[data-name="error_dynamics365_c"]').hide();
         $('[data-name="id_cpp_365_chk_c"]').hide();
 
         //Oculta fecha de bloqueo para saber si el Origen se habilita
@@ -3610,7 +3609,6 @@
                         this.model.set('id_cpp_365_chk_c',data[1]);
                     }
 					else {
-						this.model.set('error_dynamics365_c','Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).');
 						app.alert.dismiss('infoDynamics');
 						app.alert.show('error_otp', {
 							level: 'warning',
@@ -3621,7 +3619,6 @@
 					callback(null, fields, errors);
                 }, this),
                 error: _.bind(function (response) {
-					this.model.set('error_dynamics365_c',response.textStatus+'\n"Error al enviar información hacia Dynamics 365"');
                     app.alert.dismiss('infoDynamics');
                     app.alert.show('error_otp', {
                         level: 'warning',
