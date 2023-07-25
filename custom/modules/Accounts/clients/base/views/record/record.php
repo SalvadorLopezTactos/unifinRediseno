@@ -374,13 +374,7 @@ array (
                 'name' => 'regimenes_fiscal_sat_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REGIMENES_FISCAL_SAT',
-              ),
-              11 => 
-              array (
-                'readonly' => false,
-                'name' => 'error_dynamics365_c',
-                'studio' => 'visible',
-                'label' => 'LBL_ERROR_DYNAMICS365',
+                'span' => 12,
               ),
             ),
           ),
