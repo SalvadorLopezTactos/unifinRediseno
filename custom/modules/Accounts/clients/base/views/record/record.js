@@ -2895,12 +2895,15 @@
             //Consumir servicio de OTP
             app.api.call('create', app.api.buildURL("Dynamics365"), body, {
                 success: _.bind(function (data) {
+					var params = {};
                     app.alert.dismiss('infoDynamics');
                     if(data!=null){
                         self.model.set('control_dynamics_365_c',data[0]);
                         self.model.set('id_cpp_365_chk_c',data[1]);
+						params["error_dynamics365_c"] = "";
                     }
 					else {
+						params["error_dynamics365_c"] = 'Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).';
 						app.alert.dismiss('infoDynamics');
 						app.alert.show('error_otp', {
 							level: 'warning',
@@ -2908,15 +2911,26 @@
 							autoClose: true
 						});
 					}
+					var url1 = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+					app.api.call('update', url1, params, {
+						success: _.bind(function (data1) {
+						}, this)
+					});
                 }, this),
                 error: _.bind(function (response) {
+					var params = {};
+					params["error_dynamics365_c"] = response.textStatus+'\n"Error al enviar información hacia Dynamics 365"';
                     app.alert.dismiss('infoDynamics');
                     app.alert.show('error_otp', {
                         level: 'error',
                         messages: response.textStatus+'\n"Error al enviar información hacia Dynamics 365"',
                         autoClose: true
                     });
-
+					var url1 = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+					app.api.call('update', url1, params, {
+						success: _.bind(function (data1) {
+						}, this)
+					});
                 },this)
             });
         }else {
