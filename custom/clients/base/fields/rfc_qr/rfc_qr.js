@@ -223,7 +223,7 @@
 								var Interior = data["address"]["buildingNumber"].toUpperCase();
 								//var Colonia = (data[0]["Colonia"] != undefined && data[0]["Colonia"] !='') ? data[0]["Colonia"] : ' ' ;
 								//Se aplica normalize para reemplazar caracteres especiales
-								var Ciudad = data["address"]["riched_d_ciudad"].toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");;
+								var Ciudad = data["address"]["riched_d_ciudad"].toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 								var IdCiudad = data["address"]["riched_id_ciudad"];
 								var Colonia = data["address"]["neighborhood"].toUpperCase();
 								var Municipio = data["address"]["municipality"].toUpperCase();
@@ -502,7 +502,8 @@
 																	var list_paises = data.paises;
 																	var list_municipios = data.municipios;
 																	//var city_list = App.metadata.getCities();
-																	var list_ciudades = data.ciudades;
+																	var city_list = data.ciudades_metadata;
+																	var list_ciudades=data.ciudades;
 																	var list_estados = data.estados;
 																	var list_colonias = data.colonias;
 																	//País
@@ -529,9 +530,18 @@
 																	//Colonia
 																	var listColonia = {};
 																	var auxColonia = '';
+																	var idCodigoPostal = '';
 																	for (var i = 0; i < list_colonias.length; i++) {
-																		listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
-																		if(list_colonias[i].nameColonia == Colonia) auxColonia = list_colonias[i].idColonia;
+																		listColonia[i]={};
+																		listColonia[i]['idColonia']=list_colonias[i].idColonia;
+																		listColonia[i]['nameColonia']=list_colonias[i].nameColonia;
+																		listColonia[i]['idCodigoPostal']=list_colonias[i].idCodigoPostal;
+																		//str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+																		//if(list_colonias[i].nameColonia == Colonia) auxColonia = list_colonias[i].idColonia;
+																		if(list_colonias[i].nameColonia.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase() == Colonia.toUpperCase()){
+																			auxColonia = list_colonias[i].idColonia;
+																			idCodigoPostal = list_colonias[i].idCodigoPostal;
+																		}
 																	}
 																	if(auxColonia==''){
 																		listColonia['']="";
@@ -549,7 +559,7 @@
 																	if(cDireccionFiscal >= 1) {
 																	  if(direccion[indice_indicador].indicador == 2) {
 																		  direccion[indice_indicador].valCodigoPostal = CP;
-										  								  direccion[indice_indicador].postal = data.idCP;
+										  								  direccion[indice_indicador].postal = idCodigoPostal;
 																		  direccion[indice_indicador].calle = Calle.trim();
 																		  direccion[indice_indicador].numext = Exterior.trim();
 																		  direccion[indice_indicador].numint = Interior.trim();
@@ -647,7 +657,7 @@
 																			nuevaDireccion.indicadorSeleccionados = '^2^';
 																			nuevaDireccion.bloqueado = bloqueado;
 																			nuevaDireccion.valCodigoPostal = CP;
-																			nuevaDireccion.postal = data.idCP;
+																			nuevaDireccion.postal = idCodigoPostal;
 																			nuevaDireccion.calle = Calle;
 																			nuevaDireccion.numext = Exterior;
 																			nuevaDireccion.numint = Interior;
@@ -748,7 +758,7 @@
 																			nuevaDireccion.indicadorSeleccionados = '^2^';
 																			nuevaDireccion.bloqueado = bloqueado;
 																			nuevaDireccion.valCodigoPostal = CP;
-																			nuevaDireccion.postal = data.idCP;
+																			nuevaDireccion.postal = idCodigoPostal;
 																			nuevaDireccion.calle = Calle;
 																			nuevaDireccion.numext = Exterior;
 																			nuevaDireccion.numint = Interior;

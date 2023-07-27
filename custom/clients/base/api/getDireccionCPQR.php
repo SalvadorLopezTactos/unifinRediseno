@@ -203,11 +203,18 @@ class getDireccionCPQR extends SugarApi
 
     public function searchForId($id, $array , $busqueda) {
         foreach ($array as $key => $val) {
-            if ($val[$busqueda] === $id) {
+            //$GLOBALS['log']->fatal( "COMPARANDO: ".strtoupper($val[$busqueda]). " VS ".strtoupper($id) );
+            if (strtoupper( $this->removerAcentos($val[$busqueda]) ) === strtoupper($id)) {
                 return $key;
             }
         }
         return -1;
+    }
+
+    public function removerAcentos( $str ){
+        $search = explode(",","ç,æ,œ,á,é,í,ó,ú,à,è,ì,ò,ù,ä,ë,ï,ö,ü,ÿ,â,ê,î,ô,û,å,e,i,ø,u");
+        $replace = explode(",","c,ae,oe,a,e,i,o,u,a,e,i,o,u,a,e,i,o,u,y,a,e,i,o,u,a,e,i,o,u");
+        return str_replace($search, $replace, $str);
     }
 
     public function buildBodyRequest( $dato, $pais, $estado, $idMunicipio, $colonia, $cp, $ciudad, $municipio ){
