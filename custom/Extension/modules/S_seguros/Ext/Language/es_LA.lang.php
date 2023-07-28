@@ -93,3 +93,4 @@ $mod_strings['LBL_REVISION'] = 'Revisión';
 $mod_strings['LBL_SEGUIMIENTO'] = 'Seguimiento';
 $mod_strings['LBL_ATENDIDO'] = 'Atendido';
 $mod_strings['LBL_NOTIFICADO'] = 'Notificado';
+$mod_strings['LBL_ID_ODOO'] = 'Id Odoo';
