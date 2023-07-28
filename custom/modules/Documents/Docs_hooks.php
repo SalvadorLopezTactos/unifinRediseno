@@ -47,7 +47,7 @@ class Upload_documents
                     $usuarioSharePoint = $sugar_config['inter_sharepoint_user'];
                     $content = array(
                       "UserName" => $usuarioSharePoint,
-                    	"Id" => $seguros->id,
+                    	"Id" => $seguros->int_id_dynamics_c,
                     	"Tipo" => "3",
                     	"NameFile" => $file_name,
                     	"File" => $file_encoded
