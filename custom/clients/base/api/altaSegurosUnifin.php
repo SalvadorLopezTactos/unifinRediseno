@@ -67,6 +67,7 @@ class altaSegurosUnifin extends SugarApi
 			if($args['forma_pago_act']) $beanSeguro->forma_pago_act = $args['forma_pago_act'];
 			if($args['tipo_cliente_c']) $beanSeguro->tipo_cliente_c = $args['tipo_cliente_c'];
 			if($args['description']) $beanSeguro->description = $args['description'];
+			if($args['id_odoo_c']) $beanSeguro->id_odoo_c = $args['id_odoo_c'];
 			$beanSeguro->save();
 			$idSeguro = $beanSeguro->id;
 			if($idSeguro) {
