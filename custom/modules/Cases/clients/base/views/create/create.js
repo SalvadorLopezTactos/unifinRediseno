@@ -317,6 +317,14 @@
             case '84':
             case '85':
             case '92':
+            case '96':
+            case '97':
+            case '98':
+            case '110':
+            case '111':
+            case '112':
+            case '113':
+            case '115':
                 this.model.set('priority','P1');
             break;
 
@@ -347,6 +355,21 @@
             case '83':
             case '86':
             case '87':
+            case '93':
+            case '94':
+            case '95':
+            case '99':
+            case '100':
+            case '101':
+            case '102':
+            case '103':
+            case '104':
+            case '105':
+            case '106':
+            case '107':
+            case '108':
+            case '109':
+            case '114':
                 this.model.set('priority','P2');
             break;
 
