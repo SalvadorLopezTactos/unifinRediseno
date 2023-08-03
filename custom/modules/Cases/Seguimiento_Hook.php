@@ -233,6 +233,13 @@ class Seguimiento_Hook
                 $sugar_date_time = new SugarDateTime($fecha_seguimiento);
                 $fecha_s = $sugar_date_time->formatDateTime("datetime", "db", $current_user);
 
+            }else if( $bean->type=='5' || $bean->type=='6' || $bean->type=='9' ){ // 5 - Documentos, 6 - Facturación, 9 - Pagos y Saldos
+                $GLOBALS['log']->fatal('CASO PARA CARTERA');
+                //El seguimiento se establece en Horas
+                $dias_seguimiento=$this->get_tiempo_seguimiento($bean->type,'Dias',$bean->subtipo_c);
+                $GLOBALS['log']->fatal('SE ESTABLECEN '.$dias_seguimiento.' Dias de seguimiento');
+                $fecha_s = $this->dia_seguimiento($dias_seguimiento);
+
             }else{
                 $tiempo=$this->get_tiempo_seguimiento("",'Dias',$bean->subtipo_c);
                 $fecha_s = $this->dia_seguimiento($tiempo);
@@ -323,7 +330,7 @@ class Seguimiento_Hook
     function dia_seguimiento($add){
         global $current_user;
 
-        //$GLOBALS['log']->fatal("Días a sumar: ".$add);
+        $GLOBALS['log']->fatal("Días a sumar: ".$add);
         $hoy=$this->sumDays($add, 'Y-m-d H:i:s');
 
         $due_date_time = new SugarDateTime($hoy);
@@ -437,208 +444,257 @@ class Seguimiento_Hook
     function set_asignado_responsable($bean, $event, $args){
         global $db;
         global $current_user;
+        $esCAC = isset($current_user->cac_c) ? $current_user->cac_c : false;
         //Se establece asignado y responsable
         // $GLOBALS['log']->fatal("Creado por: ". $bean->created_by);
         // $GLOBALS['log']->fatal("Asignado a: ".$bean->assigned_user_id);
         // $GLOBALS['log']->fatal("Logueado: ".$current_user->id);
         if($bean->producto_c != "B621" && $bean->producto_c !="B601"){
-            if(($bean->fetched_row['area_interna_c'] != $bean->area_interna_c) || ($bean->fetched_row['equipo_soporte_c'] != $bean->equipo_soporte_c) || !$args['isUpdate'] ){
+            if( $bean->area_interna_c != "Cobranza" ){
 
-                $area_interna="='".$bean->area_interna_c."'";
-                $equipo_soporte="='".$bean->equipo_soporte_c."'";
-                $esCAC = isset($current_user->cac_c) ? $current_user->cac_c : false;
+                if(($bean->fetched_row['area_interna_c'] != $bean->area_interna_c) || ($bean->fetched_row['equipo_soporte_c'] != $bean->equipo_soporte_c) || !$args['isUpdate'] ){
 
-                if( !empty( $bean->account_id ) && $bean->valida_cambio_fiscal_c == 1 ){
-                    $GLOBALS['log']->fatal('Entra validación para establecer área interna');
-                    $area_interna_por_cambio_razon_social = $this->getAreaInternaParaCambioRazonSocial( $bean->account_id );
-                    if( $area_interna_por_cambio_razon_social !== "" ){
-                        $GLOBALS['log']->fatal('Se establece área interna por cambio de razón social: '.$area_interna_por_cambio_razon_social);
-                        $bean->area_interna_c = $area_interna_por_cambio_razon_social;
-                        $area_interna="='".$area_interna_por_cambio_razon_social."'";
+                    $area_interna="='".$bean->area_interna_c."'";
+                    $equipo_soporte="='".$bean->equipo_soporte_c."'";
+
+                    if( !empty( $bean->account_id ) && $bean->valida_cambio_fiscal_c == 1 ){
+                        $GLOBALS['log']->fatal('Entra validación para establecer área interna');
+                        $area_interna_por_cambio_razon_social = $this->getAreaInternaParaCambioRazonSocial( $bean->account_id );
+                        if( $area_interna_por_cambio_razon_social !== "" ){
+                            $GLOBALS['log']->fatal('Se establece área interna por cambio de razón social: '.$area_interna_por_cambio_razon_social);
+                            $bean->area_interna_c = $area_interna_por_cambio_razon_social;
+                            $area_interna="='".$area_interna_por_cambio_razon_social."'";
+                        }
                     }
-                }
-                
-                if($bean->area_interna_c==''){
-                    $area_interna='IS NULL';
-                }
+                    
+                    if($bean->area_interna_c==''){
+                        $area_interna='IS NULL';
+                    }
 
-                if($bean->equipo_soporte_c==''){
-                    $equipo_soporte='IS NULL';
-                }
+                    if($bean->equipo_soporte_c==''){
+                        $equipo_soporte='IS NULL';
+                    }
 
-                $query="SELECT * FROM unifin_casos_soporte_area WHERE area_interna {$area_interna} AND equipo {$equipo_soporte}";
+                    $query="SELECT * FROM unifin_casos_soporte_area WHERE area_interna {$area_interna} AND equipo {$equipo_soporte}";
 
-                // $GLOBALS['log']->fatal("QUERY PARA OBTENER RESPONSABLE Y ASIGNADO");
-                // $GLOBALS['log']->fatal($query);
+                    // $GLOBALS['log']->fatal("QUERY PARA OBTENER RESPONSABLE Y ASIGNADO");
+                    // $GLOBALS['log']->fatal($query);
 
-                $responsable="";
-                $asignado="";
+                    $responsable="";
+                    $asignado="";
 
-                $result = $GLOBALS['db']->query($query);
+                    $result = $GLOBALS['db']->query($query);
 
-                $registros_encontrados=$result->num_rows;
+                    $registros_encontrados=$result->num_rows;
 
-                //$GLOBALS['log']->fatal("REGISTROS: ".$registros_encontrados);
+                    //$GLOBALS['log']->fatal("REGISTROS: ".$registros_encontrados);
 
-                if($registros_encontrados>0){
+                    if($registros_encontrados>0){
 
-                    while($row = $GLOBALS['db']->fetchByAssoc($result)){
-                        $id_registro=$row['id'];
-                        $responsable=$row['responsable'];
-                        $asignado= (!$esCAC || ($esCAC && $bean->created_by == $bean->assigned_user_id) ) ? $row['responsable'] : $bean->assigned_user_id;
-                        $ultimo_asignado=intval($row['ultimo_asignado_carrusel']);
+                        while($row = $GLOBALS['db']->fetchByAssoc($result)){
+                            $id_registro=$row['id'];
+                            $responsable=$row['responsable'];
+                            $asignado= (!$esCAC || ($esCAC && $bean->created_by == $bean->assigned_user_id) ) ? $row['responsable'] : $bean->assigned_user_id;
+                            $ultimo_asignado=intval($row['ultimo_asignado_carrusel']);
 
-                        $asignacion_carrusel=($row['asignacion_carrousel']==1) ? true : false;
-                        $responsable_en_carrusel=($row['responsable_carrousel']==1) ? true : false;
-                        //Calculando el asignado, dependiendo si se tiene asignación en carrusel
-                        if($asignacion_carrusel){
-                            $usuarios_carrusel=$this->getUsersReportsTo($responsable);
+                            $asignacion_carrusel=($row['asignacion_carrousel']==1) ? true : false;
+                            $responsable_en_carrusel=($row['responsable_carrousel']==1) ? true : false;
+                            //Calculando el asignado, dependiendo si se tiene asignación en carrusel
+                            if($asignacion_carrusel){
+                                $usuarios_carrusel=$this->getUsersReportsTo($responsable);
 
-                            $GLOBALS['log']->fatal(print_r($usuarios_carrusel,true));
+                                $GLOBALS['log']->fatal(print_r($usuarios_carrusel,true));
 
-                            if($responsable_en_carrusel){
-                                //Se toma en cuenta en el carrusel al usuario responsable, por lo tanto se pone al inicio de la lista de usuarios disponibles
-                                array_unshift($usuarios_carrusel,$responsable);
-                            }
-
-                            //Sólo procesa asgnado si: 1) No es caso creado por CAC o 2) Es CAC, pero establece asignado manualmente
-                            if(!$esCAC || ($esCAC && $bean->created_by == $bean->assigned_user_id ) )
-                            {
-                                $usersVacaciones=array();
-                                //Se arma arreglo para buscar el usuario que se va a asignar, el arreglo armado es del estlo:
-                                /**
-                                 * (
-                                 * 0:( 
-                                 *  id_usuario1=>(
-                                 *      fecha_vacacion1,
-                                 *      fecha_vacacion2)
-                                 *  ),
-                                 * 1:(
-                                 *  id_usuario2=>(
-                                 *      fecha_vacacion1,
-                                 *      fecha_vacacion2)
-                                 *  ),....
-                                 * )
-                                 **/
-                                for($i=0;$i<count($usuarios_carrusel);$i++){
-                                    $queryHoliday="SELECT holiday_date from holidays WHERE person_id='{$usuarios_carrusel[$i]}' AND deleted=0";
-                                    $resultHoliday = $GLOBALS['db']->query($queryHoliday);
-                                    $arrUsersVacaciones=array();
-                                    $arrHolidays=array();
-                                    if($resultHoliday->num_rows > 0){
-                                        
-                                        while ($row = $db->fetchByAssoc($resultHoliday)){
-                                            $hoy=date('Y-m-d');
-                                            $holidayDate = $row['holiday_date'];
-                                            array_push($arrHolidays,$holidayDate);
-                                        }
-                                        //array_push($arrUsersVacaciones,$arrHolidays);
-                                        //$arrUsersVacaciones[$usuarios_carrusel[$i]]=$arrHolidays;
-
-                                    }else{
-                                        array_push($arrHolidays,'');
-                                    }
-                                    array_push($usersVacaciones,$arrHolidays);
-                                    //$usersVacaciones[$usuarios_carrusel[$i]]=$arrUsersVacaciones;
+                                if($responsable_en_carrusel){
+                                    //Se toma en cuenta en el carrusel al usuario responsable, por lo tanto se pone al inicio de la lista de usuarios disponibles
+                                    array_unshift($usuarios_carrusel,$responsable);
                                 }
 
-                                $GLOBALS['log']->fatal("ARREGLO USERS VACACIONES");
-                                $GLOBALS['log']->fatal(print_r($usersVacaciones,true));
-                                
-                                $conteoArregloUsuariosCompleto=count($usersVacaciones);
-                                $conteo=0;
-                                //for ($i=$aux_ultimo_asignado; $i < $conteoArregloUsuariosCompleto; $i++) {
-                                $index=$ultimo_asignado;
-                                while($index < $conteoArregloUsuariosCompleto){
-                                    $hoy=date('Y-m-d');
-                                    $GLOBALS['log']->fatal("Buscando en el indice: ".$index." la fecha actual ".$hoy);
-                                    $arregloFechas=$usersVacaciones[$index];
+                                //Sólo procesa asgnado si: 1) No es caso creado por CAC o 2) Es CAC, pero establece asignado manualmente
+                                if(!$esCAC || ($esCAC && $bean->created_by == $bean->assigned_user_id ) )
+                                {
+                                    $usersVacaciones=array();
+                                    //Se arma arreglo para buscar el usuario que se va a asignar, el arreglo armado es del estlo:
+                                    /**
+                                     * (
+                                     * 0:( 
+                                     *  id_usuario1=>(
+                                     *      fecha_vacacion1,
+                                     *      fecha_vacacion2)
+                                     *  ),
+                                     * 1:(
+                                     *  id_usuario2=>(
+                                     *      fecha_vacacion1,
+                                     *      fecha_vacacion2)
+                                     *  ),....
+                                     * )
+                                     **/
+                                    for($i=0;$i<count($usuarios_carrusel);$i++){
+                                        $queryHoliday="SELECT holiday_date from holidays WHERE person_id='{$usuarios_carrusel[$i]}' AND deleted=0";
+                                        $resultHoliday = $GLOBALS['db']->query($queryHoliday);
+                                        $arrUsersVacaciones=array();
+                                        $arrHolidays=array();
+                                        if($resultHoliday->num_rows > 0){
+                                            
+                                            while ($row = $db->fetchByAssoc($resultHoliday)){
+                                                $hoy=date('Y-m-d');
+                                                $holidayDate = $row['holiday_date'];
+                                                array_push($arrHolidays,$holidayDate);
+                                            }
+                                            //array_push($arrUsersVacaciones,$arrHolidays);
+                                            //$arrUsersVacaciones[$usuarios_carrusel[$i]]=$arrHolidays;
+
+                                        }else{
+                                            array_push($arrHolidays,'');
+                                        }
+                                        array_push($usersVacaciones,$arrHolidays);
+                                        //$usersVacaciones[$usuarios_carrusel[$i]]=$arrUsersVacaciones;
+                                    }
+
+                                    $GLOBALS['log']->fatal("ARREGLO USERS VACACIONES");
+                                    $GLOBALS['log']->fatal(print_r($usersVacaciones,true));
                                     
-                                    if(in_array($hoy,$arregloFechas)){
-                                        $GLOBALS['log']->fatal("Usuario no disponible, tiene vacaciones");
-                                        $conteo+=1;
+                                    $conteoArregloUsuariosCompleto=count($usersVacaciones);
+                                    $conteo=0;
+                                    //for ($i=$aux_ultimo_asignado; $i < $conteoArregloUsuariosCompleto; $i++) {
+                                    $index=$ultimo_asignado;
+                                    while($index < $conteoArregloUsuariosCompleto){
+                                        $hoy=date('Y-m-d');
+                                        $GLOBALS['log']->fatal("Buscando en el indice: ".$index." la fecha actual ".$hoy);
+                                        $arregloFechas=$usersVacaciones[$index];
+                                        
+                                        if(in_array($hoy,$arregloFechas)){
+                                            $GLOBALS['log']->fatal("Usuario no disponible, tiene vacaciones");
+                                            $conteo+=1;
 
-                                        $GLOBALS['log']->fatal("index: ".$index);
-                                        //$GLOBALS['log']->fatal("count(usersVacaciones): ".count($usersVacaciones));
-                                        //$GLOBALS['log']->fatal("conteo: ".$conteo);
-                                        //Si no se ha encontrado el usuario disponible,
-                                        //Se aplican 2 validaciones:
-                                        //Si no se han recorrido todos los usuarios disponibles y ya se llegó al final del arreglo
-                                        if($index==count($usersVacaciones)-1 && $conteo < count($usersVacaciones)){
-                                            $index=-1;
-                                            $conteoArregloUsuariosCompleto=$conteoArregloUsuariosCompleto-$conteo;
-                                            $GLOBALS['log']->fatal("conteo: ".$conteo);
-                                            $GLOBALS['log']->fatal("conteoArregloUsuariosCompleto: ".$conteoArregloUsuariosCompleto);
-                                            $GLOBALS['log']->fatal("No se encontró usuario disponible, se reinicia el ciclo for");
-                                        }
-                                        if($conteo == count($usersVacaciones)){
-                                            //En este caso, ya se recorrieron todos los usuarios que reportan, pero ninguno está disponible para asignación
-                                            //ya se llegó al conteo total del ciclo, se procede a asignar al usuario responsable
+                                            $GLOBALS['log']->fatal("index: ".$index);
+                                            //$GLOBALS['log']->fatal("count(usersVacaciones): ".count($usersVacaciones));
+                                            //$GLOBALS['log']->fatal("conteo: ".$conteo);
+                                            //Si no se ha encontrado el usuario disponible,
+                                            //Se aplican 2 validaciones:
+                                            //Si no se han recorrido todos los usuarios disponibles y ya se llegó al final del arreglo
+                                            if($index==count($usersVacaciones)-1 && $conteo < count($usersVacaciones)){
+                                                $index=-1;
+                                                $conteoArregloUsuariosCompleto=$conteoArregloUsuariosCompleto-$conteo;
+                                                $GLOBALS['log']->fatal("conteo: ".$conteo);
+                                                $GLOBALS['log']->fatal("conteoArregloUsuariosCompleto: ".$conteoArregloUsuariosCompleto);
+                                                $GLOBALS['log']->fatal("No se encontró usuario disponible, se reinicia el ciclo for");
+                                            }
+                                            if($conteo == count($usersVacaciones)){
+                                                //En este caso, ya se recorrieron todos los usuarios que reportan, pero ninguno está disponible para asignación
+                                                //ya se llegó al conteo total del ciclo, se procede a asignar al usuario responsable
+                                                $index=$conteoArregloUsuariosCompleto;
+                                                $GLOBALS['log']->fatal("No se encontró usuario disponible, se procede a asignar al responsable");
+                                                array_unshift($usuarios_carrusel,$responsable);
+                                                $ultimo_asignado=0;
+                                            }
+                                        }else{
+                                            //Rompe el ciclo ya que si no se encuentra la fecha, quiere decir que el usuario se encuentra disponible y se puede asignar
+                                            $ultimo_asignado=$index;
                                             $index=$conteoArregloUsuariosCompleto;
-                                            $GLOBALS['log']->fatal("No se encontró usuario disponible, se procede a asignar al responsable");
-                                            array_unshift($usuarios_carrusel,$responsable);
-                                            $ultimo_asignado=0;
+                                            $GLOBALS['log']->fatal("Indice asignar: ".$ultimo_asignado);
+                                            $GLOBALS['log']->fatal("Se rompe ciclo, el usuario se encuentra disponible ".$usuarios_carrusel[$ultimo_asignado]);
                                         }
-                                    }else{
-                                        //Rompe el ciclo ya que si no se encuentra la fecha, quiere decir que el usuario se encuentra disponible y se puede asignar
-                                        $ultimo_asignado=$index;
-                                        $index=$conteoArregloUsuariosCompleto;
-                                        $GLOBALS['log']->fatal("Indice asignar: ".$ultimo_asignado);
-                                        $GLOBALS['log']->fatal("Se rompe ciclo, el usuario se encuentra disponible ".$usuarios_carrusel[$ultimo_asignado]);
+                                        $index++;
                                     }
-                                    $index++;
+                                    //Antes de asignar, se toma en cuenta el valor del último asignado
+                                    $asignado=$usuarios_carrusel[$ultimo_asignado];
+
+                                    $ultimo_asignado+=1;
+
+                                    if($ultimo_asignado==count($usuarios_carrusel)){
+                                        //En caso de que el contador llegue al mismo número de usuarios disponibles para asignación, se procede a reiniciar dicho contador
+                                        $ultimo_asignado=0;
+                                    }
+
+                                    $queryUpdate="UPDATE unifin_casos_soporte_area SET ultimo_asignado_carrusel='{$ultimo_asignado}' WHERE id='{$id_registro}'";
+
+                                    $resultUpdate=$GLOBALS['db']->query($queryUpdate);
+                                }else{
+                                    $asignado=$bean->assigned_user_id;
                                 }
-                                //Antes de asignar, se toma en cuenta el valor del último asignado
-                                $asignado=$usuarios_carrusel[$ultimo_asignado];
-
-                                $ultimo_asignado+=1;
-
-                                if($ultimo_asignado==count($usuarios_carrusel)){
-                                    //En caso de que el contador llegue al mismo número de usuarios disponibles para asignación, se procede a reiniciar dicho contador
-                                    $ultimo_asignado=0;
-                                }
-
-                                $queryUpdate="UPDATE unifin_casos_soporte_area SET ultimo_asignado_carrusel='{$ultimo_asignado}' WHERE id='{$id_registro}'";
-
-                                $resultUpdate=$GLOBALS['db']->query($queryUpdate);
-                            }else{
-                                $asignado=$bean->assigned_user_id;
                             }
+                        }
+
+                    }else{
+                        if($esCAC){
+                            $responsable=$bean->user_id_c;
+                            $asignado=$bean->assigned_user_id;
+                        }else{
+                            $responsable=$current_user->id;
+                            $asignado=$current_user->id;
                         }
                     }
 
-                }else{
-                    if($esCAC){
-                        $responsable=$bean->user_id_c;
-                        $asignado=$bean->assigned_user_id;
+                    //En caso de que el área interna sea de Uniclick, el usuario asignado, autmáticamente se asigna con Samuel Álvarez,
+                    //esto, se establece con base a lo requerido para el proceso de seguimiento al cambio de razón social y direcciones
+                    $idSamuel = "92b04f7d-e547-9d4f-c96a-5a31da014bdd";
+                    if( $bean->area_interna_c == 'Uniclick' ){
+                        $bean->assigned_user_id=$idSamuel;
                     }else{
-                        $responsable=$current_user->id;
-                        $asignado=$current_user->id;
+                        $bean->assigned_user_id=$asignado;
                     }
+                    $bean->user_id_c=$responsable;
+
+                    //ENVIANDO NOTIFICACIÓN
+                    $notify_user = BeanFactory::retrieveBean('Users', $bean->assigned_user_id);
+                    $admin = Administration::getSettings();
+
+                    $xtpl= $this->createNotificationEmailTemplate("Case", $notify_user,$bean);
+
+                    $subject      = $xtpl->text("Case" . "_Subject");
+                    $textBody     = trim($xtpl->text("Case"));
+
+                    $this->enviarNotificacion($notify_user,$admin,$subject,$textBody);
+
                 }
+            }else{
+                //Condición para área de Administración de Cartera (Cobranza)
+                //En la creación de un caso con usuario de CAC y área interna Cobranza, entra proceso para establecer responsables
+                if( !$args['isUpdate'] && $esCAC ){
+                    $producto = $bean->producto_c;
+                    
+                    if( $producto != "" ){
+                        $query="SELECT * FROM unifin_casos_soporte_area WHERE producto = '{$producto}'";
 
-                //En caso de que el área interna sea de Uniclick, el usuario asignado, autmáticamente se asigna con Samuel Álvarez,
-                //esto, se establece con base a lo requerido para el proceso de seguimiento al cambio de razón social y direcciones
-                $idSamuel = "92b04f7d-e547-9d4f-c96a-5a31da014bdd";
-                if( $bean->area_interna_c == 'Uniclick' ){
-                    $bean->assigned_user_id=$idSamuel;
-                }else{
-                    $bean->assigned_user_id=$asignado;
+                        $GLOBALS['log']->fatal("QUERY PARA OBTENER RESPONSABLE Y ASIGNADO DE COBRANZA");
+                        $GLOBALS['log']->fatal($query);
+
+                        $result = $GLOBALS['db']->query($query);
+
+                        $registros_encontrados=$result->num_rows;
+                        $responsable = "";
+                        $asignado = "";
+                        if($registros_encontrados>0){
+                            while($row = $GLOBALS['db']->fetchByAssoc($result)){
+                                $responsable = $row['responsable'];
+                            }
+
+                        }
+
+                        //Se establece responsable_interno y asignado con base a la consulta a la bd
+                        $GLOBALS['log']->fatal("Responsable y asignado: ".$responsable);
+                        $bean->assigned_user_id = $responsable;
+                        $bean->user_id_c = $responsable;
+
+                        //ENVIANDO NOTIFICACIÓN
+                        $notify_user = BeanFactory::retrieveBean('Users', $responsable);
+                        $admin = Administration::getSettings();
+
+                        $xtpl= $this->createNotificationEmailTemplate("Case", $notify_user,$bean);
+
+                        $subject      = $xtpl->text("Case" . "_Subject");
+                        $textBody     = trim($xtpl->text("Case"));
+
+                        $this->enviarNotificacion($notify_user,$admin,$subject,$textBody);
+
+                    }
+                    
+
                 }
-                $bean->user_id_c=$responsable;
-
-                //ENVIANDO NOTIFICACIÓN
-                $notify_user = BeanFactory::retrieveBean('Users', $bean->assigned_user_id);
-                $admin = Administration::getSettings();
-
-                $xtpl= $this->createNotificationEmailTemplate("Case", $notify_user,$bean);
-
-                $subject      = $xtpl->text("Case" . "_Subject");
-                $textBody     = trim($xtpl->text("Case"));
-
-                $this->enviarNotificacion($notify_user,$admin,$subject,$textBody);
 
             }
+            
         }
 
     }
