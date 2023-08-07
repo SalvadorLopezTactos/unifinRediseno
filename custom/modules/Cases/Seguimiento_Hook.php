@@ -237,6 +237,7 @@ class Seguimiento_Hook
                 $GLOBALS['log']->fatal('CASO PARA CARTERA');
                 //El seguimiento se establece en Horas
                 $dias_seguimiento=$this->get_tiempo_seguimiento($bean->type,'Dias',$bean->subtipo_c);
+                $dias_seguimiento = ( empty($dias_seguimiento) ) ? '0' : $dias_seguimiento;
                 $GLOBALS['log']->fatal('SE ESTABLECEN '.$dias_seguimiento.' Dias de seguimiento');
                 $fecha_s = $this->dia_seguimiento($dias_seguimiento);
 
