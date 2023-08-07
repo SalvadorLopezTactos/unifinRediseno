@@ -445,6 +445,7 @@ class Seguimiento_Hook
     function set_asignado_responsable($bean, $event, $args){
         global $db;
         global $current_user;
+        global $app_list_strings;
         $esCAC = isset($current_user->cac_c) ? $current_user->cac_c : false;
         //Se establece asignado y responsable
         // $GLOBALS['log']->fatal("Creado por: ". $bean->created_by);
@@ -675,6 +676,15 @@ class Seguimiento_Hook
 
                         //Se establece responsable_interno y asignado con base a la consulta a la bd
                         $GLOBALS['log']->fatal("Responsable y asignado: ".$responsable);
+                        //Antes de establecer el asignado y responsable, se valida que no se encuentre de vacaciones y no se encuentre inactivo
+                        $vacaciones = $this->getVacacionesAsignado($responsable);
+                        $inactivo = $this->getUserStatus($responsable);
+
+                        if( $vacaciones || $inactivo ){
+                            $responsable = $app_list_strings['responsable_cobranza_list']['0'];
+                            $GLOBALS['log']->fatal("Responsable y asignado NUEVO: ".$responsable);
+                        }
+
                         $bean->assigned_user_id = $responsable;
                         $bean->user_id_c = $responsable;
 
@@ -700,6 +710,38 @@ class Seguimiento_Hook
 
     }
 
+    function getVacacionesAsignado( $idUser ){
+
+        $array_vacaciones = array();
+        $queryHolidays = "SELECT * FROM holidays WHERE person_id = '{$idUser}' AND deleted = 0;";
+        $GLOBALS['log']->fatal($queryHolidays);
+        $estaVacaciones = false;
+        $queryResult = $GLOBALS['db']->query($queryHolidays);
+        while ($row = $GLOBALS['db']->fetchByAssoc($queryResult)) {
+            array_push( $array_vacaciones, $row['holiday_date'] );
+        }
+
+        $fecha_actual = date('Y-m-d');
+        if( in_array( $fecha_actual, $array_vacaciones ) ){
+            $GLOBALS['log']->fatal('El responsable '.$idUser.' se encuentra de vacaciones');
+            $estaVacaciones = true;
+        }
+
+        return $estaVacaciones;
+    }
+
+    function getUserStatus ( $idUser ){
+        $inactivo = false;
+        $beanUser = BeanFactory::getBean("Users", $idUser, array('disable_row_level_security' => true));
+
+        if( $beanUser->status == 'Inactive' ){
+            $GLOBALS['log']->fatal('El responsable '.$idUser.' está INACTIVO');
+            $inactivo = true;
+        }
+
+        return $inactivo;
+
+    }
     /*
     * Con base a los productos relacionados a la Cuenta, se establece el Área interna para el proceso que crea casos en el cambio de razón social y direcciones
     * Si el producto Uniclick en tipo_cuenta es Cliente ('3') y no es Cliente en ningún otro Producto, el área interna para asignar será Uniclick
