@@ -14,7 +14,7 @@
             var fecha_vencimiento = this.model.get('follow_up_datetime');
             var status_actual = this.model.get('status');
             
-            if( fecha_vencimiento != "" && fecha_vencimiento != undefined ){
+            if( fecha_vencimiento != "" && fecha_vencimiento != undefined && status_actual != "" && status_actual != undefined ){
 
                 //var date = new Date();
                 //var fecha_actual = date.getFullYear().toString() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-'+ String(date.getDate()).padStart(2, '0');
@@ -35,10 +35,12 @@
 
                     this.items = lista_status;
 
+                    /*
                     //Status se establece vacío para que no permita guardar ya que el registro se encuentra vencido en caso de que aún no se haya establecido como Completada o Escalada
                     if( status_actual != '3' && status_actual !='5'){
                         this.model.set('status','');
                     }
+                    */
                     
                 }
             }
