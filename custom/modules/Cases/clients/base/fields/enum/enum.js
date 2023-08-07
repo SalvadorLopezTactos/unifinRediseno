@@ -28,7 +28,7 @@
 
                     //Solo mostrar "Completada" o "Escalada"
                     Object.keys(lista_status).forEach(function (key) {
-                        if(key !="3" && key != "5"){
+                        if(key !="3" && key != "5" && key != status_actual){
                             delete lista_status[key];
                         }
                     });
