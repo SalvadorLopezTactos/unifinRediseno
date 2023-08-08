@@ -13,6 +13,7 @@
             */
             var fecha_vencimiento = this.model.get('follow_up_datetime');
             var status_actual = this.model.get('status');
+            var current_user_id = App.user.id;
             
             if( fecha_vencimiento != "" && fecha_vencimiento != undefined && status_actual != "" && status_actual != undefined ){
 
@@ -42,6 +43,20 @@
                     }
                     */
                     
+                }else{
+                    if( this.model.get('assigned_user_id') == current_user_id ){
+                        var lista_status= app.lang.getAppListStrings('case_status_dom');
+
+                        //Solo mostrar "En curso" o "Completada" cuando el usuario asignado está firmado y no se ha vencido el caso
+                        Object.keys(lista_status).forEach(function (key) {
+                            if(key !="2" && key != "3" && key != status_actual){
+                                delete lista_status[key];
+                            }
+                        });
+
+                        this.items = lista_status;
+
+                    }
                 }
             }
         }
