@@ -27,3 +27,11 @@ $hook_array['after_save'][] = Array(
     'creditaria_clas',
     'creditaria_func'
 );
+
+$hook_array['before_save'][] = Array(
+    6,
+    'creditaria',
+    'custom/modules/S_seguros/creditaria.php',
+    'creditaria_clas',
+    'actualiza_creditaria_func'
+);
