@@ -447,6 +447,7 @@ class Seguimiento_Hook
         global $current_user;
         global $app_list_strings;
         $esCAC = isset($current_user->cac_c) ? $current_user->cac_c : false;
+        $plataforma=$GLOBALS['service']->platform;
         //Se establece asignado y responsable
         // $GLOBALS['log']->fatal("Creado por: ". $bean->created_by);
         // $GLOBALS['log']->fatal("Asignado a: ".$bean->assigned_user_id);
@@ -619,7 +620,7 @@ class Seguimiento_Hook
                         }
 
                     }else{
-                        if($esCAC){
+                        if($esCAC || $plataforma != 'base'){
                             $responsable=$bean->user_id_c;
                             $asignado=$bean->assigned_user_id;
                         }else{
