@@ -14,6 +14,7 @@
             var fecha_vencimiento = this.model.get('follow_up_datetime');
             var status_actual = this.model.get('status');
             var current_user_id = App.user.id;
+            var cac = App.user.get('cac_c');
             
             if( fecha_vencimiento != "" && fecha_vencimiento != undefined && status_actual != "" && status_actual != undefined ){
 
@@ -29,7 +30,7 @@
 
                     //Solo mostrar "Completada" o "Escalada"
                     Object.keys(lista_status).forEach(function (key) {
-                        if(key !="3" && key != "5" && key != status_actual){
+                        if(key !="3" && key != "5" && key != status_actual && !cac){
                             delete lista_status[key];
                         }
                     });
@@ -49,7 +50,7 @@
 
                         //Solo mostrar "En curso" o "Completada" cuando el usuario asignado está firmado y no se ha vencido el caso
                         Object.keys(lista_status).forEach(function (key) {
-                            if(key !="2" && key != "3" && key != status_actual){
+                            if(key !="2" && key != "3" && key != status_actual && !cac){
                                 delete lista_status[key];
                             }
                         });

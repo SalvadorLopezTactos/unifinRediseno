@@ -478,7 +478,7 @@ class Seguimiento_Hook
                         $equipo_soporte='IS NULL';
                     }
 
-                    $query="SELECT * FROM unifin_casos_soporte_area WHERE area_interna {$area_interna} AND equipo {$equipo_soporte}";
+                    $query="SELECT * FROM unifin_casos_soporte_area WHERE area_interna {$area_interna} AND equipo {$equipo_soporte} AND producto IS NULL";
 
                     // $GLOBALS['log']->fatal("QUERY PARA OBTENER RESPONSABLE Y ASIGNADO");
                     // $GLOBALS['log']->fatal($query);
