@@ -28,6 +28,7 @@
         this.model.addValidationTask('check_duplicados_modal', _.bind(this.check_duplicados_modal, this));
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
         this.on('render', this._hidechkLeadCancelado, this);
+        this.on('render', this.setCheckReadOnlyEmpresa, this);
         this.model.addValidationTask('setCleanName', _.bind(this.cleanName, this));
         this.model.on("change:regimen_fiscal_c", _.bind(this._cleanRegFiscal, this));
         this.getRegistrosAsignados();
@@ -122,6 +123,11 @@
         /****Oculta check Lead Cancelado solo al crear Lead****/
         this.$('[data-name=lead_cancelado_c]').hide();
         this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').hide();
+    },
+
+    setCheckReadOnlyEmpresa: function(){
+        //En la creación, siempre se activa la bandera para disparar la dependencia y el campo "Nombre de Empresa" se habilite para edición
+        this.model.set('read_only_empresa_c',1);
     },
 
     expmail: function (fields, errors, callback) {

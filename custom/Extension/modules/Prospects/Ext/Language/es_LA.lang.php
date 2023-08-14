@@ -74,3 +74,6 @@ $mod_strings['LBL_CLEAN_NAME'] = 'Nombre único';
 $mod_strings['LBL_PROSPECTS_PROSPECTS_1_FROM_PROSPECTS_L_TITLE'] = 'Contacto Asociado';
 $mod_strings['LBL_EXCLUYE_CAMPANA'] = 'Excluye Campaña';
 $mod_strings['LBL_RECORD_SAVED_SUCCESS'] = 'Ha creado con éxito {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.';
+$mod_strings['LBL_EMPRESA_PO'] = 'Nombre de Empresa';
+$mod_strings['LBL_COMPANIA_PO'] = 'Compañia';
+$mod_strings['LBL_READ_ONLY_EMPRESA'] = 'Solo Lectura Empresa';
