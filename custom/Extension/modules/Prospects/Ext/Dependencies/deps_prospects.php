@@ -10,7 +10,7 @@ $dependencies['Prospects']['read_only_compania']=array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'empresa_po_c',
-                'value' => 'not(equal($read_only_empresa_c,1))',
+                'value' => 'equal($read_only_empresa_c,1)',
             ),
         ),
     ),
