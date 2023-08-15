@@ -73,3 +73,11 @@ $hook_array['before_save'][] = Array(
     'filterPO',
     'AssignFilterAccounts_ByUsr'
 );
+
+$hook_array['before_save'][] = Array(
+    10,
+    'Establece bandera Solo Lectura cuando la petición viene de Onboarding',
+    'custom/modules/Prospects/Prospects_Onboarding.php',
+    'Prospects_Onboarding',
+    'setFlagReadOnly'
+);
