@@ -798,7 +798,7 @@
         var producto_financiero = this.model.get('producto_financiero_c');
         var cuentaId = this.model.get('account_id');
         var faltantes = "";
-        if ((cuentaId != "" || cuentaId != null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c') == 'SI' && producto != '' && producto_financiero == '0' && producto_financiero != undefined) {
+        if ((cuentaId != "" || cuentaId != null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c') == 'SI' && producto != '' && producto_financiero == '0' && producto_financiero != undefined && this.model.get('tipo_producto_c') != "1") {
 
             app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId), null, {
                 success: _.bind(function (cuenta) {
@@ -1131,7 +1131,7 @@
                 errors['amount'].required = true;
             }
 
-            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c') != "6" && this.model.get('tipo_producto_c') != "7" && this.model.get('tipo_producto_c') != "13" &&
+            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c') != "1" && this.model.get('tipo_producto_c') != "6" && this.model.get('tipo_producto_c') != "7" && this.model.get('tipo_producto_c') != "13" &&
                 this.model.get('producto_financiero_c') != "43" && this.model.get('admin_cartera_c') != true) {
                 errors['ca_pago_mensual_c'] = errors['ca_pago_mensual_c'] || {};
                 errors['ca_pago_mensual_c'].required = true;
