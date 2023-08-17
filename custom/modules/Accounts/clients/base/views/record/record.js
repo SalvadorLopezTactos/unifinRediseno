@@ -7030,9 +7030,9 @@
                                                     }
                                                     //Control para mostrar botón de desbloqueo
                                                     if(
-                                                        (self.model.get('tct_no_contactar_chk_c') || dataResumen.bloqueo_cartera_c) ||
-                                                        (dataResumen.bloqueo_credito_c || dataResumen.bloqueo2_c) ||
-                                                        (dataResumen.bloqueo_cumple_c || dataResumen.bloqueo3_c)
+                                                      ((self.model.get('tct_no_contactar_chk_c') || dataResumen.bloqueo_cartera_c) && App.user.attributes.bloqueo_cuentas_c) ||
+                                                      ((dataResumen.bloqueo_credito_c || dataResumen.bloqueo2_c) && App.user.attributes.bloqueo_credito_c)  ||
+                                                      ((dataResumen.bloqueo_cumple_c || dataResumen.bloqueo3_c) && App.user.attributes.bloqueo_cumple_c)
                                                     ){
                                                         $('[name="desbloquea_cuenta"]').removeClass('hidden');
                                                     }
