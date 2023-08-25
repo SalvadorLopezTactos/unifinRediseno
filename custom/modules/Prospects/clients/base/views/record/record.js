@@ -11,6 +11,10 @@
         this.context.on('button:cancel_button:click', this.handleCancel, this);
         this.context.on('button:reenvio_correo:click', this.reenvio_correo, this);
 
+        //Botones para Aprobar/Rechazar envío de correos
+        this.context.on('button:vobo_envio_correo:click', this.vobo_envio_correo, this);
+        this.context.on('button:rechaza_envio_correo:click', this.rechaza_envio_correo, this);
+
         //this.model.on('sync', this._hideBtnConvert, this);
         this._readonlyFields();
         this.events['keypress [name=phone_mobile]'] = 'validaSoloNumerosTel';
@@ -46,6 +50,7 @@
         this.model.on("change:estatus_po_c", _.bind(this.change_estatus, this));
         this.model.on('sync', this.userAlianzaSoc, this);
         this.model.on('sync', this.muestraBotonCorreo, this);
+        this.model.on('sync', this.hideShowBtnVoBo, this);
         this.cmbio_soc = 0;
 
         //Función para eliminar opciones del campo origen
@@ -973,6 +978,105 @@
         });
     },
 
+    vobo_envio_correo: function(){
+        app.alert.show("aprueba_envio", {
+            level: "confirmation",
+            messages: "Está a punto de aprobar la operación, ¿Desea confirmar el envío del correo?",
+            autoClose: false,
+            onConfirm: function () {
+                var id_prospecto = App.controller.context.get('model').id;
+                
+                $('a[name="rechaza_envio_correo"]').attr('disabled',"disabled");
+                $('a[name="vobo_envio_correo"]').attr('disabled',"disabled");
+                $('a[name="rechaza_envio_correo"]').attr('style',"pointer-events:none");
+                $('a[name="vobo_envio_correo"]').attr('style',"pointer-events:none");
+                
+                app.alert.show('envio_correo_vobo', {
+                    level: 'process',
+                    title: 'Enviando correo',
+                });
+        
+                app.api.call('GET', app.api.buildURL('AutorizaEnvioPO/' + id_prospecto), null, {
+                    success: _.bind(function (response) {
+                        
+                        $('a[name="rechaza_envio_correo"]').removeAttr('disabled');
+                        $('a[name="vobo_envio_correo"]').removeAttr('disabled');
+                        $('a[name="rechaza_envio_correo"]').attr('style',"");
+                        $('a[name="vobo_envio_correo"]').attr('style',"");
+                        
+                        app.alert.dismiss('envio_correo_vobo');
+        
+                        app.alert.show('alert_reenvio_correo', {
+                            level: 'success',
+                            messages: response,
+                        });
+
+                        //Recarga modelo para actualizar las banderas reseteadas en el api
+                        App.controller.context.attributes.model.fetch();
+
+                        $('[name="rechaza_envio_correo"]').addClass('hidden');
+                        $('[name="vobo_envio_correo"]').addClass('hidden');
+        
+                    }, this),
+                });
+                
+            },
+            onCancel: function () {
+                //alert("Cancelled!");
+            }
+        });
+    },
+
+    rechaza_envio_correo: function(){
+        app.alert.show("rechaza_envio", {
+            level: "confirmation",
+            messages: "Está a punto de cancelar la operación, ¿Desea rechazar el envío del correo?",
+            autoClose: false,
+            onConfirm: function () {
+                var id_prospecto = App.controller.context.get('model').id;
+
+                $('a[name="rechaza_envio_correo"]').attr('disabled',"disabled");
+                $('a[name="vobo_envio_correo"]').attr('disabled',"disabled");
+                $('a[name="rechaza_envio_correo"]').attr('style',"pointer-events:none");
+                $('a[name="vobo_envio_correo"]').attr('style',"pointer-events:none");
+                
+                app.alert.show('envio_correo_rechazo', {
+                    level: 'process',
+                    title: 'Rechazando operación',
+                });
+        
+                app.api.call('GET', app.api.buildURL('RechazaEnvioPO/' + id_prospecto), null, {
+                    success: _.bind(function (response) {
+                        
+                        $('a[name="rechaza_envio_correo"]').removeAttr('disabled');
+                        $('a[name="vobo_envio_correo"]').removeAttr('disabled');
+                        $('a[name="rechaza_envio_correo"]').attr('style',"");
+                        $('a[name="vobo_envio_correo"]').attr('style',"");
+
+                        app.alert.dismiss('envio_correo_rechazo');
+        
+                        app.alert.show('alert_reenvio_correo', {
+                            level: 'success',
+                            messages: response,
+                        });
+
+                        //Recarga modelo para actualizar las banderas reseteadas en el api
+                        App.controller.context.attributes.model.fetch();
+
+                        $('[name="rechaza_envio_correo"]').addClass('hidden');
+                        $('[name="vobo_envio_correo"]').addClass('hidden');
+        
+                    }, this),
+                });
+                
+            },
+            onCancel: function () {
+                //alert("Cancelled!");
+            }
+        });
+
+    },
+
     get_addresses: function () {
 
         this.oDirecciones = [];
@@ -1438,6 +1542,14 @@
                 }
             }, this),
         });
+    },
+
+    hideShowBtnVoBo: function(){
+        var id_user = App.user.id;
+        if( this.model.get('envio_correo_po_c') && this.model.get('id_director_vobo_c') == id_user ){
+            $('[name="rechaza_envio_correo"]').removeClass('hidden');
+            $('[name="vobo_envio_correo"]').removeClass('hidden');
+        }
     },
 
     cambios_origen_SOC: function () {

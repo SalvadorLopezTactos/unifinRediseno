@@ -12,6 +12,28 @@ array (
           0 => 
           array (
             'type' => 'button',
+            'name' => 'rechaza_envio_correo',
+            'label' => 'Rechazar envío correo',
+            'css_class' => 'btn-danger hidden',
+            'events' => 
+            array (
+              'click' => 'button:rechaza_envio_correo:click',
+            ),
+          ),
+          1 => 
+          array (
+            'type' => 'button',
+            'name' => 'vobo_envio_correo',
+            'label' => 'Vo.Bo. envío correo',
+            'css_class' => 'btn-success hidden',
+            'events' => 
+            array (
+              'click' => 'button:vobo_envio_correo:click',
+            ),
+          ),
+          2 => 
+          array (
+            'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
@@ -21,7 +43,7 @@ array (
               'click' => 'button:cancel_button:click',
             ),
           ),
-          1 => 
+          3 => 
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
@@ -31,7 +53,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          2 => 
+          4 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -67,18 +89,6 @@ array (
               array (
                 'type' => 'divider',
               ),
-              /*
-              4 => 
-              array (
-                'name' => 'convert_po_to_Lead',
-                'type' => 'rowaction',
-                'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
-                'acl_action' => 'view',
-                'event' => 'button:convert_po_to_Lead:click',
-                'class' => 'btn_convertLeads',
-                'css_class' => 'hidden'
-              ),
-              */
               5 => 
               array (
                 'type' => 'divider',
@@ -125,7 +135,7 @@ array (
               ),
             ),
           ),
-          3 => 
+          5 => 
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
@@ -710,6 +720,18 @@ array (
               ),
               31 => 
               array (
+              ),
+              32 => 
+              array (
+                'readonly' => false,
+                'name' => 'envio_correo_po_c',
+                'label' => 'LBL_ENVIO_CORREO_PO',
+              ),
+              33 => 
+              array (
+                'readonly' => false,
+                'name' => 'id_director_vobo_c',
+                'label' => 'LBL_ID_DIRECTOR_VOBO',
               ),
             ),
           ),

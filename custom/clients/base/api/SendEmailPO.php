@@ -9,13 +9,29 @@ class SendEmailPO extends SugarApi
     public function registerApiRest()
     {
         return array(
-            'UsuariosAPI' => array(
+            'sendEmailPo' => array(
                 'reqType' => 'GET',
                 'noLoginRequired' => true,
                 'path' => array('SendEmailPO','?'),
                 'pathVars' => array('method','id_po'),
                 'method' => 'sendEmailProspect',
                 'shortHelp' => 'Envía notificación por email a respectivos usuarios en proceso de Público Objetivo',
+            ),
+            'autorizacionPO' => array(
+                'reqType' => 'GET',
+                'noLoginRequired' => true,
+                'path' => array('AutorizaEnvioPO','?'),
+                'pathVars' => array('method','id_po'),
+                'method' => 'autorizaEnvioCorreo',
+                'shortHelp' => 'Envía correo a través de la aprobación del director del PO',
+            ),
+            'rechazoPO' => array(
+                'reqType' => 'GET',
+                'noLoginRequired' => true,
+                'path' => array('RechazaEnvioPO','?'),
+                'pathVars' => array('method','id_po'),
+                'method' => 'rechazaEnvioCorreo',
+                'shortHelp' => 'Envía correo a través del rechazo del director del PO',
             ),
         );
     }
@@ -104,6 +120,124 @@ class SendEmailPO extends SugarApi
         
         return $response;
 
+    }
+
+    public function autorizaEnvioCorreo($api, $args){
+        
+        $id_prospecto = $args['id_po'];
+        $response = '';
+
+        $beanPO = BeanFactory::retrieveBean('Prospects', $id_prospecto, array('disable_row_level_security' => true));
+        $email_po = $beanPO->email1;
+
+        $id_asesor = $beanPO->assigned_user_id;
+        $beanAsesor = BeanFactory::retrieveBean('Users', $id_asesor, array('disable_row_level_security' => true));
+        $asesorName = $beanAsesor->first_name . " " . $beanAsesor->last_name;
+        $telefono_asesor = $beanAsesor->phone_mobile;
+        $email_asesor = $beanAsesor->email1;
+
+        $id_director_regional = $this->getIdDirectorRegional($beanAsesor);
+        $id_director_comercial = $this->getIdDirectorComercial($beanAsesor);
+
+        $name_regional = "";
+        $email_regional = "";
+
+        $name_comercial = "";
+        $email_comercial = "";
+        
+        if($id_director_regional != ""){
+            $info_regional = $this->getInfoUser($id_director_regional);
+            $name_regional = $info_regional['name'];
+            $email_regional = $info_regional['email'];
+        }
+
+        if($id_director_comercial != ""){
+            $info_comercial = $this->getInfoUser($id_director_comercial);
+            $name_comercial = $info_comercial['name'];
+            $email_comercial = $info_comercial['email'];
+        }
+
+        $link_unileasing = "https://unilease-unifin.com.mx/reemplazar/".$id_asesor;
+
+        $body_mail = $this->buildBodyPO( $beanPO->name, $link_unileasing, $asesorName, $telefono_asesor, $email_asesor );
+
+        $GLOBALS['log']->fatal("El correo del PO es: ".$email_po);
+        $GLOBALS['log']->fatal("El correo del Asesor es: ".$email_asesor);
+
+        if( !empty($email_po) ){
+            $this->sendEmailNotificationToProspect( $body_mail, $email_po, $beanPO->name );
+            $response = "<br>Se envió notificación al Público Objetivo: ". $beanPO->name; 
+        }
+
+        //Enviando correo al asesor cc a Director Comercial y Director Regional
+        $body_mail_asesor = $this->buildBodyNotificationAsesor( $asesorName, $beanPO->name );
+
+        if( !empty($email_asesor) ){
+            $this->sendEmailAsesorPO( $body_mail_asesor, $nombreEmpresa ,$email_asesor, $asesorName, $email_comercial, $name_comercial, $email_regional, $name_regional );
+            $response .= "<br>Se envió notificación a: ". $asesorName. " , " .$name_comercial. " , ".$name_regional; 
+        }
+
+        //Resetea banderas
+        $GLOBALS['log']->fatal('Reestableciendo banderas');
+        $beanPO->envio_correo_po_c = 0;
+        $beanPO->id_director_vobo_c = "";
+        $beanPO->save();
+        $GLOBALS['log']->fatal('Banderas reestablecidas');
+        
+        return $response;
+    }
+
+    public function rechazaEnvioCorreo($api, $args){
+        $id_prospecto = $args['id_po'];
+        $response = '';
+
+        $beanPO = BeanFactory::retrieveBean('Prospects', $id_prospecto, array('disable_row_level_security' => true));
+        $nombreEmpresa = $beanPO->empresa_po_c;
+        $email_po = $beanPO->email1;
+
+        $id_asesor = $beanPO->assigned_user_id;
+        $beanAsesor = BeanFactory::retrieveBean('Users', $id_asesor, array('disable_row_level_security' => true));
+        $asesorName = $beanAsesor->first_name . " " . $beanAsesor->last_name;
+        $telefono_asesor = $beanAsesor->phone_mobile;
+        $email_asesor = $beanAsesor->email1;
+
+        $id_director_regional = $this->getIdDirectorRegional($beanAsesor);
+        $id_director_comercial = $this->getIdDirectorComercial($beanAsesor);
+
+        $name_regional = "";
+        $email_regional = "";
+
+        $name_comercial = "";
+        $email_comercial = "";
+        
+        if($id_director_regional != ""){
+            $info_regional = $this->getInfoUser($id_director_regional);
+            $name_regional = $info_regional['name'];
+            $email_regional = $info_regional['email'];
+        }
+
+        if($id_director_comercial != ""){
+            $info_comercial = $this->getInfoUser($id_director_comercial);
+            $name_comercial = $info_comercial['name'];
+            $email_comercial = $info_comercial['email'];
+        }
+
+        $body_correo_rechazo = $this->buildBodyRechazo( $asesorName, $beanPO->name );
+
+        if( !empty($email_asesor) ){
+            $this->sendEmailNotificationRechazo( $body_correo_rechazo, $nombreEmpresa ,$email_asesor, $asesorName, $email_comercial, $name_comercial, $email_regional, $name_regional );
+            $response = "<br>Se envió notificación de rechazo a: ". $asesorName; 
+        }
+
+        //Resetea banderas
+        $GLOBALS['log']->fatal('Reestableciendo banderas');
+        $beanPO->envio_correo_po_c = 0;
+        $beanPO->id_director_vobo_c = "";
+        $beanPO->save();
+        $GLOBALS['log']->fatal('Banderas reestablecidas');
+
+        return $response;
+        //buildBodyRechazo( $nombre_asesor, $nombre_po )
     }
 
     public function getIdDirectorRegional( $beanAsesor ){
@@ -234,6 +368,26 @@ class SendEmailPO extends SugarApi
         return $mailHTML;
     }
 
+    public function buildBodyRechazo( $nombre_asesor, $nombre_po ){
+
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado <b>' . $nombre_asesor . '</b>
+            <br><br>Te comentamos que tu director rechazó el reenvío de correo de Onboarding de tu cliente/contacto:
+            <br>'.$nombre_po.'
+            <br>Contáctate con él para revisar el detalle.
+            <br><br>Atentamente Unifin</font></p>
+            <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+            <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
+            <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+            Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+            Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+            No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+            Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+
+
+        return $mailHTML;
+
+    }
+
     public function sendEmailNotificationPO( $nombre_empresa, $email, $name_email, $email_cc, $name_email_cc, $body_correo ){
 
         try{
@@ -298,6 +452,33 @@ class SendEmailPO extends SugarApi
             $GLOBALS['log']->fatal("ENVIANDO CORREO ASESOR: ".$email_asesor );
             $GLOBALS['log']->fatal("ENVIANDO CORREO COMERCIAL: ".$email_comercial );
             $GLOBALS['log']->fatal("ENVIANDO CORREO REGIONAL: ".$email_regional );
+            $result = $mailer->send();
+
+        } catch (Exception $e){
+            $GLOBALS['log']->fatal("Exception: No se ha podido enviar el correo electrónico");
+            $GLOBALS['log']->fatal(print_r($e,true));
+
+        }
+
+    }
+
+    public function sendEmailNotificationRechazo( $body_correo, $nombre_empresa ,$email_asesor, $name_asesor, $email_comercial, $name_comercial, $email_regional, $name_regional ){
+
+        try{
+            $mailer = MailerFactory::getSystemDefaultMailer();
+            $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+            $mailer->setSubject('Rechazo Reenvío Unileasing / '.$nombre_empresa);
+            $body = trim($body_correo);
+            $mailer->setHtmlBody($body);
+            $mailer->clearRecipients();
+            
+            $mailer->addRecipientsTo(new EmailIdentity($email_asesor, $name_asesor));
+            $mailer->addRecipientsCc(new EmailIdentity($email_comercial, $name_comercial));
+            $mailer->addRecipientsCc(new EmailIdentity($email_regional, $name_regional));
+            
+            $GLOBALS['log']->fatal("ENVIANDO CORREO DE RECHAZO ASESOR: ".$email_asesor );
+            $GLOBALS['log']->fatal("ENVIANDO CORREO DE RECHAZO COMERCIAL: ".$email_comercial );
+            $GLOBALS['log']->fatal("ENVIANDO CORREO DE RECHAZO REGIONAL: ".$email_regional );
             $result = $mailer->send();
 
         } catch (Exception $e){
