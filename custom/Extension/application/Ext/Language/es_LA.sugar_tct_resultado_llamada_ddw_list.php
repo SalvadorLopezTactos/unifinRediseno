@@ -1,5 +1,5 @@
 <?php
- // created: 2023-08-21 15:15:18
+ // created: 2023-08-23 20:43:48
 
 $app_list_strings['tct_resultado_llamada_ddw_list']=array (
   '' => '',
@@ -15,4 +15,5 @@ $app_list_strings['tct_resultado_llamada_ddw_list']=array (
   'Encuesta_Exitosa' => 'Encuesta Exitosa',
   'Encuesta_no_Exitosa' => 'Encuesta no Exitosa',
   '1er Contacto' => '1er Contacto',
+  'Viable_Envio_Solicitud' => 'Viable, Envío a Solicitud',
 );

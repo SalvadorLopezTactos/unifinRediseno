@@ -78,3 +78,5 @@ $mod_strings['LBL_EMPRESA_PO'] = 'Nombre de Empresa';
 $mod_strings['LBL_COMPANIA_PO'] = 'Compañia';
 $mod_strings['LBL_READ_ONLY_EMPRESA'] = 'Solo Lectura Empresa';
 $mod_strings['LBL_NUMERO_EMPLEADO'] = 'Número empleado';
+$mod_strings['LBL_ENVIO_CORREO_PO'] = '¿Se envió correo?';
+$mod_strings['LBL_ID_DIRECTOR_VOBO'] = 'Id Director VoBo';

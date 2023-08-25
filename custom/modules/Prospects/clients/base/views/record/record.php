@@ -67,6 +67,7 @@ array (
               array (
                 'type' => 'divider',
               ),
+              /*
               4 => 
               array (
                 'name' => 'convert_po_to_Lead',
@@ -75,7 +76,9 @@ array (
                 'acl_action' => 'view',
                 'event' => 'button:convert_po_to_Lead:click',
                 'class' => 'btn_convertLeads',
+                'css_class' => 'hidden'
               ),
+              */
               5 => 
               array (
                 'type' => 'divider',
@@ -107,6 +110,18 @@ array (
                 'name' => 'delete_button',
                 'label' => 'LBL_DELETE_BUTTON_LABEL',
                 'acl_action' => 'delete',
+              ),
+              10 => 
+              array (
+                'type' => 'divider',
+              ),
+              11 => 
+              array (
+                'type' => 'rowaction',
+                'event' => 'button:reenvio_correo:click',
+                'name' => 'reenvio_correo',
+                'label' => 'Reenvío Correo',
+                'acl_action' => 'view',
               ),
             ),
           ),

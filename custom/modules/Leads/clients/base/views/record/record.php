@@ -59,6 +59,7 @@ array (
                 'acl_action' => 'send_poll',
                 'event' => 'button:send_poll:click',
               ),
+              /*
               3 => 
               array (
                 'name' => 'convert_Leads_button',
@@ -68,6 +69,7 @@ array (
                 'event' => 'button:convert_Lead_to_Accounts:click',
                 'class' => 'btn_convertLeads',
               ),
+              */
               4 => 
               array (
                 'name' => 'reset_lead',

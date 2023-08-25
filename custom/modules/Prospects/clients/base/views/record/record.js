@@ -9,8 +9,9 @@
         this.model.on('sync', this._readonlyFields, this);
         this.context.on('button:convert_po_to_Lead:click', this.convert_Po_to_Lead, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
+        this.context.on('button:reenvio_correo:click', this.reenvio_correo, this);
 
-        this.model.on('sync', this._hideBtnConvert, this);
+        //this.model.on('sync', this._hideBtnConvert, this);
         this._readonlyFields();
         this.events['keypress [name=phone_mobile]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_home]'] = 'validaSoloNumerosTel';
@@ -44,6 +45,7 @@
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:estatus_po_c", _.bind(this.change_estatus, this));
         this.model.on('sync', this.userAlianzaSoc, this);
+        this.model.on('sync', this.muestraBotonCorreo, this);
         this.cmbio_soc = 0;
 
         //Función para eliminar opciones del campo origen
@@ -482,8 +484,8 @@
         if (this.model.get('estatus_po_c') == '3' || this.model.get('estatus_po_c') == '4') {
             var editButton = self.getField('edit_button');
             editButton.setDisabled(true);
-      			var btnConvert = self.getField("convert_po_to_Lead");
-      			btnConvert.hide();
+      			//var btnConvert = self.getField("convert_po_to_Lead");
+      			//btnConvert.hide();
             _.each(this.model.fields, function (field) {
                 if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
                     self.noEditFields.push(field.name);
@@ -945,6 +947,32 @@
         prospect_dir.render();
     },
 
+    reenvio_correo: function(){
+        var id_prospecto = this.model.get('id');
+
+        var buttonReenvio = this.getField('reenvio_correo');
+        buttonReenvio.setDisabled(true);
+
+        app.alert.show('envio_correo', {
+            level: 'process',
+            title: 'Enviando correo',
+        });
+
+        app.api.call('GET', app.api.buildURL('SendEmailPO/' + id_prospecto), null, {
+            success: _.bind(function (response) {
+                var buttonReenvio = this.getField('reenvio_correo');
+                buttonReenvio.setDisabled(false);
+                app.alert.dismiss('envio_correo');
+
+                app.alert.show('alert_reenvio_correo', {
+                    level: 'success',
+                    messages: response,
+                });
+
+            }, this),
+        });
+    },
+
     get_addresses: function () {
 
         this.oDirecciones = [];
@@ -1395,6 +1423,21 @@
         if(readonly){
             this.$("[data-name='alianza_soc_chk_c']").attr('style', 'pointer-events:none;');
         }
+    },
+
+    muestraBotonCorreo: function(){
+
+        var id_prospecto = this.model.get('id');
+
+        app.api.call('GET', app.api.buildURL('GetRelatedMeetingsCallsPO/' + id_prospecto), null, {
+            success: _.bind(function (response) {
+                if( !response ){
+                    //Oculta botón para Reenvío de correo
+                    var button = this.getField('reenvio_correo');
+                    button.dispose();
+                }
+            }, this),
+        });
     },
 
     cambios_origen_SOC: function () {

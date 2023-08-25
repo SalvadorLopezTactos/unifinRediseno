@@ -12,7 +12,7 @@
         this.context.on('button:convert_Lead_to_Accounts:click', this.convert_Lead_to_Accounts, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
         this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
-        this.model.on('sync', this._hideBtnConvert, this);
+        //this.model.on('sync', this._hideBtnConvert, this);
         this._readonlyFields();
         this.events['keypress [name=phone_mobile]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_home]'] = 'validaSoloNumerosTel';
@@ -538,8 +538,8 @@
         if (this.model.get('subtipo_registro_c') == '4') {
             var editButton = self.getField('edit_button');
             editButton.setDisabled(true);
-      			var btnConvert = self.getField("convert_Leads_button");
-      			btnConvert.hide();
+      			//var btnConvert = self.getField("convert_Leads_button");
+      			//btnConvert.hide();
             var noEditCampo = true;
             var pointerEvents = true;
             _.each(this.model.fields, function (field) {
