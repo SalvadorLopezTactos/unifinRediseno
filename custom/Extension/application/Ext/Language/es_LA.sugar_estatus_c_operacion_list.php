@@ -1,5 +1,5 @@
 <?php
- // created: 2020-11-23 18:25:30
+ // created: 2023-08-26 13:51:35
 
 $app_list_strings['estatus_c_operacion_list']=array (
   'P' => 'INTEGRACIÓN DE EXPEDIENTE',
@@ -33,4 +33,6 @@ $app_list_strings['estatus_c_operacion_list']=array (
   'BO' => 'VALIDACIÓN BO CRÉDITO',
   'DB' => 'DEVUELTA BO CRÉDITO',
   'AC' => 'AUTORIZADOR CARÁTULA',
+  'VC' => 'VALIDCIÓN MESA CONTROL',
+  'AN' => 'ANÁLISIS LEGAL',
 );

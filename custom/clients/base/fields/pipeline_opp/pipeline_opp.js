@@ -81,6 +81,16 @@
                 $('#SE2').addClass('alerta');
                 $("#SE2").html("Devuelta BO Crédito");
             }
+            if(subetapa=="VC"){
+                $("#SE2").removeClass('ocult');
+                $('#SE2').addClass('success');
+                $("#SE2").html("Validación mesa de Control");
+            }
+            if(subetapa=="AN"){
+                $("#SE2").removeClass('ocult');
+                $('#SE2').addClass('alerta');
+                $("#SE2").html("Análisis legal");
+            }
         }
         if (etapa=="C"){
             //Agrega clase current para sombrear en color actual al pipeline CREDITO
