@@ -23,7 +23,7 @@
         this.model.addValidationTask('check_longDupTel', _.bind(this.validaLongDupTel, this));
         this.model.addValidationTask('check_TextOnly', _.bind(this.checkTextOnly, this));
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
-        this.model.addValidationTask('checkCreateRecord', _.bind(this.checkCreateRecord, this));
+        //this.model.addValidationTask('checkCreateRecord', _.bind(this.checkCreateRecord, this));
         //Validation task que muestra modal sobre duplicados
         this.model.addValidationTask('check_duplicados_modal', _.bind(this.check_duplicados_modal, this));
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
@@ -253,7 +253,7 @@
 
             //Parámetros para consumir servicio
             var params = {
-                'nombre': this.model.get('name'),
+                'nombre': this.model.get('name_c'),
                 'correo': email,
                 'telefonos': telefonos,
                 'rfc': rfc,
