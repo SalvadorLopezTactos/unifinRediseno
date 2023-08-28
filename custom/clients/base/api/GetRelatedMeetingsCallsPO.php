@@ -56,24 +56,24 @@ class GetRelatedMeetingsCallsPO extends SugarApi
             }
         }
 
-        /**ToDo: Recuperar resultado Viable Envío a Solicitud una vez que se define en el campo que se muestra */
-        /*
+
         if ($beanPO->load_relationship('meetings')) {
-            $relatedMeetings = $beanPO->calls->getBeans();
+            $relatedMeetings = $beanPO->meetings->getBeans();
 
             if (!empty($relatedMeetings)) {
                 
                 foreach ($relatedMeetings as $meeting) {
 
-                    if( $call->tct_resultado_llamada_ddw_c == 'Ilocalizable' ){
-                        $numero_ilocalizable += 1;
-                        $GLOBALS['log']->fatal("ILOCALIZABLE NUMERO". $numero_ilocalizable);
+                    if( $meeting->resultado_c == '30' ){
+                        array_push($arr_muestra_boton,'1');
+                    }else{
+                        array_push($arr_muestra_boton,'0');
                     }
 
                 }
             }
         }
-        */
+
         $GLOBALS['log']->fatal(print_r($arr_muestra_boton,true));
         if( in_array('1',$arr_muestra_boton) ){
             $muestra_boton = true;
