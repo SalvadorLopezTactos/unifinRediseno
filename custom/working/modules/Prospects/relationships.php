@@ -58,15 +58,6 @@ $relationships = array (
       ),
       1 => 
       array (
-        'name' => 'idx_prospect_dataprivacy_prospect',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'prospect_id',
-        ),
-      ),
-      2 => 
-      array (
         'name' => 'idx_prospect_dataprivacy_dataprivacy',
         'type' => 'index',
         'fields' => 
@@ -74,7 +65,7 @@ $relationships = array (
           0 => 'dataprivacy_id',
         ),
       ),
-      3 => 
+      2 => 
       array (
         'name' => 'idx_prospects_dataprivacy',
         'type' => 'alternate_key',
@@ -119,103 +110,6 @@ $relationships = array (
     'relationship_only' => false,
     'for_activities' => false,
     'is_custom' => false,
-    'from_studio' => false,
-  ),
-  'bc_survey_prospects' => 
-  array (
-    'name' => 'bc_survey_prospects',
-    'true_relationship_type' => 'many-to-many',
-    'relationships' => 
-    array (
-      'bc_survey_prospects' => 
-      array (
-        'lhs_module' => 'bc_survey',
-        'lhs_table' => 'bc_survey',
-        'lhs_key' => 'id',
-        'rhs_module' => 'Prospects',
-        'rhs_table' => 'prospects',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'bc_survey_prospects_c',
-        'join_key_lhs' => 'bc_survey_prospectsbc_survey_ida',
-        'join_key_rhs' => 'bc_survey_prospectsprospects_idb',
-      ),
-    ),
-    'table' => 'bc_survey_prospects_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      'bc_survey_prospectsbc_survey_ida' => 
-      array (
-        'name' => 'bc_survey_prospectsbc_survey_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'bc_survey_prospectsprospects_idb' => 
-      array (
-        'name' => 'bc_survey_prospectsprospects_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'bc_survey_prospectsspk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'bc_survey_prospects_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'bc_survey_prospectsbc_survey_ida',
-          1 => 'bc_survey_prospectsprospects_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'bc_survey',
-    'lhs_table' => 'bc_survey',
-    'lhs_key' => 'id',
-    'rhs_module' => 'Prospects',
-    'rhs_table' => 'prospects',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'bc_survey_prospects_c',
-    'join_key_lhs' => 'bc_survey_prospectsbc_survey_ida',
-    'join_key_rhs' => 'bc_survey_prospectsprospects_idb',
-    'readonly' => true,
-    'relationship_name' => 'bc_survey_prospects',
-    'rhs_subpanel' => NULL,
-    'lhs_subpanel' => NULL,
-    'is_custom' => true,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
     'from_studio' => false,
   ),
   'prospects_prospects_1' => 
@@ -324,6 +218,214 @@ $relationships = array (
     'relationship_name' => 'prospects_prospects_1',
     'rhs_subpanel' => 'default',
     'lhs_subpanel' => 'default',
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'bc_survey_prospects' => 
+  array (
+    'name' => 'bc_survey_prospects',
+    'true_relationship_type' => 'many-to-many',
+    'relationships' => 
+    array (
+      'bc_survey_prospects' => 
+      array (
+        'lhs_module' => 'bc_survey',
+        'lhs_table' => 'bc_survey',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Prospects',
+        'rhs_table' => 'prospects',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'bc_survey_prospects_c',
+        'join_key_lhs' => 'bc_survey_prospectsbc_survey_ida',
+        'join_key_rhs' => 'bc_survey_prospectsprospects_idb',
+      ),
+    ),
+    'table' => 'bc_survey_prospects_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'bc_survey_prospectsbc_survey_ida' => 
+      array (
+        'name' => 'bc_survey_prospectsbc_survey_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'bc_survey_prospectsprospects_idb' => 
+      array (
+        'name' => 'bc_survey_prospectsprospects_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'bc_survey_prospectsspk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'bc_survey_prospects_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'bc_survey_prospectsbc_survey_ida',
+          1 => 'bc_survey_prospectsprospects_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'bc_survey',
+    'lhs_table' => 'bc_survey',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Prospects',
+    'rhs_table' => 'prospects',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'bc_survey_prospects_c',
+    'join_key_lhs' => 'bc_survey_prospectsbc_survey_ida',
+    'join_key_rhs' => 'bc_survey_prospectsprospects_idb',
+    'readonly' => true,
+    'relationship_name' => 'bc_survey_prospects',
+    'rhs_subpanel' => NULL,
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'from_studio' => false,
+  ),
+  'prospects_dire_direccion_1' => 
+  array (
+    'name' => 'prospects_dire_direccion_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'prospects_dire_direccion_1' => 
+      array (
+        'lhs_module' => 'Prospects',
+        'lhs_table' => 'prospects',
+        'lhs_key' => 'id',
+        'rhs_module' => 'dire_Direccion',
+        'rhs_table' => 'dire_direccion',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'prospects_dire_direccion_1_c',
+        'join_key_lhs' => 'prospects_dire_direccion_1prospects_ida',
+        'join_key_rhs' => 'prospects_dire_direccion_1dire_direccion_idb',
+      ),
+    ),
+    'table' => 'prospects_dire_direccion_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'prospects_dire_direccion_1prospects_ida' => 
+      array (
+        'name' => 'prospects_dire_direccion_1prospects_ida',
+        'type' => 'id',
+      ),
+      'prospects_dire_direccion_1dire_direccion_idb' => 
+      array (
+        'name' => 'prospects_dire_direccion_1dire_direccion_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_prospects_dire_direccion_1_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_prospects_dire_direccion_1_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'prospects_dire_direccion_1prospects_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_prospects_dire_direccion_1_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'prospects_dire_direccion_1dire_direccion_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'prospects_dire_direccion_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'prospects_dire_direccion_1dire_direccion_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Prospects',
+    'lhs_table' => 'prospects',
+    'lhs_key' => 'id',
+    'rhs_module' => 'dire_Direccion',
+    'rhs_table' => 'dire_direccion',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'prospects_dire_direccion_1_c',
+    'join_key_lhs' => 'prospects_dire_direccion_1prospects_ida',
+    'join_key_rhs' => 'prospects_dire_direccion_1dire_direccion_idb',
+    'readonly' => true,
+    'relationship_name' => 'prospects_dire_direccion_1',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
     'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
@@ -706,13 +808,13 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
-  'prospects_dire_direccion_1' => 
+  'prospects_leads_1' => 
   array (
-    'rhs_label' => 'Direcciones',
+    'rhs_label' => 'Leads',
     'lhs_label' => 'Público Objetivo',
     'rhs_subpanel' => 'default',
     'lhs_module' => 'Prospects',
-    'rhs_module' => 'dire_Direccion',
+    'rhs_module' => 'Leads',
     'relationship_type' => 'one-to-many',
     'readonly' => true,
     'deleted' => false,
@@ -720,6 +822,6 @@ $relationships = array (
     'for_activities' => false,
     'is_custom' => false,
     'from_studio' => true,
-    'relationship_name' => 'prospects_dire_direccion_1',
+    'relationship_name' => 'prospects_leads_1',
   ),
 );

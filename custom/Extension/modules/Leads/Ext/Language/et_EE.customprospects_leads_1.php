@@ -1,0 +1,4 @@
+<?php
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_PROSPECTS_LEADS_1_FROM_PROSPECTS_TITLE'] = 'Público Objetivo';
+$mod_strings['LBL_PROSPECTS_LEADS_1_FROM_LEADS_TITLE'] = 'Público Objetivo';
