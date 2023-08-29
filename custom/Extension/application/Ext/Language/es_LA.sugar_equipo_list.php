@@ -1,5 +1,5 @@
 <?php
- // created: 2021-04-19 23:07:02
+ // created: 2022-08-03 19:02:34
 
 $app_list_strings['equipo_list']=array (
   0 => '',
@@ -11,7 +11,6 @@ $app_list_strings['equipo_list']=array (
   6 => '6',
   7 => '7',
   8 => '8',
-  9 => '9',
   'CA' => 'CA',
   'CA1' => 'CA1',
   'CA2' => 'CA2',
@@ -38,7 +37,6 @@ $app_list_strings['equipo_list']=array (
   'PUE' => 'PUE',
   'QRO' => 'QRO',
   'QRO2' => 'QRO2',
-  'SLP' => 'SLP',
   'TIJ' => 'TIJ',
   'TOL' => 'TOL',
   'VER' => 'VER',
@@ -49,6 +47,7 @@ $app_list_strings['equipo_list']=array (
   'TOR' => 'TOR',
   'TMP' => 'TMP',
   'AGS' => 'AGS',
+  9 => '9',
   'VLLH' => 'VLLH',
   '4MOV' => '4MOV',
   'METRO' => 'METRO',
@@ -56,5 +55,26 @@ $app_list_strings['equipo_list']=array (
   'SOS' => 'SOS',
   'CS' => 'CS',
   'NoAsignado' => 'No Asignado',
-  'GDL2' => 'GDL2',
+  'MTY2' => 'MTY2',
+  'LUMO' => 'LUMO',
+  'CDMX' => 'CDMX',
+  'MTY_H' => 'MTY_H',
+  'GDL_H' => 'GDL_H',
+  'MER_H' => 'MER_H',
+  'CAN_H' => 'CAN_H',
+  'CORP 1' => 'CORP 1',
+  'CORP 2' => 'CORP 2',
+  'ALIANZAS' => 'ALIANZAS',
+  'CHIS' => 'CHIS',
+  'DESARROLLO' => 'DESARROLLO',
+  'Sinequipo' => 'Sin equipo',
+  'FEC' => 'FEC',
+  'JLM' => 'JLM',
+  'OOO' => 'OOO',
+  'JRD' => 'JRD',
+  'AAF' => 'AAF',
+  'JCJ' => 'JCJ',
+  'PAC' => 'PAC',
+  'SLP' => 'SLP',
+  'CENTRAL' => 'CENTRAL',
 );

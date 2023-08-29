@@ -1,7 +1,9 @@
 <?php
- // created: 2020-12-17 13:12:39
+ // created: 2023-08-26 13:52:11
 $dictionary['Opportunity']['fields']['estatus_c']['labelValue']='SubEtapa';
 $dictionary['Opportunity']['fields']['estatus_c']['dependency']='';
+$dictionary['Opportunity']['fields']['estatus_c']['required_formula']='';
+$dictionary['Opportunity']['fields']['estatus_c']['readonly_formula']='';
 $dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']=array (
   'trigger' => 'tct_etapa_ddw_c',
   'values' => 
@@ -58,6 +60,8 @@ $dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']=array (
       3 => 'K',
       4 => 'BO',
       5 => 'DB',
+      6 => 'VC',
+      7 => 'AN',
     ),
     'C' => 
     array (

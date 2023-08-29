@@ -76,6 +76,7 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['habilita_envio_tc_c'] = $current_user->habilita_envio_tc_c;
         $userArray['current_user']['admin_seguros_c'] = $current_user->admin_seguros_c;
 		$userArray['current_user']['seguimiento_seguros_c'] = $current_user->seguimiento_seguros_c;
+        $userArray['current_user']['asignacion_po_c'] = $current_user->asignacion_po_c;
         return $userArray;
     }
 }

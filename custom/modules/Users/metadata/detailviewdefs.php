@@ -441,6 +441,16 @@ array (
             'label' => 'LBL_SEGUIMIENTO_SEGUROS',
           ),
         ),
+        19 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'asignacion_po_c',
+            'label' => 'LBL_ASIGNACION_PO',
+          ),
+          1 => '',
+        ),
       ),
       'lbl_detailview_panel4' => 
       array (
