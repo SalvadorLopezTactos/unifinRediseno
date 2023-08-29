@@ -538,7 +538,11 @@ array (
             'name' => 'reasignacion_po_c',
             'label' => 'LBL_REASIGNACION_PO',
           ),
-          1 => '',
+          1 => array (
+            'readonly' => false,
+            'name' => 'asignacion_po_c',
+            'label' => 'LBL_ASIGNACION_PO',
+          ),
         ),
       ),
       'lbl_editview_panel5' => 

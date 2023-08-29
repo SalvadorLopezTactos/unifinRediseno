@@ -77,6 +77,8 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['admin_seguros_c'] = $current_user->admin_seguros_c;
         $userArray['current_user']['seguimiento_seguros_c'] = $current_user->seguimiento_seguros_c;
         $userArray['current_user']['reasignacion_po_c'] = $current_user->reasignacion_po_c;
+		$userArray['current_user']['seguimiento_seguros_c'] = $current_user->seguimiento_seguros_c;
+        $userArray['current_user']['asignacion_po_c'] = $current_user->asignacion_po_c;
         return $userArray;
     }
 }

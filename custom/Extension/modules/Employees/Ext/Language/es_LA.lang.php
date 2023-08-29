@@ -69,3 +69,4 @@ $mod_strings['LBL_MFA_ENABLE'] = 'MFA enable';
 $mod_strings['LBL_ADMIN_SEGUROS'] = 'Administración Seguros';
 $mod_strings['LBL_SEGUIMIENTO_SEGUROS'] = 'Seguimiento Seguros';
 $mod_strings['LBL_REASIGNACION_PO'] = 'Reasignación de Público Objetivo';
+$mod_strings['LBL_ASIGNACION_PO'] = 'Gestión de asignación PO';
