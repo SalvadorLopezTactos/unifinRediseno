@@ -1,0 +1,80 @@
+<?php
+class Prospects_AsignacionPO
+{
+    public function set_assigned($bean = null, $event = null, $args = null){
+        global $app_list_strings, $db;
+        //Sólo aplica en creación
+        if (!$args['isUpdate'] && $_SESSION['platform'] != 'base') {
+            //Valida asignación para PO creados fuera de CRM
+            $asignado_id = '';
+            
+            //Recupera usuario por núm empleaso
+            if(!empty($bean->numero_empleado_c)){
+              $query = "select id_c from users_cstm
+                where no_empleado_c = '{$bean->numero_empleado_c}' limit 1;";
+              $resultado = $db->query($query);
+              while ($row = $db->fetchByAssoc($resultado)) {
+                  $asignado_id = $row['id_c'];
+              }              
+            }
+            
+            //Recupera usuario por carrousel
+            if(!empty($bean->zona_geografica_c) && empty($asignado_id)){
+              $equipos = '';
+              $query = "select equipos,asignado_id from unifin_asignacion_po 
+                where zona_geografica = '{$bean->zona_geografica_c}' limit 1;";
+              $resultado = $db->query($query);
+              while ($row = $db->fetchByAssoc($resultado)) {
+                  $equipos = $row['equipos'];
+              }
+              if(!empty($equipos)){
+                $equipos = str_replace("^","'",$equipos);
+                $query = "select u.id, u.last_name, u.status, uc.equipo_c, b.fecha_reporte, bc.vacaciones_c, a.zona_geografica, a.asignado_id
+                  from users u
+                  inner join users_cstm uc on uc.id_c=u.id
+                  left join uni_brujula b on b.assigned_user_id = u.id  and b.fecha_reporte = curdate()
+                  left join uni_brujula_cstm bc on bc.id_c = b.id
+                  left join unifin_asignacion_po a on a.zona_geografica = '{$bean->zona_geografica_c}'
+                  where uc.equipo_c in ({$equipos})
+                  and u.status='Active'
+                  and u.deleted=0
+                  and (bc.vacaciones_c = 0 or bc.vacaciones_c is null)
+                  and a.zona_geografica is not null
+                  order by u.last_name asc;";
+                $resultado = $db->query($query);
+                $countRows = 0;
+                $index = 1;
+                $nextIndex = 1;
+                while ($row = $db->fetchByAssoc($resultado)) {
+                  $countRows++;
+                }
+                if($countRows>0){
+                  while ($row = $db->fetchByAssoc($resultado)) {
+                      if($index == $row['asignado_id']){
+                        $asignado_id = $row['id'];
+                        $nextIndex = $row['asignado_id'] +1;
+                      }
+                      //Si el indice es mayor al conteo se establece 1
+                      if($countRows > $row['asignado_id'] && $row['asignado_id'] == 1){
+                        $asignado_id = $row['id'];
+                        $nextIndex = $row['asignado_id'] +1;
+                      }
+                      $index++;
+                  }
+                }
+                
+                //Actualiza indice
+                $query = "update unifin_asignacion_po a
+                  set a.asignado_id = '{$nextIndex}',
+                  where a.zona_geografica='{$bean->zona_geografica_c}';";
+                $resultado = $db->query($query);
+              }   
+            }
+            
+            //Establece asignado
+            if(!empty($asignado_id)){
+              $bean->assigned_user_id = $asignado_id;
+            }
+        }
+    }
+}
