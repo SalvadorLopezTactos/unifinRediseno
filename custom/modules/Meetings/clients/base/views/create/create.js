@@ -58,7 +58,11 @@
 		//Oculta panel del Participantes
 		this.$('[data-name=reunion_participantes]').find('.record-label').addClass('hide');
 		this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').addClass('hide');
-		if(this.model.get('tct_conferencia_chk_c') && app.user.attributes.lenia_c) this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').removeClass('hide');
+        if(this.model.get('tct_conferencia_chk_c') && app.user.attributes.lenia_c) this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').removeClass('hide');
+        
+        if( this.model.get("parent_type") == "Prospects" ){
+            this.model.set("objetivo_c","14");
+        }
     },
 
     /*Valida que por lo menos exita un objetivo específico a su vez expande el panel*/

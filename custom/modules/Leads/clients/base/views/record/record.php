@@ -59,15 +59,17 @@ array (
                 'acl_action' => 'send_poll',
                 'event' => 'button:send_poll:click',
               ),
-              3 => 
-              array (
-                'name' => 'convert_Leads_button',
-                'type' => 'rowaction',
-                'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
-                'acl_action' => 'view',
-                'event' => 'button:convert_Lead_to_Accounts:click',
-                'class' => 'btn_convertLeads',
-              ),
+              /*
+-              3 => 
+-              array (
+-                'name' => 'convert_Leads_button',
+-                'type' => 'rowaction',
+-                'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
+-                'acl_action' => 'view',
+-                'event' => 'button:convert_Lead_to_Accounts:click',
+-                'class' => 'btn_convertLeads',
+-              ),
+-              */
               4 => 
               array (
                 'name' => 'reset_lead',
@@ -608,6 +610,10 @@ array (
               ),
               77 => 
               array (
+              ),
+              78 => 
+              array (
+                'name' => 'prospects_leads_1_name',
               ),
             ),
           ),

@@ -1,5 +1,5 @@
 <?php
- // created: 2019-12-23 11:48:07
+ // created: 2023-08-28 13:09:06
 
 $app_list_strings['resultado_list']=array (
   '' => '',
@@ -26,4 +26,11 @@ $app_list_strings['resultado_list']=array (
   23 => 'Está interesado, solicita cotización para proceder',
   24 => 'Cancelada por el prospecto, se reagendo',
   25 => 'Cancelada por el prospecto, no le interesa',
+  1 => 'El cliente no estuvo presente, cita cancelada',
+  8 => 'Cita no realizada',
+  26 => '1er Contacto',
+  27 => 'Ilocalizable',
+  28 => 'No Interesado',
+  29 => 'Fuera de Perfil',
+  30 => 'Viable, Envío a Solicitud',
 );

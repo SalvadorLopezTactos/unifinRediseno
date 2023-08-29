@@ -17,7 +17,7 @@ class clean_fields_class
             foreach ($bean as $field => $value) {
                 $fieldName = isset($bean->field_defs[$field]['name']) ? $bean->field_defs[$field]['name'] : '';
                 $fieldType = isset($bean->field_defs[$field]['type']) ? $bean->field_defs[$field]['type'] : '';
-                if ($fieldName != 'nombre_de_cargar_c' && $fieldName != 'resultado_de_carga_c') {
+                if ($fieldName != 'nombre_de_cargar_c' && $fieldName != 'resultado_de_carga_c' && $fieldName != 'id_director_vobo_c') {
 
                     if ($fieldType == 'varchar') {
                         $value = mb_strtoupper($value, "UTF-8");

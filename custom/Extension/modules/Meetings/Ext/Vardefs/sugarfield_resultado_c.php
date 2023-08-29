@@ -1,7 +1,9 @@
 <?php
- // created: 2020-01-07 10:34:06
+ // created: 2023-08-28 13:09:57
 $dictionary['Meeting']['fields']['resultado_c']['labelValue']='Resultado de Cita';
 $dictionary['Meeting']['fields']['resultado_c']['dependency']='';
+$dictionary['Meeting']['fields']['resultado_c']['required_formula']='';
+$dictionary['Meeting']['fields']['resultado_c']['readonly_formula']='';
 $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
   'trigger' => 'objetivo_c',
   'values' => 
@@ -147,6 +149,14 @@ $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
       8 => '2',
       9 => '17',
       10 => '23',
+    ),
+    14 => 
+    array (
+      0 => '26',
+      1 => '27',
+      2 => '28',
+      3 => '29',
+      4 => '30',
     ),
     'Planned' => 
     array (

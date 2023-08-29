@@ -446,10 +446,14 @@ array (
           0 => 
           array (
             'readonly' => false,
+            'name' => 'reasignacion_po_c',
+            'label' => 'LBL_REASIGNACION_PO',
+          ),
+          1 => array (
+            'readonly' => false,
             'name' => 'asignacion_po_c',
             'label' => 'LBL_ASIGNACION_PO',
           ),
-          1 => '',
         ),
       ),
       'lbl_detailview_panel4' => 

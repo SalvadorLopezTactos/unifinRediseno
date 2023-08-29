@@ -766,7 +766,7 @@
                 }
 
             }
-        }else if(this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada"){
+        }else if( this.model.get('tct_resultado_llamada_ddw_c') == "Nueva_llamada" || this.model.get('tct_resultado_llamada_ddw_c') == "1er Contacto" ){
 
             $('.record-cell[data-type="calls_meeting_call"]').show();
             //oculta etiqueta de campo
