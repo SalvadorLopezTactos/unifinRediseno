@@ -530,6 +530,16 @@ array (
             'label' => 'LBL_SEGUIMIENTO_SEGUROS',
           ),
         ),
+        19 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'reasignacion_po_c',
+            'label' => 'LBL_REASIGNACION_PO',
+          ),
+          1 => '',
+        ),
       ),
       'lbl_editview_panel5' => 
       array (

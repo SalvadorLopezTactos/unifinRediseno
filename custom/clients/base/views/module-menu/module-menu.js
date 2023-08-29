@@ -34,6 +34,9 @@
 
         }*/
 
+        //Mostrar reasignación de asesores para Público Objetivo únicamente para usuarios con el permiso especial
+        this.validateShowReassignPO();
+
     },
 
     handleRouteEvent: function(event) {
@@ -103,5 +106,27 @@
             });
         }
     },
+
+    validateShowReassignPO: function (){
+        
+        var privilegioReassignPO = App.user.get('reasignacion_po_c');
+
+        if(this.module == "Prospects"){
+
+            if(!privilegioReassignPO){
+                
+                var metaProspects = App.metadata.getModule('Prospects').menu.header.meta;
+                for (let index = 0; index < metaProspects.length; index++) {
+                    if( metaProspects[index].route == "#Accounts/layout/Reasignacion_publico_objetivo" ){
+
+                        //Elimina opción de reasignar promotores para Público Objetivo
+                        App.metadata.getModule('Prospects').menu.header.meta.splice(index,1);
+                    }
+                
+                }
+            }
+            
+        }
+    }
 
 })
