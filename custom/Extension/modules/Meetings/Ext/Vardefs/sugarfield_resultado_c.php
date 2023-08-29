@@ -1,5 +1,5 @@
 <?php
- // created: 2023-08-28 13:09:57
+ // created: 2023-08-29 20:28:09
 $dictionary['Meeting']['fields']['resultado_c']['labelValue']='Resultado de Cita';
 $dictionary['Meeting']['fields']['resultado_c']['dependency']='';
 $dictionary['Meeting']['fields']['resultado_c']['required_formula']='';
@@ -152,11 +152,12 @@ $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
     ),
     14 => 
     array (
-      0 => '26',
-      1 => '27',
-      2 => '28',
-      3 => '29',
-      4 => '30',
+      0 => '',
+      1 => '26',
+      2 => '27',
+      3 => '28',
+      4 => '29',
+      5 => '30',
     ),
     'Planned' => 
     array (
