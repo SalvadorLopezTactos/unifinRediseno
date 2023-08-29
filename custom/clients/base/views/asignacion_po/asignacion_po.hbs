@@ -1,0 +1,112 @@
+{{#if this.loadView}}
+  <style>
+      .container {
+          overflow-y: auto;
+          display: block;
+          width: 100%;
+      }
+      .cuentas {
+          display: table;
+          width: 90%;
+      }
+      .cuentasContainer {
+          margin-top: 1%;
+          overflow-y: auto;
+          height: 300px;
+      }
+      #containerHeader {
+          font-size: 18px;
+          margin-top: 2%;
+          margin-left: 1%;
+          line-height: 10px;
+      }
+      #successful {
+          margin-top: 10%;
+          font-size: 25px;
+          color: #33800d;
+      }
+  </style>
+	<script>
+		var $select2 = this.$('.cuentasContainer').find('select.select2');
+		$select2.select2();
+
+        this.$('[data-field="oficinas_atiende_id"].updateOA').select2({
+            width:'100%',
+            minimumResultsForSearch:7,
+            closeOnSelect: false, 
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
+	</script>	
+	<div><p></p></div>
+  <div class="container">
+    <div class="row-fluid">
+      <div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 96%;">
+        <h1>
+          <p style="vertical-align: middle;  margin: 5px;">
+						Gestión de Asignación PO
+          </p>
+        </h1>
+      </div>
+    </div>
+		{{#if listaAsignacionPO}}
+			<div class="row-fluid">
+				<table class="table">
+					<tr>
+						<td class="span4">
+							<label class="record-label" style="font-weight:bold; text-align:center">ZONA GEOGRÁFICA</label>
+						</td>
+						<td class="span4">
+							<label class="record-label" style="font-weight:bold; text-align:center">EQUIPO(S) ATIENDE</label>
+						</td>
+            <td class="span4">
+							<label class="record-label" style="font-weight:bold; text-align:center">ÚLTIMA MODIFICACIÓN</label>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="cuentasContainer row-fluid">
+			  <table class="table table-striped tablavet">
+				{{#each listaAsignacionPO}}
+					<tr>
+						<td class="span4">	
+							<span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'> 
+                {{getUnifinListValue "zonageografica_list" zona_geografica}}
+              </span>
+						</td>
+            <td class="span4">
+							<select class="oficinas_atiende select2 updateOA" multiple="multiple" style="width: 100%;" data-field="oficinas_atiende_id">
+								{{#each ../lista_equipo}}
+									<option value="{{@key}}" {{ifMSelected @key ../equipos}}>{{this}}</option>
+								{{/each}}
+							</select>
+						</td>
+            <td class="span4">	
+							<span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>
+                {{uName}}
+              </span><br>
+              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 10px;'>
+                {{date_modified}}
+              </span>
+						</td>                        
+					</tr>
+				{{/each}}
+			  </table>
+			</div>
+			<div><p></p></div>
+      <table>
+				<br>
+				<tr>
+					<th>Total de registros encontrados: {{Total}}</th>
+          <td align="center"><input type="button" value="Guardar cambios" id="btn_guardar" class="btn btn-success" /></td>
+					<td></td>
+        </tr>
+			</table>
+		{{else}}
+			<div class="row-fluid hide notFound" style="color:gray;">
+				<div class="span12"><center>No se han encontrado registros</center></div>
+			</div>
+		{{/if}}
+		<textarea style="display: none" id="crossSeleccionados" value=""></textarea>
+    </div>
+{{/if}}
