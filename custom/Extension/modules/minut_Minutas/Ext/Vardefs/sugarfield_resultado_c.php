@@ -1,7 +1,9 @@
 <?php
- // created: 2020-01-10 14:32:46
+ // created: 2023-08-30 19:10:48
 $dictionary['minut_Minutas']['fields']['resultado_c']['labelValue']='Resultado de Cita';
 $dictionary['minut_Minutas']['fields']['resultado_c']['dependency']='';
+$dictionary['minut_Minutas']['fields']['resultado_c']['required_formula']='';
+$dictionary['minut_Minutas']['fields']['resultado_c']['readonly_formula']='';
 $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
   'trigger' => 'objetivo_c',
   'values' => 
@@ -148,6 +150,16 @@ $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
       9 => '17',
       10 => '22',
       11 => '23',
+    ),
+    14 => 
+    array (
+      0 => '',
+      1 => '26',
+      2 => '27',
+      3 => '5',
+      4 => '28',
+      5 => '29',
+      6 => '30',
     ),
     'Planned' => 
     array (
