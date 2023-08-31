@@ -470,6 +470,9 @@
 
     _readonlyFields: function () {
         var self = this;
+
+        //Solo Lectura Regimen Fiscal para que únicamente se establezca el PO como PF
+        $('[data-name="regimen_fiscal_c"]').css('pointer-events','none');
         /***************************READONLY PARA SUBTIPO DE LEAD CANCELADO**************************/
         if (this.model.get('estatus_po_c') == '3' || this.model.get('estatus_po_c') == '4') {
 
