@@ -124,6 +124,8 @@ class SendEmailPO extends SugarApi
 
     public function autorizaEnvioCorreo($api, $args){
         
+        global $sugar_config;
+        $url_unileasing = $sugar_config['url_unileasing_email'];
         $id_prospecto = $args['id_po'];
         $response = '';
 
@@ -157,7 +159,7 @@ class SendEmailPO extends SugarApi
             $email_comercial = $info_comercial['email'];
         }
 
-        $link_unileasing = "https://unilease-unifin.com.mx/reemplazar/".$id_asesor;
+        $link_unileasing = $url_unileasing . "/api/crm/contact/create?crm_id=".$id_prospecto."&assessor_id=".$id_asesor;
 
         $body_mail = $this->buildBodyPO( $beanPO->name, $link_unileasing, $asesorName, $telefono_asesor, $email_asesor );
 
