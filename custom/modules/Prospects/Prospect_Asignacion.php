@@ -2,7 +2,7 @@
 class Prospects_AsignacionPO
 {
     public function set_assigned($bean = null, $event = null, $args = null){
-        global $app_list_strings, $db;
+        global $db;
         //Sólo aplica en creación
         if (!$args['isUpdate'] && $_SESSION['platform'] != 'base') {
             //Valida asignación para PO creados fuera de CRM
@@ -41,21 +41,22 @@ class Prospects_AsignacionPO
                   and (bc.vacaciones_c = 0 or bc.vacaciones_c is null)
                   and a.zona_geografica is not null
                   order by u.last_name asc;";
-                $resultado = $db->query($query);
+                $resultadoC = $db->query($query);
                 $countRows = 0;
                 $index = 1;
                 $nextIndex = 1;
-                while ($row = $db->fetchByAssoc($resultado)) {
+                while ($rowC = $db->fetchByAssoc($resultadoC)) {
                   $countRows++;
                 }
                 if($countRows>0){
+                  $resultado = $db->query($query);
                   while ($row = $db->fetchByAssoc($resultado)) {
                       if($index == $row['asignado_id']){
                         $asignado_id = $row['id'];
                         $nextIndex = $row['asignado_id'] +1;
                       }
                       //Si el indice es mayor al conteo se establece 1
-                      if($countRows > $row['asignado_id'] && $row['asignado_id'] == 1){
+                      if($countRows > $row['asignado_id'] && $index == 1){
                         $asignado_id = $row['id'];
                         $nextIndex = $row['asignado_id'] +1;
                       }
@@ -65,7 +66,7 @@ class Prospects_AsignacionPO
                 
                 //Actualiza indice
                 $query = "update unifin_asignacion_po a
-                  set a.asignado_id = '{$nextIndex}',
+                  set a.asignado_id = '{$nextIndex}'
                   where a.zona_geografica='{$bean->zona_geografica_c}';";
                 $resultado = $db->query($query);
               }   
