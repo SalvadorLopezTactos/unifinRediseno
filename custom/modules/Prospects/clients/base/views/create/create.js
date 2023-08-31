@@ -122,6 +122,9 @@
         /****Oculta check Lead Cancelado solo al crear Lead****/
         this.$('[data-name=lead_cancelado_c]').hide();
         this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').hide();
+
+        //Solo Lectura Regimen Fiscal para que únicamente se establezca el PO como PF
+        $('[data-name="regimen_fiscal_c"]').css('pointer-events','none');
     },
 
     expmail: function (fields, errors, callback) {
@@ -471,7 +474,7 @@
         var campos = "";
 
         var tipoPersona = this.model.get('regimen_fiscal_c');
-        var campos_req = [];
+        var campos_req = ['phone_mobile','email','zona_geografica_c'];
 
         if (tipoPersona!='3'){
             campos_req.push('nombre_c', 'apellido_paterno_c', 'apellido_materno_c');
