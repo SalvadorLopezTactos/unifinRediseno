@@ -536,7 +536,7 @@
 
             if(bandera>0){
 
-                var alertOptions = {title: msjError, level: "error"};
+                var alertOptions = {messages: msjError, level: "error"};
                 app.alert.show('validation', alertOptions);
 
                 errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
