@@ -307,4 +307,19 @@ SQL;
             }*/
         }
     }
+    
+    public function asignadoPO($bean, $event, $args)
+    {
+       /* Valida relación de con PO para establecer Asignado
+        */
+        if($bean->fetched_row['prospects_leads_1prospects_ida'] != $bean->prospects_leads_1prospects_ida && !empty($bean->prospects_leads_1prospects_ida) ){
+            //Recupera bean
+            $prospect = BeanFactory::retrieveBean('Prospects', $bean->prospects_leads_1prospects_ida, array('disable_row_level_security' => true));
+            
+            if($prospect->assigned_user_id) {
+               $bean->assigned_user_id = $prospect->assigned_user_id;
+            }
+        }
+    }
+    
 }
