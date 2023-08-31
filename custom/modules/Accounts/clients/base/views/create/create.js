@@ -1847,10 +1847,10 @@
                  title: "El campo profesi\u00F3n es requerido",
                  autoClose: false
                  });*/
-                if (this.model.get('profesion_c') == '' || this.model.get('profesion_c') == null) {
-                    errors['profesion_c'] = errors['profesion_c'] || {};
-                    errors['profesion_c'].required = true;
-                }
+                // if (this.model.get('profesion_c') == '' || this.model.get('profesion_c') == null) {
+                //     errors['profesion_c'] = errors['profesion_c'] || {};
+                //     errors['profesion_c'].required = true;
+                // }
             }
             else {
                 /*app.alert.show("Pais de constitucion", {
@@ -2908,10 +2908,10 @@
                       RequeridosProvRec = RequeridosProvRec + '<b>-No. serie FIEL<br></b>';
                     $('[name=ctpldnoseriefiel_c]').css('border-color', 'red');
                 }
-                if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == undefined) {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Profesión<br></b>';
-                    $('[data-name=profesion_c]').find('.select2-choice').css('border-color', 'red');
-                }
+                // if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == undefined) {
+                //     RequeridosProvRec = RequeridosProvRec + '<b>-Profesión<br></b>';
+                //     $('[data-name=profesion_c]').find('.select2-choice').css('border-color', 'red');
+                // }
                 //Requerido Subsector custom
                 // if ($('.list_sse').select2('val') == "") {
                 //     RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';

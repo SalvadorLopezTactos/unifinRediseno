@@ -72,7 +72,7 @@ $dependencies['Accounts']['RFC_required'] = array(
     ),
 );
 
-$dependencies['Accounts']['Profesion_required'] = array(
+/*$dependencies['Accounts']['Profesion_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
     'triggerFields' => array('tipodepersona_c', 'estatus_c', 'tipo_registro_cuenta_c', 'profesion_c'),
@@ -87,7 +87,7 @@ $dependencies['Accounts']['Profesion_required'] = array(
             ),
         ),
     ),
-);
+);*/
 
 $dependencies['Accounts']['IVA_required'] = array(
     'hooks' => array("all"),
@@ -821,7 +821,7 @@ $dependencies['Accounts']['Zona_Geografica_required'] = array(
     ),
 );
 //Dependencia para IFE/Pasaporte con persona fisica, integración de expediente. Adrian Arauz/ 16/07/18. Actrualizacion debido a choque
-$dependencies['Accounts']['Pasaporte_required'] = array(
+/*$dependencies['Accounts']['Pasaporte_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
     'triggerFields' => array('tipo_registro_cuenta_c', 'ifepasaporte_c', 'subtipo_registro_cuenta_c', 'tipodepersona_c'),
@@ -837,7 +837,7 @@ $dependencies['Accounts']['Pasaporte_required'] = array(
             ),
         ),
     ),
-);
+);*/
 //Dependencia para Curp Requerido en Persona fisica e integracion de expediente. Actualizacion de excepciones.
 $dependencies['Accounts']['Curp_required'] = array(
     'hooks' => array("all"),
@@ -890,7 +890,7 @@ $dependencies['Accounts']['Regimen_Patrimonial_required'] = array(
     ),
 );
 //Profesion. Actualizacion de formula para excepciones en algunos registros. 17/07/18
-$dependencies['Accounts']['Profesion_required'] = array(
+/*$dependencies['Accounts']['Profesion_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
     'triggerFields' => array('tipo_registro_cuenta_c', 'profesion_c', 'subtipo_registro_cuenta_c', 'tipodepersona_c'),
@@ -905,7 +905,7 @@ $dependencies['Accounts']['Profesion_required'] = array(
             ),
         ),
     ),
-);
+);*/
 //Dependencia para numero de empleados para prospecto/interesado. A la espera de cambios en la vista registro para visualizar si funciona*
 $dependencies['Accounts']['Numero_Empleados_required'] = array(
     'hooks' => array("all"),
