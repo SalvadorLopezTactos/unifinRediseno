@@ -3598,10 +3598,10 @@
                  title: "El campo profesi\u00F3n es requerido",
                  autoClose: false
                  });*/
-                if (this.model.get('profesion_c') == '' || this.model.get('profesion_c') == null) {
-                    errors['profesion_c'] = errors['profesion_c'] || {};
-                    errors['profesion_c'].required = true;
-                }
+                // if (this.model.get('profesion_c') == '' || this.model.get('profesion_c') == null) {
+                //     errors['profesion_c'] = errors['profesion_c'] || {};
+                //     errors['profesion_c'].required = true;
+                // }
             }
             else {
                 /*app.alert.show("Pais de constitucion", {
@@ -7676,9 +7676,9 @@
                                                 if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null || this.model.get('nacionalidad_c')=='0') {
                                                         necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                                 }
-                                                if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
-                                                        necesarios = necesarios + '<b>Profesión</b><br>';
-                                                }
+                                                // if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
+                                                //         necesarios = necesarios + '<b>Profesión</b><br>';
+                                                // }
 
                                                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null ) {
                                                         necesarios = necesarios + '<b>RFC</b><br>';
@@ -8003,9 +8003,9 @@ validaReqUniclickInfo: function () {
                                             if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null || this.model.get('nacionalidad_c')=='0') {
                                                     necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                             }
-                                            if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
-                                                    necesarios = necesarios + '<b>Profesión</b><br>';
-                                            }
+                                            // if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
+                                            //         necesarios = necesarios + '<b>Profesión</b><br>';
+                                            // }
 
                                             if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null ) {
                                                     necesarios = necesarios + '<b>RFC</b><br>';

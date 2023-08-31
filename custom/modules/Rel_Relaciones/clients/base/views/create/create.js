@@ -897,9 +897,9 @@
                                         if (data.curp_c == "") {
                                             RequeridosProvRec = RequeridosProvRec + '<b>-CURP<br></b>';
                                         }
-                                        if (data.profesion_c == "") {
-                                            RequeridosProvRec = RequeridosProvRec + '<b>-Profesión<br></b>';
-                                        }
+                                        // if (data.profesion_c == "") {
+                                        //     RequeridosProvRec = RequeridosProvRec + '<b>-Profesión<br></b>';
+                                        // }
                                         if (data.ctpldnoseriefiel_c == "" ) {
                                             RequeridosProvRec = RequeridosProvRec + '<b>-No. Serie FIEL<br></b>';
                                         }
@@ -1027,9 +1027,9 @@
                                     if (data.curp_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-CURP<br></b>';
                                     }
-                                    if (data.profesion_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Profesión<br></b>';
-                                    }
+                                    // if (data.profesion_c == "") {
+                                    //     RequeridosProvRec = RequeridosProvRec + '<b>-Profesión<br></b>';
+                                    // }
                                     if (data.ctpldnoseriefiel_c == "" ) {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-No. Serie FIEL<br></b>';
                                     }
@@ -1176,9 +1176,9 @@
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
                                 }
-                                if (data[0].contents.profesion_c == "") {
-                                    faltantes.push('Profesión');
-                                }
+                                // if (data[0].contents.profesion_c == "") {
+                                //     faltantes.push('Profesión');
+                                // }
                                 if (data[0].contents.curp_c == "") {
                                     faltantes.push('CURP');
                                 }
@@ -1309,9 +1309,9 @@
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
                                 }
-                                if (data[0].contents.profesion_c == "") {
-                                    faltantes.push('Profesión');
-                                }
+                                // if (data[0].contents.profesion_c == "") {
+                                //     faltantes.push('Profesión');
+                                // }
                                 if (data[0].contents.curp_c == "") {
                                     faltantes.push('CURP');
                                 }
@@ -1448,9 +1448,9 @@
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
                                 }
-                                if (data[0].contents.profesion_c == "") {
-                                    faltantes.push('Profesión');
-                                }
+                                // if (data[0].contents.profesion_c == "") {
+                                //     faltantes.push('Profesión');
+                                // }
                                 if (data[0].contents.curp_c == "") {
                                     faltantes.push('CURP');
                                 }
@@ -1582,9 +1582,9 @@
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
                                 }
-                                if (data[0].contents.profesion_c == "") {
-                                    faltantes.push('Profesión');
-                                }
+                                // if (data[0].contents.profesion_c == "") {
+                                //     faltantes.push('Profesión');
+                                // }
                                 //Validación PFAE
                                 if (data[0].contents.tipodepersona_c != "Persona Fisica") {
                                   if (data[0].contents.nombre_comercial_c == "") {
@@ -1716,9 +1716,9 @@
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
                                 }
-                                if (data[0].contents.profesion_c == "") {
-                                    faltantes.push('Profesión');
-                                }
+                                // if (data[0].contents.profesion_c == "") {
+                                //     faltantes.push('Profesión');
+                                // }
                                 if (data[0].contents.curp_c == "") {
                                     faltantes.push('CURP');
                                 }
@@ -1782,9 +1782,9 @@
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
                                 }
-                                if (data[0].contents.profesion_c == "") {
-                                    faltantes.push('Profesión');
-                                }
+                                // if (data[0].contents.profesion_c == "") {
+                                //     faltantes.push('Profesión');
+                                // }
                                 //Validación PFAE
                                 if (data[0].contents.tipodepersona_c != "Persona Fisica") {
                                   if (data[0].contents.nombre_comercial_c == "") {
@@ -1918,9 +1918,9 @@
 									if (telCyC == 0) {
 										faltantes.push('Teléfono Casa o Celular');
 									}
-									if (data[0].contents.profesion_c == "") {
-										faltantes.push('Profesión');
-									}
+									// if (data[0].contents.profesion_c == "") {
+									// 	faltantes.push('Profesión');
+									// }
 								}else{
 									//Pregunta por el telefono Trabajo
 									if (telO == 0) {
@@ -2330,9 +2330,9 @@
                                                 if (data[4].contents.nacionalidad_c == "" || data[4].contents.nacionalidad_c == null || data[4].contents.nacionalidad_c=='0') {
                                                         necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                                 }
-                                                if (data[4].contents.profesion_c == "" || data[4].contents.profesion_c == null) {
-                                                        necesarios = necesarios + '<b>Profesión</b><br>';
-                                                }
+                                                // if (data[4].contents.profesion_c == "" || data[4].contents.profesion_c == null) {
+                                                //         necesarios = necesarios + '<b>Profesión</b><br>';
+                                                // }
                                                 if (data[4].contents.rfc_c == "" || data[4].contents.rfc_c == null ) {
                                                         necesarios = necesarios + '<b>RFC</b><br>';
                                                 }
