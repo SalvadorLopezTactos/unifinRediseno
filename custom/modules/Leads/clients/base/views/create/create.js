@@ -115,6 +115,38 @@
     _hidechkLeadCancelado: function () {
         /****Oculta check Lead Cancelado solo al crear Lead****/
         this.$('[data-name=lead_cancelado_c]').hide();
+        this.validaCreacionLeadsSeguros();
+    },
+
+    //oculta drawer de creación,únicamente se permite crear Leads a Usuarios con roles: Seguros, 	Seguros - Creditaria y Admins
+    validaCreacionLeadsSeguros:function(){
+        //Oculta botón de conversión para todos los usuarios, excepto para roles: Seguros, 	Seguros - Creditaria
+        var currentUserRoles = App.user.get('roles');
+        var rolesSeguros = ['Seguros','Seguros - Creditaria'];
+        var includesSeguros =[];
+
+        for (let index = 0; index < currentUserRoles.length; index++) {
+            const rol = currentUserRoles[index];
+            
+            if( rolesSeguros.includes(rol) ){
+                includesSeguros.push("1");
+            }else{
+                includesSeguros.push("0");
+            }
+        }
+
+        if( App.user.get('type') != 'admin'){
+            
+            if( !includesSeguros.includes('1') ){
+                app.alert.show('noCreaLead', {
+                    level: 'error',
+                    messages: 'No cuentas con los permisos para crear registro de Lead',
+                    autoClose: false
+                });
+                app.drawer.close();
+            }
+
+        }
     },
 
     expmail: function (fields, errors, callback) {
