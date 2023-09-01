@@ -55,10 +55,28 @@ class Publico_Objetivo{
 					$beanPO->estatus_po_c = '4';//Cancelado
 					$beanPO->save();
 
+				}else{
+					$beanPO->estatus_po_c = '5';//Ilocalizable
+					$beanPO->save();
+
 				}
 			}
+
+			if( $resultado_actual == 'No_esta_Interesado' ){
+				$beanPO->estatus_po_c = '6';//No intetresado
+				$beanPO->save();
+			}
+
+			if( $resultado_actual == 'Fuera_de_Perfil' ){
+				$beanPO->estatus_po_c = '7';//Fuera_de_Perfil
+				$beanPO->save();
+			}
+
+			if( $resultado_actual == 'Viable_Envio_Solicitud' ){
+				$beanPO->estatus_po_c = '8';//Viable_Envio_Solicitud
+				$beanPO->save();
+			}
 			
-	
 		} 
 		
 	}

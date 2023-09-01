@@ -46,7 +46,7 @@ class GetRelatedMeetingsCallsPO extends SugarApi
                 
                 foreach ($relatedCalls as $call) {
 
-                    if( $call->tct_resultado_llamada_ddw_c == 'Viable_Envio_Solicitud' ){
+                    if( $call->status == "Held" && $call->tct_resultado_llamada_ddw_c == 'Viable_Envio_Solicitud' ){
                         array_push($arr_muestra_boton,'1');
                     }else{
                         array_push($arr_muestra_boton,'0');
@@ -63,8 +63,7 @@ class GetRelatedMeetingsCallsPO extends SugarApi
             if (!empty($relatedMeetings)) {
                 
                 foreach ($relatedMeetings as $meeting) {
-
-                    if( $meeting->resultado_c == '30' ){
+                    if(  $meeting->status == "Held" && $meeting->resultado_c == '30' ){
                         array_push($arr_muestra_boton,'1');
                     }else{
                         array_push($arr_muestra_boton,'0');

@@ -89,6 +89,15 @@ array (
               array (
                 'type' => 'divider',
               ),
+              4 => 
+              array (
+                'name' => 'convert_po_to_Lead',
+                'type' => 'rowaction',
+                'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
+                'acl_action' => 'view',
+                'event' => 'button:convert_po_to_Lead:click',
+                'class' => 'btn_convertLeads',
+              ),
               5 => 
               array (
                 'type' => 'divider',

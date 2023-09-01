@@ -51,6 +51,8 @@
         this.model.on('sync', this.userAlianzaSoc, this);
         this.model.on('sync', this.muestraBotonCorreo, this);
         this.model.on('sync', this.hideShowBtnVoBo, this);
+
+        this.model.on('sync', this.muestraBotonConversion, this);
         this.cmbio_soc = 0;
 
         //Función para eliminar opciones del campo origen
@@ -1552,6 +1554,28 @@
         if( this.model.get('envio_correo_po_c') && this.model.get('id_director_vobo_c') == id_user ){
             $('[name="rechaza_envio_correo"]').removeClass('hidden');
             $('[name="vobo_envio_correo"]').removeClass('hidden');
+        }
+    },
+
+    muestraBotonConversion: function(){
+        //Oculta botón de conversión para todos los usuarios, excepto para roles: Seguros, 	Seguros - Creditaria
+        var currentUserRoles = App.user.get('roles');
+        var rolesSeguros = ['Seguros','Seguros - Creditaria'];
+        var includesSeguros =[];
+
+        for (let index = 0; index < currentUserRoles.length; index++) {
+            const rol = currentUserRoles[index];
+            
+            if( rolesSeguros.includes(rol) ){
+                includesSeguros.push("1");
+            }else{
+                includesSeguros.push("0");
+            }
+        }
+
+        if( !includesSeguros.includes('1') ){
+            var btnConvert = this.getField('convert_po_to_Lead');
+            btnConvert.dispose();
         }
     },
 

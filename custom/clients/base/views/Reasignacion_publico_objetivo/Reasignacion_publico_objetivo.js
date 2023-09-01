@@ -111,7 +111,7 @@
         var urlFilter = "";
         //Si no se establece valor en nombre de Prospecto, se buscan todos los registros asignados al usuario seleccionado
         if( filtroPO != "" ){
-            urlFilter = 'Prospects?view=list&filter[0][$or][0][first_name][$starts]='+ filtroPO +'&filter[0][$or][1][last_name][$starts]='+ filtroPO +'&filter[0][$and][0][assigned_user_id][$in][]='+ assignedUserId +'&fields=name_c,regimen_fiscal_c,nombre_empresa_c,nombre_c,apellido_paterno_c,apellido_materno_c,detalle_origen_c,origen_c,estatus_po_c,subestatus_po_c,assigned_user_name&max_num=-1';
+            urlFilter = 'Prospects?view=list&filter[0][$or][0][first_name][$starts]='+ filtroPO.trim() +'&filter[0][$or][1][last_name][$starts]='+ filtroPO.trim() +'&filter[0][$and][0][assigned_user_id][$in][]='+ assignedUserId +'&fields=name_c,regimen_fiscal_c,nombre_empresa_c,nombre_c,apellido_paterno_c,apellido_materno_c,detalle_origen_c,origen_c,estatus_po_c,subestatus_po_c,assigned_user_name&max_num=-1';
         }else{
             urlFilter = 'Prospects?view=list&filter[0][$and][0][assigned_user_id][$in][]=' + assignedUserId + '&fields=name_c,regimen_fiscal_c,nombre_empresa_c,nombre_c,apellido_paterno_c,apellido_materno_c,detalle_origen_c,origen_c,estatus_po_c,subestatus_po_c,assigned_user_name&max_num=-1';
         }
@@ -183,34 +183,61 @@
             };
             app.alert.show('validation', alertOptions);
         }else{
-            //Reasignar
-            var paramsReasignProspects = {
-                'prospects': ids_seleccionados,
-                'reasignado': reAssignarA,
-            };
-
-            app.alert.show('reasignando', {
+            //Antes de reasignar, validar que el usuario no se encuentre INACTIVO
+            App.alert.show('validaUser', {
                 level: 'process',
-                title: 'Cargando...'
+                title: 'Cargando',
             });
-            var urlProspectsReassign = app.api.buildURL("reasignarPO", '', {}, {});
 
-            app.api.call("create", urlProspectsReassign, {data: paramsReasignProspects}, {
-                success: _.bind(function (data) {
-                    console.log(typeof data);
-                    if(data){
-                        app.alert.dismiss('reasignando');
-                        self.prospects = [];
-                        self.seleccionados = [];
-                        self.render();
-                        $('#successful').show();
-                        self.model.set("users_accounts_1users_ida","");
-                        self.model.set("users_accounts_1_name","");
-                        self.model.set("asignar_a_promotor_id","");
-                        self.model.set("asignar_a_promotor","");
+            app.api.call('GET', app.api.buildURL('Users/' + reAssignarA), null, {
+                success: function (user) {
+                    App.alert.dismiss("validaUser");
+                    if( user.status == "Inactive" ){
+                        var alertOptionsInactive = {
+                            title: "Error",
+                            level: "error",
+                            messages: "No se pueden reasignar registros a " + user.full_name + " ya que se encuentra Inactivo"
+                        };
+                        app.alert.show('validation', alertOptionsInactive);
+
+                    }else{
+
+                        //Reasignar
+                        var paramsReasignProspects = {
+                            'prospects': ids_seleccionados,
+                            'reasignado': reAssignarA,
+                        };
+
+                        app.alert.show('reasignando', {
+                            level: 'process',
+                            title: 'Cargando...'
+                        });
+                        var urlProspectsReassign = app.api.buildURL("reasignarPO", '', {}, {});
+
+                        app.api.call("create", urlProspectsReassign, {data: paramsReasignProspects}, {
+                            success: _.bind(function (data) {
+                                console.log(typeof data);
+                                if(data){
+                                    app.alert.dismiss('reasignando');
+                                    self.prospects = [];
+                                    self.seleccionados = [];
+                                    self.render();
+                                    $('#successful').show();
+                                    self.model.set("users_accounts_1users_ida","");
+                                    self.model.set("users_accounts_1_name","");
+                                    self.model.set("asignar_a_promotor_id","");
+                                    self.model.set("asignar_a_promotor","");
+                                }
+                            }, this)
+                        });
+
                     }
-                }, this)
+                },
+                error: function (e) {
+                    throw e;
+                }
             });
+
         }
     },
 
