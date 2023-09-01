@@ -55,8 +55,29 @@ class Publico_Objetivo_Meetings{
 					$beanPO->estatus_po_c = '4';//Cancelado
 					$beanPO->save();
 
+				}else{
+					$beanPO->estatus_po_c = '5';//Ilocalizable
+					$beanPO->save();
+
 				}
 			}
+
+			if( $resultado_actual == '28' ){
+				$beanPO->estatus_po_c = '6';//No intetresado
+				$beanPO->save();
+			}
+
+			if( $resultado_actual == '29' ){
+				$beanPO->estatus_po_c = '7';//Fuera_de_Perfil
+				$beanPO->save();
+			}
+
+			if( $resultado_actual == '30' ){
+				$beanPO->estatus_po_c = '8';//Viable_Envio_Solicitud
+				$beanPO->save();
+			}
+
+
 			
 	
 		} 
