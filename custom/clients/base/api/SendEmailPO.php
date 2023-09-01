@@ -39,6 +39,8 @@ class SendEmailPO extends SugarApi
 
     public function sendEmailProspect($api, $args)
     {
+        global $sugar_config;
+        $url_unileasing = $sugar_config['url_unileasing_email'];
         $id_prospecto = $args['id_po'];
         $response = "";
         $beanPO = BeanFactory::retrieveBean('Prospects', $id_prospecto, array('disable_row_level_security' => true));
@@ -90,7 +92,7 @@ class SendEmailPO extends SugarApi
 
         }else{
             //No hay envío previo
-            $link_unileasing = "https://unilease-unifin.com.mx/reemplazar/".$id_asesor;
+            $link_unileasing = $url_unileasing . "/api/crm/contact/create?crm_id=".$id_prospecto."&assessor_id=".$id_asesor;
 
             $body_mail = $this->buildBodyPO( $beanPO->name, $link_unileasing, $asesorName, $telefono_asesor, $email_asesor );
 
