@@ -18,6 +18,7 @@
         this._super('initialize', [options]);
 
         this.loadData(); //Carga de Datos
+        this.model.addValidationTask('validaPrimerContacto', _.bind(this.validaPrimerContacto, this));
         this.model.addValidationTask('validaRequiredFields', _.bind(this.validaRequiredFields, this));
         this.model.addValidationTask('validaFechaInicialCall', _.bind(this.validaFechaInicialCall, this));
 
@@ -466,6 +467,36 @@
 
         callback(null, fields, errors);
     },
+
+    validaPrimerContacto:function(fields, errors, callback){
+
+        var resultado = this.model.get('tct_resultado_llamada_ddw_c');
+
+        if( resultado == '1er Contacto' ){
+            var d = new Date();
+             
+            var fechaInicio = $('.newDate').val();
+
+            if( fechaInicio != "" ){
+                var date3MesesAdelante = d.setMonth(d.getMonth() + 3);
+
+                if( new Date(fechaInicio).getTime() > new Date(date3MesesAdelante).getTime() ){
+                    var alertOptions = { title:"Fecha de inicio no permitida", messages: "La programación de la Reunión/Llamada no puede ser mayor a 3 meses", level: "error"};
+                    app.alert.show('valida1ercontacto', alertOptions);
+
+                    errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
+                    errors['calls_meeting_call_'].required = true;
+
+                }
+
+
+            }
+        }
+
+        callback(null, fields, errors);
+        
+    },
+
 
     validaRequiredFields:function(fields, errors, callback){
         var bandera=0;
