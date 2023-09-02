@@ -102,7 +102,7 @@ SQL;
             error_log(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : Error: ".$e->getMessage());
             $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : Error ".$e->getMessage());
         }
-
+ 
     }
 
     public function cambiaPuesto($bean=null, $event= null, $args= null){
@@ -310,16 +310,39 @@ SQL;
     
     public function asignadoPO($bean, $event, $args)
     {
-       /* Valida relación de con PO para establecer Asignado
+       /* Valida relación de con PO para establecer Asignado en Lead
         */
         if($bean->fetched_row['prospects_leads_1prospects_ida'] != $bean->prospects_leads_1prospects_ida && !empty($bean->prospects_leads_1prospects_ida) ){
-            //Recupera bean
+            //Recupera bean PO
             $prospect = BeanFactory::retrieveBean('Prospects', $bean->prospects_leads_1prospects_ida, array('disable_row_level_security' => true));
             
             if($prospect->assigned_user_id) {
                $bean->assigned_user_id = $prospect->assigned_user_id;
             }
         }
+        /* Valida relación de con Cuenta para establecer Asignado
+         */
+         if($bean->fetched_row['account_id'] != $bean->account_id && !empty($bean->account_id) ){
+            try {
+                 if($bean->assigned_user_id) {
+                    //Recupera bean Cuenta
+                    $account = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
+                    $account->user_id_c = $bean->assigned_user_id;
+                    $account->save();
+                    //Recupera bean Uni_Productos - L
+                    global $db;
+                    $queryU = "update uni_productos u
+                       inner join accounts_uni_productos_1_c au on au.accounts_uni_productos_1uni_productos_idb = u.id 
+                       set u.assigned_user_id = '{$bean->assigned_user_id}'
+                       where au.accounts_uni_productos_1accounts_ida ='{$account->id}' and au.deleted=0 and u.tipo_producto = 1;";
+                    $queryResult = $db->query($queryU);
+                    //$GLOBALS['log']->fatal($queryU);
+                 }               
+             }catch (Exception $e){
+                 $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : Error ".$e->getMessage());
+             }
+             
+         }
     }
     
 }
