@@ -43,26 +43,25 @@ class Prospects_AsignacionPO
                   order by u.last_name asc;";
                 $resultadoC = $db->query($query);
                 $countRows = 0;
-                $index = 1;
+                $indexA = 0;
                 $nextIndex = 1;
+                $usuarios = [];
                 while ($rowC = $db->fetchByAssoc($resultadoC)) {
                   $countRows++;
+                  $usuarios[]=$rowC['id'];
+                  $indexA = $rowC['asignado_id'];
                 }
-                if($countRows>0){
-                  $resultado = $db->query($query);
-                  while ($row = $db->fetchByAssoc($resultado)) {
-                      if($index == $row['asignado_id']){
-                        $asignado_id = $row['id'];
-                        $nextIndex = $row['asignado_id'] +1;
-                      }
-                      //Si el indice es mayor al conteo se establece 1
-                      if($countRows > $row['asignado_id'] && $index == 1){
-                        $asignado_id = $row['id'];
-                        $nextIndex = $row['asignado_id'] +1;
-                      }
-                      $index++;
+                if ($countRows>0) {
+                  if($indexA<=$countRows){
+                    $asignado_id = $usuarios[$indexA-1];
+                  }else{
+                    $asignado_id = $usuarios[0];
                   }
+                  
+                  $nextIndex = ($indexA+1 > $countRows) ? 1 : $indexA+1;
+                  
                 }
+                
                 
                 //Actualiza indice
                 $query = "update unifin_asignacion_po a
