@@ -17,13 +17,15 @@ class callLead_class
   					$beanLead->save();
   				}
   			}
-        if ($parentType == 'Prospects') {
-  				$beanPO = BeanFactory::getBean('Prospects', $parent_id);
-  				if($beanPO->estatus_po_c == '1'){
-            $beanPO->estatus_po_c = '2';
-  					$beanPO->subestatus_po_c = '1';
-  					$beanPO->save();
-  				}
+            if ($parentType == 'Prospects') {
+                if($bean->tct_resultado_llamada_ddw_c != 'Cita' && $bean->tct_resultado_llamada_ddw_c != '1er Contacto'){//Validación para que Prospecto siga permaneciendo como Nuevo debido al requerimiento de Público Objetivo
+                    $beanPO = BeanFactory::getBean('Prospects', $parent_id);
+                    if($beanPO->estatus_po_c == '1'){
+                        $beanPO->estatus_po_c = '2';
+                        $beanPO->subestatus_po_c = '1';
+                        $beanPO->save();
+                    }
+                }
   			}
 		  }
 	  }
