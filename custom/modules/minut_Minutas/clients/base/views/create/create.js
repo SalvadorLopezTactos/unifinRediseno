@@ -1260,17 +1260,20 @@
         moduleid.fetch({
             success:_.bind(function(modelo){
                 self.parent_type = modelo.get('parent_type');
-                this.hideSeccionParticipantes( modelo.get('parent_type') );
+                this.hideSeccionParticipantesReferencias( modelo.get('parent_type') );
 
             }, this)
         });
     },
 
-    hideSeccionParticipantes( parentModule ){
+    hideSeccionParticipantesReferencias( parentModule ){
         if( parentModule == "Prospects" ){
             //Oculta panel de participantes cuando el padre viene de Prospects
             $('[data-name="minuta_participantes"]').parent().parent().siblings().hide();
             $('[data-name="minuta_participantes"]').hide();
+
+            $('[data-name="minuta_referencias"]').parent().parent().siblings().hide();
+            $('[data-name="minuta_referencias"]').hide();
         }
     },
 
