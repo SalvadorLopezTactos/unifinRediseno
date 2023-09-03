@@ -62,8 +62,13 @@ class Publico_Objetivo{
 				}
 			}
 
+			if( $resultado_actual == 'Cita' || $resultado_actual == '1er Contacto'  ){
+				$beanPO->estatus_po_c = '1';//Nuevo
+				$beanPO->save();
+			}
+
 			if( $resultado_actual == 'No_esta_Interesado' ){
-				$beanPO->estatus_po_c = '6';//No intetresado
+				$beanPO->estatus_po_c = '6';//No interesado
 				$beanPO->save();
 			}
 

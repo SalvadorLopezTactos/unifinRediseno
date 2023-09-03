@@ -62,8 +62,13 @@ class Publico_Objetivo_Meetings{
 				}
 			}
 
+			if( $resultado_actual == '26' || $resultado_actual == '5' ){ //1er Contacto o Está interesado, se gendó otra visita
+				$beanPO->estatus_po_c = '1';//Nuevo
+				$beanPO->save();
+			}
+
 			if( $resultado_actual == '28' ){
-				$beanPO->estatus_po_c = '6';//No intetresado
+				$beanPO->estatus_po_c = '6';//No interesado
 				$beanPO->save();
 			}
 

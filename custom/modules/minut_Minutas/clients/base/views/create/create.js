@@ -93,40 +93,44 @@
      * Valida asistencia de almenos un participante tipo Cuenta
      */
     saveAsistencia: function (fields, errors, callback) {
-        var objParticipantes = selfData.mParticipantes["participantes"];
-        banderaAsistencia = 0;
-        banderaCorreo = 0;
-        for (var i = 0; i < objParticipantes.length; i++) {
-            if (objParticipantes[i].asistencia == 1 && objParticipantes[i].unifin != 1) {
-                banderaAsistencia++;
+
+        if( $('[data-name="minuta_participantes"]').is(':visible') ){
+
+            var objParticipantes = selfData.mParticipantes["participantes"];
+            banderaAsistencia = 0;
+            banderaCorreo = 0;
+            for (var i = 0; i < objParticipantes.length; i++) {
+                if (objParticipantes[i].asistencia == 1 && objParticipantes[i].unifin != 1) {
+                    banderaAsistencia++;
+                }
+                if (!objParticipantes[i].correo && objParticipantes[i].asistencia ==1 && objParticipantes[i].unifin != 1) {
+                    banderaCorreo++;
+                }
             }
-            if (!objParticipantes[i].correo && objParticipantes[i].asistencia ==1 && objParticipantes[i].unifin != 1) {
-                banderaCorreo++;
+            // Valida Asistencias
+            if (this.model.get('resultado_c') != '24' || this.model.get('resultado_c') != '25') {
+                if (banderaAsistencia < 1) {
+                    app.alert.show("Asistencia", {
+                        level: "error",
+                        messages: "Debes marcar <b>asistencia</b> por lo menos a un <b>Participante</b> tipo Cuenta.",
+                        autoClose: false,
+                        return: false,
+                    });
+                    errors['xd'] = errors['xd'] || {};
+                    errors['xd'].required = true;
+                }
             }
-        }
-        // Valida Asistencias
-        if (this.model.get('resultado_c') != '24' || this.model.get('resultado_c') != '25') {
-            if (banderaAsistencia < 1) {
-                app.alert.show("Asistencia", {
+            // Valida Correos
+            if (banderaCorreo > 0 && banderaAsistencia >= 1) {
+                app.alert.show("Correo", {
                     level: "error",
-                    messages: "Debes marcar <b>asistencia</b> por lo menos a un <b>Participante</b> tipo Cuenta.",
+                    messages: "Todos los <b>Participantes</b> tipo Cuenta marcados con asistencia deben contar con <b>correo</b>.",
                     autoClose: false,
                     return: false,
                 });
-                errors['xd'] = errors['xd'] || {};
-                errors['xd'].required = true;
+                errors['correo'] = errors['correo'] || {};
+                errors['correo'].required = true;
             }
-        }
-        // Valida Correos
-        if (banderaCorreo > 0 && banderaAsistencia >= 1) {
-            app.alert.show("Correo", {
-                level: "error",
-                messages: "Todos los <b>Participantes</b> tipo Cuenta marcados con asistencia deben contar con <b>correo</b>.",
-                autoClose: false,
-                return: false,
-            });
-            errors['correo'] = errors['correo'] || {};
-            errors['correo'].required = true;
         }
         callback(null, fields, errors);
     },
@@ -1256,8 +1260,21 @@
         moduleid.fetch({
             success:_.bind(function(modelo){
                 self.parent_type = modelo.get('parent_type');
+                this.hideSeccionParticipantesReferencias( modelo.get('parent_type') );
+
             }, this)
         });
+    },
+
+    hideSeccionParticipantesReferencias( parentModule ){
+        if( parentModule == "Prospects" ){
+            //Oculta panel de participantes cuando el padre viene de Prospects
+            $('[data-name="minuta_participantes"]').parent().parent().siblings().hide();
+            $('[data-name="minuta_participantes"]').hide();
+
+            $('[data-name="minuta_referencias"]').parent().parent().siblings().hide();
+            $('[data-name="minuta_referencias"]').hide();
+        }
     },
 
     Lead_Account_options: function(){

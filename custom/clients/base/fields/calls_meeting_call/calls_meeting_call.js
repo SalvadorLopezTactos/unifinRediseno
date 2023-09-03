@@ -586,7 +586,7 @@
         if(this.model.get('tct_resultado_llamada_ddw_c')=="Cita"){
             module="Reuni\u00F3n";
         }
-        if(this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada"){
+        if(this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada" || this.model.get('tct_resultado_llamada_ddw_c')=="1er Contacto"){
             module="Llamada";
         }
 
