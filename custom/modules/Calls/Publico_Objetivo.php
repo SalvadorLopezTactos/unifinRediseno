@@ -13,7 +13,7 @@ class Publico_Objetivo{
 			$beanPO = BeanFactory::retrieveBean('Prospects', $id_prospecto, array('disable_row_level_security' => true));
 			
 			if( $resultado_actual == 'Ilocalizable' ){
-				$numero_ilocalizable = 1;
+				$numero_ilocalizable = 0;
 				//Obtener llamadas relacionadas
 				if ($beanPO->load_relationship('calls')) {
 					$relatedBeans = $beanPO->calls->getBeans();

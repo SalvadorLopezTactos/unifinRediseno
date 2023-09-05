@@ -641,12 +641,16 @@ class Meetings_Hooks
 
         //Actualiza estatus Público objetivo
         if ($bean->parent_type == 'Prospects' && $bean->status == "Held") {
+
+          if( $bean->resultado_c !='5' && $bean->resultado_c !='26'){ // 5: Está Interesado. Se agendó otra visita, 26: Primer contacto
             $beanPO = BeanFactory::retrieveBean('Prospects', $bean->parent_id, array('disable_row_level_security' => true));
             if($beanPO->estatus_po_c == '1'){
                 $beanPO->estatus_po_c = '2';
                 $beanPO->subestatus_po_c = '1';
                 $beanPO->save();
             }
+
+          }
         }
     }
 
