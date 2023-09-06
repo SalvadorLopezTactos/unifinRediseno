@@ -225,6 +225,7 @@ array (
               ),
               4 => 
               array (
+                'readonly' => true,
                 'name' => 'tipo_registro_sf_c',
                 'label' => 'LBL_TIPO_REGISTRO_SF',
               ),
@@ -420,6 +421,15 @@ array (
                 'readonly' => false,
                 'name' => 'revision_c',
                 'label' => 'LBL_REVISION',
+              ),
+              39 => 
+              array (
+                'readonly' => true,
+                'name' => 'int_id_dynamics_c',
+                'label' => 'LBL_INT_ID_DYNAMICS_C',
+              ),
+              40 => 
+              array (
               ),
             ),
           ),
@@ -639,8 +649,9 @@ array (
               ),
               15 => 
               array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
+                'readonly' => false,
+                'name' => 'id_poliza_c',
+                'label' => 'LBL_ID_POLIZA',
               ),
               16 => 
               array (
