@@ -222,7 +222,6 @@ class validaDuplicadoPO extends SugarApi
         }
 
         //Consume servicio de similitud
-        $nombre="";
         if (!empty($nombre)) {
             //Declara variable de consumo
             global $sugar_config;
