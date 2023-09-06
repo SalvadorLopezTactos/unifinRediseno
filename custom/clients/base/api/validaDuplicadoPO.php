@@ -109,7 +109,7 @@ class validaDuplicadoPO extends SugarApi
                           and t.telefono in ('".$telefonos."')
                           and ac.rfc_c = '".$rfc."'
                         ";
-            $consultas[] ="select '0' as nivel, 'Prospect' as modulo, 'Prospects' as moduloLink, pc.clean_name_c nombre, p.id as id, pc.rfc_c as rfc,
+            $consultas[] ="select '0' as nivel, 'Público Objetivo' as modulo, 'Público Objetivo' as moduloLink, pc.clean_name_c nombre, p.id as id, pc.rfc_c as rfc,
             'Nivel de match encontrado a través de la combinación del nombre, email, algún teléfono y RFC' as descripcion
                         from prospects p
                             inner join prospects_cstm pc on p.id=pc.id_c
@@ -148,7 +148,7 @@ class validaDuplicadoPO extends SugarApi
                           and e.email_address='".$correo."'
                           and t.telefono in ('".$telefonos."')
                         ";
-            $consultas[] ="select '1' as nivel, 'Prospect' as modulo, 'Prospects' as moduloLink, pc.clean_name_c nombre, p.id as id, pc.rfc_c as rfc,
+            $consultas[] ="select '1' as nivel, 'Público Objetivo' as modulo, 'Público Objetivo' as moduloLink, pc.clean_name_c nombre, p.id as id, pc.rfc_c as rfc,
             'Nivel de match encontrado a través de la combinación del nombre, email y algún teléfono' as descripcion
                         from prospects p
                             inner join prospects_cstm pc on p.id=pc.id_c
@@ -185,7 +185,7 @@ class validaDuplicadoPO extends SugarApi
                         and (e.email_address='".$correo."' or t.telefono in ('".$telefonos."'))
                       ";
 
-            $consultas[] ="select '2' as nivel, 'Prospect' as modulo, 'Prospects' as moduloLink, pc.clean_name_c nombre, p.id as id, pc.rfc_c as rfc,
+            $consultas[] ="select '2' as nivel, 'Público Objetivo' as modulo, 'Público Objetivo' as moduloLink, pc.clean_name_c nombre, p.id as id, pc.rfc_c as rfc,
             'Nivel de match encontrado a través de la combinación del nombre, email o algún teléfono' as descripcion
                         from prospects p
                               inner join prospects_cstm pc on p.id=pc.id_c
@@ -222,6 +222,7 @@ class validaDuplicadoPO extends SugarApi
         }
 
         //Consume servicio de similitud
+        $nombre = "";
         if (!empty($nombre)) {
             //Declara variable de consumo
             global $sugar_config;

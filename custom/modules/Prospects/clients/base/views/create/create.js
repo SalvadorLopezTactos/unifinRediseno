@@ -321,7 +321,7 @@
                                     registros:self.duplicados,
                                     name: 'ValidaDuplicadoModal',
                                     layout: this.layout,
-                                    module: 'Prospects'
+                                    module: 'Leads'
                                 });
                                 /** add the new view to the components list of the record layout*/
                                 this.layout._components.push(quickCreateView);
