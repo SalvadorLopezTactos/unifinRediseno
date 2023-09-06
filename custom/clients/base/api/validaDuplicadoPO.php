@@ -27,35 +27,34 @@ class validaDuplicadoPO extends SugarApi
     public function validaRegistroDuplicado($api, $args)
     {
 
-        if (!$bean->excluye_campana_c){
-                try {
-                    $GLOBALS['log']->fatal(print_r($args,true));
-                    //Recupera argumentos de petición: input
-                    $nombre = isset($args['nombre']) ? $args['nombre'] : '';
-                    //Estructura resultado: output
-                    $respuesta = [];
-                    $items = [];
+        try {
+            $GLOBALS['log']->fatal(print_r($args,true));
+            //Recupera argumentos de petición: input
+            $nombre = isset($args['nombre']) ? $args['nombre'] : '';
+            //Estructura resultado: output
+            $respuesta = [];
+            $items = [];
 
-                    //Valida existencia de nombre
-                    if(!empty($nombre)){
-                        //Procesa validación
-                        $items = $this->consultaRegistros($args);
-                        $respuesta['code'] = '200';
-                        $respuesta['registros'] = $items;
-                    }else{
-                        //Agrega error
-                        $respuesta['code'] = '400';
-                        $respuesta['error_message'] = 'Debe especificar el nombre del registro';
-                    }
-                }catch(Exception $e){
-                    //Agrega error
-                    $respuesta['code'] = '500';
-                    $respuesta['error_message'] = $e->getMessage();
-                }
-        }        
+            //Valida existencia de nombre
+            if(!empty($nombre)){
+                //Procesa validación
+                $items = $this->consultaRegistros($args);
+                $respuesta['code'] = '200';
+                $respuesta['registros'] = $items;
+            }else{
+                //Agrega error
+                $respuesta['code'] = '400';
+                $respuesta['error_message'] = 'Debe especificar el nombre del registro';
+            }
+        }catch(Exception $e){
+            //Agrega error
+            $respuesta['code'] = '500';
+            $respuesta['error_message'] = $e->getMessage();
+        }
+ 
 
-                //Regresa resultado de validación
-                return $respuesta;
+        //Regresa resultado de validación
+        return $respuesta;
     }
 
 
@@ -110,6 +109,18 @@ class validaDuplicadoPO extends SugarApi
                           and t.telefono in ('".$telefonos."')
                           and ac.rfc_c = '".$rfc."'
                         ";
+            $consultas[] ="select '0' as nivel, 'Prospect' as modulo, 'Prospects' as moduloLink, pc.clean_name_c nombre, p.id as id, pc.rfc_c as rfc,
+            'Nivel de match encontrado a través de la combinación del nombre, email, algún teléfono y RFC' as descripcion
+                        from prospects p
+                            inner join prospects_cstm pc on p.id=pc.id_c
+                            left join email_addr_bean_rel er on er.bean_id = p.id and er.deleted=0
+                            left join email_addresses e on e.id=er.email_address_id and e.deleted =0
+                        where
+                            pc.clean_name_c='".$nombre."'
+                            and e.email_address='".$correo."'
+                            and p.phone_mobile IN ('".$telefonos."') or p.phone_work IN ('".$telefonos."') or p.phone_home IN ('".$telefonos."')
+                            and pc.rfc_c = '".$rfc."';
+                        ";
         }
         //Nivel 1 - Nombre (limpio con algoritmo: clean_name) + email + algún teléfono
         if(!empty($nombre) && !empty($correo) &&  $totalTelefonos>0 ) {
@@ -137,6 +148,17 @@ class validaDuplicadoPO extends SugarApi
                           and e.email_address='".$correo."'
                           and t.telefono in ('".$telefonos."')
                         ";
+            $consultas[] ="select '1' as nivel, 'Prospect' as modulo, 'Prospects' as moduloLink, pc.clean_name_c nombre, p.id as id, pc.rfc_c as rfc,
+            'Nivel de match encontrado a través de la combinación del nombre, email y algún teléfono' as descripcion
+                        from prospects p
+                            inner join prospects_cstm pc on p.id=pc.id_c
+                            left join email_addr_bean_rel er on er.bean_id = p.id and er.deleted=0
+                            left join email_addresses e on e.id=er.email_address_id and e.deleted =0
+                        where
+                            pc.clean_name_c='".$nombre."'
+                            and e.email_address='".$correo."'
+                            and p.phone_mobile IN ('".$telefonos."') or p.phone_work IN ('".$telefonos."') or p.phone_home IN ('".$telefonos."')
+                        ";
         }
         //Nivel 2 - Nombre (limpio con algoritmo: clean_name) + email o algún teléfono
         if(!empty($nombre) && (!empty($correo) || $totalTelefonos>0) ) {
@@ -162,6 +184,17 @@ class validaDuplicadoPO extends SugarApi
                         a.clean_name='".$nombre."'
                         and (e.email_address='".$correo."' or t.telefono in ('".$telefonos."'))
                       ";
+
+            $consultas[] ="select '2' as nivel, 'Prospect' as modulo, 'Prospects' as moduloLink, pc.clean_name_c nombre, p.id as id, pc.rfc_c as rfc,
+            'Nivel de match encontrado a través de la combinación del nombre, email o algún teléfono' as descripcion
+                        from prospects p
+                              inner join prospects_cstm pc on p.id=pc.id_c
+                              left join email_addr_bean_rel er on er.bean_id = p.id and er.deleted=0
+                              left join email_addresses e on e.id=er.email_address_id and e.deleted =0
+                        where
+                          pc.clean_name_c='".$nombre."'
+                          and (e.email_address='".$correo."' or p.phone_mobile IN ('".$telefonos."') or p.phone_work IN ('".$telefonos."') or p.phone_home IN ('".$telefonos."'))
+                        ";
         }
 
         // $queryRegistros = isset($consultas) ? implode(" union ",$consultas)." order by nivel desc ; " : '';
@@ -189,6 +222,7 @@ class validaDuplicadoPO extends SugarApi
         }
 
         //Consume servicio de similitud
+        $nombre="";
         if (!empty($nombre)) {
             //Declara variable de consumo
             global $sugar_config;
