@@ -62,16 +62,16 @@
     },
 
     roFunction: function() {
-		var creditaria = 0;
+		var tieneSeguros = 0;
 		var roles = app.user.attributes.roles;
 		for(var i=0;i<roles.length;i++)
 		{
-			if(roles[i] === "Seguros - Creditaria")
+			if(roles[i] === "Seguros")
 			{
-				creditaria = 1;
+				tieneSeguros = 1;
 			}
 		}
-		if(creditaria) {
+		if(!tieneSeguros) {
 			$('[name="edit_button"]').hide();
 			_.each(this.model.fields, function(field){
 				this.noEditFields.push(field.name);
