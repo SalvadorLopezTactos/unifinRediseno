@@ -89,6 +89,8 @@ class SendEmailPO extends SugarApi
             }else{
                 $response = "No existe Director Comercial al que se le pueda enviar notificación"; 
             }
+            $beanPO->id_director_vobo_c = $id_director_comercial;
+            $beanPO->save();
 
         }else{
             //No hay envío previo
