@@ -48,6 +48,8 @@
         this.model.on("change:detalle_origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:estatus_po_c", _.bind(this.change_estatus, this));
+
+        this.events['click a[track="click:actiondropdown"] > .sicon.sicon-chevron-down'] = 'clickActionsCambiaEtiquetaEnvioCorreo';
         this.model.on('sync', this.userAlianzaSoc, this);
         this.model.on('sync', this.muestraBotonCorreo, this);
         this.model.on('sync', this.hideShowBtnVoBo, this);
@@ -560,6 +562,16 @@
             $('[data-name="codigo_expo_c"]').css({ "pointer-events":"none"});
             $('.record-cell[data-name="codigo_expo_c"]').find('.record-edit-link-wrapper').addClass('hide');
         }
+    },
+
+    clickActionsCambiaEtiquetaEnvioCorreo: function(){
+
+        if( !this.model.get('envio_correo_po_c')){
+            $('[data-event="button:reenvio_correo:click"]').html("Enviar correo");
+        }else{
+            $('[data-event="button:reenvio_correo:click"]').html("Reenviar correo");
+        }
+
     },
 
     //Función para eliminar opciones del campo origen
