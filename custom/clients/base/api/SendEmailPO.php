@@ -317,7 +317,7 @@ class SendEmailPO extends SugarApi
             <br>El asesor a tu cargo ' . $nombre_asesor . ' necesita tu visto bueno para enviar una vez más el correo de registro en la plataforma para el contacto <b>'. $nombre_po .'</b>.
             <br>Solo dar clic sobre la siguiente liga para Autorizar o Rechazar el envío <a id="linkPO" href="'.$link_po.'">Ver detalle</a>
             <br><br>Atentamente Unifin</font></p>
-            <br><p class="imagen"><img border="0" width="350" height="107" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+            <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
             <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
             <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
             Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
@@ -340,7 +340,7 @@ class SendEmailPO extends SugarApi
             <br>'.$telefono.'
             <br>'.$correo_asesor.'
             <br><br>Atentamente Unifin</font></p>
-            <br><p class="imagen"><img border="0" width="350" height="107" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+            <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
             <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
             <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
             Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
@@ -360,7 +360,7 @@ class SendEmailPO extends SugarApi
             <br>Le fue enviado el enlace para su registro en la plataforma Unileasing.
             <br>Es importante que lo contactes para dar seguimiento a su solicitud.
             <br><br>Atentamente Unifin</font></p>
-            <br><p class="imagen"><img border="0" width="350" height="107" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+            <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
             <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
             <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
             Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
@@ -379,7 +379,7 @@ class SendEmailPO extends SugarApi
             <br>'.$nombre_po.'
             <br>Contáctate con él para revisar el detalle.
             <br><br>Atentamente Unifin</font></p>
-            <br><p class="imagen"><img border="0" width="350" height="107" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+            <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
             <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
             <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
             Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
