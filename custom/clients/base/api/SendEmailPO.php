@@ -185,7 +185,7 @@ class SendEmailPO extends SugarApi
 
         //Resetea banderas
         $GLOBALS['log']->fatal('Reestableciendo banderas');
-        $beanPO->envio_correo_po_c = 0;
+        //$beanPO->envio_correo_po_c = 0;
         $beanPO->id_director_vobo_c = "";
         $beanPO->save();
         $GLOBALS['log']->fatal('Banderas reestablecidas');
