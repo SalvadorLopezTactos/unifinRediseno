@@ -42,7 +42,7 @@
         this.model.addValidationTask('verificaRiesgoPep', _.bind(this.cambiaRiesgodePersona, this));
         this.model.addValidationTask('tipo_proveedor_requerido', _.bind(this.validaProveedorRequerido, this));
         this.model.addValidationTask('check_info', _.bind(this.doValidateInfoReq, this));
-        this.model.addValidationTask('macrosector', _.bind(this.macrosector, this));
+        //this.model.addValidationTask('macrosector', _.bind(this.macrosector, this));
         // this.model.addValidationTask('sectoreconomico', _.bind(this.sectoreconomico, this));
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
@@ -3539,7 +3539,7 @@
                 errors['tipo_proveedor_c'].required = true;
             }
             //Validacion de Actividad Economica - antes macrosector
-            if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+            /*if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
                 //Entra a modo edición el campo custom
                 fieldAE1 = this.getField('account_clasf_sectorial');
                 this.inlineEditMode = true;
@@ -3550,7 +3550,7 @@
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
-            }
+            }*/
             if (this.model.get('rfc_c') == '' || this.model.get('rfc_c') == null) {
                 /*app.alert.show("RFC requerido", {
                  level: "error",
@@ -4184,7 +4184,7 @@
                 }
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
                     //Requerido Actividad Economica - antes macro sector
-                    if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+                    /*if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
 
                         //Entra a modo edición el campo custom
                         fieldAE2 = this.getField('account_clasf_sectorial');
@@ -4196,7 +4196,7 @@
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                         errors['actividadeconomica_c'].required = true;
-                    }
+                    }*/
                     if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
                         errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
                         errors['fechaconstitutiva_c'].required = true;
@@ -4220,7 +4220,7 @@
                         errors['genero_c'].required = true;
                     }
 
-                    if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+                    /*if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
 
                         //Entra a modo edición el campo custom
                         fieldAE3 = this.getField('account_clasf_sectorial');
@@ -4232,7 +4232,7 @@
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                         errors['actividadeconomica_c'].required = true;
-                    }
+                    }*/
                 }
             }
         }
@@ -4285,7 +4285,7 @@
                 errors['razonsocial_c'].required = true;
             }
             //Requerido Actividad Economica custom
-            if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+            /*if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
 
                 //Entra a modo edición el campo custom
                 fieldAE4 = this.getField('account_clasf_sectorial');
@@ -4297,7 +4297,7 @@
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
-            }
+            }*/
             if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
                 errors['rfc_c'] = errors['rfc_c'] || {};
                 errors['rfc_c'].required = true;
@@ -8104,9 +8104,9 @@ validaReqUniclickInfo: function () {
                                             }
                                         }else{
                                             //Valida persona Moral
-                                            if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') == null) {
+                                            /*if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') == null) {
                                                 necesarios = necesarios + '<b>Actividad Económica<br></b>';
-                                            }
+                                            }*/
                                             if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
                                                 necesarios = necesarios + '<b>Razón Social<br></b>';
                                             }
