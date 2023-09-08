@@ -561,9 +561,9 @@ extendsFrom: 'RecordView',
                                     // if (data.subsectoreconomico_c == "") {
                                     //     RequeridosPR = RequeridosPR + '<b>Subsector Económico<br></b>';
                                     // }
-                                    if (data.actividadeconomica_c == "") {
-                                        RequeridosPR = RequeridosPR + '<b>Actividad Económica<br></b>';
-                                    }
+                                    // if (data.actividadeconomica_c == "") {
+                                    //     RequeridosPR = RequeridosPR + '<b>Actividad Económica<br></b>';
+                                    // }
                                     if (data.phone_office == "") {
                                         RequeridosPR = RequeridosPR + '<b>Teléfono<br></b>';
                                     }
@@ -700,9 +700,9 @@ extendsFrom: 'RecordView',
                         // if (data.subsectoreconomico_c == "") {
                         //     Requeridoschange = Requeridoschange + '<b>Subsector Económico<br></b>';
                         // }
-                        if (data.actividadeconomica_c == "") {
-                            Requeridoschange = Requeridoschange + '<b>Actividad Económica<br></b>';
-                        }
+                        // if (data.actividadeconomica_c == "") {
+                        //     Requeridoschange = Requeridoschange + '<b>Actividad Económica<br></b>';
+                        // }
                         if (data.phone_office == "") {
                             Requeridoschange = Requeridoschange + '<b>Teléfono<br></b>';
                         }
@@ -859,9 +859,9 @@ extendsFrom: 'RecordView',
                                     if (data.ctpldnoseriefiel_c == "" ){
                                         RequeridosProvRec = RequeridosProvRec + '<b>-No. Serie FIEL<br></b>';
                                     }
-                                    if (data.actividadeconomica_c == "" ){
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
-                                    }
+                                    // if (data.actividadeconomica_c == "" ){
+                                    //     RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                                    // }
                                     app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                         success: _.bind(function (data) {
                                             var flag_inactivo =0;
@@ -970,9 +970,9 @@ extendsFrom: 'RecordView',
                                     if (data.ctpldnoseriefiel_c == "" ){
                                         RequeridosProvRec = RequeridosProvRec + '<b>-No. Serie FIEL<br></b>';
                                     }
-                                    if (data.actividadeconomica_c == "" ){
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
-                                    }
+                                    // if (data.actividadeconomica_c == "" ){
+                                    //     RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                                    // }
                                     app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                         success: _.bind(function (data) {
                                             if (data.records <= 0) {
@@ -1091,9 +1091,9 @@ extendsFrom: 'RecordView',
                                 //   if (data[0].contents.subsectoreconomico_c == "") {
                                 //       faltantes.push('Sub Sector Económico');
                                 //   }
-                                  if (data[0].contents.actividadeconomica_c == "") {
-                                      faltantes.push('Actividad Económica');
-                                  }
+                                  // if (data[0].contents.actividadeconomica_c == "") {
+                                  //     faltantes.push('Actividad Económica');
+                                  // }
                                 }
                             } else {
                                 if (data[0].contents.razonsocial_c == "") {
@@ -1108,9 +1108,9 @@ extendsFrom: 'RecordView',
                                 // if (data[0].contents.sectoreconomico_c == "") {
                                 //     faltantes.push('Sector Económico');
                                 // }
-                                if (data[0].contents.actividadeconomica_c == "") {
-                                    faltantes.push('Actividad Económica');
-                                }
+                                // if (data[0].contents.actividadeconomica_c == "") {
+                                //     faltantes.push('Actividad Económica');
+                                // }
                                 // if (data[0].contents.subsectoreconomico_c == "") {
                                 //     faltantes.push('Sub Sector Económico');
                                 // }
@@ -1359,9 +1359,9 @@ extendsFrom: 'RecordView',
                                 //   if (data[0].contents.subsectoreconomico_c == "") {
                                 //       faltantes.push('Sub Sector Económico');
                                 //   }
-                                  if (data[0].contents.actividadeconomica_c == "") {
-                                      faltantes.push('Actividad Económica');
-                                  }
+                                  // if (data[0].contents.actividadeconomica_c == "") {
+                                  //     faltantes.push('Actividad Económica');
+                                  // }
                                 }
                             } else {
                                 if (data[0].contents.razonsocial_c == "") {
@@ -1379,9 +1379,9 @@ extendsFrom: 'RecordView',
                                 // if (data[0].contents.sectoreconomico_c == "") {
                                 //     faltantes.push('Sector Económico');
                                 // }
-                                if (data[0].contents.actividadeconomica_c == "") {
-                                    faltantes.push('Actividad Económica');
-                                }
+                                // if (data[0].contents.actividadeconomica_c == "") {
+                                //     faltantes.push('Actividad Económica');
+                                // }
                                 // if (data[0].contents.subsectoreconomico_c == "") {
                                 //     faltantes.push('Sub Sector Económico');
                                 // }
@@ -1490,9 +1490,9 @@ extendsFrom: 'RecordView',
                                 //   if (data[0].contents.subsectoreconomico_c == "") {
                                 //       faltantes.push('Sub Sector Económico');
                                 //   }
-                                  if (data[0].contents.actividadeconomica_c == "") {
-                                      faltantes.push('Actividad Económica');
-                                  }
+                                  // if (data[0].contents.actividadeconomica_c == "") {
+                                  //     faltantes.push('Actividad Económica');
+                                  // }
                                 }
                             } else {
                                 if (data[0].contents.razonsocial_c == "") {
@@ -1507,9 +1507,9 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.fechaconstitutiva_c == "") {
                                     faltantes.push('Fecha Constitutiva');
                                 }
-                                if (data[0].contents.actividadeconomica_c == "") {
-                                    faltantes.push('Actividad Económica');
-                                }
+                                // if (data[0].contents.actividadeconomica_c == "") {
+                                //     faltantes.push('Actividad Económica');
+                                // }
                                 // if (data[0].contents.subsectoreconomico_c == "") {
                                 //     faltantes.push('Sub Sector Económico');
                                 // }
@@ -1693,9 +1693,9 @@ extendsFrom: 'RecordView',
                                 //   if (data[0].contents.subsectoreconomico_c == "") {
                                 //       faltantes.push('Sub Sector Económico');
                                 //   }
-                                  if (data[0].contents.actividadeconomica_c == "") {
-                                      faltantes.push('Actividad Económica');
-                                  }
+                                  // if (data[0].contents.actividadeconomica_c == "") {
+                                  //     faltantes.push('Actividad Económica');
+                                  // }
                                 }
                             } else {
                                 if (data[0].contents.razonsocial_c == "") {
@@ -1710,9 +1710,9 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.fechaconstitutiva_c == "") {
                                     faltantes.push('Fecha Constitutiva');
                                 }
-                                if (data[0].contents.actividadeconomica_c == "") {
-                                    faltantes.push('Actividad Económica');
-                                }
+                                // if (data[0].contents.actividadeconomica_c == "") {
+                                //     faltantes.push('Actividad Económica');
+                                // }
                                 // if (data[0].contents.sectoreconomico_c == "") {
                                 //     faltantes.push('Sector Económico');
                                 // }
@@ -1937,9 +1937,9 @@ extendsFrom: 'RecordView',
 							if (data[0].contents.email.length == 0) {
 								faltantes.push('Correo electrónico');
 							}
-							if (data[0].contents.actividadeconomica_c == "") {
-								faltantes.push('Actividad Económica');
-							}
+							// if (data[0].contents.actividadeconomica_c == "") {
+							// 	faltantes.push('Actividad Económica');
+							// }
 							if (data[0].contents.nacionalidad_c == "" || data[0].contents.nacionalidad_c == "0") {
 								faltantes.push('Nacionalidad');
 							}
@@ -2223,9 +2223,9 @@ extendsFrom: 'RecordView',
                                             }
                                         if (this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CS')) {
                                                 //Valida persona Moral
-                                            if (data[4].contents.actividadeconomica_c == "" || data[4].contents.actividadeconomica_c == null) {
-                                                necesarios = necesarios + '<b>Actividad Económica<br></b>';
-                                            }
+                                            // if (data[4].contents.actividadeconomica_c == "" || data[4].contents.actividadeconomica_c == null) {
+                                            //     necesarios = necesarios + '<b>Actividad Económica<br></b>';
+                                            // }
                                             if (data[4].contents.nacionalidad_c == "" || data[4].contents.nacionalidad_c == null || data[4].contents.nacionalidad_c == '0') {
                                                 necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                             }

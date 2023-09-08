@@ -542,7 +542,7 @@
         this.model.addValidationTask('validaGenero', _.bind(this.validaGenero, this));
 
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
-		this.model.addValidationTask('valida_actividad_economica', _.bind(this.valida_actividad_economica, this));
+		//this.model.addValidationTask('valida_actividad_economica', _.bind(this.valida_actividad_economica, this));
 
 		/*RFC_ValidatePadron
 		  Validación de rfc en el padron de contribuyentes
@@ -1793,12 +1793,12 @@
                 errors['tipo_proveedor_c'].required = true;
             }
             //Validacion de Actividad Economica - antes macrosector
-            if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae').select2('val') == null) {
+            /*if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae').select2('val') == null) {
 
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
-            }
+            }*/
             if (this.model.get('rfc_c') == '' || this.model.get('rfc_c') == null) {
                 /*app.alert.show("RFC requerido", {
                  level: "error",
@@ -2268,12 +2268,12 @@
                 }
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
                     //Requerido Actividad Economica - antes macro sector
-                    if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
+                    /*if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
 
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                         errors['actividadeconomica_c'].required = true;
-                    }
+                    }*/
                     if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
                         errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
                         errors['fechaconstitutiva_c'].required = true;
@@ -2297,12 +2297,12 @@
                         errors['genero_c'].required = true;
                     }
                     //Requerido Actividad Economica - antes macro sector
-                    if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
+                    /*if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
 
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                         errors['actividadeconomica_c'].required = true;
-                    }
+                    }*/
                 }
             }
         }
@@ -2355,12 +2355,12 @@
                 errors['razonsocial_c'].required = true;
             }
             //Requerido Actividad Economica custom
-            if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
+            /*if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
 
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
-            }
+            }*/
             if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
                 errors['rfc_c'] = errors['rfc_c'] || {};
                 errors['rfc_c'].required = true;

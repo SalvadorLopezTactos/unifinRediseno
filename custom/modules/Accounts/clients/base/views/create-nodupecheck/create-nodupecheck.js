@@ -1518,10 +1518,10 @@
                 errors['nacionalidad_c'].required = true;
             }
             //Validacion Actividad Economica custom
-            if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
+            /*if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
-            }
+            }*/
             //Requerido Subsector custom
             // if ($('.list_sse').select2('val') == "" || $('.list_sse').select2('val') == undefined) {
             //     errors['subsectoreconomico_c'] = errors['subsectoreconomico_c'] || {};
