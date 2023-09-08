@@ -20,12 +20,13 @@
      'clean_fields_class',
      'setCleanName'
  );
+
  $hook_array['before_save'][] = Array(
      4,
-     'Valida registros duplicados en validación de carga',
-     'custom/modules/Prospects/clean_fields.php',
-     'clean_fields_class',
-     'ExistenciaEnCuentas'
+     'Validacion de duplicados RFC',
+     'custom/modules/Prospects/Validate_Email.php',
+     'Validate_Email',
+     'existsEmail'
  );
 
  $hook_array['before_save'][] = Array(
