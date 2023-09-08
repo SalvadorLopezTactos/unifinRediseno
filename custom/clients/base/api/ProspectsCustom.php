@@ -64,21 +64,23 @@ class ProspectsCustom extends SugarApi
         if(empty($idProspect)){
             //Genera nuevo bean para Prospects
             $beanProspect = BeanFactory::newBean("Prospects");
-            //Generar objeto para respuesta
-            $beanResult = [];
-            
-            //Iterar $args obtenidos y setea bean
-            foreach ($args as $clave => $valor) {
-                if (!empty($valor)) {
-                    $beanProspect->$clave = $valor;
-                }
-            }
-            //Guarda bean y devuelve estructura
-            $beanProspect->save();
         }else{
             //Recupera bean existente
             $beanProspect = BeanFactory::retrieveBean('Prospects', $idProspect, array('disable_row_level_security' => true));
         }
+        
+        //Iterar $args obtenidos y setea bean
+        foreach ($args as $clave => $valor) {
+            if (!empty($valor) && $clave!='id' && $clave!='deleted') {
+                $beanProspect->$clave = $valor;
+            }
+        }
+        
+        //Guarda bean y devuelve estructura
+        $beanProspect->save();
+        
+        //Generar objeto para respuesta
+        $beanResult = [];
         
         //Setear objeto de resultado con valores guardados
         foreach ($beanProspect->column_fields as $elemento) {
