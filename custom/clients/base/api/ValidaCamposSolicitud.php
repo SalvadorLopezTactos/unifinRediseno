@@ -43,12 +43,11 @@ class ValidaCamposSolicitud extends SugarApi
         global $db;
 
         $req_pm = "origen_cuenta_c,tipodepersona_c," .
-            "nombre_comercial_c,actividadeconomica_c," .
+            "nombre_comercial_c," .
             "empleados_c,promotorleasing_c,promotorfactoraje_c,promotorcredit_c";
 
         $req_pf_y_pfae = "origen_cuenta_c,tipodepersona_c," .
             "primernombre_c,apellidopaterno_c,apellidomaterno_c," .
-            "actividadeconomica_c," .
             "empleados_c," .
             "promotorleasing_c,promotorfactoraje_c,promotorcredit_c";
 
