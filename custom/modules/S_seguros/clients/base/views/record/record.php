@@ -649,7 +649,6 @@ array (
               ),
               15 => 
               array (
-                'readonly' => false,
                 'name' => 'id_poliza_c',
                 'label' => 'LBL_ID_POLIZA',
               ),
