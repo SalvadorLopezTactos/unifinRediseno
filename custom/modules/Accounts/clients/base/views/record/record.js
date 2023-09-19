@@ -1332,6 +1332,8 @@
 	},
 
     editClicked: function () {
+        this.setCorrectModel();
+
         this._super("editClicked");
         this.$('[data-name="promotorleasing_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorfactoraje_c"]').attr('style', 'pointer-events:none');
@@ -5077,6 +5079,8 @@
 
 
     get_addresses: function () {
+
+        this.setCorrectModel();
         //Extiende This
         this.oDirecciones = [];
         this.oDirecciones.direccion = [];
@@ -5316,6 +5320,7 @@
 
     //Sobre escribe función para recuperar info de registros relacionados
     _saveModel: function () {
+        this.setCorrectModel();
         var options,
             successCallback = _.bind(function () {
                 // Loop through the visible subpanels and have them sync. This is to update any related
@@ -5387,6 +5392,13 @@
         options = _.extend({}, options, this.getCustomSaveOptions(options));
 
         this.model.save({}, options);
+    },
+
+    setCorrectModel: function(){
+        /* Parche generado para evitar que al dar click en botón de editar, la url cambie con el id del Lead relacionado en el subpanel */
+        if( App.controller.context.attributes.model.get('id') != this.model.get('id') ){
+            this.model = App.controller.context.attributes.model;
+        }
     },
 
     validaformato: function (fields, errors, callback) {

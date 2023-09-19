@@ -590,8 +590,8 @@
     },
 
     editClicked: function () {
+        this.setCorrectModel();
         this._super("editClicked");
-
     },
 
     checkInVentas: function (evt) {
@@ -1096,6 +1096,8 @@
 
     get_addresses: function () {
 
+        this.setCorrectModel();
+
         this.oDirecciones = [];
         this.oDirecciones.direccion = [];
         this.prev_oDirecciones = [];
@@ -1260,7 +1262,8 @@
     },
 
     //Sobre escribe función para recuperar info de registros relacionados
-    _saveModel: function () {
+    _saveModel: function () {        
+        this.setCorrectModel();
         var options,
             successCallback = _.bind(function () {
                 // Loop through the visible subpanels and have them sync. This is to update any related
@@ -1328,6 +1331,13 @@
         options = _.extend({}, options, this.getCustomSaveOptions(options));
 
         this.model.save({}, options);
+    },
+
+    setCorrectModel: function(){
+        /* Parche generado para evitar que al dar click en botón de editar, la url cambie con el id del Lead relacionado en el subpanel */
+        if( App.controller.context.attributes.model.get('id') != this.model.get('id') ){
+            this.model = App.controller.context.attributes.model;
+        }
     },
 
     setCustomFields: function (fields, errors, callback) {
