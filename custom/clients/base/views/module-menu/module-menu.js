@@ -51,7 +51,7 @@
                 break;
 
             case '#ExpedienteUniclick':
-                route = '#bwc/index.php?entryPoint=ExpedienteUniclick';
+                route = '#Administration/layout/expedienteUniclick';
                 break;
 
 
