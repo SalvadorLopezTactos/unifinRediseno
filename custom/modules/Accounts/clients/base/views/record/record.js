@@ -10,7 +10,7 @@
     oculta: 0,
 
     initialize: function (options) {
-        self = this;
+        //self = this;
         contexto_cuenta = this;
         self.hasContratosActivos = false;
         this._super("initialize", [options]);
@@ -5077,6 +5077,7 @@
 
 
     get_addresses: function () {
+
         //Extiende This
         this.oDirecciones = [];
         this.oDirecciones.direccion = [];
@@ -5105,7 +5106,7 @@
         //Recupera información
         if (!_.isEmpty(idCuenta) && idCuenta != "") {
             app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_dire_direccion_1'), null, {
-                success: function (data) {
+                success: _.bind(function (data) {
                     contexto_cuenta.length_direcciones = data.records.length;
                     //Itera y agrega direcciones
                     for (var i = 0; i < data.records.length; i++) {
@@ -5135,11 +5136,11 @@
                         var secuencia = data.records[i].secuencia;
                         var idDireccion = data.records[i].id;
                         var direccionCompleta = data.records[i].name;
-						            var bloqueado = (indicadorSeleccionados.indexOf('2') != -1) ? 1 : 0;
+                        var bloqueado = (indicadorSeleccionados.indexOf('2') != -1) ? 1 : 0;
                         var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
-                        bloqueado = (self.model.get('tipo_registro_cuenta_c') == 4 || self.model.get('tipo_registro_cuenta_c') == 5 )? 0: bloqueado;
+                        bloqueado = (this.model.get('tipo_registro_cuenta_c') == 4 || this.model.get('tipo_registro_cuenta_c') == 5 )? 0: bloqueado;
                         var editaCiudad = contexto_cuenta.editaCiudad;
-                        if(self.model.get('tipo_registro_cuenta_c') == '3' && self.model.get('subtipo_registro_cuenta_c') != '11' && self.model.get('origen_cuenta_c') != '11' && indicadorSeleccionados.includes('^2^') ){
+                        if(this.model.get('tipo_registro_cuenta_c') == '3' && this.model.get('subtipo_registro_cuenta_c') != '11' && this.model.get('origen_cuenta_c') != '11' && indicadorSeleccionados.includes('^2^') ){
                             bloqueado = 1;
                         }
                         var validaDireccion = data.records[i].cambio_direccion_c;
@@ -5185,7 +5186,7 @@
                             "secuencia": secuencia,
                             "id": idDireccion,
                             "direccionCompleta": direccionCompleta,
-							              "bloqueado": bloqueado,
+							"bloqueado": bloqueado,
                             "editaCiudad": editaCiudad,
                             "validaDireccion":validaDireccion
                         };
@@ -5277,10 +5278,7 @@
                             });
                         }
                     }
-                },
-                error: function (e) {
-                    throw e;
-                }
+                }, this)
             });
         }
     },
@@ -7273,7 +7271,7 @@
                                 success: _.bind(function (data_members) {
                                     if (data_members.records) {
                                         for (var j = 0; j < data_members.records.length; j++) {
-                                            self.ids_responsables.push(data_members.records[j].id);
+                                            this.ids_responsables.push(data_members.records[j].id);
                                         }
                                         // Cuentas No Contactar
                                         var id_cuenta_resumen=this._currentUrl.split('/')[1];
@@ -7283,7 +7281,7 @@
                                                 app.alert.dismiss('loadingShowHideBotonesBloqueo');
                                                 //Obtener los usuarios del equipo de responsables de validación correspondientes a la condición del usuario logueado
                                                 //En caso de que la cuenta ya haya sido bloqueada de manera definitiva, mostrar la alerta, en otro caso se muestra el botón
-                                                if(self.ids_responsables.includes(app.user.id)){
+                                                if(this.ids_responsables.includes(app.user.id)){
                                                     //Control para mostrar botón de bloqueo
                                                     if(
                                                         (self.model.get('tct_no_contactar_chk_c') && !dataResumen.bloqueo_cartera_c) ||
