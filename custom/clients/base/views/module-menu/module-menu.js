@@ -51,7 +51,7 @@
                 break;
 
             case '#ExpedienteUniclick':
-                route = '#Administration/layout/expedienteUniclick';
+                route = '#Home/layout/expedienteUniclick';
                 break;
 
 
