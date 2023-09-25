@@ -12,12 +12,14 @@ class class_validate_rfc
             and lc.rfc_c = '{$bean->rfc_c}'";
 			$queryResultL1 = $db->query($queryRFCLead);
 			if($db->getRowCount($queryResultL1) > 0) throw new SugarApiExceptionInvalidParameter('No se puede guardar el registro. El RFC '.$bean->rfc_c.' ya exite en Leads, favor de corregir');
-			$queryRFCAccount = "SELECT a.id from accounts a, accounts_cstm ac where a.id = ac.id_c 
-            and a.deleted = 0 
-            and (ac.convertido_c is null or ac.convertido_c = 0)
-            and ac.rfc_c = '{$bean->rfc_c}'";
-			$queryResultA1 = $db->query($queryRFCAccount);
-			if($db->getRowCount($queryResultA1) > 0) throw new SugarApiExceptionInvalidParameter('No se puede guardar el registro. El RFC '.$bean->rfc_c.' ya exite en Cuentas, favor de corregir');
+      if($_SESSION['platform'] != 'portalUnileasing'){
+  			$queryRFCAccount = "SELECT a.id from accounts a, accounts_cstm ac where a.id = ac.id_c 
+              and a.deleted = 0 
+              and (ac.convertido_c is null or ac.convertido_c = 0)
+              and ac.rfc_c = '{$bean->rfc_c}'";
+  			$queryResultA1 = $db->query($queryRFCAccount);
+  			if($db->getRowCount($queryResultA1) > 0) throw new SugarApiExceptionInvalidParameter('No se puede guardar el registro. El RFC '.$bean->rfc_c.' ya exite en Cuentas, favor de corregir');
+      }
 		}
     }
 }
