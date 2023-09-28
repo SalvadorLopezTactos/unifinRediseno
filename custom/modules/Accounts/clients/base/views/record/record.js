@@ -3170,11 +3170,7 @@
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono RECORD*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
         if ((this.model.get('tipo_registro_cuenta_c')=="2" && (this.model.get('subtipo_registro_cuenta_c')=='8' ||this.model.get('subtipo_registro_cuenta_c')=='9'
-        ||this.model.get('subtipo_registro_cuenta_c')=='10' ||this.model.get('subtipo_registro_cuenta_c')=='12')) || this.model.get('tipo_registro_cuenta_c')=="3") {
-                    if (_.isEmpty(this.model.get('email'))) {
-                        errors['email'] = errors['email'] || {};
-                        errors['email'].required = true;
-                    }
+        || this.model.get('subtipo_registro_cuenta_c')=='10' ||this.model.get('subtipo_registro_cuenta_c')=='12')) || this.model.get('tipo_registro_cuenta_c')=="3") {
                         var validPhone = false;
                         for (var i = 0; i < this.oTelefonos.telefono.length; i++) {
                             if (this.oTelefonos.telefono[i].estatus=='Activo') {
