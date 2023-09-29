@@ -821,16 +821,20 @@ class altaLeadServices extends SugarApi
         $obj_input['lead']['insertar'] = null;
         $obj_input['lead']['descripcion'] = null;
         # Agrega atributos en Asociados
-        for ($i = 0; $i < count($obj_input['asociados']); $i++) {
-            $obj_input['asociados'][$i]['requeridos'] = null;
-            $obj_input['asociados'][$i]['formato_texto'] = null;
-            $obj_input['asociados'][$i]['formato_telefenos'] = null;
-            $obj_input['asociados'][$i]['formato_correo'] = null;
-            $obj_input['asociados'][$i]['duplicados_en_leads'] = null;
-            $obj_input['asociados'][$i]['duplicados_en_cuentas'] = null;
-            $obj_input['asociados'][$i]['insertar'] = null;
-            $obj_input['asociados'][$i]['descripcion'] = null;
+        if( $obj_input['asociados'] != null ){
+            for ($i = 0; $i < count($obj_input['asociados']); $i++) {
+                $obj_input['asociados'][$i]['requeridos'] = null;
+                $obj_input['asociados'][$i]['formato_texto'] = null;
+                $obj_input['asociados'][$i]['formato_telefenos'] = null;
+                $obj_input['asociados'][$i]['formato_correo'] = null;
+                $obj_input['asociados'][$i]['duplicados_en_leads'] = null;
+                $obj_input['asociados'][$i]['duplicados_en_cuentas'] = null;
+                $obj_input['asociados'][$i]['insertar'] = null;
+                $obj_input['asociados'][$i]['descripcion'] = null;
+            }
+
         }
+        
         return $obj_input;
     }
 
