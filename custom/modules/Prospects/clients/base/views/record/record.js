@@ -2,7 +2,7 @@
     extendsFrom: 'RecordView',
 
     initialize: function (options) {
-        self = this;
+        //self = this;
         this._super("initialize", [options]);
 
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos_min, this));
@@ -591,7 +591,6 @@
 
     editClicked: function () {
         this._super("editClicked");
-
     },
 
     checkInVentas: function (evt) {
@@ -1260,7 +1259,7 @@
     },
 
     //Sobre escribe función para recuperar info de registros relacionados
-    _saveModel: function () {
+    _saveModel: function () {        
         var options,
             successCallback = _.bind(function () {
                 // Loop through the visible subpanels and have them sync. This is to update any related
