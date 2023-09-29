@@ -63,6 +63,7 @@ class GetAgenteCP extends SugarApi
             //$GLOBALS['log']->fatal("Consulta asesor: " . $query_asesores);
             //$GLOBALS['log']->fatal("indice asesor: " . $last_indice);
             $result_usr = $db->query($query_asesores);
+            $users = array();
             while ($row = $db->fetchByAssoc($result_usr)) {
                 $users[] = $row['id'];
             }
