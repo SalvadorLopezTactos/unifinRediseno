@@ -2,6 +2,7 @@
     events: {
         'click  .btn-ReenviarCliente': 'ReenviaCorreoCliente',
         'click  .btn-DescargarCliente': 'DescargaArchivoCliente',
+        'click  .btn-DescargarCotejoDigital': 'descargarCotejoDigital',
     },
 
     initialize: function (options) {
@@ -205,4 +206,50 @@
             }
         }
     },
+
+    descargarCotejoDigital:function(){
+
+        App.alert.show('cotejoDescarga', {
+            level: 'process',
+            title: 'Generando descarga, por favor espere.',
+        });
+
+        $('#btn-DescargarCotejo').attr("disabled",true);
+
+        var idPersona = this.model.get('id');
+        var bodyRequest = {
+            "idPersona": idPersona
+        };
+
+        var valUrl = app.api.buildURL("ObtenerCotejoDigital", '', {}, {});
+                app.api.call("create", valUrl, bodyRequest , {
+                    success: _.bind(function (data) {
+                        $('#btn-DescargarCotejo').removeAttr("disabled");
+                        if (data != null) {
+                            App.alert.dismiss('cotejoDescarga');
+                            $('.btn-DescargarCliente').unbind('click', false);
+                            if( data.status == "OK" ){
+                                //Crea elemento
+                                var downloadLink = document.createElement("a");
+                                downloadLink.href = data.mssg;
+                                downloadLink.download = "CotejoDigital.pdf";
+                                document.body.appendChild(downloadLink);
+                                downloadLink.click();
+                                document.body.removeChild(downloadLink);
+                            }else{
+                                app.alert.show("no_descarga_cotejo", {
+                                    level: "warning",
+                                    title: "Advertencia",
+                                    messages: data.mssg,
+                                    autoClose: false
+                                });
+                            }
+
+                        }
+                    }, this)
+                });
+
+
+
+    }
 })
