@@ -45,11 +45,12 @@ class CotejoDigital extends SugarApi
     
                 return array("status"=> "OK", "mssg"=> $archivo_cotejo);
             }else{
-                return array("status"=> "Error", "mssg"=>"El cotejo digital no se pudo generar");
+                return array("status"=> "Error", "mssg"=>"No se logró recuperar un Cotejo Digital para esta cuenta");
             }
 
         } catch (Exception $e) {
-            return array("status"=> "Error", "mssg"=> $e->getMessage());
+            $GLOBALS['log']->fatal( "Error servicio cotejo: ".$e->getMessage() );
+            return array("status"=> "Error", "mssg"=> "El servicio de Cotejo Digital no se encuentra disponible intente más tarde");
         }
         
     }
