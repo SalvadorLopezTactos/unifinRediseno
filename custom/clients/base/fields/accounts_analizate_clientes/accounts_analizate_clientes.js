@@ -209,6 +209,28 @@
 
     descargarCotejoDigital:function(){
 
+        if ( _.isEmpty(cont_nlzt.Analizate.Cliente.url_documento) ) {
+            app.alert.show("sin_csf", {
+                level: "warning",
+                title: "Sin CSF",
+                messages: "Esta cuenta no tiene cargada una CSF y no se podrá obtener su Cotejo Digital",
+                autoClose: false
+            });
+
+            return;
+        }
+
+        if( _.isEmpty(this.model.get('rfc_c')) ){
+            app.alert.show("sin_rfc", {
+                level: "warning",
+                title: "Sin RFC",
+                messages: "Esta cuenta no tiene RFC y no se podrá obtener su Cotejo Digital",
+                autoClose: false
+            });
+
+            return;
+        }
+
         App.alert.show('cotejoDescarga', {
             level: 'process',
             title: 'Generando descarga, por favor espere.',
@@ -222,34 +244,31 @@
         };
 
         var valUrl = app.api.buildURL("ObtenerCotejoDigital", '', {}, {});
-                app.api.call("create", valUrl, bodyRequest , {
-                    success: _.bind(function (data) {
-                        $('#btn-DescargarCotejo').removeAttr("disabled");
-                        if (data != null) {
-                            App.alert.dismiss('cotejoDescarga');
-                            $('.btn-DescargarCliente').unbind('click', false);
-                            if( data.status == "OK" ){
-                                //Crea elemento
-                                var downloadLink = document.createElement("a");
-                                downloadLink.href = data.mssg;
-                                downloadLink.download = "CotejoDigital.pdf";
-                                document.body.appendChild(downloadLink);
-                                downloadLink.click();
-                                document.body.removeChild(downloadLink);
-                            }else{
-                                app.alert.show("no_descarga_cotejo", {
-                                    level: "warning",
-                                    title: "Advertencia",
-                                    messages: data.mssg,
-                                    autoClose: false
-                                });
-                            }
+        
+        app.api.call("create", valUrl, bodyRequest , {
+            success: _.bind(function (data) {
+                $('#btn-DescargarCotejo').removeAttr("disabled");
+                if (data != null) {
+                    App.alert.dismiss('cotejoDescarga');
+                    if( data.status == "OK" ){
+                        //Crea elemento
+                        var downloadLink = document.createElement("a");
+                        downloadLink.href = data.mssg;
+                        downloadLink.download = "CotejoDigital.pdf";
+                        document.body.appendChild(downloadLink);
+                        downloadLink.click();
+                        document.body.removeChild(downloadLink);
+                    }else{
+                        app.alert.show("no_descarga_cotejo", {
+                            level: "warning",
+                            title: "Advertencia",
+                            messages: data.mssg,
+                            autoClose: false
+                        });
+                    }
 
-                        }
-                    }, this)
-                });
-
-
-
+                }
+            }, this)
+        });
     }
 })
