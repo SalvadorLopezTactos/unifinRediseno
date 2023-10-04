@@ -28,7 +28,7 @@ class CotejoDigital extends SugarApi
         $auth_encode = base64_encode($user . ':' . $pwd);
         $guid_persona = $args['idPersona'];
 
-        $quantico_url = $sugar_config['quantico_url_base'];
+        $quantico_url = $sugar_config['quantico_url_base_cotejo'];
         $host = $quantico_url."/CreditRequestIntegration/rest/ExpedientDocument/DownloadDocument";
 
         $body_request = array(
