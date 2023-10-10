@@ -545,7 +545,7 @@
             var pointerEvents = true;
             _.each(this.model.fields, function (field) {
                 //Valida si el campo debe evitar bloqueo por pointer-events:none
-                if (field.name == 'origen_ag_tel_c' || field.name == 'promotor_c' || field.name == 'account_to_lead' || field.name == 'assigned_user_name' || field.name == 'email') {
+                if (field.name == 'origen_ag_tel_c' || field.name == 'promotor_c' || field.name == 'account_to_lead' || field.name == 'assigned_user_name' || field.name == 'email' || field.name == 'prospects_leads_1_name') {
                     pointerEvents = false;
                 }
                 //Valida si el campo debe evitar bloqueo para CP
