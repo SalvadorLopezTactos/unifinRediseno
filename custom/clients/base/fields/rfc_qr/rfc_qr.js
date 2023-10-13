@@ -243,7 +243,9 @@
 								if(Regimen == "Persona Moral") {
 									//var Denominacion = data[0]["Denominación o Razón Social"]+" "+data[0]["Régimen de capital"];
 									//var Constitucion = data[0]["Fecha de constitución"];
-									var Denominacion = data["company"]["legalName"]+" "+ data["company"]["entityType2"];
+									//var Denominacion = data["company"]["legalName"]+" "+ data["company"]["entityType2"];
+									var Denominacion =  data["company"]["legalName"] + data["company"]["entityType4"];
+									var RegimenCapital = data["company"]["entityType4"];
 									var Constitucion = data["startedOperationsAt"];
 									Completo = Denominacion;
 									//Constitucion = Constitucion.substring(6, 10) + "-" + Constitucion.substring(3, 5) + "-" + Constitucion.substring(0, 2);
@@ -347,6 +349,7 @@
 															contexto_cuenta.model.set('razonsocial_c', Denominacion);
 															contexto_cuenta.model.set('nombre_comercial_c', Denominacion);
 															contexto_cuenta.model.set('fechaconstitutiva_c', Constitucion);
+															contexto_cuenta.model.set('regimen_capital_c', RegimenCapital);
 														}else {
 
 															cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('primernombre_c') != Nombre ? true : cambioRazonSocial['cambioCuenta'];

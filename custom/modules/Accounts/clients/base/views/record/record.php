@@ -305,36 +305,45 @@ array (
               0 => 
               array (
                 'readonly' => false,
+                'name' => 'regimen_capital_c',
+                'label' => 'LBL_REGIMEN_CAPITAL',
+              ),
+              1 => 
+              array (
+              ),
+              2 => 
+              array (
+                'readonly' => false,
                 'name' => 'valid_cambio_razon_social_c',
                 'label' => '',
                 'css_class' => 'hidden',
               ),
-              1 => 
+              3 => 
               array (
                 'readonly' => false,
                 'name' => 'json_audit_c',
                 'studio' => 'visible',
                 'label' => 'LBL_JSON_AUDIT',
               ),
-              2 => 
+              4 => 
               array (
                 'readonly' => false,
                 'name' => 'cambio_nombre_c',
                 'label' => 'LBL_CAMBIO_NOMBRE',
               ),
-              3 => 
+              5 => 
               array (
                 'readonly' => false,
                 'name' => 'cambio_dirfiscal_c',
                 'label' => 'LBL_CAMBIO_DIRFISCAL',
               ),
-              4 => 
+              6 => 
               array (
                 'readonly' => false,
                 'name' => 'enviar_mensaje_c',
                 'label' => 'LBL_ENVIAR_MENSAJE',
               ),
-              5 => 
+              7 => 
               array (
                 'readonly' => false,
                 'name' => 'omitir_caso',
@@ -342,33 +351,33 @@ array (
                 'studio' => 'visible',
                 'dismiss_label' => true,
               ),
-              6 => 
+              8 => 
               array (
                 'readonly' => false,
                 'name' => 'usr_aprueba_rechaza_c',
                 'studio' => 'visible',
                 'label' => 'LBL_USR_APRUEBA_RECHAZA',
               ),
-              7 => 
+              9 => 
               array (
                 'readonly' => false,
                 'name' => 'fecha_aprueba_rechaza_c',
                 'label' => 'LBL_FECHA_APRUEBA_RECHAZA',
               ),
-              8 => 
+              10 => 
               array (
                 'readonly' => false,
                 'name' => 'json_direccion_audit_c',
                 'studio' => 'visible',
                 'label' => 'LBL_JSON_DIRECCION_AUDIT',
               ),
-              9 => 
+              11 => 
               array (
                 'readonly' => false,
                 'name' => 'direccion_actualizada_api_c',
                 'label' => 'LBL_DIRECCION_ACTUALIZADA_API',
               ),
-              10 => 
+              12 => 
               array (
                 'readonly' => false,
                 'name' => 'regimenes_fiscal_sat_c',

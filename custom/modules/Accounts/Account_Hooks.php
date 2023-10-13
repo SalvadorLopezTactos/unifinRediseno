@@ -2001,6 +2001,14 @@ where rfc_c = '{$bean->rfc_c}' and
                         $text_cambios .= '<li><b>Razón social / Nombre</b>: <b>tenía el valor</b> '. $bean->fetched_row['name'] .'<b> y cambió a </b>'.$bean->name.'</li>';
                     }
 
+                    if( $bean->tipodepersona_c == 'Persona Moral' ){
+                        $name_actual = $bean->fetched_row['name'];
+                        $name_nuevo = $bean->name;
+                        $regimen_capital = $bean->regimen_capital_c;
+
+                        $send_notification = $this->evaluaCambioRegimenCapital( $name_actual, $name_nuevo, $regimen_capital );
+                    } 
+
                     
                     //Detectar cambio dirección fiscal
                     $direccion_anterior = $this->getDireccionFiscalBD($bean);
@@ -2238,6 +2246,41 @@ where rfc_c = '{$bean->rfc_c}' and
 
     }
 
+    function evaluaCambioRegimenCapital( $name_actual, $name_nuevo, $regimen_capital ){
+       
+        $name_nuevo = str_replace($regimen_capital,"",$name_nuevo);
+        $notificacion = false;
+        if( $this->startsWith( $name_actual, $name_nuevo ) ){
+            $GLOBALS['log']->fatal("SE PROCEDE A VALIDAR REGIMEN CAPITAL");
+            $regimen_capital_actual = str_replace($name_nuevo,"",$name_actual );
+
+            $regimen_capital_actual_clean = preg_replace("/\s+/", "", str_replace(['.',','],"", $regimen_capital_actual));
+            $GLOBALS['log']->fatal("CLEAN REGIMEN CAPITAL ACTUAL CLEAN: ".$regimen_capital_actual_clean);
+
+            $regimen_capital_nuevo_clean = preg_replace("/\s+/", "",str_replace(['.',','],"", $regimen_capital));
+            $GLOBALS['log']->fatal("CLEAN REGIMEN CAPITAL NUEVO CLEAN: ".$regimen_capital_nuevo_clean);
+
+            if( $regimen_capital_actual_clean != $regimen_capital_nuevo_clean ){
+                $notificacion = true;
+            }else{
+                $notificacion = false;
+            }
+
+        }else{
+            $notificacion = true;
+        }
+
+        return $notificacion;
+
+    }
+
+    /*
+    * Función para evaluar si una cadena empieza con otra cadena
+    */
+    function startsWith($string, $startString) { 
+        $len = strlen($startString); 
+        return (substr($string, 0, $len) === $startString); 
+    }
     /*
     * Obtiene productos relacionados de la cuenta para saber a cual grupo de correos electrónicos de Email se envia
     * Si es Cliente en cualquier producto, se envía a un grupo

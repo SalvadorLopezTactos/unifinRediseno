@@ -205,16 +205,33 @@ class GetCambiosRazonDireFiscal extends SugarApi
 
     public function rechazarCambios($api, $args){
         global $current_user;
+        global $app_list_strings;
         $response = array();
         $id_cuenta = "";
         $date = TimeDate::getInstance()->nowDb();
 
         if( !empty($args['cuenta']) ){
             $id_cuenta = $args['cuenta']['id_cuenta'];
+            $razon_rechazo = $args['cuenta']['razon_rechazo'];
             
+            $beanCuenta = BeanFactory::getBean('Accounts', $id_cuenta , array('disable_row_level_security' => true));
+            $nombreCuenta = $beanCuenta->name;
+            $idUsuarioLeasing = $beanCuenta->user_id_c;
+
             //Al ser rechazados los cambios, las banderas únicamente se actualizan desde bd para evitar pasar por todos los LH
             $this->reestableceBanderasCuenta($id_cuenta);
             $this->insertAuditAccion($id_cuenta);
+
+            //Guardar razón rechazo
+            $this->saveRazonRechazo($id_cuenta, $razon_rechazo);
+
+            //Envía correo
+            $bodyCorreo = $this->buildBodyCorreoRechazo( $nombreCuenta, $razon_rechazo );
+            $emailsDestinatarios = $this->getUsuariosDestinatariosRechazo( $idUsuarioLeasing );
+
+            $GLOBALS['log']->fatal( print_r($emailsDestinatarios,true) );
+
+            $this->sendEmailRechazo( $nombreCuenta,$emailsDestinatarios, $bodyCorreo );
 
             array_push($response,"Cambios de Cuenta rechazados");
         }
@@ -300,6 +317,105 @@ class GetCambiosRazonDireFiscal extends SugarApi
         
         $GLOBALS['db']->query($insertQueryAudit);
 
+    }
+
+    public function saveRazonRechazo($id_cuenta, $razon_rechazo){
+        $beanResumen = BeanFactory::getBean('tct02_Resumen', $id_cuenta , array('disable_row_level_security' => true));
+
+        $beanResumen->razon_rechazo_regimen_c = $razon_rechazo;
+
+        $beanResumen->save();
+    }
+
+    public function buildBodyCorreoRechazo( $nombreCuenta, $razonRechazo ){
+
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">
+            Se rechaza la actualización de la razón social de <b>'.$nombreCuenta.'</b>.<br>
+            <br>Descripción de rechazo: '.$razonRechazo.'<br>
+            <br>Atentamente Unifin</font></p>
+            <br><br><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png">
+            <br><span style="font-size:8.5pt;color:#757b80">____________________________________________</span>
+            <p class="MsoNormal" style="text-align: justify;">
+              <span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+                Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+                Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+                No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+                Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro <a href="https://www.unifin.com.mx/aviso-de-privacidad" target="_blank">Aviso de Privacidad</a>  publicado en <a href="http://www.unifin.com.mx/" target="_blank">www.unifin.com.mx</a>
+              </span>
+            </p>';
+
+        return $mailHTML;
+
+    }
+
+    public function getUsuariosDestinatariosRechazo( $idUsuarioLeasing ){
+        global $app_list_strings;
+        $emailsList = array();
+        if( !empty( $idUsuarioLeasing )){
+
+            $beanUserLeasing = BeanFactory::getBean('Users', $idUsuarioLeasing , array('disable_row_level_security' => true));
+            $estado = $beanUserLeasing->status;
+            $emailLeasing = "";
+
+            $notificaJefe = ( $estado == 'Inactive' ) ? true : false;
+
+            if( $notificaJefe ){
+                $idJefe = $beanUserLeasing->reports_to_id;
+                $beanJefe = BeanFactory::getBean('Users', $idJefe , array('disable_row_level_security' => true));
+                $emailLeasing = $beanJefe->email1;
+
+            }else{
+
+                $emailLeasing = $beanUserLeasing->email1;
+            }
+
+            if( $emailLeasing !== ""){
+                array_push($emailsList, $emailLeasing);
+            }
+
+        }else{
+            //Si la cuenta no tiene usuario leasing, se notifica a Juan Carlos Vera
+            $listRechazoLeasing = $app_list_strings['robina_rechazo_leasing_list'];
+            $emailEncargadoLeasing = "";
+            for ($i=0; $i < count($listRechazoLeasing); $i++) { 
+                $emailEncargadoLeasing = $listRechazoLeasing[$i];
+            }
+
+            if( $emailEncargadoLeasing !== ""){
+                array_push($emailsList, $emailEncargadoLeasing);
+            }
+
+        }
+
+        $listEmailsEncargados = $app_list_strings['robina_rechazo_list'];
+
+        for ($i=0; $i < count($listEmailsEncargados) ; $i++) { 
+            array_push($emailsList, $listEmailsEncargados[$i]);
+        }
+
+        return $emailsList;
+    }
+
+    public function sendEmailRechazo( $nombreCuenta,$emailsList, $bodyCorreo ){
+        try{
+            global $app_list_strings;
+            $mailer = MailerFactory::getSystemDefaultMailer();
+            $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+            $mailer->setSubject('Se rechaza la actualización de la razón Social de '.$nombreCuenta);
+            $body = trim($bodyCorreo);
+            $mailer->setHtmlBody($body);
+            $mailer->clearRecipients();
+            for ($i=0; $i < count($emailsList); $i++) {
+                $GLOBALS['log']->fatal("AGREGANDO CORREOS DESTINATARIOS: ".$emailsList[$i]);
+                $mailer->addRecipientsTo(new EmailIdentity($emailsList[$i], $emailsList[$i]));
+            }
+            $result = $mailer->send();
+
+        } catch (Exception $e){
+            $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ");
+            $GLOBALS['log']->fatal(print_r($e,true));
+
+        }
     }
 
     public function insertAuditJSONDirecciones($id_cuenta){

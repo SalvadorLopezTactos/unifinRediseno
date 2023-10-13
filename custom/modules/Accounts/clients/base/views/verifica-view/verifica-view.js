@@ -159,6 +159,22 @@
         var model = this.context.attributes.model;
         //Validacion para saber desde donde se lanzó la función para cerrar el drawer
         if( elemento === 'BUTTON' ){
+            $('#razon_rechazo').parent().parent().parent().parent().show()
+            //Establece obligatorio el motivo de rechazo
+            var razon_rechazo = $('#razon_rechazo').val().trim();
+
+            if( razon_rechazo == "" ){
+                $('#razon_rechazo').parent().parent().parent().addClass('error');
+
+                app.alert.show('error_razon_rechazo', {
+                    level: 'error',
+                    messages: 'Favor de establecer Razón de rechazo',
+                    autoClose: true
+                });
+
+                return;
+            }
+
             app.alert.show('close_valida_cambios', {
                 level: 'confirmation',
                 messages: '¿Está seguro que desea rechazar los cambios?',
@@ -179,6 +195,8 @@
                     if( contextCambios.json_audit_cuenta !== null ){
                         contextCambios.json_audit_cuenta['id_cuenta']= model.attributes.id;
                         elementos_rechazar['cuenta']= contextCambios.json_audit_cuenta;
+                        elementos_rechazar['cuenta']['razon_rechazo']= $('#razon_rechazo').val().trim();
+
                     }
                     if( contextCambios.json_audit_direccion !== null ){
                         elementos_rechazar['direccion']= contextCambios.json_audit_direccion;
