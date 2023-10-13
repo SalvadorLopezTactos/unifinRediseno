@@ -247,6 +247,7 @@
 									var Denominacion =  data["company"]["legalName"] + data["company"]["entityType4"];
 									var RegimenCapital = data["company"]["entityType4"];
 									var Constitucion = data["startedOperationsAt"];
+									var LegalName = data["company"]["legalName"];
 									Completo = Denominacion;
 									//Constitucion = Constitucion.substring(6, 10) + "-" + Constitucion.substring(3, 5) + "-" + Constitucion.substring(0, 2);
 									Constitucion = Constitucion.split('T')[0];
@@ -347,6 +348,7 @@
 															//Valida cambios
 															cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('razonsocial_c') != Denominacion ? true : cambioRazonSocial['cambioCuenta'];
 															contexto_cuenta.model.set('razonsocial_c', Denominacion);
+															contexto_cuenta.model.set('denominacion_c', LegalName);
 															contexto_cuenta.model.set('nombre_comercial_c', Denominacion);
 															contexto_cuenta.model.set('fechaconstitutiva_c', Constitucion);
 															contexto_cuenta.model.set('regimen_capital_c', RegimenCapital);
