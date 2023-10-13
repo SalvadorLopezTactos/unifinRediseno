@@ -84,6 +84,27 @@
                         
                     </tbody>
                 </table>
+                
+                {{!-- <div class="row-fluid" style="margin:10px;display:none">
+                    <div class="record-label">Razón de rechazo</div>
+                    <span class="normal index5">
+                        <textarea rows="3" cols="90" name="razon_rechazo" id="razon_rechazo" class="input-xlarge wide tleft"></textarea>
+                    </span>
+                </div> --}}
+
+                <div class="row-fluid" style="margin:10px;display:none">
+                    <div class="span11 record-cell" data-type="type" data-name="name">
+                    <div class="record-label">Razón de rechazo</div>
+                    <span class="normal index5">
+                        <span sfuuid="123451">
+                        <textarea rows="3" cols="90" name="razon_rechazo" id="razon_rechazo" class="input-xlarge wide tleft"></textarea>
+                        </span>
+                    </span>
+                    </div>
+
+                </div>
+
+                
                 {{#if usr_aprobo_rechazo}}
                     <div style="text-align:left;padding-left:5px">
                         <h5><b>Aprobado / Rechazado por: </b>{{usr_aprobo_rechazo}} el {{fecha_aprobo_rechazo}} </h5>
