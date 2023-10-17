@@ -38,7 +38,7 @@ class getAsesorCuenta extends SugarApi
             $resultado['dirEquipo']=[];
             $resultado['dirRegional']=[];
             $equipo = '';
-            $asesor = "select p.tipo_producto, u.id,u.first_name, u.last_name, uc.equipo_c ,e.email_address
+            $asesor = "select p.tipo_producto, u.id,u.first_name, u.last_name, uc.equipo_c ,e.email_address, u.phone_mobile, uc.ext_c
               from uni_productos p
               inner join accounts_uni_productos_1_c ap on ap.accounts_uni_productos_1uni_productos_idb = p.id
               inner join users u on u.id = p.assigned_user_id
@@ -64,7 +64,7 @@ class getAsesorCuenta extends SugarApi
             //Realiza consulta director equipo
             if(!empty($equipo)){
                 $resultado['dirEquipo']=[];
-                $dirEquipo = "select u.id, u.first_name, u.last_name, uc.equipo_c, uc.posicion_operativa_c, e.email_address
+                $dirEquipo = "select u.id, u.first_name, u.last_name, uc.equipo_c, uc.posicion_operativa_c, e.email_address, u.phone_mobile, uc.ext_c
                   from users u
                   inner join users_cstm uc on uc.id_c = u.id
                   left join email_addr_bean_rel eb on eb.bean_id = u.id
@@ -89,7 +89,7 @@ class getAsesorCuenta extends SugarApi
             //Realiza consulta director regional
             if(!empty($equipo)){
                 $resultado['dirRegional']=[];
-                $dirEquipo = "select u.id, u.first_name, u.last_name, uc.equipo_c, uc.equipos_c, uc.posicion_operativa_c, e.email_address
+                $dirEquipo = "select u.id, u.first_name, u.last_name, uc.equipo_c, uc.equipos_c, uc.posicion_operativa_c, e.email_address, u.phone_mobile, uc.ext_c
                   from users u
                   inner join users_cstm uc on uc.id_c = u.id
                   left join email_addr_bean_rel eb on eb.bean_id = u.id
