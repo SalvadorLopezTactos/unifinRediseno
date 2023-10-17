@@ -346,7 +346,12 @@
 								
 														if(Regimen == "Persona Moral") {
 															//Valida cambios
-															cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('razonsocial_c') != Denominacion ? true : cambioRazonSocial['cambioCuenta'];
+															//Para una Persona Moral, los espacios. puntos o comas, no se deben tomar en cuenta como un cambio para notificar
+															var name_actual = contexto_cuenta.model.get("razonsocial_c");
+															var name_nuevo = Denominacion;
+															var regimen_capital = RegimenCapital;
+															cambioRazonSocial["cambioCuenta"] = contextol.evaluaCambioRegimenCapital( name_actual, name_nuevo, regimen_capital );
+															//cambioRazonSocial['cambioCuenta'] = contexto_cuenta.model.get('razonsocial_c') != Denominacion ? true : cambioRazonSocial['cambioCuenta'];
 															contexto_cuenta.model.set('razonsocial_c', Denominacion);
 															contexto_cuenta.model.set('denominacion_c', LegalName);
 															contexto_cuenta.model.set('nombre_comercial_c', Denominacion);
@@ -940,6 +945,28 @@
 				
 			}
 		});
+
+	},
+
+	evaluaCambioRegimenCapital: function( name_actual, name_nuevo, regimen_capital){
+		name_nuevo = name_nuevo.replace(regimen_capital,"");
+		var cambio_nombre = false;
+		if( name_actual.startsWith(name_nuevo) ){
+			var regimen_capital_actual = name_actual.replace(name_nuevo,"");
+			//Elimina los espacios, puntos y comas
+			var regimen_capital_actual_clean = regimen_capital_actual.replace(/[ ,.]/g,"");
+			var regimen_capital_nuevo_clean = regimen_capital.replace(/[ ,.]/g, "");
+
+			if( regimen_capital_actual_clean != regimen_capital_nuevo_clean ){
+				cambio_nombre = true;
+			}else{
+				cambio_nombre = false;
+			}
+		}else{
+			cambio_nombre = true;
+		}
+
+		return cambio_nombre;
 
 	},
 
