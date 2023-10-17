@@ -2001,7 +2001,7 @@ where rfc_c = '{$bean->rfc_c}' and
                         $text_cambios .= '<li><b>Razón social / Nombre</b>: <b>tenía el valor</b> '. $bean->fetched_row['name'] .'<b> y cambió a </b>'.$bean->name.'</li>';
                     }
 
-                    if( $bean->tipodepersona_c == 'Persona Moral' ){
+                    if( $bean->tipodepersona_c == 'Persona Moral' && $pos==false ){
                         $name_actual = $bean->fetched_row['name'];
                         $name_nuevo = $bean->name;
                         $regimen_capital = $bean->regimen_capital_c;
