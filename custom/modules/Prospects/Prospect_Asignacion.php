@@ -38,6 +38,7 @@ class Prospects_AsignacionPO
                   where uc.equipo_c in ({$equipos})
                   and u.status='Active'
                   and u.deleted=0
+                  and u.is_group=0
                   and (bc.vacaciones_c = 0 or bc.vacaciones_c is null)
                   and a.zona_geografica is not null
                   order by u.last_name asc;";
