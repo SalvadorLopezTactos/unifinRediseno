@@ -351,26 +351,42 @@ class GetCambiosRazonDireFiscal extends SugarApi
     public function getUsuariosDestinatariosRechazo( $idUsuarioLeasing ){
         global $app_list_strings;
         $emailsList = array();
+        
         if( !empty( $idUsuarioLeasing )){
 
             $beanUserLeasing = BeanFactory::getBean('Users', $idUsuarioLeasing , array('disable_row_level_security' => true));
             $estado = $beanUserLeasing->status;
+            $es_grupo = $beanUserLeasing->is_group;
             $emailLeasing = "";
 
-            $notificaJefe = ( $estado == 'Inactive' ) ? true : false;
+            if( $es_grupo ){
+                 $listRechazoLeasing = $app_list_strings['robina_rechazo_leasing_list'];
+                $emailEncargadoLeasing = "";
+                for ($i=0; $i < count($listRechazoLeasing); $i++) { 
+                    $emailEncargadoLeasing = $listRechazoLeasing[$i];
+                }
 
-            if( $notificaJefe ){
-                $idJefe = $beanUserLeasing->reports_to_id;
-                $beanJefe = BeanFactory::getBean('Users', $idJefe , array('disable_row_level_security' => true));
-                $emailLeasing = $beanJefe->email1;
-
+                if( $emailEncargadoLeasing !== ""){
+                    array_push($emailsList, $emailEncargadoLeasing);
+                }
             }else{
 
-                $emailLeasing = $beanUserLeasing->email1;
-            }
+                $notificaJefe = ( $estado == 'Inactive' ) ? true : false;
 
-            if( $emailLeasing !== ""){
-                array_push($emailsList, $emailLeasing);
+                if( $notificaJefe ){
+                    $idJefe = $beanUserLeasing->reports_to_id;
+                    $beanJefe = BeanFactory::getBean('Users', $idJefe , array('disable_row_level_security' => true));
+                    $emailLeasing = $beanJefe->email1;
+
+                }else{
+
+                    $emailLeasing = $beanUserLeasing->email1;
+                }
+
+                if( $emailLeasing !== ""){
+                    array_push($emailsList, $emailLeasing);
+                }
+
             }
 
         }else{
