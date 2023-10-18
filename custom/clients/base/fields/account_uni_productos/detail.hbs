@@ -56,7 +56,12 @@
                                 <input type="checkbox" class="chk_ls_excluir" {{#if ResumenProductos.leasing.exclu_precalif_c}}checked{{/if}} data-field="chk_ls_excluir"/>
                             </div>
                         </td>
-                        <td  width="33%" ></td>
+                        <td  width="33%" >
+                            <div class="mpadc ">
+                                 <label class="record-label mpad" style="margin-left:0px">Estado de Cliente</label>
+                                 {{getUnifinListValue 'estado_cliente_list' ResumenProductos.leasing.estado_cliente_c}}
+                            </div>
+                        </td>
                     </tr>
                     {{#if ResumenProductos.leasing.visible_noviable}}
                     <tr>
@@ -222,7 +227,13 @@
                             <input type="checkbox" class="chk_fac_multi" {{#if ResumenProductos.factoring.multilinea_c}}checked{{/if}} data-field="chk_fac_multi"/>
                         </div>
 						</td>
-						<td  width="33%" ></td><td  width="33%" ></td>
+						<td  width="33%" ></td>
+                        <td  width="33%" >
+                            <div class="mpadc ">
+                                 <label class="record-label mpad" style="margin-left:0px">Estado de Cliente</label>
+                                 {{getUnifinListValue 'estado_cliente_list' ResumenProductos.factoring.estado_cliente_c}}
+                            </div>
+                        </td>
 					</tr><!--Cierre Fila 2 -->
                     {{#if ResumenProductos.factoring.visible_noviable}}
                     <tr>
@@ -388,7 +399,13 @@
 								<input type="checkbox" class="chk_ca_multi" {{#if ResumenProductos.credito_auto.multilinea_c}}checked{{/if}} data-field="chk_ca_multi"/>
 							</div>
 						</td>
-						<td  width="33%" ></td><td  width="33%" ></td>
+						<td  width="33%" ></td>
+                        <td  width="33%" >
+                            <div class="mpadc ">
+                                 <label class="record-label mpad" style="margin-left:0px">Estado de Cliente</label>
+                                 {{getUnifinListValue 'estado_cliente_list' ResumenProductos.credito_auto.estado_cliente_c}}
+                            </div>
+                        </td>
 					</tr> <!--Cierre Fila 2 -->
 					{{#if ResumenProductos.credito_auto.visible_noviable}}
 					<tr>
@@ -554,7 +571,13 @@
 							<input type="checkbox" class="chk_fe_multi" {{#if ResumenProductos.fleet.multilinea_c}}checked{{/if}} data-field="chk_fe_multi"/>
 						</div>
 						</td>
-						<td  width="33%" ></td><td  width="33%" ></td>
+						<td  width="33%" ></td>
+                        <td  width="33%" >
+                            <div class="mpadc ">
+                                 <label class="record-label mpad" style="margin-left:0px">Estado de Cliente</label>
+                                 {{getUnifinListValue 'estado_cliente_list' ResumenProductos.fleet.estado_cliente_c}}
+                            </div>
+                        </td>
 					</tr> <!--Cierre Fila 2 -->
 					{{#if ResumenProductos.fleet.visible_noviable}}
 					<tr > <!-- Fila 3 -->
@@ -728,7 +751,12 @@
 							</label>
 						</div>
 						</td>
-						<td  width="33%" ></td>
+						<td  width="33%" >
+                            <div class="mpadc ">
+                                 <label class="record-label mpad" style="margin-left:0px">Estado de Cliente</label>
+                                 {{getUnifinListValue 'estado_cliente_list' ResumenProductos.uniclick.estado_cliente_c}}
+                            </div>
+                        </td>
                     </tr> <!--Cierre Fila 2 -->
                     {{#if ResumenProductos.uniclick.visible_noviable}}
                     <tr> <!-- Fila 3 -->
@@ -886,6 +914,16 @@
                         </div>
 						</td>
                     </tr>  <!--Cierre Fila1 -->
+                    <tr>
+                        <td  width="33%" ></td>
+                        <td  width="33%" ></td>
+                        <td  width="33%" >
+                            <div class="mpadc ">
+                                 <label class="record-label mpad" style="margin-left:0px">Estado de Cliente</label>
+                                 {{getUnifinListValue 'estado_cliente_list' ResumenProductos.seguros.estado_cliente_c}}
+                            </div>
+                        </td>
+                    </tr>
                 </table>
             </td>
         </tr>

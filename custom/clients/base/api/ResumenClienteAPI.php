@@ -94,6 +94,7 @@ class ResumenClienteAPI extends SugarApi
             );
         //General
         $arr_principal['general_cliente'] = array(
+            "estado_cliente_c" => "No definido",
             "tipo" => "No definido",
             "cliente_desde"=>"",
             "segmento" => "Sin Segmento",
@@ -978,6 +979,7 @@ class ResumenClienteAPI extends SugarApi
 
             //Procesa registro
             if($beanResumen){
+                $arr_principal['general_cliente']['estado_cliente_c'] = $app_list_strings['estado_cliente_list'][$beanResumen->estado_cliente_c];
                 //Recupera Leasing
                 // $arr_principal['leasing']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_l_c;
                 $arr_principal['leasing']['fecha_pago']= $beanResumen->leasing_fecha_pago;

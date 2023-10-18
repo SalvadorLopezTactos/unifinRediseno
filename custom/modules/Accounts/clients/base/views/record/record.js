@@ -8539,6 +8539,8 @@ validaReqUniclickInfo: function () {
                             Productos[key]['motivo_c'] = (Productos[key]['motivo_c'] == null) ? "" : Productos[key]['motivo_c'];
                             Productos[key]['aprueba1_c'] = (Productos[key]['aprueba1_c'] == "1") ? true : false;
                             Productos[key]['aprueba2_c'] = (Productos[key]['aprueba2_c'] == "1") ? true : false;
+                            Productos[key]["aprueba2_c"] =
+                            Productos[key]["estado_cliente_c"] = Productos[key].estado_cliente_c;
 
                             switch (tipoProducto) {
                                 case "1": //Leasing
