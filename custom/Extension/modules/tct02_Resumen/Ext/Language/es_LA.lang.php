@@ -104,3 +104,4 @@ $mod_strings['LBL_GRUPO'] = 'Grupo';
 $mod_strings['LBL_SCORE_CREDITO'] = 'Score Crédito';
 $mod_strings['LBL_ERROR_DYNAMICS365'] = ' Error en integración Dynamics365';
 $mod_strings['LBL_RAZON_RECHAZO_REGIMEN'] = 'Razón de Rechazo';
+$mod_strings['LBL_ESTADO_CLIENTE'] = 'Estado de Cliente';
