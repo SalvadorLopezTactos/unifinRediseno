@@ -152,4 +152,42 @@ SQL;
 		}
 
 	}
+
+	//Evita guardado de registro en caso de que se relacione una cuenta bloqueada
+    function verifica_cuenta_bloqueada($bean=null, $event=null, $args=null){
+        
+        $id_cuenta = $bean->rel_relaciones_accounts_1accounts_ida;
+
+        $api_bloqueo = new GetBloqueoCuenta();
+        $args =array();
+        $args['id_cuenta']=$id_cuenta;
+        
+        $responseBloqueo = $api_bloqueo->getBloqueoCuentaPorTipo(array(),$args);
+        
+        if( $responseBloqueo['bloqueo'] == 'SI' ){
+            
+            $tipos_bloqueo = $responseBloqueo['tipo'];
+            require_once 'include/api/SugarApiException.php';
+            throw new SugarApiExceptionInvalidParameter("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: ". implode(',',$tipos_bloqueo) );
+            
+        }
+
+		$id_cuenta_relacionada = $bean->account_id1_c;
+        $args_rel=array();
+        $args_rel['id_cuenta']=$id_cuenta_relacionada;
+        
+        $responseBloqueoRel = $api_bloqueo->getBloqueoCuentaPorTipo(array(),$args_rel);
+        
+        if( $responseBloqueoRel['bloqueo'] == 'SI' ){
+            
+            $tipos_bloqueo_rel = $responseBloqueoRel['tipo'];
+            require_once 'include/api/SugarApiException.php';
+            throw new SugarApiExceptionInvalidParameter("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: ". implode(',',$tipos_bloqueo_rel) );
+            
+        }
+
+		
+        
+        
+    }
 }

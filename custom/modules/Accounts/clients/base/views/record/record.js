@@ -4988,28 +4988,44 @@
     },
 
     blockRecordNoContactar: function () {
-		if(!app.user.attributes.tct_no_contactar_chk_c && !app.user.attributes.bloqueo_credito_c && !app.user.attributes.bloqueo_cumple_c) {
-			var url = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
-			app.api.call('read', url, {}, {
-				success: _.bind(function (data) {
-					if (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c) {
-						var equipo = '';
-						if(data.bloqueo_cartera_c) equipo = 'Cartera<br>';
-						if(data.bloqueo2_c) equipo = equipo + 'Crédito<br>';
-						if(data.bloqueo3_c) equipo = equipo + 'Cumplimiento';
-						//Bloquear el registro completo y mostrar alerta
-						$('.record.tab-layout').attr('style', 'pointer-events:none');
-						$('.subpanel').attr('style', 'pointer-events:none');
-						app.alert.show("cuentas_no_contactar", {
-							level: "error",
-							title: "Cuenta No Contactable<br>",
-							messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de "+equipo+"</b>",
-							autoClose: false
-						});
-					}
-				}, this)
-			});
-		}
+        //Consulta resumen para validar bloqueo de registro
+        //if(!app.user.attributes.tct_no_contactar_chk_c && !app.user.attributes.bloqueo_credito_c && !app.user.attributes.bloqueo_cumple_c) {
+        var url = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+        app.api.call('read', url, {}, {
+            success: _.bind(function (data) {
+                if (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c) {
+                    var equipo = "";
+                    if (data.bloqueo_cartera_c) equipo = "Cartera<br>";
+                    if (data.bloqueo2_c) equipo = equipo + "Crédito<br>";
+                    if (data.bloqueo3_c) equipo = equipo + "Cumplimiento";
+                    //Bloquear el registro completo y mostrar alerta
+                    $(".record-cell").attr("style", "pointer-events:none");
+                    $('[name="edit_button"].rowaction').hide();
+                    
+                    //Oculta botón de creación en subpaneles
+                    $(".subpanels-layout")
+                    .find(".filtered.tabbable")
+                    .find('[name="create_button"]')
+                    .hide();
+                    //Oculta botón de acciones en subpaneles
+                    $(".subpanels-layout")
+                    .find(".filtered.tabbable")
+                    .find(".btn.dropdown-toggle")
+                    .hide();
+                    
+                    app.alert.show("cuentas_no_contactar", {
+                        level: "error",
+                        title: "Cuenta No Contactable<br>",
+                        messages:
+                        "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de " +
+                        equipo +
+                        "</b>",
+                        autoClose: false,
+                    });
+                }
+            }, this)
+        });
+        //}
     },
 
     blockRecordNoViable: function () {

@@ -47,3 +47,11 @@ $hook_array['before_save'][] = Array(
     'Rel_Relaciones_Hooks',
     'SetRelacionesOtrosClientes'
 );
+
+$hook_array['before_save'][] = Array(
+   4,
+   'Evita guardado de registro en caso de que se relacione una cuenta bloqueada',
+   'custom/modules/Rel_Relaciones/Rel_Relaciones_Hooks.php',
+   'Rel_Relaciones_Hooks',
+   'verifica_cuenta_bloqueada'
+);
