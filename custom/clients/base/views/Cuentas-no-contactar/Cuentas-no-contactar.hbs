@@ -186,7 +186,8 @@
                     <td>
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
-                            <span class="btn ConsultarEstado fa fa-eye" title="Consultar Estado" data-id="{{id}}" value="{{id}}"></span>
+                            <span class="btn ConsultarAudit fa fa-list" title="Consultar Datos Históricos" data-id="{{id}}" value="{{id}}"></span>
+							<span class="btn ConsultarEstado fa fa-eye" title="Consultar Estado" data-id="{{id}}" value="{{id}}"></span>
                           </div>
                     </span>
                     </td>
@@ -333,6 +334,59 @@
 				</tbody>
 			</table>
 		</div>
+
+		<!-- Modal Visualizar Auditoría -->
+		<div id="consultarAuditModal" style="display:none" class="row-fluid">
+		  <!-- Modal content -->
+		  <div class="modal span12 " style="width:100%;height:100%">
+			<div class="modal-content" style="margin:auto; width:80%">
+				<div class="modal-header">
+					<center>
+						<h2>Historial de bloqueos</h2>
+						<h1 id="nombre_cuenta_audit"></h1>
+         		 	</center>
+				</div>
+				<div class="modal-body">
+					{{#if audit_historicos}}
+					<table class="table table-bordered table-striped" style="overflow-x: scroll;">
+						<thead>
+							<tr>
+								<td class="span3"><b>Área</b></td>
+								<td class="span3"><b>Solicitó bloqueo</b></td>
+								<td class="span3"><b>Fecha Solicitud</b></td>
+								<td class="span3"><b>Autorizó bloqueo</b></td>
+								<td class="span3"><b>Fecha Aprobación</b></td>
+							</tr>
+						</thead>
+						<tbody>
+						{{#each audit_historicos}}
+							<tr>
+								<td>{{area}}</td>
+								<td>{{solicito}}</td>
+								<td>{{fechaSolicitud}}</td>
+								<td>{{aprobo}}</td>
+								<td>{{fechaAprobacion}}</td>
+							</tr>
+						{{/each}}
+						</tbody>
+					</table>
+					{{else}}
+						<div style="text-align: center;padding: 20px">
+							<p>No existen registros históricos para esta Cuenta</p>
+						</div>	
+					{{/if}}
+					
+			  </div>
+				<br>
+			  <div class="modal-footer">
+				<div align="right">
+				  <button class="btn btn-danger btn-Model" id="btn-close-audit" type="submit">Cerrar</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+
 		<!-- Modal Visualizar Consultar Estado -->
 		<div id="consultarEstadoModal" style="display:none" class="row-fluid">
 		  <!-- Modal content -->
