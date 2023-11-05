@@ -4998,6 +4998,8 @@
                     if (data.bloqueo_cartera_c) equipo = "Cartera<br>";
                     if (data.bloqueo2_c) equipo = equipo + "Crédito<br>";
                     if (data.bloqueo3_c) equipo = equipo + "Cumplimiento";
+
+                    this.context.param_equipo = equipo;
                     //Bloquear el registro completo y mostrar alerta
                     $(".record-cell").attr("style", "pointer-events:none");
                     $('[name="edit_button"].rowaction').hide();
@@ -5013,6 +5015,7 @@
                     .find(".btn.dropdown-toggle")
                     .hide();
                     
+                    /*
                     app.alert.show("cuentas_no_contactar", {
                         level: "error",
                         title: "Cuenta No Contactable<br>",
@@ -5022,6 +5025,33 @@
                         "</b>",
                         autoClose: false,
                     });
+                    */
+
+                    /**LLAMADA A NUEVA VISTA */
+                    if (Modernizr.touch) {
+                      app.$contentEl.addClass("content-overflow-visible");
+                    }
+                    /**check whether the view already exists in the layout.
+                     * If not we will create a new view and will add to the components list of the record layout
+                     * */
+                    var quickCreateView = this.layout.getComponent(
+                      "alert-account-no-contactar"
+                    );
+                    if (!quickCreateView) {
+                      /** Create a new view object */
+                      quickCreateView = app.view.createView({
+                        context: this.context,
+                        name: "alert-account-no-contactar",
+                        layout: this.layout,
+                        module: "Accounts",
+                      });
+                      /** add the new view to the components list of the record layout*/
+                      this.layout._components.push(quickCreateView);
+                      this.layout.$el.append(quickCreateView.$el);
+                    }
+                    /**triggers an event to show the pop up quick create view*/
+                    this.layout.trigger("app:view:alert-account-no-contactar");
+
                 }
             }, this)
         });

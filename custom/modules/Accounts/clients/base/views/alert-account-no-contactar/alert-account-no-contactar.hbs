@@ -1,0 +1,144 @@
+<style>
+
+    .modal-header_cstm h3 {
+        font-size: 15px;
+        font-weight: normal;
+    }
+
+    .modal-header_cstm {
+        background: #FCD5D0;
+        color: #F62B0D;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .modal-body_cstm {
+        padding: 5px 0px 58px 12px;
+    }
+
+    .fa-book {
+        color: #FFF;
+    }
+
+    .modal_cstm {
+        position: absolute;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        top: 0;
+        left: 30%;
+        overflow: auto;
+        background: #ffffff ;
+        border: 1px solid #898A8B;
+        width: 90%;
+    }
+
+    .modal-backdrop {
+        /* bug fix - no overlay */
+        display: flex;
+    }
+
+    .form-horizontal {
+        display: inline-block;
+    }
+
+    .select_cstm
+    {
+        margin: 1px 0px 5px 3px!important;
+    }
+
+</style>
+
+<div class="modal modal_cstm " id="alert-account-no-contactar">
+    <div class="modal-header_cstm">
+        <h3> <b>{{str "Cuenta No Contactable" module}}</b></h3>
+    </div>
+    <div class="modal-body_cstm">
+        <div style="text-align: center;">
+            <p>
+                Cualquier duda o aclaración, favor de contactar al área <b>Administrativa de: {{ texto_mostrar }}</b>
+            </p>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-consultar" id="btn-consultar" style="background:#DBDBDB;color:#8A8A8A">Consultar Estado<i class="fa fa-eye" style="padding: 3px; "></i></button>
+
+    </div>
+</div>
+
+<!-- Modal Visualizar Consultar Estado -->
+		<div id="consultarEstadoModal" style="display:none" class="row-fluid">
+		  <!-- Modal content -->
+		  <div class="modal span12 " style="width:100%;height:100%">
+			<div class="modal-content" style="margin:auto; width:80%">
+				<div class="modal-header">
+				  <center>
+            <h2>Consultar Estado</h2>
+            <h1>{{registroBloqueo.nombreCuenta}}</h1>
+          </center>
+				</div>
+				<div class="modal-body">
+				<table class="table table-bordered table-striped" style="overflow-x: scroll;">
+					<thead>
+						<tr>
+              <td class="span3">&nbsp;</td>
+							<td class="span3"><b>Cartera</b></td>
+							<td class="span3"><b>Crédito</b></td>
+							<td class="span3"><b>Cumplimiento</b></td>
+						</tr>
+					</thead>
+					<tbody>
+            <!-- Fila 0: Estado -->
+						<tr>
+              <td><b>Situación Actual</b></td>
+							<td>{{#if registroBloqueo.cartera}}{{registroBloqueo.cartera.estado}}{{/if}}</td>
+							<td>{{#if registroBloqueo.credito}}{{registroBloqueo.credito.estado}}{{/if}}</td>
+							<td>{{#if registroBloqueo.cumplimiento}}{{registroBloqueo.cumplimiento.estado}}{{/if}}</td>
+						</tr>
+            <!-- Fila 1: Razón -->
+						<tr>
+              <td><b>Razón</b></td>
+							<td>{{#if registroBloqueo.cartera}}{{getUnifinListValue 'razon_list' registroBloqueo.cartera.razon}}{{/if}}</td>
+							<td>{{#if registroBloqueo.credito}}{{getUnifinListValue 'razon_list' registroBloqueo.credito.razon}}{{/if}}</td>
+							<td>{{#if registroBloqueo.cumplimiento}}{{getUnifinListValue 'razon_list' registroBloqueo.cumplimiento.razon}}{{/if}}</td>
+						</tr>
+            <!-- Fila 2: Motivo -->
+						<tr>
+              <td><b>Motivo</b></td>
+							<td>{{#if registroBloqueo.cartera}}{{getUnifinListValue 'motivo_bloqueo_list' registroBloqueo.cartera.motivo}}{{/if}}</td>
+							<td>{{#if registroBloqueo.credito}}{{getUnifinListValue 'motivo_bloqueo_list' registroBloqueo.credito.motivo}}{{/if}}</td>
+							<td>{{#if registroBloqueo.cumplimiento}}{{getUnifinListValue 'motivo_bloqueo_list' registroBloqueo.cumplimiento.motivo}}{{/if}}</td>
+						</tr>
+            <!-- Fila 3: Detalle -->
+						<tr>
+              <td><b>Detalle</b></td>
+							<td>{{#if registroBloqueo.cartera}}{{registroBloqueo.cartera.detalle}}{{/if}}</td>
+							<td>{{#if registroBloqueo.credito}}{{registroBloqueo.credito.detalle}}{{/if}}</td>
+							<td>{{#if registroBloqueo.cumplimiento}}{{registroBloqueo.cumplimiento.detalle}}{{/if}}</td>
+						</tr>
+            <!-- Fila 4: Responsable Ingesta -->
+						<tr>
+              <td><b>Responsable Ingesta</b></td>
+							<td>{{#if registroBloqueo.cartera}}{{registroBloqueo.cartera.responsableIngesta}}{{/if}}</td>
+							<td>{{#if registroBloqueo.credito}}{{registroBloqueo.credito.responsableIngesta}}{{/if}}</td>
+							<td>{{#if registroBloqueo.cumplimiento}}{{registroBloqueo.cumplimiento.responsableIngesta}}{{/if}}</td>
+						</tr>
+            <!-- Fila 5: Responsable Validación -->
+						<tr>
+              <td><b>Responsable Validación</b></td>
+							<td>{{#if registroBloqueo.cartera}}{{registroBloqueo.cartera.responsableValidacion}}{{/if}}</td>
+							<td>{{#if registroBloqueo.credito}}{{registroBloqueo.credito.responsableValidacion}}{{/if}}</td>
+							<td>{{#if registroBloqueo.cumplimiento}}{{registroBloqueo.cumplimiento.responsableValidacion}}{{/if}}</td>
+						</tr>
+					</tbody>
+				</table>
+			  </div>
+				<br>
+			  <div class="modal-footer">
+				<div align="right">
+				  <button class="btn btn-danger btn-Model" id="btn-cerrar-modal-estado" type="submit">Cerrar</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
