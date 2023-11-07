@@ -42,6 +42,7 @@ class GetBloqueoCuenta extends SugarApi
     public function getBloqueoCuentaPorTipo($api, $args)
     {
         $id_cuenta=$args['id_cuenta'];
+        $GLOBALS['log']->fatal($id_cuenta);
         $response = array();
 
         //Obtiene cuenta
@@ -59,11 +60,11 @@ class GetBloqueoCuenta extends SugarApi
                 array_push($arr_tipo_bloqueos,'Cartera');
                 
             }
-            if($beanResumen->bloqueo_credito_c==1){
+            if($beanResumen->bloqueo2_c==1){
                 array_push($arr_bloqueo,'1');
                 array_push($arr_tipo_bloqueos,'Crédito');
             }
-            if($beanResumen->bloqueo_cumple_c==1){
+            if($beanResumen->bloqueo3_c==1){
                 array_push($arr_bloqueo,'1');
                 array_push($arr_tipo_bloqueos,'Cumplimiento');
             }
