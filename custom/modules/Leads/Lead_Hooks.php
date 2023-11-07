@@ -322,36 +322,37 @@ SQL;
         }
         /* Valida relación de con Cuenta para establecer Asignado
          */
-         if($bean->fetched_row['account_id'] != $bean->account_id && !empty($bean->account_id) ){
+         if(!empty($bean->account_id) ){
             try {
                  if($bean->assigned_user_id) {
                     //Recupera bean Cuenta
-                    
                     $account = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
-                    //$account->user_id_c = $bean->assigned_user_id;
-                    $asignado_anterior = $account->user_id_c;
-                    //$account->save();
+                    $asignado_anterior = $account->user_id_c;              
+                    
+                    //Valida usuario
+                    $asignadoActual = BeanFactory::retrieveBean('Users', $asignado_anterior, array('disable_row_level_security' => true));
+                    if( $asignadoActual->id != $bean->assigned_user_id  && ($asignadoActual->status == 'Inactive' || $asignadoActual->is_group) ){
+                        global $db;
+                        global $current_user;
+                        //Actualiza cuenta con el usuario asignado de Lead
+                        $queryUpdateAssignadoCuenta = "UPDATE accounts_cstm SET user_id_c = '{$bean->assigned_user_id}' WHERE id_c = '{$bean->account_id}'";
+                        $db->query($queryUpdateAssignadoCuenta);
 
-                    global $db;
-                    global $current_user;
-                    //Actualiza cuenta con el usuario asignado de Lead
-                    $queryUpdateAssignadoCuenta = "UPDATE accounts_cstm SET user_id_c = '{$bean->assigned_user_id}' WHERE id_c = '{$bean->account_id}'";
-                    $db->query($queryUpdateAssignadoCuenta);
+                        //Inserta registro en tabla de auditoría para mantener rastreo de cambios
+                        $id_acc_audit=create_guid();
+                        $date= TimeDate::getInstance()->nowDb();
+                        $queryInsertAuditCuenta = "INSERT INTO accounts_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
+                        VALUES ('{$id_acc_audit}', '{$bean->account_id}', '{$date}', '{$current_user->id}', 'user_id_c', 'relate', '{$asignado_anterior}', '{$bean->assigned_user_id}', '', '', '1', '{$date}')";
+                        $db->query($queryInsertAuditCuenta);
 
-                    //Inserta registro en tabla de auditoría para mantener rastreo de cambios
-                    $id_acc_audit=create_guid();
-                    $date= TimeDate::getInstance()->nowDb();
-                    $queryInsertAuditCuenta = "INSERT INTO accounts_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
-                    VALUES ('{$id_acc_audit}', '{$bean->account_id}', '{$date}', '{$current_user->id}', 'user_id_c', 'relate', '{$asignado_anterior}', '{$bean->assigned_user_id}', '', '', '1', '{$date}')";
-                    $db->query($queryInsertAuditCuenta);
-
-                    //Recupera bean Uni_Productos - L
-                    $queryU = "update uni_productos u
-                       inner join accounts_uni_productos_1_c au on au.accounts_uni_productos_1uni_productos_idb = u.id 
-                       set u.assigned_user_id = '{$bean->assigned_user_id}'
-                       where au.accounts_uni_productos_1accounts_ida ='{$account->id}' and au.deleted=0 and u.tipo_producto = 1;";
-                    $queryResult = $db->query($queryU);
-                    //$GLOBALS['log']->fatal($queryU);
+                        //Recupera bean Uni_Productos - L
+                        $queryU = "update uni_productos u
+                           inner join accounts_uni_productos_1_c au on au.accounts_uni_productos_1uni_productos_idb = u.id 
+                           set u.assigned_user_id = '{$bean->assigned_user_id}'
+                           where au.accounts_uni_productos_1accounts_ida ='{$account->id}' and au.deleted=0 and u.tipo_producto = 1;";
+                        $queryResult = $db->query($queryU);
+                        //$GLOBALS['log']->fatal($queryU);
+                    }
                  }               
              }catch (Exception $e){
                  $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : Error ".$e->getMessage());
