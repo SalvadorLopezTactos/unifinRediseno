@@ -3,7 +3,7 @@ $dependencies['Cases']['area_interna_c'] = array
 (
     'hooks' => array("edit"),
     'trigger' => 'true',
-    'triggerFields' => array('case_fcr_c'),
+    'triggerFields' => array('tipo_seguimiento_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -11,7 +11,7 @@ $dependencies['Cases']['area_interna_c'] = array
             'params' => array(
                 'target' => 'area_interna_c',
                 'label' => 'LBL_AREA_INTERNA',
-                'value' => 'equal($case_fcr_c, true)',
+                'value' => 'equal($tipo_seguimiento_c, "1")',
             ),
         ),
     ),
@@ -22,7 +22,7 @@ $dependencies['Cases']['team_name'] = array
 (
     'hooks' => array("edit"),
     'trigger' => 'true',
-    'triggerFields' => array('case_fcr_c'),
+    'triggerFields' => array('tipo_seguimiento_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -30,7 +30,7 @@ $dependencies['Cases']['team_name'] = array
             'params' => array(
                 'target' => 'team_name',
                 'label' => 'LBL_TEAM_NAME',
-                'value' => 'equal($case_fcr_c, true)',
+                'value' => 'equal($tipo_seguimiento_c, "1")',
             ),
         ),
     ),
@@ -41,7 +41,7 @@ $dependencies['Cases']['follow_up_datetime'] = array
 (
     'hooks' => array("edit"),
     'trigger' => 'true',
-    'triggerFields' => array('case_fcr_c'),
+    'triggerFields' => array('tipo_seguimiento_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -49,7 +49,7 @@ $dependencies['Cases']['follow_up_datetime'] = array
             'params' => array(
                 'target' => 'follow_up_datetime',
                 'label' => 'LBL_FOLLOW_UP_DATETIME',
-                'value' => 'equal($case_fcr_c, true)',
+                'value' => 'equal($tipo_seguimiento_c, "1")',
             ),
         ),
     ),

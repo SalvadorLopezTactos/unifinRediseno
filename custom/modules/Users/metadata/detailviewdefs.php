@@ -449,11 +449,22 @@ array (
             'name' => 'reasignacion_po_c',
             'label' => 'LBL_REASIGNACION_PO',
           ),
-          1 => array (
+          1 => 
+          array (
             'readonly' => false,
             'name' => 'asignacion_po_c',
             'label' => 'LBL_ASIGNACION_PO',
           ),
+        ),
+        20 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'cancelar_casos_c',
+            'label' => 'LBL_CANCELAR_CASOS',
+          ),
+          1 => '',
         ),
       ),
       'lbl_detailview_panel4' => 
