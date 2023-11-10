@@ -246,7 +246,7 @@
 									//var Denominacion = data["company"]["legalName"]+" "+ data["company"]["entityType2"];
 									var Denominacion =  data["company"]["legalName"] + data["company"]["entityType4"];
 									var RegimenCapital = data["company"]["entityType4"];
-									var Constitucion = data["startedOperationsAt"];
+									var Constitucion = data["company"]["constitutionDate"];
 									var LegalName = data["company"]["legalName"];
 									Completo = Denominacion;
 									//Constitucion = Constitucion.substring(6, 10) + "-" + Constitucion.substring(3, 5) + "-" + Constitucion.substring(0, 2);
@@ -256,7 +256,8 @@
 									var Paterno = data["person"]["middleName"];
 									var Materno = data["person"]["lastName"];
 									var CURP = data["person"]["curp"];
-									var Nacimiento = '';//Atributo para fecha de nacimiento, no viene en la CSF
+									var Nacimiento = data["person"]["birthdate"];
+									Nacimiento = Nacimiento.split("T")[0];
 									Completo = Nombre + " " + Paterno + " " + Materno;
 									//Nacimiento = Nacimiento.substring(6, 10) + "-" + Nacimiento.substring(3, 5) + "-" + Nacimiento.substring(0, 2);
 									//Nacimiento = Nacimiento.split('T')[0];
