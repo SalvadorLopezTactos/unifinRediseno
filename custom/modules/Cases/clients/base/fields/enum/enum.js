@@ -60,7 +60,22 @@
                     }
                 }
             }
+
+            //Valor Cancelado únicamente se muestra al usuario que cuenta con el privilegio cancelar_casos_c
+            if( (App.user.get("cancelar_casos_c") == 0 || App.user.get("cancelar_casos_c") == "") && App.user.get("type") != "admin" ){
+                
+                var lista_status = app.lang.getAppListStrings("case_status_dom");
+                
+                Object.keys(lista_status).forEach(function (key) {
+                    if (key == "10") {
+                        delete lista_status[key];
+                    }
+                });
+
+                this.items = lista_status;
+            }
         }
         this._super('render');
-    }
+    },
+
 })

@@ -270,14 +270,11 @@ array (
               17 => 
               array (
                 'readonly' => false,
-                'name' => 'case_fcr_c',
-                'label' => 'LBL_CASE_FCR',
+                'name' => 'tipo_seguimiento_c',
+                'label' => 'LBL_TIPO_SEGUIMIENTO',
               ),
               18 => 
               array (
-                'readonly' => false,
-                'name' => 'case_hd_c',
-                'label' => 'LBL_CASE_HD',
               ),
             ),
           ),

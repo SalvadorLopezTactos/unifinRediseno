@@ -1,5 +1,5 @@
 <?php
- // created: 2022-11-24 11:59:22
+ // created: 2023-11-09 22:06:04
 $dictionary['Case']['fields']['status']['default']='1';
 $dictionary['Case']['fields']['status']['required']=true;
 $dictionary['Case']['fields']['status']['massupdate']=true;
@@ -22,6 +22,7 @@ $dictionary['Case']['fields']['status']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
+      6 => '10',
     ),
     2 => 
     array (
@@ -31,6 +32,7 @@ $dictionary['Case']['fields']['status']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
+      6 => '10',
     ),
     3 => 
     array (
@@ -40,6 +42,7 @@ $dictionary['Case']['fields']['status']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
+      6 => '10',
     ),
     4 => 
     array (
@@ -49,6 +52,7 @@ $dictionary['Case']['fields']['status']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
+      6 => '10',
     ),
     8 => 
     array (
@@ -58,6 +62,7 @@ $dictionary['Case']['fields']['status']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
+      6 => '10',
     ),
     10 => 
     array (
@@ -67,6 +72,7 @@ $dictionary['Case']['fields']['status']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
+      6 => '10',
     ),
     'B621' => 
     array (
@@ -76,6 +82,7 @@ $dictionary['Case']['fields']['status']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
+      6 => '10',
     ),
     'B601' => 
     array (
@@ -85,6 +92,7 @@ $dictionary['Case']['fields']['status']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
+      6 => '10',
     ),
     'CP5' => 
     array (
@@ -97,6 +105,7 @@ $dictionary['Case']['fields']['status']['visibility_grid']=array (
       6 => '7',
       7 => '8',
       8 => '9',
+      9 => '10',
     ),
     'SC6' => 
     array (
@@ -106,6 +115,7 @@ $dictionary['Case']['fields']['status']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
+      6 => '10',
     ),
   ),
 );

@@ -8,7 +8,7 @@
         this._super("initialize", [options]);
 
         this.model.addValidationTask('valida_user_holidays', _.bind(this.valida_user_holidays, this));
-        this.model.addValidationTask('valida_fcr_hd', _.bind(this.valida_fcr_hd, this));
+        //this.model.addValidationTask('valida_fcr_hd', _.bind(this.valida_fcr_hd, this));
         this.model.addValidationTask('valida_area_interna', _.bind(this.valida_area_interna, this));
         this.model.addValidationTask('valida_requeridos_min', _.bind(this.valida_requeridos_min, this));
         this.model.addValidationTask('valida_concluido', _.bind(this.valida_concluido, this));
@@ -17,6 +17,7 @@
 
         //this.model.on('sync', this.getPersonas, this);
         this.model.on('sync', this.setOpcionesAsesoresComerciales, this);
+        this.model.on("sync", this.blockCasoCancelado, this);
         this.model.on('change:account_name', this.getPersonas, this);
         this.model.on('change:type', this.setPriority, this);
         this.model.on('change:subtipo_c', this.setPriority, this);
@@ -99,7 +100,9 @@
 
     valida_area_interna:function(fields, errors, callback){
 
-        if(this.model.get('case_hd_c') && !$('[data-name="case_hd_c"]').hasClass('vis_action_hidden') && _.isEmpty(this.model.get('area_interna_c'))){
+        //if(this.model.get('case_hd_c') && !$('[data-name="case_hd_c"]').hasClass('vis_action_hidden') && _.isEmpty(this.model.get('area_interna_c'))){
+        //Al establecerse tipo segumiento = HD, se establece requerida el área interna
+        if( this.model.get('tipo_seguimiento_c') == '2'  && _.isEmpty(this.model.get('area_interna_c'))){
             errors['area_interna_c'] = errors['area_interna_c'] || {};
             errors['area_interna_c'].required = true;
         }
@@ -650,6 +653,33 @@
         this.setOpcionesProducto();
         this.setOpcionesProductoParaCredito();
         this.disableTipo();
+    },
+
+    blockCasoCancelado: function(){
+      //El registro se bloquea cuando se encuentra CANCELADO y no tiene el privilego especial
+      if ( this.model.get("status") == "10" && App.user.get('cancelar_casos_c') == 0 ) {
+        
+        app.alert.show("caso_cancelado", {
+          level: "error",
+          title: "Registro bloqueado",
+          messages:
+            "El registro se encuentra Cancelado",
+          autoClose: false,
+        });
+        //Bloquear el registro completo
+        $(".record-cell").attr("style", "pointer-events:none");
+        $('[name="edit_button"].rowaction').hide();
+        //Oculta botón de creación en subpaneles
+        $(".subpanels-layout")
+          .find(".filtered.tabbable")
+          .find('[name="create_button"]')
+          .hide();
+        //Oculta botón de acciones en subpaneles
+        $(".subpanels-layout")
+          .find(".filtered.tabbable")
+          .find(".btn.dropdown-toggle")
+          .hide();
+      }
     },
 
     setOpcionesProducto:function(){
