@@ -1,5 +1,5 @@
 <?php
- // created: 2022-08-03 19:02:34
+ // created: 2023-10-16 14:06:59
 
 $app_list_strings['equipo_list']=array (
   0 => '',
@@ -77,4 +77,6 @@ $app_list_strings['equipo_list']=array (
   'PAC' => 'PAC',
   'SLP' => 'SLP',
   'CENTRAL' => 'CENTRAL',
+  '' => '',
+  'RELATIONSHIP MANAGEMENT' => 'RELATIONSHIP MANAGEMENT',
 );

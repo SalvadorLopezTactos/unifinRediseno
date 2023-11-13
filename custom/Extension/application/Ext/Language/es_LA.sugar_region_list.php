@@ -1,17 +1,32 @@
 <?php
- // created: 2019-03-29 18:08:15
+ // created: 2022-08-03 19:01:21
 
 $app_list_strings['region_list']=array (
-  'Region 0' => '0',
   'CASA' => 'CASA',
   'METRO 1' => 'METRO 1',
   'METRO 2' => 'METRO 2',
   'METRO 8' => 'METRO 8',
   'NORTE' => 'NORTE',
-  'NOROESTE' => 'NOROESTE',
   'BAJIO' => 'BAJIO',
   'SUR' => 'SUR',
   'EXPRESS' => 'EXPRESS',
   'METROPOLITANA' => 'METROPOLITANA',
   'OCCIDENTE' => 'OCCIDENTE',
+  'NOROESTE' => 'NOROESTE',
+  'EXPERIENCE' => 'EXPERIENCE',
+  'METRO' => 'METRO',
+  'NOASIGNADA' => 'No Asignada',
+  'Region 0' => '0',
+  'HUNTERS' => 'Hunters',
+  'CORPORATIVA' => 'CORPORATIVA',
+  'Norte' => 'Norte',
+  'Sur' => 'Sur',
+  'Este' => 'Este',
+  'Oeste' => 'Oeste',
+  'Centro' => 'Centro',
+  'Noreste' => 'Noreste',
+  'Sureste' => 'Sureste',
+  'Noroeste' => 'Noroeste',
+  'Suroeste' => 'Suroeste',
+  'CENTRAL' => 'CENTRAL',
 );
