@@ -5004,28 +5004,7 @@
                     $(".record-cell").attr("style", "pointer-events:none");
                     $('[name="edit_button"].rowaction').hide();
                     
-                    //Oculta botón de creación en subpaneles
-                    $(".subpanels-layout")
-                    .find(".filtered.tabbable")
-                    .find('[name="create_button"]')
-                    .hide();
-                    //Oculta botón de acciones en subpaneles
-                    $(".subpanels-layout")
-                    .find(".filtered.tabbable")
-                    .find(".btn.dropdown-toggle")
-                    .hide();
-                    
-                    /*
-                    app.alert.show("cuentas_no_contactar", {
-                        level: "error",
-                        title: "Cuenta No Contactable<br>",
-                        messages:
-                        "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de " +
-                        equipo +
-                        "</b>",
-                        autoClose: false,
-                    });
-                    */
+                    this.ocultaOpcionesSubpanel();
 
                     /**LLAMADA A NUEVA VISTA */
                     if (Modernizr.touch) {
@@ -5056,6 +5035,32 @@
             }, this)
         });
         //}
+    },
+
+    ocultaOpcionesSubpanel: function (){
+      //Oculta botón de creación en subpaneles
+      $(".subpanels-layout")
+        .find(".filtered.tabbable")
+        .find('[name="create_button"]')
+        .hide();
+      //Oculta botón de creación en emails
+      $(".subpanels-layout")
+        .find(".filtered.tabbable")
+        .find('[name="email_compose_button"]')
+        .hide();
+      //Oculta botón de acciones en subpaneles
+      $(".subpanels-layout")
+        .find(".filtered.tabbable")
+        .find(".btn.dropdown-toggle")
+        .hide();
+
+        //Se lanza click para obligar mostrar los registros relacionados y de esta manera poder ocultar los botones de vista preliminar y acciones
+        $(".a11y-wrapper").trigger("click");
+
+        //Oculta botones de vista preliminar y acciones en cada registro de subpaneles
+        $("td.sticky-column.stick-right").hide();
+
+
     },
 
     blockRecordNoViable: function () {

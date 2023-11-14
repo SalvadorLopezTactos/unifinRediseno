@@ -13,7 +13,7 @@
 );*/
 
 $hook_array['before_save'][] = Array(
-    1,
+    2,
     'Conecta con Dynamics',
     'custom/modules/S_seguros/seguros_dynamics.php',
     'Seguros_dynamics',
@@ -21,7 +21,7 @@ $hook_array['before_save'][] = Array(
 );
 
 $hook_array['after_save'][] = Array(
-    1,
+    2,
     'creditaria',
     'custom/modules/S_seguros/creditaria.php',
     'creditaria_clas',
