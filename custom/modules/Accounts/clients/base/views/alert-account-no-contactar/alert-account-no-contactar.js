@@ -11,8 +11,9 @@
   events: {
     "click #btn-consultar": "consultarEstado",
     "click #btn-cerrar-modal-estado": "cerrarModalEstado",
+    "click .closeModalCuentaBloqueada": "closeModalCuentaBloqueada",
   },
-  
+
   initialize: function (options) {
     self_modal_get = this;
     this.texto_mostrar = options.context.param_equipo;
@@ -48,7 +49,7 @@
     this.bindDataChange();
   },
 
-  closeModal: function () {
+  closeModalCuentaBloqueada: function () {
     var modal = $("#alert-account-no-contactar");
     if (modal) {
       modal.hide();
