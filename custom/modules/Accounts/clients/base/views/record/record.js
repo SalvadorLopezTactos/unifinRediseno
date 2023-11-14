@@ -5053,14 +5053,6 @@
         .find(".filtered.tabbable")
         .find(".btn.dropdown-toggle")
         .hide();
-
-        //Se lanza click para obligar mostrar los registros relacionados y de esta manera poder ocultar los botones de vista preliminar y acciones
-        $(".a11y-wrapper").trigger("click");
-
-        //Oculta botones de vista preliminar y acciones en cada registro de subpaneles
-        $("td.sticky-column.stick-right").hide();
-
-
     },
 
     blockRecordNoViable: function () {
@@ -7331,14 +7323,14 @@
                                                 if(this.ids_responsables.includes(app.user.id)){
                                                     //Control para mostrar botón de bloqueo
                                                     if(
-                                                        (self.model.get('tct_no_contactar_chk_c') && !dataResumen.bloqueo_cartera_c) ||
+                                                        (contexto_cuenta.model.get('tct_no_contactar_chk_c') && !dataResumen.bloqueo_cartera_c) ||
                                                         (dataResumen.bloqueo_credito_c && !dataResumen.bloqueo2_c) ||
                                                         (dataResumen.bloqueo_cumple_c && !dataResumen.bloqueo3_c)
                                                     ){
                                                         $('[name="bloquea_cuenta"]').removeClass('hidden');
                                                     }
                                                     if(
-                                                        (self.model.get('tct_no_contactar_chk_c') && dataResumen.bloqueo_cartera_c) ||
+                                                        (contexto_cuenta.model.get('tct_no_contactar_chk_c') && dataResumen.bloqueo_cartera_c) ||
                                                         (dataResumen.bloqueo_credito_c && dataResumen.bloqueo2_c) ||
                                                         (dataResumen.bloqueo_cumple_c && dataResumen.bloqueo3_c)
                                                     ){
@@ -7360,7 +7352,7 @@
                                                     }
                                                     //Control para mostrar botón de desbloqueo
                                                     if(
-                                                        (self.model.get('tct_no_contactar_chk_c') || dataResumen.bloqueo_cartera_c) ||
+                                                        (contexto_cuenta.model.get('tct_no_contactar_chk_c') || dataResumen.bloqueo_cartera_c) ||
                                                         (dataResumen.bloqueo_credito_c || dataResumen.bloqueo2_c) ||
                                                         (dataResumen.bloqueo_cumple_c || dataResumen.bloqueo3_c)
                                                     ){
