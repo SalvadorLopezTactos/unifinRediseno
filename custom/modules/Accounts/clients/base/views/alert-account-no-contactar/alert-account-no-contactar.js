@@ -18,6 +18,11 @@
     self_modal_get = this;
     this.texto_mostrar = options.context.param_equipo;
     this.texto_mostrar = this.texto_mostrar.replace("<br>", ", ");
+
+    //Se quita del string la ùltima coma
+    if (this.texto_mostrar.charAt(this.texto_mostrar.length - 2) == ',') {
+      this.texto_mostrar = this.texto_mostrar.slice(0, -2);
+    }
     app.view.View.prototype.initialize.call(this, options);
     if (this.layout) {
       this.layout.on(
