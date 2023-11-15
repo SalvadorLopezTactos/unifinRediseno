@@ -5004,28 +5004,7 @@
                     $(".record-cell").attr("style", "pointer-events:none");
                     $('[name="edit_button"].rowaction').hide();
                     
-                    //Oculta botón de creación en subpaneles
-                    $(".subpanels-layout")
-                    .find(".filtered.tabbable")
-                    .find('[name="create_button"]')
-                    .hide();
-                    //Oculta botón de acciones en subpaneles
-                    $(".subpanels-layout")
-                    .find(".filtered.tabbable")
-                    .find(".btn.dropdown-toggle")
-                    .hide();
-                    
-                    /*
-                    app.alert.show("cuentas_no_contactar", {
-                        level: "error",
-                        title: "Cuenta No Contactable<br>",
-                        messages:
-                        "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de " +
-                        equipo +
-                        "</b>",
-                        autoClose: false,
-                    });
-                    */
+                    this.ocultaOpcionesSubpanel();
 
                     /**LLAMADA A NUEVA VISTA */
                     if (Modernizr.touch) {
@@ -5056,6 +5035,24 @@
             }, this)
         });
         //}
+    },
+
+    ocultaOpcionesSubpanel: function (){
+      //Oculta botón de creación en subpaneles
+      $(".subpanels-layout")
+        .find(".filtered.tabbable")
+        .find('[name="create_button"]')
+        .hide();
+      //Oculta botón de creación en emails
+      $(".subpanels-layout")
+        .find(".filtered.tabbable")
+        .find('[name="email_compose_button"]')
+        .hide();
+      //Oculta botón de acciones en subpaneles
+      $(".subpanels-layout")
+        .find(".filtered.tabbable")
+        .find(".btn.dropdown-toggle")
+        .hide();
     },
 
     blockRecordNoViable: function () {
@@ -7326,14 +7323,14 @@
                                                 if(this.ids_responsables.includes(app.user.id)){
                                                     //Control para mostrar botón de bloqueo
                                                     if(
-                                                        (self.model.get('tct_no_contactar_chk_c') && !dataResumen.bloqueo_cartera_c) ||
+                                                        (contexto_cuenta.model.get('tct_no_contactar_chk_c') && !dataResumen.bloqueo_cartera_c) ||
                                                         (dataResumen.bloqueo_credito_c && !dataResumen.bloqueo2_c) ||
                                                         (dataResumen.bloqueo_cumple_c && !dataResumen.bloqueo3_c)
                                                     ){
                                                         $('[name="bloquea_cuenta"]').removeClass('hidden');
                                                     }
                                                     if(
-                                                        (self.model.get('tct_no_contactar_chk_c') && dataResumen.bloqueo_cartera_c) ||
+                                                        (contexto_cuenta.model.get('tct_no_contactar_chk_c') && dataResumen.bloqueo_cartera_c) ||
                                                         (dataResumen.bloqueo_credito_c && dataResumen.bloqueo2_c) ||
                                                         (dataResumen.bloqueo_cumple_c && dataResumen.bloqueo3_c)
                                                     ){
@@ -7355,7 +7352,7 @@
                                                     }
                                                     //Control para mostrar botón de desbloqueo
                                                     if(
-                                                        (self.model.get('tct_no_contactar_chk_c') || dataResumen.bloqueo_cartera_c) ||
+                                                        (contexto_cuenta.model.get('tct_no_contactar_chk_c') || dataResumen.bloqueo_cartera_c) ||
                                                         (dataResumen.bloqueo_credito_c || dataResumen.bloqueo2_c) ||
                                                         (dataResumen.bloqueo_cumple_c || dataResumen.bloqueo3_c)
                                                     ){
