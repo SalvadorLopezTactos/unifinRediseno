@@ -80,3 +80,5 @@ $mod_strings['LBL_READ_ONLY_EMPRESA'] = 'Solo Lectura Empresa';
 $mod_strings['LBL_NUMERO_EMPLEADO'] = 'Número empleado';
 $mod_strings['LBL_ENVIO_CORREO_PO'] = '¿Se envió correo?';
 $mod_strings['LBL_ID_DIRECTOR_VOBO'] = 'Id Director VoBo';
+$mod_strings['LBL_ACCOUNT_REL_CONTACTO_ACCOUNT_ID'] = 'Cuenta relacionada a partir de Relación (relacionado Cuenta ID)';
+$mod_strings['LBL_ACCOUNT_REL_CONTACTO'] = 'Cuenta relacionada a partir de Relación';

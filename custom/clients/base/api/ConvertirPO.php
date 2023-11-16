@@ -41,7 +41,7 @@ class ConvertirPO extends SugarApi
             if ((!empty($beanPO) && !is_null($beanPO)) && (!empty($beanCuenta) && !is_null($beanCuenta)) ) {
                 $relacionesCuenta = $this->getRelacionesCuenta($beanCuenta);
 
-                $idCuentaRecuperada = $this->validaExistenciaPOenCuenta( $beanPO->email1 );
+                $idCuentaRecuperada = $this->validaExistenciaPOenCuenta( $beanPO->email1, $beanPO->rfc_c );
                 //$idCuentaRecuperada = $this->validaExistenciaPOenCuenta( "llamados@yopmail.com" );
                 
                 //El PO ya existe en cuentas
@@ -84,6 +84,7 @@ class ConvertirPO extends SugarApi
 
                 }else{//El PO no existe en cuentas
                     $idCuentaPersonaGenerada = $this->generaCuentaDesdePO($beanPO);
+                    
                     $GLOBALS['log']->fatal('CUENTA CREADA DESDE PO: '.$idCuentaPersonaGenerada);
 
                     //Crea Relación entre la cuenta encontrada y el id de la cuenta
@@ -94,6 +95,11 @@ class ConvertirPO extends SugarApi
                     $beanRelacion->account_id1_c = $idCuentaPersonaGenerada;
 
                     $beanRelacion->save();
+
+                    //Una vez generada la cuenta, el PO se establece Convertido y se establece campo relacionado con la cuenta a la que se le genera relación de la Persona recién creadsa
+                    $beanPO->estatus_po_c = '3';
+                    $beanPO->account_id2_c = $idCuenta;
+                    $beanPO->save();
 
                     $response = array(
                         "status" => 200,
@@ -106,7 +112,7 @@ class ConvertirPO extends SugarApi
             }else{
                 $response = array(
                     "status" => 404,
-                    "detalle" => "Los valores establecidos para idPO o idCuenta no son valores validos",
+                    "detalle" => "Los valores establecidos para idPO o idCuenta no son valores válidos",
                     "idCuentaPO" => ""
                 );
             }
@@ -122,7 +128,7 @@ class ConvertirPO extends SugarApi
     
     }
 
-    public function validaExistenciaPOenCuenta( $email ){
+    public function validaExistenciaPOenCuenta( $email, $rfc ){
 
         $accounts_bean = BeanFactory::newBean('Accounts');
         $accounts_bean->disable_row_level_security = true;
@@ -130,7 +136,12 @@ class ConvertirPO extends SugarApi
         $sql = new SugarQuery();
         $sql->select(array('id'));
         $sql->from( $accounts_bean );
-        $sql->where()->equals('email1', $email);
+        
+        if( $rfc != "" ){
+            $sql->where()->equals('rfc_c', $rfc);
+        }else{
+            $sql->where()->equals('email1', $email);
+        }
 
         $result = $sql->execute();
 
