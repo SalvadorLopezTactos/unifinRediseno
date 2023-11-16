@@ -98,7 +98,7 @@ class ConvertirPO extends SugarApi
 
                     //Una vez generada la cuenta, el PO se establece Convertido y se establece campo relacionado con la cuenta a la que se le genera relación de la Persona recién creadsa
                     $beanPO->estatus_po_c = '3';
-                    $beanPO->account_id2_c = $idCuenta;
+                    $beanPO->account_id2_c = $idCuentaPersonaGenerada;
                     $beanPO->save();
 
                     $response = array(
