@@ -62,7 +62,7 @@
             }
 
             //Valor Cancelado únicamente se muestra al usuario que cuenta con el privilegio cancelar_casos_c
-            if( (App.user.get("cancelar_casos_c") == 0 || App.user.get("cancelar_casos_c") == "") && App.user.get("type") != "admin" ){
+            if( (App.user.get("cancelar_casos_c") == 0 || App.user.get("cancelar_casos_c") == "") && App.user.get("type") != "admin" && this.model.get('status') !="10" ){
                 
                 var lista_status = app.lang.getAppListStrings("case_status_dom");
                 
