@@ -255,29 +255,29 @@ class IntegracionQuantico
         global $db;
         
         $OnboardingContact = "";
-        $queryGetCuentasRelaciones = "SELECT r.id,rc.account_id1_c,r.relaciones_activas, r.tipodecontacto FROM rel_relaciones_accounts_1_c ra
-INNER JOIN rel_relaciones r on ra.rel_relaciones_accounts_1rel_relaciones_idb = r.id
-INNER JOIN rel_relaciones_cstm rc ON r.id = rc.id_c
+        $queryGetCuentasRelaciones = "SELECT 
+    r.id,rc.account_id1_c,r.relaciones_activas, r.tipodecontacto, pc.id_c idPO
+FROM rel_relaciones_accounts_1_c ra
+    INNER JOIN rel_relaciones r on ra.rel_relaciones_accounts_1rel_relaciones_idb = r.id
+    INNER JOIN rel_relaciones_cstm rc ON r.id = rc.id_c
+    INNER JOIN prospects_cstm pc on pc.account_id2_c = rc.account_id1_c
 WHERE rel_relaciones_accounts_1accounts_ida = '{$bean->account_id}'
 AND r.relaciones_activas LIKE '^Contacto^'
-AND r.tipodecontacto = 'Promocion';";
+AND r.tipodecontacto = 'Promocion'
+AND ra.deleted=0
+AND r.deleted =0
+ORDER BY ra.date_modified desc
+limit 1
+;";
 
         $resultCuentasRelaciones = $db->query($queryGetCuentasRelaciones);
 
         $count_relaciones_contacto = $resultCuentasRelaciones->num_rows;
 
         if( $count_relaciones_contacto > 0 ){
-
+            
             while ($row = $db->fetchByAssoc($resultCuentasRelaciones)) {
-                $idCuentaRelacionContacto = $row['account_id1_c'];
-                
-                $selectPersonaPO = "SELECT id_c FROM prospects_cstm WHERE account_id2_c = '{$idCuentaRelacionContacto}';";
-                $resultSelectPersonaPO = $db->query($selectPersonaPO);
-
-                if( $resultSelectPersonaPO->num_rows > 0 ){
-                    $OnboardingContact = $idCuentaRelacionContacto;
-                }
-                
+                $OnboardingContact = $row['account_id1_c'];
             }
         }
 
