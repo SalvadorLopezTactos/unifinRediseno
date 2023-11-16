@@ -669,6 +669,11 @@
         //Bloquear el registro completo
         $(".record-cell").attr("style", "pointer-events:none");
         $('[name="edit_button"].rowaction').hide();
+
+        //Oculta botón de acciones
+        var header = $('[data-type="avatar"].record-cell').parent().parent();
+        header.find(".btn-toolbar").find("span.fieldset").hide();
+
         //Oculta botón de creación en subpaneles
         $(".subpanels-layout")
           .find(".filtered.tabbable")
