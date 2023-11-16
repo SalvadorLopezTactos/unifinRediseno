@@ -435,6 +435,16 @@ array (
                 'name' => 'fecha_asignacion_c',
                 'label' => 'LBL_FECHA_ASIGNACION',
               ),
+              43 => 
+              array (
+                'readonly' => false,
+                'name' => 'account_rel_contacto_c',
+                'studio' => 'visible',
+                'label' => 'LBL_ACCOUNT_REL_CONTACTO',
+              ),
+              44 => 
+              array (
+              ),
             ),
           ),
           2 => 
