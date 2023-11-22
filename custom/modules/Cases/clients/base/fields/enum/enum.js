@@ -73,6 +73,14 @@
                 });
 
                 this.items = lista_status;
+            }else{
+                //Se agrega Cancelado solo si el usuario tiene el privilegio de cancelar_casos
+                if(App.user.get("cancelar_casos_c") == 1 && this.items != undefined ){
+                    if( !Object.keys(this.items).includes("10") ){
+                        this.items['10']= "Cancelado"   
+                    }
+
+                }
             }
         }
         this._super('render');
