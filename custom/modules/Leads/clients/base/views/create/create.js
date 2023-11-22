@@ -48,6 +48,7 @@
         this.model.addValidationTask('check_direcciones', _.bind(this.validadireccexisting, this));
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
+        this.model.addValidationTask('valida_telefonos_requeridos',_.bind(this.valida_telefonos_requeridos, this));
     },
 
     delegateButtonEvents: function() {
@@ -115,7 +116,7 @@
     _hidechkLeadCancelado: function () {
         /****Oculta check Lead Cancelado solo al crear Lead****/
         this.$('[data-name=lead_cancelado_c]').hide();
-        this.validaCreacionLeadsSeguros();
+        //this.validaCreacionLeadsSeguros();
     },
 
     //oculta drawer de creación,únicamente se permite crear Leads a Usuarios con roles: Seguros, 	Seguros - Creditaria y Admins
@@ -1023,4 +1024,29 @@
           callback(null, fields, errors);
         }
     },
+
+    valida_telefonos_requeridos: function (fields, errors, callback){
+
+        if (((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
+            (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
+            (this.model.get('phone_work') == '' || this.model.get('phone_work') == null))){
+
+                app.alert.show("phone_required", {
+                  level: "error",
+                  autoClose: false,
+                  messages: "Al menos un teléfono es requerido",
+                });
+
+                $('[data-name="phone_work"]').css("border-color", "red");
+                $('[data-name="phone_home"]').css("border-color", "red");
+                $('[data-name="phone_mobile"]').css("border-color", "red");
+
+                errors["lead_telefonos"] = errors["xd"] || {};
+                errors["lead_telefonos"].required = true;
+
+        }
+
+        callback(null, fields, errors);
+        
+    }
 })

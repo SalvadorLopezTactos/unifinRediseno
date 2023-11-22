@@ -1565,24 +1565,10 @@
     },
 
     muestraBotonConversionLeads:function(){
-        //Oculta botón de conversión para todos los usuarios, excepto para roles: Seguros, 	Seguros - Creditaria
-        var currentUserRoles = App.user.get('roles');
-        var rolesSeguros = ['Seguros','Seguros - Creditaria'];
-        var includesSeguros =[];
-
-        for (let index = 0; index < currentUserRoles.length; index++) {
-            const rol = currentUserRoles[index];
-            
-            if( rolesSeguros.includes(rol) ){
-                includesSeguros.push("1");
-            }else{
-                includesSeguros.push("0");
-            }
-        }
-
-        if( !includesSeguros.includes('1') ){
-            var btnConvert = this.getField('convert_Leads_button');
-            btnConvert.dispose();
+        //muestra botón de Conversión para registros con Origen Seguros
+        if ( this.model.get("origen_c") != "11" ) {
+          var btnConvert = this.getField("convert_Leads_button");
+          btnConvert.dispose();
         }
     },
 

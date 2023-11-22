@@ -240,6 +240,7 @@ array (
               array (
                 'name' => 'origen_c',
                 'label' => 'LBL_ORIGEN',
+                'readonly' => true,
               ),
               17 => 
               array (
