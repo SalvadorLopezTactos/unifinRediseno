@@ -17,7 +17,7 @@
   initialize: function (options) {
     self_modal_get = this;
     this.texto_mostrar = options.context.param_equipo;
-    this.texto_mostrar = this.texto_mostrar.replace("<br>", ", ");
+    this.texto_mostrar = this.texto_mostrar.replaceAll("<br>", ", ");
 
     //Se quita del string la ùltima coma
     if (this.texto_mostrar.charAt(this.texto_mostrar.length - 2) == ',') {
