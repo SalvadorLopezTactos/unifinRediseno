@@ -58,6 +58,8 @@ class getAsesorCuenta extends SugarApi
                 $resultado['asesor']['nombre'] = $row['first_name'];
                 $resultado['asesor']['apellidos'] = $row['last_name'];
                 $resultado['asesor']['correo'] = $row['email_address'];
+                $resultado['asesor']['phone_mobile'] = $row['phone_mobile'];
+                $resultado['asesor']['ext_c'] = $row['ext_c'];
                 $equipo = $row['equipo_c'];
             }
             
@@ -83,6 +85,8 @@ class getAsesorCuenta extends SugarApi
                     $resultado['dirEquipo']['nombre'] = $row['first_name'];
                     $resultado['dirEquipo']['apellidos'] = $row['last_name'];
                     $resultado['dirEquipo']['correo'] = $row['email_address'];
+                    $resultado['dirEquipo']['phone_mobile'] = $row['phone_mobile'];
+                    $resultado['dirEquipo']['ext_c'] = $row['ext_c'];
                 }
             }
             
@@ -108,6 +112,8 @@ class getAsesorCuenta extends SugarApi
                     $resultado['dirRegional']['nombre'] = $row['first_name'];
                     $resultado['dirRegional']['apellidos'] = $row['last_name'];
                     $resultado['dirRegional']['correo'] = $row['email_address'];
+                    $resultado['dirRegional']['phone_mobile'] = $row['phone_mobile'];
+                    $resultado['dirRegional']['ext_c'] = $row['ext_c'];
                 }
             }
         }
