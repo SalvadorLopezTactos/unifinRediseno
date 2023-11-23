@@ -186,6 +186,7 @@
         this.model.addValidationTask('dataOrigen',_.bind(this.dataOrigen, this));
 		this.model.addValidationTask('SOCInicio', _.bind(this.SOCInicio, this));
 		this.model.addValidationTask('negocio_c', _.bind(this.negocios, this));
+		this.model.addValidationTask('validaCreacionLeasing', _.bind(this.validaCreacionLeasing, this));
     },
 
     /* producto_financiero: function () {
@@ -563,7 +564,8 @@
 
             app.alert.show("Monto de Linea requerido", {
                 level: "error",
-                title: "Monto de L\u00EDnea debe ser mayor a cero",
+                title: "Error",
+                messages: "Monto de L\u00EDnea debe ser mayor a cero",
                 autoClose: false
             });
         }
@@ -2614,4 +2616,21 @@
 		}
 		callback(null, fields, errors);
     },
+
+    //En la creación no se posible crear solicitudes con el Producto Leasing
+    validaCreacionLeasing: function (fields, errors, callback) {
+
+        if( this.model.get('tipo_producto_c') == '1' ){
+            app.alert.show("noLeasing", {
+              level: "error",
+              title: "Error",
+              messages:"No es posible crear solicitud con producto Leasing",
+              autoClose: false,
+            });
+            errors["tipo_producto_c"] = errors["tipo_producto_c"] || {};
+            errors["tipo_producto_c"].required = true;
+        }
+
+        callback(null, fields, errors);
+    }
 })

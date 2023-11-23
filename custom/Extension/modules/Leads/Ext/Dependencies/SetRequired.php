@@ -90,3 +90,21 @@ $dependencies['Leads']['nombre_empresa_c'] = array(
         ),
     ),
 );
+
+/*******************Puesto*****************/
+$dependencies['Leads']['puesto_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('regimen_fiscal_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired', //Action type
+            'params' => array(
+                'target' => 'puesto_c',
+                'label'  => 'LBL_PUESTO_C',
+                'value'  => 'not(equal($regimen_fiscal_c, "3"))',  //PF O PFAE
+            ),
+        ),
+    ),
+);

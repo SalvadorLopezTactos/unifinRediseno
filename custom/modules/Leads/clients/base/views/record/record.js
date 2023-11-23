@@ -1572,7 +1572,7 @@
 
         for (let index = 0; index < currentUserRoles.length; index++) {
             const rol = currentUserRoles[index];
-            
+
             if( rolesSeguros.includes(rol) ){
                 includesSeguros.push("1");
             }else{
@@ -1580,7 +1580,8 @@
             }
         }
 
-        if( !includesSeguros.includes('1') ){
+        //Se ocula botón para convertir en caso de que no tenga los roles Seguros','Seguros - Creditaria y además no es de origen Seguros
+        if( !includesSeguros.includes('1') && this.model.get("origen_c") != "11" ){
             var btnConvert = this.getField('convert_Leads_button');
             btnConvert.dispose();
         }

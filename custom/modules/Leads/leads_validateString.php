@@ -113,7 +113,7 @@ class leads_validateString
 
                 $query = "SELECT lc.id_c, lc.clean_name_c FROM leads_cstm lc JOIN leads l
                 on l.id = lc.id_c WHERE lc.clean_name_c = '{$bean->clean_name_c}'
-                AND lc.id_c <> '{$bean->id}' AND l.deleted =0";
+                AND lc.id_c <> '{$bean->id}' AND lc.subtipo_registro_c <>'3' AND l.deleted =0";
                 $results = $GLOBALS['db']->query($query);
 
                 //$result = $sql->execute();
@@ -132,6 +132,7 @@ class leads_validateString
                     ->equals('pb_id_c', $bean->pb_id_c)
                     ->equals('duns_id_c', $bean->duns_id_c);
                 $sqlLead->where()->notEquals('id', $bean->id);
+                $sqlLead->where()->notEquals('subtipo_registro_c','3');//Omite a los registros cancelados
                 $resultLead = $sqlLead->execute();
                 // $GLOBALS['log']->fatal("Result SugarQuery Lead " . print_r($resultLead));
                 $countLead = count($resultLead);
@@ -140,7 +141,7 @@ class leads_validateString
 
                 $idExistenteLead = $countLead>0? $resultLead[0]['id']:"";
 
-                //$GLOBALS['log']->fatal("c---- " . $countLead . "  " . $count);
+
                 if ($count > 0 || $countLead > 0) {
                     if ($_REQUEST['module'] != 'Import') {
 
