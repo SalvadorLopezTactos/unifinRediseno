@@ -3,6 +3,7 @@ array_push($job_strings, 'cargacsv');
 
 function cargacsv()
 {
+    $GLOBALS['log']->fatal('INICIA JOB, CARGA CSV - Reasigna cuentas');
     require_once 'include/SugarQuery/SugarQuery.php';
  		$beanQuery = BeanFactory::newBean('Documents');
 		$sugarQuery = new SugarQuery();
@@ -29,6 +30,7 @@ function cargacsv()
 			$file = 'upload/'.$nombre;
 			$contenido = sugar_file_get_contents($file);
 			$arr = explode("\n", $contenido);
+      $listaCuentas = [];
 			foreach ($arr as $key => $value) {
 				$row = explode(",", $value);
 				$idCuenta = $row[0];
@@ -46,13 +48,26 @@ function cargacsv()
 					$args['data']['producto_seleccionado'] = $producto;
 					$args['data']['promoActual'] = $idAsesorActual;
 					$args['data']['nombreArchivo'] = $nombre;
+          $args['data']['batch'] = true;
 					$callApi = new reAsignarCuentas();
 					$respuesta = $callApi->asignarCuentas('', $args);
-          if($respuesta[actualizados][0]) array_push($actualizados, $respuesta[actualizados][0]);
-          if($respuesta[no_actualizados][0]) array_push($no_actualizados, $respuesta[no_actualizados][0]);
+          if($respuesta['actualizados'][0]){
+             array_push($actualizados, $respuesta['actualizados'][0]);
+             //Agrega cuenta para sincronizar con Quantico
+             $cuentaQ = [
+                 'AccountId' => $idCuenta,
+                 'AdviserId' => $idAsesorReasignado,
+             ];
+             $listaCuentas[] = $cuentaQ;
+           }
+          if($respuesta['no_actualizados'][0]) array_push($no_actualizados, $respuesta['no_actualizados'][0]);
           $total = $total + 1;
 				}
 			}
+      //Generar actualización a Quantico
+      if(!empty($listaCuentas)){
+          $asignaQuantico = $callApi->reasignaQuantico($listaCuentas);
+      }
       $fecha = date("YmdHis");
       $nombres = substr($nombre, 14, -4);
       $url = $GLOBALS['sugar_config']['site_url'];
@@ -86,5 +101,6 @@ function cargacsv()
       $mailer->addRecipientsTo(new EmailIdentity($correo, $usuario->first_name . ' ' . $usuario->last_name));
       $result = $mailer->send();
 		}
+    $GLOBALS['log']->fatal('TERMINA JOB, CARGA CSV - Reasigna cuentas');
 		return true;
 }
