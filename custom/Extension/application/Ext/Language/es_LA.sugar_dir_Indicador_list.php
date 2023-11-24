@@ -1,5 +1,5 @@
 <?php
- // created: 2022-06-15 14:33:56
+ // created: 2023-11-24 13:21:03
 
 $app_list_strings['dir_Indicador_list']=array (
   0 => 'Sin Indicador',
@@ -66,4 +66,5 @@ $app_list_strings['dir_Indicador_list']=array (
   61 => 'Correspondencia, Entrega de Bienes, Operativa, Administración y Entrega de Tarjetas',
   62 => 'Fiscal, Entrega de Bienes, Operativa, Administración y Entrega de Tarjetas',
   63 => 'Correspondencia, Fiscal, Entrega de Bienes, Operativa, Administración y Entrega de Tarjetas',
+  64 => 'Buró Crédito',
 );
