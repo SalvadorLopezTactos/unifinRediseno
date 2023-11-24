@@ -553,7 +553,12 @@ array (
             'name' => 'cancelar_casos_c',
             'label' => 'LBL_CANCELAR_CASOS',
           ),
-          1 => '',
+          1 => 
+          array (
+            'readonly' => false,
+            'name' => 'seguimiento_bc_c',
+            'label' => 'LBL_SEGUIMIENTO_BC',
+          ),
         ),
       ),
       'lbl_editview_panel5' => 
