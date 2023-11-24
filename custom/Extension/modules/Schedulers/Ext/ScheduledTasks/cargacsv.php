@@ -54,11 +54,16 @@ function cargacsv()
           if($respuesta['actualizados'][0]){
              array_push($actualizados, $respuesta['actualizados'][0]);
              //Agrega cuenta para sincronizar con Quantico
-             $cuentaQ = [
-                 'AccountId' => $idCuenta,
-                 'AdviserId' => $idAsesorReasignado,
-             ];
-             $listaCuentas[] = $cuentaQ;
+             //Sólo aplica para producto leasing
+             if($producto == 'LEASING'){
+                 $cuentaQ = [
+                     'ClientId' => $idCuenta,
+                     'AdviserId' => $idAsesorReasignado,
+                     'ProductId' => "41",
+                     'ProductTypeId' => "1"
+                 ];
+                 $listaCuentas[] = $cuentaQ;
+             }
            }
           if($respuesta['no_actualizados'][0]) array_push($no_actualizados, $respuesta['no_actualizados'][0]);
           $total = $total + 1;

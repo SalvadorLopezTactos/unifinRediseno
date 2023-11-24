@@ -433,11 +433,16 @@ class reAsignarCuentas extends SugarApi
                 //Guarda cuenta CRM
                 $account->save();
                 //Agrega cuenta para sincronizar con Quantico
-                $cuentaQ = [
-                    'AccountId' => $account->id,
-                    'AdviserId' => $reAsignado,
-                ];
-                $listaCuentas[] = $cuentaQ;
+                //Sólo aplica para producto leasing
+                if($product == 'LEASING'){
+                    $cuentaQ = [
+                        'ClientId' => $account->id,
+                        'AdviserId' => $reAsignado,
+                        'ProductId' => "41",
+                        'ProductTypeId' => "1"
+                    ];
+                    $listaCuentas[] = $cuentaQ;
+                }
 
                 array_push($actualizados, $account->id);
 
