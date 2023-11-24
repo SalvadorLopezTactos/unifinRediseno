@@ -43,6 +43,8 @@ class reAsignarCuentas extends SugarApi
         $nombreArchivo = $args['data']['nombreArchivo'];
         $statusProducto = $args['data']['status_producto'];
         $idProducto = $args['data']['producto_seleccionado_id'];
+        $batch = isset($args['data']['batch']) ? $args['data']['batch'] : false;
+        $listaCuentas = [];
 
         $GLOBALS['log']->fatal("cuentas " . print_r($args['data']['seleccionados'], true));
 
@@ -428,8 +430,14 @@ class reAsignarCuentas extends SugarApi
                         $account->user_id8_c = $reAsignado;
                         break;
                 }
-
+                //Guarda cuenta CRM
                 $account->save();
+                //Agrega cuenta para sincronizar con Quantico
+                $cuentaQ = [
+                    'AccountId' => $account->id,
+                    'AdviserId' => $reAsignado,
+                ];
+                $listaCuentas[] = $cuentaQ;
 
                 array_push($actualizados, $account->id);
 
@@ -613,6 +621,13 @@ SQL;
         }
         $main_array['actualizados'] = $actualizados;
         $main_array['no_actualizados'] = $no_actualizados;
+        //Genera actualización Quantico
+        $GLOBALS['log']->fatal('Previo');
+        if(!$batch && !empty($listaCuentas) ){
+          $asignaQuantico = $this->reasignaQuantico($listaCuentas);
+        }
+        
+        //Genera archivo de errores
         if (count($no_actualizados) > 0 && $nombreArchivo != null && !empty($nombreArchivo)) {
             $fichero = 'custom/errores_reasignacion/' . $nombreArchivo . '.txt';
             $texto_archivo = '';
@@ -757,5 +772,46 @@ where rel.account_id='{$idCuenta}'
 
         return $existeOpp;
 
+    }
+    
+    public function reasignaQuantico($listaCuentas)
+    {
+        // URL del endpoint
+        global $sugar_config;
+        $quanticoHost = $sugar_config['quantico_url_base'];
+        $user = $sugar_config['quantico_usr'];
+        $pwd = $sugar_config['quantico_psw'];
+        $auth_encode = base64_encode($user . ':' . $pwd);
+        $endpoint = $quanticoHost."/CreditRequestIntegration/rest/CreditRequestApi/UpdateAdviserCreditRequest";
+
+        // Convertir los datos a formato JSON
+        $jsonData = json_encode($listaCuentas);
+        $GLOBALS['log']->fatal("Petición de endpoit: ".$endpoint);
+        $GLOBALS['log']->fatal($jsonData);
+
+        // Configurar la solicitud cURL
+        $ch = curl_init($endpoint);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+          'Content-Type: application/json',
+          'Authorization: Basic ' . $auth_encode
+        ]);
+
+        // Ejecutar la solicitud cURL y obtener la respuesta
+        $response = curl_exec($ch);
+
+        // Verificar si hay errores en la solicitud cURL
+        if (curl_errno($ch)) {
+          $GLOBALS['log']->fatal('Error al realizar la solicitud cURL: ' . curl_error($ch));
+        }
+        // Cerrar la conexión cURL
+        curl_close($ch);
+
+        // Imprimir la respuesta de la API
+        $GLOBALS['log']->fatal("Respuesta de endpoit: ".$endpoint);
+        $GLOBALS['log']->fatal($response);
+        return true;
     }
 }
