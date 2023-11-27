@@ -47,6 +47,7 @@ class reAsignarCuentas extends SugarApi
         $listaCuentas = [];
 
         $GLOBALS['log']->fatal("cuentas " . print_r($args['data']['seleccionados'], true));
+        $listaUsuarios = $this->getUsersDetail("'".$reAsignado."'");
 
 
         if ($product == "LEASING") {
@@ -437,7 +438,7 @@ class reAsignarCuentas extends SugarApi
                 if($product == 'LEASING'){
                     $cuentaQ = [
                         'ClientId' => $account->id,
-                        'AdviserId' => $reAsignado,
+                        'AdviserId' => $listaUsuarios[$reAsignado],
                         'ProductId' => "41",
                         'ProductTypeId' => "1"
                     ];
@@ -818,5 +819,19 @@ where rel.account_id='{$idCuenta}'
         $GLOBALS['log']->fatal("Respuesta de endpoit: ".$endpoint);
         $GLOBALS['log']->fatal($response);
         return true;
+    }
+    
+    public function getUsersDetail($listaUsuarios)
+    {
+        $usuarios = [];
+        $queryU = "SELECT id_c, id_active_directory_c FROM users_cstm WHERE id_c IN ($listaUsuarios)";
+        $resultU = $GLOBALS['db']->query($queryU);
+
+        while ($row = $GLOBALS['db']->fetchByAssoc($resultU)) {
+            $usuarios[$row['id_c']] = $row['id_active_directory_c'];
+        }
+
+        return $usuarios;
+
     }
 }
