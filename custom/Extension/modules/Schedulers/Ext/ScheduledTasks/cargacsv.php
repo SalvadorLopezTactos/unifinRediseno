@@ -31,12 +31,15 @@ function cargacsv()
 			$contenido = sugar_file_get_contents($file);
 			$arr = explode("\n", $contenido);
       $listaCuentas = [];
+      $idsUsuarios = "'1'";
+      $listaUsuarios = [];
 			foreach ($arr as $key => $value) {
 				$row = explode(",", $value);
 				$idCuenta = $row[0];
 				if($idCuenta != "" && $idCuenta != "idCuenta"){
 					$idAsesorReasignado = $row[1];
 					$idAsesorActual = $row[2];
+          $idsUsuarios .= ",'".$idAsesorReasignado."'";
 					$producto = $row[3];
 					$cuentas = array();
 					array_push($cuentas, $idCuenta);
@@ -70,7 +73,12 @@ function cargacsv()
 				}
 			}
       //Generar actualización a Quantico
+      $listaUsuarios = $callApi->getUsersDetail($idsUsuarios);
       if(!empty($listaCuentas)){
+          $totalUsers = count($listaUsuarios);
+          for ($i = 0; $i < $totalUsers; $i++) {
+            $listaCuentas[$i]['AdviserId'] = $listaUsuarios[$listaCuentas[$i]['AdviserId']];
+          }
           $asignaQuantico = $callApi->reasignaQuantico($listaCuentas);
       }
       $fecha = date("YmdHis");
