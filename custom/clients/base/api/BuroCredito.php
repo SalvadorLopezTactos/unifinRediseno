@@ -27,6 +27,13 @@ class BuroCredito extends SugarApi
                 'method' => 'deleteClientesBuroCredito',
                 'shortHelp' => 'Elimina del seguimiento de buró de crédito la cuenta enviada como parámetro',
             ),
+            'AddBuroCredito' => array(
+                'reqType' => 'POST',
+                'path' => array('AgregarClienteBuroCredito'),
+                'pathVars' => array(''),
+                'method' => 'addClienteBuroCredito',
+                'shortHelp' => 'Agrega a seguimiento de buró de crédito la cuenta enviada como parámetro',
+            ),
         );
     }
 
@@ -83,6 +90,116 @@ AND rc.seguimiento_bc_c = 1 ";
             "id"=> $idCliente
         );
 
+
+    }
+
+    public function addClienteBuroCredito($api, $args){
+        //Establece bandera de seguimiento
+        $idCliente = $args['idCliente'];
+        $beanResumen = BeanFactory::getBean('tct02_Resumen', $idCliente);
+        $beanResumen->seguimiento_bc_c = 1;
+        $beanResumen->save();
+
+        $response = array();
+
+        //Obtiene direcciones del cliente para que, en caso de tener dirección fiscal, dicha dirección se establece con el nuevo tipo "Buró de Crédito"
+        //y se observa en la nueva sección dentro de Cuentas
+        $beanDireccionFiscal = $this->getDireFiscal( $idCliente );
+
+        if( $beanDireccionFiscal != "" ){
+            //Se genera nueva Dirección Buró de Crédito solo si el Cliente no cuenta con una
+            if( !$this->tieneDireBuroCredito( $idCliente ) ){
+                $beanNuevaDireccionBuro = BeanFactory::newBean('dire_Direccion');
+                
+                $beanNuevaDireccionBuro->name = $beanDireccionFiscal->name;
+                $beanNuevaDireccionBuro->dire_direccion_dire_codigopostaldire_codigopostal_ida = $beanDireccionFiscal->dire_direccion_dire_codigopostaldire_codigopostal_ida;
+                $beanNuevaDireccionBuro->dire_direccion_dire_municipiodire_municipio_ida = $beanDireccionFiscal->dire_direccion_dire_municipiodire_municipio_ida;
+                $beanNuevaDireccionBuro->dire_direccion_dire_estadodire_estado_ida = $beanDireccionFiscal->dire_direccion_dire_estadodire_estado_ida;
+                $beanNuevaDireccionBuro->dire_direccion_dire_paisdire_pais_ida = $beanDireccionFiscal->dire_direccion_dire_paisdire_pais_ida;
+                $beanNuevaDireccionBuro->dire_direccion_dire_coloniadire_colonia_ida = $beanDireccionFiscal->dire_direccion_dire_coloniadire_colonia_ida;
+
+                $beanNuevaDireccionBuro->calle = $beanDireccionFiscal->calle;
+                $beanNuevaDireccionBuro->numext = $beanDireccionFiscal->numext;
+                $beanNuevaDireccionBuro->numint = $beanDireccionFiscal->numint;
+                $beanNuevaDireccionBuro->indicador = '64';//Buró de Crédito
+
+                $beanNuevaDireccionBuro->accounts_dire_direccion_1accounts_ida = $beanDireccionFiscal->accounts_dire_direccion_1accounts_ida;
+
+                $beanNuevaDireccionBuro->save();
+
+                $response = array(
+                    "msg"=>"El Cliente ". $idCliente ." se ha establecido para seguimiento de Buró de Crédito",
+                    "id_direccion"=> $beanNuevaDireccionBuro->id
+                );
+
+            }
+        }else{
+            $response = array(
+                    "msg"=>"El Cliente ". $idCliente ." se ha establecido para seguimiento de Buró de Crédito",
+                    "id_direccion"=> ""
+                );
+        }
+
+        return $response;
+        
+    }
+
+    public function getDireFiscal( $idCliente ){
+        $beanCliente = BeanFactory::getBean('Accounts', $idCliente);
+
+        $direccion_fiscal = "";
+        //Obtiene las direcciones relacionadas para detectar la Fiscal y poder armar el cuerpo de la notificación
+        $indicador_direcciones_fiscales = array(2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55,58,59,62,63);
+        if ($beanCliente->load_relationship('accounts_dire_direccion_1')) {
+            $relatedDirecciones = $beanCliente->accounts_dire_direccion_1->getBeans();
+
+            if (!empty($relatedDirecciones)) {
+                        
+                foreach ($relatedDirecciones as $direccion) {
+                    //Valida si tiene dirección fiscal
+                    $indicador = $direccion->indicador;
+                    if( in_array($indicador,$indicador_direcciones_fiscales) && !$direccion->inactivo ){
+                        $GLOBALS['log']->fatal("La dirección fiscal encontrada es: ".$direccion->id);   
+                        $direccion_fiscal = $direccion;
+
+                        //Se aplica break para salir del ciclo al encontrar la dirección fiscal
+                        break;
+                    }
+                    
+                }
+            }
+        }
+
+        return $direccion_fiscal;
+
+    }
+
+    public function tieneDireBuroCredito( $idCliente ){
+
+        $beanCliente = BeanFactory::getBean('Accounts', $idCliente);
+
+        $direccion_buro = false;
+        
+        if ($beanCliente->load_relationship('accounts_dire_direccion_1')) {
+            $relatedDirecciones = $beanCliente->accounts_dire_direccion_1->getBeans();
+
+            if (!empty($relatedDirecciones)) {
+                        
+                foreach ($relatedDirecciones as $direccion) {
+                    //Valida si tiene dirección fiscal
+                    $indicador = $direccion->indicador;
+                    if( $indicador == '64' && !$direccion->inactivo ){
+                        $GLOBALS['log']->fatal("La dirección Buró de Crédito encontrada es: ".$direccion->id);   
+                        $direccion_buro = true;
+                        //Se aplica break para salir del ciclo al encontrar la dirección de buró
+                        break;
+                    }
+                    
+                }
+            }
+        }
+
+        return $direccion_buro;
 
     }
 

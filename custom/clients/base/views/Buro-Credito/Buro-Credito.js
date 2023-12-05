@@ -6,6 +6,7 @@
     "keyup #filtroBuro": "buscarClientesBuro",
     "click #btnBuscarClientesSinBuro": "buscarClientesSinBuro",
     "click #btnBorraBuroCredito": "borraClienteBuroCredito",
+    "click #btnAgregarBuroCredito": "agregarClienteBuroCredito",
   },
 
   initialize: function (options) {
@@ -13,16 +14,16 @@
 
     var mostrar = this.validaPermiso();
     this.loadViewBuro = false;
-    
-    if( !mostrar ){
-        var alertOptionsBuro = {
-          title: "Información",
-          messages: "No cuentas con el privilegio para accesar a esta vista",
-          level: "warning",
-        };
-        app.alert.show("sinPrivilegioBuro", alertOptionsBuro);
-        var route = app.router.buildRoute(this.module, null, "");
-        app.router.navigate(route, { trigger: true });
+
+    if (!mostrar) {
+      var alertOptionsBuro = {
+        title: "Información",
+        messages: "No cuentas con el privilegio para accesar a esta vista",
+        level: "warning",
+      };
+      app.alert.show("sinPrivilegioBuro", alertOptionsBuro);
+      var route = app.router.buildRoute(this.module, null, "");
+      app.router.navigate(route, { trigger: true });
     }
 
     this.cuentasBuro = [];
@@ -31,17 +32,16 @@
     this.getCuentasBuro();
   },
 
-  validaPermiso: function (){
+  validaPermiso: function () {
     var privilegio_buro = App.user.get("seguimiento_bc_c");
 
     var permiso = false;
 
-    if( privilegio_buro == 1 ){
-        permiso = true;
+    if (privilegio_buro == 1) {
+      permiso = true;
     }
 
     return permiso;
-    
   },
 
   /*
@@ -63,9 +63,9 @@
         if (data.length > 0) {
           self.cuentasBuro = data;
           self.tempCuentasBuro = data;
-        }else{
-            self.cuentasBuro = [];
-            self.tempCuentasBuro = [];
+        } else {
+          self.cuentasBuro = [];
+          self.tempCuentasBuro = [];
         }
 
         self.render();
@@ -134,44 +134,84 @@
     });
   },
 
-  borraClienteBuroCredito: function(e){
+  borraClienteBuroCredito: function (e) {
     self = this;
     var idBorrar = $(e.currentTarget).attr("val-id");
     var name = $(e.currentTarget).attr("val-name");
 
-    app.alert.show('confirmBorrarBuro', {
-            level: 'confirmation',
-            messages: 'Se procederá a eliminar del seguimiento al cliente:<br>' + name + '<br>¿Estás seguro?',
-            autoClose: false,
-            onConfirm: function () {
-                console.log("SE ELIMINARÁ EL ID: "+ idBorrar);
-                app.alert.show("deleteBuro", {
-                  level: "process",
-                  title: "Eliminando del seguimiento.",
-                  autoClose: false,
-                });
-                var urlBorrar = app.api.buildURL("BorrarClienteBuroCredito", '', {}, {});
-                
-                app.api.call("create", urlBorrar, {idCliente: idBorrar}, {
-                    success: _.bind(function (data) {
-                        app.alert.dismiss("deleteBuro");
-                        app.alert.show("successDelete", {
-                          level: "success",
-                          title: data.msg,
-                          autoClose: true,
-                        });
-
-                        //Una vez eliminado de la lista, se procede a cargar de nuevo para actualizar la lista 
-                        self.getCuentasBuro();
-                    }, this),
-                });
-
-
-            },
-            onCancel: function () {
-
-            }
+    app.alert.show("confirmBorrarBuro", {
+      level: "confirmation",
+      messages:
+        "Se procederá a eliminar del seguimiento al cliente:<br>" +
+        name +
+        "<br>¿Estás seguro?",
+      autoClose: false,
+      onConfirm: function () {
+        console.log("SE ELIMINARÁ EL ID: " + idBorrar);
+        app.alert.show("deleteBuro", {
+          level: "process",
+          title: "Eliminando del seguimiento.",
+          autoClose: false,
         });
+        var urlBorrar = app.api.buildURL("BorrarClienteBuroCredito","",{},{});
+
+        app.api.call("create", urlBorrar, { idCliente: idBorrar },{
+            success: _.bind(function (data) {
+              app.alert.dismiss("deleteBuro");
+              app.alert.show("successDelete", {
+                level: "success",
+                title: data.msg,
+                autoClose: true,
+              });
+
+              //Una vez eliminado de la lista, se procede a cargar de nuevo para actualizar la lista
+              self.getCuentasBuro();
+            }, this),
+          }
+        );
+      },
+      onCancel: function () {},
+    });
+  },
+
+  agregarClienteBuroCredito: function (e){
+    self = this;
+    var idBorrar = $(e.currentTarget).attr("val-id");
+    var name = $(e.currentTarget).attr("val-name");
+
+    app.alert.show("confirmAgregarBuro", {
+      level: "confirmation",
+      messages:
+        "Se procederá a establecer seguimiento al cliente:<br>" +
+        name +
+        "<br>¿Estás seguro?",
+      autoClose: false,
+      onConfirm: function () {
+        
+        app.alert.show("agregaBuro", {
+          level: "process",
+          title: "Agregando a Seguimiento de Buró de Crédito",
+          autoClose: false,
+        });
+        var urlAgregar = app.api.buildURL("AgregarClienteBuroCredito","",{},{});
+        app.api.call("create",urlAgregar,{ idCliente: idBorrar },{
+            success: _.bind(function (data) {
+              app.alert.dismiss("agregaBuro");
+              app.alert.show("successAgrega", {
+                level: "success",
+                title: data.msg,
+                autoClose: true,
+              });
+
+              //Una vez eliminado de la lista, se procede a cargar de nuevo para actualizar la lista
+              self.cuentasSinBuro = [];
+              self.getCuentasBuro();
+            }, this),
+          }
+        );
+      },
+      onCancel: function () {},
+    });
 
   },
 

@@ -5144,7 +5144,7 @@
         
         //Recupera información
         if (!_.isEmpty(idCuenta) && idCuenta != "") {
-            app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_dire_direccion_1'), null, {
+            app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_dire_direccion_1?filter[0][indicador][$not_equals]=64'), null, {
                 success: _.bind(function (data) {
                     contexto_cuenta.length_direcciones = data.records.length;
                     //Itera y agrega direcciones
@@ -5346,6 +5346,9 @@
             }
             
             this.model.set('account_direcciones', this.oDirecciones.direccion);
+            
+            this.model.set('account_direccion_buro_credito', contexto_dire_buro.direccionBuro);
+            
         }
         //Callback a validation task
         callback(null, fields, errors);
