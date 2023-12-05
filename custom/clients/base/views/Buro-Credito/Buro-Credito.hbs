@@ -1,0 +1,334 @@
+<style>
+        .container {
+            overflow-y:auto;
+            display:block;
+            width: 100%;
+        }
+
+        .cuentas {
+            display:table;
+            width: 90%;
+        }
+
+        .cuentasContainer {
+            height: 200px;
+            margin-top: 2%;
+            overflow-y:auto;
+        }
+
+        #containerHeader {
+            font-size: 18px;
+            margin-top: 2%;
+            margin-left: 1%;
+            line-height: 10px;
+        }
+
+        #successful {
+            margin-top: 10%;
+            font-size: 25px;
+            color: #33800d;
+        }
+
+		.modal {
+			position: fixed; /* Stay in place */
+			padding-top: 100px; /* Location of the box */
+			padding-bottom: 100px;
+			top: 0;
+			left:0;
+			/* width: 100%; /* Full width */
+			/*height: 100%; /* Full height */
+			overflow: auto; /* Enable scroll if needed */
+			background-color: rgb(0,0,0); /* Fallback color */
+			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+
+		/* Modal Content */
+		.modal-content {
+			position: relative;
+			background-color: #fefefe;
+			margin: auto;
+			padding: 1;
+			border: 1px solid #888;
+			width: 98%;
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+			-webkit-animation-name: animatetop;
+			-webkit-animation-duration: 0.4s;
+			animation-name: animatetop;
+			animation-duration: 0.4s
+		}
+
+		/* Add Animation */
+		@-webkit-keyframes animatetop {
+			from {top:-300px; opacity:0}
+			to {top:0; opacity:1}
+		}
+
+		@keyframes animatetop {
+			from {top:-300px; opacity:0}
+			to {top:0; opacity:1}
+		}
+
+		/* The Close Button */
+		.close {
+			color: white;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+		.modal-header {
+			padding: .5px 0px;
+			background-color: #21618C;
+			color: white;
+		}
+
+		.modal-body {
+			padding: .5px 0px;
+			font-size: 12px;
+			text-align: center;
+		}
+
+		.modal-footer {
+			padding: 2px 16px;
+			background-color: #21618C;
+			color: #ffffff;
+			font-size: 12px;
+			text-align: center;
+		}
+
+		.pointer {cursor: pointer;}
+
+        .fixed-height-table {
+            height: 300px; 
+            overflow-y: auto; /* Habilita el desplazamiento vertical */
+        }
+</style>
+
+    <div class="container" >
+        <h1 id="containerHeader" align="left" style="color:#22608c"><b>Buró de Crédito</b></h1>
+		<br>
+        <div class="row-fluid">
+            <div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 97%;">
+                <h1>
+                    <p style="vertical-align: middle;  margin: 5px;padding:5px">
+                       Lista de Clientes guardados para seguimiento de Buró de Crédito
+                    </p>
+                </h1>
+            </div>
+        </div>
+
+        {{!-- Sección de búsqueda para Clientes en Buró --}}
+        <div class="record row-fluid panel_body">
+            <div class="span2"></div>
+            <div class="span6 record-cell">
+                <div class="record-label">Búsqueda por nombre</div>
+                <span>
+                    <span>
+						<input id="filtroBuro" type="text" value="" style="width: 100%">
+                        <p class="help-block"></p>
+                    </span>
+                </span>
+            </div>
+            <div class="span2 record-cell" style="margin-left:10px;">
+                <div class="record-label">&nbsp;</div>
+                <span>
+                    <span>
+						<button class="btn btn-primary" id="btnBuscarClientesBuro" type="button" style="display:none">Buscar
+                            <img id='processing' style="display: none;" width="15" height="5" src="custom/Levementum/images/icon_processing.gif">
+                        </button>
+                    </span>
+                </span>
+            </div>
+            <div class="span2"></div>
+        </div>
+
+        {{!-- Sección para Clientes Marcados como Buró de crédito --}}
+        <div class="cuentasContainer tcenter">
+            {{#if tempCuentasBuro}}
+                <table class="cuentas" align="center" border="1">
+                    <tr>
+                        <th width="20%">Nombre</th>
+                        <th width="20%">Tipo</th>
+                        <th width="20%">Subtipo</th>
+                        <th width="20%">RFC</th>
+                        <th width="20%">Acción</th>
+                    </tr>
+
+                    {{#each tempCuentasBuro}}
+                        <tr class='single'>
+                            <td>
+                                <span sfuuid='880' class='list'>
+                                    <div class='ellipsis_inline' data-placement='bottom'>
+                                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>
+                                            <a href="#Accounts/{{id}}" target="_blank">{{name}}</a>
+                                        </span>
+                                    </div>
+                                </span>
+                            </td>
+
+                            <td>
+                                <span sfuuid='880' class='list'>
+                                    <div class='ellipsis_inline' data-placement='bottom'>
+                                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>
+                                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_cuenta_c}}</span>
+                                        </span>
+                                    </div>
+                                </span>
+                            </td>
+
+                            <td>
+                                <span sfuuid='880' class='list'>
+                                    <div class='ellipsis_inline' data-placement='bottom'>
+                                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>
+                                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_cuenta_c}}</span>
+                                        </span>
+                                    </div>
+                                </span>
+                            </td>
+
+                            <td>
+                                <span sfuuid='880' class='list'>
+                                    <div class='ellipsis_inline' data-placement='bottom'>
+                                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>
+                                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{rfc_c}}</span>
+                                        </span>
+                                    </div>
+                                </span>
+                            </td>
+
+                            <td>
+                                <span sfuuid='880' class='list'>
+                                    <div class='ellipsis_inline' data-placement='bottom'>
+                                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>
+                                            <button class="btn btn-primary" id="btnBorraBuroCredito" val-id="{{id}}" val-name="{{name}}" type="button">Eliminar de la lista
+                                                <img id='processingBorraBuro' style="display: none;" width="15" height="5" src="custom/Levementum/images/icon_processing.gif">
+                                            </button>
+                                        </span>
+                                    </div>
+                                </span>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
+            {{else}}
+                <div class="row-fluid" style="color:gray;">
+                    <div class="span12"><center>No existen registros en la lista de Seguimiento de Buró de Crédito</center></div>
+                </div>
+		    {{/if}}
+        </div>
+
+        {{!-- Sección para buscar Clientes potenciales para marcar en buró --}}
+        <br>
+        <div class="row-fluid">
+            <div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 97%;">
+                <h1>
+                    <p style="vertical-align: middle;  margin: 5px;padding:5px">
+                       Busca y selecciona a los clientes que deseas agregar para seguimiento de Buró de Crédito
+                    </p>
+                </h1>
+            </div>
+        </div>
+
+        {{!-- Sección de búsqueda para Cuentas tipo Cliente que no cuentan con el check de Buró de Crédito --}}
+        <div class="record row-fluid panel_body">
+            <div class="span2"></div>
+            <div class="span6 record-cell">
+                <div class="record-label">Búsqueda por nombre</div>
+                <span>
+                    <span>
+						<input id="filtroSinBuro" type="text" value="" style="width: 100%">
+                        <p class="help-block"></p>
+                    </span>
+                </span>
+            </div>
+            <div class="span2 record-cell" style="margin-left:10px;">
+                <div class="record-label">&nbsp;</div>
+                <span>
+                    <span>
+						<button class="btn btn-primary" id="btnBuscarClientesSinBuro" type="button">Buscar
+                            <img id='processingSinBuro' style="display: none;" width="15" height="5" src="custom/Levementum/images/icon_processing.gif">
+                        </button>
+                    </span>
+                </span>
+            </div>
+            <div class="span2"></div>
+        </div>
+
+         <div class="cuentasContainer tcenter">
+            <table class="cuentas" align="center" border="1">
+				<tr>
+					<th width="20%">Nombre</th>
+					<th width="20%">Tipo</th>
+					<th width="20%">Subtipo</th>
+					<th width="20%">RFC</th>
+					<th width="20%">Acción</th>
+				</tr>
+
+                {{#each cuentasSinBuro}}
+                <tr class='single'>
+                        <td>
+                            <span sfuuid='880' class='list'>
+                                <div class='ellipsis_inline' data-placement='bottom'>
+                                    <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>
+                                        <a href="#Accounts/{{id}}" target="_blank">{{name}}</a>
+                                    </span>
+                                </div>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span sfuuid='880' class='list'>
+                                <div class='ellipsis_inline' data-placement='bottom'>
+                                    <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>
+                                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_cuenta_c}}</span>
+                                    </span>
+                                </div>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span sfuuid='880' class='list'>
+                                <div class='ellipsis_inline' data-placement='bottom'>
+                                    <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>
+                                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_cuenta_c}}</span>
+                                    </span>
+                                </div>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span sfuuid='880' class='list'>
+                                <div class='ellipsis_inline' data-placement='bottom'>
+                                    <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>
+                                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{rfc_c}}</span>
+                                    </span>
+                                </div>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span sfuuid='880' class='list'>
+                                <div class='ellipsis_inline' data-placement='bottom'>
+                                    <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>
+                                        <button class="btn btn-primary" id="btnAgregarBuroCredito" val-id="{{id}}" val-name="{{name}}" type="button">Agregar a Seguimiento
+                                            <img id='processingAgregaBuro' style="display: none;" width="15" height="5" src="custom/Levementum/images/icon_processing.gif">
+                                        </button>
+                                    </span>
+                                </div>
+                            </span>
+                        </td>
+                    </tr>
+
+                {{/each}}
+            </table>
+        </div>
+
+        
+    </div>

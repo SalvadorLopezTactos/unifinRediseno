@@ -1,0 +1,131 @@
+{{!--
+/*
+ * Creado por: Salvador Lopez salvador.lopez@tactos.com.mx
+ */
+--}}
+<script>
+    //Agrega estilo select2
+    this.$('#DireccionNuevaBuro').find('select.select2').select2({
+      width:'100%'
+    });
+
+    //Agrega estilo multiselect
+    this.$('[data-field="multi_tipo_existing"].multi_tipo_existing').select2({
+        width:'100%',
+        minimumResultsForSearch:7,
+        closeOnSelect: false,
+        containerCssClass: 'select2-choices-pills-close'
+    });
+    this.$('[data-field="multi1_n_existing"].multi1_n_existing').select2({
+        width:'100%',
+        minimumResultsForSearch:7,
+        closeOnSelect: true,
+        containerCssClass: 'select2-choices-pills-close'
+    });
+    this.$('[data-field="multiTipoNew"].multiTipoNew').select2({
+        width:'100%',
+        minimumResultsForSearch:7,
+        closeOnSelect: false,
+        containerCssClass: 'select2-choices-pills-close'
+    });
+    this.$('[data-field="multiIndicadorNew"].multiIndicadorNew').select2({
+        width:'100%',
+        minimumResultsForSearch:7,
+        closeOnSelect: false,
+        containerCssClass: 'select2-choices-pills-close'
+    });
+
+</script>
+
+{{#if loadFieldDireccionBuro}}
+    <h4>&nbsp; Dirección Buró de Crédito</h4>
+    <div class="control-group direccion">
+        <table style="border: 2px solid lightblue; width: 100%;" cellspacing="1" cellpadding="5" id="DireccionNuevaBuro">
+            {{#each direccionBuro}}
+            <tr>
+                <td>
+                    <div>
+                        <div class="row-fluid" style="margin-top: 10px;">  <!--Fila 1 -->
+                        <div class="span4">
+                                <label class="record-label">Tipo</label>
+                                <select id="multiTipoNew" class="row-fluid select2 multiTipoNew" style="width: 100%" multiple="multiple" size="3" data-field="multiTipoNew">
+                                    {{#each listTipo}}
+                                        <option value="{{@key}}" {{ifMSelected @key ../tipoSeleccionados}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
+                        </div>
+
+                        </div> <!-- Cierra fila 1-->
+                        <div class="row-fluid" style="margin-top: 10px;">  <!--- Fila 2-->
+                            <div class="span4">
+                                <label class="record-label">Código Postal</label>
+                                <input type="text" id="newPostalInputTemp" class="newPostalInputTemp" value="{{valCodigoPostal}}">
+                            </div>
+                            <div class="span4">
+                                <label class="record-label">País</label>
+                                <select class="row-fluid newPais select2" data-field="pais" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                    {{#each listPais}}
+                                        <option value="{{@key}}" {{ifSelected @key ../pais}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="span4">
+                                <label class="record-label">Estado</label>
+                                <select class="row-fluid newEstado select2" data-field="estado" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                    {{#each listEstado}}
+                                        <option value="{{@key}}" {{ifSelected @key ../estado}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div> <!-- Cierra fila 2-->
+                        <div class="row-fluid" style="margin-top: 10px;">  <!--- Fila 3-->
+                            <div class="span4">
+                                <label class="record-label">Municipio</label>
+                                <select class="row-fluid newMunicipio select2" data-field="municipio" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                    {{#each listMunicipio}}
+                                        <option value="{{@key}}" {{ifSelected @key ../municipio}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="span4">
+                                <label class="record-label">Ciudad</label>
+                                <select class="row-fluid newCiudad select2" data-field="ciudad" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                    {{#each listCiudad}}
+                                        <option value="{{@key}}" {{ifSelected @key ../ciudad}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="span4">
+                                <label class="record-label">Colonia</label>
+                                <select class="row-fluid newColonia select2" data-field="colonia" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                    {{#each listColonia}}
+                                        <option value="{{@key}}" {{ifSelected @key ../colonia}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div> <!-- Cierra fila 3-->
+                            <div class="row-fluid" style="margin-top: 10px;">  <!--- Fila 4-->
+                                <div class="span4">
+                                    <label class="record-label">Calle</label>
+                                    <input type="text" class="newCalle" placeholder="Calle" value="{{calle}}" data-field="calle" maxlength = "100"/>
+                                </div>
+                                <div class="span4">
+                                    <label class="record-label">Número Exterior y Número Interior</label>
+                                    <br>
+                                    <input type="text" class="newNumExt" placeholder="numExt" value="{{numext}}" data-field="numext" style="width: 49%;margin: 0px;" maxlength = "50">
+                                    <input type="text" class="newNumInt" placeholder="numInt" value="{{numint}}" data-field="numint" style="width: 49%;margin: 0px;" maxlength = "100">
+                                </div>
+                            </div> <!-- Cierra fila 4-->
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+{{else}}
+<div class="row-fluid">
+    <div class="span6 record-cell">
+        <span> Información no disponible para el usuario </span>
+    </div>
+</div>
+{{/if}}
