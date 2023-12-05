@@ -31,12 +31,15 @@ function cargacsv()
 			$contenido = sugar_file_get_contents($file);
 			$arr = explode("\n", $contenido);
       $listaCuentas = [];
+      $idsUsuarios = "'1'";
+      $listaUsuarios = [];
 			foreach ($arr as $key => $value) {
 				$row = explode(",", $value);
 				$idCuenta = $row[0];
 				if($idCuenta != "" && $idCuenta != "idCuenta"){
 					$idAsesorReasignado = $row[1];
 					$idAsesorActual = $row[2];
+          $idsUsuarios .= ",'".$idAsesorReasignado."'";
 					$producto = $row[3];
 					$cuentas = array();
 					array_push($cuentas, $idCuenta);
@@ -54,18 +57,28 @@ function cargacsv()
           if($respuesta['actualizados'][0]){
              array_push($actualizados, $respuesta['actualizados'][0]);
              //Agrega cuenta para sincronizar con Quantico
-             $cuentaQ = [
-                 'AccountId' => $idCuenta,
-                 'AdviserId' => $idAsesorReasignado,
-             ];
-             $listaCuentas[] = $cuentaQ;
+             //Sólo aplica para producto leasing
+             if($producto == 'LEASING'){
+                 $cuentaQ = [
+                     'ClientId' => $idCuenta,
+                     'AdviserId' => $idAsesorReasignado,
+                     'ProductId' => "41",
+                     'ProductTypeId' => "1"
+                 ];
+                 $listaCuentas[] = $cuentaQ;
+             }
            }
           if($respuesta['no_actualizados'][0]) array_push($no_actualizados, $respuesta['no_actualizados'][0]);
           $total = $total + 1;
 				}
 			}
       //Generar actualización a Quantico
+      $listaUsuarios = $callApi->getUsersDetail($idsUsuarios);
       if(!empty($listaCuentas)){
+          $totalUsers = count($listaUsuarios);
+          for ($i = 0; $i < $totalUsers; $i++) {
+            $listaCuentas[$i]['AdviserId'] = $listaUsuarios[$listaCuentas[$i]['AdviserId']];
+          }
           $asignaQuantico = $callApi->reasignaQuantico($listaCuentas);
       }
       $fecha = date("YmdHis");
