@@ -235,8 +235,10 @@
         this.model.on('sync', this._hideVista360, this);
         //Display or Hide Proveedor Analizte
         this.model.on('sync', this._panel_anlzt_proveedor, this);
-         //Display or Hide Analizte Cliente
-         this.model.on('sync', this._panel_anlzt_cliente, this);
+        //Display or Hide Analizte Cliente
+        this.model.on('sync', this._panel_anlzt_cliente, this);
+
+        this.model.on('sync', this.hide_panel_buro_credito, this);
         //Solo Lectura campos Origen
         this.model.on('sync', this.readOnlyOrigen, this);
         /* @author F. Javier Garcia S. 10/07/2018
@@ -8964,6 +8966,16 @@ validaReqUniclickInfo: function () {
         }else{
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL24']").hide();
         }
+    },
+
+    hide_panel_buro_credito: function (){
+
+        var privilegio_buro = App.user.get("seguimiento_bc_c");
+
+        if (privilegio_buro == 0) {
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL27']").hide();
+        }
+
     },
 
     ocultaSolicitarCIEC: function () {
