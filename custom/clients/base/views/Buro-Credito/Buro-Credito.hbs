@@ -7,7 +7,7 @@
 
         .cuentas {
             display:table;
-            width: 90%;
+            width: 100%;
         }
 
         .cuentasContainer {
@@ -126,7 +126,7 @@
 
         {{!-- Sección de búsqueda para Clientes en Buró --}}
         <div class="record row-fluid panel_body">
-            <div class="span2"></div>
+            {{!-- <div class="span2"></div> --}}
             <div class="span6 record-cell">
                 <div class="record-label">Búsqueda por nombre</div>
                 <span>
@@ -152,7 +152,7 @@
         {{!-- Sección para Clientes Marcados como Buró de crédito --}}
         <div class="cuentasContainer tcenter">
             {{#if tempCuentasBuro}}
-                <table class="cuentas" align="center" border="1">
+                <table class="cuentas" border="1">
                     <tr>
                         <th width="20%">Nombre</th>
                         <th width="20%">Tipo</th>
@@ -238,7 +238,7 @@
 
         {{!-- Sección de búsqueda para Cuentas tipo Cliente que no cuentan con el check de Buró de Crédito --}}
         <div class="record row-fluid panel_body">
-            <div class="span2"></div>
+            {{!-- <div class="span2"></div> --}}
             <div class="span6 record-cell">
                 <div class="record-label">Búsqueda por nombre</div>
                 <span>
@@ -262,7 +262,7 @@
         </div>
 
          <div class="cuentasContainer tcenter">
-            <table class="cuentas" align="center" border="1">
+            <table class="cuentas" border="1">
 				<tr>
 					<th width="20%">Nombre</th>
 					<th width="20%">Tipo</th>
