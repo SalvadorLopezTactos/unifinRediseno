@@ -1,5 +1,5 @@
 <?php
- // created: 2018-01-10 14:11:26
+ // created: 2023-12-06 17:06:05
 
 $app_list_strings['estados_list']=array (
   1 => 'SIN ESTADO',
@@ -11,20 +11,20 @@ $app_list_strings['estados_list']=array (
   7 => 'COLIMA',
   8 => 'CHIAPAS',
   9 => 'CHIHUAHUA',
-  10 => 'DISTRITO FEDERAL',
+  10 => 'CIUDAD DE MÉXICO',
   11 => 'DURANGO',
   12 => 'GUANAJUATO',
   13 => 'GUERRERO',
   14 => 'HIDALGO',
   15 => 'JALISCO',
-  16 => 'ESTADO DE MEXICO',
-  17 => 'MICHOACAN',
+  16 => 'MEXICO',
+  17 => 'MICHOACAN DE OCAMPO',
   18 => 'MORELOS',
   19 => 'NAYARIT',
-  20 => 'NUEVO LEON',
+  20 => 'NUEVO LEÓN',
   21 => 'OAXACA',
   22 => 'PUEBLA',
-  23 => 'QUERETARO',
+  23 => 'QUERÉTARO',
   24 => 'QUINTANA ROO',
   25 => 'SAN LUIS POTOSI',
   26 => 'SINALOA',
@@ -32,8 +32,8 @@ $app_list_strings['estados_list']=array (
   28 => 'TABASCO',
   29 => 'TAMAULIPAS',
   30 => 'TLAXCALA',
-  31 => 'VERACRUZ',
-  32 => 'YUCATAN',
+  31 => 'VERACRUZ DE IGNACIO DE LA LLAVE',
+  32 => 'YUCATÁN',
   33 => 'ZACATECAS',
   56 => 'TOLUCA',
   63 => 'ZACATECAS',
