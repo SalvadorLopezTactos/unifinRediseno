@@ -107,13 +107,13 @@ AND rc.seguimiento_bc_c = 1 ";
 
         //Obtiene direcciones del cliente para que, en caso de tener dirección fiscal, dicha dirección se establece con el nuevo tipo "Buró de Crédito"
         //y se observa en la nueva sección dentro de Cuentas
-        $beanDireccionFiscal = $this->getDireFiscal( $idCliente );
+        $beanDireccionFiscal = $this->getDireFiscal($idCliente);
 
-        if( $beanDireccionFiscal != "" ){
+        if ($beanDireccionFiscal != "") {
             //Se genera nueva Dirección Buró de Crédito solo si el Cliente no cuenta con una
-            if( !$this->tieneDireBuroCredito( $idCliente ) ){
+            if (!$this->tieneDireBuroCredito($idCliente)) {
                 $beanNuevaDireccionBuro = BeanFactory::newBean('dire_Direccion');
-                
+
                 $beanNuevaDireccionBuro->name = $beanDireccionFiscal->name;
                 $beanNuevaDireccionBuro->dire_direccion_dire_codigopostaldire_codigopostal_ida = $beanDireccionFiscal->dire_direccion_dire_codigopostaldire_codigopostal_ida;
                 $beanNuevaDireccionBuro->dire_direccion_dire_municipiodire_municipio_ida = $beanDireccionFiscal->dire_direccion_dire_municipiodire_municipio_ida;
@@ -124,27 +124,30 @@ AND rc.seguimiento_bc_c = 1 ";
                 $beanNuevaDireccionBuro->calle = $beanDireccionFiscal->calle;
                 $beanNuevaDireccionBuro->numext = $beanDireccionFiscal->numext;
                 $beanNuevaDireccionBuro->numint = $beanDireccionFiscal->numint;
-                $beanNuevaDireccionBuro->indicador = '64';//Buró de Crédito
+                $beanNuevaDireccionBuro->indicador = '64'; //Buró de Crédito
 
                 $beanNuevaDireccionBuro->accounts_dire_direccion_1accounts_ida = $beanDireccionFiscal->accounts_dire_direccion_1accounts_ida;
 
                 $beanNuevaDireccionBuro->save();
 
                 $response = array(
-                    "msg"=>"El Cliente ". $beanCliente->name ." se ha establecido para seguimiento de Buró de Crédito",
-                    "id_direccion"=> $beanNuevaDireccionBuro->id
+                    "msg" => "El Cliente " . $beanCliente->name . " se ha establecido para seguimiento de Buró de Crédito",
+                    "id_direccion" => $beanNuevaDireccionBuro->id
                 );
-
+            } else {
+                $response = array(
+                    "msg" => "El Cliente " . $beanCliente->name . " se ha establecido para seguimiento de Buró de Crédito",
+                    "id_direccion" => "Ya cuenta con dirección Buró de Crédito previa"
+                );
             }
-        }else{
+        } else {
             $response = array(
-                    "msg"=>"El Cliente ". $beanCliente->name ." se ha establecido para seguimiento de Buró de Crédito",
-                    "id_direccion"=> ""
-                );
+                "msg" => "El Cliente " . $beanCliente->name . " se ha establecido para seguimiento de Buró de Crédito",
+                "id_direccion" => ""
+            );
         }
 
         return $response;
-        
     }
 
     public function getDireFiscal( $idCliente ){
