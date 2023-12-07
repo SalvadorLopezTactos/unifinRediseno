@@ -85,8 +85,10 @@ AND rc.seguimiento_bc_c = 1 ";
 
         $beanResumen->save();
 
+        $beanCliente = BeanFactory::getBean('Accounts', $idCliente);
+
         return array(
-            "msg"=>"El Cliente ".$beanResumen->name." ha sido removido del seguimiento de Buró de Crédito",
+            "msg"=>"El Cliente ". $beanCliente->name." ha sido removido del seguimiento de Buró de Crédito",
             "id"=> $idCliente
         );
 
@@ -97,6 +99,7 @@ AND rc.seguimiento_bc_c = 1 ";
         //Establece bandera de seguimiento
         $idCliente = $args['idCliente'];
         $beanResumen = BeanFactory::getBean('tct02_Resumen', $idCliente);
+        $beanCliente = BeanFactory::getBean('Accounts', $idCliente);
         $beanResumen->seguimiento_bc_c = 1;
         $beanResumen->save();
 
@@ -128,14 +131,14 @@ AND rc.seguimiento_bc_c = 1 ";
                 $beanNuevaDireccionBuro->save();
 
                 $response = array(
-                    "msg"=>"El Cliente ". $idCliente ." se ha establecido para seguimiento de Buró de Crédito",
+                    "msg"=>"El Cliente ". $beanCliente->name ." se ha establecido para seguimiento de Buró de Crédito",
                     "id_direccion"=> $beanNuevaDireccionBuro->id
                 );
 
             }
         }else{
             $response = array(
-                    "msg"=>"El Cliente ". $idCliente ." se ha establecido para seguimiento de Buró de Crédito",
+                    "msg"=>"El Cliente ". $beanCliente->name ." se ha establecido para seguimiento de Buró de Crédito",
                     "id_direccion"=> ""
                 );
         }

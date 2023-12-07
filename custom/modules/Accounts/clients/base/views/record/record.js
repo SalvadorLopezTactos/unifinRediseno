@@ -8970,12 +8970,21 @@ validaReqUniclickInfo: function () {
 
     hide_panel_buro_credito: function (){
 
-        var privilegio_buro = App.user.get("seguimiento_bc_c");
+        //Obtiene bandera de buró del registro de Resumen relacionado
+        var url = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+		app.api.call('read', url, {}, {
+			success: _.bind(function (resumen) {
+                var privilegio_buro = App.user.get("seguimiento_bc_c");
+				if( resumen.seguimiento_bc_c == "" || resumen.seguimiento_bc_c==0 ) {
+					this.$("[data-panelname='LBL_RECORDVIEW_PANEL27']").hide();
+				}else{
+                    if( privilegio_buro == 0 || privilegio_buro == "" ){
+                        this.$("[data-panelname='LBL_RECORDVIEW_PANEL27']").hide();   
+                    }
+                }
 
-        if (privilegio_buro == 0) {
-            this.$("[data-panelname='LBL_RECORDVIEW_PANEL27']").hide();
-        }
-
+			}, this)
+		});
     },
 
     ocultaSolicitarCIEC: function () {
