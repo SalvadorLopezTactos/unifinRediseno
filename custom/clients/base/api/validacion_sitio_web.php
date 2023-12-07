@@ -37,7 +37,8 @@ class validacion_sitio_web extends SugarApi
     public function ping_web($api, $args)
     {
         //Recupera página web
-		$url = $args['website'];
+        try {    
+		    $url = $args['website'];
         /*************************************/
         //check, if a valid url is provided
         if(!filter_var($url, FILTER_VALIDATE_URL))
@@ -103,6 +104,10 @@ class validacion_sitio_web extends SugarApi
                     }
                 }
             }
+        }
+        } catch (Exception $e) {
+            $GLOBALS['log']->fatal($e->getMessage());
+            return '00';
         }
     }
 

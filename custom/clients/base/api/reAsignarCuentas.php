@@ -45,6 +45,9 @@ class reAsignarCuentas extends SugarApi
         $idProducto = $args['data']['producto_seleccionado_id'];
         $batch = isset($args['data']['batch']) ? $args['data']['batch'] : false;
         $listaCuentas = [];
+        $main_array = [];
+        $main_array['actualizados'] = [];
+        $main_array['no_actualizados'] = [];
 
         $GLOBALS['log']->fatal("cuentas " . print_r($args['data']['seleccionados'], true));
         $listaUsuarios = $this->getUsersDetail("'".$reAsignado."'");
