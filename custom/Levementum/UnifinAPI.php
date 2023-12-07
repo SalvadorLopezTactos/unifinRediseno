@@ -2602,4 +2602,37 @@ SQL;
         }
 
     }
+
+    public function postOnboardingPO($host, $token, $body)
+    {
+        try {
+            $url = $host;
+            $request_body = json_encode($body);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_ENCODING, '');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $request_body);
+            curl_setopt(
+                $ch,
+                CURLOPT_HTTPHEADER,
+                array(
+                    'Content-Type: application/json',
+                    'Authorization: Token ' . $token
+                )
+            );
+
+            $result = curl_exec($ch);
+            $curl_info = curl_getinfo($ch);
+            $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $response = json_decode($result, true);
+
+            return $response;
+        } catch (Exception $exception) {
+            $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : unifinPostCall ERROR: " . $e->getMessage());
+        }
+    }
 }

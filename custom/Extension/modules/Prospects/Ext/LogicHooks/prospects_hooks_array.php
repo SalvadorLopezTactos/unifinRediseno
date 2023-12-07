@@ -82,3 +82,11 @@ $hook_array['before_save'][] = Array(
     'Prospects_Onboarding',
     'setFlagReadOnly'
 );
+
+$hook_array['before_save'][] = array(
+    13,
+    'Inegración de PO con Onboarding en actualización',
+    'custom/modules/Prospects/Prospects_Onboarding.php',
+    'Prospects_Onboarding',
+    'updateApiOnboarding'
+);
