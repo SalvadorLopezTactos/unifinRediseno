@@ -91,7 +91,7 @@
   },
 
   buscarClientesSinBuro: function () {
-    var filtroName = $("#filtroSinBuro").val();
+    var filtroName = $("#filtroSinBuro").val().trim();
 
     if (filtroName == "") {
       var alertOptions = {
