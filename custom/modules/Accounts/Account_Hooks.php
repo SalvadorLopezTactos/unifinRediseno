@@ -2104,9 +2104,26 @@ where rfc_c = '{$bean->rfc_c}' and
             //Se envía excepción en caso de que el registro se encuentre en proceso de validación
             //La validación solo aplica para Cliente:3 
             if( ($bean->tipo_registro_cuenta_c == '3') && $bean->origen_cuenta_c !== '11' && $bean->subtipo_registro_cuenta_c != '11' ){
-                require_once 'include/api/SugarApiException.php';
-                $GLOBALS['log']->fatal("No es posible generar cambios al registro ya que se encuentra en un proceso de revisión");
-                throw new SugarApiExceptionInvalidParameter("No es posible generar cambios al registro ya que se encuentra en un proceso de revisión");
+                // require_once 'include/api/SugarApiException.php';
+                // $GLOBALS['log']->fatal("No es posible generar cambios al registro ya que se encuentra en un proceso de revisión");
+                // throw new SugarApiExceptionInvalidParameter("No es posible generar cambios al registro ya que se encuentra en un proceso de revisión");
+
+                //Cuando se detecta cambio y razón social, permite guardado solo que los cambios en los campod:
+                //nombre, apellidos, razón social y denominación social no sr verán reflejados
+                $bean->name = $bean->fetched_row['name'];
+                if( $bean->tipodepersona_c !== "Persona Moral" ){ //PF y PFAE
+
+                    $bean->primernombre_c = $bean->fetched_row['primernombre_c'];
+                    $bean->apellidopaterno_c = $bean->fetched_row['apellidopaterno_c'];
+                    $bean->apellidomaterno_c = $bean->fetched_row['apellidomaterno_c'];
+                    $bean->nombre_comercial_c = $bean->fetched_row['nombre_comercial_c'];
+
+                }else{
+                    $bean->denominacion_c = $bean->fetched_row['denominacion_c'];
+                    $bean->razonsocial_c = $bean->fetched_row['razonsocial_c'];
+                    $bean->nombre_comercial_c = $bean->fetched_row['nombre_comercial_c'];
+                }
+
             }
 
         }else{

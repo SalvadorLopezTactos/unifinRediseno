@@ -93,6 +93,10 @@ class GetCambiosRazonDireFiscal extends SugarApi
                 }
 
                 //$beanCuenta->save();
+                //Una vez aprobados los cambios para nombre, se establece el nuevo nombre para solicitudes relacionada
+                $nombre_actual = $args['cuenta']['nombre_actual'];
+                $nombre_actualizar = $args['cuenta']['nombre_por_actualizar'];
+                $this->setNombreCuentaEnSolicitudes($beanCuenta, $nombre_actual, $nombre_actualizar);
 
                 array_push($response,"Cuenta actualizada correctamente");
             }
@@ -458,6 +462,43 @@ class GetCambiosRazonDireFiscal extends SugarApi
         $GLOBALS['log']->fatal("UPDATE BANDERAS DE DIRECCION");
         $GLOBALS['log']->fatal($queryResetDireccion);
         $GLOBALS['db']->query($queryResetDireccion);
+    }
+
+    public function setNombreCuentaEnSolicitudes( $beanCuenta, $nombre_actual, $nombre_actualizar ){
+
+        if ($beanCuenta->load_relationship('opportunities')) {
+
+            $relatedOpps = $beanCuenta->opportunities->getBeans();
+
+            if (!empty($relatedOpps)) {
+                foreach ($relatedOpps as $opp) {
+                    /*
+                    tct_etapa_ddw_c - R (RECHAZADO)
+
+                    estatus_c - N (AUTORIZADA)
+                            - R (RECHAZADA CREDITO)
+                            - CM (RECHAZADA COMITE)
+                            - K (CANCELADA)
+                    */
+                    if( $opp->tct_etapa_ddw_c != 'R' && $opp->estatus_c != 'N' && $opp->estatus_c != 'R' && $opp->estatus_c != 'CM' && $opp->estatus_c != 'K' ){
+                        //Obtiene el nombre de la solicitud para reemplazar el nuevo nombre de la cuenta
+                        $nombre_opp = $opp->name;
+
+                        if(strpos($nombre_opp, $nombre_actual) !== false ){
+                            $nuevoNombreOpp = str_replace($nombre_actual, $nombre_actualizar, $nombre_opp);
+                            $opp->name = $nuevoNombreOpp;
+
+                            $opp->save();
+
+                        }
+
+                    }
+                }
+            }
+
+        }
+
+
     }
 
 }
