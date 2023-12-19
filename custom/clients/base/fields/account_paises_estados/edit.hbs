@@ -1,0 +1,26 @@
+<script>
+    //Agrega estilo select2
+    this.$('#row-paises-estados').find('select.select2').select2({
+        width: '100%'
+    });
+
+</script>
+<div class="row-fluid" id="row-paises-estados">
+    <div class="span6 record-cell">
+        <label class="record-label">País de nacimiento</label>
+        <select class="row-fluid select2 pais_nacimiento_cstm" id="pais_nacimiento_cstm">
+            {{#each paisesList}}
+                <option value="{{id}}" {{ifSelected id ../idPaisCstm}}>{{namePais}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="span6 record-cell">
+        <label class="record-label">Estado de nacimiento</label>
+        <select class="row-fluid select2 estado_nacimiento_cstm" id="estado_nacimiento_cstm">
+            {{#each estadosList}}
+                <option value="{{id}}" {{ifSelected id ../idEstadoCstm}}>{{nameEstado}}</option>
+            {{/each}}
+            
+        </select>
+    </div>
+</div>

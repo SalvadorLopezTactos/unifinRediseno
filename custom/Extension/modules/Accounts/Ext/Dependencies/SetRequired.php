@@ -180,6 +180,7 @@ $dependencies['Accounts']['fechaconstitutiva_required'] = array(
     ),
 );
 //Queda a prueba ya que una condicion de visibilidad en Studio.Añadir prospecto e interesado solamente. 16/07/18 actualizado. 17/07/18 Cambio de formula para excepciones.
+/*
 $dependencies['Accounts']['Pais_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
@@ -197,7 +198,9 @@ $dependencies['Accounts']['Pais_required'] = array(
         ),
     ),
 );
+*
 //Modificacion para  exceptuar, en este caso se eliminará el regimen fiscal. 17/07/18
+/*
 $dependencies['Accounts']['EstadoNacimiento_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
@@ -215,6 +218,7 @@ $dependencies['Accounts']['EstadoNacimiento_required'] = array(
         ),
     ),
 );
+*/
 //Actualizacion para la condicion del regimen fiscal para el prospecto/interesado. Adrian Arauz 13/07/18. Se añade cuenta cliente. 17/07/18 se añade excepcion para proveedor.
 
     // $dependencies['Accounts']['SectorEconomico_required'] = array(
