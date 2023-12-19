@@ -866,133 +866,140 @@ array (
               ),
               24 => 
               array (
+                'name' => 'account_paises_estados',
+                'studio' => 'visible',
+                'label' => ' ',
+                'span' => 12,
+              ),
+              25 => 
+              array (
                 'name' => 'zonageografica_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ZONAGEOGRAFICA',
               ),
-              25 => 
+              26 => 
               array (
                 'name' => 'ifepasaporte_c',
                 'label' => 'LBL_IFEPASAPORTE',
               ),
-              26 => 
+              27 => 
               array (
                 'name' => 'curp_c',
                 'label' => 'LBL_CURP',
               ),
-              27 => 
+              28 => 
               array (
                 'type' => 'button',
                 'name' => 'generar_curp_c',
                 'label' => 'LBL_GENERAR_CURP',
               ),
-              28 => 
+              29 => 
               array (
                 'name' => 'estadocivil_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTADOCIVIL',
               ),
-              29 => 
+              30 => 
               array (
                 'name' => 'regimenpatrimonial_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REGIMENPATRIMONIAL',
               ),
-              30 => 
+              31 => 
               array (
                 'name' => 'profesion_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROFESION',
               ),
-              31 => 
+              32 => 
               array (
                 'name' => 'puesto_cuenta_c',
                 'label' => 'LBL_PUESTO_CUENTA_C',
               ),
-              32 => 
+              33 => 
               array (
                 'name' => 'email',
               ),
-              33 => 
+              34 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              34 => 
+              35 => 
               array (
                 'name' => 'referenciabancaria_c',
                 'label' => 'LBL_REFERENCIABANCARIA',
               ),
-              35 => 
+              36 => 
               array (
               ),
-              36 => 
+              37 => 
               array (
                 'name' => 'tipo_relacion_c',
                 'label' => 'LBL_TIPO_RELACION',
               ),
-              37 => 
+              38 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              38 => 
+              39 => 
               array (
                 'name' => 'reus_c',
                 'label' => 'LBL_REUS',
               ),
-              39 => 
+              40 => 
               array (
                 'name' => 'referencia_bancaria_c',
                 'label' => 'LBL_REFERENCIA_BANCARIA_C',
               ),
-              40 => 
+              41 => 
               array (
                 'name' => 'tct_prospecto_contactado_chk_c',
                 'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
               ),
-              41 => 
+              42 => 
               array (
                 'name' => 'show_panel_c',
                 'label' => 'LBL_SHOW_PANEL',
               ),
-              42 => 
+              43 => 
               array (
                 'name' => 'apoderado_nombre_c',
                 'label' => 'LBL_APODERADO_NOMBRE_C',
               ),
-              43 => 
+              44 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              44 => 
+              45 => 
               array (
                 'name' => 'apoderado_apaterno_c',
                 'label' => 'LBL_APODERADO_APATERNO_C',
               ),
-              45 => 
+              46 => 
               array (
                 'name' => 'apoderado_amaterno_c',
                 'label' => 'LBL_APODERADO_AMATERNO_C',
               ),
-              46 => 
+              47 => 
               array (
                 'name' => 'cuenta_especial_c',
                 'label' => 'LBL_CUENTA_ESPECIAL',
               ),
-              47 => 
+              48 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              48 => 
+              49 => 
               array (
                 'name' => 'alta_portal_proveedor_chk_c',
                 'label' => 'LBL_ALTA_PORTAL_PROVEEDOR_CHK',
                 'css_class' => 'hidden',
               ),
-              49 => 
+              50 => 
               array (
               ),
             ),

@@ -1748,16 +1748,21 @@
     },
 
     _ActualizaEtiquetas: function () {
-        if (this.model.get('tipodepersona_c') != 'Persona Moral' && $("div[data-name='pais_nacimiento_c']").length > 0) {
+        if (this.model.get('tipodepersona_c') != 'Persona Moral' ) {
             this.$("div.record-label[data-name='pais_nacimiento_c']").text("Pa\u00EDs de nacimiento");
+            //Establece etiqueta a campo personalizado de pais y estado
+            $('[data-fieldname="account_paises_estados"]').find('.record-label').eq(0).text("Pa\u00EDs de nacimiento");
         } else {
             this.$("div.record-label[data-name='pais_nacimiento_c']").text("Pa\u00EDs de constituci\u00F3n");
+            $('[data-fieldname="account_paises_estados"]').find('.record-label').eq(0).text("Pa\u00EDs de constituci\u00F3n");
         }
 
-        if (this.model.get('tipodepersona_c') != 'Persona Moral' && $("div[data-name='estado_nacimiento_c']").length > 0) {
+        if (this.model.get('tipodepersona_c') != 'Persona Moral') {
             this.$("div.record-label[data-name='estado_nacimiento_c']").text("Estado de nacimiento");
+            $('[data-fieldname="account_paises_estados"]').find('.record-label').eq(1).text("Estado de nacimiento");
         } else {
             this.$("div.record-label[data-name='estado_nacimiento_c']").text("Estado de constituci\u00F3n");
+            $('[data-fieldname="account_paises_estados"]').find('.record-label').eq(1).text("Estado de constituci\u00F3n");
         }
     },
 

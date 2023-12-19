@@ -12,6 +12,14 @@ class PaisesEstadosMap extends SugarApi
                 'method' => 'getIdEstadoByName',
                 'shortHelp' => 'Obtiene el id del estado enviado como parámetro',
             ),
+
+            'GetAllPaisesEstados' => array(
+                'reqType' => 'GET',
+                'path' => array('GetAllCountriesStates'),
+                'pathVars' => array(''),
+                'method' => 'getAllPaisesEstados',
+                'shortHelp' => 'Obtiene todos los países y estados',
+            ),
         );
     }
 
@@ -116,6 +124,24 @@ class PaisesEstadosMap extends SugarApi
         }
 
         return $last_index;
+
+    }
+
+    function getAllPaisesEstados($api, $args){
+
+        $response = array();
+        $query = "SELECT * FROM paises_estados ORDER BY date_entered DESC;";
+
+        $resultPaisesEstados = $GLOBALS['db']->query($query);
+
+        if ($resultPaisesEstados->num_rows > 0) {
+
+            while ($row = $GLOBALS['db']->fetchByAssoc($resultPaisesEstados)) {
+                array_push($response,$row);
+            }
+        }
+
+        return $response;
 
     }
 
