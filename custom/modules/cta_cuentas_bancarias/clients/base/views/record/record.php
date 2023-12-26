@@ -191,10 +191,22 @@ array (
               4 => 
               array (
                 'readonly' => false,
+                'name' => 'tipo_cuenta_c',
+                'label' => 'LBL_TIPO_CUENTA',
+              ),
+              5 => 
+              array (
+                'readonly' => false,
+                'name' => 'convenio_c',
+                'label' => 'LBL_CONVENIO',
+              ),
+              6 => 
+              array (
+                'readonly' => false,
                 'name' => 'domiciliacion_c',
                 'label' => 'LBL_DOMICILIACION',
               ),
-              5 => 
+              7 => 
               array (
               ),
             ),
