@@ -17,3 +17,5 @@ $mod_strings['LBL_FORMA_PAGO'] = 'Forma de Pago';
 $mod_strings['LBL_REGIMEN_CUENTA'] = 'Regimen de Cuenta';
 $mod_strings['LBL_DOMICILIACION'] = 'Domiciliación';
 $mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Detalle Cuenta Bancaria';
+$mod_strings['LBL_TIPO_CUENTA'] = 'Tipo de cuenta';
+$mod_strings['LBL_CONVENIO'] = 'Convenio';
