@@ -415,7 +415,7 @@ class Dynamics365 extends SugarApi
                 $valorReturn =  $ctaBancaria->cuenta;
                 break;
             case 'Extranjero':
-                $valorReturn =  $ctaBancaria->clabe;
+                $valorReturn =  $ctaBancaria->cuenta;
                 break;
             case 'Convenio':
                 $valorReturn =  $ctaBancaria->convenio_c;
