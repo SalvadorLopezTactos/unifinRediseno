@@ -12,6 +12,21 @@ class PaisesEstadosMap extends SugarApi
                 'method' => 'getIdEstadoByName',
                 'shortHelp' => 'Obtiene el id del estado enviado como parámetro',
             ),
+            'GetNameEstado' => array(
+                'reqType' => 'GET',
+                'path' => array('GetStateNameById'),
+                'pathVars' => array(''),
+                'method' => 'getNameEstadoById',
+                'shortHelp' => 'Obtiene el nombre del estado del id pasado como parámetro',
+            ),
+
+            'GetNamePais' => array(
+                'reqType' => 'GET',
+                'path' => array('GetCountryNameById'),
+                'pathVars' => array(''),
+                'method' => 'getNameCountryById',
+                'shortHelp' => 'Obtiene el nombre del país del id pasado como parámetro',
+            ),
 
             'GetAllPaisesEstados' => array(
                 'reqType' => 'GET',
@@ -71,6 +86,86 @@ class PaisesEstadosMap extends SugarApi
         
     }
 
+    function getNameEstadoById($api, $args){
+        $response = array(
+            "status" => "",
+            "msg" => "",
+            "stateName" => ""
+        );
+
+        $estado = $args['state_id'];
+
+        if (isset($estado)) {
+
+            $name_estado = $this->searchEstadoById($estado);
+
+            if ($name_estado !== "") {
+
+                $response = array(
+                    "status" => "OK",
+                    "msg" => "El nombre del Estado se obtuvo correctamente",
+                    "stateName" => $name_estado
+                );
+            } else {
+
+                $response = array(
+                    "status" => "OK",
+                    "msg" => "El id del Estado ".$estado. " no existe",
+                    "stateName" => ""
+                );
+            }
+        } else {
+            $response = array(
+                "status" => "ERROR",
+                "msg" => "Favor de ingresar state_id",
+                "stateName" => ""
+            );
+        }
+
+        return $response;
+
+    }
+
+    function getNameCountryById($api, $args){
+        $response = array(
+            "status" => "",
+            "msg" => "",
+            "countryName" => ""
+        );
+
+        $idPais = $args['country_id'];
+
+        if (isset($idPais)) {
+
+            $name_pais = $this->searchPaisById($idPais);
+
+            if ($name_pais !== "") {
+
+                $response = array(
+                    "status" => "OK",
+                    "msg" => "El nombre del País se obtuvo correctamente",
+                    "countryName" => $name_pais
+                );
+            } else {
+
+                $response = array(
+                    "status" => "OK",
+                    "msg" => "El id del País " . $idPais . " no existe",
+                    "countryName" => ""
+                );
+            }
+        } else {
+            $response = array(
+                "status" => "ERROR",
+                "msg" => "Favor de ingresar country_id",
+                "countryName" => ""
+            );
+        }
+
+        return $response;
+
+    }
+
     function searchEstadoByName( $nombreEstado ){
 
         $id_estado = "";
@@ -86,6 +181,41 @@ class PaisesEstadosMap extends SugarApi
         }
 
         return $id_estado;
+
+    }
+
+    function searchEstadoById($idEstado)
+    {
+
+        $name_estado = "";
+        $query = "SELECT * FROM estados WHERE id = '$idEstado';";
+
+        $resultEstado = $GLOBALS['db']->query($query);
+
+        if ($resultEstado->num_rows > 0) {
+
+            while ($row = $GLOBALS['db']->fetchByAssoc($resultEstado)) {
+                $name_estado = $row['estado'];
+            }
+        }
+
+        return $name_estado;
+    }
+
+    function searchPaisById($idPais){
+        $name_pais = "";
+        $query = "SELECT pais FROM paises_estados WHERE id_pais = '$idPais' LIMIT 1;";
+
+        $resultPais = $GLOBALS['db']->query($query);
+
+        if ($resultPais->num_rows > 0) {
+
+            while ($row = $GLOBALS['db']->fetchByAssoc($resultPais)) {
+                $name_pais = $row['pais'];
+            }
+        }
+
+        return $name_pais;
 
     }
 
