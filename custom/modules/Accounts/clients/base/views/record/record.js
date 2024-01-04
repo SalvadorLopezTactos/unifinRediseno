@@ -5045,21 +5045,39 @@
     },
 
     ocultaOpcionesSubpanel: function (){
-      //Oculta botón de creación en subpaneles
-      $(".subpanels-layout")
-        .find(".filtered.tabbable")
-        .find('[name="create_button"]')
-        .hide();
-      //Oculta botón de creación en emails
-      $(".subpanels-layout")
-        .find(".filtered.tabbable")
-        .find('[name="email_compose_button"]')
-        .hide();
-      //Oculta botón de acciones en subpaneles
-      $(".subpanels-layout")
-        .find(".filtered.tabbable")
-        .find(".btn.dropdown-toggle")
-        .hide();
+
+        //Obtiene atributo de CAC
+        var esCac = App.user.attributes.cac_c;
+        //Oculta botón de creación en subpaneles
+        $(".subpanels-layout")
+            .find(".filtered.tabbable")
+            .find('[name="create_button"]')
+            .hide();
+        //Oculta botón de creación en emails
+        $(".subpanels-layout")
+            .find(".filtered.tabbable")
+            .find('[name="email_compose_button"]')
+            .hide();
+        //Oculta botón de acciones en subpaneles
+        $(".subpanels-layout")
+            .find(".filtered.tabbable")
+            .find(".btn.dropdown-toggle")
+            .hide();
+        
+        //Para cuentas bloqueadas, si el usuario pertenece al CAC, si tiene permiso de crear Casos
+        if( esCac == 1 ){
+            $(".subpanels-layout")
+            .find('.filtered.tabbable[data-subpanel-link="cases"]')
+            .find('[name="create_button"]')
+            .show();
+
+            $(".subpanels-layout")
+            .find('.filtered.tabbable[data-subpanel-link="cases"]')
+            .find(".btn.dropdown-toggle")
+            .show();
+        }
+        
+        
     },
 
     blockRecordNoViable: function () {
