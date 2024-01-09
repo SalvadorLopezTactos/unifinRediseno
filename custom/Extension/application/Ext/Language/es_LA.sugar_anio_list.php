@@ -1,5 +1,5 @@
 <?php
- // created: 2021-11-05 12:15:45
+ // created: 2024-01-09 18:23:00
 
 $app_list_strings['anio_list']=array (
   '' => '',
@@ -11,4 +11,5 @@ $app_list_strings['anio_list']=array (
   2021 => '2021',
   2022 => '2022',
   2023 => '2023',
+  2024 => '2024',
 );
