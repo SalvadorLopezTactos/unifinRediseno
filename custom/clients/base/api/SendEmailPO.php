@@ -315,17 +315,281 @@ class SendEmailPO extends SugarApi
 
     public function buildBodyEmailVoBo( $nombre_director, $nombre_asesor,$nombre_po, $link_po ){
 
-        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado <b>' . $nombre_director . '</b>
-            <br>El asesor a tu cargo ' . $nombre_asesor . ' necesita tu visto bueno para enviar una vez más el correo de registro en la plataforma para el contacto <b>'. $nombre_po .'</b>.
-            <br>Solo dar clic sobre la siguiente liga para Autorizar o Rechazar el envío <a id="linkPO" href="'.$link_po.'">Ver detalle</a>
-            <br><br>Atentamente Unifin</font></p>
-            <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
-            <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
-            <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
-            Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
-            Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
-            No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
-            Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+        $mailHTML = '<head>
+	<title></title>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport"/><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]-->
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				padding: 0;
+			}
+
+			a[x-apple-data-detectors] {
+				color: inherit !important;
+				text-decoration: inherit !important;
+			}
+
+			#MessageViewBody a {
+				color: inherit;
+				text-decoration: none;
+			}
+
+			p {
+				line-height: inherit
+			}
+
+			.desktop_hide,
+			.desktop_hide table {
+				mso-hide: all;
+				display: none;
+				max-height: 0px;
+				overflow: hidden;
+			}
+
+			.image_block img+div {
+				display: none;
+			}
+
+			@media (max-width:620px) {
+				.mobile_hide {
+					display: none;
+				}
+
+				.row-content {
+					width: 100% !important;
+				}
+
+				.stack .column {
+					width: 100%;
+					display: block;
+				}
+
+				.mobile_hide {
+					min-height: 0;
+					max-height: 0;
+					max-width: 0;
+					overflow: hidden;
+					font-size: 0px;
+				}
+
+				.desktop_hide,
+				.desktop_hide table {
+					display: table !important;
+					max-height: none !important;
+				}
+
+				.row-1 .column-1 .block-1.paragraph_block td.pad>div,
+				.row-3 .column-1 .block-1.paragraph_block td.pad>div,
+				.row-5 .column-1 .block-1.paragraph_block td.pad>div,
+				.row-7 .column-1 .block-1.paragraph_block td.pad>div {
+					text-align: center !important;
+					font-size: 14px !important;
+				}
+
+				.row-1 .column-1 .block-1.paragraph_block td.pad,
+				.row-3 .column-1 .block-1.paragraph_block td.pad,
+				.row-5 .column-1 .block-1.paragraph_block td.pad,
+				.row-7 .column-1 .block-1.paragraph_block td.pad {
+					padding: 20px 35px !important;
+				}
+
+				.row-1 .column-1,
+				.row-3 .column-1,
+				.row-4 .column-1,
+				.row-5 .column-1,
+				.row-6 .column-1,
+				.row-7 .column-1 {
+					padding: 0 !important;
+				}
+			}
+		</style>
+	</head>
+	<body style="background-color: #e4e7e7; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
+		<table border="0" cellpadding="0" cellspacing="0" class="nl-container" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #e4e7e7;" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #56adff; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+															<tr>
+																<td class="pad">
+																	<div style="color:#041e41;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:6px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:justify;mso-line-height-alt:9px;"> </div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+															<tr>
+																<td class="pad" style="padding-bottom:15px;padding-left:50px;padding-top:40px;width:100%;padding-right:0px;">
+																	<div align="left" class="alignment" style="line-height:10px"><img src="cid:Recurso-1unileasingazul" style="display: block; height: auto; border: 0; max-width: 240px; width: 100%;" width="240"/></div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+															<tr>
+																<td class="pad" style="padding-bottom:25px;padding-left:50px;padding-right:50px;padding-top:25px;">
+																	<div style="color:#041e41;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:justify;mso-line-height-alt:24px;">
+																		<p style="margin: 0; margin-bottom: 16px;">Hola, <strong>' . $nombre_director . '</strong></p>
+																		<p style="margin: 0; margin-bottom: 16px;">El asesor a tu cargo, <strong>' . $nombre_asesor . ',</strong> necesita tu visto bueno para enviar una vez más el correo de registro en la plataforma a su prospecto: <strong>' . $nombre_po . '.</strong></p>
+																		<p style="margin: 0;">En la siguiente liga podrás autorizar o rechazar el envío:</p>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="10" cellspacing="0" class="button_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+															<tr>
+																<td class="pad">
+																	<div align="center" class="alignment"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="height:42px;width:115px;v-text-anchor:middle;" arcsize="65%" stroke="false" fillcolor="#56adff"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Arial, sans-serif; font-size:16px"><![endif]-->
+																		<div style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#56adff;border-radius:27px;width:auto;border-top:0px solid transparent;font-weight:400;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;"><a id="linkPO" href="' . $link_po . '"><strong>Click aquí</strong></a></span></span></div><!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
+																		</div>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-5" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+								<tbody>
+									<tr>
+										<td>
+											<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+												<tbody>
+													<tr>
+														<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+															<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+																<tr>
+																	<td class="pad" style="padding-bottom:25px;padding-left:50px;padding-right:50px;padding-top:25px;">
+																		<div style="color:#041e41;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:justify;mso-line-height-alt:24px;">
+																			<p style="margin: 0;">Atentamente, UNIFIN.</p>
+																		</div>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-6" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+								<tbody>
+									<tr>
+										<td>
+											<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+												<tbody>
+													<tr>
+														<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 15px; padding-left: 15px; padding-right: 15px; padding-top: 15px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+															<table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+																<tr>
+																	<td class="pad" style="padding-bottom:20px;width:100%;">
+																		<div align="center" class="alignment" style="line-height:10px"><img src="cid:Copia_de_Recurso-2unileasingazulLOW" style="display: block; height: auto; border: 0; max-width: 102px; width: 100%;" width="102"/></div>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-7" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+								<tbody>
+									<tr>
+										<td>
+											<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #dde1e9; color: #000; width: 600px; margin: 0 auto;" width="600">
+												<tbody>
+													<tr>
+														<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+															<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+																<tr>
+																	<td class="pad" style="padding-bottom:25px;padding-left:30px;padding-right:30px;padding-top:25px;">
+																		<div style="color:#000000;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:14.399999999999999px;">
+																			<p style="margin: 0;"><em>Información confidencial y exclusiva para uso interno de Unifin.</em></p>
+																		</div>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table><!-- End -->
+		</body>';
 
 
         return $mailHTML;
@@ -664,19 +928,228 @@ class SendEmailPO extends SugarApi
 
     public function buildBodyNotificationAsesor( $nombre_asesor, $nombre_po ){
         
-        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado <b>' . $nombre_asesor . '</b>
-            <br>Te comentamos que  a tu cliente/contacto:
-            <br>'.$nombre_po.'
-            <br>Le fue enviado el enlace para su registro en la plataforma Unileasing.
-            <br>Es importante que lo contactes para dar seguimiento a su solicitud.
-            <br><br>Atentamente Unifin</font></p>
-            <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
-            <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
-            <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
-            Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
-            Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
-            No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
-            Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+        $mailHTML = '<head>
+	<title></title>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport"/><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]-->
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				padding: 0;
+			}
+
+			a[x-apple-data-detectors] {
+				color: inherit !important;
+				text-decoration: inherit !important;
+			}
+
+			#MessageViewBody a {
+				color: inherit;
+				text-decoration: none;
+			}
+
+			p {
+				line-height: inherit
+			}
+
+			.desktop_hide,
+			.desktop_hide table {
+				mso-hide: all;
+				display: none;
+				max-height: 0px;
+				overflow: hidden;
+			}
+
+			.image_block img+div {
+				display: none;
+			}
+
+			@media (max-width:620px) {
+				.mobile_hide {
+					display: none;
+				}
+
+				.row-content {
+					width: 100% !important;
+				}
+
+				.stack .column {
+					width: 100%;
+					display: block;
+				}
+
+				.mobile_hide {
+					min-height: 0;
+					max-height: 0;
+					max-width: 0;
+					overflow: hidden;
+					font-size: 0px;
+				}
+
+				.desktop_hide,
+				.desktop_hide table {
+					display: table !important;
+					max-height: none !important;
+				}
+
+				.row-1 .column-1 .block-1.paragraph_block td.pad>div,
+				.row-3 .column-1 .block-1.paragraph_block td.pad>div,
+				.row-5 .column-1 .block-1.paragraph_block td.pad>div {
+					text-align: center !important;
+					font-size: 14px !important;
+				}
+
+				.row-1 .column-1 .block-1.paragraph_block td.pad,
+				.row-3 .column-1 .block-1.paragraph_block td.pad,
+				.row-5 .column-1 .block-1.paragraph_block td.pad {
+					padding: 20px 35px !important;
+				}
+
+				.row-1 .column-1,
+				.row-3 .column-1,
+				.row-4 .column-1,
+				.row-5 .column-1 {
+					padding: 0 !important;
+				}
+			}
+		</style>
+	</head>
+	<body style="background-color: #e4e7e7; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
+		<table border="0" cellpadding="0" cellspacing="0" class="nl-container" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #e4e7e7;" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #56adff; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+															<tr>
+																<td class="pad">
+																	<div style="color:#041e41;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:6px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:justify;mso-line-height-alt:9px;"> </div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+															<tr>
+																<td class="pad" style="padding-bottom:15px;padding-left:50px;padding-top:40px;width:100%;padding-right:0px;">
+																	<div align="left" class="alignment" style="line-height:10px"><img src="cid:Recurso-1unileasingazul" style="display: block; height: auto; border: 0; max-width: 240px; width: 100%;" width="240"/></div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+															<tr>
+																<td class="pad" style="padding-bottom:25px;padding-left:50px;padding-right:50px;padding-top:25px;">
+																	<div style="color:#041e41;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:justify;mso-line-height-alt:24px;">
+																		<p style="margin: 0; margin-bottom: 16px;">Hola, <strong>'.$nombre_asesor.'</strong></p>
+																		<p style="margin: 0; margin-bottom: 16px;">Te informamos que a tu prospecto: <strong>'.$nombre_po.'</strong> le fue enviado el enlace para su registro en la plataforma UniLeasing®.</p>
+																		<p style="margin: 0; margin-bottom: 16px;">Es importante que lo contactes a la brevedad para dar seguimiento a su solicitud.</p>
+																		<p style="margin: 0;">Atentamente, UNIFIN.</p>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 15px; padding-left: 15px; padding-right: 15px; padding-top: 15px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+															<tr>
+																<td class="pad" style="padding-bottom:20px;width:100%;">
+																	<div align="center" class="alignment" style="line-height:10px"><img src="cid:Copia_de_Recurso-2unileasingazulLOW" style="display: block; height: auto; border: 0; max-width: 102px; width: 100%;" width="102"/></div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-5" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #dde1e9; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+															<tr>
+																<td class="pad" style="padding-bottom:25px;padding-left:30px;padding-right:30px;padding-top:25px;">
+																	<div style="color:#000000;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:14.399999999999999px;">
+																		<p style="margin: 0;"><em>Información confidencial y exclusiva para uso interno de Unifin.</em></p>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table><!-- End -->
+	</body>';
 
 
         return $mailHTML;
@@ -684,18 +1157,228 @@ class SendEmailPO extends SugarApi
 
     public function buildBodyRechazo( $nombre_asesor, $nombre_po ){
 
-        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado <b>' . $nombre_asesor . '</b>
-            <br><br>Te comentamos que tu director rechazó el reenvío de correo de Onboarding de tu cliente/contacto:
-            <br>'.$nombre_po.'
-            <br>Contáctate con él para revisar el detalle.
-            <br><br>Atentamente Unifin</font></p>
-            <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
-            <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
-            <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
-            Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
-            Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
-            No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
-            Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+        $mailHTML = '<head>
+	<title></title>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport"/><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]-->
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				padding: 0;
+			}
+
+			a[x-apple-data-detectors] {
+				color: inherit !important;
+				text-decoration: inherit !important;
+			}
+
+			#MessageViewBody a {
+				color: inherit;
+				text-decoration: none;
+			}
+
+			p {
+				line-height: inherit
+			}
+
+			.desktop_hide,
+			.desktop_hide table {
+				mso-hide: all;
+				display: none;
+				max-height: 0px;
+				overflow: hidden;
+			}
+
+			.image_block img+div {
+				display: none;
+			}
+
+			@media (max-width:620px) {
+				.mobile_hide {
+					display: none;
+				}
+
+				.row-content {
+					width: 100% !important;
+				}
+
+				.stack .column {
+					width: 100%;
+					display: block;
+				}
+
+				.mobile_hide {
+					min-height: 0;
+					max-height: 0;
+					max-width: 0;
+					overflow: hidden;
+					font-size: 0px;
+				}
+
+				.desktop_hide,
+				.desktop_hide table {
+					display: table !important;
+					max-height: none !important;
+				}
+
+				.row-1 .column-1 .block-1.paragraph_block td.pad>div,
+				.row-3 .column-1 .block-1.paragraph_block td.pad>div,
+				.row-5 .column-1 .block-1.paragraph_block td.pad>div {
+					text-align: center !important;
+					font-size: 14px !important;
+				}
+
+				.row-1 .column-1 .block-1.paragraph_block td.pad,
+				.row-3 .column-1 .block-1.paragraph_block td.pad,
+				.row-5 .column-1 .block-1.paragraph_block td.pad {
+					padding: 20px 35px !important;
+				}
+
+				.row-1 .column-1,
+				.row-3 .column-1,
+				.row-4 .column-1,
+				.row-5 .column-1 {
+					padding: 0 !important;
+				}
+			}
+		</style>
+	</head>
+	<body style="background-color: #e4e7e7; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
+		<table border="0" cellpadding="0" cellspacing="0" class="nl-container" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #e4e7e7;" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #56adff; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+															<tr>
+																<td class="pad">
+																	<div style="color:#041e41;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:6px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:justify;mso-line-height-alt:9px;"> </div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+															<tr>
+																<td class="pad" style="padding-bottom:15px;padding-left:50px;padding-top:40px;width:100%;padding-right:0px;">
+																	<div align="left" class="alignment" style="line-height:10px"><img src="cid:Recurso-1unileasingazul" style="display: block; height: auto; border: 0; max-width: 240px; width: 100%;" width="240"/></div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+															<tr>
+																<td class="pad" style="padding-bottom:25px;padding-left:50px;padding-right:50px;padding-top:25px;">
+																	<div style="color:#041e41;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:justify;mso-line-height-alt:24px;">
+																		<p style="margin: 0; margin-bottom: 16px;">Hola, <strong>' . $nombre_asesor . '</strong></p>
+																		<p style="margin: 0; margin-bottom: 16px;">Te informamos que tu Director rechazó el reenvío del correo de Onboarding a tu prospecto: <strong>' . $nombre_po . '.</strong></p>
+																		<p style="margin: 0; margin-bottom: 16px;">Contáctalo para revisar el detalle.</p>
+																		<p style="margin: 0;">Atentamente, UNIFIN.</p>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 15px; padding-left: 15px; padding-right: 15px; padding-top: 15px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+															<tr>
+																<td class="pad" style="padding-bottom:20px;width:100%;">
+																	<div align="center" class="alignment" style="line-height:10px"><img src="cid:Copia_de_Recurso-2unileasingazulLOW" style="display: block; height: auto; border: 0; max-width: 102px; width: 100%;" width="102"/></div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-5" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #cdd2d9;" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #dde1e9; color: #000; width: 600px; margin: 0 auto;" width="600">
+											<tbody>
+												<tr>
+													<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+														<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+															<tr>
+																<td class="pad" style="padding-bottom:25px;padding-left:30px;padding-right:30px;padding-top:25px;">
+																	<div style="color:#000000;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:14.399999999999999px;">
+																		<p style="margin: 0;"><em>Información confidencial y exclusiva para uso interno de Unifin.</em></p>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table><!-- End -->
+	</body>';
 
 
         return $mailHTML;
@@ -708,6 +1391,8 @@ class SendEmailPO extends SugarApi
             $mailer = MailerFactory::getSystemDefaultMailer();
             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
             $mailer->setSubject('Reenvio Onboarding '.$nombre_empresa);
+            $mailer->addAttachment(new \EmbeddedImage('Recurso-1unileasingazul', 'custom/images_email/Recurso-1unileasingazul.png', 'Recurso-1unileasingazul'), "Recurso-1unileasingazul");
+            $mailer->addAttachment(new \EmbeddedImage('Copia_de_Recurso-2unileasingazulLOW', 'custom/images_email/Copia_de_Recurso-2unileasingazulLOW.png', 'Copia_de_Recurso-2unileasingazulLOW'), "Copia_de_Recurso-2unileasingazulLOW");
             $body = trim($body_correo);
             $mailer->setHtmlBody($body);
             $mailer->clearRecipients();
@@ -760,6 +1445,8 @@ class SendEmailPO extends SugarApi
             $mailer = MailerFactory::getSystemDefaultMailer();
             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
             $mailer->setSubject('Seguimiento Unileasing / '.$nombre_empresa);
+            $mailer->addAttachment(new \EmbeddedImage('Recurso-1unileasingazul', 'custom/images_email/Recurso-1unileasingazul.png', 'Recurso-1unileasingazul'), "Recurso-1unileasingazul");
+            $mailer->addAttachment(new \EmbeddedImage('Copia_de_Recurso-2unileasingazulLOW', 'custom/images_email/Copia_de_Recurso-2unileasingazulLOW.png', 'Copia_de_Recurso-2unileasingazulLOW'), "Copia_de_Recurso-2unileasingazulLOW");
             $body = trim($body_correo);
             $mailer->setHtmlBody($body);
             $mailer->clearRecipients();
@@ -787,6 +1474,8 @@ class SendEmailPO extends SugarApi
             $mailer = MailerFactory::getSystemDefaultMailer();
             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
             $mailer->setSubject('Rechazo Reenvío Unileasing / '.$nombre_empresa);
+            $mailer->addAttachment(new \EmbeddedImage('Recurso-1unileasingazul', 'custom/images_email/Recurso-1unileasingazul.png', 'Recurso-1unileasingazul'), "Recurso-1unileasingazul");
+            $mailer->addAttachment(new \EmbeddedImage('Copia_de_Recurso-2unileasingazulLOW', 'custom/images_email/Copia_de_Recurso-2unileasingazulLOW.png', 'Copia_de_Recurso-2unileasingazulLOW'), "Copia_de_Recurso-2unileasingazulLOW");
             $body = trim($body_correo);
             $mailer->setHtmlBody($body);
             $mailer->clearRecipients();
