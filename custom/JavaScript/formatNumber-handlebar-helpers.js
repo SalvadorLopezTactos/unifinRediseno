@@ -45,7 +45,7 @@
          * @return {String} The Field Value.
          */
         Handlebars.registerHelper("getUnifinListValue", function (unifin_list, unifin_field_key) {
-            var match = 'no-match';
+            var match = '';
             _.each(app.lang.getAppListStrings(unifin_list), function (value, key) {
                 if (unifin_field_key == key) {
                     match = value;
