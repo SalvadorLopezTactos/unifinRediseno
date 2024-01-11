@@ -170,6 +170,10 @@ WHERE cp.name = '{$cp}'";
         $arrNewColonias=array_values(array_unique($arrColonias, SORT_REGULAR));
         $arrNewCiudades=array_values(array_unique($arrCiudades, SORT_REGULAR));
 
+        //Ordena arreglos de Ciudades y colonias
+        usort($arrNewColonias, fn ($a, $b) => strcmp($a["nameColonia"], $b["nameColonia"]));
+        usort($arrNewCiudades, fn ($a, $b) => strcmp($a["nameCiudad"], $b["nameCiudad"]));
+
         $arrPadre['paises']=$arrNewPaises;
         $arrPadre['municipios']=$arrNewMunicipios;
         $arrPadre['estados']=$arrNewEstados;
