@@ -5298,6 +5298,16 @@
                                     for (var i = 0; i < list_colonias.length; i++) {
                                         listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
                                     }
+
+                                    //Se ordena la lista de colonias
+                                    var  arrayColonias = Object.entries(listColonia);
+                                    // Ordenar el array por valores de manera ascendente
+                                    arrayColonias.sort(function (a, b) {
+                                        return a[1].localeCompare(b[1]);
+                                    });
+                                    // Se establece el arreglo ya ordenado
+                                    listColonia = Object.fromEntries(arrayColonias);
+
                                     contexto_cuenta.oDirecciones.direccion[data.indice].listColonia = listColonia;
                                     contexto_cuenta.oDirecciones.direccion[data.indice].listColoniaFull = listColonia;
                                     //Ciudad
@@ -5312,6 +5322,14 @@
                                             }
                                         }
                                     }
+
+                                    //Se ordena la lista de ciudades
+                                    var  arrayCiudades = Object.entries(listCiudad);
+                                    arrayCiudades.sort(function (a, b) {
+                                        return a[1].localeCompare(b[1]);
+                                    });
+                                    // Se establece el arreglo ya ordenado
+                                    listCiudad = Object.fromEntries(arrayCiudades);
                                     
                                     contexto_cuenta.oDirecciones.direccion[data.indice].ciudad = (contexto_cuenta.oDirecciones.direccion[data.indice].ciudad=='') ? idSinCiudad : contexto_cuenta.oDirecciones.direccion[data.indice].ciudad;
                                     contexto_cuenta.oDirecciones.direccion[data.indice].valCiudad = (contexto_cuenta.oDirecciones.direccion[data.indice].valCiudad =='') ? 'SIN CIUDAD' : contexto_cuenta.oDirecciones.direccion[data.indice].valCiudad;
