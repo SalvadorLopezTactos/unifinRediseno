@@ -120,6 +120,7 @@ AND rc.seguimiento_bc_c = 1 ";
                 $beanNuevaDireccionBuro->dire_direccion_dire_estadodire_estado_ida = $beanDireccionFiscal->dire_direccion_dire_estadodire_estado_ida;
                 $beanNuevaDireccionBuro->dire_direccion_dire_paisdire_pais_ida = $beanDireccionFiscal->dire_direccion_dire_paisdire_pais_ida;
                 $beanNuevaDireccionBuro->dire_direccion_dire_coloniadire_colonia_ida = $beanDireccionFiscal->dire_direccion_dire_coloniadire_colonia_ida;
+                $beanNuevaDireccionBuro->dire_direccion_dire_ciudaddire_ciudad_ida = $beanDireccionFiscal->dire_direccion_dire_ciudaddire_ciudad_ida;
 
                 $beanNuevaDireccionBuro->calle = $beanDireccionFiscal->calle;
                 $beanNuevaDireccionBuro->numext = $beanDireccionFiscal->numext;
