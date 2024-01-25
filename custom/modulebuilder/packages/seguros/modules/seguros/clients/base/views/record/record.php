@@ -328,6 +328,17 @@ array (
                 ),
                 'label' => 'LBL_INGRESO_REF',
               ),
+              26 => 
+              array (
+                'name' => 'tctbl_backlog_seguros_s_seguros_name',
+              ),
+              27 => 
+              array (
+              ),
+              28 => 
+              array (
+                'name' => 'tctbl_backlog_seguros_s_seguros_1_name',
+              ),
             ),
           ),
           2 => 

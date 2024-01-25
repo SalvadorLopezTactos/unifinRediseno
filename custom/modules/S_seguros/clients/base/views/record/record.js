@@ -38,6 +38,8 @@
         this.$("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
         //Desabilita edicion campo pipeline
         this.noEditFields.push('seguro_pipeline');
+
+        $('[data-name=tctbl_backlog_seguros_s_seguros_1_name]').hide();
     },
 
     setTipo: function() {

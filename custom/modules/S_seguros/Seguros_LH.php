@@ -116,4 +116,130 @@ class Seguros_LH{
         }
 
     }
+
+    public function elimina_relacion_asociada_set_cierre_bl( $bean, $event, $arguments ){
+
+        //Elimina relación "Activa" con Backlog en caso de que la oportunidad se establezca como Ganada o No Ganada
+        if($bean->fetched_row['etapa'] != $bean->etapa && ($bean->etapa == "9" || $bean->etapa == "10")){
+            $GLOBALS['log']->fatal("ELIMINA RELACION ACTIVA YA QUE LA OPORTUNIDAD SE ESTABLECIÓ COMO GANADA O NO GANADA");
+
+            if ($bean->load_relationship('tctbl_backlog_seguros_s_seguros_1')) {
+
+                $bean->tctbl_backlog_seguros_s_seguros_1->delete($bean->tctbl_backlog_seguros_s_segurostctbl_backlog_seguros_ida);
+
+            }
+
+            //Establece fecha de cierre
+            $GLOBALS['log']->fatal("OPORTUNIDAD DE SEGURO ". $bean->etapa. " SE ESTABLECE FECHA DE CIERRE");
+            $bean->cierre_bl_c = $bean->fecha_cierre_c;
+            
+        }
+
+    }
+
+    public function update_etapa_backlog($bean, $event, $arguments){
+
+        $backlog_actual = $bean->fetched_rel_row['tctbl_backlog_seguros_s_segurostctbl_backlog_seguros_ida'];
+        $backlog_nuevo = $bean->tctbl_backlog_seguros_s_segurostctbl_backlog_seguros_ida;
+
+        $GLOBALS['log']->fatal("ENTRA LH, LA ETAPA CAMBIÓ, RECALCULA ETAPA PARA ESTABLECER AL BACKLOG");
+        // $GLOBALS['log']->fatal( $bean->fetched_row['etapa'] );
+        // $GLOBALS['log']->fatal($backlog_actual );
+        // $GLOBALS['log']->fatal($bean->etapa );
+        // $GLOBALS['log']->fatal($bean->tctbl_backlog_seguros_s_segurostctbl_backlog_seguros_ida);
+        // $GLOBALS['log']->fatal( print_r($bean->rel_fields_before_value,true) );
+        //En caso de que se establezca nueva relación de Backlog o Cambie la etaoa de la oportunidad de seguro
+        //se procede a validar las etapas de las oportunidades de seguro relacionadas (activas) para establecer la nueva etapa del backlog, que es la de menor jerarquía
+
+        
+
+        if( $bean->fetched_row['etapa'] != $bean->etapa || $backlog_actual != $backlog_nuevo ){
+
+            $GLOBALS['log']->fatal("ENTRA LH, LA ETAPA CAMBIÓ, RECALCULA ETAPA PARA ESTABLCER AL BACKLOG");
+
+            $id_bl = $bean->tctbl_backlog_seguros_s_segurostctbl_backlog_seguros_ida;
+            $bean_bl = BeanFactory::getBean('TCTBL_Backlog_Seguros', $id_bl, array('disable_row_level_security' => true));
+
+            if( $bean_bl->load_relationship('tctbl_backlog_seguros_s_seguros_1') ){
+
+                $relatedSeguros = $bean_bl->tctbl_backlog_seguros_s_seguros_1->getBeans();
+
+                $GLOBALS['log']->fatal("TIENE ". count($relatedSeguros). " Oportunidades activas" );
+                $array_etapas = array();
+                foreach ($relatedSeguros as $oppSeguro) {
+                    
+                    array_push($array_etapas, (int)$oppSeguro->etapa);
+
+                }
+
+                //Obtener la etapa de menor jerarquía de las oportunidades relacionadas y establecer en el backlog relacionado
+                if( count($array_etapas) > 0 ){
+                    $min_etapa = min($array_etapas);
+
+                    $bean_bl->etapa = $min_etapa;
+                    $bean_bl->save();
+                    $GLOBALS['log']->fatal("GUARDA LA NUEVA ETAPA DEL BACKLOG");
+
+                }
+
+            }
+
+        }
+
+    }
+        
+
+    public function valida_mes_anio_bl( $bean, $event, $arguments ){
+        //$GLOBALS['log']->fatal("BEFORE RELATIONSHIP ADD SEGUROS");
+        //$GLOBALS['log']->fatal( print_r($arguments,true) );
+        $related_module = $arguments['related_module'];
+        $name_rel = $arguments['relationship'];
+        
+        if( $related_module == "TCTBL_Backlog_Seguros" && $name_rel == "tctbl_backlog_seguros_s_seguros" ){
+
+            $bl_id = $arguments['related_id'];
+
+            $bean_bl = BeanFactory::getBean('TCTBL_Backlog_Seguros', $bl_id, array('disable_row_level_security' => true));
+
+            $mes_bl = $bean_bl->mes;
+            $anio_bl = $bean_bl->anio;
+
+            $GLOBALS['log']->fatal( "MES BL: ".$mes_bl );
+            $GLOBALS['log']->fatal( "ANIO BL: " . $anio_bl);
+
+            $mes_actual = date("n");
+            $anio_actual = date("Y");
+
+            $GLOBALS['log']->fatal("MES ACTUAL: " . $mes_actual);
+            $GLOBALS['log']->fatal("ANIO ACTUAL: " . $anio_actual);
+
+            if ($anio_bl < $anio_actual || ($anio_bl == $anio_actual && $mes_bl < $mes_actual)) {
+
+                throw new SugarApiExceptionInvalidParameter("El backlog que intentas agregar cuenta con mes y año menor a la fecha actual");
+            }
+
+        }
+        
+    }
+
+    public function genera_relacion_activa( $bean, $event, $arguments ){
+
+        //UNa vez que se establece la relación con oportunidades de seguro asociadas, se establece una nueva relación con oportunidades de seguro activas
+        $GLOBALS['log']->fatal("AFTER RELATIONSHIP ADD SEGUROS");
+        $GLOBALS['log']->fatal(print_r($arguments, true));
+        $related_module = $arguments['related_module'];
+        $name_rel = $arguments['relationship'];
+
+        if ($related_module == "TCTBL_Backlog_Seguros" && $name_rel == "tctbl_backlog_seguros_s_seguros") {
+            $GLOBALS['log']->fatal("ENTRA CONDIDICION PARA GENERAR RELACION ACTIVA");
+            $bl_id = $arguments['related_id'];
+            //Genera Bean de Oportunidad de seguro Activa
+            $bean->load_relationship('tctbl_backlog_seguros_s_seguros_1');
+            $bean->tctbl_backlog_seguros_s_seguros_1->add( $bl_id );
+            $bean->save();
+
+        }
+
+    }
+
 }
