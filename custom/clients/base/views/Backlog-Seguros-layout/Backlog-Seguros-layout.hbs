@@ -1,0 +1,1455 @@
+<style>
+    #operaciones_canceladas {
+        background-color: red;
+        color: #f5f5f5;
+        font-weight: bold;
+        width: 10%;
+    }
+
+    #operaciones_pipeline {
+        background-color: yellow;
+        font-weight: bold;
+        width: 10%;
+    }
+
+    .table th {
+        text-align: left;
+        background: #000042 !important;
+        color: #f5f5f5;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    table  {
+        background: rgba(0, 0, 0, 0);
+    }
+    .totales {
+        text-align: left;
+        background: #000042 !important;
+        color: #f5f5f5;
+        font-weight: bold;
+    }
+
+    .filtros {
+        margin-bottom: 10px !important;
+    }
+
+    .filtros_table {
+        margin-left: 1%;
+        margin-top: 2%;
+    }
+
+    .popup {
+        margin-left: 20%;
+        /*width: 27%; */
+        border-style: groove;
+        position: absolute;
+        top: 0;
+        /*bottom: 0;*/
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-weight: bold;
+        z-index: 2;
+        /*visibility: hidden;*/
+    }
+
+    .popuptables {
+        margin-left: 2%;
+        margin-top: 2%;
+    }
+
+    .popupC2 {
+        padding-left: 2px;
+    }
+
+    .popup_footer {
+        margin-left: 50%;
+        margin-top: 5%;
+    }
+
+    .barra_de_acciones {
+        margin-bottom: 1%;
+        margin-left: 1%;
+    }
+
+    .backlogHeaderFloat {
+        position: fixed;
+        z-index: 1;
+    }
+
+    .backlogHeaderFloat_totals {
+        position: fixed;
+        z-index: 1;
+    }
+
+    .innerTableTd {
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .dashlet-content > div {
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+        max-height: 580px !important;
+    }
+
+    .dashboard{
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+    }
+
+    .dashboard .thumbnail.dashlet:not(.collapsed) {
+        max-height: 100%;
+        height: 100%;
+    }
+    /*
+    <!--.icon-comment -->*/
+    /*
+    .fa-comment {
+        color: red;
+    }
+    */
+
+    .backlogInfo{
+        overflow-y:auto;
+        overflow-x:inherit;
+        height: 500px;
+        /*white-space: nowrap;*/
+        width: auto;
+    }
+
+    .backlogBodyInfo{
+        white-space: nowrap;
+    }
+
+    .btn-Guardar {
+        line-height: 18px;
+        text-align: center;
+        display: inline-block;
+        margin-top: 2px;
+        font-size: 12px;
+    }
+
+    .sinborde { /*Table without border*/
+        border: 0;
+    }
+
+    .modal {
+        position: fixed; /* Stay in place */
+        padding-top: 100px; /* Location of the box */
+        padding-bottom: 100px;
+        top: 0;
+        left:0;
+        /* width: 100%; /* Full width */
+        /*height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 1;
+        border: 1px solid #888;
+        width: 98%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @-webkit-keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
+    @keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
+    /* The Close Button */
+    .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .modal-header {
+        padding: .5px 0px;
+        background-color: #21618C;
+        color: white;
+    }
+
+    .modal-body {
+        padding: .5px 0px;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .modal-footer {
+        padding: 2px 16px;
+        background-color: #21618C;
+        color: #ffffff;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .pointer {cursor: pointer;}
+</style>
+<div class="backlog-dashlet-wrapper">
+    <input type="hidden" id="access" value="{{access}}"/>
+    <div>
+        <table class="filtros_table" >
+            <tr>
+                <td>Mes:</td>
+                <td>Año:</td>
+                <td>Equipo:</td>
+                <td>Asesor:</td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="mes_filtro" class="filtros">
+                      {{#each meses_list_html}}
+                            <option value="{{@key}}" {{ifSelected @key ../mes_filtro}}>{{this}}</option>
+                      {{/each}}
+                      <!--
+                      <option value="{{mes_filtro}}">{{getUnifinListValue "mes_list" mes_filtro}}</option>
+                      {{#each meses_list_html}}
+                        {{#if @key}}
+                            <option value="{{@key}}">{{this}}</option>
+                        {{/if}}
+                      {{/each}}
+                      -->
+                    </select>
+                </td>
+                <td>
+                    <select id="anio_filtro" class="filtros">
+                      <option value="{{anio_filtro}}">{{getUnifinListValue "anio_list" anio_filtro}}</option>
+                      {{#each anio_list_html_filter}}
+                        {{#if @key}}
+                            <option value="{{@key}}">{{this}}</option>
+                        {{/if}}
+                      {{/each}}
+                    </select>
+                </td>
+                <td>
+                    <select id="equipo_filtro" class="filtros" >
+                      {{#each equipo_list_html}}
+                            <option value="{{@key}}" {{ifSelected @key ../equipo_filtro}}>{{this}}</option>
+                      {{/each}}
+                    </select>
+                </td>
+                <td>
+                    <select id="promotor_filtro" class="filtros">
+                      {{#each promotores_list_html}}
+                        <option value="{{@key}}" {{ifSelected @key ../promotor_filtro}}>{{this}}</option>
+                      {{/each}}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Solicitud:</td>
+                <!--<td>Tipo de operacion:</td>-->
+                <td>Etapa:</td>
+                <td>Estatus:</td>
+				<td>Producto:</td>
+				<td colspan="6"></td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="progreso_filtro" class="filtros">
+                      {{#each progreso_list_html}}
+                        <option value="{{@key}}" {{ifSelected @key ../progreso_filtro}}>{{this}}</option>
+                      {{/each}}
+                    </select>
+                </td>
+                <!--<td>
+                    <select id="tipo_operacion_filtro" class="filtros">
+                      {{#each tipo_operacion_list_html}}
+                        <option value="{{@key}}" {{ifSelected @key ../tipo_operacion_filtro}}>{{this}}</option>
+                      {{/each}}
+                    </select>
+                </td>-->
+                <td>
+                    <select id="etapa_filtro" class="filtros">
+                      {{#each etapa_list_html}}
+                        <option value="{{@key}}" {{ifSelected @key ../etapa_filtro}}>{{this}}</option>
+                      {{/each}}
+                    </select>
+                </td>
+                <td>
+                    <select id="estatus_filtro" class="filtros">
+                      {{#each estatus_list_html}}
+                        <option value="{{@key}}" {{ifSelected @key ../estatus_filtro}}>{{this}}</option>
+                      {{/each}}
+                    </select>
+                </td>
+				<td>
+                    <select id="producto_filtro" class="filtros">
+                      {{#each producto_list_html}}
+                        <option value="{{@key}}" {{ifSelected @key ../producto_filtro}}>{{this}}</option>
+                      {{/each}}
+                    </select>
+                </td>
+                <td colspan="6"> 
+                    <input type="button" value="Buscar" id="btn_Buscar" class="btn btn-primary filtros"/>
+                    <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
+                    <span class="btn btn-success exportar filtros" tabindex="-1">Exportar a Excel</span>
+                </td>
+            </tr>
+			<!--<tr>
+                <td>Producto:</td>
+				<td></td>
+				<td colspan = "12"></td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="producto_filtro" class="filtros">
+                      {{#each producto_list_html}}
+                        <option value="{{@key}}" {{ifSelected @key ../producto_filtro}}>{{this}}</option>
+                      {{/each}}
+                    </select>
+                </td>
+                <td> 
+                    <input type="button" value="Buscar" id="btn_Buscar" class="btn btn-primary filtros"/>
+                    <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
+                    <span class="btn btn-success exportar filtros" tabindex="-1">Exportar a Excel</span>
+                </td>
+				<td colspan="12"></td>
+            </tr>
+			-->
+        </table>
+    </div>
+
+    <div class="barra_de_acciones">
+        <h1> Backlogs ({{totalRegistros}})</h1>
+        <table>
+            <tr>
+                <!--<td>
+                    <a class="rowaction btn btn-primary" href="javascript:void(0);" id="expandir_backlog_button">
+                        <span class="icon-plus"></span></a>
+                    <a class="rowaction btn btn-primary" href="javascript:void(0);" id="colapsar_backlog_button">
+                        <span class="icon-minus"></span></a>
+                </td>-->
+                <td>
+                    <div class="btn-group">
+                        <!-- <a class="btn">Menú</a> -->
+                        <span class="btn totales marcarTodos checkboxChange" title="Seleccionar Todo">
+                            <input type="checkbox" id="selectAll"/>
+                        </span>
+                        <a class="btn dropdown-toggle totales disabled" id="menuOptions" data-toggle="dropdown">
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- dropdown menu links -->
+                            <li>
+                                <a class="MoverOperacionMasiva"><i class="fa fa-hand-o-up"></i>Mover a otro mes</a>
+                            </li>
+                            <li>
+                                <a class="CancelarMasiva"><i class="fa fa-times-circle "></i>Cancelar</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                </td>
+                <!--<td>
+                    <span class="btn btn-success Comprometer_mass">Comprometer Masivo</span>
+                </td>-->
+                <td>
+                    <a class="btn btn-primary crearBacklog"><i class="fa fa-plus"></i>Crear Backlog</a>
+                </td>
+                <td>
+                    <span class="btn btn-primary ocultar_columnas">Ocultar Columnas</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="dashlet-backlog-wrapper">
+        <div class="backlogInfo" style="display: block">
+            <table width="100%" class="table table-bordered table-condensed backlog_dashlet_box" id="backlog-dashlet">
+                <tr class="backlog_dashlet_header">
+                    <!--<th width="1%">
+                        Comprometer
+                        <input type="checkbox" id="mass_update_btn"/>
+                    </th>-->
+                    <th width="5%" class="hide_acciones">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Acciones</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="5%" class="hide_estatus">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Producto</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="5%" class="hide_estatus">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Tipo Operación Producto</td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th width="5%" class="hide_estatus">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Estatus</td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th width="10%" class="hide_mes">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Mes</td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th width="1%" class="hide_equipo">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Equipo <i id="EquipoSort" class="fa fa-unsorted" {{EquipoSortDirection}}></i></td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th width="1%" class="hide_zona">
+                        <table width="100%" >
+                            <tr>
+                                <td class="innerTableTd">Zona</td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th width="10%" class="hide_promotor">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Asesor <i id="PromotorSort" class="fa fa-unsorted" {{PromotorSortDirection}}></i></td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th width="30%" class="hide_cliente">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Cliente <i id="ClienteSort" class="fa fa-unsorted" {{ClienteSortDirection}}></i></td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th width="5%" class="hide_operacion">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">No. Backlog <i id="NumeroBacklogSort" class="fa fa-unsorted" {{NumeroBacklogSortDirection}}></i></td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th width="8%" class="hide_tipo_bien">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Tipo de Bien</td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th width="5%" class="hide_monto_original">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Linea Disponible</td>
+                            </tr>
+                        </table>
+                    </th>
+					<!--
+                    <th width="7%" class="hide_monto_comprometido">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Monto Original <i id="MontoOperacionSort" class="fa fa-unsorted" {{MontoOperacionSortDirection}}></i></td>
+                            </tr>
+                        </table>
+                    </th>
+					-->
+                    <!--<th width="10%" class="hide_ri_comprometida">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Pago Único Original</td>
+                            </tr>
+                        </table>
+                    </th>
+					-->
+					<!--
+                    <th width="7%" class="hide_monto_diferencia">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Diferencia</td>
+                            </tr>
+                        </table>
+                    </th>
+					-->
+					
+                    <th width="5%" class="hide_monto_final_comprometido">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Backlog <i id="MontoFinalSort" class="fa fa-unsorted" {{MontoFinalSortDirection}}></i></td>
+                            </tr>
+                        </table>
+                    </th>
+					<!--
+                    <th width="5%" class="hide_ri_final_comprometida">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Pago Único</td>
+                            </tr>
+                        </table>
+                    </th>
+					-->
+                    <!--<th width="5%" class="hide_bl_actual">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Backlog Actual</td>
+                            </tr>
+                        </table>
+                    </th>-->
+                    <th width="5%" class="hide_pipeline_posterior">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Colocacion Pipeline</td>
+                            </tr>
+                        </table>
+                    </th>
+					<!--
+                    <th width="5%" class="hide_monto_real">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Colocación Real</td>
+                            </tr>
+                        </table>
+                    </th>
+					-->
+					<!--
+                    <th width="10%" class="hide_ri_real">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Pago Único Real</td>
+                            </tr>
+                        </table>
+                    </th>
+					-->
+					<!--
+                    <th width="10%" class="hide_monto_cancelado">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Monto Cancelado</td>
+                            </tr>
+                        </table>
+                    </th>
+					-->
+					<!--
+                    <th width="10%" class="hide_ri_cancelada">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Pago Único Cancelada</td>
+                            </tr>
+                        </table>
+                    </th>
+					-->
+					<!--
+                    <th width="20%" class="hide_tipo_operacion">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Tipo de Operacion</td>
+                            </tr>
+                        </table>
+                    </th>
+					-->
+                    <th width="10%" class="hide_etapa_preliminar">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Etapa Inicio Mes</td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th width="15%" class="hide_etapa">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Etapa</td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th width="15%" class="hide_etapa">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Refinanciamiento</td>
+                            </tr>
+                        </table>
+                    </th>
+					<!--
+                    <th width="15%" class="hide_progreso">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Solicitud</td>
+                            </tr>
+                        </table>
+                    </th>
+					-->
+                    <!--<th width="15%" class="hide_conversion">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Probabilidad de Conversión %</td>
+                            </tr>
+                        </table>
+                    </th>
+					-->
+                    <!--<th width="15%" class="hide_motivo_rechazo">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Motivo de rechazo</td>
+                            </tr>
+                        </table>
+                    </th>
+					-->
+					<th width="15%" class="hide_monto_prospecto">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Prospecto</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_devuelta">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Devuelta</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_monto_credito">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Crédito</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_monto_rechazado">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Rechazado</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_sin_solicitud">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Sin solicitud</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_con_solicitud">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Con solicitud</td>
+                            </tr>
+                        </table>
+                    </th>
+                </tr>
+
+                {{#each backlogs}}
+                    <tr class="backlog_dashlet_header_totals">
+                        <!--<th class="totales"></th>-->
+                        <!-- AF: 09/04/2018 - Menú
+                        Actualizaicón masiva: Adición de menú de opciones-->
+                        <th class="totales hide_acciones"></th>
+						<th class="totales hide_producto"></th>
+						<th class="totales hide_tipo_operacion"></th>
+                        <th class="totales hide_estatus"></th>
+                        <th class="totales hide_mes"></th>
+                        <th class="totales hide_equipo"></th>
+                        <th class="totales hide_zona"></th>
+                        <th class="totales hide_promotor"></th>
+                        <th class="totales hide_cliente"></th>
+                        <th class="totales hide_operacion"></th>
+                        <th class="totales hide_tipo_bien"></th>
+                        <th class="totales hide_monto_original">{{customFormatNumber totales.total_monto_original}}</th>
+                        <!--<th class="totales hide_monto_comprometido">{{customFormatNumber totales.total_monto_comprometido}}</th>-->
+                        <!--<th class="totales hide_ri_comprometida">{{customFormatNumber totales.total_renta_inicial}}</th>-->
+                        <!--<th class="totales hide_monto_diferencia">{{customFormatNumber totales.total_monto_diferencia}}</th>-->
+                        <th class="totales hide_monto_final_comprometido">{{customFormatNumber totales.total_monto_final_comprometido}}</th>
+                        <!--<th class="totales hide_ri_final_comprometida">{{customFormatNumber totales.total_renta_inicial_final}}</th>-->
+                        <!--<th class="totales hide_bl_actual">{{customFormatNumber totales.total_bl_actual}}</th>-->
+                        <th class="totales hide_pipeline_posterior">{{customFormatNumber totales.total_pipeline_posterior}}</th>
+                        <!--<th class="totales hide_monto_real">{{customFormatNumber totales.total_monto_real}}</th>-->
+                        <!--<th class="totales hide_ri_real">{{customFormatNumber totales.total_renta_real}}</th>-->
+                        <!--<th class="totales hide_monto_cancelado">{{customFormatNumber totales.total_monto_cancelado}}</th>-->
+                        <!--<th class="totales hide_ri_cancelada">{{customFormatNumber totales.total_ri_cancelada}}</th>-->
+                        <!--<th class="totales hide_tipo_operacion"></th>-->
+                        <th class="totales hide_etapa_preliminar"></th>
+                        <th class="totales hide_etapa"></th>
+                        <th class="totales hide_refinanciamiento"></th>
+                        <!--<th class="totales hide_progreso"></th>-->
+                        <!--<th class="totales hide_conversion"></th>-->
+                        <!--<th class="totales hide_motivo_rechazo"></th>-->
+						<th class="totales hide_monto_prospecto">{{customFormatNumber totales.total_monto_prospecto}}</th>
+						<th class="totales hide_monto_devuelta">{{customFormatNumber totales.total_monto_devuelta}}</th>
+						<th class="totales hide_monto_credito">{{customFormatNumber totales.total_monto_credito}}</th>
+						<th class="totales hide_monto_rechazado">{{customFormatNumber totales.total_monto_rechazado}}</th>
+						<th class="totales hide_sin_solicitud">{{customFormatNumber totales.total_sin_solicitud}}</th>
+						<th class="totales hide_con_solicitud">{{customFormatNumber totales.total_con_solicitud}}</th>
+                    </tr>
+                {{/each}}
+
+                {{#each backlogs}}
+                    {{#each this.MyBacklogs.linea}}
+                        <tr bgcolor="{{color}}" class="backlog-dashlet-row">
+                            <td class="hide_acciones">
+                                <div class="btn-toolbar" style="margin: 0px; padding-left:0px;">
+                                    <div class="btn-group">
+                                        <span class="btn Seleccionar switch-mini round-switch checkboxChange"> <input type="checkbox" title="Seleccionar" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-progreso="{{progreso}}" data-numBacklog="{{numero_de_backlog}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-oppId="{{oppId}}" data-oppTipo="{{tipo_operacion}}" data-producto="{{producto}}"/></span>
+                                        <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
+                                        <span class="btn MoverOperacion fa fa-hand-o-up " title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-progreso="{{progreso}}"></span>
+                                        <span class="btn Cancelar fa fa-times-circle updateCancelar" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_operacion_c}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
+                                        <span class="btn Comentario fa {{comentado}} updateComentario" title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}" data-progreso="{{progreso}}"></span>
+                                        <span class="btn Revivir fa fa-repeat updateRevivir" title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-progreso="{{progreso}}"></span>
+										<span class="btn ConsultarEstado fa fa-eye" title="Consultar Estado" data-id="{{@key}}" data-mes="{{mes_int}}" data-anio="{{anio}}"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <!--<tr class="backlog-dashlet-row">-->
+                            <!--<td>
+                            <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
+                        </td>-->
+							<td class="hide_estatus">{{producto}}</td>
+							<td class="hide_estatus">{{tipo_operacion_producto}}</td>
+                            <td class="hide_estatus">{{estatus_operacion_c}}</td>
+                            <td class="hide_mes backlogBodyInfo">{{mes}}-{{anio}}</td>
+                            <td class="hide_equipo">{{equipo}}</td>
+                            <td class="hide_zona">{{zona}}</td>
+                            <td class="hide_promotor"  title="{{promotor}}">{{iniciales}}</td>
+                            <td class="hide_cliente backlogBodyInfo">
+                                <a href="#Accounts/{{clienteId}}" target="_blank">{{cliente}}</a>
+                            </td>
+                            <td class="hide_operacion">
+                                <a href="#lev_Backlog/{{@key}}" target="_blank">{{numero_de_backlog}}</a>
+                            </td>
+                            <td class="hide_tipo_bien">{{tipo_bien}}</td>
+                            <td bgcolor="{{colorDispLinea}}" class="hide_monto_original">{{customFormatNumber monto_original}}</td>
+                            <!--<td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>-->
+                            <!--<td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>-->
+                            <!--<td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>-->
+                            <td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>
+                            <!--<td class="hide_ri_final_comprometida">{{customFormatNumber ri_final_comprometida}}</td>-->
+                            <!--<td class="hide_bl_actual">{{customFormatNumber bl_actual}}</td>-->
+                            <td class="hide_pipeline_posterior">{{customFormatNumber pipeline_posterior}}</td>
+                            <!--<td class="hide_monto_real">{{customFormatNumber monto_real}}</td>-->
+                            <!--<td class="hide_ri_real">{{customFormatNumber renta_real}}</td>-->
+                            <!--<td class="hide_monto_cancelado">{{customFormatNumber monto_cancelado}}</td>-->
+                            <!--<td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>-->
+                            <!--<td class="hide_tipo_operacion">{{tipo_operacion}}</td>-->
+                            <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
+                            <td class="hide_etapa">{{etapa}}</td>
+                            <td class="hide_etapa">{{refinanciamiento}}</td>
+                            <!--<td class="hide_progreso">{{progreso}}</td>-->
+                            <!--<td class="hide_conversion">{{conversion}}</td>-->
+                            <!--<td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>-->
+							<td class="hide_monto_prospecto">{{customFormatNumber monto_prospecto}}</td>
+                            <td class="hide_monto_devuelta">{{customFormatNumber monto_devuelta}}</td>
+							<td class="hide_monto_credito">{{customFormatNumber monto_credito}}</td>
+							<td class="hide_monto_rechazado">{{customFormatNumber monto_rechazado}}</td>
+							<td class="hide_sin_solicitud">{{customFormatNumber monto_sin_solicitud}}</td>
+							<td class="hide_con_solicitud">{{customFormatNumber monto_con_solicitud}}</td>
+                            <!--<td>-->
+                            <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
+                            <!--</td>-->
+                        </tr>
+                    {{/each}}
+
+                    {{#each this.SubBacklogs}}
+                        {{#each this.linea}}
+                            <tr bgcolor="{{color}}" class="backlog-dashlet-row">
+                                <td class="hide_acciones">
+                                    <div class="btn-toolbar" style="margin: 0px; padding-left:0px;">
+                                        <div class="btn-group">
+                                            <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
+                                            <span class="btn MoverOperacion fa fa-hand-o-up" title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-progreso="{{progreso}}"></span>
+                                            <span class="btn Cancelar fa fa-times-circle" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_operacion_c}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
+                                            <span class="btn Comentario fa {{comentado}}" title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}" data-progreso="{{progreso}}"></span>
+                                            <span class="btn Revivir fa fa-repeat" title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-progreso="{{progreso}}"></span>
+											<span class="btn ConsultarEstado fa fa-eye" title="Consultar Estado" data-id="{{@key}}" data-mes="{{mes_int}}" data-anio="{{anio}}"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <!--<tr class="backlog-dashlet-row">-->
+                                <!--<td>
+                                <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
+                            </td>-->
+								<td class="hide_estatus">{{producto}}</td>
+								<td class="hide_estatus">{{tipo_operacion_producto}}</td>
+                                <td class="hide_estatus">{{estatus_operacion_c}}</td>
+                                <td class="hide_mes">{{mes}}-{{anio}}</td>
+                                <td class="hide_equipo">{{equipo}}</td>
+                                <td class="hide_zona">{{zona}}</td>
+                                <td class="hide_promotor" title="{{promotor}}">{{iniciales}}</td>
+                                <td class="hide_cliente">
+                                    <a href="#Accounts/{{clienteId}}" target="_blank">{{cliente}}</a>
+                                </td>
+                                <td class="hide_operacion">
+                                    <a href="#lev_Backlog/{{@key}}" target="_blank">{{numero_de_backlog}}</a>
+                                </td>
+                                <td class="hide_tipo_bien">{{tipo_bien}}</td>
+                                <td bgcolor="{{colorDispLinea}}" class="hide_monto_original">{{customFormatNumber monto_original}}</td>
+                                <!--<td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>-->
+                                <!--<td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>-->
+                                <!--<td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>-->
+                                <td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>
+                                <!--<td class="hide_ri_final_comprometida">{{customFormatNumber ri_final_comprometida}}</td>-->
+                                <!--<td class="hide_bl_actual">{{customFormatNumber bl_actual}}</td>-->
+                                <td class="hide_pipeline_posterior">{{customFormatNumber pipeline_posterior}}</td>
+                                <!--<td class="hide_monto_real">{{customFormatNumber monto_real}}</td>-->
+                                <!--<td class="hide_ri_real">{{customFormatNumber renta_real}}</td>-->
+                                <!--<td class="hide_monto_cancelado" >{{customFormatNumber monto_cancelado}}</td>-->
+                                <!--<td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>-->
+                                <!--<td class="hide_tipo_operacion">{{tipo_operacion}}</td>-->
+                                <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
+                                <td class="hide_etapa">{{etapa}}</td>
+                                <td class="hide_etapa">{{refinanciamiento}}</td>
+                                <!--<td class="hide_progreso">{{progreso}}</td>-->
+                                <!--<td class="hide_conversion">{{conversion}}</td>-->
+                                <!--<td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>-->
+                                <td class="hide_monto_prospecto">{{customFormatNumber monto_prospecto}}</td>
+                                <td class="hide_monto_devuelta">{{customFormatNumber monto_devuelta}}</td>
+								<td class="hide_monto_credito">{{customFormatNumber monto_credito}}</td>
+								<td class="hide_monto_rechazado">{{customFormatNumber monto_rechazado}}</td>
+								<td class="hide_sin_solicitud">{{customFormatNumber monto_sin_solicitud}}</td>
+								<td class="hide_con_solicitud">{{customFormatNumber monto_con_solicitud}}</td>
+								<!--<td>-->
+                                <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
+                                <!--</td>-->
+
+                            </tr>
+                        {{/each}}
+                    {{/each}}
+
+                    {{#if Children}}
+                        {{#each Children}}
+                            {{#each this}}
+                                {{#each this}}
+                                    {{#each this}}
+                                        <tr bgcolor="{{color}}" class="backlog-dashlet-row">
+                                            <td class="hide_acciones">
+                                                <div class="btn-toolbar" style="margin: 0px;padding-left:0px;">
+                                                    <div class="btn-group">
+                                                        <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
+                                                        <span class="btn MoverOperacion fa fa-hand-o-up" title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-progreso="{{progreso}}"></span>
+                                                        <span class="btn Cancelar fa fa-times-circle" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_operacion_c}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
+                                                        <span class="btn Comentario fa {{comentado}} " title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}" data-progreso="{{progreso}}"></span>
+                                                        <span class="btn Revivir fa fa-repeat " title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-progreso="{{progreso}}"></span>
+														<span class="btn ConsultarEstado fa fa-eye" title="Consultar Estado" data-id="{{@key}}" data-mes="{{mes_int}}" data-anio="{{anio}}"></span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <!--<tr class="backlog-dashlet-row">-->
+                                            <!--<td>
+                                            <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
+                                        </td>-->
+											<td class="hide_estatus">{{producto}}</td>
+											<td class="hide_estatus">{{tipo_operacion_producto}}</td>
+                                            <td class="hide_estatus">{{estatus_operacion_c}}</td>
+                                            <td class="hide_mes">{{mes}}-{{anio}}</td>
+                                            <td class="hide_equipo">{{equipo}}</td>
+                                            <td class="hide_zona">{{zona}}</td>
+                                            <td class="hide_promotor" title="{{promotor}}">{{iniciales}}</td>
+                                            <td class="hide_cliente">
+                                                <a href="#Accounts/{{clienteId}}" target="_blank">{{cliente}}</a>
+                                            </td>
+                                            <td class="hide_operacion">
+                                                <a href="#lev_Backlog/{{@key}}" target="_blank">{{numero_de_backlog}}</a>
+                                            </td>
+                                            <td class="hide_tipo_bien">{{tipo_bien}}</td>
+                                            <td bgcolor="{{colorDispLinea}}" class="hide_monto_original">{{customFormatNumber monto_original}}</td>
+                                            <!--<td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>-->
+                                            <!--<td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>-->
+                                            <!--<td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>-->
+                                            <td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>
+                                            <!--<td class="hide_ri_final_comprometida">{{customFormatNumber ri_final_comprometida}}</td>-->
+                                            <!--<td class="hide_bl_actual">{{customFormatNumber bl_actual}}</td>-->
+                                            <td class="hide_pipeline_posterior">{{customFormatNumber pipeline_posterior}}</td>
+                                            <!--<td class="hide_monto_real">{{customFormatNumber monto_real}}</td>-->
+                                            <!--<td class="hide_ri_real">{{customFormatNumber renta_real}}</td>-->
+                                            <!--<td class="hide_monto_cancelado">{{customFormatNumber monto_cancelado}}</td>-->
+                                            <!--<td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>-->
+                                            <!--<td class="hide_tipo_operacion">{{tipo_operacion}}</td>-->
+                                            <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
+                                            <td class="hide_etapa">{{etapa}}</td>
+                                            <td class="hide_etapa">{{refinanciamiento}}</td>
+                                            <!--<td class="hide_progreso">{{progreso}}</td>-->
+                                            <!--<td class="hide_conversion">{{conversion}}</td>-->
+                                            <!--<td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>-->
+                                            <td class="hide_monto_prospecto">{{customFormatNumber monto_prospecto}}</td>
+                                            <td class="hide_monto_devuelta">{{customFormatNumber monto_devuelta}}</td>
+											<td class="hide_monto_credito">{{customFormatNumber monto_credito}}</td>
+											<td class="hide_monto_rechazado">{{customFormatNumber monto_rechazado}}</td>
+											<td class="hide_sin_solicitud">{{customFormatNumber monto_sin_solicitud}}</td>
+											<td class="hide_con_solicitud">{{customFormatNumber monto_con_solicitud}}</td>
+											<!--<td>-->
+                                            <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
+                                            <!--</td>-->
+                                        </tr>
+                                    {{/each}}
+                                {{/each}}
+                            {{/each}}
+                        {{/each}}
+                    {{/if}}
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Ocultar Columnas -->
+<div id="myModalHideCols" style="display:none" class="row-fluid">
+    <!-- Modal content -->
+    <div class="modal span12 " style="width:100%;height:100%">
+        <div class="modal-content" style="margin:auto; width:25%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title" style="margin: 0 auto;">Columnas</h2>
+            </div>
+            <div class="modal-body" style="overflow: hidden;">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="span8" style="margin-left: 30px;margin-top: 20px;">
+                                    <select id="sel_columnas" multiple size=22>
+                                        <option value="none">Ninguno</option>
+                                        <option value="hide_acciones">Acciones</option>
+										<option value="hide_acciones">Producto</option>
+										<option value="hide_acciones">Tipo Operación Producto</option>
+                                        <option value="hide_estatus">Estatus</option>
+                                        <option value="hide_mes">Mes</option>
+                                        <option value="hide_equipo">Equipo</option>
+                                        <option value="hide_zona">Zona</option>
+                                        <option value="hide_promotor">Asesor</option>
+                                        <option value="hide_cliente">Cliente</option>
+                                        <option value="hide_operacion">No. Backlog</option>
+                                        <option value="hide_tipo_bien">Tipo de Bien</option>
+                                        <option value="hide_monto_original">Linea Disponible</option>
+                                        <!--<option value="hide_monto_comprometido">Monto Original</option>-->
+                                        <!--<option value="hide_ri_comprometida">Pago Único Original</option>-->
+                                        <!--<option value="hide_monto_diferencia">Diferencia</option>-->
+                                        <option value="hide_monto_final_comprometido">Backlog</option>
+                                        <!--<option value="hide_ri_final_comprometida">Pago Único</option>-->
+                                        <!--<option value="hide_bl_actual">Backlog Actual</option>-->
+                                        <option value="hide_pipeline_posterior">Colocacion Pipeline</option>
+                                        <!--<option value="hide_monto_real">Colocación Real</option>-->
+                                        <!--<option value="hide_ri_real">Pago Único Real</option>-->
+                                        <!--<option value="hide_monto_cancelado">Monto Cancelado</option>-->
+                                        <!--<option value="hide_ri_cancelada">Pago Único Cancelada</option>-->
+                                        <!--<option value="hide_tipo_operacion">Tipo de Operacion</option>-->
+                                        <option value="hide_etapa_preliminar">Etapa Inicio Mes</option>
+                                        <option value="hide_etapa">Etapa</option>
+                                        <option value="hide_etapa">Refinanciamiento</option>
+                                        <!--<option value="hide_progreso">Solicitud</option>-->
+                                        <!--<option value="hide_conversion">Probabilidad de Conversión %</option>-->
+                                        <!--<option value="hide_motivo_rechazo">Motivo de Rechazo</option>-->
+										<option value="hide_monto_prospecto">Prospecto</option>
+                                        <option value="hide_monto_devuelta">Devuelta</option>
+										<option value="hide_monto_credito">Crédito</option>
+										<option value="hide_monto_rechazado">Rechazado</option>
+										<option value="hide_sin_solicitud">Sin solicitud</option>
+										<option value="hide_con_solicitud">Con solicitud</option>
+									</select>
+                                </div>
+                                <div class="span1" style="margin-top: 20px;">
+                                    <input type="button" value="Ejecutar" id="btn_ejecuta_ocultar_columnas" class="btn btn-success"/>
+                                    <input type="button" value="Cancelar" id="btn_cancela_ocultar_columnas" class="btn btn-danger" style="margin-top: 25px;"/>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Mover Mes -->
+<div id="myModalMover" style="display:none" class="row-fluid">
+    <!-- Modal content -->
+    <div class="modal span12 " style="width:100%;height:100%">
+        <div class="modal-content" style="margin:auto; width:35%;height:60%;">
+            <div class="modal-header">
+                <h2>MOVER OPERACIÓN</h2>
+            </div>
+            <div class="modal-body">
+                <div style="margin-left:15px;margin-bottom:20px">
+                <table>
+                    <tbody style="font-size:15px;" align="left">
+                    <tr>
+                        <td><b>Operación</b></td>
+                        <td>{{newMoverMes.nameBacklog}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Monto Original</b></td>
+                        <td>
+                            <span id="monto_mes">${{customFormatNumber newMoverMes.montoOriginalBacklog}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+                <table class="popuptables" style="display: {{mes_switch}};">
+                    <tr>
+                        <td>
+                            Año:
+                        </td>
+                        <td></td>
+                        <td>
+                            <select class="anio_switch_popup">
+                                {{#each anio_list_html_mover}}
+                                    {{#if @key}}
+                                        <option value="{{@key}}">{{this}}</option>
+                                    {{/if}}
+                                {{/each}}
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mes:
+                        </td>
+                        <td></td>
+                        <td>
+                            <select class="mes_switch_popup">
+                                {{#each meses_list_html_mover}}
+                                    {{#if @key}}
+                                        <option value="{{@key}}">{{this}}</option>
+                                    {{/if}}
+                                {{/each}}
+
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div align="right">
+                    <button class="btn btn-danger btn-Model" id="btn-Cancelar" type="submit">Cancelar</button>
+                    <button class="btn btn-success btn-Model" id="btn-GuardarMover" type="submit">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Mover Masivo -->
+<div id="myModalMoverMasiva" style="display:none" class="row-fluid">
+    <!-- Modal content -->
+    <div class="modal span12 " style="width:100%;height:100%">
+        <div class="modal-content" style="margin:auto; width:35%;height:50%;">
+            <div class="modal-header">
+                <h2>MOVER OPERACIÓN</h2>
+            </div>
+            <div class="modal-body">
+                <div style="margin-left:15px;margin-bottom:20px">
+                    <table>
+                        <tbody style="font-size:15px;" align="left">
+                        <tr>
+                            <td><b>Número de líneas seleccionadas</b></td>
+                            <td>{{countChecks}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table class="popuptables">
+                    <tr>
+                        <td>
+                            Año:
+                        </td>
+                        <td></td>
+                        <td>
+                            <select class="anio_masivo_switch_popup">
+                                {{#each anio_list_html_mover}}
+                                    {{#if @key}}
+                                        <option value="{{@key}}">{{this}}</option>
+                                    {{/if}}
+                                {{/each}}
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mes:
+                        </td>
+                        <td></td>
+                        <td>
+                            <select class="mes_switch_masivo_popup">
+                                {{#each meses_list_html_mover}}
+                                    {{#if @key}}
+                                        <option value="{{@key}}">{{this}}</option>
+                                    {{/if}}
+                                {{/each}}
+
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div align="right">
+                    <button class="btn btn-danger btn-Model" id="btn-Cancelar" type="submit">Cancelar</button>
+                    <button class="btn btn-success btn-Model" id="btn-GuardarMoverMasiva" type="submit">Guardar</button>
+                    <!--
+                    <span class="btn btn-success btn-Model" title="Guardar" id="btn-GuardarMoverMasiva">
+                        Guardar
+                        <i class="fa fa-spinner fa-spin savingIcon" style="display: none"></i>
+                    </span>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cancelar -->
+<div id="myModalCan" style="display:none" class="row-fluid">
+  <!-- Modal content -->
+  <div class="modal span12 " style="width:100%;height:100%">
+    <div class="modal-content" style="margin:auto; width:50%">
+        <div class="modal-header">
+          <!--<button type="button" class="close closeCancelar" data-dismiss="modal">&times;</button>-->
+          <h2>CANCELAR OPERACIÓN</h2>
+        </div>
+        <div class="modal-body">
+          <div class="Disposiciones">
+            <label style="font-size:15px; color:red" align="left"><b>El Backlog tiene asociada la(s) disposición(es): {{disposiciones}}</b></label>
+            <label style="font-size:15px; color:red" align="left"><b>Si deseas proceder con la solicitud de cancelación, da click en Guardar</b></label>
+          </div>
+          <table>
+            <tbody style="font-size:15px;" align="left">
+                <tr>
+                    <td><b>Operación</b></td>
+                    <td>{{newCancelar.nameBacklog}}</td>
+                </tr>
+                <tr>
+                    <td><b>Monto Original</b></td>
+                    <td>${{customFormatNumber newCancelar.montoOriginalBacklog}}</td>
+                </tr>
+                <tr>
+                    <td><b>Pago Único Original</b></td>
+                    <td>${{customFormatNumber newCancelar.rentaInicialOriginal}}</td>
+                </tr>
+                <tr>
+                    <td><b>Motivo de Cancelación</b></td>
+                    <td>
+                        <select id="motivoCancelarC" class="motivoCancelarC">
+                            {{#each motivoCancelar}}
+                            <option value="{{@key}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </td>
+                </tr>
+                <tr class="Quien"><!---->
+                    <td>
+                        <b>¿Quién?</b>
+                        <br>
+                        <input type="text" name="Quien" class="QuienInput">
+                    </td>
+                </tr>
+                <tr class="Producto"><!---->
+                    <td>
+                        <b>¿Qué producto?</b>
+                        <br>
+                        <input type="text" name="producto" class="ProductoInput">
+                    </td>
+                </tr>
+                <div class="FechaCancelar" id="FechaCancelar" style="display: none;">
+                    <tr class="FechaCancelar">
+                        <td><b>Año:</b></td>
+                        <td><b>Mes: </b></td>
+                    </tr>
+                    <tr class="FechaCancelar">
+                        <td>
+                            <select id="anio_cancelar">
+                                {{#each anioCancelar}}
+                               <option value="{{@key}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </td>
+                        <td>
+                            <select id="mes_cancelar" class="mes_cancelar">
+                                {{#each mesCancelar}}
+                               <option value="{{@key}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </td>
+                    </tr>
+                </div>
+            </tbody>
+          </table><br>
+
+          <div align="left">
+            <label style="font-size:15px;"><b>Comentarios:</b></label>
+            <textarea cols="12" name="texto3" id="ComentarioCan" class="form-control" style="margin: 1px; width: 97%; height: 61px; resize:none;"></textarea>
+          </div>
+        <br><br><br><br>
+      </div>
+      <div class="modal-footer">
+        <div align="right">
+          <button class="btn btn-danger  btn-Model" id="btn-CanCancelar" type="submit">Cancelar</button>
+          <button class="btn btn-success  btn-Model" id="btn-GuardarCan" type="submit">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Cancelar Masivo-->
+<div id="myModalCanMasiva" style="display:none" class="row-fluid">
+  <!-- Modal content -->
+  <div class="modal span12 " style="width:100%;height:100%">
+    <div class="modal-content" style="margin:auto; width:50%">
+        <div class="modal-header">
+          <!--<button type="button" class="close closeCancelar" data-dismiss="modal">&times;</button>-->
+          <h2>CANCELAR OPERACIÓN</h2>
+        </div>
+        <div class="modal-body">
+          <table>
+            <tbody style="font-size:15px;" align="left">
+
+                <tr>
+                    <td><b>Número de líneas seleccionadas</b></td>
+                    <td>{{countChecksCancelar}}</td>
+                </tr>
+
+                <tr>
+                    <td><b>Motivo de Cancelación</b></td>
+                    <td>
+                        <select id="motivoCancelarMasivo" class="motivoCancelarMasivo">
+                            <option value="{{motivoDefault}}">{{getUnifinListValue "motivo_cancelacion_c_list" motivoDefault}}</option>
+                            {{#each motivoCancelarMasivoList}}
+                            <option value="{{@key}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </td>
+                </tr>
+                <tr class="Quien" style="display:none;">
+                    <td>
+                        <b>¿Quién?</b>
+                        <br>
+                        <input type="text" name="Quien" class="QuienInput" id="quienMasivo">
+                    </td>
+                </tr>
+                <tr class="Producto" style="display:none;">
+                    <td>
+                        <b>¿Qué producto?</b>
+                        <br>
+                        <input type="text" name="producto" class="ProductoInput" id="productoInputMasivo">
+                    </td>
+                </tr>
+                <div class="FechaCancelar" id="FechaCancelar" style="display: none;">
+                    <tr class="FechaCancelar">
+                        <td><b>Año:</b></td>
+                        <td><b>Mes: </b></td>
+                    </tr>
+                    <tr class="FechaCancelar">
+                        <td>
+                            <select id="anio_cancelar">
+                                {{#each anioCancelarMasivo}}
+                               <option value="{{@key}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </td>
+                        <td>
+                            <select id="mes_cancelar" class="mes_cancelar">
+                                {{#each mesCancelarMasivo}}
+                               <option value="{{@key}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </td>
+                    </tr>
+                </div>
+            </tbody>
+          </table><br>
+
+          <div align="left">
+            <label style="font-size:15px;"><b>Comentarios:</b></label>
+            <textarea cols="12" name="texto3" id="ComentarioCanMasivo" class="form-control" style="margin: 1px; width: 97%; height: 61px; resize:none;"></textarea>
+          </div>
+        <br><br><br><br>
+      </div>
+      <div class="modal-footer">
+        <div align="right">
+          <button class="btn btn-danger  btn-Model" id="btn-Cancelar" type="submit">Cancelar</button>
+          <button class="btn btn-success  btn-Model" id="btn-GuardarCanMasivo" type="submit">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Comentarios -->
+<div id="myModal" style="display:none" class="row-fluid">
+  <!-- Modal content -->
+  <div class="modal span12 " style="width:100%;height:100%">
+    <div class="modal-content" style="margin:auto; width:50%">
+        <div class="modal-header">
+          <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+          <h2>COMENTARIOS DE OPERACIÓN</h2>
+        </div>
+        <div class="modal-body">
+          <table>
+            <tbody style="font-size:15px;" align="left">
+              <tr>
+                <td><b>Operación</b></td>
+                <td>{{newComentario.nameBacklog}}</td>
+              </tr>
+              <tr>
+                <td><b>Monto Original</b></td>
+                <td>${{customFormatNumber newComentario.montoOriginalBacklog}}</td>
+              </tr>
+              <tr>
+                <td><b>Monto Real</b></td>
+                <td>${{customFormatNumber newComentario.montoRealBacklog}}</td>
+              </tr>
+            </tbody>
+          </table><br>
+          <div align="left">
+            <label style="font-size:15px;"><b>Comentarios</b></label>
+            <textarea disabled cols="12" name="texto" id="texto" class="form-control" style="margin: 1px; width:97%; height: 61px; resize:none;">{{newComentario.comentariosExistentes}}</textarea>
+          </div>
+          <div align="left">
+            <label style="font-size:15px;"><b>Agregar Comentario</b></label>
+            <textarea cols="12" name="texto2" id="AddDescrip" class="form-control" style="margin: 1px; width: 97%; height: 61px; resize:none;"></textarea>
+          </div>
+        <br><br><br><br>
+      </div>
+      <div class="modal-footer">
+        <div align="right">
+          <button class="btn btn-danger  btn-Model" id="btn-CancelarComen" type="submit">Cancelar</button>
+          <button class="btn btn-success  btn-Model" id="btn-GuardarComen" type="submit">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Revivir -->
+<div id="myModalRe" style="display:none" class="row-fluid">
+  <!-- Modal content -->
+  <div class="modal span12 " style="width:100%;height:100%">
+    <div class="modal-content" style="margin:auto; width:50%">
+        <div class="modal-header">
+          <!--<button type="button" class="close closeRe" data-dismiss="modal">&times;</button>-->
+          <h2>REVIVIR OPERACIÓN</h2>
+        </div>
+        <div class="modal-body">
+          <table>
+            <tbody style="font-size:15px;" align="left">
+                <tr>
+                    <td><b>Operación</b></td>
+                    <td>{{newRevivir.nameBacklog}}</td>
+                </tr>
+                <tr>
+                    <td><b>Monto Original</b></td>
+                    <td>${{customFormatNumber newRevivir.montoOriginalBacklog}}</td>
+                </tr>
+                <tr>
+                    <td><b>Pago Único Original</b></td>
+                    <td>${{customFormatNumber newRevivir.rentaInicialOriginal}}</td>
+                </tr>
+                <tr>
+                    <td><b>Año:</b></td>
+                    <td><b>Mes: </b></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="anio_revivir">
+                            {{#each anioRevivir}}
+                           <option value="{{@key}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </td>
+                    <td>
+                        <select id="mes_revivir">
+                            {{#each mesRevivir}}
+                           <option value="{{@key}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+          </table><br>
+
+          <div align="left">
+            <label style="font-size:15px;"><b>Comentarios:</b></label>
+            <textarea cols="12" name="texto2" id="ComentarioRev" class="form-control" style="margin: 1px; width: 97%; height: 61px; resize:none;"></textarea>
+          </div>
+        <br><br><br><br>
+      </div>
+      <div class="modal-footer">
+        <div align="right">
+          <button class="btn btn-danger  btn-Model" id="btn-CancelarRe" type="submit">Cancelar</button>
+          <button class="btn btn-success  btn-Model" id="btn-GuardarRe" type="submit">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Visualizar Consulta de Estado -->
+<div id="consultarEstadoModal" style="display:none" class="row-fluid">
+  <!-- Modal content -->
+  <div class="modal span12 " style="width:100%;height:100%">
+    <div class="modal-content" style="margin:auto; width:50%">
+        <div class="modal-header">
+          <center><h2>Consultar Estado</h2></center>
+        </div>
+        <div class="modal-body">
+        <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
+            <thead>
+                <tr>
+                    <td><b>Disposición</b></td>
+                    <td><b>Estatus</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each disposiciones2}}
+                <tr>
+                    <td>{{#if idDisposicion}}{{idDisposicion}}{{/if}}</td>
+                    <td>{{#if estatus}}{{estatus}}{{/if}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>     
+        <br><br><br><br>
+      </div>
+      <div class="modal-footer">
+        <div align="right">
+          <button class="btn btn-danger btn-Model" id="btn-Cancelar-View" type="submit">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(function () {
+        $(".popup").draggable();
+    });
+</script>

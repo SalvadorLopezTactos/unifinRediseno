@@ -95,3 +95,6 @@ $mod_strings['LBL_ATENDIDO'] = 'Atendido';
 $mod_strings['LBL_NOTIFICADO'] = 'Notificado';
 $mod_strings['LBL_ID_ODOO'] = 'Id Odoo';
 $mod_strings['LBL_ID_POLIZA'] = 'Id de Póliza Interprotección';
+$mod_strings['LBL_CIERRE_BL'] = 'Cierre BL';
+$mod_strings['LBL_TCTBL_BACKLOG_SEGUROS_S_SEGUROS_1_FROM_TCTBL_BACKLOG_SEGUROS_TITLE'] = 'Backlog (Oportunidades Activas)';
+$mod_strings['LBL_TCTBL_BACKLOG_SEGUROS_S_SEGUROS_1_FROM_S_SEGUROS_TITLE'] = 'TCTBL_Backlog_Seguros';
