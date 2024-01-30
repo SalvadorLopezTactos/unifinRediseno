@@ -8,7 +8,11 @@ function backlog_seguros(){
     $mes_actual = date("n");
     $anio_actual = date("Y");
     //Obtener todos los backlogs
-    $sqlBl = "SELECT id,anio,mes,etapa FROM TCTBL_Backlog_Seguros WHERE deleted = 0";
+    //$sqlBl = "SELECT id,anio,mes,etapa FROM TCTBL_Backlog_Seguros WHERE deleted = 0";
+    $sqlBl = "SELECT *
+FROM tctbl_backlog_seguros
+WHERE ( anio < YEAR(NOW()) OR (anio = YEAR(NOW()) AND mes < MONTH(NOW())) )
+AND etapa != '9' and etapa != '10';";
     $queryResult = $db->query($sqlBl);
 
     $GLOBALS['log']->fatal("Se obtuvieron ". $queryResult->num_rows. " registros de Backlog");
@@ -21,17 +25,16 @@ function backlog_seguros(){
         $anio_bl = $row['anio'];
         $etapa = $row['etapa'];
 
-        if ( ($anio_bl < $anio_actual || ($anio_bl == $anio_actual && $mes_bl < $mes_actual) ) && ($etapa != '9' || $etapa != '10') ) {
-            $bean_bl = BeanFactory::getBean('TCTBL_Backlog_Seguros', $id_bl, array('disable_row_level_security' => true));
+        $bean_bl = BeanFactory::getBean('TCTBL_Backlog_Seguros', $id_bl, array('disable_row_level_security' => true));
 
-            $bean_bl->mes = $mes_actual;
-            $bean_bl->anio = $anio_actual;
+        $bean_bl->mes = $mes_actual;
+        $bean_bl->anio = $anio_actual;
 
-            $bean_bl->save();
+        $bean_bl->save();
 
-            $GLOBALS['log']->fatal("SE ACTUALIZA MES Y ANIO DEL BACKLOG DE SEGUROS CON EL ID: ".$bean_bl->id);
+        $GLOBALS['log']->fatal("SE ACTUALIZA MES Y ANIO DEL BACKLOG DE SEGUROS CON EL ID: ".$bean_bl->id);
 
-        }
+        
     }
 
     return true;

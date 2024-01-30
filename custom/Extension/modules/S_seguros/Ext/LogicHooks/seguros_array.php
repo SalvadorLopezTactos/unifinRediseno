@@ -42,20 +42,20 @@ $hook_array['before_save'][] = Array(
    'verifica_cuenta_bloqueada_opp'
 );
 
-$hook_array['before_save'][] = array(
-    6,
-    'Cuando la oportunidad de seguro cambia a Ganada o No Ganada, se procede a borrar la relación de oportunidades asociadas con el Backlog y establece valor en Cierre BL',
-    'custom/modules/S_seguros/Seguros_LH.php',
-    'Seguros_LH',
-    'elimina_relacion_asociada_set_cierre_bl'
-);
-
-$hook_array['before_save'][] = array(
-    7,
+$hook_array['after_save'][] = array(
+    1,
     'Establece etapa de menor jerarquía a Backlog relacionada',
     'custom/modules/S_seguros/Seguros_LH.php',
     'Seguros_LH',
     'update_etapa_backlog'
+);
+
+$hook_array['before_save'][] = array(
+    7,
+    'Cuando la oportunidad de seguro cambia a Ganada o No Ganada, se procede a borrar la relación de oportunidades asociadas con el Backlog y establece valor en Cierre BL',
+    'custom/modules/S_seguros/Seguros_LH.php',
+    'Seguros_LH',
+    'elimina_relacion_asociada_set_cierre_bl'
 );
 
 $hook_array['before_relationship_add'][] = array(
@@ -66,10 +66,18 @@ $hook_array['before_relationship_add'][] = array(
     'valida_mes_anio_bl'
 );
 
-$hook_array['after_relationship_add'][] = array(
-    1,
+$hook_array['before_relationship_add'][] = array(
+    2,
     'Cada que se detecte una nueva relación con Backlog, se genera un registro en la relación de Oportunidades de Seguro Activas',
     'custom/modules/S_seguros/Seguros_LH.php',
     'Seguros_LH',
     'genera_relacion_activa'
+);
+
+$hook_array['before_relationship_delete'][] = array(
+    1,
+    'Cuando cambia el valor del Backlog relacionado, se elimina la respectiva relación Activa para mantender sincronizdo el subpanel dentro del registro de Backlog Seguros',
+    'custom/modules/S_seguros/Seguros_LH.php',
+    'Seguros_LH',
+    'elimina_relacion_activa'
 );
