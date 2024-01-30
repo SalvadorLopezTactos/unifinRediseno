@@ -58,7 +58,11 @@
 		    if(this.model.get('tipo_venta_c') == 4) this.model.set('incentivo',0);
 		    if(this.model.get('tipo_sf_c') == 2 && data.puestousuario_c != 58) this.model.set('incentivo',10);
 		    if(this.model.get('tipo_sf_c') == 1 && data.productos_c.includes("8")) this.model.set('incentivo',15);
-          }, this)
+
+        //Oculta campo de relaciones asociadas
+        $('[data-name=tctbl_backlog_seguros_s_seguros_1_name]').hide();
+
+      }, this)
         });
 	  }
     },
@@ -76,9 +80,19 @@
 		if(!tieneSeguros) {
 			$('[name="edit_button"]').hide();
 			_.each(this.model.fields, function(field){
-				this.noEditFields.push(field.name);
-				this.$('.record-edit-link-wrapper[data-name='+field.name+']').remove();
-				this.$("[data-name='"+field.name+"']").attr('style', 'pointer-events:none;');
+        if( field.name !== 'tctbl_backlog_seguros_s_seguros_name' ){
+          
+          this.noEditFields.push(field.name);
+          this.$('.record-edit-link-wrapper[data-name='+field.name+']').remove();
+          this.$("[data-name='"+field.name+"']").attr('style', 'pointer-events:none;');
+
+        }else{
+          //Deja habilitado el campo de Backlog relacionado solo en casod de que no tenga valor
+          if( this.model.get('tctbl_backlog_seguros_s_seguros_name') !== "" ){
+            this.$("[data-name='"+field.name+"']").attr('style', 'pointer-events:none;');
+          }
+        }
+
 			},this);
 			this.noEditFields.push('prima_objetivo');
 			this.$("[data-name='prima_objetivo']").attr('style', 'pointer-events:none;');
