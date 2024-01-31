@@ -98,3 +98,5 @@ $mod_strings['LBL_ID_POLIZA'] = 'Id de Póliza Interprotección';
 $mod_strings['LBL_CIERRE_BL'] = 'Cierre BL';
 $mod_strings['LBL_TCTBL_BACKLOG_SEGUROS_S_SEGUROS_1_FROM_TCTBL_BACKLOG_SEGUROS_TITLE'] = 'Backlog (Oportunidades Activas)';
 $mod_strings['LBL_TCTBL_BACKLOG_SEGUROS_S_SEGUROS_1_FROM_S_SEGUROS_TITLE'] = 'TCTBL_Backlog_Seguros';
+$mod_strings['LBL_FOLIO_WEB'] = 'Folio';
+$mod_strings['LBL_STATUS_WEB'] = 'Estatus web';
