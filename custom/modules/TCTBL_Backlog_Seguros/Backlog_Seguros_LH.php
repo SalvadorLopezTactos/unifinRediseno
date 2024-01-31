@@ -7,7 +7,13 @@ class Backlog_Seguros_LH
 
         global $app_list_strings;
 
-        $bean->name = 'Backlog '. $bean->no_backlog. ' - ' .$app_list_strings['mes_list'][$bean->mes]. " " . $app_list_strings['anio_list'][$bean->anio];
+        $stringName = 'Backlog '. $bean->no_backlog. ' - ' .$app_list_strings['mes_list'][$bean->mes]. " " . $app_list_strings['anio_list'][$bean->anio];
+        $stringQuery ="UPDATE tctbl_backlog_seguros SET name = '{$stringName}' WHERE id = '{$bean->id}'";
+
+        $GLOBALS['log']->fatal("Se establece nombre del Backlog");
+        $GLOBALS['log']->fatal($stringQuery);
+        $GLOBALS['db']->query($stringQuery);
+
     }
 
 }
