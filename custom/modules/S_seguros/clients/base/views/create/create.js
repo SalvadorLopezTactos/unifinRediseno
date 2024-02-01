@@ -27,7 +27,7 @@
         this.model.set("referenciador",app.user.attributes.full_name);
         this.model.set("requiere_ayuda_c",1);
         this.addRegion();
-        this.model.set("asesor_vta_cruzada_c",2);
+        this.model.set("asesor_vta_cruzada_c",1);
         this.model.set("ejecutivo_c","6");
         this.model.set("tipo_venta_c",9);
         this.creditaria = 1;
@@ -268,6 +268,6 @@
   },
   
   setASVC: function() {
-    if(this.creditaria) this.model.set('asesor_vta_cruzada_c', 2);
+    if(this.creditaria) this.model.set('asesor_vta_cruzada_c', 1);
   },
 })
