@@ -59,6 +59,7 @@ array (
             'name' => 'main_dropdown',
             'primary' => true,
             'showOn' => 'view',
+            'css_class' =>'ddw-main',
             'buttons' => 
             array (
               0 => 

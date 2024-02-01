@@ -49,7 +49,8 @@
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:estatus_po_c", _.bind(this.change_estatus, this));
 
-        this.events['click a[track="click:actiondropdown"] > .sicon.sicon-chevron-down'] = 'clickActionsCambiaEtiquetaEnvioCorreo';
+        //this.events['click a[track="click:actiondropdown"] > .sicon.sicon-chevron-down'] = 'clickActionsCambiaEtiquetaEnvioCorreo';
+        this.events['click .ddw-main > .dropdown-toggle'] = 'clickActionsCambiaEtiquetaEnvioCorreo';
         this.model.on('sync', this.userAlianzaSoc, this);
         this.model.on('sync', this.muestraBotonCorreo, this);
         this.model.on('sync', this.hideShowBtnVoBo, this);
