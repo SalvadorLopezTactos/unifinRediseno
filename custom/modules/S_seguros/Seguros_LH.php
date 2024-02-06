@@ -141,6 +141,7 @@ class Seguros_LH{
 
 
         $GLOBALS['log']->fatal('arguments del after_save');
+        $GLOBALS['log']->fatal(print_r($arguments['dataChanges'], true));
 
         if($arguments['dataChanges']['etapa'] || $arguments['dataChanges']['tctbl_backlog_seguros_s_segurostctbl_backlog_seguros_ida'] ){
 
@@ -149,9 +150,9 @@ class Seguros_LH{
             $id_bl = $bean->tctbl_backlog_seguros_s_segurostctbl_backlog_seguros_ida;
             $bean_bl = BeanFactory::getBean('TCTBL_Backlog_Seguros', $id_bl, array('disable_row_level_security' => true));
 
-            if( $bean_bl->load_relationship('tctbl_backlog_seguros_s_seguros_1') ){
+            if( $bean_bl->load_relationship('tctbl_backlog_seguros_s_seguros') ){
 
-                $relatedSeguros = $bean_bl->tctbl_backlog_seguros_s_seguros_1->getBeans();
+                $relatedSeguros = $bean_bl->tctbl_backlog_seguros_s_seguros->getBeans();
 
                 $GLOBALS['log']->fatal("TIENE ". count($relatedSeguros). " Oportunidades activas" );
                 $array_etapas = array();
