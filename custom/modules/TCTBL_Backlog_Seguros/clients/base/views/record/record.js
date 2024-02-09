@@ -3,13 +3,20 @@
     seleccionado:null,
 
     initialize: function (options) {
+        selfBacklogSeguros = this;
         this._super("initialize", [options]);
 
         this.model.on('sync', this.ocultaOpcionesSubpanelSeguros, this);
         this.model.on('sync', this.validaEdicionMesCorriente, this);
+        this.model.on('sync', this.getOppsSeguros, this);
+
+        this.context.on('button:cancel_bl_button:click', this.cancel_bl_button, this);
 
         this.model.addValidationTask('validaMontosPrimas', _.bind(this.validaMontosPrimas, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+
+        selfBacklogSeguros.puedeCancelar = true;
+        selfBacklogSeguros.msgCancelar = "";
 
     },
 
@@ -17,6 +24,59 @@
         this._super("_render");
 
     },
+
+    cancel_bl_button: function (){
+
+        if( this.model.get('etapa') == 12 ){
+             app.alert.show('msg_cancelar', {
+                level: 'error',
+                title: "Error",
+                messages: 'El registro ya se encuentra <b>Cancelado</b>',
+                autoClose: false
+            });
+
+            return;
+        }
+
+        if( this.model.get('created_by') != App.user.get('id') ){
+            app.alert.show('msg_cancelar', {
+                level: 'error',
+                title: "No es posible Cancelar",
+                messages: 'No cuentas con el privilegio para Cancelar el registro, únicamente el usuario que creó el registro puede hacerlo',
+                autoClose: false
+            });
+
+            return;
+        }
+
+        if( !selfBacklogSeguros.puedeCancelar ){
+            app.alert.show('msg_cancelar', {
+                level: 'error',
+                title: "No es posible Cancelar",
+                messages: selfBacklogSeguros.msgCancelar,
+                autoClose: false
+            });
+            return;
+        }
+
+        this.actualizaBLCancelado();
+
+    },
+
+    actualizaBLCancelado: function(){
+        this.model.set('etapa','12');
+        this.model.save(null, {
+            showAlerts: true,
+            success: function (model, response) {
+                app.alert.show('success_cancel_bl', {
+                    level: 'success',
+                    messages: 'El registro se ha <b>Cancelado</b>',
+                    autoClose: false
+                });
+            }
+        });
+    },
+
 
     ocultaOpcionesSubpanelSeguros: function (){
 
@@ -67,6 +127,30 @@
 			// },this);
 
         }
+
+    },
+
+    getOppsSeguros: function(){
+
+        app.api.call("read", app.api.buildURL("TCTBL_Backlog_Seguros/" + this.model.get('id') + "/link/tctbl_backlog_seguros_s_seguros", null, null), null, {
+                success: _.bind(function (data) {
+                    if( data.records.length > 0 ){
+                        var arr_cancelar = [];
+                        for (var i = 0; i < data.records.length; i++) {
+                            if ( data.records[i].etapa != 1 ) {
+                                arr_cancelar.push( "1" );
+                                
+                            }
+                        }
+
+                        if( arr_cancelar.includes("1") ){
+                            selfBacklogSeguros.puedeCancelar = false;
+                            selfBacklogSeguros.msgCancelar = "Alguna de las oportunidades asociadas ya no se encuentra en etapa de Prospecto";
+                        }
+                        
+                    }
+                }, this)
+            });
 
     },
 
