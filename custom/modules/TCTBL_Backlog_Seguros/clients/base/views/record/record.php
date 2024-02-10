@@ -75,7 +75,15 @@ array (
               array (
                 'type' => 'divider',
               ),
-              5 => 
+              5 =>
+              array(
+                'type' => 'rowaction',
+                'event' => 'button:cancel_bl_button:click',
+                'name' => 'cancel_bl_button',
+                'label' => 'Cancelar',
+                'acl_action' => 'edit',
+              ),
+              6 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:find_duplicates_button:click',
@@ -83,7 +91,7 @@ array (
                 'label' => 'LBL_DUP_MERGE',
                 'acl_action' => 'edit',
               ),
-              6 => 
+              7 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:duplicate_button:click',
@@ -92,7 +100,7 @@ array (
                 'acl_module' => 'TCTBL_Backlog_Seguros',
                 'acl_action' => 'create',
               ),
-              7 => 
+              8 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:audit_button:click',
@@ -100,11 +108,11 @@ array (
                 'label' => 'LNK_VIEW_CHANGE_LOG',
                 'acl_action' => 'view',
               ),
-              8 => 
+              9 => 
               array (
                 'type' => 'divider',
               ),
-              9 => 
+              10 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:delete_button:click',

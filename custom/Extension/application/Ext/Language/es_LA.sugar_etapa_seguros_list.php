@@ -1,5 +1,5 @@
 <?php
- // created: 2020-09-01 08:47:53
+ // created: 2024-02-09 13:49:41
 
 $app_list_strings['etapa_seguros_list']=array (
   1 => 'Prospecto',
@@ -13,4 +13,5 @@ $app_list_strings['etapa_seguros_list']=array (
   9 => 'Ganada',
   10 => 'No Ganada',
   11 => 'Solicitud de Cotización',
+  12 => 'Cancelada',
 );

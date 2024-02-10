@@ -121,13 +121,13 @@ class Seguros_LH{
 
         //Elimina relación "Activa" con Backlog en caso de que la oportunidad se establezca como Ganada o No Ganada
         if($bean->fetched_row['etapa'] != $bean->etapa && ($bean->etapa == "9" || $bean->etapa == "10")){
-            $GLOBALS['log']->fatal("ELIMINA RELACION ACTIVA YA QUE LA OPORTUNIDAD SE ESTABLECIÓ COMO GANADA O NO GANADA");
+            // $GLOBALS['log']->fatal("ELIMINA RELACION ACTIVA YA QUE LA OPORTUNIDAD SE ESTABLECIÓ COMO GANADA O NO GANADA");
 
-            if ($bean->load_relationship('tctbl_backlog_seguros_s_seguros_1')) {
+            // if ($bean->load_relationship('tctbl_backlog_seguros_s_seguros_1')) {
 
-                $bean->tctbl_backlog_seguros_s_seguros_1->delete($bean->tctbl_backlog_seguros_s_segurostctbl_backlog_seguros_ida);
+            //     $bean->tctbl_backlog_seguros_s_seguros_1->delete($bean->tctbl_backlog_seguros_s_segurostctbl_backlog_seguros_ida);
 
-            }
+            // }
 
             //Establece fecha de cierre
             $GLOBALS['log']->fatal("OPORTUNIDAD DE SEGURO ". $bean->etapa. " SE ESTABLECE FECHA DE CIERRE");
