@@ -2390,9 +2390,14 @@ where rfc_c = '{$bean->rfc_c}' and
     }
 
     function evaluaCambioRegimenCapital( $name_actual, $name_nuevo, $regimen_capital ){
-       
+        $name_actual = trim($name_actual);
+        $name_nuevo = trim ($name_nuevo);
         $name_nuevo = str_replace($regimen_capital,"",$name_nuevo);
+        $name_nuevo = trim ($name_nuevo);
         $notificacion = false;
+        //$GLOBALS['log']->fatal("name_actual-".$name_actual."-");
+        //$GLOBALS['log']->fatal("name_nuevo-".$name_nuevo."-");
+        //$GLOBALS['log']->fatal("regimen_capital-".$regimen_capital."-");
         if( $this->startsWith( $name_actual, $name_nuevo ) ){
             $GLOBALS['log']->fatal("SE PROCEDE A VALIDAR REGIMEN CAPITAL");
             $regimen_capital_actual = str_replace($name_nuevo,"",$name_actual );
