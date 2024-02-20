@@ -84,7 +84,12 @@ class minutMinutas_Hooks
                       else
                       {
                         $beanRelated = BeanFactory::getBean('Rel_Relaciones', $relacion->id);
-                        $beanRelated->relaciones_activas = $beanRelated->relaciones_activas.',^Contacto^';
+                        if( $objArrParticipnates[$j]['tipo_contacto'] == "Negocios" ){
+                          $GLOBALS['log']->fatal("SE GENERA RELACIÓN TIPO NEGOCIOS*");
+                          $beanRelated->relaciones_activas = $beanRelated->relaciones_activas . ',^Negocios^';
+                        }else{
+                          $beanRelated->relaciones_activas = $beanRelated->relaciones_activas.',^Contacto^';
+                        }
                         $beanRelated->tipodecontacto = $objArrParticipnates[$j]['tipo_contacto'];
                         $beanRelated->save();
                       }
@@ -111,7 +116,13 @@ class minutMinutas_Hooks
                 // genero relacion
                 $beanRelacion = BeanFactory::newBean("Rel_Relaciones");
                 $beanRelacion->tipodecontacto = $objArrParticipnates[$j]['tipo_contacto'];
-                $beanRelacion->relaciones_activas = "Contacto";
+                if ($objArrParticipnates[$j]['tipo_contacto'] == "Negocios") {
+                  $GLOBALS['log']->fatal("SE GENERA RELACIÓN TIPO NEGOCIOS*");
+                  $beanRelacion->relaciones_activas = "Negocios";
+                } else {
+                  $beanRelacion->relaciones_activas = "Contacto";
+                }
+                
                 $beanRelacion->rel_relaciones_accounts_1accounts_ida = $objIdCuentaPadre;
                 $beanRelacion->account_id1_c = $cuenta;
                 $beanRelacion->rel_relaciones_accountsaccounts_ida = $beanRelacion->rel_relaciones_accounts_1accounts_ida;

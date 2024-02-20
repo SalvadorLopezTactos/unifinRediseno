@@ -9,6 +9,18 @@ array (
       array (
         'buttons' => 
         array (
+          0 => 
+          array (
+            'type' => 'button',
+            'name' => 'iniciar_reunion',
+            'label' => 'Iniciar Reunión',
+            'css_class' => 'btn-link',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:iniciar_reunion:click',
+            ),
+          ),
           1 => 
           array (
             'type' => 'button',
@@ -63,22 +75,6 @@ array (
                 'event' => 'button:edit_button:click',
                 'name' => 'edit_button',
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
-                'acl_action' => 'edit',
-              ),
-              1 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:new_minuta_b:click',
-                'name' => 'new_minuta',
-                'label' => 'LBL_CREATE_NEW_MINUTA',
-                'acl_action' => 'edit',
-              ),
-              2 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:getlocation:click',
-                'name' => 'check_in1',
-                'label' => 'LBL_CHECK_IN_LABEL',
                 'acl_action' => 'edit',
               ),
             ),
@@ -597,6 +593,15 @@ array (
               array (
                 'name' => 'check_out_platform_c',
                 'label' => 'LBL_CHECK_OUT_PLATFORM_C',
+              ),
+              12 => 
+              array (
+                'readonly' => false,
+                'name' => 'minuta_reunion_status_c',
+                'label' => 'LBL_MINUTA_REUNION_STATUS',
+              ),
+              13 => 
+              array (
               ),
             ),
           ),

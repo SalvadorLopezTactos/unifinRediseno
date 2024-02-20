@@ -1,5 +1,5 @@
 <?php
- // created: 2022-07-13 09:59:14
+ // created: 2024-02-19 12:39:38
 
 $app_list_strings['Tipo_Contacto_list']=array (
   '' => '',
@@ -10,4 +10,5 @@ $app_list_strings['Tipo_Contacto_list']=array (
   'Factoraje' => 'Factoraje',
   'FirmanteVR' => 'Firmante VR',
   'Seguros' => 'Seguros',
+  'Negocios' => 'Negocios',
 );
