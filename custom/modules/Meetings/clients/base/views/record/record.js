@@ -10,7 +10,7 @@
     initialize: function (options) {
       	var createViewEvents = {};
         createViewEvents['focus [data-name=campana_rel_c]'] = 'abre';
-	      this.events = _.extend({}, this.events, createViewEvents);
+	    this.events = _.extend({}, this.events, createViewEvents);
         self = this;
         this._super("initialize", [options]);
         this.events['click a[name=parent_name]'] = 'handleEdit';
@@ -34,19 +34,19 @@
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
         this.model.on("change:status",_.bind(this.hidecheck, this));
-        this.model.on("change:parent_name",_.bind(this.showCheckin, this));
+        //this.model.on("change:parent_name",_.bind(this.showCheckin, this));
 		this.model.on("change:tct_conferencia_chk_c", _.bind(this.participantes, this));
 		this.model.on("change:date_start", _.bind(this.actualiza, this));
         //this.model.on('render',this.hidecheck,this);
         //this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
         //this.model.addValidationTask('ValidaCuentaNoVacia',_.bind(this.ValidaCuentaNoVacia, this));
         //Al dar click mandara a la vista de creacion correspondiente a la minuta
-        this.context.on('button:new_minuta_b:click', this.CreaMinuta,this);
+        //this.context.on('button:new_minuta_b:click', this.CreaMinuta,this);
 
         this.context.on('button:getlocation:click', this.GetLocation, this);
 
-        this.model.on('sync', this.ValidaCuentNoVacia,this); //Validacion para creación de la minuta
-        this.model.on('sync', this.showCheckin, this);
+        //this.model.on('sync', this.ValidaCuentNoVacia,this); //Validacion para creación de la minuta
+        //this.model.on('sync', this.showCheckin, this);
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
         */
@@ -66,12 +66,17 @@
         this.model.on('sync', this.validaRelLeadMeet, this);
     },
 
+    delegateButtonEvents: function () {
+        this._super("delegateButtonEvents");
+
+        this.context.on('button:iniciar_reunion:click', this.iniciarReunion, this);
+    },
+
     abre: function () {
       window.abre = 1;
     },
 
-    campanas: function()
-    {
+    campanas: function(){
       if (App.user.attributes.puestousuario_c != '27' && App.user.attributes.puestousuario_c != '31') {
         this.$('div[data-name="evento_campana_c"]').hide();
         this.$('div[data-name="campana_rel_c"]').hide();
@@ -982,5 +987,162 @@
 
     actualiza: function () {
 		selfData.mParticipantes["actualiza"] = 1;
+    },
+
+    iniciarReunion: function(){
+        contextReunion = this;
+        var status = this.model.get('status');
+
+        if( status != "Planned" ){
+
+            app.alert.show("not_planned_alert",{
+                level: "error",
+                title: "Error",
+                messages: "La Reunión no se encuentra Planificada",
+                autoClose: false
+            });
+
+            return;
+
+        }else{
+
+            var fechaActual = new Date(); //obtiene fecha actual
+            var fechainicio = new Date(this.model.get("date_start"));
+            var d = fechainicio.getDate();
+            var m = fechainicio.getMonth() + 1;
+            var y = fechainicio.getFullYear();
+            var fechafin= new Date(y,m-1,d+1, 2,0); //Fecha final
+
+            if (this.model.get('assigned_user_id')==app.user.attributes.id /* && (currentModel.get('check_in_time_c')=='' || currentModel.get('check_in_time_c')==null) */
+                && fechaActual>fechainicio && fechaActual<fechafin && this.model.get('status')=='Planned'){
+
+                    //Se obtienen coordenadas
+                    this.getLocation(this.model);
+
+            }else if(  App.user.get('lenia_c') == 1 || this.model.get('tct_conferencia_chk_c') == 1 ){
+                app.alert.show("alert_error_meeting",{
+                    level: "error",
+                    title: "Error",
+                    messages: "No cuentas con el privilegio para iniciar reunión de este tipo",
+                    autoClose: false
+                });
+            }else{
+
+                app.alert.show("alert_error_meeting",{
+                    level: "error",
+                    title: "Error",
+                    messages: "No se cumplen las condiciones para <b>Iniciar Reunión</b>, favor de verificar ",
+                    autoClose: false
+                });
+
+                return;
+            }
+        }
+    },
+
+    getLocation: function ( model ){
+        self.model = model;
+        var today= new Date();
+        self.model.set('check_in_time_c', today);
+        self.model.set('check_in_platform_c', this.getPlatform());
+        self.model.set('minuta_reunion_status_c', 'Iniciada');
+        self.model.set('date_start', today);
+        if(navigator.geolocation){
+            app.alert.show('checkin_alert', {
+                level: 'process',
+                title: 'Realizando Check-in, favor de esperar'
+            });
+            navigator.geolocation.getCurrentPosition(this.showPosition,this.showError);
+        }else {
+            alert("No fue posible encontrar tu ubicación");
+        }
+
+        //self.model.save();
+    },
+
+        //Obienete la plataforma del usuario en la cual haya hecho check-in
+    getPlatform: function(){
+        var plataforma=navigator.platform;
+        if(plataforma!='iPad'){
+            return 'Pc';
+        }else{
+            return 'iPad';
+        }
+    },
+
+    showPosition:function(position) {
+        self.model.set('check_in_longitude_c', position.coords.longitude);
+        self.model.set('check_in_latitude_c',position.coords.latitude);
+        self.model.set('check_in_latitude_c',position.coords.latitude);
+        self.model.save();
+        self.render();
+
+        app.alert.dismiss('checkin_alert');
+        app.alert.show('alert_check-in_success', {
+                level: 'success',
+                messages: 'Check-in Existoso',
+            });
+        
+        contextReunion.createMinuta();
+        
+        //SUGAR.App.controller.context.reloadData({});
+    },
+
+    showError:function(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert("Permiso de geolocalizaci\u00F3n no autorizado")
+            break;
+                case error.POSITION_UNAVAILABLE:
+                alert("La informaci\u00F3n de la geolocalizaci\u00F3n no está disponible");
+                break;
+            case error.TIMEOUT:
+                alert("El tiempo de espera a terminado");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("A ocurrido un error desconocido");
+                break;
+        }
+        self.model.save();
+        self.render();
+        SUGAR.App.controller.context.reloadData({});
+    },
+
+    createMinuta:function(){
+        var modelMinuta=App.data.createBean('minut_Minutas');
+        // FECHA ACTUAL
+        var startDate = new Date(self.model.get('date_end'));
+        var startMonth = startDate.getMonth() + 1;
+        var startDay = startDate.getDate();
+        var startYear = startDate.getFullYear();
+        var startDateText = startDay + "/" + startMonth + "/" + startYear;
+        var objetivo=App.lang.getAppListStrings('objetivo_list');
+        modelMinuta.set('account_id_c', this.model.get('parent_id') );
+        modelMinuta.set('tct_relacionado_con_c',this.model.get('parent_name'));
+        modelMinuta.set('objetivo_c', this.model.get('objetivo_c'));
+        modelMinuta.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'));
+        modelMinuta.set('minut_minutas_meetings_name',this.model.get('name'));
+        modelMinuta.set('name',"Minuta de Reunión: " + this.model.get('name') );
+
+        var parent_meet = this.model.get('parent_type');
+        var parent_id_acc = this.model.get('parent_id');
+
+        app.drawer.open({
+              layout: 'create',
+              context: {
+                    create: true,
+                    module: 'minut_Minutas',
+                    model: modelMinuta,
+                    modelMeeting : self.model
+                },
+            },
+          function(variable){
+              //alert('Drawer Cerrado');
+              location.reload();
+              //self.MotivoCanc_flag = 1;
+              //self.render();
+          }
+        );
+        //}
     },
 })

@@ -89,7 +89,8 @@
         <select class="newCampo6P select2" placeholder="Select">
           <option>Tipo de Contacto</option>
           {{#each tipoContacto}}
-            <option value="{{@key}}">{{@key}}</option>
+            {{!-- <option value="{{@key}}">{{@key}}</option> --}}
+            <option value="{{@key}}" {{ifSelected @key ../tipoContactoDefault}}>{{this}}</option>
           {{/each}}
         </select>
       </div>
@@ -110,7 +111,8 @@
 			<select class="newCampo7P select2" placeholder="Select">
 			  <option>Tipo de Contacto</option>
 			  {{#each tipoContacto}}
-				<option value="{{@key}}">{{@key}}</option>
+				  {{!-- <option value="{{@key}}">{{@key}}</option> --}}
+          <option value="{{@key}}" {{ifSelected @key ../tipoContactoDefault}}>{{this}}</option>
 			  {{/each}}
 			</select>
 		  </div>

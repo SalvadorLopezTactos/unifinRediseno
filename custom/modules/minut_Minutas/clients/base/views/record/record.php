@@ -27,7 +27,7 @@ array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
             'name' => 'save_button',
-            'label' => 'LBL_SAVE_BUTTON_LABEL',
+            'label' => 'Finalizar Reunión',
             'css_class' => 'btn btn-primary',
             'showOn' => 'edit',
             'acl_action' => 'edit',
@@ -95,6 +95,14 @@ array (
                 'readonly' => true,
                 'dismiss_label' => true,
               ),
+              4=>
+              array(
+                'name' => 'counter_minuta',
+                'studio' => 'visible',
+                'label' => ' ',
+                'span' => 12,
+              ),
+
             ),
           ),
           1 => 

@@ -15,6 +15,8 @@
      */
     mParticipantes : null,
     tipoContacto : null,
+    tipoContactoDefault:null,
+
     initialize: function (options) {
         //Inicializa campo custom
         self = this;
@@ -34,6 +36,7 @@
       //Recupera data existente
       this.mParticipantes = '';
       this.tipoContacto = App.lang.getAppListStrings('Tipo_Contacto_list');
+      this.tipoContactoDefault = "Negocios";
 
       selfData = this;
       var idReunion = '';
@@ -54,7 +57,13 @@
       }else if(this.context.parent){
 
           //Recupera datos para vista de creación
-          idReunion = this.context.parent.attributes.modelId;
+          var idReunion = "";
+          if( this.context.parent.get('module') == "Accounts" ){
+              idReunion = this.model.get('minut_minutas_meetingsmeetings_idb');
+          }else{
+
+              idReunion = this.context.parent.get('modelId');
+          }
           app.alert.show('alert_participants', {
             level: 'process',
             title: 'Cargando...'
@@ -319,6 +328,13 @@
             if (valor4 == '') {
                 $('.newCampo4P').css('border-color', 'red');
                 campos = campos + '<b>' + $('.newCampo4P')[0].placeholder + '</b><br>';
+                faltantes++
+            }
+
+            //Teléfono
+            if (valor5 == '') {
+                $('.newCampo5P').css('border-color', 'red');
+                campos = campos + '<b>' + $('.newCampo5P')[0].placeholder + '</b><br>';
                 faltantes++
             }
 
