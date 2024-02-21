@@ -23,7 +23,15 @@
                 and meetings.created_by != meetings.assigned_user_id
                 and (users_cstm.puestousuario_c = '27' or users_cstm.puestousuario_c = '31'  or users.id= 'eeae5860-bb05-4ae5-3579-56ddd8a85c31');";
 
-        $querym="select id from meetings where status='Planned' and date_end < UTC_TIMESTAMP();";
+        //$querym="select id from meetings where status='Planned' and date_end < UTC_TIMESTAMP();";
+        //Se cierran las Reuniones que no han sido iniciadas y las que no se han completado desde minuta en un periodo de 2 días 
+        $querym= "SELECT m.id,m.status,m.date_end,mc.minuta_reunion_status_c FROM meetings m
+INNER JOIN meetings_cstm mc
+ON m.id = mc.id_c
+WHERE (status='Planned' and (mc.minuta_reunion_status_c = 'Pendiente' or mc.minuta_reunion_status_c IS NULL) and m.date_end < UTC_TIMESTAMP() and m.deleted=0)
+OR
+(status='Planned' and mc.minuta_reunion_status_c = 'Iniciada' and m.date_end < DATE_SUB(UTC_TIMESTAMP(), INTERVAL 1 DAY) and m.deleted=0);";
+
 
         $resultc = $GLOBALS['db']->query($queryc);
         $resultMNotSurvey = $GLOBALS['db']->query($queryMNotSurvey);
