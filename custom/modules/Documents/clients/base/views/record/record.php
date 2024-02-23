@@ -150,19 +150,33 @@ array (
                 'name' => 'filename',
                 'span' => 12,
               ),
-              1 => 'assigned_user_name',
+              1 => 
+              array (
+                'readonly' => false,
+                'name' => 'data_document_quantico_c',
+                'label' => 'LBL_DATA_DOCUMENT_QUANTICO',
+                'span' => 12,
+              ),
               2 => 
+              array (
+                'name' => 'document_download_quantico',
+                'studio' => 'visible',
+                'label' => ' ',
+                'span' => 12,
+              ),
+              3 => 'assigned_user_name',
+              4 => 
               array (
                 'readonly' => false,
                 'name' => 'tipo_documento_c',
                 'label' => 'LBL_TIPO_DOCUMENTO',
               ),
-              3 => 
+              5 => 
               array (
                 'name' => 's_seguros_documents_1_name',
                 'label' => 'LBL_S_SEGUROS_DOCUMENTS_1_FROM_S_SEGUROS_TITLE',
               ),
-              4 => 
+              6 => 
               array (
                 'name' => 'opportunities_documents_1_name',
                 'label' => 'LBL_OPPORTUNITIES_DOCUMENTS_1_FROM_OPPORTUNITIES_TITLE',

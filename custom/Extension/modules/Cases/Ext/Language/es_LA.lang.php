@@ -27,3 +27,5 @@ $mod_strings['LBL_EQUIPO_SOPORTE'] = 'Equipo de Soporte';
 $mod_strings['LBL_IGNORE_UPDATE_ASIGNADO'] = 'Ignora actualización';
 $mod_strings['LBL_VALIDA_CAMBIO_FISCAL'] = 'Valida cambio fiscal';
 $mod_strings['LBL_TIPO_SEGUIMIENTO'] = 'Tipo Seguimiento';
+$mod_strings['LBL_SOLICITUD_OPPORTUNITY_ID'] = 'Solicitud (relacionado Solicitud y Línea ID)';
+$mod_strings['LBL_SOLICITUD'] = 'Solicitud';
