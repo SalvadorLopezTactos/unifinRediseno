@@ -214,8 +214,8 @@ class Upload_documents
                             "ClientGUID" => $idCuenta,
                             "DocumentReference" => "BURO_DE_CREDITO",
                             "FechaCreacion" => date("Y-m-d"),
-                            //"RequestNumber" => $requestNumber,
-                            "RequestNumber" => 169474,
+                            "RequestNumber" => $requestNumber,
+                            //"RequestNumber" => 169474,
                             "RelationshipTypeId" => 17,
                             "FileBase64" => $file_encoded
                         );
