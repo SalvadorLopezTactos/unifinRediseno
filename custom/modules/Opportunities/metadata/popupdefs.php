@@ -11,6 +11,7 @@ $popupMeta = array (
   'tct_etapa_ddw_c' => 'opportunities_cstm.tct_etapa_ddw_c',
   'estatus_c' => 'opportunities_cstm.estatus_c',
   'assigned_user_id' => 'opportunities.assigned_user_id',
+  'tct_opp_estatus_c' => 'opportunities_cstm.tct_opp_estatus_c',
 ),
     'searchInputs' => array (
   0 => 'name',
@@ -20,12 +21,13 @@ $popupMeta = array (
   4 => 'tct_etapa_ddw_c',
   5 => 'estatus_c',
   6 => 'assigned_user_id',
+  7 => 'tct_opp_estatus_c',
 ),
     'searchdefs' => array (
   'name' => 
   array (
     'name' => 'name',
-    'width' => 10,
+    'width' => '10',
   ),
   'account_name' => 
   array (
@@ -36,31 +38,39 @@ $popupMeta = array (
       'size' => 30,
       'class' => 'sqsEnabled sqsNoAutofill',
     ),
-    'width' => 10,
+    'width' => '10',
   ),
   'opportunity_type' => 
   array (
     'name' => 'opportunity_type',
-    'width' => 10,
+    'width' => '10',
   ),
   'sales_stage' => 
   array (
     'name' => 'sales_stage',
-    'width' => 10,
+    'width' => '10',
   ),
   'tct_etapa_ddw_c' => 
   array (
     'type' => 'enum',
     'label' => 'LBL_TCT_ETAPA_DDW_C',
-    'width' => 10,
+    'width' => '10',
     'name' => 'tct_etapa_ddw_c',
   ),
   'estatus_c' => 
   array (
     'type' => 'enum',
     'label' => 'LBL_ESTATUS',
-    'width' => 10,
+    'width' => '10',
     'name' => 'estatus_c',
+  ),
+  'tct_opp_estatus_c' => 
+  array (
+    'readonly' => false,
+    'type' => 'enum',
+    'label' => 'LBL_TCT_OPP_ESTATUS_C',
+    'width' => 10,
+    'name' => 'tct_opp_estatus_c',
   ),
   'assigned_user_id' => 
   array (
@@ -75,7 +85,7 @@ $popupMeta = array (
         0 => false,
       ),
     ),
-    'width' => 10,
+    'width' => '10',
   ),
 ),
     'listviewdefs' => array (

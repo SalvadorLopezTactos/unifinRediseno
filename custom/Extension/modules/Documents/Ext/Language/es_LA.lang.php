@@ -3,3 +3,4 @@
 $mod_strings['LBL_TIPO_DOCUMENTO'] = 'Tipo de Documento';
 $mod_strings['LBL_ID_ALFRESCO'] = 'ID Alfresco';
 $mod_strings['LBL_SCORING_COMERCIAL'] = 'Documento Scoring Comercial';
+$mod_strings['LBL_DATA_DOCUMENT_QUANTICO'] = 'ID y versión Doc Quantico';

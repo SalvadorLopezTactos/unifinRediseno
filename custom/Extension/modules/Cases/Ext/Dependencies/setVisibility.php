@@ -152,3 +152,20 @@ $dependencies['Cases']['leads_cases_1_name'] = array(
         ),
     ),
 );
+
+//Campo Relacionado "Solicitud" solo es visible cuando el tipo es "Actualización de Buró"
+$dependencies['Cases']['solicitud_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id', 'name', 'type'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'solicitud_c',
+                'value' => 'equal($type,"13")',
+            ),
+        ),
+    ),
+);
