@@ -38,7 +38,7 @@
       this.tipoContacto = App.lang.getAppListStrings('Tipo_Contacto_list');
       this.tipoContactoDefault = "Negocios";
 
-      selfData = this;
+      selfMinutaParticipantes = this;
       var idReunion = '';
 
       if (this.action == 'detail') {
@@ -46,9 +46,9 @@
         idReunion = this.model.get('id');
         app.api.call('GET', app.api.buildURL('RecordParticipantes/'+idReunion), null, {
             success: function (data) {
-                selfData.mParticipantes= data;
-                _.extend(this, selfData.mParticipantes);
-                selfData.render();
+                selfMinutaParticipantes.mParticipantes= data;
+                _.extend(this, selfMinutaParticipantes.mParticipantes);
+                selfMinutaParticipantes.render();
             },
             error: function (e) {
                 throw e;
@@ -77,9 +77,9 @@
 
                   app.api.call('GET', app.api.buildURL('GetParticipantes/'+idReunion), null, {
                       success: function (data) {
-                          selfData.mParticipantes= data;
-                          _.extend(this, selfData.mParticipantes);
-                          selfData.render();
+                          selfMinutaParticipantes.mParticipantes= data;
+                          _.extend(this, selfMinutaParticipantes.mParticipantes);
+                          selfMinutaParticipantes.render();
                           app.alert.dismiss('alert_participants');
                       },
                       error: function (e) {
@@ -121,18 +121,18 @@
 
         $('.updateAsistencia').click(function(evt) {
           var row = $(this).closest("tr");    // Find the row
-          if (selfData.mParticipantes.participantes[row.index()].asistencia == 1) {
-              selfData.mParticipantes.participantes[row.index()].asistencia = 0;
+          if (selfMinutaParticipantes.mParticipantes.participantes[row.index()].asistencia == 1) {
+              selfMinutaParticipantes.mParticipantes.participantes[row.index()].asistencia = 0;
           }else{
-              selfData.mParticipantes.participantes[row.index()].asistencia = 1;
+              selfMinutaParticipantes.mParticipantes.participantes[row.index()].asistencia = 1;
           }
-          selfData.render();
+          selfMinutaParticipantes.render();
         });
         $('.campo2P').change(function(evt) {
           var row = $(this).closest("tr");
           var correo =row.prevObject[0].value; //$('.campo2P').eq(row.index()).val();
           if(correo.trim() == "") {
-                if (selfData.mParticipantes.participantes[row.index()].asistencia == 1) {
+                if (selfMinutaParticipantes.mParticipantes.participantes[row.index()].asistencia == 1) {
                     $('.campo2SelectP').eq(row.index()).find('input').css('border-color', 'red');
                     //Alerta coreo requerido
                     app.alert.show('email_telefono_error', {
@@ -149,7 +149,7 @@
                 });
           }else{
               $('.campo2SelectP').eq(row.index()).find('input').css('border-color', '');
-              if (!selfData.validaMail(correo)) {
+              if (!selfMinutaParticipantes.validaMail(correo)) {
                 $('.campo2SelectP').eq(row.index()).find('input').css('border-color', 'red');
                 app.alert.show('mail_participante_error', {
                     level: 'error',
@@ -159,10 +159,10 @@
                 $('.campo2SelectP').eq(row.index()).find('input').val('');
               }
               else {
-                selfData.mParticipantes.participantes[row.index()].correo = correo;
+                selfMinutaParticipantes.mParticipantes.participantes[row.index()].correo = correo;
               }
           }
-          selfData.mParticipantes.participantes[row.index()].correo = correo;
+          selfMinutaParticipantes.mParticipantes.participantes[row.index()].correo = correo;
         });
         $('.campo3P').change(function(evt) {
             var row = $(this).closest("tr");
@@ -176,8 +176,8 @@
                   messages: 'El Teléfono solo se eliminará de la información de la minuta, no de la cuenta del participante.'
                 });
             }
-            if(telefono!="" && telefono!= selfData.mParticipantes.participantes[row.index()].tel_previo) {
-                if (!selfData.validaTamano(telefono) && telefono) {
+            if(telefono!="" && telefono!= selfMinutaParticipantes.mParticipantes.participantes[row.index()].tel_previo) {
+                if (!selfMinutaParticipantes.validaTamano(telefono) && telefono) {
                     $('.campo3SelectP').eq(row.index()).find('input').css('border-color', 'red');
                     app.alert.show('phone_participante_error', {
                         level: 'error',
@@ -187,7 +187,7 @@
                     $('.campo3SelectP').eq(row.index()).find('input').val('');
                 }else {
 
-                    var idtelefono=  selfData.mParticipantes.participantes[row.index()].id;
+                    var idtelefono=  selfMinutaParticipantes.mParticipantes.participantes[row.index()].id;
                     var urlapi = app.api.buildURL("Accounts/" + idtelefono + "/link/accounts_tel_telefonos_1");
                     var repetido= 0;
 
@@ -200,10 +200,10 @@
                                     }
                                 });
                                 if (repetido>0) {
-                                    var nombrec= selfData.mParticipantes.participantes[row.index()].nombres;
-                                    var apellidoc=selfData.mParticipantes.participantes[row.index()].apaterno;
-                                    var apellidomc=selfData.mParticipantes.participantes[row.index()].amaterno;
-                                    var idcuenta= selfData.mParticipantes.participantes[row.index()].id;
+                                    var nombrec= selfMinutaParticipantes.mParticipantes.participantes[row.index()].nombres;
+                                    var apellidoc=selfMinutaParticipantes.mParticipantes.participantes[row.index()].apaterno;
+                                    var apellidomc=selfMinutaParticipantes.mParticipantes.participantes[row.index()].amaterno;
+                                    var idcuenta= selfMinutaParticipantes.mParticipantes.participantes[row.index()].id;
                                     app.alert.show('Error_telefono_repetido', {
                                         level: 'error',
                                         autoClose: false,
@@ -211,22 +211,22 @@
                                     });
 
                                     $('.campo3SelectP').eq(row.index()).find('input').css('border-color', 'red');
-                                    selfData.mParticipantes.participantes[row.index()].telefono = selfData.mParticipantes.participantes[row.index()].tel_previo;
-                                    selfData.render();
+                                    selfMinutaParticipantes.mParticipantes.participantes[row.index()].telefono = selfMinutaParticipantes.mParticipantes.participantes[row.index()].tel_previo;
+                                    selfMinutaParticipantes.render();
                                 }
                                 else{
                                     $('.campo3SelectP').eq(row.index()).find('input').css('border-color', '');
-                                    selfData.mParticipantes.participantes[row.index()].telefono = telefono;
+                                    selfMinutaParticipantes.mParticipantes.participantes[row.index()].telefono = telefono;
                                 }
                             }else{
                                 $('.campo3SelectP').eq(row.index()).find('input').css('border-color', '');
-                                selfData.mParticipantes.participantes[row.index()].telefono = telefono;
+                                selfMinutaParticipantes.mParticipantes.participantes[row.index()].telefono = telefono;
                             }
                         }, this),
                     });
                 }
             }else{
-                selfData.mParticipantes.participantes[row.index()].telefono = telefono;
+                selfMinutaParticipantes.mParticipantes.participantes[row.index()].telefono = telefono;
             }
         });
     },
@@ -638,7 +638,7 @@
     },
 
     estableceParticipantes:function(fields, errors, callback) {
-        this.model.set('minuta_participantes', selfData.mParticipantes);
+        this.model.set('minuta_participantes', selfMinutaParticipantes.mParticipantes);
         callback(null, fields, errors);
     },
 
