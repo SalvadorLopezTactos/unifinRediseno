@@ -249,31 +249,41 @@ array (
               11 => 
               array (
                 'readonly' => false,
+                'name' => 'solicitud_c',
+                'studio' => 'visible',
+                'label' => 'LBL_SOLICITUD',
+              ),
+              12 => 
+              array (
+              ),
+              13 => 
+              array (
+                'readonly' => false,
                 'name' => 'subtipo_c',
                 'label' => 'LBL_SUBTIPO',
               ),
-              12 => 
+              14 => 
               array (
                 'readonly' => false,
                 'name' => 'detalle_subtipo_c',
                 'label' => 'LBL_DETALLE_SUBTIPO',
               ),
-              13 => 'priority',
-              14 => 'status',
-              15 => 
+              15 => 'priority',
+              16 => 'status',
+              17 => 
               array (
                 'name' => 'source',
               ),
-              16 => 
+              18 => 
               array (
               ),
-              17 => 
+              19 => 
               array (
                 'readonly' => false,
                 'name' => 'tipo_seguimiento_c',
                 'label' => 'LBL_TIPO_SEGUIMIENTO',
               ),
-              18 => 
+              20 => 
               array (
               ),
             ),

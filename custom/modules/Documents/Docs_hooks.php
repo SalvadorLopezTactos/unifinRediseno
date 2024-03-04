@@ -163,4 +163,119 @@ class Upload_documents
           $equipos
         );
     }
+
+    function upload_doc_quantico($bean = null, $event = null, $args = null){
+
+        if( $bean->tipo_documento_c == '11' && $bean->data_document_quantico_c == ""){ //Carta de Buró de Crédito y aún no se ha integrado con Quantico
+            //Instancia clases requeridas
+            include_once 'include/utils/file_utils.php';
+            include_once 'include/utils/sugar_file_utils.php';
+            global $sugar_config, $db;
+
+            try {
+
+                $beanCaso = $this->getCase($bean);
+
+                //Si se obtiene caso relacionado, se obtienen datos de la Cuenta y Solicitud
+                if( $beanCaso != "" ){
+
+                    $idCuenta = $beanCaso->account_id;
+                    $idSolicitud = $beanCaso->opportunity_id_c;
+
+                    $GLOBALS['log']->fatal('ID CUENTA: '.$idCuenta);
+                    $GLOBALS['log']->fatal('ID SOLICICTUD:' . $idSolicitud);
+                    
+
+                    if( $idSolicitud != "" && $idCuenta !="" ){
+                        $beanSolicitud = BeanFactory::retrieveBean('Opportunities', $idSolicitud, array('disable_row_level_security' => true));
+
+                        $requestNumber = $beanSolicitud->idsolicitud_c;
+                        $GLOBALS['log']->fatal('REQUEST NUMBER:' . $requestNumber);
+
+                        //Recupera variables de documento por procesar
+                        $file_id = $bean->document_revision_id;
+                        $doc_revision = BeanFactory::retrieveBean('DocumentRevisions', $file_id);
+
+                        $GLOBALS['log']->fatal('Inicia proceso de subida de documento a QUANTICO');
+                        //ruta al archivo
+                        $GLOBALS['log']->fatal('File id :' . $file_id);
+                        $file = new UploadFile();
+                        //get the file location
+                        $file->temp_file_location = $file->get_upload_path($file_id);
+                        $file_content = $file->get_file_contents();
+                        $file_encoded = base64_encode($file_content);
+
+                        //Crea request para subir documento
+                        $host = $sugar_config['quantico_expediente_url'];
+
+                        $url_endpoint = $host . "/Expedient_CS/rest/QuanticoDocuments/UploadRequestDocument";
+
+                        $body = array(
+                            "ClientGUID" => $idCuenta,
+                            "DocumentReference" => "BURO_DE_CREDITO",
+                            "FechaCreacion" => date("Y-m-d"),
+                            "RequestNumber" => $requestNumber,
+                            //"RequestNumber" => 169474,
+                            "RelationshipTypeId" => 17,
+                            "FileBase64" => $file_encoded
+                        );
+
+                        $callApiQuantico = new UnifinAPI();
+                        $resultado = $callApiQuantico->unifinPostCall($url_endpoint, $body);
+                        $GLOBALS['log']->fatal("RESPONSE SERVICIO");
+                        $GLOBALS['log']->fatal(print_r($resultado, true));
+
+                        if( isset( $resultado['Uuid'] )){
+                            $idDocumentoQuantico = $resultado['Uuid'];
+                            $versionDocumentoQuantico = $resultado['Version'];
+                            $stringData = $idDocumentoQuantico." ". $versionDocumentoQuantico;
+                            $sqlUpdate = "UPDATE documents_cstm SET data_document_quantico_c = '{$stringData}' WHERE (id_c = '{$bean->id}');";
+                            $GLOBALS['db']->query($sqlUpdate);
+                        }
+
+                    }
+                }else{
+
+                }
+                
+            } catch (Exception $e) {
+                $GLOBALS['log']->fatal("ERROR AL SUBIR CARTA BURÓ DE CRÉDITO");
+                $GLOBALS['log']->fatal($e->getMessage());
+            }
+        }else{
+            $GLOBALS['log']->fatal("NO SE SUBE DOCUMENTO");
+        }
+
+
+    }
+
+    /**
+     * Obtiene el último caso modificado relacionado al documento que se está guardando
+     */
+    function getCase($bean){
+
+        $caseRelated = "";
+        $GLOBALS['log']->fatal("ENTRA FUNCIÓN PARA CASOS");
+        if ($bean->load_relationship('cases')) {
+            $GLOBALS['log']->fatal("RECORRIENDO CASOS RELACIONADOS");
+            $parametros = array(
+                'orderby' => 'date_modified DESC',
+                'disable_row_level_security' => true
+            );
+            $casosRelacionados = $bean->cases->getBeans($bean->id, $parametros);
+            if (!empty($casosRelacionados)) {
+                $i = 0;
+                foreach ($casosRelacionados as $caso) {
+                    $GLOBALS['log']->fatal("CASO: ".$caso->id);
+                    if( $i == 0 ){
+                        $caseRelated = $caso;
+                        $i++;
+                    }
+                }
+            }
+        }
+
+        return $caseRelated;
+
+    }
 }

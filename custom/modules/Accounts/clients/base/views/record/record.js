@@ -3890,8 +3890,13 @@
         if (direccion.length > 0) {
             var direcciones=[];
             Object.keys(direccion).forEach(key => {
-                var direccion_string= direccion[key].valCodigoPostal + direccion[key].pais + direccion[key].estado + direccion[key].municipio + direccion[key].ciudad + direccion[key].colonia + direccion[key].calle.trim().toLowerCase() + direccion[key].numint.trim().toLowerCase() + direccion[key].numext.trim().toLowerCase();
-                direcciones.push(direccion_string);
+
+                //Se agrega al arreglo de direcciones para validar duplicadas, solo si la dirección se encuentra Activa
+                if( direccion[key].inactivo == 0 ){
+                    var direccion_string= direccion[key].valCodigoPostal + direccion[key].pais + direccion[key].estado + direccion[key].municipio + direccion[key].ciudad + direccion[key].colonia + direccion[key].calle.trim().toLowerCase() + direccion[key].numint.trim().toLowerCase() + direccion[key].numext.trim().toLowerCase();
+                    direcciones.push(direccion_string);
+                }
+                
             });
 
             /*

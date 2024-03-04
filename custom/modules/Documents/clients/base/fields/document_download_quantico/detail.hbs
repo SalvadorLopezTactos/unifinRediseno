@@ -1,0 +1,20 @@
+<div class="row-fluid panel_body">
+    <div class="span12 record-cell">
+        <span class="detail">
+            <div class="ellipsis_inline" title="">
+                <span class="text-overflow">Descarga Documento de Quantico</span>
+            </div>
+            <span class="normal index">
+                {{#if errorCall}}
+                    No se ha podido obtener el Documento
+                {{else}}
+                    <span sfuuid="37" class="detail" style="">
+                        <a class="ellipsis_inline" data-placement="bottom" title=""
+                            href="data:application/pdf;base64,{{base64Doc}}" download="{{nameFile}}.{{extFile}}"
+                            target="_blank">{{nameFile}}.{{extFile}}</a>
+                    </span>
+                {{/if}}
+            </span>
+        </span>
+    </div>
+</div>

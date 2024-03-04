@@ -12,6 +12,14 @@ $hook_array['after_save'][] = Array(
     'upload_documents', // name of the class
     'file_to_drive' // name of the function.
 );
+
+$hook_array['after_save'][] = array(
+    2,
+    'Integrar Dcoumento adjunto con Quantico',
+    'custom/modules/Documents/Docs_hooks.php',
+    'upload_documents',
+    'upload_doc_quantico'
+);
 /*
 $hook_array['after_save'][] = Array(
     2,
