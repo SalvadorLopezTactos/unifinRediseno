@@ -166,6 +166,7 @@
     _render: function () {
         this._super("_render");
         //self.mParticipantes = self.model.set('minuta_participantes',mParticipantes);
+        $('[data-fieldname="reunion_participantes"]').children().show();
         var self = this;
         //Función related
         $('.bigdrop').each(function( index, value ) {
