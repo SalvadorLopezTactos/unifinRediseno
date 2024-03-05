@@ -34,7 +34,7 @@
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
         this.model.on("change:status",_.bind(this.hidecheck, this));
-        //this.model.on("change:parent_name",_.bind(this.showCheckin, this));
+        this.model.on("change:parent_name",_.bind(this.showCheckin, this));
 		this.model.on("change:tct_conferencia_chk_c", _.bind(this.participantes, this));
 		this.model.on("change:date_start", _.bind(this.actualiza, this));
         //this.model.on('render',this.hidecheck,this);
@@ -46,7 +46,7 @@
         this.context.on('button:getlocation:click', this.GetLocation, this);
 
         //this.model.on('sync', this.ValidaCuentNoVacia,this); //Validacion para creación de la minuta
-        //this.model.on('sync', this.showCheckin, this);
+        this.model.on('sync', this.showCheckin, this);
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
         */
@@ -64,6 +64,7 @@
         this.model.on('sync',this.enableparentname,this);
         this.model.on('sync', this.campanas, this);
         this.model.on('sync', this.validaRelLeadMeet, this);
+        this.model.on('sync', this.showHideButtonIniciaReunion, this);
     },
 
     delegateButtonEvents: function () {
@@ -598,8 +599,9 @@
         var fechaCompleta = [m, d, y].join('/');
         var fechaendnew = Date.parse(fechaCompleta);
 
-        if (this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_time_c')=='' || this.model.get('check_in_time_c')==null)
-            && fechaActual==fechaendnew && (this.model.get('parent_name')!='' && this.model.get('parent_name')!=null) && this.model.get('status')=='Planned'){
+        if ( (this.model.get('parent_type') !== 'Accounts' || (this.model.get('parent_type') == 'Accounts' && App.user.get('lenia_c') == 1 && this.model.get('tct_conferencia_chk_c') == 1) ) && 
+            this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_time_c')=='' || this.model.get('check_in_time_c')==null) &&
+            fechaActual==fechaendnew && (this.model.get('parent_name')!='' && this.model.get('parent_name')!=null) && this.model.get('status')=='Planned'){
                 myField.listenTo(myField, "render", function () {
                         myField.show();
                         //console.log("field being rendered as: " + myField.tplName);
@@ -901,6 +903,12 @@
                    
                 }, this)
             });
+        }
+    },
+
+    showHideButtonIniciaReunion: function () {
+        if( this.model.get('parent_type') == 'Accounts'  && !( App.user.get('lenia_c') == 1 && this.model.get('tct_conferencia_chk_c') == 1) ) {
+            $('[name="iniciar_reunion"]').removeClass('hidden');
         }
     },
 

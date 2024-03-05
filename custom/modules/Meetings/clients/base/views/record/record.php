@@ -14,7 +14,7 @@ array (
             'type' => 'button',
             'name' => 'iniciar_reunion',
             'label' => 'Iniciar Reunión',
-            'css_class' => 'btn-link',
+            'css_class' => 'btn-link hidden',
             'showOn' => 'view',
             'events' => 
             array (
@@ -75,6 +75,14 @@ array (
                 'event' => 'button:edit_button:click',
                 'name' => 'edit_button',
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
+                'acl_action' => 'edit',
+              ),
+              1 =>
+              array(
+                'type' => 'rowaction',
+                'event' => 'button:getlocation:click',
+                'name' => 'check_in1',
+                'label' => 'LBL_CHECK_IN_LABEL',
                 'acl_action' => 'edit',
               ),
             ),

@@ -20,11 +20,11 @@
         this.padre();
         this.Lead_Account_options();
 
-        this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
+        //this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
         this.model.addValidationTask('validaFecha', _.bind(this.validaFechaReunion, this));
         //this.model.addValidationTask('validaEncuesta', _.bind(this.validaEncuesta, this));
         this.model.addValidationTask('save_Asistencia_Parti', _.bind(this.saveAsistencia, this));
-        this.model.addValidationTask('save_Referencias', _.bind(this.saveReferencias, this));
+        //this.model.addValidationTask('save_Referencias', _.bind(this.saveReferencias, this));
         //this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
         this.model.addValidationTask('save_Reuunion_Llamada',_.bind(this.saveReuionLlamada, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
@@ -103,7 +103,7 @@
 
         if( $('[data-name="minuta_participantes"]').is(':visible') ){
 
-            var objParticipantes = selfData.mParticipantes["participantes"];
+            var objParticipantes = selfMinutaParticipantes.mParticipantes["participantes"];
             banderaAsistencia = 0;
             banderaCorreo = 0;
             for (var i = 0; i < objParticipantes.length; i++) {
