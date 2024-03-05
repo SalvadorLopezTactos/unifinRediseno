@@ -188,6 +188,11 @@ class Upload_documents
 
                     if( $idSolicitud != "" && $idCuenta !="" ){
                         $beanSolicitud = BeanFactory::retrieveBean('Opportunities', $idSolicitud, array('disable_row_level_security' => true));
+                        $beanCuenta = BeanFactory::retrieveBean('Accounts', $idCuenta, array('disable_row_level_security' => true));
+
+                        $regimenFiscal = $beanCuenta->tipodepersona_c;
+
+                        $documentReference = $this->getDocumentReference($regimenFiscal);
 
                         $requestNumber = $beanSolicitud->idsolicitud_c;
                         $GLOBALS['log']->fatal('REQUEST NUMBER:' . $requestNumber);
@@ -212,7 +217,7 @@ class Upload_documents
 
                         $body = array(
                             "ClientGUID" => $idCuenta,
-                            "DocumentReference" => "BURO_DE_CREDITO",
+                            "DocumentReference" => $documentReference,
                             "FechaCreacion" => date("Y-m-d"),
                             "RequestNumber" => $requestNumber,
                             //"RequestNumber" => 169474,
@@ -277,5 +282,26 @@ class Upload_documents
 
         return $caseRelated;
 
+    }
+
+    function getDocumentReference( $regimenFiscal ){
+        $documentReference = "";
+        switch ($regimenFiscal) {
+            case 'Persona Fisica':
+                $documentReference = "BURO_DE_CREDITO";
+                break;
+            case 'Persona Fisica con Actividad Empresarial':
+                $documentReference = "BURO_DE_CREDITO_PFAE";
+                break;
+            case 'Persona Fisica con Actividad Empresarial':
+                $documentReference = "BURO_DE_CREDITO_PM";
+                break;
+            
+            default:
+                $documentReference = "BURO_DE_CREDITO";
+                break;
+        }
+
+        return $documentReference;
     }
 }

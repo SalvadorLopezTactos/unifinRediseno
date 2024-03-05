@@ -14,6 +14,7 @@
         this.model.addValidationTask('valida_concluido', _.bind(this.valida_concluido, this));
         this.model.addValidationTask('informa_docs_requeridos', _.bind(this.informa_docs_requeridos, this));
         this.model.addValidationTask('valida_lead_cancelado', _.bind(this.valida_lead_cancelado, this));
+         this.model.addValidationTask('valida_solicitud_relacionada', _.bind(this.valida_solicitud_relacionada, this));
 
         //this.model.on('sync', this.getPersonas, this);
         this.model.on('sync', this.setOpcionesAsesoresComerciales, this);
@@ -247,6 +248,48 @@
         }else{
             callback(null, fields, errors);
         }
+    },
+
+    valida_solicitud_relacionada:function(fields, errors, callback){
+ 
+        var solicitudRelacionada = this.model.get('opportunity_id_c');
+        var idCuentaRelacionada = this.model.get('account_id');
+
+        if( solicitudRelacionada != '' && idCuentaRelacionada != '' ){
+            var urlSolicitudesRelacionadas = app.api.buildURL('Accounts/' + idCuentaRelacionada + '/link/opportunities', null, null);
+
+            app.api.call('read', urlSolicitudesRelacionadas, {}, {
+                success: _.bind(function (data) {
+
+                    if( data.records.length > 0 ){
+                        var solsRelArray = [];
+                        for (let index = 0; index < data.records.length; index++) {
+                            solsRelArray.push( data.records[index].id );
+                        }
+
+                        if( !solsRelArray.includes(solicitudRelacionada) ){
+
+                            app.alert.show('alert_solicitud', {
+                                level: 'error',
+                                title: 'Error',
+                                messages: 'La solicitud seleccionada no pertenece a la cuenta relacionada, favor de elegir otra',
+                                autoClose: false
+                            });
+
+                            errors['solicitud_c'] = errors['solicitud_c'] || {};
+                            errors['solicitud_c'].required = true;
+
+                        }
+
+                    }
+
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }else{
+            callback(null, fields, errors);
+        }
+
     },
 
     valida_requeridos_min: function (fields, errors, callback) {

@@ -171,16 +171,6 @@ array (
                 'name' => 'tipo_documento_c',
                 'label' => 'LBL_TIPO_DOCUMENTO',
               ),
-              5 => 
-              array (
-                'name' => 's_seguros_documents_1_name',
-                'label' => 'LBL_S_SEGUROS_DOCUMENTS_1_FROM_S_SEGUROS_TITLE',
-              ),
-              6 => 
-              array (
-                'name' => 'opportunities_documents_1_name',
-                'label' => 'LBL_OPPORTUNITIES_DOCUMENTS_1_FROM_OPPORTUNITIES_TITLE',
-              ),
             ),
           ),
           2 => 
