@@ -204,7 +204,7 @@
         var solicitudRelacionada = this.model.get('opportunity_id_c');
         var idCuentaRelacionada = this.model.get('account_id');
 
-        if( solicitudRelacionada != '' && idCuentaRelacionada != '' ){
+        if( solicitudRelacionada != '' && solicitudRelacionada != undefined && idCuentaRelacionada != '' ){
             var urlSolicitudesRelacionadas = app.api.buildURL('Accounts/' + idCuentaRelacionada + '/link/opportunities', null, null);
 
             app.api.call('read', urlSolicitudesRelacionadas, {}, {
