@@ -293,7 +293,7 @@ class Upload_documents
             case 'Persona Fisica con Actividad Empresarial':
                 $documentReference = "BURO_DE_CREDITO_PFAE";
                 break;
-            case 'Persona Fisica con Actividad Empresarial':
+            case 'Persona Moral':
                 $documentReference = "BURO_DE_CREDITO_PM";
                 break;
             
