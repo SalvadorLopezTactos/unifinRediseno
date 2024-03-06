@@ -20,6 +20,8 @@
 
         //Oculta panel con campos de checkin en minuta
         $('[data-panelname="LBL_RECORDVIEW_PANEL4"]').addClass('hide');
+        $('[data-panelname="LBL_RECORDVIEW_PANEL7"]').addClass('hide');
+        $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').addClass('hide');
 
     },
 

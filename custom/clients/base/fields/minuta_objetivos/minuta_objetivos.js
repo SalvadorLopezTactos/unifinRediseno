@@ -88,6 +88,11 @@
     _render: function () {
         self = this;
         this._super("_render");
+        
+        //Trick: Show custom field in detail view
+        if($('[data-fieldname="minuta_objetivos"] > span').length >0){
+            $('[data-fieldname="minuta_objetivos"] > span').show();
+        }
 
         $('.updateRecord').click(function (evt) {
             var row = $(this).closest("tr");    // Find the row
