@@ -96,6 +96,10 @@
     _render: function () {
         this._super("_render");
         //self.mParticipantes = self.model.set('minuta_participantes',mParticipantes);
+        //Trick: Show custom field in detail view
+        if($('[data-fieldname="minuta_participantes"] > span').length >0){
+            $('[data-fieldname="minuta_participantes"] > span').show();
+        }
 
         var self = this;
         //Función related
