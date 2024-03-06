@@ -146,7 +146,7 @@
          Ajuste: Ocultar campo dependiente de multiselect "¿Instrumento monetario con el que espera realizar los pagos?"
          */
         //this.changeInstMonetario();
-        this.model.on('change:tct_inst_monetario_c', this.changeInstMonetario, this);
+        //this.model.on('change:tct_inst_monetario_c', this.changeInstMonetario, this);
 
         /*
          AA 24/06/2019 Se añade evento para desabilitar el boton genera RFC si la nacionalidad es diferente de Mexicano
