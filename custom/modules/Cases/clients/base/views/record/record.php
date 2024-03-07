@@ -252,6 +252,19 @@ array (
                 'name' => 'solicitud_c',
                 'studio' => 'visible',
                 'label' => 'LBL_SOLICITUD',
+                'initial_filter' => 'filterOppsRelatedToAccount',
+                'initial_filter_label' => 'LBL_FILTER_OPPS_RELATED_TO_ACCOUNT',
+                'filter_populate' =>
+                array(
+                  'estatus_c' =>
+                  array(
+                    0 => 'K',
+                  ),
+                ),
+                'filter_relate' =>
+                array(
+                  'account_id' => 'account_id',
+                ),
               ),
               12 => 
               array (

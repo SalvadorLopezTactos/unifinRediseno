@@ -12,7 +12,7 @@
             'initial_filter': 'filterOppsRelatedToAccount',
             'initial_filter_label': 'LBL_FILTER_OPPS_RELATED_TO_ACCOUNT',
             'filter_populate': {
-                'account_id': [this.model.get('account_id')],
+                'account_id': this.model.get('account_id'),
                 'estatus_c': ['K']
             }
         })
