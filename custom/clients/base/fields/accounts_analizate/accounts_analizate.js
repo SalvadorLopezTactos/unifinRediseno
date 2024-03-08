@@ -16,6 +16,11 @@
         cont_nlzt.lista_url = App.lang.getAppListStrings('analizate_url_list');
     },
 
+    _render: function () {
+        this._super("_render");
+        $('[data-fieldname="accounts_analizate"]').children().show();
+
+    },
 
     DescargaArchivo: function (empresa) {
         cont_nlzt.Financiera = cont_nlzt.Analizate.Financiera;
