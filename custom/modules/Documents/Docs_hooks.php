@@ -166,7 +166,7 @@ class Upload_documents
 
     function upload_doc_quantico($bean = null, $event = null, $args = null){
 
-        if( $bean->tipo_documento_c == '11' && $bean->data_document_quantico_c == ""){ //Carta de Buró de Crédito y aún no se ha integrado con Quantico
+        if( $bean->tipo_documento_c == '9' && $bean->data_document_quantico_c == ""){ //Consulta a Buró de Crédito y aún no se ha integrado con Quantico
             //Instancia clases requeridas
             include_once 'include/utils/file_utils.php';
             include_once 'include/utils/sugar_file_utils.php';

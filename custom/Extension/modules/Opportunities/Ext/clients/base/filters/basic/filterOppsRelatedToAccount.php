@@ -5,9 +5,7 @@ $viewdefs['Opportunities']['base']['filter']['basic']['filters'][] = array(
     'name' => 'LBL_FILTER_OPPS_RELATED_TO_ACCOUNT',
     'filter_definition' => array(
         array(
-            'account_id' => array(
-                '$in' => array(),
-            ),
+            'account_id' => ''
         ),
         array(
             'estatus_c' => array(
