@@ -59,7 +59,7 @@
                         var uniqueArrayPaises = contextoPaisesEstadosCstm.setUniqueArray(  contextoPaisesEstadosCstm.paisesList );
                         contextoPaisesEstadosCstm.paisesList = uniqueArrayPaises;
 
-                        if( contextoPaisesEstadosCstm.model.get("pais_nacimiento_c") != undefined ){
+                        if( contextoPaisesEstadosCstm.model.get("pais_nacimiento_c") != undefined && contextoPaisesEstadosCstm.model.get("pais_nacimiento_c") != ''){
 
                             contextoPaisesEstadosCstm.idPaisCstm = contextoPaisesEstadosCstm.model.get("pais_nacimiento_c");
 

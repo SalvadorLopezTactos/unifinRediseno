@@ -2,7 +2,7 @@
     extendsFrom: 'SubpanelListView',
 
      initialize: function(options) {   
-        self = this; 
+        contexto_subbpanel_meeting = this; 
         this._super("initialize", [options]);
 
         this.events = _.extend({}, this.events, {
@@ -69,19 +69,19 @@
     },
 
     getLocation: function ( model ){
-        self=this;
-        self.model = model;
+        self_location=this;
+        self_location.model = model;
         var today= new Date();
-        self.model.set('check_in_time_c', today);
-        self.model.set('check_in_platform_c', self.getPlatform());
-        self.model.set('minuta_reunion_status_c', 'Iniciada');
-        self.model.set('date_start', today);
+        contexto_subbpanel_meeting.model.set('check_in_time_c', today);
+        contexto_subbpanel_meeting.model.set('check_in_platform_c', self_location.getPlatform());
+        contexto_subbpanel_meeting.model.set('minuta_reunion_status_c', 'Iniciada');
+        contexto_subbpanel_meeting.model.set('date_start', today);
         if(navigator.geolocation){
             app.alert.show('checkin_alert', {
                 level: 'process',
                 title: 'Realizando Check-in, favor de esperar'
             });
-            navigator.geolocation.getCurrentPosition(this.showPosition,this.showError);
+            navigator.geolocation.getCurrentPosition(self_location.showPosition,self_location.showError);
         }else {
             alert("No se pudo encontrar tu ubicacion");
         }
@@ -100,10 +100,10 @@
     },
 
     showPosition:function(position) {
-        self.model.set('check_in_longitude_c', position.coords.longitude);
-        self.model.set('check_in_latitude_c',position.coords.latitude);
-        self.model.save();
-        self.render();
+        contexto_subbpanel_meeting.model.set('check_in_longitude_c', position.coords.longitude);
+        contexto_subbpanel_meeting.model.set('check_in_latitude_c',position.coords.latitude);
+        contexto_subbpanel_meeting.model.save();
+        contexto_subbpanel_meeting.render();
 
         app.alert.dismiss('checkin_alert');
         app.alert.show('alert_check-in_success', {
@@ -111,7 +111,7 @@
                 messages: 'Check-in Existoso',
             });
         
-        self.createMinuta();
+        contexto_subbpanel_meeting.createMinuta();
         
         //SUGAR.App.controller.context.reloadData({});
     },
@@ -131,8 +131,8 @@
                 alert("A ocurrido un error desconocido");
                 break;
         }
-        self.model.save();
-        self.render();
+        contexto_subbpanel_meeting.model.save();
+        contexto_subbpanel_meeting.render();
         SUGAR.App.controller.context.reloadData({});
     },
 
@@ -140,7 +140,7 @@
         var parentModel = this.context.attributes.parentModel;
         var modelMinuta=App.data.createBean('minut_Minutas');
         // FECHA ACTUAL
-        var startDate = new Date(self.model.get('date_end'));
+        var startDate = new Date(contexto_subbpanel_meeting.model.get('date_end'));
         var startMonth = startDate.getMonth() + 1;
         var startDay = startDate.getDate();
         var startYear = startDate.getFullYear();
@@ -148,10 +148,10 @@
         var objetivo=App.lang.getAppListStrings('objetivo_list');
         modelMinuta.set('account_id_c', parentModel.get('id') );
         modelMinuta.set('tct_relacionado_con_c', parentModel.get('name'));
-        modelMinuta.set('objetivo_c', self.model.get('objetivo_c'));
-        modelMinuta.set('minut_minutas_meetingsmeetings_idb',self.model.get('id'));
-        modelMinuta.set('minut_minutas_meetings_name',self.model.get('name'));
-        modelMinuta.set('name',"Minuta de Reunión: " +self.model.get('name') );
+        modelMinuta.set('objetivo_c', contexto_subbpanel_meeting.model.get('objetivo_c'));
+        modelMinuta.set('minut_minutas_meetingsmeetings_idb',contexto_subbpanel_meeting.model.get('id'));
+        modelMinuta.set('minut_minutas_meetings_name',contexto_subbpanel_meeting.model.get('name'));
+        modelMinuta.set('name',"Minuta de Reunión: " +contexto_subbpanel_meeting.model.get('name') );
 
         var parent_meet = this.model.get('parent_type');
         var parent_id_acc = this.model.get('parent_id');
@@ -162,7 +162,7 @@
                     create: true,
                     module: 'minut_Minutas',
                     model: modelMinuta,
-                    modelMeeting : self.model
+                    modelMeeting : contexto_subbpanel_meeting.model
                 },
             },
           function(variable){
