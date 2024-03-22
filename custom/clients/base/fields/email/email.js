@@ -303,83 +303,83 @@
             });
 
             try{
-            if(self.model.attributes.email !=undefined){
-            //CORREOS REUS
+                if(contexto_cuenta.model.attributes.email !=undefined){
+                //CORREOS REUS
 
-            for (var i = 0; i < self.model.attributes.email.length; i++) {
-                if (self.model.attributes.email[i].opt_out == true ) {
-                    emailREUS = true;
-                }
-            }
-
-            /*
-            if(self.ResumenProductos == undefined){
-                self.ResumenProductos = this.ResumenProductos;
-            }*/
-            if(self.ResumenProductos!=undefined){
-                self1=self;
-            }
-
-            if(self.ResumenProductos==undefined){
-                self=self1;
-            }
-
-            //VALIDACIONES PARA USUARIO LOGEADO CONTRA USUARIO ASIGNADO EN LOS PRODUCTOS Y QUE TIENEN TIPO DE CUENTA CLIENTE
-            if (self.ResumenProductos.leasing.tipo_cuenta == "3") {
-                productoREUS = true;
-                // console.log("LEASING USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
-            }
-            if (self.ResumenProductos.factoring.tipo_cuenta == "3") {
-                productoREUS = true;
-                // console.log("FACTORAJE USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
-            }
-            if ( self.ResumenProductos.credito_auto.tipo_cuenta == "3") {
-                productoREUS = true;
-                // console.log("CREDITO-AUTO USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
-            }
-            if (self.ResumenProductos.uniclick.tipo_cuenta == "3") {
-                productoREUS = true;
-                // console.log("UNICLICK USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
-            }
-            if (self.ResumenProductos.fleet.tipo_cuenta == "3") {
-                productoREUS = true;
-                // console.log("FLEET USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
-            }
-            if (self.ResumenProductos.seguros.tipo_cuenta == "3") {
-                productoREUS = true;
-                // console.log("SEGUROS USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
-            }
-
-            //EMAIL REUS
-            //PUESTOS COMERCIALES AUTORIZADOS CON LA VALIDACION DE USUARIO ASIGNADO EN ALGUN PRODUCTO CON TIPO DE CUENTA-PRODUCTO CLIENTE
-            if (emailREUS == true && arrayPuestosComerciales.includes(puesto_usuario) && productoREUS == true) {
-                reus = true;
-            }else if (emailREUS == true && !arrayPuestosComerciales.includes(puesto_usuario) && this.model.get('tipo_registro_cuenta_c') == '3') {
-            //EMAIL REUS
-            //PUESTOS COMERCIALES DIFERENTES A LOS AUTORIZADOS EN LA LISTA CON EL TIPO DE REGISTRO DE LA CUENTA CLIENTE
-                reus = true;
-            }
-
-            if (emailREUS == true && reus == true){
-                reus = true;
-            }
-
-            //if (reus == true) {
-
-                //Desmarca el atributo de invalid_email
-                for (var i = 0; i < self.model.attributes.email.length; i++) {
-                    if (self.model.attributes.email[i].opt_out == true) {
-                      if (reus == true) {
-                          self.model.attributes.email[i].invalid_email = false;
-                      }else{
-                          self.model.attributes.email[i].invalid_email = true;
-                      }
+                for (var i = 0; i < contexto_cuenta.model.attributes.email.length; i++) {
+                    if (contexto_cuenta.model.attributes.email[i].opt_out == true ) {
+                        emailREUS = true;
                     }
                 }
-            //}
-            }
+
+                /*
+                if(self.ResumenProductos == undefined){
+                    self.ResumenProductos = this.ResumenProductos;
+                }*/
+                // if(self.ResumenProductos!=undefined){
+                //     self1=self;
+                // }
+
+                // if(self.ResumenProductos==undefined){
+                //     self=self1;
+                // }
+
+                //VALIDACIONES PARA USUARIO LOGEADO CONTRA USUARIO ASIGNADO EN LOS PRODUCTOS Y QUE TIENEN TIPO DE CUENTA CLIENTE
+                if (contexto_cuenta.ResumenProductos.leasing.tipo_cuenta == "3") {
+                    productoREUS = true;
+                    // console.log("LEASING USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+                }
+                if (contexto_cuenta.ResumenProductos.factoring.tipo_cuenta == "3") {
+                    productoREUS = true;
+                    // console.log("FACTORAJE USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+                }
+                if ( contexto_cuenta.ResumenProductos.credito_auto.tipo_cuenta == "3") {
+                    productoREUS = true;
+                    // console.log("CREDITO-AUTO USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+                }
+                if (contexto_cuenta.ResumenProductos.uniclick.tipo_cuenta == "3") {
+                    productoREUS = true;
+                    // console.log("UNICLICK USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+                }
+                if (contexto_cuenta.ResumenProductos.fleet.tipo_cuenta == "3") {
+                    productoREUS = true;
+                    // console.log("FLEET USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+                }
+                if (contexto_cuenta.ResumenProductos.seguros.tipo_cuenta == "3") {
+                    productoREUS = true;
+                    // console.log("SEGUROS USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+                }
+
+                //EMAIL REUS
+                //PUESTOS COMERCIALES AUTORIZADOS CON LA VALIDACION DE USUARIO ASIGNADO EN ALGUN PRODUCTO CON TIPO DE CUENTA-PRODUCTO CLIENTE
+                if (emailREUS == true && arrayPuestosComerciales.includes(puesto_usuario) && productoREUS == true) {
+                    reus = true;
+                }else if (emailREUS == true && !arrayPuestosComerciales.includes(puesto_usuario) && this.model.get('tipo_registro_cuenta_c') == '3') {
+                //EMAIL REUS
+                //PUESTOS COMERCIALES DIFERENTES A LOS AUTORIZADOS EN LA LISTA CON EL TIPO DE REGISTRO DE LA CUENTA CLIENTE
+                    reus = true;
+                }
+
+                if (emailREUS == true && reus == true){
+                    reus = true;
+                }
+
+                //if (reus == true) {
+
+                    //Desmarca el atributo de invalid_email
+                    for (var i = 0; i < contexto_cuenta.model.attributes.email.length; i++) {
+                        if (contexto_cuenta.model.attributes.email[i].opt_out == true) {
+                          if (reus == true) {
+                              contexto_cuenta.model.attributes.email[i].invalid_email = false;
+                          }else{
+                              contexto_cuenta.model.attributes.email[i].invalid_email = true;
+                          }
+                        }
+                    }
+                //}
+                }
             } catch (err) {
-            console.log(err.message);
+                console.log(err.message);
             }
         }
 
