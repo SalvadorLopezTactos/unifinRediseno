@@ -391,6 +391,20 @@ class Dynamics365 extends SugarApi
             } else {
                 $GLOBALS['log']->fatal('Petición mal realizada (Cuentas por pagar): ' . $responseCPP->data->idProveedor365);
                 array_push($responseFull, "");
+
+                $GLOBALS['log']->fatal("Enviando notificación para bitácora de errores Dynamics 365 (Cuentas por pagar)");
+                require_once("custom/clients/base/api/ErrorLogApi.php");
+                $apiErrorLog = new ErrorLogApi();
+                $args = array(
+                    "integration" => "Dynamics: Cuentas por pagar",
+                    "system" => "Dynamics365",
+                    "parent_type" => "Accounts",
+                    "parent_id" => $idCuenta,
+                    "endpoint" => $urlCPP,
+                    "request" => '{"idProveedor" : ' . $beanCuenta->idcliente_c . '}',
+                    "response" => json_encode($responseCPP)
+                );
+                $response = $apiErrorLog->setDataErrorLog(null, $args);
             }
         }
 
