@@ -338,6 +338,25 @@ class Dynamics365 extends SugarApi
             $GLOBALS['log']->fatal('Request Dynamics: Alta Proveedor/Cliente, host: ' . $hostVendor);
             $GLOBALS['log']->fatal(json_encode($argsVendor));
             $responseCreate = $this->postDynamics($hostVendor, $token, $argsVendor);
+
+            $GLOBALS['log']->fatal("Response Dynamics");
+            $GLOBALS['log']->fatal(print_r($responseCreate,true));
+
+            if( !$responseCreate->Success ){
+                $GLOBALS['log']->fatal("Enviando notificación para bitácora de errores Dynamics 365");
+                require_once("custom/clients/base/api/ErrorLogApi.php");
+                $apiErrorLog = new ErrorLogApi();
+                $args = array(
+                    "integration"=> "Dynamics: Alta Proveedor/Cliente",
+                    "system"=> "Dynamics365",
+                    "parent_type"=> "Accounts",
+                    "parent_id"=> $idCuenta,
+                    "endpoint"=> $hostVendor,
+                    "request"=> json_encode($argsVendor),
+                    "response"=> json_encode($responseCreate)
+                );
+                $response = $apiErrorLog->setDataErrorLog(null, $args);
+            }
             //$GLOBALS['log']->fatal('Response: '. $responseCreate);
             $responseDynamics .= ($responseCreate->Success) ?  ' | ' . $item['type'] . ' Success - ' . $responseCreate->Message :  ' | ' . $item['type'] . ' Warning - ' . $responseCreate->ExceptionType;
         }
