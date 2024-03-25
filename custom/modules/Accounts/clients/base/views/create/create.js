@@ -3590,52 +3590,57 @@
     },
 
     requestDynamics:function (fields, errors, callback) {
-        //Valida que sea proveedor
-        var tipo_cuenta=this.model.get('tipo_registro_cuenta_c');
-        var proveedor=this.model.get('esproveedor_c');
-        var cedente=this.model.get('cedente_factor_c');
-        var deudor=this.model.get('deudor_factor_c');
-        if (tipo_cuenta =='5' || tipo_cuenta=='3' || proveedor || cedente || deudor) {
-            var self=this;
-            var body={
-                "accion":this.model.get('id')
+        if(_.isEmpty(errors)){
+            //Valida que sea proveedor
+            var tipo_cuenta=this.model.get('tipo_registro_cuenta_c');
+            var proveedor=this.model.get('esproveedor_c');
+            var cedente=this.model.get('cedente_factor_c');
+            var deudor=this.model.get('deudor_factor_c');
+            if (tipo_cuenta =='5' || tipo_cuenta=='3' || proveedor || cedente || deudor) {
+                var self=this;
+                var body={
+                    "accion":this.model.get('id')
+                }
+                app.alert.show('infoDynamics', {
+                    level: 'process',
+                    closeable: false,
+                    messages: app.lang.get('LBL_LOADING'),
+                });
+                //Consumir servicio de OTP
+                app.api.call('create', app.api.buildURL("Dynamics365"), body, {
+                    success: _.bind(function (data) {
+                        app.alert.dismiss('infoDynamics');
+                        if(data!=null){
+                            this.model.set('control_dynamics_365_c',data[0]);
+                            this.model.set('id_cpp_365_chk_c',data[1]);
+                        }
+                        else {
+                            app.alert.dismiss('infoDynamics');
+                            app.alert.show('error_otp', {
+                                level: 'warning',
+                                messages: 'Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).',
+                                autoClose: true
+                            });
+                        }
+                        callback(null, fields, errors);
+                    }, this),
+                    error: _.bind(function (response) {
+                        app.alert.dismiss('infoDynamics');
+                        app.alert.show('error_otp', {
+                            level: 'warning',
+                            messages: response.textStatus+'\n"Error al enviar información hacia Dynamics 365"',
+                            autoClose: true
+                        });
+                        callback(null, fields, errors);
+                    },this)
+                });
+            }else {
+                callback(null, fields, errors);
             }
-            app.alert.show('infoDynamics', {
-                level: 'process',
-                closeable: false,
-                messages: app.lang.get('LBL_LOADING'),
-            });
-            //Consumir servicio de OTP
-            app.api.call('create', app.api.buildURL("Dynamics365"), body, {
-                success: _.bind(function (data) {
-                    app.alert.dismiss('infoDynamics');
-                    if(data!=null){
-                        this.model.set('control_dynamics_365_c',data[0]);
-                        this.model.set('id_cpp_365_chk_c',data[1]);
-                    }
-					else {
-						app.alert.dismiss('infoDynamics');
-						app.alert.show('error_otp', {
-							level: 'warning',
-							messages: 'Error al enviar información hacia Dynamics 365: Petición mal realizada (Cuentas por pagar).',
-							autoClose: true
-						});
-					}
-					callback(null, fields, errors);
-                }, this),
-                error: _.bind(function (response) {
-                    app.alert.dismiss('infoDynamics');
-                    app.alert.show('error_otp', {
-                        level: 'warning',
-                        messages: response.textStatus+'\n"Error al enviar información hacia Dynamics 365"',
-                        autoClose: true
-                    });
-					callback(null, fields, errors);
-                },this)
-            });
+
+        }else{
+          callback(null, fields, errors);
         }
-		else {
-			callback(null, fields, errors);
-		}
+
     },
 })
