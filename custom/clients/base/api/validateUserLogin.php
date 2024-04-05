@@ -74,7 +74,17 @@ class validateUserLogin extends SugarApi
         );
         try{
             //Recupera parámetros
-            $userData = isset($args['userData']) ? json_decode(base64_decode($args['userData']),true) : array();  //userData.user || userData.password -- error_log(print_r($userData,true));
+            //Decode Base64 User data
+            $userDataB64 = isset($args['userData']) ? base64_decode($args['userData']) : '';
+            // Expresión regular para buscar comillas dobles no precedidas ni seguidas por : o { o } o ,
+            $pattern = '/(?<![:,{}])"(?![:,{}])/';
+
+            //Reemplazar las comillas dobles que no sean las propias de json
+            $userDataParse = preg_replace($pattern, '\"', $userDataB64);
+
+            //Forma arreglo de user data
+            $userData = isset($userDataParse) ? json_decode($userDataParse, true) : array();
+            //$userData = isset($args['userData']) ? json_decode(base64_decode($args['userData']),true) : array();  //userData.user || userData.password -- error_log(print_r($userData,true));
             error_log('Userdata - u:'.$userData['user']);
             //Validaciones en caso de existir usuario cargado
             if(isset($userData['user'])){
@@ -109,7 +119,17 @@ class validateUserLogin extends SugarApi
                 
         try {
             //Recupera parámetros
-            $userData = isset($args['userData']) ? json_decode(base64_decode($args['userData']),true) : array();
+            //$userData = isset($args['userData']) ? json_decode(base64_decode($args['userData']),true) : array();
+            //Decode Base64 User data
+            $userDataB64 = isset($args['userData']) ? base64_decode($args['userData']) : '';
+            // Expresión regular para buscar comillas dobles no precedidas ni seguidas por : o { o } o ,
+            $pattern = '/(?<![:,{}])"(?![:,{}])/';
+
+            //Reemplazar las comillas dobles que no sean las propias de json
+            $userDataParse = preg_replace($pattern, '\"', $userDataB64);
+
+            //Forma arreglo de user data
+            $userData = isset($userDataParse) ? json_decode($userDataParse, true) : array();
             error_log('Userdata - u:'.$userData['user']);
             //userData.user || userData.password -- error_log(print_r($userData,true));
             global $sugar_config;
@@ -201,7 +221,17 @@ class validateUserLogin extends SugarApi
                 
         try {
             //Recupera parámetros
-            $userData = isset($args['userData']) ? json_decode(base64_decode($args['userData']),true) : array(); //userData.user || userData.password -- error_log(print_r($userData,true));
+            //$userData = isset($args['userData']) ? json_decode(base64_decode($args['userData']),true) : array(); //userData.user || userData.password -- error_log(print_r($userData,true));
+            //Decode Base64 User data
+            $userDataB64 = isset($args['userData']) ? base64_decode($args['userData']) : '';
+            // Expresión regular para buscar comillas dobles no precedidas ni seguidas por : o { o } o ,
+            $pattern = '/(?<![:,{}])"(?![:,{}])/';
+
+            //Reemplazar las comillas dobles que no sean las propias de json
+            $userDataParse = preg_replace($pattern, '\"', $userDataB64);
+
+            //Forma arreglo de user data
+            $userData = isset($userDataParse) ? json_decode($userDataParse, true) : array();
             $codeMFA = isset($args['code']) ? $args['code'] : 0;
             error_log('Userdata - u:'.$userData['user']);
             error_log('Userdata - c:'.$userData['code']);
