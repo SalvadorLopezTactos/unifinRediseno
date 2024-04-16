@@ -1,5 +1,5 @@
 <?php
- // created: 2023-08-26 13:51:35
+ // created: 2024-04-15 23:43:07
 
 $app_list_strings['estatus_c_operacion_list']=array (
   'P' => 'INTEGRACIÓN DE EXPEDIENTE',
@@ -35,4 +35,6 @@ $app_list_strings['estatus_c_operacion_list']=array (
   'AC' => 'AUTORIZADOR CARÁTULA',
   'VC' => 'VALIDCIÓN MESA CONTROL',
   'AN' => 'ANÁLISIS LEGAL',
+  'CV' => 'CANCELADA POR VIGENCIA',
+  'BE' => 'BLOQUEADA POR EXPEDIENTE',
 );
