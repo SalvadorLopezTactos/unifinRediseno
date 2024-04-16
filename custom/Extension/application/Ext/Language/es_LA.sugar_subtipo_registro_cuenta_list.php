@@ -1,5 +1,5 @@
 <?php
- // created: 2022-04-26 18:55:19
+ // created: 2024-04-16 00:12:11
 
 $app_list_strings['subtipo_registro_cuenta_list']=array (
   1 => 'Sin Contactar',
@@ -31,5 +31,7 @@ $app_list_strings['subtipo_registro_cuenta_list']=array (
   27 => 'Con Tarjeta Activa',
   28 => 'Con Tarjeta Inactiva',
   29 => 'Con Tarjeta Cancelada',
+  30 => 'Preautorizada - Cancelada por vigencia',
+  31 => 'Preautorizada – Bloqueada por expediente',
   '' => '',
 );

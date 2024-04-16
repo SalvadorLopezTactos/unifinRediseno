@@ -92,11 +92,31 @@
                 $("#SE2").html("Análisis legal");
             }
         }
+        
+        if (etapa=="PA"){
+            //Agrega clase current para sombrear en color actual al pipeline PREAUTORIZADA
+            $('#PA').addClass('current');
+            $('#SI').addClass('done');
+            $('#P').addClass('done');
+            //Valida subetapa
+            if (subetapa=="CV") {
+                $("#SE6").removeClass('ocult');
+                $('#SE6').addClass('error');
+                $("#SE6").html("Cancelada por vigencia");
+            }
+            if (subetapa=="BE") {
+                $("#SE6").removeClass('ocult');
+                $('#SE6').addClass('error');
+                $("#SE6").html("Bloqueada por expediente");
+            }
+        }
+        
         if (etapa=="C"){
             //Agrega clase current para sombrear en color actual al pipeline CREDITO
             $('#C').addClass('current');
             $('#SI').addClass('done');
             $('#P').addClass('done');
+            $('#PA').addClass('done');
             //Validaciones subetapas
             if(subetapa=="BC"){
                 $("#SE3").removeClass('ocult');
@@ -155,6 +175,7 @@
             $('#SI').addClass('done');
             $('#P').addClass('done');
             $('#C').addClass('done');
+            $('#PA').addClass('done');
             //Valida subetapa
             if (subetapa=="D") {
                 $("#SE4").removeClass('ocult');
@@ -174,6 +195,7 @@
             $('#P').addClass('done');
             $('#C').addClass('done');
             $('#D').addClass('done');
+            $('#PA').addClass('done');
             //Valida subetapa
             if (subetapa=="N") {
                 $("#SE4").removeClass('ocult');
@@ -188,6 +210,7 @@
             $('#P').addClass('done');
             $('#C').addClass('done');
             $('#D').addClass('done');
+            $('#PA').addClass('done');
             //Cambia texto a Rechazado
             $("#CL").html("Rechazado");
             //Valida subetapas
