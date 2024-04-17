@@ -33,6 +33,22 @@ class GetDireccionesCP extends SugarApi
                 //long help to be displayed in the help documentation
                 'longHelp' => '',
             ),
+            //GET
+            'retrieve_mex_cp' => array(
+                //request type
+                'reqType' => 'GET',
+                'noLoginRequired' => true,
+                //endpoint path
+                'path' => array('DireccionesMexCP', '?','?'),
+                //endpoint variables
+                'pathVars' => array('module', 'cp','indice'),
+                //method to call
+                'method' => 'getAddressByCP',
+                //short help string to be displayed in the help documentation
+                'shortHelp' => 'Método GET para obtener información relacionada al Código Postal - filtra CP de México',
+                //long help to be displayed in the help documentation
+                'longHelp' => '',
+            ),
             //GET - Copia de DireccionesCP, pero con un atributo adicional - Municipio - Creado para no afectar sistemas que hoy consumen servicio actual
             'retrieve_cpm' => array(
                 //request type
@@ -66,7 +82,7 @@ class GetDireccionesCP extends SugarApi
      */
     public function getAddressByCP($api, $args)
     {
-
+        $nacional = isset($args['module']) && $args['module'] == 'DireccionesMexCP'  ? true : false;
         $cp=$args['cp'];
         $municipio = isset($args['municipio']) ? $args['municipio'] : '';
         $indice = "0";
@@ -113,6 +129,11 @@ WHERE cp.name = '{$cp}'";
         //Valida existencia de municipio
         if(!empty($municipio)){
             $query .= " and m.name='{$municipio}'";
+        }
+        
+        //Valida direcciones nacionales
+        if($nacional){
+            $query .= " and p.id='2'";
         }
 
         //LOG Plataforma:
