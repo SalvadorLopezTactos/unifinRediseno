@@ -37,6 +37,9 @@ class Prospects_AsignacionPO
             }
 
             $bean->assigned_user_id = $id_asignado;
+            //Alianzas
+            $bean->origen_c = '12';
+
 
           }else{
             $GLOBALS['log']->fatal("ENTRA ASIGNACIÓN EXISTENTE ");
