@@ -323,13 +323,21 @@
             });
 
             selfRegistroLlamadas.render();
+            selfRegistroLlamadas.getRecordsPO();
 
         }, this),
         error: _.bind(function (error) {
+          $('#processing').hide();
+          $('#btnRegistrar').removeAttr( 'disabled' );
+          app.alert.dismiss('create_calls');
 
             console.log(error);
-            
-            app.alert.dismiss('create_calls');
+
+            App.alert.show('errorRequired', {
+              level: 'error',
+              title: 'Error',
+              messages: JSON.stringify(error,null,1)
+            });
             
         }, this)
       });

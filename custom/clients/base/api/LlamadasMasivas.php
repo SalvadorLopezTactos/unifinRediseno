@@ -4,6 +4,7 @@
  */
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
+require_once('custom/clients/base/api/SendEmailPO.php');
 class LlamadasMasivas extends SugarApi
 {
     /**
@@ -65,6 +66,14 @@ class LlamadasMasivas extends SugarApi
             $bean_llamada->status = 'Planned';
             $bean_llamada->tct_resultado_llamada_ddw_c = $resultado;
             $bean_llamada->save();
+
+            if( $resultado == "Viable_Envio_Solicitud" ){
+                $GLOBALS['log']->fatal("ENVIANDO CORREO A : " . $registrosPO[$i]);
+                //Envía correo
+                $callEmail = new SendEmailPO();
+                $resultado = $callEmail->sendEmailProspect(array(),array('id_po'=> $registrosPO[$i]));
+
+            }
 
             array_push($llamadas_generadas, $bean_llamada->id);
 
