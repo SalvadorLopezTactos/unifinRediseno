@@ -1,5 +1,5 @@
 <?php
- // created: 2022-05-20 12:16:58
+ // created: 2024-04-10 23:12:32
 
 $app_list_strings['producto_financiero_list']=array (
   0 => '',
@@ -83,4 +83,5 @@ $app_list_strings['producto_financiero_list']=array (
   88 => 'ARRENDAMIENTO ESTRUCTURADO AGRÍCOLA',
   89 => 'ARRENDAMIENTO ESTRUCTURADO FRONTERA',
   90 => 'CRÉDITO PUENTE',
+  91 => 'HOMBRE CAMIÓN',
 );

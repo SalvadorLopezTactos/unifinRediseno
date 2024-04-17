@@ -74,6 +74,16 @@
                 $('#ST2').addClass('success');
                 $("#ST2").html("Con Línea");
             }
+            if (subtipoCuenta == 30) {
+                $("#ST2").removeClass('ocult');
+                $('#ST2').addClass('error');
+                $("#ST2").html("Preautorizada - Cancelada por vigencia");
+            }
+            if (subtipoCuenta == 31) {
+                $("#ST2").removeClass('ocult');
+                $('#ST2').addClass('error');
+                $("#ST2").html("Preautorizada – Bloqueada por expediente");
+            }
         }
 
         if (tipoCuenta == 3) {

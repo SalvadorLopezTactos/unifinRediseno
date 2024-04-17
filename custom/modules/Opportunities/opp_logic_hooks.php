@@ -1130,6 +1130,16 @@ SQL;
                 $GLOBALS['log']->fatal('Prospecto Integración de expediente');
                 $this->actualizaTipoCuenta('2', '8', $cliente, $producto);
             }
+            //Actualiza a Prospecto; Preautorizada - Cancelada por vigencia
+            if ($subetapa == "CV" && $bean->fetched_row['estatus_c'] != $subetapa) {
+                $GLOBALS['log']->fatal('Prospecto Preautorizada - Cancelada por vigencia');
+                $this->actualizaTipoCuenta('2', '30', $cliente, $producto);
+            }
+            //Actualiza a Prospecto; Preautorizada – Bloqueada por expediente
+            if ($subetapa == "BE" && $bean->fetched_row['estatus_c'] != $subetapa) {
+                $GLOBALS['log']->fatal('Prospecto Preautorizada – Bloqueada por expediente');
+                $this->actualizaTipoCuenta('2', '31', $cliente, $producto);
+            }
             //Actualiza en Crédito y actualiza campos con valor Prospecto en Crédito: 2,9
             if (($subetapa == "BC" || $subetapa == "CC" || $subetapa == "RF" || $subetapa == "EF" || $subetapa == "RM" || $subetapa == "SC" || $subetapa == "D" || $subetapa == "CN" || $subetapa == "E") && $bean->fetched_row['estatus_c'] != $subetapa) {
                 $GLOBALS['log']->fatal('Prospecto En Crédito');
