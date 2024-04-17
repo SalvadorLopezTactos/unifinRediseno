@@ -82,3 +82,7 @@ $mod_strings['LBL_ENVIO_CORREO_PO'] = '¿Se envió correo?';
 $mod_strings['LBL_ID_DIRECTOR_VOBO'] = 'Id Director VoBo';
 $mod_strings['LBL_ACCOUNT_REL_CONTACTO_ACCOUNT_ID'] = 'Cuenta relacionada a partir de Relación (relacionado Cuenta ID)';
 $mod_strings['LBL_ACCOUNT_REL_CONTACTO'] = 'Cuenta relacionada a partir de Relación';
+$mod_strings['LBL_MUNICIPIO_PO'] = 'Municipio';
+$mod_strings['LBL_CP_PO'] = 'Código Postal';
+$mod_strings['LBL_ASESOR_ALIANZA'] = 'Asesor Alianza';
+$mod_strings['LBL_COUNT_MATCH'] = 'Match PO';

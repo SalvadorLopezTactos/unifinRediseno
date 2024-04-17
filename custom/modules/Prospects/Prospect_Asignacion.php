@@ -2,9 +2,45 @@
 class Prospects_AsignacionPO
 {
     public function set_assigned($bean = null, $event = null, $args = null){
-        global $db;
+        global $db, $app_list_strings;
         //Sólo aplica en creación
         if (!$args['isUpdate'] && $_SESSION['platform'] != 'base') {
+
+          //Entra validación para nueva asignación de alianza
+          $GLOBALS['log']->fatal("ENTRA ASIGNACIÓN DESDE API");
+
+          if( !empty($bean->zona_geografica_c) ){
+            $valor_zona_geografica = $app_list_strings['mapeo_dire_estado_zona_geografica_list'][$bean->zona_geografica_c];
+
+            $GLOBALS['log']->fatal("ZONA GEOGRAFICA ENCONTRADA: ". $valor_zona_geografica);
+
+            if( !empty( $valor_zona_geografica ) ){
+              $bean->zona_geografica_c = $valor_zona_geografica;
+            }
+          }
+
+          //Valida existencia de relación entre estado (zona_geografica) y municipio (municipio_po_c)
+          //Se aplica validación para evitar obtener municipio_po_c NULL y traiga resultados de la bd equivocados
+          $municipio = ( empty($bean->municipio_po_c) ) ? "" : $bean->municipio_po_c;
+          $queryZonaGeograficaMunicipio = "SELECT * FROM unifin_asignacion_po where zona_geografica='{$bean->zona_geografica_c}' AND municipio='{$bean->municipio_po_c}'";
+
+          $GLOBALS['log']->fatal("QUERY PARA OBTENER ASIGNADO: ".$queryZonaGeograficaMunicipio);
+
+          $resultZonaGeograficaMunicipio = $db->query($queryZonaGeograficaMunicipio);
+
+          if( $resultZonaGeograficaMunicipio->num_rows > 0 ){
+            $id_asignado = "";
+            while ($row = $db->fetchByAssoc($resultZonaGeograficaMunicipio)) {
+
+              $id_asignado = $row['asignado_id'];
+              $GLOBALS['log']->fatal("ID ENCONTRADO PARA ASIGNACIÓN: " . $id_asignado);
+            }
+
+            $bean->assigned_user_id = $id_asignado;
+
+          }else{
+            $GLOBALS['log']->fatal("ENTRA ASIGNACIÓN EXISTENTE ");
+
             //Valida asignación para PO creados fuera de CRM
             $asignado_id = '';
             
@@ -63,7 +99,6 @@ class Prospects_AsignacionPO
                   
                 }
                 
-                
                 //Actualiza indice
                 $query = "update unifin_asignacion_po a
                   set a.asignado_id = '{$nextIndex}'
@@ -76,6 +111,7 @@ class Prospects_AsignacionPO
             if(!empty($asignado_id)){
               $bean->assigned_user_id = $asignado_id;
             }
+          }   
         }
     }
 }
