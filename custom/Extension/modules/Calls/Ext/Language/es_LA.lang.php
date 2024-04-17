@@ -40,3 +40,4 @@ $mod_strings['LBL_CREADO_PRODUCTO_C'] = 'Producto';
 $mod_strings['LBL_CREADO_PUESTO_C'] = 'Puesto';
 $mod_strings['LBL_REGIMEN_FISCAL'] = 'Régimen fiscal';
 $mod_strings['LBL_DETALLE'] = 'Detalle';
+$mod_strings['LNK_REGISTRO_LLAMADAS_PO'] = 'Registro de llamada masivo';
