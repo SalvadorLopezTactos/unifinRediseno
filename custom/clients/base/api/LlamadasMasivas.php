@@ -63,7 +63,7 @@ class LlamadasMasivas extends SugarApi
             $bean_llamada->parent_id = $registrosPO[$i];
             $bean_llamada->parent_type = "Prospects";
             $bean_llamada->assigned_user_id = $current_user->id;
-            $bean_llamada->status = 'Planned';
+            $bean_llamada->status = 'Held';
             $bean_llamada->tct_resultado_llamada_ddw_c = $resultado;
             $bean_llamada->save();
 

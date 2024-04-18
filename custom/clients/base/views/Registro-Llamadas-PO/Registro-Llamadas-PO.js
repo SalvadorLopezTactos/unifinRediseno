@@ -200,16 +200,48 @@
       var fechaActual = Date.parse(dateActualFormat);
 
 
-      if (fechaInicio < fechaActual) {
-          app.alert.show("error_fecha", {
+      // // if (fechaInicio < fechaActual) {
+      // //     app.alert.show("error_fecha", {
+      // //         level: "error",
+      // //         title: "Error",
+      // //         messages: "No se puede establecer valor con fecha menor al d\u00EDa de hoy",
+      // //         autoClose: false
+      // //     });
+
+      // //     $('.dateInicio').css('border-color','red');
+      // //     $('.dateFin').css('border-color','red');
+
+      // //     return;
+      // // }
+
+      //Validar que la fecha inicio se encuentre entre el día de hoy y máximo 5 días atrás
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
+
+      const fechaMaxima = new Date();
+      fechaMaxima.setDate(fechaMaxima.getDate() - 5);
+      fechaMaxima.setHours(0, 0, 0, 0); 
+
+      // Crear un objeto Date para la fecha que deseas comparar
+      const dateInicio = new Date($('.dateInicio').val());
+      //Se obtiene timeZone para evitar restar 6 horas debido a la zona horariao
+      const zonaHorariaOffset = dateInicio.getTimezoneOffset();
+      // Sumar la diferencia de tiempo a la fecha para ajustarla a la zona horaria local
+      dateInicio.setMinutes(dateInicio.getMinutes() + zonaHorariaOffset);
+
+      // Comprobar si la fecha a comparar está dentro del rango
+      if (dateInicio.getTime() >= fechaMaxima.getTime() && dateInicio.getTime() <= currentDate.getTime()) {
+          console.log('La fecha está dentro del rango de hoy y hasta 5 días anteriores.');
+      } else {
+          console.log('La fecha está fuera del rango de hoy y hasta 5 días anteriores.');
+          app.alert.show("error_fecha_inicio", {
               level: "error",
               title: "Error",
-              messages: "No se puede establecer valor con fecha menor al d\u00EDa de hoy",
+              messages: "La fecha de inicio debe de cumplir lo siguiente:<br>Máximo puede ser una fecha de 5 días atrás<br>No puede ser una fecha futura",
               autoClose: false
           });
 
           $('.dateInicio').css('border-color','red');
-          $('.dateFin').css('border-color','red');
 
           return;
       }
@@ -239,6 +271,40 @@
             return;
         }
 
+        //Validando que fecha y hora fin no sea superior a la fecha y hora actual
+        const fechaHoraActual = new Date();
+
+        // Obtener la fecha y hora de finalización
+        const dateFin = $('.dateFin').val();
+
+        // Verificar si la hora incluye "am" o "pm"
+        if (horaFin.includes('pm')) {
+          const [hora, minutos] = horaFin.replace('pm', '').split(':');
+          horaFin = `${parseInt(hora, 10) + 12}:${minutos}`;
+        } else if (horaFin.includes('am')) {
+          horaFin = horaFin.replace('am', '');
+        }
+        const [hora, minutos] = horaFin.split(':');
+        const fechaHoraFin = new Date(dateFin);
+        const zonaHorariaFin = fechaHoraFin.getTimezoneOffset();
+        // Sumar la diferencia de tiempo a la fecha para ajustarla a la zona horaria local
+        fechaHoraFin.setMinutes(fechaHoraFin.getMinutes() + zonaHorariaFin);
+        fechaHoraFin.setHours(parseInt(hora, 10));
+        fechaHoraFin.setMinutes(parseInt(minutos, 10));
+
+        // Validar si la fecha y hora de finalización es posterior a la fecha y hora actual
+        if (fechaHoraFin > fechaHoraActual) {
+          app.alert.show("error_fecha_fin", {
+                level: "error",
+                title: "Error",
+                messages: "La fecha fin no puede ser superior a la hora y fecha actual",
+                autoClose: false
+            });
+
+            $('.dateFin').css('border-color','red');
+
+            return;
+        }
     }
   },
 
