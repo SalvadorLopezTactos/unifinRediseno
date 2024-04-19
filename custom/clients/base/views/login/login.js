@@ -532,8 +532,14 @@
                   success: _.bind(function (validationUsers) {
                       app.alert.dismiss('validate_code_cstm');
                       if (validationUsers.status=='200') {
-                          this.$('input[name=password]').val(JSON.parse(atob(localStorage['mfaCRM'])).password);
-                          this.$('input[name=username]').val(JSON.parse(atob(localStorage['mfaCRM'])).user);
+                          const userDataB64 = localStorage['mfaCRM'] ? atob(localStorage['mfaCRM']) : '';
+                          const pattern = /(?<![:,{}])"(?![:,{}])/g;
+                          const userDataParse = userDataB64.replace(pattern, '\\"');
+                          const userData = userDataParse ? JSON.parse(userDataParse) : {};
+                          this.$('input[name=password]').val(userData.password);
+                          this.$('input[name=username]').val(userData.user);
+                          //this.$('input[name=password]').val(JSON.parse(atob(localStorage['mfaCRM'])).password);
+                          //this.$('input[name=username]').val(JSON.parse(atob(localStorage['mfaCRM'])).user);
                           localStorage.removeItem('mfaCRM');
                           self.mfa_conteo = new Date(0);
                           self.login();
