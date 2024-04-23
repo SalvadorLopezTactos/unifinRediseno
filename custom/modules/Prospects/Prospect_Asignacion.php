@@ -75,6 +75,7 @@ class Prospects_AsignacionPO
                   left join uni_brujula_cstm bc on bc.id_c = b.id
                   left join unifin_asignacion_po a on a.zona_geografica = '{$bean->zona_geografica_c}'
                   where uc.equipo_c in ({$equipos})
+                  and a.municipio IS NULL
                   and u.status='Active'
                   and u.deleted=0
                   and u.is_group=0
