@@ -112,65 +112,59 @@
     var resultado = $('#resultadoLlamada').select2('val'); 
     var horaInicio = $('#horaInicio').val(); 
     var horaFin = $('#horaFin').val(); 
-  
-    this.validRequeridos( asunto, resultado, horaInicio, horaFin );
 
-    this.validaFechas( horaInicio, horaFin  );
+    var requeridos = this.validRequeridos( asunto, resultado, horaInicio, horaFin );
+    var arrValido = [];
+    if( requeridos.length == 0 ){
+      arrValido = this.validaFechas( horaInicio, horaFin  );
+    }
 
-    this.validaSeleccionados();
+    var valido = this.validaSeleccionados();
 
-    this.procesaCreacionLlamadas();
+    if( requeridos.length == 0 && ( arrValido.length > 0 && !arrValido.includes(false)) && valido ){
+        this.procesaCreacionLlamadas();
+    }
 
   },
 
   validRequeridos: function ( asunto, resultado, horaInicio, horaFin ){
-
+    var arrReq = [];
     if( asunto.trim() == "" ){
+      
+      arrReq.push("Asunto de llamada");
+    }
+
+    if( resultado.trim() == "" ){
+      
+      arrReq.push("Resultado de llamada");
+    }
+
+    if( horaInicio.trim() == "" ){
+      
+      arrReq.push("Hora de inicio");
+    }
+
+    if( horaFin.trim() == "" ){
+      
+      arrReq.push("Hora de fin");
+    }
+
+    if( arrReq.length > 0 ){
+      
       App.alert.show('errorRequired', {
         level: 'error',
         title: 'Error',
-        messages: "Favor de ingresar Asunto de llamada"
+        messages: "Favor de ingresar los campos requeridos:<br>" + arrReq.join( "<br>" )
       });
-
-      return;
     }
 
-    if( resultado == "" ){
-      App.alert.show('errorRequired', {
-        level: 'error',
-        title: 'Error',
-        messages: "Favor de ingresar Resultado de llamada"
-      });
-
-      return;
-    }
-
-    if( horaInicio == "" ){
-      App.alert.show('errorRequired', {
-        level: 'error',
-        title: 'Error',
-        messages: "Favor de establecer Hora de inicio"
-      });
-
-      return;
-    }
-
-    if( horaFin == "" ){
-      App.alert.show('errorRequired', {
-        level: 'error',
-        title: 'Error',
-        messages: "Favor de establecer Hora de fin"
-      });
-
-      return;
-    }
-
+    return arrReq;
   },
 
   validaFechas: function ( horaInicio, horaFin ){
 
     this.cleanFields();
-
+    var arrValido = [];
     if($('.dateInicio').val() !="" && $('.dateFin').val() != "" && $('.dateInicio').val() != undefined && $('.dateFin').val() != undefined ){
       // FECHA INICIO 
       var dateSplit=$('.dateInicio').val().split('-');
@@ -232,6 +226,7 @@
       // Comprobar si la fecha a comparar está dentro del rango
       if (dateInicio.getTime() >= fechaMaxima.getTime() && dateInicio.getTime() <= currentDate.getTime()) {
           console.log('La fecha está dentro del rango de hoy y hasta 5 días anteriores.');
+          arrValido.push(true);
       } else {
           console.log('La fecha está fuera del rango de hoy y hasta 5 días anteriores.');
           app.alert.show("error_fecha_inicio", {
@@ -243,7 +238,7 @@
 
           $('.dateInicio').css('border-color','red');
 
-          return;
+          arrValido.push(false);
       }
 
     }
@@ -268,7 +263,7 @@
             $('#horaInicio').css('border-color','red');
             $('#horaFin').css('border-color','red');
 
-            return;
+            arrValido.push(false);
         }
 
         //Validando que fecha y hora fin no sea superior a la fecha y hora actual
@@ -303,13 +298,17 @@
 
             $('.dateFin').css('border-color','red');
 
-            return;
+            arrValido.push(false);
         }
     }
+
+    return arrValido;
   },
 
   validaSeleccionados: function(){
     
+    var valido = true;
+
     if( $("input.selected:checked").length == 0 ){
 
       app.alert.show("Sin_seleccion", {
@@ -319,9 +318,11 @@
         autoClose: false
       });
 
-      return;
+      valido = false;
         
     }
+
+    return valido;
   },
 
   procesaCreacionLlamadas: function (){
