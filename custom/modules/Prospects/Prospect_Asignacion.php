@@ -107,7 +107,7 @@ class Prospects_AsignacionPO
                 //Actualiza indice
                 $query = "update unifin_asignacion_po a
                   set a.asignado_id = '{$nextIndex}'
-                  where a.zona_geografica='{$bean->zona_geografica_c}';";
+                  where a.zona_geografica='{$bean->zona_geografica_c}' and a.municipio IS NULL;";
                 $resultado = $db->query($query);
               }   
             }
