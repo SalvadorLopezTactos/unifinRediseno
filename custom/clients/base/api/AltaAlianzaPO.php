@@ -54,51 +54,68 @@ class AltaAlianzaPO extends SugarApi
 
         }else{
 
-            //Valida existencia de po con email
-            $idProspect = $this->validateExistsPO($args['email1']);
+            $arr_required_set = array();
+            foreach ($arr_required as $key) {
+                $valor = $args["{$key}"];
+                $GLOBALS['log']->fatal("EL VALOR: ".$valor);
+                $GLOBALS['log']->fatal($key);
+                if( trim($valor) == "" ){
+                    array_push($arr_required_set, $key);
+                }
+            }
 
-            if( !empty($idProspect) ){
-
-                //Regresa el registro encontrado y se marca el count match
-
-                $beanProspect = BeanFactory::retrieveBean('Prospects', $idProspect, array('disable_row_level_security' => true));
-                $beanProspect->count_match_c = ($beanProspect->count_match_c == "" ) ? 0 : $beanProspect->count_match_c;
-                $suma = $beanProspect->count_match_c + 1;
-                $beanProspect->count_match_c = $suma;
-                $beanProspect->save();
-
-                //Se aplica directo el UPDATE ya que existe un lh que valida existencia de email y no permite el guardado
-                //$marcaCountSQL = "UPDATE prospects_cstm SET count_match_c = '{$suma}' WHERE (`id_c` = '{$idProspect}')";
-
-                //$GLOBALS['db']->query($marcaCountSQL);
-
-
+            if( count($arr_required_set) > 0 ){
                 $response = array(
-                    "status" => 200, //Falta algún campo
-                    "message" => "El registro con el email ".$args['email1']." ya existe",
-                    "detail" => $idProspect
+                    "status" => 422, //Falta algún campo
+                    "message" => "Falta agregar los siguientes campos requeridos",
+                    "detail" => array_values($arr_required_set)
                 );
 
             }else{
+                //Valida existencia de po con email
+                $idProspect = $this->validateExistsPO($args['email1']);
 
-                //Crea registro de PO
-                $beanProspect = BeanFactory::newBean("Prospects");
-                //Iterar $args obtenidos y setea bean
-                foreach ($args as $clave => $valor) {
-                    if (!empty($valor) && $clave != 'id' && $clave != 'deleted') {
-                        $beanProspect->$clave = $valor;
+                if (!empty($idProspect)) {
+
+                    //Regresa el registro encontrado y se marca el count match
+
+                    $beanProspect = BeanFactory::retrieveBean('Prospects', $idProspect, array('disable_row_level_security' => true));
+                    $beanProspect->count_match_c = ($beanProspect->count_match_c == "") ? 0 : $beanProspect->count_match_c;
+                    $suma = $beanProspect->count_match_c + 1;
+                    $beanProspect->count_match_c = $suma;
+                    $beanProspect->save();
+
+                    //Se aplica directo el UPDATE ya que existe un lh que valida existencia de email y no permite el guardado
+                    //$marcaCountSQL = "UPDATE prospects_cstm SET count_match_c = '{$suma}' WHERE (`id_c` = '{$idProspect}')";
+
+                    //$GLOBALS['db']->query($marcaCountSQL);
+
+
+                    $response = array(
+                        "status" => 200, //Falta algún campo
+                        "message" => "El registro con el email " . $args['email1'] . " ya existe",
+                        "detail" => $idProspect
+                    );
+                } else {
+
+                    //Crea registro de PO
+                    $beanProspect = BeanFactory::newBean("Prospects");
+                    //Iterar $args obtenidos y setea bean
+                    foreach ($args as $clave => $valor) {
+                        if (!empty($valor) && $clave != 'id' && $clave != 'deleted') {
+                            $beanProspect->$clave = $valor;
+                        }
                     }
+
+                    //Guarda bean y devuelve estructura
+                    $beanProspect->save();
+
+                    $response = array(
+                        "status" => 200, //Falta algún campo
+                        "message" => "El registro se ha creado correctamente",
+                        "detail" => $beanProspect->id
+                    );
                 }
-
-                //Guarda bean y devuelve estructura
-                $beanProspect->save();
-
-                $response = array(
-                    "status" => 200, //Falta algún campo
-                    "message" => "El registro se ha creado correctamente",
-                    "detail" => $beanProspect->id
-                );
-
             }
 
         }
