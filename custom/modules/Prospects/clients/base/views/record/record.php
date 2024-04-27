@@ -59,7 +59,7 @@ array (
             'name' => 'main_dropdown',
             'primary' => true,
             'showOn' => 'view',
-            'css_class' =>'ddw-main',
+            'css_class' => 'ddw-main',
             'buttons' => 
             array (
               0 => 
@@ -394,56 +394,75 @@ array (
               ),
               34 => 
               array (
-                'name' => 'email',
+                'name' => 'prospect_cp_estados_municipios',
+                'studio' => 'visible',
+                'label' => ' ',
+                'span' => 12,
               ),
               35 => 
               array (
+                'readonly' => false,
+                'name' => 'municipio_po_c',
+                'label' => 'LBL_MUNICIPIO_PO',
               ),
               36 => 
+              array (
+                'readonly' => false,
+                'name' => 'cp_po_c',
+                'label' => 'LBL_CP_PO',
+              ),
+              37 => 
+              array (
+                'name' => 'email',
+              ),
+              38 => 
+              array (
+              ),
+              39 => 
               array (
                 'readonly' => false,
                 'name' => 'origen_ag_tel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ORIGEN_AG_TEL_C',
               ),
-              37 => 
+              40 => 
               array (
                 'readonly' => false,
                 'name' => 'alianza_c',
                 'label' => 'LBL_ALIANZA',
               ),
-              38 => 
+              41 => 
               array (
                 'readonly' => false,
                 'name' => 'status_management_c',
                 'label' => 'LBL_STATUS_MANAGEMENT_C',
               ),
-              39 => 
+              42 => 
               array (
                 'name' => 'prospects_prospects_1_name',
               ),
-              40 => 
+              43 => 
               array (
                 'name' => 'prospects_telefonos',
                 'studio' => 'visible',
                 'label' => 'LBL_PROSPECTS_TELEFONOS',
                 'span' => 12,
               ),
-              41 => 'assigned_user_name',
-              42 => 
+              44 => 'assigned_user_name',
+              45 => 
               array (
                 'readonly' => false,
                 'name' => 'fecha_asignacion_c',
                 'label' => 'LBL_FECHA_ASIGNACION',
               ),
-              43 => 
+              46 => 
               array (
                 'readonly' => false,
                 'name' => 'account_rel_contacto_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ACCOUNT_REL_CONTACTO',
               ),
-              44 => 
+              47 => 
               array (
               ),
             ),

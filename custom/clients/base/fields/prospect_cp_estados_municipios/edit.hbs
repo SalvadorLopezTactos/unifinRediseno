@@ -1,0 +1,43 @@
+<script>
+    //Agrega estilo select2
+    this.$('#estado_po').select2({
+        width: '100%'
+    });
+
+   this.$('#municipio_po').select2({
+        width: '100%'
+    });
+
+
+</script>
+<div class="row-fluid" id="row-prospect-cp-estados-municipios">
+    <div class="span6 record-cell">
+        <label class="record-label">Código Postal</label>
+        <div class="base" id="text_edit_base">
+            <div class="edit">
+                <input type="text" name="cp_po" id="cp_po" class="inherit-width" value="{{nameCP}}">
+            </div>
+        </div>
+    </div>
+    <div class="span6 record-cell">
+        <label class="record-label">Estado</label>
+        <select class="row-fluid select2 estado_po" id="estado_po">
+            {{#each estadosList}}
+            {{!-- <option value="{{id}}" {{ifSelected id ../idEstadoCstm}}>{{nameEstados}}</option> --}}
+            <option value="{{idEstado}}" {{ifSelected idEstado ../idEstadoFromZonaGeografica}}>{{nameEstado}}</option>
+            {{/each}}
+        </select>
+    </div>
+</div>
+<div class="row-fluid" id="row-prospect-cp-estados-municipios">
+    <div class="span6 record-cell">
+        <label class="record-label">Municipio</label>
+        <select class="row-fluid select2 municipio_po" id="municipio_po">
+            {{#each municipiosList}}
+            {{!-- <option value="{{idEstado}}" {{ifSelected id ../nameEstado}}>{{nameEstado}}</option> --}}
+            <option value="{{idMunicipio}}" {{ifSelected idMunicipio ../nameMunicipio}}>{{nameMunicipio}}</option>
+            {{/each}}
+
+        </select>
+    </div>
+</div>
