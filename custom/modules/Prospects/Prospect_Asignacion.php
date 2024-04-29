@@ -62,7 +62,7 @@ class Prospects_AsignacionPO
             if(!empty($bean->zona_geografica_c) && empty($asignado_id)){
               $equipos = '';
               $query = "select equipos,asignado_id from unifin_asignacion_po 
-                where zona_geografica = '{$bean->zona_geografica_c}' limit 1;";
+                where zona_geografica = '{$bean->zona_geografica_c}' and municipio IS NULL limit 1;";
               $resultado = $db->query($query);
               while ($row = $db->fetchByAssoc($resultado)) {
                   $equipos = $row['equipos'];
