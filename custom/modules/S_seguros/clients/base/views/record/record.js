@@ -144,6 +144,9 @@
 	  if(usrid) {
         app.api.call("read", app.api.buildURL("Users/" + usrid, null, null, {}), null, {
           success: _.bind(function (data) {
+            if( data.region_c == 'OCCIDENTE-BAJIO' ){
+              data.region_c = data.region_c.replace('-',' ');
+            }
             this.model.set('region',data.region_c);
 		    if(data.puestousuario_c == 58) this.model.set('incentivo',15);
 		    if(this.model.get('tipo_venta_c') == 4) this.model.set('incentivo',0);
