@@ -1,7 +1,7 @@
 <?php
- // created: 2022-08-03 19:01:21
+// created: 2023-11-17 09:35:05
 
-$app_list_strings['region_list']=array (
+$app_list_strings['region_list'] = array(
   'CASA' => 'CASA',
   'METRO 1' => 'METRO 1',
   'METRO 2' => 'METRO 2',
@@ -29,4 +29,6 @@ $app_list_strings['region_list']=array (
   'Noroeste' => 'Noroeste',
   'Suroeste' => 'Suroeste',
   'CENTRAL' => 'CENTRAL',
+  'RELATIONSHIP MANAGEMENT' => 'RELATIONSHIP MANAGEMENT',
+  'OCCIDENTE BAJIO' => 'OCCIDENTE BAJIO',
 );
