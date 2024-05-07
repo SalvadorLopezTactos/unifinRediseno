@@ -504,12 +504,15 @@
 
     getTipoCliente: function(){
         //console.log("getTipoCliente");
+        if(this.model.get('account_id_c') =='' || this.model.get('account_id_c') == undefined){
+          return;
+        }
         var disponible = 0;
         app.alert.show('getDetailUser', {
             level: 'process',
             title: 'Cargando...'
         });
-		this.val = this.getValores();
+		    this.val = this.getValores();
         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get('account_id_c'), null, null, {
             fields: name,
         }), null, {
@@ -602,36 +605,32 @@
 
 
                 //Obtiene el promotor del cliente, equipo y region del mismo
-                var usuario = app.data.createBean('Users',{id:promotor});
-                usuario.fetch({
-                    success: _.bind(function(modelo) {
-                        app.alert.dismiss('getDetailUser');
-                        if(modelo.get('id')!=undefined){
-                            //establece las opciones disponibles en campo de producto, correspondientes
-                            var lista_productos= app.lang.getAppListStrings('tipo_producto_list');
-                            var productos_user=modelo.get('productos_c');
+                app.api.call("read", app.api.buildURL("Infouser/" + promotor, null, null, {}), null, {
+                  success: _.bind(function (modelo) {
+                    app.alert.dismiss('getDetailUser');
+                    if(modelo.id!=undefined){
+                        //establece las opciones disponibles en campo de producto, correspondientes
+                        var lista_productos= app.lang.getAppListStrings('tipo_producto_list');
+                        var productos_user=modelo.productos_c;
 
-                            Object.keys(lista_productos).forEach(function (key) {
-                                if(!productos_user.includes(key) && key !=""){
-                                    delete lista_productos[key];
-                                }
-                            });
-                            this.model.fields['producto_c'].options = lista_productos;
-                            //Estableciendo nuevas opciones en campo de producto
-                            var campo_producto=this.getField('producto_c');
-                            campo_producto.items=lista_productos;
-                            campo_producto.render();
-							//this.setValores(this.val);
-                            this.model.set("region", modelo.get("region_c"));
-                            this.model.set("equipo", modelo.get("equipo_c"));
-                            this.model.set("assigned_user_id", modelo.get('id'));
-                            this.model.set("assigned_user_name", modelo.get('name'));
-
-                            //Asigna producto Leasing
-                            //this.model.set('producto_c',1);
-                        }
-
-                    },this)
+                        Object.keys(lista_productos).forEach(function (key) {
+                            if(!productos_user.includes(key) && key !=""){
+                                delete lista_productos[key];
+                            }
+                        });
+                        
+                        this.model.fields['producto_c'].options = lista_productos;
+                        //Estableciendo nuevas opciones en campo de producto
+                        var campo_producto=this.getField('producto_c');
+                        campo_producto.items=lista_productos;
+                        campo_producto.render();
+                        this.model.set("region", modelo.region_c);
+                        this.model.set("equipo", modelo.equipo_c);
+                        this.model.set("assigned_user_id", modelo.id);
+                        this.model.set("assigned_user_name", modelo.first_name + ' ' + modelo.last_name);
+                    }
+                    
+                  }, this)
                 });
             }, this)
         });
