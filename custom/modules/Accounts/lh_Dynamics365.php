@@ -16,7 +16,7 @@ class Accounts_Dynamics365
       $cedente=$bean->cedente_factor_c;
       $deudor=$bean->deudor_factor_c;
 
-      if(($tipo_cuenta=='5' || $tipo_cuenta=='3' || $proveedor || $cedente || $deudor) && empty($bean->control_dynamics_365_c)) {
+      if(($tipo_cuenta=='5' || $proveedor) && empty($bean->control_dynamics_365_c)) {
         $GLOBALS['log']->fatal('***********ENTRA CONDICION PARA CONSUMIR DYNAMICS*************');
           //Consumir servicio de dynamics, declarado en custom api
           require_once("custom/clients/base/api/Dynamics365.php");
