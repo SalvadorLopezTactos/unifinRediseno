@@ -79,7 +79,7 @@ class Dynamics365 extends SugarApi
         $records_list = array();
         $url_endpoint = "";
 
-        if ($tipo_cuenta == '3') { //tipo_registro_cuenta_c 3 = Cliente
+        /*if ($tipo_cuenta == '3') { //tipo_registro_cuenta_c 3 = Cliente
             $url_endpoint = '/api/services/UNF_ClientServicesGrp/UNF_ClientServices/createClient';
             //Obtener régimen fiscal
             $regimen_fiscal = $beanCuenta->tipodepersona_c;
@@ -99,12 +99,6 @@ class Dynamics365 extends SugarApi
                 $body_elements["PERSONLASTNAME"] = $beanCuenta->apellidopaterno_c . " " . $beanCuenta->apellidomaterno_c;
                 $body_elements["PERSONMIDDLENAME"] = "";
             } else {
-                /*
-                $body_elements["PERSONFIRSTNAME"]=$beanCuenta->razonsocial_c;
-                $body_elements["PERSONLASTNAME"]="";
-                $body_elements["PERSONMIDDLENAME"]="";
-                */
-
                 $body_elements["CUSTOMERPARTYTYPE"] = "Organization";
                 $body_elements["COMPANYTYPE"] = ($beanCuenta->pais_nacimiento_c == '2') ? "LegalEntity" : "ForeignCompany";
                 $body_elements["CUSTOMERORGANIZATIONNAME"] = $beanCuenta->razonsocial_c;
@@ -200,7 +194,7 @@ class Dynamics365 extends SugarApi
                 'type' => 'Cliente'
             );
             $records_list[] = $itemVendor;
-        }
+        }*/
         if ($tipo_cuenta == '5' || $es_proveedor) {
             $url_endpoint = '/api/services/TT_ProveedorServicesGrp/TT_ProveedorServices/createVendor';
             //Obtener régimen fiscal
