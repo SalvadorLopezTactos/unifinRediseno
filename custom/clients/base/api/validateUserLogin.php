@@ -75,7 +75,7 @@ class validateUserLogin extends SugarApi
         try{
             //Recupera parámetros
             //Decode Base64 User data
-            $userDataB64 = isset($args['userData']) ? base64_decode($args['userData']) : '';
+            $userDataB64 = isset($args['userData']) ? $args['userData'] : '';
             // Expresión regular para buscar comillas dobles no precedidas ni seguidas por : o { o } o ,
             $pattern = '/(?<![:,{}])"(?![:,{}])/';
 
@@ -85,9 +85,9 @@ class validateUserLogin extends SugarApi
             //Forma arreglo de user data
             $userData = isset($userDataParse) ? json_decode($userDataParse, true) : array();
             //$userData = isset($args['userData']) ? json_decode(base64_decode($args['userData']),true) : array();  //userData.user || userData.password -- error_log(print_r($userData,true));
-            error_log('Userdata - u:'.$userData['user']);
+            error_log('Userdata - u:'.$userData['u']);
             //Validaciones en caso de existir usuario cargado
-            if(isset($userData['user'])){
+            if(isset($userData['u'])){
                 $getLogin = $this->getLastLogin($userData);
                 $result['valid_secs'] = isset($getLogin['valid_secs']) ? $getLogin['valid_secs'] : 0;
             }
@@ -121,7 +121,7 @@ class validateUserLogin extends SugarApi
             //Recupera parámetros
             //$userData = isset($args['userData']) ? json_decode(base64_decode($args['userData']),true) : array();
             //Decode Base64 User data
-            $userDataB64 = isset($args['userData']) ? base64_decode($args['userData']) : '';
+            $userDataB64 = isset($args['userData']) ? $args['userData'] : '';
             // Expresión regular para buscar comillas dobles no precedidas ni seguidas por : o { o } o ,
             $pattern = '/(?<![:,{}])"(?![:,{}])/';
 
@@ -130,7 +130,7 @@ class validateUserLogin extends SugarApi
 
             //Forma arreglo de user data
             $userData = isset($userDataParse) ? json_decode($userDataParse, true) : array();
-            error_log('Userdata - u:'.$userData['user']);
+            error_log('Userdata - u:'.$userData['u']);
             //userData.user || userData.password -- error_log(print_r($userData,true));
             global $sugar_config;
             $mfa_enable =  isset($sugar_config['mfa_enable']) ? $sugar_config['mfa_enable'] : false;
@@ -148,7 +148,7 @@ class validateUserLogin extends SugarApi
             from users u 
             inner join email_addr_bean_rel eb on eb.bean_id=u.id and eb.bean_module='Users' and eb.primary_address = true and eb.deleted=0
             inner join email_addresses e on e.id = eb.email_address_id and e.deleted=0
-            where u.user_name='".$userData['user']."' and u.status='Active' and u.deleted=0 and u.is_group=0
+            where u.user_name='".$userData['u']."' and u.status='Active' and u.deleted=0 and u.is_group=0
             limit 1;";
             $resultQ = $GLOBALS['db']->query($queryUser);
             while ($row = $GLOBALS['db']->fetchByAssoc($resultQ)) {
@@ -223,7 +223,7 @@ class validateUserLogin extends SugarApi
             //Recupera parámetros
             //$userData = isset($args['userData']) ? json_decode(base64_decode($args['userData']),true) : array(); //userData.user || userData.password -- error_log(print_r($userData,true));
             //Decode Base64 User data
-            $userDataB64 = isset($args['userData']) ? base64_decode($args['userData']) : '';
+            $userDataB64 = isset($args['userData']) ? $args['userData'] : '';
             // Expresión regular para buscar comillas dobles no precedidas ni seguidas por : o { o } o ,
             $pattern = '/(?<![:,{}])"(?![:,{}])/';
 
@@ -233,7 +233,7 @@ class validateUserLogin extends SugarApi
             //Forma arreglo de user data
             $userData = isset($userDataParse) ? json_decode($userDataParse, true) : array();
             $codeMFA = isset($args['code']) ? $args['code'] : 0;
-            error_log('Userdata - u:'.$userData['user']);
+            error_log('Userdata - u:'.$userData['u']);
             error_log('Userdata - c:'.$userData['code']);
             global $sugar_config;
             $mfa_valid_mistakes =  isset($sugar_config['mfa_valid_mistakes']) ? $sugar_config['mfa_valid_mistakes'] : 0;
@@ -241,7 +241,7 @@ class validateUserLogin extends SugarApi
             //Valida última solicitud de acceso de usuario
             $queryCurrentLogin= "select mfa.id, mfa.validation_mistakes, mfa.code ,mfa.time_expiration, mfa.time_expiration - unix_timestamp() valid_secs
             from unifin_mfa_login mfa
-            where mfa.user_name='".$userData['user']."' and time_expiration >= unix_timestamp() order by mfa.id desc
+            where mfa.user_name='".$userData['u']."' and time_expiration >= unix_timestamp() order by mfa.id desc
             limit 1;";
             $resultCL = $GLOBALS['db']->query($queryCurrentLogin);
             $complement_message = '';
@@ -296,12 +296,12 @@ class validateUserLogin extends SugarApi
         $user_mfa_enable = false;
         
         //Validaciones en caso de existir usuario cargado
-        if(isset($userData['user'])){
+        if(isset($userData['u'])){
             //Valida configuración MFA Usuario
             $queryUser = "select u.id, mfa_enable_c
             from users u 
             inner join users_cstm uc on uc.id_c=u.id
-            where u.user_name='".$userData['user']."' and u.status='Active' and u.deleted=0 and u.is_group=0
+            where u.user_name='".$userData['u']."' and u.status='Active' and u.deleted=0 and u.is_group=0
             limit 1;";
             $resultQ = $GLOBALS['db']->query($queryUser);
             while ($row = $GLOBALS['db']->fetchByAssoc($resultQ)) {
@@ -312,7 +312,7 @@ class validateUserLogin extends SugarApi
             //Valida última solicitud de acceso de usuario
             $queryCurrentLogin= "select mfa.id, mfa.validation_mistakes, mfa.time_expiration, mfa.time_expiration - unix_timestamp() valid_secs
             from unifin_mfa_login mfa
-            where mfa.user_name='".$userData['user']."' and time_expiration >= unix_timestamp() order by mfa.id desc
+            where mfa.user_name='".$userData['u']."' and time_expiration >= unix_timestamp() order by mfa.id desc
             limit 1;";
             $resultCL = $GLOBALS['db']->query($queryCurrentLogin);
             while ($row = $GLOBALS['db']->fetchByAssoc($resultCL)) {
@@ -342,11 +342,11 @@ class validateUserLogin extends SugarApi
             $user_mfa_enable = false;
             
             //Genera insert en unifin_mfa_login
-            if(isset($userData['user'])){
+            if(isset($userData['u'])){
                 //Valida última solicitud de acceso de usuario
                 $queryCurrentLogin= "select mfa.id, mfa.code, mfa.validation_mistakes, mfa.time_expiration, mfa.time_expiration - unix_timestamp() valid_secs
                 from unifin_mfa_login mfa
-                where mfa.user_name='".$userData['user']."' and time_expiration >= unix_timestamp() order by mfa.id desc
+                where mfa.user_name='".$userData['u']."' and time_expiration >= unix_timestamp() order by mfa.id desc
                 limit 1;";
                 $resultCL = $GLOBALS['db']->query($queryCurrentLogin);
                 while ($row = $GLOBALS['db']->fetchByAssoc($resultCL)) {
@@ -358,7 +358,7 @@ class validateUserLogin extends SugarApi
                 
                 if($result['valid_secs']<=0){
                     $codeMFA = random_int(100000, 999999);
-                    $insertS = "INSERT INTO unifin_mfa_login (user_name, code, time_set, time_expiration) VALUES ('".$userData['user']."', '".$codeMFA."', unix_timestamp(), unix_timestamp()+{$mfa_expiration_time});";
+                    $insertS = "INSERT INTO unifin_mfa_login (user_name, code, time_set, time_expiration) VALUES ('".$userData['u']."', '".$codeMFA."', unix_timestamp(), unix_timestamp()+{$mfa_expiration_time});";
                     $resultInser = $GLOBALS['db']->query($insertS);
                     $result['code'] = $codeMFA;
                     $result['status'] = '200';
@@ -437,8 +437,8 @@ class validateUserLogin extends SugarApi
             "message"=>""
         );
         try {
-            $ldaprdn  = isset($userData['user']) ? $userData['user'].'@unifin.com.mx' : 'x';
-            $ldappass = isset($userData['password']) ? $userData['password'] : 'x';
+            $ldaprdn  = isset($userData['u']) ? $userData['u'].'@unifin.com.mx' : 'x';
+            $ldappass = isset($userData['p']) ? $userData['p'] : 'x';
             $queryConfigLDAP="SELECT value from config where category='ldap' and name='hostname' limit 1;";
             $connection_string = $GLOBALS['db']->getOne($queryConfigLDAP);
             // $GLOBALS['log']->fatal('ldaprdn:'. $ldaprdn);
