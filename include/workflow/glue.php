@@ -50,12 +50,10 @@ class WorkFlowGlue {
 
 	}
 
-    public function translateOperator($operatorName) 
+    public function translateOperator($operatorName)
     {
-        foreach ($this->translateOperators as $key => $value) 
-        {
-            if (translate($value) == $operatorName)
-            {
+        foreach ($this->translateOperators as $key => $value) {
+            if (translate($value) == $operatorName) {
                 return $this->operator_array[$key];
             }
         }
@@ -316,6 +314,7 @@ class WorkFlowGlue {
 	}
 
 	function glue_date($parent_type, & $type_object, $include_same_compare=false){
+        $datetimeFunction = null;
 		$eval_string = "";
 
 		$eval_string .= "\n \t ( \n";
@@ -359,7 +358,7 @@ class WorkFlowGlue {
                 $type_object->lhs_field
             );
             $eval_string .= " $operator ";
-            
+
             // Sign should be driven by point in time
             $sign = $parent_type == 'past' ? '+' : '-';
             $eval_string .= sprintf('(time() %s %s)', $sign, $type_object->ext1);
@@ -789,8 +788,9 @@ SQL;
 
 	function build_trigger_triggers($array_position_name, $triggershell_id){
 
-		$this->trigger_meta_data .= "'".$array_position_name."' => \n\n";
-		$this->trigger_meta_data .= "array ( \n\n";
+        $base_array = [];
+        $this->trigger_meta_data .=  var_export($array_position_name, true)  . " => \n\n";
+        $this->trigger_meta_data .= "array ( \n\n";
 
 
 
@@ -847,11 +847,11 @@ SQL;
 
 		$trigger_shell_array = "";
 
-		$trigger_shell_array .= "\t '".$name."' => array ( \n\n";
+        $trigger_shell_array .= "\t" . var_export($name, true) . " => array ( \n\n";
 
-		foreach($sub_array as $key => $value){
-			$trigger_shell_array .= "\t\t '" . $key . "' => " . $this->write_escape($value) . ",\n";
-		}
+        foreach ($sub_array as $key => $value) {
+            $trigger_shell_array .= "\t\t " . var_export($key, true) . " => " . $this->write_escape($value) . ",\n";
+        }
 
 		$trigger_shell_array .= "\t ), \n\n";
 

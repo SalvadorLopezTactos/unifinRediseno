@@ -13,8 +13,12 @@
 
 require_once('include/json_config.php');
 
-class ViewRetrieveSource extends ViewList {
-    function display() {
+class ViewRetrieveSource extends ViewList
+{
+    public function display()
+    {
+        error_log('Usage of Connectors view.retrievesource with request data: '. print_r($_REQUEST, true));
+        error_log('Stack trace: '. (new \Exception())->getTraceAsString());
 
         $source_id = $this->request->getValidInputRequest('source_id', 'Assert\ComponentName');
 
@@ -94,6 +98,7 @@ class ViewRetrieveSource extends ViewList {
      */
     private function getDisplayColumns($source_instance, $beans) {
 
+        $listViewDefs = [];
     	$source_id = $_REQUEST['source_id'];
 
     	require_once('include/connectors/utils/ConnectorUtils.php');
@@ -128,7 +133,7 @@ class ViewRetrieveSource extends ViewList {
         		}
         	}
         } else {
-		    $width = round((95 / count($output_list)), 1);
+            $width = round((95 / (is_countable($output_list) ? count($output_list) : 0)), 1);
 			foreach($output_list as $key=>$value) {
 
 				if(isset($connector_field_defs[$key]['vname'])) {

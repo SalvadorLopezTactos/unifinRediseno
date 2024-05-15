@@ -95,6 +95,7 @@ class Quota extends SugarBean
      */
     public function create_new_list_query($order_by, $where, $filter = array(), $params = array(), $show_deleted = 0, $join_type = '', $return_array = false, $parentbean = null, $singleSelect = false, $retrieve_created_by = true)
     {
+        $ret_array = [];
         global $current_user;
 
         $ret_array['select'] = "SELECT users.first_name as name, users.last_name, users.id users_id, quotas.* ";

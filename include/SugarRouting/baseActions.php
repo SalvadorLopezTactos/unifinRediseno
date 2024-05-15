@@ -68,7 +68,7 @@ function delete_file($action, $file) {
 	// file must exist
 	if(file_exists($file)) {
 		// file must be located in the cache dir
-		if(strpos($file, $sugar_config['cache_dir']) !== false) {
+        if (strpos($file, (string)$sugar_config['cache_dir']) !== false) {
 			if(unlink($file)) {
 				return true;
 			}

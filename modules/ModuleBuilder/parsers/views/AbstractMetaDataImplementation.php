@@ -367,58 +367,64 @@ abstract class AbstractMetaDataImplementation
         }
         // END ASSERTIONS
         $GLOBALS['log']->debug(get_class($this)."->_loadFromFile(): reading from ".$filename );
-        require FileLoader::validateFilePath($filename); // loads the viewdef - must be a require not require_once to ensure can reload if called twice in succession
-
-        // Check to see if we have the module name set as a variable rather than embedded in the $viewdef array
-        // If we do, then we have to preserve the module variable when we write the file back out
-        // This is a format used by ModuleBuilder templated modules to speed the renaming of modules
-        // OOB Sugar modules don't use this format
-
-        $moduleVariables = array ( 'module_name' , '_module_name' , 'OBJECT_NAME' , '_object_name' ) ;
-
-        $variables = array ( ) ;
-        foreach ($moduleVariables as $name) {
-            if (isset ( $$name )) {
-                $variables [ $name ] = $$name ;
+        try {
+            // loads the viewdef - must be a require not require_once to ensure can reload if called twice in succession
+            require FileLoader::validateFilePath($filename);
+            LoggerManager::getLogger()->debug(get_class($this) . "->_loadFromFile(): loading from valid filename $filename");
+            
+            // Check to see if we have the module name set as a variable rather than embedded in the $viewdef array
+            // If we do, then we have to preserve the module variable when we write the file back out
+            // This is a format used by ModuleBuilder templated modules to speed the renaming of modules
+            // OOB Sugar modules don't use this format
+    
+            $moduleVariables = ['module_name' , '_module_name' , 'OBJECT_NAME' , '_object_name'];
+    
+            $variables = [];
+            foreach ($moduleVariables as $name) {
+                if (isset(${$name})) {
+                    $variables [ $name ] = ${$name} ;
+                }
             }
-        }
-
-        // Extract the layout definition from the loaded file - the layout definition is held under a variable name that varies between the various layout types (e.g., listviews hold it in listViewDefs, editviews in viewdefs)
-        $viewVariable = $this->_fileVariables [ $this->_view ] ;
-        $defs = $$viewVariable ;
-
-        // Now tidy up the module name in the viewdef array
-        // MB created definitions store the defs under packagename_modulename and later methods that expect to find them under modulename will fail
-
-        $modulePath = true;
-        if (isset ( $variables [ 'module_name' ] )) {
-            $mbName = $variables [ 'module_name' ] ;
-            $modulePath = isset($defs[$mbName]);
-            // Some defs define a variable but don't path from it (subpanels)
-            if ($mbName != $this->_moduleName && $modulePath) {
-                $defs [ $this->_moduleName ] = $defs [ $mbName ] ;
-                unset ( $defs [ $mbName ] ) ;
+    
+            // Extract the layout definition from the loaded file - the layout definition is held under a variable name that varies between the various layout types (e.g., listviews hold it in listViewDefs, editviews in viewdefs)
+            $viewVariable = $this->_fileVariables[$this->_view];
+            $defs = ${$viewVariable} ;
+    
+            // Now tidy up the module name in the viewdef array
+            // MB created definitions store the defs under packagename_modulename and later methods that expect to find them under modulename will fail
+    
+            $modulePath = true;
+            if (isset($variables['module_name'])) {
+                $mbName = $variables['module_name'];
+                $modulePath = isset($defs[$mbName]);
+                // Some defs define a variable but don't path from it (subpanels)
+                if ($mbName != $this->_moduleName && $modulePath) {
+                    $defs[$this->_moduleName] = $defs[$mbName];
+                    unset($defs[$mbName]);
+                }
             }
+            $this->_variables = $variables;
+            // now remove the modulename preamble from the loaded defs but only if
+            // the defs are pathed from a module
+            reset($defs);
+            if ($modulePath) {
+                $value = current($defs);
+            } else {
+                $value = $defs;
+            }
+    
+            $GLOBALS['log']->debug(get_class($this) . '->_loadFromFile: returning ' . print_r($value, true));
+        } catch (\Throwable $e) {
+            LoggerManager::getLogger()->warn(get_class($this) . "->_loadFromFile(): require " . $filename . "failed!");
+            return null;
         }
-        $this->_variables = $variables ;
-        // now remove the modulename preamble from the loaded defs but only if
-        // the defs are pathed from a module
-        reset($defs);
-        if ($modulePath) {
-            $value = current($defs);
-        } else {
-            $value = $defs;
-        }
-
-        $GLOBALS['log']->debug(get_class($this) . '->_loadFromFile: returning ' . print_r($value, true));
-
         return $value;
     }
 
     protected function _loadFromPopupFile ($filename, $mod, $view, $forSave = false)
     {
         // BEGIN ASSERTIONS
-        if (!file_exists ( $filename )) {
+        if (!file_exists($filename)) {
             return null ;
         }
         // END ASSERTIONS
@@ -429,47 +435,56 @@ abstract class AbstractMetaDataImplementation
             $GLOBALS['mod_strings'] = $mod;
         }
 
-        require $filename ; // loads the viewdef - must be a require not require_once to ensure can reload if called twice in succession
-        $viewVariable = $this->_fileVariables [ $this->_view ] ;
-        $defs = $$viewVariable ;
-        if (!$forSave) {
-            //Now we will unset the reserve field in pop definition file.
-            $limitFields = PopupMetaDataParser::$reserveProperties;
-            foreach ($limitFields as $v) {
-                if (isset($defs[$v])) {
-                    unset($defs[$v]);
+        $defs = null;
+        try {
+            // loads the viewdef - must be a require not require_once to ensure can reload if called twice in succession
+            require FileLoader::validateFilePath($filename);
+            $viewVariable = $this->_fileVariables[$this->_view];
+            $defs = ${$viewVariable} ;
+            if (!$forSave) {
+                //Now we will unset the reserve field in pop definition file.
+                $limitFields = PopupMetaDataParser::$reserveProperties;
+                foreach ($limitFields as $v) {
+                    if (isset($defs[$v])) {
+                        unset($defs[$v]);
+                    }
+                }
+                if (isset($defs[PopupMetaDataParser::$defsMap[$view]])) {
+                    $defs = $defs[PopupMetaDataParser::$defsMap[$view]];
+                } else {
+                    //If there are no defs for this view, grab them from the non-popup view
+                    if ($view == MB_POPUPLIST) {
+                        $this->_view = MB_LISTVIEW;
+                        $defs = $this->_loadFromFile($this->getFileName(MB_LISTVIEW, $this->_moduleName, MB_CUSTOMMETADATALOCATION));
+                        if ($defs == null) {
+                            $defs = $this->_loadFromFile($this->getFileName(MB_LISTVIEW, $this->_moduleName, MB_BASEMETADATALOCATION));
+                        }
+                        $this->_view = $view;
+                    } elseif ($view == MB_POPUPSEARCH) {
+                        $this->_view = MB_ADVANCEDSEARCH;
+                        $defs = $this->_loadFromFile($this->getFileName(MB_ADVANCEDSEARCH, $this->_moduleName, MB_CUSTOMMETADATALOCATION));
+                        if ($defs == null) {
+                            $defs = $this->_loadFromFile($this->getFileName(MB_ADVANCEDSEARCH, $this->_moduleName, MB_BASEMETADATALOCATION));
+                        }
+                        if (isset($defs['layout']) && isset($defs['layout']['advanced_search'])) {
+                            $defs = $defs['layout']['advanced_search'];
+                        }
+                        $this->_view = $view;
+                    }
+                    if ($defs === null) {
+                        $defs = [];
+                    }
                 }
             }
-            if (isset($defs[PopupMetaDataParser::$defsMap[$view]])) {
-                $defs = $defs[PopupMetaDataParser::$defsMap[$view]];
-            } else {
-                //If there are no defs for this view, grab them from the non-popup view
-                if ($view == MB_POPUPLIST) {
-                    $this->_view = MB_LISTVIEW;
-                    $defs = $this->_loadFromFile ( $this->getFileName ( MB_LISTVIEW, $this->_moduleName, MB_CUSTOMMETADATALOCATION ) ) ;
-                    if ($defs == null)
-                        $defs = $this->_loadFromFile ( $this->getFileName ( MB_LISTVIEW, $this->_moduleName, MB_BASEMETADATALOCATION ) ) ;
-                    $this->_view = $view;
-                } elseif ($view == MB_POPUPSEARCH) {
-                    $this->_view = MB_ADVANCEDSEARCH;
-                    $defs = $this->_loadFromFile ( $this->getFileName ( MB_ADVANCEDSEARCH, $this->_moduleName, MB_CUSTOMMETADATALOCATION ) ) ;
-                    if ($defs == null)
-                        $defs = $this->_loadFromFile ( $this->getFileName ( MB_ADVANCEDSEARCH, $this->_moduleName, MB_BASEMETADATALOCATION ) ) ;
-
-                    if (isset($defs['layout']) && isset($defs['layout']['advanced_search']))
-                        $defs = $defs['layout']['advanced_search'];
-                    $this->_view = $view;
-                }
-                if ($defs == null)
-                    $defs = array();
+    
+            $this->_variables = [];
+            if (!empty($oldModStrings)) {
+                $GLOBALS['mod_strings'] = $oldModStrings;
             }
+        } catch (\Throwable $e) {
+            LoggerManager::getLogger()->warn(get_class($this) . "->_loadFromFile(): require " . $filename . "failed!");
+            return null;
         }
-
-        $this->_variables = array();
-        if (!empty($oldModStrings)) {
-            $GLOBALS['mod_strings'] = $oldModStrings;
-        }
-
         return $defs;
     }
 
@@ -490,7 +505,7 @@ abstract class AbstractMetaDataImplementation
 
         mkdir_recursive(dirname($filename));
 
-        $useVariables = (count($this->_variables) > 0) && $useVariables; // only makes sense to do the variable replace if we have variables to replace...
+        $useVariables = ((is_countable($this->_variables) ? count($this->_variables) : 0) > 0) && $useVariables; // only makes sense to do the variable replace if we have variables to replace...
 
         // create the new metadata file contents, and write it out
         $out = "<?php\n" ;
@@ -501,7 +516,7 @@ abstract class AbstractMetaDataImplementation
             }
         }
 
-        $viewVariable = $this->_fileVariables [ $this->_view ] ;
+        $viewVariable = $this->_fileVariables[$this->_view];
         if ($forPopup) {
             $out .= "\$$viewVariable = \n" . var_export_helper ( $defs ) ;
         } else {

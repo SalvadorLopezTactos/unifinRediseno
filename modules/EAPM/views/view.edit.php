@@ -79,7 +79,7 @@ class EAPMViewEdit extends ViewEdit {
             $params[] = htmlspecialchars(translate('LBL_MODULE_NAME', 'Users'));
         }
         $href = 'index.php?' . http_build_query(['module' => $returnModule, 'action' => 'EditView', 'record' => $returnId]);
-        $params[] = '<a href="' . htmlspecialchars($href). '">'. htmlspecialchars($returnName).'</a>';
+        $params[] = '<a href="' . htmlspecialchars($href) . '">' . htmlspecialchars($returnName).'</a>';
         $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL']);
 
         return $params;

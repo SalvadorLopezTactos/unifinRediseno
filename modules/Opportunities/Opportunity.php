@@ -839,6 +839,14 @@ class Opportunity extends SugarBean
                             }
 
                             // Update the quantity
+                            if (!is_numeric($newRenewalRLIProperties[$matchingRenewalRLI->id]['quantity'])) {
+                                LoggerManager::getLogger()->fatal(sprintf('RLI quantity is expected to be numeric, "%s" given', gettype($newRenewalRLIProperties[$matchingRenewalRLI->id]['quantity'])) . PHP_EOL . (new Exception())->getTraceAsString());
+                                $newRenewalRLIProperties[$matchingRenewalRLI->id]['quantity'] = 0;
+                            }
+                            if (!is_numeric($rliBean->quantity)) {
+                                LoggerManager::getLogger()->fatal(sprintf('RLI quantity is expected to be numeric, "%s" given', gettype($rliBean->quantity)) . PHP_EOL . (new Exception())->getTraceAsString());
+                                $rliBean->quantity = floatval($rliBean->quantity);
+                            }
                             $newRenewalRLIProperties[$matchingRenewalRLI->id]['quantity'] += $rliBean->quantity;
 
                             // we need to convert the amount to the existing renewal RLI's currency
@@ -1515,7 +1523,7 @@ class Opportunity extends SugarBean
                 $rli->save();
             }
         }
-        SugarBean::leaveOperation(self::OPERATION_CASCADE . $this->id);
+        parent::leaveOperation(self::OPERATION_CASCADE . $this->id);
         // After updating all associated RLIs, update the calculated fields on this Opportunity
         // to set the original fields correctly.
         $this->updateCalculatedFields();

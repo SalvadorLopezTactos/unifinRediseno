@@ -106,19 +106,7 @@ class PMSEBusinessRules extends vCardApi
      */
     public function businessRuleDownload($api, $args)
     {
-        ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
-        $businessRule = $this->getPMSEBusinessRuleExporter();
-        $requiredFields = array('record', 'module');
-        foreach ($requiredFields as $fieldName) {
-            if (!array_key_exists($fieldName, $args)) {
-                $sugarApiExceptionMissingParameter = new SugarApiExceptionMissingParameter(
-                    'Missing parameter: ' . $fieldName
-                );
-                PMSELogger::getInstance()->alert($sugarApiExceptionMissingParameter->getMessage());
-                throw $sugarApiExceptionMissingParameter;
-            }
-        }
-
+        ProcessManager\AccessManager::getInstance()->verifyRecordAccess($api, $args);
         if (PMSEEngineUtils::isExportDisabled($args['module'])) {
             $sugarApiExceptionNotAuthorized = new SugarApiExceptionNotAuthorized(
                 $GLOBALS['app_strings']['ERR_EXPORT_DISABLED']
@@ -126,7 +114,7 @@ class PMSEBusinessRules extends vCardApi
             PMSELogger::getInstance()->alert($sugarApiExceptionNotAuthorized->getMessage());
             throw $sugarApiExceptionNotAuthorized;
         }
-
+        $businessRule = $this->getPMSEBusinessRuleExporter();
         return $businessRule->exportProject($args['record'], $api);
     }
 

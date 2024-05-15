@@ -289,7 +289,7 @@ class EmailRecipientRelationship extends One2MBeanRelationship
             return $address['email_address_id'] === $emailAddress->id;
         });
 
-        if (count($matches) === 0) {
+        if (count((array) $matches) === 0) {
             if ($bean->emailAddress->addAddress($emailAddress->email_address) === false) {
                 LoggerManager::getLogger()->error(
                     "Failed to add {$emailAddress->email_address} (EmailAddresses/{$bean->email_address_id}) to " .

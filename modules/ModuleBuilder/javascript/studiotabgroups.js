@@ -122,11 +122,11 @@ StudioTabGroup.prototype.saveField = function(elemID, formname) {
 		if (inputs[i].name == "width") {
 			this.widths[elemID] = inputs[i].value;
 			var dispWidth = elem.getElementsByTagName("td")[3];
-			dispWidth.innerHTML = "width:" + inputs[i].value;
+            dispWidth.innerText = 'width:' + inputs[i].value;
 		}
 		if (inputs[i].name == "label") {
 			var title = elem.getElementsByTagName("span")[0];
-			title.innerHTML = inputs[i].value;
+            title.innerText = inputs[i].value;
 		}
 	}
 	ModuleBuilder.submitForm(formname);

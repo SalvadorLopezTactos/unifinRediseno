@@ -24,6 +24,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 // TEMPLATE:
 //////////////////////////////////////////////
 function reportCriteriaWithResult(&$reporter,&$args) {
+    $duplicateButtons = [];
 	global $current_user,$theme;
 	global $current_language;
 	global $mod_strings, $app_strings, $timedate;
@@ -101,10 +102,11 @@ function reportCriteriaWithResult(&$reporter,&$args) {
         );
 	}
 	// Summation with Details
-	else if ($report_type == 'summary' && (!empty($reporter->report_def['display_columns']) && count($reporter->report_def['display_columns']) > 0 )) {
+    elseif ($report_type == 'summary' && (!empty($reporter->report_def['display_columns']) && (is_countable($reporter->report_def['display_columns']) ? count($reporter->report_def['display_columns']) : 0) > 0)) {
 		$canCovertToMatrix = 0;
-		if ((!empty($reporter->report_def['group_defs']) && count($reporter->report_def['group_defs']) <= 3  ))
-			$canCovertToMatrix = 1;
+        if ((!empty($reporter->report_def['group_defs']) && (is_countable($reporter->report_def['group_defs']) ? count($reporter->report_def['group_defs']) : 0) <= 3)) {
+            $canCovertToMatrix = 1;
+        }
 		$duplicateButtons = array(
             '<input type=button class="button" onclick="showDuplicateOverlib(this,\'summation_with_details\','.$canCovertToMatrix.');" type="button" ' .
                 'value="'.$app_strings['LBL_DUPLICATE_BUTTON_LABEL'].'"/>',
@@ -131,8 +133,7 @@ function reportCriteriaWithResult(&$reporter,&$args) {
 	// Summation
 	else if ($report_type == 'summary') {
 		$canCovertToMatrix = 0;
-		if ((!empty($reporter->report_def['group_defs']) && count($reporter->report_def['group_defs']) <= 3  ))
-        {
+        if ((!empty($reporter->report_def['group_defs']) && (is_countable($reporter->report_def['group_defs']) ? count($reporter->report_def['group_defs']) : 0) <= 3)) {
 			$canCovertToMatrix = 1;
         }
 
@@ -436,7 +437,7 @@ EOD
         $smarty->assign("fiscalStartDate", $config['timeperiod_start_date']);
     }
 
-    $smarty->assign('ENTROPY', mt_rand());
+    $smarty->assign('ENTROPY', random_int(0, mt_getrandmax()));
     echo $smarty->fetch("modules/Reports/templates/_reportCriteriaWithResult.tpl");
 
 	reportResults($reporter, $args);
@@ -444,7 +445,7 @@ EOD
 
 function hasRuntimeFilter(&$reporter) {
 	$hasRuntimeFilter = false;
-	if (count($reporter->report_def['filters_def']) <= 0) {
+    if ((is_countable($reporter->report_def['filters_def']) ? count($reporter->report_def['filters_def']) : 0) == 0) {
 		return false;
 	}
 	$filterDefs = $reporter->report_def['filters_def']['Filter_1'];
@@ -580,7 +581,7 @@ function hasReportFilterModified($reportId, $filtersContent) {
 				getFlatListFilterContents($filtersContent['Filter_1'], $filterContentsArray);
 				$reportCacheFilterContentsArray = array();
 				getFlatListFilterContents($reportCache->contents_array['filters_def']['Filter_1'], $reportCacheFilterContentsArray);
-				if (count($filterContentsArray) != count($reportCacheFilterContentsArray)) {
+            if ((is_countable($filterContentsArray) ? count($filterContentsArray) : 0) != (is_countable($reportCacheFilterContentsArray) ? count($reportCacheFilterContentsArray) : 0)) {
 					$isModified = true;
 				} else {
 					$isModified = checkFilterModified($filtersContent['Filter_1'], $isModified, $reportCache->contents_array['filters_def']['Filter_1']);
@@ -675,7 +676,7 @@ function reportResults(&$reporter, &$args) {
 			template_summary_list_view($reporter,$args);
 			$do_chart = true;
 		} else {
-			template_total_view($reporter,$args);
+            template_total_view($reporter);
 		} // else
 	} else if (!empty($reporter->report_def['display_columns'])) {
 		template_list_view($reporter,$args);

@@ -43,6 +43,8 @@ var $useForSubpanel = true;
 
     public function display()
     {
+        $action_button_header = [];
+        $action_button_footer = [];
         global $current_user, $app_list_strings;
 
         $idpConfig = new IdmConfig(\SugarConfig::getInstance());
@@ -118,7 +120,8 @@ var $useForSubpanel = true;
             if (empty($this->bean->id)) {
                 $license_users = $admin->settings['license_users'];
                 if ($license_users != '') {
-                    $license_seats_needed = count( get_user_array(false, "", "", false, null, " AND ".User::getLicensedUsersWhere(), false) ) - $license_users;
+                    $array = get_user_array(false, "", "", false, null, " AND " . User::getLicensedUsersWhere(), false);
+                    $license_seats_needed = (is_countable($array) ? count($array) : 0) - $license_users;
                 } else {
                     $license_seats_needed = -1;
                 }

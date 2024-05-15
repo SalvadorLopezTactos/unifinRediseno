@@ -64,17 +64,18 @@ class TabController
     {
         global $moduleList;
 
-        $system_tabs_result = [];
-
         $administration = Administration::getSettings('MySettings', true);
         if (isset($administration->settings) && isset($administration->settings['MySettings_tab'])) {
             $tabs = $administration->settings['MySettings_tab'];
-            $trimmed_tabs = trim($tabs);
+            $trimmed_tabs = is_string($tabs) ? trim($tabs) : $tabs;
             //make sure serialized string is not empty
             if (!empty($trimmed_tabs)) {
                 // TODO: decode JSON rather than base64
-                $tabs = base64_decode($tabs);
-                $tabs = unserialize($tabs, ['allowed_classes' => false]);
+                if (is_string($trimmed_tabs)) {
+                    // Sometimes for unclear reason on Oracle we get decoded array here instead of string
+                    $tabs = base64_decode($trimmed_tabs);
+                    $tabs = unserialize($tabs, ['allowed_classes' => false]);
+                }
                 if ($requireInModuleList && !empty($tabs) && is_array($tabs)) {
                     //Ensure modules saved in the prefences exist.
                     foreach ($tabs as $id => $tab) {
@@ -86,12 +87,12 @@ class TabController
                 if ($filter) {
                     $tabs = SugarACL::filterModuleList($tabs, 'access', true);
                 }
-                $system_tabs_result = $this->get_key_array($tabs);
+                $system_tabs_result = static::get_key_array($tabs);
             } else {
-                $system_tabs_result = $this->get_key_array($moduleList);
+                $system_tabs_result = static::get_key_array($moduleList);
             }
         } else {
-            $system_tabs_result = $this->get_key_array($moduleList);
+            $system_tabs_result = static::get_key_array($moduleList);
         }
 
         return $system_tabs_result;
@@ -136,7 +137,7 @@ class TabController
     {
         global $moduleList;
         $tabs = $this->get_system_tabs();
-        $unsetTabs = $this->get_key_array($moduleList);
+        $unsetTabs = static::get_key_array($moduleList);
         foreach ($tabs as $tab) {
             unset($unsetTabs[$tab]);
         }
@@ -163,7 +164,7 @@ class TabController
     public function set_system_tabs($tabs)
     {
         // only allowed accessed modules can be modified from allow to hide
-        $sysTabs = array_merge($tabs, $this->getNonAccessibleEnabledTabs());
+        $sysTabs = array_merge($tabs ?? [], $this->getNonAccessibleEnabledTabs());
 
         $administration = $this->getAdministration();
         // TODO: encode in JSON rather than base64
@@ -254,7 +255,7 @@ class TabController
         $system_tabs = $this->get_system_tabs();
         $tabs = $user->getPreference($type . '_tabs');
         if (!empty($tabs)) {
-            $tabs = $this->get_key_array($tabs);
+            $tabs = static::get_key_array($tabs);
             if ($type == 'display') {
                 $tabs['Home'] = 'Home';
             }
@@ -275,7 +276,7 @@ class TabController
     {
         global $moduleList;
         $tabs = $this->get_user_tabs($user);
-        $unsetTabs = $this->get_key_array($moduleList);
+        $unsetTabs = static::get_key_array($moduleList);
         foreach ($tabs as $tab) {
             unset($unsetTabs[$tab]);
         }

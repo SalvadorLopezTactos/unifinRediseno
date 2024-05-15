@@ -114,8 +114,14 @@
         }
 
         var label = app.lang.get(lblKey, this.module) || lblKey;
-        var $nav = $('<li/>')
-            .html('<a href="#' + id + '" onclick="return false;" data-toggle="tab">' + label + '</a>');
+        const anchorTag = document.createElement('a');
+        anchorTag.classList = 'font-bold p-0 text-center';
+        anchorTag.dataset.toggle = 'tab';
+        anchorTag.href = `#${id}`;
+        anchorTag.onclick = 'return false;';
+        anchorTag.textContent = label;
+
+        let $nav = $('<li/>').append(anchorTag);
 
         // we have a sugar app and want to lazy load it
         if (compDef.type === 'external-app') {

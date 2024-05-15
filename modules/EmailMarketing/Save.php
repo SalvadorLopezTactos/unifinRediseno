@@ -117,7 +117,7 @@ if ($marketing->all_prospect_lists==1) {
 				unset($prospectlists[$key]);
 			}
 		}
-		if (count($prospectlists) != 0) {
+        if ((is_countable($prospectlists) ? count($prospectlists) : 0) != 0) {
 			foreach ($prospectlists as $key=>$list_id) {
 				$marketing->prospectlists->delete($marketing->id,$list_id);				
 			}	

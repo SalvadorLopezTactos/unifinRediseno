@@ -132,13 +132,13 @@ class vEvent extends vBasic{
 	 * @return
 	 */
 	function generateVCal(){
-		$cal =  <<<VEVENT
+        $cal =  <<<VEVENT_WRAP
 BEGIN:VEVENT
 STATUS:CONFIRMED
 CLASS:PUBLIC
 CATEGORIES:Sugar Event
 
-VEVENT;
+VEVENT_WRAP;
 		foreach($this->properties as $k=>$v){
 			$cal .= $k.':' . $v ."\n";
 		}

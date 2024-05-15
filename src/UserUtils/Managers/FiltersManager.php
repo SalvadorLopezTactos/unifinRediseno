@@ -111,7 +111,7 @@ class FiltersManager extends Manager
             return;
         }
 
-        if (count($this->modules) > 0) {
+        if ((is_countable($this->modules) ? count($this->modules) : 0) > 0) {
             foreach ($this->destinationUsers as $destinationUserId) {
                 $this->deleteFilters($destinationUserId, $this->modules);
             }
@@ -158,7 +158,7 @@ class FiltersManager extends Manager
      */
     private function cloneFilters(string $sourceUser, string $destinationUser, ?array $modules): void
     {
-        if (count($modules) > 0) {
+        if (count((array) $modules) > 0) {
             foreach ($modules as $module) {
                 $this->cloneFiltersFor($sourceUser, $destinationUser, $module);
             }
@@ -246,7 +246,7 @@ class FiltersManager extends Manager
      */
     private function deleteFilters(string $userId, ?array $modules): void
     {
-        if (count($modules) > 0) {
+        if (count((array) $modules) > 0) {
             foreach ($modules as $module) {
                 $this->deleteFiltersFor($userId, $module);
             }

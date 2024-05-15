@@ -20,9 +20,9 @@ studiotabs.reset();
 <input type='hidden' name='action' value={$action}>
 <input type='hidden' name='view' value={$view}>
 <input type='hidden' name='module' value='{$module}'>
-<input type='hidden' name='subpanel' value='{$subpanel}'>
-<input type='hidden' name='subpanelLabel' value='{$subpanelLabel}'>
-<input type='hidden' name='local' value='{$local}'>
+<input type='hidden' name='subpanel' value='{$subpanel|escape:'html'}'>
+<input type='hidden' name='subpanelLabel' value='{$subpanelLabel|escape:'html'}'>
+<input type='hidden' name='local' value='{$local|escape:'html'}'>
 <input type='hidden' name='view_module' value='{$view_module}'>
 {if $fromPortal}
     <input type='hidden' name='PORTAL' value='1'>
@@ -37,8 +37,8 @@ studiotabs.reset();
 <tr>
     <td colspan=3>
     <span class='mbLBL'>{sugar_translate label='LBL_SUBPANEL_TITLE'}</span>
-    <input id ="subpanel_title" type="text" name="subpanel_title" value="{$subpanel_title}">
-    <input id ="subpanel_title_key" type="hidden" name="subpanel_title_key" value="{$subpanel_label}">
+    <input id ="subpanel_title" type="text" name="subpanel_title" value="{$subpanel_title|escape:'html'}">
+    <input id ="subpanel_title_key" type="hidden" name="subpanel_title_key" value="{$subpanel_label|escape:'html'}">
     </td>
 </tr>
 {/if}
@@ -56,19 +56,19 @@ studiotabs.reset();
 {foreach from=$groups key='label' item='list'}
 
 <td id={$label}  width="30%" VALIGN="top" style="float: left; border: 1px gray solid; padding:4px; margin-right:4px; margin-top: 8px;  overflow-x: hidden;">
-<h3 >{$label}</h3>
+<h3 >{$label|escape:'html'}</h3>
 <ul id='ul{$slotCounter}' style="overflow-y: auto; overflow-x: hidden;">
 
 {foreach from=$list key='key' item='value'}
 
-<li name="width={$value.width}%" id='subslot{$modCounter}' class='draggable' data-name="{$key}">
+<li name="width={$value.width}%" id='subslot{$modCounter}' class='draggable' data-name="{$key|escape:'html'}">
     <table width='100%'>
         <tr>
             <td id='subslot{$modCounter}label' style="font-weight: bold;">
             {if $MB}
-            {if !empty($value.label)}{$current_mod_strings[$value.label]}{elseif !empty($value.vname)}{$current_mod_strings[$value.vname]}{else}{$key}{/if}
+            {if !empty($value.label)}{$current_mod_strings[$value.label]|escape:'html'}{elseif !empty($value.vname)}{$current_mod_strings[$value.vname]|escape:'html'}{else}{$key|escape:'html'}{/if}
             {else}
-            {if !empty($value.label)}{sugar_translate label=$value.label module=$language}{elseif !empty($value.vname)}{sugar_translate label=$value.vname module=$language}{else}{$key}{/if}
+            {if !empty($value.label)}{sugar_translate label=$value.label module=$language}{elseif !empty($value.vname)}{sugar_translate label=$value.vname module=$language}{else}{$key|escape:'html'}{/if}
             {/if}
             </td>
             <td></td>
@@ -141,7 +141,7 @@ function dragDropInit(){
     studiotabs.fields = { };
     studiotabs.slotCount = {$slotCounter};
     studiotabs.modCount = {$modCounter};
-    
+
     for(msi = 0; msi < studiotabs.slotCount ; msi++){
         studiotabs.fields["topslot"+ msi] = new Studio2.ListDD("topslot" + msi, "subTabs", true);
     }

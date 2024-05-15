@@ -54,14 +54,6 @@ $dictionary['Campaign'] = array (
                 'boost' => 1.39,
             ),
         ),
-        'refer_url' => array (
-            'name' => 'refer_url',
-            'vname' => 'LBL_REFER_URL',
-            'type' => 'varchar',
-            'len' => '255',
-            'default' => 'http://',
-            'comment' => 'The URL referenced in the tracker URL; no longer used as of 4.2 (see campaign_trkrs)'
-        ),
         'description' => array (
             'name' => 'description',
             'type' => 'none',

@@ -115,7 +115,7 @@ class QuickSearchQuery
         try {
             $api = ExternalAPIFactory::loadAPI($args['api']);
             $data['fields']     = $api->searchDoc($_REQUEST['query']);
-            $data['totalCount'] = count($data['fields']);
+            $data['totalCount'] = is_countable($data['fields']) ? count($data['fields']) : 0;
         } catch(Exception $ex) {
             $GLOBALS['log']->error($ex->getMessage());
         }
@@ -257,6 +257,7 @@ class QuickSearchQuery
      */
     protected function formatResults($results, $args)
     {
+        $data = [];
         global $sugar_config;
 
         $app_list_strings = isset($GLOBALS['app_list_strings']) ? $GLOBALS['app_list_strings'] : null;
@@ -366,13 +367,14 @@ class QuickSearchQuery
     protected function getRawResults($args, $singleSelect = false)
     {
         $orderBy = !empty($args['order']) ? $args['order'] : '';
+        $baseOrderBy = $orderBy;
         $limit   = !empty($args['limit']) ? intval($args['limit']) : '';
         $data    = array();
 
         foreach ($args['modules'] as $module) {
             $focus = BeanFactory::newBean($module);
 
-            $orderBy = $focus->db->getValidDBName(($args['order_by_name'] && $focus instanceof Person && $args['order'] == 'name') ? 'last_name' : $orderBy);
+            $orderBy = $focus->db->getValidDBName(($args['order_by_name'] && $focus instanceof Person && $baseOrderBy === 'name') ? 'last_name' : $orderBy);
 
             if ($focus->ACLAccess('ListView', true)) {
                 $where = $this->constructWhere($focus, $args);
@@ -397,6 +399,7 @@ class QuickSearchQuery
      */
     protected function prepareResults($data, $args)
     {
+        $results = [];
         $results['totalCount'] = $count = count($data);
         $results['fields']     = array();
 

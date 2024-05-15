@@ -15,6 +15,8 @@ class ProjectTaskViewList extends ViewList
 {
  	function display()
  	{
+         $listViewDefs = [];
+        $searchdefs = null;
  		if(!$this->bean->ACLAccess('list')){
  			ACLController::displayNoAccess();
  			return;
@@ -148,7 +150,9 @@ class ProjectTaskViewList extends ViewList
                 $searchForm->populateFromRequest();
 	    	}
 			$where_clauses = $searchForm->generateSearchWhere(true, $this->seed->module_dir);
-			if (count($where_clauses) > 0 )$where = '('. implode(' ) AND ( ', $where_clauses) . ')';
+            if ((is_countable($where_clauses) ? count($where_clauses) : 0) > 0) {
+                $where = '(' . implode(' ) AND ( ', $where_clauses) . ')';
+            }
 			$GLOBALS['log']->info("List View Where Clause: $where");
 		}
 

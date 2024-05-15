@@ -25,8 +25,8 @@ class SugarListWhereExpression extends EnumExpression
         $trigger = $params[0]->evaluate();
         $lists = $params[1]->evaluate();
         $array = array();
-        foreach($lists as $list) {
-            if (!empty($list)) {
+        foreach (is_iterable($lists) ? $lists : [] as $list) {
+            if (is_array($list) && isset($list[0], $list[1])) {
                 if ($list[0] == $trigger) {
                     $array = $list[1];
                     break;

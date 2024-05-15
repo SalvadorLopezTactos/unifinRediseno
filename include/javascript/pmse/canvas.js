@@ -699,9 +699,6 @@ AdamCanvas.prototype.onCreateElementHandler = function (element) {
     this.RemoveCurrentMenu();
     if (this.project instanceof AdamProject) {
         this.project.addElement(element);
-
-        var items2 = this.getDiagramTree();
-        Tree.treeReload('tree', items2);
     }
 };
 /**
@@ -712,8 +709,6 @@ AdamCanvas.prototype.onChangeElementHandler = function (element) {
     if (this.project instanceof AdamProject) {
         this.project.updateElement(element);
 
-        var items2 = this.getDiagramTree();
-        Tree.treeReload('tree', items2);
         if (element.length === 1) {
             this.project.updatePropertiesGrid(
                 element[0].type !== 'Connection' ? this.customShapes.find('id', element[0].id)
@@ -731,8 +726,6 @@ AdamCanvas.prototype.onRemoveElementHandler = function (element) {
     if (this.project instanceof AdamProject) {
         this.project.removeElement(element);
 
-        var items2 = this.getDiagramTree();
-        Tree.treeReload('tree', items2);
         this.project.updatePropertiesGrid();
     }
 };
@@ -1101,22 +1094,6 @@ AdamCanvas.prototype.buildRecursiveNode = function (root, canvas) {
         }
     }
     $.extend(root, {'items': items});
-};
-/**
- * Get the diagram Tree
- * @returns {Object}
- */
-AdamCanvas.prototype.getDiagramTree = function () {
-    var diaTree = [],
-        tree = {
-            //name: this.getName()
-            name:  this.name
-            //icon:'bpmn_icon_pool',
-            //selected:true;
-        };
-    this.buildRecursiveNode(tree, this);
-    diaTree.push(tree);
-    return diaTree;
 };
 
 AdamCanvas.prototype.addConnection = function (conn) {

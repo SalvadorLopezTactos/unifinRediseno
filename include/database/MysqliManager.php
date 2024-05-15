@@ -192,6 +192,9 @@ class MysqliManager extends MysqlManager
 	 */
 	public function getRowCount($result)
 	{
+        if (!$result instanceof \mysqli_result) {
+            return 0;
+        }
 	    return mysqli_num_rows($result);
 	}
 
@@ -257,7 +260,9 @@ class MysqliManager extends MysqlManager
 	 */
 	public function fetchRow($result)
 	{
-		if (empty($result))	return false;
+        if (!$result instanceof \mysqli_result) {
+            return false;
+        }
 
 		$row = mysqli_fetch_assoc($result);
 		if($row == null) $row = false; //Make sure MySQLi driver results are consistent with other database drivers
@@ -290,7 +295,7 @@ class MysqliManager extends MysqlManager
                   $this->connectOptions['db_user_name'],
                   $this->connectOptions['db_password'],
                   $this->connectOptions['db_name'],
-                  $this->connectOptions['db_port'],
+                  isset($this->connectOptions['db_port']) ? (int)$this->connectOptions['db_port'] : null,
                   $this->connectOptions['db_socket'],
                   $this->connectOptions['db_client_flags']
               );

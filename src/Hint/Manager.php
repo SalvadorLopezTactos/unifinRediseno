@@ -122,7 +122,7 @@ class Manager implements LoggerAwareInterface
         $this->logger->info('Initializing shared instance of Hint Manager.');
 
         //  Load configuration from the database.
-        $dbConfig = $this->loadConfig();
+        $dbConfig = static::loadConfig();
 
         // Get Hint Host geo from the SugarConfig
         $geo = $this->getHintHostGeoInfo();

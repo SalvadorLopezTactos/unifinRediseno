@@ -40,6 +40,7 @@ class OpportunitiesConfigApi extends ConfigModuleApi
      */
     public function configSave(ServiceBase $api, array $args)
     {
+        $converter = null;
         //acl check, only allow if they are module admin
         if (!$api->user->isAdmin() && !$api->user->isDeveloperForModule('Opportunities')) {
             // No create access so we construct an error message and throw the exception

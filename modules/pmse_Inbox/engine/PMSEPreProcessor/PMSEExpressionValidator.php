@@ -73,7 +73,7 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
             // this is an update to handle changes/to/from
             $criteria = $this->validateUpdateState($criteria, $request->getArguments());
 
-            $this->setLogicHookArgs($request->getArguments());
+            static::setLogicHookArgs($request->getArguments());
 
             // Now check if the evaluation is valid as well
             if ($this->getEvaluator()->evaluateExpression($criteria, $bean, $paramsRelated)) {
@@ -193,7 +193,7 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
             $results = $seedBean->$relField->getRelationshipObject()->load($seedBean->$relField, $relWhere);
             
             $rows = !empty($results['rows']) ? $results['rows'] : [];
-            if (count($rows) > 0) {
+            if ((is_countable($rows) ? count($rows) : 0) > 0) {
                 // And verify that the relationship is actually valid record to record
                 $id = key($rows);
                 $return = $id === $bean->id;

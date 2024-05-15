@@ -402,6 +402,8 @@ class Call extends SugarBean {
 		global $app_list_strings;
 		global $timedate;
 
+        $singularModuleLabel = strtoupper($app_list_strings['moduleListSingular'][$this->module_name]);
+
         // rrs: bug 42684 - passing a contact breaks this call
 		$notifyUser =($call->current_notify_user->object_name == 'User') ? $call->current_notify_user : $current_user;
 
@@ -429,13 +431,13 @@ class Call extends SugarBean {
                 $call->current_notify_user->id . '&record=' . $call->id
             );
         }
-		$xtpl->assign("CALL_TO", $call->current_notify_user->new_assigned_user_name);
-		$xtpl->assign("CALL_SUBJECT", $call->name);
-		$xtpl->assign("CALL_STARTDATE", $xOffset);
-		$xtpl->assign("CALL_HOURS", $call->duration_hours);
-		$xtpl->assign("CALL_MINUTES", $call->duration_minutes);
-		$xtpl->assign("CALL_STATUS", ((isset($call->status))?$app_list_strings['call_status_dom'][$call->status] : ""));
-		$xtpl->assign("CALL_DESCRIPTION", $call->description);
+        $xtpl->assign($singularModuleLabel . '_TO', $call->current_notify_user->new_assigned_user_name);
+        $xtpl->assign($singularModuleLabel . '_SUBJECT', $call->name);
+        $xtpl->assign($singularModuleLabel . '_STARTDATE', $xOffset);
+        $xtpl->assign($singularModuleLabel . '_HOURS', $call->duration_hours);
+        $xtpl->assign($singularModuleLabel . '_MINUTES', $call->duration_minutes);
+        $xtpl->assign($singularModuleLabel . '_STATUS', ((isset($call->status))?$app_list_strings['call_status_dom'][$call->status] : ''));
+        $xtpl->assign($singularModuleLabel . '_DESCRIPTION', $call->description);
 
 		return $xtpl;
 	}

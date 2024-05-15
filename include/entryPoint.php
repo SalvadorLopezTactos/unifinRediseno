@@ -69,6 +69,8 @@ if(empty($GLOBALS['installing']) && !file_exists('config.php'))
 	exit ();
 }
 
+error_reporting(error_reporting() & ~E_DEPRECATED);
+
 require __DIR__ . '/../vendor/autoload.php';
 
 if(empty($GLOBALS['installing']) &&empty($sugar_config['dbconfig']['db_name']))

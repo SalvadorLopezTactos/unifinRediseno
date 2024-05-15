@@ -549,7 +549,7 @@ EOF;
         // Bug 20916 - Special case for check ACL access rights for Subpanel QuickCreates
         if (isset($_POST['action']) && $_POST['action'] == 'SubpanelCreates') {
             $actual_module = $_POST['target_module'];
-            if (!empty($GLOBALS['modListHeader']) && !in_array($actual_module, $GLOBALS['modListHeader'])) {
+            if (!empty($GLOBALS['modListHeader']) && !safeInArray($actual_module, $GLOBALS['modListHeader'])) {
                 $this->controller->hasAccess = false;
             }
             return;
@@ -559,10 +559,10 @@ EOF;
             $GLOBALS['modListHeader'] = query_module_access_list($GLOBALS['current_user']);
         }
 
-        if (in_array($this->controller->module, $GLOBALS['modInvisList'])
-            && ((in_array('Activities', $GLOBALS['moduleList']) && in_array('Calendar', $GLOBALS['moduleList']))
-                && in_array($this->controller->module, $GLOBALS['modInvisListActivities']))
-        ) {
+        if (safeInArray($this->controller->module, $GLOBALS['modInvisList'] ?? [])
+                && safeInArray('Activities', $GLOBALS['moduleList'] ?? [])
+                && safeInArray('Calendar', $GLOBALS['moduleList'] ?? [])
+                && safeInArray($this->controller->module, $GLOBALS['modInvisListActivities'] ?? [])) {
             $this->controller->hasAccess = false;
             return;
         }
@@ -928,12 +928,10 @@ EOF;
     public static function endSession()
     {
         $trackerManager = TrackerManager::getInstance();
-        /*
         if ($monitor = $trackerManager->getMonitor('tracker_sessions')) {
             $monitor->closeSession();
             $trackerManager->saveMonitor($monitor);
         }
-        */
         $sess = SessionStorage::getInstance();
         if ($sess->getId()) {
             $sess->destroy();

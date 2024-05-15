@@ -1016,7 +1016,7 @@ abstract class UpgradeDriver
             return $this->error("Bad data file: $file");
         }
         include $file;
-        return $$name;
+        return ${$name};
     }
 
     /**
@@ -1060,6 +1060,7 @@ abstract class UpgradeDriver
      */
     protected function loadStrings()
     {
+        $langdirs = [];
         if (isset($this->config['default_language'])) {
             $lang = $this->config['default_language'];
         } else {
@@ -1611,7 +1612,7 @@ abstract class UpgradeDriver
         set_error_handler(array($this, 'scriptErrorHandler'), E_ALL & ~E_STRICT & ~E_DEPRECATED);
         ob_start();
         try {
-            $script->run($this);
+            $script->run();
         } catch (Exception $e) {
             $this->error("Exception: " . $e->getMessage());
         }

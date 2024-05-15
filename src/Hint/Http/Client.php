@@ -37,6 +37,7 @@ class Client implements LoggerAwareInterface
     const COMPANY_IDENTITY_SVC_URL = '/hint/data-enrichment/v1/createIdentity';
     const DATA_ENRICHMENT_CONFIG_SVC_URL = '/hint/data-enrichment/v1/config-fields-for-enrich';
     const DATA_ENRICHMENT_UPDATE_LIC_URL = '/hint/data-enrichment/v1/updateLicense';
+    const DATA_ENRICHMENT_DELETE_INSTANCE = '/hint/data-enrichment/v1/instance';
     const HINT_EU_AWS_REGIONS = ['eu-west-1', 'eu-central-1'];
     const HINT_APSE_AWS_REGIONS = ['ap-southeast-2', 'ap-southeast-1'];
     const US_REGION = 'US';
@@ -135,6 +136,37 @@ class Client implements LoggerAwareInterface
         if ($statusCode >= 400) {
             $this->logger->alert('Unexpected HTTP return status code in updateLicenseInDataEnrichmentIdentityTable(): '. $statusCode);
             $this->logger->alert('Error occurred in updateLicenseInDataEnrichmentIdentityTable(): ' . $response->getBody());
+        }
+
+        return $statusCode;
+    }
+
+    /**
+     * Remove instance from data enrichment
+     *
+     * @param array $body
+     * @return string
+     */
+    public function removeInstanceFromDataEnrichment($body)
+    {
+        $hintApiCalls = new \HintApi();
+        $hintApiCalls->createToken('', '');
+
+        $uri = $this->endpoint . self::DATA_ENRICHMENT_DELETE_INSTANCE;
+        $request = new Request(
+            Request::METHOD_DELETE,
+            $uri,
+            $this->prepareHeaders([
+                'authToken: ' . $hintApiCalls->privilegeToken,
+            ]),
+            $this->preparePayload($body)
+        );
+        $response = $this->getHttpClient()->sendRequest($request);
+        $statusCode = $response->getCode();
+
+        if ($statusCode !== 200) {
+            $this->logger->alert('Unexpected HTTP return status code in removeInstanceFromDataEnrichment(): ' . $statusCode);
+            $this->logger->alert('Error occurred in removeInstanceFromDataEnrichment(): ' . $response->getBody());
         }
 
         return $statusCode;

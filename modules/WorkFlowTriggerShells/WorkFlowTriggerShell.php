@@ -382,6 +382,7 @@ class WorkFlowTriggerShell extends SugarBean {
 	
 	function get_time_int($triggershell_id){	
 
+        $time_int_array = [];
         $row = $this->db
             ->getConnection()
             ->executeQuery(

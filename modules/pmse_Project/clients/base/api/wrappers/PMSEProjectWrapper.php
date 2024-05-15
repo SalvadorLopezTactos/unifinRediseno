@@ -963,16 +963,17 @@ class PMSEProjectWrapper extends PMSEWrapper implements PMSEObservable
                             $destinationBean->retrieve_by_string_fields(array($destinationEntity['uid_field'] => $element['flo_element_dest']));
                             $element['flo_element_dest'] = $destinationBean->id;
 
-                            $tmpState = array_values($element['flo_state']);
-                            $lastElement = array_pop($tmpState);
-                            $firstElement = array_shift($tmpState);
-
-                            $element['flo_x1'] = $firstElement['x'];
-                            $element['flo_y1'] = $firstElement['y'];
-                            $element['flo_x2'] = $lastElement['x'];
-                            $element['flo_y2'] = $lastElement['y'];
-                            $element['flo_state'] = json_encode($element['flo_state']);
-
+                            if (isset($element['flo_state']) && is_array($element['flo_state'])) {
+                                $tmpState = array_values($element['flo_state']);
+                                $lastElement = array_pop($tmpState);
+                                $firstElement = array_shift($tmpState);
+    
+                                $element['flo_x1'] = $firstElement['x'];
+                                $element['flo_y1'] = $firstElement['y'];
+                                $element['flo_x2'] = $lastElement['x'];
+                                $element['flo_y2'] = $lastElement['y'];
+                                $element['flo_state'] = json_encode($element['flo_state']);
+                            }
                         } elseif ($type == 'flows' && strtolower($element['action']) == 'update') {
                             if (isset($element['flo_element_origin_type'])) {
                                 $originBean = ucfirst($element['flo_element_origin_type']);

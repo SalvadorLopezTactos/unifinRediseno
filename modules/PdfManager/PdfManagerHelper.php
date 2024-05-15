@@ -68,6 +68,7 @@ class PdfManagerHelper
     public static function getAvailableModules()
     {
 
+        $available_modules = [];
         $bannedModules = PdfManagerHelper::getBannnedModules();
 
         $module_names = array_change_key_case ($GLOBALS['app_list_strings']['moduleList']);
@@ -111,7 +112,7 @@ class PdfManagerHelper
 
             if (!empty($fieldsForSelectedModule) && $addLinks) {
                 $linksForSelectedModule = PdfManagerHelper::getLinksForModule($moduleName);
-                if (count($linksForSelectedModule) > 0) {
+                if ((is_countable($linksForSelectedModule) ? count($linksForSelectedModule) : 0) > 0) {
                     $linksFieldsForSelectedModule = array();
                     foreach ($linksForSelectedModule as $linkName => $linkDef) {
                         $linksFieldsForSelectedModule['pdfManagerRelateLink_' . $linkName] = $linkDef['label'];
@@ -451,7 +452,10 @@ class PdfManagerHelper
 
         $fields_module = array();
         foreach ($module_instance->toArray() as $name => $value) {
-
+            if (!is_scalar($name) && $name !== null) {
+                LoggerManager::getLogger()->fatal(sprintf('array key is expected to be scalar, %s given. %s', gettype($name), PHP_EOL . (new Exception())->getTraceAsString()));
+                continue;
+            }
             if (isset($module_instance->field_defs[$name]['type']) &&
                 ($module_instance->field_defs[$name]['type'] == 'enum' || $module_instance->field_defs[$name]['type'] == 'radio' || $module_instance->field_defs[$name]['type'] == 'radioenum') &&
                 isset($module_instance->field_defs[$name]['options']) &&
@@ -481,7 +485,7 @@ class PdfManagerHelper
                 $module_instance->field_defs[$name]['type'] == 'link' &&
                 $module_instance->load_relationship($name) &&
                 self::hasOneRelationship($module_instance, $name) &&
-                count($module_instance->$name->get()) == 1
+                (is_countable($module_instance->$name->get()) ? count($module_instance->$name->get()) : 0) == 1
                ) {
                 $related_module = $module_instance->$name->getRelatedModuleName();
                 $related_instance = BeanFactory::newBean($related_module);

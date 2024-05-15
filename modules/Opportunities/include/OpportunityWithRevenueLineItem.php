@@ -365,7 +365,7 @@ EOL;
 
         $bean_chunks = array_chunk($opps, 100);
         // process the first chunk
-        $this->processOpportunityIds($bean_chunks[0]);
+        static::processOpportunityIds($bean_chunks[0]);
 
         $job_group = md5(microtime());
 

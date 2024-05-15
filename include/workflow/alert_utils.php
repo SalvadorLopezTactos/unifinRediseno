@@ -889,7 +889,7 @@ function replace_target_body_items($target_body, $replace_array){
 
 	foreach ($replace_array as $name => $replacement_value){
 		$replacement_value=nl2br($replacement_value);
-		$target_body = str_replace($name, $replacement_value, $target_body);
+        $target_body = str_replace($name, $replacement_value, $target_body);
 	}
 	return $target_body;
 

@@ -84,8 +84,8 @@ class TeamDemoData {
 	function get_random_team()
 	{
 		$team_list = $this->_seed_data_get_team_list();
-		$team_list_size = count($team_list);
-		$random_index = mt_rand(0,$team_list_size-1);
+        $team_list_size = is_countable($team_list) ? count($team_list) : 0;
+        $random_index = random_int(0, $team_list_size-1);
 		
 		return $team_list[$random_index];
 	}
@@ -96,8 +96,8 @@ class TeamDemoData {
 	function get_random_teamset()
 	{
 		$team_list = $this->_seed_data_get_teamset_list();
-		$team_list_size = count($team_list);
-		$random_index = mt_rand(0,$team_list_size-1);
+        $team_list_size = is_countable($team_list) ? count($team_list) : 0;
+        $random_index = random_int(0, $team_list_size-1);
 		
 		return $team_list[$random_index];
 	}	

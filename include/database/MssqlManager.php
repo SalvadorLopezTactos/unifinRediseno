@@ -128,7 +128,7 @@ abstract class MssqlManager extends DBManager
         $orderByArray = preg_split('/order by/i', $sql);
 
         //count the number of array elements
-        $unionOrderByCount = count($orderByArray);
+        $unionOrderByCount = is_countable($orderByArray) ? count($orderByArray) : 0;
         $arr_count = 0;
 
         if ($unionOrderByCount > 1) {
@@ -1153,7 +1153,7 @@ WHERE TABLE_NAME = ?
                         $tmpColumnName = $def['name'] . '_temp';
                         // mssql not provide batches via one statement, so we must use some hack with reuse db in one statement.
                         $modifyDef =  $this->oneColumnSQLRep($def, $ignoreRequired, $tablename, true);
-                        $sqlVarIndex = mt_rand(0, PHP_INT_MAX);
+                        $sqlVarIndex = random_int(0, PHP_INT_MAX);
                         $sql .="
                             DECLARE @useDbSql_$sqlVarIndex varchar(100);
                             DECLARE @sql_$sqlVarIndex nvarchar(4000);
@@ -1223,7 +1223,7 @@ WHERE TABLE_NAME = ?
 
                         break;
                     }
-                    $sqlVarIndex = rand(0, PHP_INT_MAX);
+                    $sqlVarIndex = random_int(0, PHP_INT_MAX);
                     $tempTableName = $tablename . '_' . $sqlVarIndex;
                     $sql .="
                             DECLARE @useDbSql_$sqlVarIndex varchar(100);
@@ -1477,6 +1477,7 @@ INNER JOIN sys.columns c
      */
 	protected function get_field_default_constraint_name($table, $column = null)
     {
+        $results = [];
         $query = <<<EOQ
 select s.name, o.name, c.name dtrt, d.name ctrt
     from sys.default_constraints as d

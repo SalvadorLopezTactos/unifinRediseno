@@ -170,8 +170,8 @@
                 </tr>
                 </tr><tr>
                     <td width="15%" scope="row"><slot>{$MOD.LBL_LOCALE_DEFAULT_NAME_FORMAT|strip_semicolon}:</slot></td>
-                    <td><slot>{$NAME_FORMAT}&nbsp;</slot></td>
-                    <td><slot></slot>{$MOD.LBL_LOCALE_NAME_FORMAT_DESC}&nbsp;</td>
+                    <td><slot>{$NAME_FORMAT|escape:'html'}&nbsp;</slot></td>
+                    <td><slot></slot>{$MOD.LBL_LOCALE_NAME_FORMAT_DESC|escape:'html'}&nbsp;</td>
                 </tr>
             </table>
         </div>

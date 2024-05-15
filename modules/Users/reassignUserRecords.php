@@ -47,7 +47,7 @@ if (!empty($return_module)) {
 
 ?>
 <h2 class="moduleTitle" style="margin-bottom:0;">
-    <?=htmlspecialchars($mod_strings_users['LBL_REASS_SCRIPT_TITLE']);?>
+    <?= htmlspecialchars($mod_strings_users['LBL_REASS_SCRIPT_TITLE']);?>
 </h2>
 <?php
 // Include Metadata for processing
@@ -135,9 +135,9 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                         //Leon bug 20739
                         $t_mod_strings = return_module_language($GLOBALS['current_language'], $modFilter);
                         ?>
-                    <div id="reassign_<?=htmlspecialchars($modFilter);?>" style="display:<?=htmlspecialchars($display);?>">
+                    <div id="reassign_<?= htmlspecialchars($modFilter);?>" style="display:<?= htmlspecialchars($display);?>">
                         <h5 style="padding-left:0; margin-bottom:4px;">
-                            <?=htmlspecialchars($app_list_strings['moduleList'][$modFilter]);?> <?=htmlspecialchars($mod_strings_users['LBL_REASS_FILTERS']);?>
+                            <?= htmlspecialchars($app_list_strings['moduleList'][$modFilter]);?> <?= htmlspecialchars($mod_strings_users['LBL_REASS_FILTERS']);?>
                         </h5>
                         <?php
                         foreach ($fieldArray['fields'] as $meta) :
@@ -146,7 +146,7 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                             $sizeHtml = !empty($meta['size']) ? 'size="' . intval($meta['size']) . '"' : '';
                             //Leon bug 20739
                             ?>
-                            <?=htmlspecialchars($t_mod_strings[$meta['vname']]);?><br>
+                            <?= htmlspecialchars($t_mod_strings[$meta['vname']]);?><br>
                             <?php
                             $extraHtml = '';
                             switch ($meta['type']) {
@@ -170,10 +170,10 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                                     continue 2;
                             }
                             ?>
-                            <<?=htmlspecialchars($tag);?> <?=$sizeHtml;?> name="<?=htmlspecialchars($name);?>" <?=htmlspecialchars($multi);?>>
+                            <<?= htmlspecialchars($tag);?> <?=$sizeHtml;?> name="<?= htmlspecialchars($name);?>" <?= htmlspecialchars($multi);?>>
                             <?=$extraHtml;?>
                             <br>
-                            <?php
+<?php
                         endforeach;
                         ?>
                     </div>
@@ -239,13 +239,13 @@ else :
 
         $toteamname = TeamSetManager::getCommaDelimitedTeams($team_set_id, $team_id, true);
         ?>
-        <?=htmlspecialchars($mod_strings_users['LBL_REASS_DESC_PART2']);?>
+        <?= htmlspecialchars($mod_strings_users['LBL_REASS_DESC_PART2']);?>
 <form action="index.php?module=Users&action=reassignUserRecords&execute=true" method="post">
-    <br><?=htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_TITLE']);?>
+    <br><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_TITLE']);?>
     <ul>
-        <li><?=htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_ONE']);?></li>
-        <li><?=htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_TWO']);?></li>
-        <li><?=htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_THREE']);?></li>
+        <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_ONE']);?></li>
+        <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_TWO']);?></li>
+        <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_THREE']);?></li>
     </ul>
         <?php
         require_once 'include/SugarSmarty/plugins/function.sugar_help.php';
@@ -254,7 +254,7 @@ else :
         ?>
     <br>
     <input type="checkbox" name="verbose">
-        <?=htmlspecialchars($mod_strings_users['LBL_REASS_VERBOSE_OUTPUT']);?>
+        <?= htmlspecialchars($mod_strings_users['LBL_REASS_VERBOSE_OUTPUT']);?>
         <?=$help_img;?>
     <br>
         <?php
@@ -310,9 +310,9 @@ else :
             <?php
         endforeach;
         ?>
-    <br><input type="button" class="button" value="<?=htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_GO_BACK']);?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords';">
-    &nbsp;<input type="submit" class="button" value="<?=htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE']);?>">
-    &nbsp;<input type="button" class="button" value="<?=htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_RESTART']);?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords&clear=true';">
+    <br><input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_GO_BACK']);?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords';">
+    &nbsp;<input type="submit" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE']);?>">
+    &nbsp;<input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_RESTART']);?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords&clear=true';">
 </form>
         <?php
     else :
@@ -355,7 +355,7 @@ else :
             $workflow = !empty($_POST[$module . "_workflow"]);
             ?>
             <h5>
-                <?=htmlspecialchars($mod_strings_users['LBL_PROCESSING']);?> <?=htmlspecialchars($moduleLabel);?>
+                <?= htmlspecialchars($mod_strings_users['LBL_PROCESSING']);?> <?= htmlspecialchars($moduleLabel);?>
             </h5>
             <?php
 

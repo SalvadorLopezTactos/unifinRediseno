@@ -92,6 +92,7 @@ class QuotesSugarpdfStandard extends QuotesSugarpdfQuotes{
         );
     }
     function preDisplay(){
+        $quote = [];
         global $mod_strings, $timedate, $user;
         parent::preDisplay();
         $this->_initOptions();
@@ -120,6 +121,7 @@ class QuotesSugarpdfStandard extends QuotesSugarpdfQuotes{
         $this->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, $mod_strings['LBL_PDF_QUOTE_TITLE'], $html);
     }
     function display(){
+        $addressBS = [];
         global $mod_strings, $app_strings, $app_list_strings;
         global $locale;
 

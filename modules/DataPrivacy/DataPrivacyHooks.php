@@ -82,7 +82,7 @@ class DataPrivacyHooks
             $exDateTime = $jobInfo['execute_time'];
             $data = json_decode(html_entity_decode($jobInfo['data']), true);
             $dataPrivacyIds = $data['dataPrivacyIds'];
-            if (count($dataPrivacyIds) < $maxDataPrivacyRecordsPerJob) {
+            if ((is_countable($dataPrivacyIds) ? count($dataPrivacyIds) : 0) < $maxDataPrivacyRecordsPerJob) {
                 $dataPrivacyIds[] = $dp->id;
                 $data = json_encode(array('dataPrivacyIds' => $dataPrivacyIds));
 

@@ -462,7 +462,8 @@ class ViewLayoutView extends SugarView
             foreach ($dropdownFields as $field) {
                 $isEmpty = true;
                 if (is_dir($folderDropdown . '/' . $field['name'])) {
-                    $isEmpty = (count(scandir($folderDropdown . '/' . $field['name'])) === 2);
+                    $dirs = scandir($folderDropdown . '/' . $field['name']);
+                    $isEmpty = ((is_countable($dirs) ? count($dirs) : 0) === 2);
                 }
                 if (!$isEmpty) {
                     $params['dropdownField'] = $field['name'];
@@ -580,9 +581,9 @@ class ViewLayoutView extends SugarView
             if (!empty($params['layoutOption']) && $params['layoutOption'] !== 'std') {
                 $buttons [] = ['type' => 'spacer', 'width' => '10px'];
                 $resetDisabled = !(isset($layoutWithMetadata['resultForReset']) &&
-                    count($layoutWithMetadata['resultForReset']));
+                    (is_countable($layoutWithMetadata['resultForReset']) ? count($layoutWithMetadata['resultForReset']) : 0));
                 $copyDisabled = !(isset($layoutWithMetadata['resultsForCopy']) &&
-                    count($layoutWithMetadata['resultsForCopy']));
+                    (is_countable($layoutWithMetadata['resultsForCopy']) ? count($layoutWithMetadata['resultsForCopy']) : 0));
 
                 $buttons [] = [
                     'id' => 'resetToBase',

@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\InputValidationException;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 if (!function_exists('verifyAndCleanup')) {
@@ -261,6 +262,10 @@ if (!$focus->is_group && !$focus->portal_only) {
     }
 
     if (isset($_POST['user_theme'])) {
+        if (!SugarThemeRegistry::exists($_POST['user_theme'])) {
+            throw new InputValidationException('User theme doesn\'t exist.');
+        }
+
         $focus->setPreference('user_theme', $_POST['user_theme'], 0, 'global');
         $_SESSION['authenticated_user_theme'] = $_POST['user_theme'];
     }

@@ -27,6 +27,7 @@ class TemplateRadioEnum extends TemplateEnum{
 	
 	
 	function get_xtpl_edit($add_blank = false){
+        $returnXTPL = [];
 		$name = $this->name;
 		$value = '';
 		if(isset($this->bean->$name)){

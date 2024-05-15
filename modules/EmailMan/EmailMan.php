@@ -294,6 +294,7 @@ SQL;
      */
     function create_ref_email($marketing_id,$subject,$body_text,$body_html,$campagin_name,$from_address,$sender_id,$notes,$macro_nv,$newmessage,$from_address_name) {
 
+        $rel_name = null;
        global $mod_Strings, $timedate;
        $upd_ref_email=false;
        if ($newmessage or empty($this->ref_email->id)) {
@@ -603,7 +604,7 @@ SQL;
 			$at_pos=strrpos($lower_email_address,'@');
 			if ($at_pos !== false) {
 				foreach ($this->restricted_domains as $domain=>$value) {
-					$pos=strrpos($lower_email_address,$domain);
+                    $pos=strrpos($lower_email_address, (string) $domain);
 					if ($pos !== false && $pos > $at_pos) {
 						//found
 						$this->set_as_sent($lower_email_address, true,null,null,'blocked');

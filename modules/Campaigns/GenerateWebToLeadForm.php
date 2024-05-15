@@ -126,18 +126,18 @@ $Web_To_Lead_Form_html .= "<tr align='center' style='color: rgb(0, 105, 225); fo
  //$Web_To_Lead_Form_html .= "\n<p>\n";
 
 if(!empty($_REQUEST['colsFirst']) && !empty($_REQUEST['colsSecond'])){
- if(count($_REQUEST['colsFirst']) < count($_REQUEST['colsSecond'])){
-   $columns= count($_REQUEST['colsSecond']);
+    if ((is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0) < (is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0)) {
+        $columns= is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0;
  }
- if(count($_REQUEST['colsFirst']) > count($_REQUEST['colsSecond']) || count($_REQUEST['colsFirst']) == count($_REQUEST['colsSecond'])){
-   $columns= count($_REQUEST['colsFirst']);
+    if ((is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0) > (is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0) || (is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0) == (is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0)) {
+        $columns= is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0;
  }
 }
 else if(!empty($_REQUEST['colsFirst'])){
- $columns= count($_REQUEST['colsFirst']);
+    $columns= is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0;
 }
 else if(!empty($_REQUEST['colsSecond'])){
- $columns= count($_REQUEST['colsSecond']);
+    $columns= is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0;
 }
 
 $emailFieldPresent = false;

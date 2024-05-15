@@ -244,6 +244,7 @@ class PMSEProjectApi extends ModuleApi
      */
     protected function getLoadedAndFormattedBean(ServiceBase $api, array $args)
     {
+        $bean = null;
         $addNoAccessAcl = false;
         // Load the bean fresh to ensure the cache entry from the create process
         // doesn't get in the way of visibility checks

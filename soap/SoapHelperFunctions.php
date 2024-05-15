@@ -530,6 +530,7 @@ function getRelationshipResults($bean, $link_field_name, $link_module_fields) {
 } // fn
 
 function get_return_value_for_link_fields($bean, $module, $link_name_to_value_fields_array) {
+    $value = null;
 	global $module_name, $current_user;
 	$module_name = $module;
 	if($module == 'Users' && $bean->id != $current_user->id){
@@ -679,7 +680,7 @@ function new_handle_set_entries($module_name, $name_value_lists, $select_fields 
 						$query = $seed->table_name.".outlook_id = '".$GLOBALS['db']->quote($seed->outlook_id)."'";
 						$response = $seed->get_list($order_by, $query, 0,-1,-1,0);
 						$list = $response['list'];
-						if(count($list) > 0){
+                        if ((is_countable($list) ? count($list) : 0) > 0) {
 							foreach($list as $value)
 							{
 								$seed->id = $value->id;
@@ -748,6 +749,7 @@ function get_return_value($value, $module, $returnDomValue = false){
  * @return array - output_list - the rows of the reports, field_list - the fields in the report.
  */
 function get_report_value($seed){
+    $result = [];
 	$field_list = array();
 	$output_list = array();
 	$report = new Report(html_entity_decode($seed->content));
@@ -810,7 +812,7 @@ function get_name_value_xml($val, $module_name){
 			$xml .= '<name_value_list>';
 			foreach($val['name_value_list'] as $name=>$nv){
 				$xml .= '<name_value>';
-				$xml .= '<name>'.htmlspecialchars($nv['name']).'</name>';
+                $xml .= '<name>' . htmlspecialchars($nv['name']).'</name>';
                 $xml .= get_encoded_Value($nv['value']);
 				$xml .= '</name_value>';
 			}
@@ -1047,10 +1049,9 @@ SQL;
  *                      false if the client version is greater
  */
 function is_server_version_greater($left, $right){
-    if(count($left) == 0 && count($right) == 0){
+    if ((is_countable($left) ? count($left) : 0) == 0 && (is_countable($right) ? count($right) : 0) == 0) {
         return false;
-    }
-    else if(count($left) == 0 || count($right) == 0){
+    } elseif ((is_countable($left) ? count($left) : 0) == 0 || (is_countable($right) ? count($right) : 0) == 0) {
         return true;
     }
     else if($left[0] == $right[0]){

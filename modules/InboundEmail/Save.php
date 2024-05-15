@@ -71,7 +71,7 @@ if (empty($optimum)) {
 $delimiter = $focus->getSessionInboundDelimiterString($remoteSystemName, $focus->email_user, $focus->port, $focus->protocol);
 
 //added check to ensure the $optimum['serial']) is not empty.
-if (ArrayFunctions::is_array_access($optimum) && (count($optimum) > 0) && !empty($optimum['serial'])) {
+if (ArrayFunctions::is_array_access($optimum) && ((is_countable($optimum) ? count($optimum) : 0) > 0) && !empty($optimum['serial'])) {
 	$focus->service = $optimum['serial'];
 } else {
 	// no save

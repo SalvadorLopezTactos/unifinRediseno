@@ -655,7 +655,7 @@ class EditViewMerge{
 		$panel_ids = array();
         $setDefaultPanel = false;
         
-		if(count($panels) == 1) {
+        if ((is_countable($panels) ? count($panels) : 0) == 1) {
 		   $arrayKeys = array_keys($panels);
 		   if(!empty($arrayKeys[0])) {
 		   	  $this->defaulPanel = $arrayKeys[0];
@@ -693,14 +693,14 @@ class EditViewMerge{
 		$this->module = $module;
         $varName = $this->varName;
 		require($original_file);
-        $$varName = $this->renameEmailField($$varName);
-        $this->originalData = $$varName;
+        ${$varName} = $this->renameEmailField(${$varName});
+        $this->originalData = ${$varName};
 		require($new_file);
-        $this->newData = $$varName;
+        $this->newData = ${$varName};
 		if(file_exists($custom_file)){
 			require($custom_file);
-            $$varName = $this->renameEmailField($$varName);
-            $this->customData = $$varName;
+            ${$varName} = $this->renameEmailField(${$varName});
+            $this->customData = ${$varName};
 		}else{
 			$this->customData = $this->originalData;
 		}	

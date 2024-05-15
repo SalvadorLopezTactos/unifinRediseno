@@ -78,7 +78,7 @@ class ReportsSugarpdfSummary_combo extends ReportsSugarpdfReports
 
         //disable paging so we get all results in one pass
         $this->bean->enable_paging = false;
-        $cols = count($this->bean->report_def['display_columns']);
+        $cols = is_countable($this->bean->report_def['display_columns']) ? count($this->bean->report_def['display_columns']) : 0;
         $this->bean->run_summary_combo_query();
 
         $header_row = $this->bean->get_summary_header_row();
@@ -102,8 +102,8 @@ class ReportsSugarpdfSummary_combo extends ReportsSugarpdfReports
             $count = 0;
 
             for ($j=0; $j < sizeof($row['cells']); $j++) {
-                if ($j > count($header_row) - 1) {
-                    $label = $header_row[count($header_row) - 1];
+                if ($j > (is_countable($header_row) ? count($header_row) : 0) - 1) {
+                    $label = $header_row[(is_countable($header_row) ? count($header_row) : 0) - 1];
                 } else {
                     $label = $header_row[$j];
                 }

@@ -129,8 +129,12 @@ if ($is_edit) {
 	$xtpl->assign('DESCRIPTION', $focus->description);
 	$xtpl->assign('CUSTOM_QUERY', $focus->custom_query);
 
-	if (empty($focus->list_order)) $xtpl->assign('LIST_ORDER', count($focus->get_custom_queries())+1); 
-	else $xtpl->assign('LIST_ORDER', $focus->list_order);
+    if (empty($focus->list_order)) {
+        $queries = $focus->get_custom_queries();
+        $xtpl->assign('LIST_ORDER', (is_countable($queries) ? count($focus->get_custom_queries()) : 0) + 1);
+    } else {
+        $xtpl->assign('LIST_ORDER', $focus->list_order);
+    }
 
 // adding custom fields:
 

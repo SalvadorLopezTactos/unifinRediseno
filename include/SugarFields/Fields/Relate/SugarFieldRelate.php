@@ -45,7 +45,7 @@ class SugarFieldRelate extends SugarFieldBase {
 
         if (isset($displayParams['idName']))
         {
-            $rpos = strrpos($displayParams['idName'], $vardef['name']);
+            $rpos = strrpos($displayParams['idName'], (string) $vardef['name']);
             if ($rpos !== false) {
                 $displayParams['idNameHidden'] = substr($displayParams['idName'], 0, $rpos);
             }

@@ -133,7 +133,7 @@ class Notes extends Portal
         );
 
         $accountsOfContact = PortalFactory::getInstance('Session')->getAccountIds();
-        if (count($accountsOfContact) > 1) {
+        if ((is_countable($accountsOfContact) ? count($accountsOfContact) : 0) > 1) {
             $casesQb->where(
                 $casesQb->expr()->in(
                     'c.account_id',

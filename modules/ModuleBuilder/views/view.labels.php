@@ -31,6 +31,7 @@ class ViewLabels extends ViewModulefields
      //TODO Bundle Studio and ModuleBuilder label handling to increase maintainability.
     public function display()
     {
+        $translatedEditModule = null;
         global $mod_strings;
 
         // Check if the user has access to the module

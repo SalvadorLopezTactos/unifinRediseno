@@ -411,7 +411,7 @@ class UserPreference extends SugarBean
 
         if (!$category) {
             if (!empty($_COOKIE['sugar_user_theme']) && !headers_sent()) {
-                setcookie('sugar_user_theme', '', time() - 3600); // expire the sugar_user_theme cookie
+                setcookie('sugar_user_theme', '', ['expires' => time() - 3600]); // expire the sugar_user_theme cookie
             }
 
             // only call session_destroy() when we have a valid session_id

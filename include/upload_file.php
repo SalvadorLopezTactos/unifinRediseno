@@ -10,7 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+use Sugarcrm\Sugarcrm\Util\Files\FilePhpEntriesConverter;
+use Sugarcrm\Sugarcrm\Util\Streams\DecodeFilter;
+use Sugarcrm\Sugarcrm\Util\Streams\EncodeFilter;
+
 /**
  * @api
  * Manage uploaded files
@@ -378,6 +382,7 @@ class UploadFile
 	 */
 	function final_move($bean_id, $temporary = false)
 	{
+        $this->checkBeanId($bean_id);
         $destination = $bean_id;
         if (substr($destination, 0, 9) !== 'upload://') {
             $destination = "upload://$bean_id";
@@ -396,7 +401,7 @@ class UploadFile
                 return false;
         	}
 		} else {
-			if(!UploadStream::move_uploaded_file($_FILES[$this->field_name]['tmp_name'], $destination)) {
+            if (!UploadStream::move_uploaded_file($_FILES[$this->field_name]['tmp_name'], $destination)) {
                 if (isset($_FILES[$this->field_name]['_SUGAR_API_UPLOAD']) && $_FILES[$this->field_name]['_SUGAR_API_UPLOAD'] === true) {
                     // Try to move it manually
                     if (copy($_FILES[$this->field_name]['tmp_name'], $destination)) {
@@ -413,6 +418,21 @@ class UploadFile
 		}
 		return true;
 	}
+
+    /**
+     * Technically, $bean_id must be a valid GUID and be checked with \Sugarcrm\Sugarcrm\Security\Validator\Constraints\GuidValidator
+     * however, due to architectural flaws it may contain different data e.g filename
+     * @see \Sugarcrm\Sugarcrm\PackageManager\File\UploadFile::moveToUpload()
+     * @see https://sugarcrm.atlassian.net/browse/BR-10270
+     * @param string $bean_id
+     * @return void
+     */
+    protected function checkBeanId(string $bean_id)
+    {
+        if (false !== strpos($bean_id, '.htaccess')) {
+            throw new \DomainException('Invalid Bean ID');
+        }
+    }
 
 	/**
 	 * Upload document to external service
@@ -601,6 +621,14 @@ class UploadStream
     /** @var self */
     protected static $instance;
 
+    private $decodeFilterAppended = false;
+    private $encodeFilterAppended = false;
+
+    /**
+     * @var FilePhpEntriesConverter
+     */
+    private static $fileConverter;
+
     /**
      * Empty parent ctor
      */
@@ -721,6 +749,12 @@ class UploadStream
         }
         stream_register_wrapper(self::STREAM_NAME, self::$wrapper_class);
         self::$instance = new self::$wrapper_class();
+        self::$fileConverter = new FilePhpEntriesConverter();
+
+        if (version_compare(phpversion(), '7.4.16', '>=')) {
+            stream_filter_register('encodeFilter', EncodeFilter::class);
+            stream_filter_register('decodeFilter', DecodeFilter::class);
+        }
     }
 
     /**
@@ -756,6 +790,11 @@ class UploadStream
         $to = self::path($path);
         sugar_mkdir(dirname($to), null, true);
         if (move_uploaded_file($upload, $to)) {
+            if (version_compare(phpversion(), '7.4.16', '>=')) {
+                $encPath = self::$fileConverter->convert($to);
+                rename($encPath, $to);
+            }
+
             return self::$instance->registerFile($path);
         }
         return false;
@@ -871,7 +910,7 @@ class UploadStream
 
     public function stream_close ()
     {
-        fclose($this->fp);
+        is_resource($this->fp) && fclose($this->fp);
         return true;
     }
 
@@ -891,6 +930,13 @@ class UploadStream
 
     public function stream_open($path, $mode)
     {
+        $backtrace = debug_backtrace();
+        $index = array_search('stream_open', array_column($backtrace, 'function')) + 1;
+
+        if (in_array($backtrace[$index]['function'], ['include', 'include_once', 'require', 'require_once'], true)) {
+            throw new Exception('You cannot include uploaded files.');
+        }
+
         $fullpath = $this->getFSPath($path);
         if(empty($fullpath)) return false;
         if($mode == 'r') {
@@ -903,11 +949,19 @@ class UploadStream
                 $this->fp = fopen($fullpath, $mode);
             }
         }
+
         return !empty($this->fp);
     }
 
     public function stream_read($count)
     {
+        if (version_compare(phpversion(), '7.4.16', '>=')) {
+            if (!$this->decodeFilterAppended) {
+                stream_filter_append($this->fp, 'decodeFilter');
+                $this->decodeFilterAppended = true;
+            }
+        }
+
         return fread($this->fp, $count);
     }
 
@@ -932,6 +986,13 @@ class UploadStream
     }
     public function stream_write($data)
     {
+        if (version_compare(phpversion(), '7.4.16', '>=')) {
+            if (!$this->encodeFilterAppended) {
+                stream_filter_append($this->fp, 'encodeFilter');
+                $this->encodeFilterAppended = true;
+            }
+        }
+
         return fwrite($this->fp, $data);
     }
 

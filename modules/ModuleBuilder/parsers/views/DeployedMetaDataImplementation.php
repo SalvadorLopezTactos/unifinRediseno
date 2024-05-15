@@ -370,6 +370,8 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
      */
     protected function getDefsFromTemplate($module, $client = 'base')
     {
+        $types = [];
+        $clients = [];
         // Set the requested client for comparison later
         $rClient = $client;
 

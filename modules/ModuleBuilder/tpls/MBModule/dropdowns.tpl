@@ -27,8 +27,11 @@
 	</tr>
 	<tr>
 		{/if}
-		<td><a class='mbLBLL' href='javascript:void(0)'
-			onclick='ModuleBuilder.getContent("module=ModuleBuilder&action=dropdown&dropdown_name={$name}")'>{$name}</a></td>
+        <td>
+            <a class="mbLBLL" href="javascript:void(0)" onclick="ModuleBuilder.getContent('module=ModuleBuilder&action=dropdown&dropdown_name={$name|escape:'url'}')">
+                {$name|escape:'html'}
+            </a>
+        </td>
 		{counter name='items'} {/foreach} {if $items == 0}
 		<td class='mbLBLL'>{$mod_strings.LBL_NONE}</td>
 		{elseif $items % 3 == 1}

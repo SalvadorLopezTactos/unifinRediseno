@@ -125,13 +125,7 @@
      * @protected
      */
     _setLogoImage: function(imageUrl) {
-        // let's put Sugar logo here instead of hbs template
-        var logoUrl = imageUrl ?
-            imageUrl :
-            app.utils.buildUrl('styleguide/assets/img/sugar-cube-black.svg');
-
-        var altStr = app.lang.get('str', 'LBL_SUGAR_CUBE_ALT', this.module);
-        this.logoImage = '<img src="' + logoUrl + '" alt="' + altStr + '">';
+        this.logoImage = imageUrl ? imageUrl : app.utils.buildUrl('styleguide/assets/img/sugar-cube-black.svg');
     },
 
     /**

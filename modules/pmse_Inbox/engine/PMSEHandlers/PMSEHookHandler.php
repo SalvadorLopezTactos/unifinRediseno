@@ -164,7 +164,7 @@ class PMSEHookHandler extends PMSEAbstractRequestHandler
         $flows = $bean->get_full_list('', $addedSQL);
 
         // If there were flows to process, handle that
-        if ($flows !== null && ($c = count($flows)) > 0) {
+        if ($flows !== null && ($c = is_countable($flows) ? count($flows) : 0) > 0) {
             foreach ($flows as $flow) {
                 $this->newFollowFlow($flow->fetched_row, false, null, 'WAKE_UP');
             }

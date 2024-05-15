@@ -125,9 +125,7 @@ $params[] = sprintf(
 );
 
 if (empty($focus->id)) {
-    $params[] = htmlspecialchars(
-        $GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'] . ' ' . $mod_strings['LBL_MODULE_NAME']
-    );
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'] . ' ' . $mod_strings['LBL_MODULE_NAME']);
 } else {
     $href = 'index.php?' . http_build_query([
             'module' => $focus->module_dir,
@@ -199,7 +197,7 @@ $xtpl->assign('STATUS_OPTIONS', get_select_options_with_id($app_list_strings['em
 require_once 'modules/Campaigns/utils.php';
 $json = getJSONobj();
 $IEStoredOptions = get_campaign_mailboxes_with_stored_options();
-$IEStoredOptionsJSON = (!empty($IEStoredOptions)) ? $json->encode($IEStoredOptions, false) : 'new Object()';
+$IEStoredOptionsJSON = (!empty($IEStoredOptions)) ? $json->encode($IEStoredOptions) : 'new Object()';
 $xtpl->assign("IEStoredOptions", $IEStoredOptionsJSON);
 
 $xtpl->parse('main');

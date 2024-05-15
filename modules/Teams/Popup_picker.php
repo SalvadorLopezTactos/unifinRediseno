@@ -54,9 +54,9 @@ class Popup_Picker
 			foreach(array_keys($this->_popupMeta['whereClauses']) as $key) {
 				append_where_clause($whereClauses, $key, $this->_popupMeta['whereClauses'][$key]);
 				if($key == 'name' && !empty($_REQUEST['name'])) {
-                    $whereClauses[count($whereClauses)-1] = sprintf(
+                    $whereClauses[(is_countable($whereClauses) ? count($whereClauses) : 0)-1] = sprintf(
                         '(%s or teams.name_2 like %s)',
-                        $whereClauses[count($whereClauses)-1],
+                        $whereClauses[(is_countable($whereClauses) ? count($whereClauses) : 0)-1],
                         $GLOBALS['db']->quoted($_REQUEST['name'] . '%')
                     );
 				}

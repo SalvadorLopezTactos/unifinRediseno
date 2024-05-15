@@ -154,6 +154,7 @@ class PortalPasswordApi extends SugarApi
      */
     public function sendEmail(string $templateId, SugarBean $contactBean, string $platform) : bool
     {
+        $mailTransmissionProtocol = null;
         $result = false;
 
         if (empty($templateId)) {

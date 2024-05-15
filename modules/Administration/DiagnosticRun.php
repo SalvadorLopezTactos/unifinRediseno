@@ -83,6 +83,7 @@ define("SQL_INFO_WEIGHT", 1);
 define("MD5_WEIGHT", 5);
 define("BEANLISTBEANFILES_WEIGHT", 1);
 define("SUGARLOG_WEIGHT", 2);
+define("MLPLOG_WEIGHT", 2);
 define("VARDEFS_WEIGHT", 2);
 
 //THIS MUST CHANGE IF THE NUMBER OF DIRECTORIES TRAVERSED TO GET TO
@@ -161,7 +162,7 @@ function getFullTableDump($tableName){
     $returnString .= array_as_table("{$db->dbName} $tableName " . $mod_strings['LBL_DIAGNOSTICS_FULLTABLEDUMP_KEYS'] . ":", $indexes);
     $returnString .= "<BR><BR>";
 
-    $def_count = count($cols);
+    $def_count = is_countable($cols) ? count($cols) : 0;
 
 	$td_result = $db->query("select * from ".$tableName);
     if(!$td_result) {
@@ -311,6 +312,17 @@ function executesugarlog()
     sodUpdateProgressBar(SUGARLOG_WEIGHT);
 }
 
+function executemlplog()
+{
+    global $cacheDir, $mod_strings;
+    $logger = new SugarLogger();
+    $logPath = dirname($logger->getLogFileNameWithPath()) . '/package_install.log';
+    if (!copy($logPath, $cacheDir . '/package_install.log')) {
+        $data = array($cacheDir);
+        echo string_format($mod_strings['LBL_DIAGNOSTICS_ERROR_MLPLOG'], $data);
+    }
+    sodUpdateProgressBar(MLPLOG_WEIGHT);
+}
 function executephpinfo()
 {
     //BEGIN GETPHPINFO
@@ -340,12 +352,9 @@ function executeconfigphp()
     //store db_password in temp var so we can get config.php w/o making anyone angry
     global $cacheDir;    global $sugar_config;
 
-    $tempPass = $sugar_config['dbconfig']['db_password'];
-    $sugar_config['dbconfig']['db_password'] = '********';
+    $maskedConfig = getConfigWithMaskedPasswords($sugar_config);
     //write config.php to a file
-    write_array_to_file("Diagnostic", $sugar_config, $cacheDir."config.php");
-    //restore db_password so everything still works
-    $sugar_config['dbconfig']['db_password'] = $tempPass;
+    write_array_to_file("Diagnostic", $maskedConfig, $cacheDir."config.php");
     //END COPY CONFIG.PHP
 
     //UPDATING PROGRESS BAR
@@ -563,6 +572,7 @@ function executecustom_dir()
 
 function executemd5($filesmd5, $md5calculated)
 {
+    $md5_string = null;
 	//BEGIN ALL MD5 CHECKS
 	global $curdatetime, $skip_md5_diff, $sod_guid, $mod_strings;
 
@@ -743,6 +753,7 @@ $domd5filesmd5 = ((empty($_POST['md5filesmd5']) || $_POST['md5filesmd5'] == 'off
 $domd5calculated = ((empty($_POST['md5calculated']) || $_POST['md5calculated'] == 'off') ? false : true);
 $dobeanlistbeanfiles = ((empty($_POST['beanlistbeanfiles']) || $_POST['beanlistbeanfiles'] == 'off') ? false : true);
 $dosugarlog = ((empty($_POST['sugarlog']) || $_POST['sugarlog'] == 'off') ? false : true);
+$domlplog = ((empty($_POST['mlplog']) || $_POST['mlplog'] == 'off') ? false : true);
 $dovardefs = ((empty($_POST['vardefs']) || $_POST['vardefs'] == 'off') ? false : true);
 //END check for what we are executing
 
@@ -759,6 +770,10 @@ if($domysql_info) {$totalweight += SQL_INFO_WEIGHT; $totalitems++;}
 if($domd5) {$totalweight += MD5_WEIGHT; $totalitems++;}
 if($dobeanlistbeanfiles) {$totalweight += BEANLISTBEANFILES_WEIGHT; $totalitems++;}
 if($dosugarlog) {$totalweight += SUGARLOG_WEIGHT; $totalitems++;}
+if ($domlplog) {
+    $totalweight += MLPLOG_WEIGHT;
+    $totalitems++;
+}
 if($dovardefs) {$totalweight += VARDEFS_WEIGHT; $totalitems++;}
 //END items to calculate progress bar
 
@@ -811,6 +826,11 @@ if($dosugarlog)
   echo $mod_strings['LBL_DIAGNOSTIC_GETSUGARLOG']."<BR>";
   executesugarlog();
   echo $mod_strings['LBL_DIAGNOSTIC_DONE']."<BR><BR>";
+}
+if ($domlplog) {
+    echo $mod_strings['LBL_DIAGNOSTIC_GETMLPLOG'] . "<BR>";
+    executemlplog();
+    echo $mod_strings['LBL_DIAGNOSTIC_DONE'] . "<BR><BR>";
 }
 if($dovardefs)
 {

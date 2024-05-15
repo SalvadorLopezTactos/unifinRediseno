@@ -28,6 +28,7 @@ class Viewpackage extends SugarView
 
 	function display()
 	{
+         $original_name = null;
  		global $mod_strings;
  		$smarty = new Sugar_Smarty();
  		$mb = new ModuleBuilder();

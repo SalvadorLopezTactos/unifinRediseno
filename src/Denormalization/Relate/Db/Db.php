@@ -247,11 +247,21 @@ abstract class Db implements OfflineOperations, OnlineOperations
         $update = $this->connection->createQueryBuilder();
 
         if ($relatedId) {
-            $update->update($primaryTableName)
-                ->set($denormalizedFieldName, ':value')
-                ->where("$primaryKey = :id")
-                ->setParameter('value', $value)
-                ->setParameter('id', $relatedId);
+            if (is_null($joinPrimaryKey) && is_null($joinLinkedKey)) {
+                // One-to-Many ralationship from "One" side updating value in "Many" side
+                // No need to get the $primaryKey as it's always 'id' in this case
+                $update->update($primaryTableName)
+                    ->set($denormalizedFieldName, ':value')
+                    ->where("id = :id")
+                    ->setParameter('value', $value)
+                    ->setParameter('id', $relatedId);
+            } else {
+                $update->update($primaryTableName)
+                    ->set($denormalizedFieldName, ':value')
+                    ->where("$primaryKey = :id")
+                    ->setParameter('value', $value)
+                    ->setParameter('id', $relatedId);
+            }
 
             $update->execute();
             return;

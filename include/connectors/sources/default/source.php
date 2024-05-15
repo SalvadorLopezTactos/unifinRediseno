@@ -98,6 +98,7 @@ abstract class source{
      * Load source's vardef file
      */
  	public function loadVardefs() {
+        $dictionary = [];
 		$dir = str_replace('_','/',$class = get_class($this));
 		$defs = SugarAutoLoader::existingCustomOne("modules/Connectors/connectors/sources/{$dir}/vardefs.php");
 		if(!empty($defs)) {

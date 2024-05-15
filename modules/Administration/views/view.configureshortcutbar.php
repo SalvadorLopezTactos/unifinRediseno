@@ -175,6 +175,7 @@ class ViewConfigureshortcutbar extends SugarView
      */
     protected function getQuickCreateMetadata($module)
     {
+        $viewdefs = [];
         $quickCreateFile = "modules/$module/clients/base/menus/quickcreate/quickcreate.php";
 
         if (!file_exists("custom/{$quickCreateFile}") && !file_exists($quickCreateFile)) {

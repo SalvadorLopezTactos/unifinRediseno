@@ -199,7 +199,10 @@ ItemMatrixField.prototype.setList = function (data, selected) {
 };
 
 ItemMatrixField.prototype.generateOption = function (item, selected) {
-    var out = '', value, text, select;
+    var out = '';
+    var select = false;
+    var value;
+    var text;
     if (typeof item === 'object') {
         value = item.value;
         text = item.text;
@@ -207,14 +210,24 @@ ItemMatrixField.prototype.generateOption = function (item, selected) {
     if (typeof selected === 'object' && (selected instanceof Array)) {
         if (selected.indexOf(value) !== -1) {
             this.addLockedFields(value);
-            select = 'checked = "checked"';
+            select = true;
         }
     }
     if (this.visualStyle === 'list') {
-        out = '<li style="list-style-type: none;"><label><input type="checkbox" name="' + value + '" value="' + value + '" class="item-matrix-field" ' + select + '/> ' + text + '</label></li>';
+        out = $('<li style="list-style-type: none;"></li>')
+            .append($('<label></label>')
+                .append($('<input type="checkbox" class="item-matrix-field" />')
+                    .attr({name: value, value: value, checked: select}))
+                .append($('<span></span').text(' ' + text))
+            )
+            .get(0).outerHTML;
     } else {
-        //out = '<div class="box cell"><label><input type="checkbox" name="' + value + '" value="' + value + '" class="item-matrix-field" ' + select + '/> ' + text + '</label></div>';
-        out = '<div class="box cell"><input type="checkbox" name="' + value + '" value="' + value + '" class="item-matrix-field" ' + select + '/> <span>' + text + '</span></div>';
+        out = $('<div class="box cell">')
+            .append($('<input type="checkbox" class="item-matrix-field" />')
+                .attr({name: value, value: value, checked: select}))
+            .append($('<span></span>')
+            .text(' ' + text))
+            .get(0).outerHTML;
     }
     return out;
 };

@@ -95,6 +95,7 @@ class ViewSugarFieldCollection{
      * Organize and save the value into the bean
      */
     function retrieve_values(){
+        $field = [];
         if(empty($this->bean->{$this->value_name}) && isset($this->bean->{$this->name})){
             $values = array();
             $values = $this->bean->{$this->name}->get(true);
@@ -164,7 +165,7 @@ class ViewSugarFieldCollection{
      */
     function process_editview(){
         if(isset($this->bean->{$this->value_name}['secondaries'])){
-            $this->numFields=count($this->bean->{$this->value_name}['secondaries'])+1;
+            $this->numFields=(is_countable($this->bean->{$this->value_name}['secondaries']) ? count($this->bean->{$this->value_name}['secondaries']) : 0)+1;
         }
         if(!isset($this->displayParams['readOnly'])) {
            $this->displayParams['readOnly'] = '';
@@ -331,6 +332,7 @@ FRA;
      * return the javascript code which define sqs_objects.
      */
     function createQuickSearchCode($returnAsJavascript = true){
+        $field = [];
         $sqs_objects = array();
         $qsd = QuickSearchDefaults::getQuickSearchDefaults();
         $qsd->setFormName($this->form_name);

@@ -96,7 +96,7 @@ class MailMergeController extends SugarController{
         }
         
         $json = getJSONobj();
-        $json_response = $json->encode($response, true);
+        $json_response = $json->encode($response);
         print $json_response;
     }
 }

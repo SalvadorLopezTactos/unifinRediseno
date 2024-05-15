@@ -66,4 +66,9 @@ interface SugarMetric_Provider_Interface
      * @return null
      */
     public function setMetricClass($name);
+
+    /**
+     * @return void
+     */
+    public static function ignoreTransaction() : void;
 }

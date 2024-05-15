@@ -34,11 +34,9 @@ class CampaignLog extends SugarBean {
 
 
     public function __construct() {
-        global $sugar_config;
         parent::__construct();
 
         $this->disable_row_level_security=true;
-        //$this->team_id = 1; // make the item globally accessible
     }
 
     function get_list_view_data(){

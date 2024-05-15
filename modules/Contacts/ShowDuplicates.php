@@ -52,7 +52,7 @@ $GLOBALS['check_notify'] = FALSE;
 
 $query = 'select id, first_name, last_name, title from contacts where deleted=0 ';
 $duplicates = $_POST['duplicate'];
-$count = count($duplicates);
+$count = is_countable($duplicates) ? count($duplicates) : 0;
 if ($count > 0)
 {
 	$query .= "and (";

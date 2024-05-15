@@ -314,6 +314,7 @@ class RenameModules
      */
     public function saveCustomLanguageStrings($appStrings)
     {
+        $changed = null;
         if (empty($appStrings)) {
             // Nothing to save...
             return true;
@@ -431,6 +432,7 @@ class RenameModules
      */
     private function getSubpanelDefs($bean)
     {
+        $viewdefs = [];
         if (empty($bean->module_dir)) {
             return array();
         }
@@ -780,6 +782,7 @@ class RenameModules
      */
     protected function checkDefaultsForSubstring($key, $substring)
     {
+        $mod_strings = [];
         // Check for the label in the static defaults file in case we need it later
         if ($this->changedModule &&
             file_exists('modules/'.$this->changedModule.'/language/'.$this->selectedLanguage.'.lang.php'))
@@ -832,8 +835,8 @@ class RenameModules
         // then it's impossible to say if the old value is already updated.
         // If oldStringValue is already updated, don't re-update it.
         // Also handle the corner case where we actually DO want a repeat in the string.
-        if (strpos($search, $replace) !== false
-            || strpos($oldStringValue, $replace) === false
+        if (strpos($search, (string) $replace) !== false
+            || strpos($oldStringValue, (string) $replace) === false
             || $this->checkDefaultsForSubstring($modKey, $replace)
         ) {
             // Handle resetting routes in strings, since some modules like Forecasting

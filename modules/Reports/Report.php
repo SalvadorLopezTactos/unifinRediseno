@@ -195,7 +195,7 @@ class Report
 
         //Scheduled reports don't have $_REQUEST.
         if ((!isset($_REQUEST['module']) || $_REQUEST['module'] == 'Reports') && !defined('SUGAR_PHPUNIT_RUNNER')) {
-            Report::cache_modules_def_js();
+            $this->cache_modules_def_js();
         }
 
         $mod_strings = return_module_language($current_language, 'Reports');
@@ -217,7 +217,7 @@ class Report
             $this->report_def = $report_def_str;
             $this->report_def_str = $json->encode($report_def_str);
         } else {
-            if (Report::is_old_content($report_def_str)) {
+            if ($this->is_old_content($report_def_str)) {
                 $this->handleException('this report was created with an older version of reports. please upgrade');
             }
             $this->report_def_str = $report_def_str;
@@ -245,7 +245,7 @@ class Report
         if (!empty($this->report_def['report_type'])) {
             $this->report_type = $this->report_def['report_type'];
         }
-        if (!empty($this->report_def['display_columns']) && count($this->report_def['display_columns']) > 0 && $this->report_type == 'summary') {
+        if (!empty($this->report_def['display_columns']) && (is_countable($this->report_def['display_columns']) ? count($this->report_def['display_columns']) : 0) > 0 && $this->report_type == 'summary') {
             $this->show_columns = true;
         }
         if (!empty($this->report_def['chart_type'])) {
@@ -271,7 +271,7 @@ class Report
                         }
                     }
                     if (!$isInGroupBy)
-                        $this->report_def['group_defs'][count($this->report_def['group_defs'])] = $summary_column;
+                        $this->report_def['group_defs'][is_countable($this->report_def['group_defs']) ? count($this->report_def['group_defs']) : 0] = $summary_column;
                 }
             }
         }
@@ -386,24 +386,24 @@ class Report
         if (isset($upgrade_lookup) && count($upgrade_lookup) > 0) {
             $this->full_table_list = $tempFullTableList;
             $this->report_def['full_table_list'] = $tempFullTableList;
-            for ($i = 0; $i < count($this->report_def['display_columns']); $i++) {
+            for ($i = 0; $i < (is_countable($this->report_def['display_columns']) ? count($this->report_def['display_columns']) : 0); $i++) {
                 if ($this->report_def['display_columns'][$i]['table_key'] != 'self') {
                     $this->report_def['display_columns'][$i]['table_key'] = $upgrade_lookup[$this->report_def['display_columns'][$i]['table_key']];
                 }
             }
-            for ($i = 0; $i < count($this->report_def['summary_columns']); $i++) {
+            for ($i = 0; $i < (is_countable($this->report_def['summary_columns']) ? count($this->report_def['summary_columns']) : 0); $i++) {
                 if ($this->report_def['summary_columns'][$i]['table_key'] != 'self') {
                     $this->report_def['summary_columns'][$i]['table_key'] = $upgrade_lookup[$this->report_def['summary_columns'][$i]['table_key']];
                 }
             }
 
-            for ($i = 0; $i < count($this->report_def['group_defs']); $i++) {
+            for ($i = 0; $i < (is_countable($this->report_def['group_defs']) ? count($this->report_def['group_defs']) : 0); $i++) {
                 if ($this->report_def['group_defs'][$i]['table_key'] != 'self') {
                     $this->report_def['group_defs'][$i]['table_key'] = $upgrade_lookup[$this->report_def['group_defs'][$i]['table_key']];
                 }
             }
             if (isset($this->report_def['order_by'])) {
-                for ($i = 0; $i < count($this->report_def['order_by']); $i++) {
+                for ($i = 0; $i < (is_countable($this->report_def['order_by']) ? count($this->report_def['order_by']) : 0); $i++) {
                     if ($this->report_def['order_by'][$i]['table_key'] != 'self') {
                         $this->report_def['order_by'][$i]['table_key'] = $upgrade_lookup[$this->report_def['order_by'][$i]['table_key']];
                     }
@@ -418,7 +418,7 @@ class Report
                 } else {
                     $filters['Filter_1']['operator'] = 'AND';
                 }
-                for ($i = 0; $i < count($this->report_def['filters_def']); $i++) {
+                for ($i = 0; $i < (is_countable($this->report_def['filters_def']) ? count($this->report_def['filters_def']) : 0); $i++) {
                     if ($this->report_def['filters_def'][$i]['table_key'] != 'self') {
                         $this->report_def['filters_def'][$i]['table_key'] = $upgrade_lookup[$this->report_def['filters_def'][$i]['table_key']];
                     }
@@ -441,7 +441,7 @@ class Report
             else
                 $filters['Filter_1']['operator'] = 'AND';
 
-            for ($i = 0; $i < count($this->report_def['filters_def']); $i++) {
+            for ($i = 0; $i < (is_countable($this->report_def['filters_def']) ? count($this->report_def['filters_def']) : 0); $i++) {
                 array_push($filters['Filter_1'], $this->report_def['filters_def'][$i]);
             }
             $this->report_def['filters_def'] = $filters;
@@ -593,11 +593,10 @@ class Report
         $fields = array('display_columns', 'summary_columns', 'order_by', 'filters_def', 'group_defs');
         foreach ($fields as $field)
         {
-            if (count($this->report_def[$field])) {
+            if (is_countable($this->report_def[$field]) ? count($this->report_def[$field]) : 0) {
                 continue;
             }
-            for ($i = 0; $i < count($this->report_def[$field]); $i++)
-            {
+            for ($i = 0; $i < (is_countable($this->report_def[$field]) ? count($this->report_def[$field]) : 0); $i++) {
                 $def = $this->report_def[$field][$i];
                 if (empty($def['table_key']) && empty($def['name'])) {
                     continue;
@@ -874,7 +873,9 @@ class Report
         $row_start_name = 'row_start', $row_end_name = 'row_end', $limit = false)
     {
         // FIXME: needs DB-independent code here
-        if ($limit) {
+        if (empty($this->$query_name)) {
+            $this->$result_name = '';
+        } elseif ($limit) {
             $this->$result_name = $this->db->limitQuery($this->$query_name, $this->report_offset, $this->report_max, true,
                                                         "Error executing query ");
         } else {
@@ -1176,15 +1177,15 @@ class Report
         $where_clause .= '(';
         $operator = $this->getFilterOperator($filters['operator']);
         $isSubCondition = 0;
-        if (count($filters) < 2) { // We only have an operator and an empty Filter Box.
+        if ((is_countable($filters) ? count($filters) : 0) < 2) { // We only have an operator and an empty Filter Box.
             $where_clause .= "1=1";
         }
-        for ($i = 0; $i < count($filters) - 1; $i++) {
+        for ($i = 0; $i < (is_countable($filters) ? count($filters) : 0) - 1; $i++) {
             $current_filter = $filters[$i];
             if (isset($current_filter['operator'])) {
                 $where_clause .= "(";
                 $isSubCondition = 1;
-                Report::filtersIterate($current_filter, $where_clause);
+                $this->filtersIterate($current_filter, $where_clause);
             }
             else {
                 if (!empty($current_filter['type']) && ($current_filter['type'] == 'datetimecombo' || $current_filter['type'] == 'datetime')) {
@@ -1205,7 +1206,7 @@ class Report
                 // reset the subCondition
                 $isSubCondition = 0;
             }
-            if ($i != count($filters) - 2) {
+            if ($i != (is_countable($filters) ? count($filters) : 0) - 2) {
                 $where_clause .= " $operator ";
             }
 
@@ -1259,17 +1260,17 @@ class Report
         $filters = $this->report_def['filters_def'];
         $where_clause = "";
         if (isset($filters['Filter_1']))
-            Report::filtersIterate($filters['Filter_1'], $where_clause);
+            $this->filtersIterate($filters['Filter_1'], $where_clause);
         $this->where = $where_clause;
     }
 
     function filtersIterateForUI($filters, &$verdef_arr_for_filters)
     {
         $operator = $filters['operator'];
-        for ($i = 0; $i < count($filters) - 1; $i++) {
+        for ($i = 0; $i < (is_countable($filters) ? count($filters) : 0) - 1; $i++) {
             $current_filter = $filters[$i];
             if (isset($current_filter['operator'])) {
-                Report::filtersIterateForUI($current_filter, $verdef_arr_for_filters);
+                $this->filtersIterateForUI($current_filter, $verdef_arr_for_filters);
             }
             else {
                 $fieldDef = $this->getFieldDefFromLayoutDef($current_filter);
@@ -1297,7 +1298,7 @@ class Report
         $filters = $this->report_def['filters_def'];
         $originalWhereClause = $this->where;
         if (isset($filters['Filter_1'])) {
-            Report::filtersIterateForUI($filters['Filter_1'], $verdef_arr_for_filters);
+            $this->filtersIterateForUI($filters['Filter_1'], $verdef_arr_for_filters);
         } // if
         $where_clause = $this->where;
         global $reportAlias;
@@ -1374,13 +1375,13 @@ class Report
 
 
         $got_summary = 0;
-        foreach ($this->report_def[$key] as $index => $display_column)
-        {
-
-            if ($display_column['name'] == 'count') {
-                $got_summary = 1;
-            } else if (!empty($display_column['group_function'])) {
-                $got_summary = 1;
+        if (is_array($this->report_def) && isset($this->report_def[$key]) && safeIsIterable($this->report_def[$key])) {
+            foreach ($this->report_def[$key] as $index => $display_column) {
+                if ($display_column['name'] == 'count') {
+                    $got_summary = 1;
+                } elseif (!empty($display_column['group_function'])) {
+                    $got_summary = 1;
+                }
             }
         }
         return $got_summary;
@@ -1395,8 +1396,7 @@ class Report
         }
 
 
-        for ($i = 0; $i < count($this->report_def['group_defs']); $i++)
-        {
+        for ($i = 0; $i < (is_countable($this->report_def['group_defs']) ? count($this->report_def['group_defs']) : 0); $i++) {
             $def_qualifier = '';
             if (!empty($this->report_def['group_defs'][$i]['qualifier'])) {
                 $def_qualifier = $this->report_def['group_defs'][$i]['qualifier'];
@@ -1456,8 +1456,9 @@ class Report
         $got_count = 0;
         $got_join = array();
         $tp_count = 1;
-        foreach ($this->report_def[$key] as $index => $display_column) {
-            if ($display_column['name'] == 'count') {
+        if (is_array($this->report_def) && isset($this->report_def[$key]) && safeIsIterable($this->report_def[$key])) {
+            foreach ($this->report_def[$key] as $index => $display_column) {
+                if ($display_column['name'] == 'count') {
                 if ('self' != $display_column['table_key'])
                 {
                     // use table name itself, not it's alias
@@ -1581,6 +1582,7 @@ class Report
                 // create additional join of currency table for each module containing currency fields
                 $this->currency_join[$key][$display_column['currency_alias']] = $table_alias;
             }
+        }
         }
 
         // 'register' the joins for the other column defs since we need to join all for summary to work.. else the count and maybe other group functions won't work.
@@ -1934,7 +1936,7 @@ class Report
     {
         $has_space = strrpos($field, " ");
         // Check if the field has space - i.e. it's "table.field alias"
-        if ($has_space && !stristr("' '", $field)) {
+        if ($has_space && !stristr("' '", (string) $field)) {
             $aggregate_func = strtolower(substr($field, 0, 4));
             if ($aggregate_func == 'max(' || $aggregate_func == 'min(' || $aggregate_func == 'avg(' || $aggregate_func == 'sum(') {
                 return $field;
@@ -1986,7 +1988,6 @@ class Report
 
     function create_query($query_name = 'query', $field_list_name = 'select_fields')
     {
-
         $query = "SELECT ";
         $field_list_name_array = $this->$field_list_name;
         foreach ($field_list_name_array as $field) {
@@ -1999,6 +2000,9 @@ class Report
             } else {
                 $field_not_null[] = $this->wrapIfNull($field);
             }
+        }
+        if (empty($field_not_null)) {
+            return;
         }
         $this->$field_list_name = $field_not_null;
         $query .= implode(",", $this->$field_list_name);
@@ -2140,112 +2144,109 @@ class Report
         $header_row = array();
         $summary_count = 0;
 
-        foreach ($this->report_def[$column_field_name] as $display_column) {
-            if ($skip_non_group && empty($display_column['group_function'])) {
+        if (is_array($this->report_def) && isset($this->report_def[$column_field_name]) && safeIsIterable($this->report_def[$column_field_name])) {
+            foreach ($this->report_def[$column_field_name] as $display_column) {
+                if ($skip_non_group && empty($display_column['group_function'])) {
                 if ($exporting || $this->plain_text_output)
-                    array_push($header_row, ' ');
+                        array_push($header_row, ' ');
                 else
-                    array_push($header_row, '&nbsp;');
-                continue;
-            }
+                        array_push($header_row, '&nbsp;');
+                    continue;
+                }
 
-            $group_by_key = '';
-            if (!empty($this->report_def['group_defs'][0])) {
+                $group_by_key = '';
+                if (!empty($this->report_def['group_defs'][0])) {
                 $group_by_key = $this->report_def['group_defs'][0]['table_key'] . ":" . $this->report_def['group_defs'][0]['name'];
-            }
-            if (!empty($this->report_def['order_by'][0])) {
-                $order_by_key = $this->report_def['order_by'][0]['table_key'] . ":" . $this->report_def['order_by'][0]['name'];
+                }
+                if (!empty($this->report_def['order_by'][0])) {
+                    $order_by_key = $this->report_def['order_by'][0]['table_key'] . ":" . $this->report_def['order_by'][0]['name'];
+                    $column_key = $this->_get_full_key($display_column);
+
+                    if (!empty($display_column['group_function'])) {
+                        $column_key .= ':' . $display_column['group_function'];
+                    } elseif (!empty($display_column['column_function'])) {
+                        $column_key .= ':' . $display_column['column_function'];
+                    }
+
+                    if ($group_by_key == $column_key) {
+                        $display_column['no_sort'] = 1;
+                    }
+
+                    if ($order_by_key == $column_key) {
+                        if (empty($this->report_def['order_by'][0]['sort_dir']) || $this->report_def['order_by'][0]['sort_dir'] == 'a') {
+                            $display_column['sort'] = '_down';
+                        } else {
+                            $display_column['sort'] = '_up';
+                        }
+                    }
+                }
+
                 $column_key = $this->_get_full_key($display_column);
 
-                if (!empty($display_column['group_function'])) {
-                    $column_key .= ':' . $display_column['group_function'];
-                }
-                elseif (!empty($display_column['column_function'])) {
-                    $column_key .= ':' . $display_column['column_function'];
-                }
-
-                if ($group_by_key == $column_key) {
-                    $display_column['no_sort'] = 1;
-                }
-
-                if ($order_by_key == $column_key) {
-                    if (empty($this->report_def['order_by'][0]['sort_dir']) || $this->report_def['order_by'][0]['sort_dir'] == 'a') {
-                        $display_column['sort'] = '_down';
-                    }
-                    else {
-                        $display_column['sort'] = '_up';
-                    }
-                }
-            }
-
-            $column_key = $this->_get_full_key($display_column);
-
-            if (!empty($display_column['group_function']) && $display_column['group_function'] != 'count') {
+                if (!empty($display_column['group_function']) && $display_column['group_function'] != 'count') {
                 $column_key .= ":" . $display_column['group_function'];
             }
             elseif (!empty($display_column['column_function']) && $display_column['column_function'] != 'count') {
                 $column_key .= ":" . $display_column['column_function'];
             }
 
-            if (!empty($this->report_def['summary_order_by'][0])) {
-                if (!empty($this->report_def['summary_order_by'][0]['group_function']) && $this->report_def['summary_order_by'][0]['group_function'] == 'count') {
-                    $order_by_key = $this->report_def['summary_order_by'][0]['table_key'] . ":" . 'count';
+                if (!empty($this->report_def['summary_order_by'][0])) {
+                    if (!empty($this->report_def['summary_order_by'][0]['group_function']) && $this->report_def['summary_order_by'][0]['group_function'] == 'count') {
+                        $order_by_key = $this->report_def['summary_order_by'][0]['table_key'] . ":" . 'count';
+                    } else {
+                        $order_by_key = $this->report_def['summary_order_by'][0]['table_key'] . ":" . $this->report_def['summary_order_by'][0]['name'];
+
+                        if (!empty($this->report_def['summary_order_by'][0]['group_function'])) {
+                            $order_by_key .= ":" . $this->report_def['summary_order_by'][0]['group_function'];
+                        } elseif (!empty($this->report_def['summary_order_by'][0]['column_function'])) {
+                            $order_by_key .= ":" . $this->report_def['summary_order_by'][0]['column_function'];
+                        }
+                    }
+
+                    if ($order_by_key == $column_key) {
+                        if (empty($this->report_def['summary_order_by'][0]['sort_dir']) || $this->report_def['summary_order_by'][0]['sort_dir'] == 'a') {
+                            $display_column['sort'] = '_down';
+                        } else {
+                            $display_column['sort'] = '_up';
+                        }
+                    }
+                }
+                $display = $this->layout_manager->widgetDisplay($display_column);
+
+                if ($column_field_name == 'summary_columns' && !empty($display_column['is_group_by'])) {
+                    if ($display_column['is_group_by'] != 'hidden') {
+                        $this->group_column_is_invisible = 0;
+                        array_push($header_row, $display);
                 }
                 else {
-                    $order_by_key = $this->report_def['summary_order_by'][0]['table_key'] . ":" . $this->report_def['summary_order_by'][0]['name'];
-
-                    if (!empty($this->report_def['summary_order_by'][0]['group_function'])) {
-                        $order_by_key .= ":" . $this->report_def['summary_order_by'][0]['group_function'];
-                    }
-                    elseif (!empty($this->report_def['summary_order_by'][0]['column_function'])) {
-                        $order_by_key .= ":" . $this->report_def['summary_order_by'][0]['column_function'];
-                    }
+                        $this->group_column_is_invisible = 1;
                 }
-
-                if ($order_by_key == $column_key) {
-                    if (empty($this->report_def['summary_order_by'][0]['sort_dir']) || $this->report_def['summary_order_by'][0]['sort_dir'] == 'a') {
-                        $display_column['sort'] = '_down';
-                    }
-                    else {
-                        $display_column['sort'] = '_up';
-                    }
-                }
-            }
-            $display = $this->layout_manager->widgetDisplay($display_column);
-
-            if ($column_field_name == 'summary_columns' && !empty($display_column['is_group_by'])) {
-                if ($display_column['is_group_by'] != 'hidden') {
-                    $this->group_column_is_invisible = 0;
-                    array_push($header_row, $display);
-                }
-                else {
-                    $this->group_column_is_invisible = 1;
-                }
-                $this->group_header = $display;
-                $this->chart_group_position[] = $summary_count;
+                    $this->group_header = $display;
+                    $this->chart_group_position[] = $summary_count;
             }
             else {
-                array_push($header_row, $display);
+                    array_push($header_row, $display);
             }
-            $summary_count++;
+                $summary_count++;
 
-            //if summary, but not the total summary, and doing the chart
-            if ($skip_non_group == false && $column_field_name == 'summary_columns' && $this->do_chart == true) {
-                //              $this->layout_manager->setAttribute('context', 'HeaderCellPlain');
+                //if summary, but not the total summary, and doing the chart
+                if ($skip_non_group == false && $column_field_name == 'summary_columns' && $this->do_chart == true) {
+                    //              $this->layout_manager->setAttribute('context', 'HeaderCellPlain');
                 $chart_header = array();
-                $chart_header['label'] = $this->layout_manager->widgetDisplay($display_column);
-                $chart_header['column_key'] = $column_key;
-                array_push($this->chart_header_row, $chart_header);
+                    $chart_header['label'] = $this->layout_manager->widgetDisplay($display_column);
+                    $chart_header['column_key'] = $column_key;
+                    array_push($this->chart_header_row, $chart_header);
             }
             elseif ($skip_non_group == true && $column_field_name == 'summary_columns' && $this->do_chart == true) {
-                $this->layout_manager->setAttribute('context', 'HeaderCellPlain');
+                    $this->layout_manager->setAttribute('context', 'HeaderCellPlain');
                 $chart_header = array();
-                $chart_header['label'] = $this->layout_manager->widgetDisplay($display_column);
-                $chart_header['column_key'] = $column_key;
-                array_push($this->chart_total_header_row, $chart_header);
+                    $chart_header['label'] = $this->layout_manager->widgetDisplay($display_column);
+                    $chart_header['column_key'] = $column_key;
+                    array_push($this->chart_total_header_row, $chart_header);
             }
 
-        } // END foreach
+            } // END foreach
+        }
 
         // Bug 29829 Make sure the header names are distinct labels for sugarpdf writeCellTable()
         if ($force_distinct) {
@@ -2647,7 +2648,7 @@ class Report
                 if (!empty($this->report_def['group_defs'])) {
                     $group_def_array = $this->report_def['group_defs'];
                     if (isset($this->report_def['layout_options']) &&
-                        ((count($group_def_array) == 2) || (count($group_def_array) == 3))
+                        (((is_countable($group_def_array) ? count($group_def_array) : 0) == 2) || ((is_countable($group_def_array) ? count($group_def_array) : 0) == 3))
                     ) {
                         $reportType = 'Matrix';
                     }
@@ -2769,6 +2770,7 @@ class Report
     // static function to return the modules associated to a report definition
     function getModules(&$report_def)
     {
+        $modules_hash = [];
         $modules = array();
         $modules_hash[$report_def['module']] = 1;
         $focus = BeanFactory::newBean($report_def['module']);
@@ -2967,7 +2969,7 @@ class Report
     {
         // Summary labels are customizable. Summary label should be used instead of group label
         if (isset($this->report_def['summary_columns']) && isset($this->report_def['group_defs'])) {
-            for ($i = 0; $i < count($this->report_def['group_defs']); $i++) {
+            for ($i = 0; $i < (is_countable($this->report_def['group_defs']) ? count($this->report_def['group_defs']) : 0); $i++) {
                 $isValid = true;
                 if (isset($this->report_def['group_defs'][$i]['qualifier'])) {
                     if (!isset($this->report_def['summary_columns'][$i]['qualifier'])) {

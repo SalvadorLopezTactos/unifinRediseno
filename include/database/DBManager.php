@@ -994,7 +994,7 @@ abstract class DBManager implements LoggerAwareInterface
 	{
         $indices = $this->massageIndexDefs($fieldDefs, $indices);
 		if (!empty($fieldDefs)) {
-			$sql = $this->createTableSQLParams($tablename, $fieldDefs, $indices, $engine);
+            $sql = $this->createTableSQLParams($tablename, $fieldDefs, $indices, $engine);
 			$res = true;
 			if ($sql) {
 				$msg = "Error creating table: $tablename";
@@ -1093,7 +1093,7 @@ abstract class DBManager implements LoggerAwareInterface
         //if the table does not exist create it and we are done
         $sql = "/* Table : $tableName */\n";
         if (!$this->tableExists($tableName)) {
-            $createtablesql = $this->createTableSQLParams($tableName,$fielddefs,$indices,$engine);
+            $createtablesql = $this->createTableSQLParams($tableName, $fielddefs, $indices, $engine);
             if($execute && $createtablesql){
                 $this->createTableParams($tableName,$fielddefs,$indices,$engine);
             }
@@ -2205,6 +2205,7 @@ abstract class DBManager implements LoggerAwareInterface
 	 */
 	public function fetchOneOffset($sql, $offset, $dieOnError = false, $msg = '', $encode = true)
 	{
+        $suppress = null;
         $this->logger->info("fetch OneOffset: |$sql|");
 		$this->checkConnection();
 
@@ -2996,6 +2997,8 @@ abstract class DBManager implements LoggerAwareInterface
 	 */
     protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false, $action = null)
 	{
+        $colBaseType = null;
+        $defLen = null;
 		$name = $fieldDef['name'];
 		$type = $this->getFieldType($fieldDef);
         $colType = $this->getColumnType($type);
@@ -3704,6 +3707,9 @@ abstract class DBManager implements LoggerAwareInterface
 		$i = 0;
 		$order_by_arr = array();
         $returnValue = '';
+        if (!safeIsIterable($values)) {
+            return $returnValue;
+        }
 		foreach ($values as $key => $value) {
 			if($key == '') {
 				$order_by_arr[] = "WHEN ($order_by='' OR $order_by IS NULL) THEN $i";
@@ -4802,5 +4808,45 @@ abstract class DBManager implements LoggerAwareInterface
 
     public function optimizeTable(string $table): void
     {
+    }
+
+    /**
+     * check if $db is Mysql
+     * @param DBManager|null $db
+     * @return bool
+     */
+    public static function isMysql(?DBManager $db) : bool
+    {
+        return ($db instanceof MysqlManager);
+    }
+
+    /**
+     * check if $db is Oracle
+     * @param DBManager|null $db
+     * @return bool
+     */
+    public static function isOracle(?DBManager $db) : bool
+    {
+        return ($db instanceof OracleManager);
+    }
+
+    /**
+     * check if $db is DB2
+     * @param DBManager|null $db
+     * @return bool
+     */
+    public static function isDb2(?DBManager $db) : bool
+    {
+        return ($db instanceof IBMDB2Manager);
+    }
+
+    /**
+     * check if $db is SQL Server
+     * @param DBManager|null $db
+     * @return bool
+     */
+    public static function isSqlServer(?DBManager $db) : bool
+    {
+        return ($db instanceof SqlsrvManager);
     }
 }

@@ -101,7 +101,7 @@ class Config
             $components = array($components);
         }
 
-        $isAssociativeArray = array_keys($components) !== range(0, count($components) - 1);
+        $isAssociativeArray = array_keys($components) !== range(0, (is_countable($components) ? count($components) : 0) - 1);
         foreach ($components as $key => $value) {
             if (is_string($value)) {
                 $result[] = array(

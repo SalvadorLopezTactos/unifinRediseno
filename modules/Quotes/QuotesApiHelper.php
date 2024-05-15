@@ -75,6 +75,8 @@ class QuotesApiHelper extends SugarBeanApiHelper
      */
     protected function setAddressFromBean($fromModule, $fromId, SugarBean $quote)
     {
+        $typeKey = null;
+        $altTypeKey = null;
         $fromBean = BeanFactory::getBean($fromModule, $fromId);
         if ($fromModule == 'Contacts') {
             $quote->shipping_contact_id = $fromId;

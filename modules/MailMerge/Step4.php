@@ -9,6 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Guid;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+
 global $app_strings;
 global $app_list_strings;
 global $mod_strings;
@@ -21,6 +26,10 @@ $xtpl->assign("APP", $app_strings);
 
 if(!empty($_POST['document_id']))
 {
+    $docIdViolations = Validator::getService()->validate($_POST['document_id'], new Guid());
+    if ($docIdViolations->count()) {
+        throw new ViolationException('Invalid document ID', $docIdViolations);
+    }
 	$_SESSION['MAILMERGE_DOCUMENT_ID'] = $_POST['document_id'];
 }
 $document_id = $_SESSION['MAILMERGE_DOCUMENT_ID'];

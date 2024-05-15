@@ -10,6 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\DropdownList;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Guid;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Bean\ModuleName;
+
 require_once('modules/MailMerge/modules_array.php');
 require_once('modules/MailMerge/merge_query.php');
 
@@ -30,11 +36,31 @@ if(!isset($_SESSION['MAILMERGE_MODULE']))
 {
 	if(isset($_POST['mailmerge_module']))
 	{
+        $violations = Validator::getService()->validate($_POST['mailmerge_module'], new ModuleName());
+
+        if ($violations->count() > 0) {
+            $GLOBALS['log']->error('Violation for module name');
+            throw new ViolationException(
+                'Violation for module name',
+                $violations
+            );
+        }
+
 		$_SESSION['MAILMERGE_MODULE'] = $_POST['mailmerge_module'];
 	}
 }
 
 if(isset($_POST['contains_contact_info'])){
+
+    $violations = Validator::getService()->validate($_POST['contains_contact_info'], new ModuleName());
+
+    if ($violations->count() > 0) {
+        $GLOBALS['log']->error('Violation for module name');
+        throw new ViolationException(
+            'Violation for module name',
+            $violations
+        );
+    }
 
 	$_SESSION['MAILMERGE_CONTAINS_CONTACT_INFO'] = $_POST['contains_contact_info'];
 
@@ -44,6 +70,12 @@ if(!isset($_SESSION["MAILMERGE_DOCUMENT_ID"]))
 {
 	if(!empty($_POST['document_id']))
 	{
+        $violations = Validator::getService()->validate($_POST['document_id'], new Guid());
+
+        if ($violations->count()) {
+            throw new ViolationException('Invalid document ID', $violations);
+        }
+
 		$_SESSION['MAILMERGE_DOCUMENT_ID'] = $_POST['document_id'];
 	}
 }

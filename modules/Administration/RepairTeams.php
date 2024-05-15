@@ -144,6 +144,7 @@ if (isset($_REQUEST['silent']) and $_REQUEST['silent']==0) {
 }
 function render_rebuild_options($global_team_id=1) {
 
+    $smarty = null;
     global $current_language;
     $user = BeanFactory::newBean('Users');
     static $mod_strings = null;

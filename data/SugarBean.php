@@ -385,6 +385,16 @@ class SugarBean
     protected $stateChanges;
 
     /**
+     * @var array
+     */
+    protected array $fillable = [];
+
+    public function getFillable(): array
+    {
+        return $this->fillable;
+    }
+
+    /**
      * Create Bean
      * @deprecated
      * @param string $beanName
@@ -1509,7 +1519,7 @@ class SugarBean
                     return array_values($this->$field_name->getBeans(array(
                         'where' => $optional_where,
                         'deleted' => $deleted,
-                        'limit' => ($end_index - $begin_index)
+                        'limit' => ((int)$end_index - (int)$begin_index),
                     )));
                 else
                     return array_values($this->$field_name->getBeans());
@@ -2015,6 +2025,7 @@ class SugarBean
      */
     public function auditSQL(SugarBean $bean, $changes, $event_id)
     {
+        $dictionary = [];
         global $current_user;
         $sql = "INSERT INTO ".$bean->get_audit_table_name();
         //get field defs for the audit table.
@@ -2571,20 +2582,6 @@ class SugarBean
                     $influencing_fields = $this->get_fields_influencing_linked_bean_calc_fields($lname);
                     $data_changes = $this->db->getDataChanges($this);
                     $changed_fields = array_keys($data_changes);
-
-                    // loop over the influencing_fields to check if any are calculated and enforced formulas
-                    // if they are we need to add them to the changed_fields as they could have been
-                    // changed from another save that was done` before this one since we don't roll up more than one
-                    // level at a time a rollup on a rollup field would never update the parent unless the parent is
-                    // saved explicitly
-                    foreach($influencing_fields as $field) {
-                        $def = $this->getFieldDefinition($field);
-
-                        if (isset($def['calculated']) && isTruthy($def['calculated']) &&
-                            isset($def['enforced']) && isTruthy($def['enforced'])) {
-                            $changed_fields[] = $field;
-                        }
-                    }
 
                     // if fetched_row is empty we have a new record, so don't check for changed_fields
                     // if deleted is 1, we need to update all related items
@@ -3613,6 +3610,7 @@ class SugarBean
     */
     public function retrieve($id = -1, $encode = true, $deleted = true)
     {
+        $custom_logic_arguments = [];
         // in case if a CHAR ID was fetched from database manually, we need to convert it here in order
         // to make sure it doesn't contain trailing spaces
         $id = $this->db->fromConvert($id, 'id');
@@ -4243,9 +4241,11 @@ class SugarBean
 
         $erased_fields = json_decode($row[$key], true);
 
-        return count(
-            array_intersect($erased_fields, $sourceFields)
-        ) > 0;
+        if (!is_array($erased_fields)) {
+            return false;
+        }
+
+        return safeCount(array_intersect($erased_fields, $sourceFields)) > 0;
     }
 
     /**
@@ -4278,6 +4278,16 @@ class SugarBean
     */
     function create_list_count_query($query)
     {
+        // sometimes this method calls with $query as array, this is wrong like calling the deprecated functionality.
+        // This workaround to avoid failures, but all calls of this should be removed in the future.
+        if (is_array($query)) {
+            $results = [];
+            foreach ($query as $queryPart) {
+                $results[] = $this->create_list_count_query($queryPart);
+            }
+            return $results;
+        }
+
         // remove the 'order by' clause which is expected to be at the end of the query
         $pattern = '/\sORDER BY.*/is';  // ignores the case
         $replacement = '';
@@ -4769,16 +4779,19 @@ class SugarBean
                 } else {
                     $tmp_final_query = $parentbean->$shortcut_function_name();
                 }
-                if(!$first)
-                    {
-                        $final_query_rows .= ' UNION ALL ( '.$parentbean->create_list_count_query($tmp_final_query, $parameters) . ' )';
-                        $final_query .= ' UNION ALL ( '.$tmp_final_query . ' )';
-                    } else {
-                        $final_query_rows = '(' . $parentbean->create_list_count_query($tmp_final_query, $parameters) . ')';
+                if (!$first) {
+                    $final_query_rows .= ' UNION ALL ( ' . $parentbean->create_list_count_query($tmp_final_query, $parameters) . ' )';
+                    $final_query .= ' UNION ALL ( ' . $tmp_final_query . ' )';
+                } else {
+                    $final_query_rows = '(' . $parentbean->create_list_count_query($tmp_final_query, $parameters) . ')';
+                    if (self::canApplyParentheses($GLOBALS['db'])) {
                         $final_query = '(' . $tmp_final_query . ')';
-                        $first = false;
+                    } else {
+                        $final_query = $tmp_final_query;
                     }
+                    $first = false;
                 }
+            }
         }
         //If final_query is still empty, its time to build the sub-queries
         if (empty($final_query))
@@ -4819,7 +4832,10 @@ class SugarBean
                     $query = ' UNION ALL ( '.$query . ' )';
                     $final_query_rows .= " UNION ALL ";
                 } else {
-                    $query = '(' . $query . ')';
+                    // to make the minimal impact on the sql
+                    if (self::canApplyParentheses($GLOBALS['db'])) {
+                        $query = '(' . $query . ')';
+                    }
                     $first = false;
                 }
                 $query_array = $subquery['query_array'];
@@ -4907,6 +4923,22 @@ class SugarBean
         return $parentbean->process_union_list_query($parentbean, $final_query, $row_offset, $limit, $max, '',$subpanel_def, $final_query_rows, $secondary_queries);
     }
 
+    /**
+     * excludging Mysql with version >= 8.0.30.
+     * @param DBManager|null $db
+     * @return bool
+     */
+    private static function canApplyParentheses(?DBManager $db) : bool
+    {
+        if (!DBManager::isMysql($db)) {
+            return true;
+        }
+
+        if (version_compare($db->version(), '8.0.30') >= 0) {
+            return false;
+        }
+        return true;
+    }
 
     /**
     * Returns a full (ie non-paged) list of the current object type.
@@ -5014,19 +5046,24 @@ class SugarBean
         if(!empty($filter))
         {
             $filterKeys = array_keys($filter);
-            if(is_numeric($filterKeys[0]))
-            {
-                $fields = array();
-                foreach($filter as $field)
-                {
+            if (is_numeric($filterKeys[0])) {
+                $fields = [];
+                foreach ($filter as $filterKey => $field) {
+                    if (is_string($field)) {
                     $field = strtolower($field);
-                    if(isset($this->field_defs[$field]))
-                    {
-                        $fields[$field]= $this->field_defs[$field];
+                    } elseif (is_string($filterKey)) {
+                        $field = strtolower($filterKey);
+                    } else {
+                        $e = new Exception();
+                        LoggerManager::getLogger()->fatal(
+                            'Malformed filter definition in create_new_list_query: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString()
+                        );
+                        continue;
                     }
-                    else
-                    {
-                        $fields[$field] = array('force_exists'=>true);
+                    if (isset($this->field_defs[$field])) {
+                        $fields[$field] = $this->field_defs[$field];
+                    } else {
+                        $fields[$field] = ['force_exists' => true];
                     }
                 }
             }else{
@@ -5352,7 +5389,7 @@ class SugarBean
                                 global $current_user;
                                 if (!empty($current_user) && $current_user->showLastNameFirst()) {
                                     $reversedFields = [];
-                                    for ($i = count($data['db_concat_fields']) - 1; $i >= 0; $i--) {
+                                    for ($i = (is_countable($data['db_concat_fields']) ? count($data['db_concat_fields']) : 0) - 1; $i >= 0; $i--) {
                                         $reversedFields[] = $data['db_concat_fields'][$i] ?? '';
                                     }
                                     $full_name_search = str_replace($data['name'], $this->db->concat($params['join_table_alias'], $reversedFields), $search_expression);
@@ -5520,8 +5557,10 @@ class SugarBean
                     $row['parent_erased_fields'] = $parent->erased_fields;
                 }
 
-                foreach ($parentsToChildren[$parent->id] as $child_id) {
-                    $results[$child_id] = $row;
+                if (isset($parent->id) && isset($parentsToChildren[$parent->id]) && is_iterable($parentsToChildren[$parent->id])) {
+                    foreach ($parentsToChildren[$parent->id] as $child_id) {
+                        $results[$child_id] = $row;
+                    }
                 }
             }
         }
@@ -5543,6 +5582,8 @@ class SugarBean
      */
     function process_list_query($query, $row_offset, $limit= -1, $max_per_page = -1, $where = '')
     {
+        $rows_found = null;
+        $queryParts = [];
         if (is_array($query)) {
             $queryParts = $query;
             $query = $query['select'] . $query['from'] . $query['where'] . $query['order_by'];
@@ -5636,8 +5677,10 @@ class SugarBean
             $secondaryResult = $this->db->query($secondaryQuery);
 
             while (($row = $this->db->fetchByAssoc($secondaryResult)) !== false) {
-                foreach ($idIndex[$row['ref_id']] as $index) {
-                    $data[$index] = array_merge($data[$index], $row);
+                if (isset($idIndex[$row['ref_id']]) && safeIsIterable($idIndex[$row['ref_id']])) {
+                    foreach ($idIndex[$row['ref_id']] as $index) {
+                        $data[$index] = array_merge($data[$index], $row);
+                    }
                 }
             }
         }
@@ -6116,6 +6159,7 @@ class SugarBean
     function process_full_list_query($query, $check_date=false)
     {
 
+        $list = [];
         $GLOBALS['log']->debug("process_full_list_query: query is ".$query);
         $result = $this->db->query($query, false);
         $GLOBALS['log']->debug("process_full_list_query: result is ".print_r($result,true));
@@ -6403,6 +6447,9 @@ class SugarBean
             $this->{$name . '_owner'} = $relatedBean->$ownerField;
         }
 
+        if (!is_array($relatedBean->erased_fields)) {
+            $relatedBean->erased_fields = [];
+        }
         if ($this->retrieve_erased_fields) {
             if (isset($definition['link'])) {
                 $this->{$definition['link'] . '_erased_fields'} = $relatedBean->erased_fields;
@@ -6421,7 +6468,7 @@ class SugarBean
                     $sourceFields = [$rName];
                 }
 
-                if (count(
+                if (safeCount(
                     array_intersect($relatedBean->erased_fields, $sourceFields)
                 ) > 0) {
                     $this->erased_fields[] = $name;
@@ -6448,6 +6495,7 @@ class SugarBean
      */
     protected function getDeleteUpdateParams(string $date = null, string $userId = null)
     {
+        $return = [];
         // Delete marker is always needed
         $return['deleted'] = 1;
 
@@ -6469,6 +6517,7 @@ class SugarBean
      */
     public function mark_deleted($id)
     {
+        $custom_logic_arguments = [];
         if (isset($_SESSION['show_deleted'])) {
             $this->mark_undeleted($id);
         } else {
@@ -6565,6 +6614,7 @@ class SugarBean
     */
     function mark_undeleted($id)
     {
+        $custom_logic_arguments = [];
         // call the custom business logic
         $custom_logic_arguments['id'] = $id;
         $this->call_custom_logic("before_restore", $custom_logic_arguments);
@@ -6782,6 +6832,7 @@ class SugarBean
      */
     function updateDependentFieldForListView($listview_def_main = '', $filter_fields = null)
     {
+        $listViewDefs = [];
         static $listview_def = '';
         static $module_name = '';
         // for subpanels
@@ -6885,7 +6936,7 @@ class SugarBean
             }
             $name = $this->db->getValidDBName($name);
 
-            $where_clause .= "$name = ".$this->db->quoted($value,false);
+            $where_clause .= "$name = ".$this->db->quoted($value);
         }
         if(!empty($where_clause)) {
             if($deleted) {
@@ -9070,7 +9121,7 @@ class SugarBean
 
         $changes = $this->db->getStateChanges($this, $this->lastAuditedState, ['for' => 'audit']);
 
-        if (count($changes) < 1) {
+        if ((is_countable($changes) ? count($changes) : 0) < 1) {
             return;
         }
 

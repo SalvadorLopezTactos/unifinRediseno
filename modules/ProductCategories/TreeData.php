@@ -64,7 +64,7 @@ SQL;
         $node = new Node($row['id'], $row['name']);
         $node->set_property("href", $href_string);
 
-    	if (count($open_nodes_ids) > 0 and $row['id']==current($open_nodes_ids)) {
+        if ((is_countable($open_nodes_ids) ? count($open_nodes_ids) : 0) > 0 and $row['id']==current($open_nodes_ids)) {
             $node->expanded = true;
             $node->dynamic_load = false;
             $current_id=current($open_nodes_ids);

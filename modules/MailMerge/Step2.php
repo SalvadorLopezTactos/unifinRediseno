@@ -9,6 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Bean\ModuleName;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Guid;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+
 //require_once('include/utils.php');
 require_once('include/json_config.php');
 $json_config = new json_config();
@@ -29,6 +35,15 @@ $xtpl->assign('JSON_CONFIG_JAVASCRIPT', $json_config->get_static_json_server(fal
 
 if(isset($_POST['mailmerge_module']))
 {
+    $violations = Validator::getService()->validate($_POST['mailmerge_module'], new ModuleName());
+    if ($violations->count() > 0) {
+        $GLOBALS['log']->error('Violation for module name');
+        throw new ViolationException(
+            'Violation for module name',
+            $violations
+        );
+    }
+
 	$_SESSION['MAILMERGE_MODULE'] = $_POST['mailmerge_module'];
     if($_SESSION['MAILMERGE_MODULE'] == 'Campaigns'){
         $_SESSION['MAILMERGE_MODULE'] = 'CampaignProspects';
@@ -115,6 +130,11 @@ if($_SESSION['MAILMERGE_MODULE'] == 'CampaignProspects'){
 
 if(!empty($_POST['document_id']))
 {
+    $recordIdViolations = Validator::getService()->validate($_POST['document_id'], new Guid());
+    if ($recordIdViolations->count()) {
+        throw new ViolationException('Invalid ID', $recordIdViolations);
+    }
+
 	$_SESSION['MAILMERGE_DOCUMENT_ID'] = $_POST['document_id'];
 }
 

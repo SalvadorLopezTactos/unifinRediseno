@@ -161,7 +161,7 @@ class MapsGenerator
             $pushPins = $this->bingGeneratePushPins($recordsMeta, false, true);
         }
 
-        $pushPins = implode($pushPins);
+        $pushPins = implode('', $pushPins);
 
         $mapType = $this->bingGetMapType($mapMeta);
         $baseUrl = $this->bingMapUrl();

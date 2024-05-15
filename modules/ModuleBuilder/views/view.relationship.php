@@ -176,10 +176,10 @@ class ViewRelationship extends SugarView
             // many-many for example
 
             // fix up the available cardinality options
-            if (count($lhs_subpanels) == 0 || count($rhs_subpanels) == 0) {
+            if ((is_countable($lhs_subpanels) ? count($lhs_subpanels) : 0) == 0 || (is_countable($rhs_subpanels) ? count($rhs_subpanels) : 0) == 0) {
                 unset($cardinality[MB_MANYTOMANY]);
             }
-            if (count($rhs_subpanels) == 0) {
+            if ((is_countable($rhs_subpanels) ? count($rhs_subpanels) : 0) == 0) {
                 unset($cardinality[MB_ONETOMANY]);
             }
 

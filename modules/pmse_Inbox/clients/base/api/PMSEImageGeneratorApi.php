@@ -129,6 +129,12 @@ class PMSEImageGeneratorApi extends FileTempApi
         $image = ProcessManager\Factory::getPMSEObject('PMSEImageGenerator');
         $img = empty($args['_project']) ?
             $image->get_image($args['record']) : $image->getProjectImage($args['record']);
+        if ($img === null) {
+            LoggerManager::getLogger()->fatal(
+                __METHOD__ . ': image processing failed' .  PHP_EOL . (new Exception())->getTraceAsString()
+            );
+            return;
+        }
         $file = new UploadStream();
         if (!$file->checkDir($path)) {
             $file->createDir($path);

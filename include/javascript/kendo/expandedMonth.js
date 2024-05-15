@@ -30,32 +30,6 @@
             '<tr>' + tableRows.join('</tr><tr>') + '</tr>' + '</table>';
     }
 
-    function times(rowLevels, rowCount) {
-        var rows = new Array(rowCount).join().split(',');
-        var rowHeaderRows = [];
-        var rowIndex;
-        for (var rowLevelIndex = 0; rowLevelIndex < rowLevels.length; rowLevelIndex++) {
-            var level = rowLevels[rowLevelIndex];
-            var rowspan = rowCount / level.length;
-            var className;
-            for (rowIndex = 0; rowIndex < level.length; rowIndex++) {
-                className = level[rowIndex].className || '';
-                if (level[rowIndex].allDay) {
-                    className = 'k-scheduler-times-all-day';
-                }
-                rows[rowspan * rowIndex] += '<th class="' + className + '" rowspan="' + rowspan + '">' +
-                    level[rowIndex].text + '</th>';
-            }
-        }
-        for (rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-            rowHeaderRows.push(rows[rowIndex]);
-        }
-        if (rowCount < 1) {
-            return $();
-        }
-        return $('<div class="k-scheduler-times">' + table(rowHeaderRows) + '</div>');
-    }
-
     function content() {
         return $('<div class="k-scheduler-content">' + '<table ' + cellspacing() +
             ' class="k-scheduler-table"/>' + '</div>');
@@ -146,8 +120,6 @@
 
             this.content.children(".k-event,.k-more-events,.k-events-container").remove();
             this._groups();
-
-            this.updateResourcesLayout(events);
 
             events = new kendo.data.Query(events).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }]).toArray();
             var resources = this.groupedResources;
@@ -291,24 +263,8 @@
         },
 
         _bottomSection: function(columnLevels, rowLevels, rowCount) {
-            this.times = times(rowLevels, rowCount);
             this.content = content(columnLevels[columnLevels.length - 1], rowLevels[rowLevels.length - 1]);
-            return $('<tr>').append(this.times.add(this.content).wrap('<td>').parent());
-        },
-
-        /**
-         * The left side column (resources) has to be updated in order to span for entire columns on the rigt side
-         * Considering we touched cells length, we need to manually update this column
-         */
-        updateResourcesLayout: function(events) {
-            var content = this.content;
-            var contentTrs = content.find("tr");
-            var times = this.times;
-            var timesTr = times.find("tr");
-            _.each(contentTrs, function(contentTr, idx) {
-            var contentTrHeight = $(contentTr).css("height");
-            $(timesTr[idx]).css("height", contentTrHeight);
-            });
+            return $('<tr>').append(this.content.wrap('<td>').parent());
         }
     });
 })();

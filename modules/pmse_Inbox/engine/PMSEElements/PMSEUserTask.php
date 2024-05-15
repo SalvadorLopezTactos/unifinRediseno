@@ -65,6 +65,8 @@ class PMSEUserTask extends PMSEEvent
      */
     public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
     {
+        $routeAction = null;
+        $flowAction = null;
         if ($externalAction != '') {
             $usesEBGateway = $this->checkIfUsesAnEventBasedGateway($flowData['cas_id'], $flowData['cas_index']);
             $this->checkIfExistEventBased($flowData['cas_id'], $flowData['cas_index'], $usesEBGateway);

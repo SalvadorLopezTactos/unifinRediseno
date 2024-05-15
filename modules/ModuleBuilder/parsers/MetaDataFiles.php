@@ -1287,10 +1287,10 @@ class MetaDataFiles
     {
         $mergeComponents = $mergeDefs['components'];
 
-        foreach($mergeComponents as $mergeComponent) {
+        foreach (safeIsIterable($mergeComponents) ? $mergeComponents : [] as $mergeComponent) {
             // if it is the only thing in the array its an override and it needs to be added to an existing component
             if (isset($currentDefs['components'], $mergeComponent['override_subpanel_list_view'])
-                && count($mergeComponent) == 1
+                && (is_countable($mergeComponent) ? count($mergeComponent) : 0) == 1
             ) {
                 $overrideView = $mergeComponent['override_subpanel_list_view']['view'];
                 $mergeContext = $mergeComponent['override_subpanel_list_view']['link'];

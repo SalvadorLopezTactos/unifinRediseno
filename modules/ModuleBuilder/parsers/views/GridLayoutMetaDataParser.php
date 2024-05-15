@@ -355,8 +355,7 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
     function addField ( $def , $panelID = FALSE)
     {
 
-        if (count ( $this->_viewdefs [ 'panels' ] ) == 0)
-        {
+        if ((is_countable($this->_viewdefs ['panels']) ? count($this->_viewdefs ['panels']) : 0) == 0) {
             $GLOBALS [ 'log' ]->error ( get_class ( $this ) . "->addField(): _viewdefs empty for module {$this->_moduleName} and view {$this->_view}" ) ;
         }
 
@@ -371,7 +370,7 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
 
             $panel = $this->_viewdefs [ 'panels' ] [ $panelID ] ;
             if(!empty($panel)) {
-                $lastrow = count ( $panel ) - 1 ; // index starts at 0
+                $lastrow = (is_countable($panel) ? count($panel) : 0) - 1; // index starts at 0
                 $lastRowDef = $this->_viewdefs [ 'panels' ] [ $panelID ] [ $lastrow ];
             } else {
                 $lastrow = 0;
@@ -431,7 +430,7 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
         foreach ( $this->_viewdefs [ 'panels' ] as $panelID => $panel )
         {
             $lastRowTouched = false ;
-            $lastRowID = count ( $this->_viewdefs [ 'panels' ] [ $panelID ] ) - 1 ; // zero offset
+            $lastRowID = (is_countable($this->_viewdefs ['panels'] [$panelID]) ? count($this->_viewdefs ['panels'] [$panelID]) : 0) - 1; // zero offset
 
             foreach ( $panel as $rowID => $row )
             {
@@ -460,8 +459,9 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
                 {
                     unset ( $this->_viewdefs [ 'panels' ] [ $panelID ] [ $lastRowID ] ) ;
                     // if the row was the only one in the panel, and the panel is not the first (default) panel, then remove the panel also
-					if ( count ( $this->_viewdefs [ 'panels' ] [ $panelID ] ) == 0 && $panelID != $firstPanelID )
-						unset ( $this->_viewdefs [ 'panels' ] [ $panelID ] ) ;
+                    if ((is_countable($this->_viewdefs ['panels'] [$panelID]) ? count($this->_viewdefs ['panels'] [$panelID]) : 0) == 0 && $panelID != $firstPanelID) {
+                        unset($this->_viewdefs['panels'][$panelID]);
+                    }
                 }
 
             }
@@ -781,8 +781,7 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
         // Fix for a flexibility in the format of the panel sections - if only one panel, then we don't have a panel level defined,
 		// it goes straight into rows
         // See EditView2 for similar treatment
-        if (! empty ( $panels ) && count ( $panels ) > 0)
-        {
+        if (!empty($panels) && (is_countable($panels) ? count($panels) : 0) > 0) {
             $keys = array_keys ( $panels ) ;
             if (is_numeric ( $keys [ 0 ] ))
             {

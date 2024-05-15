@@ -53,7 +53,7 @@ class SugarACLTeamBased extends SugarACLStrategy
             return true;
         }
 
-        $action = $this->fixUpActionName($action);
+        $action = static::fixUpActionName($action);
         // Field level.
         if ($action == 'field') {
             return $this->fieldACL($bean, $user, $context);

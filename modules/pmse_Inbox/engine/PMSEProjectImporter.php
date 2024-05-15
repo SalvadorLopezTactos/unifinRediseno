@@ -318,6 +318,10 @@ class PMSEProjectImporter extends PMSEImporter
      */
     protected function saveProjectBean(array $project)
     {
+        if (!$this->getBean()->ACLAccess('save', $project)) {
+            throw new SugarApiExceptionNotAuthorized();
+        }
+
         $this->handleProjectBeanSave($project);
         $this->addKey('prj_id', $this->getBeanId());
 

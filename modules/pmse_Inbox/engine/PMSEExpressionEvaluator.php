@@ -411,11 +411,22 @@ class PMSEExpressionEvaluator
             (strtolower($value2ExpSubtype) == 'currency' && $this->isScalar($value1))) {
             switch ($operator) {
                 case 'x':
-                    $result = $value1->expValue * $value2->expValue;
+                    $v1exp = $value1->expValue ?? null;
+                    $v2exp = $value1->expValue ?? null;
+                    if (is_numeric($v1exp) && is_numeric($v2exp)) {
+                        $result = (float)$v1exp * (float)$v2exp;
+                    } else {
+                        $result = 0;
+                        PMSELogger::getInstance()->error(
+                            'Non-numeric values in executeMultiplyDivideCurrency: '
+                            . '$value1->expValue = ' . var_export($v1exp, true)
+                            . '; $value2->expValue = ' . var_export($v2exp, true)
+                        );
+                    }
                     break;
                 case '/':
-                    if (strtolower($value1ExpSubtype) == 'currency') {
-                        $result = $value1->expValue / $value2->expValue;
+                    if (strtolower($value1ExpSubtype) == 'currency' && (float)($value2->expValue ?? 0) != 0) {
+                        $result = (float)($value1->expValue ?? 0) / (float)$value2->expValue;
                     } else {
                         $error = "Impossible to divide an scalar value by a currency.";
                     }
@@ -441,16 +452,17 @@ class PMSEExpressionEvaluator
         $result = 0;
         switch ($operator) {
             case '+':
-                $result = $value1 + $value2;
+                $result = (float)$value1 + (float)$value2;
                 break;
             case '-':
-                $result = $value1 - $value2;
+                $result = (float)$value1 - (float)$value2;
                 break;
         }
         return $result;
     }
 
     public function executeAddSubstractCurrency($value1, $operator, $value2) {
+        $result = null;
         global $current_user;
 
         $value1ExpSubtype = PMSEEngineUtils::getExpressionSubtype($value1);
@@ -473,10 +485,10 @@ class PMSEExpressionEvaluator
 
         switch ($operator) {
             case '+':
-                $result = $num1 + $num2;
+                $result = (float)$num1 + (float)$num2;
                 break;
             case '-':
-                $result = $num1 - $num2;
+                $result = (float)$num1 - (float)$num2;
                 break;
         }
 

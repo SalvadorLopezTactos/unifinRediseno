@@ -285,6 +285,7 @@ class AbstractRelationships
     {
 
         $relationships = SugarRelationshipFactory::getInstance()->getRelationshipDefs();
+        $relationships = is_array($relationships) ? $relationships : [];
         array_walk($relationships, function (&$def) {
             $def['readonly'] = true;
             $def['relationship_name'] = $def['name'];
@@ -370,8 +371,7 @@ class AbstractRelationships
                     {
                         $metadata = $relationship->$buildMethod () ;
 
-                        if (count ( $metadata ) > 0) // don't clutter up the filesystem with empty files...
-                        {
+                        if ((is_countable($metadata) ? count($metadata) : 0) > 0) {// don't clutter up the filesystem with empty files...
                             $GLOBALS [ 'log' ]->debug ( get_class ( $this ) . ": BUILD is running METHOD $saveMethod" ) ;
                             $installDef = $this->$saveMethod ( $basepath, $installDefPrefix, $name, $metadata ) ;
                             if (!is_null($installDef)) {
@@ -680,6 +680,7 @@ class AbstractRelationships
 
     protected function saveWirelessSubpanelDefinitions ($basepath , $installDefPrefix , $relationshipName , $subpanelDefinitions)
     {
+        $installDefs = [];
         mkdir_recursive ( "$basepath/wirelesslayoutdefs/" ) ;
 
         foreach ( $subpanelDefinitions as $moduleName => $definitions )
@@ -718,6 +719,7 @@ class AbstractRelationships
      */
     protected function saveVardefs ($basepath , $installDefPrefix , $relationshipName , $vardefs)
     {
+        $installDefs = [];
         mkdir_recursive ( "$basepath/vardefs/" ) ;
         $GLOBALS [ 'log' ]->debug ( get_class ( $this ) . "->saveVardefs(): vardefs =" . print_r ( $vardefs, true ) ) ;
 
@@ -784,7 +786,7 @@ class AbstractRelationships
             $key = $mb->getPackage ( $name )->key ;
             if (strlen ( $key ) < strlen ( $deployedName ))
             {
-                $position = stripos ( $deployedName, $key ) ;
+                $position = stripos($deployedName, (string)$key);
                 $moduleName = trim( substr( $deployedName , strlen($key) ) , '_' ); //use trim rather than just assuming that _ is between packageName and moduleName in the deployedName
                 if ( $position !== false && $position == 0 && (isset ( $mb->packages [ $name ]->modules [ $moduleName ] )))
                 {

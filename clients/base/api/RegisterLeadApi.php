@@ -50,6 +50,7 @@ class RegisterLeadApi extends SugarApi {
      */
     public function createLeadRecord(ServiceBase $api, array $args)
     {
+        $fields = [];
         $msg = 'This endpoint is deprecated for portal lead creation as of 9.2.0';
         LoggerManager::getLogger()->deprecated($msg);
 

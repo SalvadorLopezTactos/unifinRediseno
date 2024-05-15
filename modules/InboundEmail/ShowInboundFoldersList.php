@@ -108,7 +108,7 @@ $ie->mailbox        = 'INBOX';
 
 if($popupBoolean) {
     $returnArray = $ie->getFoldersListForMailBox();
-    $foldersList = $returnArray['foldersList'];
+    $foldersList = $returnArray['foldersList'] ?? '';
     if ($returnArray['status']) {
         $msg = $returnArray['statusMessage'];
         $requestMailBox = explode(",", $_REQUEST['mailbox']);
@@ -169,7 +169,7 @@ echo '<tr>
 				</td>
 				<td valign="top">
 					<div id="sf_deletedFoldersList" style="display:none;">
-					'. htmlspecialchars($deletedFoldersList).'
+					' . htmlspecialchars($deletedFoldersList).'
 					</div>
 				</td>
 			</tr>
@@ -212,7 +212,7 @@ printf('<input type="hidden" id="sf_returnstatus" name="returnstatus" value="%s"
 printf('<input type="hidden" id="sf_foldersList" name="foldersList" value="%s">', htmlspecialchars($foldersList));
 printf(
     '<input type="hidden" id="sf_selectedfoldersList" name="selectedfoldersList" value="%s">',
-    htmlspecialchars(implode(',', $requestMailBox), ENT_QUOTES, 'UTF-8')
+    htmlspecialchars(implode(',', $requestMailBox ?? []), ENT_QUOTES, 'UTF-8')
 );
 printf(
     '<input type="hidden" id="sf_searchField" name="searchField" value="%s">',

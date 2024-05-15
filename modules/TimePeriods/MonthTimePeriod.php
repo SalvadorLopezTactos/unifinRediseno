@@ -123,7 +123,7 @@ class MonthTimePeriod extends TimePeriod implements TimePeriodInterface {
                    return $count;
                }
             }
-            return count($keys);
+            return is_countable($keys) ? count($keys) : 0;
         }
 
         $keys = array();

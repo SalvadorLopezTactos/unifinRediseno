@@ -101,6 +101,7 @@ class PMSECaseWrapper //extends FilterApi
     }
     public function _concat_filter($def_filter_value,$def_filter_conditional,$def_filter_name)
     {
+        $staticAssignmentCondition = null;
         $_query_filter="";
             switch($def_filter_conditional)
             {
@@ -144,6 +145,7 @@ class PMSECaseWrapper //extends FilterApi
     }
     public function _FilterTime($time)
     {
+        $def_filter_value = null;
         foreach($time as $uno => $dos){
             foreach($dos as $tres => $cuatro){
                 if ($tres == 'in_time') {
@@ -163,6 +165,7 @@ class PMSECaseWrapper //extends FilterApi
     }
     public function retrieveCases($api, $args, $custom = false)
     {
+        $_offset = null;
         $_idRows=array();
         //echo $args;
         global $current_user;

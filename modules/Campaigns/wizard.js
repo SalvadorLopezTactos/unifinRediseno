@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 	/*
 	 * this function hides a div element using the passed in id value
 	 */
@@ -165,7 +164,9 @@
 	        var nav_step = document.getElementById('nav_step'+hilite);
 			nav_step.className   = '';
 			if(already_linked.indexOf(hilite)<0){
-		        nav_step.innerHTML= "<a href='#'  onclick=\"javascript:direct('"+hilite+"');\">" +nav_step.innerHTML+ "</a>";
+        // jscs:disable
+                nav_step.innerHTML = "<a href='#'  onclick=\"javascript:direct('" + hilite + "');\">" + nav_step.textContent + "</a>";
+        // jscs:enable
 		        already_linked +=',hilite'; 
 			}
     }

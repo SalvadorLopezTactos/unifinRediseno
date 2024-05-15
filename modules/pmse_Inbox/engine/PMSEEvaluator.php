@@ -166,7 +166,7 @@ class PMSEEvaluator
                     case 'textarea':
                     case 'textfield':
                     case 'url':
-                        if (count($resultArray) > 1) {
+                        if ((is_countable($resultArray) ? count($resultArray) : 0) > 1) {
                             $result = '';
                             foreach ($resultArray as $item) {
                                 $result .= $item->expValue;

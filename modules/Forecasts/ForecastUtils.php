@@ -21,6 +21,7 @@ $href_string = "javascript:node_click('activetimeperiods','activetimeperiodswork
 $mod_strings = return_module_language($current_language, 'Forecasts');
 $GLOBALS['displayListView'] = true;
 function get_worksheet_defintion($user_id, $forecast_type, $timeperiod_id, $allow_commit = false) {
+        $lv = null;
 		//global variable references.
 	global $current_user;
 	global $current_language;
@@ -273,7 +274,7 @@ function get_worksheet_defintion($user_id, $forecast_type, $timeperiod_id, $allo
 function add_downline($user, & $parent_node) {
 	$ret = array ();
 	$node = null;
-	if (count($user->my_direct_reports) > 0) {
+    if ((is_countable($user->my_direct_reports) ? count($user->my_direct_reports) : 0) > 0) {
 		//add node for manager's direct forecasts. NOT if the user preference for opportunity ownership is set to false.
 		if (user_owns_opps($user->current_user, null)) {
 			$node = create_node($user->current_user, true, false, true);
@@ -311,7 +312,7 @@ function create_node($user_id, $href = true, $dynamic = true, $force_direct = fa
 
 	$rollup = true;
 	$node_name = $user->my_name;
-	if ($force_direct or count($user->my_direct_reports) == 0) {
+    if ($force_direct or (is_countable($user->my_direct_reports) ? count($user->my_direct_reports) : 0) == 0) {
 		$rollup = false;
 	}
 	if ($top_level) {

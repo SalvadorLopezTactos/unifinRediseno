@@ -61,6 +61,9 @@ class ACLField extends SugarBean
                     return array();
                 }
             }
+            if (!is_iterable($fieldDefs)) {
+                $fieldDefs = [];
+            }
 
             $availableFields = array();
             foreach ($fieldDefs as $field => $def) {

@@ -77,7 +77,7 @@ for ($i = 1; $i <= $_REQUEST['numRowsToSave']; $i++) {
     }
 }
 // get random ProjectTask from current project
-$ind = rand(1, $_REQUEST['numRowsToSave']);
+$ind = random_int(1, $_REQUEST['numRowsToSave']);
 $projectTask = BeanFactory::newBean('ProjectTask');
 $projectTask->skipParentUpdate();
 if(isset($_REQUEST["obj_id_" . $ind]) && !empty($_REQUEST["obj_id_" . $ind]))

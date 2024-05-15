@@ -480,16 +480,6 @@ array (
                 'name' => 'tct_no_contactar_chk_c',
                 'label' => 'LBL_TCT_NO_CONTACTAR_CHK',
               ),
-              15 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              16 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
             ),
           ),
           4 => 
@@ -595,102 +585,82 @@ array (
               array (
                 'name' => 'prospeccion_propia_c',
                 'label' => 'LBL_PROSPECCION_PROPIA_C',
+                'span' => 12,
               ),
               6 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              7 => 
               array (
                 'name' => 'referenciador_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REFERENCIADOR',
+                'span' => 12,
               ),
-              8 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              9 => 
+              7 => 
               array (
                 'name' => 'referido_cliente_prov_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REFERIDO_CLIENTE_PROV',
+                'span' => 12,
               ),
-              10 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              11 => 
+              8 => 
               array (
                 'name' => 'referenciado_agencia_c',
                 'label' => 'LBL_REFERENCIADO_AGENCIA',
+                'span' => 12,
               ),
-              12 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              13 => 
+              9 => 
               array (
                 'name' => 'tct_referenciado_dir_rel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_REFERENCIADO_DIR_REL',
+                'span' => 12,
               ),
-              14 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              15 => 
+              10 => 
               array (
                 'name' => 'tct_origen_busqueda_txf_c',
                 'label' => 'LBL_TCT_ORIGEN_BUSQUEDA_TXF',
               ),
-              16 => 
+              11 => 
               array (
                 'name' => 'tct_origen_base_ddw_c',
                 'label' => 'LBL_TCT_ORIGEN_BASE_DDW',
               ),
-              17 => 
+              12 => 
               array (
                 'name' => 'medio_detalle_origen_c',
                 'label' => 'LBL_MEDIO_DETALLE_ORIGEN_C',
               ),
-              18 => 
+              13 => 
               array (
                 'name' => 'punto_contacto_origen_c',
                 'label' => 'LBL_PUNTO_CONTACTO_ORIGEN_C',
               ),
-              19 => 
+              14 => 
               array (
                 'name' => 'evento_c',
                 'label' => 'LBL_EVENTO',
               ),
-              20 => 
+              15 => 
               array (
               ),
-              21 => 
+              16 => 
               array (
                 'name' => 'camara_c',
                 'label' => 'LBL_CAMARA',
               ),
-              22 => 
+              17 => 
               array (
               ),
-              23 => 
+              18 => 
               array (
                 'name' => 'como_se_entero_c',
                 'label' => 'LBL_COMO_SE_ENTERO',
               ),
-              24 => 
+              19 => 
               array (
                 'name' => 'cual_c',
                 'label' => 'LBL_CUAL',
               ),
-              25 => 
+              20 => 
               array (
                 'name' => 'tct_origen_ag_tel_rel_c',
                 'studio' => 'visible',
@@ -706,19 +676,19 @@ array (
                   ),
                 ),
               ),
-              26 => 
+              21 => 
               array (
                 'name' => 'tct_que_promotor_rel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_QUE_PROMOTOR_REL',
               ),
-              27 => 
+              22 => 
               array (
                 'readonly' => false,
                 'name' => 'codigo_expo_c',
                 'label' => 'LBL_CODIGO_EXPO',
               ),
-              28 => 
+              23 => 
               array (
                 'name' => 'alianza_soc_chk_c',
                 'label' => 'LBL_ALIANZA_SOC_CHK',
@@ -827,179 +797,157 @@ array (
               ),
               16 => 
               array (
-              ),
-              17 => 
-              array (
-              ),
-              18 => 
-              array (
                 'name' => 'rfc_c',
                 'label' => 'LBL_RFC',
               ),
-              19 => 
+              17 => 
               array (
                 'type' => 'button',
                 'name' => 'generar_rfc_c',
                 'label' => 'LBL_GENERAR_RFC',
               ),
-              20 => 
+              18 => 
               array (
                 'name' => 'nacionalidad_c',
                 'label' => 'LBL_NACIONALIDAD',
               ),
-              21 => 
+              19 => 
               array (
                 'name' => 'tct_pais_expide_rfc_c',
                 'label' => 'LBL_TCT_PAIS_EXPIDE_RFC',
               ),
-              22 => 
+              20 => 
               array (
                 'name' => 'pais_nacimiento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PAIS_NACIMIENTO',
               ),
-              23 => 
+              21 => 
               array (
                 'name' => 'estado_nacimiento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTADO_NACIMIENTO',
               ),
-              24 => 
+              22 => 
               array (
                 'name' => 'account_paises_estados',
                 'studio' => 'visible',
                 'label' => ' ',
                 'span' => 12,
               ),
-              25 => 
+              23 => 
               array (
                 'name' => 'zonageografica_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ZONAGEOGRAFICA',
               ),
-              26 => 
+              24 => 
               array (
                 'name' => 'ifepasaporte_c',
                 'label' => 'LBL_IFEPASAPORTE',
               ),
-              27 => 
+              25 => 
               array (
                 'name' => 'curp_c',
                 'label' => 'LBL_CURP',
               ),
-              28 => 
+              26 => 
               array (
                 'type' => 'button',
                 'name' => 'generar_curp_c',
                 'label' => 'LBL_GENERAR_CURP',
               ),
-              29 => 
+              27 => 
               array (
                 'name' => 'estadocivil_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTADOCIVIL',
               ),
-              30 => 
+              28 => 
               array (
                 'name' => 'regimenpatrimonial_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REGIMENPATRIMONIAL',
               ),
-              31 => 
+              29 => 
               array (
                 'name' => 'profesion_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROFESION',
               ),
-              32 => 
+              30 => 
               array (
                 'name' => 'puesto_cuenta_c',
                 'label' => 'LBL_PUESTO_CUENTA_C',
               ),
-              33 => 
+              31 => 
               array (
                 'name' => 'email',
+                'span' => 12,
               ),
-              34 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              35 => 
+              32 => 
               array (
                 'name' => 'referenciabancaria_c',
                 'label' => 'LBL_REFERENCIABANCARIA',
               ),
-              36 => 
+              33 => 
               array (
               ),
-              37 => 
+              34 => 
               array (
                 'name' => 'tipo_relacion_c',
                 'label' => 'LBL_TIPO_RELACION',
+                'span' => 12,
               ),
-              38 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              39 => 
+              35 => 
               array (
                 'name' => 'reus_c',
                 'label' => 'LBL_REUS',
               ),
-              40 => 
+              36 => 
               array (
                 'name' => 'referencia_bancaria_c',
                 'label' => 'LBL_REFERENCIA_BANCARIA_C',
               ),
-              41 => 
+              37 => 
               array (
                 'name' => 'tct_prospecto_contactado_chk_c',
                 'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
               ),
-              42 => 
+              38 => 
               array (
                 'name' => 'show_panel_c',
                 'label' => 'LBL_SHOW_PANEL',
               ),
-              43 => 
+              39 => 
               array (
                 'name' => 'apoderado_nombre_c',
                 'label' => 'LBL_APODERADO_NOMBRE_C',
+                'span' => 12,
               ),
-              44 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              45 => 
+              40 => 
               array (
                 'name' => 'apoderado_apaterno_c',
                 'label' => 'LBL_APODERADO_APATERNO_C',
               ),
-              46 => 
+              41 => 
               array (
                 'name' => 'apoderado_amaterno_c',
                 'label' => 'LBL_APODERADO_AMATERNO_C',
               ),
-              47 => 
+              42 => 
               array (
                 'name' => 'cuenta_especial_c',
                 'label' => 'LBL_CUENTA_ESPECIAL',
+                'span' => 12,
               ),
-              48 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              49 => 
+              43 => 
               array (
                 'name' => 'alta_portal_proveedor_chk_c',
                 'label' => 'LBL_ALTA_PORTAL_PROVEEDOR_CHK',
                 'css_class' => 'hidden',
               ),
-              50 => 
+              44 => 
               array (
               ),
             ),
@@ -1201,13 +1149,9 @@ array (
                 ),
                 'name' => 'tct_depositos_promedio_c',
                 'label' => 'LBL_TCT_DEPOSITOS_PROMEDIO_C',
+                'span' => 12,
               ),
               7 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              8 => 
               array (
                 'related_fields' => 
                 array (
@@ -1217,21 +1161,21 @@ array (
                 'name' => 'tct_prom_cheques_cur_c',
                 'label' => 'LBL_TCT_PROM_CHEQUES_CUR_C',
               ),
-              9 => 
+              8 => 
               array (
                 'name' => 'dates_account_statements',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_DATES_ACCOUNT_STATEMENTS_C',
                 'type' => 'dates_account_statements',
               ),
-              10 => 
+              9 => 
               array (
                 'name' => 'tct_dates_acc_statements_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_DATES_ACC_STATEMENTS_C',
                 'span' => 12,
               ),
-              11 => 
+              10 => 
               array (
                 'name' => 'potencial_autos',
                 'studio' => 'visible',
@@ -1503,50 +1447,42 @@ array (
               array (
                 'name' => 'ctpldnoseriefiel_c',
                 'label' => 'LBL_CTPLDNOSERIEFIEL',
+                'span' => 12,
               ),
               1 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              2 => 
               array (
                 'name' => 'tct_cpld_pregunta_u1_ddw_c',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA_U1_DDW',
               ),
-              3 => 
+              2 => 
               array (
                 'name' => 'tct_cpld_pregunta_u2_txf_c',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA_U2_TXF',
               ),
-              4 => 
+              3 => 
               array (
                 'name' => 'tct_cpld_pregunta_u3_ddw_c',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA_U3_DDW',
               ),
-              5 => 
+              4 => 
               array (
                 'name' => 'tct_cpld_pregunta_u4_txf_c',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA_U4_TXF',
               ),
-              6 => 
+              5 => 
               array (
                 'name' => 'tct_fedeicomiso_chk_c',
                 'label' => 'LBL_TCT_FEDEICOMISO_CHK',
+                'span' => 12,
               ),
-              7 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              8 => 
+              6 => 
               array (
                 'name' => 'accounts_tct_pld',
                 'studio' => 'visible',
                 'dismiss_label' => true,
                 'span' => 12,
               ),
-              9 => 
+              7 => 
               array (
                 'name' => 'tct_nuevo_pld_c',
                 'studio' => 'visible',
@@ -1696,18 +1632,14 @@ array (
               array (
                 'name' => 'tct_periodo2_pm_c',
                 'label' => 'LBL_TCT_PERIODO2_PM',
+                'span' => 12,
               ),
               7 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              8 => 
               array (
                 'name' => 'tct_fecha_ini2_pm_c',
                 'label' => 'LBL_TCT_FECHA_INI2_PM',
               ),
-              9 => 
+              8 => 
               array (
                 'name' => 'tct_fecha_fin2_pm_c',
                 'label' => 'LBL_TCT_FECHA_FIN2_PM',
@@ -1749,18 +1681,14 @@ array (
               array (
                 'name' => 'tct_periodo_pm_c',
                 'label' => 'LBL_TCT_PERIODO_PM',
+                'span' => 12,
               ),
               5 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              6 => 
               array (
                 'name' => 'tct_fecha_ini_pm_c',
                 'label' => 'LBL_TCT_FECHA_INI_PM',
               ),
-              7 => 
+              6 => 
               array (
                 'name' => 'tct_fecha_fin_pm_c',
                 'label' => 'LBL_TCT_FECHA_FIN_PM',
@@ -1865,62 +1793,54 @@ array (
                 'name' => 'tct_fedeicomiso_c15_ddw_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_FEDEICOMISO_C15_DDW',
+                'span' => 12,
               ),
               15 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              16 => 
               array (
                 'name' => 'tct_fedeicomiso_c16_ddw_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_FEDEICOMISO_C16_DDW',
               ),
-              17 => 
+              16 => 
               array (
                 'name' => 'tct_fedeicomiso_c16_2_txf_c',
                 'label' => 'LBL_TCT_FEDEICOMISO_C16_2_TXF',
               ),
-              18 => 
+              17 => 
               array (
                 'name' => 'tct_fedeicomiso_c17_ddw_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_FEDEICOMISO_C17_DDW',
               ),
-              19 => 
+              18 => 
               array (
                 'name' => 'tct_fedeicomiso_c17_2_txf_c',
                 'label' => 'LBL_TCT_FEDEICOMISO_C17_2_TXF',
               ),
-              20 => 
+              19 => 
               array (
                 'name' => 'tct_fedeicomiso_c18_ddw_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_FEDEICOMISO_C18_DDW',
               ),
-              21 => 
+              20 => 
               array (
                 'name' => 'tct_fedeicomiso_c18_2_txf_c',
                 'label' => 'LBL_TCT_FEDEICOMISO_C18_2_TXF',
               ),
-              22 => 
+              21 => 
               array (
                 'name' => 'tct_fedeicomiso_c19_txf_c',
                 'label' => 'LBL_TCT_FEDEICOMISO_C19_TXF',
+                'span' => 12,
               ),
-              23 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              24 => 
+              22 => 
               array (
                 'name' => 'tct_fedeicomiso_c20_msl_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_FEDEICOMISO_C20_MSL',
               ),
-              25 => 
+              23 => 
               array (
                 'name' => 'tct_fedeicomiso_c21_ddw_c',
                 'studio' => 'visible',

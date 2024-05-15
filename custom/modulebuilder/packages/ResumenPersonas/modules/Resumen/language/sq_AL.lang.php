@@ -1,5 +1,5 @@
 <?php
-// created: 2020-10-12 12:23:06
+// created: 2024-05-15 13:42:23
 $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => 'Id e përdoruesit të caktuar',
   'LBL_ASSIGNED_TO_NAME' => 'Përdorues',

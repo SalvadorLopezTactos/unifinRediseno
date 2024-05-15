@@ -32,6 +32,7 @@ class OneDrive extends Drive
      */
     public function listFolders(array $options)
     {
+        $response = null;
         $driveId = $options['driveId'];
         $parentId = $options['parentId'] ?? null;
         $sharedWithMe = $options['sharedWithMe'];
@@ -216,6 +217,7 @@ class OneDrive extends Drive
      */
     public function getFile(array $options)
     {
+        $response = null;
         $fileId = $options['fileId'];
         $driveId = $options['driveId'];
         $select = $options['select'];
@@ -477,6 +479,7 @@ class OneDrive extends Drive
      */
     public function uploadLargeFile($options): array
     {
+        $fileSize = null;
         $client = $this->getClient();
 
         $parentId = $options['parentId'] ?? $options['pathId'];
@@ -486,6 +489,7 @@ class OneDrive extends Drive
         if ($options['data']) {
             $data = $options['data'];
             $filePath = $data['tmp_name'];
+            $fileSize = $data['size'];
         } else {
             $filePath = $options['filePath'];
         }
@@ -514,7 +518,7 @@ class OneDrive extends Drive
         $uploadFile->final_move($fileId);
         $filePath = "upload://{$fileId}";
 
-        return $this->uploadChunks($uploadUrl, $filePath, $client, $fileName);
+        return $this->uploadChunks($uploadUrl, $filePath, $fileName, $fileSize);
     }
 
     /**
@@ -523,15 +527,15 @@ class OneDrive extends Drive
      * @param string $filePath
      * @param GraphProxy $client
      */
-    protected function uploadChunks(string $uploadUrl, string $filePath, \GraphProxy $client, $fileName) : array
+    protected function uploadChunks(string $uploadUrl, string $filePath, string $fileName, ?int $fileSize) : array
     {
         global $current_user;
 
         $payload = [
             'uploadUrl' => $uploadUrl,
             'filePath' => $filePath,
-            'client' => $client,
             'fileName' => $fileName,
+            'fileSize' => $fileSize,
         ];
 
         $job = new SchedulersJob();

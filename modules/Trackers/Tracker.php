@@ -93,7 +93,7 @@ class Tracker extends SugarBean
         }
 
         $list = $breadCrumb->getBreadCrumbList($modules);
-        $GLOBALS['log']->info("Tracker: retrieving ".count($list)." items");
+        $GLOBALS['log']->info("Tracker: retrieving ".(is_countable($list) ? count($list) : 0)." items");
         return $list;
     }
 

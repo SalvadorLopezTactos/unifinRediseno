@@ -51,7 +51,7 @@ class SugarACLAdminOnlyFields extends SugarACLStrategy
             return true;
         }
 
-        $view = $this->fixUpActionName($view);
+        $view = static::fixUpActionName($view);
         $user = $this->getCurrentUser($context);
 
         if ($view === 'field'

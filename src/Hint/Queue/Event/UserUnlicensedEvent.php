@@ -42,10 +42,12 @@ class UserUnlicensedEvent extends BaseUserLicenseChangeEvent
         // per-user licensing only sugar 10.3+
         if ($hadLicense) {
             $licenses = json_decode($user->license_type, true);
-            $key = array_search("HINT", $licenses);
-            if ($key !== false) {
-                unset($licenses[$key]);
-                $user->license_type = json_encode($licenses);
+            if (is_array($licenses)) {
+                $key = array_search('HINT', $licenses);
+                if ($key !== false) {
+                    unset($licenses[$key]);
+                    $user->license_type = json_encode(array_values($licenses));
+                }
             }
 
             // Mark this column as true for this user. In the case that they become licensed

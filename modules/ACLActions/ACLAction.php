@@ -250,7 +250,7 @@ class ACLAction  extends SugarBean
         }
         //if we don't have it loaded then lets check against the db
         $overridden_actions = self::getOverriddenActions($user_id);
-        $selected_actions = self::getAllActionsWithOverride($overridden_actions, '', '', '');
+        $selected_actions = self::getAllActionsWithOverride($overridden_actions);
         if (!isset(self::$acls)) {
             self::$acls = [];
         }

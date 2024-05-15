@@ -80,7 +80,9 @@ if(isset($_REQUEST['record']) and !empty($_REQUEST['record'])){
 }
 
 $dateStartFormatted = ViewDateFormatter::format('datetime', $mrkt_focus->date_start);
-list($dateStart, $timeStart) = $timedate->split_date_time($dateStartFormatted);
+$splitDateTime = $timedate->split_date_time($dateStartFormatted);
+$dateStart = $splitDateTime[0] ?? null;
+$timeStart = $splitDateTime[1] ?? null;
 $meridiem = $timedate->AMPMMenu('', $timeStart);
 
 if (!empty($meridiem) && !empty($timeStart)) {
@@ -120,7 +122,7 @@ $mailboxes=get_campaign_mailboxes($emails);
  * get full array of stored options
  */
 $IEStoredOptions = get_campaign_mailboxes_with_stored_options();
-$IEStoredOptionsJSON = (!empty($IEStoredOptions)) ? $json->encode($IEStoredOptions, false) : 'new Object()';
+$IEStoredOptionsJSON = (!empty($IEStoredOptions)) ? $json->encode($IEStoredOptions) : 'new Object()';
 $ss->assign("IEStoredOptions", $IEStoredOptionsJSON);
 
 //add empty options.

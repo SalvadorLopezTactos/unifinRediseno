@@ -185,6 +185,14 @@ class SugarEmailAddress extends SugarBean
                 $isPrimary = true;
                 if (!empty($bean->email) && is_array($bean->email)) {
                     foreach ($bean->email as $emailAddr) {
+                        if (!is_array($emailAddr)) {
+                            $e = new Exception(sprintf('Email address have type "%s", array expected', gettype($emailAddr)));
+                            LoggerManager::getLogger()->fatal('Error in handleLegacySave: ' . $e->getMessage() .  $e->getTraceAsString());
+                            continue;
+                        }
+                        if (!isset($emailAddr['email_address'])) {
+                            continue;
+                        }
                         $address = $emailAddr['email_address'];
                         $optO = $this->getEmailAddressOptoutValue($emailAddr);
                         $invalidE = (isset($emailAddr['invalid_email'])) ?
@@ -942,7 +950,7 @@ class SugarEmailAddress extends SugarBean
 
     /**
      * preps a passed email address for email address storage
-     * @param array $addr Address in focus, must be RFC compliant
+     * @param string $addr Address in focus, must be RFC compliant
      * @return string $id email_addresses ID
      */
     function getEmailGUID($addr)

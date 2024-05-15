@@ -62,7 +62,7 @@ abstract class AbstractExpression
     {
         self::initBoolConstants();
 		// if the array contains only one value, then set params equal to that value
-		if ($this->getParamCount() == 1 && is_array($params) && sizeof($params) == 1) {
+        if (static::getParamCount() == 1 && is_array($params) && sizeof($params) == 1) {
 			$this->params = $params[0];
 		}
 
@@ -82,8 +82,8 @@ abstract class AbstractExpression
         if (!$this->params) {
             return $this->params;
         }
-        $types = $this->getParameterTypes();
-        $oneParam = $this->getParamCount() == 1;
+        $types = static::getParameterTypes();
+        $oneParam = static::getParamCount() == 1;
 
         $params = $this->params;
         if ($oneParam) {
@@ -91,7 +91,7 @@ abstract class AbstractExpression
         }
 
         if (!is_array($types)) {
-            $types = array_fill(0, count($params), $types);
+            $types = array_fill(0, is_countable($params) ? count($params) : 0, $types);
         }
 
         $result = array();
@@ -158,8 +158,8 @@ abstract class AbstractExpression
 	function validateParameters() {
 		// retrieve the params, the param count, and the param types
         $params = $this->params;
-		$count  = $this->getParamCount();
-		$types  = $this->getParameterTypes();
+        $count = static::getParamCount();
+        $types = static::getParameterTypes();
 
 		// retrieve the operation name for throwing exceptions
 		$op_name = call_user_func(array(get_class($this), "getOperationName"));
@@ -207,7 +207,7 @@ abstract class AbstractExpression
             }
         } elseif ($count != AbstractExpression::$INFINITY) {
             // check parameter count
-            if (count($params) != $count) {
+            if ((is_countable($params) ? count($params) : 0) != $count) {
                 throw new Exception($op_name . ": Requires exactly $count parameter(s)");
             }
         }

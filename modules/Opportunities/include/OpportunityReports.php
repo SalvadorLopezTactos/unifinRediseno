@@ -66,7 +66,7 @@ class OpportunityReports
             } elseif (isset($report['full_table_list'])) {
                 if (isset($report['full_table_list']['self']['children']) &&
                         is_array($report['full_table_list']['self']['children'])) {
-                    $this->rli_table_name = 'self_link_' . count($report['full_table_list']);
+                    $this->rli_table_name = 'self_link_' . (is_countable($report['full_table_list']) ? count($report['full_table_list']) : 0);
                     $report['full_table_list']['self']['children'][$this->rli_table_name] = $this->rli_table_name;
                 }
                 $report['full_table_list'][$this->rli_table_name] = $this->rli_table_def;

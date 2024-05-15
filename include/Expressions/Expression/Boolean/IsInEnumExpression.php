@@ -26,15 +26,17 @@ class IsInEnumExpression extends BooleanExpression
         $haystack = $params[1]->evaluate();
         $needle = $params[0]->evaluate();
 
-        foreach ($haystack as $value) {
-            if ($value instanceof Expression) {
-                $value = $value->evaluate();
-            }
-            if ($value == $needle) {
-                return AbstractExpression::$TRUE;
-            }
-            if (is_array($value) && in_array($needle, $value)) {
-                return AbstractExpression::$TRUE;
+        if (is_iterable($haystack)) {
+            foreach ($haystack as $value) {
+                if ($value instanceof Expression) {
+                    $value = $value->evaluate();
+                }
+                if ($value == $needle) {
+                    return AbstractExpression::$TRUE;
+                }
+                if (is_array($value) && in_array($needle, $value)) {
+                    return AbstractExpression::$TRUE;
+                }
             }
         }
 

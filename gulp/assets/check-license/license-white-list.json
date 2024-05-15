@@ -15,7 +15,6 @@
     "include/javascript/StackBlur.js",
     "include/javascript/canvg.js",
     "include/javascript/fuse/fuse.js",
-    "include/javascript/include.js",
     "include/javascript/iscroll.js",
     "include/javascript/jquery.js",
     "include/javascript/jquery/",

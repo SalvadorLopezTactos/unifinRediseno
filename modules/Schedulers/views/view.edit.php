@@ -42,6 +42,7 @@ class SchedulersViewEdit extends ViewEdit {
     
 
     function display(){
+        $ints = [];
 		global $mod_strings;
 		global $app_list_strings;
 

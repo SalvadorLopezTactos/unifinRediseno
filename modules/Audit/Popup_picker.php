@@ -70,7 +70,7 @@ EOHTML;
 		$audited_fields = $focus->getAuditEnabledFieldDefinitions();
 		asort($audited_fields);
 		$fields = '';
-		$field_count = count($audited_fields);
+        $field_count = is_countable($audited_fields) ? count($audited_fields) : 0;
 		$start_tag = "<table><tr><td >";
 		$end_tag = "</td></tr></table>";
 

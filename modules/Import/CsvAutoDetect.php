@@ -227,7 +227,7 @@ class CsvAutoDetect {
             return false;
         }
 
-        $total_count = count($this->_parser->data[0]);
+        $total_count = is_countable($this->_parser->data[0]) ? count($this->_parser->data[0]) : 0;
         if ($total_count == 0) {
             return false;
         }
@@ -264,13 +264,13 @@ class CsvAutoDetect {
                     }
                     // check if the CSV item is part of the label or vice versa
                     else if (isset($defs['vname']) && isset($mod_strings[$defs['vname']])) {
-                        if (stripos(trim($mod_strings[$defs['vname']],':'), $val) !== false || stripos($val, trim($mod_strings[$defs['vname']],':')) !== false) {
+                        if (stripos(trim($mod_strings[$defs['vname']], ':'), (string) $val) !== false || stripos($val, trim($mod_strings[$defs['vname']], ':')) !== false) {
                             $match_count++;
                             break;
                         }
                     }
                     else if (isset($defs['vname']) && isset($GLOBALS['app_strings'][$defs['vname']])) {
-                        if (stripos(trim($GLOBALS['app_strings'][$defs['vname']],':'), $val) !== false || stripos($val, trim($GLOBALS['app_strings'][$defs['vname']],':')) !== false) {
+                        if (stripos(trim($GLOBALS['app_strings'][$defs['vname']], ':'), (string) $val) !== false || stripos($val, trim($GLOBALS['app_strings'][$defs['vname']], ':')) !== false) {
                             $match_count++;
                             break;
                         }

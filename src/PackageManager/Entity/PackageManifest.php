@@ -238,10 +238,10 @@ class PackageManifest
             $versions = $this->manifest['acceptable_sugar_versions'];
             if (!isset($versions['exact_matches']) && !isset($versions['regex_matches'])) {
                 foreach ($versions as $index => $version) {
-                    if (empty($version)) {
+                    if (empty($version) || !is_scalar($version)) {
                         continue;
                     }
-                    $parts = explode('.', $version);
+                    $parts = explode('.', (string) $version);
                     $countParts = count($parts);
                     if ($countParts < 3) {
                         $parts = array_merge($parts, array_fill($countParts, 3 - $countParts, '([0-9]+)'));

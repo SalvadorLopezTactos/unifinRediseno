@@ -28,6 +28,8 @@
             value = app.lang.get('LBL_YOU_HAVE_BEEN_MENTIONED_BY', this.module);
             var href = app.router.buildRoute('Employees', this.model.get('created_by'), 'detail', true);
             value += ' <a href="#' + href + '">' + this.model.get('created_by_name') + '</a>';
+        } else if (this.name === 'description') {
+            value = DOMPurify.sanitize(value);
         }
 
         return value;

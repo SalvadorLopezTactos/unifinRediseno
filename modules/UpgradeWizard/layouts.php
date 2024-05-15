@@ -112,8 +112,7 @@ function cleanMergeData($data)
     $results = array();
     foreach ($data as $m => $layouts)
     {
-        if(count($layouts) > 0)
-        {
+        if ((is_countable($layouts) ? count($layouts) : 0) > 0) {
             $results[$m] = $layouts;
         }
     }

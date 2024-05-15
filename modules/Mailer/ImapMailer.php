@@ -68,6 +68,16 @@ class ImapMailer implements Inbound
     }
 
     /**
+     * Logout of imap server
+     */
+    public function closeConnection()
+    {
+        if (!empty($this->client)) {
+            $this->client->logout();
+        }
+    }
+
+    /**
      * Creates Laminas Mail object to use to connect to IMAP server
      * @throws Exception
      */
@@ -104,7 +114,7 @@ class ImapMailer implements Inbound
      * @param string $errfile
      * @param int    $errline
      */
-    protected function errorHandler($errno, $errstr, $errfile, $errline)
+    public function errorHandler($errno, $errstr, $errfile, $errline)
     {
         LoggerManager::getLogger()->fatal("ImapMailer Imap Error: $errno: $errstr");
     }

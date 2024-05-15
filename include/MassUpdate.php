@@ -140,7 +140,7 @@ class MassUpdate
         . '<input type="hidden" name="action" value="MassUpdate" />'
         . '<input type="hidden" name="lvso" value="' . htmlspecialchars($lvso, ENT_QUOTES, 'UTF-8') . '" />'
         . '<input type="hidden" name="' . htmlspecialchars($order_by_name, ENT_QUOTES, 'UTF-8') . '" value="' . htmlspecialchars($request_order_by_name, ENT_QUOTES, 'UTF-8') . '" />'
-        . '<input type="hidden" name="' . htmlspecialchars(CsrfAuthenticator::FORM_TOKEN_FIELD) . '" value="' . htmlspecialchars(CsrfAuthenticator::getInstance()->getFormToken()) . '" />';
+            . '<input type="hidden" name="' . htmlspecialchars(CsrfAuthenticator::FORM_TOKEN_FIELD) . '" value="' . htmlspecialchars(CsrfAuthenticator::getInstance()->getFormToken()) . '" />';
 
 		// cn: bug 9103 - MU navigation in emails is broken
 		if ($module == 'Emails') {

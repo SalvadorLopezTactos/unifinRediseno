@@ -14,6 +14,8 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
 use Sugarcrm\Sugarcrm\PackageManager\PackageManager;
 
+MlpLogger::replaceDefault();
+
 $request = InputValidation::getService();
 $mode = $request->getValidInputRequest(
     'mode',

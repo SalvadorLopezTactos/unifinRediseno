@@ -59,7 +59,7 @@ class Result implements ResultInterface
      */
     public function __call($method, array $args = array())
     {
-        return call_user_func_array(array($this->result, $method), $args);
+        return is_callable([$this->result, $method])? call_user_func_array([$this->result, $method], $args) : null;
     }
 
     //// ResultInterface ////

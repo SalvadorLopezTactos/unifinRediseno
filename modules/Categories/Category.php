@@ -86,7 +86,7 @@ class Category extends SugarBean implements NestedBeanInterface
                 $tree[$i] = $data;
                 $stack[] = & $tree[$i];
             } else {
-                $i = count($stack[$stackLength - 1]['children']);
+                $i = is_countable($stack[$stackLength - 1]['children']) ? count($stack[$stackLength - 1]['children']) : 0;
                 $stack[$stackLength - 1]['children'][$i] = $data;
                 $stack[] = & $stack[$stackLength - 1]['children'][$i];
             }

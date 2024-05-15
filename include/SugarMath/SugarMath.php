@@ -49,10 +49,8 @@ class SugarMath
 
     /**
      * the math decimal precision, default is 6
-     *
-     * @var int $scale
      */
-    protected $scale = 6;
+    protected int $scale = 6;
 
     /**
      * class constructor
@@ -100,7 +98,7 @@ class SugarMath
     public function setScale($scale)
     {
         $this->testValue($scale, 'intpos', 'scale must be a positive integer');
-        $this->scale = $scale;
+        $this->scale = (int)$scale;
         return $this;
     }
 
@@ -159,20 +157,72 @@ class SugarMath
                 return bcmul($params[0], $params[1], $this->scale);
                 break;
             case 'div':
-                return bcdiv($params[0], $params[1], $this->scale);
+                try {
+                    $numerator = (string) ($params[0] ?? '');
+                    $denominator = (string) ($params[1] ?? '1'); // Defaults to '1' to avoid division by zero if $params[1] was not defined
+
+                    // Ensure that both arguments are well-formed numbers
+                    if (!is_numeric($numerator) || !is_numeric($denominator)) {
+                        throw new InvalidArgumentException('Invalid arguments for division');
+                    }
+
+                    return @bcdiv($numerator, $denominator, $this->scale);
+                } catch (DivisionByZeroError $e) {
+                    LoggerManager::getLogger()->fatal('Division by zero bcdiv: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+                } catch (InvalidArgumentException $e) {
+                    LoggerManager::getLogger()->fatal('Invalid argument in bcdiv: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+                }
+                return '0';
                 break;
             case 'pow':
                 // bcpow anyway truncates exponent, at least it does not raise warning if we do it explicitly
                 return bcpow($params[0], (int)$params[1], $this->scale);
                 break;
             case 'mod':
-                return bcmod($params[0], $params[1]);
+                try {
+                    $numerator = (string) ($params[0] ?? '');
+                    $denominator = (string) ($params[1] ?? '1'); // Defaults to '1' to avoid division by zero if $params[1] was not defined
+
+                    // Ensure that both arguments are well-formed numbers
+                    if (!is_numeric($numerator) || !is_numeric($denominator)) {
+                        throw new InvalidArgumentException('Invalid arguments for modulo');
+                    }
+
+                    return @bcmod($numerator, $denominator, $this->scale);
+                } catch (DivisionByZeroError $e) {
+                    LoggerManager::getLogger()->fatal('Division by zero in bcmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+                } catch (InvalidArgumentException $e) {
+                    LoggerManager::getLogger()->fatal('Invalid argument in bcmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+                }
+                return '0';
                 break;
             case 'powmod':
-                return bcpowmod($params[0], $params[1], $params[2], $this->scale);
+                try {
+                    $base = (string) ($params[0] ?? '');
+                    $exponent = (string) ($params[1] ?? '');
+                    $modulus = (string) ($params[2] ?? '1'); // Defaults to '1' to avoid division by zero if $params[1] was not defined
+
+                    // Ensure that all arguments are well-formed numbers
+                    if (!is_numeric($base) || !is_numeric($exponent) || !is_numeric($modulus) || !is_numeric($this->scale)) {
+                        throw new InvalidArgumentException('Invalid arguments for power modulus operation');
+                    }
+
+                    return bcpowmod($base, $exponent, $modulus, $this->scale);
+                } catch (DivisionByZeroError $e) {
+                    LoggerManager::getLogger()->fatal('Division by zero in bcpowmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+                } catch (InvalidArgumentException $e) {
+                    LoggerManager::getLogger()->fatal('Invalid argument in bcpowmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+                }
+                return '0';
                 break;
             case 'sqrt':
-                return bcsqrt($params[0], $this->scale);
+                try {
+                    return bcsqrt($params[0] ?? '0', $this->scale);
+                } catch (ValueError $e) {
+                    LoggerManager::getLogger()->fatal(
+                        $e->getMessage() . PHP_EOL . $e->getTraceAsString()
+                    );
+                }
                 break;
             case 'comp':
                 return bccomp($params[0], $params[1], $this->scale);

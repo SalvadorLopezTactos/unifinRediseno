@@ -20,6 +20,14 @@
 class SugarMetric_Manager
 {
     /**
+     * @var array
+     */
+    private $ootbEnabledProviders = [
+        'SugarMetric_Provider_Newrelic' => false,
+        'SugarMetric_Provider_Log' => false,
+    ];
+
+    /**
      * @var SugarMetric_Provider_Interface[]
      */
     protected $metricProviders = array();
@@ -45,6 +53,8 @@ class SugarMetric_Manager
 
         // Check metrics is enabled in configuration
         if (empty($sugar_config['metrics_enabled'])) {
+            // Some providers track transactions even if the metrics_enabled is not set
+            $this->ignoreDisabledTransactions();
             return $this;
         }
 
@@ -65,10 +75,14 @@ class SugarMetric_Manager
 
                     if ($metric->isLoaded()) {
                         $this->registerMetricProvider($name, $metric);
+                        if (isset($this->ootbEnabledProviders[$name])) {
+                            $this->ootbEnabledProviders[$name] = true;
+                        }
                     }
                 }
             }
         }
+        $this->ignoreDisabledTransactions();
     }
 
     /**
@@ -187,6 +201,15 @@ class SugarMetric_Manager
     {
         foreach ($this->metricProviders as $provider) {
             $provider->handleException($exception);
+        }
+    }
+
+    protected function ignoreDisabledTransactions(): void
+    {
+        foreach ($this->ootbEnabledProviders as $class => $enabled) {
+            if (!$enabled) {
+                $class::ignoreTransaction();
+            }
         }
     }
 

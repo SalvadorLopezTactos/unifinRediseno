@@ -24,6 +24,10 @@ if (!is_admin($current_user)) sugar_die("Unauthorized access to administration."
 
 $focus = Administration::getSettings();
 
+if ($focus->isLicensedForHint() && $_POST['license_key'] !== $focus->settings['license_key']) {
+    deleteInstanceFromHintServices();
+}
+
 // filter for relevant POST data and update config table
 foreach ($_POST as $key => $val) {
 	$prefix = $focus->get_config_prefix($key);
@@ -56,17 +60,16 @@ if (!is_null($licenseKey)) {
         $licenseKey = trim($licenseKey);
         $focus->saveSetting('license', 'key', $licenseKey);
     }
+
     loadLicense(true);
     check_now(get_sugarbeat());
     $focus->saveSetting('site', 'id', getSiteHash($licenseKey));
 }
 
-
 unset($_SESSION['license_seats_needed']);
 unset($_SESSION['LICENSE_EXPIRES_IN']);
 unset($_SESSION['VALIDATION_EXPIRES_IN']);
 unset($_SESSION['HomeOnly']);
-
 
 apiLoadSystemStatus(true);
 

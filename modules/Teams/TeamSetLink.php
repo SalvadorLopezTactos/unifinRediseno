@@ -110,6 +110,7 @@ class TeamSetLink extends Link2 {
 	 */
     public function save($checkForUpdate = true, $usedDefaultTeam = false)
     {
+        $updatesArr = [];
         if ($this->_saved == false) {
             $isTransactionStarted = false;
             $conn = DBManagerFactory::getInstance()->getConnection();
@@ -268,7 +269,7 @@ class TeamSetLink extends Link2 {
     {
         $teamIds = [];
 
-        foreach ($rel_keys as $key) {
+        foreach (is_iterable($rel_keys) ? $rel_keys : [] as $key) {
             if ($key instanceof SugarBean) {
                 $teamIds[] = $key->id;
             } else {
@@ -297,7 +298,7 @@ class TeamSetLink extends Link2 {
 	public function remove($rel_keys, $additional_values=array(), $save = true) {
 		$team_ids = $this->_teamSet->getTeamIds($this->focus->team_set_id);
 		//Check if an attempt was made to remove the primary team (team_id) of the bean
-		$primary_key = array_search($this->focus->team_id, $rel_keys);
+        $primary_key = is_array($rel_keys)? array_search($this->focus->team_id, $rel_keys) : null;
 		if($primary_key !== false) {
 		   //Remove the entry from $rel_keys	
 		   unset($rel_keys[$primary_key]);	
@@ -306,7 +307,7 @@ class TeamSetLink extends Link2 {
 		   $GLOBALS['log']->error($msg);
 		}
 
-		$team_ids = array_diff($team_ids, $rel_keys);
+        $team_ids = is_array($rel_keys)? array_diff($team_ids, $rel_keys) : null;
 		//Make sure that we are not adding an empty set of teams
 		//this will occur if you attempt to remove all the existing teams attached to the bean
 		if(!empty($team_ids)) {

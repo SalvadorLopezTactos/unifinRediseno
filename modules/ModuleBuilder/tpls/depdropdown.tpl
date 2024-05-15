@@ -181,7 +181,7 @@ SUGAR.util.doWhen("typeof($) != 'undefined'", function()
     var parentOptions = {$parentOptions};
     var childOptions = {$childOptions};
     //Load from the field if its on the page
-    var targetId = "{$smarty.request.targetId}";
+    var targetId = "{$smarty.request.targetId|escape:'html'}";
     var idFilterChars = {$id_filter_chars}g; // regex for keeping troublesome chars out of our id.
 
     if ($("#" + targetId).length > 0)

@@ -90,8 +90,7 @@ class ImportViewStep2 extends ImportView
         $import_map_seed = BeanFactory::newBean('Import_1');
         $custom_imports_arr = $import_map_seed->retrieve_all_by_string_fields( array('assigned_user_id' => $current_user->id, 'is_published' => 'no','module' => $importModule));
 
-        if( count($custom_imports_arr) )
-        {
+        if (is_countable($custom_imports_arr) ? count($custom_imports_arr) : 0) {
             $custom = array();
             foreach ( $custom_imports_arr as $import)
             {

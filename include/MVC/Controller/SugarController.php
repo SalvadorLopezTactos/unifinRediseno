@@ -272,12 +272,12 @@ class SugarController
 	 * Generic load method to load mapping arrays.
 	 */
 	private function loadMapping($var, $merge = false){
-		$$var = sugar_cache_retrieve("CONTROLLER_". $var . "_".$this->module);
-		if(!$$var){
+        ${$var} = sugar_cache_retrieve("CONTROLLER_" . $var . "_" . $this->module);
+        if (!${$var}) {
 			if($merge && !empty($this->$var)){
-				$$var = $this->$var;
+                ${$var} = $this->$var;
 			}else{
-				$$var = array();
+                ${$var} = array();
 			}
 			foreach(SugarAutoLoader::existingCustom("include/MVC/Controller/{$var}.php", "modules/{$this->module}/{$var}.php") as $file) {
 			    require $file;
@@ -288,9 +288,9 @@ class SugarController
 			    require $file;
 			}
 
-			sugar_cache_put("CONTROLLER_". $var . "_".$this->module, $$var);
+            sugar_cache_put("CONTROLLER_" . $var . "_" . $this->module, ${$var});
 		}
-		$this->$var = $$var;
+        $this->$var = ${$var};
 	}
 
 	/**
@@ -681,8 +681,8 @@ class SugarController
                 'return_action' => $this->request->getValidInputRequest('return_action'),
             );
             if (!empty($_POST['mass'])) {
-                $total_records = count($_POST['mass']);
-                $failed_update = count($arr);
+                $total_records = is_countable($_POST['mass']) ? count($_POST['mass']) : 0;
+                $failed_update = is_countable($arr) ? count($arr) : 0;
                 $successful_update = $total_records - $failed_update;
                 if ($successful_update == $total_records) {
                    //show succesful deletion message if this is a delete update

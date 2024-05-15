@@ -191,31 +191,30 @@ class OpportunityHooks extends AbstractForecastHooks
             $closed_won = static::$settings['sales_stage_won'];
             $closed_lost = static::$settings['sales_stage_lost'];
 
-            $won_rlis = count(
-                $bean->get_linked_beans(
+            $wonBeans = $bean->get_linked_beans(
                     'revenuelineitems',
                     'RevenueLineItems',
                     array(),
                     0,
                     -1,
                     0,
-                    "sales_stage in ('" . join("', '", $closed_won) . "')"
-                )
+                "sales_stage in ('" . implode("', '", $closed_won) . "')"
             );
+            $won_rlis = is_countable($wonBeans) ? count($wonBeans) : 0;
 
-            $lost_rlis = count(
-                $bean->get_linked_beans(
+            $lostBeans = $bean->get_linked_beans(
                     'revenuelineitems',
                     'RevenueLineItems',
                     array(),
                     0,
                     -1,
                     0,
-                    "sales_stage in ('" . join("', '", $closed_lost) . "')"
-                )
+                "sales_stage in ('" . implode("', '", $closed_lost) . "')"
             );
+            $lost_rlis = is_countable($lostBeans) ? count($lostBeans) : 0;
 
-            $total_rlis = count($bean->get_linked_beans('revenuelineitems', 'RevenueLineItems'));
+            $totalBeans = $bean->get_linked_beans('revenuelineitems', 'RevenueLineItems');
+            $total_rlis = is_countable($totalBeans) ? count($totalBeans) : 0;
 
             if ($total_rlis > ($won_rlis + $lost_rlis)) {
                 // still in progress

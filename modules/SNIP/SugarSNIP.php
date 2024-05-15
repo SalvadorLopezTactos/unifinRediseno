@@ -580,7 +580,7 @@ class SugarSNIP
         if(empty($e->id)) return;
 
         //Process attachments
-        if(isset($email['message']['attachments']) && count($email['message']['attachments'])) {
+        if (isset($email['message']['attachments']) && (is_countable($email['message']['attachments']) ? count($email['message']['attachments']) : 0)) {
             foreach ($email['message']['attachments'] as $attach)
             {
                 $note = $this->processEmailAttachment($attach, $e);

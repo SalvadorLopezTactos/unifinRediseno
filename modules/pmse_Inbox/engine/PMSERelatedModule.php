@@ -255,6 +255,7 @@ class PMSERelatedModule
 
     public function getRelatedBeans($filter, $relationship = 'all', $removeTarget = false)
     {
+        $res = [];
         global $beanList, $app_list_strings;
         if (isset($beanList[$filter])) {
             $newModuleFilter = $filter;

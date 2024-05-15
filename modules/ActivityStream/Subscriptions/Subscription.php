@@ -49,7 +49,7 @@ class Subscription extends Basic
         $query->where()->equals('parent_id', $record->id);
         $query->where()->equals('parent_type', $record->module_name);
 
-        return $query->execute($type);
+        return $query->execute();
     }
 
     /**
@@ -66,7 +66,7 @@ class Subscription extends Basic
         $query->select(array('parent_id', 'parent_type'));
         $query->where()->equals('created_by', $user->id);
 
-        return $query->execute($type);
+        return $query->execute();
     }
 
     /**
@@ -260,7 +260,7 @@ class Subscription extends Basic
             'args'          => $args,
             'user_partials' => $userPartials,
         );
-        if (count($userPartials) < 5) {
+        if ((is_countable($userPartials) ? count($userPartials) : 0) < 5) {
             self::addActivitySubscriptions($data);
         } else {
             $job                   = BeanFactory::newBean('SchedulersJobs');

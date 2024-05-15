@@ -114,10 +114,10 @@ class DefaultDashboardInstaller
         }
 
         if (!empty($metadata['components'])) {
-            for ($i = 0; $i < count($metadata['components']); $i++) {
+            for ($i = 0; $i < (is_countable($metadata['components']) ? count($metadata['components']) : 0); $i++) {
                 if (!empty($metadata['components'][$i]['rows'])) {
-                    for ($j = 0; $j < count($metadata['components'][$i]['rows']); $j++) {
-                        for ($k = 0; $k < count($metadata['components'][$i]['rows'][$j]); $k++) {
+                    for ($j = 0; $j < (is_countable($metadata['components'][$i]['rows']) ? count($metadata['components'][$i]['rows']) : 0); $j++) {
+                        for ($k = 0; $k < (is_countable($metadata['components'][$i]['rows'][$j]) ? count($metadata['components'][$i]['rows'][$j]) : 0); $k++) {
                             if (!empty($metadata['components'][$i]['rows'][$j][$k]['view'])) {
                                 $view = &$metadata['components'][$i]['rows'][$j][$k]['view'];
                                 $isSavedReportsChart = !empty($view['type']) && $view['type'] == 'saved-reports-chart';

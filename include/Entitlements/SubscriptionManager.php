@@ -915,7 +915,7 @@ class SubscriptionManager
         }
 
         return array_filter($userTypes, function ($type) use ($allowedSeats, $usedSeats) {
-            if (empty($allowedSeats[$type]) || $allowedSeats[$type]['quantity'] - $usedSeats[$type] <= 0) {
+            if (empty($allowedSeats[$type]) || $allowedSeats[$type]['quantity'] - $usedSeats[$type] < 0) {
                 return true;
             }
             return false;

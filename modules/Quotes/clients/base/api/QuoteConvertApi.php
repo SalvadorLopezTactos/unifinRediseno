@@ -53,7 +53,8 @@ class QuoteConvertApi extends SugarApi
         // we made it though all the ACL checks. lets see if this quote already has an an opportunity
         $quote->load_relationship('opportunities');
 
-        if (count($quote->opportunities->getBeans())) {
+        $beans = $quote->opportunities->getBeans();
+        if (is_countable($beans) && count($beans) > 0) {
             // throw an exception here as we already have one.
             throw new SugarApiExceptionEditConflict(
                 'EXCEPTION_QUOTE_ALREADY_CONVERTED',

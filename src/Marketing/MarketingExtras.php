@@ -184,6 +184,7 @@ class MarketingExtras
      */
     private function configureProxy($ch)
     {
+        $proxy_settings = [];
         $proxy_config = \Administration::getSettings('proxy');
 
         if (!empty($proxy_config) &&

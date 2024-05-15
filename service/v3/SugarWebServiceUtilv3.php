@@ -23,18 +23,14 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
     {
         $this->getLogger()->info('Begin: SoapHelperWebServices->filter_fields');
         global $invalid_contact_fields;
-        $filterFields = array();
-        foreach($fields as $field)
-        {
-            if (is_array($invalid_contact_fields))
-            {
-                if (in_array($field, $invalid_contact_fields))
-                {
+        $filterFields = [];
+        foreach (safeIsIterable($fields) ? $fields : [] as $field) {
+            if (is_array($invalid_contact_fields)) {
+                if (in_array($field, $invalid_contact_fields)) {
                     continue;
                 }
             }
-            if (isset($value->field_defs[$field]))
-            {
+            if (is_scalar($field) && isset($value->field_defs[$field])) {
                 $var = $value->field_defs[$field];
                 if($var['type'] == 'link') continue;
                 if( isset($var['source'])
@@ -271,6 +267,8 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
 	}
 
     function get_module_view_defs($module_name, $type, $view){
+        $listViewDefs = [];
+        $viewdefs = [];
         $metadataFile = null;
         $view = strtolower($view);
         if ($view == 'subpanel') {

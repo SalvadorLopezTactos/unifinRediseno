@@ -27,6 +27,9 @@
     initialize: function(options) {
         this._super('initialize', [options]);
         this.contactInfo = app.config.contactInfo;
+        if (_.isString(this.contactInfo.contactURL) && !this.contactInfo.contactURL.match(/^(http|https):\/\//)) {
+            this.contactInfo.contactURL = app.config.siteUrl + this.contactInfo.contactURL.trim();
+        }
     },
 
     /**

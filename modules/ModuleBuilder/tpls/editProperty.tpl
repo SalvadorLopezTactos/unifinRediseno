@@ -14,19 +14,19 @@
 {sugar_csrf_form_token}
 <input type='hidden' name='module' value='ModuleBuilder'>
 <input type='hidden' name='action' value='saveProperty'>
-<input type='hidden' name='view_module' value='{$view_module}'>
-{if isset($view_package)}<input type='hidden' name='view_package' value='{$view_package}'>{/if}
-<input type='hidden' name='subpanel' value='{$subpanel}'>
+<input type='hidden' name='view_module' value="{$view_module|escape:'html'}">
+{if isset($view_package)}<input type='hidden' name='view_package' value="{$view_package|escape:'html'}">{/if}
+<input type='hidden' name='subpanel' value="{$subpanel|escape:'html'}">
 <input type='hidden' name='to_pdf' value='true'>
 
 {if isset($MB)}
-<input type='hidden' name='MB' value='{$MB}'>
-<input type='hidden' name='view_package' value='{$view_package}'>
+<input type='hidden' name='MB' value="{$MB|escape:'html'}">
+<input type='hidden' name='view_package' value="{$view_package|escape:'html'}">
 {/if}
 
 <script>
     function saveAction() {
-        var widthUnit = '{$widthUnit}';
+        var widthUnit = '{$widthUnit|escape:'javascript'}';
         for(var i=0, l=document.editProperty.elements.length; i<l; i++) {
             var field = document.editProperty.elements[i];
             if (field.className.indexOf('save') != -1 )
@@ -50,9 +50,9 @@
 
 	function switchLanguage( language )
 	{
-        var request = 'module=ModuleBuilder&action=editProperty&view_module={$editModule}&selected_lang=' + language ;
+        var request = 'module=ModuleBuilder&action=editProperty&view_module={$editModule|escape:'url'}&selected_lang=' + language ;
         {foreach from=$properties key='key' item='property'}
-                request += '&id_{$key}={$property.id}&name_{$key}={$property.name}&title_{$key}={$property.title}&label_{$key}={$property.label}' ;
+                request += '&id_{$key|escape:'url'}={$property.id|escape:'url'}&name_{$key|escape:'url'}={$property.name|escape:'url'}&title_{$key|escape:'url'}={$property.title|escape:'url'}&label_{$key|escape:'url'}={$property.label|escape:'url'}' ;
         {/foreach}
         ModuleBuilder.getContent( request ) ;
     }
@@ -63,32 +63,32 @@
 
 	{foreach from=$properties key='key' item='property'}
 	<tr>
-		<td width="25%" align='right'>{if isset($property.title)}{$property.title}{else}{$property.name}{/if}:</td>
+        <td width="25%" align='right'>{if isset($property.title)}{$property.title|escape:'html'}{else}{$property.name|escape:'html'}{/if}:</td>
 		<td width="75%">
-			<input class='save' type='hidden' name='{$property.name}' id='editProperty_{$id}{$property.id}' value='no_change'>
+            <input class='save' type='hidden' name="{$property.name|escape:'html'}" id="editProperty_{$id|escape:'html'}{$property.id|escape:'html'}" value='no_change'>
 			{if isset($property.hidden)}
-				{$property.value}
+                {$property.value|escape:'html'}
 			{else}
 				{if $key == 'width'}
-					<select id="selectWidthClass_{$id}{$property.id}" onchange="handleClassSelection(this)">
+                    <select id="selectWidthClass_{$id|escape:'html'}{$property.id|escape:'html'}" onchange="handleClassSelection(this)">
 						<option value="" selected="selected">default</option>
                         {foreach from=$defaultWidths item='width'}
-                            <option value="{$width}">{$width}</option>
+                            <option value="{$width|escape:'html'}">{$width|escape:'html'}</option>
                         {/foreach}
 						<option value="custom">custom</option>
 					</select>
-					<input id="widthValue_{$id}{$property.id}" onchange="handleWidthChange(this.value)" value="{$property.value}" style="display:none">
-                    
+                    <input id="widthValue_{$id|escape:'html'}{$property.id|escape:'html'}" onchange="handleWidthChange(this.value)" value="{$property.value|escape:'html'}" style="display:none">
+
                     <script>
                     var propertyValue, widthValue, saveWidthProperty, selectWidthClass;
-                    
 
-                    propertyValue = '{$property.value}';
-                    saveWidthProperty = document.getElementById('editProperty_{$id}{$property.id}');
-                    widthValue = document.getElementById('widthValue_{$id}{$property.id}');
-                    selectWidthClass = document.getElementById('selectWidthClass_{$id}{$property.id}');
 
-                    
+                    propertyValue = '{$property.value|escape:'javascript'}';
+                    saveWidthProperty = document.getElementById('editProperty_{$id|escape:'javascript'}{$property.id|escape:'javascript'}');
+                    widthValue = document.getElementById('widthValue_{$id|escape:'javascript'}{$property.id|escape:'javascript'}');
+                    selectWidthClass = document.getElementById('selectWidthClass_{$id|escape:'javascript'}{$property.id|escape:'javascript'}');
+
+
                     if (propertyValue != '') {
                         if (isNaN(propertyValue)) {
                             selectWidthClass.value = propertyValue;
@@ -117,16 +117,16 @@
                         saveWidthProperty.value = w;
                     }
                     </script>
-                    
+
 				{else}
-                    <input onchange='document.getElementById("editProperty_{$id}{$property.id}").value = this.value' value='{$property.value}'>
+                    <input onchange="document.getElementById('editProperty_{$id|escape:'javascript'|escape:'html':'UTF-8'}{$property.id|escape:'javascript'|escape:'html':'UTF-8'}').value = this.value" value="{$property.value|escape:'html'}">
                 {/if}
 			{/if}
 		</td>
 	</tr>
 	{/foreach}
 	<tr>
-		<td><input class="button" type="Button" name="save" value="{$APP.LBL_SAVE_BUTTON_LABEL}" onclick="saveAction(); ModuleBuilder.submitForm('editProperty'); ModuleBuilder.closeAllTabs();"></td>
+		<td><input class="button" type="Button" name="save" value="{$APP.LBL_SAVE_BUTTON_LABEL|escape:'html'}" onclick="saveAction(); ModuleBuilder.submitForm('editProperty'); ModuleBuilder.closeAllTabs();"></td>
 	</tr>
 </table>
 </form>

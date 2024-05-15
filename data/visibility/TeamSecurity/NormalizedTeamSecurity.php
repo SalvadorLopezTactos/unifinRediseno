@@ -68,6 +68,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
      */
     protected function getInCondition($currentUserId, $teamTableAlias)
     {
+        $count = null;
         $usePrefetch = false;
         if ($this->getOption('teamset_prefetch')) {
             $teamSets = TeamSet::getTeamSetIdsForUser($currentUserId);

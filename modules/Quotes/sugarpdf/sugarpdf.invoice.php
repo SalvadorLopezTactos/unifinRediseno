@@ -14,6 +14,7 @@
 class QuotesSugarpdfInvoice extends QuotesSugarpdfStandard{
     
     function preDisplay(){
+        $quote = [];
         global $mod_strings, $timedate;
         parent::preDisplay();
         

@@ -78,6 +78,10 @@ class PersonFilterApi extends FilterApi {
         $this->useOnlyActiveUsers = isset($args['filter']) && $this->useOnlyActiveUsers($args['filter']);
         $this->getCustomWhereForModule($args['module_list'], $q);
 
+        if (($options['id_query'] ?? null) instanceof SugarQuery) {
+            $this->addCustomWhereToIdQuery((string) $args['module_list'], $options['id_query']);
+        }
+
         return $this->runQuery($api, $args, $q, $options, $seed);
     }
 
@@ -146,5 +150,22 @@ class PersonFilterApi extends FilterApi {
     protected function useOnlyActiveUsers(array $filter = []) : bool
     {
         return empty(array_column($filter, 'status'));
+    }
+
+    /**
+     * Adds Custom Where part like what will be added inside ::getCustomWhereForModule method
+     */
+    protected function addCustomWhereToIdQuery(string $module, SugarQuery $query): void
+    {
+        // everything is similar to ::getCustomWhereForModule
+
+        if ($module === 'Employees') {
+            return;
+        }
+
+        $w = $query->where()->equals('portal_only', '0');
+        if ($this->useOnlyActiveUsers) {
+            $w->equals('status', 'Active');
+        }
     }
 }

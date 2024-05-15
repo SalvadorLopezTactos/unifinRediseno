@@ -68,12 +68,12 @@ $contactBean = BeanFactory::newBean('Contacts');
 $focus->load_relationship("contact_resources");
 $contacts = $focus->contact_resources->getBeans($contactBean);
 
-for ($i = 1; $i <= count($users); $i++) {
+for ($i = 1; $i <= (is_countable($users) ? count($users) : 0); $i++) {
 	$mpx .= "50," . $i . "," . $i . "," . $locale->translateCharset($users[$i-1]->full_name, 'UTF-8', $locale->getExportCharset()) . "\n";
 	$resources[$users[$i-1]->id] = $i;
 }
 $j = $i-1;
-for ($i = 1; $i <= count($contacts); $i++) {
+for ($i = 1; $i <= (is_countable($contacts) ? count($contacts) : 0); $i++) {
 	$offset = $i+$j;
     $mpx .= "50," . $offset . "," . $offset . "," . $locale->translateCharset($contacts[$i-1]->full_name, 'UTF-8', $locale->getExportCharset()) . "\n";
     $resources[$contacts[$i-1]->id] = $offset;
@@ -91,7 +91,7 @@ $projectTasks = $focus->getAllProjectTasks();
 
 $outlineLevel = 1;
 $indentLevel = array();
-for ($i = 0; $i < count($projectTasks); $i++){
+for ($i = 0; $i < (is_countable($projectTasks) ? count($projectTasks) : 0); $i++) {
 	$projTaskId = $i+1;
 	
 	$mpx .= "70,";

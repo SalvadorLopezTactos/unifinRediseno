@@ -139,10 +139,20 @@ foreach($config_params as $group => $gdata) {
             <td align="left">
 FORM;
             //if the type is password, set a hidden field to capture the value.  This is so that we can properly encode special characters, which is a limitation with password fields
-            if($type=='password'){
-                $form .= "<input type='$type' name='{$name}_entry' id='{$name}_entry' value='".urldecode($sessval)."'><input type='hidden' name='$name' id='$name' value='".urldecode($sessval)."'>";
-            }else{
-                $form .= "<input type='$type' name='$name' id='$name' value='$sessval'>";
+            if ($type === 'password') {
+                $nameHtml = htmlspecialchars($name);
+                $sessvalHtml = htmlspecialchars(urldecode($sessval));
+                $form .= <<<HTML
+<input type="password" name="{$nameHtml}_entry" id="{$nameHtml}_entry" value="{$sessvalHtml}" />
+<input type="hidden" name="{$nameHtml}" id="{$nameHtml}" value="{$sessvalHtml}" />
+HTML;
+            } else {
+                $nameHtml = htmlspecialchars($name);
+                $sessvalHtml = htmlspecialchars($sessval);
+                $typeHtml = htmlspecialchars($type);
+                $form .= <<<HTML
+<input type="$typeHtml" name="$nameHtml" id="$nameHtml" value="$sessvalHtml" />
+HTML;
             }
 
 
@@ -152,7 +162,10 @@ FORM;
 FORM;
 
         } else {
-            $form .= "<input name=\"$name\" id=\"$name\" value=\"\" type=\"hidden\">\n";
+            $nameHtml = htmlspecialchars($name);
+            $form .= <<<HTML
+<input name="{$nameHtml}" id="{$nameHtml}" value="" type="hidden" />
+HTML;
         }
     }
 }
@@ -179,10 +192,13 @@ $dbUSRDD  .= "<option value='same' $same_select>".$mod_strings['LBL_DBCONFIG_SAM
 $dbUSRDD  .= "</select><br>&nbsp;";
 
 
+    $setup_db_sugarsales_password = urldecode($_SESSION['setup_db_sugarsales_password']);
+    $setup_db_sugarsales_password_html = htmlspecialchars($setup_db_sugarsales_password);
 
-$setup_db_sugarsales_password = urldecode($_SESSION['setup_db_sugarsales_password']);
-$setup_db_sugarsales_user = urldecode($_SESSION['setup_db_sugarsales_user']);
-$setup_db_sugarsales_password_retype = urldecode($_SESSION['setup_db_sugarsales_password_retype']);
+    $setup_db_sugarsales_user = urldecode($_SESSION['setup_db_sugarsales_user']);
+
+    $setup_db_sugarsales_password_retype = urldecode($_SESSION['setup_db_sugarsales_password_retype']);
+    $setup_db_sugarsales_password_retype_html = htmlspecialchars($setup_db_sugarsales_password_retype);
 
 $out2 .=<<<EOQ2
 
@@ -204,14 +220,14 @@ $out2 .=<<<EOQ2
     <td>&nbsp;</td>
     <td nowrap><b>{$mod_strings['LBL_DBCONF_DB_PASSWORD']}</b></td>
     <td nowrap align="left">
-        <input type="password" name="setup_db_sugarsales_password_entry" value="{$setup_db_sugarsales_password}" />
-        <input type="hidden" name="setup_db_sugarsales_password" value="{$setup_db_sugarsales_password}" />
+        <input type="password" name="setup_db_sugarsales_password_entry" value="{$setup_db_sugarsales_password_html}" />
+        <input type="hidden" name="setup_db_sugarsales_password" value="{$setup_db_sugarsales_password_html}" />
     </td>
 </tr>
 <tr>
     <td>&nbsp;</td>
     <td nowrap><b>{$mod_strings['LBL_DBCONF_DB_PASSWORD2']}</b></td>
-    <td nowrap align="left"><input type="password" name="setup_db_sugarsales_password_retype_entry" value="{$setup_db_sugarsales_password_retype}"  /><input type="hidden" name="setup_db_sugarsales_password_retype" value="{$setup_db_sugarsales_password_retype}" /></td>
+    <td nowrap align="left"><input type="password" name="setup_db_sugarsales_password_retype_entry" value="{$setup_db_sugarsales_password_retype_html}"  /><input type="hidden" name="setup_db_sugarsales_password_retype" value="{$setup_db_sugarsales_password_retype_html}" /></td>
 </tr></table>
 </span>
 

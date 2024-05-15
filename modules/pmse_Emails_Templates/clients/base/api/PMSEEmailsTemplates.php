@@ -16,6 +16,11 @@ use Sugarcrm\Sugarcrm\ProcessManager;
 
 class PMSEEmailsTemplates extends vCardApi
 {
+    /**
+     * @var Sugarcrm\Sugarcrm\ProcessManager\PMSE|mixed
+     */
+    public $crmDataWrapper;
+
     public function __construct()
     {
         $this->crmDataWrapper = ProcessManager\Factory::getPMSEObject('PMSECrmDataWrapper');
@@ -83,6 +88,7 @@ class PMSEEmailsTemplates extends vCardApi
      */
     public function findVariables($api, $args)
     {
+        $direction = null;
         // Initialize this var since not all requests send 'q'
         $q = isset($args["q"]) ? $args["q"] : null;
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
@@ -169,7 +175,7 @@ class PMSEEmailsTemplates extends vCardApi
                 $tmpField['_module'] = $newModuleFilter;
                 $tmpField['name'] = str_replace(':', '', translate($field['vname'], $newModuleFilter));
                 $tmpField['rhs_module'] = $filter;
-                if (empty($q) || stripos($tmpField['name'], $q) !== false) {
+                if (empty($q) || stripos($tmpField['name'], (string) $q) !== false) {
                     $output[] = $tmpField;
                 }
             }
@@ -197,7 +203,6 @@ class PMSEEmailsTemplates extends vCardApi
 
         return array('totalRecords' => count($output),'records' => $outputTmp);
     }
-
 
     public function retrieveRelatedBeans($api, $args)
     {
@@ -254,19 +259,7 @@ class PMSEEmailsTemplates extends vCardApi
 
     public function emailTemplateDownload ($api, $args)
     {
-        ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
-        $emailTemplate = ProcessManager\Factory::getPMSEObject('PMSEEmailTemplateExporter');
-        $requiredFields  = array('record', 'module');
-        foreach ( $requiredFields as $fieldName ) {
-            if ( !array_key_exists($fieldName, $args) ) {
-                $sugarApiExceptionMissingParameter = new SugarApiExceptionMissingParameter(
-                    'Missing parameter: '.$fieldName
-                );
-                PMSELogger::getInstance()->alert($sugarApiExceptionMissingParameter->getMessage());
-                throw $sugarApiExceptionMissingParameter;
-            }
-        }
-
+        ProcessManager\AccessManager::getInstance()->verifyRecordAccess($api, $args);
         if (PMSEEngineUtils::isExportDisabled($args['module'])) {
             $sugarApiExceptionNotAuthorized = new SugarApiExceptionNotAuthorized(
                 $GLOBALS['app_strings']['ERR_EXPORT_DISABLED']
@@ -274,7 +267,13 @@ class PMSEEmailsTemplates extends vCardApi
             PMSELogger::getInstance()->alert($sugarApiExceptionNotAuthorized->getMessage());
             throw $sugarApiExceptionNotAuthorized;
         }
-
+        $emailTemplate = $this->getEmailTemplateExporter();
         return $emailTemplate->exportProject($args['record'], $api);
+    }
+
+    protected function getEmailTemplateExporter()
+    {
+        $emailTemplate = ProcessManager\Factory::getPMSEObject('PMSEEmailTemplateExporter');
+        return $emailTemplate;
     }
 }

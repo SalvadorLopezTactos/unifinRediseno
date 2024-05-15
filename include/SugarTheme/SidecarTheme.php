@@ -360,6 +360,7 @@ class SidecarTheme
      * @return array mixed Merged array
      */
     private function loadLessDefs($variables, $file, $intersect_merge = true) {
+        $lessdefs = [];
         if (file_exists($file)) {
             include $file;
             if ($intersect_merge) {

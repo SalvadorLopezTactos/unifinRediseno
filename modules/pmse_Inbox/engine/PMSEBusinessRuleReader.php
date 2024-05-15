@@ -118,26 +118,29 @@ class PMSEBusinessRuleReader
      */
     public function parseRuleSetJSON($sugarModule, $ruleSetJSON, $type = 'single')
     {
+        $transformedCondition = null;
         $res = '';
         $evaluatedBean = BeanFactory::getBean($sugarModule, $this->appDataVar['id']);
         $ruleSet = json_decode($ruleSetJSON);
         $appData = array();
         $successReturn = "";
         $this->businessRuleConversor->setBaseModule($ruleSet->base_module);
-        foreach ($ruleSet->ruleset as $key => $rule) {
-            $this->businessRuleConversor->setEvaluatedBean($evaluatedBean);
-            $transformedCondition = $this->businessRuleConversor->transformCondition($rule->conditions);
-            $transformedCondition = json_encode($transformedCondition);
-            $evaluationResult = $this->evaluator->evaluateExpression($transformedCondition, $evaluatedBean);
-            if ($evaluationResult) {
-                $successReturn = $this->businessRuleConversor->getReturnValue($rule->conclusions);
-                $appData = $this->businessRuleConversor->processAppData($rule->conclusions, $appData);
-            }
-            if ($type == 'single' && $evaluationResult) {
-                break;
+        if (isset($ruleSet->ruleset) && safeIsIterable($ruleSet->ruleset)) {
+            foreach ($ruleSet->ruleset as $rule) {
+                $this->businessRuleConversor->setEvaluatedBean($evaluatedBean);
+                $transformedCondition = $this->businessRuleConversor->transformCondition($rule->conditions);
+                $transformedCondition = json_encode($transformedCondition);
+                $evaluationResult = $this->evaluator->evaluateExpression($transformedCondition, $evaluatedBean);
+                if ($evaluationResult) {
+                    $successReturn = $this->businessRuleConversor->getReturnValue($rule->conclusions);
+                    $appData = $this->businessRuleConversor->processAppData($rule->conclusions, $appData);
+                }
+                if ($type == 'single' && $evaluationResult) {
+                    break;
+                }
             }
         }
-        if (count($appData)) {
+        if (is_countable($appData) ? count($appData) : 0) {
             $res .= $this->businessRuleConversor->processConditionResult(array(), $appData);
         }
         $log = "The following condition: \n" . $transformedCondition . " has returned: \n" . json_encode($successReturn);

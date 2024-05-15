@@ -307,14 +307,24 @@ class ActionButtonApi extends SugarApi
 
             //create a temporary bean
             $record = BeanFactory::newBean($targetModule);
+            if (!is_object($record)) {
+                // if $record is not an object the method will fail on $record->updateCalculatedFields() anyway,
+                // so doing it here with less potential for additional errors/warnings
+                throw new \SugarApiExceptionError(
+                    \sprintf(
+                        'Could not create bean for module %s',
+                        $targetModule,
+                    )
+                );
+            }
 
-            $fieldDefs = $record->field_defs;
+            $fieldDefs = is_array($record->field_defs) ? $record->field_defs : [];
 
             //we cannot use the ModuleApi populateBean() function since there can be required fields
             //that are not provided at this time, they may be provided from UI
             //by user when the drawer will be opened
             foreach ($beanFields as $fieldName => $fieldValue) {
-                if (array_key_exists($fieldName, $fieldDefs) && $fieldDefs[$fieldName]['type'] === 'multienum') {
+                if (array_key_exists($fieldName, $fieldDefs) && $fieldDefs[$fieldName]['type'] === 'multienum' && is_array($fieldValue)) {
                     $fieldValue = implode(",", $fieldValue);
                 }
 

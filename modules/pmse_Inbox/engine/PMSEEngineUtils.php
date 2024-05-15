@@ -267,7 +267,7 @@ class PMSEEngineUtils
      */
     public static function getBusinessTimePattern(bool $checkOnly = true) : String
     {
-        $bcPattern = implode(array_keys(self::$BusinessCenterTimeUnits));
+        $bcPattern = implode('', array_keys(self::$BusinessCenterTimeUnits));
         if ($checkOnly) {
             return "/\d+{$bcPattern}/";
         } else {
@@ -1040,6 +1040,8 @@ class PMSEEngineUtils
      */
     public static function getPrimaryEmailKeyFromREQUEST($bean)
     {
+        $widget_id = null;
+        $primaryValue = null;
         $module = $bean->module_dir;
         $widgetCount = 0;
         $moduleItem = '0';
@@ -1585,6 +1587,7 @@ class PMSEEngineUtils
 
     public static function getDateToFE($theDate, $type, $bean = null)
     {
+        $fieldName = null;
         global $timedate, $db;
 
         $theDate = $db->fromConvert($theDate, $type);
@@ -1612,6 +1615,7 @@ class PMSEEngineUtils
     }
 
     public static function getStudioModules($type = '') {
+        $pmseModulesList = null;
         include 'modules/pmse_Inbox/engine/PMSEModules.php';
         $studioBrowser = new StudioBrowser();
         if ($type == 'related') {

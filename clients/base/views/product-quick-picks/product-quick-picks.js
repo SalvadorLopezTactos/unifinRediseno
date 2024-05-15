@@ -329,6 +329,11 @@
             delete data.pricing_formula;
             delete data.my_favorite;
             delete data.sync_key;
+            delete data.team_count;
+            delete data.team_count_link;
+            delete data.team_name;
+            delete data.team_id;
+            delete data.team_set_id;
 
             let closestComp = this._getClosestComponent();
             if (closestComp && closestComp.triggerBefore('productCatalogDashlet:add:allow')) {

@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\PackageManager\Exception;
 
+use ModuleScanner;
 use SugarException;
 
 class PackageManagerException extends SugarException
@@ -21,6 +22,29 @@ class PackageManagerException extends SugarException
     public function setErrorDescription($data): self
     {
         $this->setExtraData('error_description', $data);
+        return $this;
+    }
+
+    /**
+     * @var ModuleScanner
+     */
+    protected $moduleScanner;
+
+    /**
+     * @return ModuleScanner
+     */
+    public function getModuleScanner(): ModuleScanner
+    {
+        return $this->moduleScanner;
+    }
+
+    /**
+     * @param ModuleScanner $moduleScanner
+     * @return $this
+     */
+    public function setModuleScanner(ModuleScanner $moduleScanner): PackageManagerException
+    {
+        $this->moduleScanner = $moduleScanner;
         return $this;
     }
 }

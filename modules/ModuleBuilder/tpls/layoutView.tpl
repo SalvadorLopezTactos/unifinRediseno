@@ -58,7 +58,7 @@
         {assign var="field" value=$col.name}
         <div class='le_field' data-name="{$field}" id='{$idCount}'>
             {if ! $fromModuleBuilder && ($col.name != '(filler)')}
-                {capture assign="otherAttributes"}class="le_edit" style="float:right; cursor:pointer;" onclick="editFieldProperties('{$idCount}', '{$col.label}');"{/capture}
+                {capture assign="otherAttributes"}class="le_edit" style="float:right; cursor:pointer;" onclick="editFieldProperties('{$idCount}', '{$col.label|escape:'javascript'}');"{/capture}
                 {sugar_getimage name="edit_inline" ext=".gif" other_attributes=$otherAttributes}
             {/if}
             {if isset($col.type) && ($col.type == 'address')}
@@ -78,9 +78,9 @@
                 {eval var=$col.label assign='newLabel'}
                 {if $from_mb}
                     {if !empty($current_mod_strings[$newLabel])}
-                        {$current_mod_strings[$newLabel]}
+                        {$current_mod_strings[$newLabel]|escape:'html'}
                     {else}
-                        {$col.label}
+                        {$col.label|escape:'html'}
                     {/if}
                 {else}
                     {sugar_translate label=$newLabel module=$language}
@@ -88,13 +88,13 @@
  			{else}
                 {assign var='label' value=$col.label} 
                 {if !empty($current_mod_strings[$label])}
-                    {$current_mod_strings[$label]}
+                    {$current_mod_strings[$label]|escape:'html'}
                 {else}
-                	{$label}
+                	{$label|escape:'html'}
                 {/if}
             {/if}{if !empty($col.fieldset)} **{/if}</span>
-            <span class='field_name'>{$col.name}</span>
-            <span class='field_label'>{$col.label}</span>
+            <span class='field_name'>{$col.name|escape:'html'}</span>
+            <span class='field_label'>{$col.label|escape:'html'}</span>
             {if !empty($col.fieldset_fields)}
             <span class='field_fieldset_fields' id='fieldset_{$idCount}'>
                 {foreach from=$col.fieldset_fields item='fsfield'}
@@ -103,11 +103,11 @@
                         {sugar_translate label=$fslabel module=$language}
                     {else}
                         {if !empty($current_mod_strings[$fslabel])}
-                            {$current_mod_strings[$fslabel]}
+                            {$current_mod_strings[$fslabel]|escape:'html'}
                         {elseif !empty($mod[$fslabel])}
-                            {$mod[$fslabel]}
+                            {$mod[$fslabel]|escape:'html'}
                         {else}
-                            {$fslabel}
+                            {$fslabel|escape:'html'}
                         {/if}
                     {/if}<br>
                 {/foreach}
@@ -181,7 +181,7 @@
                 {assign var="field" value=$col.name}
                 <div class='le_field' data-name="{$col.name}" id='{$idCount}'>
                     {if ! $fromModuleBuilder && ($col.name != '(filler)')}
-                        {capture assign="otherAttributes"}class="le_edit" style="float:right; cursor:pointer;" onclick="editFieldProperties('{$idCount}', '{$col.label}');"{/capture}
+                        {capture assign="otherAttributes"}class="le_edit" style="float:right; cursor:pointer;" onclick="editFieldProperties('{$idCount}', '{$col.label|escape:'javascript'}');"{/capture}
                         {sugar_getimage name="edit_inline" ext=".gif" other_attributes=$otherAttributes}
                     {/if}
 
@@ -203,15 +203,15 @@
                         {sugar_translate label=$label module=$language}
                     {else}
 		                {if !empty($current_mod_strings[$label])}
-		                    {$current_mod_strings[$label]}
+		                    {$current_mod_strings[$label]|escape:'html'}
 		                {elseif !empty($mod[$label])}
-		                    {$mod[$label]}
+		                    {$mod[$label]|escape:'html'}
 		                {else}
-		                	{$label}
+		                	{$label|escape:'html'}
 		                {/if}
 		            {/if}{if !empty($col.fieldset)} **{/if}</span>
-                    <span class='field_name'>{$col.name}</span>
-                    <span class='field_label'>{$col.label}</span>
+                    <span class='field_name'>{$col.name|escape:'html'}</span>
+                    <span class='field_label'>{$col.label|escape:'html'}</span>
                     {if !empty($col.fieldset_fields)}
                     <span class='field_fieldset_fields' id='fieldset_{$idCount}'>
                         {foreach from=$col.fieldset_fields item='fsfield'}
@@ -220,11 +220,11 @@
                                 {sugar_translate label=$fslabel module=$language}
                             {else}
                                 {if !empty($current_mod_strings[$fslabel])}
-                                    {$current_mod_strings[$fslabel]}
+                                    {$current_mod_strings[$fslabel]|escape:'html'}
                                 {elseif !empty($mod[$fslabel])}
-                                    {$mod[$fslabel]}
+                                    {$mod[$fslabel]|escape:'html'}
                                 {else}
-                                    {$fslabel}
+                                    {$fslabel|escape:'html'}
                                 {/if}
                             {/if}<br>
                         {/foreach}

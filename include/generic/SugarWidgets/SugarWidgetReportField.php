@@ -219,6 +219,7 @@ class SugarWidgetReportField extends SugarWidgetField
      */
     public function queryOrderBy($layout_def)
     {
+        $field_def = [];
         if (!empty($this->reporter->all_fields[$layout_def['column_key']])) {
             $field_def = $this->reporter->all_fields[$layout_def['column_key']];
         }

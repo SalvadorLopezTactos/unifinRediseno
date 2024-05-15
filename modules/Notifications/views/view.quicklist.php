@@ -14,6 +14,7 @@ class ViewQuickList extends SugarView
 {
 	function display()
 	{
+        $data = [];
 		global $current_user;
 		
 	    $query_fields = array('is_read' => 0,'assigned_user_id' => $current_user->id);

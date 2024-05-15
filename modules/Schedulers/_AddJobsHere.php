@@ -136,27 +136,26 @@ function pollMonitoredInboxes() {
 						$_REQUEST['team_id'] = $sugarFolder->team_id;
 						$_REQUEST['team_set_id'] = $sugarFolder->team_set_id;
                         $_REQUEST['acl_team_set_id'] = $sugarFolder->acl_team_set_id;
-					} // if
-					$messagesToDelete = array();
-					if ($ieX->isMailBoxTypeCreateCase()) {
-						$users[] = $sugarFolder->assign_to_id;
-						$GLOBALS['log']->debug('Getting users for teamset');
-						$teamSet = BeanFactory::newBean('TeamSets');
-						$usersList = $teamSet->getTeamSetUsers($sugarFolder->team_set_id, true);
-						$GLOBALS['log']->debug('Done Getting users for teamset');
-						$users = array();
-						foreach($usersList as $userObject) {
-							$users[] = $userObject->id;
-						} // foreach
-						$distributionMethod = $ieX->get_stored_options("distrib_method", "");
-						if ($distributionMethod != 'roundRobin') {
-							$counts = $emailUI->getAssignedEmailsCountForUsers($users);
-						} else {
-							$lastRobin = $emailUI->getLastRobin($ieX);
-						}
-						$GLOBALS['log']->debug('distribution method id [ '.$distributionMethod.' ]');
-					}
-					foreach($newMsgs as $k => $msgNo) {
+                    } // if
+                    $messagesToDelete = [];
+                    if ($ieX->isMailBoxTypeCreateCase()) {
+                        $GLOBALS['log']->debug('Getting users for teamset');
+
+                        /** @var TeamSet $teamSet */
+                        $teamSet = BeanFactory::newBean('TeamSets');
+
+                        $users = $teamSet->getTeamSetUserIds((string) $sugarFolder->team_set_id);
+                        $GLOBALS['log']->debug('Done Getting users for teamset');
+
+                        $distributionMethod = $ieX->get_stored_options('distrib_method', '');
+                        if ($distributionMethod === 'leastBusy') {
+                            $counts = $emailUI->getAssignedEmailsCountForUsers($users);
+                        } elseif ($distributionMethod === 'roundRobin') {
+                            $lastRobin = $emailUI->getLastRobin($ieX);
+                        }
+                        $GLOBALS['log']->debug('distribution method id [ ' . $distributionMethod . ' ]');
+                    }
+                    foreach ($newMsgs as $k => $msgNo) {
                         try {
                             $uid = $msgNo;
                             if ($ieX->isPop3Protocol()) {
@@ -261,6 +260,9 @@ function pollMonitoredInboxes() {
 				// cn: bug 9171 - continue while
 			} // else
 		} // foreach
+        if ($ieX->conn && method_exists($ieX->conn, 'closeConnection')) {
+            $ieX->conn->closeConnection();
+        }
 	} // while
     $GLOBALS['current_user']->team_id = $_bck_up['team_id'];
     $GLOBALS['current_user']->team_set_id = $_bck_up['team_set_id'];

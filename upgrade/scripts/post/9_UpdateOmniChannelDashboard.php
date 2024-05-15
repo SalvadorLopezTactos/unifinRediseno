@@ -41,6 +41,7 @@ class SugarUpgradeUpdateOmniChannelDashboard extends UpgradeScript
 
     private function addCreateTaskToActivityTimelineDashlet()
     {
+        $activityDashletIndex = null;
         $this->log('Adding create task button for cases tab activity module in omnichannel dashboard');
         $defaultDashboardInstaller = new DefaultDashboardInstaller();
         $dashboardFile = 'modules/Dashboards/dashboards/omnichannel/omnichannel.php';

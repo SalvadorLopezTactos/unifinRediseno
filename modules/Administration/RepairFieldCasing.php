@@ -14,7 +14,7 @@ if(is_admin($current_user)) {
     global $mod_strings;
 
     //echo out processing message
-    echo '<br>'.$mod_strings['LBL_REPAIR_FIELD_CASING_PROCESSING'];
+    echo '<br>' . htmlspecialchars($mod_strings['LBL_REPAIR_FIELD_CASING_PROCESSING']);
 
     //store the affected entries
     $database_entries = array();
@@ -40,7 +40,7 @@ if(is_admin($current_user)) {
        	   $table_name = strtolower($module) . '_cstm';
 
            foreach($entries as $original_col_name=>$entry) {
-               echo '<br>'. string_format($mod_strings['LBL_REPAIR_FIELD_CASING_SQL_FIELD_META_DATA'], array($entry['name']));
+                echo '<br>' . htmlspecialchars(string_format($mod_strings['LBL_REPAIR_FIELD_CASING_SQL_FIELD_META_DATA'], array($entry['name'])));
                 $GLOBALS['db']->getConnection()
                     ->update(
                         'fields_meta_data',
@@ -50,8 +50,7 @@ if(is_admin($current_user)) {
                         ],
                         ['id' => $entry['id']]
                     );
-
-           	   echo '<br>'. string_format($mod_strings['LBL_REPAIR_FIELD_CASING_SQL_CUSTOM_TABLE'], array($entry['name'], $table_name));
+                 echo '<br>' . htmlspecialchars(string_format($mod_strings['LBL_REPAIR_FIELD_CASING_SQL_CUSTOM_TABLE'], array($entry['name'], $table_name)));
 
       		   $GLOBALS['db']->query($GLOBALS['db']->renameColumnSQL($table_name, $entry['name'], strtolower($entry['name'])));
            }
@@ -70,7 +69,6 @@ if(is_admin($current_user)) {
 	       	  $class_names[] = $GLOBALS['beanList'][$module];
 	       }
 
-	       $repairClass->module_list[] = $module;
 	       foreach($views as $view) {
                 try{
                     $parser = ParserFactory::getParser($view, $module);
@@ -84,7 +82,13 @@ if(is_admin($current_user)) {
 	       		   	  foreach($panel as $row_id=>$row) {
 	       		   	  	 foreach($row as $entry_id=>$entry) {
 	       		   	  	 	if(is_array($entry) && isset($entry['name'])) {
-	       		   	  	 	   $parser->_viewdefs['panels'][$panel_id][$row_id][$entry_id]['name'] = strtolower($entry['name']);
+                                    $parser->_viewdefs['panels'][$panel_id][$row_id][$entry_id]['name'] = is_scalar($entry['name']) ? strtolower($entry['name']) : null;
+                                    if (!is_scalar($entry['name'])) {
+                                        LoggerManager::getLogger()->fatal(
+                                            sprintf('scalar expected, "%s" given', gettype($entry['name']))
+                                            . PHP_EOL . (new Exception())->getTraceAsString()
+                                        );
+                                    }
 	       		   	  	 	}
 	       		   	  	 }
 	       		   	  }
@@ -93,7 +97,13 @@ if(is_admin($current_user)) {
 	       		  //For basic_search and advanced_search views, just process the fields
        		   	  foreach($parser->_viewdefs as $entry_id=>$entry) {
        		   	  	 if(is_array($entry) && isset($entry['name'])) {
-       		   	  	 	$parser->_viewdefs[$entry_id]['name'] = strtolower($entry['name']);
+                            $parser->_viewdefs[$entry_id]['name'] = is_scalar($entry['name']) ? strtolower($entry['name']) : null;
+                            if (!is_scalar($entry['name'])) {
+                                LoggerManager::getLogger()->fatal(
+                                    sprintf('scalar expected, "%s" given', gettype($entry['name']))
+                                    . PHP_EOL . (new Exception())->getTraceAsString()
+                                );
+                            }
        		   	  	 }
        		   	  }
 	       		}
@@ -108,14 +118,12 @@ if(is_admin($current_user)) {
 
 	    } //foreach
 
-	    echo '<br>'.$mod_strings['LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'];
+        echo '<br>' . htmlspecialchars($mod_strings['LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE']);
         $repair = new RepairAndClear();
         $repair->show_output = false;
         $repair->module_list = array($class_names);
         $repair->clearVardefs();
     }
 
-    echo '<br>'.$mod_strings['LBL_DIAGNOSTIC_DONE'];
-
+    echo '<br>' . htmlspecialchars($mod_strings['LBL_DIAGNOSTIC_DONE']);
 }
-?>

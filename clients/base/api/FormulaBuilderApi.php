@@ -44,7 +44,7 @@ class FormulaBuilderApi extends SugarApi
             'fields' => $this->getFields($module, $allowRestricted),
             'relateFields' => $this->getRelateFields($module),
             'relateModules' => $this->getRelateModules($module),
-            'help' => $this->getFunctionsHelp($module),
+            'help' => $this->getFunctionsHelp(),
             'rollupFields' => $this->getRollupFields($module),
             'fieldsTypes' => $this->getFieldsTypes($module),
         ];
@@ -173,6 +173,7 @@ class FormulaBuilderApi extends SugarApi
      */
     private function getFunctionsHelp(): array
     {
+        $FUNCTION_MAP = null;
         $functionsHelp = [];
 
         $cacheFile = sugar_cached('Expressions/functionmap.php');
@@ -183,7 +184,7 @@ class FormulaBuilderApi extends SugarApi
 
         require $cacheFile;
 
-        if (is_array($FUNCTION_MAP) || $FUNCTION_MAP instanceof Traversable) {
+        if (is_iterable($FUNCTION_MAP)) {
             foreach ($FUNCTION_MAP as $functionName => $functionData) {
                 $funcPath = $functionData['src'];
 

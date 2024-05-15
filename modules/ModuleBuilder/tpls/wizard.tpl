@@ -46,12 +46,12 @@
 					 <tr>
 						 <td align="center"><a class='studiolink' id='{$button.linkId}' href="javascript:void(0)">
 						 {if (isset($button.imageName))}
-							 {$button.imageTitle}
+							 {$button.imageTitle|escape:'html'}
 						 {else}
 							 {if (isset($button.label))}
-								 {$button.label}
+								 {$button.label|escape:'html'}
 							 {else}
-								 {$buttonName}
+								 {$buttonName|escape:'html'}
 							 {/if}
 						 {/if}</a></td>
 				     </tr>

@@ -11,6 +11,8 @@
  */
 
 // Check to see if we have already registered our upload stream wrapper
+use Sugarcrm\Sugarcrm\Util\Files\FilePhpEntriesConverter;
+
 if (!in_array('upload', stream_get_wrappers())) {
     UploadStream::register();
 }
@@ -431,6 +433,19 @@ class DownloadFileApi extends DownloadFile
             }
             $this->api->setHeader("Content-Disposition", "attachment; filename=\"" . $this->cleanFilename($info['name']) . "\"");
         }
-        $this->api->fileResponse($info['path']);
+
+        $path = $info['path'];
+
+        if (version_compare(phpversion(), '7.4.16', '>=')) {
+            if (substr($path, 0, 9) === "upload://") {
+                $fileConverter = new FilePhpEntriesConverter();
+                $path = $fileConverter->revert(UploadFile::realpath($path));
+                register_shutdown_function(function () use ($path) {
+                    unlink($path);
+                });
+            }
+        }
+
+        $this->api->fileResponse($path);
     }
 }

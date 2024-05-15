@@ -1266,6 +1266,7 @@ class PMSEUserAssignmentHandler
 
     private function getTeamMembers($teamBean, $args)
     {
+        $options = [];
         // Set up the defaults
         $options['limit'] = 20;
         $options['offset'] = 0;

@@ -50,6 +50,7 @@ class ViewModulefields extends SugarView
 
 	function display()
 	{
+        $titleLBL = [];
         $smarty = new Sugar_Smarty();
         global $mod_strings;
         $bak_mod_strings=$mod_strings;

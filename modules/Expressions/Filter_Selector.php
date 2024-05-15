@@ -39,11 +39,19 @@ global $selector_meta_array;
 	//end expression object
 	}
 
-	foreach($exp_object->selector_popup_fields as $field){
-		if(isset($_REQUEST[$field])){
-			$exp_object->$field = InputValidation::getService()->getValidInputRequest($field);
-		}
-	}
+foreach ($exp_object->selector_popup_fields as $field) {
+    if (isset($_REQUEST[$field])) {
+        try {
+            $exp_object->$field = InputValidation::getService()
+                ->getValidInputRequest(
+                    $field,
+                    ['Assert\Regex' => ['pattern' => '/[\'"<>]/', 'match' => false,],]
+                );
+        } catch (\Exception $exception) {
+            sugar_die($exception->getMessage());
+        }
+    }
+}
 
 	////HANDLE META ARRAY FIELDS
 	if(isset($_REQUEST['exp_meta_type']) && $_REQUEST['exp_meta_type']!='') {

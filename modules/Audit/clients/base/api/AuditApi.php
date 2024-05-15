@@ -59,7 +59,7 @@ class AuditApi extends FilterApi
         } else {
             $options = $this->parseArguments($api, $args, $auditBean);
             $records = $auditBean->getAuditLogChunk($focus, $options);
-            if ($options['limit'] > 0 && count($records) > $options['limit']) {
+            if ($options['limit'] > 0 && (is_countable($records) ? count($records) : 0) > $options['limit']) {
                 $next_offset = $options['limit'] + $options['offset'];
                 array_pop($records);
             } else {
@@ -85,7 +85,7 @@ class AuditApi extends FilterApi
         $options = $this->parseArguments($api, $args, $auditBean);
 
         $records = $auditBean->getAuditLogChunk($focus, $options);
-        if ($options['limit'] > 0 && count($records) > $options['limit']) {
+        if ($options['limit'] > 0 && (is_countable($records) ? count($records) : 0) > $options['limit']) {
             $next_offset = $options['limit'] + $options['offset'];
             array_pop($records);
         } else {

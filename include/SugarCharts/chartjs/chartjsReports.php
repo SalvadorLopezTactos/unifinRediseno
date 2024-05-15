@@ -28,7 +28,9 @@ class chartjsReports extends chartjs
     {
         $total = 0;
         foreach ($dataset as $value) {
-            $total += $value['numerical_value'];
+            if (isset($value['numerical_value'])) {
+                $total += (float)$value['numerical_value'];
+            }
         }
 
         return $total;

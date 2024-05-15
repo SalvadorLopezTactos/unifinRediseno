@@ -312,7 +312,7 @@ class PMSEPreProcessor
                 if ($hasRunOrder && isset($this->executedFlowIds[$bean->id])) {
                     if ($flowData['evn_type'] === 'START') {
                         $executedEvents = $this->executedFlowIds[$bean->id];
-                        $lastRanEvent = $executedEvents[count($executedEvents) - 1];
+                        $lastRanEvent = $executedEvents[(is_countable($executedEvents) ? count($executedEvents) : 0) - 1];
 
                         // continue if the current event is out of order or has already been ran
                         if ($flowData['prj_run_order'] < $lastRanEvent['run_order'] || in_array($eventData, $executedEvents)) {
@@ -665,9 +665,6 @@ class PMSEPreProcessor
                 ' OR ' . $evnParamsChar . ' = '.$db->quoted('newallupdates');
         }
 
-        $mysqlHint = $db->getConnection()->getDatabasePlatform() instanceof MySqlPlatform
-            ? ' force index(idx_pmse_bpm_flow_cas_flow_status_cas_obj_id_del) ' : '';
-
         $sql = "
         SELECT
             rd.evn_id, rd.evn_uid, rd.prj_id, rd.pro_id, rd.evn_type,
@@ -689,7 +686,7 @@ class PMSEPreProcessor
         FROM
             pmse_bpm_related_dependency rd
         LEFT JOIN
-            pmse_bpm_flow flow{$mysqlHint}
+            pmse_bpm_flow flow
             ON
                 rd.rel_element_id = flow.bpmn_id AND
                 flow.cas_flow_status='WAITING' AND

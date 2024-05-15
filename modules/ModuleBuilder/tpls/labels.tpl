@@ -57,10 +57,10 @@
             {foreach from=$MOD item='label' key='key'}
                 <tr>
                     <td class="labels-cell align-right">
-                        {$key}:
+                        {$key|escape:'html'}:
                     </td>
                     <td class="labels-cell align-left">
-                        <input type='hidden' name='label_{$key}' id='label_{$key}' value='no_change'><input id='input_{$key}' onchange='document.getElementById("label_{$key}").value = this.value; ModuleBuilder.state.markAsDirty();' value='{$label}' size='60'>
+                        <input type='hidden' name="label_{$key|escape:'html'}" id="label_{$key|escape:'html'}" value='no_change'><input id="input_{$key|escape:'html'}" onchange='document.getElementById("label_{$key|escape:'javascript'}").value = this.value; ModuleBuilder.state.markAsDirty();' value="{$label|escape:'html'}" size="60">
                     </td>
 
                     {if $showCompareLanguage}

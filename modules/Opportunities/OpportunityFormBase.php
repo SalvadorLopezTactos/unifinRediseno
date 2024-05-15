@@ -136,6 +136,7 @@ return $the_form;
 }
 
 function getFormBody($prefix, $mod='Opportunities', $formname=''){
+        $json = null;
 	if(!ACLController::checkAccess('Opportunities', 'edit', true)){
 		return '';
 	}

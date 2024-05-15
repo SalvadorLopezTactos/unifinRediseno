@@ -336,6 +336,7 @@ class Lead extends Person {
      */
     public function get_old_related_calls()
     {
+        $return_array = [];
         $return_array['select']='SELECT calls.id ';
         $return_array['from']='FROM calls ';
         $return_array['where']=" WHERE calls.parent_id = '$this->id'
@@ -368,6 +369,7 @@ class Lead extends Person {
      */
     public function get_old_related_meetings()
     {
+        $return_array = [];
         $return_array['select']='SELECT meetings.id ';
         $return_array['from']='FROM meetings ';
         $return_array['where']=" WHERE meetings.parent_id = '$this->id'

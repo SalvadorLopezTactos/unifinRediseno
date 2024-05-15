@@ -74,6 +74,8 @@ class SugarpdfSmarty extends Sugarpdf{
         if (!($this->ss instanceof Sugar_Smarty)) {
             $this->ss = new Sugar_Smarty();
             $securityPolicy = new Smarty_Security($this->ss);
+            // forbid all static calls
+            $securityPolicy->static_classes = [null];
             // explicitly allow list of PHP functions (equals to defaults):
             $securityPolicy->php_functions = ['isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time',];
             // remove PHP tags

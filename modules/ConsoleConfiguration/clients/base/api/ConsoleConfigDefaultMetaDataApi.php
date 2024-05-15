@@ -53,7 +53,7 @@ class ConsoleConfigDefaultMetaDataApi extends SugarApi
             $this->buildModuleNameValidator();
         }
         $errors = $this->validator->validate($module, $this->moduleNameConstraints);
-        return count($errors) == 0;
+        return (is_countable($errors) ? count($errors) : 0) == 0;
     }
 
     /**

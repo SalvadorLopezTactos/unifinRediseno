@@ -32,10 +32,10 @@ set_time_limit(180);
 <input type="hidden" name="action" value="LogView">
 <input type="hidden" name="module" value="Configurator">
 <input type="hidden" name="doaction" value="">
-<input type="button" onclick="document.logview.doaction.value='all';document.logview.submit()" name="all" value="<?=htmlspecialchars($mod_strings['LBL_ALL'])?>">
-<input type="button" onclick="document.logview.doaction.value='mark';document.logview.submit()" name="mark" value="<?=htmlspecialchars($mod_strings['LBL_MARK_POINT'])?>">
-<input type="submit" name="display" value="<?=htmlspecialchars($mod_strings['LBL_REFRESH_FROM_MARK'])?>">
-<input type="button" onclick="document.logview.doaction.value='next';document.logview.submit()" name="next" value="<?=htmlspecialchars($mod_strings['LBL_NEXT_'])?>">
+<input type="button" onclick="document.logview.doaction.value='all';document.logview.submit()" name="all" value="<?= htmlspecialchars($mod_strings['LBL_ALL'])?>">
+<input type="button" onclick="document.logview.doaction.value='mark';document.logview.submit()" name="mark" value="<?= htmlspecialchars($mod_strings['LBL_MARK_POINT'])?>">
+<input type="submit" name="display" value="<?= htmlspecialchars($mod_strings['LBL_REFRESH_FROM_MARK'])?>">
+<input type="button" onclick="document.logview.doaction.value='next';document.logview.submit()" name="next" value="<?= htmlspecialchars($mod_strings['LBL_NEXT_'])?>">
 <br><br>
     <?= htmlspecialchars($mod_strings['LBL_SEARCH']) ?><input type="text" name="filter" value="<?= htmlspecialchars($filter) ?>">&nbsp;
     <?php //@codingStandardsIgnoreStart ?>

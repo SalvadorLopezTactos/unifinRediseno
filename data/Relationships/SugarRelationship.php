@@ -786,6 +786,7 @@ abstract class SugarRelationship
     protected function getOrderByFields($orderBy)
     {
         $parts = explode(',', $orderBy);
+        $parts = is_array($parts) ? $parts : [];
         array_walk($parts, 'trim');
         $fields = array();
         foreach ($parts as $part) {

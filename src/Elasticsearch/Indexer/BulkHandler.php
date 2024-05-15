@@ -144,7 +144,7 @@ class BulkHandler
         }
 
         // When reaching the maximum, send out the request
-        if (count($this->documents[$index]) >= $this->maxBulkThreshold) {
+        if ((is_countable($this->documents[$index]) ? count($this->documents[$index]) : 0) >= $this->maxBulkThreshold) {
             $this->sendBulk($index, $this->documents[$index]);
             $this->documents[$index] = array();
         }

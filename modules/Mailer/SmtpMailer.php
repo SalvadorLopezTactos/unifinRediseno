@@ -243,6 +243,8 @@ class SmtpMailer extends BaseMailer
      */
     protected function connectToHost(PHPMailer &$mailer)
     {
+        $connectionStartTime = null;
+        $timeDurationMicroseconds = null;
         if (!is_null($this->connectionCommandTimeDuration)) {
             if ($this->connectionCommandTimeDuration < 3) {
                 $this->setConnectionCommandTimeDuration(3);

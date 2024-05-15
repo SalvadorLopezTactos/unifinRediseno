@@ -105,7 +105,7 @@
      * @return {string}
      */
     formatContent: function(text) {
-        return text ? text.replace(/\n/g, '<br />') : '';
+        return text ? _.escape(text).replace(/\n/g, '<br />') : '';
     },
 
     /**

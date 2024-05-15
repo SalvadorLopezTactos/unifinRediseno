@@ -165,7 +165,8 @@ class PMSEEvalCriteria
      */
     public function evaluationsRecursive($array)
     {
-        if (count($array) == 1) {
+        $fin = null;
+        if ((is_countable($array) ? count($array) : 0) == 1) {
             return array_shift($array);
         } else {
             //We set the array to check for groups within the array
@@ -184,10 +185,10 @@ class PMSEEvalCriteria
                 $signe = '';
             }
             //if we divide groups into subgroups, a new array
-            if (count($subGroup) > 0) {
+            if ((is_countable($subGroup) ? count($subGroup) : 0) > 0) {
                 $ini = $h = array_pop($subGroup);
                 $sw = 0;
-                while ($h < count($array) && $sw == 0) {
+                while ($h < (is_countable($array) ? count($array) : 0) && $sw == 0) {
                     if ("$array[$h]" == "$signe") {
                         $fin = $h;
                         $sw = 1;
@@ -257,7 +258,7 @@ class PMSEEvalCriteria
         foreach ($arrayGroups as $group) {
             $count = 0;
             foreach ($group as $arr) {
-                $count = count($arr) - $count;
+                $count = (is_countable($arr) ? count($arr) : 0) - $count;
             }
             if ($count != 0) {
                 $value = false;

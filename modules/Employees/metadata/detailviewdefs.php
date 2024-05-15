@@ -116,7 +116,7 @@ $viewdefs['Employees']['DetailView'] = array(
     
     array (
       'name' => 'reports_to_name',
-      'customCode' => '<a href="index.php?module=Employees&action=DetailView&record={$fields.reports_to_id.value}">{$fields.reports_to_name.value}</a>',
+      'customCode' => '<a href="index.php?module=Employees&action=DetailView&record={$fields.reports_to_id.value|escape:html}">{$fields.reports_to_name.value|escape:html}</a>',
       'label' => 'LBL_REPORTS_TO_NAME',
     ),
     

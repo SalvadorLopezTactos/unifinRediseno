@@ -278,6 +278,38 @@ function array_search_insensitive($key, $haystack)
     return $found;
 }
 
+function getConfigWithMaskedPasswords(array $config): array
+{
+    $res = [];
+
+    maskConfigNode($config, $res);
+
+    return $res;
+}
+
+function maskConfigNode($node, array &$res): void
+{
+    if (!is_array($node)) {
+        return;
+    }
+    $keys = array_keys($node);
+
+    foreach ($keys as $key) {
+        if (is_array($node[$key])) {
+            $res[$key] = $res[$key] ?? [];
+            maskConfigNode($node[$key], $res[$key]);
+        } else {
+            if ((0 === substr_compare($key, 'password', -strlen('password')))
+                || (0 === substr_compare($key, 'pwd', -strlen('pwd')))
+                || (0 === substr_compare($key, 'pass', -strlen('pass')))) {
+                $res[$key] = '******';
+            } else {
+                $res[$key] = $node[$key];
+            }
+        }
+    }
+}
+
 /**
  * Wrapper around PHP's ArrayObject class that provides dot-notation recursive searching
  * for multi-dimensional arrays

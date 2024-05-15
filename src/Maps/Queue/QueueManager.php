@@ -464,7 +464,7 @@ class QueueManager
         foreach ($mappingTable as $clientKey => $sugarKey) {
             $value = null;
 
-            if (property_exists(get_class($targetBean), $sugarKey)) {
+            if (property_exists($targetBean !== null ? get_class($targetBean) : self::class, $sugarKey)) {
                 $value = $targetBean->{$sugarKey};
             }
 

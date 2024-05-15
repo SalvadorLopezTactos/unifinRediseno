@@ -44,7 +44,27 @@ function packUpgradeWizardCli($phar, $params, $files = array())
     }
     $pathToSmartyPhar = dirname(__DIR__) . '/HealthCheck/smarty.phar';
     foreach (new RecursiveIteratorIterator(new Phar($pathToSmartyPhar)) as $f) {
+        if (false !== strpos($f, 'vendor/nikic/php-parser')) {
+            continue;
+        }
         $phar->addFile($f, str_replace('phar://' . $pathToSmartyPhar . '/', '', $f));
+    }
+
+    //Phar upgrader should be independent from Mango implementation and its dependencies
+    if ($phar instanceof Phar) {
+        $dir = dirname(__DIR__, 2);
+        $parserPath = $dir . '/vendor/nikic/php-parser';
+
+        /** @var SplFileInfo $f */
+        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($parserPath)) as $f) {
+            if ($f->isDir()) {
+                continue;
+            }
+
+            $filePath = $f->getPathname();
+
+            $phar->addFile($filePath, str_replace($dir . '/', '', $filePath));
+        }
     }
 }
 

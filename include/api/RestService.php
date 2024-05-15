@@ -788,7 +788,7 @@ class RestService extends ServiceBase
             $apiBase = 'api/rest.php/';
 
             // Check rewritten URLs AND request uri vs script name
-            if (isset($_REQUEST['__sugar_url']) && strpos($_SERVER['REQUEST_URI'], $_SERVER['SCRIPT_NAME']) === false) {
+            if (isset($_REQUEST['__sugar_url']) && strpos($_SERVER['REQUEST_URI'], (string) $_SERVER['SCRIPT_NAME']) === false) {
                 // This is a forwarded rewritten URL
                 $apiBase = 'rest/';
             }
@@ -955,6 +955,9 @@ class RestService extends ServiceBase
         // I know this looks a little weird, overriding post vars with get vars, but
         // in the case of REST, get vars are fairly uncommon and pretty explicit, where
         // the posted document is probably the output of a generated form.
+        if (!is_array($postVars)) {
+            $postVars = [];
+        }
         return array_merge($postVars,$getVars,$pathVars);
     }
 

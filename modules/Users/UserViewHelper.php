@@ -442,6 +442,7 @@ class UserViewHelper {
 
     protected function setupAdvancedTabUserSettings()
     {
+        $admin = null;
         global $current_user, $locale, $app_strings, $app_list_strings, $sugar_config;
         // This is for the "Advanced" tab, it's not controlled by the metadata UI so we have to do more for it.
 
@@ -575,6 +576,7 @@ class UserViewHelper {
     }
 
     protected function setupAdvancedTabNavSettings() {
+        $ss = null;
         global $app_list_strings;
 
         /* Module Tab Chooser */

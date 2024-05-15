@@ -27,7 +27,10 @@ class ExternalAPIFactory
      */
     public static function filterAPIList($apiFullList)
     {
-        $filteredList = array();
+        $filteredList = [];
+        if (!safeIsIterable($apiFullList)) {
+            return $filteredList;
+        }
         foreach($apiFullList as $name => $data) {
             if(isset($data['connector'])) {
                 if(ConnectorUtils::eapmEnabled($data['connector'])) {

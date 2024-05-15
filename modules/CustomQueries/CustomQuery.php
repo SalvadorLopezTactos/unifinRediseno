@@ -90,6 +90,7 @@ class CustomQuery extends SugarBean {
 	}
 
 	function get_custom_results($check_valid=false, $get_columns=false, $building_query=false, $listview_only=false){
+        $valid = [];
 	    global $current_user;
 	    global $current_language;
 	    $temp_mod_strings = return_module_language($current_language, "CustomQueries");
@@ -312,6 +313,7 @@ class CustomQuery extends SugarBean {
 	}
 
 	function get_list_view_data(){
+        $smarty = null;
 		global $app_strings;
         global $mod_strings;
 
@@ -460,12 +462,12 @@ in use by a data set, especially if the data set has the custom layout enabled.
 			$temp_select[$value] = $value;
 		}
 
-		foreach($old_column_array as $key => $value){
-			if(empty($temp_select[$value])){
-			//a column name has changed
-				$check_bind = true;
-			//end if column name has changed check
-			}
+        foreach (safeIsIterable($old_column_array) ? $old_column_array : [] as $value) {
+            if (empty($temp_select[$value])) {
+                //a column name has changed
+                $check_bind = true;
+                //end if column name has changed check
+            }
 
 		//end foreach if column names have changed
 		}

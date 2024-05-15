@@ -858,6 +858,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public function getModuleData($moduleName, MetaDataContextInterface $context = null)
     {
+        $data = [];
         $vardefs = $this->getVarDef($moduleName);
         if (!empty($vardefs['fields']) && is_array($vardefs['fields'])) {
             $vardefs['fields'] = MassUpdate::setMassUpdateFielddefs($vardefs['fields'], $moduleName);
@@ -1003,6 +1004,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public function getVarDef($moduleName)
     {
+        $data = [];
         $obj = BeanFactory::getObjectName($moduleName);
 
         if ($obj) {
@@ -1356,7 +1358,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected static function getPlatformMetadata(String $metaType): array
     {
-        $$metaType = [];
+        ${$metaType} = [];
         $metaDefs = SugarAutoLoader::existingCustom("clients/$metaType.php");
         if ($metaExtension = SugarAutoLoader::loadExtension($metaType)) {
             $metaDefs[] = $metaExtension;
@@ -1364,7 +1366,7 @@ class MetaDataManager implements LoggerAwareInterface
         foreach ($metaDefs as $file) {
             require $file;
         }
-        return $$metaType;
+        return ${$metaType};
     }
 
     /**
@@ -1819,7 +1821,7 @@ class MetaDataManager implements LoggerAwareInterface
             $context = $this->getDefaultContext();
         }
         if (empty($platforms)) {
-            $platforms = $this->getPlatformsWithCaches();
+            $platforms = static::getPlatformsWithCaches();
         }
 
         static::logDetails($this->logger, "Invalidating cache. Platforms with caches " . print_r($platforms, true), $context);
@@ -1843,7 +1845,7 @@ class MetaDataManager implements LoggerAwareInterface
     public function invalidateUserCache(User $user)
     {
         $context = new MetaDataContextUser($user);
-        $platforms = $this->getPlatformsWithCaches();
+        $platforms = static::getPlatformsWithCaches();
         $this->invalidateCache($platforms, $context);
     }
 
@@ -2162,8 +2164,8 @@ class MetaDataManager implements LoggerAwareInterface
         }
 
         include 'sugar_version.php';
-        if (isset($$var)) {
-            return $$var;
+        if (isset(${$var})) {
+            return ${$var};
         }
 
         return null;
@@ -2176,6 +2178,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public function getServerInfo()
     {
+        $data = [];
         $system_config = Administration::getSettings(false, true);
         $data['flavor'] = $this->getInstanceVersionValue('sugar_flavor');
         $data['version'] = $this->getInstanceVersionValue('sugar_version');
@@ -2712,7 +2715,7 @@ class MetaDataManager implements LoggerAwareInterface
 
         // Get our metadata if a users specific context was provided
         if (!$this->public && !($context instanceof MetaDataContextDefault)) {
-            $contextData = $this->loadAndCacheMetadata(false, $context, $ignoreCache, $data['_hash']);
+            $contextData = $this->loadAndCacheMetadata(false, $context, $ignoreCache);
             $data = array_merge($data, $contextData);
         }
 
@@ -3303,7 +3306,7 @@ class MetaDataManager implements LoggerAwareInterface
     public function getQuickcreateList($filter = true)
     {
         if (!isset($this->data['modules'])) {
-            $this->data['modules'] = $this->getModulesData(null, $filter);
+            $this->data['modules'] = $this->getModulesData(null);
         }
         $modulesData = $this->data['modules'];
 
@@ -3592,7 +3595,7 @@ class MetaDataManager implements LoggerAwareInterface
             $app_list_strings_public['available_language_dom'] = $stringData['app_list_strings']['available_language_dom'];
 
             // Let clients fill in any gaps that may need to be filled in
-            $app_list_strings_public = $this->fillInAppListStrings($app_list_strings_public, $stringData['app_list_strings'], $language);
+            $app_list_strings_public = $this->fillInAppListStrings($app_list_strings_public, $stringData['app_list_strings']);
             $stringData['app_list_strings'] = $app_list_strings_public;
 
         } else {

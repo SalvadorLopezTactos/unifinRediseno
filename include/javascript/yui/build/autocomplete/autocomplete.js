@@ -1860,7 +1860,7 @@ YAHOO.widget.AutoComplete.prototype._sendQuery = function(sQuery) {
  * @private
  */
 YAHOO.widget.AutoComplete.prototype._populateListItem = function(elListItem, oResult, sQuery) {
-    elListItem.innerHTML = this.formatResult(oResult, sQuery, elListItem._sResultMatch);
+    elListItem.innerText = this.formatResult(oResult, sQuery, elListItem._sResultMatch);
 };
 
 /**

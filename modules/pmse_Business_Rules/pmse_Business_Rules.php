@@ -13,6 +13,8 @@
 
 class pmse_Business_Rules extends pmse_Business_Rules_sugar
 {
+    protected array $fillable = ['rst_module'];
+
     public function __construct()
     {
         parent::__construct();

@@ -3545,9 +3545,9 @@ if (!class_exists('TCPDF', false)) {
 			}
 			if ($txt != '') {
 				// text lenght
-				$width = $this->GetStringWidth($txt);
+                $width = (int) $this->GetStringWidth($txt);
 				// ratio between cell lenght and text lenght
-				$ratio = ($w - (2 * $this->cMargin)) / $width;
+                $ratio = $width === 0? 0 : ($w - (2 * $this->cMargin)) / $width;
 
 				// stretch text if required
 				if (($stretch > 0) AND (($ratio < 1) OR (($ratio > 1) AND (($stretch % 2) == 0)))) {
@@ -4540,6 +4540,9 @@ if (!class_exists('TCPDF', false)) {
 					if (function_exists($gdfunction)) {
 						// GD library
 						$img = $gdfunction($file);
+                        if ($img === false) {
+                            return;
+                        }
 						if ($resize) {
 							$imgr = imagecreatetruecolor($neww, $newh);
 							imagecopyresampled($imgr, $img, 0, 0, 0, 0, $neww, $newh, $pixw, $pixh);
@@ -11035,7 +11038,7 @@ if (!class_exists('TCPDF', false)) {
 						// opening html tag
 						$dom[$key]['opening'] = true;
 						$dom[$key]['parent'] = end($level);
-						if (substr($element, -1, 1) != '/') {
+                        if (substr($element, -1, 1) != '/') {
 							// not self-closing tag
 							array_push($level, $key);
 							$dom[$key]['self'] = false;
@@ -11252,6 +11255,12 @@ if (!class_exists('TCPDF', false)) {
 							// store the number of rows on table element
 							++$dom[($dom[$key]['parent'])]['rows'];
 							// store the TR elements IDs on table element
+                            if (!is_array($dom[($dom[$key]['parent'])])) {
+                                $dom[($dom[$key]['parent'])] = [];
+                            }
+                            if (is_null($dom[($dom[$key]['parent'])]['trids'])) {
+                                $dom[($dom[$key]['parent'])]['trids'] = [];
+                            }
 							array_push($dom[($dom[$key]['parent'])]['trids'], $key);
 							if ($thead) {
 								$dom[$key]['thead'] = true;
@@ -11815,7 +11824,9 @@ if (!class_exists('TCPDF', false)) {
 								$cellspacingx = $cellspacing;
 							}
 							$colspan = $dom[$key]['attribute']['colspan'];
-							$wtmp = ($colspan * ($table_width / $dom[$table_el]['cols']));
+                            $colCount = (int) ($dom[$table_el]['cols'] ?? 0);
+                            $wTmpC = $colCount === 0 ? 0 : $table_width / $colCount;
+                            $wtmp = $colspan * $wTmpC;
 							if (isset($dom[$key]['width'])) {
 								$cellw = $this->getHTMLUnitToUnits($dom[$key]['width'], $wtmp, 'px');
 							} else {
@@ -12143,7 +12154,7 @@ if (!class_exists('TCPDF', false)) {
 			unset($dom);
 		}
 
-		/**
+        /**
 		 * Process opening tags.
 		 * @param array $dom html dom array
 		 * @param int $key current element id
@@ -13893,7 +13904,8 @@ if (!class_exists('TCPDF', false)) {
 					$tw = $this->w - $this->rMargin - $this->x;
 				}
 				$fw = $tw - $numwidth - $this->GetStringWidth(' ');
-				$numfills = floor($fw / $this->GetStringWidth($filler));
+                $fillerWidth = (int) $this->GetStringWidth($filler);
+                $numfills = $fillerWidth === 0? 0 : floor($fw / $fillerWidth);
 				if ($numfills > 0) {
 					$rowfill = str_repeat($filler, $numfills);
 				} else {

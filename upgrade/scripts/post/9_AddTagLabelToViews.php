@@ -169,9 +169,9 @@ class SugarUpgradeAddTagLabelToViews extends UpgradeScript
      */
     protected function getDataFromFile($file, $var)
     {
-        $$var = array();
+        ${$var} = array();
         @require $file;
-        return $$var;
+        return ${$var};
     }
 
     /**

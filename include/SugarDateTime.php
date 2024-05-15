@@ -675,6 +675,12 @@ class SugarDateTime extends DateTime
      */
     public function setTimezone ($timezone)
     {
+        if (!$timezone instanceof \DateTimeZone) {
+            LoggerManager::getLogger()->fatal(
+                sprintf('DateTime::setTimezone() expects parameter 1 to be DateTimeZone, %s given', gettype($timezone)) .  PHP_EOL . (new Exception())->getTraceAsString()
+            );
+            return $this;
+        }
         parent::setTimezone($timezone);
         return $this;
     }

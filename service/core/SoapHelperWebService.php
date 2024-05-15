@@ -34,16 +34,20 @@ class SoapHelperWebServices {
 		if(!empty($value->field_defs)){
 
 			foreach($value->field_defs as $var){
-				if(!empty($fields) && !in_array( $var['name'], $fields))continue;
-				if(isset($var['source']) && ($var['source'] != 'db' && $var['source'] != 'non-db' && $var['source'] != 'custom_fields') && $var['name'] != 'email1' && $var['name'] != 'email2' && (!isset($var['type'])|| $var['type'] != 'relate')&&!(isset($var['type'])&&$var['type']=='id'&&isset($var['link'])))continue;
-				if (isset($var['source']) && $var['source'] == 'non_db' && (isset($var['type']) && $var['type'] != 'link')) {
-					continue;
-				}
-				$required = 0;
-				$options_dom = array();
-				$options_ret = array();
-				// Apparently the only purpose of this check is to make sure we only return fields
-				//   when we've read a record.  Otherwise this function is identical to get_module_field_list
+                if (!empty($fields) && !safeInArray($var['name'], $fields)) {
+                    continue;
+                }
+                if (isset($var['source']) && ($var['source'] != 'db' && $var['source'] != 'non-db' && $var['source'] != 'custom_fields') && $var['name'] != 'email1' && $var['name'] != 'email2' && (!isset($var['type']) || $var['type'] != 'relate') && !(isset($var['type']) && $var['type'] == 'id' && isset($var['link']))) {
+                    continue;
+                }
+                if (isset($var['source']) && $var['source'] == 'non_db' && (isset($var['type']) && $var['type'] != 'link')) {
+                    continue;
+                }
+                $required = 0;
+                $options_dom = [];
+                $options_ret = [];
+                // Apparently the only purpose of this check is to make sure we only return fields
+                //   when we've read a record.  Otherwise this function is identical to get_module_field_list
 
 				if( isset($var['required']) && $var['required'] && $var['required'] !== 'false' ){
 					$required = 1;
@@ -407,7 +411,7 @@ class SoapHelperWebServices {
 		$filterFields = array();
 		foreach($fields as $field){
 			if (is_array($invalid_contact_fields)) {
-				if (in_array($field, $invalid_contact_fields)) {
+                if (safeInArray($field, $invalid_contact_fields)) {
 					continue;
 				} // if
 			} // if
@@ -435,16 +439,16 @@ class SoapHelperWebServices {
 		$list = array();
 		if(!empty($value->field_defs)){
 			if(empty($fields))$fields = array_keys($value->field_defs);
-			if(isset($value->assigned_user_name) && in_array('assigned_user_name', $fields)) {
+            if (isset($value->assigned_user_name) && safeInArray('assigned_user_name', $fields)) {
 				$list['assigned_user_name'] = $this->get_name_value('assigned_user_name', $value->assigned_user_name);
 			}
-			if(isset($value->assigned_name) && in_array('assigned_name', $fields)) {
+            if (isset($value->assigned_name) && safeInArray('assigned_name', $fields)) {
 				$list['team_name'] = $this->get_name_value('team_name', $value->assigned_name);
 			}
-			if(isset($value->modified_by_name) && in_array('modified_by_name', $fields)) {
+            if (isset($value->modified_by_name) && safeInArray('modified_by_name', $fields)) {
 				$list['modified_by_name'] = $this->get_name_value('modified_by_name', $value->modified_by_name);
 			}
-			if(isset($value->created_by_name) && in_array('created_by_name', $fields)) {
+            if (isset($value->created_by_name) && safeInArray('created_by_name', $fields)) {
 				$list['created_by_name'] = $this->get_name_value('created_by_name', $value->created_by_name);
 			}
 
@@ -715,7 +719,7 @@ class SoapHelperWebServices {
 					if(!empty($relFields)){
 						$relFieldsKeys = array_keys($relFields);
 						foreach($name_value_list as $key => $value) {
-							if (in_array($value['name'], $relFieldsKeys)) {
+                            if (safeInArray($value['name'], $relFieldsKeys)) {
 								$name_value_pair[$value['name']] = $value['value'];
 							} // if
 						} // foreach
@@ -765,7 +769,7 @@ class SoapHelperWebServices {
                     $seed->field_defs[$value['name']]['type'] == 'enum') {
                     $vardef = $seed->field_defs[$value['name']];
 					if(isset($app_list_strings[$vardef['options']]) && !isset($app_list_strings[$vardef['options']][$value]) ) {
-						if ( in_array($val,$app_list_strings[$vardef['options']]) ){
+                        if (safeInArray($val, $app_list_strings[$vardef['options']])) {
 							$val = array_search($val,$app_list_strings[$vardef['options']]);
 						}
 					}
@@ -832,7 +836,7 @@ class SoapHelperWebServices {
 							$query = $seed->table_name.".outlook_id = '".$GLOBALS['db']->quote($seed->outlook_id)."'";
 							$response = $seed->get_list($order_by, $query, 0,-1,-1,0);
 							$list = $response['list'];
-							if(count($list) > 0){
+                            if ((is_countable($list) ? count($list) : 0) > 0) {
 								foreach($list as $value)
 								{
 									$seed->id = $value->id;
@@ -915,6 +919,7 @@ class SoapHelperWebServices {
 	 * @return array - output_list - the rows of the reports, field_list - the fields in the report.
 	 */
 	function get_report_value($seed, $select_fields){
+        $result = [];
         $this->getLogger()->info('Begin: SoapHelperWebServices->get_report_value');
 		$field_list = array();
 		$output_list = array();
@@ -955,9 +960,8 @@ class SoapHelperWebServices {
 			foreach ($row['cells'] as $key=>$value){
                 $this->getLogger()->info('SoapHelperWebServices->get_report_value name = ' . $key . "  value = " . $value);
 
-				if (!empty($select_fields) && is_array($select_fields) && in_array($key, $select_fields)) {
-
-					if (in_array($key, $select_fields)) {
+                if (!empty($select_fields) && is_array($select_fields) && safeInArray($key, $select_fields)) {
+                    if (safeInArray($key, $select_fields)) {
 						$row_list['name_value_list'][$key] = $this->get_name_value($key, $value);
 					} // if
 				} else {
@@ -1137,7 +1141,7 @@ class SoapHelperWebServices {
 			}else{
 				foreach($contacts as $contact){
 					if(!empty($trimmed_last) && strcmp($trimmed_last, $contact->last_name) == 0){
-						if((!empty($trimmed_email) || !empty($trimmed_email2)) && (strcmp($trimmed_email, $contact->email1) == 0 || strcmp($trimmed_email, $contact->email2) == 0 || strcmp($trimmed_email2, $contact->email) == 0 || strcmp($trimmed_email2, $contact->email2) == 0)){
+                        if ($this->isContactMailContains($contact, $trimmed_email, $trimmed_email2)) {
 							$contact->load_relationship('accounts');
 							if(empty($seed->account_name) || strcmp($seed->account_name, $contact->account_name) == 0){
                                 $this->getLogger()->info('End: SoapHelperWebServices->check_for_duplicate_contacts - duplicte found ' . $contact->id);
@@ -1248,7 +1252,7 @@ class SoapHelperWebServices {
      */
     public function isIDMModeModule($module)
     {
-        return in_array($module, $this->getIDMConfig()->getIDMModeDisabledModules());
+        return safeInArray($module, $this->getIDMConfig()->getIDMModeDisabledModules());
     }
 
     /**
@@ -1273,5 +1277,27 @@ class SoapHelperWebServices {
             $this->idmConfig = new IdmConfig(\SugarConfig::getInstance());
         }
         return $this->idmConfig;
+    }
+
+    /**
+     * @param SugarBean $contact
+     * @param string $trimmedEmail
+     * @param string $trimmedEmail2
+     * @return bool
+     */
+    protected function isContactMailContains($contact, string $trimmedEmail, string $trimmedEmail2): bool
+    {
+        $result = false;
+
+        if (!empty($trimmedEmail)) {
+            $result = strcmp($trimmedEmail, (string)$contact->email1) === 0 ||
+                strcmp($trimmedEmail, (string)$contact->email2) === 0;
+        }
+        if (!$result && !empty($trimmedEmail2)) {
+            $result = strcmp($trimmedEmail2, (string)$contact->email1) === 0 ||
+                strcmp($trimmedEmail2, (string)$contact->email2) === 0;
+        }
+
+        return $result;
     }
 } // clazz

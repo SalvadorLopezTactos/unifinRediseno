@@ -432,9 +432,9 @@
                 _.each(calendarDefs, function(calendarDef) {
                     if (this.scheduler) {
                         this.scheduler.resources[0].dataSource.add({
-                            text: calendarDef.name,
-                            value: calendarDef.id,
-                            color: calendarDef.color
+                            text: DOMPurify.sanitize(calendarDef.name),
+                            value: DOMPurify.sanitize(calendarDef.id),
+                            color: DOMPurify.sanitize(calendarDef.color)
                         });
                     }
                 }, this);
@@ -484,7 +484,7 @@
                     color = '#FFFFFF';
                 }
                 htmlContent = '<div class="templateHtmlWrapper" style="color:' + color + ';">' +
-                    '<div class="calendarEventBody">' + htmlContent + '</div></div>';
+                    '<div class="calendarEventBody">' + DOMPurify.sanitize(htmlContent) + '</div></div>';
 
                 if (viewName == 'agenda') {
                     this.$('div.k-task[data-uid=' + event.uid + ']').each(function() {
@@ -493,20 +493,25 @@
                 }
 
                 const assignedUserColor = app.Calendar.utils.pastelColor(event.assignedUserId);
-                htmlContent = $(htmlContent).prepend('<div class="previewEvent" data-module=' + event.module +
-                    ' data-record=' + event.dbclickRecordId + ' rel="tooltip" data-placement="bottom"' +
-                    ' aria-haspopup="true" aria-expanded="false" data-original-title="' + event.assignedUserName +
-                    '"><span class="userBar" style="background-color:' + assignedUserColor + '"></span></div>');
+                htmlContent = $(htmlContent).prepend('<div class="previewEvent" data-module=' +
+                    _.escape(event.module) +
+                    ' data-record=' +  _.escape(event.dbclickRecordId) + ' rel="tooltip" data-placement="bottom"' +
+                    ' aria-haspopup="true" aria-expanded="false" data-original-title="' +
+                    _.escape(event.assignedUserName) +
+                    '"><span class="userBar" style="background-color:' +
+                    _.escape(assignedUserColor) + '"></span></div>');
 
                 _.each(event.invitees, function(invitee, idx) {
                     if (invitee.id !== event.assignedUserId && idx < 3) {
                         const inviteeColor = app.Calendar.utils.pastelColor(invitee.id);
                         const inviteeName = invitee.name;
 
-                        htmlContent = $(htmlContent).prepend('<div class="previewEvent" data-module=' + event.module +
-                        ' data-record=' + event.dbclickRecordId + ' rel="tooltip" data-placement="bottom"' +
-                        ' aria-haspopup="true" aria-expanded="false" data-original-title="' + inviteeName +
-                        '"><span class="userBar" style="background-color:' + inviteeColor + '"></span></div>');
+                        htmlContent = $(htmlContent).prepend('<div class="previewEvent" data-module=' +
+                            _.escape(event.module) +
+                        ' data-record=' +  _.escape(event.dbclickRecordId) + ' rel="tooltip" data-placement="bottom"' +
+                        ' aria-haspopup="true" aria-expanded="false" data-original-title="' +  _.escape(inviteeName) +
+                        '"><span class="userBar" style="background-color:' +
+                            _.escape(inviteeColor) + '"></span></div>');
                     }
                 }, this);
             }
@@ -703,10 +708,12 @@
                 tooltip.sender.content.find('.event-tooltip .tooltip-description').addClass('hideBottomBorder');
             }
 
-            tooltip.sender.content.find('.event-tooltip .tooltip-header .category-container').html(event.name);
+            const sanitizedEventName = DOMPurify.sanitize(event.name);
+            const sanitizedEventTooltip = DOMPurify.sanitize(event.event_tooltip);
+            tooltip.sender.content.find('.event-tooltip .tooltip-header .category-container').html(sanitizedEventName);
             tooltip.sender.content.find('.event-tooltip .tooltip-time .category-container').html(time);
             tooltip.sender.content.find('.event-tooltip .tooltip-description .category-container')
-                .html(event.event_tooltip);
+                .html(sanitizedEventTooltip);
             tooltip.sender.content.find('.event-tooltip .tooltip-header .userDot')
                 .css('background-color', assignedUserColor);
             tooltip.sender.content.parent().css('box-shadow', 'none');

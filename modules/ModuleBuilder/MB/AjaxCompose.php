@@ -14,13 +14,26 @@ class AjaxCompose{
 	var $crumbs = array('Home'=>'ModuleBuilder.main("Home")',/* 'Assistant'=>'Assistant.mbAssistant.xy=Array("650, 40"); Assistant.mbAssistant.show();'*/);
 	function addSection($name, $title, $content, $action='activate'){
 		$crumb = '';
+        $escapedTitle = htmlspecialchars($title);
 		if($name == 'center'){
 			$crumb = $this->getBreadCrumb();
 		}
         if (is_array($content)) {
-            $this->sections[$name] = array('title'=>$title,'crumb'=>$crumb, 'content'=>$content, 'action'=>$action);
+            $this->sections[$name] = [
+                'title' => $escapedTitle,
+                'crumb' => $crumb,
+                'content' => $content,
+                'action' => $action,
+            ];
         } else {
-            $this->sections[$name] = array('title'=>$title,'crumb'=>$crumb, 'content'=>mb_detect_encoding($content, mb_detect_order(), true) == "UTF-8" ? $content : utf8_encode($content), 'action'=>$action);
+            $this->sections[$name] = [
+                'title' => $escapedTitle,
+                'crumb' => $crumb,
+                'content' => mb_detect_encoding($content, mb_detect_order(), true) == "UTF-8"
+                    ? $content
+                    : mb_convert_encoding($content, 'UTF-8', 'ISO-8859-1'),
+                'action' => $action,
+            ];
         }
 	}
 	
@@ -53,13 +66,13 @@ class AjaxCompose{
 				}else{
 					$crumbs .= '&nbsp;|&nbsp;';
 				}
-				if(empty($action)){
-					$crumbs .="<span class='crumbLink'>$name</span>";
-					$actions[] = "";
-				}else {
-					$crumbs .="<a href='javascript:void(0);' onclick='$action' class='crumbLink'>$name</a>";
-				    $actions[] = $action;
-				}
+                if (empty($action)) {
+                    $crumbs .= '<span class="crumbLink">' . htmlspecialchars($name) . '</span>';
+                    $actions[] = "";
+                } else {
+                    $crumbs .= sprintf('<a href="javascript:void(0);" onclick="%s" class="crumbLink">%s</a>', htmlspecialchars($action), htmlspecialchars($name));
+                    $actions[] = $action;
+                }
 				$count++;
 			}
 			

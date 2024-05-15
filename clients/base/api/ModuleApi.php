@@ -20,7 +20,7 @@ class ModuleApi extends SugarApi {
 
     /** @var RelateRecordApi */
     protected $relateRecordApi;
-    private $aclCheckOptions = array('source' => 'module_api');
+    private $aclCheckOptions = ['source' => 'module_api'];
 
     /**
      * A list of fields for which we disallow update through updateRecord
@@ -133,6 +133,15 @@ class ModuleApi extends SugarApi {
     }
 
     /**
+     * This method returns the aclCheckOptions
+     * @return array
+     */
+    public function getACLOptions() : array
+    {
+        return $this->aclCheckOptions;
+    }
+
+    /**
      * This method returns the pii fields of a given record
      *
      * @param ServiceBase $api
@@ -171,7 +180,7 @@ class ModuleApi extends SugarApi {
             }
         }
 
-        if (in_array('email', $piiFields)) {
+        if (safeInArray('email', $piiFields)) {
             $fields = array_merge($fields, $this->mergeEmailFieldsWithEvents($data['email'] ?? null, $events));
         }
 
@@ -327,13 +336,17 @@ class ModuleApi extends SugarApi {
         $this->requireArgs($args,array('module'));
 
         // Users can be created only in cloud console for IDM mode.
-        if (in_array($args['module'], $this->idmModeDisabledModules)
+        if (safeInArray($args['module'], $this->idmModeDisabledModules)
                 && $this->isIDMModeEnabled()
                 && empty($args['skip_idm_mode_restrictions'])) {
             throw new SugarApiExceptionNotAuthorized();
         }
 
-        $bean = BeanFactory::newBean($args['module']);
+        $bean = BeanFactory::newBeanFromArgs($args);
+
+        if (empty($bean)) {
+            throw new SugarApiExceptionMissingParameter('Invalid module or missing required field(s)');
+        }
 
         // TODO: When the create ACL goes in to effect, add it here.
         if (!$bean->ACLAccess('save', $this->aclCheckOptions)) {
@@ -470,7 +483,7 @@ class ModuleApi extends SugarApi {
         $this->requireArgs($args,array('module','record'));
 
         // Users can be deleted only in cloud console for IDM mode.
-        if (in_array($args['module'], $this->idmModeDisabledModules)
+        if (safeInArray($args['module'], $this->idmModeDisabledModules)
                 && $this->isIDMModeEnabled()
                 && empty($args['skip_idm_mode_restrictions'])) {
             throw new SugarApiExceptionNotAuthorized();
@@ -596,7 +609,7 @@ class ModuleApi extends SugarApi {
                 $sf = $sfh->getSugarField($def['type']);
                 $extension = pathinfo($bean->$fieldName, PATHINFO_EXTENSION);
 
-                if (in_array($mimeType, $sf::$imageFileMimeTypes) &&
+                if (safeInArray($mimeType, $sf::$imageFileMimeTypes) &&
                     !verify_image_file($filepath)
                 ) {
                     throw new SugarApiExceptionInvalidParameter(string_format(

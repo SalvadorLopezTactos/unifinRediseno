@@ -98,7 +98,7 @@ class ModuleInstaller
         $this->adminWork->startAdminWork();
 
         $this->ms = new ModuleScanner();
-        $this->modules = $this->getModuleDirs();
+        $this->modules = static::getModuleDirs();
         $this->db = DBManagerFactory::getInstance();
         include("ModuleInstall/extensions.php");
         $this->extensions = $extensions;
@@ -133,6 +133,8 @@ class ModuleInstaller
      * Finally it runs over a list of defined tasks; then install_beans, then install_custom_fields, then clear the Vardefs, run a RepairAndClear, then finally call rebuild_relationships.
      */
     function install($base_dir, $is_upgrade = false, $previous_version = ''){
+        $errors = [];
+        $installdefs = [];
         $this->setInstallationBegin();
         if(defined('TEMPLATE_URL'))SugarTemplateUtilities::disableCache();
         if ((defined('MODULE_INSTALLER_PACKAGE_SCAN') && MODULE_INSTALLER_PACKAGE_SCAN)
@@ -407,7 +409,7 @@ class ModuleInstaller
                 /* END - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
             }
             //here we should get the module list again as we could have copied something to the modules dir
-            $this->modules = $this->getModuleDirs();
+            $this->modules = static::getModuleDirs();
         }
     }
     protected function uninstall_copy()
@@ -1033,6 +1035,7 @@ class ModuleInstaller
     }
 
     function install_connectors(){
+        $cp = [];
         if(isset($this->installdefs['connectors'])){
             foreach($this->installdefs['connectors'] as $cp){
                 $this->log(translate('LBL_MI_IN_CONNECTORS') . $cp['name']);
@@ -1067,6 +1070,7 @@ class ModuleInstaller
 
     }
     function uninstall_connectors(){
+        $cp = [];
         if(isset($this->installdefs['connectors'])){
             foreach($this->installdefs['connectors'] as $cp){
                 $this->log(translate('LBL_MI_UN_CONNECTORS') . $cp['name']);
@@ -1165,7 +1169,7 @@ class ModuleInstaller
                 if (sugar_is_file($path.'/'.$packs['language'].'.'. $this->id_name . '.php', 'w')) {
                     rmdir_recursive( $path.'/'.$packs['language'].'.'. $this->id_name . '.php');
                 } else if (sugar_is_file($path.'/'.DISABLED_PATH.'/'.$packs['language'].'.'. $this->id_name . '.php', 'w')) {
-                    rmdir_recursive($path.'/'.DISABLED_PATH.'/'.$packs['language'].'.'. $this->id_name . '.php', 'w');
+                    rmdir_recursive($path.'/'.DISABLED_PATH.'/'.$packs['language'].'.'. $this->id_name . '.php');
                 }
             }
             $this->rebuild_languages($languages, array_keys($modules));
@@ -1210,6 +1214,8 @@ class ModuleInstaller
     // Non-standard, needs special rebuild
     public function enable_languages()
     {
+        $languages = [];
+        $modules = [];
         if(isset($this->installdefs['language'])) {
             foreach($this->installdefs['language'] as $item) {
                 $from = str_replace('<basepath>', $this->base_dir, $item['from']);
@@ -1544,6 +1550,7 @@ class ModuleInstaller
         }
         $rel_dictionary = FileLoader::varFromInclude($file, 'dictionary');
 
+        $rel_dictionary = is_array($rel_dictionary) ? $rel_dictionary : [];
         array_walk($rel_dictionary, array("ModuleInstaller", "cleanUpRelationship"));
 
         foreach ($rel_dictionary as $rel_name => $rel_data) {
@@ -1847,6 +1854,7 @@ class ModuleInstaller
 
     function uninstall($base_dir)
     {
+        $installdefs = [];
         // set long time out for long execution.
         $uninstallTimeout = (int) SugarConfig::getInstance()->get('uninstall_timeout', 600);
         ini_set('max_execution_time', strval($uninstallTimeout));
@@ -1983,6 +1991,7 @@ class ModuleInstaller
      */
     public function forceUninstall(string $baseDir, bool $enableHookExecution = true): void
     {
+        $installdefs = [];
         // set long time out for long execution.
         $uninstallTimeout = (int) SugarConfig::getInstance()->get('uninstall_timeout', 600);
         ini_set('max_execution_time', strval($uninstallTimeout));
@@ -2112,7 +2121,7 @@ class ModuleInstaller
     function remove_acl_actions() {
         global $beanFiles, $beanList, $current_user;
         include('include/modules.php');
-        include("modules/ACL/remove_actions.php");
+        include_once 'modules/ACL/remove_actions.php';
         removeACLActions($current_user, $beanList, $beanFiles, $this->silent);
     }
 
@@ -2709,6 +2718,8 @@ class ModuleInstaller
     //********** DISABLE/ENABLE FUNCTIONS
     ///////////////////
     function enable($base_dir, $is_upgrade = false, $previous_version = ''){
+        $errors = [];
+        $installdefs = [];
         global $app_strings;
         $this->base_dir = $base_dir;
         $total_steps = 3; //minimum number of steps with no tasks
@@ -2855,6 +2866,7 @@ class ModuleInstaller
     }
 
     function enable_relationships(){
+        $save_table_dictionary = null;
         $rebuild = false;
         if(isset($this->installdefs['relationships'])){
             $str = "<?php \n //WARNING: The contents of this file are auto-generated\n";
@@ -3970,6 +3982,12 @@ class ModuleInstaller
             return false;
         }
         $handle = opendir($path);
+        if ($handle === false) {
+            LoggerManager::getLogger()->fatal(
+                "Failed to open dir '$path'. " .  PHP_EOL . (new Exception())->getTraceAsString()
+            );
+            return false;
+        }
         while (false !== ($entry = readdir($handle))) {
             if ($entry != "." && $entry != "..") {
                 closedir($handle);

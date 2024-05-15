@@ -16,6 +16,7 @@ final class Request
     // currently supported methods
     const METHOD_POST = 'POST';
     const METHOD_GET = 'GET';
+    const METHOD_DELETE = 'DELETE';
 
     /**
      * @var string

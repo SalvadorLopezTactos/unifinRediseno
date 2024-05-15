@@ -28,10 +28,10 @@ class HintUserPreferencesHook extends LogicHook
     {
         if ($arguments['isUpdate']) {
             if (array_key_exists('contents', $arguments['dataChanges'])) {
-                $before = unserialize(base64_decode($arguments['dataChanges']['contents']['before']));
-                $after = unserialize(base64_decode($arguments['dataChanges']['contents']['after']));
+                $before = unserialize(base64_decode($arguments['dataChanges']['contents']['before']), ['allowed_classes' => false]);
+                $after = unserialize(base64_decode($arguments['dataChanges']['contents']['after']), ['allowed_classes' => false]);
 
-                if (array_key_exists('timezone', $before)) {
+                if (array_key_exists('timezone', (array)$before)) {
                     if ($before['timezone'] !== $after['timezone']) {
                         if ($user = \BeanFactory::retrieveBean('Users', $bean->assigned_user_id)) {
                             // data

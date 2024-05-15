@@ -226,6 +226,7 @@ class OAuthToken extends SugarBean
      */
     public function cleanupOldUserTokens($limit = 1)
     {
+        $skip = [];
         $ids = [];
         $skip[$this->id] = $this->id;
 

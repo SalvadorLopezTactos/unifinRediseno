@@ -18,6 +18,7 @@ require_once 'ModuleInstall/ModuleScanner.php';
 require_once 'include/SugarSmarty/plugins/function.sugar_csrf_form_token.php';
 
 use Sugarcrm\Sugarcrm\PackageManager\Entity\PackageManifest;
+use Sugarcrm\Sugarcrm\PackageManager\Exception\PackageManifestException;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\PackageManager\PackageManager;
 use UploadFile as BaseUploadFile;
@@ -60,6 +61,9 @@ if ($run !== "" && empty($GLOBALS['sugar_config']['use_common_ml_dir'])) {
             $zipFile = new PackageZipFile($uploadFile->getPath(), $packageManager->getBaseTempDir());
             $packageManager->uploadPackageFromFile($zipFile, PackageManifest::PACKAGE_TYPE_MODULE);
         } catch (ModuleScannerException $e) {
+            $e->getModuleScanner()->displayIssues();
+            sugar_cleanup(true);
+        } catch (PackageManifestException $e) {
             $e->getModuleScanner()->displayIssues();
             sugar_cleanup(true);
         } catch (\SugarException $e) {

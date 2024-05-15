@@ -42,7 +42,7 @@ class ReportCSVExporterRowsAndColumns extends ReportCSVExporterBase
         while (($row = $this->reporter->get_next_row('result', 'display_columns', false, true)) !== 0) {
             $newArr = array();
 
-            $cellCount = count($row['cells']);
+            $cellCount = is_countable($row['cells']) ? count($row['cells']) : 0;
             for ($i = 0; $i < $cellCount; $i++) {
                 array_push($newArr, preg_replace("/\"/", "\"\"", from_html($row['cells'][$i])));
             }

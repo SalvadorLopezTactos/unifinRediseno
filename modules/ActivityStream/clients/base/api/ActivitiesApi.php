@@ -132,7 +132,7 @@ class ActivitiesApi extends FilterApi
         global $locale;
 
         $response = array();
-        $data = $query->execute('array', false);
+        $data = $query->execute();
 
         $seed = BeanFactory::newBean('Activities');
 

@@ -83,7 +83,7 @@ class ReportCSVExporterSummationWithDetails extends ReportCSVExporterBase
 
             // iterate over all non-group display summaries
             $cells = $groups['cells'];
-            $numCells = count($cells);
+            $numCells = is_countable($cells) ? count($cells) : 0;
             for ($i = 0; $i < $numCells; $i++) {
                 $displaySummaryName = $cells[$i];
                 if (!isset($walker[$displaySummaryName])) {
@@ -105,7 +105,7 @@ class ReportCSVExporterSummationWithDetails extends ReportCSVExporterBase
 
             // build the extra display summary
             $groupFunctionCells = $groups['group_function_cells'];
-            $numGroupFunctionCells = count($groupFunctionCells);
+            $numGroupFunctionCells = is_countable($groupFunctionCells) ? count($groupFunctionCells) : 0;
             for ($i = 0; $i < $numGroupFunctionCells; $i++) {
                 $groupFunctionSummaryName = $groupFunctionCells[$i];
                 $groupFunctionSummaryValue = $rowData['cells'][$groupFunctionSummaryName];

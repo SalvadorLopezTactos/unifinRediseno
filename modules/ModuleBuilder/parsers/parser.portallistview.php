@@ -14,7 +14,6 @@
 
 
 
-
 class ParserPortalListView extends ParserModifyListView
 {
 
@@ -29,6 +28,7 @@ class ParserPortalListView extends ParserModifyListView
 
 	function init ($module_name)
 	{
+        $viewdefs = [];
 		global $app_list_strings;
 		$this->module_name = $module_name;
 		$this->mod_strings = return_module_language($GLOBALS ['current_language'], $this->module_name);
@@ -87,6 +87,7 @@ class ParserPortalListView extends ParserModifyListView
 
 	function handleSave ()
 	{
+        $newFile = null;
 		if (!file_exists($this->customFile)) {
 			//Backup the orginal layout to the history
 			$this->_history->append($this->originalFile);

@@ -250,8 +250,9 @@ class SugarFieldTeamset extends SugarFieldBase {
 	    	$secondaries = array();
 			$primary = false;
         	$json = getJSONobj();
-	  		$vals = $json->decode($this->view->vardef['value']);
+            $vals = $json->decode($this->view->vardef['value'], true);
 	  		$this->view->displayParams['primaryChecked'] = true;
+            if (is_iterable($vals)) {
         	foreach($vals as $id=>$name){
         		if(!$primary){
         			$this->view->bean->{$this->view->value_name}= array('primary'=>array('id'=>$id, 'name'=>$name));
@@ -261,6 +262,7 @@ class SugarFieldTeamset extends SugarFieldBase {
         			$secondaries['secondaries'][]=array('id'=>$id, 'name'=>$name);
         		}
         	} //foreach
+            }
         	if(!empty($this->view->bean)) {
         	   $this->view->bean->{$this->view->value_name}=array_merge((array)$this->view->bean->{$this->view->value_name}, $secondaries);
         	}

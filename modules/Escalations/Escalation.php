@@ -148,8 +148,8 @@ class Escalation extends SugarBean
      */
     public function handleParentEscalation()
     {
-        $parentTypeChanged = array_key_exists('parent_type', $this->stateChanges);
-        $parentIdChanged = array_key_exists('parent_id', $this->stateChanges);
+        $parentTypeChanged = is_array($this->stateChanges) && array_key_exists('parent_type', $this->stateChanges);
+        $parentIdChanged = is_array($this->stateChanges) && array_key_exists('parent_id', $this->stateChanges);
 
         if ($parentIdChanged) {
             if ($parentTypeChanged) {

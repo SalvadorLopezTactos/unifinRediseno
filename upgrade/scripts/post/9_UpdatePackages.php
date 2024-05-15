@@ -129,6 +129,10 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
                 continue;
             }
 
+            if (!check_file_name($package->filename)) {
+                throw new \Exception('Path traversal attack vector detected');
+            }
+
             $this->removeFileRelatedMetadata($package->filename);
 
             try {
@@ -166,6 +170,11 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
 
             $destinationFile = $this->getUpgradeTypeDir($packageType) . DIRECTORY_SEPARATOR
                 . pathinfo($package->filename, PATHINFO_BASENAME);
+
+            if (!check_file_name($destinationFile)) {
+                throw new \Exception('Path traversal attack vector detected');
+            }
+
             if ($package->filename !== $destinationFile) {
                 rename($package->filename, $destinationFile);
                 $package->filename = $destinationFile;
@@ -225,11 +234,21 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
             . DIRECTORY_SEPARATOR . pathinfo($baseFile, PATHINFO_FILENAME);
         foreach (PackageZipFile::PACKAGE_METADATA_FILE_ADDONS as $addon) {
             $file = sprintf('%s-%s.php', $fileTemplate, $addon);
+
+            if (!check_file_name($file)) {
+                throw new \Exception('Path traversal attack vector detected');
+            }
+
             if (file_exists($file)) {
                 unlink($file);
             }
         }
         $md5File = $baseFile . '.' . PackageZipFile::PACKAGE_METADATA_MD5_FILE_EXT;
+
+        if (!check_file_name($md5File)) {
+            throw new \Exception('Path traversal attack vector detected');
+        }
+
         if (file_exists($md5File)) {
             unlink($md5File);
         }

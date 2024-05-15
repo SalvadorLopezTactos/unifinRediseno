@@ -271,8 +271,8 @@ $focus->load_relationship('tracked_urls');
 
 $trkr_lists = $focus->tracked_urls->get();
 $trkr_html ='';
-$ss->assign('TRACKER_COUNT',count($trkr_lists));
-if(count($trkr_lists)>0){
+$ss->assign('TRACKER_COUNT', is_countable($trkr_lists) ? count($trkr_lists) : 0);
+if ((is_countable($trkr_lists) ? count($trkr_lists) : 0)>0) {
 global $odd_bg, $even_bg, $hilite_bg;
 
     $trkr_count = 0;
@@ -379,8 +379,7 @@ if((isset($_REQUEST['wizardtype']) && $_REQUEST['wizardtype'] ==1) || ($focus->c
  //this is a newsletter type campaign, fill in subscription values
 
 //if prospect lists are returned, then iterate through and populate form values
-if(count($prospect_lists)>0){
-
+        if ((is_countable($prospect_lists) ? count($prospect_lists) : 0) > 0) {
     foreach($prospect_lists as $pl_id){
     //retrieve prospect list
      $pl = BeanFactory::getBean('ProspectLists', $pl_id);
@@ -418,8 +417,7 @@ if(count($prospect_lists)>0){
     $ss->assign("PL_DOM_STMT", $dom_txt);
     $trgt_count = 0;
     $trgt_html = ' ';
-    if(count($prospect_lists)>0){
-
+        if ((is_countable($prospect_lists) ? count($prospect_lists) : 0) > 0) {
         foreach($prospect_lists as $pl_id){
         //retrieve prospect list
              $pl_focus = BeanFactory::getBean('ProspectLists', $pl_id);
@@ -522,7 +520,7 @@ if($campaign_type == 'general'){
     $ss->assign('HIDE_CONTINUE','submit');
 }
 
-$ss->assign('TOTAL_STEPS', count($steps));
+    $ss->assign('TOTAL_STEPS', is_countable($steps) ? count($steps) : 0);
 $sshtml = create_wiz_step_divs($steps,$ss);
 $ss->assign('STEPS',$sshtml);
 
@@ -583,6 +581,7 @@ $ss->assign("TEAM_SET_FIELD", $code);
 }
 
 function create_wiz_menu_items($steps,$type,$mrkt_string,$summ_url){
+        $i = null;
     global $mod_strings;
     $nav_html = '<table border="0" cellspacing="0" cellpadding="0" width="100%" >';
     if(isset($steps)  && !empty($steps)){

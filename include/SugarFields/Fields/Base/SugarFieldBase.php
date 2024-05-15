@@ -655,7 +655,7 @@ class SugarFieldBase {
     public function apiSave(SugarBean $bean, array $params, $field, $properties)
     {
         if (isset($params[$field])) {
-            $unformatted = $this->apiUnformatField($params[$field], $properties);
+            $unformatted = $this->apiUnformatField($params[$field]);
             if (isset($properties['len']) && isset($properties['type']) && $this->isTrimmable($properties['type'])) {
                 if (is_string($unformatted) || is_numeric($unformatted)) {
                     $bean->$field = trim($unformatted);
@@ -1036,6 +1036,11 @@ class SugarFieldBase {
             $maxSize = $bean->db->getMaxFieldSize($properties);
 
             if ($maxSize > 0) {
+                if (!is_string($params[$field])) {
+                    LoggerManager::getLogger()->fatal('Field size validation failed. $params[$field] is not a string.'
+                        . ' Field: ' . $field . ' Max size: ' . $maxSize . 'Backtrace: ' . (new Exception())->getTraceAsString());
+                    return true; // skip validation and let the code work as it was working in PHP 7.4
+                }
                 return strlen($params[$field]) < $maxSize;
             }
         }

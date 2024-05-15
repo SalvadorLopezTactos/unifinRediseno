@@ -556,7 +556,7 @@ abstract class CollectionApi extends SugarApi
                 }
 
                 if (isset($fieldDef['sort_on'])) {
-                    if ($isFieldNumeric && count($fieldDef['sort_on']) > 1) {
+                    if ($isFieldNumeric && (is_countable($fieldDef['sort_on']) ? count($fieldDef['sort_on']) : 0) > 1) {
                         throw new SugarApiExceptionError(
                             'Cannot use "sort_on" more than one columns for numeric fields in collections'
                         );
@@ -637,7 +637,7 @@ abstract class CollectionApi extends SugarApi
 
         $getValue = function ($row, $fields) {
             // do not concat values in case there's only one field in order to preserve value type
-            if (count($fields) == 1) {
+            if ((is_countable($fields) ? count($fields) : 0) == 1) {
                 return $row[$fields[0]];
             } else {
                 return implode(' ', array_map(function ($field) use ($row) {
@@ -699,8 +699,8 @@ abstract class CollectionApi extends SugarApi
         $recordComparator = $this->getRecordComparator($spec);
 
         return function ($a, $b) use ($recordComparator) {
-            $countA = count($a);
-            $countB = count($b);
+            $countA = is_countable($a) ? count($a) : 0;
+            $countB = is_countable($b) ? count($b) : 0;
             if (!$countA || !$countB) {
                 // non-empty array should go first
                 return $countB - $countA;
@@ -726,7 +726,7 @@ abstract class CollectionApi extends SugarApi
         $truncated = array();
 
         foreach ($remainder as $source => $records) {
-            $truncated[$source] = count($records) > 0;
+            $truncated[$source] = (is_countable($records) ? count($records) : 0) > 0;
         }
 
         foreach ($offset as $source => $value) {

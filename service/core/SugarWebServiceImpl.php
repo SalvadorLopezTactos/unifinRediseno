@@ -909,6 +909,7 @@ function set_document_revision($session, $document_revision) {
  * @exception 'SoapFault' -- The SOAP error, if any
  */
 function search_by_module($session, $search_string, $modules, $offset, $max_results){
+        $unified_search_modules = [];
         $modules = object_to_array_deep($modules);
         $this->getLogger()->info('Begin: SugarWebServiceImpl->search_by_module');
 	global  $beanList, $beanFiles;
@@ -977,7 +978,7 @@ function search_by_module($session, $search_string, $modules, $offset, $max_resu
 				$where_clauses = $searchForm->generateSearchWhere() ;
 
 				$where = '';
-				if (count($where_clauses) > 0 ) {
+                        if ((is_countable($where_clauses) ? count($where_clauses) : 0) > 0) {
 					$where = '('. implode(' ) OR ( ', $where_clauses) . ')';
 				}
 

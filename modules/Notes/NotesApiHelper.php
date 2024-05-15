@@ -32,11 +32,6 @@ class NotesApiHelper extends SugarBeanApiHelper
 
         $data = parent::populateFromApi($bean, $submittedData, $options);
 
-        // delete legacy attachment if filename is blank
-        if ($bean->id && !empty($bean->fetched_row['filename']) && empty($submittedData['filename'])) {
-            $bean->deleteAttachment("false", false);
-        }
-
         //Only needed for Portal sessions
         $portalSession = PortalFactory::getInstance('Session');
         if ($portalSession->isActive()) {

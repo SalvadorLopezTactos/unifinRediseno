@@ -412,6 +412,7 @@ class Meeting extends SugarBean {
 	}
 
 	function get_list_view_data() {
+        $join_icon = null;
 		$meeting_fields = $this->get_list_view_array();
 
 		global $app_list_strings, $focus, $action, $currentModule;
@@ -482,10 +483,13 @@ class Meeting extends SugarBean {
 	}
 
 	function set_notification_body($xtpl, &$meeting) {
+        $typestring = null;
 		global $sugar_config;
 		global $app_list_strings;
 		global $current_user;
 		global $timedate;
+
+        $singularModuleLabel = strtoupper($app_list_strings['moduleListSingular'][$this->module_name]);
 
 		// cn: bug 9494 - passing a contact breaks this call
 		$notifyUser =($meeting->current_notify_user->object_name == 'User') ? $meeting->current_notify_user : $current_user;
@@ -510,9 +514,9 @@ class Meeting extends SugarBean {
                 $meeting->current_notify_user->id . '&record=' . $meeting->id
             );
         }
-		$xtpl->assign("MEETING_TO", $meeting->current_notify_user->new_assigned_user_name);
-		$xtpl->assign("MEETING_SUBJECT", trim($meeting->name));
-		$xtpl->assign("MEETING_STATUS",(isset($meeting->status)? $app_list_strings['meeting_status_dom'][$meeting->status]:""));
+        $xtpl->assign($singularModuleLabel . '_TO', $meeting->current_notify_user->new_assigned_user_name);
+        $xtpl->assign($singularModuleLabel . '_SUBJECT', trim($meeting->name));
+        $xtpl->assign($singularModuleLabel . '_STATUS', (isset($meeting->status) ? $app_list_strings['meeting_status_dom'][$meeting->status] : ''));
         $typekey = strtolower($meeting->type);
         if (isset($meeting->type)) {
             if (!empty($app_list_strings['eapm_list'][$meeting->type])) {
@@ -523,22 +527,22 @@ class Meeting extends SugarBean {
                 $typestring = $app_list_strings['meeting_type_dom'][$meeting->type];
             }
         }
-        $xtpl->assign("MEETING_TYPE", isset($meeting->type) ? $typestring : "");
+        $xtpl->assign($singularModuleLabel . '_TYPE', isset($meeting->type) ? $typestring : "");
         $startdate = $timedate->fromDb($meeting->date_start);
         $xtpl->assign(
-            "MEETING_STARTDATE",
+            $singularModuleLabel . '_STARTDATE',
             $timedate->asUser($startdate, $notifyUser) . " " . TimeDate::userTimezoneSuffix($startdate, $notifyUser)
         );
         $enddate = $timedate->fromDb($meeting->date_end);
         $xtpl->assign(
-            "MEETING_ENDDATE",
+            $singularModuleLabel . '_ENDDATE',
             $timedate->asUser($enddate, $notifyUser) . " " . TimeDate::userTimezoneSuffix($enddate, $notifyUser)
         );
-        $xtpl->assign("MEETING_HOURS", $meeting->duration_hours);
-        $xtpl->assign("MEETING_MINUTES", $meeting->duration_minutes);
-        $xtpl->assign("MEETING_DESCRIPTION", $meeting->description);
+        $xtpl->assign($singularModuleLabel . '_HOURS', $meeting->duration_hours);
+        $xtpl->assign($singularModuleLabel . '_MINUTES', $meeting->duration_minutes);
+        $xtpl->assign($singularModuleLabel . '_DESCRIPTION', $meeting->description);
         if ( !empty($meeting->join_url) ) {
-            $xtpl->assign('MEETING_URL', $meeting->join_url);
+            $xtpl->assign($singularModuleLabel . '_URL', $meeting->join_url);
             $xtpl->parse('Meeting.Meeting_External_API');
         }
 

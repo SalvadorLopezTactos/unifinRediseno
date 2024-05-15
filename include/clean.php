@@ -200,9 +200,11 @@ class SugarCleaner
     static public function cleanHtml($html, $encoded = false)
     {
         static $processed = array();
+        if (!is_scalar($html) || empty($html)) {
+            return $html;
+        }
+        $html = (string) $html;
         $key = md5($html);
-
-        if(empty($html)) return $html;
 
         if (in_array($key, $processed)) {
             // mail is already clean, do not process again

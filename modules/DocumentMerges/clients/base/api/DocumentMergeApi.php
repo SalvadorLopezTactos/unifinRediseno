@@ -306,6 +306,9 @@ class DocumentMergeApi extends SugarApi
      */
     protected function getFileName(array $args): string
     {
+        $record = null;
+        $prefix = null;
+        $postfix = null;
         $fileName = '';
         if (!empty($args['record_id'])) {
             $record = BeanFactory::retrieveBean($args['record_module'], $args['record_id']);
@@ -532,7 +535,7 @@ class DocumentMergeApi extends SugarApi
 
         $revisions = $document->get_linked_beans('revisions', 'DocumentRevision');
         if (!empty($revisions)) {
-            $latestRevision = count($revisions);
+            $latestRevision = is_countable($revisions) ? count($revisions) : 0;
             $currentRevisionNumber = $latestRevision + 1;
         } else {
             $currentRevisionNumber = 1;

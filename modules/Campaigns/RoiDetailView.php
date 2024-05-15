@@ -84,7 +84,6 @@ if (isset($_REQUEST['offset']) or isset($_REQUEST['record'])) {
     $smarty->assign("TRACKER_URL", $sugar_config['site_url'] . '/campaign_tracker.php?track=' . $focus->tracker_key);
     $smarty->assign("TRACKER_COUNT", intval($focus->tracker_count));
     $smarty->assign("TRACKER_TEXT", $focus->tracker_text);
-    $smarty->assign("REFER_URL", $focus->refer_url);
     $smarty->assign("IMPRESSIONS", $focus->impressions);
    $roi_vals = array();
    $roi_vals['budget']= $focus->budget;
@@ -131,8 +130,8 @@ $campaignsData = $focus->db->getConnection()
         [$campaign_id]
     )->fetchAssociative();
             
-   if(unformat_number($focus->impressions) > 0){         
-    $cost_per_impression= unformat_number($focus->actual_cost)/unformat_number($focus->impressions);
+if ((float)unformat_number($focus->impressions) > 0) {
+    $cost_per_impression = (float)unformat_number($focus->actual_cost) / (float)unformat_number($focus->impressions);
    }
    else{
    	$cost_per_impression = format_number(0);
@@ -145,7 +144,7 @@ if (empty($campaignsData['click_thru_link'])) {
 $click_thru_links = $campaignsData['click_thru_link'];
    
    if($click_thru_links >0){
-    $cost_per_click_thru= unformat_number($focus->actual_cost)/unformat_number($click_thru_links);   	
+    $cost_per_click_thru = (float)unformat_number($focus->actual_cost) / (float)unformat_number($click_thru_links);
    }
    else{
    	$cost_per_click_thru = format_number(0);

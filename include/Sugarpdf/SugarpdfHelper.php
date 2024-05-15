@@ -66,6 +66,7 @@
      * @see modules/Currencies/Currency.php
      */
     function format_number_sugarpdf($amount, $round = null, $decimals = null, $params = array()) {
+        $checkAmount = null;
         global $app_strings, $current_user, $sugar_config, $locale;
         static $current_users_currency = null;
         static $last_override_currency = null;

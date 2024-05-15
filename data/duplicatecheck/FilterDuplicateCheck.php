@@ -75,10 +75,13 @@ class FilterDuplicateCheck extends DuplicateCheckStrategy
      * Based on the filter template in the vardef
      *
      * @param array $dupeCheckFilterTemplate
-     * @return array
+     * @return ?array
      */
     protected function buildDupeCheckFilter($dupeCheckFilterTemplate)
     {
+        if (!is_array($dupeCheckFilterTemplate)) {
+            return null;
+        }
         foreach ($dupeCheckFilterTemplate as &$filterDef) {
             foreach ($filterDef as $field => &$filter) {
                 if ($field == '$or' || $field == '$and') {

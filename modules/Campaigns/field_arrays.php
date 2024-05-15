@@ -35,11 +35,10 @@ $fields_array['Campaign'] = array ('column_fields' => array(
 				'campaign_type','assigned_user_id','assigned_user_name','end_date',
 				'team_id',
 				'team_name',
-				'refer_url',"currency_id",
+            "currency_id",
 	),
         'required_fields' => array(
 				'name'=>1, 'end_date'=>2,
 				'status'=>3, 'campaign_type'=>4
 	),
 );
-?>

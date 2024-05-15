@@ -231,8 +231,7 @@ function checkSystemCompliance() {
     if ($canInstall !== true)
     {
         $ret['error_found'] = true;
-        if (count($canInstall) == 1)
-        {
+        if ((is_countable($canInstall) ? count($canInstall) : 0) == 1) {
             $ret['dbVersion'] = "<b><span class=stop>" . $installer_mod_strings[$canInstall[0]] . "</span></b>";
         }
         else
@@ -989,6 +988,7 @@ function getAllTables() {
  * @return string result of check
  */
 function checkFiles($files, $echo=false) {
+    $errors = [];
 	global $mod_strings;
 	$filesNotWritable = array();
 	$i=0;
@@ -1263,6 +1263,7 @@ function get_upgrade_progress(){
 	return $currState;
 }
 function currSubStep($currStep){
+    $currState = null;
 	$currSubStep = '';
 	if(is_array($currStep)){
        foreach($currStep as $key=>$val){
@@ -1346,6 +1347,7 @@ function didThisStepRunBefore($step,$SubStep=''){
 
 //get and set post install status
 function post_install_progress($progArray='',$action=''){
+    $upgrade_config = [];
 	$upgrade_progress_dir = sugar_cached('upgrades/temp');
 	$upgrade_progress_file = $upgrade_progress_dir.'/upgrade_progress.php';
     if($action=='' || $action=='get'){
@@ -1445,6 +1447,7 @@ function repairDBForUpgrade($execute=false,$path=''){
  *
  */
 function upgradeUserPreferences() {
+    $errors = [];
     global $sugar_config, $sugar_version;
     $uw_strings = return_module_language($GLOBALS['current_language'], 'UpgradeWizard');
 
@@ -1602,6 +1605,7 @@ function upgradeUserPreferences() {
  * @return bool true on successful write to config file, false on failure;
  */
 function upgradeLocaleNameFormat($name_format) {
+    $errors = [];
     global $sugar_config, $sugar_version;
 
     $localization = Localization::getObject();
@@ -1754,6 +1758,7 @@ function upgradeModulesForTeamsets($filter=array()) {
  * @param $column_name The name of the column containing the default team_set_id value
  */
 function upgradeTeamColumn($bean, $column_name) {
+    $vardefs = [];
 	//first let's check to ensure that the team_set_id field is defined, if not it could be the case that this is an older
 	//module that does not use the SugarObjects
 	if(empty($bean->field_defs['team_set_id']) && $bean->module_dir != 'Trackers'){
@@ -2105,6 +2110,8 @@ function upgrade_connectors() {
  */
 function upgradeEnableInsideViewConnector($path='')
 {
+    $mapping = null;
+    $modules_sources = [];
     logThis('Begin upgradeEnableInsideViewConnector', $path);
 
     // Load up the existing mapping and hand it to the InsideView connector to have it setup the correct logic hooks
@@ -2327,7 +2334,7 @@ function getUWDirs()
 function whetherNeedToSkipDir($dir, $skipDirs)
 {
     foreach($skipDirs as $skipMe) {
-		if(strpos( clean_path($dir), $skipMe ) !== false) {
+        if (strpos(clean_path($dir), (string)$skipMe) !== false) {
 			return true;
 		}
 	}

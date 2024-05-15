@@ -120,7 +120,7 @@ class ContentTransferEncoding implements HeaderInterface
     {
         $transferEncoding = trim($transferEncoding);
         foreach (static::$allowedTransferEncodings as $validEncoding) {
-            if (strpos($transferEncoding, $validEncoding) !== false) {
+            if (strpos($transferEncoding, (string) $validEncoding) !== false) {
                 $this->transferEncoding = $validEncoding;
                 return true;
             }

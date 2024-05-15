@@ -361,13 +361,14 @@ function addModuleSelectFilter(cell,filter, row) {
 		} // if
 	}
 
-	select_html_info['options'] = options;
-	cell.innerHTML=buildSelectHTML(select_html_info, true);
-	filters_arr[filters_count_map[current_filter_id]].module_select = cell.getElementsByTagName('select')[0];
+    select_html_info.options = options;
+    cell.innerHTML = buildSelectHTML(select_html_info, true);
+    filters_arr[filters_count_map[current_filter_id]].module_select = cell.getElementsByTagName('select')[0];
 
-	var module_text_cell = document.createElement('td');
-	module_text_cell.innerHTML = "&nbsp;&nbsp;&nbsp;" + cell.innerHTML + options[selectedValue].text;
-	row.appendChild(module_text_cell);
+    let module_text_cell = document.createElement('td');
+    module_text_cell.innerHTML = cell.innerHTML;
+    module_text_cell.append(document.createTextNode(options[selectedValue].text));
+    row.appendChild(module_text_cell);
 }
 
 function addColumnSelectFilter(cell,filter, row) {
@@ -1235,45 +1236,35 @@ function getModuleInFilter(filter) {
 	return selected_module;
 }
 //builds the html for a select
-function buildSelectHTML(info, showHidden, id,onBlur) {
-	var text;
-	text = "<select";
-	if (onBlur)
-		text +=	" onBlur="+onBlur;
-	if (id)
-		text += " id="+id;
-	if (showHidden != null && showHidden) {
-		text = text + " style='display:none'";
-		//text = text + " disabled";
-	}
+function buildSelectHTML(info, showHidden, id, onBlur) {
+    let attrs = {};
+    if (onBlur) {
+        attrs.onBlur = onBlur;
+    }
+    if (id) {
+        attrs.id = id;
+    }
+    if (showHidden != null && showHidden) {
+        attrs.style = 'display:none';
+    }
+    for (let key in info.select) {
+        if (typeof (info.select[key]) != 'undefined') {
+            attrs[key] = info.select[key];
+        }
+    }
+    let select = $('<select></select>').attr(attrs);
 
-	for(var key in info['select']) {
-		if ( typeof (info['select'][key]) != 'undefined') {
-			text +=" "+ key +"=\""+ info['select'][key] +"\"";
-		}
-	}
-	text +=">";
-
-	var saved_attrs = new Array();
-
-	for(i=0; i < info['options'].length; i++) {
-		option = info['options'][i];
-		var attr = new Object();
-		for( var j in option ) {
-            if ( j != 'text' &&  j != 'value' && j != 'selected' && j != 'name' && j != 'id') {
-				attr[j] = option[j];
-            }
-		}
-		saved_attrs.push(attr);
-		text += "<option value=\""+encodeURI(option['value'])+"\" ";
-
-		if ( typeof (option['selected']) != 'undefined' && option['selected']== true) {
-			text += "SELECTED";
-		}
-		text += ">"+option['text']+"</option>";
-	}
-	text += "</select>";
-	return text;
+    for (let i = 0; i < info.options.length; i++) {
+        let option = info.options[i];
+        let opt = $('<option></option>');
+        opt.attr({'value': option.value});
+        if (typeof (option.selected) != 'undefined' && option.selected === true) {
+            opt.attr({'selected': true});
+        }
+        opt.text(option.text);
+        select.append(opt);
+    }
+    return select.get(0).outerHTML;
 }
 
 function _sort_by_field_name(a,b) {

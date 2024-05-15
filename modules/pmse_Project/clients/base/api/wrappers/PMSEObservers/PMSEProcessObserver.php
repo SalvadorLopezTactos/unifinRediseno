@@ -130,7 +130,7 @@ class PMSEProcessObserver implements PMSEObserver
             }
 
             $this->processRelatedDependencies($processDefinitionData);
-            $depNumber = count($rows);
+            $depNumber = is_countable($rows) ? count($rows) : 0;
             $this->logger->debug("Updating {$depNumber} dependencies");
         }
     }

@@ -281,7 +281,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
     public function panelGetField($name, $src = null)
     {
         // If there was a passed source, use that for the panel search
-        $panels = $src !== null && is_array($src) ? $src : $this->_paneldefs;
+        $panels = safeIsIterable($src) ? $src : (safeIsIterable($this->_paneldefs) ? $this->_paneldefs : []);
         foreach ($panels as $panelix => $def) {
             if (isset($def['fields']) && is_array($def['fields'])) {
                 foreach ($def['fields'] as $fieldix => $field) {
@@ -393,7 +393,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
                     }
 
                     // Get the initial def structure
-                    $def = $this->_trimFieldDefs($this->_fielddefs[$fieldname]);
+                    $def = static::_trimFieldDefs($this->_fielddefs[$fieldname]);
 
                     // Set the basic default properties of the field def
                     $panelfield = $this->setDefDefaults($fieldname, $def);
@@ -476,7 +476,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
         if ($panel === false) {
             throw new Exception('Invalid Panel');
         }
-        $fieldCount = count($panel['fields']);
+        $fieldCount = is_countable($panel['fields']) ? count($panel['fields']) : 0;
         $fields = $panel['fields'];
 
         // we just have a field name, make it into an array
@@ -538,7 +538,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
     protected function generateFieldDef($fieldName)
     {
         // Get the initial def structure
-        $def = $this->_trimFieldDefs($this->_fielddefs[$fieldName]);
+        $def = static::_trimFieldDefs($this->_fielddefs[$fieldName]);
 
         // Set the basic default properties of the field def
         $fieldDef = $this->setDefDefaults($fieldName, $def, true);

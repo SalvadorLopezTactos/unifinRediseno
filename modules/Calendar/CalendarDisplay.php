@@ -96,9 +96,9 @@ class CalendarDisplay {
 		$ss->assign('isPrint', $this->cal->isPrint() ? 'true': 'false');
 
 
-		if(count($cal->shared_ids)){
+        if (is_countable($cal->shared_ids) ? count($cal->shared_ids) : 0) {
 			$ss->assign('shared_ids',$cal->shared_ids);
-			$ss->assign('shared_users_count',count($cal->shared_ids));
+            $ss->assign('shared_users_count', is_countable($cal->shared_ids) ? count($cal->shared_ids) : 0);
 		}
 		$ss->assign('activity_colors',$this->activity_colors);
 
@@ -160,6 +160,7 @@ class CalendarDisplay {
 	 */
 	protected function load_settings_template($ss)
 	{
+        $match = [];
 		list($d_start_hour,$d_start_min) =  explode(":",$this->cal->day_start_time);
 		list($d_end_hour,$d_end_min) =  explode(":",$this->cal->day_end_time);
 

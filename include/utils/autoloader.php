@@ -373,7 +373,7 @@ class SugarAutoLoader
     {
         foreach (self::$namespaceMap as $namespace => $paths) {
             foreach ($paths as $path) {
-                if (strpos($class, $namespace) === 0) {
+                if (strpos($class, (string) $namespace) === 0) {
                     $path = empty($path) ? '' : $path . '/';
                     if (false !== $pos = strrpos($class, '\\')) {
                         $path .= str_replace('\\', '/', substr($class, 0, $pos)) . '/';
@@ -400,7 +400,7 @@ class SugarAutoLoader
     {
         foreach (self::$namespaceMapPsr4 as $prefix => $paths) {
             foreach ($paths as $path) {
-                if (strpos($class, $prefix) === 0) {
+                if (strpos($class, (string) $prefix) === 0) {
                     $path = empty($path) ? '' : $path . '/';
                     $path .= str_replace('\\', '/', str_replace($prefix, '', $class)) . '.php';
                     if (file_exists($path)) {
@@ -728,21 +728,24 @@ class SugarAutoLoader
 	 */
 	public static function loadWithMetafiles($module, $varname)
 	{
-	    $vardef = self::existingCustomOne("modules/{$module}/metadata/{$varname}.php");
+        $sanitizedModule = basename($module);
+        $sanitizedVarname = basename($varname);
+
+        $vardef = self::existingCustomOne('modules/' . $sanitizedModule . '/metadata/' . $sanitizedVarname . '.php');
 	    if(!empty($vardef) && substr($vardef, 0, 7) == "custom/") {
 	        // custom goes first, because this is how Studio overrides defaults
 	        return $vardef;
 	    }
 	    // otherwise check metadata
 	    global $metafiles;
-	    if(!isset($metafiles[$module])) {
-	        $meta = self::existingCustomOne('modules/'.$module.'/metadata/metafiles.php');
+        if (!isset($metafiles[$sanitizedModule])) {
+            $meta = self::existingCustomOne('modules/' . $sanitizedModule . '/metadata/metafiles.php');
     	    if($meta) {
     	    	require $meta;
     	    }
 	    }
-	    if(!empty($metafiles[$module][$varname])) {
-	        $defs = self::existing($metafiles[$module][$varname], $vardef);
+        if (!empty($metafiles[$sanitizedModule][$sanitizedVarname])) {
+            $defs = self::existing($metafiles[$sanitizedModule][$sanitizedVarname], $vardef);
 	    } else {
 	        $defs = self::existing($vardef);
 	    }

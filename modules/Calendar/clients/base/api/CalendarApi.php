@@ -1122,7 +1122,7 @@ class CalendarApi extends FilterApi
         }
 
         $leadsInviteesFormatted = $this->formatInvitees($leadsInvitees, 'Leads');
-        foreach ($leadsInviteesFormatted as $recordId => $person) {
+        foreach ($leadsInviteesFormatted as $recordId => $persons) {
             if (!is_array($invitees[$recordId])) {
                 $invitees[$recordId] = [];
             }
@@ -1398,16 +1398,14 @@ class CalendarApi extends FilterApi
                 $options = ['erased_fields' => true, 'use_cache' => false, 'encode' => false];
                 $result['bean'] = BeanFactory::retrieveBean($result['bean']->module_dir, $result['bean']->id, $options);
             }
-            if(!empty($result['bean'])){
-                $record = $this->formatBean($api, $args, $result['bean']);
-                $highlighted = $this->getMatchedFields($args, $record, 1);
-                $record['_search'] = array(
-                    'highlighted' => $highlighted,
-                );
-                $records[] = $record;
-
-            }
+            $record = $this->formatBean($api, $args, $result['bean']);
+            $highlighted = $this->getMatchedFields($args, $record, 1);
+            $record['_search'] = array(
+                'highlighted' => $highlighted,
+            );
+            $records[] = $record;
         }
+
         return array(
             'next_offset' => -1,
             'records' => $records,
@@ -1445,7 +1443,7 @@ class CalendarApi extends FilterApi
             }
 
             foreach ($fieldValues as $fieldValue) {
-                if (stripos($fieldValue, $query) !== false) {
+                if (stripos($fieldValue, (string) $query) !== false) {
                     $matchedFields[$searchField] = array($fieldValue);
                 }
             }

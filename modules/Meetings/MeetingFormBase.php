@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Base Form For Meetings
  * Portions created by SugarCRM are Copyright(C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -25,6 +24,8 @@ class MeetingFormBase extends FormBase {
     protected $recurringCreated = array();
 
 	function getFormBody($prefix, $mod='', $formname=''){
+        $lbl_subject = null;
+        $jscalendarImage = null;
 		if(!ACLController::checkAccess('Meetings', 'edit', true)){
 		return '';
 	}

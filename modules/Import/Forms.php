@@ -40,7 +40,9 @@ function getControl(
 
  	// set the filename for this control
     $file = create_cache_directory('modules/Import/') . $module . $fieldname . '.tpl';
-
+    if (!check_file_name($file)) {
+        sugar_die('Invalid filename');
+    }
     if ( !is_file($file)
             || inDeveloperMode()
             || !empty($_SESSION['developerMode']) ) {

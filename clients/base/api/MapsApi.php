@@ -262,7 +262,7 @@ class MapsApi extends FilterApi
 
             if ($relatedLink) {
                 $relatedRecords = $relatedLink->getBeans();
-                $hasParent = count($relatedRecords) > 0;
+                $hasParent = (is_countable($relatedRecords) ? count($relatedRecords) : 0) > 0;
 
                 $recordId = $hasParent ? array_keys($relatedRecords)[0] : $recordId;
                 $recordModule = $hasParent ? $relatedRecords[$recordId]->module_name : $recordModule;
@@ -319,16 +319,18 @@ class MapsApi extends FilterApi
 
         list($radius ,$unitType, $coords, $geocodeTable ,$recordId, $recordTable) = $distanceData;
 
-        if ($radius && strtolower($unitType) === 'miles') {
+        $earthRadiusKm = 6371;
+        $pi = pi();
+        $recordIdQuoted = $db->quote($recordId);
+
+        $latitude = (float)$coords['latitude'];
+        $longitude = (float)$coords['longitude'];
+        $radius = (float)$radius;
+
+        if (is_string($unitType) && strtolower($unitType) === 'miles') {
             //convert miles to km
             $radius = $radius * 1.60934;
         }
-
-        $earthRadiusKm = 6371;
-        $pi = pi();
-        $latitude = $coords['latitude'];
-        $longitude = $coords['longitude'];
-        $recordIdQuoted = $db->quote($recordId);
 
         // SQRT in SQL is part of the standard ANSI SQL-92 so is safety to use it in RAW SQL
         // COS is in the base functions of supported database by SUGARCRM: MySQL, DB2, Oracle and SQL Server
@@ -410,7 +412,7 @@ class MapsApi extends FilterApi
                 ];
             }
 
-            if (count($ids) < 1) {
+            if ((is_countable($ids) ? count($ids) : 0) < 1) {
                 return [
                     'records' => [],
                     'next_offset' => -1,
@@ -454,7 +456,7 @@ class MapsApi extends FilterApi
         $i = $distinctCompensation;
         foreach ($beans as $beanId => $bean) {
             if ($i == $options['limit']) {
-                if (count($beans) > $options['limit']) {
+                if ((is_countable($beans) ? count($beans) : 0) > $options['limit']) {
                     unset($beans[$beanId]);
                 }
                 $data['next_offset'] = (int) ($options['limit'] + $options['offset']);

@@ -12,6 +12,7 @@
 
 
 class pmse_Emails_Templates extends pmse_Emails_Templates_sugar {
+    protected array $fillable = ['base_module'];
 
 	public function __construct(){
 		parent::__construct();
@@ -26,7 +27,7 @@ class pmse_Emails_Templates extends pmse_Emails_Templates_sugar {
     public function cleanContent($content, $encoded = false)
     {
         $clearContent = parent::cleanContent($content, $encoded);
-        return $this->restoreRecordLinks($clearContent);
+        return static::restoreRecordLinks($clearContent);
     }
 
     /**

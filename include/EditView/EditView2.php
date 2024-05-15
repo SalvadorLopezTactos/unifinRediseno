@@ -94,6 +94,7 @@ class EditView
      */
     function setup($module, $focus = null, $metadataFile = null, $tpl = 'include/EditView/EditView.tpl', $createFocus = true)
     {
+        $viewdefs = [];
         $this->th = $this->getTemplateHandler();
         $this->th->ss = $this->ss;
         $this->tpl = $tpl;
@@ -136,9 +137,18 @@ class EditView
      */
     protected function setLockedFieldsets()
     {
-        foreach ($this->defs['panels'] as $pIndex => $panel) {
-            foreach ($panel as $rIndex => $row) {
-                foreach ($row as $fIndex => $field) {
+        if (!isset($this->defs['panels']) || !safeIsIterable($this->defs['panels'])) {
+            return;
+        }
+        foreach ($this->defs['panels'] as $panel) {
+            if (!safeIsIterable($panel)) {
+                continue;
+            }
+            foreach ($panel as $row) {
+                if (!safeIsIterable($row)) {
+                    continue;
+                }
+                foreach ($row as $field) {
                     $fieldName = is_array($field) && isset($field['name'])
                                  ? $field['name']
                                  : $field;
@@ -238,23 +248,24 @@ class EditView
     function render()
     {
         $totalWidth = 0;
-        foreach ($this->defs['templateMeta']['widths'] as $col => $def) {
-            foreach ($def as $k => $value) {
-                $totalWidth += $value;
+        if (isset($this->defs['templateMeta']['widths']) && safeIsIterable($this->defs['templateMeta']['widths'])) {
+            foreach ($this->defs['templateMeta']['widths'] as $col => $def) {
+                foreach ($def as $k => $value) {
+                    $totalWidth += $value;
+                }
             }
-        }
 
-        // calculate widths
-        foreach ($this->defs['templateMeta']['widths'] as $col => $def) {
-            foreach ($def as $k => $value) {
-                $this->defs['templateMeta']['widths'][$col][$k] = round($value / ($totalWidth / 100), 2);
+            // calculate widths
+            foreach ($this->defs['templateMeta']['widths'] as $col => $def) {
+                foreach ($def as $k => $value) {
+                    $this->defs['templateMeta']['widths'][$col][$k] = round($value / ($totalWidth / 100), 2);
+                }
             }
         }
 
         $this->sectionPanels = array();
         $this->sectionLabels = array();
-        if (!empty($this->defs['panels']) && count($this->defs['panels']) > 0)
-        {
+        if (!empty($this->defs['panels']) && (is_countable($this->defs['panels']) ? count($this->defs['panels']) : 0) > 0) {
            $keys = array_keys($this->defs['panels']);
            if (is_numeric($keys[0]))
            {
@@ -273,9 +284,8 @@ class EditView
         static $itemCount = 100; //Start the generated tab indexes at 100 so they don't step on custom ones.
 
         /* loop all the panels */
-        foreach ($this->defs['panels'] as $key=>$p)
-        {
-            $panel = array();
+        foreach (safeIsIterable($this->defs['panels']) ? $this->defs['panels'] : [] as $key => $p) {
+            $panel = [];
 
             if (!is_array($this->defs['panels'][$key])) {
                $this->sectionPanels[strtoupper($key)] = $p;
@@ -284,7 +294,7 @@ class EditView
             {
                 foreach ($p as $row=>$rowDef)
                 {
-                    $columnsInRows = count($rowDef);
+                    $columnsInRows = is_countable($rowDef) ? count($rowDef) : 0;
                     $columnsUsed = 0;
                     foreach ($rowDef as $col => $colDef)
                     {
@@ -363,7 +373,7 @@ class EditView
         $addFiller = true;
         foreach($panel as $row)
         {
-            if (count($row) == $this->defs['templateMeta']['maxColumns']
+            if ((is_countable($row) ? count($row) : 0) == $this->defs['templateMeta']['maxColumns']
                 || 1 == count($panel))
             {
                 $addFiller = false;
@@ -374,7 +384,7 @@ class EditView
         if ($addFiller)
         {
             $rowCount = count($panel);
-            $filler   = count($panel[$rowCount-1]);
+            $filler   = is_countable($panel[$rowCount-1]) ? count($panel[$rowCount-1]) : 0;
             while ($filler < $this->defs['templateMeta']['maxColumns'])
             {
                 $panel[$rowCount - 1][$filler++] = array('field' => array('name' => ''));

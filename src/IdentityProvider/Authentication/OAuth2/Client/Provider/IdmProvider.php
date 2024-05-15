@@ -325,6 +325,7 @@ class IdmProvider extends BasicGenericProvider
      */
     protected function createHttpClient(array $config): ClientInterface
     {
+        $options = [];
         if (isset($config['http_client']['retry_count'])) {
             $options['retry_count'] = (int) $config['http_client']['retry_count'];
         }

@@ -308,6 +308,7 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
      * @exception 'SoapFault' -- The SOAP error, if any
      */
     public function login($user_auth, $application, $name_value_list = array()){
+        $availModuleNames = [];
         $user_auth = object_to_array_deep($user_auth);
         $name_value_list = object_to_array_deep($name_value_list);
         $this->getLogger()->info('Begin: SugarWebServiceImpl->login');
@@ -803,6 +804,7 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
      * @exception 'SoapFault' -- The SOAP error, if any
      */
     function search_by_module($session, $search_string, $modules, $offset, $max_results,$assigned_user_id = '', $select_fields = array(), $unified_search_only = TRUE){
+        $unified_search_modules = [];
         $modules = object_to_array_deep($modules);
         $select_fields = object_to_array_deep($select_fields);
         $this->getLogger()->info('Begin: SugarWebServiceImpl->search_by_module');
@@ -887,15 +889,15 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
     				$where_clauses = $searchForm->generateSearchWhere() ;
 
     				$where = '';
-    				if (count($where_clauses) > 0 ) {
+                    if ((is_countable($where_clauses) ? count($where_clauses) : 0) > 0) {
     					$where = '('. implode(' ) OR ( ', $where_clauses) . ')';
     				}
 
     				$mod_strings = return_module_language($current_language, $seed->module_dir);
 
-    				if(count($select_fields) > 0)
-    				    $filterFields = $select_fields;
-    				else {
+                    if ((is_countable($select_fields) ? count($select_fields) : 0) > 0) {
+                        $filterFields = $select_fields;
+                    } else {
     				    require_once SugarAutoLoader::loadWithMetafiles($seed->module_dir, 'listviewdefs');
 
         				$filterFields = array();

@@ -27,10 +27,11 @@ class IndexOfExpression extends NumericExpression
         $params = $this->getParameters();
         $array = $params[1]->evaluate();
         $value = $params[0]->evaluate();
-
-        for ($i = 0; $i < sizeOf($array); $i++) {
-            if ($array[$i] == $value) {
-                return $i;
+        if (is_iterable($array)) {
+            for ($i = 0; $i < safeCount($array); $i++) {
+                if ($array[$i] == $value) {
+                    return $i;
+                }
             }
         }
 

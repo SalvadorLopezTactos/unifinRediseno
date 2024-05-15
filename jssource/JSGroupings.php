@@ -55,7 +55,7 @@
                     case 'jquery_core':
                         return array (
                             'include/javascript/jquery/jquery-min.js'               =>  $target,
-                            'include/javascript/jquery/jquery-ui-min.js'            =>  $target,
+                            'include/javascript/jquery/jquery-ui.min.js'            =>  $target,
                             'include/javascript/jquery/jquery.json-2.3.js'          =>  $target,
                             'include/javascript/jquery/jquery-migrate.min.js' =>  $target,
                         );
@@ -222,7 +222,7 @@
            $sugar_grp_sidecar = array_merge(
                array(
                    'include/javascript/phpjs/base64_encode.js' => 'include/javascript/sugar_sidecar.min.js',
-                   'include/javascript/jquery/jquery-ui-min.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/jquery/jquery-ui.min.js' => 'include/javascript/sugar_sidecar.min.js',
                ),
                getSubgroupForTarget('bootstrap', 'include/javascript/sugar_sidecar.min.js'),
                array(
@@ -461,8 +461,6 @@
                 'include/javascript/pmse/command_default_flow.js' => 'include/javascript/pmse.designer.min.js',
                 'include/javascript/pmse/command_connection_condition.js' => 'include/javascript/pmse.designer.min.js',
                 'include/javascript/pmse/command_reconnect.js' => 'include/javascript/pmse.designer.min.js',
-                'include/javascript/pmse/pmtree.js' => 'include/javascript/pmse.designer.min.js',
-                'include/javascript/pmse/progrid.js' => 'include/javascript/pmse.designer.min.js',
                 'include/javascript/pmse/ErrorMessageItem.js' => 'include/javascript/pmse.designer.min.js',
                 'include/javascript/pmse/ListContainer.js' => 'include/javascript/pmse.designer.min.js',
                 'include/javascript/pmse/ErrorListItem.js' => 'include/javascript/pmse.designer.min.js',

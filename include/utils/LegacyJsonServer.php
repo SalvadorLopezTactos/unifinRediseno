@@ -297,7 +297,7 @@ class LegacyJsonServer
                 $first_name_query = array_shift($query_parts);
                 $name_query = "({$table}first_name like '" . $GLOBALS['db']->quote($first_name_query) . "%'";
                 if (count($query_parts) > 0) {
-                    $last_name_query = implode($query_parts);
+                    $last_name_query = implode('', $query_parts);
                     $full_name_group = 'and';
                 } else {
                     $last_name_query = $first_name_query;

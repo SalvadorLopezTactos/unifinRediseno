@@ -94,30 +94,6 @@ class HintAccountset extends \Basic
             }
         }
 
-        foreach ($emails as $email) {
-            if (!empty($email['primary_address']) && !empty($email['email_address'])) {
-                /* @var $user \User */
-                $user = $person;
-                if ($person instanceof \Employee) {
-                    $user = \BeanFactory::retrieveBean('Users', $person->id);
-                }
-
-                // create and add email target
-                $emailTarget = \HintNotificationTarget::activateTarget(
-                    $user->id,
-                    NotificationTargetTypes::EMAIL_WEEKLY_TARGET_TYPE,
-                    [
-                        'email' => $email['email_address'],
-                        'timezone' => \TimeDate::userTimezone($user),
-                        // just "site" url, as there's no path for dashlet preferences
-                        'siteUrl' => \SugarConfig::getInstance()->get('site_url'),
-                    ]
-                );
-                $accountset->notification_targets->add($emailTarget);
-                break;
-            }
-        }
-
         $accountset->save();
 
         return $accountset;

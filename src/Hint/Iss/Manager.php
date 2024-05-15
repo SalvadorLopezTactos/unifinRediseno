@@ -71,7 +71,7 @@ class Manager implements LoggerAwareInterface
      */
     public function sendCommands($commands)
     {
-        if (count($commands) == 0) {
+        if ((is_countable($commands) ? count($commands) : 0) == 0) {
             // nothing to do this round
             return;
         }

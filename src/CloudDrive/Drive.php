@@ -30,4 +30,25 @@ class Drive
         $fileInfo = $download->getFileInfo($bean, 'filename');
         return $fileInfo['path'];
     }
+
+    /**
+     * Get a chunk from a file
+     *
+     * @param string $path
+     * @param int $chunkSize
+     * @param int $offset
+     *
+     * @return null|bool|string
+     */
+    public static function getFileChunk(string $path, int $chunkSize, int $offset)
+    {
+        if ($stream = fopen($path, 'r')) {
+            $data = stream_get_contents($stream, $chunkSize, $offset);
+            fclose($stream);
+
+            return $data;
+        }
+
+        return null;
+    }
 }

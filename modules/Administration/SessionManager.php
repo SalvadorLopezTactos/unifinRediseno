@@ -77,6 +77,7 @@ class SessionManager extends SugarBean {
      * return true if we can add a session, false if there are no available slots
      */
     function canAddSession(){
+        $ncc_config = [];
         $this->archiveInactiveSessions();
 
         //we may not even have to check b/c the license could have the

@@ -26,7 +26,12 @@ class SugarWebServiceUtilv4_1 extends SugarWebServiceUtilv4
 
    			// only initialize session once in case this method is called multiple times
    			if(!session_id()) {
-   			   session_id($session_id);
+                if (is_scalar($session_id)) {
+                    session_id((string)$session_id);
+                } else {
+                    $this->getLogger()->fatal('Session ID is not scalar: ' . PHP_EOL . (new Exception())->getTraceAsString());
+                    session_id();
+                }
    			   session_start();
    			}
 

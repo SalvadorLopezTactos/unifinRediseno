@@ -234,6 +234,7 @@ class HTTP_WebDAV_Server_vCal extends HTTP_WebDAV_Server
         */
         function http_PUT()
         {
+            $focus = null;
             $options = Array();
             $options["path"] = $this->path;
             $options["content_length"] = $_SERVER["CONTENT_LENGTH"];

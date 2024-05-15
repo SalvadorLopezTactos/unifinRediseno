@@ -62,7 +62,7 @@ class SugarACLPortal extends SugarACLStatic
                             'rhs_value' => \DBManagerFactory::getInstance()->quote(PortalFactory::getInstance('Session')->getContactId()),
                          ],
                     ]);
-                    $bean->portal_owner = count($rows['rows']) > 0;
+                    $bean->portal_owner = (is_countable($rows['rows']) ? count($rows['rows']) : 0) > 0;
                     break;
                 case 'Notes':
                     $bean->portal_owner = $bean->contact_id === PortalFactory::getInstance('Session')->getContactId();

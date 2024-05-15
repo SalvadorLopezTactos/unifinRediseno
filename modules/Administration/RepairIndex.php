@@ -20,8 +20,9 @@ function compare($table_name, $db_indexes, $var_indexes) {
 		//else by columns in the index.
 		$sel_db_index = null;
 		$var_fields_string ='';
-		if(count($var_i_def['fields'])>0)
-			$var_fields_string = implode('',$var_i_def['fields']);
+        if ((is_countable($var_i_def['fields']) ? count($var_i_def['fields']) : 0) > 0) {
+            $var_fields_string = implode('', $var_i_def['fields']);
+        }
 		$field_list_match = false;
 		if(isset($db_indexes[$var_i_name])) {
 			$sel_db_index = $db_indexes[$var_i_name];

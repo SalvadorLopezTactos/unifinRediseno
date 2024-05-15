@@ -231,6 +231,7 @@ class WorkFlowAlertShell extends SugarBean {
 
 	function retrieve_meta_information(){
 
+        $process_dictionary = [];
 		require_once('modules/WorkFlowAlertShells/MetaArray.php');
 		$this->target_meta_array = $process_dictionary['AlertShellDetailView']['elements'][$this->alert_type];
 

@@ -199,6 +199,8 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
      */
     protected function detectLinkName($subpanelName, $loadedModule)
     {
+        $layout_defs = [];
+        $legacyDefs = [];
         if (isModuleBWC($loadedModule) && !file_exists("modules/{$loadedModule}/clients/" . $this->getViewClient() . "/layouts/subpanels/subpanels.php")) {
             @include "modules/{$loadedModule}/metadata/subpaneldefs.php";
             if(empty($layout_defs[$loadedModule]['subpanel_setup'])) {
@@ -247,6 +249,8 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
      */
     protected function setupSubpanelViewDefFileInfo()
     {
+        $layoutFiles = [];
+        $viewdefs = [];
         $client = $this->getViewClient();
         $this->sidecarSubpanelName = $this->getSidecarSubpanelViewName($this->loadedModule, $this->linkName);
 

@@ -138,10 +138,10 @@ trait PMSEEvalRelations
                 }
                 break;
             case 'contains':
-                $result = strpos($value1, $value2) !== false;
+                $result = strpos($value1, (string) $value2) !== false;
                 break;
             case 'does_not_contain':
-                $result = strpos($value1, $value2) === false;
+                $result = strpos($value1, (string) $value2) === false;
                 break;
             case 'array_has_any':
                 // getting a null value doesn't make sense

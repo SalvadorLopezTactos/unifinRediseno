@@ -428,6 +428,7 @@ class StudioModule
      */
     public function getWirelessLayouts()
     {
+        $layouts = [];
         $layouts[translate('LBL_WIRELESSEDITVIEW')] = array(
             'name' => translate('LBL_WIRELESSEDITVIEW'),
             'type' => MB_WIRELESSEDITVIEW,

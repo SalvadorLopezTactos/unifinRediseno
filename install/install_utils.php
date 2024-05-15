@@ -81,7 +81,7 @@ function parseAcceptLanguage() {
  * @param mode string Install or Uninstall
  */
 function updateUpgradeHistory() {
-    if(isset($_SESSION['INSTALLED_LANG_PACKS']) && count($_SESSION['INSTALLED_LANG_PACKS']) > 0) {
+    if (isset($_SESSION['INSTALLED_LANG_PACKS']) && (is_countable($_SESSION['INSTALLED_LANG_PACKS']) ? count($_SESSION['INSTALLED_LANG_PACKS']) : 0) > 0) {
         foreach($_SESSION['INSTALLED_LANG_PACKS'] as $k => $zipFile) {
             // What was installed without source zip file?
             if (!file_exists($zipFile)) {
@@ -218,7 +218,7 @@ function getInstalledLangPacks($showButtons=true) {
     $files = findAllFiles(sugar_cached("upload/upgrades"), $files);
 
     if(isset($_SESSION['INSTALLED_LANG_PACKS']) && !empty($_SESSION['INSTALLED_LANG_PACKS'])){
-        if (count($_SESSION['INSTALLED_LANG_PACKS']) > 0) {
+        if ((is_countable($_SESSION['INSTALLED_LANG_PACKS']) ? count($_SESSION['INSTALLED_LANG_PACKS']) : 0) > 0) {
             foreach($_SESSION['INSTALLED_LANG_PACKS'] as $file) {
                 // handle manifest.php
                 $target_manifest = remove_file_extension( $file ) . '-manifest.php';
@@ -253,6 +253,8 @@ function getInstalledLangPacks($showButtons=true) {
 }
 
 function getSugarConfigLanguageArray($langZip) {
+    $installdefs = [];
+    $manifest = [];
     global $sugar_config;
 
     include(remove_file_extension($langZip)."-manifest.php");
@@ -423,6 +425,7 @@ function installLog($entry) {
  * @return array bottle collection of error messages
  */
 function handleSugarConfig() {
+    $config = [];
     global $bottle;
     global $cache_dir;
     global $mod_strings;
@@ -670,13 +673,10 @@ function getForbiddenPaths()
  */
 function getHtaccessData($htaccess_file)
 {
-    global $sugar_config;
-
     $contents = '';
 
     // Adding RewriteBase path for vhost and alias configurations
-    $basePath = parse_url($sugar_config['site_url'], PHP_URL_PATH);
-    if(empty($basePath)) $basePath = '/';
+    $basePath = getBasePath();
 
     $restrict_str = <<<EOQ
 # BEGIN SUGARCRM RESTRICTIONS
@@ -687,11 +687,15 @@ EOQ;
         $restrict_str .= "php_value suhosin.executor.include.whitelist upload\n";
     }
 
+    $errorDocument = $basePath === '/'? '/404.php' : $basePath . '/404.php';
     $restrict_str .= <<<EOQ
 # Fix mimetype for logo.svg (SP-1395)
 AddType     image/svg+xml     .svg
 AddType     application/json  .json
 AddType     application/javascript  .js
+
+ErrorDocument 404 {$errorDocument}
+ErrorDocument 403 {$errorDocument}
 
 <IfModule mod_rewrite.c>
     Options +FollowSymLinks
@@ -772,6 +776,7 @@ EOQ;
  */
 function handleHtaccess()
 {
+    $restrict_str = null;
     global $mod_strings;
     $htaccess_file   = ".htaccess";
     $status =  file_put_contents(".htaccess", getHtaccessData($htaccess_file));
@@ -856,7 +861,39 @@ function handleWebConfig($iisCheck = true)
     echo "<p>Rebuilding UTF-8 document</p>\n";
     $xmldoc->startElement('configuration');
     echo "<p>Rebuilding configuration element</p>\n";
-        $xmldoc->startElement('system.webServer');
+    $xmldoc->startElement('system.webServer');
+        $basePath = getBasePath();
+        $errorDocument = $basePath === '/' ? '/404.php' : $basePath . '/404.php';
+        // start httpErrors element
+
+        $xmldoc->startElement('httpErrors');
+            $xmldoc->writeAttribute('errorMode', 'Custom');
+            // add remove elements
+            $xmldoc->startElement('remove');
+            $xmldoc->writeAttribute('statusCode', '403');
+            $xmldoc->writeAttribute('subStatusCode', '-1');
+            $xmldoc->endElement();
+
+            $xmldoc->startElement('remove');
+            $xmldoc->writeAttribute('statusCode', '404');
+            $xmldoc->writeAttribute('subStatusCode', '-1');
+            $xmldoc->endElement();
+
+            // add error elements
+            $xmldoc->startElement('error');
+            $xmldoc->writeAttribute('statusCode', '403');
+            $xmldoc->writeAttribute('path', $errorDocument);
+            $xmldoc->writeAttribute('responseMode', 'ExecuteURL');
+            $xmldoc->endElement();
+
+            $xmldoc->startElement('error');
+            $xmldoc->writeAttribute('statusCode', '404');
+            $xmldoc->writeAttribute('path', $errorDocument);
+            $xmldoc->writeAttribute('responseMode', 'ExecuteURL');
+            $xmldoc->endElement();
+        // end httpErrors element
+        $xmldoc->endElement();
+
         echo "<p>Rebuilding system.webServer element</p>\n";
             $xmldoc->startElement('httpProtocol');
                 $xmldoc->startElement('customHeaders');
@@ -969,6 +1006,15 @@ function handleWebConfig($iisCheck = true)
     $xmldoc->endDocument();
     $xmldoc->flush();
     echo "<p>web.config is rebuilt</p>\n";
+}
+
+function getBasePath(): string
+{
+    $basePath = parse_url($GLOBALS['sugar_config']['site_url'], PHP_URL_PATH);
+    if (empty($basePath)) {
+        $basePath = '/';
+    }
+    return $basePath;
 }
 
 /**
@@ -1668,7 +1714,7 @@ function getLangPacks($display_commit = true, $types = array('langpack'), $notic
     }//rof
     $_SESSION['hidden_input'] = $hidden_input;
 
-    if(count($files) > 0 ) {
+    if ((is_countable($files) ? count($files) : 0) > 0) {
         $ret .= "</tr><td colspan=7>";
         $ret .= "<form name='commit' action='install.php' method='POST'>
                     <input type='hidden' name='current_step' value='{$next_step}'>
@@ -1694,7 +1740,7 @@ function extractFile( $zip_file, $file_in_zip, $base_tmp_upgrade_dir){
 
 if ( !function_exists('extractManifest') ) {
 function extractManifest( $zip_file,$base_tmp_upgrade_dir ) {
-    return( extractFile( $zip_file, "manifest.php",$base_tmp_upgrade_dir ) );
+        return extractFile($zip_file, "manifest.php", $base_tmp_upgrade_dir);
 }
 }
 
@@ -1786,9 +1832,9 @@ function createWebAddress() {
     global $seed;
     global $tlds;
 
-    $one = $seed[rand(0, count($seed)-1)];
-    $two = $seed[rand(0, count($seed)-1)];
-    $tld = $tlds[rand(0, count($tlds)-1)];
+    $one = $seed[random_int(0, count($seed)-1)];
+    $two = $seed[random_int(0, count($seed)-1)];
+    $tld = $tlds[random_int(0, count($tlds)-1)];
 
     return "www.{$one}{$two}{$tld}";
 }
@@ -1798,16 +1844,17 @@ function createWebAddress() {
  * @return string
  */
 function createEmailAddress() {
+    $part = [];
     global $seed;
     global $tlds;
 
-    $part[0] = $seed[rand(0, count($seed)-1)];
-    $part[1] = $seed[rand(0, count($seed)-1)];
-    $part[2] = $seed[rand(0, count($seed)-1)];
+    $part[0] = $seed[random_int(0, count($seed)-1)];
+    $part[1] = $seed[random_int(0, count($seed)-1)];
+    $part[2] = $seed[random_int(0, count($seed)-1)];
 
-    $tld = $tlds[rand(0, count($tlds)-1)];
+    $tld = $tlds[random_int(0, count($tlds)-1)];
 
-    $len = rand(1,3);
+    $len = random_int(1, 3);
 
     $ret = '';
     for($i=0; $i<$len; $i++) {
@@ -1816,7 +1863,7 @@ function createEmailAddress() {
     }
 
     if($len == 1) {
-        $ret .= rand(10, 99);
+        $ret .= random_int(10, 99);
     }
 
     return "{$ret}@example{$tld}";
@@ -1825,7 +1872,7 @@ function createEmailAddress() {
 
 function add_digits($quantity, &$string, $min = 0, $max = 9) {
     for($i=0; $i < $quantity; $i++) {
-        $string .= mt_rand($min,$max);
+        $string .= random_int($min, $max);
     }
 }
 
@@ -1844,7 +1891,9 @@ function create_date($year=null,$mnth=null,$day=null)
 {
     global $timedate;
     $now = $timedate->getNow();
-    if ($day==null) $day=$now->day+mt_rand(0,365);
+    if ($day == null) {
+        $day = $now->day + random_int(0, 365);
+    }
     return $timedate->asDbDate($now->get_day_begin($day, $mnth, $year));
 }
 
@@ -1858,9 +1907,15 @@ function create_time($hr=null,$min=null,$sec=null)
 {
     global $timedate;
     $date = TimeDate::fromTimestamp(0);
-    if ($hr==null) $hr=mt_rand(6,19);
-    if ($min==null) $min=(mt_rand(0,3)*15);
-    if ($sec==null) $sec=0;
+    if ($hr == null) {
+        $hr = random_int(6, 19);
+    }
+    if ($min == null) {
+        $min = (random_int(0, 3) * 15);
+    }
+    if ($sec == null) {
+        $sec = 0;
+    }
     return $timedate->asDbTime($date->setDate(2007, 10, 7)->setTime($hr, $min, $sec));
 }
 
@@ -1869,7 +1924,7 @@ function create_past_date()
     global $timedate;
     $now = $timedate->getNow(true);
     $day_of_year = date('z') + 1;
-    $day=$now->day-mt_rand(1, $day_of_year);
+    $day=$now->day-random_int(1, $day_of_year);
     return $timedate->asDbDate($now->get_day_begin($day));
 }
 
@@ -1915,7 +1970,7 @@ $numChars = 7; // number of chars in the password
 $charBKT = "abcdefghijklmnpqrstuvwxyz123456789ABCDEFGHIJKLMNPQRSTUVWXYZ";
 $password="";
 for ($i=0;$i<$numChars;$i++)  // loop and create password
-            $password = $password . substr($charBKT, random_int(0, getrandmax()) % strlen($charBKT), 1);
+            $password = $password . substr($charBKT, random_int(0, mt_getrandmax()) % strlen($charBKT), 1);
 
 return $password;
 
@@ -1965,6 +2020,7 @@ function create_writable_dir($dirname)
  */
 function enableInsideViewConnector()
 {
+    $mapping = null;
     // Load up the existing mapping and hand it to the InsideView connector to have it setup the correct logic hooks
     $mapFile = 'modules/Connectors/connectors/sources/ext/rest/insideview/mapping.php';
     if ( file_exists('custom/'.$mapFile) ) {

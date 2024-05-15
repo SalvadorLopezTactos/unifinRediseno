@@ -37,6 +37,7 @@ class SugarWidgetFieldCurrency extends SugarWidgetFieldInt
 
     public function displayList($layout_def)
     {
+            $field_def = [];
             global $current_user;
 
             if (empty($layout_def['group_function'])) {

@@ -215,17 +215,17 @@ class Sugarpdf extends TCPDF
         $cell_height = round(($this->getCellHeightRatio() * $headerfont[2]) / $this->getScaleFactor(), 2);
         // set starting margin for text data cell
         if ($this->getRTL()) {
-            $header_x = $ormargins['right'] + ($headerdata['logo_width'] * 1.1);
+            $header_x = (float)$ormargins['right'] + ((float)$headerdata['logo_width'] * 1.1);
         } else {
-            $header_x = $ormargins['left'] + ($headerdata['logo_width'] * 1.1);
+            $header_x = (float)$ormargins['left'] + ((float)$headerdata['logo_width'] * 1.1);
         }
         $this->SetTextColor(0, 0, 0);
         // header title
-        $this->SetFont($headerfont[0], 'B', $headerfont[2] + 1);
+        $this->SetFont($headerfont[0] ?? '', 'B', (float)$headerfont[2] + 1);
         $this->SetX($header_x);
         $this->Cell(0, $cell_height, $headerdata['title'], 0, 1, '', 0, '', 0);
         // header string
-        $this->SetFont($headerfont[0], $headerfont[1], $headerfont[2]);
+        $this->SetFont($headerfont[0] ?? '', $headerfont[1] ?? '', (float)$headerfont[2]);
         $this->SetX($header_x);
         $this->MultiCell(0, $cell_height, $headerdata['string'], 0, '', 0, 1, '', '', true, 0, false);
         // print an ending header line
@@ -703,6 +703,29 @@ class Sugarpdf extends TCPDF
         }
 
         return parent::Output($name,$dest);
+    }
+
+    protected function openHTMLTagHandler(&$dom, $key, $cell = false)
+    {
+        $tag = $dom[$key];
+        // check for text direction attribute
+        if (isset($tag['attribute']['dir'])) {
+            $this->tmprtl = $tag['attribute']['dir'] == 'rtl' ? 'R' : 'L';
+        } else {
+            $this->tmprtl = false;
+        }
+
+        if ($tag['value'] === 'tcpdf') {
+            if (defined('K_TCPDF_CALLS_IN_HTML') && (K_TCPDF_CALLS_IN_HTML === true)) {
+                // Special tag used to call TCPDF methods
+                if (isset($tag['attribute']['method']) && $tag['attribute']['method'] === 'AddPage') {
+                    $this->AddPage();
+                    $this->newline = true;
+                }
+            }
+        } else {
+            parent::openHTMLTagHandler($dom, $key, $cell);
+        }
     }
 }
 

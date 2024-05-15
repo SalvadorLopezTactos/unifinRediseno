@@ -137,7 +137,8 @@ class RelatedValueApi extends SugarApi
                     break;
                 case "count":
                     if ($focus->load_relationship($link)) {
-                        $ret[$link][$type] = count($focus->$link->get());
+                        $linkValue = $focus->$link->get();
+                        $ret[$link][$type] = is_countable($linkValue) ? count($linkValue) : 0;
                     } else {
                         $ret[$link][$type] = 0;
                     }
@@ -221,7 +222,7 @@ class RelatedValueApi extends SugarApi
                         $relBeans = $focus->$link->getBeansForSugarLogic();
 
                         foreach ($relBeans as $bean) {
-                            if (in_array($bean->{$rfDef['condition_field']}, $condition_values)) {
+                            if (safeInArray($bean->{$rfDef['condition_field']}, $condition_values)) {
                                 $sum++;
                                 $values[$bean->id] = true;
                             }
@@ -255,7 +256,7 @@ class RelatedValueApi extends SugarApi
                                 //ensure the user can access the fields we are using.
                                 ACLField::hasAccess($rField, $bean->module_dir, $GLOBALS['current_user']->id, true)
                             ) {
-                                if (is_array($condition_values) && in_array($bean->{$rfDef['condition_field']}, $condition_values)) {
+                                if (safeInArray($bean->{$rfDef['condition_field']}, $condition_values)) {
                                     if (is_null($isCurrency)) {
                                         $isCurrency = $this->isFieldCurrency($bean, $rField);
                                     }
@@ -307,7 +308,7 @@ class RelatedValueApi extends SugarApi
                             // If this is a rollupConditionalMinDate, make sure the bean conditions hold
                             if (!empty($isRollupMinDate) && !empty($conditions) && is_array($conditions)) {
                                 foreach ($conditions as $conField => $conValues) {
-                                    if (!in_array($bean->$conField, $conValues)) {
+                                    if (!safeInArray($bean->$conField, $conValues)) {
                                         continue 2;
                                     }
                                 }

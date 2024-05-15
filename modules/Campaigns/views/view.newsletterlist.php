@@ -26,7 +26,9 @@ class ViewNewsLetterList extends ViewList
         }   
         $where_clauses = $this->searchForm->generateSearchWhere(true, $this->seed->module_dir);
         $where_clauses[] = "campaigns.campaign_type in ('NewsLetter')";
-        if (count($where_clauses) > 0 )$this->where = '('. implode(' ) AND ( ', $where_clauses) . ')';
+        if ((is_countable($where_clauses) ? count($where_clauses) : 0) > 0) {
+            $this->where = '(' . implode(' ) AND ( ', $where_clauses) . ')';
+        }
         $GLOBALS['log']->info("List View Where Clause: $this->where");
 
 

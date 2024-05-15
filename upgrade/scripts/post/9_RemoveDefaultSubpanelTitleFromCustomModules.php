@@ -180,9 +180,9 @@ class SugarUpgradeRemoveDefaultSubpanelTitleFromCustomModules extends UpgradeScr
      */
     protected function getDataFromFile($file, $var)
     {
-        $$var = array();
+        ${$var} = array();
         @require $file;
-        return $$var;
+        return ${$var};
     }
 
     /**

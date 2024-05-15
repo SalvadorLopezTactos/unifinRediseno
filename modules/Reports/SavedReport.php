@@ -104,7 +104,7 @@ class SavedReport extends Basic
 
 		// clean stored report_name too
 		$tmpContent['report_name'] = $name;
-		$content = $json->encode($tmpContent, false);
+        $content = $json->encode($tmpContent);
 		// end SECURITY
 
 		$result = 1;
@@ -513,6 +513,7 @@ function getACLAllowedModules()
  */
 function getModulesDropdown()
 {
+    $allowed_modules = [];
     global $app_list_strings;
     $modules = getACLAllowedModules();
     foreach ($modules as $module => $value) {

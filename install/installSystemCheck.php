@@ -13,6 +13,8 @@ $_SESSION['setup_license_accept'] = true;
 
 function runCheck(bool $install_script, array $mod_strings)
 {
+    $cache_files = [];
+    $loginImage = null;
 installLog("Begin System Check Process *************");
 
 if( !isset( $install_script ) || !$install_script ){

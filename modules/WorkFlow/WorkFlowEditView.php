@@ -121,7 +121,7 @@ if(!empty($etid)) {
     //FIXME: notes.filename IS NOT NULL is probably not necessary
     $notes_list = $note->get_full_list("", "notes.email_id=" . $GLOBALS['db']->quoted($etid) . " AND notes.filename IS NOT NULL", true);
     if (!empty($notes_list)) {
-        for ($i = 0; $i < count($notes_list); $i++) {
+        for ($i = 0; $i < (is_countable($notes_list) ? count($notes_list) : 0); $i++) {
             $the_note = $notes_list[$i];
             if (empty($the_note->filename)) {
                 continue;

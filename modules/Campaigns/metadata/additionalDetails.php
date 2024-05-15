@@ -24,9 +24,7 @@ function additionalDetailsCampaign($fields) {
 
 	if(!empty($fields['TRACKER_TEXT'])) 
 		$overlib_string .= '<b>'. $mod_strings['LBL_TRACKER_TEXT'] . '</b> ' . $fields['TRACKER_TEXT'] . '<br>';
-	if(!empty($fields['REFER_URL'])) 
-        $overlib_string .= '<a target="_blank" rel="nofollow noopener noreferrer" href='. $fields['REFER_URL'] . '>' . $fields['REFER_URL'] . '</a><br>';
-	
+
 	if(!empty($fields['OBJECTIVE'])) {
 		$overlib_string .= '<b>'. $mod_strings['LBL_CAMPAIGN_OBJECTIVE'] . '</b> ' . substr($fields['OBJECTIVE'], 0, 300);
 		if(strlen($fields['OBJECTIVE']) > 300) $overlib_string .= '...';
@@ -44,5 +42,4 @@ function additionalDetailsCampaign($fields) {
 }
  
  ?>
- 
  

@@ -54,6 +54,7 @@ class PMSEImageGenerator
 
     public function get_image($cas_id)
     {
+        $files = null;
         if (isset($cas_id)) {
             $this->cas_id = $cas_id;
             //Get running elements
@@ -63,8 +64,8 @@ class PMSEImageGenerator
             $this->prj_id = $processBean->prj_id;
 
             //GET DIAGRAMS
-            $diagrams = $this->get_project_diagrams($this->prj_id, $processBean->deleted == "1" ? 1 : 0);
-            foreach ($diagrams as $diagram) {
+            $diagrams = $this->get_project_diagrams($this->prj_id, $processBean->deleted == '1' ? 1 : 0);
+            foreach (safeIsIterable($diagrams) ? $diagrams : [] as $diagram) {
                 $files = $this->diagram_to_png($diagram);
             }
 
@@ -74,6 +75,7 @@ class PMSEImageGenerator
 
     public function getProjectImage($id)
     {
+        $files = null;
         $processBean = BeanFactory::newBean('pmse_BpmnProcess');
         $this->allElements = true;
         $q = new SugarQuery();
@@ -176,6 +178,7 @@ class PMSEImageGenerator
 
     private function get_project_elements($prj_id, $dia_id, $table)
     {
+        $bean = null;
         $boundFields = array(
             //'bound.bou_uid',
             //'bound.prj_id',
@@ -830,6 +833,7 @@ class PMSEImageGenerator
                 case 'bpmnFlow':
                     imagesetthickness($img, 1);
                     $lines = json_decode($figure[9]);
+                    $lines = safeIsIterable($lines) ? $lines : [];
 
                     if ($element_running->in_flow) {
                         $line_color = $black;
@@ -849,7 +853,7 @@ class PMSEImageGenerator
                                 imageline($img, $lines[$key]->x - $x1, $lines[$key]->y - $y1, $lines[$key + 1]->x - $x1,
                                     $lines[$key + 1]->y - $y1, $line_color);
                             }
-                            if ((int)((sizeof($lines) - 1) / 2) == $key) {
+                            if ((int)((safeCount($lines) - 1) / 2) == $key) {
                                 if (isset($element_running->count) && $element_running->count > 1) {
                                     $cf = ' (' . $element_running->count . ')';
                                 } else {
@@ -866,31 +870,63 @@ class PMSEImageGenerator
                     $decorator_height = 11;
                     //END DECORATOR
                     $colorBackView = imagecolorallocate($img, 24, 124, 220);
-                    if ($lines[sizeof($lines) - 1]->x == $lines[sizeof($lines) - 2]->x) {
-                        if ($lines[sizeof($lines) - 1]->y < $lines[sizeof($lines) - 2]->y) {
-                            $spriteCoords = $xSpriteMap['arrow_target_bottom'];
-                            imagecopymerge($img, $shape_image,
-                                $lines[sizeof($lines) - 1]->x - (int)($decorator_width / 2) - $x1,
-                                $lines[sizeof($lines) - 1]->y - $y1, $spriteCoords[0], $spriteCoords[1],
-                                $decorator_width, $decorator_height, 100);
-                        } else {
-                            $spriteCoords = $xSpriteMap['arrow_target_top'];
-                            imagecopymerge($img, $shape_image,
-                                $lines[sizeof($lines) - 1]->x - (int)($decorator_width / 2) - $x1,
-                                $lines[sizeof($lines) - 1]->y - $decorator_height - $y1, $spriteCoords[0],
-                                $spriteCoords[1], $decorator_width, $decorator_height, 100);
-                        }
-                    } elseif (($lines[sizeof($lines) - 1]->y == $lines[sizeof($lines) - 2]->y)) {
-                        if ($lines[sizeof($lines) - 1]->x < $lines[sizeof($lines) - 2]->x) {
-                            $spriteCoords = $xSpriteMap['arrow_target_right'];
-                            imagecopymerge($img, $shape_image, $lines[sizeof($lines) - 1]->x - $x1,
-                                $lines[sizeof($lines) - 1]->y - (int)($decorator_height / 2) - $y1, $spriteCoords[0],
-                                $spriteCoords[1], $decorator_width, $decorator_height, 100);
-                        } else {
-                            $spriteCoords = $xSpriteMap['arrow_target_left'];
-                            imagecopymerge($img, $shape_image, $lines[sizeof($lines) - 1]->x - $decorator_width - $x1,
-                                $lines[sizeof($lines) - 1]->y - (int)($decorator_height / 2) - $y1, $spriteCoords[0],
-                                $spriteCoords[1], $decorator_width, $decorator_height, 100);
+                    if (isset($lines[safeCount($lines) - 1]) && isset($lines[safeCount($lines) - 2])) {
+                        if ($lines[safeCount($lines) - 1]->x == $lines[safeCount($lines) - 2]->x) {
+                            if ($lines[safeCount($lines) - 1]->y < $lines[safeCount($lines) - 2]->y) {
+                                $spriteCoords = $xSpriteMap['arrow_target_bottom'];
+                                imagecopymerge(
+                                    $img,
+                                    $shape_image,
+                                    $lines[safeCount($lines) - 1]->x - (int)($decorator_width / 2) - $x1,
+                                    $lines[safeCount($lines) - 1]->y - $y1,
+                                    $spriteCoords[0],
+                                    $spriteCoords[1],
+                                    $decorator_width,
+                                    $decorator_height,
+                                    100
+                                );
+                            } else {
+                                $spriteCoords = $xSpriteMap['arrow_target_top'];
+                                imagecopymerge(
+                                    $img,
+                                    $shape_image,
+                                    $lines[safeCount($lines) - 1]->x - (int)($decorator_width / 2) - $x1,
+                                    $lines[safeCount($lines) - 1]->y - $decorator_height - $y1,
+                                    $spriteCoords[0],
+                                    $spriteCoords[1],
+                                    $decorator_width,
+                                    $decorator_height,
+                                    100
+                                );
+                            }
+                        } elseif (($lines[safeCount($lines) - 1]->y == $lines[safeCount($lines) - 2]->y)) {
+                            if ($lines[safeCount($lines) - 1]->x < $lines[safeCount($lines) - 2]->x) {
+                                $spriteCoords = $xSpriteMap['arrow_target_right'];
+                                imagecopymerge(
+                                    $img,
+                                    $shape_image,
+                                    $lines[safeCount($lines) - 1]->x - $x1,
+                                    $lines[safeCount($lines) - 1]->y - (int)($decorator_height / 2) - $y1,
+                                    $spriteCoords[0],
+                                    $spriteCoords[1],
+                                    $decorator_width,
+                                    $decorator_height,
+                                    100
+                                );
+                            } else {
+                                $spriteCoords = $xSpriteMap['arrow_target_left'];
+                                imagecopymerge(
+                                    $img,
+                                    $shape_image,
+                                    $lines[safeCount($lines) - 1]->x - $decorator_width - $x1,
+                                    $lines[safeCount($lines) - 1]->y - (int)($decorator_height / 2) - $y1,
+                                    $spriteCoords[0],
+                                    $spriteCoords[1],
+                                    $decorator_width,
+                                    $decorator_height,
+                                    100
+                                );
+                            }
                         }
                     }
 
@@ -960,7 +996,7 @@ class PMSEImageGenerator
             default:
                 $line = $this->wrap_text($size, $angle, $font, $txt, $x2 - $x1);
         }
-        $h = count($line) * 16;
+        $h = (is_countable($line) ? count($line) : 0) * 16;
         foreach ($line as $value) {
             $w = strlen(trim($value)) * 6;
             $X = ($x1 + ((($x2 - $x1) - $w) / 2)) - 3;

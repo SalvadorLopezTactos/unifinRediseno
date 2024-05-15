@@ -127,7 +127,7 @@ var link_defs_<?php echo $module_name_escaped; ?> = new Object();
 			$linked_field['label'] =$linked_field['name'];
 		}
 	  	$linked_field['label'] = preg_replace('/:$/','',$linked_field['label']);
-		$linked_field['label'] = addslashes($linked_field['label']);
+            $linked_field['label'] = is_string($linked_field['label']) ? addslashes($linked_field['label']) : '';
 
         echo "link_defs_{$module_name_escaped}[ '{$linked_field['name']}' ] = " . json_encode(array(
             'name' => $linked_field['name'],
@@ -234,15 +234,20 @@ var option_arr_<?php echo $module_name_escaped; ?> = new Array();
 				        $trans_options = array();
 				    }
 
-					foreach($trans_options as $option_value=>$option_text)
-					{
-						$option_text = translate($option_text);
+foreach (safeIsIterable($trans_options) ? $trans_options : [] as $option_value => $option_text) {
+                        $option_text = translate($option_text);
 
 // BEGIN HALF-FIX
 				        if(is_array($option_text))
 				        {
 				          $option_text = 'Array';
 				        }
+    if (!is_scalar($option_text) || !is_scalar($option_value)) {
+        LoggerManager::getLogger()->fatal(
+            sprintf('$option_text and $option_value are expected to be scalar, %s and %s given. %s', gettype($option_text), gettype($option_value), PHP_EOL . (new Exception())->getTraceAsString())
+        );
+        continue;
+    }
 				        $option_text = html_entity_decode($option_text,ENT_QUOTES);
 				        $option_text = addslashes($option_text);
 				        $option_value = html_entity_decode($option_value,ENT_QUOTES);
@@ -257,31 +262,34 @@ option_arr_<?php echo $module_name_escaped; ?>[option_arr_<?php echo $module_nam
 
 field_defs_<?php echo $module_name_escaped; ?>[ "<?php echo $field_def['name']; ?>"].options=option_arr_<?php echo $module_name_escaped; ?>;
 
-<?php
-				} else if(isset($field_def['type']) && ($field_def['type'] == 'enum' || $field_def['type'] == 'timeperiod') && isset($field_def['function']))
-				{
-?>
-                    var option_arr_<?php echo $module_name_escaped; ?> = new Array();
+    <?php
+} elseif (isset($field_def['type']) && ($field_def['type'] == 'enum' || $field_def['type'] == 'timeperiod') && isset($field_def['function'])) {
+    ?>
+    var option_arr_<?php echo $module_name_escaped; ?> = new Array();
 
-<?php
-                    $options_array = getFunctionValue(!empty($field_def['function_bean']) ? $field_def['function_bean'] : null, $field_def['function']);
+    <?php
+    $options_array = getFunctionValue(!empty($field_def['function_bean']) ? $field_def['function_bean'] : null, $field_def['function']);
 
-			        foreach($options_array as $option_value=>$option_text)
-			        {
-			            $option_text = html_entity_decode($option_text,ENT_QUOTES);
-			            $option_text = addslashes($option_text);
-			            $option_value = html_entity_decode($option_value,ENT_QUOTES);
-			            $option_value = addslashes($option_value);
-?>
-option_arr_<?php echo $module_name_escaped; ?>[option_arr_<?php echo $module_name_escaped; ?>.length] = { "value":"<?php echo $option_value; ?>", "text":"<?php echo $option_text; ?>"};
-<?php
-            }
-?>
-field_defs_<?php echo $module_name_escaped; ?>[ "<?php echo $field_def['name']; ?>"].options=option_arr_<?php echo $module_name_escaped; ?>;
-<?php
-			    } else if( isset($field_def['type']) && $field_def['type'] == 'parent_type' && isset($field_def['group']) && isset($module->field_defs[$field_def['group']]) && isset($module->field_defs[$field_def['group']]['options']))
-			    {
-	    	?>
+    foreach (safeIsIterable($options_array) ? $options_array : [] as $option_value => $option_text) {
+        if (!is_scalar($option_text) || !is_scalar($option_value)) {
+            LoggerManager::getLogger()->fatal(
+                sprintf('$option_text and $option_value are expected to be scalar, %s and %s given. %s', gettype($option_text), gettype($option_value), PHP_EOL . (new Exception())->getTraceAsString())
+            );
+            continue;
+        }
+        $option_text = html_entity_decode($option_text, ENT_QUOTES);
+        $option_text = addslashes($option_text);
+        $option_value = html_entity_decode($option_value, ENT_QUOTES);
+        $option_value = addslashes($option_value);
+        ?>
+        option_arr_<?php echo $module_name_escaped; ?>[option_arr_<?php echo $module_name_escaped; ?>.length] = { "value":"<?php echo $option_value; ?>", "text":"<?php echo $option_text; ?>"};
+        <?php
+    }
+    ?>
+    field_defs_<?php echo $module_name_escaped; ?>[ "<?php echo $field_def['name']; ?>"].options=option_arr_<?php echo $module_name_escaped; ?>;
+    <?php
+} elseif (isset($field_def['type']) && $field_def['type'] == 'parent_type' && isset($field_def['group']) && isset($module->field_defs[$field_def['group']]) && isset($module->field_defs[$field_def['group']]['options'])) {
+    ?>
                     var option_arr_<?php echo $module_name_escaped; ?> = new Array();
 	    	<?php
 	    	    	$options_array = array();

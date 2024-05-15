@@ -47,6 +47,9 @@ class Popup_Picker
 {
     function process_page()
     {
+        $the_javascript = null;
+        $clear_button = null;
+        $cancel_button = null;
         global $mod_strings, $app_strings, $currentModule,
                $seed_object, $sugar_version, $sugar_config;
         $focus = BeanFactory::newBean('ProductCategories');
@@ -100,9 +103,10 @@ class Popup_Picker
             $cancel_button = "<input title='".$app_strings['LBL_CANCEL_BUTTON_TITLE']."' accessKey='".$app_strings['LBL_CANCEL_BUTTON_KEY']."' class='button' LANGUAGE=javascript onclick=\"window.close()\" type='submit' name='button' value='  ".$app_strings['LBL_CANCEL_BUTTON_LABEL']."  '>\n";
         }
 
-        if (empty($_REQUEST['form']) || $_REQUEST['form'] == 'EditView' && $_REQUEST['tree'] == 'ProdCat')
-        {
-            $seed_object->show_products = FALSE;
+        if (empty($_REQUEST['form']) || $_REQUEST['form'] == 'EditView' && $_REQUEST['tree'] == 'ProdCat') {
+            if ($seed_object instanceof ProductCategory) {
+                $seed_object->show_products = false;
+            }
             $the_javascript = <<<END
             <script type='text/javascript' language='JavaScript'>
                 function set_return(treeid) {

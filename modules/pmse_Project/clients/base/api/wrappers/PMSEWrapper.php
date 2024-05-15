@@ -347,15 +347,15 @@ class PMSEWrapper
     public function getPrimaryFieldDefinition($bean)
     {
         $defaultIndex = 'id';
-        $definition = '';
+        $definition = [];
         $indices = $bean->getIndices();
         foreach ($indices as $index) {
             if ($index['type'] == 'primary') {
-                if (count($index['fields']) == 1) {
+                if ((is_countable($index['fields']) ? count($index['fields']) : 0) == 1) {
                     $definition = $bean->getFieldDefinition($index['fields'][0]);
                     $definition['single'] = true;
                 } else {
-                    if (count($index['fields']) > 1) {
+                    if ((is_countable($index['fields']) ? count($index['fields']) : 0) > 1) {
                         $definition = array();
                         foreach ($index['fields'] as $field) {
                             $definition[] = $bean->getFieldDefinition($field);

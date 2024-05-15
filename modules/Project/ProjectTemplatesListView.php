@@ -121,7 +121,7 @@ else{
 $lv->setup($seedProject, 'include/ListView/ListViewGeneric.tpl', $where, $params);
 
 // Bug 49610
-for ($i = 0; $i < count($lv->data['data']); $i++) {
+for ($i = 0; $i < (is_countable($lv->data['data']) ? count($lv->data['data']) : 0); $i++) {
     $lv->data['data'][$i]['OFFSET'] = $i + 1;
 }
 

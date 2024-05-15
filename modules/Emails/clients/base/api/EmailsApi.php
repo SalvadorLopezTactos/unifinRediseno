@@ -74,6 +74,16 @@ class EmailsApi extends ModuleApi
     public function createRecord(ServiceBase $api, array $args)
     {
         $isReady = isset($args['state']) && $args['state'] === Email::STATE_READY;
+        if (!empty($args['parent_id']) && !empty($args['parent_type'])) {
+            $parentBean = BeanFactory::retrieveBean($args['parent_type'], $args['parent_id']);
+            if (empty($parentBean->id) || !$parentBean->ACLAccess('view')) {
+                $sugarApiExceptionNotAuthorized = new \SugarApiExceptionNotAuthorized(
+                    sprintf('No access to view record [%s] [%s]', $args['parent_type'], $args['parent_id'])
+                );
+                LoggerManager::getLogger()->fatal($sugarApiExceptionNotAuthorized->getMessage());
+                throw $sugarApiExceptionNotAuthorized;
+            }
+        }
         $result = parent::createRecord($api, $args);
 
         if ($isReady) {

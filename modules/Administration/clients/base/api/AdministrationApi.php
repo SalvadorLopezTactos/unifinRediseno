@@ -953,6 +953,7 @@ class AdministrationApi extends SugarApi
      */
     public function getCSPSConfig(ServiceBase $api, array $args): array
     {
+        $cspSettings = [];
         $msg = 'This endpoint is deprecated as of 11.2.0 and will be removed in a future release.';
         LoggerManager::getLogger()->deprecated($msg);
 
@@ -1171,6 +1172,10 @@ class AdministrationApi extends SugarApi
 
                     // each [section_key]
                     foreach ($optionDefSections as $section) {
+                        if (!is_array($section)) {
+                            continue;
+                        }
+
                         $option = [];
 
                         $option['label'] = array_key_exists(1, $section) ? $section[1] : '';

@@ -14,6 +14,7 @@ namespace Sugarcrm\Sugarcrm\PackageManager;
 
 use ErrorException;
 use LoggerManager;
+use MlpLogger;
 use Sugarcrm\Sugarcrm\PackageManager\Entity\PackageManifest;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\PackageExistsException;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\PackageManagerException;
@@ -322,8 +323,18 @@ class PackageManager
         $issues = $this->moduleScanner->scanFile($manifestFile);
         if (!empty($issues)) {
             $exception = new Exception\PackageManifestException();
-            $exception->setErrorDescription($this->moduleScanner->getFormattedIssues());
+            $exception->setErrorDescription($this->moduleScanner->getFormattedIssues())
+                ->setModuleScanner($this->moduleScanner);
             throw $exception;
+        }
+        if ($this->isPackageScanEnabled) {
+            $strictIssues = $this->moduleScanner->strictManifestScan($manifestFile);
+            if (!empty($strictIssues)) {
+                $exception = new Exception\PackageManifestException();
+                $exception->setErrorDescription($this->moduleScanner->getFormattedIssues())
+                    ->setModuleScanner($this->moduleScanner);
+                throw $exception;
+            }
         }
 
         $manifest = $installdefs = $upgrade_manifest = [];
@@ -561,8 +572,12 @@ class PackageManager
             $moduleInstaller->setUpgradeHistory($history);
             $moduleInstaller->setInstallationDone();
 
-            $this->forceUninstall($history, true);
-            throw new PackageManagerException('ERR_UW_PACKAGE_NOT_INSTALLED');
+            if (SugarConfig::getInstance()->get('uninstallOnError', true)) {
+                $this->forceUninstall($history, true);
+                throw new PackageManagerException('ERR_UW_PACKAGE_NOT_INSTALLED');
+            } else {
+                throw new PackageManagerException('ERR_UW_PACKAGE_INSTALLED_WITH_ERROR');
+            }
         }, $history);
 
         try {
@@ -590,13 +605,21 @@ class PackageManager
                 $zipFile->runPackageScript(PackageZipFile::POST_INSTALL_FILE, $this->silent);
             }
         } catch (Throwable $e) {
-            LoggerManager::getLogger()->fatal(
-                'Package Install process was not finished successfully, uninstalling'
-            );
-            LoggerManager::getLogger()->fatal($e);
+            if (SugarConfig::getInstance()->get('uninstallOnError', true)) {
+                LoggerManager::getLogger()->fatal(
+                    'Package Install process was not finished successfully, uninstalling'
+                );
+                LoggerManager::getLogger()->fatal($e);
 
-            $this->forceUninstall($history);
-            throw new PackageManagerException('ERR_UW_PACKAGE_NOT_INSTALLED');
+                $this->forceUninstall($history);
+                throw new PackageManagerException('ERR_UW_PACKAGE_NOT_INSTALLED');
+            } else {
+                LoggerManager::getLogger()->fatal(
+                    'Package Install process was not finished successfully, leaving installation files in place'
+                );
+                LoggerManager::getLogger()->fatal($e);
+                throw new PackageManagerException('ERR_UW_PACKAGE_INSTALLED_WITH_ERROR');
+            }
         }
 
         if ($previousInstalled) {
@@ -757,16 +780,24 @@ class PackageManager
         if (!$isDone) {
             return;
         }
-        LoggerManager::getLogger()->fatal(sprintf(
-            "Uninstalling a package %s because of the fatal error",
-            $justInstalled->name
-        ));
-        LoggerManager::getLogger()->fatal($err);
+        if (SugarConfig::getInstance()->get('uninstallOnError', true)) {
+            MlpLogger::replaceDefault();
 
-        try {
-            $this->forceUninstall($justInstalled, true);
-        } catch (\Throwable $e) {
-            LoggerManager::getLogger()->fatal($e);
+            LoggerManager::getLogger()->fatal(sprintf(
+                "Uninstalling a package %s because of the fatal error",
+                $justInstalled->name
+            ));
+            LoggerManager::getLogger()->fatal($err);
+
+            try {
+                $this->forceUninstall($justInstalled, true);
+            } catch (\Throwable $e) {
+                LoggerManager::getLogger()->fatal($e);
+            }
+        } else {
+            LoggerManager::getLogger()->fatal(
+                'Package Install process was not finished successfully, leaving installation files in place'
+            );
         }
     }
 

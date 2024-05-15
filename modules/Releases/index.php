@@ -105,8 +105,12 @@ if ($is_edit) {
 	$xtpl->assign('STATUS', $focus->status);
 
 
-	if (empty($focus->list_order)) $xtpl->assign('LIST_ORDER', count($focus->get_releases(FALSE, 'All'))+1);
-	else $xtpl->assign('LIST_ORDER', $focus->list_order);
+    if (empty($focus->list_order)) {
+        $releases = $focus->get_releases(false, 'All');
+        $xtpl->assign('LIST_ORDER', (is_countable($releases) ? count($releases) : 0) + 1);
+    } else {
+        $xtpl->assign('LIST_ORDER', $focus->list_order);
+    }
 	$xtpl->assign('STATUS_OPTIONS', get_select_options_with_id($app_list_strings['release_status_dom'], $focus->status));
 
 // adding custom fields:

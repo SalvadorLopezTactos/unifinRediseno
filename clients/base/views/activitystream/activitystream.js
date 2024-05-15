@@ -275,6 +275,7 @@
         data = model.get('data');
         data.value = this.formatTags(data.value);
         data.value = this.formatLinks(data.value);
+        data.value = DOMPurify.sanitize(data.value, {ADD_ATTR: ['target']});
 
         this.processAvatars();
         this.$('.comments').prepend(template(model.attributes));
@@ -387,6 +388,7 @@
             this._unformattedPost = post.value;
             post.value = this.formatLinks(post.value);
             post.value = this.formatTags(post.value);
+            post.value = DOMPurify.sanitize(post.value, {ADD_ATTR: ['target']});
         }
 
         this.commentsCollection.each(function(model) {
@@ -394,6 +396,7 @@
             this._unformattedComments[model.get('id')] = data.value;
             data.value = this.formatLinks(data.value);
             data.value = this.formatTags(data.value);
+            data.value = DOMPurify.sanitize(data.value, {ADD_ATTR: ['target']});
         }, this);
     },
 

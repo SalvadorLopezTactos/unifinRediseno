@@ -23,6 +23,7 @@ class ListApi extends SugarListApi {
 
     public function parseArguments(ServiceBase $api, array $args, SugarBean $seed = null)
     {
+        $right_part = null;
         $parsed = parent::parseArguments($api, $args, $seed);
 
         $deleted = false;

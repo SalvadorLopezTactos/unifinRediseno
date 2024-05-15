@@ -203,6 +203,9 @@ class SugarBeanApiHelper
                 }
 
                 foreach ($fieldList AS $fieldName) {
+                    if (!is_string($fieldName) && !is_numeric($fieldName)) {
+                        continue;
+                    }
                     if (empty($fieldAcls[$fieldName]) && isset($moduleAclFields[$fieldName])) {
                         $fieldAcls[$fieldName] = $moduleAclFields[$fieldName];
                     }

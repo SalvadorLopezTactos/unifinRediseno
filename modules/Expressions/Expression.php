@@ -189,6 +189,7 @@ class Expression extends SugarBean {
 
 
 	function get_selector_array($type, $value, $dom_name, $text_only_array=false, $meta_filter_name="", $only_related_modules = false, $trigger_type="", $only_plural = false){
+        $select_array = [];
 		global $app_list_strings;
 		global $current_language;
 
@@ -341,7 +342,7 @@ class Expression extends SugarBean {
 			//foreach loop on the in values
 			$selected_array = unencodeMultienum($this->rhs_value);
 			$multi_text = "";
-			$selected_count = count($selected_array);
+            $selected_count = is_countable($selected_array) ? count($selected_array) : 0;
 			$the_counter = 1;
 			foreach($selected_array as $key => $value){
 

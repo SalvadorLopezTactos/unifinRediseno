@@ -1052,7 +1052,7 @@ function get_relationships($session, $module_name, $module_id, $related_module, 
 		$error->set_error('no_relationship_support');
 		return array('ids'=>$ids, 'error'=>$error->get_soap_array());
 	}
-	elseif (count($id_list) == 0) {
+    elseif ((is_countable($id_list) ? count($id_list) : 0) == 0) {
 		return array('ids'=>$ids, 'error'=>$error->get_soap_array());
 	}
 
@@ -1344,6 +1344,7 @@ function set_document_revision($session,$document_revision)
  * @return get_entry_list_result 	- id, module_name, and list of fields from each record
  */
 function search_by_module($user_name, $password, $search_string, $modules, $offset, $max_results){
+    $output_list = [];
     $modules = object_to_array_deep($modules);
 	$error = new SoapError();
     $hasLoginError = false;
@@ -2097,7 +2098,7 @@ function handle_set_entries($module_name, $name_value_lists, $select_fields = FA
 						$query = $seed->table_name.".outlook_id = '".$seed->outlook_id."'";
 						$response = $seed->get_list($order_by, $query, 0,-1,-1,0);
 						$list = $response['list'];
-						if(count($list) > 0){
+                        if ((is_countable($list) ? count($list) : 0) > 0) {
 							foreach($list as $value)
 							{
 								$seed->id = $value->id;

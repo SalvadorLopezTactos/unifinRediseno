@@ -330,6 +330,7 @@ class CurrentUserApi extends SugarApi
      */
     public function updatePassword(ServiceBase $api, array $args)
     {
+        $user_data = [];
         $user_data['valid'] = false;
 
         // Deals with missing required args else assigns oldpass and new paswords
@@ -361,6 +362,7 @@ class CurrentUserApi extends SugarApi
      */
     public function verifyPassword(ServiceBase $api, array $args)
     {
+        $user_data = [];
         $user_data['valid'] = false;
 
         // Deals with missing required args else assigns oldpass and new paswords
@@ -533,6 +535,7 @@ class CurrentUserApi extends SugarApi
 
     protected function getUserPrefCurrency(User $user, $category = 'global')
     {
+        $return = [];
         global $locale;
 
         $currency = BeanFactory::newBean('Currencies');
@@ -829,6 +832,7 @@ class CurrentUserApi extends SugarApi
      */
     protected function getBasicUserInfo($platform, $category = 'global')
     {
+        $user_data = [];
         global $current_user;
 
         $this->forceUserPreferenceReload($current_user);
@@ -973,6 +977,12 @@ class CurrentUserApi extends SugarApi
         // set each of the args in the array
         foreach ($args as $key => $value) {
             $preferenceName = $this->getUserPreferenceName($key);
+            if ($key === 'default_locale_name_format') {
+                if (!isset($GLOBALS['sugar_config']['name_formats'][$value])) {
+                    $GLOBALS['log']->security('default_locale_name_format allow list violation');
+                    throw new SugarApiExceptionInvalidParameter("Invalid value provided for default_locale_name_format");
+                }
+            }
             $current_user->setPreference($preferenceName, $value, 0, $category);
         }
 

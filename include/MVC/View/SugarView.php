@@ -203,7 +203,7 @@ class SugarView
             $language = htmlspecialchars($language, ENT_QUOTES, 'UTF-8');
 
             $roles = ACLRole::getUserRoles($current_user->id);
-            $roles = count($roles) >= 1 ? implode(',', $roles) : 'no_roles';
+            $roles = (is_countable($roles) ? count($roles) : 0) >= 1 ? implode(',', $roles) : 'no_roles';
             $roles = htmlspecialchars($roles, ENT_QUOTES, 'UTF-8');
 
             $licenses = Subscription::SUGAR_BASIC_KEY;
@@ -312,7 +312,6 @@ class SugarView
         $trackerManager = TrackerManager::getInstance();
         $timeStamp = TimeDate::getInstance()->nowDb();
         if($monitor = $trackerManager->getMonitor('tracker')){
-            $monitor->action = isset($monitor->action) ? $monitor->action : '';
             $monitor->setValue('team_id', $GLOBALS['current_user']->getPrivateTeamID());
             $monitor->setValue('action', $action);
             $monitor->setValue('user_id', $GLOBALS['current_user']->id);
@@ -329,7 +328,6 @@ class SugarView
 
             //If visible is true, but there is no bean, do not track (invalid/unauthorized reference)
             //Also, do not track save actions where there is no bean id
-            $monitor->visible = empty($monitor->visible) ? 0: $monitor->visible; 
             if($monitor->visible && empty($this->bean->id)) {
             $trackerManager->unsetMonitor($monitor);
             return;

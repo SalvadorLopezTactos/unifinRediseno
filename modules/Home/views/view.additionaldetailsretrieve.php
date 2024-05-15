@@ -14,6 +14,7 @@ class HomeViewAdditionaldetailsretrieve extends SugarView
 {
  	public function display()
  	{
+        $retArray = [];
         global $beanList, $beanFiles, $current_user, $app_strings, $app_list_strings;
 
         $moduleDir = empty($_REQUEST['bean']) ? '' : $_REQUEST['bean'];

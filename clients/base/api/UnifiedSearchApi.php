@@ -59,6 +59,7 @@ class UnifiedSearchApi extends SugarListApi
      */
     public function parseSearchOptions(ServiceBase $api, array $args)
     {
+        $orderByData = [];
         if (isset($args['module_list']) && is_string($args['module_list'])) {
             // We can create a bean of this type
             $seed = BeanFactory::newBean($args['module_list']);
@@ -230,7 +231,6 @@ class UnifiedSearchApi extends SugarListApi
             $sortByDateModified = false;
         }
 
-
         return $recordSet;
     }
 
@@ -393,12 +393,16 @@ class UnifiedSearchApi extends SugarListApi
         }
 
         $multiModule = false;
-        if ( empty($options['moduleList']) || count($options['moduleList']) == 0 || count($options['moduleList']) > 1 ) {
+        if (isset($options['moduleList']) && is_countable($options['moduleList'])) {
+            $cntOptionModuleList = count($options['moduleList']);
+        } else {
+            $cntOptionModuleList = 0;
+        }
+        if (empty($options['moduleList']) || $cntOptionModuleList == 0 || $cntOptionModuleList > 1) {
             $multiModule = true;
         }
 
-        if(empty($options['moduleList']))
-        {
+        if (empty($options['moduleList'])) {
             $usa = new UnifiedSearchAdvanced();
             $moduleList = $usa->getUnifiedSearchModules();
 

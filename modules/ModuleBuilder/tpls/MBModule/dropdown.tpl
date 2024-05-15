@@ -18,10 +18,10 @@
     <form name='dropdown_form' onsubmit="return false">
 {sugar_csrf_form_token}
         <input type='hidden' name='module' value='ModuleBuilder'>
-        <input type='hidden' name='action' value='{$action}'>
+        <input type='hidden' name='action' value="{$action|escape:'html'}">
         <input type='hidden' name='to_pdf' value='true'>
-        <input type='hidden' name='view_module' value='{$module_name}'>
-        <input type='hidden' name='view_package' value='{$package_name}'>
+        <input type='hidden' name='view_module' value="{$module_name|escape:'html'}">
+        <input type='hidden' name='view_package' value="{$package_name|escape:'html'}">
         <input type='hidden' id='list_value' name='list_value' value=''>
         {* This indicates that this dropdown is being created from a new field *}
         {if ($fromNewField)}
@@ -66,9 +66,9 @@
                     <span class='mbLBLL'>{sugar_translate label='LBL_DROPDOWN_TITLE_NAME'}:&nbsp;</span>
                     {if not $new }
                         <input type='hidden' id='dropdown_name' name='dropdown_name'
-                               value='{$dropdown_name}'>{$dropdown_name}
+                               value="{$dropdown_name|escape:'html'}">{$dropdown_name|escape:'html'}
                     {else}
-                        <input type='text' id='dropdown_name' name='dropdown_name' value={$dropdown_name}>
+                        <input type='text' id='dropdown_name' name='dropdown_name' value="{$dropdown_name|escape:'html'}">
                     {/if}
                 </td>
             </tr>
@@ -135,7 +135,7 @@
                                             <span class="fieldValue" id="span_{$name|escape:'html':'UTF-8'}">[{$val|escape:'html':'UTF-8'}]</span>
                                             <span class="fieldValue" id="span_edit_{$name|escape:'html':'UTF-8'}" style="display:none">
                                                 <input type="text" id="input_{$name|escape:'html':'UTF-8'}" value="{$val|escape:'html':'UTF-8'}"
-                                                    onBlur='SimpleList.setDropDownValue("{$name|escape:'javascript':'UTF-8'}", this.value, true)'>
+                                                    onBlur='SimpleList.setDropDownValue("{$name|escape:'javascript':'UTF-8'|escape:'html':'UTF-8'}", this.value, true)'>
                                             </span>
 
                                             {*Show comparison language information if applicable*}
@@ -180,11 +180,11 @@
                                         </td>
                                         <td align='right'>
                                             <a href='javascript:void(0)'
-                                               onclick='SimpleList.editDropDownValue("{$name|escape:'javascript':'UTF-8'}", true)'>
+                                               onclick='SimpleList.editDropDownValue("{$name|escape:'javascript':'UTF-8'|escape:'html':'UTF-8'}", true)'>
                                                 {$editImage}</a>
                                             &nbsp;
                                             <a href='javascript:void(0)'
-                                               onclick='SimpleList.deleteDropDownValue("{$name|escape:'javascript':'UTF-8'}", true)'>
+                                               onclick='SimpleList.deleteDropDownValue("{$name|escape:'javascript':'UTF-8'|escape:'html':'UTF-8'}", true)'>
                                                 {$deleteImage}</a>
                                         </td>
                                     </tr>
@@ -230,7 +230,7 @@
         );
 
         eval({$ul_list});
-        SimpleList.name = '{$dropdown_name}';
+        SimpleList.name = '{$dropdown_name|escape:'javascript'}';
         SimpleList.requiredOptions = {$required_items};
         SimpleList.ul_list = list;
         SimpleList.hasSalesStageClassification = Boolean('{$allow_sales_stage_classification}');

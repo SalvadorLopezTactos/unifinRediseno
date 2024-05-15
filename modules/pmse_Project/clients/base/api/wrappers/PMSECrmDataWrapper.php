@@ -1090,7 +1090,7 @@ SQL;
         }
         $related_modules = $this->retrieveRelatedBeans($filter, $relationship);
         if ($related_modules['success']) {
-            for ($i = 0; $i < count($related_modules['result']); $i++) {
+            for ($i = 0; $i < (is_countable($related_modules['result']) ? count($related_modules['result']) : 0); $i++) {
                 $fields = $this->retrieveFields($related_modules['result'][$i]['value']);
                 $related_modules['result'][$i]["fields"] = $fields['result'];
             }
@@ -1787,13 +1787,13 @@ SQL;
         }
         $arrayModules = $this->returnArrayModules($newModuleFilter);
         $customfields = false;
-        if (count($arrayModules) > 0) {
+        if ((is_countable($arrayModules) ? count($arrayModules) : 0) > 0) {
             $output = array();
             $customfields = true;
         } else {
             $arrayModules = $this->returnArrayModules('All');
         }
-        if (count($arrayModules) > 0) {
+        if ((is_countable($arrayModules) ? count($arrayModules) : 0) > 0) {
             foreach ($fieldsData as $field) {
                 $newfield = $this->dataFieldPersonalized($field, $arrayModules, $customfields);
                 if (isset($field['vname']) && isset($newfield)) {

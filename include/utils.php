@@ -29,6 +29,48 @@ use Sugarcrm\Sugarcrm\ProductDefinition\Config\Config as ProductDefinitionConfig
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 /**
+ * @param mixed $potentiallyCountable
+ * @return int
+ */
+function safeCount($potentiallyCountable): int
+{
+    if (is_countable($potentiallyCountable)) {
+        return count($potentiallyCountable);
+    }
+    LoggerManager::getLogger()->fatal('count() called on non-countable argument: ' . PHP_EOL . (new Exception())->getTraceAsString());
+    return 0;
+}
+
+/**
+ * check the second parameter before calling in_array() function
+ * @param mixed $needle the searched value
+ * @param mixed $haystack the array
+ * @param bool $strict option
+ * @return bool
+ *
+ */
+function safeInArray($needle, $haystack, bool $strict = false) : bool
+{
+    if (!is_array($haystack)) {
+        LoggerManager::getLogger()->fatal('in_array() called on non-array argument 2: ' . PHP_EOL . (new Exception())->getTraceAsString());
+        return false;
+    }
+    return in_array($needle, $haystack, $strict);
+}
+
+/**
+ * Replacement for is_iterable to check also for stdClass instances, which can be iterated over
+ * but is_iterable() call on them returns false
+ *
+ * @param $subject
+ * @return bool
+ */
+function safeIsIterable($subject): bool
+{
+    return is_iterable($subject) || $subject instanceof \stdClass;
+}
+
+/**
  * To get human readable, non-localized subscriptions such Enterprise, Sell, Serve, etc.
  *
  * @param array $subscriptions
@@ -1318,7 +1360,7 @@ function return_module_language($language, $module, $refresh=false)
     global $currentModule;
 
     // Jenny - Bug 8119: Need to check if $module is not empty
-    if (empty($module)) {
+    if (empty($module) || !is_string($module)) {
         $message = "Variable module is not in return_module_language ";
         //If any object in the stack contains a circular reference,
         //debug_backtrace will cause a fatal recursive dependency error without DEBUG_BACKTRACE_IGNORE_ARGS
@@ -2126,7 +2168,9 @@ function translate($string, $mod='', $selectedValue='')
 
     // Bug 48996 - Custom enums with '0' value were not returning because of empty check
     // Added a numeric 0 checker to the conditional to allow 0 value indexed to pass
-    if (is_array($returnValue) && (!empty($selectedValue) || (is_numeric($selectedValue) && $selectedValue == 0))  && isset($returnValue[$selectedValue]) ) {
+    if (is_array($returnValue)
+        && ((is_string($selectedValue) && $selectedValue !== '') || is_numeric($selectedValue))
+        && isset($returnValue[$selectedValue])) {
         return $returnValue[$selectedValue];
     }
 
@@ -2257,7 +2301,7 @@ function clean_xss($str, $cleanImg=true)
     preg_match_all($css_url, $str, $cssUrlMatches, PREG_PATTERN_ORDER);
 
     if (isset($sugar_config['security_trusted_domains']) && !empty($sugar_config['security_trusted_domains']) && is_array($sugar_config['security_trusted_domains'])) {
-        if (is_array($cssUrlMatches) && count($cssUrlMatches) > 0) {
+        if (is_array($cssUrlMatches) && safeCount($cssUrlMatches) > 0) {
             // normalize whitelist
             foreach ($sugar_config['security_trusted_domains'] as $k => $v) {
                 $sugar_config['security_trusted_domains'][$k] = strtolower($v);
@@ -3157,11 +3201,11 @@ function _ppl($mixed, $die=false, $displayStackTrace=false, $loglevel="fatal")
  */
 function check_php_version(string $version = PHP_VERSION)
 {
-    if (version_compare($version, '7.3.0', '<')) {
+    if (version_compare($version, '7.4.0', '<')) {
         return -1;
     }
 
-    if (version_compare($version, '8.1.0-dev', '>=')) {
+    if (version_compare($version, '8.3.0-dev', '>=')) {
         return -1;
     }
 
@@ -3213,7 +3257,7 @@ function check_iis_version($sys_iis_version = '')
 
     // unsupported version check overrides default unsupported
     foreach ($unsupported_iis_versions as $ver) {
-        if (1 == version_compare($sys_iis_version, $ver, 'eq') && strpos($sys_iis_version,$ver) !== false) {
+        if (1 == version_compare($sys_iis_version, $ver, 'eq') && strpos($sys_iis_version, (string)$ver) !== false) {
             $retval = 0;
             break;
         }
@@ -3343,7 +3387,7 @@ function check_logic_hook_file($module_name, $event, $action_array)
 
             $logic_count = 0;
             if (!empty($hook_array[$event])) {
-                $logic_count = count($hook_array[$event]);
+                $logic_count = safeCount($hook_array[$event]);
             }
 
             if ($action_array[0]=="") {
@@ -3863,7 +3907,7 @@ function getPhpInfo($level=-1)
         $returnInfo['PHP Version'] = $version[1];
     }
 
-    for ($i=1; $i<count($parsedInfo); $i++) {
+    for ($i = 1; $i < safeCount($parsedInfo); $i++) {
         if (preg_match('/<h.>([^<]+)<\/h.>/', $parsedInfo[$i], $match)) {
             $vName = trim($match[1]);
             $parsedInfo2 = explode("\n",$parsedInfo[$i+1]);
@@ -3908,7 +3952,7 @@ function string_format($format, $args)
      * If args array has only one argument, and it's empty, so empty single quotes are used '' . That's because
      * IN () fails and IN ('') works.
      */
-    if (count($args) == 1) {
+    if (safeCount($args) == 1) {
         reset($args);
         $singleArgument = current($args);
         if (empty($singleArgument)) {
@@ -4163,7 +4207,7 @@ function sugarArrayMergeRecursive($gimp, $dom)
  */
 function isArrayAssociative(array $array): bool
 {
-    return !empty($array) && array_keys($array) !== range(0, count($array) - 1);
+    return !empty($array) && array_keys($array) !== range(0, safeCount($array) - 1);
 }
 
 /**
@@ -4929,7 +4973,7 @@ function getMajorMinorVersion($version)
     if (preg_match('/^([\d\.]+).*$/si', $version, $matches2)) {
         $version = $matches2[1];
         $arr = explode('.', $version);
-        if (count($arr) > 2) {
+        if (safeCount($arr) > 2) {
             if ($arr[2] == '0') {
                 $version = substr($version, 0, 3);
             }
@@ -5000,7 +5044,9 @@ function verify_image_file($path, $jpeg = false)
 {
     if (!empty($path)) {
         $filetype = get_file_mime_type($path);
-        if ($filetype === 'image/svg+xml') {
+        if ($filetype === 'image/svg+xml' ||
+            // the file has already been processed
+            (empty($_FILES) && strpos(str_replace('/', DIRECTORY_SEPARATOR, $path), UploadStream::getDir() . DIRECTORY_SEPARATOR . 'tmp') === 0)) {
             return true;
         }
         if (function_exists('imagepng') && function_exists('imagejpeg') && function_exists('imagecreatefromstring')) {
@@ -5380,7 +5426,7 @@ function getDuplicateRelationListWithTitle($def, $var_def, $module)
 {
     global $current_language;
     $select_array = array_unique($def);
-    if (count($select_array) < count($def)) {
+    if (safeCount($select_array) < safeCount($def)) {
         $temp_module_strings = return_module_language($current_language, $module);
         $temp_duplicate_array = array_diff_assoc($def, $select_array);
         $temp_duplicate_array = array_merge($temp_duplicate_array, array_intersect($select_array, $temp_duplicate_array));
@@ -5428,9 +5474,9 @@ function assignConcatenatedValue(SugarBean $bean, $fieldDef, $value)
 {
     $valueParts = explode(' ',$value);
     $valueParts = array_filter($valueParts);
-    $fieldNum   = count($fieldDef['db_concat_fields']);
+    $fieldNum   = safeCount($fieldDef['db_concat_fields']);
 
-    if (count($valueParts) == 1 && $fieldDef['db_concat_fields'] == array('first_name', 'last_name')) {
+    if (safeCount($valueParts) == 1 && $fieldDef['db_concat_fields'] == array('first_name', 'last_name')) {
         $bean->last_name = $value;
     }
     else {
@@ -5531,7 +5577,7 @@ function ensureJSCacheFilesExist($files = array(), $root = '.', $addPath = true)
     }
 
     // For a single file check return just that file
-    if (count($return) == 1) {
+    if (safeCount($return) == 1) {
         return $return[0];
     }
 
@@ -5689,7 +5735,22 @@ function getFunctionValue($bean, $function, $args = array())
         $function = array($bean, $function);
     }
 
-    return call_user_func_array($function, $args);
+    // If the function/method exists, call it. Otherwise, return null or handle as needed
+    if (is_callable($function)) {
+        try {
+            return call_user_func_array($function, $args);
+        } catch (Throwable $e) {
+            LoggerManager::getLogger()->fatal(
+                'Function ' . json_encode($function) . ' call failed: ' . $e->getMessage() . PHP_EOL .
+                $e->getTraceAsString()
+            );
+            return null;
+        }
+    } else {
+        // Handle the case when the function/method does not exist
+        LoggerManager::getLogger()->fatal('Function ' . json_encode($function) . ' does not exist.' . PHP_EOL . (new Exception())->getTraceAsString());
+        return null;
+    }
 }
 
 /**
@@ -5955,7 +6016,7 @@ function validate_ip($clientIp, $sessionIp)
 
     $session_parts = explode(".", $sessionIp);
     $client_parts = explode(".", $clientIp);
-    if (count($session_parts) < 4) {
+    if (safeCount($session_parts) < 4) {
         $classCheck = 0;
     } else {
         // match class C IP addresses
@@ -6082,7 +6143,15 @@ function stable_uasort(array &$input, callable $comparator) : bool
     }
 
     $result = uasort($input, function (array $a, array $b) use ($comparator) : int {
-        $result = call_user_func($comparator, $a[1], $b[1]);
+        try {
+            $result = call_user_func($comparator, $a[1], $b[1]);
+        } catch (Throwable $e) {
+            LoggerManager::getLogger()->fatal(
+                'Function ' . json_encode($comparator) . ' call failed: ' . $e->getMessage() . PHP_EOL
+                . $e->getTraceAsString()
+            );
+            $result = 0;
+        }
         return $result == 0 ? $a[0] - $b[0] : $result;
     });
 

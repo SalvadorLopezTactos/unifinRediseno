@@ -138,7 +138,7 @@ class TeamSet extends SugarBean{
         if (!$row){
             //we did not find a set with this combination of teams
             //so we should create the set and associate the teams with the set and return the set id.
-            if(count($team_ids) == 1) {
+            if ((is_countable($team_ids) ? count($team_ids) : 0) == 1) {
                 $this->new_with_id = true;
                 $this->id = $this->db->fromConvert($team_ids[0], 'id');
                 if ($this->db->getConnection()->fetchOne(
@@ -341,4 +341,37 @@ class TeamSet extends SugarBean{
         } // if
         return $usersArray;
     } // fn
+
+    /**
+     * Fetch user IDs related to the $teamSetId
+     */
+    public function getTeamSetUserIds(string $teamSetId): array
+    {
+        $teamSetId = trim($teamSetId);
+        if ($teamSetId === '') {
+            return [];
+        }
+
+        $sql = <<<EOS
+SELECT tm.user_id
+FROM team_sets_teams tst
+         INNER JOIN teams t ON tst.team_id = t.id
+         INNER JOIN team_memberships tm on t.id = tm.team_id
+         INNER JOIN users u ON tm.user_id = u.id
+WHERE tst.team_set_id = :team_set_id
+  AND tm.explicit_assign = 1
+  AND u.status = :user_status
+  AND tst.deleted = 0
+  AND t.deleted = 0
+  AND tm.deleted = 0
+  AND u.deleted = 0
+EOS;
+
+        $params = [
+            'team_set_id' => $teamSetId,
+            'user_status' => 'Active',
+        ];
+
+        return $this->db->getConnection()->fetchFirstColumn($sql, $params);
+    }
 }

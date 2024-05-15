@@ -665,8 +665,8 @@ class SugarSpot
             $patterns[1] = substr($patterns[1], 0, (strlen($patterns[1]) - 1));
         }
 
-        $module_exists = stripos($key, $patterns[1]); //primary module name.
-        $pattern_exists = stripos($key, $patterns[0]); //pattern provided by the user.
+        $module_exists = stripos($key, (string) $patterns[1]); //primary module name.
+        $pattern_exists = stripos($key, (string) $patterns[0]); //pattern provided by the user.
         if ($module_exists !== false and $pattern_exists !== false) {
             $GLOBALS['matching_keys'] = array_merge(array(array('NAME' => $key, 'ID' => $key, 'VALUE' => $item1)), $GLOBALS['matching_keys']);
         }

@@ -232,6 +232,7 @@ class CalendarUtils
 	 */
 	static function buildRecurringSequence($date_start, $params)
 	{
+        $dow = null;
 		$arr = array();
 
 		$type = $params['type'];

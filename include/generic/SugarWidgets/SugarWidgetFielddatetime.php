@@ -363,7 +363,14 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 
     function queryFilterTP_last_n_days($layout_def)
     {
-        $days = $layout_def['input_name0'] - 1;
+        $def0 = $layout_def['input_name0'] ?? null;
+        $days = 0;
+        if (is_numeric($def0)) {
+            $days = (int)$def0 - 1;
+            if ($days < 0) {
+                $days = 0;
+            }
+        }
 
         $begin = $this->now()->get("-$days days")->get_day_begin();
         $end = $this->now()->get_day_end();
@@ -580,7 +587,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
         }elseif(substr_count($layout_def['type'], 'date') > 0){
             // if date time field
             if(substr_count($layout_def['type'], 'time') > 0 && $this->get_time_part($content)!= false){
-                $td = $timedate->to_display_date_time($content);
+                $td = $timedate->to_display_date_time($content, true, false);
                 return $td;
             }else{// if date only field
                 $td = $timedate->to_display_date($content, false); // Avoid PHP notice of returning by reference.
@@ -610,7 +617,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
                 return $this-> $func_name ($layout_def);
             }
         }
-        return parent :: displayListPlain($layout_def);
+        return $this->displayListPlain($layout_def);
     }
 
 	function querySelect(& $layout_def) {

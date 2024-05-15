@@ -95,6 +95,7 @@ class DynamicField {
      */
     public function setLabel(string $language, string $key, string $value): void
     {
+        $params = [];
         $params [ "label_" . $key ] = $value;
         $parser = new ParserLabel ( $this->module ) ;
         $parser->handleSave( $params , $language);
@@ -329,6 +330,7 @@ class DynamicField {
 
     public function getRelateJoin($field_def, $joinTableAlias, $withIdName = true)
     {
+        $ret_array = [];
         if (empty($field_def['type']) || $field_def['type'] != "relate" || empty($field_def['module'])) {
             return false;
         }

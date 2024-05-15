@@ -855,6 +855,13 @@ AND team_id = ?';
 	 *
 	 */
     public static function set_team_name_from_user(&$team, &$user) {
+        if (!$team instanceof SugarBean) {
+            LoggerManager::getLogger()->fatal(
+                'Invalid usage of ' . __METHOD__ . '. First argument must be a Team instance.'
+                . PHP_EOL . (new Exception())->getTraceAsString()
+            );
+            return;
+        }
     	if(empty($user->first_name) && $user->last_name) {
 			$team->name = $user->last_name;
 			$team->name_2 = '';

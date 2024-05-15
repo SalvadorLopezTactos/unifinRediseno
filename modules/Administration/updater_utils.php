@@ -13,6 +13,13 @@
 ********************************************************************************/
 
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+use Sugarcrm\Sugarcrm\Hint\Queue\ProcessorFactory;
+use Sugarcrm\Sugarcrm\Hint\Manager;
+use Sugarcrm\Sugarcrm\Hint\Http\Client;
+use Sugarcrm\Sugarcrm\Hint\Iss\Manager as IssManager;
+use Sugarcrm\Sugarcrm\Hint\Iss\Commands;
+use Sugarcrm\Sugarcrm\Hint\ConfigurationManager;
+use Sugarcrm\Sugarcrm\Hint\HintConstants;
 
 /**
  * Proxy to SugarSystemInfo::getInstance()->getInfo()
@@ -921,4 +928,45 @@ function loginLicense(){
 	    }
 	}
 	//END REQUIRED CODE DO NOT MODIFY
+}
+
+/**
+ *
+ * Delete instance registered in hint backend services
+ */
+function deleteInstanceFromHintServices(): void
+{
+    $hintManager = Manager::instance();
+    $issManager = new IssManager($hintManager->issServiceUrl);
+    $processorFactory = new ProcessorFactory();
+    $issCommands = [];
+
+    // get disableNotifications command processor
+    $processorData = ['explicitDisable' => null];
+    $disableNotificationsCommand = $processorFactory->getProcessor(Commands::ISS_DISABLE_NOTIFICATIONS);
+    $issCommands[] = $disableNotificationsCommand($processorData);
+
+    //remove instance
+    $deleteCommand = $processorFactory->getProcessor(Commands::ISS_DELETE_INSTANCE);
+    $issCommands[] = $deleteCommand([]);
+
+    // soft disable notifications on Sugar instance
+    ConfigurationManager::updateHintConfigEntry(HintConstants::HINT_CONFIG_NOTIFICATION, null);
+    // sets the geo config to null.
+    ConfigurationManager::updateHintConfigEntry(HintConstants::HINT_CONFIG_GEO, null);
+
+    // the instance should be registered properly into backend services to be removed
+    try {
+        // remove instance from DE
+        $stage2client = new Client($hintManager->serviceUrl);
+        $body = $hintManager->getInstanceInfoBody();
+
+        $stage2client->removeInstanceFromDataEnrichment($body);
+
+        // send commands to ISS
+        $issManager->sendCommands($issCommands);
+    } catch (\Throwable $e) {
+        $errorMessage = sprintf('Problem processing request, error: %s', $e->getMessage());
+        $GLOBALS['log']->error($errorMessage);
+    }
 }

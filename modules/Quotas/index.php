@@ -197,7 +197,7 @@ if (!empty($timeperiod_id)) {
         $csrf = CsrfAuthenticator::getInstance();
         $editButtonHTML = '
 <form name="EditView" method="POST" action="index.php">
-<input type="hidden" name="' . htmlspecialchars($csrf::FORM_TOKEN_FIELD) .'" value="'. htmlspecialchars($csrf->getFormToken()). '" />
+<input type="hidden" name="' . htmlspecialchars($csrf::FORM_TOKEN_FIELD) . '" value="' . htmlspecialchars($csrf->getFormToken()). '" />
 <input type="hidden" name="module" value="Quotas">';
         if (!$is_new) {
             $editButtonHTML .= '<input type="hidden" name="record" value="' . htmlspecialchars($focus->id) . '">';
@@ -267,14 +267,12 @@ else {
 
 function outputGroupQuota($groupQuota)
 {
-    $formattedGroupQuota = htmlspecialchars(
-        format_number(
+    $formattedGroupQuota = htmlspecialchars(format_number(
             $groupQuota,
             2,
             2,
             ['convert' => true, 'currency_symbol' => true,]
-        )
-    );
+    ));
     $outputTotalHTML = '
 <tr height="20">
 <td scope="col"><slot>&nbsp;</slot></td>

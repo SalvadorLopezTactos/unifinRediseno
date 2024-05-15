@@ -274,7 +274,8 @@ class TimePeriod extends SugarBean
      */
     public function hasLeaves()
     {
-        return count($this->getLeaves()) > 0;
+        $leaves = $this->getLeaves();
+        return is_countable($leaves) && count($leaves) > 0;
     }
 
     /**
@@ -829,7 +830,7 @@ AND deleted = 0';
         $timedate = TimeDate::getInstance();
 
         if ($shownBackwardDifference > 0) {
-            $earliestTimePeriod = $this->getEarliest($this->type);
+            $earliestTimePeriod = static::getEarliest($this->type);
             if (is_null($earliestTimePeriod)) {
                 $earliestTimePeriod = TimePeriod::getByType($this->type);
                 $earliestTimePeriod->setStartDate($this->start_date);
@@ -843,7 +844,7 @@ AND deleted = 0';
         }
 
         if ($shownForwardDifference > 0) {
-            $latestTimePeriod = $this->getLatest($this->type);
+            $latestTimePeriod = static::getLatest($this->type);
             if (is_null($latestTimePeriod)) {
                 $latestTimePeriod = TimePeriod::getByType($this->type);
                 $latestTimePeriod->setStartDate($this->start_date);
@@ -871,6 +872,7 @@ AND deleted = 0';
      */
     public function buildTimePeriods($timePeriods, $direction, $quadrantCt = 0)
     {
+        $leafPeriod = null;
         $created = array();
         $timedate = TimeDate::getInstance();
         $startDate = $timedate->fromDbDate($this->start_date); //->modify($dateModifier);
@@ -1236,6 +1238,7 @@ AND deleted = 0';
      */
     public function getGenericStartEndByDuration($duration, $start_date = null)
     {
+        $end = null;
         $mapping = array('current' => 0, 'next' => 3, 'year' => 12);
         if (array_key_exists($duration, $mapping)) {
             $duration = $mapping[$duration];

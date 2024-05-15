@@ -355,7 +355,7 @@ if (!empty($etid)) {
     $where = 'notes.email_id=' . $GLOBALS['db']->quoted($etid) . ' AND notes.filename IS NOT NULL';
     $notes_list = $note->get_full_list('', $where, true) ?? [];
 
-    for ($i = 0, $iMax = count($notes_list); $i < $iMax; $i++) {
+    for ($i = 0, $iMax = is_countable($notes_list) ? count($notes_list) : 0; $i < $iMax; $i++) {
         $the_note = $notes_list[$i];
         if (empty($the_note->filename)) {
             continue;

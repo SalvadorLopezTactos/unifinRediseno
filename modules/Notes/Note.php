@@ -132,11 +132,20 @@ class Note extends SugarBean
             }
         }
 
-        if (!$this->attachment_flag && $this->load_relationship('attachments')) {
-            $attachments = $this->attachments->getBeans();
+        // executes Team update flow for all nested attachments if necessary
+        if (!$this->attachment_flag && $this->isUpdate() && $this->load_relationship('attachments')) {
+            $sensitiveFields = [
+                'team_id' => true,
+                'team_set_id' => true,
+                'acl_team_set_id' => true,
+                'assigned_user_id' => true,
+            ];
+            if (!empty(array_intersect_key($this->getStateChanges(), $sensitiveFields))) {
+                // update DB values
+                $this->updateAttachmentTeams($this->attachments, $this->id);
 
-            foreach ($attachments as $attachment) {
-                $attachment->setAttachmentTeams($this);
+                // update already loaded beans
+                $this->synchronizeTeamsRecursively();
             }
         }
 
@@ -160,6 +169,59 @@ class Note extends SugarBean
             if ($save) {
                 $this->save();
             }
+        }
+    }
+
+    /**
+     * Fast implementation of team update flow in case a parent Note changes
+     */
+    public function updateAttachmentTeams(Link2 $attachmentLink, string $id): void
+    {
+        $updateChunkSize = 100;
+        $rel = $attachmentLink->getRelationshipObject();
+        $conn = DBManagerFactory::getConnection();
+        $attachmentIds = $conn->fetchFirstColumn(
+            sprintf('SELECT id FROM %s WHERE %s = ? AND deleted = ?', $rel->getRelationshipTable(), $rel->rhs_key),
+            [$id, 0]
+        );
+
+        $attachmentChunks = array_chunk($attachmentIds, $updateChunkSize);
+        foreach ($attachmentChunks as $attachmentChunk) {
+            $builder = $conn->createQueryBuilder();
+            $builder->update($rel->getRelationshipTable())
+                ->set('team_id', ':team_id')
+                ->set('team_set_id', ':team_set_id')
+                ->set('acl_team_set_id', ':acl_team_set_id')
+                ->set('assigned_user_id', ':assigned_user_id')
+                ->where($builder->expr()->in('id', ':ids'))
+                ->setParameter('team_id', $this->team_id)
+                ->setParameter('team_set_id', $this->team_set_id)
+                ->setParameter('acl_team_set_id', $this->acl_team_set_id)
+                ->setParameter('assigned_user_id', $this->assigned_user_id)
+                ->setParameter('ids', $attachmentChunk, $conn::PARAM_STR_ARRAY);
+
+            $affectedRows = $builder->execute();
+
+            if ($affectedRows === 0) {
+                continue;
+            }
+
+            // update nested attachments
+            foreach ($attachmentChunk as $attachmentId) {
+                $this->updateAttachmentTeams($attachmentLink, $attachmentId);
+            }
+        }
+    }
+
+    /**
+     * Team update flow in case a parent Note changes: updates Beans which previously were loaded in memory
+     */
+    public function synchronizeTeamsRecursively(): void
+    {
+        $this->load_relationship('attachments');
+        foreach ($this->attachments->beans as $attachment) {
+            $attachment->setAttachmentTeams($this, false);
+            $attachment->synchronizeTeamsRecursively();
         }
     }
 

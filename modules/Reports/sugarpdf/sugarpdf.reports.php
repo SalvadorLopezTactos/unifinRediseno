@@ -53,7 +53,7 @@ class ReportsSugarpdfReports extends Sugarpdf
         } else {
             $this->SetHeaderData(PDF_SMALL_HEADER_LOGO, PDF_SMALL_HEADER_LOGO_WIDTH, $this->bean->name, $timedate->getNow(true));
         }
-        $cols = count($this->bean->report_def['display_columns']);
+        $cols = is_countable($this->bean->report_def['display_columns']) ? count($this->bean->report_def['display_columns']) : 0;
     }
 
     /**
@@ -62,6 +62,8 @@ class ReportsSugarpdfReports extends Sugarpdf
      */
     public function Header()
     {
+        $table = [];
+        $imgy = null;
         $ormargins = $this->getOriginalMargins();
         $headerfont = $this->getHeaderFont();
         $headerdata = $this->getHeaderData();

@@ -128,6 +128,7 @@ class Document extends SugarBean {
     }
 
 	function save($check_notify = false) {
+        $save_revision = [];
         if (empty($this->document_name) && !empty($this->name)) {
             $this->document_name = $this->name;
         }

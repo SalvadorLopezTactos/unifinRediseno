@@ -91,7 +91,6 @@ class EmailUI {
 		global $current_language;
 		global $server_unique_key;
 
-		$this->preflightUserCache();
 		$ie = BeanFactory::newBean('InboundEmail');
         $ie->disable_row_level_security = true;
 
@@ -300,8 +299,6 @@ eoq;
 	 */
 	function displayQuickComposeEmailFrame()
 	{
-        $this->preflightUserCache();
-
 	    $this->_generateComposeConfigData('email_compose_light');
 		$javascriptOut = $this->smarty->fetch("modules/Emails/templates/_baseConfigData.tpl");
 
@@ -794,6 +791,7 @@ eoq;
 	 * @return string HTML, empty on error
 	 */
 	function getEditMailingList($id) {
+        $listName = null;
 		global $app_strings;
 		global $current_user;
 
@@ -1223,6 +1221,7 @@ eoq;
 	}
 
 	function getMailBoxesFromCacheValue($mailAccount) {
+        $cacheRoot = null;
 		$foldersCache = $this->getCacheValue($mailAccount->id, 'folders', "folders.php", 'foldersCache');
 		$mailboxes = $foldersCache['mailboxes'];
 		$mailboxesArray = $mailAccount->generateFlatArrayFromMultiDimArray($mailboxes, $mailAccount->retrieveDelimiter());
@@ -1517,91 +1516,13 @@ EOQ;
 		return $meta;
 	}
 
-	/**
-     * Renders the Import form from Smarty and returns HTML
-     * @param array $vars request variable global
-     * @param object $email Fetched email object
-     * @param bool $addToAddressBook
-     * @return array
-     */
-    function getImportForm($vars, $email, $formName = 'ImportEditView') {
-		require_once("include/EditView/EditView2.php");
-        $qsd = QuickSearchDefaults::getQuickSearchDefaults();
-		$qsd->setFormName($formName);
-
-        global $app_strings;
-        global $current_user;
-        global $app_list_strings;
-		$sqs_objects = array(
-		                     "{$formName}_parent_name" => $qsd->getQSParent(),
-		);
-        $smarty = new Sugar_Smarty();
-        $smarty->assign("APP",$app_strings);
-        $smarty->assign('formName',$formName);
-
-        $showTeam = false;
-        if (!isset($vars['showTeam']) || $vars['showTeam'] == true) {
-        	$showTeam = true;
-		} // if
-        if ($showTeam) {
-        	$smarty->assign("teamId", $current_user->default_team);
-        	$email->team_id = $current_user->default_team;
-			$email->team_set_id = $current_user->team_set_id;
-        }
-        $smarty->assign("showTeam",$showTeam);
-
-		$teamSetField = new EmailSugarFieldTeamsetCollection($email, $email->field_defs, '', $formName);
-		$code = $teamSetField->get_code();
-        $code .= $teamSetField->createQuickSearchCode(true);
-        $jsCode = '';
-
-        // extract js code. need to add it to the top of the template. so it can be evaluated.
-        preg_match_all('#<script[^>]*>.*?</script>#is', $code, $js);
-        if (!empty($js[0])) {
-            $jsCode = implode("\n", $js[0]);
-            $code = str_replace($js[0], '', $code);
-        }
-
-        $smarty->assign("TEAM_SET_FIELD", $code);
-        $smarty->assign("JS", $jsCode);
-        $showAssignTo = false;
-        if (!isset($vars['showAssignTo']) || $vars['showAssignTo'] == true) {
-        	$showAssignTo = true;
-		} // if
-		if ($showAssignTo) {
-	        if(empty($email->assigned_user_id) && empty($email->id))
-	            $email->assigned_user_id = $current_user->id;
-	        if(empty($email->assigned_name) && empty($email->id))
-	            $email->assigned_user_name = $current_user->user_name;
-	        $sqs_objects["{$formName}_assigned_user_name"] = $qsd->getQSUser();
-		}
-		$smarty->assign("showAssignedTo",$showAssignTo);
-
-        $showDelete = false;
-        if (!isset($vars['showDelete']) || $vars['showDelete'] == true) {
-            $showDelete = true;
-        }
-        $smarty->assign("showDelete",$showDelete);
-
-        $smarty->assign("userId",$email->assigned_user_id);
-        $smarty->assign("userName",$email->assigned_user_name);
-        $parent_types = $app_list_strings['record_type_display'];
-        $smarty->assign('parentOptions', get_select_options_with_id($parent_types, $email->parent_type));
-
-		$quicksearch_js = '<script type="text/javascript" language="javascript">sqs_objects = ' . json_encode($sqs_objects) . '</script>';
-        $smarty->assign('SQS', $quicksearch_js);
-
-        $meta = array();
-        $meta['html'] = $smarty->fetch("modules/Emails/templates/importRelate.tpl");
-        return $meta;
-    }
-
     /**
      * This function returns the detail view for email in new 2.0 interface
      *
      */
     function getDetailViewForEmail2($emailId) {
 
+        $meta = [];
 		global $app_strings, $app_list_strings;
 		global $mod_strings;
 
@@ -1695,7 +1616,7 @@ EOQ;
 		}
 
 		$attachments = '';
-		for($i=0; $i<count($notes_list); $i++) {
+        for ($i=0; $i<(is_countable($notes_list) ? count($notes_list) : 0); $i++) {
 			$the_note = $notes_list[$i];
 			$attachments .= "<a href=\"index.php?entryPoint=download&id={$the_note->id}&type=Notes\">".$the_note->name."</a><br />";
 			$focus->cid2Link($the_note->id, $the_note->file_mime_type);
@@ -1923,7 +1844,7 @@ function doDistributionWithMethod($users, $emailIds, $distributionMethod) {
 	} elseif($distributionMethod == 'leastBusy') {
 		$this->distLeastBusy($users, $emailIds);
 	} elseif($distributionMethod == 'direct') {
-		if(count($users) > 1) {
+            if ((is_countable($users) ? count($users) : 0) > 1) {
 			// only 1 user allowed in direct assignment
 			$error = 1;
 		} else {
@@ -2092,6 +2013,7 @@ function setLastRobin($ie, $lastRobin) {
 	 */
 function getSingleMessage($ie) {
 
+        $out = [];
 		global $timedate;
 		global $app_strings,$mod_strings;
 
@@ -2190,6 +2112,8 @@ eoq;
 	 * @param object email Email bean in focus
 	 */
 	function displayComposeEmail($email) {
+        $toAddresses = null;
+        $ccAddresses = null;
 		global $locale;
 		global $current_user;
 
@@ -2205,11 +2129,11 @@ eoq;
 		$addresses = array('toAddresses' => 'to', 'ccAddresses' => 'cc', 'bccAddresses' => 'bcc');
 		foreach($addresses as $var => $type)
 		{
-			$$var = "";
+            ${$var} = "";
 			foreach (array("{$type}_addrs_names", "{$type}addrs", "{$type}_addrs") as $emailVar)
 			{
 				if (!empty($email->$emailVar)) {
-					$$var = $email->$emailVar;
+                    ${$var} = $email->$emailVar;
 					break;
 				}
 			}
@@ -2273,6 +2197,7 @@ eoq;
 	 * @return object email
 	 */
 	function handleReplyType($email, $type) {
+        $header = null;
 		global $mod_strings;
 		 $GLOBALS['log']->debug("****At Handle Reply Type: $type");
 		switch($type) {
@@ -2310,7 +2235,7 @@ eoq;
                 $myCaseMacro = $myCase->getEmailSubjectMacro();
                 $email->parent_name = $myCase->name;
                 $GLOBALS['log']->debug("****Case # : {$myCase->case_number} macro: $myCaseMacro");
-				if(!strpos($email->name, str_replace('%1',$myCase->case_number,$myCaseMacro))) {
+                if (!strpos($email->name, (string) str_replace('%1', $myCase->case_number, $myCaseMacro))) {
 		        	$GLOBALS['log']->debug("Replacing");
 		            $email->name = str_replace('%1',$myCase->case_number,$myCaseMacro) . ' '. $email->name;
 		        }
@@ -2445,8 +2370,9 @@ eoq;
     	            if ($focus->load_relationship($searchBean))
     	            {
     	                $data = $focus->$searchBean->get();
-    	                if (count($data) != 0)
+                        if ((is_countable($data) ? count($data) : 0) != 0) {
                             $q[] = $this->findEmailFromBeanIds($data, $searchBean, $whereArr);
+                        }
     	            }
     	        }
     	        if (!empty($q))
@@ -2457,8 +2383,9 @@ eoq;
     	        if ($focus->load_relationship($beanType))
     	        {
     	            $data = $focus->$beanType->get();
-    	            if (count($data) != 0)
-    	            $finalQuery = $this->findEmailFromBeanIds($data, $beanType, $whereArr);
+                    if ((is_countable($data) ? count($data) : 0) != 0) {
+                        $finalQuery = $this->findEmailFromBeanIds($data, $beanType, $whereArr);
+                    }
     	        }
     	    }
     	}
@@ -2724,21 +2651,6 @@ eoq;
 		return $ret;
 	}
 
-	/**
-	 * Preps the User's cache dir
-	 */
-	function preflightUserCache() {
-		$path = clean_path($this->userCacheDir);
-		if(!file_exists($this->userCacheDir))
-			mkdir_recursive($path);
-
-		$files = findAllFiles($path, array());
-
-		foreach($files as $file) {
-			unlink($file);
-		}
-	}
-
 	function clearInboundAccountCache($ieId) {
 		global $sugar_config;
 		$cacheRoot = sugar_cached("modules/Emails/{$ieId}");
@@ -2987,10 +2899,9 @@ eoq;
 		    //Retrieve the related IE accounts.
             $relatedIEAccounts = $ie->retrieveByGroupFolderId($singleGroup['id']);
 
-            if(count($relatedIEAccounts) == 0)
+            if ((is_countable($relatedIEAccounts) ? count($relatedIEAccounts) : 0) == 0) {
                 $server_url = $app_strings['LBL_EMAIL_MULT_GROUP_FOLDER_ACCOUNTS_EMPTY'];
-            else if(count($relatedIEAccounts) == 1)
-            {
+            } elseif ((is_countable($relatedIEAccounts) ? count($relatedIEAccounts) : 0) == 1) {
                 if($relatedIEAccounts[0]->status != 'Active' || $relatedIEAccounts[0]->mailbox_type == 'bounce')
                     continue;
 
@@ -3269,6 +3180,7 @@ eoq;
 	 * @return string
 	 */
 	function jsonOuput($data, $resultsParam, $count=0, $fromCache=true, $unread=-1) {
+        $a = [];
 	    global $app_strings;
 
 		$count = ($count > 0) ? $count : 0;
@@ -3304,10 +3216,10 @@ eoq;
         $defaultNum = 2;
         $pattern = '/@.*,/U';
         preg_match_all($pattern, $tempStr, $matchs);
-        $totalCount = count($matchs[0]);
+        $totalCount = is_countable($matchs[0]) ? count($matchs[0]) : 0;
 
         if(!empty($matchs[0]) && $totalCount > $defaultNum) {
-            $position = strpos($tempStr, $matchs[0][$defaultNum]);
+            $position = strpos($tempStr, (string) $matchs[0][$defaultNum]);
             $hiddenCount = $totalCount - $defaultNum;
             $frontStr = substr($tempStr, 0, $position);
             $backStr = substr($tempStr, $position, -1);
@@ -3324,6 +3236,7 @@ eoq;
      * @return String converted string
      */
     function unifyEmailString($str) {
+        $new = [];
         preg_match_all('/@.*;/U', $str, $matches);
         if(!empty($matches[0])) {
             foreach($matches[0] as $key => $value) {

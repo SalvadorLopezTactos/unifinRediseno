@@ -83,18 +83,6 @@ class EmailTemplate extends SugarBean {
 
     protected $storedVariables = array();
 
-
-	public function __construct() {
-		parent::__construct();
-
-		global $current_user;
-		if(!empty($current_user)) {
-			$this->team_id = $current_user->default_team;	//default_team is a team id
-		} else {
-			$this->team_id = 1; // make the item globally accessible
-		}
-	}
-
 	/**
 	 * Generates the extended field_defs for creating macros
 	 * @param object $bean SugarBean
@@ -168,7 +156,7 @@ class EmailTemplate extends SugarBean {
 
 		$json = getJSONobj();
 		$ret = "var field_defs = ";
-		$ret .= $json->encode($collection, false);
+        $ret .= $json->encode($collection);
 		$ret .= ";";
 		return $ret;
 	}
@@ -211,8 +199,7 @@ class EmailTemplate extends SugarBean {
             $this->parsed_urls=array();
 
         $return_array = $template_text_array;
-        if(count($tracked_urls) > 0)
-        {
+        if ((is_countable($tracked_urls) ? count($tracked_urls) : 0) > 0) {
             //parse the template and find all the dynamic strings that need replacement.
             foreach ($template_text_array as $key=>$template_text) {
                 if (!empty($template_text)) {
@@ -226,12 +213,12 @@ class EmailTemplate extends SugarBean {
                         );
 
                         $matches = $this->_preg_match_tracker_url($template_text);
-                        $count = count($matches[0]);
+                        $count = is_countable($matches[0]) ? count($matches[0]) : 0;
                         $this->parsed_urls[$key]=array('matches' => $matches, 'text' => $template_text);
                     } else {
                         $matches=$this->parsed_urls[$key]['matches'];
                         if(!empty($matches[0])) {
-                            $count=count($matches[0]);
+                            $count=is_countable($matches[0]) ? count($matches[0]) : 0;
                         } else {
                             $count=0;
                         }
@@ -293,6 +280,7 @@ class EmailTemplate extends SugarBean {
 	function parse_email_template($template_text_array, $focus_name, $focus, &$macro_nv) {
 
 
+        $return_array = [];
 		global $beanFiles, $beanList, $app_list_strings;
 
 		// generate User instance that owns this "Contact" for contact_user_* macros
@@ -339,7 +327,7 @@ class EmailTemplate extends SugarBean {
 			} else {
 				$matches=$this->parsed_entities[$key];
 				if(!empty($matches[0])) {
-					$count=count($matches[0]);
+                    $count=is_countable($matches[0]) ? count($matches[0]) : 0;
 				} else {
 					$count=0;
 				}

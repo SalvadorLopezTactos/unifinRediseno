@@ -401,7 +401,7 @@ class FilterApi extends SugarApi
             static::addFavoriteFilter($query, $query->where(), '_this', 'INNER');
         }
 
-        if (count($query->order_by) < 1) {
+        if ((is_countable($query->order_by) ? count($query->order_by) : 0) < 1) {
             self::addOrderBy($query, $this->defaultOrderBy, $options['nulls_last']);
         }
 
@@ -692,7 +692,7 @@ class FilterApi extends SugarApi
                 ->execute()
                 ->fetchFirstColumn();
 
-            if (count($ids) < 1) {
+            if ((is_countable($ids) ? count($ids) : 0) < 1) {
                 return [
                     'records' => [],
                     'next_offset' => -1,
@@ -731,7 +731,7 @@ class FilterApi extends SugarApi
         $i = $distinctCompensation;
         foreach ($beans as $bean_id => $bean) {
             if ($i == $options['limit']) {
-                if (count($beans) > $options['limit']) {
+                if ((is_countable($beans) ? count($beans) : 0) > $options['limit']) {
                     unset($beans[$bean_id]);
                 }
                 $data['next_offset'] = (int) ($options['limit'] + $options['offset']);
@@ -1291,15 +1291,18 @@ class FilterApi extends SugarApi
         $join->on()->queryAnd()
             ->equalsField("{$geocodeTable}.parent_id", "{$recordTable}.id");
 
-        if (strtolower($unitType) === 'miles') {
+        $earthRadiusKm = 6371;
+        $pi = pi();
+
+        /* Casting to float type is necessary here for sanitization of query arguments */
+        $latitude = (float)$coords['latitude'];
+        $longitude = (float)$coords['longitude'];
+        $radius = (float)$radius;
+
+        if (is_string($unitType) && strtolower($unitType) === 'miles') {
             //convert miles to km
             $radius = $radius * 1.60934;
         }
-
-        $earthRadiusKm = 6371;
-        $pi = pi();
-        $latitude = $coords['latitude'];
-        $longitude = $coords['longitude'];
 
         // SQRT in SQL is part of the standard ANSI SQL-92 so is safety to use it in RAW SQL
         // COS is in the base functions of supported database by SUGARCRM: MySQL, DB2, Oracle and SQL Server

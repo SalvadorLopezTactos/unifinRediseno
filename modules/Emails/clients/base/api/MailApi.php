@@ -788,27 +788,6 @@ class MailApi extends ModuleApi
     }
 
     /**
-     * Clears the user's attachment cache directory
-     *
-     * @deprecated DELETE /Mail/attachment/cache has been deprecated and will not be available after v11. Attachments
-     * are no longer written as temporary files to the current user's cache directory.
-     * @param ServiceBase $api The service base
-     * @param array $args The request args
-     * @return bool
-     * @throws SugarApiExceptionRequestMethodFailure
-     */
-    public function clearUserCache(ServiceBase $api, array $args)
-    {
-        LoggerManager::getLogger()->deprecated(
-            'DELETE /Mail/attachment/cache has been deprecated and will not be available after v11.'
-        );
-
-        $em = new EmailUI();
-        $em->preflightUserCache();
-        return true;
-    }
-
-    /**
      * Returns a new Email bean, used for testing purposes
      *
      * @deprecated This method is no longer used and is not recommended.

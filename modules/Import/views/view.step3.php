@@ -29,6 +29,7 @@ class ImportViewStep3 extends ImportView
      */
  	public function display()
     {
+        $fields = [];
         global $mod_strings, $app_strings, $current_user, $sugar_config, $app_list_strings, $locale, $current_language;
 
         $import_module = $this->request->getValidInputRequest('import_module', 'Assert\Mvc\ModuleName', false);
@@ -312,7 +313,7 @@ class ImportViewStep3 extends ImportView
         }
 
         // add in extra defaulted fields if they are in the mapping record
-        if ( count($default_values) > 0 ) {
+        if ((is_countable($default_values) ? count($default_values) : 0) > 0) {
             foreach ( $default_values as $field_name => $default_value ) {
                 // build string of options
                 $fields  = $this->bean->get_importable_fields();

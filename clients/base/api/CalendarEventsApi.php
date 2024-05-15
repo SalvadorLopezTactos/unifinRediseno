@@ -200,7 +200,7 @@ class CalendarEventsApi extends ModuleApi
             $this->deleteRecurrences($bean);
         }
 
-        return $this->getLoadedAndFormattedBean($api, $args, $bean);
+        return $this->getLoadedAndFormattedBean($api, $args);
     }
 
     /**

@@ -12,6 +12,8 @@
 
 //Used in rebuildExtensions
 
+use Configurator;
+use SugarConfig;
 use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
 use Sugarcrm\Sugarcrm\Session\SessionStorage;
@@ -790,6 +792,13 @@ class RepairAndClear
     {
         $jsFiles = array("sugar_grp1.js", "sugar_grp1_yui.js", "sugar_grp1_jquery.js");
         ensureJSCacheFilesExist($jsFiles);
+        if (SugarConfig::getInstance()->get('update_js_custom_version_on_rebuild', true)) {
+            $cfg = new Configurator();
+            $jsCstmVersion = 'js_custom_version';
+            $cfg->config[$jsCstmVersion] = (int)SugarConfig::getInstance()->get($jsCstmVersion, 1) + 1;
+            $cfg->handleOverride();
+            SugarConfig::getInstance()->clearCache($jsCstmVersion);
+        }
     }
 
     public function log($message): void

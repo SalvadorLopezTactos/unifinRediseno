@@ -190,60 +190,6 @@
 div.ui-layout-mask {}		/* standard mask for iframes */
 iframe.ui-layout-mask {}	/* extra mask for objects/applets */
 
-
-/*
-stylesheet for the jquery.progrid.js plugin
-*/
-table.progrid-table{
-	border-collapse: collapse;
-    border-spacing: 0px;
-    color: #333333;
-    background: #fff
-}
-table.progrid-table tr *{
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-table.progrid-table tr.row_selected td, table.progrid-table input, table.progrid-table select{
-	background: #cdcdcd
-}
-table.progrid-table thead tr th, table.progrid-table tbody tr td{
-	border-top: 1px solid #DDDDDD;
-}
-table.progrid-table td {
-	padding: 0px
-}
-table.progrid-table thead th {
-    border-bottom: 1px solid black;
-    font-weight: bold;
-    line-height: 1.82em;
-}
-table.progrid-table tbody tr.odd{
-	background-color: #F9F9F9;
-}
-table.progrid-table td *, table.progrid-table th *{
-	padding: 0.91em;
-	padding-top: 0px;
-	padding-bottom: 0px;
-	line-height: 1.734em;
-	border: none;
-	font-size: 1em;
-	height: 1.734em;
-}
-table.progrid-table td select{
-	padding:0px;
-	height: 1.5em;
-	line-height: 0;
-}
-table.progrid-table td select option{
-	line-height: 1.4em;
-	height: 1.4em;
-}
-table.progrid-table tr td *{
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	margin: 0px;
-}
 .content_tree {
     /*	background: #edf5fa;*/
     width:300px;

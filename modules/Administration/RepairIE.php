@@ -35,7 +35,7 @@ while($a = $db->fetchByAssoc($r)) {
 if(empty($badAccts)) {
     echo htmlspecialchars($mod_strings['LBL_REPAIR_IE_SUCCESS']);
 } else {
-    echo '<div class="error">'.htmlspecialchars($mod_strings['LBL_REPAIR_IE_FAILURE']).'</div><br/>';
+    echo '<div class="error">' . htmlspecialchars($mod_strings['LBL_REPAIR_IE_FAILURE']).'</div><br/>';
     foreach ($badAccts as $id => $acctName) {
         $href = 'index.php?'.
             http_build_query([
@@ -43,7 +43,7 @@ if(empty($badAccts)) {
                 'action' => 'EditView',
                 'record' => $id,
             ]);
-        echo '<a href="'.htmlspecialchars($href).'" target="_blank">'.htmlspecialchars($acctName).'</a><br/>';
+        echo '<a href="' . htmlspecialchars($href) . '" target="_blank">' . htmlspecialchars($acctName).'</a><br/>';
     }
 }
 

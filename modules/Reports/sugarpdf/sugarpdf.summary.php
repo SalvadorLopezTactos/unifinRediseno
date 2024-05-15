@@ -82,11 +82,11 @@ class ReportsSugarpdfSummary extends ReportsSugarpdfReports
         $header_row = $this->bean->get_summary_header_row();
         $count = 0;
 
-        if (count($this->bean->report_def['summary_columns']) == 0) {
+        if ((is_countable($this->bean->report_def['summary_columns']) ? count($this->bean->report_def['summary_columns']) : 0) == 0) {
             $item[$count]['']='';
             $count++;
         }
-        if (count($this->bean->report_def['summary_columns']) > 0) {
+        if ((is_countable($this->bean->report_def['summary_columns']) && count($this->bean->report_def['summary_columns'])) > 0) {
             while ($row = $this->bean->get_summary_next_row()) {
                 for ($i= 0; $i < sizeof($header_row); $i++) {
                     $label = $header_row[$i];

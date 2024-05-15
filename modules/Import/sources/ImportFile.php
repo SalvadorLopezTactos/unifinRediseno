@@ -273,7 +273,7 @@ class ImportFile extends ImportDataSource
      */
     public function getFieldCount()
     {
-        return (!empty($this->_currentRow)) ? count($this->_currentRow): 0;
+        return is_countable($this->_currentRow) ? count($this->_currentRow) : 0;
     }
 
     /**
@@ -490,8 +490,7 @@ class ImportFile extends ImportDataSource
         if( $this->hasHeaderRow(FALSE) )
             $this->next();
 
-        while( $this->valid() &&  $totalItems > count($this->_dataSet) )
-        {
+        while ($this->valid() && $totalItems > (is_countable($this->_dataSet) ? count($this->_dataSet) : 0)) {
             if($currentLine >= $this->_offset)
             {
                 $this->_dataSet[] = $this->_currentRow;

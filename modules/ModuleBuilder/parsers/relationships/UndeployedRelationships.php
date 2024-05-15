@@ -29,7 +29,7 @@ class UndeployedRelationships extends AbstractRelationships implements Relations
         $this->basepath = $path ;
         // pull the module and package names out of the path
         $this->moduleName = basename ( $path, "/" ) ; // just in case there are any trailing /
-        $this->packageName = basename ( dirname ( dirname ( $path ) ) ) ; // simpler than explode :)
+        $this->packageName = basename(dirname($path, 2)); // simpler than explode :)
         require_once 'modules/ModuleBuilder/MB/ModuleBuilder.php' ;
         $mb = new ModuleBuilder ( ) ;
         $this->packageKey = $mb->getPackageKey ( $this->packageName ) ;

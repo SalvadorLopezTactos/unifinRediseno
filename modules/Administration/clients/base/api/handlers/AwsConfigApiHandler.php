@@ -36,6 +36,15 @@ class AwsConfigApiHandler extends ConfigApiHandler
      */
     public function setConfig(ServiceBase $api, array $args)
     {
+        $isValidUrls = $this->validateUrls(
+            $args['aws_login_url'] ?? '',
+            $args['aws_connect_url'] ?? '',
+        );
+
+        if (!$isValidUrls) {
+            throw new \InvalidArgumentException('Invalid url was provided');
+        }
+
         $admin = BeanFactory::getBean('Administration');
 
         // We only want to do this for Serve or Sell licensed instances
@@ -66,6 +75,25 @@ class AwsConfigApiHandler extends ConfigApiHandler
         }
 
         return [];
+    }
+
+    protected function validateUrls(string ...$urls): bool
+    {
+        foreach ($urls as $url) {
+            if ($url === '') {
+                continue;
+            }
+
+            $parts = parse_url($url);
+
+            if (isset($parts['scheme']) && in_array($parts['scheme'], ['http', 'https'], true)) {
+                continue;
+            }
+
+            return false;
+        }
+
+        return true;
     }
 
     /**

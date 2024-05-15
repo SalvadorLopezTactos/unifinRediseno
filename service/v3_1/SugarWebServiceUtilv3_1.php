@@ -83,6 +83,7 @@ class SugarWebServiceUtilv3_1 extends SugarWebServiceUtilv3
      */
     function get_visible_mobile_modules($availModules)
     {
+        $wireless_module_registry = null;
         foreach(SugarAutoLoader::existingCustom('include/MVC/Controller/wireless_module_registry.php') as $file) {
             require $file;
         }
@@ -484,6 +485,7 @@ class SugarWebServiceUtilv3_1 extends SugarWebServiceUtilv3
      */
     public function checkFieldValue($bean, $name, $value)
     {
+        $type = null;
         static $sfh;
 
         if (!isset($sfh)) {

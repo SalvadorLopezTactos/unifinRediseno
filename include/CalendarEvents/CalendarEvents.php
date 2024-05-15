@@ -991,6 +991,7 @@ class CalendarEvents
             $rows = $query->execute();
             $rowCount = count($rows);
             $GLOBALS['log']->debug(sprintf('Repeating the action on %d events', $rowCount));
+            $rows = is_array($rows) ? $rows : [];
             array_walk($rows, $callback);
             $offset += $rowCount;
         } while ($rowCount === $limit);

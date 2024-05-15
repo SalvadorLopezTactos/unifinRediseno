@@ -220,6 +220,7 @@ class SugarChart
      */
     function xmlYAxis()
     {
+        $step = null;
         $this->chart_yAxis['yStep'] = '100';
         $this->chart_yAxis['yLog'] = '1';
         $this->chart_yAxis['yMax'] = $this->is_currency ? $this->convertCurrency($this->chart_yAxis['yMax']) : $this->chart_yAxis['yMax'];
@@ -473,7 +474,7 @@ class SugarChart
     function xmlDataForGroupByChart()
     {
         $data = '';
-        foreach ($this->data_set as $key => $value) {
+        foreach (safeIsIterable($this->data_set) ? $this->data_set : [] as $key => $value) {
             $amount = $this->is_currency ? $this->convertCurrency($this->calculateGroupByTotal($value)) : $this->calculateGroupByTotal($value);
             $label = $this->is_currency ? ($this->currency_symbol . $this->formatNumber($amount)) : $amount;
 
@@ -815,6 +816,9 @@ class SugarChart
     function getDashletScript($id, $xmlFile = "")
     {
 
+        $sugar_config = [];
+        $current_user = null;
+        $current_language = null;
         $xmlFile = (!$xmlFile) ? $sugar_config['tmp_dir']. $current_user->id . '_' . $this->id . '.xml' : $xmlFile;
         $chartStringsXML = $GLOBALS['sugar_config']['tmp_dir'].'chart_strings.' . $current_language .'.lang.xml';
 
@@ -842,6 +846,7 @@ class SugarChart
    */
     function sortData($data_set, $keycolname1 = null, $translate1 = false, $keycolname2 = null, $translate2 = false, $ifsort2 = false)
     {
+        $sortby1 = [];
         //You can set whether the columns need to be translated or sorted. It the column needn't to be translated, the sorting must be done in SQL, this function will not do the sorting.
         global $app_list_strings;
         $sortby1[] = array();

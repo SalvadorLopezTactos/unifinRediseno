@@ -184,7 +184,7 @@ class BreadCrumbStack {
     * @return int - the number of elements in the stack
     */
    public function length(){
-   		return count($this->stack);
+           return is_countable($this->stack) ? count($this->stack) : 0;
    }
    
    /**

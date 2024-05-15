@@ -94,7 +94,7 @@ class UserDemoData {
 		$u->savePreferencesToDB();
 
 
-		$u->picture = $this->_copy_user_image($id);
+        $u->picture = static::_copy_user_image($id);
 
 		$u->save();
 

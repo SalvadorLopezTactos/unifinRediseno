@@ -27,18 +27,18 @@ class ReportCSVExporterMatrix1x2 extends ReportCSVExporterMatrix
 
         $groupings = $this->reporter->report_def['group_defs'];
         $content = "\"\"". $this->getDelimiter(false) . "\"{$groupings[1]['label']}\""
-            . $this->spacePadder(count($this->columnHeaders[0]) * (count($this->columnHeaders[1]) + 1))
+            . $this->spacePadder((is_countable($this->columnHeaders[0]) ? count($this->columnHeaders[0]) : 0) * ((is_countable($this->columnHeaders[1]) ? count($this->columnHeaders[1]) : 0) + 1))
             . $this->getLineEnd();
         $content .= "\"\"";
         foreach ($this->columnHeaders[0] as $columnHeader => $value) {
             $content .= $this->getDelimiter(false) . "\"{$columnHeader}\""
-                . $this->spacePadder(count($this->columnHeaders[1]));
+                . $this->spacePadder(is_countable($this->columnHeaders[1]) ? count($this->columnHeaders[1]) : 0);
         }
         $content .= $this->getDelimiter(false) . "\"\"" . $this->getLineEnd(); // save space for grand total
         $content .= "\"\"";
-        for ($i = 0; $i < count($this->columnHeaders[0]); $i++) {
+        for ($i = 0; $i < (is_countable($this->columnHeaders[0]) ? count($this->columnHeaders[0]) : 0); $i++) {
             $content .= $this->getDelimiter(false) . "\"{$groupings[2]['label']}\""
-                . $this->spacePadder(count($this->columnHeaders[1]));
+                . $this->spacePadder(is_countable($this->columnHeaders[1]) ? count($this->columnHeaders[1]) : 0);
         }
         $content .= $this->getDelimiter(false) . "\"\"" . $this->getLineEnd();
         $content .= "\"{$groupings[0]['label']}\"";
@@ -51,12 +51,12 @@ class ReportCSVExporterMatrix1x2 extends ReportCSVExporterMatrix
         $content .= $this->getDelimiter(false) . $this->getTranslationOf('LBL_GRAND_TOTAL') . $this->getLineEnd();
         $rowTotal = array_pad(
             array(),
-            count($this->columnHeaders[0]) * count($this->columnHeaders[1]),
+            (is_countable($this->columnHeaders[0]) ? count($this->columnHeaders[0]) : 0) * (is_countable($this->columnHeaders[1]) ? count($this->columnHeaders[1]) : 0),
             array_pad(array(), count($this->displayHeaders), 0)
         );
         $rowCount = array_pad(
             [],
-            count($this->columnHeaders[0]) * count($this->columnHeaders[1]),
+            (is_countable($this->columnHeaders[0]) ? count($this->columnHeaders[0]) : 0) * (is_countable($this->columnHeaders[1]) ? count($this->columnHeaders[1]) : 0),
             0
         );
         $passedFirstRow = false;

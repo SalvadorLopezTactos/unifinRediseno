@@ -110,4 +110,9 @@ class SugarMetric_Provider_Log implements SugarMetric_Provider_Interface
     {
         $this->logger->{$this->logLevel}('Log Metric Provider: setMetricClass with class name: "' . $name . '" is called');
     }
+
+    public static function ignoreTransaction(): void
+    {
+        // Not applicable for this provider
+    }
 }

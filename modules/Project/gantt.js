@@ -360,98 +360,95 @@ SUGAR.gantt = function() {
 	    	barAnimation.animate();
 	    },
 
-	    changeTask: function(task_num){
+        changeTask: function(taskNum) {
 	    	if (!document.getElementById("gantt"))
 	    		return;
 	    	oneMinute = 1000*60;
 	    	var oneDay = oneMinute*60*24;
 	    	var oneWeek = oneDay*7;
 
-	    	if (document.getElementById('gantt_chart_start_date').value != ''){
-	    		calendar_start_date = SUGAR.grid.getJSDate(document.getElementById('gantt_chart_start_date').value);
-	    	}
-	    	else{
-	    		calendar_start_date = SUGAR.grid.getJSDate(document.getElementById('calendar_start').value);
+            if (document.getElementById('gantt_chart_start_date').value != '') {
+                calendarStartDate = SUGAR.grid.getJSDate(document.getElementById('gantt_chart_start_date').value);
+            } else {
+                calendarStartDate = SUGAR.grid.getJSDate(document.getElementById('calendar_start').value);
 	    	}
 
-	        var start_date = document.getElementById('date_start_'+task_num).value;
-	        var end_date = document.getElementById('date_finish_'+task_num).value;
+            var startDate = document.getElementById('date_start_' + taskNum).value;
+            var endDate = document.getElementById('date_finish_' + taskNum).value;
 	        var duration;
-	        var progress = document.getElementById('percent_complete_'+task_num).value;
+            var progress = document.getElementById('percent_complete_' + taskNum).value;
 
-			task_start_date = SUGAR.grid.getJSDate(start_date);
-			task_end_date = SUGAR.grid.getJSDate(end_date);
+            taskStartDate = SUGAR.grid.getJSDate(startDate);
+            taskEndDate = SUGAR.grid.getJSDate(endDate);
 
-	        if (SUGAR.gantt.daysBetween(task_start_date, task_end_date) > 0){
-	        	duration = SUGAR.gantt.daysBetween(task_start_date, task_end_date) + 1;
-	        }
-	        else{
+            if (SUGAR.gantt.daysBetween(taskStartDate, taskEndDate) > 0) {
+                duration = SUGAR.gantt.daysBetween(taskStartDate, taskEndDate) + 1;
+            } else {
 	        	duration = 1;
 	        }
 
-			calendar_end_date = new Date();
-			calendar_end_date.setTime( calendar_start_date.getTime() + (SUGAR.gantt.getNumCols()-3)*oneDay );
+            calendarEndDate = new Date();
+            calendarEndDate.setTime(calendarStartDate.getTime() + (SUGAR.gantt.getNumCols() - 3) * oneDay);
 
-			taskRow = document.getElementById('gantt_row_'+task_num);
+            taskRow = document.getElementById('gantt_row_' + taskNum);
 			var emptyRow = false;
 
-			var status = (SUGAR.gantt.isParent(task_num)) ? 'parent' : SUGAR.gantt.getStatus(progress);
+            var status = (SUGAR.gantt.isParent(taskNum)) ? 'parent' : SUGAR.gantt.getStatus(progress);
 
 			// check the range, make sure the task's start date doesn't fall before the calendar's start date
-			if (task_start_date > calendar_start_date && task_start_date <= calendar_end_date){
-				start = SUGAR.gantt.daysBetween(calendar_start_date, task_start_date);
-				start++;
-			}
-			else{
+            if (taskStartDate > calendarStartDate && taskStartDate <= calendarEndDate) {
+                start = SUGAR.gantt.daysBetween(calendarStartDate, taskStartDate);
+                start++;
+            } else {
 				start = 1
 				// check to see if the task duration overlaps with a date on the chart
-				if (task_end_date < calendar_start_date){
+                if (taskEndDate < calendarStartDate) {
 					emptyRow = true;
-				}
-				// check to see if the task's end date overlaps with a date on the chart
-				else if (task_start_date > calendar_end_date){
-		    		emptyRow = true;
-		    	}
-		    	else if (duration == 0 || typeof duration == 'undefined' || duration == ''){
-		    		emptyRow = true;
-		    	}
-		    	// the task end date and calendar's end date overlap, so compensate for that
-				else if (task_end_date >= calendar_end_date){
-					duration = duration - 1;
-				}
-				// the task's duration overlaps, so display the partial bar of the task
-				else{
-					duration = duration - SUGAR.gantt.daysBetween(calendar_start_date, task_start_date);
+                } else if (taskStartDate > calendarEndDate) {
+                    // check to see if the task's end date overlaps with a date on the chart
+                    emptyRow = true;
+                } else if (duration == 0 || typeof duration == 'undefined' || duration == '') {
+                    emptyRow = true;
+                } else if (taskEndDate >= calendarEndDate) {
+                    // the task end date and calendar's end date overlap, so compensate for that
+                    duration = duration - 1;
+                } else {
+                    // the task's duration overlaps, so display the partial bar of the task
+                    duration = duration - SUGAR.gantt.daysBetween(calendarStartDate, taskStartDate);
 				}
 			}
 
-	        document.getElementById('task_'+task_num+'_id').colSpan = start;
+            document.getElementById('task_' + taskNum + '_id').colSpan = start;
 
-	        var bar = document.getElementById('task_'+task_num+'_bar');
+            var bar = document.getElementById('task_' + taskNum + '_bar');
 
 	        if (!emptyRow){
-		        var maxMiddleCell = SUGAR.gantt.getNumCols() - document.getElementById('task_'+task_num+'_id').colSpan - 1;
+                var maxMiddleCell = SUGAR.gantt.getNumCols() -
+                    document.getElementById('task_' + taskNum + '_id').colSpan - 1;
 
 		        duration = Math.min(maxMiddleCell, duration);
-		        document.getElementById('task_'+task_num+'_bar').colSpan = duration;
+                document.getElementById('task_' + taskNum + '_bar').colSpan = duration;
+                document.getElementById('task_' + taskNum).colSpan = SUGAR.gantt.getNumCols() -
+                    document.getElementById('task_' + taskNum + '_id').colSpan -
+                    document.getElementById('task_' + taskNum + '_bar').colSpan;
+                document.getElementById('task_' + taskNum + '_bar').innerHTML =
+                    '<div style="width:0%" class="' + _.escape(status) + '" id="bar_' +
+                    _.escape(taskNum) + '">\u00a0</div>';
 
-		        document.getElementById('task_'+task_num).colSpan = SUGAR.gantt.getNumCols() - document.getElementById('task_'+task_num+'_id').colSpan - document.getElementById('task_'+task_num+'_bar').colSpan;
-		        document.getElementById('task_'+task_num+'_bar').innerHTML = '<div style="width:0%" class="'+status+'" id="bar_'+task_num+'">\u00a0</div>';
+                if (status != 'inprogress') {
+                    SUGAR.gantt.animateBar('bar', taskNum);
+                } else {
+                    SUGAR.gantt.setProgress(taskNum, progress);
+                }
 
-		        if (status != 'inprogress'){
-		        	SUGAR.gantt.animateBar('bar', task_num);
-		        }
-		        else{
-		            SUGAR.gantt.setProgress(task_num, progress);
-			    }
-
-		        bar.onclick = function() {  SUGAR.gantt.taskOverLib(this,SUGAR.gantt.popupInfo(task_num),
-						  						document.getElementById("description_"+task_num).value); }
-	        }
-	        else{
+                bar.onclick = function() {
+                    SUGAR.gantt.taskOverLib(this, SUGAR.gantt.popupInfo(taskNum),
+                    document.getElementById('description_' + taskNum).value);
+                };
+            } else {
 	        	/* remove middle and last cells for an empty row */
-	        	document.getElementById('task_'+task_num+'_bar').colSpan = SUGAR.gantt.getNumCols() - 2;
-		        document.getElementById('task_'+task_num+'_bar').innerHTML = '\u00a0';
+                document.getElementById('task_' + taskNum + '_bar').colSpan = SUGAR.gantt.getNumCols() - 2;
+                document.getElementById('task_' + taskNum + '_bar').innerHTML = '\u00a0';
 
 		        bar.onmouseover = function() { }
 		        bar.onmouseout = function() { }
@@ -572,7 +569,8 @@ SUGAR.gantt = function() {
 	    	var status = SUGAR.gantt.getStatus(progress);
 
 	    	var cellMiddle = document.getElementById('task_'+tasknum+'_bar');
-	    	cellMiddle.innerHTML = '<div style="width:100%" class="'+status+'" id="bar_'+tasknum+'">\u00a0</div>';
+            cellMiddle.innerHTML = '<div style="width:100%" class="' + _.escape(status) + '" id="bar_' +
+                _.escape(tasknum) + '">\u00a0</div>';
 
 	        if (status != 'inprogress'){
 	        	SUGAR.gantt.animateBar('bar', tasknum);

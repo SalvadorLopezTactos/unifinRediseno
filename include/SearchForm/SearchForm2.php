@@ -169,7 +169,7 @@ class SearchForm
         //Show and hide the good tab form
         foreach($this->tabs as $tabkey=>$viewtab){
             $viewName=str_replace(array($this->module . '|','_search'),'',$viewtab['key']);
-            if(strpos($this->view,$viewName)!==false){
+            if (strpos($this->view, (string)$viewName) !== false) {
                 $this->tabs[$tabkey]['displayDiv']='';
                 //if this is advanced tab, use form with saved search sub form built in
                 if($viewName=='advanced'){
@@ -389,8 +389,12 @@ class SearchForm
 	                }
 	            }
 
-	            if(isset($this->fieldDefs[$fvName]['options']) && isset($GLOBALS['app_list_strings'][$this->fieldDefs[$fvName]['options']]))
-                {
+                if (!is_scalar($this->fieldDefs[$fvName]['options'] ?? null)) {
+                    LoggerManager::getLogger()->fatal(
+                        sprintf('scalar expected, "%s" given', gettype($this->fieldDefs[$fvName]['options'] ?? null))
+                            . PHP_EOL . (new Exception())->getTraceAsString()
+                    );
+                } elseif (isset($GLOBALS['app_list_strings'][$this->fieldDefs[$fvName]['options']])) {
 	                // fill in enums
                     $this->fieldDefs[$fvName]['options'] = $GLOBALS['app_list_strings'][$this->fieldDefs[$fvName]['options']];
                     //Hack to add blanks for parent types on search views
@@ -421,8 +425,16 @@ class SearchForm
 						if(!empty($this->fieldDefs[$fvName]['function']['include'])){
 								require_once($this->fieldDefs[$fvName]['function']['include']);
 						}
+                        if (!is_callable($function_name)) {
+                            LoggerManager::getLogger()->fatal(
+                                'Invalid fieldDef: ' . $fvName . ' has a function name that cannot be called: '
+                                . $function_name
+                                . PHP_EOL . (new Exception())->getTraceAsString()
+                            );
+                        } else {
 						$value = call_user_func($function_name, $this->seed, $name, $value, $this->view);
 						$this->fieldDefs[$fvName]['value'] = $value;
+                        }
 					}else{
 
                         if (isset($this->fieldDefs[$fvName]['function_bean'])) {
@@ -432,10 +444,18 @@ class SearchForm
                             }
                         }
 
-					    if(!isset($function['params']) || !is_array($function['params'])) {
-							$this->fieldDefs[$fvName]['options'] = call_user_func($function_name, $this->seed, $name, $value, $this->view);
-						} else {
-							$this->fieldDefs[$fvName]['options'] = call_user_func_array($function_name, $function['params']);
+                        if (!is_callable($function_name)) {
+                            LoggerManager::getLogger()->fatal(
+                                'Invalid fieldDef: ' . $fvName . ' has a function name that cannot be called: '
+                                . $function_name
+                                . PHP_EOL . (new Exception())->getTraceAsString()
+                            );
+                        } else {
+                            if (!isset($function['params']) || !is_array($function['params'])) {
+                                $this->fieldDefs[$fvName]['options'] = call_user_func($function_name, $this->seed, $name, $value, $this->view);
+                            } else {
+                                $this->fieldDefs[$fvName]['options'] = call_user_func_array($function_name, $function['params']);
+                            }
 						}
 					}
 	       	 	}
@@ -545,9 +565,13 @@ class SearchForm
 					{
 						global $timedate;
                         // FG - bug 45287 - to db conversion is ok, but don't adjust timezone (not now), otherwise you'll jump to the day before (if at GMT-xx)
-						$date_value = $timedate->to_db_date($this->searchFields[$name]['value'], false);
-						$this->searchFields[$name]['value'] = $date_value == '' ? $this->searchFields[$name]['value'] : $date_value;
-					}
+                        $date_value = $timedate->to_db_date($this->searchFields[$name]['value'], false);
+                        $this->searchFields[$name]['value'] = $date_value == '' ? $this->searchFields[$name]['value'] : $date_value;
+                        if ($date_value == '' && in_array($this->searchFields[$name]['operator'] ?? '', ['in', 'not in',])) {
+                            $GLOBALS['log']->fatal("Can't convert {$this->searchFields[$name]['value']} to db date format");
+                            $this->searchFields[$name]['value'] = '';
+                        }
+                    }
                 }
 
                 if((empty($array['massupdate']) || $array['massupdate'] == 'false') && $addAllBeanFields) {
@@ -678,12 +702,12 @@ class SearchForm
              }
          }
 
-         foreach($this->searchFields as $field=>$parms) {
-             $customField = false;
-             // Jenny - Bug 7462: We need a type check here to avoid database errors
-             // when searching for numeric fields. This is a temporary fix until we have
-             // a generic search form validation mechanism.
-             $type = !empty($this->seed->field_defs[$field]['type']) ? $this->seed->field_defs[$field]['type'] : '';
+        foreach (safeIsIterable($this->searchFields) ? $this->searchFields : [] as $field => $parms) {
+            $customField = false;
+            // Jenny - Bug 7462: We need a type check here to avoid database errors
+            // when searching for numeric fields. This is a temporary fix until we have
+            // a generic search form validation mechanism.
+            $type = !empty($this->seed->field_defs[$field]['type']) ? $this->seed->field_defs[$field]['type'] : '';
 
              //If range search is enabled for the field, we first check if this is the starting range
              if(!empty($parms['enable_range_search']) && empty($type))
@@ -1090,8 +1114,7 @@ class SearchForm
                                      // If it is a unified search and if the search contains more then 1 word (contains space)
                                      // and if it's the last element from db_field (so we do the concat only once, not for every db_field element)
                                      // we concat the db_field array() (both original, and in reverse order) and search for the whole string in it
-                                     if ( $UnifiedSearch && strpos($field_value, ' ') !== false && strpos($db_field, $parms['db_field'][count($parms['db_field']) - 1]) !== false )
-                                     {
+                                    if ($UnifiedSearch && strpos($field_value, ' ') !== false && strpos($db_field, (string)$parms['db_field'][count($parms['db_field']) - 1]) !== false) {
                                          // Get the table name used for concat
                                          $concat_table = explode('.', $db_field);
                                          $concat_table = $concat_table[0];
@@ -1123,8 +1146,7 @@ class SearchForm
                                                    {
                                                       foreach($GLOBALS['app_list_strings']['salutation_dom'] as $salutation)
                                                       {
-                                                         if(!empty($salutation) && strpos($field_value, $salutation) === 0)
-                                                         {
+                                                       if (!empty($salutation) && strpos($field_value, (string)$salutation) === 0) {
                                                             $field_value = trim(substr($field_value, strlen($salutation)));
                                                             break;
                                                          }

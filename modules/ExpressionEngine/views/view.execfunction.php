@@ -40,6 +40,6 @@ class ViewExecFunction extends ViewAjax
             else
                 $result = $timedate->asUser($result);
         }
-        echo json_encode($result);
+        echo JSON::encode($result);
     }
 }

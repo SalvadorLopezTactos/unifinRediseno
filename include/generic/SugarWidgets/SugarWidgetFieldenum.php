@@ -138,6 +138,9 @@ class SugarWidgetFieldEnum extends SugarWidgetReportField
     }
     public function displayListPlain($layout_def)
     {
+        $field_def = [];
+        $value = null;
+        $val = null;
 		if(!empty($layout_def['column_key'])){
 			$field_def = $this->reporter->all_fields[$layout_def['column_key']];
 		}else if(!empty($layout_def['fields'])){

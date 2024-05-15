@@ -28,7 +28,9 @@
 	<td class='mbLBL'>{sugar_translate module="DynamicFields" label="COLUMN_TITLE_DEFAULT_VALUE"}:</td>
 	<td>
 	{if $hideLevel < 5 && empty($vardef.function)}
-		{html_options name="default[]" id="default[]" selected=$selected_options options=$default_dropdowns multiple=$multi}
+        <select name="default[]" id="default[]"{if $multi} multiple{/if}>
+            {html_options selected=$selected_options options=$default_dropdowns}
+        </select>
 	{else}
 		<input type='hidden' name='default[]' id='default[]' value='{$vardef.default}'>{$vardef.default}
 	{/if}
@@ -62,7 +64,11 @@
 <tr id='visGridRow' {if empty($vardef.visibility_grid)}style="display:none"{/if} class="toggleDep">
     <td class='mbLBL'>{sugar_translate module="DynamicFields" label="LBL_PARENT_DROPDOWN"}:</td>
 	<td>
-        {html_options name="parent_dd" id="parent_dd" selected=$vardef.visibility_grid.trigger options=$module_dd_fields}
+        {if !empty($vardef.visibility_grid.trigger)}
+            {html_options name="parent_dd" id="parent_dd" selected=$vardef.visibility_grid.trigger options=$module_dd_fields}
+        {else}
+            {html_options name="parent_dd" id="parent_dd" selected="" options=$module_dd_fields}
+        {/if}
          <input type="hidden" name="visibility_grid" id="visibility_grid" value='{$vardef.visibility_grid|@json}'/>
 	{if $hideLevel < 5}
         <button onclick="ModuleBuilder.editVisibilityGrid('visibility_grid', YAHOO.util.Dom.get('parent_dd').value, YAHOO.util.Dom.get('options').value)">

@@ -19,6 +19,7 @@
  */
 function get_unlinked_email_query_via_link($params)
 {
+    $return_array = [];
     $relation = $params['link'];
 	$bean = $GLOBALS['app']->controller->bean;
     if(empty($bean->$relation)) {
@@ -63,6 +64,7 @@ function get_unlinked_email_query_via_link($params)
  */
 function get_beans_by_email_addr($module_dir)
 {
+    $return_array = [];
     $bean = $GLOBALS['app']->controller->bean;
     $module_dir = $module_dir['module'];
     $module = BeanFactory::newBean($module_dir);

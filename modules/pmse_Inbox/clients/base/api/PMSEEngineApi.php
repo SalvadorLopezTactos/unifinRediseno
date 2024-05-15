@@ -257,6 +257,7 @@ class PMSEEngineApi extends SugarApi
 
     public function getNotes(ServiceBase $api, array $args)
     {
+        $records = [];
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
         $notesBean = BeanFactory::newBean('pmse_BpmNotes');
         $queryOptions = array('add_deleted' => true);
@@ -400,6 +401,7 @@ class PMSEEngineApi extends SugarApi
 
     public function reassignRecord(ServiceBase $api, array $args)
     {
+        $caseData = [];
         PMSEEngineUtils::logDeprecated(__METHOD__);
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $case = $args['data'];
@@ -473,7 +475,7 @@ class PMSEEngineApi extends SugarApi
         $i = 0;
         foreach ($userList as $user) {
             if ($i == (int)$filter['max_num']) {
-                if (count($userList) > $filter['max_num']) {
+                if ((is_countable($userList) ? count($userList) : 0) > $filter['max_num']) {
                     array_pop($userList);               }
                 $resultArray['next_offset'] = (int) ($filter['max_num'] + $filter['offset']);
                 continue;
@@ -570,7 +572,7 @@ class PMSEEngineApi extends SugarApi
         $i = 0;
         foreach ($userList as $user) {
             if ($i == (int)$filter['max_num']) {
-                if (count($userList) > $filter['max_num']) {
+                if ((is_countable($userList) ? count($userList) : 0) > $filter['max_num']) {
                     array_pop($userList);               }
                 $resultArray['next_offset'] = (int) ($filter['max_num'] + $filter['offset']);
                 continue;
@@ -856,6 +858,7 @@ SQL;
      */
     public function getReassignFlows(ServiceBase $api, array $args)
     {
+        $options = [];
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $result = array('success' => true);
 

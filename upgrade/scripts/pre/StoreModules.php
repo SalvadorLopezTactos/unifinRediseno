@@ -21,6 +21,7 @@ class SugarUpgradeStoreModules extends UpgradeScript
 
     public function run()
     {
+        $app_list_strings = [];
         include 'include/modules.php';
         $this->upgrader->state['old_modules'] = $moduleList;
         include 'include/language/en_us.lang.php';

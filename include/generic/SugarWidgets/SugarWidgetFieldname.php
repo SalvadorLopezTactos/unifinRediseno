@@ -165,15 +165,16 @@ class SugarWidgetFieldName extends SugarWidgetFieldVarchar
         }
 		$arr = array();
 
-		foreach($layout_def['input_name0'] as $value)
-		{
-			if ($value == 'Current User') {
-				global $current_user;
-				array_push($arr,$this->reporter->db->quoted($current_user->id));
-			}
-			else
-				array_push($arr,$this->reporter->db->quoted($value));
-		}
+        if (isset($layout_def['input_name0']) && safeIsIterable($layout_def['input_name0'])) {
+            foreach ($layout_def['input_name0'] as $value) {
+                if ($value == 'Current User') {
+                    global $current_user;
+                    array_push($arr, $this->reporter->db->quoted($current_user->id));
+                } else {
+                    array_push($arr, $this->reporter->db->quoted($value));
+                }
+            }
+        }
 
         $str = implode(",", $arr);
 

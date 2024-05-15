@@ -92,6 +92,7 @@ class TemplateEnum extends TemplateText{
     	}
     }
 	function get_xtpl_edit(){
+        $returnXTPL = [];
 		$name = $this->name;
 		$value = '';
 		if(isset($this->bean->$name)){

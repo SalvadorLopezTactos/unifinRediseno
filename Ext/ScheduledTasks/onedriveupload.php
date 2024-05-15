@@ -9,6 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\HttpClient\ExternalResourceClient;
+use Sugarcrm\Sugarcrm\CloudDrive\Drives\OneDrive;
+
 if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
@@ -42,17 +46,22 @@ if (!class_exists('OneDriveUploadJob')) {
         public function run($data)
         {
             global $current_user;
+            $oneDriveClient = new OneDrive();
 
             $this->job->runnable_ran = true;
             $this->job->runnable_data = $data;
-            $data = unserialize(base64_decode($data));
+            $data = unserialize(base64_decode($data), ['allowed_classes' => false]);
+            if ($data === false) {
+                $GLOBALS['log']->fatal('OneDriveUploadJob data could not be unserialized');
+                return true;
+            }
             $uploadUrl = $data['uploadUrl'];
             $filePath = $data['filePath'];
-            $client = $data['client'];
+            $client = $oneDriveClient->getClient();
             $fileName = $data['fileName'];
+            $fileSize = $data['fileSize'];
 
             $fragSize = 320 * 1024;
-            $fileSize = filesize($filePath);
             $numFrags = ceil($fileSize / $fragSize);
             $bytesRemaining = $fileSize;
             $i = 0;
@@ -70,11 +79,7 @@ if (!class_exists('OneDriveUploadJob')) {
                     $end = $fileSize - 1;
                 }
 
-                if ($stream = \fopen($filePath, 'r')) {
-                    // get contents using offset
-                    $data = \stream_get_contents($stream, $chunkSize, $offset);
-                    \fclose($stream);
-                }
+                $data = $oneDriveClient->getFileChunk($filePath, $chunkSize, $offset);
 
                 $contentRange = " bytes {$start}-{$end}/{$fileSize}";
                 $headers = array(
@@ -102,6 +107,7 @@ if (!class_exists('OneDriveUploadJob')) {
             $notification->name = translate('LBL_MICROSOFT_UPLOAD_COMPLETE');
             $notification->description = $fileName . translate('LBL_MICROSOFT_UPLOAD_COMPLETE_DESCRIPTION');
             $notification->assigned_user_id = $current_user->id;
+            $notification->severity = 'information';
             $notification->save();
 
             return true;

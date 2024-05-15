@@ -9,6 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Bean\ModuleName;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Guid;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+
 require_once('modules/MailMerge/modules_array.php');
 
 require_once('include/json_config.php');
@@ -41,13 +47,21 @@ if(isset($_REQUEST['reset']) && $_REQUEST['reset'])
 	$_SESSION['MAILMERGE_CONTAINS_CONTACT_INFO'] = null;
 }
 $fromListView = false;
-if(!empty($_REQUEST['record']))
-{
-	$_SESSION['MAILMERGE_RECORD'] = $_REQUEST['record'];
-}
-else if(isset($_REQUEST['uid'])) {
-	$_SESSION['MAILMERGE_RECORD'] = explode(',', $_REQUEST['uid']);
-
+if (!empty($_REQUEST['record'])) {
+    $recordIdViolations = Validator::getService()->validate($_REQUEST['record'], new Guid());
+    if ($recordIdViolations->count()) {
+        throw new ViolationException('Invalid ID', $recordIdViolations);
+    }
+    $_SESSION['MAILMERGE_RECORD'] = $_REQUEST['record'];
+} elseif (isset($_REQUEST['uid'])) {
+    $uids = explode(',', $_REQUEST['uid']);
+    foreach ($uids as $uid) {
+        $recordIdViolations = Validator::getService()->validate($uid, new Guid());
+        if ($recordIdViolations->count()) {
+            throw new ViolationException('Invalid ID', $recordIdViolations);
+        }
+    }
+    $_SESSION['MAILMERGE_RECORD'] = $uids;
 }
 else if(isset($_REQUEST['entire']) && $_REQUEST['entire'] == 'true') {
 	// do entire list
@@ -99,6 +113,16 @@ if(isset($_SESSION['MAILMERGE_RECORD']))
 	if($rModule == 'CampaignProspects'){
     	$rModule = 'Campaigns';
 	}
+    if (!empty($rModule)) {
+        $violations = Validator::getService()->validate($rModule, new ModuleName());
+        if ($violations->count() > 0) {
+            $GLOBALS['log']->error('Violation for module name');
+            throw new ViolationException(
+                'Violation for module name',
+                $violations
+            );
+        }
+    }
 
 	$_SESSION['MAILMERGE_MODULE'] = $rModule;
 	if(!empty($rModule) && $rModule != "MailMerge")
@@ -171,7 +195,7 @@ $xtpl->assign("MAILMERGE_TEMPLATES", get_select_options_with_id(getDocumentRevis
 
 if(isset($_SESSION['MAILMERGE_MODULE'])){
 	$module_select_text = $mod_strings['LBL_MAILMERGE_SELECTED_MODULE'];
-	$xtpl->assign("MAILMERGE_NUM_SELECTED_OBJECTS",count($_SESSION['MAILMERGE_RECORD'])." ".$_SESSION['MAILMERGE_MODULE']." Selected");
+    $xtpl->assign("MAILMERGE_NUM_SELECTED_OBJECTS", (is_countable($_SESSION['MAILMERGE_RECORD']) ? count($_SESSION['MAILMERGE_RECORD']) : 0)." ".$_SESSION['MAILMERGE_MODULE']." Selected");
 }
 else{
 	$module_select_text = $mod_strings['LBL_MAILMERGE_MODULE'];

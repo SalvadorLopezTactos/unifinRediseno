@@ -229,7 +229,11 @@ class ServiceDictionaryRest extends ServiceDictionary
             foreach ($reqTypes as $reqType) {
                 // We use the path length, platform, and request type as the first three keys to search by
                 $path = $endpoint['path'];
-                array_unshift($path, count($endpoint['path']), $platform, $reqType);
+                if (is_array($path)) {
+                    array_unshift($path, safeCount($endpoint['path']), $platform, $reqType);
+                } else {
+                    LoggerManager::getLogger()->fatal(sprintf('"path" is expected to be array, "%s" given', gettype($path)) . PHP_EOL . (new Exception())->getTraceAsString());
+                }
 
                 $endpointScore = 0.0;
                 if (isset($endpoint['extraScore'])) {

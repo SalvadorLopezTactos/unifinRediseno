@@ -139,7 +139,7 @@ class vCard
 	{
         global $locale;
         $content = $this->toString();
-        $api->setHeader("Content-Disposition","attachment; filename={$this->name}.vcf");
+        $api->setHeader("Content-Disposition", "attachment; filename*=utf-8''" . rawurlencode($this->name) . '.vcf');
         $api->setHeader("Content-Type","text/x-vcard; charset=".$locale->getExportCharset());
         $api->setHeader("Expires","Mon, 26 Jul 1997 05:00:00 GMT" );
         $api->setHeader("Last-Modified", TimeDate::httpTime() );
@@ -159,6 +159,10 @@ class vCard
      */
     public function importVCard($filename, $module = 'Contacts')
     {
+        $keys = [];
+        $key = null;
+        $size = null;
+        $values = [];
         global $current_user;
         $lines = file($filename);
         $start = false;

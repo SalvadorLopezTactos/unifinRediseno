@@ -96,11 +96,11 @@ class OneToOneRelationship extends AbstractRelationship
             return array () ;
  
         if ($this->lhs_module == $this->rhs_module) // don't add in two fields on recursive relationships
-            return array ( $this->lhs_module => $this->getValidDBName($this->relationship_name . "_name") );
+            return array ( $this->lhs_module => static::getValidDBName($this->relationship_name . "_name") );
         else
             return array (
-                $this->lhs_module => $this->getValidDBName($this->relationship_name . "_name") ,
-                $this->rhs_module => $this->getValidDBName($this->relationship_name . "_name")
+                $this->lhs_module => static::getValidDBName($this->relationship_name . "_name") ,
+                $this->rhs_module => static::getValidDBName($this->relationship_name . "_name"),
             ) ;
     }
 

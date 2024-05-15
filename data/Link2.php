@@ -115,7 +115,7 @@ class Link2 {
                     $this->add_distinct=true;
                 }
             }
-            if (!empty($this->def['primary_only'])) {
+            if ($this->loadedSuccesfully() && !empty($this->def['primary_only'])) {
                 $this->relationship->primaryOnly = true;
             }
         }

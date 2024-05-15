@@ -174,6 +174,7 @@ class ParserPortalLayoutView extends ParserModifyLayoutView
 
     function _getOrigFieldViewDefs ()
     {
+        $viewdefs = [];
         $origFieldDefs = array();
         if (file_exists($this->_sourceFile))
         {

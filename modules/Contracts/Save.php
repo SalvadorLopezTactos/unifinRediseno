@@ -45,7 +45,7 @@ if (!empty($_POST['type']) && $_POST['type'] !== $_POST['old_type']) {
 		$ctype->load_relationship('documents');
 		$doc = BeanFactory::newBean('Documents');
 		$documents=$ctype->documents->getBeans($doc);
-		if (count($documents) > 0) {
+        if ((is_countable($documents) ? count($documents) : 0) > 0) {
 			$sugarbean->load_relationship('contracts_documents');
 			foreach($documents as $document) {
 				$sugarbean->contracts_documents->add($document->id,array('document_revision_id'=>$document->document_revision_id));

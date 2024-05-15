@@ -189,6 +189,7 @@ class Importer
 
     protected function importRow($row)
     {
+        $fieldTranslated = null;
         global $sugar_config, $mod_strings, $current_user, $current_language;
 
         $focus = BeanFactory::newBean($this->bean->module_dir);
@@ -348,7 +349,7 @@ class Importer
             // Handle email, email1 and email2 fields ( these don't have the type of email )
             if ( $field == 'email' || $field == 'email1' || $field == 'email2' )
             {
-                $returnValue = $this->ifs->email($rowValue, $fieldDef, $focus);
+                $returnValue = $this->ifs->email($rowValue, $fieldDef);
                 // try the default value on fail
                 if ( !$returnValue && !empty($defaultRowValue) )
                     $returnValue = $this->ifs->email( $defaultRowValue, $fieldDef);
@@ -611,6 +612,7 @@ class Importer
      */
     public function handleTagsImport($focus, $row)
     {
+        $params = [];
         // Handle tags import - this needs to be done only when we have an
         // ID for the parent record as relationships don't like it when you
         // don't have a real record to relate to
@@ -669,6 +671,7 @@ class Importer
 
     protected function sanitizeFieldValueByType($rowValue, $fieldDef, $defaultRowValue, $focus, $fieldTranslated)
     {
+        $fieldDefs = [];
         global $mod_strings, $app_list_strings;
         switch ($fieldDef['type'])
         {

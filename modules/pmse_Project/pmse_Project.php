@@ -13,5 +13,5 @@
 
 class pmse_Project extends pmse_Project_sugar
 {
-
+    protected array $fillable = ['prj_module'];
 }

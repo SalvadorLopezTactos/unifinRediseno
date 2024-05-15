@@ -64,8 +64,11 @@
 	<td scope="row"><slot>{$MOD.LBL_DIAGNOSTIC_SUGARLOG}</slot></td>
 	<td ><slot><input name='sugarlog' class="checkbox" type="checkbox" tabindex='11' checked></slot></td>
 	</tr><tr>
+		<td scope="row"><slot>{$MOD.LBL_DIAGNOSTIC_MLPLOG}</slot></td>
+		<td ><slot><input name="mlplog" class="checkbox" type="checkbox" tabindex="12" checked></slot></td>
+	</tr><tr>
 	<td scope="row"><slot>{$MOD.LBL_DIAGNOSTIC_VARDEFS}</slot></td>
-	<td ><slot><input name='vardefs' class="checkbox" type="checkbox" tabindex='11' checked></slot></td>
+	<td ><slot><input name="vardefs" class="checkbox" type="checkbox" tabindex="13" checked></slot></td>
 	</tr>
 </table>
 </div>

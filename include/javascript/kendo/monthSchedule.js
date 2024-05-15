@@ -44,12 +44,7 @@ function table(tableRows, className) {
     }
     return '<table ' + cellspacing() + ' class="' + $.trim('k-scheduler-table ' + (className || '')) + '">' + '<tr>' + tableRows.join('</tr><tr>') + '</tr>' + '</table>';
 }
-function allDayTable(tableRows, className) {
-    if (!tableRows.length) {
-        return '';
-    }
-    return '<div style=\'position:relative\'>' + table(tableRows, className) + '</div>';
-}
+
 function getMilliseconds(date) {
     return toInvariantTime(date).getTime() - getDate(toInvariantTime(date));
 }
@@ -75,7 +70,7 @@ function adjustDST(date, hours) {
 //Dependencies end
 
 
-function timesHeader(columnLevelCount, allDaySlot, rowCount) {
+function timesHeader(columnLevelCount, rowCount) {
     var tableRows = [];
     tableRows.push('<th>&#8203;</th>'); // the new week column level - left
     columnLevelCount--; //remve column level for time
@@ -85,15 +80,13 @@ function timesHeader(columnLevelCount, allDaySlot, rowCount) {
             tableRows.push('<th>&#8203;</th>');
         }
     }
-    if (allDaySlot) {
-        tableRows.push('<th class="k-scheduler-times-all-day">' + allDaySlot.text + '</th>');
-    }
+
     if (rowCount < 1) {
         return $();
     }
     return $('<div class="k-scheduler-times">' + table(tableRows) + '</div>');
 }
-function datesHeader(columnLevels, columnCount, allDaySlot) {
+function datesHeader(columnLevels, columnCount) {
     var dateTableRows = [];
     var columnIndex;
 
@@ -113,7 +106,8 @@ function datesHeader(columnLevels, columnCount, allDaySlot) {
             if (columnIndex + smartColspan > level.length) {
                 smartColspan = level.length - columnIndex;
             }
-            th.push('<th colspan="' + smartColspan + '" class="' + (column.className || '') + '">' + columnText + '</th>');
+            th.push($('<th></th>').attr('colspan', smartColspan).attr('className', column.className || '')
+                .text(columnText).get(0).outerHTML);
         }
         smartColspan--;
     }
@@ -130,28 +124,20 @@ function datesHeader(columnLevels, columnCount, allDaySlot) {
         var colspan = columnCount / level.length;
         for (columnIndex = 0; columnIndex < level.length; columnIndex++) {
             var column = level[columnIndex];
-            th.push('<th colspan="' + (column.colspan || colspan) + '" class="' + (column.className || '') + '">' + column.text + '</th>');
+            th.push($('<th></th>').attr('colspan', column.colspan || colspan).addClass(column.className || '')
+                .html(column.text).get(0).outerHTML);
         }
         dateTableRows.push(th.join(''));
     }
-    var allDayTableRows = [];
-    if (allDaySlot) {
-        var lastLevel = columnLevels[columnLevels.length - 1];
-        var td = [];
-        var cellContent = allDaySlot.cellContent;
-        for (columnIndex = 0; columnIndex < lastLevel.length; columnIndex++) {
-            td.push('<td class="' + (lastLevel[columnIndex].className || '') + '">' + (cellContent ? cellContent(columnIndex) : '&nbsp;') + '</td>');
-        }
-        allDayTableRows.push(td.join(''));
-    }
-    return $('<div class="k-scheduler-header k-state-default">' + '<div class="k-scheduler-header-wrap">' + table(dateTableRows) + allDayTable(allDayTableRows, 'k-scheduler-header-all-day') + '</div>' + '</div>');
+
+    return $('<div class="k-scheduler-header k-state-default">' + '<div class="k-scheduler-header-wrap">' + table(dateTableRows) + '</div>' + '</div>');
 }
 
 window.monthSchedule = kendo.ui.monthSchedule = kendo.ui.TimelineMonthView.extend({
   name: "monthSchedule",
   type: "monthSchedule",
   options: {
-    dateHeaderTemplate: kendo.template('<span class=\'k-link k-nav-day\'>#=(kendo.format(\'{0:dddd}\', date)).substring(0,1)#</span>'),
+    dateHeaderTemplate: kendo.template($('<span class="k-link k-nav-day"></span>').text('#=(kendo.format(\'{0:dddd}\', date)).substring(0,1)#').get(0).outerHTML),
     columnWidth: 50,
     name: "monthSchedule",
     type: "monthSchedule",
@@ -161,9 +147,9 @@ window.monthSchedule = kendo.ui.monthSchedule = kendo.ui.TimelineMonthView.exten
     We have to use our custom methods for timesHeader and datesHeader
   */
   _topSection: function (columnLevels, allDaySlot, rowCount) {
-      this.timesHeader = timesHeader(columnLevels.length, allDaySlot, rowCount);
+      this.timesHeader = timesHeader(columnLevels.length, rowCount);
       var columnCount = columnLevels[columnLevels.length - 1].length;
-      this.datesHeader = datesHeader(columnLevels, columnCount, allDaySlot);
+      this.datesHeader = datesHeader(columnLevels, columnCount);
 
       return $('<tr>').append(
           this.timesHeader

@@ -46,6 +46,7 @@ class MBLanguage{
 
 		function loadStrings($file)
         {
+            $mod_strings = null;
             $module = strtoupper($this->name);
             $object_name = strtoupper($this->key_name);
             $_object_name = strtolower($this->name);
@@ -66,6 +67,7 @@ class MBLanguage{
 		}
 
     public function loadAppListStrings($file){
+        $app_list_strings = null;
         if (!file_exists($file)) {
             return;
         }

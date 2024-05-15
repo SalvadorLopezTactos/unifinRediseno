@@ -104,10 +104,12 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                 $csvFileName = template_handle_export($reporter, false);
                 $filesToUnlink[] = $csvFileName;
             } else { // both PDF and CSV
+                // necessary to make copy of reporter because after making PDF we clear $select_fields
+                $csvReporter = clone $reporter;
                 require_once 'modules/Reports/templates/templates_tcpdf.php';
                 $reportFilename = template_handle_pdf($reporter, false);
                 require_once 'modules/Reports/templates/templates_export.php';
-                $csvFileName = template_handle_export($reporter, false);
+                $csvFileName = template_handle_export($csvReporter, false);
                 $filesToUnlink[] = $reportFilename;
                 $filesToUnlink[] = $csvFileName;
             }

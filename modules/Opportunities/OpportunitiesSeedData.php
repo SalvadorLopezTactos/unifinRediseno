@@ -176,7 +176,7 @@ class OpportunitiesSeedData {
             $currency_id = '-99';
 
             if (!$usingRLIs) {
-                $seed = rand(1, 15);
+                $seed = random_int(1, 15);
                 if ($seed % 2 == 0) {
                     $currency_id = $currency->id;
                     $base_rate = $currency->conversion_rate;
@@ -199,7 +199,7 @@ class OpportunitiesSeedData {
                 $opp->date_closed_timestamp = $timedate->fromDbDate($opp->date_closed)->getTimestamp();
             }
             $opp->opportunity_type = array_rand($app_list_strings['opportunity_type_dom']);
-            $amount = rand(1000, 7500);
+            $amount = random_int(1000, 7500);
             $opp->amount = $amount;
             $opp->amount_usdollar = SugarMath::init($amount)->div($base_rate)->result();
             $opp->probability = $app_list_strings['sales_probability_dom'][$opp->sales_stage];
@@ -227,7 +227,7 @@ class OpportunitiesSeedData {
 
             $return = array();
             if ($usingRLIs) {
-                $return = static::createRevenueLineItems($opp, rand(3, 5), $app_list_strings);
+                $return = static::createRevenueLineItems($opp, random_int(3, 5), $app_list_strings);
             }
             $values = array_merge(self::toDatabaseArray($opp), $return);
 
@@ -463,7 +463,7 @@ class OpportunitiesSeedData {
             }
 
             if (!$usingRLIs) {
-                $seed = rand(1, 15);
+                $seed = random_int(1, 15);
                 if ($seed % 2 == 0) {
                     $currencyId = $currency->id;
                     $baseRate = $currency->conversion_rate;
@@ -531,12 +531,15 @@ class OpportunitiesSeedData {
      * @param array $app_list_strings
      */
     private static function createRevenueLineItems(&$opp, $rlis_to_create, $app_list_strings) {
+        $service = null;
+        $service_duration_value = null;
+        $service_duration_unit = null;
         $currency_id = $opp->currency_id;
         $base_rate = $opp->base_rate;
 
         $pt = null;
 
-        $seed = rand(1, 15);
+        $seed = random_int(1, 15);
         if ($seed%2 == 0) {
             $currency = SugarCurrency::getCurrencyByISO('EUR');
             $currency_id = $currency->id;
@@ -597,10 +600,10 @@ class OpportunitiesSeedData {
         $latestRliSalesStageKey = '';
 
         while($rlis_created < $rlis_to_create) {
-            $amount = mt_rand(1000, 7500);
-            $rand_best_worst = mt_rand(100, 900);
+            $amount = random_int(1000, 7500);
+            $rand_best_worst = random_int(100, 900);
             $doPT = false;
-            $quantity = mt_rand(1, 100);
+            $quantity = random_int(1, 100);
             $cost_price = $amount/2;
             $list_price = $amount;
             $discount_price = ($amount / $quantity);
@@ -612,7 +615,7 @@ class OpportunitiesSeedData {
                 $list_price = $pt['list_price'];
                 $discount_price = ($pt['discount_price'] / $quantity);
                 $amount = $pt['discount_price'];
-                $rand_best_worst = mt_rand(100, $cost_price);
+                $rand_best_worst = random_int(100, $cost_price);
                 $service = $pt['service'];
                 if ($service === '1') {
                     $rlis_to_create = 1;
@@ -683,7 +686,7 @@ class OpportunitiesSeedData {
             // if this is an even number, assign a product template
             if ($doPT) {
                 $rli->product_template_id = $pt_id;
-                $rli->discount_amount = rand(100, intval($rli->cost_price));
+                $rli->discount_amount = random_int(100, intval($rli->cost_price));
                 $rli->discount_rate_percent = (($rli->discount_amount/$rli->discount_price)*100);
                 foreach($pt as $field => $value) {
                     if ($field != 'id') {
@@ -869,9 +872,10 @@ class OpportunitiesSeedData {
      */
     public static function getMonthDeltaFromRange($total_months = 12)
     {
+        $key = null;
         $ranges = self::getRanges($total_months);
         asort($ranges, SORT_NUMERIC);
-        $x = mt_rand(1, array_sum($ranges));
+        $x = random_int(1, array_sum($ranges));
         foreach ($ranges as $key => $y) {
             $x -= $y;
             if ($x <= 0) {
@@ -895,7 +899,7 @@ class OpportunitiesSeedData {
         $now->modify("+$monthDelta month");
         // random day from now to end of month
         $now->setTime(0, 0, 0);
-        $day = mt_rand($now->day, $now->days_in_month);
+        $day = random_int($now->day, $now->days_in_month);
         return $timedate->asDbDate($now->get_day_begin($day));
     }
 
@@ -918,7 +922,7 @@ class OpportunitiesSeedData {
         } else {
             // random day from start of month to now
             $tmpDay = ($now->day-1 != 0) ? $now->day-1 : 1;
-            $day =  mt_rand(1, $tmpDay);
+            $day =  random_int(1, $tmpDay);
         }
         $now->setTime(0, 0, 0); // always default it to midnight
         return $timedate->asDbDate($now->get_day_begin($day));

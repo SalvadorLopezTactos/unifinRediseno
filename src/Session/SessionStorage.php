@@ -83,7 +83,7 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
         if (!$lock) {
             $this->unlock();
         }
-        $this->registerShutdownFunction($previousUserId);
+        static::registerShutdownFunction($previousUserId);
     }
 
     /**

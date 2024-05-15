@@ -1662,6 +1662,7 @@ class User extends Person {
      * @return array Assoc array for an email and name
      */
     function getEmailInfo($id='') {
+        $ret = [];
         $user = $this;
         if(!empty($id)) {
             $user = BeanFactory::getBean('Users', $id);
@@ -1865,6 +1866,8 @@ class User extends Person {
 	 * @return string Human readable name format
 	 */
 	function getLocaleFormatDesc() {
+        $format = [];
+        $name = [];
 		global $locale;
 		global $mod_strings;
 		global $app_strings;
@@ -2297,50 +2300,50 @@ class User extends Person {
         // Create random characters for the ones that doesnt have requirements
         for ($i=0; $i < $length - $condition; $i ++)  // loop and create password
         {
-            $password = $password . substr($charBKT, random_int(0, getrandmax()) % strlen($charBKT), 1);
+            $password = $password . substr($charBKT, random_int(0, mt_getrandmax()) % strlen($charBKT), 1);
         }
         if ($res['onelower'] == '1') // If a lower caracter is required, i add one in the password
         {
             if (strlen($password) != '0') // If there is other characters in the password, I insert one in a random position
             {
-                $password = substr_replace($password, substr($LOWERCASE, random_int(0, getrandmax()) % strlen($LOWERCASE), 1), random_int(0, getrandmax()) % strlen($password), 0);
+                $password = substr_replace($password, substr($LOWERCASE, random_int(0, mt_getrandmax()) % strlen($LOWERCASE), 1), random_int(0, mt_getrandmax()) % strlen($password), 0);
             }
             else // otherwise i put one in first position
             {
-                $password = $password . substr($LOWERCASE, random_int(0, getrandmax()) % strlen($LOWERCASE), 1);
+                $password = $password . substr($LOWERCASE, random_int(0, mt_getrandmax()) % strlen($LOWERCASE), 1);
             }
         }
         if ($res['onenumber'] == '1')
         {
             if (strlen($password) != '0')
             {
-                $password = substr_replace($password, substr($NUMBER, random_int(0, getrandmax()) % strlen($NUMBER), 1), random_int(0, getrandmax()) % strlen($password), 0);
+                $password = substr_replace($password, substr($NUMBER, random_int(0, mt_getrandmax()) % strlen($NUMBER), 1), random_int(0, mt_getrandmax()) % strlen($password), 0);
             }
             else
             {
-                $password = $password . substr($NUMBER, random_int(0, getrandmax()) % strlen($NUMBER), 1);
+                $password = $password . substr($NUMBER, random_int(0, mt_getrandmax()) % strlen($NUMBER), 1);
             }
         }
         if ($res['oneupper'] == '1')
         {
             if (strlen($password) != '0')
             {
-                $password = substr_replace($password, substr($UPPERCASE, random_int(0, getrandmax()) % strlen($UPPERCASE), 1), random_int(0, getrandmax()) % strlen($password), 0);
+                $password = substr_replace($password, substr($UPPERCASE, random_int(0, mt_getrandmax()) % strlen($UPPERCASE), 1), random_int(0, mt_getrandmax()) % strlen($password), 0);
             }
             else
             {
-                $password = $password . substr($UPPERCASE, random_int(0, getrandmax()) % strlen($UPPERCASE), 1);
+                $password = $password . substr($UPPERCASE, random_int(0, mt_getrandmax()) % strlen($UPPERCASE), 1);
             }
         }
         if ($res['onespecial'] == '1')
         {
             if (strlen($password) != '0')
             {
-                $password = substr_replace($password, substr($SPECIAL, random_int(0, getrandmax()) % strlen($SPECIAL), 1), random_int(0, getrandmax()) % strlen($password), 0);
+                $password = substr_replace($password, substr($SPECIAL, random_int(0, mt_getrandmax()) % strlen($SPECIAL), 1), random_int(0, mt_getrandmax()) % strlen($password), 0);
             }
             else
             {
-                $password = $password . substr($SPECIAL, random_int(0, getrandmax()) % strlen($SPECIAL), 1);
+                $password = $password . substr($SPECIAL, random_int(0, mt_getrandmax()) % strlen($SPECIAL), 1);
             }
         }
 
@@ -3580,7 +3583,7 @@ class User extends Person {
         }
 
         // Make the key/value changes to the last state data
-        foreach ($changes as $key => $value) {
+        foreach (safeIsIterable($changes) ? $changes : [] as $key => $value) {
             $lastStates[$key] = $value;
         }
 

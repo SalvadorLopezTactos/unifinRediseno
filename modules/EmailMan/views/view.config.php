@@ -188,7 +188,7 @@ class ViewConfig extends SugarView
 
         //////////////////////////////////////////////////////////////////////////////
         ////	EMAIL SECURITY
-        if(!isset($sugar_config['email_xss']) || empty($sugar_config['email_xss'])) {
+        if (!isset($sugar_config['email_xss']) || empty($sugar_config['email_xss']) || !is_array($sugar_config['email_xss'])) {
             $sugar_config['email_xss'] = getDefaultXssTags();
         }
 

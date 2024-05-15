@@ -293,7 +293,7 @@ class PMSERelatedDependencyWrapper
             $relatedDependency->new_with_id = false;
             $relatedDependency->save();
         }
-        $this->logger->debug("Creating " . count($resultArray) . " Related Dependencies.");
+        $this->logger->debug("Creating " . (is_countable($resultArray) ? count($resultArray) : 0) . " Related Dependencies.");
 
     }
 }

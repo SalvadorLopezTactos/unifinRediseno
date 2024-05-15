@@ -107,5 +107,5 @@ switch($_REQUEST['adminAction']) {
 	break;
 }
 
-$ret = $json->encode($out, true);
+$ret = $json->encode($out);
 echo $ret;

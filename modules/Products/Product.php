@@ -136,7 +136,6 @@ class Product extends SugarBean
         'manufacturer_id',
         'type_id',
         'category_id',
-        'team_id',
         'weight',
         'support_name',
         'support_term',
@@ -151,10 +150,7 @@ class Product extends SugarBean
 
     public function __construct()
     {
-
         parent::__construct();
-
-        $this->team_id = 1; // make the item globally accessible
 
         $currency = BeanFactory::newBean('Currencies');
         $this->default_currency_symbol = $currency->getDefaultCurrencySymbol();
@@ -185,6 +181,11 @@ class Product extends SugarBean
      */
     public function get_list_view_data()
     {
+        $support_expired = null;
+        $support_coming_due = null;
+        $support_expired_color = null;
+        $support_coming_due_color = null;
+        $params = [];
         $GLOBALS['log']->deprecated('Product::get_list_view_data() has been deprecated in 7.8');
         global $current_language, $app_strings, $app_list_strings, $current_user, $timedate, $locale;
         $product_mod_strings = return_module_language($current_language,"Products");

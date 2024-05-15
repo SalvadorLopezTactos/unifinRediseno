@@ -1194,7 +1194,7 @@ class PMSEEmailHandler
         if (!empty($content)) {
             $beanUtils = $this->getBeanUtils();
             $beanUtils->setFlowData($this->flowData);
-            return $beanUtils->mergeBeanInTemplate($targetBean, $content, true, $this->flowData);
+            return $beanUtils->mergeBeanInTemplate($targetBean, $content, true);
         }
 
         return null;

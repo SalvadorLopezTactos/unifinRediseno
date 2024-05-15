@@ -278,7 +278,7 @@ class ChartDisplay
             $total = $total_row['cells'][$total];
 
             if ($this->shouldUnformat($total)) {
-                $total = unformat_number($total);
+                $total = (float)unformat_number($total);
             }
             if ($total > 100000) {
                 $do_thousands = true;
@@ -347,7 +347,18 @@ class ChartDisplay
                 if (!isset($chart_rows[$row_remap['group_text']][$row_remap['group_base_text']]['numerical_value'])) {
                     $chart_rows[$row_remap['group_text']][$row_remap['group_base_text']]['numerical_value'] = 0;
                 }
-                $chart_rows[$row_remap['group_text']][$row_remap['group_base_text']]['numerical_value'] += $row_remap['numerical_value'];
+
+                $groupText = $row_remap['group_text'];
+                $groupBaseText = $row_remap['group_base_text'];
+                if (isset($chart_rows[$groupText][$groupBaseText]['numerical_value'])
+                    && is_numeric($chart_rows[$groupText][$groupBaseText]['numerical_value'])) {
+                    $chart_rows[$groupText][$groupBaseText]['numerical_value'] += intval($row_remap['numerical_value']);
+                } else {
+                    if (isset($chart_rows[$groupText][$groupBaseText]['numerical_value'])) {
+                        $chart_rows[$groupText][$groupBaseText]['numerical_value'] = intval($chart_rows[$groupText][$groupBaseText]['numerical_value']);
+                    }
+                    $chart_rows[$groupText][$groupBaseText]['numerical_value'] = intval($row_remap['numerical_value']);
+                }
             }
             $chart_rows[$row_remap['group_text']][$row_remap['group_base_text']]['raw_value'] = isset($row_remap['raw_value']) ? $row_remap['raw_value'] : '';
             $chart_rows[$row_remap['group_text']][$row_remap['group_base_text']]['group_base_text'] = $row_remap['group_base_text'];
@@ -520,7 +531,7 @@ class ChartDisplay
         }
         $total = $total_row['cells'][$total_index]['val'];
         if ($this->shouldUnformat($total)) {
-            $total = unformat_number($total, true);
+            $total = (float)unformat_number($total, true);
         }
         global $do_thousands;
         if ($this->get_maximum() > 100000 && (!isset($this->reporter->report_def['do_round'])

@@ -5492,7 +5492,7 @@ YAHOO.ext.ToolbarButton.prototype = {
         appendTo.appendChild(element);
         this.el = getEl(element, true);
         this.el.unselectable();
-        inner.innerHTML = (this.text ? this.text : '&#160;');
+        inner.innerText = (this.text ? this.text : '&#160;');
         this.inner = inner;
         this.el.mon('click', this.onClick, this, true);    
         this.el.mon('mouseover', this.onMouseOver, this, true);    

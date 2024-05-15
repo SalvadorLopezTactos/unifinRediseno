@@ -126,7 +126,7 @@ abstract class HeaderWrap
     {
         return 0 === strpos($value, '=?')
             && strlen($value) - 2 === strpos($value, '?=')
-            && false !== strpos($originalValue, $value);
+            && false !== strpos($originalValue, (string) $value);
     }
 
     /**

@@ -158,7 +158,7 @@ class ReportsApi extends ModuleApi
                         case 'date':
                         case 'datetime':
                         case 'datetimecombo':
-                            if (count($value) == 1) {
+                            if ((is_countable($value) ? count($value) : 0) == 1) {
                                 $filterRow['qualifier_name'] = 'on';
                                 $filterRow['input_name0'] = reset($value);
                             } else {

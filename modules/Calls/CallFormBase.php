@@ -173,6 +173,7 @@ return $the_form;
 function handleSave($prefix,$redirect=true,$useRequired=false) {
 
 
+        $return_id = null;
 	require_once('include/formbase.php');
 
 	global $current_user;

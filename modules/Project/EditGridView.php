@@ -39,7 +39,7 @@ $href = 'index.php?' . http_build_query([
         'action' => $focus->is_template ? 'ProjectTemplatesDetailView' : 'DetailView',
         'record' => $focus->id,
     ]);
-$params[] = '<a href="' . htmlspecialchars($href). '">' . htmlspecialchars($focus->name). '</a>';
+$params[] = '<a href="' . htmlspecialchars($href) . '">' . htmlspecialchars($focus->name). '</a>';
 
 echo getClassicModuleTitle("Project", $params, true);
 
@@ -81,7 +81,7 @@ $holidays = array();
 if (count($resources) > 0){
 	$query = "select * from holidays where (";
         $i = 0;
-        $count = count($users);
+        $count = is_countable($users) ? count($users) : 0;
         foreach ($users as $key => $user) {
             $query .= "person_id like '". $user->id . "'";
             if ($i < ($count - 1)) {
@@ -90,11 +90,12 @@ if (count($resources) > 0){
             $i++;
         }
 
-	if (count($users) > 0 && count($contacts) > 0)
-	    $query .= " or ";
+    if (is_countable($users) && is_countable($contacts) && count($users) > 0 && count($contacts) > 0) {
+        $query .= " or ";
+    }
 
         $i = 0;
-        $count = count($contacts);
+        $count = is_countable($contacts) ? count($contacts) : 0;
         foreach ($contacts as $key => $contact) {
             $query .= "person_id like '". $contact->id . "'";
             if ($i < ($count - 1)) {

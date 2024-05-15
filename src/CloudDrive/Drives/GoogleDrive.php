@@ -64,7 +64,7 @@ class GoogleDrive extends Drive
                 $parents = ['files' => [['id' => $parentId]]];
             }
 
-            if (is_array($parents) && count($parents['files']) > 0) {
+            if (is_array($parents) && (is_countable($parents['files']) ? count($parents['files']) : 0) > 0) {
                     $parent = $parents['files'][0];
                     $parentId = $parent->id;
                     $folders = $this->listFolders([
@@ -408,7 +408,7 @@ class GoogleDrive extends Drive
             return false;
         }
 
-        if (count($files) > 0) {
+        if ((is_countable($files) ? count($files) : 0) > 0) {
             $file['exists'] = true;
             $file['file'] = $files[0];
         }

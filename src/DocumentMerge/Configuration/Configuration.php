@@ -50,6 +50,7 @@ class Configuration implements ConfigurationInterface
      */
     protected function getRegion() : string
     {
+        $config = [];
         $region = '';
         $idmConfig = new IdmConfig($this->config);
         $modeConfig = $idmConfig->getIDMModeConfig();

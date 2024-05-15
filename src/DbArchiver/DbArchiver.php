@@ -130,6 +130,7 @@ class DbArchiver
      */
     public function createArchiveTable($bean = null) : bool
     {
+        $indices = [];
         if (is_null($bean)) {
             $bean = $this->getBean();
         }
@@ -305,7 +306,7 @@ class DbArchiver
                 ->insert($this->cstmArchiveTableName);
         }
 
-        for ($i = 0, $m = count($rows), $cm = count($cstmRows); $i < $m; $i++) {
+        for ($i = 0, $m = is_countable($rows) ? count($rows) : 0, $cm = is_countable($cstmRows) ? count($cstmRows) : 0; $i < $m; $i++) {
             $qbArchive
                 ->values(
                     array_map(function ($value) use ($builder) {
@@ -489,13 +490,13 @@ class DbArchiver
         $archivedCustomTables = $this->getCstmRowsArchived();
 
         foreach ($archivedTables as $archiveTable => $ids) {
-            if (count($ids) > 0) {
+            if ((is_countable($ids) ? count($ids) : 0) > 0) {
                 $this->delete($ids, $archiveTable, 'id');
             }
         }
 
         foreach ($archivedCustomTables as $archiveCustomTable => $ids) {
-            if (count($ids) > 0) {
+            if ((is_countable($ids) ? count($ids) : 0) > 0) {
                 $this->delete($ids, $archiveCustomTable, 'id_c');
             }
         }

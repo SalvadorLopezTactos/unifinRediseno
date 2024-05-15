@@ -244,7 +244,7 @@ class PMSEBeanHandler
 
                 // There are strange cases where bean that was passed in is actually
                 // an array of beans, so this needs to handle that
-                if (!$newBean instanceof SugarBean) {
+                if (is_array($newBean)) {
                     // Why we even allow an array of beans is beyond me, but it
                     // is what it is, for now
                     $newBean = array_pop($newBean);
@@ -285,11 +285,21 @@ class PMSEBeanHandler
                     $data['rel_module'] === pmse_Emails_Templates_sugar::CURRENT_ACTIVITY_LINK) {
                     $replace[$data['original']] = $this->getCurrentActivityLink($bean);
                 } elseif ($data['value_type'] === 'href_link') {
-                    $replace[$data['original']] = bpminbox_get_href($newBean, $fieldName, $value);
+                    if (empty($newBean)) {
+                        PMSELogger::getInstance()->alert('Module object $newBean is null in function \PMSEBeanHandler::mergingTemplate.');
+                        $replace[$data['original']] = '';
+                    } else {
+                        $replace[$data['original']] = bpminbox_get_href($newBean, $fieldName, $value);
+                    }
                 } else {
-                    $replace[$data['original']] = $evaluate ?
-                        nl2html(bpminbox_get_display_text($newBean, $fieldName, $value)) :
-                        bpminbox_get_display_text($newBean, $fieldName, $value);
+                    if ($newBean instanceof SugarBean) {
+                        $replace[$data['original']] = $evaluate ? nl2html(
+                            bpminbox_get_display_text($newBean, $fieldName, $value)
+                        ) : bpminbox_get_display_text($newBean, $fieldName, $value);
+                    } else {
+                        PMSELogger::getInstance()->alert('Module object $newBean is null in function \PMSEBeanHandler::mergingTemplate.');
+                        $replace[$data['original']] = '';
+                    }
                 }
             }
         }
@@ -429,6 +439,7 @@ class PMSEBeanHandler
      */
     public function processValueExpression($expression, $bean)
     {
+        $value = null;
         global $timedate;
         $response = new stdClass();
         $dataEval = array();
@@ -701,6 +712,7 @@ class PMSEBeanHandler
      */
     public function calculateDueDate($expre, $bean)
     {
+        $dueDate = null;
         $isDate = false;
         $date = '';
         $arrayUnitPos = array();

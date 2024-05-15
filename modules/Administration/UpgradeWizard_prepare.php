@@ -18,6 +18,8 @@ use Sugarcrm\Sugarcrm\PackageManager\PackageManager;
 
 require_once 'include/utils.php';
 
+MlpLogger::replaceDefault();
+
 $historyId = InputValidation::getService()->getValidInputRequest('install_file');
 if (empty($historyId)) {
     sugar_die(htmlspecialchars(translate('ERR_UW_NO_PACKAGE_FILE', 'Administration')));

@@ -34,13 +34,20 @@ class AdministrationController extends SugarController
 
 
         global $current_user, $app_strings, $modInvisList;
-
+        $request = InputValidation::getService();
+        
         if (!is_admin($current_user)) {
             sugar_die($app_strings['ERR_NOT_ADMIN']);
         }
 
         // handle the tabs listing
-        $enabled_tabs = json_decode(html_entity_decode(InputValidation::getService()->getValidInputRequest('enabled_tabs'), ENT_QUOTES));
+        $enabled_tabs = json_decode(
+            html_entity_decode($request->getValidInputRequest('enabled_tabs'), ENT_QUOTES),
+            true
+        );
+        if (!is_array($enabled_tabs)) {
+            $enabled_tabs = [];
+        }
         // Add Home back in so that it always appears first in Sugar 7
         array_unshift($enabled_tabs, 'Home');
         $tabs = new TabController();
@@ -84,7 +91,7 @@ class AdministrationController extends SugarController
         $disabled_langs = json_decode(html_entity_decode(InputValidation::getService()->getValidInputRequest('disabled_langs'), ENT_QUOTES));
         $enabled_langs = json_decode(html_entity_decode(InputValidation::getService()->getValidInputRequest('enabled_langs'), ENT_QUOTES));
 
-        if (count($sugar_config['languages']) === count($disabled_langs)) {
+        if ((is_countable($sugar_config['languages']) ? count($sugar_config['languages']) : 0) === (is_countable($disabled_langs) ? count($disabled_langs) : 0)) {
             sugar_die(translate('LBL_CAN_NOT_DISABLE_ALL_LANG'));
         } else {
             $cfg = $this->getConfigurator();
@@ -300,6 +307,7 @@ class AdministrationController extends SugarController
      */
     public function action_callRebuildSprites()
     {
+        $mod_strings = [];
         global $current_user;
         $this->view = 'ajax';
         if(function_exists('imagecreatetruecolor'))
@@ -478,6 +486,7 @@ class AdministrationController extends SugarController
      */
     public function action_saveApiPlatforms()
     {
+        $app_strings = [];
         global $current_user;
 
         if (!is_admin($current_user)) {
@@ -523,8 +532,8 @@ class AdministrationController extends SugarController
         // If out array values are themselves arrays, we have an
         // associativ array, and should save key-value pairs.
         foreach ($platformMeta as $key => $value) {
-            $key = is_array($value) ? "'$key'" : "";
-            $out .= "\$${arrayName}[$key] = " . var_export($value, true) . ";\n";
+            $key = is_array($value) ? strval(var_export($key, true)) : "";
+            $out .= "\${$arrayName}[$key] = " . var_export($value, true) . ";\n";
         }
 
         mkdir_recursive(dirname($file_loc));

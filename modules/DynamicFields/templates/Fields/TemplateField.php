@@ -323,7 +323,7 @@ class TemplateField{
     public function get_db_add_alter_table($table)
     {
         $db = DBManagerFactory::getInstance();
-        return $db->addColumnSQL($table, $this->get_field_def(), true);
+        return $db->addColumnSQL($table, $this->get_field_def());
     }
 
     public function get_db_delete_alter_table($table)

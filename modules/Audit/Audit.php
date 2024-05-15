@@ -96,6 +96,7 @@ class Audit extends SugarBean
      */
     protected function getFieldDefs()
     {
+        $dictionary = [];
         if (empty($this->fieldDefs)) {
             require 'metadata/audit_templateMetaData.php';
             $this->fieldDefs = $dictionary['audit']['fields'];
@@ -275,6 +276,7 @@ class Audit extends SugarBean
 
    public static function get_audit_list()
     {
+        $dictionary = [];
         global $focus, $genericAssocFieldsArray, $moduleAssocFieldsArray, $current_user, $timedate, $app_strings;
         $audit_list = array();
         if (!empty($_REQUEST['record'])) {

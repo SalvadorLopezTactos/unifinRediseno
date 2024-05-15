@@ -157,13 +157,13 @@ class Scheduler extends SugarBean {
 	{
         $allSchedulers = $this->get_full_list('', "schedulers.status='Active' AND NOT EXISTS(SELECT id FROM {$this->job_queue_table} WHERE scheduler_id=schedulers.id AND status!='" . SchedulersJob::JOB_STATUS_DONE . "')") ?: [];
 
-		$GLOBALS['log']->info('-----> Scheduler found [ '.count($allSchedulers).' ] ACTIVE jobs');
+        $GLOBALS['log']->info('-----> Scheduler found [ '.(is_countable($allSchedulers) ? count($allSchedulers) : 0).' ] ACTIVE jobs');
 
 		if(!empty($allSchedulers)) {
 			foreach($allSchedulers as $focus) {
 				if($focus->fireQualified()) {
 				    $job = $focus->createJob();
-				    $queue->submitJob($job, $this->getUser());
+                    $queue->submitJob($job);
 				}
 			}
 		} else {
@@ -184,6 +184,12 @@ class Scheduler extends SugarBean {
 	 */
 	function deriveDBDateTimes($focus)
 	{
+        $dayName = [];
+        $compMons = [];
+        $monName = [];
+        $dateName = [];
+        $hrName = [];
+        $minName = [];
         global $timedate;
 		$GLOBALS['log']->debug('----->Schedulers->deriveDBDateTimes() got an object of type: '.$focus->object_name);
 		/* [min][hr][dates][mon][days] */

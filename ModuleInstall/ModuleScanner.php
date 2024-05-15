@@ -11,6 +11,7 @@
  */
 
 use Sugarcrm\Sugarcrm\Security\ModuleScanner\CodeScanner;
+use Sugarcrm\Sugarcrm\Security\ModuleScanner\ManifestScanner;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\DropdownList as ConstraintsDropdownList;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
@@ -74,7 +75,13 @@ class ModuleScanner{
 	    'splfileinfo',
 	    'splfileobject',
         'sugarautoloader',
-
+        'sugarmin',
+        'sugarcronparalleljobs',
+        'sugarcronjobs',
+        'symfony\component\security\core\authentication\token\abstracttoken',
+        'symfony\component\security\core\authentication\token\remembermetoken',
+        'symfony\component\expressionlanguage\serializedparsedexpression',
+        'pdo',
     );
 	private $blackList = array(
     'popen',
@@ -131,6 +138,8 @@ class ModuleScanner{
     'realpath',
     'rewind',
 	'readdir',
+    'readline_add_history',
+    'readline_write_history',
     'set_file_buffer',
     'tmpfile',
     'umask',
@@ -174,6 +183,7 @@ class ModuleScanner{
 	'call_user_func',
 	'call_user_func_array',
 	'create_function',
+        'session_save_path',
 
 
 	//mutliple files per function call
@@ -389,6 +399,7 @@ class ModuleScanner{
 
         // sugar vulnerable functions, need to be lower case
         'getfunctionvalue',
+        'save_custom_app_list_strings_contents',
     );
     private $unsafeHttpClientFunctions = [
         // curl
@@ -446,6 +457,7 @@ class ModuleScanner{
         'socket_shutdown',
         'socket_write',
         'fsockopen',
+        'pfsockopen',
         // streams
         'stream_bucket_append',
         'stream_bucket_make_writeable',
@@ -495,12 +507,22 @@ class ModuleScanner{
         'stream_wrapper_unregister',
     ];
 
-    private $methodsBlackList = array('setlevel', 'put' => array('sugarautoloader'), 'unlink' => array('sugarautoloader'));
+    private $methodsBlackList = [
+        'setlevel',
+        'put' => ['sugarautoloader'],
+        'unlink' => ['sugarautoloader'],
+        'minify' => ['sugarmin'],
+    ];
 
     /**
      * @var CodeScanner
      */
     private $codeScanner;
+
+    /**
+     * @var ManifestScanner
+     */
+    private $manifestScanner;
 
     protected $installdefs;
 
@@ -559,6 +581,7 @@ class ModuleScanner{
         }
         $functionsBlackList = array_diff($this->blackList, $this->blackListExempt);
         $this->codeScanner = new CodeScanner($classesBlackList, $functionsBlackList, $this->methodsBlackList);
+        $this->manifestScanner = new ManifestScanner();
 	}
 
 	private $issues = array();
@@ -940,12 +963,18 @@ class ModuleScanner{
                                 }
                             }
                         }
+                        if (!empty($def['function']['include'])) {
+                            if (!check_file_name($def['function']['include'])) {
+                                $issues[] = translate('ML_INVALID_INCLUDE') . ' ' . $def['function']['include'];
+                            }
+                        }
                     }
                     if (!empty($functions)) {
                         foreach ($functions as $function) {
                             if (is_string($function)) {
-                                if (!in_array(strtolower($function), $this->blackListExempt)
-                                    && in_array(strtolower($function), $this->blackList)
+                                $canonicalFunctionName = ltrim(strtolower($function), '\\');
+                                if (!in_array($canonicalFunctionName, $this->blackListExempt)
+                                    && in_array($canonicalFunctionName, $this->blackList)
                                 ) {
                                     $issues[] = translate('ML_INVALID_FUNCTION') . ' ' . $function . '()';
                                 }
@@ -1019,24 +1048,37 @@ class ModuleScanner{
         return join("/", $res);
     }
 
+    /**
+     * @param string $manifestPath
+     * @return array
+     */
+    public function strictManifestScan(string $manifestPath): array
+    {
+        if (isset($this->manifestScanner)) {
+            $issues = $this->manifestScanner->scan(file_get_contents($manifestPath));
+            foreach ($issues as $issue) {
+                $this->issues['manifest'][$manifestPath][] = $issue->getMessage();
+            }
+            return $issues;
+        }
+        return [];
+    }
+
 	/**
 	 *This function will scan the Manifest for disabled actions specified in $GLOBALS['sugar_config']['moduleInstaller']['disableActions']
 	 *if $GLOBALS['sugar_config']['moduleInstaller']['disableRestrictedCopy'] is set to false or not set it will call on scanCopy to ensure that it is not overriding files
 	 */
     public function scanManifest($manifestPath)
     {
-		$issues = array();
-		if(!file_exists($manifestPath)){
-			$this->issues['manifest'][$manifestPath] = translate('ML_NO_MANIFEST');
-			return $issues;
-		}
-		$fileIssues = $this->scanFile($manifestPath);
-		//if the manifest contains malicious code do not open it
-		if(!empty($fileIssues)){
-			return $fileIssues;
-		}
-		$this->lockConfig();
-		list($manifest, $installdefs) = MSLoadManifest($manifestPath);
+        if (!file_exists($manifestPath)) {
+            $this->issues['manifest'][$manifestPath] = translate('ML_NO_MANIFEST');
+            return false;
+        }
+        if ($issues = $this->strictManifestScan($manifestPath)) {
+            return false;
+        }
+        $this->lockConfig();
+        [$manifest, $installdefs] = MSLoadManifest($manifestPath);
         $this->installdefs = $installdefs;
 		$fileIssues = $this->checkConfig($manifestPath);
 		if(!empty($fileIssues)){
@@ -1053,8 +1095,11 @@ class ModuleScanner{
 		}
 
         // now lets scan for files that will override our files
-        if (empty($this->config['disableRestrictedCopy']) && isset($installdefs['copy'])) {
+        if (isset($installdefs['copy'])) {
             foreach ($installdefs['copy'] as $copy) {
+                if (!isset($copy['from'])) {
+                    continue;
+                }
                 $from = $this->normalizePath($copy['from']);
                 if ($from === false) {
                     $this->issues['copy'][$copy['from']] = translate('ML_PATH_MAY_NOT_CONTAIN') .' ".." -' . $copy['from'];
@@ -1091,10 +1136,6 @@ class ModuleScanner{
      */
     public function scanCopy($from, $to)
     {
-        // if the file doesn't exist for the $to then it is not overriding anything
-        if (!file_exists($to)) {
-            return;
-        }
         if (is_dir($from)) {
             $d = dir($from);
             while ($e = $d->read()) {
@@ -1109,11 +1150,19 @@ class ModuleScanner{
         if (is_dir($to) && is_file($from)) {
             $to = rtrim($to, '/'). '/' . basename($from);
         }
-        // if the $to is a file and it is found in sugarFileExists then don't allow overriding it
-        if (is_file($to) && $this->sugarFileExists($to)) {
-            $this->issues['copy'][$from] = translate('ML_OVERRIDE_CORE_FILES') . '(' . $to . ')';
-        }
 
+        if (!$this->isValidExtension($to)) {
+            $this->issues['copy'][$to] = translate('ML_INVALID_EXT');
+        }
+        if (empty($this->config['disableRestrictedCopy']) && file_exists($to)) {
+            // if the $to is a file and it is found in sugarFileExists then don't allow overriding it
+            if (is_file($to) && $this->sugarFileExists($to)) {
+                $this->issues['copy'][$from] = translate('ML_OVERRIDE_CORE_FILES') . '(' . $to . ')';
+            }
+            if ($this->isConfigFile($to)) {
+                $this->issues['copy'][$from] = translate('ML_CONFIG_OVERRIDE');
+            }
+        }
     }
 
 
@@ -1127,9 +1176,13 @@ class ModuleScanner{
 	 */
     public function scanPackage($path, $sugarFileAllowed = true)
     {
+        $manifest = [];
         $this->baseDir = $path;
         $this->pathToModule = $path;
         $this->scanManifest($path . '/manifest.php');
+        if (count($this->issues)) {
+            return;
+        }
         if (empty($this->config['disableFileScan'])) {
             /**
              * @var array $manifest

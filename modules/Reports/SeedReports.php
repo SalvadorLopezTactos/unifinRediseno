@@ -198,6 +198,7 @@ function get_admin_reports($is_upgrade = false)
 
 function create_default_reports($is_upgrade = false, $reportlist = array())
 {
+    $ootb_reports = [];
     $stock_tags = array(
         "sales_marketing" => array("Sales and Marketing", "Stock Report"),
         "customer_service" => array("Customer Service", "Stock Report"),

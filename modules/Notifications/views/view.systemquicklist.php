@@ -28,6 +28,7 @@ class ViewSystemQuicklist extends ViewQuickList{
      * @return null
      */
     protected function clearFTSFlags() {
+        $settings = [];
         if (is_admin($GLOBALS['current_user']))
         {
             $admin = Administration::getSettings();

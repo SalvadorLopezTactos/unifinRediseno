@@ -116,8 +116,9 @@ class ImportListView
         $maxColumns = 0;
         foreach($this->data as $data)
         {
-            if(count($data) > $maxColumns)
+            if ((is_countable($data) ? count($data) : 0) > $maxColumns) {
                 $maxColumns = count($data);
+            }
         }
         return $maxColumns;
     }

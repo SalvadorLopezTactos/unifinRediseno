@@ -22,6 +22,7 @@ class ImportViewConfirm extends ImportView
      */
  	public function display()
     {
+        $error_msgs = [];
         global $mod_strings, $app_strings, $current_user;
         global $sugar_config, $locale;
 
@@ -404,15 +405,12 @@ eoq;
     public function getMaxColumnsInSampleSet($sampleSet)
     {
         $maxColumns = 0;
-        $GLOBALS['log']->fatal(print_r($sampleSet,true));
         foreach($sampleSet as $v)
         {
-            if(!empty($v)){
-
-                if(count($v) > $maxColumns)
-                    $maxColumns = count($v);
-                else
-                    continue;
+            if ((is_countable($v) ? count($v) : 0) > $maxColumns) {
+                $maxColumns = count($v);
+            } else {
+                continue;
             }
         }
 

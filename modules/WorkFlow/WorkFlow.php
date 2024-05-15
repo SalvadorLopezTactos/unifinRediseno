@@ -423,6 +423,7 @@ function filter_base_modules(){
 	//only call this after the bean has been made and the vardef file exists
 	function display_label($focus, $field){
 
+        $current_language = null;
 		global $dictionary;
 
         if (!file_exists('modules/'. $focus->module_dir . '/' . $focus->object_name.'.php')) {
@@ -484,6 +485,9 @@ function write_workflow(){
 
 function get_trigger_contents(){
 
+        $opt = [];
+        $eval = null;
+        $timeArray = null;
 		$this->glue_object = new WorkFlowGlue();
 		$this->glue_object->start_trigger_meta_array();
 		$this->glue_object->start_alert_meta_array();
@@ -560,32 +564,31 @@ $alert_file_contents = "";
 
 				$eval = "get_trigger_count_bool(\$focus, \$trigger_meta_array['trigger_count_".$trigger_count."'])===true \n";
 
-				//write the meta array
-				$this->glue_object->build_trigger_triggers("trigger_count_".$trigger_count, $row['triggershell_id']);
-				$trigger_processed=true;
-			}
-			if($row['trigger_type']=="trigger_record_change"){
-				$eval = "true";
-				$trigger_processed=true;
-			}
-			if($row['trigger_type']=="filter_rel_field"){
-				$this->glue_object->build_trigger_triggers("trigger_".$trigger_count, $row['triggershell_id']);
-				$eval_dump .= "\t \$primary_array = array();\n";
-				$eval_dump .= "\t \$primary_array = check_rel_filter(\$focus, \$primary_array, '".$row['rel_module']."', \$trigger_meta_array['trigger_".$trigger_count."'], '".$row['rel_module_type']."'); \n";
-				$eval = "(\$primary_array['results']==true)\n";
-				$trigger_processed=true;
-			}
-			//bridging type
-			if(!empty($row['parent_id'])){
-				//check if this is a bridging object
-				$trigger_id = $row['id']; //wdong, bug 25015, the $row['triggershell_id'] maybe empty here. and then $row['id'] is just what we want.
-                if(!empty($row['triggershell_id'])){
+                //write the meta array
+                $this->glue_object->build_trigger_triggers('trigger_count_' . $trigger_count, $row['triggershell_id']);
+                $trigger_processed = true;
+            }
+            if ($row['trigger_type'] == 'trigger_record_change') {
+                $eval = 'true';
+                $trigger_processed = true;
+            }
+            if ($row['trigger_type'] == 'filter_rel_field') {
+                $this->glue_object->build_trigger_triggers('trigger_' . $trigger_count, $row['triggershell_id']);
+                $eval_dump .= "\t \$primary_array = array();\n";
+                $eval_dump .= "\t \$primary_array = check_rel_filter(\$focus, \$primary_array, " . var_export($row['rel_module'], true) . ", \$trigger_meta_array['trigger_" . $trigger_count . "'], " . var_export($row['rel_module_type'], true) . "); \n";
+                $eval = "(\$primary_array['results']==true)\n";
+                $trigger_processed = true;
+            }
+            //bridging type
+            if (!empty($row['parent_id'])) {
+                //check if this is a bridging object
+                $trigger_id = $row['id']; //wdong, bug 25015, the $row['triggershell_id'] maybe empty here. and then $row['id'] is just what we want.
+                if (!empty($row['triggershell_id'])) {
                     $trigger_id = $row['triggershell_id'];
                 }
-				$eval = "isset(\$focus->bridge_id) && \$focus->bridge_id == '".$trigger_id."' ";
-				$trigger_processed=true;
-
-			}
+                $eval = "isset(\$focus->bridge_id) && \$focus->bridge_id == " . var_export($trigger_id, true);
+                $trigger_processed = true;
+            }
 
 
 			if(	$row['trigger_type']=="compare_specific" ||
@@ -649,19 +652,19 @@ $alert_file_contents = "";
 
                 // Set-up the $time_array for Time type triggers
                 $timeArray = '';
-                if ($row['trigger_type']=="compare_any_time") {
-                    $timeArray .= "\t \$time_array['time_int'] = '" . $row['parameters'] . "';\n";
+                if ($row['trigger_type'] == 'compare_any_time') {
+                    $timeArray .= "\t \$time_array['time_int'] = " . var_export($row['parameters'], true) . ";\n";
                     $timeArray .= "\t \$time_array['parameters'] = \$focus->" . $row['target_field'] . ";\n";
                     $timeArray .= "\t \$time_array['time_int_type'] = 'normal';\n";
                     $timeArray .= "\t \$time_array['target_field'] = 'none';\n";
                 } else {
-                    $timeArray .= "\t \$trigger_time_count = '" . $trigger_time_count . "';\n ";
-                    $timeArray .= "\t \$time_array['time_int'] = '" . $time_interval_array['time_int'] . "';\n";
-                    $timeArray .= "\t \$time_array['time_int_type'] = '" . $time_interval_array['time_int_type'] . "';\n";
-                    $timeArray .= "\t \$time_array['target_field'] = '" . $time_interval_array['target_field'] . "';\n";
+                    $timeArray .= "\t \$trigger_time_count = " . var_export($trigger_time_count, true) . ";\n ";
+                    $timeArray .= "\t \$time_array['time_int'] = " . var_export($time_interval_array['time_int'], true) . ";\n";
+                    $timeArray .= "\t \$time_array['time_int_type'] = " . var_export($time_interval_array['time_int_type'], true) . ";\n";
+                    $timeArray .= "\t \$time_array['target_field'] = " . var_export($time_interval_array['target_field'], true) . ";\n";
                 }
                 $eval_dump .= $timeArray;
-                $eval_dump .= "\t \$workflow_id = '" . $row['id'] . "'; \n\n";
+                $eval_dump .= "\t \$workflow_id = " . var_export($row['id'], true) . "; \n\n";
 
 				$eval_dump .= 'if(!empty($_SESSION["workflow_cron"]) && $_SESSION["workflow_cron"]=="Yes" &&
 				!empty($_SESSION["workflow_id_cron"]) && ArrayFunctions::in_array_access($workflow_id, $_SESSION["workflow_id_cron"])){
@@ -754,7 +757,7 @@ $alert_file_contents = "";
                     $additionalEval[] = "({$eval})";
                 }
                 foreach ($this->secondary_triggers as $key => $secondaryTrigger) {
-                    $eval_dump .= "'" . $secondaryTrigger['field'] . "', ";
+                    $eval_dump .= var_export($secondaryTrigger['field'], true) . ", ";
 
                     if ($secondaryTrigger['type'] == 'filter_rel_field') {
                         $relatedTriggers .= "\$filter{$key} = " . $secondaryTrigger['eval'] . "; \n";
@@ -767,7 +770,7 @@ $alert_file_contents = "";
                         $additionalEval[] = $secondaryTrigger['eval'];
                     }
                 }
-                $eval_dump .= "'" . $row['target_field'] . "'));\n";
+                $eval_dump .=  var_export($row['target_field'], true) . "));\n";
                 $eval_dump .= $relatedTriggers;
                 $eval_dump .= "\$dataChanged = \$GLOBALS['db']->getDataChanges(\$focus, \$checkFields);\n";
                 $eval_dump .= "if ((empty(\$focus->fetched_row) ";
@@ -782,7 +785,7 @@ $alert_file_contents = "";
                 $eval_dump .= ") {\n";
                 // Need to add the $timeArray and $workflow_id here for check_for_schedule() call
                 $eval_dump .= $timeArray;
-                $eval_dump .= "\$workflow_id = '" . $row['id'] . "'; \n\n";
+                $eval_dump .= "\$workflow_id = " . var_export($row['id'], true) . "; \n\n";
                 $eval_dump .= get_time_contents($row['id']);
                 $eval_dump .= "}\n";
 
@@ -861,23 +864,23 @@ SQL;
 				$eval .= "\t if(";
 				$eval .= html_entity_decode($row['eval'], ENT_QUOTES);
                 $secondaryTriggersEval = html_entity_decode($row['eval'], ENT_QUOTES);
-				$eval .= "\t ){ \n";
-				$eval_reached = true;
-			}
-			if($row['type']=="filter_rel_field"){
-				$this->glue_object->build_trigger_triggers("trigger_".$trigger_count."_secondary_".$secondary_count, $row['id']);
-				$secondaryTriggersEval = "check_rel_filter(\$focus, \$secondary_array, '".$row['rel_module']."', \$trigger_meta_array['trigger_".$trigger_count."_secondary_".$secondary_count."'], '".$row['rel_module_type']."')";
-				$eval .= "\t \$secondary_array = " . $secondaryTriggersEval . "; \n";
-				$eval .= "\t if(";
-				$eval .= "(\$secondary_array['results']==true)";
-				$eval .= "\t ){ \n";
-				$eval_reached = true;
-			}
-			if($row['type']=="trigger_record_change"){
-				$eval .= "\t if(true){ \n";
-				$eval_reached = true;
-			}
-			//BEGIN WFLOW PLUGINS
+                $eval .= "\t ){ \n";
+                $eval_reached = true;
+            }
+            if ($row['type'] == 'filter_rel_field') {
+                $this->glue_object->build_trigger_triggers('trigger_' . $trigger_count . '_secondary_' . $secondary_count, $row['id']);
+                $secondaryTriggersEval = "check_rel_filter(\$focus, \$secondary_array, " . var_export($row['rel_module'], true) . ", \$trigger_meta_array['trigger_" . $trigger_count . '_secondary_' . $secondary_count . "'], " . var_export($row['rel_module_type'], true) . ")";
+                $eval .= "\t \$secondary_array = " . $secondaryTriggersEval . "; \n";
+                $eval .= "\t if(";
+                $eval .= "(\$secondary_array['results']==true)";
+                $eval .= "\t ){ \n";
+                $eval_reached = true;
+            }
+            if ($row['type'] == 'trigger_record_change') {
+                $eval .= "\t if(true){ \n";
+                $eval_reached = true;
+            }
+            //BEGIN WFLOW PLUGINS
 
 				//prepare the opt array
 				$opt['object'] = $this;
@@ -1252,6 +1255,7 @@ function get_field_value_array($base_module=false, $inclusion_type=false, $exclu
 
 
 
+        $inclusion_array = null;
 	if($base_module==false){
 		$base_module = $this->base_module;
 	}

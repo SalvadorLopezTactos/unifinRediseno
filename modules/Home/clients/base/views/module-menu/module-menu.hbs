@@ -11,12 +11,14 @@
  */
 --}}
 {{#if meta.short}}
-    <a class="cube module-list-link" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:cube" tabindex="-1">{{{logoImage}}}</a>
+    <a class="cube module-list-link" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:cube" tabindex="-1">
+        <img src="{{logoImage}}" alt="{{str 'LBL_SUGAR_CUBE_ALT' module}}">
+    </a>
 {{else}}
     <a class="cube btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}"
         data-route="#{{buildRoute module=module}}" track="click:cube" aria-label="{{getModuleName module plural=true}}"
     >
-        {{{logoImage}}}
+        <img src="{{logoImage}}" alt="{{str 'LBL_SUGAR_CUBE_ALT' module}}">
     </a>
     {{#if actions}}
         <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown"

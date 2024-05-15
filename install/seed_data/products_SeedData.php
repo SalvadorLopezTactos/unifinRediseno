@@ -84,13 +84,13 @@ function traverse_tree($parent_id, $depth_flag, &$tree_depth, &$tree_branches, &
 function create_category($parent_id){
 global $sugar_demodata;
 $last_name_array = $sugar_demodata['last_name_array'];
-$last_name_count = count($sugar_demodata['last_name_array']);
+    $last_name_count = is_countable($sugar_demodata['last_name_array']) ? count($sugar_demodata['last_name_array']) : 0;
 
 
 $last_name_max = $last_name_count - 1;
 	
 	$category = new ProductCategory();
-	$category->name = $last_name_array[mt_rand(0,$last_name_max)] .$sugar_demodata['category_ext_name'];
+    $category->name = $last_name_array[random_int(0, $last_name_max)] .$sugar_demodata['category_ext_name'];
 	$category->parent_id = $parent_id;
     $key = array_rand($sugar_demodata['users']);
     $category->assigned_user_id = $sugar_demodata['users'][$key]['id'];
@@ -112,9 +112,9 @@ function create_product($category_id)
     $serviceDurationUnitArray = ['year', 'month', 'day', 'month'];
     $serviceDurationValueArray = [1, 6, 14, 24];
     $first_name_array = $sugar_demodata['first_name_array'];
-    $first_name_count = count($sugar_demodata['first_name_array']);
+    $first_name_count = is_countable($sugar_demodata['first_name_array']) ? count($sugar_demodata['first_name_array']) : 0;
     $company_name_array = $sugar_demodata['company_name_array'];
-    $company_name_count = count($sugar_demodata['company_name_array']);
+    $company_name_count = is_countable($sugar_demodata['company_name_array']) ? count($sugar_demodata['company_name_array']) : 0;
     global $dollar_id;
     if (empty($dollar_id)) {
         $dollar_id = '-99';
@@ -122,13 +122,13 @@ function create_product($category_id)
     global $manufacturer_id_arr;
     $first_name_max = $first_name_count - 1;
 
-    $cost = rand(300, 600);
-    $list = rand(700, 1000);
-    $discount = rand($list - 200, $list - 50);
+    $cost = random_int(300, 600);
+    $list = random_int(700, 1000);
+    $discount = random_int($list - 200, $list - 50);
     $pricingFormulas = array_keys($app_list_strings['pricing_formula_dom']);
 
     $template = new ProductTemplate();
-    $template->name = $first_name_array[mt_rand(0, $first_name_max)] . $sugar_demodata['product_ext_name'];
+    $template->name = $first_name_array[random_int(0, $first_name_max)] . $sugar_demodata['product_ext_name'];
     $template->tax_class = "Taxable";
     $template->manufacturer_id = $manufacturer_id_arr[0];
     $template->currency_id = $dollar_id;
@@ -139,15 +139,15 @@ function create_product($category_id)
     $template->discount_price = $discount;
     $template->discount_usdollar = $discount;
     $template->pricing_formula = $pricingFormulas[array_rand($pricingFormulas, 1)];
-    $template->mft_part_num = $company_name_array[mt_rand(0, $company_name_count - 1)] . ' ' . mt_rand(
+    $template->mft_part_num = $company_name_array[random_int(0, $company_name_count - 1)] . ' ' . random_int(
             1,
             1000000
         ) . "XYZ987";
     $template->pricing_factor = "1";
     $template->status = "Available";
-    $template->weight = rand(10, 40);
+    $template->weight = random_int(10, 40);
     $template->date_available = "2004-10-15";
-    $template->qty_in_stock = rand(0, 150);
+    $template->qty_in_stock = random_int(0, 150);
     $template->category_id = $category_id;
     if ($serviceCount <= 3) {
         $template->service = true;

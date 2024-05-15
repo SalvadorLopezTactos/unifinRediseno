@@ -57,6 +57,7 @@ class ProjectSugarpdfProjectgrid extends Sugarpdf{
      * Custom header for Projectgrid
      */
     public function Header() {
+        $table = [];
         $ormargins = $this->getOriginalMargins();
         $headerfont = $this->getHeaderFont();
         $headerdata = $this->getHeaderData();
@@ -91,6 +92,7 @@ class ProjectSugarpdfProjectgrid extends Sugarpdf{
     }
     
     function preDisplay(){
+        $grid = [];
         global $mod_strings, $timedate;
         parent::preDisplay();
         
@@ -148,6 +150,7 @@ class ProjectSugarpdfProjectgrid extends Sugarpdf{
     }
     
     function display(){
+        $item = [];
         global $mod_strings, $app_list_strings;
         
         //Create new page           

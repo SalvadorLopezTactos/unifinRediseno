@@ -20,6 +20,7 @@ class TrackerQueriesDatabaseStore implements Store {
 
     public function flush($monitor)
     {
+        $fields = [];
         $db = DBManagerFactory::getInstance();
         if ($monitor->run_count > 1) {
             $db->getConnection()

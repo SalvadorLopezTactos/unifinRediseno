@@ -215,8 +215,7 @@ function retrieve_modified_relationships($module_name, $related_module, $relatio
     			    }
 			    }
 			}
-			if($index < (count($select_fields) - 1))
-			{
+            if ($index < ((is_countable($select_fields) ? count($select_fields) : 0) - 1)) {
 				$field_select .= ",";
 				$index++;
 			}

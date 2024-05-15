@@ -446,6 +446,7 @@ class PMSEHistoryLogWrapper
      */
     private function getProcessStatus($case_id)
     {
+        $statusEntry = [];
         $q = new SugarQuery();
         $fields = array(
             'cas_status',

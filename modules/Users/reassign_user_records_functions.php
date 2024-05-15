@@ -122,7 +122,7 @@ function processConditions(SugarBean $bean, string $fromuser, array $moduleFilte
                     // only thing and set to none. However, we need to
                     // exclude '0', since '0' is considered by php
                     // to be empty, but in our logic, it is a valid value.
-                    if (count($data[$metaName]) == 1 &&
+                    if ((is_countable($data[$metaName]) ? count($data[$metaName]) : 0) == 1 &&
                         empty($data[$metaName][0]) &&
                         $data[$metaName][0] !== '0') {
                         continue 2;

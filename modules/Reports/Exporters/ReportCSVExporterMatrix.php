@@ -197,7 +197,7 @@ abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
             $data = $this->makeDetailData($row, $headers);
             $walker = &$output;
             // make the trie for the grouping part
-            for ($i = 0; $i < count($grouping); $i++) {
+            for ($i = 0; $i < (is_countable($grouping) ? count($grouping) : 0); $i++) {
                 if (!isset($walker[$grouping[$i]['label']])) {
                     // if the label is not yet there
                     $walker[$grouping[$i]['label']] = array();

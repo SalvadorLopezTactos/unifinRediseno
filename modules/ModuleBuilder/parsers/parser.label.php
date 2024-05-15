@@ -120,6 +120,7 @@ class ParserLabel extends ModuleBuilderParser
      * @param string $basepath      base path of the language file
      */
     static function removeLabel($language, $label, $labelvalue, $moduleName, $basepath = null) {
+        $deployedModule = null;
         $GLOBALS['log']->debug("ParserLabel->removeLabels($language, \$label, \$labelvalue, $moduleName, $basepath );");
         if (is_null($basepath)) {
             $deployedModule = true ;

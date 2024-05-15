@@ -73,8 +73,8 @@ trait MemoryUsageRecorderTrait
     protected function getMemoryUsageLimitFromIni() : int
     {
         $memory_limit = ini_get('memory_limit');
-        if (empty($memory_limit)) {
-            $memory_limit = '-1';
+        if (empty($memory_limit) || $memory_limit === '-1') {
+            return -1;
         }
         preg_match('/^\s*([0-9.]+)\s*([KMGTPE])B?\s*$/i', $memory_limit, $matches);
         $num = 0;

@@ -149,7 +149,7 @@
                 return item.tagName === 'IFRAME';
             });
             if (frame && frame.contentWindow && frame.contentWindow.document && !_.isNull(value)) {
-                frame.contentDocument.body.innerHTML = value;
+                frame.contentDocument.body.innerHTML = sanitizedValue;
 
                 // Set the styling of the view mode based on the current sugar theme
                 this._setViewContentThemeStyling(frame);

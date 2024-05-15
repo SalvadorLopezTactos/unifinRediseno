@@ -70,17 +70,6 @@ class Prospect extends Person {
     // This is used to retrieve related fields from form posts.
 	var $additional_column_fields = Array('assigned_user_name');
 
-
-	public function __construct() {
-		parent::__construct();
-		global $current_user;
-		if(!empty($current_user)) {
-			$this->team_id = $current_user->default_team;	//default_team is a team id
-		} else {
-			$this->team_id = 1; // make the item globally accessible
-		}
-	}
-
 	function fill_in_additional_list_fields()
 	{
 		parent::fill_in_additional_list_fields();
@@ -159,7 +148,7 @@ class Prospect extends Person {
             }
         }
 
-        $count = count($fields);
+        $count = is_countable($fields) ? count($fields) : 0;
         $index = 1;
         $sel_fields = "";
         if(!empty($fields))

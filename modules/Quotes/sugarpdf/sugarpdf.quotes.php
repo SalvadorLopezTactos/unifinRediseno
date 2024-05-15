@@ -31,6 +31,7 @@ class QuotesSugarpdfQuotes extends Sugarpdf{
      * Custom header for Quotes
      */
     public function Header() {
+        $table = [];
         $ormargins = $this->getOriginalMargins();
         $headerfont = $this->getHeaderFont();
         $headerdata = $this->getHeaderData();

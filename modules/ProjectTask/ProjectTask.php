@@ -80,13 +80,6 @@ class ProjectTask extends SugarBean {
 				$this->assigned_user_id = $current_user->id;
 				$this->assigned_user_name = $current_user->user_name;
 			}
-
-			global $current_user;
-			if(!empty($current_user)) {
-				$this->team_id = $current_user->default_team;	//default_team is a team id
-			} else {
-				$this->team_id = 1; // make the item globally accessible
-			}
 		}
 	}
     /**
@@ -441,6 +434,7 @@ class ProjectTask extends SugarBean {
     */
     function getAllSubProjectTasks()
     {
+        $potentialParentTaskIds = [];
 		$projectTasksBeans = array();
 
         if (!empty($this->project_task_id) && !empty($this->project_id))

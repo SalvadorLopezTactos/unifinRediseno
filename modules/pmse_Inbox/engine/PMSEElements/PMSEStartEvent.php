@@ -121,7 +121,7 @@ class PMSEStartEvent extends PMSEEvent
         $dueDate = $_date->asDb();
 
         //todo: generate a pin
-        $cas_pin = rand(0, 10000);
+        $cas_pin = random_int(0, 10000);
 
         //execute queries to get the correct process Id and process title
         $pro_id = $elementData['pro_id'];

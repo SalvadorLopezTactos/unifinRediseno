@@ -190,6 +190,9 @@ class MetaDataHelper
 
         $ftsFields = array();
         $vardefs = $this->getModuleVardefs($module);
+        if (!isset($vardefs['fields']) || !is_array($vardefs['fields'])) {
+            return $ftsFields;
+        }
         foreach ($vardefs['fields'] as $field => $defs) {
 
             // skip field if no type has been defined

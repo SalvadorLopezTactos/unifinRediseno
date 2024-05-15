@@ -46,7 +46,7 @@ class BeanFactory {
      */
     public static function getBean($module, $id = null, $params = array(), $deleted = true)
     {
-        if (!$id) {
+        if (!$id || !(is_string($id) || is_numeric($id))) {
             return self::newBean($module);
         }
 
@@ -261,6 +261,34 @@ class BeanFactory {
     }
 
     /**
+     * @param string $module
+     * @param array $args
+     * @return SugarBean|null
+     */
+    public static function newBeanFromArgs(array $args): ?SugarBean
+    {
+        $bean = self::newBean($args['module'] ?? '');
+
+        if ($bean === null) {
+            return null;
+        }
+
+        $fillable = $bean->getFillable();
+
+        foreach ($fillable as $fieldName) {
+            if (in_array($fieldName, array_keys($args), true)) {
+                $bean->$fieldName = $args[$fieldName];
+            }
+            // field cannot be empty
+            if (empty($bean->$fieldName)) {
+                return null;
+            }
+        }
+
+        return $bean;
+    }
+
+    /**
      * Create new empty bean by object name
      * @param string $name
      * @return SugarBean|null
@@ -289,6 +317,9 @@ class BeanFactory {
      */
     public static function getBeanClass($module)
     {
+        if (!is_string($module)) {
+            return false;
+        }
         if(!empty(self::$bean_classes[$module])) {
             return self::$bean_classes[$module];
         }
@@ -392,6 +423,7 @@ class BeanFactory {
      */
     public static function registerBean($bean)
     {
+        $info = [];
         global $beanList;
 
         if (func_num_args() > 1) {

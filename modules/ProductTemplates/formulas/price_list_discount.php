@@ -50,7 +50,7 @@ class PercentageDiscount {
 
 	function calculate_price($cost_price, $list_price, $discount_price, $factor) {
 		//Percentage Markup: $discount_price = $cost_price x (1 + $percentage) 
-		$discount_price  = 	$list_price * (1 - ($factor/100));
+        $discount_price = (float)$list_price * (1 - ((float)$factor / 100));
 		return $discount_price;
 	}
 }

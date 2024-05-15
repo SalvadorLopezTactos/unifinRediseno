@@ -18,10 +18,6 @@
  ********************************************************************************/
 
 
-
-
-
-
 global $app_strings;
 global $mod_strings;
 
@@ -62,7 +58,7 @@ $xtpl->assign("ID", $focus->id);
 if (!empty($_REQUEST['campaign_name'])) {
 	$xtpl->assign("CAMPAIGN_NAME", $_REQUEST['campaign_name']);
 } else  {
-	$xtpl->assign("CAMPAIGN_NAME", $focus->campaign_name);
+    $xtpl->assign("CAMPAIGN_NAME", htmlspecialchars($focus->campaign_name));
 }
 
 if (!empty($_REQUEST['campaign_id'])) {
@@ -87,4 +83,3 @@ if (!empty($focus->is_optout) && $focus->is_optout == 1) {
 
 $xtpl->parse("main");
 $xtpl->out("main");
-?>

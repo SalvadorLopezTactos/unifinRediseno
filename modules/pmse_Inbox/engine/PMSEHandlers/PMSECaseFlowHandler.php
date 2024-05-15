@@ -262,6 +262,7 @@ class PMSECaseFlowHandler
      */
     public function retrieveData($caseID, $caseIndex, $threadIndex)
     {
+        $result = [];
         $flowParams = array('cas_id' => $caseID, 'cas_index' => $caseIndex, 'cas_thread' => $threadIndex);
         $flowData = $this->retrieveFlowData($flowParams);
         $bpmnElement = $this->retrieveElementByType($flowData);

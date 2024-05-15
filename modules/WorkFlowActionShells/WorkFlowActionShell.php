@@ -479,41 +479,25 @@ function copy($parent_id){
 		
 	//end function check_for_invitee_bridge_meta	
 	}	
-	
-	
 
-	function check_for_child_bridge($delete=false){
-		
-		$query = "SELECT id FROM workflow WHERE parent_id='".$this->id."'";
-		$result = $this->db->query($query,true," Error getting child bridge: ");
-
-		// Get the id and the name.
-		$row = $this->db->fetchByAssoc($result);
-	
-		if($row!=null){
-		
-			if($delete==true){
-				
-				$workflow_object = BeanFactory::getBean('WorkFlow', $row['id']);
-				$workflow_object->check_controller = false;
+    public function check_for_child_bridge($delete = false)
+    {
+        $sql = 'SELECT id FROM workflow WHERE parent_id=?';
+        $row = DBManagerFactory::getInstance()
+            ->getConnection()
+            ->executeQuery($sql, [$this->id])
+            ->fetchAssociative();
+        if ($row !== false) {
+            if ($delete) {
+                $workflow_object = BeanFactory::getBean('WorkFlow', $row['id']);
+                $workflow_object->check_controller = false;
                 $workflow_object->mark_deleted($row['id']);
+            } else {
+                return $row['id'];
+            }
+        }
+    }
 
-			// end if delete is true
-			} else {
-				
-				return $row['id'];	
-			}		
-				
-		//end if a child exists
-		}	
-		
-	//end function check_for_child_bridge
-	}	
-	
-	
-	
-	
-	
 	function check_for_child_invitee($action_shell_id){
 		
 		$this->retrieve($action_shell_id);

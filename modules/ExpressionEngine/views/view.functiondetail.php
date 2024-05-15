@@ -18,6 +18,7 @@ class ViewFunctiondetail extends SugarView
  	}
 
  	function display(){
+         $FUNCTION_MAP = [];
  		global $app_strings, $current_user, $mod_strings, $theme, $beanList, $beanFiles;
  		if (!is_file($cachefile = sugar_cached('Expressions/functionmap.php'))) {
         	$GLOBALS['updateSilent'] = true;

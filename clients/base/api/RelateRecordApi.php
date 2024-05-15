@@ -288,10 +288,18 @@ class RelateRecordApi extends SugarApi
             $relatedData = $this->getRelatedFields($api, $args, $primaryBean, $linkName, $relatedBean);
             $primaryBean->$linkName->add(array($relatedBean), array_merge($relatedData, $additionalValues));
 
+            if (!empty($args['avoid_response'])) {
+                continue;
+            }
+
             $result['related_records'][] = $this->formatBean($api, $args, $relatedBean);
         }
         //Clean up any hanging related records.
         SugarRelationship::resaveRelatedBeans();
+
+        if (!empty($args['avoid_response'])) {
+            return [];
+        }
 
         $result['record'] = $this->formatBean($api, $args, $primaryBean);
 
@@ -446,6 +454,10 @@ class RelateRecordApi extends SugarApi
 
         //Clean up any hanging related records.
         SugarRelationship::resaveRelatedBeans();
+
+        if (!empty($args['avoid_response'])) {
+            return [];
+        }
 
         // Get fresh copies of primary and related beans so that the newly deleted relationship
         // shows as deleted. See BR-1055, BR-1630

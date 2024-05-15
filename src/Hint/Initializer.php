@@ -478,8 +478,9 @@ class Initializer implements LoggerAwareInterface
         $nonInactiveUsersQuery = new \SugarQuery();
         $nonInactiveUsersQuery->select(['id']);
         // using status Active should screen out fake users like the snip user
-        $nonInactiveUsersQuery->from($user)->where()->condition('status', '=', 'Active');
-        $nonInactiveUsersQuery->from($user)->where()->queryAnd('deleted', '=', '0');
+        $nonInactiveUsersQuery->from($user)->where()->queryAnd()
+            ->condition('status', '=', 'Active')
+            ->condition('deleted', '=', '0');
 
         $assignedUserIds = array_column($query->execute(), 'id');
         $nonInactiveUserIds = array_column($nonInactiveUsersQuery->execute(), 'id');

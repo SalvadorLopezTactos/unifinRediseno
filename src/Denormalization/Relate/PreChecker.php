@@ -105,6 +105,7 @@ final class PreChecker
      */
     public function validateNormalization(Entity $entity): array
     {
+        $details = [];
         if ($entity->fieldDef['type'] !== 'relate') {
             return ['validation_error' => 'LBL_MANAGE_RELATE_DENORMALIZATION_PRECHECK_SUPPORTED_TYPES'];
         }
@@ -149,7 +150,7 @@ final class PreChecker
             return $yValues[0];
         }
 
-        $size = count($xValues);
+        $size = is_countable($xValues) ? count($xValues) : 0;
         $minDelta = null;
         $firstI = 0;
         $secondI = 0;

@@ -306,7 +306,7 @@ class LanguageApi extends SugarApi
     protected function formatSysDropdownItems(string $name, string $lang) : array
     {
         $appListStrings = return_app_list_strings_language($lang);
-        $currentDD = $appListStrings[$name];
+        $currentDD = isset($appListStrings[$name]) && is_array($appListStrings[$name]) ? $appListStrings[$name] : [];
         $dropdownItems = [];
         foreach ($currentDD as $key => $value) {
             $itemName = $key == '' ? '-blank-' : $key;

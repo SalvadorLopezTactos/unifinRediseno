@@ -42,6 +42,7 @@ class campaign_charts {
         bool $refresh = false,
         string $marketing_id = ''
     ): string {
+        $targeted = [];
 		global $app_strings, $mod_strings, $charset, $lang, $barChartColors,$app_list_strings;
 		$sugarChart = SugarChartFactory::getInstance('','Reports');
 		$xmlFile = $sugarChart->getXMLFileName($campaign_id);
@@ -198,6 +199,8 @@ class campaign_charts {
         bool $is_dashlet = false,
         string $dashlet_id = ''
     ): string {
+        $focus = null;
+        $opp_data1 = [];
 		global $app_strings,$mod_strings, $current_module_strings, $charset, $lang, $app_list_strings, $current_language,$sugar_config;
 
 		$not_empty = false;

@@ -107,7 +107,7 @@ abstract class SugarCacheAbstract
             // if Redis or any other external cache is enabled
             // this method can be called twice: SugarCachePsr::get and SugarCacheRedis::get
             // causing double prefix and it messes the cache up
-            if (strpos($key, $this->_keyPrefix) === 0) {
+            if (strpos($key, (string) $this->_keyPrefix) === 0) {
                 $key = str_replace($this->_keyPrefix, '', $key);
             }
             $this->_localStore[$key] = $this->_getExternal($this->_keyPrefix.$key);

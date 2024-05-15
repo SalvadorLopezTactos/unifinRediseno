@@ -67,7 +67,7 @@
 	</tr>
 	<tr id='readmefield' style="display:none;">
 		<td></td>
-		<td ><textarea name='readme' cols='60' rows='10'>{$package->readme}</textarea></td>
+        <td ><textarea name="readme" cols="60" rows="10">{$package->readme|escape:'html':'UTF-8'}</textarea></td>
 	</tr>
 	
 	{if !empty($package->name)}

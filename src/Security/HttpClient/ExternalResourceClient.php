@@ -42,7 +42,6 @@ class ExternalResourceClient implements ClientInterface
      * @var ResponseFactoryInterface
      */
     private $responseFactory;
-
     /**
      * @param float $timeout Read timeout in seconds, specified by a float (e.g. 10.5)
      * @param int $maxRedirects The max number of redirects to follow. Value 0 means that no redirects are followed
@@ -119,7 +118,7 @@ class ExternalResourceClient implements ClientInterface
      */
     public function post(string $url, $body, array $headers = []): ResponseInterface
     {
-        return $this->request('POST', $url, is_string($body)? $body : http_build_query($body), array_merge(['Content-type' => 'application/x-www-form-urlencoded'], $headers));
+        return $this->request('POST', $url, is_string($body)? $body : http_build_query((array) $body), array_merge(['Content-type' => 'application/x-www-form-urlencoded'], $headers));
     }
 
     /**
@@ -132,7 +131,7 @@ class ExternalResourceClient implements ClientInterface
      */
     public function put(string $url, $body, array $headers = []): ResponseInterface
     {
-        return $this->request('PUT', $url, is_string($body)? $body : http_build_query($body), array_merge(['Content-type' => 'application/x-www-form-urlencoded'], $headers));
+        return $this->request('PUT', $url, is_string($body)? $body : http_build_query((array) $body), array_merge(['Content-type' => 'application/x-www-form-urlencoded'], $headers));
     }
 
     /**
@@ -145,7 +144,7 @@ class ExternalResourceClient implements ClientInterface
      */
     public function patch(string $url, $body, array $headers = []): ResponseInterface
     {
-        return $this->request('PATCH', $url, is_string($body)? $body : http_build_query($body), array_merge(['Content-type' => 'application/x-www-form-urlencoded'], $headers));
+        return $this->request('PATCH', $url, is_string($body)? $body : http_build_query((array) $body), array_merge(['Content-type' => 'application/x-www-form-urlencoded'], $headers));
     }
 
     /**

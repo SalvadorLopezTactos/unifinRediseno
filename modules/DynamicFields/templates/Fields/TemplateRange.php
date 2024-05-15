@@ -38,6 +38,7 @@ class TemplateRange extends TemplateText
 	 */
     public function populateFromPost(Request $request = null)
     {
+        $searchFields = [];
         if (!$request) {
             $request = InputValidation::getService();
         }

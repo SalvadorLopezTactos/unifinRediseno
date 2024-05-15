@@ -11,6 +11,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-setcookie('touchscreen','1', time() + 86400 * 90);
+setcookie('touchscreen', '1', ['expires' => time() + 86400 * 90]);
 
 header('Location:index.php?module=Users&action=Login');

@@ -45,7 +45,7 @@ if (!class_exists('UserUtilitiesJob')) {
         {
             $this->job->runnable_ran = true;
             $this->job->runnable_data = $data;
-            $data = unserialize(base64_decode($this->job->runnable_data));
+            $data = unserialize(base64_decode($this->job->runnable_data), ['allowed_classes' => false]);
             $invoker = new Invoker([$data]);
             $newCommands = [];
             foreach ($invoker->getCommands() as $command) {

@@ -290,6 +290,7 @@ r22618 - 2007-05-09 15:36:06 -0700 (Wed, 09 May 2007) - clee - Added file.
  */
 function smarty_function_sugar_button($params, $smarty)
 {
+    $output = null;
    if(empty($params['module'])) {
    	  $smarty->trigger_error("sugar_button: missing required param (module)");
    } else if(empty($params['id'])) {

@@ -16,7 +16,7 @@ class PdfManagerViewEdit extends ViewEdit
 {
     public function display()
     {
-    
+
         // Disable VCR Control
         $this->ev->showVCRControl = false;
 
@@ -25,7 +25,11 @@ class PdfManagerViewEdit extends ViewEdit
             $this->bean->team_id = 1;
             $this->bean->team_set_id = 1;
         }
-    
+        /**
+         * Remove potential XSS vectors
+         */
+        $this->bean->body_html = SugarCleaner::cleanHtml($this->bean->body_html, true);
+
         // Load TinyMCE
         $tiny = new SugarTinyMCE();
         $tiny->defaultConfig['apply_source_formatting']=true;

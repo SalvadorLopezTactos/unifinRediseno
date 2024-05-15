@@ -154,6 +154,7 @@ class ArchivedEmailsLink extends Link2
      */
     public function getJoin($params = array(), $return_as_array = false)
     {
+        $return_array = [];
         $return_array['join'] = $this->getEmailsJoin($params);
 
         $join_type = !empty($params['join_type']) ? $params['join_type'] : ' INNER JOIN ';
@@ -256,6 +257,7 @@ SQL;
      */
     public function getQuery($params = array())
     {
+        $query_array = [];
         $query_array['select'] = "SELECT DISTINCT emails.* ";
         $query_array['from'] = "FROM emails ";
         $query_array['join'] = $this->getEmailsJoin();
@@ -304,6 +306,7 @@ SQL;
      */
     public function getSubpanelQuery($params = array(), $return_array = false)
     {
+        $query_array = [];
         $query_array['join'] = $this->getEmailsJoin($params);
         $query_array['select'] = "";
         $query_array['from'] = "";

@@ -507,7 +507,7 @@ function clean_save_data($target_module, $action_array){
 				// make sure there are options, some enums based on functions don't have options set
 				if($target_module->field_defs[$field]['type']=='enum' && isset($target_module->field_defs[$field]['options'])) {
 					$options_array_name = $target_module->field_defs[$field]['options'];
-					$target_module->$field = key($app_list_strings[$options_array_name]);
+                $target_module->{$field} = key(is_array($app_list_strings[$options_array_name]) ? $app_list_strings[$options_array_name] : ['' => '']);
 					$data_cleaned = true;
 				//end if type is enum
 				}

@@ -12,7 +12,7 @@
 *}
 
 
-<form method="post" action="{$insights.url}" target="_blank" rel="nofollow noopener noreferrer">
+<form method="post" action="{$insights.url}" target="_blank">
     <input name="key" value="{$insights.key}" type="hidden">
     <input name="login" value="{$mod.LBL_FORM_ACCESS_CLOUD_INSIGHT}" type="submit">
 </form>

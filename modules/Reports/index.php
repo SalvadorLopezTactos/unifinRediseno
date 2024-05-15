@@ -324,7 +324,7 @@ function control(&$args)
                 $result = $saved_report->mark_published("yes");
                 if ($result == -1)
                 {
-                        $error_msg = htmlspecialchars($mod_strings['MSG_UNABLE_PUBLISH_ANOTHER']);
+                    $error_msg = htmlspecialchars($mod_strings['MSG_UNABLE_PUBLISH_ANOTHER']);
                 }
         }
         else if ( $_REQUEST['publish'] == 'no')
@@ -334,7 +334,7 @@ function control(&$args)
                 $result = $saved_report->mark_published("no");
                 if ($result == -1)
                 {
-                        $error_msg = htmlspecialchars($mod_strings['MSG_UNABLE_PUBLISH_YOU_OWN']);
+                    $error_msg = htmlspecialchars($mod_strings['MSG_UNABLE_PUBLISH_YOU_OWN']);
 
                 }
         }

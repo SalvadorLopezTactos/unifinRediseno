@@ -99,6 +99,7 @@ class Contract extends SugarBean
 
     function save($check_notify = false)
     {
+        $time_array = [];
         /** @var TimeDate $timedate */
         global $timedate;
 

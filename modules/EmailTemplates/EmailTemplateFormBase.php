@@ -256,7 +256,7 @@ EOQ;
 	///////////////////////////////////////////////////////////////////////////
 	////	ATTACHMENTS FROM DOCUMENTS
 	if(!empty($_REQUEST['document'])){
-      $count = count($_REQUEST['document']);
+            $count = is_countable($_REQUEST['document']) ? count($_REQUEST['document']) : 0;
     } else {
     	$count=10;
     }

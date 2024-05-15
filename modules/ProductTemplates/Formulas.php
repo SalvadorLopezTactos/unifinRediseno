@@ -52,6 +52,7 @@ function refresh_price_formulas()
 }
 
 function get_formula_details($pricing_factor) {
+    $output = [];
 	global $price_formulas;
 	foreach ($price_formulas as $formula=>$file) {
 		require_once($file);

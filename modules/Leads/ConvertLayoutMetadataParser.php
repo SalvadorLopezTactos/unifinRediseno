@@ -312,6 +312,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
      */
     public function getDefaultDefForModule($module)
     {
+        $viewdefs = [];
         // check if custom def exists
         $fileName = "modules/$module/clients/base/layouts/convert-main-for-leads/convert-main-for-leads.php";
 

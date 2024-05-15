@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 function get_expression($express_type, $first, $second){
 	
 	if($express_type=="+"){
@@ -29,19 +28,43 @@ function get_expression($express_type, $first, $second){
 }
 
 function express_add($first, $second){
+    [$first, $second] = express_prepare_params($first, $second);
 	return $first + $second;
 }	
 
 function express_subtract($first, $second){
+    [$first, $second] = express_prepare_params($first, $second);
 	return $first - $second;
 }
 
 function express_multiple($first, $second){
+    [$first, $second] = express_prepare_params($first, $second);
 	return $first * $second;
 }
 
 function express_divide($first, $second){
+    [$first, $second] = express_prepare_params($first, $second);
+    if ($second == 0) {
+        LoggerManager::getLogger()->fatal('Division by zero: ' . (new Exception())->getTraceAsString());
+        return $first;
+    }
 	return $first / $second;
+}
+
+/**
+ * @param $first
+ * @param $second
+ * @return float[]|int[]
+ */
+function express_prepare_params($first, $second): array
+{
+    if (!is_numeric($first)) {
+        $first = (float)$first;
+    }
+    if (!is_numeric($second)) {
+        $second = (float)$second;
+    }
+    return [$first, $second];
 }
 
 

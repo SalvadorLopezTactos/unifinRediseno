@@ -38,6 +38,7 @@ class SubPanelViewUsers {
 		$this->hideNewButton = $value;
 	}
 	function getHeaderText($action, $currentModule){
+        $widget_data = [];
 		global $app_strings;
 		global $current_user;
 

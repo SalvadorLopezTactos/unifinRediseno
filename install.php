@@ -57,6 +57,7 @@ $trackerManager->pause();
 ///////////////////////////////////////////////////////////////////////////////
 ////	INSTALLER LANGUAGE
 function getSupportedInstallLanguages(){
+    $config = [];
 	$supportedLanguages = array(
 	'en_us'	=> 'English (US)',
 	);
@@ -92,7 +93,7 @@ if(isset($_POST['language'])) {
 	$_SESSION['language'] = str_replace('-','_',$_POST['language']);
 }
 
-$current_language = isset($_SESSION['language']) ? $_SESSION['language'] : $default_lang;
+$current_language = isset($_SESSION['language']) ? basename($_SESSION['language']) : $default_lang;
 
 if(file_exists("install/language/{$current_language}.lang.php")) {
     require_once FileLoader::validateFilePath("install/language/{$current_language}.lang.php");
@@ -358,14 +359,14 @@ $validation_errors = array();
 
             case 'systemOptions.php':
                 if (isset($_REQUEST['setup_db_type'])) {
-                    $validDbTypes = ['mysql', 'mssql', 'db2', 'oci8'];
+                    $validDbTypes = ['mysql', 'mssql', 'ibm_db2', 'oci8'];
                     if (!in_array(strtolower($_REQUEST['setup_db_type']), $validDbTypes)) {
-                        throw new \InvalidArgumentException(sprintf("Only 'mysql', 'mssql', 'db2', 'oci8' are supported db types, '%s' given", $_REQUEST['setup_db_type']));
+                        throw new \InvalidArgumentException(vsprintf("Only '%s', '%s', '%s', '%s' are supported db types, '%s' given", array_merge($validDbTypes, [$_REQUEST['setup_db_type']])));
                     }
                     $_SESSION['setup_db_type'] = $_REQUEST['setup_db_type'];
                 }
                 $validation_errors = validate_systemOptions();
-                if (count($validation_errors) > 0) {
+                if ((is_countable($validation_errors) ? count($validation_errors) : 0) > 0) {
                     $next_step--;
                 }
                 break;
@@ -397,7 +398,7 @@ $validation_errors = array();
 
                 $validation_errors = array();
                 $validation_errors = validate_siteConfig('a');
-                if (count($validation_errors) > 0) {
+                if ((is_countable($validation_errors) ? count($validation_errors) : 0) > 0) {
                     $next_step--;
                 }
                 break;
@@ -433,7 +434,7 @@ $validation_errors = array();
 
                 $validation_errors = array();
                 $validation_errors = validate_siteConfig('b');
-                if (count($validation_errors) > 0) {
+                if ((is_countable($validation_errors) ? count($validation_errors) : 0) > 0) {
                     $next_step--;
                 }
                 break;
@@ -511,17 +512,17 @@ EOQ;
         }
 
             $db_errors = validate_dbConfig();
-        if(count($db_errors) > 0) {
+            if ((is_countable($db_errors) ? count($db_errors) : 0) > 0) {
             $the_file = 'dbConfig_a.php';
             $si_errors = true;
         }
         $validation_errors = validate_siteConfig('a');
-        if(count($validation_errors) > 0) {
+            if ((is_countable($validation_errors) ? count($validation_errors) : 0) > 0) {
             $the_file = 'siteConfig_a.php';
             $si_errors = true;
         }
         $validation_errors = validate_siteConfig('b');
-        if(count($validation_errors) > 0) {
+            if ((is_countable($validation_errors) ? count($validation_errors) : 0) > 0) {
             $the_file = 'siteConfig_b.php';
             $si_errors = true;
         }
@@ -559,7 +560,7 @@ EOQ;
         if(isset($_REQUEST['cli']) && ($_REQUEST['cli'] == 'true')) {
             $_SESSION['cli'] = true;
             // if we have errors, just shoot them back now
-            if(count($validation_errors) > 0) {
+                if ((is_countable($validation_errors) ? count($validation_errors) : 0) > 0) {
                 foreach($validation_errors as $error) {
                     print($mod_strings['ERR_ERROR_GENERAL']."\n");
                     print("    " . $error . "\n");

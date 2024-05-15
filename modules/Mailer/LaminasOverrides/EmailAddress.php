@@ -94,6 +94,7 @@ class EmailAddress extends AbstractValidator
      */
     public function __construct($options = [])
     {
+        $temp = [];
         if (! is_array($options)) {
             $options = func_get_args();
             $temp['allow'] = array_shift($options);

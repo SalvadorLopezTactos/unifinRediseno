@@ -717,7 +717,7 @@ class CloudDriveApi extends SugarApi
                     $path[0]['folderId'] = 'root';
                 }
 
-                if (count($path) > 1) {
+                if (count((array) $path) > 1) {
                     $approximatePath = $this->approximatePath($api, $path, $folder, $args['type']);
 
                     if (is_null($approximatePath)) {

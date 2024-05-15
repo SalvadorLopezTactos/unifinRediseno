@@ -125,7 +125,7 @@ if ($marketing->all_prospect_lists==1) {
                 unset($prospectlists[$key]);
             }
         }
-        if (count($prospectlists) != 0) {
+        if ((is_countable($prospectlists) ? count($prospectlists) : 0) != 0) {
             foreach ($prospectlists as $key=>$list_id) {
                 $marketing->prospectlists->delete($marketing->id,$list_id);
             }
@@ -148,8 +148,10 @@ if($master !='save'){
     require_once('modules/Campaigns/QueueCampaign.php');
 }
 
-$header_URL = "Location: index.php?action=WizardHome&module=Campaigns&record=".$marketing->campaign_id;
-$GLOBALS['log']->debug("about to post header URL of: $header_URL");
-header($header_URL);
-
-?>
+$location = 'index.php?' . http_build_query([
+        'action' => 'WizardHome',
+        'module' => 'Campaigns',
+        'record' => $marketing->campaign_id,
+    ]);
+$GLOBALS['log']->debug("about to post header URL of: $location");
+header("Location: $location");

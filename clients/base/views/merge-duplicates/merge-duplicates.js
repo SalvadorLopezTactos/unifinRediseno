@@ -32,14 +32,10 @@
      * Default settings used when none are supplied through metadata.
      *
      * Supported settings:
-     * - {Number} merge_relate_fetch_concurrency Determining how many worker
-     *   functions should be run in parallel for fetch.
      * - {Number} merge_relate_fetch_timeout Timeout for fetch related records
      *   call (milliseconds).
      * - {Number} merge_relate_fetch_limit Max number of records to fetch
      *   for related collection at a time.
-     * - {Number} merge_relate_update_concurrency Determining how many worker
-     *   functions should be run in parallel for update beans.
      * - {Number} merge_relate_update_timeout Timeout for update
      *   beans (milliseconds).
      * - {Number} merge_relate_max_attempt Max number of attemps for
@@ -49,10 +45,8 @@
      * <pre><code>
      * // ...
      * 'settings' => array(
-     *      'merge_relate_fetch_concurrency' => 2,
      *      'merge_relate_fetch_timeout' => 90000,
      *      'merge_relate_fetch_limit' => 20,
-     *      'merge_relate_update_concurrency' => 4,
      *      'merge_relate_update_timeout' => 90000,
      *      'merge_relate_max_attempt' => 3,
      *      //...
@@ -64,10 +58,8 @@
      * @protected
      */
     _defaultSettings: {
-        merge_relate_fetch_concurrency: 2,
         merge_relate_fetch_timeout: 90000,
         merge_relate_fetch_limit: 20,
-        merge_relate_update_concurrency: 4,
         merge_relate_update_timeout: 90000,
         merge_relate_max_attempt: 3
     },
@@ -266,10 +258,8 @@
     _initSettings: function() {
 
         var configSettings = app.config.mergeDuplicates && {
-            merge_relate_fetch_concurrency: app.config.mergeDuplicates.mergeRelateFetchConcurrency,
             merge_relate_fetch_timeout: app.config.mergeDuplicates.mergeRelateFetchTimeout,
             merge_relate_fetch_limit: app.config.mergeDuplicates.mergeRelateFetchLimit,
-            merge_relate_update_concurrency: app.config.mergeDuplicates.mergeRelateUpdateConcurrency,
             merge_relate_update_timeout: app.config.mergeDuplicates.mergeRelateUpdateTimeout,
             merge_relate_max_attempt: app.config.mergeDuplicates.mergeRelateMaxAttempt
         };
@@ -1498,31 +1488,36 @@
                 });
             });
         });
-        queue = async.queue(function(task, callback) {
+
+        var finishMerge = function() {
+            self.mergeProgressModel.trigger('massupdate:end');
+            if (!self.mergeProgressModel.get('isStopped')) {
+                self.primaryRecord.trigger('mergeduplicates:related:merged');
+            }
+
+            if (self.mergeStat.total_fetch_errors > 0 || self.mergeStat.total_errors > 0) {
+                var headerpaneView = self.layout.getComponent('merge-duplicates-headerpane');
+                headerpaneView.getField('cancel_button').setDisabled(false);
+            }
+        };
+
+        let onTaskDone = function() {
+            if (tasks.length === 0) {
+                finishMerge();
+            } else {
+                processQueue();
+            }
+        };
+
+        var processQueue = function() {
             if (self.mergeProgressModel.get('isStopped')) {
-                callback.call();
                 return;
             }
-            self._mergeRelatedCollection(task.collection, callback);
-        }, this._settings.merge_relate_fetch_concurrency);
-        queue.drain = function() {
-            var finishMerge = function() {
-                self.mergeProgressModel.trigger('massupdate:end');
-                if (!self.mergeProgressModel.get('isStopped')) {
-                    self.primaryRecord.trigger('mergeduplicates:related:merged');
-                }
-
-                if (self.mergeStat.total_fetch_errors > 0 || self.mergeStat.total_errors > 0) {
-                    var headerpaneView = self.layout.getComponent('merge-duplicates-headerpane');
-                    headerpaneView.getField('cancel_button').setDisabled(false);
-                }
-            };
-            // Wait until all related records be merged or finish merge.
-            self.mergeRelatedCollection.queue.running() ?
-                self.mergeRelatedCollection.queue.drain = finishMerge :
-                finishMerge();
+            let task = tasks.shift();
+            self._mergeRelatedCollection(task.collection, onTaskDone);
         };
-        queue.push(tasks, function(err) {});
+
+        onTaskDone();
     },
 
     /**
@@ -1558,23 +1553,15 @@
              */
             initialize: function(models, options) {
                 this.view = options.view;
-                this.queue = async.queue(
-                    _.bind(function(task, callback) {
-                        this.sync('update', this, {
-                            chunk: task,
-                            queueSuccess: callback
-                        });
-                    }, this),
-                    this.view._settings.merge_relate_update_concurrency
-                );
-                this.on('add', function(model, options) {
-                    this.queue.push(
-                        {
+                this.on('add', function(model, options, args) {
+                    this.sync('update', this, {
+                        chunk: {
+                            source_id: model.link.bean.id,
                             link_name: model.link.name,
                             ids: _.pluck(this.models, 'id')
                         },
-                        function(err) {}
-                    );
+                        queueSuccess: args.callback || function() {}
+                    });
                     this.reset();
                 }, this);
             },
@@ -1586,33 +1573,76 @@
              * records into chunks.
              */
             sync: function(method, model, options) {
+                let urlParams = {
+                    avoid_response: true,
+                };
                 var apiMethod = options.method || this.method,
-                    url = app.api.buildURL(this.module, method, {link: true, id: this.id}, options.params),
-                    callbacks = {
-                        success: function(data, response) {
-                            model.view.mergeStat.total = model.view.mergeStat.total + options.chunk.ids.length;
-                            options.queueSuccess();
-                            if (_.isFunction(options.success)) {
-                                options.success(data);
-                            }
-                        },
-                        error: function(xhr) {
-                            model.attempt = model.attempt + 1;
-                            model.view.mergeProgressModel.trigger('massupdate:item:attempt', model);
-                            if (model.attempt <= (model.view._settings.merge_relate_max_attempt)) {
-                                app.api.call(apiMethod, url, options.chunk, callbacks);
-                            } else {
-                                model.attempt = 0;
-                                model.view.mergeStat.total_errors = model.view.mergeStat.total_errors + 1;
-                                model.view.mergeProgressModel.trigger('massupdate:item:fail', model);
-                            }
-                        },
-                        complete: function(xhr) {
-                            if (_.isFunction(options.complete)) {
-                                options.complete(xhr);
-                            }
+                    url = app.api.buildURL(this.module, method, {link: true, id: this.id}, urlParams);
+                let module = this.module;
+                callbacks = {
+                    success: function(data, response) {
+                        var params = {
+                            requests: [],
+                        };
+                        for (let i = 0; i < options.chunk.ids.length; i++) {
+                            params.requests.push({
+                                // buildURL() in app.api.call() calls the rest endpoint with the following request
+                                // remove rest from the url here
+                                url: app.api.buildURL(
+                                    module,
+                                    'delete',
+                                    {
+                                        link: options.chunk.link_name + '/' + options.chunk.ids[i],
+                                        id: options.chunk.source_id
+                                    },
+                                    urlParams
+                                ).substr(4),
+                                method: 'DELETE',
+                            });
                         }
-                    };
+                        app.api.call(
+                            'create',
+                            app.api.buildURL(null, 'bulk'),
+                            params,
+                            {
+                                success: function() {
+                                    model.view.mergeStat.total = model.view.mergeStat.total + options.chunk.ids.length;
+                                    options.queueSuccess();
+                                    if (_.isFunction(options.success)) {
+                                        options.success(data);
+                                    }
+                                },
+                                error: function(xhr) {
+                                    model.attempt = model.attempt + 1;
+                                    model.view.mergeProgressModel.trigger('massupdate:item:attempt', model);
+                                    if (model.attempt <= (model.view._settings.merge_relate_max_attempt)) {
+                                        app.api.call(apiMethod, url, options.chunk, callbacks);
+                                    } else {
+                                        model.attempt = 0;
+                                        model.view.mergeStat.total_errors = model.view.mergeStat.total_errors + 1;
+                                        model.view.mergeProgressModel.trigger('massupdate:item:fail', model);
+                                    }
+                                },
+                            }
+                        );
+                    },
+                    error: function(xhr) {
+                        model.attempt = model.attempt + 1;
+                        model.view.mergeProgressModel.trigger('massupdate:item:attempt', model);
+                        if (model.attempt <= (model.view._settings.merge_relate_max_attempt)) {
+                            app.api.call(apiMethod, url, options.chunk, callbacks);
+                        } else {
+                            model.attempt = 0;
+                            model.view.mergeStat.total_errors = model.view.mergeStat.total_errors + 1;
+                            model.view.mergeProgressModel.trigger('massupdate:item:fail', model);
+                        }
+                    },
+                    complete: function(xhr) {
+                        if (_.isFunction(options.complete)) {
+                            options.complete(xhr);
+                        }
+                    }
+                };
                 app.api.call(apiMethod, url, options.chunk, callbacks);
             }
         }),
@@ -1708,25 +1738,32 @@
         collection.fetch({
             relate: true,
             limit: this._settings.merge_relate_fetch_limit,
-            offset: offset,
+            offset: 0,
             fields: ['id'],
             apiOptions: {
                 timeout: this._settings.merge_relate_fetch_timeout,
                 skipMetadataHash: true
             },
             success: function(data, response, options) {
+                if (data && data.next_offset === -1 && offset > 0) {
+                    self._mergeRelatedCollection(collection, callback, 0);
+                    return;
+                }
+
                 if (!data || !data.models || !data.models.length) {
                     onCollectionMerged.call();
                     return;
                 }
 
-                self.mergeRelatedCollection.add(data.models);
+                let nextStep = function() {
+                    if (!_.isUndefined(data.next_offset) && data.next_offset !== -1) {
+                        self._mergeRelatedCollection(collection, callback, data.next_offset);
+                    } else {
+                        onCollectionMerged.call();
+                    }
+                };
 
-                if (!_.isUndefined(data.next_offset) && data.next_offset !== -1) {
-                    self._mergeRelatedCollection(collection, callback, data.next_offset);
-                } else {
-                    onCollectionMerged.call();
-                }
+                self.mergeRelatedCollection.add(data.models, {callback: nextStep});
             },
             error: function() {
                 collection.attempt = collection.attempt + 1;

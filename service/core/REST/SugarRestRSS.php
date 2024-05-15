@@ -27,11 +27,12 @@ class SugarRestRSS extends SugarRest
 	 */
 	public function generateResponse($input)
 	{
+        $app_strings = [];
 		if(!isset($input['entry_list'])) {
 		    $this->fault($app_strings['ERR_RSS_INVALID_RESPONSE']);
 		}
 		ob_clean();
-		$this->generateResponseHeader(count($input['entry_list']));
+        $this->generateResponseHeader(is_countable($input['entry_list']) ? count($input['entry_list']) : 0);
 		$this->generateItems($input);
 		$this->generateResponseFooter();
 	} // fn
@@ -73,7 +74,9 @@ EORSS;
         $date = TimeDate::httpTime(TimeDate::getInstance()->fromDb($item['name_value_list']['date_modified']['value'])->getTimestamp());
         $description = '';
         $displayFieldNames = true;
-        if(count($item['name_value_list']) == 2 &&isset($item['name_value_list']['name']))$displayFieldNames = false;
+        if ((is_countable($item['name_value_list']) ? count($item['name_value_list']) : 0) == 2 && isset($item['name_value_list']['name'])) {
+            $displayFieldNames = false;
+        }
         foreach($item['name_value_list'] as $k=>$v){
             if ( $k == 'name' || $k == 'date_modified') {
                 continue;
@@ -119,6 +122,7 @@ EORSS;
 	 */
 	public function fault($faultObject)
 	{
+        $errorObject = null;
 		ob_clean();
         $this->generateResponseHeader(0);
 		echo '<item><name>';

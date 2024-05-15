@@ -258,16 +258,19 @@ class UpgradeHistory extends SugarBean
     }
 
     /**
-     * find a last package that was installed less than PACKAGE_EMERGENCY_ROLLBACK_TIMEOUT_MIN minutes ago
+     * find a last package that was installed less than config packageRollbackMinutes if set or
+     * PACKAGE_EMERGENCY_ROLLBACK_TIMEOUT_MIN minutes ago
      */
     public function getJustInstalled(): ?UpgradeHistory
     {
+        $timeoutMin = SugarConfig::getInstance()->get('packageRollbackMinutes');
+        $timeoutMin = is_int($timeoutMin) ? $timeoutMin : self::PACKAGE_EMERGENCY_ROLLBACK_TIMEOUT_MIN;
         $history = BeanFactory::getBean($this->getModuleName());
         $query = new SugarQuery();
         $query->select('*');
         $query->from($history);
         $date = new SugarDateTime();
-        $date->modify('-' . self::PACKAGE_EMERGENCY_ROLLBACK_TIMEOUT_MIN . ' minutes');
+        $date->modify('-' . $timeoutMin . ' minutes');
         $query->where()->gte('date_modified', $date->asDb());
         $query->where()->equals('deleted', 0);
         $query->orderBy('date_modified', 'DESC');

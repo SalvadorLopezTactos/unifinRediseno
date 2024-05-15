@@ -185,7 +185,7 @@ class DocumentRevision extends SugarBean {
 			$this->latest_revision_id = $row['document_revision_id'];
 
             if ( empty($this->revision) ) {
-                $this->revision = $this->latest_revision + 1;
+                $this->revision = (int)$this->latest_revision + 1;
             }
        }
 	}
@@ -259,6 +259,7 @@ class DocumentRevision extends SugarBean {
 	}
 	
 	function get_list_view_data(){
+        $forecast_fields = [];
 		$revision_fields = $this->get_list_view_array();
 
 		$forecast_fields['FILE_URL'] = $this->file_url;						

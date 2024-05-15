@@ -62,7 +62,8 @@ class SugarUpgradeRemoveFiles extends UpgradeScript
                 continue;
             }
 
-            $numberOfFiles = count(glob($folder . '/*'));
+            $files = glob($folder . '/*');
+            $numberOfFiles = is_countable($files) ? count($files) : 0;
 
             if ($numberOfFiles === 0) {
                 $this->removeDir($folder);

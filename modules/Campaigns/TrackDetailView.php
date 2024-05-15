@@ -89,7 +89,6 @@ if(isset($focus->campaign_type) && $focus->campaign_type == "NewsLetter"){
     $smarty->assign("TRACKER_URL", $sugar_config['site_url'] . '/campaign_tracker.php?track=' . $focus->tracker_key);
     $smarty->assign("TRACKER_COUNT", intval($focus->tracker_count));
     $smarty->assign("TRACKER_TEXT", $focus->tracker_text);
-    $smarty->assign("REFER_URL", $focus->refer_url);
 
     if(isset($focus->campaign_type) && $focus->campaign_type == "Email" || $focus->campaign_type == "NewsLetter") {
         $smarty->assign("TRACK_DELETE_BUTTON","<input title=\"{$mod_strings['LBL_TRACK_DELETE_BUTTON_TITLE']}\" class=\"button\" onclick=\"this.form.module.value='Campaigns'; this.form.action.value='Delete';this.form.return_module.value='Campaigns'; this.form.return_action.value='TrackDetailView';this.form.mode.value='Test';return confirm('{$mod_strings['LBL_TRACK_DELETE_CONFIRM']}');\" type=\"submit\" name=\"button\" value=\"  {$mod_strings['LBL_TRACK_DELETE_BUTTON_LABEL']}  \">");
@@ -150,28 +149,28 @@ SQL;
             }
 
             //fill in first option value
-            $options_str .= '<option value="'. htmlspecialchars($row['id']) .'"';
+            $options_str .= '<option value="' . htmlspecialchars($row['id']) .'"';
             // if the marketing id is same as selected marketing id, set this option to render as "selected"
             if (!empty($selected_marketing_id) && $selected_marketing_id == $row['id']) {
-                $options_str .=' selected>'. htmlspecialchars($row['name']) .'</option>';
+                $options_str .= ' selected>' . htmlspecialchars($row['name']) .'</option>';
             // if the marketing id is empty then set this first option to render as "selected"
             }elseif(empty($selected_marketing_id) && $focus->campaign_type == 'NewsLetter'){
-                $options_str .=' selected>'. htmlspecialchars($row['name']) .'</option>';
+                $options_str .= ' selected>' . htmlspecialchars($row['name']) .'</option>';
             // if the marketing is not empty, but not same as selected marketing id, then..
             //.. do not set this option to render as "selected"
             }else{
-                $options_str .='>'. htmlspecialchars($row['name']) .'</option>';
+                $options_str .= '>' . htmlspecialchars($row['name']) .'</option>';
             }
         }
         //process rest of records, if they exist
         while ($row = $focus->db->fetchByAssoc($result)){
             //add to list of option values
-            $options_str .= '<option value="'. htmlspecialchars($row['id']) .'"';
+            $options_str .= '<option value="' . htmlspecialchars($row['id']) .'"';
             //if the marketing id is same as selected marketing id, then set this option to render as "selected"
             if (!empty($selected_marketing_id) && $selected_marketing_id == $row['id']) {
-                $options_str .=' selected>'. htmlspecialchars($row['name']) .'</option>';
+                $options_str .= ' selected>' . htmlspecialchars($row['name']) .'</option>';
             }else{
-                $options_str .=' >'. htmlspecialchars($row['name']) .'</option>';
+                $options_str .= ' >' . htmlspecialchars($row['name']) .'</option>';
             }
          }
          $options_str .="</select>";

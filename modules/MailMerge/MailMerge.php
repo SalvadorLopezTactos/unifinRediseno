@@ -32,7 +32,7 @@ class MailMerge
 	
 	function Execute() {
 		$this->Initialize();
-		if( count( $this->list ) > 0 ) {
+        if ((is_countable($this->list) ? count($this->list) : 0) > 0) {
 			if(isset($this->template)) {
 				$this->CreateHeaderFile();
 				$this->CreateDataSource();
@@ -100,8 +100,8 @@ class MailMerge
 	}
 	
 	function Initialize() {
-		$this->rowcnt = count($this->list);
-		$this->fieldcnt = count($this->fieldList);
+        $this->rowcnt = is_countable($this->list) ? count($this->list) : 0;
+        $this->fieldcnt = is_countable($this->fieldList) ? count($this->fieldList) : 0;
 		$this->obj = new COM("word.application") or die("Unable to instanciate Word");
 		$this->obj->Visible = $this->visible;
 		

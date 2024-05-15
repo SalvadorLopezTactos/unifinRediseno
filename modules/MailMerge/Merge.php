@@ -83,7 +83,7 @@ if(!file_exists($dataDir))
 {
 	sugar_mkdir($dataDir);
 }
-srand((double)microtime()*1000000);
+mt_srand((double)microtime()*1000000);
 $mTime = microtime();
 $dataFileName = 'sugardata'.$mTime.'.php';
 write_array_to_file('merge_array', $merge_array, $dataDir.$dataFileName);

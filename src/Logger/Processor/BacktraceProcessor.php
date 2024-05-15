@@ -61,7 +61,7 @@ class BacktraceProcessor
 
     private function trimStack($stack)
     {
-        for ($i = count($stack) - 1; $i >= 0; $i--) {
+        for ($i = (is_countable($stack) ? count($stack) : 0) - 1; $i >= 0; $i--) {
             $call = $stack[$i];
             if (!empty($call['class']) && in_array(LoggerInterface::class, class_implements($call['class']))) {
                 $stack = array_slice($stack, $i);

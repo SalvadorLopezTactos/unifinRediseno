@@ -365,7 +365,7 @@ class iCal extends vCal {
         $year_date->setTime(0, 0, 0);
 
         $transitions = $tz->getTransitions($year_date->getTimestamp(), $year_end->getTimestamp());
-        foreach ($transitions as $transition) {
+        foreach (safeIsIterable($transitions) ? $transitions : [] as $transition) {
             if ($transition['isdst']) {
                     break;
                 }

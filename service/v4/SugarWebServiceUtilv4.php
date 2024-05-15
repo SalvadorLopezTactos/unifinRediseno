@@ -14,6 +14,8 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 {
     function get_module_view_defs($moduleName, $type, $view)
     {
+        $listViewDefs = [];
+        $viewdefs = [];
         $metadataFile = null;
         $results = array();
         if (empty($moduleName)) {
@@ -473,7 +475,7 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 							$query = $seed->table_name.".outlook_id = '".$seed->outlook_id."'";
 							$response = $seed->get_list($order_by, $query, 0,-1,-1,0);
 							$list = $response['list'];
-							if(count($list) > 0){
+                            if ((is_countable($list) ? count($list) : 0) > 0) {
 								foreach($list as $value)
 								{
 									$seed->id = $value->id;

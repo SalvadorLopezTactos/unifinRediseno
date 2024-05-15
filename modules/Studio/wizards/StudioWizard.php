@@ -29,7 +29,6 @@ class StudioWizard{
     	                 'ConfigureTabs'=>$GLOBALS['mod_strings']['LBL_SW_EDIT_TABS'],
     	                 'Portal'=>$GLOBALS['mod_strings']['LBL_SW_EDIT_PORTAL'],
 				         'Workflow'=>$GLOBALS['mod_strings']['LBL_SW_EDIT_WORKFLOW'],
-				         'RepairCustomFields'=>$GLOBALS['mod_strings']['LBL_SW_REPAIR_CUSTOMFIELDS'],
 				         'MigrateCustomFields'=>$GLOBALS['mod_strings']['LBL_SW_MIGRATE_CUSTOMFIELDS'],
 
         
@@ -68,9 +67,6 @@ class StudioWizard{
             case 'Portal':
                 header('Location: index.php?module=iFrames&action=index');
                 sugar_cleanup(true);
-            case 'RepairCustomFields':
-            	header('Location: index.php?module=Administration&action=UpgradeFields');
-            	sugar_cleanup(true);
             case 'MigrateCustomFields':
             	header('LOCATION: index.php?module=Administration&action=Development');
             	sugar_cleanup(true);

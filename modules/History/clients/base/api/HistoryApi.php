@@ -134,7 +134,7 @@ class HistoryApi extends RelateApi
         $fieldWhiteList = [];
         foreach ($this->moduleList as $link_name => $module) {
             $seed = BeanFactory::newBean($module);
-            $fieldWhiteList = array_merge($fieldWhiteList, array_fill_keys(array_keys($seed->field_defs), true));
+            $fieldWhiteList = array_merge($fieldWhiteList, is_array($seed->field_defs)? array_fill_keys(array_keys($seed->field_defs), true) : []);
         }
 
         $query = new SugarQuery();
@@ -222,7 +222,9 @@ class HistoryApi extends RelateApi
                                 $q->select()->fieldRaw("'' rel_assigned_user_name_last_name");
                                 $q->select()->fieldRaw("'' assigned_user_name_owner");
                             } else {
-                                $q->select()->fieldRaw("'' {$args['placeholder_fields'][$module][$field]}");
+                                $param = $q->getDBManager()->getValidDBName($args['placeholder_fields'][$module][$field]);
+
+                                $q->select()->fieldRaw("'' $param");
                             }
                         } elseif (isset($args['alias_fields'][$field])) {
                             if (isset($args['alias_fields'][$field][$module])) {

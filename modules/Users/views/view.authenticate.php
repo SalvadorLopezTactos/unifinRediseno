@@ -152,11 +152,7 @@ class UsersViewAuthenticate extends SidecarView
         setcookie(
             session_name(),
             '',
-            time() - 3600,
-            ini_get('session.cookie_path'),
-            ini_get('session.cookie_domain'),
-            ini_get('session.cookie_secure'),
-            ini_get('session.cookie_httponly')
+            ['expires' => time() - 3600, 'path' => ini_get('session.cookie_path'), 'domain' => ini_get('session.cookie_domain'), 'secure' => ini_get('session.cookie_secure'), 'httponly' => ini_get('session.cookie_httponly')]
         );
     }
 }

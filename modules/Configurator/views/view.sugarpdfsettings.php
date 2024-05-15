@@ -50,6 +50,7 @@ class ConfiguratorViewSugarpdfsettings extends SugarView
 	 */
 	public function display()
 	{
+        $SugarpdfSettings = null;
 	    global $mod_strings, $app_strings, $app_list_strings;
 
 	    foreach(SugarAutoLoader::existingCustom("modules/Configurator/metadata/SugarpdfSettingsdefs.php") as $file) {

@@ -466,6 +466,9 @@ class DependencyManager
 
         foreach ($expressionActions as $expressionAction)
         {
+            if (!is_array($expressionAction)) {
+                continue;
+            }
             $tempAction = ActionFactory::getNewAction($expressionAction['name'], $expressionAction['params']);
             if (!empty($tempAction) && $tempAction->isActionAllowed($action))
             {

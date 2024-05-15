@@ -420,7 +420,7 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
                         continue;
                     }
 
-                    $fieldCount = count($row);
+                    $fieldCount = is_countable($row) ? count($row) : 0;
 
                     // dump out the last field we stored and reset column count
                     // leading empty => should not occur, but assign to next field as colspan

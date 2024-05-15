@@ -29,6 +29,7 @@ class ViewModule extends SugarView
 
 	function display()
 	{
+        $translated_type = [];
 		global $mod_strings;
  		$smarty = new Sugar_Smarty();
 

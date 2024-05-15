@@ -86,6 +86,7 @@ class OAuth2Api extends SugarApi
 
     public function token(ServiceBase $api, array $args)
     {
+        $authData = [];
         //The token API supports setting a language for error messages as the user is not yet logged in.
         global $current_language;
 
@@ -115,7 +116,7 @@ class OAuth2Api extends SugarApi
                 $GLOBALS['current_user']->call_custom_logic('after_login');
             }
             $cleanupChance = isset($GLOBALS['sugar_config']['token_cleanup_probability'])?(int)$GLOBALS['sugar_config']['token_cleanup_probability']:10;
-            if (mt_rand() % $cleanupChance == 0) {
+            if (random_int(0, mt_getrandmax()) % $cleanupChance == 0) {
                 // cleanup based on probability
                 OAuthToken::cleanup();
             }

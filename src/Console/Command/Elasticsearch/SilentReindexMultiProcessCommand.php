@@ -89,6 +89,7 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $processes = [];
         $this->output = $output;
         $engine = SearchEngine::getInstance()->getEngine();
 

@@ -58,6 +58,7 @@ class SavedSearch extends SugarBean {
 
 	// Saved Search Form
 	function getForm($module, $inline = true) {
+        $savedSearchArray = [];
 	    global $db, $current_user, $currentModule, $current_language, $app_strings;
         $json = getJSONobj();
 
@@ -149,6 +150,7 @@ class SavedSearch extends SugarBean {
     function getSelect($module) {
 
 
+        $savedSearchArray = [];
         global $db, $current_user, $currentModule, $current_lang, $app_strings;
         $saved_search_mod_strings = return_module_language($current_lang, 'SavedSearch');
 

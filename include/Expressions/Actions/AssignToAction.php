@@ -121,10 +121,7 @@ class AssignToAction extends AbstractAction
      */
     public function fire(&$target)
     {
-        // No-op for sidecar
-        if (isModuleBWC($target)) {
-            require_once 'modules/Home/quicksearchQuery.php';
-            $json = getJSONobj();
+        if (isset($target->field_defs['assigned_user_id'])) {
             $userName = Parser::evaluate($this->expression, $target)->evaluate();
             $qsd = QuickSearchDefaults::getQuickSearchDefaults();
             $data = $qsd->getQSUser();
@@ -132,8 +129,10 @@ class AssignToAction extends AbstractAction
             $data['conditions'][0]['value'] = $userName;
             $qs = new QuickSearchQuery();
             $result = $qs->query($data);
-            $resultBean = $json->decodeReal($result);
-            print_r($resultBean);
+            $resultBean = json_decode($result, true);
+            if (!empty($resultBean['fields'][0]['id'])) {
+                $target->assigned_user_id = $resultBean['fields'][0]['id'];
+            }
         }
     }
 

@@ -576,7 +576,7 @@
         signatureContent = '<div class="signature keep">' + decodedSignature + '</div>';
 
         emailBody = this._insertInEditor(signatureContent, location);
-        htmlBodyObj = $('<div>' + emailBody + '</div>');
+        htmlBodyObj = $('<div>' + this.sanitizeContent(emailBody) + '</div>');
 
         // Mark each signature to either keep or remove.
         $('div.signature', htmlBodyObj).each(function() {

@@ -268,6 +268,7 @@ class ProspectList extends SugarBean {
 
 
 	function get_list_view_data(){
+        $mod_strings = [];
 		$temp_array = $this->get_list_view_array();
 		$temp_array["ENTRY_COUNT"] = $this->get_entry_count();
 	    $this->load_relationship('teams');

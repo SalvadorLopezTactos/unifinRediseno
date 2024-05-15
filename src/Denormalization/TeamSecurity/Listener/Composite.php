@@ -43,6 +43,7 @@ final class Composite implements Listener
      */
     public function userDeleted($userId)
     {
+        $this->listeners = is_array($this->listeners) ? $this->listeners : [];
         array_walk($this->listeners, function (Listener $listener) use ($userId) {
             $listener->userDeleted($userId);
         });
@@ -53,6 +54,7 @@ final class Composite implements Listener
      */
     public function teamDeleted($teamId)
     {
+        $this->listeners = is_array($this->listeners) ? $this->listeners : [];
         array_walk($this->listeners, function (Listener $listener) use ($teamId) {
             $listener->teamDeleted($teamId);
         });
@@ -63,6 +65,7 @@ final class Composite implements Listener
      */
     public function teamSetCreated($teamSetId, array $teamIds)
     {
+        $this->listeners = is_array($this->listeners) ? $this->listeners : [];
         array_walk($this->listeners, function (Listener $listener) use ($teamSetId, $teamIds) {
             $listener->teamSetCreated($teamSetId, $teamIds);
         });
@@ -73,6 +76,7 @@ final class Composite implements Listener
      */
     public function teamSetDeleted($teamSetId)
     {
+        $this->listeners = is_array($this->listeners) ? $this->listeners : [];
         array_walk($this->listeners, function (Listener $listener) use ($teamSetId) {
             $listener->teamSetDeleted($teamSetId);
         });
@@ -83,6 +87,7 @@ final class Composite implements Listener
      */
     public function userAddedToTeam($userId, $teamId)
     {
+        $this->listeners = is_array($this->listeners) ? $this->listeners : [];
         array_walk($this->listeners, function (Listener $listener) use ($userId, $teamId) {
             $listener->userAddedToTeam($userId, $teamId);
         });
@@ -93,6 +98,7 @@ final class Composite implements Listener
      */
     public function userRemovedFromTeam($userId, $teamId)
     {
+        $this->listeners = is_array($this->listeners) ? $this->listeners : [];
         array_walk($this->listeners, function (Listener $listener) use ($userId, $teamId) {
             $listener->userRemovedFromTeam($userId, $teamId);
         });

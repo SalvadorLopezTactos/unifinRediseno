@@ -148,6 +148,7 @@ class ModuleBuilderController extends SugarController
 
     public function action_ViewTree()
     {
+        $mbt = null;
         switch ($_REQUEST ['tree']) {
             case 'ModuleBuilder' :
                 $mbt = new MBPackageTree ();
@@ -771,6 +772,7 @@ class ModuleBuilderController extends SugarController
 
     public function action_DeleteField()
     {
+        $repair = null;
         $type = $this->request->getValidInputRequest('type');
         $name = $this->request->getValidInputRequest('name', 'Assert\ComponentName');
 

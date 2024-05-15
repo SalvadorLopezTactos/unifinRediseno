@@ -77,6 +77,7 @@ class ConnectorsController extends SugarController {
 	 *
 	 */
 	function action_RetrieveSourceDetails() {
+        $results = [];
 		$this->view = 'ajax';
 		$source_id = $this->request->getValidInputRequest('source_id', 'Assert\ComponentName');
         $record_id = $this->request->getValidInputRequest('record_id', 'Assert\Guid');

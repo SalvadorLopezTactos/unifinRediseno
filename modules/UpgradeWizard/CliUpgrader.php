@@ -105,8 +105,8 @@ class CliUpgrader extends UpgradeDriver
 
     protected function argError($msg)
     {
-        $this->bannerError($msg);
-        $this->usage();
+        static::bannerError($msg);
+        static::usage();
         exit(1);
     }
 

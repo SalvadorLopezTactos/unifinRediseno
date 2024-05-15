@@ -114,7 +114,7 @@ class DashboardManager extends Manager
             return;
         }
 
-        if (count($this->modules) > 0) {
+        if ((is_countable($this->modules) ? count($this->modules) : 0) > 0) {
             foreach ($this->destinationUsers as $destinationUserId) {
                 $this->deleteDashboards($destinationUserId, $this->modules);
             }
@@ -316,7 +316,7 @@ class DashboardManager extends Manager
      */
     private function cloneDashboards(string $sourceUser, string $destinationUser, ?array $modules): void
     {
-        if (count($modules) > 0) {
+        if (count((array) $modules) > 0) {
             foreach ($modules as $module) {
                 $this->cloneDashboardsFor($sourceUser, $destinationUser, $module);
             }

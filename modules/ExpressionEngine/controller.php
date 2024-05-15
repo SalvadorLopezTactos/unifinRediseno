@@ -208,7 +208,8 @@ class ExpressionEngineController extends SugarController
                 case "count":
                     if(!empty($id) && $focus->load_relationship($link))
                     {
-                        $ret[$link][$type] = count($focus->$link->get());
+                        $linkValue = $focus->$link->get();
+                        $ret[$link][$type] = is_countable($linkValue) ? count($linkValue) : 0;
                     } else
                     {
                         $ret[$link][$type] = 0;
@@ -283,6 +284,6 @@ class ExpressionEngineController extends SugarController
     protected function display($result)
     {
         $this->view = '';
-        echo json_encode($result);
+        echo JSON::encode($result);
     }
 }

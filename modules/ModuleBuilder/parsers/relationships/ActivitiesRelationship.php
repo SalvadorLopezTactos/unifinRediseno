@@ -313,6 +313,7 @@ class ActivitiesRelationship extends OneToManyRelationship
 
     public function buildSidecarSubpanelDefinitions()
     {
+        $subpanels = [];
         $baseRelName = substr($this->relationship_name, 0, strrpos($this->relationship_name, '_'));
         $label = 'LBL_'.strtoupper($this->rhs_module).'_SUBPANEL_TITLE';
         $linkName = $baseRelName.'_'.strtolower($this->rhs_module);

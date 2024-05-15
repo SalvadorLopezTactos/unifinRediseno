@@ -51,7 +51,7 @@
     {"pattern": "include/javascript/sugar7/actions/*.js", "included": true, "served": true, "watched": true},
 
     "include/javascript/jquery/jquery.dataTables.min.js",
-    "include/javascript/jquery/jquery-ui-min.js",
+    "include/javascript/jquery/jquery-ui.min.js",
     "include/javascript/jquery/sugar.resizableColumns.js",
     "include/javascript/twitterbootstrap/bootstrap-collapse.js",
     "include/javascript/twitterbootstrap/bootstrap-tooltip.js",
@@ -188,8 +188,6 @@
     "include/javascript/pmse/command_default_flow.js",
     "include/javascript/pmse/command_connection_condition.js",
     "include/javascript/pmse/command_reconnect.js",
-    "include/javascript/pmse/pmtree.js",
-    "include/javascript/pmse/progrid.js",
     "include/javascript/pmse/ErrorMessageItem.js",
     "include/javascript/pmse/ListContainer.js",
     "include/javascript/pmse/ErrorListItem.js",

@@ -23,6 +23,7 @@ class SugarUpgradeCreateCalendarConfigurations extends UpgradeScript
      */
     public function run()
     {
+        $calendarsData = [];
         $this->log('Create calendar configurations...');
 
         if (version_compare($this->from_version, '11.2.0', '<')) {

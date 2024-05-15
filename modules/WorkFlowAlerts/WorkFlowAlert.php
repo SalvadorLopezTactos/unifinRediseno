@@ -196,6 +196,7 @@ class WorkFlowAlert extends SugarBean {
 
 function get_field_value_array($base_module, $inclusion_type=false){
 	
+        $inclusion_array = null;
 	if($inclusion_type!=false){
 		
 		if($inclusion_type=="User"){

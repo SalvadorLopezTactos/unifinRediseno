@@ -114,4 +114,11 @@ class SugarMetric_Provider_Newrelic implements SugarMetric_Provider_Interface
             newrelic_background_job(true);
         }
     }
+
+    public static function ignoreTransaction(): void
+    {
+        if (extension_loaded('newrelic') === true) {
+            newrelic_ignore_transaction();
+        }
+    }
 }

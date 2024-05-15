@@ -86,12 +86,6 @@ class ProductBundle extends SugarBean
         return parent::mark_deleted($id);
     }
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->team_id = 1; // make the item globally accessible
-    }
-
     /**
      * @deprecated
      */

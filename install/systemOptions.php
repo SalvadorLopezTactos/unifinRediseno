@@ -16,7 +16,7 @@ if( !isset( $install_script ) || !$install_script ){
 
 $errs = '';
 if(isset($validation_errors)) {
-	if(count($validation_errors) > 0) {
+    if ((is_countable($validation_errors) ? count($validation_errors) : 0) > 0) {
 		$errs  = '<div id="errorMsgs">';
 		$errs .= "<p>{$mod_strings['LBL_SYSOPTS_ERRS_TITLE']}</p>";
 		$errs .= '<ul>';

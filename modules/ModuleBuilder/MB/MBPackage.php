@@ -803,11 +803,11 @@ function buildInstall($path){
             $varName = $spec['varName'];
             $it = $this->getDirectoryIterator('custom/' . $spec['dir']);
             foreach ($it as $file) {
-                $$varName = array();
+                ${$varName} = array();
                 include $file;
 
-                $values = $this->getCustomOptionsForModules($modules, $$varName);
-                if (count($values) > 0) {
+                $values = $this->getCustomOptionsForModules($modules, ${$varName});
+                if ((is_countable($values) ? count($values) : 0) > 0) {
                     $contents = "<?php \n";
                     foreach ($values as $name => $arr) {
                         $contents .= override_value_to_string($varName, $name, $arr);
@@ -1310,8 +1310,7 @@ function buildInstall($path){
                 foreach ($relationships as $k => $v)
                 {
 
-                    if (strpos($fileInfo->getFilename(), $k) !== false)
-                    {   //filter by modules being exported
+                    if (strpos($fileInfo->getFilename(), (string)$k) !== false) {   //filter by modules being exported
                         if ($this->filterExportedRelationshipFile($fileInfo->getFilename(),$moduleName,$exportedModulesFilter) ){
                             $result[] = $fileInfo->getPathname();
                             break;

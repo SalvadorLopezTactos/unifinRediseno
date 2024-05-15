@@ -19,7 +19,7 @@ final class Directive
 {
     private $name;
     private $srcValue;
-    private static $regex = <<<'regex'
+    private static $regex = <<<'regex_WRAP'
     ~
         (?(DEFINE)
            (?<ipv4>                                         # IPv4 address / domain name (with sub-domain wildcards)
@@ -47,7 +47,7 @@ final class Directive
         )
         ^(?:(?&url)|(?&schemeSource)|(?&wildcard)|(?&keyword))$           # regex
     ~ix
-regex;
+regex_WRAP;
     private $hidden = false;
 
     private function __construct()

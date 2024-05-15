@@ -62,7 +62,7 @@ class Dashboard extends Basic
         }
 
         $dirty = false;
-        foreach ($metadata->dashlets as $key => $dashlet) {
+        foreach (is_array($metadata->dashlets) ? $metadata->dashlets: [] as $key => $dashlet) {
             // This section of code is a portion of the code referred
             // to as Critical Control Software under the End User
             // License Agreement.  Neither the Company nor the Users
@@ -103,15 +103,15 @@ class Dashboard extends Basic
             if (!isset($component->rows)) {
                 continue;
             }
-            foreach ($component->rows as $row_key => $row) {
-                foreach ($row as $item_key => $item) {
+            foreach (is_array($component->rows) ? $component->rows : [] as $row_key => $row) {
+                foreach (is_array($row) ? $row : [] as $item_key => $item) {
                     // Check if this user has access to the module upon which this dashlet is based.
                     if (isset($item->context->module) && !SugarACL::checkAccess($item->context->module, 'access')) {
                         // The user does not have access, remove the dashlet.
                         unset($metadata->components[$component_key]->rows[$row_key][$item_key]);
 
                         // Check if this row is now empty.
-                        if (count($metadata->components[$component_key]->rows[$row_key]) == 0) {
+                        if ((is_countable($metadata->components[$component_key]->rows[$row_key]) ? count($metadata->components[$component_key]->rows[$row_key]) : 0) == 0) {
                             // This row is now empty, remove it and mark the metadata as dirty.
                             unset($metadata->components[$component_key]->rows[$row_key]);
                             $dirty = true;
@@ -135,7 +135,7 @@ class Dashboard extends Basic
                                 // this is license controled dashlet
                                 unset($metadata->components[$component_key]->rows[$row_key][$item_key]);
                                 // Check if this row is now empty.
-                                if (count($metadata->components[$component_key]->rows[$row_key]) == 0) {
+                                if ((is_countable($metadata->components[$component_key]->rows[$row_key]) ? count($metadata->components[$component_key]->rows[$row_key]) : 0) == 0) {
                                     // This row is now empty, remove it and mark the metadata as dirty.
                                     unset($metadata->components[$component_key]->rows[$row_key]);
                                     $dirty = true;
@@ -205,7 +205,7 @@ class Dashboard extends Basic
         $offset = !empty($options['offset']) ? (int)$options['offset'] : 0;
         $limit = !empty($options['limit']) ? (int)$options['limit'] : -1;
         $result = $this->get_list($order,$from,$offset,$limit,-1,0);
-        $nextOffset = (count($result['list']) > 0 && count($result['list']) ==  $limit) ? ($offset + $limit) : -1;
+        $nextOffset = ((is_countable($result['list']) ? count($result['list']) : 0) > 0 && (is_countable($result['list']) ? count($result['list']) : 0) ==  $limit) ? ($offset + $limit) : -1;
         return array('records'=>$result['list'], 'next_offset'=>$nextOffset);
     }
 
@@ -262,7 +262,7 @@ class Dashboard extends Basic
     public function get_list($order_by = "", $where = "", $row_offset = 0, $limit = -1, $max = -1, $show_deleted = 0, $singleSelect = false, $select_fields = array())
     {
         $result = parent::get_list($order_by, $where, $row_offset, $limit, $max, $show_deleted, $singleSelect, $select_fields);
-        if (!empty($result['list'])) {
+        if (is_array($result['list'])) {
             foreach ($result['list'] as $dashboard) {
                 $dashboard->view = $dashboard->view_name;
             }

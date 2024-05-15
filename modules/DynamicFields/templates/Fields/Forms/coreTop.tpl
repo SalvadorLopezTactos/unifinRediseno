@@ -83,10 +83,10 @@
 	<td class='mbLBL'>{sugar_translate module="DynamicFields" label="COLUMN_TITLE_LABEL"}:</td>
 	<td>
     {if $hideLevel < 1}
-	    <input id ="label_key_id" type="text" name="label" value="{$vardef.vname}">
+	    <input id ="label_key_id" type="text" name="label" value="{$vardef.vname|escape:'html'}">
 	{else}
-		<input type="text" readonly value="{$vardef.vname}" disabled=1>
-		<input id ="label_key_id" type="hidden" name="label" value="{$vardef.vname}">
+		<input type="text" readonly value="{$vardef.vname|escape:'html'}" disabled=1>
+		<input id ="label_key_id" type="hidden" name="label" value="{$vardef.vname|escape:'html'}">
 	{/if}
 	</td>
 </tr>

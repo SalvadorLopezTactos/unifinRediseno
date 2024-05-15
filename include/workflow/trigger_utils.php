@@ -97,7 +97,7 @@ function get_trigger_count(&$focus, $target_count_array){
 					$target_list = setup_filter_records($target_list, $target_count_array['filter2']);				
 				//end filter2		
 				}				
-				return count($target_list);
+                return is_countable($target_list) ? count($target_list) : 0;
 			} else {
 				//count is zero
 				return "0";	
@@ -182,14 +182,14 @@ function check_rel_filter(& $focus, $secondary_array, $relationship_name, $rel_f
 		}	
 	}		
 
-	$all_count = count($target_list);
+    $all_count = is_countable($target_list) ? count($target_list) : 0;
 
 	$filtered_rel_list =  setup_filter_records($target_list, $target_array);
 	
 	if($rel_module_type=="all"){
 		
 		//compares before count and after count to makes sure 'all' records remained and none were filtered
-		if(count($filtered_rel_list)==$all_count){
+        if ((is_countable($filtered_rel_list) ? count($filtered_rel_list) : 0)==$all_count) {
 			$secondary_array['results'] = true;
 			$secondary_array['cached_lists'][$relationship_name] = $filtered_rel_list;	
 		} else {

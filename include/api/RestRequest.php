@@ -473,7 +473,7 @@ class RestRequest
         if (isset($this->request['__sugar_url'])
             && (empty($this->server['REQUEST_URI'])
                 || empty($this->server['SCRIPT_NAME'])
-                || strpos($this->server['REQUEST_URI'], $this->server['SCRIPT_NAME']) === false)) {
+                || strpos($this->server['REQUEST_URI'], (string) $this->server['SCRIPT_NAME']) === false)) {
             // This is a forwarded rewritten URL
             $apiBase = '/rest/';
         }

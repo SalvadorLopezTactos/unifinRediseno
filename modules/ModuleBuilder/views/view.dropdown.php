@@ -88,6 +88,7 @@ class ViewDropdown extends SugarView
 
     function generateSmarty($params)
     {
+        $module = null;
         global $sugar_config;
 
         $vardef = array();

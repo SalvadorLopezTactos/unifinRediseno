@@ -373,10 +373,8 @@ class Email extends SugarBean {
 	 */
 	public function __construct()
 	{
-	    global $current_user;
 	    $this->cachePath = sugar_cached('modules/Emails');
 		parent::__construct();
-		$this->team_id = 1; // make the item globally accessible
 
 		$this->emailAddress = BeanFactory::newBean('EmailAddresses');
 
@@ -616,24 +614,35 @@ class Email extends SugarBean {
             'Use Email::$to, Email::$cc, and Email::$bcc to link recipients to the email. Use Email::$from to link ' .
             'the sender to the email.');
 
-		$addresses = from_html($addresses);
+        if (!is_array($addresses)) {
+            $addresses = [$addresses];
+        }
+
+        $preparedAddresses = [];
+
+        foreach ($addresses as $address) {
+            if (!is_string($address)) {
+                continue;
+            }
+            $address = from_html($address);
 		$pattern = '/@.*,/U';
-		preg_match_all($pattern, $addresses, $matchs);
+            preg_match_all($pattern, $address, $matchs);
 		if (!empty($matchs[0])){
 			$total = $matchs[0];
 			foreach ($total as $match) {
 				$convertedPattern = str_replace(',', '::;::', $match);
-				$addresses = str_replace($match, $convertedPattern, $addresses);
+                    $address = str_replace($match, $convertedPattern, $address);
 			} //foreach
 		}
 
-		$exAddr = explode("::;::", $addresses);
+            $preparedAddresses = array_merge($preparedAddresses, explode('::;::', $address));
+        }
 
 		$ret = array();
 		$clean = array("<", ">");
 		$dirty = array("&lt;", "&gt;");
 
-		foreach($exAddr as $addr) {
+        foreach (array_filter($preparedAddresses) as $addr) {
             $addr = str_replace($dirty, $clean, $addr);
             $lbpos = strrpos($addr, "<");
             if ($lbpos === false) {
@@ -650,7 +659,7 @@ class Email extends SugarBean {
 			$ret[] = trim($address);
 		}
 
-		return $ret;
+        return array_unique($ret);
 	}
 
 	/**
@@ -880,7 +889,7 @@ class Email extends SugarBean {
 			foreach ($toAddresses as $addrMeta) {
 			    $addr = $addrMeta['email'];
 			    $beans = $sea->getBeansByEmailAddress($addr);
-			    if (count($beans) == 1) {
+                if ((is_countable($beans) ? count($beans) : 0) == 1) {
 			        if (!isset($object_arr[$beans[0]->module_dir])) {
 			            $object_arr[$beans[0]->module_dir] = $beans[0]->id;
 			        }
@@ -1674,7 +1683,7 @@ class Email extends SugarBean {
             $attachments = $this->attachments->get();
 
             $message = 'Updating the teams for %d attachment(s) for Emails/%s in %s.';
-            $GLOBALS['log']->debug(sprintf($message, count($attachments), $this->id, __METHOD__));
+            $GLOBALS['log']->debug(sprintf($message, is_countable($attachments) ? count($attachments) : 0, $this->id, __METHOD__));
 
             foreach ($attachments as $attachmentId) {
                 $attachment = BeanFactory::retrieveBean(
@@ -1829,47 +1838,35 @@ class Email extends SugarBean {
         }
 
 		// to, multiple
-		$replace = array(",",";");
-		$toaddrs = str_replace($replace, "::", from_html($this->to_addrs));
-		$exToAddrs = explode("::", $toaddrs);
-
-		if(!empty($exToAddrs)) {
-			foreach($exToAddrs as $toaddr) {
+        $toAddressList = $this->extractAddressList($this->to_addrs);
+        foreach ($toAddressList as $toaddr) {
 				$toaddr = trim($toaddr);
 				if(!empty($toaddr)) {
-                    $toId = $ea->getEmailGUID($toaddr);
+                $toId = $ea->getEmailGUID($toaddr);
 					$this->linkEmailToAddress($toId, 'to');
 				}
 			}
-		}
 
 		// cc, multiple
-		$ccAddrs = str_replace($replace, "::", from_html($this->cc_addrs));
-		$exccAddrs = explode("::", $ccAddrs);
-
-		if(!empty($exccAddrs)) {
-			foreach($exccAddrs as $ccAddr) {
+        $ccAddressList = $this->extractAddressList($this->cc_addrs);
+        foreach ($ccAddressList as $ccAddr) {
 				$ccAddr = trim($ccAddr);
 				if(!empty($ccAddr)) {
-                    $ccId = $ea->getEmailGUID($ccAddr);
+                $ccId = $ea->getEmailGUID($ccAddr);
 					$this->linkEmailToAddress($ccId, 'cc');
 				}
 			}
-		}
 
 		// bcc, multiple
-		$bccAddrs = str_replace($replace, "::", from_html($this->bcc_addrs));
-		$exbccAddrs = explode("::", $bccAddrs);
-		if(!empty($exbccAddrs)) {
-			foreach($exbccAddrs as $bccAddr) {
+        $bccAddressList = $this->extractAddressList($this->bcc_addrs);
+        foreach ($bccAddressList as $bccAddr) {
 				$bccAddr = trim($bccAddr);
 				if(!empty($bccAddr)) {
-                    $bccId = $ea->getEmailGUID($bccAddr);
+                $bccId = $ea->getEmailGUID($bccAddr);
 					$this->linkEmailToAddress($bccId, 'bcc');
 				}
 			}
 		}
-	}
 
     /**
      * Link an email address to the email.
@@ -1972,11 +1969,12 @@ class Email extends SugarBean {
 
         $ea = BeanFactory::newBean('EmailAddresses');
 
-	    if(empty($emails)) return '';
-		$emails = str_replace(array(",",";"), "::", from_html($emails));
-		$addrs = explode("::", $emails);
-		$res = array();
-		foreach($addrs as $addr) {
+        $addressList = $this->extractAddressList($emails);
+        if (empty($addressList)) {
+            return '';
+        }
+        $res = [];
+        foreach ($addressList as $addr) {
             $parts = $ea->splitEmailAddress($addr);
             if(empty($parts["email"])) {
                 continue;
@@ -3178,7 +3176,7 @@ class Email extends SugarBean {
             if (is_array($this->to_addrs_arr)) {
                 foreach ($this->to_addrs_arr as $addr_arr) {
                     try {
-                        $mailer->addRecipientsTo(new EmailIdentity($addr_arr['email'], $addr_arr['display']));
+                        $mailer->addRecipientsTo(new EmailIdentity($addr_arr['email'] ?? '', $addr_arr['display'] ?? ''));
                     } catch (MailerException $me) {
                         // eat the exception
                     }
@@ -3187,7 +3185,7 @@ class Email extends SugarBean {
             if (is_array($this->cc_addrs_arr)) {
                 foreach ($this->cc_addrs_arr as $addr_arr) {
                     try {
-                        $mailer->addRecipientsCc(new EmailIdentity($addr_arr['email'], $addr_arr['display']));
+                        $mailer->addRecipientsCc(new EmailIdentity($addr_arr['email'] ?? '', $addr_arr['display'] ?? ''));
                     } catch (MailerException $me) {
                         // eat the exception
                     }
@@ -4969,5 +4967,34 @@ SQL;
             }
         }
         return null;
+    }
+
+    /**
+     * @deprecated
+     *
+     * Created to fix issues with ::cleanEmails and ::saveEmailAddresses
+     *
+     * @param $emails mixed Unknown type variable that by design should contain a list of emails
+     */
+    private function extractAddressList($emails): array
+    {
+        if (empty($emails)) {
+            return [];
+        }
+        if (!is_string($emails) && !is_array($emails)) {
+            return [];
+        }
+        $emails = str_replace([',', ';'], '::', from_html($emails));
+        if (!is_array($emails)) {
+            $emails = [$emails];
+        }
+        $addresses = [];
+        foreach ($emails as $email) {
+            foreach (explode('::', $email) as $addr) {
+                $addresses[] = $addr;
+            }
+        }
+
+        return array_unique(array_filter($addresses));
     }
 } // end class def

@@ -25,26 +25,47 @@ class DynamicNameVisitor extends ForbiddenStatementVisitor
     public function leaveNode(Node $node)
     {
         if ($node instanceof Node\Expr\MethodCall) {
-            if ($node->name instanceof Node\Expr\Variable) {
+            if ($this->isNameDynamicallyCalled($node->name)) {
                 $this->issues[] = new DynamicallyNamedMethodCalled($node->getLine());
             }
         } elseif ($node instanceof Node\Expr\FuncCall) {
-            if ($node->name instanceof Node\Expr\Variable) {
+            if ($this->isNameDynamicallyCalled($node->name)) {
                 $this->issues[] = new DynamicallyNamedFunctionCalled($node->getLine());
             }
         } elseif ($node instanceof Node\Expr\StaticCall) {
             $class = $node->class;
             $method = $node->name;
-            if ($class instanceof Node\Expr\Variable) {
+            if ($this->isNameDynamicallyCalled($class)) {
                 $this->issues[] = new DynamicallyNamedClassUsed($node->getLine());
             }
-            if ($method instanceof Node\Expr\Variable) {
+            if ($this->isNameDynamicallyCalled($method)) {
                 $this->issues[] = new DynamicallyNamedStaticMethodCalled($node->getLine());
             }
         } elseif ($node instanceof Node\Expr\New_) {
-            if ($node->class instanceof Node\Expr\Variable) {
+            if ($this->isNameDynamicallyCalled($node->class)) {
                 $this->issues[] = new DynamicallyNamedClassInstantiated($node->getLine());
             }
         }
+    }
+
+    public function isNameDynamicallyCalled($name): bool
+    {
+        if ($name instanceof Node\Expr\Variable ||
+            $name instanceof Node\Expr\ConstFetch ||
+            $name instanceof Node\Expr\FuncCall ||
+            $name instanceof Node\Expr\PropertyFetch ||
+            $name instanceof Node\Expr\ClassConstFetch ||
+            $name instanceof Node\Expr\MethodCall ||
+            $name instanceof Node\Expr\StaticCall ||
+            $name instanceof Node\Expr\BinaryOp\Concat ||
+            $name instanceof Node\Expr\Cast\String_ ||
+            $name instanceof Node\Scalar\String_ ||
+            $name instanceof Node\Expr\ArrayDimFetch ||
+            $name instanceof Node\Scalar\Encapsed
+        ) {
+            return true;
+        }
+
+        return false;
     }
 }

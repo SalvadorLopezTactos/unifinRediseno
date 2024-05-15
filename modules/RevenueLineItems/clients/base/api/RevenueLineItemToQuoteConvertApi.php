@@ -154,6 +154,7 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
      */
     protected function createProductBundleFromRLIList(array $rlis, $quote_id = null)
     {
+        $product = null;
         $errors = array();
         $rli_to_convert = array();
         foreach ($rlis as $key => $rli_id) {

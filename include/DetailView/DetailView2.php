@@ -41,6 +41,7 @@ class DetailView2 extends EditView
         $createFocus = true
         )
     {
+        $viewdefs = [];
         $this->th = new TemplateHandler();
         $this->th->ss = $this->ss;
         $this->focus = $focus;

@@ -716,6 +716,7 @@ class MBModule
 
     function getWirelessLayouts ()
     {
+        $nodes = [];
         $nodes [ translate ('LBL_WIRELESSEDITVIEW') ] = array (
             'name' => translate('LBL_WIRELESSEDITVIEW') ,
             'type' => MB_WIRELESSEDITVIEW,
@@ -1041,8 +1042,8 @@ class MBModule
         $var = $bwc ? 'subpanel_layout' : 'viewdefs';
         if (file_exists($filepath)) {
             include FileLoader::validateFilePath($filepath);
-            if (isset($$var) && is_array($$var)) {
-                return $$var;
+            if (isset(${$var}) && is_array(${$var})) {
+                return ${$var};
             }
         }
         return array();

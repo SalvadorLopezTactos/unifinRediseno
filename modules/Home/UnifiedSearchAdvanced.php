@@ -219,42 +219,38 @@ class UnifiedSearchAdvanced {
 
 			    $unifiedSearchFields = array () ;
                 $innerJoins = array();
-                foreach ( $unified_search_modules[ $moduleName ]['fields'] as $field=>$def )
-                {
-                	$listViewCheckField = strtoupper($field);
-                	//check to see if the field is in listview defs
-					if ( empty($listViewDefs[$seed->module_dir][$listViewCheckField]['default']) ) {
-						//check to see if field is in original list view defs (in case we are using custom layout defs)
-						if (!empty($orig_listViewDefs[$seed->module_dir][$listViewCheckField]['default']) ) {
-							//if we are here then the layout has been customized, but the field is still needed for query creation
-							$listViewDefs[$seed->module_dir][$listViewCheckField] = $orig_listViewDefs[$seed->module_dir][$listViewCheckField];
-						}
-
-					}
-
-                    //bug: 34125 we might want to try to use the LEFT JOIN operator instead of the INNER JOIN in the case we are
-                    //joining against a field that has not been populated.
-                    if(!empty($def['innerjoin']) )
-                    {
-                        if (empty($def['db_field']) )
-                        {
-                            continue;
+                if (isset($unified_search_modules[$moduleName]['fields']) && safeIsIterable($unified_search_modules[$moduleName]['fields'])) {
+                    foreach ($unified_search_modules[$moduleName]['fields'] as $field => $def) {
+                        $listViewCheckField = strtoupper($field);
+                        //check to see if the field is in listview defs
+                        if (empty($listViewDefs[$seed->module_dir][$listViewCheckField]['default'])) {
+                            //check to see if field is in original list view defs (in case we are using custom layout defs)
+                            if (!empty($orig_listViewDefs[$seed->module_dir][$listViewCheckField]['default'])) {
+                                //if we are here then the layout has been customized, but the field is still needed for query creation
+                                $listViewDefs[$seed->module_dir][$listViewCheckField] = $orig_listViewDefs[$seed->module_dir][$listViewCheckField];
+                            }
                         }
-                        $innerJoins[$field] = $def;
-                        $def['innerjoin'] = str_replace('INNER', 'LEFT', $def['innerjoin']);
-                    }
 
-                    if(isset($seed->field_defs[$field]['type']))
-                    {
-                        $type = $seed->field_defs[$field]['type'];
-                        if($type == 'int' && !is_numeric($this->query_string))
-                        {
-                            continue;
+                        //bug: 34125 we might want to try to use the LEFT JOIN operator instead of the INNER JOIN in the case we are
+                        //joining against a field that has not been populated.
+                        if (!empty($def['innerjoin'])) {
+                            if (empty($def['db_field'])) {
+                                continue;
+                            }
+                            $innerJoins[$field] = $def;
+                            $def['innerjoin'] = str_replace('INNER', 'LEFT', $def['innerjoin']);
                         }
-                    }
+
+                        if (isset($seed->field_defs[$field]['type'])) {
+                            $type = $seed->field_defs[$field]['type'];
+                            if ($type == 'int' && !is_numeric($this->query_string)) {
+                                continue;
+                            }
+                        }
 
                     $unifiedSearchFields[ $moduleName ] [ $field ] = $def ;
                     $unifiedSearchFields[ $moduleName ] [ $field ][ 'value' ] = $this->query_string ;
+                    }
                 }
 
                 /*
@@ -278,12 +274,9 @@ class UnifiedSearchAdvanced {
                     }
                 }
 
-                if (count($where_clauses) > 0)
-                {
-                    $where = '(('. implode(' ) OR ( ', $where_clauses) . '))';
-                }
-                else
-                {
+                if ((is_countable($where_clauses) ? count($where_clauses) : 0) > 0) {
+                    $where = '((' . implode(' ) OR ( ', $where_clauses) . '))';
+                } else {
                     /* Clear $where from prev. module
                        if in current module $where_clauses */
                     $where = '';
@@ -298,8 +291,7 @@ class UnifiedSearchAdvanced {
                     }
                 }
 
-                if(count($displayColumns) > 0)
-                {
+                if ((is_countable($displayColumns) ? count($displayColumns) : 0) > 0) {
                 	$lv->displayColumns = $displayColumns;
                 } else {
                 	$lv->displayColumns = $listViewDefs[$seed->module_dir];
@@ -367,31 +359,27 @@ class UnifiedSearchAdvanced {
 			$isCustomModule = preg_match('/^([a-z0-9]{1,5})_([a-z0-9_]+)$/i' , $moduleName);
 
 			//If the bean supports unified search or if it's a custom module bean and unified search is not defined
-			if(!empty($dictionary[$beanName]['unified_search']) || $isCustomModule)
-			{
-				$fields = array();
-				foreach ( $dictionary [ $beanName ][ 'fields' ] as $field => $def )
-				{
-					// We cannot enable or disable unified_search for email in the vardefs as we don't actually have a vardef entry for 'email'
-					// the searchFields entry for 'email' doesn't correspond to any vardef entry. Instead it contains SQL to directly perform the search.
-					// So as a proxy we allow any field in the vardefs that has a name starting with 'email...' to be tagged with the 'unified_search' parameter
+            if (!empty($dictionary[$beanName]['unified_search']) || $isCustomModule) {
+                $fields = array();
+                if (isset($dictionary[$beanName]['fields']) && safeIsIterable($dictionary[$beanName]['fields'])) {
+                foreach ($dictionary [$beanName]['fields'] as $field => $def) {
+                    // We cannot enable or disable unified_search for email in the vardefs as we don't actually have a vardef entry for 'email'
+                    // the searchFields entry for 'email' doesn't correspond to any vardef entry. Instead it contains SQL to directly perform the search.
+                    // So as a proxy we allow any field in the vardefs that has a name starting with 'email...' to be tagged with the 'unified_search' parameter
 
-					if (strpos($field,'email') !== false)
-					{
-						$field = 'email' ;
-					}
+                    if (strpos($field, 'email') !== false) {
+                        $field = 'email';
+                    }
 
-					//bug: 38139 - allow phone to be searched through Global Search
-					if (strpos($field,'phone') !== false)
-					{
-						$field = 'phone' ;
-					}
+                    //bug: 38139 - allow phone to be searched through Global Search
+                    if (strpos($field, 'phone') !== false) {
+                        $field = 'phone';
+                    }
 
-					if ( !empty($def['unified_search']) && isset ( $searchFields [ $moduleName ] [ $field ]  ))
-					{
-						$fields [ $field ] = $searchFields [ $moduleName ] [ $field ] ;
-					}
-				}
+                    if (!empty($def['unified_search']) && isset($searchFields [$moduleName] [$field])) {
+                        $fields [$field] = $searchFields [$moduleName] [$field];
+                    }
+                }
 
                 foreach ($searchFields[$moduleName] as $field => $def)
                 {
@@ -405,16 +393,16 @@ class UnifiedSearchAdvanced {
                 }
 
 				if(count($fields) > 0) {
-					$supported_modules [$moduleName] ['fields'] = $fields;
-					if (isset($dictionary[$beanName]['unified_search_default_enabled']) && $dictionary[$beanName]['unified_search_default_enabled'] === TRUE)
-					{
+                    $supported_modules [$moduleName] ['fields'] = $fields;
+                    if (isset($dictionary[$beanName]['unified_search_default_enabled']) && $dictionary[$beanName]['unified_search_default_enabled'] === true) {
                         $supported_modules [$moduleName]['default'] = true;
                     } else {
                         $supported_modules [$moduleName]['default'] = false;
                     }
-				}
+                }
+                }
 
-			}
+            }
 
 		}
 
@@ -490,16 +478,16 @@ class UnifiedSearchAdvanced {
         include($this->cache_search);
 
         //Now add any new modules that may have since been added to unified_search_modules.php
-        foreach($unified_search_modules as $module=>$data)
-        {
-            if(!isset($unified_search_modules_display[$module]))
-            {
+        if (isset($unified_search_modules) && safeIsIterable($unified_search_modules)) {
+            foreach ($unified_search_modules as $module => $data) {
+                if (!isset($unified_search_modules_display[$module])) {
                 $label = isset($app_list_strings['moduleList'][$module]) ? $app_list_strings['moduleList'][$module] : $module;
-                if($data['default'])
-                {
+                    if ($data['default']) {
+                        $json_enabled[] = ['module' => $module, 'label' => $label];
                   $json_enabled[] = array("module" => $module, 'label' => $label);
-                } else {
+                    } else {
                   $json_disabled[] = array("module" => $module, 'label' => $label);
+                    }
                 }
             }
         }
@@ -561,6 +549,7 @@ class UnifiedSearchAdvanced {
      */
     public function getUnifiedSearchModules()
     {
+        $unified_search_modules = null;
 		//Make directory if it doesn't exist
         $cachedir = sugar_cached('modules');
 		if(!file_exists($cachedir))
@@ -590,6 +579,7 @@ class UnifiedSearchAdvanced {
      */
     public function getUnifiedSearchModulesDisplay()
     {
+        $unified_search_modules_display = [];
 		if(!SugarAutoLoader::existing('custom/modules/unified_search_modules_display.php'))
 		{
             $unified_search_modules = $this->getUnifiedSearchModules();

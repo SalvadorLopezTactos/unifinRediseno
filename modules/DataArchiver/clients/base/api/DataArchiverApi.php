@@ -64,6 +64,7 @@ class DataArchiverApi extends ModuleApi
      */
     public function performArchive(ServiceBase $api, array $args)
     {
+        $criteria = [];
         // Only allow admins to make this api call
         if (!$api->user->isAdmin()) {
             throw new SugarApiExceptionNotAuthorized();
@@ -108,7 +109,7 @@ class DataArchiverApi extends ModuleApi
         $archiveRunsBean->source_module = $bean->filter_module_name;
         $archiveRunsBean->filter_def = $bean->filter_def;
         $archiveRunsBean->date_of_archive = (new TimeDate())->nowDb();
-        $archiveRunsBean->num_processed = count($returnedIds);
+        $archiveRunsBean->num_processed = is_countable($returnedIds) ? count($returnedIds) : 0;
         $archiveRunsBean->ids_processed = json_encode($returnedIds);
         $archiveRunsBean->save();
 

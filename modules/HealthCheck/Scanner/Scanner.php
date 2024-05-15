@@ -627,6 +627,10 @@ class HealthCheckScanner
      */
     public function setLogFile($fileName)
     {
+        if (!check_file_name($fileName)) {
+            throw new \Exception('Path traversal attack vector detected');
+        }
+
         $this->logfile = $fileName;
     }
 
@@ -838,7 +842,11 @@ class HealthCheckScanner
             // Check the Elastic Search Customization
             $this->checkCustomElastic();
 
-            if (version_compare($sugar_version, '11.2.0.0', '<')) {
+            if (version_compare($sugar_version, '11.2.0.0', '<')
+                // This check uses older Smarty version which is not compatible with PHP8.2. It should be ok, because
+                // upgrade paths available for Sugar older than 11.2 does not include PHP8.2 compatible Sugar versions
+                && version_compare(PHP_VERSION, '8.2.0', '<')
+            ) {
                 $this->checkSmartyTemplatesSyntax();
             }
 
@@ -872,7 +880,7 @@ class HealthCheckScanner
         $dbErrors = [];
         foreach ($templates as $template) {
             $dbErrors = $converter->scanDatabaseTpl($template);
-            if (!count($dbErrors)) {
+            if (!(is_countable($dbErrors) ? count($dbErrors) : 0)) {
                 $this->updateStatus('smartyCustomPdf', $template['name']);
             } else {
                 $this->updateStatus('smartyOutdatedCustomPdf', $template['name'], implode(', ', $dbErrors));
@@ -900,7 +908,7 @@ class HealthCheckScanner
             $curFile = $match[0];
             if (defined('SUGAR_SHADOW_TEMPLATEPATH')) {
                 $realName = realpath(str_replace(SHADOW_INSTANCE_DIR . '/', '', $curFile));
-                if (0 === strpos($realName, SUGAR_SHADOW_TEMPLATEPATH)) {
+                if (0 === strpos($realName, (string) SUGAR_SHADOW_TEMPLATEPATH)) {
                     continue;
                 }
             } elseif (isset($this->md5_files[str_replace('\\', '/', $curFile)])) {// Stock file
@@ -911,7 +919,7 @@ class HealthCheckScanner
                 continue;
             }
             $errors = $converter->scanFilesystemTpl($curFile);
-            if (!count($errors)) {
+            if (!(is_countable($errors) ? count($errors) : 0)) {
                 $this->updateStatus('smartyCustomization', $curFile);
             } else {
                 $this->updateStatus('smartyOutdatedCustomization', $curFile);
@@ -922,7 +930,7 @@ class HealthCheckScanner
         if (file_exists($cacheDir)) {
             rmdir_recursive($cacheDir);
         }
-        if (count($errors)) {
+        if (is_countable($errors) ? count($errors) : 0) {
             rmdir_recursive('./_smarty3_');
         }
         $converter::unmuteExpectedErrors();
@@ -958,7 +966,7 @@ class HealthCheckScanner
         $this->log("VERDICT: {$this->status}", 'STATUS');
         ksort($this->status_log);
         foreach ($this->status_log as $status => $items) {
-            $this->log("=> $status: " . count($items) . " total", 'BUCKET');
+            $this->log("=> $status: " . (is_countable($items) ? count($items) : 0) . " total", 'BUCKET');
             foreach ($items as $item) {
                 $this->log(sprintf("=> %s: %s", $status, $item['reason']), 'BUCKET');
             }
@@ -2275,8 +2283,7 @@ ENDP;
         $fileContentsLined = file($file);
         $linesFound = preg_grep('/' . preg_quote($pattern, '/') . '/', $fileContentsLined);
 
-        if (count($linesFound) > 0) {
-
+        if ((is_countable($linesFound) ? count($linesFound) : 0) > 0) {
             foreach ($linesFound as $linePosition => $lineContent) {
                 $foundInfo['line'] = ((int)$linePosition + 1);
                 $foundInfo['directory'] = $directory;
@@ -3801,7 +3808,7 @@ ENDP;
     {
         $curlyBracketsCount = 0;
         $found = false;
-        $count = count($tokens);
+        $count = is_countable($tokens) ? count($tokens) : 0;
         for ($i = $index + 1; $i < $count; $i++) {
             if ($tokens[$i] === '(') {
                 $curlyBracketsCount += 1;
@@ -4587,7 +4594,7 @@ ENDP;
         }
 
         // ignore errors in smarty cache
-        if (false !== strpos($errfile, sugar_cached('smarty3/'))) {
+        if (false !== strpos($errfile, (string) sugar_cached('smarty3/'))) {
             return false;
         }
 
@@ -4809,9 +4816,9 @@ class FileLoaderWrapper extends BlackHole
         if ($this->called) {
             return false;
         }
-        if (empty($$varname)) {
+        if (empty(${$varname})) {
             return null;
         }
-        return $$varname;
+        return ${$varname};
     }
 }

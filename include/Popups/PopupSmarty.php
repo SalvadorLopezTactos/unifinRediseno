@@ -378,20 +378,18 @@ class PopupSmarty extends ListViewSmarty{
                 }
             }
 
-        }
-
-        else if ( isset($_REQUEST['request_data']) )
-        {
-            $request_data = get_object_vars( json_decode( htmlspecialchars_decode( $_REQUEST['request_data'] )));
-            $request_data['field_to_name'] = get_object_vars( $request_data['field_to_name_array'] );
-            if (isset($request_data['field_to_name']) && is_array($request_data['field_to_name']))
-            {
-                foreach ( $request_data['field_to_name'] as $add_field )
-                {
-                    $add_field = strtolower($add_field);
-                    if ( $add_field != 'id' && !isset($this->filter_fields[$add_field]) && isset($this->seed->field_defs[$add_field]) )
-                    {
-                        $this->filter_fields[$add_field] = true;
+            $requestDataRaw = json_decode(htmlspecialchars_decode($_REQUEST['request_data'], ENT_COMPAT));
+            if (is_object($requestDataRaw)) {
+                $request_data = get_object_vars($requestDataRaw);
+                if (isset($request_data['field_to_name_array']) && is_object($request_data['field_to_name_array'])) {
+                    $request_data['field_to_name'] = get_object_vars($request_data['field_to_name_array']);
+                }
+                if (isset($request_data['field_to_name']) && is_array($request_data['field_to_name'])) {
+                    foreach ($request_data['field_to_name'] as $add_field) {
+                        $add_field = strtolower($add_field);
+                        if ($add_field != 'id' && !isset($this->filter_fields[$add_field]) && isset($this->seed->field_defs[$add_field])) {
+                            $this->filter_fields[$add_field] = true;
+                        }
                     }
                 }
             }
@@ -457,21 +455,24 @@ class PopupSmarty extends ListViewSmarty{
 		function _build_field_defs(){
 		$this->formData = array();
 		$this->customFieldDefs = array();
-		foreach($this->searchdefs[$this->module]['layout']['advanced_search'] as $data){
-			if(is_array($data)){
-
-				$this->formData[] = array('field' => $data);
-				$value = '';
-				$this->customFieldDefs[$data['name']]= $data;
-				if(!empty($_REQUEST[$data['name']]))
-	            	$value = $_REQUEST[$data['name']];
-	            $this->customFieldDefs[$data['name']]['value'] = $value;
-			}else
-				$this->formData[] = array('field' => array('name'=>$data));
-		}
-		$this->fieldDefs = array();
-		if($this->seed){
-			$this->seed->fill_in_additional_detail_fields();
+        if (isset($this->searchdefs[$this->module]['layout']['advanced_search']) && is_array($this->searchdefs[$this->module]['layout']['advanced_search'])) {
+            foreach ($this->searchdefs[$this->module]['layout']['advanced_search'] as $data) {
+                if (is_array($data)) {
+                    $this->formData[] = ['field' => $data];
+                    $value = '';
+                    $this->customFieldDefs[$data['name']] = $data;
+                    if (!empty($_REQUEST[$data['name']])) {
+                        $value = $_REQUEST[$data['name']];
+                    }
+                    $this->customFieldDefs[$data['name']]['value'] = $value;
+                } else {
+                    $this->formData[] = ['field' => ['name' => $data]];
+                }
+            }
+        }
+        $this->fieldDefs = [];
+        if ($this->seed) {
+            $this->seed->fill_in_additional_detail_fields();
 
 	        foreach($this->seed->toArray() as $name => $value) {
 	            $this->fieldDefs[$name] = $this->seed->field_defs[$name];
@@ -480,7 +481,12 @@ class PopupSmarty extends ListViewSmarty{
 	            $this->fieldDefs[$name]['name'] = $this->fieldDefs[$name]['name'];
 	            if($this->fieldDefs[$name]['type'] == 'relate')
 	            	$this->fieldDefs[$name]['type'] = 'name';
-	            if(isset($this->fieldDefs[$name]['options']) && isset($GLOBALS['app_list_strings'][$this->fieldDefs[$name]['options']])) {
+                if (!is_scalar($this->fieldDefs[$name]['options'] ?? null)) {
+                    LoggerManager::getLogger()->fatal(
+                        sprintf('scalar expected, "%s" given', gettype($this->fieldDefs[$name]['options'] ?? null))
+                            . PHP_EOL . (new Exception())->getTraceAsString()
+                    );
+                } elseif (isset($GLOBALS['app_list_strings'][$this->fieldDefs[$name]['options']])) {
 	                $this->fieldDefs[$name]['options'] = $GLOBALS['app_list_strings'][$this->fieldDefs[$name]['options']]; // fill in enums
 	            }
 	            if(!empty($_REQUEST[$name]))

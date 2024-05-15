@@ -261,8 +261,9 @@ class ViewModulefield extends SugarView
                     {
                         $enumFields[$field] = isset($module->mblanguage->strings[$current_language][$def['vname']]) ?
                             $this->mbModule->mblanguage->strings[$current_language][$def['vname']] : translate($field);
-                        if (substr($enumFields[$field], -1) == ":")
-                            $enumFields[$field] = substr($enumFields[$field], 0, strlen($enumFields[$field]) -1);
+                        if (is_string($enumFields[$field]) && substr($enumFields[$field], -1) == ':') {
+                            $enumFields[$field] = substr($enumFields[$field], 0, strlen($enumFields[$field]) - 1);
+                        }
                     }
                 }
             }

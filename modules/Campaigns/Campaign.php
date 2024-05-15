@@ -43,7 +43,6 @@ class Campaign extends SugarBean {
 	var $tracker_key;
 	var $tracker_text;
 	var $tracker_count;
-	var $refer_url;
     var $impressions;
 
 	// These are related

@@ -18,6 +18,7 @@ use Sugarcrm\Sugarcrm\PackageManager\Exception\PackageExistsException;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\UnableExtractFileException;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\NoPackageManifestFileException;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+use Sugarcrm\Sugarcrm\Util\Files\FilePhpEntriesConverter;
 use ZipArchive;
 use RuntimeException;
 
@@ -93,6 +94,11 @@ class PackageZipFile
     private $isFullPackageExtracted = false;
 
     /**
+     * @var FilePhpEntriesConverter
+     */
+    private $fileConverter;
+
+    /**
      * PackageZipFile constructor.
      * @param string $zipFile
      * @param string $basePackagesDir
@@ -102,6 +108,7 @@ class PackageZipFile
     {
         $this->basePackagesDir = $basePackagesDir;
         $this->relativeZipFilePath = $zipFile;
+        $this->fileConverter = new FilePhpEntriesConverter();
 
         try {
             $zipFile = $this->validateFilePath($zipFile);
@@ -111,7 +118,12 @@ class PackageZipFile
             throw $exception;
         }
 
-        $this->zipFile = $zipFile;
+        if (strpos($zipFile, \UploadStream::getDir()) !== false && version_compare(phpversion(), '7.4.16', '>=')) {
+            $this->zipFile = $this->fileConverter->revert($zipFile);
+            register_shutdown_function([$this, 'unlinkZip']);
+        } else {
+            $this->zipFile = $zipFile;
+        }
     }
 
     /**
@@ -310,5 +322,10 @@ class PackageZipFile
                 ob_get_clean();
             }
         }
+    }
+
+    public function unlinkZip(): void
+    {
+        unlink($this->zipFile);
     }
 }

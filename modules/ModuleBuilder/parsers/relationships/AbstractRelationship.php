@@ -201,6 +201,7 @@ class AbstractRelationship
      */
     function buildLabels ($update=false)
     {
+        $layout_defs = [];
         $labelDefinitions = array ( ) ;
         if (!$this->relationship_only)
         {
@@ -365,7 +366,7 @@ class AbstractRelationship
     protected function getSubpanelDefinition ($relationshipName , $sourceModule , $subpanelName, $titleKeyName = '', $source = "")
     {
         if (empty($source))
-        	$source = $this->getValidDBName($relationshipName);
+            $source = static::getValidDBName($relationshipName);
     	$subpanelDefinition = array ( ) ;
         $subpanelDefinition [ 'order' ] = 100 ;
         $subpanelDefinition [ 'module' ] = $sourceModule ;
@@ -395,7 +396,7 @@ class AbstractRelationship
     protected function getWirelessSubpanelDefinition ($relationshipName , $sourceModule , $subpanelName, $titleKeyName = '', $source = "")
     {
         if (empty($source))
-        	$source = $this->getValidDBName($relationshipName);
+            $source = static::getValidDBName($relationshipName);
     	$subpanelDefinition = array ( ) ;
         $subpanelDefinition [ 'order' ] = 100 ;
         $subpanelDefinition [ 'module' ] = $sourceModule ;
@@ -421,7 +422,7 @@ class AbstractRelationship
     {
         $vardef = array ( ) ;
 
-        $vardef [ 'name' ] = $this->getValidDBName($relationshipName) ;
+        $vardef [ 'name' ] = static::getValidDBName($relationshipName) ;
         $vardef [ 'type' ] = 'link' ;
         $vardef [ 'relationship' ] = $relationshipName ;
         $vardef [ 'source' ] = 'non-db' ;
@@ -485,7 +486,7 @@ class AbstractRelationship
     protected function getRelateFieldDefinition ($sourceModule , $relationshipName , $vnameLabel='')
     {
         $vardef = array ( ) ;
-        $vardef [ 'name' ] = $this->getValidDBName($relationshipName . "_name") ; // must end in _name for the QuickSearch code in TemplateHandler->createQuickSearchCode
+        $vardef [ 'name' ] = static::getValidDBName($relationshipName . "_name") ; // must end in _name for the QuickSearch code in TemplateHandler->createQuickSearchCode
         $vardef [ 'type' ] = 'relate' ;
 
         $vardef [ 'source' ] = 'non-db' ;
@@ -501,7 +502,7 @@ class AbstractRelationship
         $vardef [ 'id_name' ] = $this->getIDName( $sourceModule ) ;
 
         // link cannot match id_name otherwise the $bean->$id_name value set from the POST is overwritten by the Link object created by this 'link' entry
-        $vardef [ 'link' ] = $this->getValidDBName($relationshipName) ; // the name of the link field that points to the relationship - required for the save to function
+        $vardef [ 'link' ] = static::getValidDBName($relationshipName) ; // the name of the link field that points to the relationship - required for the save to function
         $vardef [ 'table' ] = $this->getTablename( $sourceModule ) ;
         $vardef [ 'module' ] = $sourceModule ;
 
@@ -610,7 +611,7 @@ class AbstractRelationship
             if ($this->from_studio)
                 $properties [ 'from_studio' ] = true;
 
-            $rel_properties [ 'join_table' ] = $this->getValidDBName ( $relationshipName."_c" ) ;
+            $rel_properties [ 'join_table' ] = static::getValidDBName($relationshipName."_c") ;
             // a and b are in case the module relates to itself
             $rel_properties [ 'join_key_lhs' ] = $this->getJoinKeyLHS() ;
             $rel_properties [ 'join_key_rhs' ] = $this->getJoinKeyRHS() ;
@@ -674,7 +675,7 @@ class AbstractRelationship
 
         // finally, wrap up with section 4, the indices on the join table
 
-        $indexBase = $this->getValidDBName ( $relationshipName ) ;
+        $indexBase = static::getValidDBName($relationshipName) ;
         $properties['indices'] = array(
             array(
                 'name' => 'idx_' . $indexBase . '_pk',
@@ -769,7 +770,7 @@ class AbstractRelationship
     function getJoinKeyLHS()
     {
         if (!isset($this->joinKeyLHS))
-        	$this->joinKeyLHS = $this->getValidDBName ( $this->relationship_name . $this->lhs_module . "_ida"  , true) ;
+            $this->joinKeyLHS = static::getValidDBName($this->relationship_name . $this->lhs_module . "_ida", true) ;
 
         return $this->joinKeyLHS;
     }
@@ -777,7 +778,7 @@ class AbstractRelationship
     function getJoinKeyRHS()
     {
         if (!isset($this->joinKeyRHS))
-        	$this->joinKeyRHS = $this->getValidDBName ( $this->relationship_name . $this->rhs_module . "_idb"  , true) ;
+            $this->joinKeyRHS = static::getValidDBName($this->relationship_name . $this->rhs_module . "_idb", true) ;
 
         return $this->joinKeyRHS;
     }
@@ -807,6 +808,7 @@ class AbstractRelationship
     }
 
     public function getTitleKey($left=false){
+        $layout_defs = [];
 		if(!$this->is_custom && !$left && file_exists("modules/{$this->rhs_module}/metadata/subpaneldefs.php")){
     		include FileLoader::validateFilePath("modules/{$this->rhs_module}/metadata/subpaneldefs.php");
     		if(isset($layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'])){

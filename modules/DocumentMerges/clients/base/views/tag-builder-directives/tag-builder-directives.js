@@ -191,7 +191,7 @@
         }
 
         let tagValue = this.tag.compile().getTagValue();
-        this.$('.preview').html(tagValue);
+        this.$('.preview').text(tagValue);
     },
 
     /**

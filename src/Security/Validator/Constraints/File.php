@@ -64,7 +64,7 @@ class File extends Constraint implements ConstraintReturnValueInterface
 
             $options['baseDirs'][$key] = $baseDir;
             // add additional base directory when shadow is enabled
-            if (defined('SHADOW_INSTANCE_DIR') && strpos($baseDir, $instanceRealPath) === 0) {
+            if (defined('SHADOW_INSTANCE_DIR') && strpos($baseDir, (string) $instanceRealPath) === 0) {
                 $shadowInstancePaths[] = str_replace($instanceRealPath, SHADOW_INSTANCE_DIR, $baseDir);
             }
         }

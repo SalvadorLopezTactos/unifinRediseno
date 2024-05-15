@@ -90,6 +90,28 @@ function send_back(module, id)
 
     // jscs:disable
     var call_back_function = window.opener[request_data.call_back_function];
+
+	//we have to use toString.call since here we have not access to "_" library
+    //alo we can't use typeof request_data.call_back_function to be equal with string
+    //since typeof new String(...) will return object
+    //I know that new String(...) is not used very offen but we have to be sure
+    if (!call_back_function && Object.prototype.toString.call(request_data.call_back_function) === '[object String]') {
+        var call_path_array = request_data.call_back_function.split('.');
+
+        //we have to check agains 1, even if the split function will not found the '.' in the string
+        //it will still return the original string inside the array on the first position
+        if (call_path_array.length > 1) {
+            for (let call_path_index = 0; call_path_index < call_path_array.length; call_path_index++) {
+                const current_path = call_path_array[call_path_index];
+
+                if (!call_back_function && typeof window.opener[current_path] !== 'undefined') {
+                    call_back_function = window.opener[current_path];
+                } else if (typeof call_back_function[current_path] !== 'undefined') {
+                    call_back_function = call_back_function[current_path];
+                }
+            }
+        }
+    }
     // jscs:enable
 	var array_contents = Array();
 

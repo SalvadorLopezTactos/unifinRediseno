@@ -273,7 +273,15 @@ class LogicHook{
                     }
                 } else {
                     $this->log("debug", "Creating new instance of hook class '$hookClass' without parameters");
+                    if (!method_exists($hookClass, $hookFunc)) {
+                        $this->log('error', "Method $hookFunc does not exist in class $hookClass");
+                        continue;
+                    }
                     $hookObject = new $hookClass();
+                    if (!is_callable([$hookObject, $hookFunc])) {
+                        $this->log('error', "Method $hookFunc of class $hookClass cannot be called");
+                        continue;
+                    }
 
                     if (!is_null($this->bean)) {
                         // & is here because of BR-1345 and old broken hooks that use &$bean in args
@@ -283,6 +291,8 @@ class LogicHook{
                         $hookObject->$hookFunc($event, $arguments);
                     }
                 }
+            } catch (Throwable $e) {
+                $this->log('fatal', 'Error executing hook: ' . $e->getMessage());
             } finally {
                 $context->deactivateSubject($subject);
             }

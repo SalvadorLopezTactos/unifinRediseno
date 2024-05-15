@@ -191,9 +191,9 @@ class CalendarBWC
         }
         
         $user_ids = $current_user->getPreference('shared_ids');
-        if (!empty($user_ids) && count($user_ids) != 0 && !isset($_REQUEST['shared_ids'])) {
+        if (!empty($user_ids) && (is_countable($user_ids) ? count($user_ids) : 0) != 0 && !isset($_REQUEST['shared_ids'])) {
             $this->shared_ids = $user_ids;
-        } elseif (isset($_REQUEST['shared_ids']) && count($_REQUEST['shared_ids']) > 0) {
+        } elseif (isset($_REQUEST['shared_ids']) && (is_countable($_REQUEST['shared_ids']) ? count($_REQUEST['shared_ids']) : 0) > 0) {
             $this->shared_ids = $_REQUEST['shared_ids'];
             $current_user->setPreference('shared_ids', $_REQUEST['shared_ids']);
         } else {

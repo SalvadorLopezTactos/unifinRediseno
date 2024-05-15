@@ -66,7 +66,12 @@ class SugarFieldMultienum extends SugarFieldEnum
         // Used for value validation and allowing empty leading and ending selected
         // list items
         $listSource = array();
-        if (isset($properties['options']) && isset($app_list_strings[$properties['options']])) {
+        if (!is_scalar($properties['options'] ?? null)) {
+            LoggerManager::getLogger()->fatal(
+                sprintf('scalar expected, "%s" given', gettype($properties['options'] ?? null))
+                    . PHP_EOL . (new Exception())->getTraceAsString()
+            );
+        } elseif (isset($app_list_strings[$properties['options']])) {
             $listSource = $app_list_strings[$properties['options']];
         }
 
